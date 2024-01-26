@@ -1,0 +1,15 @@
+# Ignore everything
+/*
+
+# Except these files & folders
+!/src
+!index.html
+!package.json
+!tsconfig.json
+!tsconfig.node.json
+!vite.config.ts
+!.prettierrc
+!README.md
+!CHANGELOG.md
+!.eslintrc.cjs
+!postcss.config.js
