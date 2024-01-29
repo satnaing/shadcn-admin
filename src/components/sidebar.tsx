@@ -25,23 +25,21 @@ export default function Sidebar({
       )}
     >
       <TooltipProvider delayDuration={0}>
-        <div className='space-y-4 py-4'>
-          <div className='px-4 py-2 flex gap-2 h-16 items-center'>
-            <img
-              src={FaryLogo}
-              alt='Logo'
-              className={`transition-all ${isCollapsed ? 'h-6 w-6' : 'h-12 w-12'}`}
-            />
-            <div
-              className={`flex flex-col justify-end truncate ${isCollapsed ? 'w-0 invisible' : 'w-auto visible'}`}
-            >
-              <span className='font-medium'>Right Direction</span>
-              <span className='text-xs'>Since 2020</span>
-            </div>
+        <div className='px-4 py-2 flex gap-2 h-16 items-center'>
+          <img
+            src={FaryLogo}
+            alt='Logo'
+            className={`transition-all ${isCollapsed ? 'h-6 w-6' : 'h-12 w-12'}`}
+          />
+          <div
+            className={`flex flex-col justify-end truncate ${isCollapsed ? 'w-0 invisible' : 'w-auto visible'}`}
+          >
+            <span className='font-medium'>Right Direction</span>
+            <span className='text-xs'>Since 2020</span>
           </div>
-          <Separator />
-          <Nav isCollapsed={isCollapsed} links={sidelinks} />
         </div>
+        <Separator className='mb-4' />
+        <Nav isCollapsed={isCollapsed} links={sidelinks} />
       </TooltipProvider>
       <Button
         onClick={() => setIsCollapsed((prev) => !prev)}
