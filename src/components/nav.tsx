@@ -73,7 +73,11 @@ function NavLink({
     >
       <div className='mr-2'>{icon}</div>
       {title}
-      {label && <span className={cn('ml-auto')}>{label}</span>}
+      {label && (
+        <div className='ml-2 bg-primary text-primary-foreground px-1 rounded-lg text-[0.625rem]'>
+          {label}
+        </div>
+      )}
     </Link>
   )
 }
@@ -89,14 +93,18 @@ function NavLinkDropdown({ title, icon, label, sub }: SideLink) {
       >
         <div className='mr-2'>{icon}</div>
         {title}
+        {label && (
+          <div className='ml-2 bg-primary text-primary-foreground px-1 rounded-lg text-[0.625rem]'>
+            {label}
+          </div>
+        )}
         <span
           className={cn(
-            'ml-1 transition-all group-data-[state="open"]:-rotate-180'
+            'ml-auto transition-all group-data-[state="open"]:-rotate-180'
           )}
         >
           <IconChevronDown stroke={1} />
         </span>
-        {label ? <span className='ml-auto'>{label}</span> : ''}
       </CollapsibleTrigger>
       <CollapsibleContent className='collapsibleDropdown' asChild>
         <ul>
