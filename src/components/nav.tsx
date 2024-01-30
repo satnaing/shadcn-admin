@@ -84,8 +84,12 @@ function NavLink({
 }
 
 function NavLinkDropdown({ title, icon, label, sub }: SideLink) {
+  /* Open collapsible by default
+   * if one of child element is active */
+  const isChildActive = !!sub?.find((s) => s.isActive)
+
   return (
-    <Collapsible>
+    <Collapsible defaultOpen={isChildActive}>
       <CollapsibleTrigger
         className={cn(
           buttonVariants({ variant: 'ghost', size: 'sm' }),
