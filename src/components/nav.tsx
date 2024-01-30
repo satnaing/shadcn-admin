@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom'
-import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from './ui/tooltip'
 import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from './ui/button'
 import {
@@ -20,12 +25,12 @@ import {
 } from '@/components/ui/dropdown-menu'
 import useCheckActiveNav from '@/hooks/useCheckActiveNav'
 
-interface NavProps {
+interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
   isCollapsed: boolean
   links: SideLink[]
 }
 
-export default function Nav({ links, isCollapsed }: NavProps) {
+export default function Nav({ links, isCollapsed, className }: NavProps) {
   const renderLink = ({ sub, ...rest }: SideLink) => {
     const key = `${rest.title}-${rest.href}`
     if (isCollapsed && sub)
@@ -40,11 +45,16 @@ export default function Nav({ links, isCollapsed }: NavProps) {
   return (
     <div
       data-collapsed={isCollapsed}
-      className='group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2'
+      className={cn(
+        'group flex flex-col gap-4 overflow-hidden border-b  py-2 transition-[max-height,padding] duration-500 data-[collapsed=true]:py-2 md:border-none',
+        className
+      )}
     >
-      <nav className='grid gap-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2'>
-        {links.map(renderLink)}
-      </nav>
+      <TooltipProvider delayDuration={0}>
+        <nav className='grid gap-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2'>
+          {links.map(renderLink)}
+        </nav>
+      </TooltipProvider>
     </div>
   )
 }
@@ -63,14 +73,14 @@ function NavLink({ title, icon, label, href, subLink = false }: NavLinkProps) {
           variant: checkActiveNav(href) ? 'secondary' : 'ghost',
           size: 'sm',
         }),
-        'justify-start px-6 h-12 rounded-none',
-        subLink && 'border-l border-l-slate-500 w-full h-10'
+        'h-12 justify-start rounded-none px-6',
+        subLink && 'h-10 w-full border-l border-l-slate-500'
       )}
     >
       <div className='mr-2'>{icon}</div>
       {title}
       {label && (
-        <div className='ml-2 bg-primary text-primary-foreground px-1 rounded-lg text-[0.625rem]'>
+        <div className='ml-2 rounded-lg bg-primary px-1 text-[0.625rem] text-primary-foreground'>
           {label}
         </div>
       )}
@@ -90,13 +100,13 @@ function NavLinkDropdown({ title, icon, label, sub }: SideLink) {
       <CollapsibleTrigger
         className={cn(
           buttonVariants({ variant: 'ghost', size: 'sm' }),
-          'justify-start px-6 h-12 rounded-none w-full group'
+          'group h-12 w-full justify-start rounded-none px-6'
         )}
       >
         <div className='mr-2'>{icon}</div>
         {title}
         {label && (
-          <div className='ml-2 bg-primary text-primary-foreground px-1 rounded-lg text-[0.625rem]'>
+          <div className='ml-2 rounded-lg bg-primary px-1 text-[0.625rem] text-primary-foreground'>
             {label}
           </div>
         )}
@@ -111,7 +121,7 @@ function NavLinkDropdown({ title, icon, label, sub }: SideLink) {
       <CollapsibleContent className='collapsibleDropdown' asChild>
         <ul>
           {sub!.map((sublink) => (
-            <li key={sublink.title} className='ml-8 my-1'>
+            <li key={sublink.title} className='my-1 ml-8'>
               <NavLink {...sublink} subLink />
             </li>
           ))}
@@ -165,7 +175,7 @@ function NavLinkIconDropdown({ title, icon, label, sub }: SideLink) {
             <Button
               variant={isChildActive ? 'secondary' : 'ghost'}
               size='icon'
-              className='w-12 h-12'
+              className='h-12 w-12'
             >
               {icon}
             </Button>

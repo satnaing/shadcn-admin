@@ -1,10 +1,10 @@
 import Nav from './nav'
-import { TooltipProvider } from './ui/tooltip'
 import { cn } from '@/lib/utils'
 import { Separator } from './ui/separator'
 import { Button } from './ui/button'
 import { sidelinks } from '@/data/sidelinks'
-import { IconChevronsLeft } from '@tabler/icons-react'
+import { IconChevronsLeft, IconMenu2, IconX } from '@tabler/icons-react'
+import { useState } from 'react'
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   isCollapsed: boolean
@@ -16,15 +16,18 @@ export default function Sidebar({
   isCollapsed,
   setIsCollapsed,
 }: SidebarProps) {
+  const [navOpened, setNavOpened] = useState(false)
   return (
     <div
       className={cn(
-        'pb-12 relative hidden lg:block border-r-2 border-r-slate-100 dark:border-r-slate-900 transition-[width]',
+        `relative w-full border-r-2 border-r-slate-100 transition-[width] dark:border-r-slate-900 md:pb-12 ${isCollapsed ? 'md:w-14' : 'md:w-64'}`,
         className
       )}
     >
-      <TooltipProvider delayDuration={0}>
-        <div className='px-4 py-2 flex gap-2 h-16 items-center'>
+      <div
+        className={`flex h-16 w-full items-center justify-between gap-2 px-4 py-2`}
+      >
+        <div className='flex items-center gap-2'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 256 256'
@@ -56,24 +59,43 @@ export default function Sidebar({
             <span className='sr-only'>Website Name</span>
           </svg>
           <div
-            className={`flex flex-col justify-end truncate ${isCollapsed ? 'w-0 invisible' : 'w-auto visible'}`}
+            className={`flex flex-col justify-end truncate ${isCollapsed ? 'invisible w-0' : 'visible w-auto'}`}
           >
             <span className='font-medium'>Shadcn Dashboard</span>
             <span className='text-xs'>Vite + ShadcnUI</span>
           </div>
         </div>
-        <Separator className='mb-4' />
-        <Nav isCollapsed={isCollapsed} links={sidelinks} />
-      </TooltipProvider>
+        <Button
+          variant='ghost'
+          size='icon'
+          className='md:hidden'
+          aria-label='Toggle Navigation'
+          aria-controls='sidebar-menu'
+          aria-expanded={navOpened}
+          onClick={() => setNavOpened((prev) => !prev)}
+        >
+          {navOpened ? <IconX /> : <IconMenu2 />}
+        </Button>
+      </div>
+
+      <Separator className='mb-4 hidden md:block' />
+      <Nav
+        id='sidebar-menu'
+        className={
+          navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'
+        }
+        isCollapsed={isCollapsed}
+        links={sidelinks}
+      />
       <Button
         onClick={() => setIsCollapsed((prev) => !prev)}
         size='icon'
         variant='outline'
-        className='rounded-full -right-5 top-1/2 absolute'
+        className='absolute -right-5 top-1/2 hidden rounded-full md:inline-flex'
       >
         <IconChevronsLeft
           stroke={1.5}
-          className={`w-5 h-5 ${isCollapsed ? 'rotate-180' : ''}`}
+          className={`h-5 w-5 ${isCollapsed ? 'rotate-180' : ''}`}
         />
       </Button>
     </div>
