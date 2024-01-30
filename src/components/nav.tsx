@@ -26,14 +26,15 @@ interface NavProps {
 
 export default function Nav({ links, isCollapsed }: NavProps) {
   const renderLink = ({ sub, ...rest }: SideLink) => {
+    const key = `${rest.title}-${rest.href}`
     if (isCollapsed && sub)
-      return <NavLinkIconDropdown {...rest} sub={sub} key={rest.href} />
+      return <NavLinkIconDropdown {...rest} sub={sub} key={key} />
 
-    if (isCollapsed) return <NavLinkIcon {...rest} key={rest.href} />
+    if (isCollapsed) return <NavLinkIcon {...rest} key={key} />
 
-    if (sub) return <NavLinkDropdown {...rest} sub={sub} key={rest.href} />
+    if (sub) return <NavLinkDropdown {...rest} sub={sub} key={key} />
 
-    return <NavLink {...rest} key={rest.href} />
+    return <NavLink {...rest} key={key} />
   }
   return (
     <div
