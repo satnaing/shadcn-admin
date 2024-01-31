@@ -46,14 +46,16 @@ export default function Nav({ links, isCollapsed, className }: NavProps) {
     <div
       data-collapsed={isCollapsed}
       className={cn(
-        'group flex flex-col gap-4 overflow-hidden border-b  py-2 transition-[max-height,padding] duration-500 data-[collapsed=true]:py-2 md:border-none',
+        'group overflow-hidden border-b  py-2 transition-[max-height,padding] duration-500 data-[collapsed=true]:py-2 md:border-none',
         className
       )}
     >
       <TooltipProvider delayDuration={0}>
-        <nav className='grid gap-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2'>
-          {links.map(renderLink)}
-        </nav>
+        <div className='h-auto overflow-auto md:h-svh'>
+          <nav className='grid gap-1 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2'>
+            {links.map(renderLink)}
+          </nav>
+        </div>
       </TooltipProvider>
     </div>
   )
