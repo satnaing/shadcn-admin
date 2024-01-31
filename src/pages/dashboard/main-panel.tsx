@@ -19,50 +19,49 @@ export default function MainPanel() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <div className='hidden flex-col md:flex'>
-      <div className=''>
-        <div className='flex h-16 items-center px-8'>
-          <TopNav links={topNav} />
-          <div className='ml-auto flex items-center space-x-4'>
-            <Search />
-            <Button
-              size='icon'
-              variant='ghost'
-              className='rounded-full'
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-            >
-              {theme === 'light' ? (
-                <IconMoon size={20} />
-              ) : (
-                <IconSun size={20} />
-              )}
-            </Button>
-            <UserNav />
-          </div>
+    <div className='h-full flex-col md:flex'>
+      {/* ===== Top Heading ===== */}
+      <div className='flex h-16 items-center gap-4 px-4 md:px-8'>
+        <TopNav links={topNav} />
+        <div className='ml-auto flex items-center space-x-4'>
+          <Search />
+          <Button
+            size='icon'
+            variant='ghost'
+            className='rounded-full'
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          >
+            {theme === 'light' ? <IconMoon size={20} /> : <IconSun size={20} />}
+          </Button>
+          <UserNav />
         </div>
       </div>
-      <div className='flex-1 space-y-4 p-8 pt-6'>
+
+      {/* ===== Main ===== */}
+      <div className='h-full flex-1 space-y-4 overflow-y-auto px-4 py-6 pt-6 md:px-8'>
         <div className='flex items-center justify-between space-y-2'>
-          <h2 className='text-3xl font-bold tracking-tight'>Dashboard</h2>
+          <h2 className='text-2xl font-bold tracking-tight md:text-3xl'>
+            Dashboard
+          </h2>
           <div className='flex items-center space-x-2'>
             <Button>Download</Button>
           </div>
         </div>
-        <Tabs defaultValue='overview' className='space-y-4'>
-          <TabsList>
-            <TabsTrigger value='overview'>Overview</TabsTrigger>
-            <TabsTrigger value='analytics' disabled>
-              Analytics
-            </TabsTrigger>
-            <TabsTrigger value='reports' disabled>
-              Reports
-            </TabsTrigger>
-            <TabsTrigger value='notifications' disabled>
-              Notifications
-            </TabsTrigger>
-          </TabsList>
+        <Tabs
+          orientation='vertical'
+          defaultValue='overview'
+          className='space-y-4'
+        >
+          <div className='w-full overflow-x-scroll pb-2'>
+            <TabsList>
+              <TabsTrigger value='overview'>Overview</TabsTrigger>
+              <TabsTrigger value='analytics'>Analytics</TabsTrigger>
+              <TabsTrigger value='reports'>Reports</TabsTrigger>
+              <TabsTrigger value='notifications'>Notifications</TabsTrigger>
+            </TabsList>
+          </div>
           <TabsContent value='overview' className='space-y-4'>
-            <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
+            <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
               <Card>
                 <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
                   <CardTitle className='text-sm font-medium'>
@@ -165,8 +164,8 @@ export default function MainPanel() {
                 </CardContent>
               </Card>
             </div>
-            <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-7'>
-              <Card className='col-span-4'>
+            <div className='grid grid-cols-1 gap-4 lg:grid-cols-7'>
+              <Card className='col-span-1 lg:col-span-4'>
                 <CardHeader>
                   <CardTitle>Overview</CardTitle>
                 </CardHeader>
@@ -174,7 +173,7 @@ export default function MainPanel() {
                   <Overview />
                 </CardContent>
               </Card>
-              <Card className='col-span-3'>
+              <Card className='col-span-1 lg:col-span-3'>
                 <CardHeader>
                   <CardTitle>Recent Sales</CardTitle>
                   <CardDescription>
