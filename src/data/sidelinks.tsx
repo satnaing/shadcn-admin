@@ -3,6 +3,7 @@ import {
   IconChartHistogram,
   IconHexagonNumber1,
   IconHexagonNumber2,
+  IconHexagonNumber3,
   IconLayoutDashboard,
   IconMessages,
   IconRouteAltLeft,
@@ -38,20 +39,26 @@ export const sidelinks: SideLink[] = [
   {
     title: 'Authentication',
     label: '',
-    href: 'authentication',
+    href: '',
     icon: <IconUserShield size={18} />,
     sub: [
       {
         title: 'Sign In (email + password)',
         label: '',
-        href: 'sign-in',
+        href: '/sign-in',
         icon: <IconHexagonNumber1 size={18} />,
       },
       {
         title: 'Sign In (Box)',
         label: '',
-        href: 'sign-in-2',
+        href: '/sign-in-2',
         icon: <IconHexagonNumber2 size={18} />,
+      },
+      {
+        title: 'Forgot Password',
+        label: '',
+        href: '/forgot-password',
+        icon: <IconHexagonNumber3 size={18} />,
       },
     ],
   },
