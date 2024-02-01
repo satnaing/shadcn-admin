@@ -18,6 +18,7 @@ import {
   IconBrandGithub,
   IconLoader2,
 } from '@tabler/icons-react'
+import { PasswordInput } from '@/components/password-input'
 
 interface SignUpFormProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -88,7 +89,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
                 <FormItem className='space-y-1'>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder='********' {...field} type='password' />
+                    <PasswordInput placeholder='********' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -101,7 +102,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
                 <FormItem className='space-y-1'>
                   <FormLabel>Confirm Password</FormLabel>
                   <FormControl>
-                    <Input placeholder='********' {...field} type='password' />
+                    <PasswordInput placeholder='********' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

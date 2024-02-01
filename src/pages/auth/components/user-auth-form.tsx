@@ -1,9 +1,13 @@
 import { HTMLAttributes, useState } from 'react'
-import { cn } from '@/lib/utils'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { z } from 'zod'
-import { Button } from '@/components/ui/button'
+import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  IconBrandFacebook,
+  IconBrandGithub,
+  IconLoader2,
+} from '@tabler/icons-react'
 import {
   Form,
   FormControl,
@@ -12,13 +16,10 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Link } from 'react-router-dom'
-import {
-  IconBrandFacebook,
-  IconBrandGithub,
-  IconLoader2,
-} from '@tabler/icons-react'
+import { PasswordInput } from '@/components/password-input'
+import { cn } from '@/lib/utils'
 
 interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -90,7 +91,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     </Link>
                   </div>
                   <FormControl>
-                    <Input placeholder='********' {...field} type='password' />
+                    <PasswordInput placeholder='********' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
