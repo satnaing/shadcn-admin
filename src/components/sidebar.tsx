@@ -19,7 +19,7 @@ export default function Sidebar({
   return (
     <div
       className={cn(
-        `relative w-full border-r-2 border-r-slate-100 transition-[width] dark:border-r-slate-900 md:pb-12 ${isCollapsed ? 'md:w-14' : 'md:w-64'}`,
+        `relative w-full border-r-2 border-r-slate-100 transition-[width] dark:border-r-slate-900 md:max-w-60 md:pb-12 ${isCollapsed ? 'md:w-14' : 'md:w-64'}`,
         className
       )}
     >

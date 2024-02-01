@@ -75,8 +75,8 @@ function NavLink({ title, icon, label, href, subLink = false }: NavLinkProps) {
           variant: checkActiveNav(href) ? 'secondary' : 'ghost',
           size: 'sm',
         }),
-        'h-12 justify-start rounded-none px-6',
-        subLink && 'h-10 w-full border-l border-l-slate-500'
+        'h-12 justify-start text-wrap rounded-none px-6',
+        subLink && 'h-10 w-full border-l border-l-slate-500 px-2'
       )}
     >
       <div className='mr-2'>{icon}</div>
@@ -205,7 +205,7 @@ function NavLinkIconDropdown({ title, icon, label, sub }: SideLink) {
               to={href}
               className={`${checkActiveNav(href) ? 'bg-secondary' : ''}`}
             >
-              {icon} <span className='ml-2'>{title}</span>
+              {icon} <span className='ml-2 max-w-52 text-wrap'>{title}</span>
               {label && <span className='ml-auto text-xs'>{label}</span>}
             </Link>
           </DropdownMenuItem>
