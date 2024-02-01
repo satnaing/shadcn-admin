@@ -1,12 +1,12 @@
 import {
   IconBoxSeam,
   IconChartHistogram,
-  IconCircleLetterA,
-  IconCircleLetterB,
+  IconHexagonNumber1,
   IconLayoutDashboard,
   IconMessages,
   IconRouteAltLeft,
   IconTruck,
+  IconUserShield,
   IconUsers,
 } from '@tabler/icons-react'
 
@@ -25,49 +25,51 @@ export const sidelinks: SideLink[] = [
   {
     title: 'Dashboard',
     label: '',
-    href: 'dashboard',
+    href: '/',
     icon: <IconLayoutDashboard size={18} />,
-    sub: [
-      {
-        title: 'Dashboard 1',
-        href: '/dashboard',
-        icon: <IconCircleLetterA size={18} />,
-      },
-      {
-        title: 'Dashboard 2',
-        href: '/dashboard-2',
-        icon: <IconCircleLetterB size={18} />,
-      },
-    ],
   },
   {
     title: 'Chats',
     label: '9',
-    href: 'chats',
+    href: '/chats',
     icon: <IconMessages size={18} />,
+  },
+  {
+    title: 'Authentication',
+    label: '',
+    href: 'authentication',
+    icon: <IconUserShield size={18} />,
+    sub: [
+      {
+        title: 'Sign In (email + password)',
+        label: '',
+        href: 'sign-in',
+        icon: <IconHexagonNumber1 size={18} />,
+      },
+    ],
   },
   {
     title: 'Partners',
     label: '',
-    href: 'partners',
+    href: '/partners',
     icon: <IconUsers size={18} />,
   },
   {
     title: 'Requests',
     label: '10',
-    href: 'requests',
+    href: '/requests',
     icon: <IconRouteAltLeft size={18} />,
     sub: [
       {
         title: 'Trucks',
         label: '9',
-        href: 'trucks',
+        href: '/trucks',
         icon: <IconTruck size={18} />,
       },
       {
         title: 'Cargos',
         label: '',
-        href: 'cargos',
+        href: '/cargos',
         icon: <IconBoxSeam size={18} />,
       },
     ],
@@ -75,7 +77,7 @@ export const sidelinks: SideLink[] = [
   {
     title: 'Analysis',
     label: '',
-    href: 'analysis',
+    href: '/analysis',
     icon: <IconChartHistogram size={18} />,
   },
 ]
