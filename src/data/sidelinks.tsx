@@ -1,6 +1,9 @@
 import {
+  IconBarrierBlock,
   IconBoxSeam,
   IconChartHistogram,
+  IconError404,
+  IconExclamationCircle,
   IconHexagonNumber1,
   IconHexagonNumber2,
   IconHexagonNumber3,
@@ -8,6 +11,7 @@ import {
   IconLayoutDashboard,
   IconMessages,
   IconRouteAltLeft,
+  IconServerOff,
   IconTruck,
   IconUserShield,
   IconUsers,
@@ -100,5 +104,31 @@ export const sidelinks: SideLink[] = [
     label: '',
     href: '/analysis',
     icon: <IconChartHistogram size={18} />,
+  },
+  {
+    title: 'Error Pages',
+    label: '',
+    href: '',
+    icon: <IconExclamationCircle size={18} />,
+    sub: [
+      {
+        title: 'Not Found',
+        label: '',
+        href: '/404',
+        icon: <IconError404 size={18} />,
+      },
+      {
+        title: 'Internal Server Error',
+        label: '',
+        href: '/500',
+        icon: <IconServerOff size={18} />,
+      },
+      {
+        title: 'Maintenance Error',
+        label: '',
+        href: '/503',
+        icon: <IconBarrierBlock size={18} />,
+      },
+    ],
   },
 ]
