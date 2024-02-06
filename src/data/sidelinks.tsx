@@ -12,6 +12,7 @@ import {
   IconMessages,
   IconRouteAltLeft,
   IconServerOff,
+  IconSettings,
   IconTruck,
   IconUserShield,
   IconUsers,
@@ -130,5 +131,11 @@ export const sidelinks: SideLink[] = [
         icon: <IconBarrierBlock size={18} />,
       },
     ],
+  },
+  {
+    title: 'Settings',
+    label: '',
+    href: '/settings',
+    icon: <IconSettings size={18} />,
   },
 ]
