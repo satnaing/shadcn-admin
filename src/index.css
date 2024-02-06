@@ -99,10 +99,7 @@
   * {
     @apply border-border;
   }
-  html {
-    @apply h-svh md:overflow-hidden;
-  }
   body {
-    @apply bg-background text-foreground;
+    @apply min-h-svh w-full bg-background text-foreground;
   }
 }

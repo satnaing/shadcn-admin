@@ -1,33 +1,48 @@
+import { useEffect, useState } from 'react'
+import { IconChevronsLeft, IconMenu2, IconX } from '@tabler/icons-react'
+import { Button } from './ui/button'
 import Nav from './nav'
 import { cn } from '@/lib/utils'
-import { Button } from './ui/button'
 import { sidelinks } from '@/data/sidelinks'
-import { IconChevronsLeft, IconMenu2, IconX } from '@tabler/icons-react'
-import { useState } from 'react'
 
-interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
+interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   isCollapsed: boolean
   setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function Sidebar({
+export default function Sidebar2({
   className,
   isCollapsed,
   setIsCollapsed,
 }: SidebarProps) {
   const [navOpened, setNavOpened] = useState(false)
+
+  /* Make body not scrollable when navBar is opened */
+  useEffect(() => {
+    if (navOpened) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [navOpened])
+
   return (
-    <div
+    <aside
       className={cn(
-        `relative w-full border-r-2 border-r-slate-100 transition-[width] dark:border-r-slate-900 md:max-w-60 md:pb-12 ${isCollapsed ? 'md:w-14' : 'md:w-64'}`,
+        `fixed left-0 right-0 top-0 z-50 w-full border-r-2 border-r-muted transition-[width] md:bottom-0 md:right-auto md:h-svh ${isCollapsed ? 'md:w-14' : 'md:w-64'}`,
         className
       )}
     >
-      <div className='flex flex-col md:h-svh'>
-        <div
-          className={`flex h-16 w-full items-center justify-between gap-2 border-b px-4 py-2`}
-        >
-          <div className='flex items-center gap-2'>
+      {/* Overlay in mobile */}
+      <div
+        onClick={() => setNavOpened(false)}
+        className={`absolute inset-0 transition-[opacity] delay-100 duration-700 ${navOpened ? 'h-svh opacity-50' : 'h-0 opacity-0'} w-full bg-black md:hidden`}
+      />
+
+      <div className='relative h-full w-full'>
+        {/* Header */}
+        <div className='sidebar-header sticky top-0 flex h-16 items-center justify-between bg-background px-4 py-3 shadow'>
+          <div className={` flex items-center ${!isCollapsed ? 'gap-2' : ''}`}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 256 256'
@@ -65,6 +80,8 @@ export default function Sidebar({
               <span className='text-xs'>Vite + ShadcnUI</span>
             </div>
           </div>
+
+          {/* Toggle Button in mobile */}
           <Button
             variant='ghost'
             size='icon'
@@ -78,26 +95,28 @@ export default function Sidebar({
           </Button>
         </div>
 
+        {/* Navigation links */}
         <Nav
           id='sidebar-menu'
-          className={
-            navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'
-          }
+          className={`h-full overflow-auto ${navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'}`}
+          closeNav={() => setNavOpened(false)}
           isCollapsed={isCollapsed}
           links={sidelinks}
         />
+
+        {/* Scrollbar width toggle button */}
+        <Button
+          onClick={() => setIsCollapsed((prev) => !prev)}
+          size='icon'
+          variant='outline'
+          className='absolute -right-5 top-1/2 hidden rounded-full md:inline-flex'
+        >
+          <IconChevronsLeft
+            stroke={1.5}
+            className={`h-5 w-5 ${isCollapsed ? 'rotate-180' : ''}`}
+          />
+        </Button>
       </div>
-      <Button
-        onClick={() => setIsCollapsed((prev) => !prev)}
-        size='icon'
-        variant='outline'
-        className='absolute -right-5 top-1/2 hidden rounded-full md:inline-flex'
-      >
-        <IconChevronsLeft
-          stroke={1.5}
-          className={`h-5 w-5 ${isCollapsed ? 'rotate-180' : ''}`}
-        />
-      </Button>
-    </div>
+    </aside>
   )
 }
