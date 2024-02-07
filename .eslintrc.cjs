@@ -15,5 +15,4 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
-  extends: ['prettier'],
 }
