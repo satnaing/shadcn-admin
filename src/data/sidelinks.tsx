@@ -2,6 +2,7 @@ import {
   IconBarrierBlock,
   IconBoxSeam,
   IconChartHistogram,
+  IconChecklist,
   IconError404,
   IconExclamationCircle,
   IconHexagonNumber1,
@@ -35,6 +36,12 @@ export const sidelinks: SideLink[] = [
     label: '',
     href: '/',
     icon: <IconLayoutDashboard size={18} />,
+  },
+  {
+    title: 'Tasks',
+    label: '3',
+    href: '/tasks',
+    icon: <IconChecklist size={18} />,
   },
   {
     title: 'Chats',
