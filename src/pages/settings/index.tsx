@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import {
   IconBrowserCheck,
+  IconExclamationCircle,
   IconNotification,
   IconPalette,
   IconTool,
@@ -38,7 +39,7 @@ export default function Settings() {
           <aside className='sticky top-0 lg:w-1/5'>
             <SidebarNav items={sidebarNavItems} />
           </aside>
-          <div className='p-1 pr-4 lg:max-w-xl'>
+          <div className='w-full p-1 pr-4 lg:max-w-xl'>
             <div className='pb-16'>
               <Outlet />
             </div>
@@ -74,5 +75,10 @@ const sidebarNavItems = [
     title: 'Display',
     icon: <IconBrowserCheck size={18} />,
     href: '/settings/display',
+  },
+  {
+    title: 'Error Example',
+    icon: <IconExclamationCircle size={18} />,
+    href: '/settings/error-example',
   },
 ]

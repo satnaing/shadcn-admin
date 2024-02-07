@@ -83,6 +83,14 @@ const router = createBrowserRouter([
               Component: (await import('./pages/settings/display')).default,
             }),
           },
+          {
+            path: 'error-example',
+            lazy: async () => ({
+              Component: (await import('./pages/settings/error-example'))
+                .default,
+            }),
+            errorElement: <GeneralError className='h-[50svh]' minimal />,
+          },
         ],
       },
     ],
