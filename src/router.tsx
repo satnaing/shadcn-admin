@@ -1,60 +1,100 @@
-import { Suspense, lazy } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import AppShell from '@/components/app-shell'
-import Loader from '@/components/loader'
+import { createBrowserRouter } from 'react-router-dom'
+import GeneralError from './pages/errors/general-error'
+import NotFoundError from './pages/errors/not-found-error'
+import MaintenanceError from './pages/errors/maintenance-error'
 
-const Dashboard = lazy(() => import('@/pages/dashboard'))
-const SignIn = lazy(() => import('@/pages/auth/sign-in'))
-const SignIn2 = lazy(() => import('@/pages/auth/sign-in-2'))
-const SignUp = lazy(() => import('@/pages/auth/sign-up'))
-const ForgotPassword = lazy(() => import('@/pages/auth/forgot-password'))
+const router = createBrowserRouter([
+  // Auth routes
+  {
+    path: '/sign-in',
+    lazy: async () => ({
+      Component: (await import('./pages/auth/sign-in')).default,
+    }),
+  },
+  {
+    path: '/sign-in-2',
+    lazy: async () => ({
+      Component: (await import('./pages/auth/sign-in-2')).default,
+    }),
+  },
+  {
+    path: '/sign-up',
+    lazy: async () => ({
+      Component: (await import('./pages/auth/sign-up')).default,
+    }),
+  },
+  {
+    path: '/forgot-password',
+    lazy: async () => ({
+      Component: (await import('./pages/auth/forgot-password')).default,
+    }),
+  },
 
-// Settings
-const Settings = lazy(() => import('@/pages/settings'))
-const Profile = lazy(() => import('@/pages/settings/profile'))
-const Account = lazy(() => import('@/pages/settings/account'))
-const Appearance = lazy(() => import('@/pages/settings/appearance'))
-const Notifications = lazy(() => import('@/pages/settings/notifications'))
-const Display = lazy(() => import('@/pages/settings/display'))
+  // Main routes
+  {
+    path: '/',
+    lazy: async () => {
+      let AppShell = await import('./components/app-shell')
+      return { Component: AppShell.default }
+    },
+    errorElement: <GeneralError />,
+    children: [
+      {
+        index: true,
+        lazy: async () => ({
+          Component: (await import('./pages/dashboard')).default,
+        }),
+      },
+      {
+        path: 'settings',
+        lazy: async () => ({
+          Component: (await import('./pages/settings')).default,
+        }),
+        errorElement: <GeneralError />,
+        children: [
+          {
+            index: true,
+            lazy: async () => ({
+              Component: (await import('./pages/settings/profile')).default,
+            }),
+          },
+          {
+            path: 'account',
+            lazy: async () => ({
+              Component: (await import('./pages/settings/account')).default,
+            }),
+          },
+          {
+            path: 'appearance',
+            lazy: async () => ({
+              Component: (await import('./pages/settings/appearance')).default,
+            }),
+          },
+          {
+            path: 'notifications',
+            lazy: async () => ({
+              Component: (await import('./pages/settings/notifications'))
+                .default,
+            }),
+          },
+          {
+            path: 'display',
+            lazy: async () => ({
+              Component: (await import('./pages/settings/display')).default,
+            }),
+          },
+        ],
+      },
+    ],
+  },
 
-// Errors
-const GeneralError = lazy(() => import('@/pages/errors/general-error'))
-const NotFoundError = lazy(() => import('@/pages/errors/not-found-error'))
-const MaintenanceError = lazy(() => import('@/pages/errors/maintenance-error'))
+  // Error routes
+  { path: '/500', Component: GeneralError },
+  { path: '/404', Component: NotFoundError },
+  { path: '/503', Component: MaintenanceError },
 
-export default function Router() {
-  return (
-    <Suspense fallback={<Loader />}>
-      <Routes>
-        {/* Auth routes */}
-        <Route path='/sign-in' element={<SignIn />} />
-        <Route path='/sign-in-2' element={<SignIn2 />} />
-        <Route path='/sign-up' element={<SignUp />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
+  // Fallback 404 route
+  { path: '*', Component: NotFoundError },
+])
 
-        <Route path='/' element={<AppShell />} errorElement={<GeneralError />}>
-          <Route path='/' element={<Dashboard />} />
-          <Route
-            path='/settings'
-            element={<Settings />}
-            errorElement={<GeneralError />}
-          >
-            <Route index element={<Profile />} />
-            <Route path='account' element={<Account />} />
-            <Route path='appearance' element={<Appearance />} />
-            <Route path='notifications' element={<Notifications />} />
-            <Route path='display' element={<Display />} />
-          </Route>
-        </Route>
-
-        {/* Error routes */}
-        <Route path='/500' element={<GeneralError />} />
-        <Route path='/404' element={<NotFoundError />} />
-        <Route path='/503' element={<MaintenanceError />} />
-
-        {/* Not Found fallback route */}
-        <Route path='*' element={<NotFoundError />} />
-      </Routes>
-    </Suspense>
-  )
-}
+export default router
