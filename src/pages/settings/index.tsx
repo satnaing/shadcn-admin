@@ -11,21 +11,22 @@ import { Search } from '@/components/search'
 import { Separator } from '@/components/ui/separator'
 import ThemeSwitch from '@/components/theme-switch'
 import { UserNav } from '@/components/user-nav'
+import { Layout, LayoutBody, LayoutHeader } from '@/components/custom/layout'
 import SidebarNav from './components/sidebar-nav'
 
 export default function Settings() {
   return (
-    <div className='relative flex flex-col after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:hidden after:h-32 after:w-full after:bg-[linear-gradient(180deg,_transparent_10%,_hsl(var(--background))_70%)] md:h-svh after:md:block'>
+    <Layout fadedBelow fixedHeight>
       {/* ===== Top Heading ===== */}
-      <div className='flex h-16 flex-none items-center gap-4 bg-background p-4 md:px-8'>
+      <LayoutHeader>
         <Search />
         <div className='ml-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <UserNav />
         </div>
-      </div>
+      </LayoutHeader>
 
-      <div className='flex h-[calc(100%-4rem)] flex-1 flex-col overflow-hidden px-4 pb-6 pt-6 md:px-10'>
+      <LayoutBody className='flex flex-col' fixedHeight>
         <div className='space-y-0.5'>
           <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
             Settings
@@ -45,8 +46,8 @@ export default function Settings() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </LayoutBody>
+    </Layout>
   )
 }
 

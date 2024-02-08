@@ -11,24 +11,25 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ThemeSwitch from '@/components/theme-switch'
 import { TopNav } from '@/components/top-nav'
 import { UserNav } from '@/components/user-nav'
+import { Layout, LayoutBody, LayoutHeader } from '@/components/custom/layout'
 import { RecentSales } from './components/recent-sales'
 import { Overview } from './components/overview'
 
 export default function Dashboard() {
   return (
-    <>
+    <Layout>
       {/* ===== Top Heading ===== */}
-      <div className='flex h-16 items-center gap-4 px-4 md:px-8'>
+      <LayoutHeader>
         <TopNav links={topNav} />
         <div className='ml-auto flex items-center space-x-4'>
           <Search />
           <ThemeSwitch />
           <UserNav />
         </div>
-      </div>
+      </LayoutHeader>
 
       {/* ===== Main ===== */}
-      <div className='space-y-4 px-4 py-6 pt-6 md:px-8'>
+      <LayoutBody className='space-y-4'>
         <div className='flex items-center justify-between space-y-2'>
           <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
             Dashboard
@@ -177,8 +178,8 @@ export default function Dashboard() {
             </div>
           </TabsContent>
         </Tabs>
-      </div>
-    </>
+      </LayoutBody>
+    </Layout>
   )
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { IconChevronsLeft, IconMenu2, IconX } from '@tabler/icons-react'
+import { Layout, LayoutHeader } from './custom/layout'
 import { Button } from './ui/button'
 import Nav from './nav'
 import { cn } from '@/lib/utils'
@@ -39,10 +40,10 @@ export default function Sidebar2({
         className={`absolute inset-0 transition-[opacity] delay-100 duration-700 ${navOpened ? 'h-svh opacity-50' : 'h-0 opacity-0'} w-full bg-black md:hidden`}
       />
 
-      <div className='relative h-full w-full'>
+      <Layout>
         {/* Header */}
-        <div className='sidebar-header sticky top-0 flex h-16 items-center justify-between bg-background px-4 py-3 shadow'>
-          <div className={` flex items-center ${!isCollapsed ? 'gap-2' : ''}`}>
+        <LayoutHeader className='sticky top-0 justify-between px-4 py-3 shadow md:px-4'>
+          <div className={`flex items-center ${!isCollapsed ? 'gap-2' : ''}`}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 256 256'
@@ -93,12 +94,12 @@ export default function Sidebar2({
           >
             {navOpened ? <IconX /> : <IconMenu2 />}
           </Button>
-        </div>
+        </LayoutHeader>
 
         {/* Navigation links */}
         <Nav
           id='sidebar-menu'
-          className={`h-[calc(100%-4rem)] overflow-auto ${navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'}`}
+          className={`h-full flex-1 overflow-auto ${navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'}`}
           closeNav={() => setNavOpened(false)}
           isCollapsed={isCollapsed}
           links={sidelinks}
@@ -116,7 +117,7 @@ export default function Sidebar2({
             className={`h-5 w-5 ${isCollapsed ? 'rotate-180' : ''}`}
           />
         </Button>
-      </div>
+      </Layout>
     </aside>
   )
 }

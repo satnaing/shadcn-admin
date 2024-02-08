@@ -4,6 +4,10 @@
 
 @layer base {
   :root {
+    /* Custom CSS Variables */
+    --header-height: 4rem;
+
+    /* CSS Variables for light theme */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
