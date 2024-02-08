@@ -1,30 +1,66 @@
-# React + TypeScript + Vite
+# Shadcn Admin Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Admin Dashboard UI crafted with Shadcn and Vite. Built with responsiveness and accessibility in mind.
 
-Currently, two official plugins are available:
+![alt text](public/images/shadcn-admin.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I've been creating dashboard UIs at work and for my personal projects. I always wanted to make a reusable collection of dashboard UI for future projects; and here it is now. While I've created a few custom components, some of the code is directly adapted from ShadcnUI examples.
 
-## Expanding the ESLint configuration
+> This is not a starter project (template) though. I'll probably make one in the future.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- Light/dark mode
+- Responsive
+- Accessible
+- Sidebar and header layouts
+- 10+ pages
+- Extra custom components
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Tech Stack
+
+**UI:** [ShadcnUI](https://ui.shadcn.com) (TailwindCSS + RadixUI)
+
+**Build Tool:** [Vite](https://vitejs.dev/)
+
+**Routing:** [React Router](https://reactrouter.com/en/main)
+
+**Type Checking:** [TypeScript](https://www.typescriptlang.org/)
+
+**Linting/Formatting:** [Eslint](https://eslint.org/) & [Prettier](https://prettier.io/)
+
+**Icons:** [Tabler Icons](https://tabler.io/icons)
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/satnaing/shadcn-admin.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Go to the project directory
+
+```bash
+  cd shadcn-admin
+```
+
+Install dependencies
+
+```bash
+  pnpm install
+```
+
+Start the server
+
+```bash
+  pnpm run dev
+```
+
+## Author
+
+Crafted with 🤍 by [@satnaing](https://github.com/satnaing)
+
+## License
+
+Licensed under the [MIT License](https://choosealicense.com/licenses/mit/)
