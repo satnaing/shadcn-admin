@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/custom/button'
 import {
   Form,
   FormControl,
@@ -13,7 +13,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { IconLoader2 } from '@tabler/icons-react'
 
 interface ForgotFormProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -59,10 +58,7 @@ export function ForgotForm({ className, ...props }: ForgotFormProps) {
                 </FormItem>
               )}
             />
-            <Button className='mt-2' disabled={isLoading}>
-              {isLoading && (
-                <IconLoader2 className='mr-2 h-4 w-4 animate-spin' />
-              )}
+            <Button className='mt-2' loading={isLoading}>
               Continue
             </Button>
           </div>

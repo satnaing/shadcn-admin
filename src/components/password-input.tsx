@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { cn } from '@/lib/utils'
-import { Button } from './ui/button'
+import { Button } from './custom/button'
 import { IconEye, IconEyeOff } from '@tabler/icons-react'
 
 export interface PasswordInputProps

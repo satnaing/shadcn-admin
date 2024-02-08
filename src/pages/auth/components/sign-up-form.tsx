@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/custom/button'
 import {
   Form,
   FormControl,
@@ -13,11 +13,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  IconBrandFacebook,
-  IconBrandGithub,
-  IconLoader2,
-} from '@tabler/icons-react'
+import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
 import { PasswordInput } from '@/components/password-input'
 
 interface SignUpFormProps extends HTMLAttributes<HTMLDivElement> {}
@@ -108,10 +104,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
                 </FormItem>
               )}
             />
-            <Button className='mt-2' disabled={isLoading}>
-              {isLoading && (
-                <IconLoader2 className='mr-2 h-4 w-4 animate-spin' />
-              )}
+            <Button className='mt-2' loading={isLoading}>
               Create Account
             </Button>
 
@@ -131,26 +124,18 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
                 variant='outline'
                 className='w-full'
                 type='button'
-                disabled={isLoading}
+                loading={isLoading}
+                leftSection={<IconBrandGithub className='h-4 w-4' />}
               >
-                {isLoading ? (
-                  <IconLoader2 className='mr-2 h-4 w-4 animate-spin' />
-                ) : (
-                  <IconBrandGithub className='mr-2 h-4 w-4' />
-                )}{' '}
                 GitHub
               </Button>
               <Button
                 variant='outline'
                 className='w-full'
                 type='button'
-                disabled={isLoading}
+                loading={isLoading}
+                leftSection={<IconBrandFacebook className='h-4 w-4' />}
               >
-                {isLoading ? (
-                  <IconLoader2 className='mr-2 h-4 w-4 animate-spin' />
-                ) : (
-                  <IconBrandFacebook className='mr-2 h-4 w-4' />
-                )}{' '}
                 Facebook
               </Button>
             </div>

@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/custom/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
