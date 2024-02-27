@@ -53,6 +53,7 @@ interface PinInputProps {
   otp?: boolean // false by default
   disabled?: boolean // false by default
   readOnly?: boolean // false by default
+  autoFocus?: boolean // false by default
 }
 
 const PinInput = ({
@@ -70,6 +71,7 @@ const PinInput = ({
   otp = false,
   disabled = false,
   readOnly = false,
+  autoFocus = false,
 }: PinInputProps) => {
   const itemsRef = React.useRef<Map<number, HTMLInputElement> | null>(null)
 
@@ -99,6 +101,15 @@ const PinInput = ({
       onComplete(pinValue)
     }
   }, [length, onComplete, pinValue])
+
+  React.useEffect(() => {
+    if (!autoFocus) return
+    const map = getMap()
+    const node = map?.get(0)
+    if (node) {
+      node.focus()
+    }
+  }, [autoFocus])
 
   function getNode(index: number) {
     const map = getMap()
