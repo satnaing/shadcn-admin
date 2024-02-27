@@ -44,7 +44,7 @@ interface PinInputProps {
   value?: string
   onChange?: (value: string) => void
   onComplete?: (value: string) => void
-  type?: 'numeric' | 'alphanumeric' // default numeric
+  type?: 'numeric' | 'alphanumeric' // default alphanumeric
   placeholder?: string // default '○'
   length?: number // 4 by default
   name?: string
@@ -59,7 +59,7 @@ interface PinInputProps {
 
 const PinInput = ({
   className,
-  type = 'numeric',
+  type = 'alphanumeric',
   placeholder = '○',
   length = 4,
   name,
@@ -175,13 +175,16 @@ const PinInput = ({
   ): void => {
     const inputValue = e.target.value
     const pastedValue = pastedVal.current
-    setInputField(
-      pastedValue ? pastedValue.charAt(length - 1) : inputValue.slice(-1),
-      index
-    )
-    pastedVal.current = null
-    if (inputValue.length > 0) {
-      focusInput(index + 1)
+    const inputChar = pastedValue
+      ? pastedValue.charAt(length - 1)
+      : inputValue.slice(-1)
+
+    if (validate(inputChar)) {
+      setInputField(inputChar, index)
+      pastedVal.current = null
+      if (inputValue.length > 0) {
+        focusInput(index + 1)
+      }
     }
   }
 
@@ -243,13 +246,23 @@ const PinInput = ({
     // }
   }
 
+  function validate(value: string) {
+    const NUMERIC_REGEX = /^[0-9]+$/
+    const ALPHA_NUMERIC_REGEX = /^[a-zA-Z0-9]+$/i
+    const regex = type === 'alphanumeric' ? ALPHA_NUMERIC_REGEX : NUMERIC_REGEX
+    return regex.test(value)
+  }
+
   const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
     event.preventDefault()
-    console.log('paste detected')
     const copyValue = event.clipboardData
       .getData('text/plain')
       .replace(/[\n\r\s]+/g, '')
     const copyArr = copyValue.split('').slice(0, length)
+
+    const isValid = copyArr.every((c) => validate(c))
+
+    if (!isValid) return
 
     for (let i = 0; i < length; i++) {
       if (i < copyArr.length) {
