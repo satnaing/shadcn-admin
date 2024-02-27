@@ -1,59 +1,72 @@
 import * as React from 'react'
-/**
-
-- remove placeholder when focus ✅
-- has <input type="hidden" value="" />
-- pastable
-- typing must focus on next input
-- back button must focus on prev input
-
-Types: alphanumeric or number 
-Alphanumeric => type="text" inputmode="text" 
-Number => type="tel" inputmode="numeric"
-autocomplete="one-time-code"
-placeholder="○"
-mask
-length=4
- */
-
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
-/**
 interface PinInputProps {
-  type?: 'numeric' | 'alphanumeric' // default numeric
-  mask?: boolean // default false 
-  defaultValue?: string // default ''
-  value?: string 
-  onChange?: (value: string) => void
-  onComplete?: ((value: string) => void)
-  otp?: boolean // default false
-  placeholder?: string // default '○'
-  variant?: "outline" | "flushed" | "filled" | "unstyled"
-  ariaLabel?: string 
-  disabled?: boolean
-  error?: boolean // If set, adds error styles and aria-invalid attribute to all inputs
-  gap?: string
-  length?: number // 4 by default
-}
- */
-
-interface PinInputProps {
+  /**
+   * Class name for input fields.
+   */
   className?: string
+  /**
+   * Uncontrolled pin input default value.
+   */
   defaultValue?: string
+  /**
+   * Controlled pin input value.
+   */
   value?: string
+  /**
+   * Called when value changes
+   */
   onChange?: (value: string) => void
+  /**
+   * Called when all input have valid value
+   */
   onComplete?: (value: string) => void
-  type?: 'numeric' | 'alphanumeric' // default alphanumeric
-  placeholder?: string // default '○'
+  /**
+   * The type of value pin input should allow, `alphanumeric` by default
+   */
+  type?: 'numeric' | 'alphanumeric'
+  /**
+   * Placeholder for input fields, `○` by default
+   */
+  placeholder?: string
+  /**
+   * Number of pin input fields, `4` by default
+   */
   length?: number // 4 by default
+  /**
+   * `name` attribute for hidden input
+   */
   name?: string
+  /**
+   * `form` attribute for hidden input
+   */
   form?: string
-  mask?: boolean // false by default
-  otp?: boolean // false by default
-  disabled?: boolean // false by default
-  readOnly?: boolean // false by default
-  autoFocus?: boolean // false by default
+  /**
+   * If set, the input's value will be masked just like password input. This field is `false` by default
+   */
+  mask?: boolean
+  /**
+   * If set, the pin input component signals to its fields that they should
+   * use `autocomplete="one-time-code"`. This field is `false` by default
+   */
+  otp?: boolean
+  /**
+   * If set, the input fields are disabled, `false` by default
+   */
+  disabled?: boolean
+  /**
+   * If set, the user cannot set the value, `false` by default
+   */
+  readOnly?: boolean
+  /**
+   * If set, the pin input receives focus on mount, `false` by default
+   */
+  autoFocus?: boolean
+  /**
+   * `aria-label` for the input fields
+   */
   ariaLabel?: string
 }
 
@@ -193,7 +206,6 @@ const PinInput = ({
     index: number
   ) => {
     const { ctrlKey, key, shiftKey, metaKey } = event
-    // const inputValue = (target as HTMLInputElement).value
 
     if (type === 'numeric') {
       const canTypeSign =
@@ -224,26 +236,8 @@ const PinInput = ({
       setInputField('', index)
       if ((event.target as HTMLInputElement).value === '') {
         focusInput(index - 1)
-      } else {
-        // focusInputField('prev', index)
-        // focusInput(index - +1)
       }
     }
-    // else if (metaKey && key === 'v') {
-    //   // console.log('inputValue', inputValue)
-    //   // setInputField(inputValue.slice(-1), index)
-    // }
-    // else if (ctrlKey && key === 'v') {
-    //   for (let index = 0; index < INPUT_LENGTH; index++) {
-    //     setInputField('f', index)
-    //   }
-    // }
-    // else if (inputValue.length > 0) {
-    //   //  && key === _value[index]
-    //   // event.preventDefault()
-    //   // focusInputField('next', index)
-    //   focusInput(index + 1)
-    // }
   }
 
   function validate(value: string) {
