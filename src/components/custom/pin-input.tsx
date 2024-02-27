@@ -271,7 +271,7 @@ const PinInput = ({
     }
 
     pastedVal.current = copyValue
-    focusInput(length - 1)
+    focusInput(copyArr.length < length ? copyArr.length : length - 1)
   }
 
   return (
