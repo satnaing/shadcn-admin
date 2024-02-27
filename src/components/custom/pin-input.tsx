@@ -8,6 +8,10 @@ interface PinInputProps {
    */
   className?: string
   /**
+   * Class name for input fields container, `flex gap-2` by default
+   */
+  containerClassName?: string
+  /**
    * Uncontrolled pin input default value.
    */
   defaultValue?: string
@@ -71,6 +75,7 @@ interface PinInputProps {
 }
 
 const PinInput = ({
+  containerClassName,
   className,
   type = 'alphanumeric',
   placeholder = '○',
@@ -269,7 +274,7 @@ const PinInput = ({
   }
 
   return (
-    <div className='flex gap-2'>
+    <div className={cn('flex gap-2', containerClassName)}>
       {pins.map((pin, i) => (
         <PinInputField
           key={i}
