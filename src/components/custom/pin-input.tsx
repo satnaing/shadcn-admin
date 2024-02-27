@@ -38,7 +38,7 @@ interface PinInputProps {
   /**
    * Number of pin input fields, `4` by default
    */
-  length?: number // 4 by default
+  length?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 // 4 by default
   /**
    * `name` attribute for hidden input
    */
@@ -95,8 +95,8 @@ const PinInput = ({
 }: PinInputProps) => {
   const itemsRef = React.useRef<Map<number, HTMLInputElement> | null>(null)
 
-  if (length > 12) {
-    throw new Error('input length cannot be more than 12')
+  if (length > 1 || length > 12) {
+    throw new Error('input length cannot be more than 12 or less than 1')
   }
 
   if ((value !== undefined && !onChange) || (value === undefined && onChange)) {
