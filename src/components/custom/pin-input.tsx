@@ -93,9 +93,7 @@ const PinInput = ({
   autoFocus = false,
   ariaLabel,
 }: PinInputProps) => {
-  const itemsRef = React.useRef<Map<number, HTMLInputElement> | null>(null)
-
-  if (length > 1 || length > 12) {
+  if (length < 1 || length > 12) {
     throw new Error('input length cannot be more than 12 or less than 1')
   }
 
@@ -105,173 +103,35 @@ const PinInput = ({
     )
   }
 
-  const pinInputs = Array.from({ length }, (_, index) =>
-    defaultValue ? defaultValue.charAt(index) : value ? value.charAt(index) : ''
-  )
+  const { pins, pinValue, refMap, ...handlers } = usePinInput({
+    value,
+    defaultValue,
+    placeholder,
+    type,
+    length,
+    readOnly,
+  })
 
-  const [pins, setPins] = React.useState<(string | number)[]>(pinInputs)
-  const pinValue = pins.join('').trim()
-
+  /* call onChange func if pinValue changes */
   React.useEffect(() => {
     onChange && onChange(pinValue)
   }, [onChange, pinValue])
 
+  /* call onComplete func if pinValue is valid and completed */
   React.useEffect(() => {
     if (onComplete && pinValue.length === length) {
       onComplete(pinValue)
     }
   }, [length, onComplete, pinValue])
 
+  /* focus on first input field if autoFocus is set */
   React.useEffect(() => {
     if (!autoFocus) return
-    const map = getMap()
-    const node = map?.get(0)
+    const node = refMap?.get(0)
     if (node) {
       node.focus()
     }
-  }, [autoFocus])
-
-  function getNode(index: number) {
-    const map = getMap()
-    const node = map?.get(index)
-    return node
-  }
-
-  function focusInput(itemId: number) {
-    const node = getNode(itemId)
-    if (node) {
-      node.focus()
-      node.placeholder = ''
-    }
-  }
-
-  function getMap() {
-    if (!itemsRef.current) {
-      // Initialize the Map on first usage.
-      itemsRef.current = new Map()
-    }
-    return itemsRef.current
-  }
-
-  const handleFocus = (
-    event: React.FocusEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    event.target.select()
-    focusInput(index)
-  }
-
-  const handleBlur = (index: number) => {
-    const node = getNode(index)
-    if (node) {
-      node.placeholder = placeholder
-    }
-  }
-
-  const setInputField = (val: string, index: number) => {
-    const node = getNode(index)
-
-    if (node) {
-      node.value = val
-    }
-
-    setPins((prev) =>
-      prev.map((p, i) => {
-        if (i === index) {
-          return val
-        } else {
-          return p
-        }
-      })
-    )
-  }
-
-  const pastedVal = React.useRef<null | string>(null)
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ): void => {
-    const inputValue = e.target.value
-    const pastedValue = pastedVal.current
-    const inputChar = pastedValue
-      ? pastedValue.charAt(length - 1)
-      : inputValue.slice(-1)
-
-    if (validate(inputChar)) {
-      setInputField(inputChar, index)
-      pastedVal.current = null
-      if (inputValue.length > 0) {
-        focusInput(index + 1)
-      }
-    }
-  }
-
-  const handleKeyDown = (
-    event: React.KeyboardEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const { ctrlKey, key, shiftKey, metaKey } = event
-
-    if (type === 'numeric') {
-      const canTypeSign =
-        key === 'Backspace' ||
-        key === 'Tab' ||
-        key === 'Control' ||
-        key === 'Delete' ||
-        (ctrlKey && key === 'v') ||
-        (metaKey && key === 'v')
-          ? true
-          : !Number.isNaN(Number(key))
-
-      if (!canTypeSign) {
-        event.preventDefault()
-      }
-    }
-
-    if (key === 'ArrowLeft' || (shiftKey && key === 'Tab')) {
-      event.preventDefault()
-      focusInput(index - 1)
-    } else if (key === 'ArrowRight' || key === 'Tab' || key === ' ') {
-      event.preventDefault()
-      focusInput(index + 1)
-    } else if (key === 'Delete') {
-      event.preventDefault()
-    } else if (key === 'Backspace') {
-      event.preventDefault()
-      setInputField('', index)
-      if ((event.target as HTMLInputElement).value === '') {
-        focusInput(index - 1)
-      }
-    }
-  }
-
-  function validate(value: string) {
-    const NUMERIC_REGEX = /^[0-9]+$/
-    const ALPHA_NUMERIC_REGEX = /^[a-zA-Z0-9]+$/i
-    const regex = type === 'alphanumeric' ? ALPHA_NUMERIC_REGEX : NUMERIC_REGEX
-    return regex.test(value)
-  }
-
-  const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
-    event.preventDefault()
-    const copyValue = event.clipboardData
-      .getData('text/plain')
-      .replace(/[\n\r\s]+/g, '')
-    const copyArr = copyValue.split('').slice(0, length)
-
-    const isValid = copyArr.every((c) => validate(c))
-
-    if (!isValid) return
-
-    for (let i = 0; i < length; i++) {
-      if (i < copyArr.length) {
-        setInputField(copyArr[i], i)
-      }
-    }
-
-    pastedVal.current = copyValue
-    focusInput(copyArr.length < length ? copyArr.length : length - 1)
-  }
+  }, [autoFocus, refMap])
 
   return (
     <div className={cn('flex gap-2', containerClassName)}>
@@ -279,11 +139,11 @@ const PinInput = ({
         <PinInputField
           key={i}
           defaultValue={pin}
-          onChange={(e) => handleChange(e, i)}
-          onFocus={(e) => handleFocus(e, i)}
-          onBlur={() => handleBlur(i)}
-          onKeyDown={(e) => handleKeyDown(e, i)}
-          onPaste={handlePaste}
+          onChange={(e) => handlers.handleChange(e, i)}
+          onFocus={(e) => handlers.handleFocus(e, i)}
+          onBlur={() => handlers.handleBlur(i)}
+          onKeyDown={(e) => handlers.handleKeyDown(e, i)}
+          onPaste={handlers.handlePaste}
           placeholder={placeholder}
           className={className}
           type={type}
@@ -293,11 +153,10 @@ const PinInput = ({
           readOnly={readOnly}
           aria-label={ariaLabel}
           ref={(node) => {
-            const map = getMap()
             if (node) {
-              map?.set(i, node)
+              refMap?.set(i, node)
             } else {
-              map?.delete(i)
+              refMap?.delete(i)
             }
           }}
         />
@@ -326,5 +185,183 @@ const PinInputField = React.forwardRef<HTMLInputElement, InputProps>(
     )
   }
 )
+
+/* ========== usePinInput custom hook ========== */
+
+interface UsePinInputProps {
+  value: string | undefined
+  defaultValue: string | undefined
+  placeholder: string
+  type: 'numeric' | 'alphanumeric'
+  length: number
+  readOnly: boolean
+}
+
+const usePinInput = ({
+  value,
+  defaultValue,
+  placeholder,
+  type,
+  length,
+  readOnly,
+}: UsePinInputProps) => {
+  const pinInputs = Array.from({ length }, (_, index) =>
+    defaultValue ? defaultValue.charAt(index) : value ? value.charAt(index) : ''
+  )
+  const [pins, setPins] = React.useState<(string | number)[]>(pinInputs)
+  const pinValue = pins.join('').trim()
+
+  const itemsRef = React.useRef<Map<number, HTMLInputElement> | null>(null)
+
+  function getMap() {
+    if (!itemsRef.current) {
+      // Initialize the Map on first usage.
+      itemsRef.current = new Map()
+    }
+    return itemsRef.current
+  }
+
+  function getNode(index: number) {
+    const map = getMap()
+    const node = map?.get(index)
+    return node
+  }
+
+  function focusInput(itemId: number) {
+    const node = getNode(itemId)
+    if (node) {
+      node.focus()
+      node.placeholder = ''
+    }
+  }
+
+  function handleFocus(
+    event: React.FocusEvent<HTMLInputElement>,
+    index: number
+  ) {
+    event.target.select()
+    focusInput(index)
+  }
+
+  function handleBlur(index: number) {
+    const node = getNode(index)
+    if (node) {
+      node.placeholder = placeholder
+    }
+  }
+
+  function updateInputField(val: string, index: number) {
+    const node = getNode(index)
+
+    if (node) {
+      node.value = val
+    }
+
+    setPins((prev) =>
+      prev.map((p, i) => {
+        if (i === index) {
+          return val
+        } else {
+          return p
+        }
+      })
+    )
+  }
+
+  function validate(value: string) {
+    const NUMERIC_REGEX = /^[0-9]+$/
+    const ALPHA_NUMERIC_REGEX = /^[a-zA-Z0-9]+$/i
+    const regex = type === 'alphanumeric' ? ALPHA_NUMERIC_REGEX : NUMERIC_REGEX
+    return regex.test(value)
+  }
+
+  const pastedVal = React.useRef<null | string>(null)
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>, index: number) {
+    const inputValue = e.target.value
+    const pastedValue = pastedVal.current
+    const inputChar = pastedValue
+      ? pastedValue.charAt(length - 1)
+      : inputValue.slice(-1)
+
+    if (validate(inputChar)) {
+      updateInputField(inputChar, index)
+      pastedVal.current = null
+      if (inputValue.length > 0) {
+        focusInput(index + 1)
+      }
+    }
+  }
+
+  function handlePaste(event: React.ClipboardEvent<HTMLInputElement>) {
+    event.preventDefault()
+    const copyValue = event.clipboardData
+      .getData('text/plain')
+      .replace(/[\n\r\s]+/g, '')
+    const copyArr = copyValue.split('').slice(0, length)
+
+    const isValid = copyArr.every((c) => validate(c))
+
+    if (!isValid) return
+
+    for (let i = 0; i < length; i++) {
+      if (i < copyArr.length) {
+        updateInputField(copyArr[i], i)
+      }
+    }
+
+    pastedVal.current = copyValue
+    focusInput(copyArr.length < length ? copyArr.length : length - 1)
+  }
+
+  function handleKeyDown(
+    event: React.KeyboardEvent<HTMLInputElement>,
+    index: number
+  ) {
+    const { ctrlKey, key, shiftKey, metaKey } = event
+
+    if (type === 'numeric') {
+      const canTypeSign =
+        key === 'Backspace' ||
+        key === 'Tab' ||
+        key === 'Control' ||
+        key === 'Delete' ||
+        (ctrlKey && key === 'v') ||
+        (metaKey && key === 'v')
+          ? true
+          : !Number.isNaN(Number(key))
+
+      if (!canTypeSign || readOnly) {
+        event.preventDefault()
+      }
+    }
+
+    if (key === 'ArrowLeft' || (shiftKey && key === 'Tab')) {
+      event.preventDefault()
+      focusInput(index - 1)
+    } else if (key === 'ArrowRight' || key === 'Tab' || key === ' ') {
+      event.preventDefault()
+      focusInput(index + 1)
+    } else if (key === 'Delete') {
+      event.preventDefault()
+    } else if (key === 'Backspace') {
+      event.preventDefault()
+      updateInputField('', index)
+      if ((event.target as HTMLInputElement).value === '') {
+        focusInput(index - 1)
+      }
+    }
+  }
+
+  return {
+    pins,
+    pinValue,
+    refMap: getMap(),
+    handleFocus,
+    handleBlur,
+    handleChange,
+    handlePaste,
+    handleKeyDown,
+  }
+}
 
 export { PinInput }
