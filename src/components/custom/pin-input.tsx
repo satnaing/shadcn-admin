@@ -40,15 +40,19 @@ interface PinInputProps {
 
 interface PinInputProps {
   className?: string
+  defaultValue?: string
   value?: string
   onChange?: (value: string) => void
+  onComplete?: (value: string) => void
   type?: 'numeric' | 'alphanumeric' // default numeric
   placeholder?: string // default '○'
   length?: number // 4 by default
-  mask?: boolean // false by default
-  otp?: boolean // false by default
   name?: string
   form?: string
+  mask?: boolean // false by default
+  otp?: boolean // false by default
+  disabled?: boolean // false by default
+  readOnly?: boolean // false by default
 }
 
 const PinInput = ({
@@ -56,10 +60,16 @@ const PinInput = ({
   type = 'numeric',
   placeholder = '○',
   length = 4,
-  mask = false,
-  otp = false,
   name,
   form,
+  defaultValue,
+  value,
+  onChange,
+  onComplete,
+  mask = false,
+  otp = false,
+  disabled = false,
+  readOnly = false,
 }: PinInputProps) => {
   const itemsRef = React.useRef<Map<number, HTMLInputElement> | null>(null)
 
@@ -67,7 +77,28 @@ const PinInput = ({
     throw new Error('input length cannot be more than 12')
   }
 
-  const pinInputs = Array.from({ length }, (_, index) => index)
+  if ((value !== undefined && !onChange) || (value === undefined && onChange)) {
+    throw new Error(
+      'if one of value or onChange is specified, both props must be set.'
+    )
+  }
+
+  const pinInputs = Array.from({ length }, (_, index) =>
+    defaultValue ? defaultValue.charAt(index) : value ? value.charAt(index) : ''
+  )
+
+  const [pins, setPins] = React.useState<(string | number)[]>(pinInputs)
+  const pinValue = pins.join('').trim()
+
+  React.useEffect(() => {
+    onChange && onChange(pinValue)
+  }, [onChange, pinValue])
+
+  React.useEffect(() => {
+    if (onComplete && pinValue.length === length) {
+      onComplete(pinValue)
+    }
+  }, [length, onComplete, pinValue])
 
   function getNode(index: number) {
     const map = getMap()
@@ -112,6 +143,16 @@ const PinInput = ({
     if (node) {
       node.value = val
     }
+
+    setPins((prev) =>
+      prev.map((p, i) => {
+        if (i === index) {
+          return val
+        } else {
+          return p
+        }
+      })
+    )
   }
 
   const pastedVal = React.useRef<null | string>(null)
@@ -120,11 +161,11 @@ const PinInput = ({
     index: number
   ): void => {
     const inputValue = e.target.value
-    if (!pastedVal.current) {
-      setInputField(inputValue.slice(-1), index)
-    } else {
-      setInputField(pastedVal.current.charAt(length - 1), index)
-    }
+    const pastedValue = pastedVal.current
+    setInputField(
+      pastedValue ? pastedValue.charAt(length - 1) : inputValue.slice(-1),
+      index
+    )
     pastedVal.current = null
     if (inputValue.length > 0) {
       focusInput(index + 1)
@@ -209,9 +250,10 @@ const PinInput = ({
 
   return (
     <div className='flex gap-2'>
-      {pinInputs.map((_, i) => (
+      {pins.map((pin, i) => (
         <PinInputField
           key={i}
+          defaultValue={pin}
           onChange={(e) => handleChange(e, i)}
           onFocus={(e) => handleFocus(e, i)}
           onBlur={() => handleBlur(i)}
@@ -222,6 +264,8 @@ const PinInput = ({
           type={type}
           mask={mask}
           autoComplete={otp ? 'one-time-code' : 'off'}
+          disabled={disabled}
+          readOnly={readOnly}
           ref={(node) => {
             const map = getMap()
             if (node) {
@@ -232,7 +276,7 @@ const PinInput = ({
           }}
         />
       ))}
-      <input type='hidden' name={name} form={form} />
+      <input type='hidden' name={name} form={form} value={pinValue} />
     </div>
   )
 }
