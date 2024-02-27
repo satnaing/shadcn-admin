@@ -54,6 +54,7 @@ interface PinInputProps {
   disabled?: boolean // false by default
   readOnly?: boolean // false by default
   autoFocus?: boolean // false by default
+  ariaLabel?: string
 }
 
 const PinInput = ({
@@ -72,6 +73,7 @@ const PinInput = ({
   disabled = false,
   readOnly = false,
   autoFocus = false,
+  ariaLabel,
 }: PinInputProps) => {
   const itemsRef = React.useRef<Map<number, HTMLInputElement> | null>(null)
 
@@ -277,6 +279,7 @@ const PinInput = ({
           autoComplete={otp ? 'one-time-code' : 'off'}
           disabled={disabled}
           readOnly={readOnly}
+          aria-label={ariaLabel}
           ref={(node) => {
             const map = getMap()
             if (node) {
