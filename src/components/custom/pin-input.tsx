@@ -4,6 +4,10 @@ import { cn } from '@/lib/utils'
 
 interface PinInputProps {
   /**
+   * id for input fields.
+   */
+  id?: string
+  /**
    * Class name for input fields.
    */
   className?: string
@@ -76,6 +80,7 @@ interface PinInputProps {
 
 const PinInput = ({
   containerClassName,
+  id,
   className,
   type = 'alphanumeric',
   placeholder = '○',
@@ -138,6 +143,7 @@ const PinInput = ({
       {pins.map((pin, i) => (
         <PinInputField
           key={i}
+          id={i === 0 ? id : undefined}
           defaultValue={pin}
           onChange={(e) => handlers.handleChange(e, i)}
           onFocus={(e) => handlers.handleFocus(e, i)}
