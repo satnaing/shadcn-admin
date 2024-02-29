@@ -114,6 +114,12 @@ export const sidelinks: SideLink[] = [
     icon: <IconChartHistogram size={18} />,
   },
   {
+    title: 'Extra Components',
+    label: '',
+    href: '/extra-components',
+    icon: <IconChartHistogram size={18} />,
+  },
+  {
     title: 'Error Pages',
     label: '',
     href: '',
