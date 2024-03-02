@@ -7,9 +7,9 @@ interface PinInputProps {
     | React.ReactElement<typeof PinInputField>[]
   className: string
   /**
-   * `aria-label` for the input fields
+   * className for the input container
    */
-  inputComponent?: JSX.ElementType
+  className?: string
   /**
    * `aria-label` for the input fields
    */
@@ -23,11 +23,15 @@ interface PinInputProps {
    */
   onChange?: (value: string) => void
   /**
-   * Called when all input have valid value
+   * Called when all inputs have valid value
    */
   onComplete?: (value: string) => void
   /**
-   * `name` attribute for hidden input
+   * Called when any input doesn't have value
+   */
+  onIncomplete?: (value: string) => void
+  /**
+   * `name` attribute for input fields
    */
   name?: string
   /**
@@ -79,6 +83,7 @@ const PinInput2 = React.forwardRef<HTMLDivElement, PinInputProps>(
       value,
       onChange,
       onComplete,
+      onIncomplete,
       placeholder = '○',
       type = 'alphanumeric',
       name,
@@ -116,7 +121,10 @@ const PinInput2 = React.forwardRef<HTMLDivElement, PinInputProps>(
       if (onComplete && pinValue.length === length) {
         onComplete(pinValue)
       }
-    }, [length, onComplete, pinValue])
+      if (onIncomplete && pinValue.length !== length) {
+        onIncomplete(pinValue)
+      }
+    }, [length, onComplete, onIncomplete, pinValue])
 
     /* focus on first input field if autoFocus is set */
     React.useEffect(() => {
