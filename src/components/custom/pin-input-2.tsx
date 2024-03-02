@@ -5,7 +5,6 @@ interface PinInputProps {
   children:
     | React.ReactElement<typeof PinInputField>
     | React.ReactElement<typeof PinInputField>[]
-  className: string
   /**
    * className for the input container
    */
@@ -78,7 +77,6 @@ const PinInputContext = React.createContext<boolean>(false)
 const PinInput2 = React.forwardRef<HTMLDivElement, PinInputProps>(
   ({ className, children, ...props }, ref) => {
     const {
-      inputComponent,
       defaultValue,
       value,
       onChange,
@@ -142,7 +140,7 @@ const PinInput2 = React.forwardRef<HTMLDivElement, PinInputProps>(
         const pinIndex = counter
         counter = counter + 1
         return React.cloneElement(child, {
-          component: inputComponent,
+          name,
           inputKey: `input-${pinIndex}`,
           defaultValue: length > pinIndex ? pins[pinIndex] : '',
           onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -186,53 +184,68 @@ const PinInput2 = React.forwardRef<HTMLDivElement, PinInputProps>(
 )
 PinInput2.displayName = 'PinInput2'
 
-interface InternalPinInputProps {
+/* ========== PinInputField ========== */
+
+interface _PinInputFieldProps {
   mask: boolean
-  inputKey?: string
+  inputKey: string
   type: 'numeric' | 'alphanumeric'
 }
 
-// https://github.com/mantinedev/mantine/blob/master/packages/%40mantine/core/src/core/Box/Box.tsx
-// export type ElementProps<
-//   ElementType extends React.ElementType,
-//   PropsToOmit extends string = never,
-// > = Omit<React.ComponentPropsWithoutRef<ElementType>, 'style' | PropsToOmit>;
-
-interface InputProps
+interface PinInputFieldProps<T>
   extends Omit<
     React.ComponentPropsWithoutRef<'input'>,
-    keyof InternalPinInputProps
+    keyof _PinInputFieldProps
   > {
-  component?: JSX.ElementType
+  component?: T
 }
 
-const PinInputField = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, component, ...props }, ref) => {
-    const { mask, type, inputKey, ...rest } = props as InternalPinInputProps
+const PinInputFieldNoRef = <T extends React.ElementType = 'input'>(
+  {
+    className,
+    component,
+    ...props
+  }: PinInputFieldProps<T> &
+    (React.ComponentType<T> extends undefined
+      ? never
+      : React.ComponentProps<T>),
+  ref: React.ForwardedRef<HTMLInputElement>
+) => {
+  const { mask, type, inputKey, ...rest } = props as _PinInputFieldProps &
+    React.ComponentProps<T>
 
-    // Check if PinInputField is used within PinInput2
-    const isInsidePinInput = React.useContext(PinInputContext)
-    if (!isInsidePinInput) {
-      throw new Error(
-        `${PinInputField.displayName} must be used within ${PinInput2.displayName}.`
-      )
-    }
-
-    const Element = component || 'input'
-
-    return (
-      <Element
-        key={inputKey}
-        ref={ref}
-        type={mask ? 'password' : type === 'numeric' ? 'tel' : 'text'}
-        inputMode={type === 'numeric' ? 'numeric' : 'text'}
-        className={cn('size-10 text-center', className)}
-        {...rest}
-      />
+  // Check if PinInputField is used within PinInput2
+  const isInsidePinInput = React.useContext(PinInputContext)
+  if (!isInsidePinInput) {
+    throw new Error(
+      `PinInputField must be used within ${PinInput2.displayName}.`
     )
   }
-)
-PinInputField.displayName = 'PinInputField'
+
+  const Element = component || 'input'
+
+  return (
+    <Element
+      key={inputKey}
+      ref={ref}
+      type={mask ? 'password' : type === 'numeric' ? 'tel' : 'text'}
+      inputMode={type === 'numeric' ? 'numeric' : 'text'}
+      className={cn('size-10 text-center', className)}
+      {...rest}
+    />
+  )
+}
+
+const PinInputField = React.forwardRef(PinInputFieldNoRef) as <
+  T extends React.ElementType = 'input',
+>(
+  {
+    className,
+    component,
+    ...props
+  }: PinInputFieldProps<T> & React.ComponentProps<T>,
+  ref: React.ForwardedRef<HTMLInputElement>
+) => JSX.Element
 
 /* ========== usePinInput custom hook ========== */
 
