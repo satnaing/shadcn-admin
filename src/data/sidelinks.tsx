@@ -3,6 +3,7 @@ import {
   IconBoxSeam,
   IconChartHistogram,
   IconChecklist,
+  IconComponents,
   IconError404,
   IconExclamationCircle,
   IconHexagonNumber1,
@@ -112,6 +113,12 @@ export const sidelinks: SideLink[] = [
     label: '',
     href: '/analysis',
     icon: <IconChartHistogram size={18} />,
+  },
+  {
+    title: 'Extra Components',
+    label: '',
+    href: '/extra-components',
+    icon: <IconComponents size={18} />,
   },
   {
     title: 'Error Pages',
