@@ -1,13 +1,17 @@
-import { Breadcrumb, BreadcrumbItem } from '@/components/custom/breadcrumb'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { IconChevronRight } from '@tabler/icons-react'
+import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { Layout, LayoutBody, LayoutHeader } from '@/components/custom/layout'
+import { Breadcrumb, BreadcrumbItem } from '@/components/custom/breadcrumb'
 import { PinInput, PinInputField } from '@/components/custom/pin-input'
-import { PinInputOg } from '@/components/custom/pin-input-original'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Separator } from '@/components/ui/separator'
+import { Input } from '@/components/ui/input'
 import { Search } from '@/components/search'
 import ThemeSwitch from '@/components/theme-switch'
-import { Separator } from '@/components/ui/separator'
 import { UserNav } from '@/components/user-nav'
-import { IconChevronRight } from '@tabler/icons-react'
-import { Link } from 'react-router-dom'
 
 export default function ExtraComponents() {
   const items = [
@@ -28,6 +32,8 @@ export default function ExtraComponents() {
     </BreadcrumbItem>
   ))
 
+  const [pinInput, setPinInput] = useState('')
+
   return (
     <Layout>
       {/* ===== Top Heading ===== */}
@@ -45,38 +51,114 @@ export default function ExtraComponents() {
             Extra Components
           </h1>
         </div>
+        <h2 className='text-lg font-bold md:text-xl'>Breadcrumbs</h2>
         <Breadcrumb separator={<IconChevronRight size={18} />}>
           {items}
         </Breadcrumb>
         <Breadcrumb>{items}</Breadcrumb>
-        {/* <Input value={pinVal} onChange={(e) => setPinVal(e.target.value)} /> */}
-        <h1>Fucking pin</h1>
-        <PinInputOg
-          autoFocus
-          defaultValue='5679'
-          type='numeric'
-          length={4}
-          ariaLabel='Pin Input'
-        />
-        {/* <PinInput defaultValue='584930' /> */}
-        <PinInput
-          className='flex h-10 space-x-4'
-          defaultValue='56'
-          onComplete={(str) => console.log('completed', str)}
-          autoFocus
-        >
-          <PinInputField />
-          <PinInputField />
-          <Separator orientation='vertical' />
-          <PinInputField />
-          <PinInputField />
-        </PinInput>
-        <div className='flex h-5 items-center space-x-4 text-sm'>
-          <div>Blog</div>
-          <Separator orientation='vertical' />
-          <div>Docs</div>
-          <Separator orientation='vertical' />
-          <div>Source</div>
+
+        <Separator />
+
+        <h2 className='text-lg font-bold md:text-xl'>Pin Input</h2>
+        <div className='flex flex-col gap-12 lg:flex-row'>
+          <div className='flex-1'>
+            <h3 className='mb-2 font-medium'>Uncontrolled</h3>
+            <Tabs defaultValue='preview'>
+              <TabsList>
+                <TabsTrigger value='preview'>Preview</TabsTrigger>
+                <TabsTrigger value='code'>Code</TabsTrigger>
+              </TabsList>
+              <TabsContent value='preview'>
+                <div className='flex min-h-56 items-center justify-center rounded border'>
+                  <PinInput
+                    className='flex h-10 space-x-4'
+                    onComplete={(str) => console.log('completed', str)}
+                    autoFocus
+                  >
+                    <PinInputField component={Input} />
+                    <PinInputField component={Input} />
+                    <Separator orientation='vertical' />
+                    <PinInputField component={Input} />
+                    <PinInputField component={Input} />
+                  </PinInput>
+                </div>
+              </TabsContent>
+              <TabsContent value='code'>
+                <SyntaxHighlighter
+                  language='tsx'
+                  style={nord}
+                  wrapLines
+                  wrapLongLines
+                >
+                  {`<PinInput
+  className='flex h-10 space-x-4'
+  defaultValue=''
+  onComplete={(str) => 
+    console.log('completed', str)
+  }  
+  autoFocus
+>
+  <PinInputField component={Input} />
+  <PinInputField component={Input} />
+  <Separator orientation='vertical' />
+  <PinInputField component={Input} />
+  <PinInputField component={Input} />
+</PinInput>
+`}
+                </SyntaxHighlighter>
+              </TabsContent>
+            </Tabs>
+          </div>
+          <div className='flex-1'>
+            <h3 className='mb-2 font-medium'>Controlled</h3>
+            <Tabs defaultValue='preview'>
+              <TabsList>
+                <TabsTrigger value='preview'>Preview</TabsTrigger>
+                <TabsTrigger value='code'>Code</TabsTrigger>
+              </TabsList>
+              <TabsContent value='preview'>
+                <div className='flex min-h-56 items-center justify-center rounded border'>
+                  <PinInput
+                    className='flex h-10 space-x-4'
+                    value={pinInput}
+                    onChange={setPinInput}
+                    onComplete={(str) => console.log('completed', str)}
+                  >
+                    {Array.from({ length: 4 }, (_, i) => (
+                      <PinInputField key={i} component={Input} />
+                    ))}
+                  </PinInput>
+                </div>
+              </TabsContent>
+              <TabsContent value='code'>
+                <SyntaxHighlighter
+                  language='tsx'
+                  style={nord}
+                  wrapLines
+                  wrapLongLines
+                >
+                  {`function ControlledPinInput() {
+  const [pinInput, setPinInput] = useState('');
+
+  return (
+    <PinInput
+      className='flex h-10 space-x-4'
+      value={pinInput}
+      onChange={setPinInput}
+      onComplete={(str) => 
+        console.log('completed', str)
+      }
+    >
+      {Array.from({ length: 4 }, (_, i) => (
+        <PinInputField key={i} component={Input} />
+      ))}
+    </PinInput>
+  )
+}`}
+                </SyntaxHighlighter>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
       </LayoutBody>
     </Layout>
