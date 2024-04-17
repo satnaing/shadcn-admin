@@ -142,7 +142,7 @@ const PinInput = React.forwardRef<HTMLDivElement, PinInputProps>(
         return React.cloneElement(child, {
           name,
           inputKey: `input-${pinIndex}`,
-          defaultValue: length > pinIndex ? pins[pinIndex] : '',
+          value: length > pinIndex ? pins[pinIndex] : '',
           onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
             handlers.handleChange(e, pinIndex),
           onFocus: (e: React.FocusEvent<HTMLInputElement>) =>
@@ -266,11 +266,29 @@ const usePinInput = ({
   length,
   readOnly,
 }: UsePinInputProps) => {
-  const pinInputs = Array.from({ length }, (_, index) =>
-    defaultValue ? defaultValue.charAt(index) : value ? value.charAt(index) : ''
+  const pinInputs = React.useMemo(
+    () =>
+      Array.from({ length }, (_, index) =>
+        defaultValue
+          ? defaultValue.charAt(index)
+          : value
+            ? value.charAt(index)
+            : ''
+      ),
+    [defaultValue, length, value]
   )
+
   const [pins, setPins] = React.useState<(string | number)[]>(pinInputs)
   const pinValue = pins.join('').trim()
+
+  /**
+   * Update pins when values changes.
+   * This is necessary and this allows pins to be synced
+   * when the value is update or reset programmatically
+   */
+  React.useEffect(() => {
+    setPins(pinInputs)
+  }, [pinInputs])
 
   const itemsRef = React.useRef<Map<number, HTMLInputElement> | null>(null)
 
