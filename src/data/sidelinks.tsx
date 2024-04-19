@@ -1,4 +1,5 @@
 import {
+  IconApps,
   IconBarrierBlock,
   IconBoxSeam,
   IconChartHistogram,
@@ -50,6 +51,12 @@ export const sidelinks: SideLink[] = [
     label: '9',
     href: '/chats',
     icon: <IconMessages size={18} />,
+  },
+  {
+    title: 'Apps',
+    label: '',
+    href: '/apps',
+    icon: <IconApps size={18} />,
   },
   {
     title: 'Authentication',
