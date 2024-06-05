@@ -90,9 +90,9 @@ export default function Worker() {
                 <SelectValue>{jobText.get(jobType)}</SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value='all'>All Apps</SelectItem>
-                <SelectItem value='available'>Connected</SelectItem>
-                <SelectItem value='notAvailable'>Not Connected</SelectItem>
+                <SelectItem value='all'>All Jobs</SelectItem>
+                <SelectItem value='connected'>Connected</SelectItem>
+                <SelectItem value='notConnected'>Not Connected</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -128,10 +128,13 @@ export default function Worker() {
               className='rounded-lg border p-4 hover:shadow-md'
             >
               <div className='mb-8 flex items-center justify-between'>
-                <div
-                  className={`flex size-10 items-center justify-center rounded-lg bg-muted p-2`}
-                >
-                  {job.logo}
+                <div className='flex items-center gap-4'>
+                  <div
+                    className={`flex size-10 items-center justify-center rounded-lg bg-muted p-2`}
+                  >
+                    {job.logo}
+                  </div>
+                  <h3 className='font-medium text-gray-800'>{job.postedBy}</h3>
                 </div>
                 <Button
                   variant='outline'
@@ -143,19 +146,15 @@ export default function Worker() {
               </div>
               <div>
                 <h2 className='mb-1 font-semibold'>{job.task}</h2>
-                <p className='mb-2 line-clamp-2 text-gray-500'>{job.desc}</p>
+                <p className='mb-4 line-clamp-2 text-gray-500'>{job.desc}</p>
               </div>
               <div className='text-sm text-gray-500'>
-                <div className='flex'>
-                  <h3 className='mr-2'>posted by:</h3>
-                  <p>{job.postedBy}</p>
-                </div>
-                <div className='flex'>
-                  <h3 className='mr-2 '>posted</h3>
+                <div className='my-1 flex gap-2'>
+                  <h3>posted</h3>
                   <p className=''>{getDate(job.posted)}</p>
                 </div>
-                <div className='flex'>
-                  <h3 className='mr-2 '>expires:</h3>
+                <div className='flex gap-2'>
+                  <h3>expires</h3>
                   <p className=''>{getDate(job.expires)}</p>
                 </div>
               </div>
