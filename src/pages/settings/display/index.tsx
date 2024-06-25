@@ -1,17 +1,13 @@
-import { Separator } from '@/components/ui/separator'
 import { DisplayForm } from './display-form'
+import ContentSection from '../components/content-section'
 
 export default function SettingsDisplay() {
   return (
-    <div className='space-y-6'>
-      <div>
-        <h3 className='text-lg font-medium'>Display</h3>
-        <p className='text-sm text-muted-foreground'>
-          Turn items on or off to control what&apos;s displayed in the app.
-        </p>
-      </div>
-      <Separator />
+    <ContentSection
+      title='Display'
+      desc="Turn items on or off to control what's displayed in the app."
+    >
       <DisplayForm />
-    </div>
+    </ContentSection>
   )
 }

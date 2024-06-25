@@ -1,3 +1,4 @@
+import { Layout } from '@/components/custom/layout'
 import { Button } from '@/components/custom/button'
 import {
   Card,
@@ -11,7 +12,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ThemeSwitch from '@/components/theme-switch'
 import { TopNav } from '@/components/top-nav'
 import { UserNav } from '@/components/user-nav'
-import { Layout, LayoutBody, LayoutHeader } from '@/components/custom/layout'
 import { RecentSales } from './components/recent-sales'
 import { Overview } from './components/overview'
 
@@ -19,21 +19,19 @@ export default function Dashboard() {
   return (
     <Layout>
       {/* ===== Top Heading ===== */}
-      <LayoutHeader>
+      <Layout.Header>
         <TopNav links={topNav} />
         <div className='ml-auto flex items-center space-x-4'>
           <Search />
           <ThemeSwitch />
           <UserNav />
         </div>
-      </LayoutHeader>
+      </Layout.Header>
 
       {/* ===== Main ===== */}
-      <LayoutBody className='space-y-4'>
-        <div className='flex items-center justify-between space-y-2'>
-          <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
-            Dashboard
-          </h1>
+      <Layout.Body>
+        <div className='mb-2 flex items-center justify-between space-y-2'>
+          <h1 className='text-2xl font-bold tracking-tight'>Dashboard</h1>
           <div className='flex items-center space-x-2'>
             <Button>Download</Button>
           </div>
@@ -43,7 +41,7 @@ export default function Dashboard() {
           defaultValue='overview'
           className='space-y-4'
         >
-          <div className='w-full overflow-x-scroll pb-2'>
+          <div className='w-full overflow-x-auto pb-2'>
             <TabsList>
               <TabsTrigger value='overview'>Overview</TabsTrigger>
               <TabsTrigger value='analytics'>Analytics</TabsTrigger>
@@ -178,7 +176,7 @@ export default function Dashboard() {
             </div>
           </TabsContent>
         </Tabs>
-      </LayoutBody>
+      </Layout.Body>
     </Layout>
   )
 }

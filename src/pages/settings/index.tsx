@@ -7,26 +7,26 @@ import {
   IconTool,
   IconUser,
 } from '@tabler/icons-react'
+import { Layout } from '@/components/custom/layout'
 import { Search } from '@/components/search'
 import { Separator } from '@/components/ui/separator'
 import ThemeSwitch from '@/components/theme-switch'
 import { UserNav } from '@/components/user-nav'
-import { Layout, LayoutBody, LayoutHeader } from '@/components/custom/layout'
 import SidebarNav from './components/sidebar-nav'
 
 export default function Settings() {
   return (
-    <Layout fadedBelow fixedHeight>
+    <Layout fixed>
       {/* ===== Top Heading ===== */}
-      <LayoutHeader>
+      <Layout.Header>
         <Search />
         <div className='ml-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <UserNav />
         </div>
-      </LayoutHeader>
+      </Layout.Header>
 
-      <LayoutBody className='flex flex-col' fixedHeight>
+      <Layout.Body className='flex flex-col'>
         <div className='space-y-0.5'>
           <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
             Settings
@@ -35,18 +35,16 @@ export default function Settings() {
             Manage your account settings and set e-mail preferences.
           </p>
         </div>
-        <Separator className='my-6' />
-        <div className='flex flex-1 flex-col space-y-8 overflow-auto lg:flex-row lg:space-x-12 lg:space-y-0'>
-          <aside className='sticky top-0 lg:w-1/5'>
+        <Separator className='my-4 lg:my-6' />
+        <div className='flex flex-1 flex-col space-y-8 md:space-y-2 md:overflow-hidden lg:flex-row lg:space-x-12 lg:space-y-0'>
+          <aside className='top-0 lg:sticky lg:w-1/5'>
             <SidebarNav items={sidebarNavItems} />
           </aside>
-          <div className='w-full p-1 pr-4 lg:max-w-xl'>
-            <div className='pb-16'>
-              <Outlet />
-            </div>
+          <div className='flex w-full p-1 pr-4 md:overflow-y-hidden'>
+            <Outlet />
           </div>
         </div>
-      </LayoutBody>
+      </Layout.Body>
     </Layout>
   )
 }
