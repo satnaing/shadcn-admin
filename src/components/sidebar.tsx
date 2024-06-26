@@ -80,8 +80,8 @@ export default function Sidebar({
             <div
               className={`flex flex-col justify-end truncate ${isCollapsed ? 'invisible w-0' : 'visible w-auto'}`}
             >
-              <span className='font-medium'>Shadcn Admin</span>
-              <span className='text-xs'>Vite + ShadcnUI</span>
+              <span className='font-medium'>Human Worker</span>
+              <span className='text-xs'>AI + unlimited potential</span>
             </div>
           </div>
 
