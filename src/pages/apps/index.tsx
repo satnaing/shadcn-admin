@@ -4,7 +4,7 @@ import {
   IconSortAscendingLetters,
   IconSortDescendingLetters,
 } from '@tabler/icons-react'
-import { Layout, LayoutBody, LayoutHeader } from '@/components/custom/layout'
+import { Layout } from '@/components/custom/layout'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -47,9 +47,9 @@ export default function Apps() {
     .filter((app) => app.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
   return (
-    <Layout fadedBelow fixedHeight>
+    <Layout fixed>
       {/* ===== Top Heading ===== */}
-      <LayoutHeader>
+      <Layout.Header>
         <div className='flex w-full items-center justify-between'>
           <Search />
           <div className='flex items-center space-x-4'>
@@ -57,10 +57,10 @@ export default function Apps() {
             <UserNav />
           </div>
         </div>
-      </LayoutHeader>
+      </Layout.Header>
 
       {/* ===== Content ===== */}
-      <LayoutBody className='flex flex-col' fixedHeight>
+      <Layout.Body className='flex flex-col'>
         <div>
           <h1 className='text-2xl font-bold tracking-tight'>
             App Integrations
@@ -112,7 +112,7 @@ export default function Apps() {
           </Select>
         </div>
         <Separator className='shadow' />
-        <ul className='no-scrollbar grid gap-4 overflow-y-scroll pb-16 pt-4 md:grid-cols-2 lg:grid-cols-3'>
+        <ul className='faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 md:grid-cols-2 lg:grid-cols-3'>
           {filteredApps.map((app) => (
             <li
               key={app.name}
@@ -139,7 +139,7 @@ export default function Apps() {
             </li>
           ))}
         </ul>
-      </LayoutBody>
+      </Layout.Body>
     </Layout>
   )
 }

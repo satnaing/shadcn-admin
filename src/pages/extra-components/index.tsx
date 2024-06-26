@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { IconChevronRight } from '@tabler/icons-react'
 import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { Layout, LayoutBody, LayoutHeader } from '@/components/custom/layout'
+import { Layout } from '@/components/custom/layout'
 import { Breadcrumb, BreadcrumbItem } from '@/components/custom/breadcrumb'
 import { PinInput, PinInputField } from '@/components/custom/pin-input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -37,15 +37,16 @@ export default function ExtraComponents() {
   return (
     <Layout>
       {/* ===== Top Heading ===== */}
-      <LayoutHeader>
+      <Layout.Header>
         <div className='ml-auto flex items-center space-x-4'>
           <Search />
           <ThemeSwitch />
           <UserNav />
         </div>
-      </LayoutHeader>
+      </Layout.Header>
 
-      <LayoutBody className='space-y-4'>
+      {/* className='space-y-4' */}
+      <Layout.Body className='space-y-4'>
         <div className='flex items-center justify-between space-y-2'>
           <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
             Extra Components
@@ -160,7 +161,7 @@ export default function ExtraComponents() {
             </Tabs>
           </div>
         </div>
-      </LayoutBody>
+      </Layout.Body>
     </Layout>
   )
 }

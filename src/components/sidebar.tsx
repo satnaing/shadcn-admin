@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { IconChevronsLeft, IconMenu2, IconX } from '@tabler/icons-react'
-import { Layout, LayoutHeader } from './custom/layout'
+import { Layout } from './custom/layout'
 import { Button } from './custom/button'
 import Nav from './nav'
 import { cn } from '@/lib/utils'
@@ -11,7 +11,7 @@ interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   setIsCollapsed: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function Sidebar2({
+export default function Sidebar({
   className,
   isCollapsed,
   setIsCollapsed,
@@ -40,9 +40,12 @@ export default function Sidebar2({
         className={`absolute inset-0 transition-[opacity] delay-100 duration-700 ${navOpened ? 'h-svh opacity-50' : 'h-0 opacity-0'} w-full bg-black md:hidden`}
       />
 
-      <Layout>
+      <Layout fixed className={navOpened ? 'h-svh' : ''}>
         {/* Header */}
-        <LayoutHeader className='sticky top-0 justify-between px-4 py-3 shadow md:px-4'>
+        <Layout.Header
+          sticky
+          className='z-50 flex justify-between px-4 py-3 shadow-sm md:px-4'
+        >
           <div className={`flex items-center ${!isCollapsed ? 'gap-2' : ''}`}>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -94,12 +97,12 @@ export default function Sidebar2({
           >
             {navOpened ? <IconX /> : <IconMenu2 />}
           </Button>
-        </LayoutHeader>
+        </Layout.Header>
 
         {/* Navigation links */}
         <Nav
           id='sidebar-menu'
-          className={`h-full flex-1 overflow-auto ${navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'}`}
+          className={`z-40 h-full flex-1 overflow-auto ${navOpened ? 'max-h-screen' : 'max-h-0 py-0 md:max-h-screen md:py-2'}`}
           closeNav={() => setNavOpened(false)}
           isCollapsed={isCollapsed}
           links={sidelinks}
@@ -110,7 +113,7 @@ export default function Sidebar2({
           onClick={() => setIsCollapsed((prev) => !prev)}
           size='icon'
           variant='outline'
-          className='absolute -right-5 top-1/2 hidden rounded-full md:inline-flex'
+          className='absolute -right-5 top-1/2 z-50 hidden rounded-full md:inline-flex'
         >
           <IconChevronsLeft
             stroke={1.5}
