@@ -20,6 +20,7 @@ import {
   IconTruck,
   IconUserShield,
   IconUsers,
+  IconLock,
 } from '@tabler/icons-react'
 
 export interface NavLink {
@@ -157,6 +158,12 @@ export const sidelinks: SideLink[] = [
         label: '',
         href: '/503',
         icon: <IconBarrierBlock size={18} />,
+      },
+      {
+        title: 'Unauthorised Error',
+        label: '',
+        href: '/401',
+        icon: <IconLock size={18} />,
       },
     ],
   },
