@@ -31,6 +31,8 @@ I've been creating dashboard UIs at work and for my personal projects. I always 
 
 **Icons:** [Tabler Icons](https://tabler.io/icons)
 
+**Charts:** [Shadcn Charts](https://ui.shadcn.com/charts)
+
 ## Run Locally
 
 Clone the project
