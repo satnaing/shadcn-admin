@@ -14,6 +14,7 @@ import { TopNav } from '@/components/top-nav'
 import { UserNav } from '@/components/user-nav'
 import { RecentSales } from './components/recent-sales'
 import { Overview } from './components/overview'
+import { TotalSalesChart } from './components/total-sales'
 
 export default function Dashboard() {
   return (
@@ -174,6 +175,7 @@ export default function Dashboard() {
                 </CardContent>
               </Card>
             </div>
+            <TotalSalesChart />
           </TabsContent>
         </Tabs>
       </Layout.Body>
