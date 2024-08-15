@@ -8,6 +8,7 @@
     基于 Vue3 + ElementPlus + JavaScript + Pinia +Vite.搭建
     <br />
     <a href="https://gitee.com/Z568_568/ZHOUYI-ADMIN.git" target="_blank"><strong>探索本项目的源码 »</strong></a>
+<a href="https://template.zhouyi.run" target="_blank"><strong>在线示例点这里 »</strong></a>
     <br />
 <p align="center">
 ZHOUYI·ADMIN 是一个现代化的管理后台模板，提供了一系列功能丰富的组件和工具，帮助开发者快速搭建和开发前后台管理应用。
@@ -19,7 +20,7 @@ ZHOUYI·ADMIN 是一个现代化的管理后台模板，提供了一系列功能
 <p align="center">
 ✌️项目如果对您有帮助，希望能得到您的 star ✨
 
-[//]: # (    <a href="https://www.zhouyi.run" target="_blank"><strong>在线示例点这里 »</strong></a>)
+
     
 <br />
  
