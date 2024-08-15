@@ -1,0 +1,47 @@
+// 定义 code 标签的样式
+
+.zy-code {
+  pre {
+    width: 100%;
+
+  }
+
+  code {
+    width: 100%;
+    font-size: .9rem;
+    background-color: #f8f8f8; // 设置背景颜色
+    border: 1px solid #ddd; // 设置边框
+    border-radius: 4px; // 设置圆角
+    color: #333; // 设置文本颜色
+    display: inline-block; // 设置为块级元素
+    font-family: "Courier New", monospace; // 设置字体
+    padding: .5rem 1rem; // 设置内边距
+    box-sizing: border-box;
+    margin: .5rem 0;
+    word-break: break-all;
+  }
+
+  // 定义 code 标签内的行内代码的样式
+  code > span {
+    background-color: #e8e8e8; // 设置背景颜色
+    border-radius: 2px; // 设置圆角
+    padding: 2px 4px; // 设置内边距
+  }
+
+  // 定义 code 标签内的关键字样式
+  code > span.keyword {
+    color: #0074d9; // 设置关键字颜色
+  }
+
+  // 定义 code 标签内的字符串样式
+  code > span.string {
+    color: #2ecc40; // 设置字符串颜色
+  }
+
+  // 定义 code 标签内的注释样式
+  code > span.comment {
+    color: #999; // 设置注释颜色
+    font-style: italic; // 设置斜体
+  }
+
+}

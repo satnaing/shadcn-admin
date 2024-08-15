@@ -1,0 +1,40 @@
+// _typography.scss
+
+// 字体大小变量
+$base-font-size: 16px;
+$small-font-size: 14px;
+$large-font-size: 18px;
+
+// 字体颜色变量
+$base-text-color: #333;
+$heading-color: #000;
+$small-text-color: #777;
+
+// 字体样式 mixin
+@mixin base-font() {
+  font-size: $base-font-size;
+  color: $base-text-color;
+}
+
+@mixin heading-font() {
+  font-size: $large-font-size;
+  color: $heading-color;
+}
+
+@mixin small-font() {
+  font-size: $small-font-size;
+  color: $small-text-color;
+}
+
+// 常用文本样式
+.text-base {
+  @include base-font();
+}
+
+.text-heading {
+  @include heading-font();
+}
+
+.text-small {
+  @include small-font();
+}

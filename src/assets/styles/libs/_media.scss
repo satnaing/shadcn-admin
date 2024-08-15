@@ -1,0 +1,76 @@
+// 定义响应式断点
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-xlarge: 1200px;
+
+//$breakpoints:(
+//        xlarge:  ( 1281px,  1800px ),
+//        large:   ( 981px,   1280px ),
+//        medium:  ( 737px,   980px  ),
+//        small:   ( 481px,   736px  ),
+//        xsmall:  ( null,    480px  ),
+//);
+
+
+// 根据断点设置媒体查询
+// min-width：大于或等于
+// max-width：小于或等于
+// and 并且
+@mixin media-query($breakpoint) {
+  @if $breakpoint == small {
+    @media (max-width: $breakpoint-small) {
+      @content;
+    }
+  } @else if $breakpoint == medium {
+    @media (max-width: $breakpoint-medium) {
+      @content;
+    }
+  } @else if $breakpoint == large {
+    @media (max-width: $breakpoint-large) {
+      @content;
+    }
+  } @else if $breakpoint == xlarge {
+    @media (max-width: $breakpoint-xlarge) {
+      @content;
+    }
+  }
+}
+
+
+// 在 small 断点下的样式
+@include media-query(small) {
+  // 响应式样式
+  html {
+    font-size: 0.8rem;
+  }
+
+}
+
+// 在 medium 断点下的样式
+@include media-query(medium) {
+
+
+}
+
+// 在 large 断点下的样式
+@include media-query(large) {
+  .main-layout {
+    min-width: 400px;
+  }
+  // 响应式样式
+  .login-box {
+    .login-main {
+      width: 100%!important;
+    }
+    .login-aside {
+      display: none!important;
+    }
+  }
+
+}
+
+// 在 xlarge 断点下的样式
+@include media-query(xlarge) {
+
+}

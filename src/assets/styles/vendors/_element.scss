@@ -1,0 +1,16 @@
+// element-ui 菜单样式补充
+.el-menu-item:hover {
+  background-color: var(--el-bg-color-page);
+}
+.el-menu--horizontal {
+  .el-menu-item.is-active {
+    border-right: none;
+  }
+}
+.el-sub-menu__title:hover {
+  background-color: var(--el-bg-color-page);
+}
+.el-menu-item.is-active {
+  background-color: var(--el-bg-color-page);
+  border-right: 1px solid var(--el-menu-active-color);
+}

@@ -1,0 +1,34 @@
+// 表单初始化样式
+
+
+.zy-form {
+  background-color: #fff;
+}
+.form-upload {
+  display: flex;
+  flex-direction: column;
+
+  .upload-img {
+    margin: 1rem 0;
+  }
+}
+
+.input {
+  &-one {
+    width: 175px !important;
+    margin-bottom: 8px;
+  }
+  &-two {
+    width: 225px !important;
+    margin-bottom: 8px;
+  }
+  &-three {
+    width: 900px !important;
+    margin-bottom: 8px;
+  }
+}
+
+#nprogress .bar {
+  background: var(--el-color-primary) !important; //自定义颜色
+}
+
