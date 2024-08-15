@@ -1,6 +1,6 @@
 
 <p align="center">
- <h1 style="color: #3f51b5; text-align: center"> ZHOUYI·ADMIN</h1>
+ <h1 style="color: #3f51b5" align="center"> ZHOUYI·ADMIN</h1>
   </p>
 
 <h3 align="center">" 🔥 ZHOUYI·ADMIN ( 纯前端 ) "</h3>
