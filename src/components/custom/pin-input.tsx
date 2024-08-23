@@ -358,9 +358,10 @@ const usePinInput = ({
   function handleChange(e: React.ChangeEvent<HTMLInputElement>, index: number) {
     const inputValue = e.target.value
     const pastedValue = pastedVal.current
-    const inputChar = pastedValue
-      ? pastedValue.charAt(length - 1)
-      : inputValue.slice(-1)
+    const inputChar =
+      pastedValue && pastedValue.length === length
+        ? pastedValue.charAt(length - 1)
+        : inputValue.slice(-1)
 
     if (validate(inputChar)) {
       updateInputField(inputChar, index)
