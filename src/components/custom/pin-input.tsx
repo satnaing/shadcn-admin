@@ -158,7 +158,9 @@ const PinInput = React.forwardRef<HTMLDivElement, PinInputProps>(
           autoComplete: otp ? 'one-time-code' : 'off',
           disabled: disabled,
           readOnly: readOnly,
-          'aria-label': ariaLabel,
+          'aria-label': ariaLabel
+            ? ariaLabel
+            : `Pin input ${counter} of ${length}`,
           ref: (node: HTMLInputElement | null) => {
             if (node) {
               refMap?.set(pinIndex, node)
