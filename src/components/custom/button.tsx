@@ -35,38 +35,49 @@ const buttonVariants = cva(
   }
 )
 
-export interface ButtonProps
+interface ButtonPropsBase
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
-  loading?: boolean
-  leftSection?: JSX.Element
-  rightSection?: JSX.Element
-}
+    VariantProps<typeof buttonVariants> {}
+
+type ButtonProps = ButtonPropsBase &
+  (
+    | { asChild: true }
+    | {
+        asChild?: false
+        loading?: boolean
+        leftSection?: JSX.Element
+        rightSection?: JSX.Element
+      }
+  )
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      className,
-      variant,
-      size,
-      asChild = false,
-      children,
-      disabled,
+  ({ className, variant, size, children, ...props }, ref) => {
+    if (props.asChild) {
+      return (
+        <Slot
+          className={cn(buttonVariants({ variant, size, className }))}
+          ref={ref}
+          {...props}
+        >
+          {children}
+        </Slot>
+      )
+    }
+
+    const {
       loading = false,
       leftSection,
       rightSection,
-      ...props
-    },
-    ref
-  ) => {
-    const Comp = asChild ? Slot : 'button'
+      disabled,
+      ...otherProps
+    } = props
+
     return (
-      <Comp
+      <button
         className={cn(buttonVariants({ variant, size, className }))}
         disabled={loading || disabled}
         ref={ref}
-        {...props}
+        {...otherProps}
       >
         {((leftSection && loading) ||
           (!leftSection && !rightSection && loading)) && (
@@ -78,7 +89,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {rightSection && loading && (
           <IconLoader2 className='ml-2 h-4 w-4 animate-spin' />
         )}
-      </Comp>
+      </button>
     )
   }
 )
