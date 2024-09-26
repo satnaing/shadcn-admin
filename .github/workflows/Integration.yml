@@ -1,0 +1,60 @@
+name: Integration
+
+on:
+  push:
+    branches:
+      - main
+      - deployment
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  install-lint-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: |
+        pnpm install
+
+    - name: Lint the code
+      run: |
+        pnpm lint
+
+    - name: Run Prettier check
+      run: |
+        pnpm format:check
+
+    - name: Build the project
+      run: |
+        pnpm build
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/deployment'
+    needs: install-lint-build
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Deploy to Netlify
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      run: |
+        npm install -g netlify-cli
+        netlify deploy --prod --dir=dist --site=$NETLIFY_SITE_ID
