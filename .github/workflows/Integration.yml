@@ -14,29 +14,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Install dependencies
-      run: |
-        pnpm install
+      - name: Install pnpm
+        run: npm install -g pnpm  
 
-    - name: Lint the code
-      run: |
-        pnpm lint
+      - name: Install dependencies
+        run: pnpm install
 
-    - name: Run Prettier check
-      run: |
-        pnpm format:check
+      - name: Lint the code
+        run: pnpm lint
 
-    - name: Build the project
-      run: |
-        pnpm build
+      - name: Run Prettier check
+        run: pnpm format:check
+
+      - name: Build the project
+        run: pnpm build
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,17 +43,20 @@ jobs:
     needs: install-lint-build
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Deploy to Netlify
-      env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-      run: |
-        npm install -g netlify-cli
-        netlify deploy --prod --dir=dist --site=$NETLIFY_SITE_ID
+      - name: Install pnpm
+        run: npm install -g pnpm  
+
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          npm install -g netlify-cli
+          netlify deploy --prod --dir=dist --site=$NETLIFY_SITE_ID
