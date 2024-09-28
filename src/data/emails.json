@@ -1,0 +1,49 @@
+{
+  "emails": [
+    {
+      "id": 1,
+      "subject": "Next Meeting",
+      "sender": "john.doe@example.com",
+      "name": "John Doe",
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+      "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
+      "date": "2024-02-14"
+    },
+    {
+      "id": 2,
+      "subject": "Hey alex",
+      "sender": "alex@example.com",
+      "name": "Alex",
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+      "avatar": "https://randomuser.me/api/portraits/men/32.jpg",
+      "date": "2024-02-13"
+    },
+    {
+      "id": 3,
+      "subject": "Project Update",
+      "sender": "sarah.smith@example.com",
+      "name": "Sarah Smith",
+      "body": "Hi team, I wanted to give you a quick update on the project status. We've made significant progress this week and are on track to meet our deadline. Let's schedule a call to discuss the next steps.",
+      "avatar": "https://randomuser.me/api/portraits/women/65.jpg",
+      "date": "2024-02-15"
+    },
+    {
+      "id": 4,
+      "subject": "Lunch Tomorrow?",
+      "sender": "mike.johnson@example.com",
+      "name": "Mike Johnson",
+      "body": "Hey there! I was wondering if you'd like to grab lunch tomorrow. There's a new Italian place that just opened up downtown. Let me know if you're interested!",
+      "avatar": "https://randomuser.me/api/portraits/men/41.jpg",
+      "date": "2024-02-16"
+    },
+    {
+      "id": 5,
+      "subject": "Quarterly Report",
+      "sender": "emily.chen@example.com",
+      "name": "Emily Chen",
+      "body": "Attached please find the quarterly report for Q1 2024. We've seen a 15% increase in revenue compared to the same period last year. Great job, everyone!",
+      "avatar": "https://randomuser.me/api/portraits/women/33.jpg",
+      "date": "2024-02-17"
+    }
+  ]
+}

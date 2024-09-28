@@ -14,6 +14,7 @@ import {
   IconHexagonNumber5,
   IconLayoutDashboard,
   IconMessages,
+  IconMail,
   IconRouteAltLeft,
   IconServerOff,
   IconSettings,
@@ -52,6 +53,12 @@ export const sidelinks: SideLink[] = [
     label: '9',
     href: '/chats',
     icon: <IconMessages size={18} />,
+  },
+  {
+    title: 'Emails',
+    label: '',
+    href: '/email',
+    icon: <IconMail size={18} />,
   },
   {
     title: 'Apps',
