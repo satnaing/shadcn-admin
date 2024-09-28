@@ -65,6 +65,12 @@ const router = createBrowserRouter([
         }),
       },
       {
+        path: 'email',
+        lazy: async () => ({
+          Component: (await import('@/pages/email')).default,
+        }),
+      },
+      {
         path: 'apps',
         lazy: async () => ({
           Component: (await import('@/pages/apps')).default,
