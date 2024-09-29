@@ -55,5 +55,12 @@
     "learn_more": "了解更多",
     "unauthorised_title": "哎呀！您没有权限访问此页面。",
     "unauthorised_desc": "看起来您尝试访问需要适当身份验证的资源。<br></br> 请使用适当的凭据登录。"
+  },
+  "userNav": {
+    "profile": "个人资料",
+    "billing": "账单",
+    "settings": "设置",
+    "new_team": "新团队",
+    "log_out": "登出"
   }
 }

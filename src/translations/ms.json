@@ -55,5 +55,12 @@
     "learn_more": "Ketahui Lebih Lanjut",
     "unauthorised_title": "Oops! Anda tidak mempunyai kebenaran untuk mengakses halaman ini.",
     "unauthorised_desc": "Nampaknya anda cuba mengakses sumber yang memerlukan pengesahan yang sesuai.<br></br> Sila log masuk dengan kelayakan yang sesuai."
+  },
+  "userNav": {
+    "profile": "Profil",
+    "billing": "Bil",
+    "settings": "Tetapan",
+    "new_team": "Pasukan Baru",
+    "log_out": "Log Keluar"
   }
 }

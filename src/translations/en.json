@@ -55,5 +55,12 @@
     "learn_more": "Learn More",
     "unauthorised_title": "Oops! You don't have permission to access this page.",
     "unauthorised_desc": " It looks like you tried to access a resource that requires proper authentication. <br></br> Please log in with the appropriate credentials."
+  },
+  "userNav": {
+    "profile": "Profile",
+    "billing": "Billing",
+    "settiings": "Settings",
+    "new_team": "New Team",
+    "log_out": "Log out"
   }
 }
