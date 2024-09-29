@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Button } from './custom/button'
 import { IconMenu } from '@tabler/icons-react'
+import { useTranslations } from 'use-intl'
 
 interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
@@ -18,6 +19,7 @@ interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export function TopNav({ className, links, ...props }: TopNavProps) {
+  const t = useTranslations()
   return (
     <>
       <div className='md:hidden'>
@@ -34,7 +36,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
                   to={href}
                   className={!isActive ? 'text-muted-foreground' : ''}
                 >
-                  {title}
+                  {t(title)}
                 </Link>
               </DropdownMenuItem>
             ))}
@@ -55,7 +57,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
             to={href}
             className={`text-sm font-medium transition-colors hover:text-primary ${isActive ? '' : 'text-muted-foreground'}`}
           >
-            {title}
+            {t(title)}
           </Link>
         ))}
       </nav>
