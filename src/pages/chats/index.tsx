@@ -25,6 +25,7 @@ import { Button } from '@/components/custom/button'
 
 // Fake Data
 import { conversations } from '@/data/conversations.json'
+import { Textarea } from '@/components/ui/textarea'
 
 type ChatUser = (typeof conversations)[number]
 type Convo = ChatUser['messages'][number]
@@ -120,10 +121,10 @@ export default function Chats() {
                       }}
                     >
                       <div className='flex gap-2'>
-                        <Avatar>
+                        {/* <Avatar>
                           <AvatarImage src={profile} alt={username} />
                           <AvatarFallback>{username}</AvatarFallback>
-                        </Avatar>
+                        </Avatar> */}
                         <div>
                           <span className='col-start-2 row-span-2 font-medium'>
                             {fullName}
@@ -161,13 +162,13 @@ export default function Chats() {
                   <IconArrowLeft />
                 </Button>
                 <div className='flex items-center gap-2 lg:gap-4'>
-                  <Avatar className='size-9 lg:size-11'>
+                  {/* <Avatar className='size-9 lg:size-11'>
                     <AvatarImage
                       src={selectedUser.profile}
                       alt={selectedUser.username}
                     />
                     <AvatarFallback>{selectedUser.username}</AvatarFallback>
-                  </Avatar>
+                  </Avatar> */}
                   <div>
                     <span className='col-start-2 row-span-2 text-sm font-medium lg:text-base'>
                       {selectedUser.fullName}
@@ -181,7 +182,7 @@ export default function Chats() {
 
               {/* Right */}
               <div className='-mr-1 flex items-center gap-1 lg:gap-2'>
-                <Button
+                {/* <Button
                   size='icon'
                   variant='ghost'
                   className='hidden size-8 rounded-full sm:inline-flex lg:size-10'
@@ -194,7 +195,7 @@ export default function Chats() {
                   className='hidden size-8 rounded-full sm:inline-flex lg:size-10'
                 >
                   <IconPhone size={22} className='stroke-muted-foreground' />
-                </Button>
+                </Button> */}
                 <Button
                   size='icon'
                   variant='ghost'
@@ -241,7 +242,7 @@ export default function Chats() {
                 </div>
               </div>
               <form className='flex w-full flex-none gap-2'>
-                <div className='flex flex-1 items-center gap-2 rounded-md border border-input px-2 py-1 focus-within:outline-none focus-within:ring-1 focus-within:ring-ring lg:gap-4'>
+                <div className='flex flex-1 items-end pb-4 pt-2 gap-2 rounded-md border border-input px-2 py-1 focus-within:outline-none focus-within:ring-1 focus-within:ring-ring lg:gap-4'>
                   <div className='space-x-1'>
                     <Button
                       size='icon'
@@ -276,12 +277,14 @@ export default function Chats() {
                   </div>
                   <label className='flex-1'>
                     <span className='sr-only'>Chat Text Box</span>
-                    <input
-                      type='text'
+                    <Textarea
+                      className='flex-1 w-full border-none focus:border-none focus:ring-0 focus-visible:outline-none focus-visible:ring-0'
                       placeholder='Type your messages...'
-                      className='h-8 w-full bg-inherit focus-visible:outline-none'
+                      rows={1}
+                      style={{ border: 'none', outline: 'none' }}
                     />
                   </label>
+
                   <Button
                     variant='ghost'
                     size='icon'

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "next:dev": "next dev",
     "build": "tsc && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
