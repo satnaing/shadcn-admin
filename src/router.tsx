@@ -48,6 +48,13 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        path: 'history',
+        lazy: async () => ({
+          Component: (await import('./pages/history')).default,
+        }),
+      },
+      {
+        index: true,
         lazy: async () => ({
           Component: (await import('./pages/dashboard')).default,
         }),
