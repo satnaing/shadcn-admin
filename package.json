@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-collapsible": "^1.0.3",
@@ -35,6 +36,7 @@
     "clsx": "^2.1.0",
     "cmdk": "^0.2.1",
     "dayjs": "^1.11.10",
+    "lucide-react": "^0.453.0",
     "react": "^18.2.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.2.0",
@@ -44,6 +46,7 @@
     "recharts": "^2.12.5",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
+    "vaul": "^1.1.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {

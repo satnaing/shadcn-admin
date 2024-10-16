@@ -20,7 +20,7 @@ export default function Otp() {
             >
               <path d='M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3' />
             </svg>
-            <h1 className='text-xl font-medium'>Shadcn Admin</h1>
+            <h1 className='text-xl font-medium'>Interview</h1>
           </div>
           <Card className='p-6'>
             <div className='mb-2 flex flex-col space-y-2 text-left'>

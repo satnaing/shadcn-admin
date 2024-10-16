@@ -52,10 +52,10 @@ export const statuses = [
   },
 ]
 
-export const priorities = [
+export const levels = [
   {
-    label: 'Low',
-    value: 'low',
+    label: 'Basic',
+    value: 'basic',
     icon: ArrowDownIcon,
   },
   {
@@ -64,8 +64,8 @@ export const priorities = [
     icon: ArrowRightIcon,
   },
   {
-    label: 'High',
-    value: 'high',
+    label: 'Advanced',
+    value: 'advanced',
     icon: ArrowUpIcon,
   },
 ]
