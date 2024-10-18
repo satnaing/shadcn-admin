@@ -128,7 +128,7 @@ importers:
         version: 6.19.1(eslint@8.56.0)(typescript@5.4.5)
       '@vitejs/plugin-react-swc':
         specifier: ^3.6.0
-        version: 3.6.0(vite@5.2.9(@types/node@20.12.7))
+        version: 3.6.0(vite@5.2.14(@types/node@20.12.7))
       autoprefixer:
         specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -157,8 +157,8 @@ importers:
         specifier: ^5.4.5
         version: 5.4.5
       vite:
-        specifier: ^5.2.9
-        version: 5.2.9(@types/node@20.12.7)
+        specifier: ^5.2.14
+        version: 5.2.14(@types/node@20.12.7)
 
 packages:
 
@@ -2347,8 +2347,8 @@ packages:
   victory-vendor@36.8.2:
     resolution: {integrity: sha512-NfSQi7ISCdBbDpn3b6rg+8RpFZmWIM9mcks48BbogHE2F6h1XKdA34oiCKP5hP1OGvTotDRzsexiJKzrK4Exuw==}
 
-  vite@5.2.9:
-    resolution: {integrity: sha512-uOQWfuZBlc6Y3W/DTuQ1Sr+oIXWvqljLvS881SVmAj00d5RdgShLcuXWxseWPd4HXwiYBFW/vXHfKFeqj9uQnw==}
+  vite@5.2.14:
+    resolution: {integrity: sha512-TFQLuwWLPms+NBNlh0D9LZQ+HXW471COABxw/9TEUBrjuHMo9BrYBPrN/SYAwIuVL+rLerycxiLT41t4f5MZpA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -3485,10 +3485,10 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vitejs/plugin-react-swc@3.6.0(vite@5.2.9(@types/node@20.12.7))':
+  '@vitejs/plugin-react-swc@3.6.0(vite@5.2.14(@types/node@20.12.7))':
     dependencies:
       '@swc/core': 1.4.15
-      vite: 5.2.9(@types/node@20.12.7)
+      vite: 5.2.14(@types/node@20.12.7)
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -4563,7 +4563,7 @@ snapshots:
       d3-time: 3.1.0
       d3-timer: 3.0.1
 
-  vite@5.2.9(@types/node@20.12.7):
+  vite@5.2.14(@types/node@20.12.7):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
