@@ -5,7 +5,7 @@ import { Button } from '@/components/custom/button'
 import { Input } from '@/components/ui/input'
 import { DataTableViewOptions } from '../components/data-table-view-options'
 
-import { priorities, statuses } from '../data/data'
+import { levels } from '../data/data'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 
 interface DataTableToolbarProps<TData> {
@@ -29,18 +29,18 @@ export function DataTableToolbar<TData>({
           className='h-8 w-[150px] lg:w-[250px]'
         />
         <div className='flex gap-x-2'>
-          {table.getColumn('status') && (
+          {/* {table.getColumn('category') && (
             <DataTableFacetedFilter
-              column={table.getColumn('status')}
-              title='Status'
-              options={statuses}
+              column={table.getColumn('category')}
+              title='Category'
+              options={category}
             />
-          )}
-          {table.getColumn('priority') && (
+          )} */}
+          {table.getColumn('level') && (
             <DataTableFacetedFilter
-              column={table.getColumn('priority')}
-              title='Priority'
-              options={priorities}
+              column={table.getColumn('level')}
+              title='Level'
+              options={levels}
             />
           )}
         </div>
