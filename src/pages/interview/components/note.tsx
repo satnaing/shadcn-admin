@@ -9,8 +9,10 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { Textarea } from '@/components/ui/textarea'
+import { useFormContext } from 'react-hook-form'
 
 export function Note() {
+  const { register } = useFormContext()
   return (
     <Drawer>
       <DrawerTrigger>
@@ -20,6 +22,7 @@ export function Note() {
         <DrawerHeader>
           <DrawerDescription>
             <Textarea
+              {...register('note')}
               placeholder='Type your note here...'
               className='min-h-80'
             ></Textarea>
@@ -27,9 +30,9 @@ export function Note() {
         </DrawerHeader>
         <DrawerFooter>
           <div className='flex w-full justify-center gap-4'>
-            <Button>Save</Button>
+            <Button type='button'>Clear</Button>
             <DrawerClose>
-              <Button variant='outline'>Cancel</Button>
+              <Button variant='outline'>Close</Button>
             </DrawerClose>
           </div>
         </DrawerFooter>
