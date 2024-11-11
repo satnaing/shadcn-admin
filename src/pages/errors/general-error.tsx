@@ -15,7 +15,7 @@ export default function GeneralError({
   const t = useTranslations('error')
   return (
     <div className={cn('h-svh w-full', className)}>
-      <div className='flex flex-col items-center justify-center w-full h-full gap-2 m-auto'>
+      <div className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'>
         {!minimal && (
           <h1 className='text-[7rem] font-bold leading-tight'>500</h1>
         )}
@@ -24,7 +24,7 @@ export default function GeneralError({
           {t.rich('500_desc', { br: () => <br /> })}
         </p>
         {!minimal && (
-          <div className='flex gap-4 mt-6'>
+          <div className='mt-6 flex gap-4'>
             <Button variant='outline' onClick={() => navigate(-1)}>
               {t('go_back')}
             </Button>

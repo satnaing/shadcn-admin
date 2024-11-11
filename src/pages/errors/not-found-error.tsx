@@ -7,13 +7,13 @@ export default function NotFoundError() {
   const t = useTranslations('error')
   return (
     <div className='h-svh'>
-      <div className='flex flex-col items-center justify-center w-full h-full gap-2 m-auto'>
+      <div className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'>
         <h1 className='text-[7rem] font-bold leading-tight'>404</h1>
         <span className='font-medium'>{t('404_title')}</span>
         <p className='text-center text-muted-foreground'>
           {t.rich('404_desc', { br: () => <br /> })}
         </p>
-        <div className='flex gap-4 mt-6'>
+        <div className='mt-6 flex gap-4'>
           <Button variant='outline' onClick={() => navigate(-1)}>
             {t('go_back')}
           </Button>

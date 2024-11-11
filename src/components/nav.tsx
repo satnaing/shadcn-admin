@@ -204,7 +204,7 @@ function NavLinkIconDropdown({ title, icon, label, sub }: NavLinkProps) {
             <Button
               variant={isChildActive ? 'secondary' : 'ghost'}
               size='icon'
-              className='w-12 h-12'
+              className='h-12 w-12'
             >
               {icon}
             </Button>
