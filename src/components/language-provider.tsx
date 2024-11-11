@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react'
 import { IntlProvider } from 'use-intl'
 import translations from '../translations'
 
-export type Language = 'en' | 'zh' | 'ms'
+export type Language = 'en' | 'zh'
 
 type LanguageProviderProps = {
   children: React.ReactNode
