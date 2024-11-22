@@ -8,5 +8,42 @@
   "trailingComma": "es5",
   "bracketSpacing": true,
   "endOfLine": "lf",
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "plugins": [
+    "prettier-plugin-tailwindcss",
+    "@trivago/prettier-plugin-sort-imports"
+  ],
+  "importOrder": [
+    "^path$",
+    "^vite$",
+    "^@vitejs/(.*)$",
+    "^react$",
+    "^react-dom/client$",
+    "^react/(.*)$",
+    "^globals$",
+    "^zod$",
+    "^axios$",
+    "^date-fns$",
+    "^react-hook-form$",
+    "^use-intl$",
+    "^@radix-ui/(.*)$",
+    "^@hookform/resolvers/zod$",
+    "^@tanstack/react-query$",
+    "^@tanstack/react-router$",
+    "^@tanstack/react-table$",
+    "^@tabler/icons-react$",
+    "<THIRD_PARTY_MODULES>",
+    "^@/assets/(.*)",
+    "^@/api/(.*)$",
+    "^@/stores/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/utils/(.*)$",
+    "^@/constants/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/components/layouts/(.*)$",
+    "^@/components/ui/(.*)$",
+    "^@/components/errors/(.*)$",
+    "^@/components/(.*)$",
+    "^@/features/(.*)$",
+    "^[./]"
+  ]
 }

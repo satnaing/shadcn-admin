@@ -5,11 +5,12 @@
 !/src
 !index.html
 !package.json
+!tailwind.config.js
 !tsconfig.json
 !tsconfig.node.json
 !vite.config.ts
 !.prettierrc
 !README.md
 !CHANGELOG.md
-!.eslintrc.cjs
+!eslint.config.js
 !postcss.config.js
