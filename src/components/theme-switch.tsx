@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { IconCheck, IconMoon, IconSun } from '@tabler/icons-react'
+import { useTheme } from '@/context/theme-context'
 import { cn } from '@/lib/utils'
 import {
   DropdownMenu,
@@ -7,10 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { useTheme } from './theme-provider'
-import { Button } from './custom/button'
+import { Button } from '@/components/button'
 
-export default function ThemeSwitch() {
+export function ThemeSwitch() {
   const { theme, setTheme } = useTheme()
 
   /* Update theme-color meta tag
@@ -18,10 +18,8 @@ export default function ThemeSwitch() {
   useEffect(() => {
     const themeColor = theme === 'dark' ? '#020817' : '#fff'
     const metaThemeColor = document.querySelector("meta[name='theme-color']")
-    metaThemeColor && metaThemeColor.setAttribute('content', themeColor)
+    if (metaThemeColor) metaThemeColor.setAttribute('content', themeColor)
   }, [theme])
-
-  console.log(theme)
 
   return (
     <DropdownMenu>
