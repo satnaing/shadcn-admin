@@ -16,6 +16,7 @@ import {
 } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/button'
 import { Layout } from '@/components/layout'
@@ -97,7 +98,7 @@ export default function Chats() {
               </label>
             </div>
 
-            <div className='-mx-3 h-full overflow-auto p-3'>
+            <ScrollArea className='-mx-3 h-full p-3'>
               {filteredChatList.map((chatUsr) => {
                 const { id, profile, username, messages, fullName } = chatUsr
                 const lastConvo = messages[0]
@@ -137,7 +138,7 @@ export default function Chats() {
                   </Fragment>
                 )
               })}
-            </div>
+            </ScrollArea>
           </div>
 
           {/* Right Side */}
