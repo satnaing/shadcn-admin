@@ -12,6 +12,7 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandList,
 } from '@/components/ui/command'
 import {
   Form,
@@ -179,25 +180,27 @@ export function AccountForm() {
                     <CommandInput placeholder='Search language...' />
                     <CommandEmpty>No language found.</CommandEmpty>
                     <CommandGroup>
-                      {languages.map((language) => (
-                        <CommandItem
-                          value={language.label}
-                          key={language.value}
-                          onSelect={() => {
-                            form.setValue('language', language.value)
-                          }}
-                        >
-                          <CheckIcon
-                            className={cn(
-                              'mr-2 h-4 w-4',
-                              language.value === field.value
-                                ? 'opacity-100'
-                                : 'opacity-0'
-                            )}
-                          />
-                          {language.label}
-                        </CommandItem>
-                      ))}
+                      <CommandList>
+                        {languages.map((language) => (
+                          <CommandItem
+                            value={language.label}
+                            key={language.value}
+                            onSelect={() => {
+                              form.setValue('language', language.value)
+                            }}
+                          >
+                            <CheckIcon
+                              className={cn(
+                                'mr-2 h-4 w-4',
+                                language.value === field.value
+                                  ? 'opacity-100'
+                                  : 'opacity-0'
+                              )}
+                            />
+                            {language.label}
+                          </CommandItem>
+                        ))}
+                      </CommandList>
                     </CommandGroup>
                   </Command>
                 </PopoverContent>
