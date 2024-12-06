@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { IconCheck, IconMoon, IconSun } from '@tabler/icons-react'
-import { useTheme } from '@/context/theme-context'
 import { cn } from '@/lib/utils'
+import { useTheme } from '@/context/theme-context'
 import {
   DropdownMenu,
   DropdownMenuContent,
