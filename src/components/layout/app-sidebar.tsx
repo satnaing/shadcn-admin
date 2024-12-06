@@ -188,7 +188,7 @@ const data: SidebarData = {
         },
         {
           title: 'Help Center',
-          url: '/',
+          url: '/help-center',
           icon: IconHelp,
         },
       ],
