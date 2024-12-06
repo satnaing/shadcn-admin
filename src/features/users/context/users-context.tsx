@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../data/schema'
 
-export type UsersDialogType = 'add' | 'edit' | 'delete'
+export type UsersDialogType = 'invite' | 'add' | 'edit' | 'delete'
 
 interface UsersContextType {
   open: UsersDialogType | null

@@ -10,6 +10,7 @@ import { ThemeSwitch } from '@/components/theme-switch'
 import { UsersActionDialog } from './components/users-action-dialog'
 import { columns } from './components/users-columns'
 import { UsersDeleteDialog } from './components/users-delete-dialog'
+import { UsersInviteDialog } from './components/users-invite-dialog'
 import { UsersTable } from './components/users-table'
 import UsersContextProvider, {
   type UsersDialogType,
@@ -45,7 +46,11 @@ export default function Users() {
             </p>
           </div>
           <div className='flex gap-2'>
-            <Button variant='outline' className='space-x-1'>
+            <Button
+              variant='outline'
+              className='space-x-1'
+              onClick={() => setOpen('invite')}
+            >
               <span>Invite User</span> <IconMailPlus />
             </Button>
             <Button className='space-x-1' onClick={() => setOpen('add')}>
@@ -62,6 +67,12 @@ export default function Users() {
         key='user-add'
         open={open === 'add'}
         onOpenChange={() => setOpen('add')}
+      />
+
+      <UsersInviteDialog
+        key='user-invite'
+        open={open === 'invite'}
+        onOpenChange={() => setOpen('invite')}
       />
 
       {currentRow && (
