@@ -7,7 +7,8 @@ import {
 } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Button } from '@/components/button'
-import { Layout } from '@/components/layout'
+import { Header } from '@/components/layout/header'
+import { Main } from '@/components/layout/main'
 import { TopNav } from '@/components/layout/top-nav'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
@@ -17,19 +18,19 @@ import { RecentSales } from './components/recent-sales'
 
 export default function Dashboard() {
   return (
-    <Layout>
+    <>
       {/* ===== Top Heading ===== */}
-      <Layout.Header>
+      <Header>
         <TopNav links={topNav} />
         <div className='ml-auto flex items-center space-x-4'>
           <Search />
           <ThemeSwitch />
           <ProfileDropdown />
         </div>
-      </Layout.Header>
+      </Header>
 
       {/* ===== Main ===== */}
-      <Layout.Body>
+      <Main>
         <div className='mb-2 flex items-center justify-between space-y-2'>
           <h1 className='text-2xl font-bold tracking-tight'>Dashboard</h1>
           <div className='flex items-center space-x-2'>
@@ -182,8 +183,8 @@ export default function Dashboard() {
             </div>
           </TabsContent>
         </Tabs>
-      </Layout.Body>
-    </Layout>
+      </Main>
+    </>
   )
 }
 

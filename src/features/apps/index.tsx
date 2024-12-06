@@ -14,7 +14,8 @@ import {
 } from '@/components/ui/select'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/button'
-import { Layout } from '@/components/layout'
+import { Header } from '@/components/layout/header'
+import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
@@ -47,20 +48,18 @@ export default function Apps() {
     .filter((app) => app.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
   return (
-    <Layout fixed>
+    <>
       {/* ===== Top Heading ===== */}
-      <Layout.Header>
-        <div className='flex w-full items-center justify-between'>
-          <Search />
-          <div className='flex items-center space-x-4'>
-            <ThemeSwitch />
-            <ProfileDropdown />
-          </div>
+      <Header>
+        <Search />
+        <div className='ml-auto flex items-center gap-4'>
+          <ThemeSwitch />
+          <ProfileDropdown />
         </div>
-      </Layout.Header>
+      </Header>
 
       {/* ===== Content ===== */}
-      <Layout.Body className='flex flex-col'>
+      <Main fixed>
         <div>
           <h1 className='text-2xl font-bold tracking-tight'>
             App Integrations
@@ -112,7 +111,7 @@ export default function Apps() {
           </Select>
         </div>
         <Separator className='shadow' />
-        <ul className='faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 md:grid-cols-2 lg:grid-cols-3'>
+        <ul className='faded-bottom no-scrollbar h-full grid gap-4 overflow-auto pb-16 pt-4 md:grid-cols-2 lg:grid-cols-3'>
           {filteredApps.map((app) => (
             <li
               key={app.name}
@@ -139,7 +138,7 @@ export default function Apps() {
             </li>
           ))}
         </ul>
-      </Layout.Body>
-    </Layout>
+      </Main>
+    </>
   )
 }

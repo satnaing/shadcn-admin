@@ -14,7 +14,6 @@ import {
   IconPalette,
   IconServerOff,
   IconSettings,
-  IconSwitchHorizontal,
   IconTool,
   IconUserCog,
   IconUserOff,
@@ -31,7 +30,6 @@ import {
 import { NavGroup } from '@/components/layout/nav-group'
 import { NavUser } from '@/components/layout/nav-user'
 import { TeamSwitcher } from '@/components/layout/team-switcher'
-import { AppSidebarTrigger } from '../app-sidebar-trigger'
 import { type SidebarData } from './types'
 
 // SideNav data
@@ -198,24 +196,19 @@ const data: SidebarData = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <div className='relative'>
-      <Sidebar collapsible='icon' {...props}>
-        <SidebarHeader>
-          <TeamSwitcher teams={data.teams} />
-        </SidebarHeader>
-        <SidebarContent>
-          {data.navGroups.map((props) => (
-            <NavGroup key={props.title} {...props} />
-          ))}
-        </SidebarContent>
-        <SidebarFooter>
-          <NavUser user={data.user} />
-        </SidebarFooter>
-        <SidebarRail />
-      </Sidebar>
-      <AppSidebarTrigger className='absolute top-1/2 -right-4 z-50 rounded-full hidden md:inline-flex'>
-        <IconSwitchHorizontal />
-      </AppSidebarTrigger>
-    </div>
+    <Sidebar collapsible='icon' {...props}>
+      <SidebarHeader>
+        <TeamSwitcher teams={data.teams} />
+      </SidebarHeader>
+      <SidebarContent>
+        {data.navGroups.map((props) => (
+          <NavGroup key={props.title} {...props} />
+        ))}
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
   )
 }
