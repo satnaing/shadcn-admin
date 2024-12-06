@@ -14,3 +14,6 @@
 !CHANGELOG.md
 !eslint.config.js
 !postcss.config.js
+
+# Ignore auto generated routeTree.gen.ts
+/src/routeTree.gen.ts
