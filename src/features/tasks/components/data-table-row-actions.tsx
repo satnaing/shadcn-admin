@@ -27,7 +27,7 @@ export function DataTableRowActions<TData>({
   const task = taskSchema.parse(row.original)
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button
           variant='ghost'
