@@ -1,17 +1,13 @@
 import * as React from 'react'
 import { Slot } from '@radix-ui/react-slot'
 import { VariantProps, cva } from 'class-variance-authority'
+import { PanelLeft } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetTitle,
-} from '@/components/ui/sheet'
+import { Sheet, SheetContent } from '@/components/ui/sheet'
 import { Skeleton } from '@/components/ui/skeleton'
 import {
   Tooltip,
@@ -196,7 +192,6 @@ const Sidebar = React.forwardRef<
     if (isMobile) {
       return (
         <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
-          <SheetTitle className='sr-only'>Sidebar</SheetTitle>
           <SheetContent
             data-sidebar='sidebar'
             data-mobile='true'
@@ -208,9 +203,6 @@ const Sidebar = React.forwardRef<
             }
             side={side}
           >
-            <SheetDescription className='sr-only'>
-              Sidebar Content
-            </SheetDescription>
             <div className='flex h-full w-full flex-col'>{children}</div>
           </SheetContent>
         </Sheet>
@@ -267,14 +259,14 @@ Sidebar.displayName = 'Sidebar'
 const SidebarTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
   React.ComponentProps<typeof Button>
->(({ className, onClick, children, ...props }, ref) => {
+>(({ className, onClick, ...props }, ref) => {
   const { toggleSidebar } = useSidebar()
 
   return (
     <Button
       ref={ref}
       data-sidebar='trigger'
-      variant='outline'
+      variant='ghost'
       size='icon'
       className={cn('h-7 w-7', className)}
       onClick={(event) => {
@@ -283,7 +275,7 @@ const SidebarTrigger = React.forwardRef<
       }}
       {...props}
     >
-      {children}
+      <PanelLeft />
       <span className='sr-only'>Toggle Sidebar</span>
     </Button>
   )
