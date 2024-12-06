@@ -72,7 +72,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Users',
-          url: '/',
+          url: '/users',
           icon: IconUsers,
         },
       ],
