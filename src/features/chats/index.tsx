@@ -19,7 +19,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { Button } from '@/components/button'
-import { Layout } from '@/components/layout'
+import { Header } from '@/components/layout/header'
+import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
@@ -59,17 +60,17 @@ export default function Chats() {
   )
 
   return (
-    <Layout fixed>
+    <>
       {/* ===== Top Heading ===== */}
-      <Layout.Header>
+      <Header>
         <Search />
         <div className='ml-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <ProfileDropdown />
         </div>
-      </Layout.Header>
+      </Header>
 
-      <Layout.Body className='sm:overflow-hidden'>
+      <Main fixed>
         <section className='flex h-full gap-6'>
           {/* Left Side */}
           <div className='flex w-full flex-col gap-2 sm:w-56 lg:w-72 2xl:w-80'>
@@ -144,8 +145,8 @@ export default function Chats() {
           {/* Right Side */}
           <div
             className={cn(
-              'absolute inset-0 left-full z-50 flex w-full flex-1 flex-col rounded-md border bg-primary-foreground shadow-sm transition-all duration-200 sm:static sm:z-auto sm:flex',
-              mobileSelectedUser && 'left-0'
+              'absolute inset-0 hidden left-full z-50 w-full flex-1 flex-col rounded-md border bg-primary-foreground shadow-sm transition-all duration-200 sm:static sm:z-auto sm:flex',
+              mobileSelectedUser && 'left-0 flex'
             )}
           >
             {/* Top Part */}
@@ -300,7 +301,7 @@ export default function Chats() {
             </div>
           </div>
         </section>
-      </Layout.Body>
-    </Layout>
+      </Main>
+    </>
   )
 }
