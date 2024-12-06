@@ -27,11 +27,11 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-  SidebarTrigger,
 } from '@/components/ui/sidebar'
 import { NavGroup } from '@/components/layout/nav-group'
 import { NavUser } from '@/components/layout/nav-user'
 import { TeamSwitcher } from '@/components/layout/team-switcher'
+import { AppSidebarTrigger } from '../app-sidebar-trigger'
 import { type SidebarData } from './types'
 
 // SideNav data
@@ -213,9 +213,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarFooter>
         <SidebarRail />
       </Sidebar>
-      <SidebarTrigger className='absolute top-1/2 -right-4 z-50 rounded-full hidden md:inline-flex'>
+      <AppSidebarTrigger className='absolute top-1/2 -right-4 z-50 rounded-full hidden md:inline-flex'>
         <IconSwitchHorizontal />
-      </SidebarTrigger>
+      </AppSidebarTrigger>
     </div>
   )
 }
