@@ -44,8 +44,8 @@ type ButtonProps = ButtonPropsBase &
     | {
         asChild?: false
         loading?: boolean
-        leftSection?: JSX.Element
-        rightSection?: JSX.Element
+        leftSection?: React.JSX.Element
+        rightSection?: React.JSX.Element
       }
   )
 

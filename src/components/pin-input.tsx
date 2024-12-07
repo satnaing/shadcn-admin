@@ -70,124 +70,123 @@ interface PinInputProps {
    * If set, the input fields are disabled, `false` by default
    */
   disabled?: boolean
+  ref?: React.Ref<HTMLDivElement>
 }
 
 const PinInputContext = React.createContext<boolean>(false)
 
-const PinInput = React.forwardRef<HTMLDivElement, PinInputProps>(
-  ({ className, children, ...props }, ref) => {
-    const {
-      defaultValue,
-      value,
-      onChange,
-      onComplete,
-      onIncomplete,
-      placeholder = '○',
-      type = 'alphanumeric',
-      name,
-      form,
-      otp = false,
-      mask = false,
-      disabled = false,
-      readOnly = false,
-      autoFocus = false,
-      ariaLabel = '',
-      ...rest
-    } = props
+const PinInput = ({ className, children, ref, ...props }: PinInputProps) => {
+  const {
+    defaultValue,
+    value,
+    onChange,
+    onComplete,
+    onIncomplete,
+    placeholder = '○',
+    type = 'alphanumeric',
+    name,
+    form,
+    otp = false,
+    mask = false,
+    disabled = false,
+    readOnly = false,
+    autoFocus = false,
+    ariaLabel = '',
+    ...rest
+  } = props
 
-    const validChildren = getValidChildren(children)
+  const validChildren = getValidChildren(children)
 
-    const length = getInputFieldCount(children)
+  const length = getInputFieldCount(children)
 
-    // pins, pinValue, refMap, ...handlers
-    const { pins, pinValue, refMap, ...handlers } = usePinInput({
-      value,
-      defaultValue,
-      placeholder,
-      type,
-      length,
-      readOnly,
-    })
+  // pins, pinValue, refMap, ...handlers
+  const { pins, pinValue, refMap, ...handlers } = usePinInput({
+    value,
+    defaultValue,
+    placeholder,
+    type,
+    length,
+    readOnly,
+  })
 
-    /* call onChange func if pinValue changes */
-    React.useEffect(() => {
-      if (!onChange) return
-      onChange(pinValue)
-    }, [onChange, pinValue])
+  /* call onChange func if pinValue changes */
+  React.useEffect(() => {
+    if (!onChange) return
+    onChange(pinValue)
+  }, [onChange, pinValue])
 
-    /* call onComplete/onIncomplete func if pinValue is valid and completed/incompleted */
-    const completeRef = React.useRef(pinValue.length === length)
-    React.useEffect(() => {
-      if (pinValue.length === length && completeRef.current === false) {
-        completeRef.current = true
-        if (onComplete) onComplete(pinValue)
-      }
-      if (pinValue.length !== length && completeRef.current === true) {
-        completeRef.current = false
-        if (onIncomplete) onIncomplete(pinValue)
-      }
-    }, [length, onComplete, onIncomplete, pinValue, pins, value])
+  /* call onComplete/onIncomplete func if pinValue is valid and completed/incompleted */
+  const completeRef = React.useRef(pinValue.length === length)
+  React.useEffect(() => {
+    if (pinValue.length === length && completeRef.current === false) {
+      completeRef.current = true
+      if (onComplete) onComplete(pinValue)
+    }
+    if (pinValue.length !== length && completeRef.current === true) {
+      completeRef.current = false
+      if (onIncomplete) onIncomplete(pinValue)
+    }
+  }, [length, onComplete, onIncomplete, pinValue, pins, value])
 
-    /* focus on first input field if autoFocus is set */
-    React.useEffect(() => {
-      if (!autoFocus) return
-      const node = refMap?.get(0)
-      if (node) {
-        node.focus()
-      }
-    }, [autoFocus, refMap])
+  /* focus on first input field if autoFocus is set */
+  React.useEffect(() => {
+    if (!autoFocus) return
+    const node = refMap?.get(0)
+    if (node) {
+      node.focus()
+    }
+  }, [autoFocus, refMap])
 
-    const skipRef = React.useRef(0)
-    let counter = 0
-    const clones = validChildren.map((child) => {
-      if (child.type === PinInputField) {
-        const pinIndex = counter
-        counter = counter + 1
-        return React.cloneElement(child, {
-          name,
-          inputKey: `input-${pinIndex}`,
-          value: length > pinIndex ? pins[pinIndex] : '',
-          onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-            handlers.handleChange(e, pinIndex),
-          onFocus: (e: React.FocusEvent<HTMLInputElement>) =>
-            handlers.handleFocus(e, pinIndex),
-          onBlur: () => handlers.handleBlur(pinIndex),
-          onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
-            handlers.handleKeyDown(e, pinIndex),
-          onPaste: (e: React.ClipboardEvent<HTMLInputElement>) =>
-            handlers.handlePaste(e),
-          placeholder: placeholder,
-          type: type,
-          mask: mask,
-          autoComplete: otp ? 'one-time-code' : 'off',
-          disabled: disabled,
-          readOnly: readOnly,
-          'aria-label': ariaLabel
-            ? ariaLabel
-            : `Pin input ${counter} of ${length}`,
-          ref: (node: HTMLInputElement | null) => {
-            if (node) {
-              refMap?.set(pinIndex, node)
-            } else {
-              refMap?.delete(pinIndex)
-            }
-          },
-        })
-      }
-      skipRef.current = skipRef.current + 1
-      return child
-    })
+  const skipRef = React.useRef(0)
+  let counter = 0
+  const clones = validChildren.map((child) => {
+    if (child.type === PinInputField) {
+      const pinIndex = counter
+      counter = counter + 1
+      return React.cloneElement(child, {
+        name,
+        inputKey: `input-${pinIndex}`,
+        value: length > pinIndex ? pins[pinIndex] : '',
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+          handlers.handleChange(e, pinIndex),
+        onFocus: (e: React.FocusEvent<HTMLInputElement>) =>
+          handlers.handleFocus(e, pinIndex),
+        onBlur: () => handlers.handleBlur(pinIndex),
+        onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) =>
+          handlers.handleKeyDown(e, pinIndex),
+        onPaste: (e: React.ClipboardEvent<HTMLInputElement>) =>
+          handlers.handlePaste(e),
+        placeholder: placeholder,
+        type: type,
+        mask: mask,
+        autoComplete: otp ? 'one-time-code' : 'off',
+        disabled: disabled,
+        readOnly: readOnly,
+        'aria-label': ariaLabel
+          ? ariaLabel
+          : `Pin input ${counter} of ${length}`,
+        ref: (node: HTMLInputElement | null) => {
+          if (node) {
+            refMap?.set(pinIndex, node)
+          } else {
+            refMap?.delete(pinIndex)
+          }
+        },
+      })
+    }
+    skipRef.current = skipRef.current + 1
+    return child
+  })
 
-    return (
-      <PinInputContext.Provider value={true}>
-        <div ref={ref} aria-label='Pin Input' className={className} {...rest}>
-          {clones}
-          <input type='hidden' name={name} form={form} value={pinValue} />
-        </div>
-      </PinInputContext.Provider>
-    )
-  }
-)
+  return (
+    <PinInputContext.Provider value={true}>
+      <div ref={ref} aria-label='Pin Input' className={className} {...rest}>
+        {clones}
+        <input type='hidden' name={name} form={form} value={pinValue} />
+      </div>
+    </PinInputContext.Provider>
+  )
+}
 PinInput.displayName = 'PinInput'
 
 /* ========== PinInputField ========== */
@@ -206,17 +205,14 @@ interface PinInputFieldProps<T>
   component?: T
 }
 
-const PinInputFieldNoRef = <T extends React.ElementType = 'input'>(
-  {
-    className,
-    component,
-    ...props
-  }: PinInputFieldProps<T> &
-    (React.ComponentType<T> extends undefined
-      ? never
-      : React.ComponentProps<T>),
-  ref: React.ForwardedRef<HTMLInputElement>
-) => {
+const PinInputField = <T extends React.ElementType = 'input'>({
+  className,
+  component,
+  ...props
+}: PinInputFieldProps<T> &
+  (React.ComponentType<T> extends undefined
+    ? never
+    : React.ComponentProps<T>)) => {
   const { mask, type, inputKey, ...rest } = props as _PinInputFieldProps &
     React.ComponentProps<T>
 
@@ -233,7 +229,6 @@ const PinInputFieldNoRef = <T extends React.ElementType = 'input'>(
   return (
     <Element
       key={inputKey}
-      ref={ref}
       type={mask ? 'password' : type === 'numeric' ? 'tel' : 'text'}
       inputMode={type === 'numeric' ? 'numeric' : 'text'}
       className={cn('size-10 text-center', className)}
@@ -241,17 +236,6 @@ const PinInputFieldNoRef = <T extends React.ElementType = 'input'>(
     />
   )
 }
-
-const PinInputField = React.forwardRef(PinInputFieldNoRef) as <
-  T extends React.ElementType = 'input',
->(
-  {
-    className,
-    component,
-    ...props
-  }: PinInputFieldProps<T> & React.ComponentProps<T>,
-  ref: React.ForwardedRef<HTMLInputElement>
-) => JSX.Element
 
 /* ========== usePinInput custom hook ========== */
 
@@ -284,13 +268,12 @@ const usePinInput = ({
     [defaultValue, length, value]
   )
 
-  const [pins, setPins] = React.useState<(string | number)[]>(pinInputs)
+  const [pins, setPins] = React.useState(pinInputs)
   const pinValue = pins.join('').trim()
 
   /**
-   * Update pins when values changes.
-   * This is necessary and this allows pins to be synced
-   * when the value is update or reset programmatically
+   * Update pins when values change programmatically.
+   * This syncs the pins if the `defaultValue` or `value` prop is updated.
    */
   React.useEffect(() => {
     setPins(pinInputs)
@@ -458,7 +441,8 @@ const getValidChildren = (children: React.ReactNode) =>
       return React.isValidElement(child)
     }
     throw new Error(`${PinInput.displayName} contains invalid children.`)
-  }) as React.ReactElement[]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  }) as React.ReactElement<any>[]
 
 const getInputFieldCount = (children: React.ReactNode) =>
   React.Children.toArray(children).filter((child) => {
