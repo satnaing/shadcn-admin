@@ -15,7 +15,7 @@ interface ConfirmDialogProps {
   onOpenChange: (open: boolean) => void
   title: React.ReactNode
   disabled?: boolean
-  desc: JSX.Element | string
+  desc: React.JSX.Element | string
   cancelBtnText?: string
   confirmText?: React.ReactNode
   destructive?: boolean

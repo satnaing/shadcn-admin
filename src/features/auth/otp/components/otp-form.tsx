@@ -2,7 +2,9 @@ import { HTMLAttributes, useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
+import { toast } from '@/hooks/use-toast'
 import {
   Form,
   FormControl,
@@ -22,6 +24,7 @@ const formSchema = z.object({
 })
 
 export function OtpForm({ className, ...props }: OtpFormProps) {
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [disabledBtn, setDisabledBtn] = useState(true)
 
@@ -32,13 +35,19 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log({ data })
+    toast({
+      title: 'You submitted the following values:',
+      description: (
+        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
+          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    })
 
     setTimeout(() => {
-      form.reset()
       setIsLoading(false)
-    }, 2000)
+      navigate({ to: '/' })
+    }, 1000)
   }
 
   return (
