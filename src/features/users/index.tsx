@@ -51,10 +51,10 @@ export default function Users() {
               className='space-x-1'
               onClick={() => setOpen('invite')}
             >
-              <span>Invite User</span> <IconMailPlus />
+              <span>Invite User</span> <IconMailPlus size={18} />
             </Button>
             <Button className='space-x-1' onClick={() => setOpen('add')}>
-              <span>Add User</span> <IconUserPlus />
+              <span>Add User</span> <IconUserPlus size={18} />
             </Button>
           </div>
         </div>
@@ -81,8 +81,10 @@ export default function Users() {
             key={`user-edit-${currentRow.id}`}
             open={open === 'edit'}
             onOpenChange={() => {
-              setCurrentRow(null)
               setOpen('edit')
+              setTimeout(() => {
+                setCurrentRow(null)
+              }, 500)
             }}
             currentRow={currentRow}
           />
@@ -91,8 +93,10 @@ export default function Users() {
             key={`user-delete-${currentRow.id}`}
             open={open === 'delete'}
             onOpenChange={() => {
-              setCurrentRow(null)
               setOpen('delete')
+              setTimeout(() => {
+                setCurrentRow(null)
+              }, 500)
             }}
             currentRow={currentRow}
           />
