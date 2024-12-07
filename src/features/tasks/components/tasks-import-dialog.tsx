@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -71,15 +70,14 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
     onOpenChange(false)
   }
 
-  /* Reset form when modal is closed */
-  useEffect(() => {
-    if (!open) {
-      form.reset()
-    }
-  }, [form, open])
-
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(val) => {
+        onOpenChange(val)
+        form.reset()
+      }}
+    >
       <DialogContent className='sm:max-w-sm gap-2'>
         <DialogHeader>
           <DialogTitle>Import Tasks</DialogTitle>
