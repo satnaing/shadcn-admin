@@ -11,7 +11,7 @@ export const Main = React.forwardRef<React.ElementRef<'main'>, MainProps>(
       <main
         ref={ref}
         className={cn(
-          'px-4 py-6 md:px-8',
+          'px-4 py-6',
           fixed && 'flex flex-col flex-grow overflow-hidden'
         )}
         {...props}
