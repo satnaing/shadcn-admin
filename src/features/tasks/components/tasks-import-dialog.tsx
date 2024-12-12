@@ -79,7 +79,7 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
       }}
     >
       <DialogContent className='sm:max-w-sm gap-2'>
-        <DialogHeader>
+        <DialogHeader className='text-left'>
           <DialogTitle>Import Tasks</DialogTitle>
           <DialogDescription>
             Import tasks quickly from a CSV file.

@@ -139,7 +139,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
             />
           </form>
         </Form>
-        <DialogFooter>
+        <DialogFooter className='gap-y-2'>
           <DialogClose asChild>
             <Button variant='outline'>Cancel</Button>
           </DialogClose>
