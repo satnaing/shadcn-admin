@@ -142,7 +142,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       }}
     >
       <DialogContent className='sm:max-w-lg'>
-        <DialogHeader>
+        <DialogHeader className='text-left'>
           <DialogTitle>{isEdit ? 'Edit User' : 'Add New User'}</DialogTitle>
           <DialogDescription>
             {isEdit ? 'Update the user here. ' : 'Create new user here. '}
