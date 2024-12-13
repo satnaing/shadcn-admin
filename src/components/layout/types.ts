@@ -18,15 +18,17 @@ interface BaseNavItem {
   icon?: React.ElementType
 }
 
-export type NavItem =
-  | (BaseNavItem & {
-      items: (BaseNavItem & { url: LinkProps['to'] })[]
-      url?: never
-    })
-  | (BaseNavItem & {
-      url: LinkProps['to']
-      items?: never
-    })
+type NavLink = BaseNavItem & {
+  url: LinkProps['to']
+  items?: never
+}
+
+type NavCollapsible = BaseNavItem & {
+  items: (BaseNavItem & { url: LinkProps['to'] })[]
+  url?: never
+}
+
+type NavItem = NavCollapsible | NavLink
 
 interface NavGroup {
   title: string
@@ -39,4 +41,4 @@ interface SidebarData {
   navGroups: NavGroup[]
 }
 
-export type { SidebarData, NavGroup }
+export type { SidebarData, NavGroup, NavItem, NavCollapsible, NavLink }
