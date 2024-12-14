@@ -1,3 +1,21 @@
+## v1.0.1 (2024-12-14)
+
+### Fix
+
+- merge two button components into one (#60)
+- loading all tabler-icon chunks in dev mode (#59)
+- display menu dropdown when sidebar collapsed (#58)
+- update spacing & alignment in dialogs/drawers
+- update border & transition of sticky columns in user table
+- update heading alignment to left in user dialogs
+- add height and scroll area in user mutation dialogs
+- update `/dashboard` route to just `/`
+- **build**: replace require with import in tailwind.config.js
+
+### Refactor
+
+- remove unnecessary layout-backup file
+
 ## v1.0.0 (2024-12-09)
 
 ### BREAKING CHANGE
