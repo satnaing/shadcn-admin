@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
 import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -14,7 +15,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/button'
 import { PasswordInput } from '@/components/password-input'
 
 type UserAuthFormProps = HTMLAttributes<HTMLDivElement>
@@ -94,7 +94,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 </FormItem>
               )}
             />
-            <Button className='mt-2' loading={isLoading}>
+            <Button className='mt-2' disabled={isLoading}>
               Login
             </Button>
 
@@ -114,19 +114,17 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 variant='outline'
                 className='w-full'
                 type='button'
-                loading={isLoading}
-                leftSection={<IconBrandGithub className='h-4 w-4' />}
+                disabled={isLoading}
               >
-                GitHub
+                <IconBrandGithub className='h-4 w-4' /> GitHub
               </Button>
               <Button
                 variant='outline'
                 className='w-full'
                 type='button'
-                loading={isLoading}
-                leftSection={<IconBrandFacebook className='h-4 w-4' />}
+                disabled={isLoading}
               >
-                Facebook
+                <IconBrandFacebook className='h-4 w-4' /> Facebook
               </Button>
             </div>
           </div>

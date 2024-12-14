@@ -1,13 +1,13 @@
 import { Link } from '@tanstack/react-router'
 import { IconMenu } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Button } from '@/components/button'
 
 interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
@@ -22,7 +22,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
   return (
     <>
       <div className='md:hidden'>
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <Button size='icon' variant='outline'>
               <IconMenu />

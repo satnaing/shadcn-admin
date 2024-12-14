@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { IconMailPlus, IconUserPlus } from '@tabler/icons-react'
 import useDialogState from '@/hooks/use-dialog-state'
-import { Button } from '@/components/button'
+import { Button } from '@/components/ui/button'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'

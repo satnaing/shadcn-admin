@@ -2,13 +2,13 @@ import { useEffect } from 'react'
 import { IconCheck, IconMoon, IconSun } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/context/theme-context'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Button } from '@/components/button'
 
 export function ThemeSwitch() {
   const { theme, setTheme } = useTheme()
@@ -22,7 +22,7 @@ export function ThemeSwitch() {
   }, [theme])
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' size='icon' className='scale-95 rounded-full'>
           <IconSun className='size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0' />

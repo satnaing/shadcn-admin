@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 import { toast } from '@/hooks/use-toast'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -14,7 +15,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/button'
 import { PinInput, PinInputField } from '@/components/pin-input'
 
 type OtpFormProps = HTMLAttributes<HTMLDivElement>
@@ -84,7 +84,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
                 </FormItem>
               )}
             />
-            <Button className='mt-2' disabled={disabledBtn} loading={isLoading}>
+            <Button className='mt-2' disabled={disabledBtn || isLoading}>
               Verify
             </Button>
           </div>

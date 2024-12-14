@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 import { toast } from '@/hooks/use-toast'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -22,7 +23,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/button'
 
 const profileFormSchema = z.object({
   username: z

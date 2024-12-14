@@ -16,9 +16,9 @@ import {
 } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
-import { Button } from '@/components/button'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
@@ -291,11 +291,8 @@ export default function Chats() {
                     <IconSend size={20} />
                   </Button>
                 </div>
-                <Button
-                  className='h-full sm:hidden'
-                  rightSection={<IconSend size={18} />}
-                >
-                  Send
+                <Button className='h-full sm:hidden'>
+                  <IconSend size={18} /> Send
                 </Button>
               </form>
             </div>
