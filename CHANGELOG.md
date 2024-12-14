@@ -1,3 +1,52 @@
+## v1.0.1 (2024-12-14)
+
+### BREAKING CHANGE
+
+- Restructured the entire folder
+hierarchy to adopt a feature-based structure. This
+change improves code modularity and maintainability
+but introduces breaking changes.
+
+### Feat
+
+- implement task dialogs
+- implement user invite dialog
+- implement users CRUD
+- implement global command/search
+- implement custom sidebar trigger
+- implement coming-soon page
+
+### Fix
+
+- merge two button components into one (#60)
+- loading all tabler-icon chunks in dev mode (#59)
+- display menu dropdown when sidebar collapsed (#58)
+- update spacing & alignment in dialogs/drawers
+- update border & transition of sticky columns in user table
+- update heading alignment to left in user dialogs
+- add height and scroll area in user mutation dialogs
+- update `/dashboard` route to just `/`
+- **build**: replace require with import in tailwind.config.js
+- uncontrolled issue in account setting
+- card layout issue in app integrations page
+- remove form reset logic from useEffect in task import
+- update JSX types due to react 19
+- prevent card stretch in filtered app layout
+- layout wrap issue in tasks page on mobile
+- update user column hover and selected colors
+- add setTimeout in user dialog closing
+- layout shift issue in dropdown modal
+- z-axis overflow issue in header
+- stretch search bar only in mobile
+- language dropdown issue in account setting
+- update overflow contents with scroll area
+
+### Refactor
+
+- remove unnecessary layout-backup file
+- update layouts and extract common layout
+- reorganize project to feature-based structure
+
 ## v1.0.0 (2024-12-09)
 
 ### BREAKING CHANGE
