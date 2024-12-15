@@ -4,12 +4,15 @@
   "version": "1.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "react-router build",
+    "deploy": "NODE_ENV=production wrangler deploy",
+    "dev": "react-router dev",
+    "start": "wrangler dev",
+    "typegen": "wrangler types",
     "lint": "biome lint .",
-    "preview": "vite preview",
     "format:check": "prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -32,6 +35,7 @@
     "@radix-ui/react-toast": "^1.2.2",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@radix-ui/react-visually-hidden": "^1.1.0",
+    "@react-router/cloudflare": "^7.0.2",
     "@tabler/icons-react": "^3.24.0",
     "@tanstack/react-query": "^5.62.3",
     "@tanstack/react-router": "^1.86.1",
@@ -41,13 +45,18 @@
     "clsx": "^2.1.1",
     "cmdk": "1.0.4",
     "date-fns": "^4.1.0",
+    "isbot": "^5.1.17",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.468.0",
+    "next-themes": "^0.4.4",
     "react": "^19.0.0",
     "react-day-picker": "8.10.1",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.0",
+    "react-router": "^7.0.2",
     "recharts": "^2.14.1",
+    "remix-toast": "^2.0.0",
+    "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "use-intl": "^3.26.0",
@@ -56,7 +65,11 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
+    "@cloudflare/workers-types": "^4.20241205.0",
     "@faker-js/faker": "^9.3.0",
+    "@react-router/dev": "^7.0.2",
+    "@react-router/fs-routes": "^7.0.2",
+    "@react-router/remix-routes-option-adapter": "^7.0.2",
     "@tanstack/react-query-devtools": "^5.62.3",
     "@tanstack/router-devtools": "^1.86.1",
     "@tanstack/router-plugin": "^1.86.0",
@@ -72,8 +85,11 @@
     "prettier": "^3.4.2",
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.9",
+    "remix-flat-routes": "^0.6.5",
     "tailwindcss": "^3.4.16",
     "typescript": "~5.7.2",
-    "vite": "^6.0.3"
+    "vite": "^6.0.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^3.95.0"
   }
 }
