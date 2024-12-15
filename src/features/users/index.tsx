@@ -15,7 +15,7 @@ import { UsersTable } from './components/users-table'
 import UsersContextProvider, {
   type UsersDialogType,
 } from './context/users-context'
-import { User, userListSchema } from './data/schema'
+import { type User, userListSchema } from './data/schema'
 import { users } from './data/users'
 
 export default function Users() {

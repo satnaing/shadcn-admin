@@ -119,7 +119,9 @@ export default function Apps() {
             >
               <div className='mb-8 flex items-center justify-between'>
                 <div
-                  className={`flex size-10 items-center justify-center rounded-lg bg-muted p-2`}
+                  className={
+                    'flex size-10 items-center justify-center rounded-lg bg-muted p-2'
+                  }
                 >
                   {app.logo}
                 </div>

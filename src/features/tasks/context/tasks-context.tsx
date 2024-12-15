@@ -1,5 +1,5 @@
 import React from 'react'
-import { Task } from '../data/schema'
+import type { Task } from '../data/schema'
 
 export type TasksDialogType = 'create' | 'update' | 'delete' | 'import'
 

@@ -158,6 +158,7 @@ export function AccountForm() {
                   <FormControl>
                     <Button
                       variant='outline'
+                      // biome-ignore lint/a11y/useSemanticElements: <explanation>
                       role='combobox'
                       className={cn(
                         'w-[200px] justify-between',

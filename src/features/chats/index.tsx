@@ -112,7 +112,7 @@ export default function Chats() {
                     <button
                       type='button'
                       className={cn(
-                        `-mx-1 flex w-full rounded-md px-2 py-2 text-left text-sm hover:bg-secondary/75`,
+                        '-mx-1 flex w-full rounded-md px-2 py-2 text-left text-sm hover:bg-secondary/75',
                         selectedUser.id === id && 'sm:bg-muted'
                       )}
                       onClick={() => {

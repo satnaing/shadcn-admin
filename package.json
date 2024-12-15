@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
+    "lint": "biome lint .",
     "preview": "vite preview",
     "format:check": "prettier --check .",
     "format": "prettier --write ."
@@ -55,9 +55,8 @@
     "zustand": "^5.0.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.16.0",
+    "@biomejs/biome": "^1.9.4",
     "@faker-js/faker": "^9.3.0",
-    "@tanstack/eslint-plugin-query": "^5.62.1",
     "@tanstack/react-query-devtools": "^5.62.3",
     "@tanstack/router-devtools": "^1.86.1",
     "@tanstack/router-plugin": "^1.86.0",
@@ -68,16 +67,13 @@
     "@types/react-dom": "^19.0.1",
     "@vitejs/plugin-react-swc": "^3.7.2",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.16.0",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.13.0",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^3.4.16",
     "typescript": "~5.7.2",
-    "typescript-eslint": "^8.17.0",
     "vite": "^6.0.3"
   }
 }

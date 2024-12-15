@@ -21,9 +21,9 @@
 ### BREAKING CHANGE
 
 - Restructured the entire folder
-hierarchy to adopt a feature-based structure. This
-change improves code modularity and maintainability
-but introduces breaking changes.
+  hierarchy to adopt a feature-based structure. This
+  change improves code modularity and maintainability
+  but introduces breaking changes.
 
 ### Feat
 

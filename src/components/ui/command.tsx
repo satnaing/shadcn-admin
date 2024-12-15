@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { type DialogProps } from '@radix-ui/react-dialog'
+import type { DialogProps } from '@radix-ui/react-dialog'
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Command as CommandPrimitive } from 'cmdk'
 import { Search } from 'lucide-react'

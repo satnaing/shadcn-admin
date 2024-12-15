@@ -13,8 +13,10 @@ import { columns } from './components/columns'
 import { DataTable } from './components/data-table'
 import { TasksImportDialog } from './components/tasks-import-dialog'
 import { TasksMutateDrawer } from './components/tasks-mutate-drawer'
-import TasksContextProvider, { TasksDialogType } from './context/tasks-context'
-import { Task } from './data/schema'
+import TasksContextProvider, {
+  type TasksDialogType,
+} from './context/tasks-context'
+import type { Task } from './data/schema'
 import { tasks } from './data/tasks'
 
 export default function Tasks() {

@@ -117,6 +117,7 @@ const PinInput = ({ className, children, ref, ...props }: PinInputProps) => {
 
   /* call onComplete/onIncomplete func if pinValue is valid and completed/incompleted */
   const completeRef = React.useRef(pinValue.length === length)
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   React.useEffect(() => {
     if (pinValue.length === length && completeRef.current === false) {
       completeRef.current = true
@@ -329,9 +330,8 @@ const usePinInput = ({
       prev.map((p, i) => {
         if (i === index) {
           return val
-        } else {
-          return p
         }
+        return p
       })
     )
   }

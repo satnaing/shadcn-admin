@@ -1,5 +1,5 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
-import { Row } from '@tanstack/react-table'
+import type { Row } from '@tanstack/react-table'
 import { IconTrash } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
 import {
