@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { ChevronRight } from 'lucide-react'
-import { Link, useLocation, useHref } from 'react-router'
+import { Link, useLocation } from 'react-router'
 import { Badge } from '~/components/ui/badge'
 import {
   Collapsible,
