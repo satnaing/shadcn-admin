@@ -14,6 +14,8 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@conform-to/react": "^1.2.2",
+    "@conform-to/zod": "^1.2.2",
     "@radix-ui/react-alert-dialog": "^1.1.2",
     "@radix-ui/react-avatar": "^1.1.1",
     "@radix-ui/react-checkbox": "^1.1.2",
@@ -48,6 +50,7 @@
     "react-day-picker": "8.10.1",
     "react-dom": "^19.0.0",
     "react-router": "^7.0.2",
+    "react-twc": "^1.4.2",
     "recharts": "^2.14.1",
     "remix-toast": "^2.0.0",
     "sonner": "^1.7.1",
