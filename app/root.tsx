@@ -1,9 +1,7 @@
 import { useEffect } from 'react'
 import {
   Links,
-  type LinksFunction,
   Meta,
-  type MetaFunction,
   Outlet,
   Scripts,
   ScrollRestoration,
