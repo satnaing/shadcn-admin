@@ -14,7 +14,8 @@
       "recommended": true,
       "suspicious": {
         "useAwait": "error",
-        "noExplicitAny": "off"
+        "noExplicitAny": "off",
+        "noArrayIndexKey": "off"
       },
       "a11y": {
         "noSvgWithoutTitle": "off"

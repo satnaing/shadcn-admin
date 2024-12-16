@@ -69,11 +69,9 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
                     >
                       {Array.from({ length: 7 }, (_, i) => {
                         if (i === 3)
-                          // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                           return <Separator key={i} orientation='vertical' />
                         return (
                           <PinInputField
-                            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                             key={i}
                             component={Input}
                             className={`${form.getFieldState('otp').invalid ? 'border-red-500' : ''}`}
