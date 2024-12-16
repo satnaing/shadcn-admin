@@ -7,6 +7,7 @@ import { Search } from '~/components/search'
 import { ThemeSwitch } from '~/components/theme-switch'
 import { Button } from '~/components/ui/button'
 import useDialogState from '~/hooks/use-dialog-state'
+import type { Route } from './+types/route'
 import { UsersActionDialog } from './components/users-action-dialog'
 import { columns } from './components/users-columns'
 import { UsersDeleteDialog } from './components/users-delete-dialog'
@@ -18,7 +19,13 @@ import UsersContextProvider, {
 import { type User, userListSchema } from './data/schema'
 import { users } from './data/users'
 
-export default function Users() {
+export const clientLoader = () => {
+  // In development environment, directly using the users data would cause hydration errors due to double rendering changing the random data,
+  // so we load it once via clientLoader
+  return { users }
+}
+
+export default function Users({ loaderData: { users } }: Route.ComponentProps) {
   // Dialog states
   const [currentRow, setCurrentRow] = useState<User | null>(null)
   const [open, setOpen] = useDialogState<UsersDialogType>(null)
