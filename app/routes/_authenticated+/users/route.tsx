@@ -19,9 +19,9 @@ import UsersContextProvider, {
 import { type User, userListSchema } from './data/schema'
 import { users } from './data/users'
 
-export const clientLoader = () => {
+export const loader = () => {
   // In development environment, directly using the users data would cause hydration errors due to double rendering changing the random data,
-  // so we load it once via clientLoader
+  // so we load it once via loader
   return { users }
 }
 
