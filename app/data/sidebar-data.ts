@@ -24,7 +24,7 @@ import type { SidebarData } from '../components/layout/types'
 
 export const sidebarData: SidebarData = {
   user: {
-    name: 'coji',
+    name: 'Mizoguchi Coji',
     email: 'coji@techtalk.jp',
     avatar: '/avatars/shadcn.jpg',
   },
@@ -32,7 +32,7 @@ export const sidebarData: SidebarData = {
     {
       name: 'Shadcn Admin',
       logo: Command,
-      plan: 'Vite + ShadcnUI',
+      plan: 'React Router + ShadcnUI',
     },
     {
       name: 'Acme Inc',
