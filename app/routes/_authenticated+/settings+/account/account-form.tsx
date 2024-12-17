@@ -123,7 +123,6 @@ export function AccountForm() {
                 fields.dob.value ? new Date(fields.dob.value) : undefined
               }
               onSelect={(date) => {
-                console.log(date)
                 form.update({
                   name: fields.dob.name,
                   value: date ? format(date, 'yyyy-MM-dd') : '',
