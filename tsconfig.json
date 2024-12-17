@@ -1,6 +1,5 @@
 {
   "include": [
-    "worker-configuration.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/.server/**/*.ts",

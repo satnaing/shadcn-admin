@@ -1,7 +1,8 @@
-import { z } from 'zod'
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { Form } from 'react-router'
+import { toast } from 'sonner'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
@@ -23,7 +24,6 @@ import {
   SheetTitle,
 } from '~/components/ui/sheet'
 import { HStack } from '~/components/ui/stack'
-import { toast } from '~/hooks/use-toast'
 import type { Task } from '../data/schema'
 
 interface Props {
@@ -58,11 +58,10 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
 
       onOpenChange(false)
       form.reset()
-      toast({
-        title: 'You submitted the following values:',
+      toast('You submitted the following values:', {
         description: (
-          <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-            <code className='text-white'>
+          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
               {JSON.stringify(submission.value, null, 2)}
             </code>
           </pre>
@@ -79,8 +78,8 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
         form.reset()
       }}
     >
-      <SheetContent className='flex flex-col'>
-        <SheetHeader className='text-left'>
+      <SheetContent className="flex flex-col">
+        <SheetHeader className="text-left">
           <SheetTitle>{isUpdate ? 'Update' : 'Create'} Task</SheetTitle>
           <SheetDescription>
             {isUpdate
@@ -89,15 +88,15 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             Click save when you&apos;re done.
           </SheetDescription>
         </SheetHeader>
-        <Form {...getFormProps(form)} className='flex flex-col gap-4'>
+        <Form {...getFormProps(form)} className="flex flex-col gap-4">
           <div>
             <Label htmlFor={fields.title.id}>Title</Label>
             <Input
               {...getInputProps(fields.title, { type: 'text' })}
               key={fields.title.key}
-              placeholder='Enter a title'
+              placeholder="Enter a title"
             />
-            <div id={fields.title.errorId} className='text-sm text-destructive'>
+            <div id={fields.title.errorId} className="text-sm text-destructive">
               {fields.title.errors}
             </div>
           </div>
@@ -116,19 +115,19 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
               }}
             >
               <SelectTrigger id={fields.status.id}>
-                <SelectValue placeholder='Select dropdown' />
+                <SelectValue placeholder="Select dropdown" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value='in progress'>In Progress</SelectItem>
-                <SelectItem value='backlog'>Backlog</SelectItem>
-                <SelectItem value='todo'>Todo</SelectItem>
-                <SelectItem value='canceled'>Canceled</SelectItem>
-                <SelectItem value='done'>Done</SelectItem>
+                <SelectItem value="in progress">In Progress</SelectItem>
+                <SelectItem value="backlog">Backlog</SelectItem>
+                <SelectItem value="todo">Todo</SelectItem>
+                <SelectItem value="canceled">Canceled</SelectItem>
+                <SelectItem value="done">Done</SelectItem>
               </SelectContent>
             </Select>
             <div
               id={fields.status.errorId}
-              className='text-sm text-destructive'
+              className="text-sm text-destructive"
             >
               {fields.status.errors}
             </div>
@@ -148,19 +147,19 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
               }}
             >
               <HStack>
-                <RadioGroupItem id='documentation' value='documentation' />
-                <Label htmlFor='documentation'>Documentation</Label>
+                <RadioGroupItem id="documentation" value="documentation" />
+                <Label htmlFor="documentation">Documentation</Label>
               </HStack>
               <HStack>
-                <RadioGroupItem id='feature' value='feature' />
-                <Label htmlFor='feature'>Feature</Label>
+                <RadioGroupItem id="feature" value="feature" />
+                <Label htmlFor="feature">Feature</Label>
               </HStack>
               <HStack>
-                <RadioGroupItem id='bug' value='bug' />
-                <Label htmlFor='bug'>Bug</Label>
+                <RadioGroupItem id="bug" value="bug" />
+                <Label htmlFor="bug">Bug</Label>
               </HStack>
             </RadioGroup>
-            <div id={fields.label.errorId} className='text-sm text-destructive'>
+            <div id={fields.label.errorId} className="text-sm text-destructive">
               {fields.label.errors}
             </div>
           </div>
@@ -179,32 +178,32 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
               }}
             >
               <HStack>
-                <RadioGroupItem id='high' value='high' />
-                <Label htmlFor='high'>High</Label>
+                <RadioGroupItem id="high" value="high" />
+                <Label htmlFor="high">High</Label>
               </HStack>
               <HStack>
-                <RadioGroupItem id='medium' value='medium' />
-                <Label htmlFor='medium'>Medium</Label>
+                <RadioGroupItem id="medium" value="medium" />
+                <Label htmlFor="medium">Medium</Label>
               </HStack>
               <HStack>
-                <RadioGroupItem id='low' value='low' />
-                <Label htmlFor='low'>Low</Label>
+                <RadioGroupItem id="low" value="low" />
+                <Label htmlFor="low">Low</Label>
               </HStack>
             </RadioGroup>
             <div
               id={fields.priority.errorId}
-              className='text-sm text-destructive'
+              className="text-sm text-destructive"
             >
               {fields.priority.errors}
             </div>
           </div>
         </Form>
 
-        <SheetFooter className='gap-2'>
+        <SheetFooter className="gap-2">
           <SheetClose asChild>
-            <Button variant='outline'>Close</Button>
+            <Button variant="outline">Close</Button>
           </SheetClose>
-          <Button form={form.id} type='submit'>
+          <Button form={form.id} type="submit">
             Save changes
           </Button>
         </SheetFooter>

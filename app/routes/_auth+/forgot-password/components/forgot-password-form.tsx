@@ -1,8 +1,8 @@
-import type { HTMLAttributes } from 'react'
-import { z } from 'zod'
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
+import type { HTMLAttributes } from 'react'
 import { Form, useNavigation } from 'react-router'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
@@ -27,24 +27,24 @@ export function ForgotForm({ className, ...props }: ForgotFormProps) {
 
   return (
     <Form
-      method='POST'
+      method="POST"
       {...getFormProps(form)}
       className={cn('grid gap-2', className)}
       {...props}
     >
-      <div className='space-y-1'>
+      <div className="space-y-1">
         <Label htmlFor={email.id}>Email</Label>
         <Input
           {...getInputProps(email, { type: 'email' })}
           key={email.key}
-          placeholder='name@example.com'
+          placeholder="name@example.com"
         />
-        <div id={email.errorId} className='text-sm text-destructive'>
+        <div id={email.errorId} className="text-sm text-destructive">
           {email.errors}
         </div>
       </div>
 
-      <Button className='mt-2' disabled={navigation.state === 'submitting'}>
+      <Button className="mt-2" disabled={navigation.state === 'submitting'}>
         Continue
       </Button>
     </Form>

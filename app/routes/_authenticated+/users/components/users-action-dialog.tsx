@@ -1,7 +1,8 @@
-import { z } from 'zod'
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { Form } from 'react-router'
+import { toast } from 'sonner'
+import { z } from 'zod'
 import { PasswordInput } from '~/components/password-input'
 import { Button } from '~/components/ui/button'
 import {
@@ -22,7 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select'
-import { toast } from '~/hooks/use-toast'
 import { userTypes } from '../data/data'
 import type { User } from '../data/schema'
 
@@ -118,11 +118,10 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       event.preventDefault()
       if (submission?.status !== 'success') return
       form.reset()
-      toast({
-        title: 'You submitted the following values:',
+      toast('You submitted the following values:', {
         description: (
-          <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-            <code className='text-white'>
+          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
               {JSON.stringify(submission.value, null, 2)}
             </code>
           </pre>
@@ -142,123 +141,123 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
         onOpenChange(state)
       }}
     >
-      <DialogContent className='sm:max-w-lg'>
-        <DialogHeader className='text-left'>
+      <DialogContent className="sm:max-w-lg">
+        <DialogHeader className="text-left">
           <DialogTitle>{isEdit ? 'Edit User' : 'Add New User'}</DialogTitle>
           <DialogDescription>
             {isEdit ? 'Update the user here. ' : 'Create new user here. '}
             Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className='h-[26.25rem] w-full pr-4 -mr-4 py-1'>
-          <Form {...getFormProps(form)} className='space-y-4 p-0.5'>
-            <div className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
+        <ScrollArea className="-mr-4 h-[26.25rem] w-full py-1 pr-4">
+          <Form {...getFormProps(form)} className="space-y-4 p-0.5">
+            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
               <Label
                 htmlFor={fields.firstName.id}
-                className='col-span-2 text-right'
+                className="col-span-2 text-right"
               >
                 First Name
               </Label>
               <Input
                 {...getInputProps(fields.firstName, { type: 'text' })}
                 key={fields.firstName.key}
-                placeholder='John'
-                className='col-span-4'
+                placeholder="John"
+                className="col-span-4"
               />
               <div
                 id={fields.firstName.errorId}
-                className='text-sm text-destructive col-span-4 col-start-3'
+                className="col-span-4 col-start-3 text-sm text-destructive"
               >
                 {fields.firstName.errors}
               </div>
             </div>
 
-            <div className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
+            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
               <Label
                 htmlFor={fields.lastName.id}
-                className='col-span-2 text-right'
+                className="col-span-2 text-right"
               >
                 Last Name
               </Label>
               <Input
                 {...getInputProps(fields.lastName, { type: 'text' })}
                 key={fields.lastName.key}
-                placeholder='Doe'
-                className='col-span-4'
+                placeholder="Doe"
+                className="col-span-4"
               />
               <div
                 id={fields.lastName.errorId}
-                className='text-sm text-destructive col-span-4 col-start-3'
+                className="col-span-4 col-start-3 text-sm text-destructive"
               >
                 {fields.lastName.errors}
               </div>
             </div>
 
-            <div className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
+            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
               <Label
                 htmlFor={fields.username.id}
-                className='col-span-2 text-right'
+                className="col-span-2 text-right"
               >
                 Username
               </Label>
               <Input
                 {...getInputProps(fields.username, { type: 'text' })}
                 key={fields.username.key}
-                placeholder='john_doe'
-                className='col-span-4'
+                placeholder="john_doe"
+                className="col-span-4"
               />
               <div
                 id={fields.username.errorId}
-                className='text-sm text-destructive col-span-4 col-start-3'
+                className="col-span-4 col-start-3 text-sm text-destructive"
               >
                 {fields.username.errors}
               </div>
             </div>
 
-            <div className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
+            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
               <Label
                 htmlFor={fields.email.id}
-                className='col-span-2 text-right'
+                className="col-span-2 text-right"
               >
                 Email
               </Label>
               <Input
                 {...getInputProps(fields.email, { type: 'email' })}
                 key={fields.email.key}
-                placeholder='john.doe@gmail.com'
-                className='col-span-4'
+                placeholder="john.doe@gmail.com"
+                className="col-span-4"
               />
               <div
                 id={fields.email.errorId}
-                className='text-sm text-destructive col-span-4 col-start-3'
+                className="col-span-4 col-start-3 text-sm text-destructive"
               >
                 {fields.email.errors}
               </div>
             </div>
 
-            <div className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
+            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
               <Label
                 htmlFor={fields.phoneNumber.id}
-                className='col-span-2 text-right'
+                className="col-span-2 text-right"
               >
                 Phone Number
               </Label>
               <Input
                 {...getInputProps(fields.phoneNumber, { type: 'tel' })}
                 key={fields.phoneNumber.key}
-                placeholder='+123456789'
-                className='col-span-4'
+                placeholder="+123456789"
+                className="col-span-4"
               />
               <div
                 id={fields.phoneNumber.errorId}
-                className='text-sm text-destructive col-span-4 col-start-3'
+                className="col-span-4 col-start-3 text-sm text-destructive"
               >
                 {fields.phoneNumber.errors}
               </div>
             </div>
 
-            <div className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
-              <Label htmlFor={fields.role.id} className='col-span-2 text-right'>
+            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+              <Label htmlFor={fields.role.id} className="col-span-2 text-right">
                 Role
               </Label>
               <Select
@@ -272,8 +271,8 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                   })
                 }}
               >
-                <SelectTrigger id={fields.role.id} className='col-span-4'>
-                  <SelectValue placeholder='Select a role' />
+                <SelectTrigger id={fields.role.id} className="col-span-4">
+                  <SelectValue placeholder="Select a role" />
                 </SelectTrigger>
                 <SelectContent>
                   {userTypes.map(({ label, value }) => (
@@ -285,37 +284,37 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               </Select>
               <div
                 id={fields.email.errorId}
-                className='text-sm text-destructive col-span-4 col-start-3'
+                className="col-span-4 col-start-3 text-sm text-destructive"
               >
                 {fields.role.errors}
               </div>
             </div>
 
-            <div className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
+            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
               <Label
                 htmlFor={fields.password.id}
-                className='col-span-2 text-right'
+                className="col-span-2 text-right"
               >
                 Password
               </Label>
               <PasswordInput
                 {...getInputProps(fields.password, { type: 'password' })}
                 key={fields.password.key}
-                placeholder='e.g., S3cur3P@ssw0rd'
-                className='col-span-4'
+                placeholder="e.g., S3cur3P@ssw0rd"
+                className="col-span-4"
               />
               <div
                 id={fields.password.errorId}
-                className='text-sm text-destructive col-span-4 col-start-3'
+                className="col-span-4 col-start-3 text-sm text-destructive"
               >
                 {fields.password.errors}
               </div>
             </div>
 
-            <div className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
+            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
               <Label
                 htmlFor={fields.confirmPassword.id}
-                className='col-span-2 text-right'
+                className="col-span-2 text-right"
               >
                 Confirm Password
               </Label>
@@ -325,12 +324,12 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                   type: 'password',
                 })}
                 key={fields.confirmPassword.key}
-                placeholder='e.g., S3cur3P@ssw0rd'
-                className='col-span-4'
+                placeholder="e.g., S3cur3P@ssw0rd"
+                className="col-span-4"
               />
               <div
                 id={fields.confirmPassword.errorId}
-                className='text-sm text-destructive col-span-4 col-start-3'
+                className="col-span-4 col-start-3 text-sm text-destructive"
               >
                 {fields.confirmPassword.errors}
               </div>
@@ -338,7 +337,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           </Form>
         </ScrollArea>
         <DialogFooter>
-          <Button type='submit' form={form.id}>
+          <Button type="submit" form={form.id}>
             Save changes
           </Button>
         </DialogFooter>

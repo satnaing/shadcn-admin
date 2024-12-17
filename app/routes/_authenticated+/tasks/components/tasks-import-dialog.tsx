@@ -1,8 +1,8 @@
-import { z } from 'zod'
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { Form } from 'react-router'
 import { toast } from 'sonner'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import {
   Dialog,
@@ -21,7 +21,7 @@ const formSchema = z.object({
     .instanceof(File)
     .refine(
       (file) => ['text/csv'].includes(file.type),
-      'Please upload csv format.'
+      'Please upload csv format.',
     ),
 })
 
@@ -46,15 +46,11 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
 
       toast.success('You have imported the following file:', {
         description: (
-          <div className='overflow-hidden'>
-            <div className='overflow-auto'>
-              <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-                <code className='text-white'>
-                  {JSON.stringify(fileDetails, null, 2)}
-                </code>
-              </pre>
-            </div>
-          </div>
+          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
+              {JSON.stringify(fileDetails, null, 2)}
+            </code>
+          </pre>
         ),
       })
       onOpenChange(false)
@@ -69,8 +65,8 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
         form.reset()
       }}
     >
-      <DialogContent className='sm:max-w-sm gap-2'>
-        <DialogHeader className='text-left'>
+      <DialogContent className="gap-2 sm:max-w-sm">
+        <DialogHeader className="text-left">
           <DialogTitle>Import Tasks</DialogTitle>
           <DialogDescription>
             Import tasks quickly from a CSV file.
@@ -80,16 +76,16 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
           <div>
             <Label htmlFor={file.id}>File</Label>
             <Input {...getInputProps(file, { type: 'file' })} key={file.key} />
-            <div id={file.errorId} className='text-destructive text-sm'>
+            <div id={file.errorId} className="text-sm text-destructive">
               {file.errors}
             </div>
           </div>
         </Form>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant='outline'>Close</Button>
+            <Button variant="outline">Close</Button>
           </DialogClose>
-          <Button type='submit' form={form.id}>
+          <Button type="submit" form={form.id}>
             Import
           </Button>
         </DialogFooter>

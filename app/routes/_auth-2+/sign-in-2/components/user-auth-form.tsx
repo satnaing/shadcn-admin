@@ -1,9 +1,9 @@
-import type { HTMLAttributes } from 'react'
-import { z } from 'zod'
-import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
-import { useForm, getInputProps, getFormProps } from '@conform-to/react'
+import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
+import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
+import type { HTMLAttributes } from 'react'
 import { Form, Link, useNavigation } from 'react-router'
+import { z } from 'zod'
 import { PasswordInput } from '~/components/password-input'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
@@ -35,7 +35,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   return (
     <Form
-      method='POST'
+      method="POST"
       {...getFormProps(form)}
       className={cn('grid gap-2', className)}
       {...props}
@@ -45,19 +45,19 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         <Input
           {...getInputProps(email, { type: 'email' })}
           key={email.key}
-          placeholder='name@example.com'
+          placeholder="name@example.com"
         />
-        <div id={email.errorId} className='text-sm text-destructive'>
+        <div id={email.errorId} className="text-sm text-destructive">
           {email.errors}
         </div>
       </div>
 
       <div>
-        <div className='flex items-center justify-between'>
+        <div className="flex items-center justify-between">
           <Label htmlFor={password.id}>Password</Label>
           <Link
-            to='/forgot-password'
-            className='text-sm font-medium text-muted-foreground hover:opacity-75'
+            to="/forgot-password"
+            className="text-sm font-medium text-muted-foreground hover:opacity-75"
           >
             Forgot password?
           </Link>
@@ -65,44 +65,44 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         <PasswordInput
           {...getInputProps(password, { type: 'password' })}
           key={password.key}
-          placeholder='********'
+          placeholder="********"
         />
-        <div id={password.errorId} className='text-sm text-destructive'>
+        <div id={password.errorId} className="text-sm text-destructive">
           {password.errors}
         </div>
       </div>
 
-      <Button className='mt-2' disabled={isLoading}>
+      <Button className="mt-2" disabled={isLoading}>
         Login
       </Button>
 
-      <div className='relative my-2'>
-        <div className='absolute inset-0 flex items-center'>
-          <span className='w-full border-t' />
+      <div className="relative my-2">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t" />
         </div>
-        <div className='relative flex justify-center text-xs uppercase'>
-          <span className='bg-background px-2 text-muted-foreground'>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">
             Or continue with
           </span>
         </div>
       </div>
 
-      <div className='flex items-center gap-2'>
+      <div className="flex items-center gap-2">
         <Button
-          variant='outline'
-          className='w-full'
-          type='button'
+          variant="outline"
+          className="w-full"
+          type="button"
           disabled={isLoading}
         >
-          <IconBrandGithub className='h-4 w-4' /> GitHub
+          <IconBrandGithub className="h-4 w-4" /> GitHub
         </Button>
         <Button
-          variant='outline'
-          className='w-full'
-          type='button'
+          variant="outline"
+          className="w-full"
+          type="button"
           disabled={isLoading}
         >
-          <IconBrandFacebook className='h-4 w-4' /> Facebook
+          <IconBrandFacebook className="h-4 w-4" /> Facebook
         </Button>
       </div>
     </Form>

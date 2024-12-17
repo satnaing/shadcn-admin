@@ -40,9 +40,9 @@ interface SidebarData {
 }
 
 export type {
-  SidebarData,
+  NavCollapsible,
   NavGroup as NavGroupProps,
   NavItem,
-  NavCollapsible,
   NavLink,
+  SidebarData,
 }

@@ -1,10 +1,10 @@
-import { z } from 'zod'
-import { format } from 'date-fns'
-import { CalendarIcon, CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
-import { useForm, getFormProps, getInputProps } from '@conform-to/react'
+import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
+import { CalendarIcon, CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
+import { format } from 'date-fns'
 import { Form } from 'react-router'
 import { toast } from 'sonner'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Calendar } from '~/components/ui/calendar'
 import {
@@ -70,8 +70,8 @@ export function AccountForm() {
       if (submission?.status !== 'success') return
       toast('You submitted the following values:', {
         description: (
-          <pre className='mt-2 w-[320px] rounded-md bg-slate-950 p-4'>
-            <code className='text-white'>
+          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
               {JSON.stringify(submission.value, null, 2)}
             </code>
           </pre>
@@ -81,31 +81,31 @@ export function AccountForm() {
   })
 
   return (
-    <Form {...getFormProps(form)} className='space-y-8'>
-      <div className='space-y-2'>
+    <Form {...getFormProps(form)} className="space-y-8">
+      <div className="space-y-2">
         <Label htmlFor={fields.name.id}>Name</Label>
         <Input
           {...getInputProps(fields.name, { type: 'text' })}
           key={fields.name.key}
-          placeholder='Your name'
+          placeholder="Your name"
         />
-        <div className='text-[0.8rem] text-muted-foreground'>
+        <div className="text-[0.8rem] text-muted-foreground">
           This is the name that will be displayed on your profile and in emails.
         </div>
-        <div id={fields.name.errorId} className='text-sm text-destructive'>
+        <div id={fields.name.errorId} className="text-sm text-destructive">
           {fields.name.errors}
         </div>
       </div>
 
-      <div className='space-y-2 flex flex-col'>
+      <div className="flex flex-col space-y-2">
         <Label htmlFor={fields.dob.id}>Date of birth</Label>
         <Popover>
           <PopoverTrigger asChild>
             <Button
-              variant='outline'
+              variant="outline"
               className={cn(
                 'w-[240px] pl-3 text-left font-normal',
-                !fields.dob.value && 'text-muted-foreground'
+                !fields.dob.value && 'text-muted-foreground',
               )}
             >
               {fields.dob.value ? (
@@ -113,12 +113,12 @@ export function AccountForm() {
               ) : (
                 <span>Pick a date</span>
               )}
-              <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
+              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className='w-auto p-0' align='start'>
+          <PopoverContent className="w-auto p-0" align="start">
             <Calendar
-              mode='single'
+              mode="single"
               selected={
                 fields.dob.value ? new Date(fields.dob.value) : undefined
               }
@@ -135,47 +135,47 @@ export function AccountForm() {
           </PopoverContent>
         </Popover>
         <input
-          type='hidden'
+          type="hidden"
           name={fields.dob.name}
           value={fields.dob.value}
           key={fields.dob.key}
         />
-        <div className='text-[0.8rem] text-muted-foreground'>
+        <div className="text-[0.8rem] text-muted-foreground">
           Your date of birth is used to calculate your age.
         </div>
-        <div id={fields.dob.errorId} className='text-sm text-destructive'>
+        <div id={fields.dob.errorId} className="text-sm text-destructive">
           {fields.dob.errors}
         </div>
       </div>
 
-      <div className='space-y-2'>
+      <div className="space-y-2">
         <Label htmlFor={fields.language.id}>Language</Label>
-        <div className='text-[0.8rem] text-muted-foreground'>
+        <div className="text-[0.8rem] text-muted-foreground">
           This is the language that will be used in the dashboard.
         </div>
 
         <Popover>
           <PopoverTrigger asChild>
             <Button
-              variant='outline'
+              variant="outline"
               // biome-ignore lint/a11y/useSemanticElements: <explanation>
-              role='combobox'
+              role="combobox"
               className={cn(
                 'w-[200px] justify-between',
-                !fields.language.value && 'text-muted-foreground'
+                !fields.language.value && 'text-muted-foreground',
               )}
             >
               {fields.language.value
                 ? languages.find(
-                    (language) => language.value === fields.language.value
+                    (language) => language.value === fields.language.value,
                   )?.label
                 : 'Select language'}
-              <CaretSortIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+              <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className='w-[200px] p-0'>
+          <PopoverContent className="w-[200px] p-0">
             <Command>
-              <CommandInput placeholder='Search language...' />
+              <CommandInput placeholder="Search language..." />
               <CommandEmpty>No language found.</CommandEmpty>
               <CommandGroup>
                 <CommandList>
@@ -185,7 +185,7 @@ export function AccountForm() {
                       key={language.value}
                       onSelect={(value) => {
                         const selectedLanguage = languages.find(
-                          (lang) => lang.label === value
+                          (lang) => lang.label === value,
                         )
                         if (!selectedLanguage) return
                         form.update({
@@ -199,7 +199,7 @@ export function AccountForm() {
                           'mr-2 h-4 w-4',
                           language.value === fields.language.value
                             ? 'opacity-100'
-                            : 'opacity-0'
+                            : 'opacity-0',
                         )}
                       />
                       {language.label}
@@ -211,18 +211,18 @@ export function AccountForm() {
           </PopoverContent>
         </Popover>
         <input
-          type='hidden'
+          type="hidden"
           name={fields.language.name}
           value={fields.language.value}
           key={fields.language.key}
         />
 
-        <div id={fields.language.errorId} className='text-sm text-destructive'>
+        <div id={fields.language.errorId} className="text-sm text-destructive">
           {fields.language.errors}
         </div>
       </div>
 
-      <Button type='submit'>Update account</Button>
+      <Button type="submit">Update account</Button>
     </Form>
   )
 }

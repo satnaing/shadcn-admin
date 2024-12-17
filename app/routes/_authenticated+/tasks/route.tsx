@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import { IconDownload, IconPlus } from '@tabler/icons-react'
+import { useState } from 'react'
+import { toast } from 'sonner'
 import { ConfirmDialog } from '~/components/confirm-dialog'
 import { Header } from '~/components/layout/header'
 import { Main } from '~/components/layout/main'
@@ -8,7 +9,6 @@ import { Search } from '~/components/search'
 import { ThemeSwitch } from '~/components/theme-switch'
 import { Button } from '~/components/ui/button'
 import useDialogState from '~/hooks/use-dialog-state'
-import { toast } from '~/hooks/use-toast'
 import { columns } from './components/columns'
 import { DataTable } from './components/data-table'
 import { TasksImportDialog } from './components/tasks-import-dialog'
@@ -29,46 +29,46 @@ export default function Tasks() {
       {/* ===== Top Heading ===== */}
       <Header sticky>
         <Search />
-        <div className='ml-auto flex items-center space-x-4'>
+        <div className="ml-auto flex items-center space-x-4">
           <ThemeSwitch />
           <ProfileDropdown />
         </div>
       </Header>
 
       <Main>
-        <div className='mb-2 flex items-center justify-between space-y-2 flex-wrap gap-x-4'>
+        <div className="mb-2 flex flex-wrap items-center justify-between gap-x-4 space-y-2">
           <div>
-            <h2 className='text-2xl font-bold tracking-tight'>Tasks</h2>
-            <p className='text-muted-foreground'>
+            <h2 className="text-2xl font-bold tracking-tight">Tasks</h2>
+            <p className="text-muted-foreground">
               Here&apos;s a list of your tasks for this month!
             </p>
           </div>
-          <div className='flex gap-2'>
+          <div className="flex gap-2">
             <Button
-              variant='outline'
-              className='space-x-1'
+              variant="outline"
+              className="space-x-1"
               onClick={() => setOpen('import')}
             >
               <span>Import</span> <IconDownload size={18} />
             </Button>
-            <Button className='space-x-1' onClick={() => setOpen('create')}>
+            <Button className="space-x-1" onClick={() => setOpen('create')}>
               <span>Create</span> <IconPlus size={18} />
             </Button>
           </div>
         </div>
-        <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
+        <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
           <DataTable data={tasks} columns={columns} />
         </div>
       </Main>
 
       <TasksMutateDrawer
-        key='task-create'
+        key="task-create"
         open={open === 'create'}
         onOpenChange={() => setOpen('create')}
       />
 
       <TasksImportDialog
-        key='tasks-import'
+        key="tasks-import"
         open={open === 'import'}
         onOpenChange={() => setOpen('import')}
       />
@@ -88,7 +88,7 @@ export default function Tasks() {
           />
 
           <ConfirmDialog
-            key='task-delete'
+            key="task-delete"
             destructive
             open={open === 'delete'}
             onOpenChange={() => {
@@ -102,18 +102,17 @@ export default function Tasks() {
               setTimeout(() => {
                 setCurrentRow(null)
               }, 500)
-              toast({
-                title: 'The following task has been deleted:',
+              toast('The following task has been deleted:', {
                 description: (
-                  <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-                    <code className='text-white'>
+                  <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
+                    <code className="text-white">
                       {JSON.stringify(currentRow, null, 2)}
                     </code>
                   </pre>
                 ),
               })
             }}
-            className='max-w-md'
+            className="max-w-md"
             title={`Delete this task: ${currentRow.id} ?`}
             desc={
               <>
@@ -122,7 +121,7 @@ export default function Tasks() {
                 This action cannot be undone.
               </>
             }
-            confirmText='Delete'
+            confirmText="Delete"
           />
         </>
       )}

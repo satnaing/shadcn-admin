@@ -1,8 +1,8 @@
-import { z } from 'zod'
 import { getFormProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { Form, Link } from 'react-router'
 import { toast } from 'sonner'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Checkbox } from '~/components/ui/checkbox'
 import { Label } from '~/components/ui/label'
@@ -41,8 +41,8 @@ export function NotificationsForm() {
       if (submission?.status !== 'success') return
       toast('You submitted the following values:', {
         description: (
-          <pre className='mt-2 w-[320px] rounded-md bg-slate-950 p-4'>
-            <code className='text-white'>
+          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
               {JSON.stringify(submission.value, null, 2)}
             </code>
           </pre>
@@ -52,50 +52,50 @@ export function NotificationsForm() {
   })
 
   return (
-    <Form method='POST' {...getFormProps(form)} className='space-y-8'>
-      <div className='space-y-3 relative'>
+    <Form method="POST" {...getFormProps(form)} className="space-y-8">
+      <div className="relative space-y-3">
         <Label htmlFor={fields.type.id}>Notify me about...</Label>
         <RadioGroup
           key={fields.type.key}
           name={fields.type.name}
           id={fields.type.id}
           defaultValue={fields.type.value}
-          className='flex flex-col space-y-1'
+          className="flex flex-col space-y-1"
         >
-          <div className='flex items-center space-x-3 space-y-0'>
-            <RadioGroupItem id={`${fields.type.id}-all`} value='all' />
+          <div className="flex items-center space-x-3 space-y-0">
+            <RadioGroupItem id={`${fields.type.id}-all`} value="all" />
             <Label htmlFor={`${fields.type.id}-all`}>All new messages</Label>
           </div>
 
-          <div className='flex items-center space-x-3 space-y-0'>
+          <div className="flex items-center space-x-3 space-y-0">
             <RadioGroupItem
               id={`${fields.type.id}-mentions`}
-              value='mentions'
+              value="mentions"
             />
             <Label htmlFor={`${fields.type.id}-mentions`}>
               Direct messages and mentions
             </Label>
           </div>
 
-          <div className='flex items-center space-x-3 space-y-0'>
-            <RadioGroupItem id={`${fields.type.id}-none`} value='none' />
+          <div className="flex items-center space-x-3 space-y-0">
+            <RadioGroupItem id={`${fields.type.id}-none`} value="none" />
             <Label htmlFor={`${fields.type.id}-none`}>Nothing</Label>
           </div>
         </RadioGroup>
-        <div id={fields.type.errorId} className='text-sm text-destructive'>
+        <div id={fields.type.errorId} className="text-sm text-destructive">
           {fields.type.errors}
         </div>
       </div>
 
-      <div className='relative'>
-        <h3 className='mb-4 text-lg font-medium'>Email Notifications</h3>
-        <div className='space-y-4'>
-          <div className='flex flex-row items-center justify-between rounded-lg border p-4'>
-            <div className='space-y-0.5'>
+      <div className="relative">
+        <h3 className="mb-4 text-lg font-medium">Email Notifications</h3>
+        <div className="space-y-4">
+          <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+            <div className="space-y-0.5">
               <Label htmlFor={fields.communication_emails.id}>
                 Email notifications
               </Label>
-              <div className='text-[0.8rem] text-muted-foreground'>
+              <div className="text-[0.8rem] text-muted-foreground">
                 Choose the types of emails you want to receive.
               </div>
             </div>
@@ -107,12 +107,12 @@ export function NotificationsForm() {
             />
           </div>
 
-          <div className='flex flex-row items-center justify-between rounded-lg border p-4'>
-            <div className='space-y-0.5'>
+          <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+            <div className="space-y-0.5">
               <Label htmlFor={fields.marketing_emails.id}>
                 Marketing emails
               </Label>
-              <div className='text-[0.8rem] text-muted-foreground'>
+              <div className="text-[0.8rem] text-muted-foreground">
                 Receive emails about new products, features, and more.
               </div>
             </div>
@@ -124,10 +124,10 @@ export function NotificationsForm() {
             />
           </div>
 
-          <div className='flex flex-row items-center justify-between rounded-lg border p-4'>
-            <div className='space-y-0.5'>
+          <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+            <div className="space-y-0.5">
               <Label htmlFor={fields.social_emails.id}>Social emails</Label>
-              <div className='text-[0.8rem] text-muted-foreground'>
+              <div className="text-[0.8rem] text-muted-foreground">
                 Receive emails for friend requests, follows, and more.
               </div>
             </div>
@@ -139,10 +139,10 @@ export function NotificationsForm() {
             />
           </div>
 
-          <div className='flex flex-row items-center justify-between rounded-lg border p-4'>
-            <div className='space-y-0.5'>
+          <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+            <div className="space-y-0.5">
               <Label htmlFor={fields.security_emails.id}>Security emails</Label>
-              <div className='text-[0.8rem] text-muted-foreground'>
+              <div className="text-[0.8rem] text-muted-foreground">
                 Receive emails about your account activity and security.
               </div>
             </div>
@@ -154,15 +154,15 @@ export function NotificationsForm() {
               aria-readonly
             />
             <input
-              type='hidden'
+              type="hidden"
               name={fields.security_emails.name}
-              value='on'
+              value="on"
             />
           </div>
         </div>
       </div>
 
-      <div className='flex flex-row items-start space-x-3 space-y-0 relative'>
+      <div className="relative flex flex-row items-start space-x-3 space-y-0">
         <Checkbox
           id={fields.mobile.id}
           name={fields.mobile.name}
@@ -170,15 +170,15 @@ export function NotificationsForm() {
           key={fields.mobile.key}
         />
 
-        <div className='space-y-1 leading-none'>
+        <div className="space-y-1 leading-none">
           <Label htmlFor={fields.mobile.id}>
             Use different settings for my mobile devices
           </Label>
-          <div className='text-[0.8rem] text-muted-foreground'>
+          <div className="text-[0.8rem] text-muted-foreground">
             You can manage your mobile notifications in the{' '}
             <Link
-              to='/settings'
-              className='underline decoration-dashed underline-offset-4 hover:decoration-solid'
+              to="/settings"
+              className="underline decoration-dashed underline-offset-4 hover:decoration-solid"
             >
               mobile settings
             </Link>{' '}
@@ -187,7 +187,7 @@ export function NotificationsForm() {
         </div>
       </div>
 
-      <Button type='submit'>Update notifications</Button>
+      <Button type="submit">Update notifications</Button>
     </Form>
   )
 }

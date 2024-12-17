@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { IconMailPlus, IconUserPlus } from '@tabler/icons-react'
+import { useState } from 'react'
 import { Header } from '~/components/layout/header'
 import { Main } from '~/components/layout/main'
 import { ProfileDropdown } from '~/components/profile-dropdown'
@@ -38,46 +38,46 @@ export default function Users({ loaderData: { users } }: Route.ComponentProps) {
       {/* ===== Top Heading ===== */}
       <Header sticky>
         <Search />
-        <div className='ml-auto flex items-center space-x-4'>
+        <div className="ml-auto flex items-center space-x-4">
           <ThemeSwitch />
           <ProfileDropdown />
         </div>
       </Header>
 
       <Main>
-        <div className='mb-2 flex items-center justify-between space-y-2 flex-wrap'>
+        <div className="mb-2 flex flex-wrap items-center justify-between space-y-2">
           <div>
-            <h2 className='text-2xl font-bold tracking-tight'>User List</h2>
-            <p className='text-muted-foreground'>
+            <h2 className="text-2xl font-bold tracking-tight">User List</h2>
+            <p className="text-muted-foreground">
               Manage your users and their roles here.
             </p>
           </div>
-          <div className='flex gap-2'>
+          <div className="flex gap-2">
             <Button
-              variant='outline'
-              className='space-x-1'
+              variant="outline"
+              className="space-x-1"
               onClick={() => setOpen('invite')}
             >
               <span>Invite User</span> <IconMailPlus size={18} />
             </Button>
-            <Button className='space-x-1' onClick={() => setOpen('add')}>
+            <Button className="space-x-1" onClick={() => setOpen('add')}>
               <span>Add User</span> <IconUserPlus size={18} />
             </Button>
           </div>
         </div>
-        <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
+        <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
           <UsersTable data={userList} columns={columns} />
         </div>
       </Main>
 
       <UsersActionDialog
-        key='user-add'
+        key="user-add"
         open={open === 'add'}
         onOpenChange={() => setOpen('add')}
       />
 
       <UsersInviteDialog
-        key='user-invite'
+        key="user-invite"
         open={open === 'invite'}
         onOpenChange={() => setOpen('invite')}
       />

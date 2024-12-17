@@ -27,7 +27,7 @@ export const useUsersContext = () => {
 
   if (!usersContext) {
     throw new Error(
-      'useUsersContext has to be used within <UsersContext.Provider>'
+      'useUsersContext has to be used within <UsersContext.Provider>',
     )
   }
 

@@ -1,8 +1,8 @@
-import { z } from 'zod'
-import { useForm, getFormProps } from '@conform-to/react'
+import { getFormProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { Form } from 'react-router'
 import { toast } from 'sonner'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Checkbox } from '~/components/ui/checkbox'
 import { Label } from '~/components/ui/label'
@@ -57,8 +57,8 @@ export function DisplayForm() {
       if (submission?.status !== 'success') return
       toast('You submitted the following values:', {
         description: (
-          <pre className='mt-2 w-[320px] rounded-md bg-slate-950 p-4'>
-            <code className='text-white'>
+          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
               {JSON.stringify(submission.value, null, 2)}
             </code>
           </pre>
@@ -69,18 +69,18 @@ export function DisplayForm() {
   const itemList = fields.items.getFieldList()
 
   return (
-    <Form method='POST' {...getFormProps(form)} className='space-y-8'>
-      <div className='space-y-2'>
+    <Form method="POST" {...getFormProps(form)} className="space-y-8">
+      <div className="space-y-2">
         <div>
-          <Label className='text-base'>Sidebar</Label>
-          <div className='text-[0.8rem] text-muted-foreground'>
+          <Label className="text-base">Sidebar</Label>
+          <div className="text-[0.8rem] text-muted-foreground">
             Select the items you want to display in the sidebar.
           </div>
         </div>
 
         {items.map((item) => (
           <div
-            className='flex flex-row items-start space-x-3 space-y-0'
+            className="flex flex-row items-start space-x-3 space-y-0"
             key={item.id}
           >
             <Checkbox
@@ -97,23 +97,23 @@ export function DisplayForm() {
                 })
               }}
             />
-            <Label htmlFor={item.id} className='font-normal'>
+            <Label htmlFor={item.id} className="font-normal">
               {item.label}
             </Label>
           </div>
         ))}
         {itemList.map((item) => (
           <input
-            type='hidden'
+            type="hidden"
             name={item.name}
             value={item.value}
             key={item.name}
           />
         ))}
-        <div className='text-sm text-destructive'>{fields.items.errors}</div>
+        <div className="text-sm text-destructive">{fields.items.errors}</div>
       </div>
 
-      <Button type='submit'>Update display</Button>
+      <Button type="submit">Update display</Button>
       <div>{JSON.stringify(form.allErrors)}</div>
     </Form>
   )

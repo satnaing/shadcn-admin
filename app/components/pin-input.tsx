@@ -181,9 +181,9 @@ const PinInput = ({ className, children, ref, ...props }: PinInputProps) => {
 
   return (
     <PinInputContext.Provider value={true}>
-      <div ref={ref} aria-label='Pin Input' className={className} {...rest}>
+      <div ref={ref} aria-label="Pin Input" className={className} {...rest}>
         {clones}
-        <input type='hidden' name={name} form={form} value={pinValue} />
+        <input type="hidden" name={name} form={form} value={pinValue} />
       </div>
     </PinInputContext.Provider>
   )
@@ -221,7 +221,7 @@ const PinInputField = <T extends React.ElementType = 'input'>({
   const isInsidePinInput = React.useContext(PinInputContext)
   if (!isInsidePinInput) {
     throw new Error(
-      `PinInputField must be used within ${PinInput.displayName}.`
+      `PinInputField must be used within ${PinInput.displayName}.`,
     )
   }
 
@@ -264,9 +264,9 @@ const usePinInput = ({
           ? defaultValue.charAt(index)
           : value
             ? value.charAt(index)
-            : ''
+            : '',
       ),
-    [defaultValue, length, value]
+    [defaultValue, length, value],
   )
 
   const [pins, setPins] = React.useState(pinInputs)
@@ -306,7 +306,7 @@ const usePinInput = ({
 
   function handleFocus(
     event: React.FocusEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) {
     event.target.select()
     focusInput(index)
@@ -332,7 +332,7 @@ const usePinInput = ({
           return val
         }
         return p
-      })
+      }),
     )
   }
 
@@ -384,7 +384,7 @@ const usePinInput = ({
 
   function handleKeyDown(
     event: React.KeyboardEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) {
     const { ctrlKey, key, shiftKey, metaKey } = event
 

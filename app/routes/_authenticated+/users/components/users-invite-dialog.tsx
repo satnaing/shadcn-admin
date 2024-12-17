@@ -1,5 +1,3 @@
-import { z } from 'zod'
-import { IconMailPlus, IconSend } from '@tabler/icons-react'
 import {
   getFormProps,
   getInputProps,
@@ -7,7 +5,10 @@ import {
   useForm,
 } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
+import { IconMailPlus, IconSend } from '@tabler/icons-react'
 import { Form } from 'react-router'
+import { toast } from 'sonner'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import {
   Dialog,
@@ -29,14 +30,12 @@ import {
 } from '~/components/ui/select'
 import { Stack } from '~/components/ui/stack'
 import { Textarea } from '~/components/ui/textarea'
-import { toast } from '~/hooks/use-toast'
 
 const formSchema = z.object({
   email: z
-    .string()
-    .min(1, { message: 'Email is required.' })
+    .string({ required_error: 'Email is required.' })
     .email({ message: 'Email is invalid.' }),
-  role: z.string().min(1, { message: 'Role is required.' }),
+  role: z.string({ required_error: 'Role is required.' }),
   desc: z.string().optional(),
 })
 
@@ -54,11 +53,10 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
       event.preventDefault()
       if (submission?.status !== 'success') return
       form.reset()
-      toast({
-        title: 'You submitted the following values:',
+      toast('You submitted the following values:', {
         description: (
-          <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-            <code className='text-white'>
+          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">
               {JSON.stringify(submission.value, null, 2)}
             </code>
           </pre>
@@ -76,9 +74,9 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
         onOpenChange(state)
       }}
     >
-      <DialogContent className='sm:max-w-md'>
-        <DialogHeader className='text-left'>
-          <DialogTitle className='flex items-center gap-2'>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader className="text-left">
+          <DialogTitle className="flex items-center gap-2">
             <IconMailPlus /> Invite User
           </DialogTitle>
           <DialogDescription>
@@ -96,7 +94,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
               />
               <div
                 id={fields.email.errorId}
-                className='text-sm text-destructive'
+                className="text-sm text-destructive"
               >
                 {fields.email.errors}
               </div>
@@ -116,19 +114,19 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
                 }}
               >
                 <SelectTrigger id={fields.role.id}>
-                  <SelectValue placeholder='Select dropdown' />
+                  <SelectValue placeholder="Select dropdown" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value='in progress'>In Progress</SelectItem>
-                  <SelectItem value='backlog'>Backlog</SelectItem>
-                  <SelectItem value='todo'>Todo</SelectItem>
-                  <SelectItem value='canceled'>Canceled</SelectItem>
-                  <SelectItem value='done'>Done</SelectItem>
+                  <SelectItem value="in progress">In Progress</SelectItem>
+                  <SelectItem value="backlog">Backlog</SelectItem>
+                  <SelectItem value="todo">Todo</SelectItem>
+                  <SelectItem value="canceled">Canceled</SelectItem>
+                  <SelectItem value="done">Done</SelectItem>
                 </SelectContent>
               </Select>
               <div
                 id={fields.email.errorId}
-                className='text-sm text-destructive'
+                className="text-sm text-destructive"
               >
                 {fields.role.errors}
               </div>
@@ -138,23 +136,23 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
               <Label htmlFor={fields.desc.id}>Description (optional)</Label>
               <Textarea
                 {...getTextareaProps(fields.desc)}
-                className='resize-none'
-                placeholder='Add a personal note to your invitation (optional)'
+                className="resize-none"
+                placeholder="Add a personal note to your invitation (optional)"
               />
               <div
                 id={fields.desc.errorId}
-                className='text-sm text-destructive'
+                className="text-sm text-destructive"
               >
                 {fields.desc.errors}
               </div>
             </div>
           </Stack>
         </Form>
-        <DialogFooter className='gap-y-2'>
+        <DialogFooter className="gap-y-2">
           <DialogClose asChild>
-            <Button variant='outline'>Cancel</Button>
+            <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <Button type='submit' form={form.id}>
+          <Button type="submit" form={form.id}>
             Invite <IconSend />
           </Button>
         </DialogFooter>

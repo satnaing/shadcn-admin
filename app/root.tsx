@@ -30,14 +30,14 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang='en'>
+    <html lang="en">
       <head>
-        <meta charSet='utf-8' />
-        <meta name='viewport' content='width=device-width,initial-scale=1' />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className='scroll-smooth'>
+      <body className="scroll-smooth">
         <Toaster closeButton richColors />
         {children}
         <ScrollRestoration />
@@ -86,11 +86,11 @@ export function ErrorBoundary() {
   }
 
   return (
-    <div className='m-8'>
-      <h1 className='text-4xl'>
+    <div className="m-8">
+      <h1 className="text-4xl">
         {status} {statusText}
       </h1>
-      <div className='mt-4'>{message}</div>
+      <div className="mt-4">{message}</div>
     </div>
   )
 }

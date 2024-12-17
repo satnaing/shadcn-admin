@@ -19,7 +19,7 @@ app.use(
         VALUE_FROM_VERCEL: 'Hello from Vercel',
       }
     },
-  })
+  }),
 )
 
 export default app

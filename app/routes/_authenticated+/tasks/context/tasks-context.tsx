@@ -27,7 +27,7 @@ export const useTasksContext = () => {
 
   if (!tasksContext) {
     throw new Error(
-      'useTasksContext has to be used within <TasksContext.Provider>'
+      'useTasksContext has to be used within <TasksContext.Provider>',
     )
   }
 
