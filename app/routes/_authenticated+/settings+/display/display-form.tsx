@@ -114,7 +114,6 @@ export function DisplayForm() {
       </div>
 
       <Button type="submit">Update display</Button>
-      <div>{JSON.stringify(form.allErrors)}</div>
     </Form>
   )
 }
