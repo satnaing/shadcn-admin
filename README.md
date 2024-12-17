@@ -39,13 +39,13 @@ I've been creating dashboard UIs at work and for my personal projects. I always 
 Clone the project
 
 ```bash
-  git clone https://github.com/satnaing/shadcn-admin.git
+  git clone https://github.com/coji/shadcn-admin-react-router.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd shadcn-admin
+  cd shadcn-admin-react-router
 ```
 
 Install dependencies
