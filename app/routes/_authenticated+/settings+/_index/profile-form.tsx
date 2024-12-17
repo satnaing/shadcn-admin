@@ -6,6 +6,7 @@ import {
   useForm,
 } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
+import { XIcon } from 'lucide-react'
 import { Form, Link } from 'react-router'
 import { toast } from 'sonner'
 import { Button } from '~/components/ui/button'
@@ -19,7 +20,6 @@ import {
   SelectValue,
 } from '~/components/ui/select'
 import { Textarea } from '~/components/ui/textarea'
-import { cn } from '~/lib/utils'
 
 const profileFormSchema = z.object({
   username: z
@@ -137,21 +137,31 @@ export default function ProfileForm() {
 
       <div className='space-y-2'>
         <Label htmlFor={fields.urls.id}>URLs</Label>
+        <div className='text-[0.8rem] text-muted-foreground'>
+          Add links to your website, blog, or social media profiles.
+        </div>
 
         {urls.map((url, index) => (
           <div key={url.id} className='space-y-2'>
-            <div
-              className={cn(
-                'text-[0.8rem] text-muted-foreground',
-                index !== 0 && 'sr-only'
-              )}
-            >
-              Add links to your website, blog, or social media profiles.
+            <div className='flex items-center gap-2'>
+              <Input
+                {...getInputProps(url, { type: 'url' })}
+                key={url.key}
+                placeholder='https://example.com'
+                className='flex-1'
+              />
+              <Button
+                type='submit'
+                size='sm'
+                variant='ghost'
+                {...form.remove.getButtonProps({
+                  name: fields.urls.name,
+                  index,
+                })}
+              >
+                <XIcon />
+              </Button>
             </div>
-            <Input
-              {...getInputProps(url, { type: 'url' })}
-              placeholder='https://example.com'
-            />
             <div id={url.errorId} className='text-sm text-destructive'>
               {url.errors}
             </div>
