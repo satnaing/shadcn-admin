@@ -1,6 +1,6 @@
 # Shadcn Admin Dashboard
 
-Admin Dashboard UI crafted with Shadcn and Vite. Built with responsiveness and accessibility in mind.
+Admin Dashboard UI built with Shadcn and React Router v7. Built with responsiveness and accessibility in mind.
 
 ![alt text](public/images/shadcn-admin.png)
 
@@ -24,11 +24,13 @@ I've been creating dashboard UIs at work and for my personal projects. I always 
 
 **Build Tool:** [Vite](https://vitejs.dev/)
 
-**Routing:** [TanStack Router](https://tanstack.com/router/latest)
+**Routing:** [React Router v7](https://reactrouter.com/en/main) (Framework)
 
 **Type Checking:** [TypeScript](https://www.typescriptlang.org/)
 
-**Linting/Formatting:** [Eslint](https://eslint.org/) & [Prettier](https://prettier.io/)
+**Linting/Formatting:** [Biome](https://biomejs.dev/) & [Prettier](https://prettier.io/)
+
+**Form Validation:** [Conform](https://conform.guide/)
 
 **Icons:** [Tabler Icons](https://tabler.io/icons)
 
@@ -60,7 +62,9 @@ Start the server
 
 ## Author
 
-Crafted with 🤍 by [@satnaing](https://github.com/satnaing)
+Crafted with 🤍 by [@coji](https://github.com/coji)
+
+This project is a fork of [shadcn-admin](https://github.com/satnaing/shadcn-admin) by [@satnaing](https://github.com/satnaing). Thanks for the great original work!
 
 ## License
 
