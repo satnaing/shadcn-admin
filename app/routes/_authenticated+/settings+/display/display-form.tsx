@@ -71,7 +71,7 @@ export function DisplayForm() {
   return (
     <Form method="POST" {...getFormProps(form)} className="space-y-8">
       <div className="space-y-2">
-        <div>
+        <div className="mb-4">
           <Label className="text-base">Sidebar</Label>
           <div className="text-[0.8rem] text-muted-foreground">
             Select the items you want to display in the sidebar.
@@ -110,7 +110,9 @@ export function DisplayForm() {
             key={item.name}
           />
         ))}
-        <div className="text-sm text-destructive">{fields.items.errors}</div>
+        <div className="text-[0.8rem] font-medium text-destructive">
+          {fields.items.errors}
+        </div>
       </div>
 
       <Button type="submit">Update display</Button>
