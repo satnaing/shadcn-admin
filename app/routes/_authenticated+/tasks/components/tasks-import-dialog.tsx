@@ -76,7 +76,10 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
           <div>
             <Label htmlFor={file.id}>File</Label>
             <Input {...getInputProps(file, { type: 'file' })} key={file.key} />
-            <div id={file.errorId} className="text-sm text-destructive">
+            <div
+              id={file.errorId}
+              className="text-[0.8rem] font-medium text-destructive"
+            >
               {file.errors}
             </div>
           </div>

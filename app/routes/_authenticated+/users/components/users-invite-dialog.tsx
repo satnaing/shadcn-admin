@@ -94,7 +94,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
               />
               <div
                 id={fields.email.errorId}
-                className="text-sm text-destructive"
+                className="text-[0.8rem] font-medium text-destructive"
               >
                 {fields.email.errors}
               </div>
@@ -126,7 +126,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
               </Select>
               <div
                 id={fields.email.errorId}
-                className="text-sm text-destructive"
+                className="text-[0.8rem] font-medium text-destructive"
               >
                 {fields.role.errors}
               </div>
@@ -141,7 +141,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
               />
               <div
                 id={fields.desc.errorId}
-                className="text-sm text-destructive"
+                className="text-[0.8rem] font-medium text-destructive"
               >
                 {fields.desc.errors}
               </div>

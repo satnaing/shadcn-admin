@@ -67,7 +67,10 @@ export function AppearanceForm() {
         <div className="text-[0.8rem] text-muted-foreground">
           Set the font you want to use in the dashboard.
         </div>
-        <div id={fields.font.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.font.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.font.errors}
         </div>
       </div>
@@ -141,7 +144,10 @@ export function AppearanceForm() {
             </span>
           </Label>
         </RadioGroup>
-        <div id={fields.theme.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.theme.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.theme.errors}
         </div>
       </div>
