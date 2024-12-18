@@ -77,7 +77,7 @@ export default function SidebarNav({
                 'justify-start',
               )}
             >
-              <span className="mr-2">{item.icon}</span>
+              <span>{item.icon}</span>
               {item.title}
             </Link>
           ))}
