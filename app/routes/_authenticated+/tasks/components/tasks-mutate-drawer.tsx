@@ -33,10 +33,10 @@ interface Props {
 }
 
 const formSchema = z.object({
-  title: z.string().min(1, 'Title is required.'),
-  status: z.string().min(1, 'Please select a status.'),
-  label: z.string().min(1, 'Please select a label.'),
-  priority: z.string().min(1, 'Please choose a priority.'),
+  title: z.string({ required_error: 'Title is required.' }),
+  status: z.string({ required_error: 'Please select a status.' }),
+  label: z.string({ required_error: 'Please select a label.' }),
+  priority: z.string({ required_error: 'Please choose a priority.' }),
 })
 type TasksForm = z.infer<typeof formSchema>
 
@@ -79,7 +79,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
       }}
     >
       <SheetContent className="flex flex-col">
-        <SheetHeader className="text-left">
+        <SheetHeader className="text-center sm:text-left">
           <SheetTitle>{isUpdate ? 'Update' : 'Create'} Task</SheetTitle>
           <SheetDescription>
             {isUpdate
@@ -88,8 +88,8 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             Click save when you&apos;re done.
           </SheetDescription>
         </SheetHeader>
-        <Form {...getFormProps(form)} className="flex flex-col gap-4">
-          <div>
+        <Form {...getFormProps(form)} className="flex-1 space-y-5">
+          <div className="space-y-1">
             <Label htmlFor={fields.title.id}>Title</Label>
             <Input
               {...getInputProps(fields.title, { type: 'text' })}
@@ -104,7 +104,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             </div>
           </div>
 
-          <div>
+          <div className="space-y-1">
             <Label htmlFor={fields.status.id}>Status</Label>
             <Select
               key={fields.status.key}
@@ -136,7 +136,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             </div>
           </div>
 
-          <div>
+          <div className="space-y-3">
             <Label htmlFor={fields.label.id}>Label</Label>
             <RadioGroup
               key={fields.label.key}
@@ -148,18 +148,25 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
                   value,
                 })
               }}
+              className="gap-3"
             >
-              <HStack>
+              <HStack className="gap-3">
                 <RadioGroupItem id="documentation" value="documentation" />
-                <Label htmlFor="documentation">Documentation</Label>
+                <Label htmlFor="documentation" className="font-normal">
+                  Documentation
+                </Label>
               </HStack>
-              <HStack>
+              <HStack className="gap-3">
                 <RadioGroupItem id="feature" value="feature" />
-                <Label htmlFor="feature">Feature</Label>
+                <Label htmlFor="feature" className="font-normal">
+                  Feature
+                </Label>
               </HStack>
-              <HStack>
+              <HStack className="gap-3">
                 <RadioGroupItem id="bug" value="bug" />
-                <Label htmlFor="bug">Bug</Label>
+                <Label htmlFor="bug" className="font-normal">
+                  Bug
+                </Label>
               </HStack>
             </RadioGroup>
             <div
@@ -170,7 +177,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             </div>
           </div>
 
-          <div>
+          <div className="space-y-3">
             <Label htmlFor={fields.priority.id}>Priority</Label>
             <RadioGroup
               key={fields.priority.key}
@@ -182,18 +189,25 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
                   value,
                 })
               }}
+              className="gap-3"
             >
-              <HStack>
+              <HStack className="gap-3">
                 <RadioGroupItem id="high" value="high" />
-                <Label htmlFor="high">High</Label>
+                <Label htmlFor="high" className="font-normal">
+                  High
+                </Label>
               </HStack>
-              <HStack>
+              <HStack className="gap-3">
                 <RadioGroupItem id="medium" value="medium" />
-                <Label htmlFor="medium">Medium</Label>
+                <Label htmlFor="medium" className="font-normal">
+                  Medium
+                </Label>
               </HStack>
-              <HStack>
+              <HStack className="gap-3">
                 <RadioGroupItem id="low" value="low" />
-                <Label htmlFor="low">Low</Label>
+                <Label htmlFor="low" className="font-normal">
+                  Low
+                </Label>
               </HStack>
             </RadioGroup>
             <div

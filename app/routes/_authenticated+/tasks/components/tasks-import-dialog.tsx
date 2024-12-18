@@ -18,7 +18,7 @@ import { Label } from '~/components/ui/label'
 
 const formSchema = z.object({
   file: z
-    .instanceof(File)
+    .instanceof(File, { message: 'Please upload a file.' })
     .refine(
       (file) => ['text/csv'].includes(file.type),
       'Please upload csv format.',
@@ -66,14 +66,14 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
       }}
     >
       <DialogContent className="gap-2 sm:max-w-sm">
-        <DialogHeader className="text-left">
+        <DialogHeader className="text-center sm:text-left">
           <DialogTitle>Import Tasks</DialogTitle>
           <DialogDescription>
             Import tasks quickly from a CSV file.
           </DialogDescription>
         </DialogHeader>
         <Form {...getFormProps(form)}>
-          <div>
+          <div className="mb-2 space-y-1">
             <Label htmlFor={file.id}>File</Label>
             <Input {...getInputProps(file, { type: 'file' })} key={file.key} />
             <div
