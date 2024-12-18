@@ -47,7 +47,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           key={email.key}
           placeholder="name@example.com"
         />
-        <div id={email.errorId} className="text-sm text-destructive">
+        <div
+          id={email.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {email.errors}
         </div>
       </div>
@@ -67,7 +70,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           key={password.key}
           placeholder="********"
         />
-        <div id={password.errorId} className="text-sm text-destructive">
+        <div
+          id={password.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {password.errors}
         </div>
       </div>

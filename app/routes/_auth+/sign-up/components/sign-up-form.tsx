@@ -62,7 +62,10 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
           key={email.id}
           placeholder="name@example.com"
         />
-        <div id={email.errorId} className="text-sm text-destructive">
+        <div
+          id={email.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {email.errors}
         </div>
       </div>
@@ -83,7 +86,10 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
           key={confirmPassword.id}
           placeholder="********"
         />
-        <div id={confirmPassword.errorId} className="text-sm text-destructive">
+        <div
+          id={confirmPassword.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {confirmPassword.errors}
         </div>
       </div>

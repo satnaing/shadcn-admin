@@ -82,7 +82,10 @@ export function NotificationsForm() {
             <Label htmlFor={`${fields.type.id}-none`}>Nothing</Label>
           </div>
         </RadioGroup>
-        <div id={fields.type.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.type.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.type.errors}
         </div>
       </div>
@@ -90,13 +93,16 @@ export function NotificationsForm() {
       <div className="relative">
         <h3 className="mb-4 text-lg font-medium">Email Notifications</h3>
         <div className="space-y-4">
-          <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+          <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
             <div className="space-y-0.5">
-              <Label htmlFor={fields.communication_emails.id}>
-                Email notifications
+              <Label
+                htmlFor={fields.communication_emails.id}
+                className="text-base"
+              >
+                Communication emails
               </Label>
               <div className="text-[0.8rem] text-muted-foreground">
-                Choose the types of emails you want to receive.
+                Receive emails about your account activity.
               </div>
             </div>
             <Switch
@@ -107,9 +113,9 @@ export function NotificationsForm() {
             />
           </div>
 
-          <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+          <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
             <div className="space-y-0.5">
-              <Label htmlFor={fields.marketing_emails.id}>
+              <Label htmlFor={fields.marketing_emails.id} className="text-base">
                 Marketing emails
               </Label>
               <div className="text-[0.8rem] text-muted-foreground">
@@ -124,9 +130,11 @@ export function NotificationsForm() {
             />
           </div>
 
-          <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+          <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
             <div className="space-y-0.5">
-              <Label htmlFor={fields.social_emails.id}>Social emails</Label>
+              <Label htmlFor={fields.social_emails.id} className="text-base">
+                Social emails
+              </Label>
               <div className="text-[0.8rem] text-muted-foreground">
                 Receive emails for friend requests, follows, and more.
               </div>
@@ -139,9 +147,11 @@ export function NotificationsForm() {
             />
           </div>
 
-          <div className="flex flex-row items-center justify-between rounded-lg border p-4">
+          <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
             <div className="space-y-0.5">
-              <Label htmlFor={fields.security_emails.id}>Security emails</Label>
+              <Label htmlFor={fields.security_emails.id} className="text-base">
+                Security emails
+              </Label>
               <div className="text-[0.8rem] text-muted-foreground">
                 Receive emails about your account activity and security.
               </div>

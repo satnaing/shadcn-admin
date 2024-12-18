@@ -39,7 +39,10 @@ export function ForgotForm({ className, ...props }: ForgotFormProps) {
           key={email.key}
           placeholder="name@example.com"
         />
-        <div id={email.errorId} className="text-sm text-destructive">
+        <div
+          id={email.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {email.errors}
         </div>
       </div>

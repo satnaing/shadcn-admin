@@ -72,7 +72,7 @@ export default function ProfileForm() {
 
   return (
     <Form method="POST" {...getFormProps(form)} className="space-y-8">
-      <div>
+      <div className="space-y-2">
         <Label htmlFor={fields.username.id}>Username</Label>
         <Input
           {...getInputProps(fields.username, { type: 'text' })}
@@ -83,12 +83,15 @@ export default function ProfileForm() {
           This is your public display name. It can be your real name or a
           pseudonym. You can only change this once every 30 days.
         </div>
-        <div id={fields.username.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.username.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.username.errors}
         </div>
       </div>
 
-      <div>
+      <div className="space-y-2">
         <Label htmlFor={fields.email.id}>Email</Label>
         <Select
           defaultValue={fields.email.initialValue}
@@ -114,12 +117,15 @@ export default function ProfileForm() {
           You can manage verified email addresses in your{' '}
           <Link to="/">email settings</Link>.
         </div>
-        <div id={fields.email.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.email.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.email.errors}
         </div>
       </div>
 
-      <div>
+      <div className="space-y-2">
         <Label htmlFor={fields.bio.id}>Bio</Label>
         <Textarea
           {...getTextareaProps(fields.bio)}
@@ -130,7 +136,10 @@ export default function ProfileForm() {
           You can <span>@mention</span> other users and organizations to link to
           them.
         </div>
-        <div id={fields.bio.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.bio.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.bio.errors}
         </div>
       </div>
@@ -154,6 +163,7 @@ export default function ProfileForm() {
                 type="submit"
                 size="sm"
                 variant="ghost"
+                className="text-muted-foreground hover:text-muted-foreground"
                 {...form.remove.getButtonProps({
                   name: fields.urls.name,
                   index,
@@ -162,7 +172,10 @@ export default function ProfileForm() {
                 <XIcon />
               </Button>
             </div>
-            <div id={url.errorId} className="text-sm text-destructive">
+            <div
+              id={url.errorId}
+              className="text-[0.8rem] font-medium text-destructive"
+            >
               {url.errors}
             </div>
           </div>

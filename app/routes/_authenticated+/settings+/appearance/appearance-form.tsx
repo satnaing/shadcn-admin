@@ -50,7 +50,6 @@ export function AppearanceForm() {
     <Form {...getFormProps(form)} className="space-y-8">
       <div className="space-y-2">
         <Label htmlFor={fields.font.id}>Font</Label>
-
         <div className="relative w-max">
           <select
             {...getSelectProps(fields.font)}
@@ -66,15 +65,22 @@ export function AppearanceForm() {
           <ChevronDownIcon className="absolute right-3 top-2.5 h-4 w-4 opacity-50" />
         </div>
         <div className="text-[0.8rem] text-muted-foreground">
-          This is the font that will be used throughout the dashboard.
+          Set the font you want to use in the dashboard.
         </div>
-        <div id={fields.font.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.font.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.font.errors}
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-1">
         <Label htmlFor={fields.theme.id}>Theme</Label>
+        <div className="text-[0.8rem] text-muted-foreground">
+          Select the theme for the dashboard.
+        </div>
+
         <RadioGroup
           id={fields.theme.id}
           name={fields.theme.name}
@@ -138,7 +144,10 @@ export function AppearanceForm() {
             </span>
           </Label>
         </RadioGroup>
-        <div id={fields.theme.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.theme.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.theme.errors}
         </div>
       </div>

@@ -166,7 +166,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.firstName.errorId}
-                className="col-span-4 col-start-3 text-sm text-destructive"
+                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive"
               >
                 {fields.firstName.errors}
               </div>
@@ -187,7 +187,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.lastName.errorId}
-                className="col-span-4 col-start-3 text-sm text-destructive"
+                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive"
               >
                 {fields.lastName.errors}
               </div>
@@ -208,7 +208,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.username.errorId}
-                className="col-span-4 col-start-3 text-sm text-destructive"
+                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive"
               >
                 {fields.username.errors}
               </div>
@@ -229,7 +229,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.email.errorId}
-                className="col-span-4 col-start-3 text-sm text-destructive"
+                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive"
               >
                 {fields.email.errors}
               </div>
@@ -250,7 +250,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.phoneNumber.errorId}
-                className="col-span-4 col-start-3 text-sm text-destructive"
+                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive"
               >
                 {fields.phoneNumber.errors}
               </div>
@@ -284,7 +284,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               </Select>
               <div
                 id={fields.email.errorId}
-                className="col-span-4 col-start-3 text-sm text-destructive"
+                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive"
               >
                 {fields.role.errors}
               </div>
@@ -305,7 +305,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.password.errorId}
-                className="col-span-4 col-start-3 text-sm text-destructive"
+                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive"
               >
                 {fields.password.errors}
               </div>
@@ -329,7 +329,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.confirmPassword.errorId}
-                className="col-span-4 col-start-3 text-sm text-destructive"
+                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive"
               >
                 {fields.confirmPassword.errors}
               </div>
