@@ -83,7 +83,10 @@ export default function ProfileForm() {
           This is your public display name. It can be your real name or a
           pseudonym. You can only change this once every 30 days.
         </div>
-        <div id={fields.username.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.username.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.username.errors}
         </div>
       </div>
@@ -114,7 +117,10 @@ export default function ProfileForm() {
           You can manage verified email addresses in your{' '}
           <Link to="/">email settings</Link>.
         </div>
-        <div id={fields.email.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.email.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.email.errors}
         </div>
       </div>
@@ -130,7 +136,10 @@ export default function ProfileForm() {
           You can <span>@mention</span> other users and organizations to link to
           them.
         </div>
-        <div id={fields.bio.errorId} className="text-sm text-destructive">
+        <div
+          id={fields.bio.errorId}
+          className="text-[0.8rem] font-medium text-destructive"
+        >
           {fields.bio.errors}
         </div>
       </div>
@@ -142,7 +151,7 @@ export default function ProfileForm() {
         </div>
 
         {urls.map((url, index) => (
-          <div key={url.id}>
+          <div key={url.id} className="space-y-2">
             <div className="flex items-center gap-2">
               <Input
                 {...getInputProps(url, { type: 'url' })}
@@ -163,7 +172,10 @@ export default function ProfileForm() {
                 <XIcon />
               </Button>
             </div>
-            <div id={url.errorId} className="text-sm text-destructive">
+            <div
+              id={url.errorId}
+              className="text-[0.8rem] font-medium text-destructive"
+            >
               {url.errors}
             </div>
           </div>
