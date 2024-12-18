@@ -72,7 +72,7 @@ export default function ProfileForm() {
 
   return (
     <Form method="POST" {...getFormProps(form)} className="space-y-8">
-      <div>
+      <div className="space-y-2">
         <Label htmlFor={fields.username.id}>Username</Label>
         <Input
           {...getInputProps(fields.username, { type: 'text' })}
@@ -88,7 +88,7 @@ export default function ProfileForm() {
         </div>
       </div>
 
-      <div>
+      <div className="space-y-2">
         <Label htmlFor={fields.email.id}>Email</Label>
         <Select
           defaultValue={fields.email.initialValue}
@@ -119,7 +119,7 @@ export default function ProfileForm() {
         </div>
       </div>
 
-      <div>
+      <div className="space-y-2">
         <Label htmlFor={fields.bio.id}>Bio</Label>
         <Textarea
           {...getTextareaProps(fields.bio)}
@@ -142,7 +142,7 @@ export default function ProfileForm() {
         </div>
 
         {urls.map((url, index) => (
-          <div key={url.id} className="space-y-2">
+          <div key={url.id}>
             <div className="flex items-center gap-2">
               <Input
                 {...getInputProps(url, { type: 'url' })}
@@ -154,6 +154,7 @@ export default function ProfileForm() {
                 type="submit"
                 size="sm"
                 variant="ghost"
+                className="text-muted-foreground hover:text-muted-foreground"
                 {...form.remove.getButtonProps({
                   name: fields.urls.name,
                   index,
