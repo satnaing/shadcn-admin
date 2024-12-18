@@ -38,7 +38,7 @@ const languages = [
 
 const accountFormSchema = z.object({
   name: z
-    .string()
+    .string({ required_error: 'Name must be at least 2 characters.' })
     .min(2, {
       message: 'Name must be at least 2 characters.',
     })
@@ -102,6 +102,7 @@ export function AccountForm() {
         <Popover>
           <PopoverTrigger asChild>
             <Button
+              id={fields.dob.id}
               variant="outline"
               className={cn(
                 'w-[240px] pl-3 text-left font-normal',
@@ -148,15 +149,13 @@ export function AccountForm() {
         </div>
       </div>
 
-      <div className="space-y-2">
+      <div className="flex flex-col space-y-2">
         <Label htmlFor={fields.language.id}>Language</Label>
-        <div className="text-[0.8rem] text-muted-foreground">
-          This is the language that will be used in the dashboard.
-        </div>
 
         <Popover>
           <PopoverTrigger asChild>
             <Button
+              id={fields.language.id}
               variant="outline"
               // biome-ignore lint/a11y/useSemanticElements: <explanation>
               role="combobox"
@@ -170,7 +169,7 @@ export function AccountForm() {
                     (language) => language.value === fields.language.value,
                   )?.label
                 : 'Select language'}
-              <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              <CaretSortIcon className="h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-[200px] p-0">
@@ -196,7 +195,7 @@ export function AccountForm() {
                     >
                       <CheckIcon
                         className={cn(
-                          'mr-2 h-4 w-4',
+                          'h-4 w-4',
                           language.value === fields.language.value
                             ? 'opacity-100'
                             : 'opacity-0',
@@ -216,7 +215,9 @@ export function AccountForm() {
           value={fields.language.value}
           key={fields.language.key}
         />
-
+        <div className="text-[0.8rem] text-muted-foreground">
+          This is the language that will be used in the dashboard.
+        </div>
         <div id={fields.language.errorId} className="text-sm text-destructive">
           {fields.language.errors}
         </div>
