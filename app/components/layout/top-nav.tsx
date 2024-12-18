@@ -1,5 +1,5 @@
 import { IconMenu } from '@tabler/icons-react'
-import { Link } from 'react-router'
+import { NavLink } from 'react-router'
 import { Button } from '~/components/ui/button'
 import {
   DropdownMenu,
@@ -13,7 +13,6 @@ interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
     title: string
     href: string
-    isActive: boolean
     disabled?: boolean
   }[]
 }
@@ -29,14 +28,14 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="bottom" align="start">
-            {links.map(({ title, href, isActive }) => (
+            {links.map(({ title, href }) => (
               <DropdownMenuItem key={`${title}-${href}`} asChild>
-                <Link
+                <NavLink
                   to={href}
-                  className={!isActive ? 'text-muted-foreground' : ''}
+                  className="text-muted-foreground aria-[current=page]:text-foreground"
                 >
                   {title}
-                </Link>
+                </NavLink>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
@@ -50,14 +49,16 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
         )}
         {...props}
       >
-        {links.map(({ title, href, isActive }) => (
-          <Link
+        {links.map(({ title, href }) => (
+          <NavLink
             key={`${title}-${href}`}
             to={href}
-            className={`text-sm font-medium transition-colors hover:text-primary ${isActive ? '' : 'text-muted-foreground'}`}
+            className={
+              '0 text-sm font-medium text-muted-foreground transition-colors hover:text-primary aria-[current=page]:text-foreground'
+            }
           >
             {title}
-          </Link>
+          </NavLink>
         ))}
       </nav>
     </>

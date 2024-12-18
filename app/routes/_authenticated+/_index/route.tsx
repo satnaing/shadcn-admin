@@ -19,26 +19,22 @@ import { RecentSales } from './components/recent-sales'
 const topNav = [
   {
     title: 'Overview',
-    href: 'dashboard/overview',
-    isActive: true,
+    href: '/',
     disabled: false,
   },
   {
     title: 'Customers',
-    href: 'dashboard/customers',
-    isActive: false,
+    href: '/customers',
     disabled: true,
   },
   {
     title: 'Products',
-    href: 'dashboard/products',
-    isActive: false,
+    href: '/products',
     disabled: true,
   },
   {
     title: 'Settings',
-    href: 'dashboard/settings',
-    isActive: false,
+    href: '/settings',
     disabled: true,
   },
 ]
