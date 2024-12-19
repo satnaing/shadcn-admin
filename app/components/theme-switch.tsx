@@ -1,5 +1,6 @@
 import { IconCheck, IconMoon, IconSun } from '@tabler/icons-react'
 import { useTheme } from 'next-themes'
+import { useEffect } from 'react'
 import { Button } from '~/components/ui/button'
 import {
   DropdownMenu,
@@ -11,6 +12,14 @@ import { cn } from '~/lib/utils'
 
 export function ThemeSwitch() {
   const { theme, setTheme } = useTheme()
+
+  /* Update theme-color meta tag
+   * when theme is updated */
+  useEffect(() => {
+    const themeColor = theme === 'dark' ? '#020817' : '#fff'
+    const metaThemeColor = document.querySelector("meta[name='theme-color']")
+    if (metaThemeColor) metaThemeColor.setAttribute('content', themeColor)
+  }, [theme])
 
   return (
     <DropdownMenu modal={false}>
