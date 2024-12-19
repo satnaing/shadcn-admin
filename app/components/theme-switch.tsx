@@ -1,4 +1,5 @@
 import { IconCheck, IconMoon, IconSun } from '@tabler/icons-react'
+import { useTheme } from 'next-themes'
 import { useEffect } from 'react'
 import { Button } from '~/components/ui/button'
 import {
@@ -7,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu'
-import { useTheme } from '~/context/theme-context'
 import { cn } from '~/lib/utils'
 
 export function ThemeSwitch() {

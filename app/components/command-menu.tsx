@@ -4,6 +4,7 @@ import {
   IconMoon,
   IconSun,
 } from '@tabler/icons-react'
+import { useTheme } from 'next-themes'
 import React from 'react'
 import { useNavigate } from 'react-router'
 import {
@@ -16,7 +17,6 @@ import {
   CommandSeparator,
 } from '~/components/ui/command'
 import { useSearch } from '~/context/search-context'
-import { useTheme } from '~/context/theme-context'
 import { sidebarData } from '~/data/sidebar-data'
 import { ScrollArea } from './ui/scroll-area'
 
