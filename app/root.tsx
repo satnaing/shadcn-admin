@@ -13,6 +13,7 @@ import { getToast } from 'remix-toast'
 import { toast } from 'sonner'
 import { Toaster } from '~/components/ui/sonner'
 import type { Route } from './+types/root'
+import { ThemeProvider } from './components/theme-provider'
 import styles from './index.css?url'
 
 export const meta: Route.MetaFunction = () => {
@@ -39,7 +40,14 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       </head>
       <body className="scroll-smooth">
         <Toaster closeButton richColors />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
