@@ -124,7 +124,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
               </SelectContent>
             </Select>
             <div
-              id={fields.email.errorId}
+              id={fields.role.errorId}
               className="text-[0.8rem] font-medium text-destructive empty:hidden"
             >
               {fields.role.errors}
