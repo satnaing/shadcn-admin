@@ -64,7 +64,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
         />
         <div
           id={email.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {email.errors}
         </div>
@@ -88,7 +88,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
         />
         <div
           id={confirmPassword.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {confirmPassword.errors}
         </div>

@@ -84,7 +84,7 @@ export function NotificationsForm() {
         </RadioGroup>
         <div
           id={fields.type.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {fields.type.errors}
         </div>

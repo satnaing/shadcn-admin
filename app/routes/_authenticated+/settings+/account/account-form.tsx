@@ -94,7 +94,7 @@ export function AccountForm() {
         </div>
         <div
           id={fields.name.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {fields.name.errors}
         </div>
@@ -149,7 +149,7 @@ export function AccountForm() {
         </div>
         <div
           id={fields.dob.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {fields.dob.errors}
         </div>
@@ -226,7 +226,7 @@ export function AccountForm() {
         </div>
         <div
           id={fields.language.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {fields.language.errors}
         </div>
