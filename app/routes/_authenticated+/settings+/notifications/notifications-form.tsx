@@ -64,7 +64,9 @@ export function NotificationsForm() {
         >
           <div className="flex items-center space-x-3 space-y-0">
             <RadioGroupItem id={`${fields.type.id}-all`} value="all" />
-            <Label htmlFor={`${fields.type.id}-all`}>All new messages</Label>
+            <Label htmlFor={`${fields.type.id}-all`} className="font-normal">
+              All new messages
+            </Label>
           </div>
 
           <div className="flex items-center space-x-3 space-y-0">
@@ -72,19 +74,24 @@ export function NotificationsForm() {
               id={`${fields.type.id}-mentions`}
               value="mentions"
             />
-            <Label htmlFor={`${fields.type.id}-mentions`}>
+            <Label
+              htmlFor={`${fields.type.id}-mentions`}
+              className="font-normal"
+            >
               Direct messages and mentions
             </Label>
           </div>
 
           <div className="flex items-center space-x-3 space-y-0">
             <RadioGroupItem id={`${fields.type.id}-none`} value="none" />
-            <Label htmlFor={`${fields.type.id}-none`}>Nothing</Label>
+            <Label htmlFor={`${fields.type.id}-none`} className="font-normal">
+              Nothing
+            </Label>
           </div>
         </RadioGroup>
         <div
           id={fields.type.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {fields.type.errors}
         </div>

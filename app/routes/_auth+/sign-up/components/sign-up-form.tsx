@@ -55,7 +55,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
       className={cn('grid gap-2', className)}
       {...props}
     >
-      <div>
+      <div className="space-y-1">
         <Label htmlFor={email.id}>Email</Label>
         <Input
           {...getInputProps(email, { type: 'email' })}
@@ -64,22 +64,28 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
         />
         <div
           id={email.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {email.errors}
         </div>
       </div>
 
-      <div>
+      <div className="space-y-1">
         <Label htmlFor={password.id}>Password</Label>
         <PasswordInput
           {...getInputProps(password, { type: 'password' })}
           key={password.id}
           placeholder="********"
         />
+        <div
+          id={password.errorId}
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+        >
+          {password.errors}
+        </div>
       </div>
 
-      <div>
+      <div className="space-y-1">
         <Label htmlFor={confirmPassword.id}>Confirm Password</Label>
         <PasswordInput
           {...getInputProps(confirmPassword, { type: 'password' })}
@@ -88,7 +94,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
         />
         <div
           id={confirmPassword.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {confirmPassword.errors}
         </div>

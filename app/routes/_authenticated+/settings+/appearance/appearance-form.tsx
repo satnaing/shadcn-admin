@@ -69,7 +69,7 @@ export function AppearanceForm() {
         </div>
         <div
           id={fields.font.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {fields.font.errors}
         </div>
@@ -146,7 +146,7 @@ export function AppearanceForm() {
         </RadioGroup>
         <div
           id={fields.theme.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {fields.theme.errors}
         </div>

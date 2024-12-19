@@ -85,7 +85,7 @@ export default function ProfileForm() {
         </div>
         <div
           id={fields.username.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {fields.username.errors}
         </div>
@@ -119,7 +119,7 @@ export default function ProfileForm() {
         </div>
         <div
           id={fields.email.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {fields.email.errors}
         </div>
@@ -138,7 +138,7 @@ export default function ProfileForm() {
         </div>
         <div
           id={fields.bio.errorId}
-          className="text-[0.8rem] font-medium text-destructive"
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
         >
           {fields.bio.errors}
         </div>
@@ -174,7 +174,7 @@ export default function ProfileForm() {
             </div>
             <div
               id={url.errorId}
-              className="text-[0.8rem] font-medium text-destructive"
+              className="text-[0.8rem] font-medium text-destructive empty:hidden"
             >
               {url.errors}
             </div>

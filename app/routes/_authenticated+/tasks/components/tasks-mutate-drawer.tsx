@@ -98,7 +98,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             />
             <div
               id={fields.title.errorId}
-              className="text-[0.8rem] font-medium text-destructive"
+              className="text-[0.8rem] font-medium text-destructive empty:hidden"
             >
               {fields.title.errors}
             </div>
@@ -130,7 +130,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             </Select>
             <div
               id={fields.status.errorId}
-              className="text-[0.8rem] font-medium text-destructive"
+              className="text-[0.8rem] font-medium text-destructive empty:hidden"
             >
               {fields.status.errors}
             </div>
@@ -171,7 +171,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             </RadioGroup>
             <div
               id={fields.label.errorId}
-              className="text-[0.8rem] font-medium text-destructive"
+              className="text-[0.8rem] font-medium text-destructive empty:hidden"
             >
               {fields.label.errors}
             </div>
@@ -212,7 +212,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             </RadioGroup>
             <div
               id={fields.priority.errorId}
-              className="text-[0.8rem] font-medium text-destructive"
+              className="text-[0.8rem] font-medium text-destructive empty:hidden"
             >
               {fields.priority.errors}
             </div>

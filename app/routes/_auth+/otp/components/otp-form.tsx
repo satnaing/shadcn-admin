@@ -49,7 +49,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
       className={cn('grid gap-2', className)}
       {...props}
     >
-      <div>
+      <div className="space-y-1">
         <PinInput
           className="flex h-10 justify-between"
           onComplete={(value) => {

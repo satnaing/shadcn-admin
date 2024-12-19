@@ -110,7 +110,7 @@ export function DisplayForm() {
             key={item.name}
           />
         ))}
-        <div className="text-[0.8rem] font-medium text-destructive">
+        <div className="text-[0.8rem] font-medium text-destructive empty:hidden">
           {fields.items.errors}
         </div>
       </div>
