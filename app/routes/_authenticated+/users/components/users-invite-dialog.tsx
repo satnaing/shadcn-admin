@@ -4,7 +4,7 @@ import {
   getTextareaProps,
   useForm,
 } from '@conform-to/react'
-import { parseWithZod } from '@conform-to/zod'
+import { getZodConstraint, parseWithZod } from '@conform-to/zod'
 import { IconMailPlus, IconSend } from '@tabler/icons-react'
 import { Form } from 'react-router'
 import { toast } from 'sonner'
@@ -28,7 +28,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select'
-import { Stack } from '~/components/ui/stack'
 import { Textarea } from '~/components/ui/textarea'
 
 const formSchema = z.object({
@@ -49,6 +48,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
     defaultValue: { email: '', role: '', desc: '' },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
+    constraint: getZodConstraint(formSchema),
     onSubmit: (event, { submission }) => {
       event.preventDefault()
       if (submission?.status !== 'success') return
@@ -84,69 +84,67 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
             invitation. Assign a role to define their access level.
           </DialogDescription>
         </DialogHeader>
-        <Form {...getFormProps(form)}>
-          <Stack>
-            <div>
-              <Label htmlFor={fields.email.id}>Email</Label>
-              <Input
-                {...getInputProps(fields.email, { type: 'email' })}
-                key={fields.email.key}
-              />
-              <div
-                id={fields.email.errorId}
-                className="text-[0.8rem] font-medium text-destructive"
-              >
-                {fields.email.errors}
-              </div>
+        <Form {...getFormProps(form)} className="space-y-4">
+          <div className="space-y-1">
+            <Label htmlFor={fields.email.id}>Email</Label>
+            <Input
+              {...getInputProps(fields.email, { type: 'email' })}
+              key={fields.email.key}
+              placeholder="eg: john.doe@gmail.com"
+            />
+            <div
+              id={fields.email.errorId}
+              className="text-[0.8rem] font-medium text-destructive"
+            >
+              {fields.email.errors}
             </div>
+          </div>
 
-            <div>
-              <Label htmlFor={fields.role.id}>Role</Label>
-              <Select
-                key={fields.role.key}
-                name={fields.role.name}
-                defaultValue={fields.role.initialValue}
-                onValueChange={(value) => {
-                  form.update({
-                    name: fields.role.name,
-                    value,
-                  })
-                }}
-              >
-                <SelectTrigger id={fields.role.id}>
-                  <SelectValue placeholder="Select dropdown" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="in progress">In Progress</SelectItem>
-                  <SelectItem value="backlog">Backlog</SelectItem>
-                  <SelectItem value="todo">Todo</SelectItem>
-                  <SelectItem value="canceled">Canceled</SelectItem>
-                  <SelectItem value="done">Done</SelectItem>
-                </SelectContent>
-              </Select>
-              <div
-                id={fields.email.errorId}
-                className="text-[0.8rem] font-medium text-destructive"
-              >
-                {fields.role.errors}
-              </div>
+          <div className="space-y-1">
+            <Label htmlFor={fields.role.id}>Role</Label>
+            <Select
+              key={fields.role.key}
+              name={fields.role.name}
+              defaultValue={fields.role.initialValue}
+              onValueChange={(value) => {
+                form.update({
+                  name: fields.role.name,
+                  value,
+                })
+              }}
+            >
+              <SelectTrigger id={fields.role.id}>
+                <SelectValue placeholder="Select a role" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="superadmin">Superadmin</SelectItem>
+                <SelectItem value="admin">Admin</SelectItem>
+                <SelectItem value="manager">Manager</SelectItem>
+                <SelectItem value="cashier">Cashier</SelectItem>
+              </SelectContent>
+            </Select>
+            <div
+              id={fields.email.errorId}
+              className="text-[0.8rem] font-medium text-destructive"
+            >
+              {fields.role.errors}
             </div>
+          </div>
 
-            <div>
-              <Label htmlFor={fields.desc.id}>Description (optional)</Label>
-              <Textarea
-                {...getTextareaProps(fields.desc)}
-                className="resize-none"
-                placeholder="Add a personal note to your invitation (optional)"
-              />
-              <div
-                id={fields.desc.errorId}
-                className="text-[0.8rem] font-medium text-destructive"
-              >
-                {fields.desc.errors}
-              </div>
+          <div className="space-y-1">
+            <Label htmlFor={fields.desc.id}>Description (optional)</Label>
+            <Textarea
+              {...getTextareaProps(fields.desc)}
+              className="resize-none"
+              placeholder="Add a personal note to your invitation (optional)"
+            />
+            <div
+              id={fields.desc.errorId}
+              className="text-[0.8rem] font-medium text-destructive"
+            >
+              {fields.desc.errors}
             </div>
-          </Stack>
+          </div>
         </Form>
         <DialogFooter className="gap-y-2">
           <DialogClose asChild>
