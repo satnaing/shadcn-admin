@@ -40,7 +40,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       className={cn('grid gap-2', className)}
       {...props}
     >
-      <div>
+      <div className="space-y-1">
         <Label htmlFor={email.id}>Email</Label>
         <Input
           {...getInputProps(email, { type: 'email' })}
@@ -55,7 +55,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         </div>
       </div>
 
-      <div>
+      <div className="space-y-1">
         <div className="flex items-center justify-between">
           <Label htmlFor={password.id}>Password</Label>
           <Link
