@@ -1,11 +1,11 @@
 import { getFormProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
-import { Form } from 'react-router'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import { Form, useActionData, useNavigation } from 'react-router'
+import type { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Checkbox } from '~/components/ui/checkbox'
 import { Label } from '~/components/ui/label'
+import { displayFormSchema, type action } from './route'
 
 const items = [
   {
@@ -34,12 +34,6 @@ const items = [
   },
 ] as const
 
-const displayFormSchema = z.object({
-  items: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: 'You have to select at least one item.',
-  }),
-})
-
 type DisplayFormValues = z.infer<typeof displayFormSchema>
 
 // This can come from your database or API.
@@ -48,25 +42,15 @@ const defaultValue: Partial<DisplayFormValues> = {
 }
 
 export function DisplayForm() {
+  const actionData = useActionData<typeof action>()
   const [form, fields] = useForm({
+    lastResult: actionData?.lastResult,
     defaultValue,
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: displayFormSchema }),
-    onSubmit: (event, { submission }) => {
-      event.preventDefault()
-      if (submission?.status !== 'success') return
-      toast('You submitted the following values:', {
-        description: (
-          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(submission.value, null, 2)}
-            </code>
-          </pre>
-        ),
-      })
-    },
   })
   const itemList = fields.items.getFieldList()
+  const navigation = useNavigation()
 
   return (
     <Form method="POST" {...getFormProps(form)} className="space-y-8">
@@ -115,7 +99,9 @@ export function DisplayForm() {
         </div>
       </div>
 
-      <Button type="submit">Update display</Button>
+      <Button type="submit" disabled={navigation.state === 'submitting'}>
+        Update display
+      </Button>
     </Form>
   )
 }
