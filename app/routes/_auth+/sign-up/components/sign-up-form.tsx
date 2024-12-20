@@ -2,43 +2,22 @@ import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
 import type { HTMLAttributes } from 'react'
-import { Form, useNavigation } from 'react-router'
-import { z } from 'zod'
+import { Form, useActionData, useNavigation } from 'react-router'
 import { PasswordInput } from '~/components/password-input'
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
 import { cn } from '~/lib/utils'
+import { formSchema, type action } from '../route'
 
 type SignUpFormProps = HTMLAttributes<HTMLFormElement>
 
-const formSchema = z
-  .object({
-    email: z
-      .string()
-      .min(1, { message: 'Please enter your email' })
-      .email({ message: 'Invalid email address' }),
-    password: z
-      .string()
-      .min(1, {
-        message: 'Please enter your password',
-      })
-      .min(7, {
-        message: 'Password must be at least 7 characters long',
-      }),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match.",
-    path: ['confirmPassword'],
-  })
-
 export function SignUpForm({ className, ...props }: SignUpFormProps) {
-  const navigation = useNavigation()
-  const isLoading = navigation.state === 'submitting'
-  const [form, { email, password, confirmPassword }] = useForm<
-    z.infer<typeof formSchema>
-  >({
+  const actionData = useActionData<typeof action>()
+
+  const [form, { email, password, confirmPassword }] = useForm({
+    lastResult: actionData?.lastResult,
     defaultValue: {
       email: '',
       password: '',
@@ -47,6 +26,8 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
   })
+  const navigation = useNavigation()
+  const isLoading = navigation.state === 'submitting'
 
   return (
     <Form
@@ -99,6 +80,13 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
           {confirmPassword.errors}
         </div>
       </div>
+
+      {form.errors && (
+        <Alert variant="destructive">
+          <AlertTitle>There was an error creating your account</AlertTitle>
+          <AlertDescription>{form.errors}</AlertDescription>
+        </Alert>
+      )}
 
       <Button className="mt-2" disabled={isLoading}>
         Create Account

@@ -1,11 +1,53 @@
+import { parseWithZod } from '@conform-to/zod'
 import { setTimeout } from 'node:timers/promises'
 import { Link } from 'react-router'
+import { redirectWithSuccess } from 'remix-toast'
+import { z } from 'zod'
 import { Card } from '~/components/ui/card'
+import type { Route } from './+types/route'
 import { SignUpForm } from './components/sign-up-form'
 
-export const action = async () => {
+export const formSchema = z
+  .object({
+    email: z
+      .string()
+      .min(1, { message: 'Please enter your email' })
+      .email({ message: 'Invalid email address' }),
+    password: z
+      .string()
+      .min(1, {
+        message: 'Please enter your password',
+      })
+      .min(7, {
+        message: 'Password must be at least 7 characters long',
+      }),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match.",
+    path: ['confirmPassword'],
+  })
+
+export const action = async ({ request }: Route.ActionArgs) => {
+  const submission = parseWithZod(await request.formData(), {
+    schema: formSchema,
+  })
+  if (submission.status !== 'success') {
+    return { lastResult: submission.reply() }
+  }
+
+  if (submission.value.email !== 'name@example.com') {
+    return {
+      lastResult: submission.reply({
+        formErrors: ['Invalid email or password'],
+      }),
+    }
+  }
   await setTimeout(3000)
-  return {}
+
+  throw await redirectWithSuccess('/', {
+    message: 'Account created successfully!',
+  })
 }
 
 export default function SignUp() {
