@@ -1,23 +1,14 @@
 import { getFormProps, getSelectProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { ChevronDownIcon } from '@radix-ui/react-icons'
-import { Form } from 'react-router'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import { Form, useActionData, useNavigation } from 'react-router'
+import type { z } from 'zod'
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import { Button, buttonVariants } from '~/components/ui/button'
 import { Label } from '~/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group'
 import { cn } from '~/lib/utils'
-
-const appearanceFormSchema = z.object({
-  theme: z.enum(['light', 'dark'], {
-    required_error: 'Please select a theme.',
-  }),
-  font: z.enum(['inter', 'manrope', 'system'], {
-    invalid_type_error: 'Select a font',
-    required_error: 'Please select a font.',
-  }),
-})
+import { appearanceFormSchema, type action } from './route'
 
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
 
@@ -27,27 +18,17 @@ const defaultValue: Partial<AppearanceFormValues> = {
 }
 
 export function AppearanceForm() {
+  const actionData = useActionData<typeof action>()
   const [form, fields] = useForm({
+    lastResult: actionData?.lastResult,
     defaultValue,
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: appearanceFormSchema }),
-    onSubmit: (event, { submission }) => {
-      event.preventDefault()
-      if (submission?.status !== 'success') return
-      toast('You submitted the following values:', {
-        description: (
-          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(submission.value, null, 2)}
-            </code>
-          </pre>
-        ),
-      })
-    },
   })
+  const navigation = useNavigation()
 
   return (
-    <Form {...getFormProps(form)} className="space-y-8">
+    <Form method="POST" {...getFormProps(form)} className="space-y-8">
       <div className="space-y-2">
         <Label htmlFor={fields.font.id}>Font</Label>
         <div className="relative w-max">
@@ -152,7 +133,16 @@ export function AppearanceForm() {
         </div>
       </div>
 
-      <Button type="submit">Update preferences</Button>
+      {form.errors && (
+        <Alert variant="destructive">
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{form.errors}</AlertDescription>
+        </Alert>
+      )}
+
+      <Button type="submit" disabled={navigation.state === 'submitting'}>
+        Update preferences
+      </Button>
     </Form>
   )
 }

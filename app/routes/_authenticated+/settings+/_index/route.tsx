@@ -40,6 +40,8 @@ export const action = async ({ request }: Route.ActionArgs) => {
       }),
     }
   }
+
+  // Save the form data to the database or API.
   await setTimeout(1000)
 
   return dataWithSuccess(

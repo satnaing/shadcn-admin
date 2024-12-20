@@ -1,4 +1,5 @@
 import { parseWithZod } from '@conform-to/zod'
+import { setTimeout } from 'node:timers/promises'
 import { dataWithSuccess } from 'remix-toast'
 import { z } from 'zod'
 import ContentSection from '../_layout/components/content-section'
@@ -25,6 +26,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
   }
 
   // Save the form data to the database or API.
+  await setTimeout(1000)
 
   return dataWithSuccess(
     {
