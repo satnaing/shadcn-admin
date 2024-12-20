@@ -1,24 +1,14 @@
 import { getFormProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
-import { Form, Link } from 'react-router'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import { Form, Link, useActionData, useNavigation } from 'react-router'
+import type { z } from 'zod'
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import { Button } from '~/components/ui/button'
 import { Checkbox } from '~/components/ui/checkbox'
 import { Label } from '~/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group'
 import { Switch } from '~/components/ui/switch'
-
-const notificationsFormSchema = z.object({
-  type: z.enum(['all', 'mentions', 'none'], {
-    required_error: 'You need to select a notification type.',
-  }),
-  mobile: z.boolean().default(false).optional(),
-  communication_emails: z.boolean().default(false).optional(),
-  social_emails: z.boolean().default(false).optional(),
-  marketing_emails: z.boolean().default(false).optional(),
-  security_emails: z.boolean(),
-})
+import { notificationsFormSchema, type action } from './route'
 
 type NotificationsFormValues = z.infer<typeof notificationsFormSchema>
 
@@ -31,25 +21,14 @@ const defaultValue: Partial<NotificationsFormValues> = {
 }
 
 export function NotificationsForm() {
+  const actionData = useActionData<typeof action>()
   const [form, fields] = useForm<NotificationsFormValues>({
+    lastResult: actionData?.lastResult,
     defaultValue,
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: notificationsFormSchema }),
-    onSubmit: (event, { submission }) => {
-      console.log(submission?.status)
-      event.preventDefault()
-      if (submission?.status !== 'success') return
-      toast('You submitted the following values:', {
-        description: (
-          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(submission.value, null, 2)}
-            </code>
-          </pre>
-        ),
-      })
-    },
   })
+  const navigation = useNavigation()
 
   return (
     <Form method="POST" {...getFormProps(form)} className="space-y-8">
@@ -204,7 +183,16 @@ export function NotificationsForm() {
         </div>
       </div>
 
-      <Button type="submit">Update notifications</Button>
+      {form.errors && (
+        <Alert variant="destructive">
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{form.errors}</AlertDescription>
+        </Alert>
+      )}
+
+      <Button type="submit" disabled={navigation.state === 'submitting'}>
+        Update notifications
+      </Button>
     </Form>
   )
 }
