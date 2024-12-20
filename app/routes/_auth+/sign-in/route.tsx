@@ -1,10 +1,32 @@
+import { parseWithZod } from '@conform-to/zod'
 import { setTimeout } from 'node:timers/promises'
+import { redirectWithSuccess } from 'remix-toast'
 import { Card } from '~/components/ui/card'
+import type { Route } from './+types/route'
 import { UserAuthForm } from './components/user-auth-form'
+import { formSchema } from './schema'
 
-export const action = async () => {
+export const action = async ({ request }: Route.ActionArgs) => {
+  const submission = parseWithZod(await request.formData(), {
+    schema: formSchema,
+  })
+
+  if (submission.status !== 'success') {
+    return { lastResult: submission.reply() }
+  }
+
+  if (submission.value.email !== 'name@example.com') {
+    return {
+      lastResult: submission.reply({
+        formErrors: ['Invalid email or password'],
+      }),
+    }
+  }
   await setTimeout(3000)
-  return {}
+
+  throw await redirectWithSuccess('/', {
+    message: 'You have successfully logged in!',
+  })
 }
 
 export default function SignIn() {
