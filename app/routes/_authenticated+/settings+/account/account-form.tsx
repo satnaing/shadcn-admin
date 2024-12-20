@@ -2,7 +2,7 @@ import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { CalendarIcon, CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
 import { format } from 'date-fns'
-import { Form, useActionData } from 'react-router'
+import { Form, useActionData, useNavigation } from 'react-router'
 import type { z } from 'zod'
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import { Button } from '~/components/ui/button'
@@ -52,6 +52,7 @@ export function AccountForm() {
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: accountFormSchema }),
   })
+  const navigation = useNavigation()
 
   return (
     <Form method="POST" {...getFormProps(form)} className="space-y-8">
@@ -212,7 +213,9 @@ export function AccountForm() {
         </Alert>
       )}
 
-      <Button type="submit">Update account</Button>
+      <Button type="submit" disabled={navigation.state === 'submitting'}>
+        Update account
+      </Button>
     </Form>
   )
 }
