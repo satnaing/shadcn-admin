@@ -1,10 +1,19 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout } from 'node:timers/promises'
 import { redirectWithSuccess } from 'remix-toast'
+import { z } from 'zod'
 import { Card } from '~/components/ui/card'
 import type { Route } from './+types/route'
 import { UserAuthForm } from './components/user-auth-form'
-import { formSchema } from './schema'
+
+export const formSchema = z.object({
+  email: z
+    .string({ required_error: 'Please enter your email' })
+    .email({ message: 'Invalid email address' }),
+  password: z.string({ required_error: 'Please enter your password' }).min(7, {
+    message: 'Password must be at least 7 characters long',
+  }),
+})
 
 export const action = async ({ request }: Route.ActionArgs) => {
   const submission = parseWithZod(await request.formData(), {
