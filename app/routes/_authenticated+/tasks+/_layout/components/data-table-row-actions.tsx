@@ -1,7 +1,7 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { IconTrash } from '@tabler/icons-react'
 import type { Row } from '@tanstack/react-table'
-import { Link } from 'react-router'
+import { Link, useFetcher } from 'react-router'
 import { Button } from '~/components/ui/button'
 import {
   DropdownMenu,
@@ -27,6 +27,7 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const task = taskSchema.parse(row.original)
+  const fetcher = useFetcher({ key: `task-label-${task.id}` })
 
   return (
     <DropdownMenu modal={false}>
@@ -49,7 +50,18 @@ export function DataTableRowActions<TData>({
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.label}>
+            <DropdownMenuRadioGroup
+              value={task.label}
+              onValueChange={(value) => {
+                fetcher.submit(
+                  { id: task.id, label: value },
+                  {
+                    action: '/tasks',
+                    method: 'POST',
+                  },
+                )
+              }}
+            >
               {labels.map((label) => (
                 <DropdownMenuRadioItem key={label.value} value={label.value}>
                   {label.label}
