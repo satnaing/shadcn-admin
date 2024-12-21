@@ -28,22 +28,33 @@ import type { Task } from '../data/schema'
 interface Props {
   open: boolean
   onOpenChange: (open: boolean) => void
-  currentRow?: Task
+  task?: Task
 }
 
-const formSchema = z.object({
+export const createSchema = z.object({
+  intent: z.literal('create'),
   title: z.string({ required_error: 'Title is required.' }),
   status: z.string({ required_error: 'Please select a status.' }),
   label: z.string({ required_error: 'Please select a label.' }),
   priority: z.string({ required_error: 'Please choose a priority.' }),
 })
-type TasksForm = z.infer<typeof formSchema>
 
-export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
-  const isUpdate = !!currentRow
+export const updateSchema = z.object({
+  intent: z.literal('update'),
+  id: z.string(),
+  title: z.string({ required_error: 'Title is required.' }),
+  status: z.string({ required_error: 'Please select a status.' }),
+  label: z.string({ required_error: 'Please select a label.' }),
+  priority: z.string({ required_error: 'Please choose a priority.' }),
+})
 
-  const [form, fields] = useForm<TasksForm>({
-    defaultValue: currentRow ?? {
+const formSchema = z.discriminatedUnion('intent', [createSchema, updateSchema])
+
+export function TasksMutateDrawer({ open, onOpenChange, task }: Props) {
+  const isUpdate = !!task
+
+  const [form, fields] = useForm({
+    defaultValue: task ?? {
       title: '',
       status: '',
       label: '',
@@ -78,6 +89,10 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
           {...getFormProps(form)}
           className="flex-1 space-y-5"
         >
+          <input
+            {...getInputProps(fields.id, { type: 'hidden' })}
+            key={fields.id.key}
+          />
           <div className="space-y-1">
             <Label htmlFor={fields.title.id}>Title</Label>
             <Input

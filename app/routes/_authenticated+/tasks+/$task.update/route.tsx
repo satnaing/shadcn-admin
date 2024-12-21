@@ -3,19 +3,12 @@ import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
 import { data, useNavigate } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
-import { z } from 'zod'
-import { TasksMutateDrawer } from '../_shared/components/tasks-mutate-drawer'
+import {
+  TasksMutateDrawer,
+  updateSchema,
+} from '../_shared/components/tasks-mutate-drawer'
 import { tasks } from '../_shared/data/tasks'
 import type { Route } from './+types/route'
-
-export const formSchema = z.object({
-  intent: z.literal('update'),
-  id: z.string(),
-  title: z.string({ required_error: 'Title is required.' }),
-  status: z.string({ required_error: 'Please select a status.' }),
-  label: z.string({ required_error: 'Please select a label.' }),
-  priority: z.string({ required_error: 'Please choose a priority.' }),
-})
 
 export const loader = async ({ params }: Route.LoaderArgs) => {
   const task = tasks.find((t) => t.id === params.task)
@@ -27,7 +20,7 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 
 export const action = async ({ request }: Route.ActionArgs) => {
   const submission = parseWithZod(await request.formData(), {
-    schema: formSchema,
+    schema: updateSchema,
   })
   if (submission.status !== 'success') {
     return { lastResult: submission.reply() }
@@ -53,7 +46,7 @@ export default function TaskUpdate({
   return (
     <TasksMutateDrawer
       key="task-update"
-      currentRow={task}
+      task={task}
       open={open}
       onOpenChange={(v) => {
         if (!v) {
