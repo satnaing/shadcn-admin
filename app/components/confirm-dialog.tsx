@@ -20,7 +20,6 @@ interface ConfirmDialogProps {
   cancelBtnText?: string
   confirmText?: React.ReactNode
   destructive?: boolean
-  handleConfirm: () => void
   isLoading?: boolean
   className?: string
   children?: React.ReactNode
@@ -37,7 +36,6 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     destructive,
     isLoading,
     disabled = false,
-    handleConfirm,
     ...actions
   } = props
   const navigation = useNavigation()
@@ -59,7 +57,6 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
             <Button
               type="submit"
               variant={destructive ? 'destructive' : 'default'}
-              onClick={handleConfirm}
               disabled={
                 disabled || isLoading || navigation.state === 'submitting'
               }

@@ -1,5 +1,5 @@
 import React from 'react'
-import type { User } from '../data/schema'
+import type { User } from '../../_shared/data/schema'
 
 export type UsersDialogType = 'invite' | 'add' | 'edit' | 'delete'
 

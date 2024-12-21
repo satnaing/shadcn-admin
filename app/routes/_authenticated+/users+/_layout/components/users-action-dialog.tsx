@@ -23,8 +23,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select'
-import { userTypes } from '../data/data'
-import type { User } from '../data/schema'
+import { userTypes } from '../../_shared/data/data'
+import type { User } from '../../_shared/data/schema'
 
 const formSchema = z
   .object({

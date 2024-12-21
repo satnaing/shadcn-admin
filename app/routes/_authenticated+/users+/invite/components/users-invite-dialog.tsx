@@ -6,9 +6,7 @@ import {
 } from '@conform-to/react'
 import { getZodConstraint, parseWithZod } from '@conform-to/zod'
 import { IconMailPlus, IconSend } from '@tabler/icons-react'
-import { Form } from 'react-router'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import { Form, useNavigation } from 'react-router'
 import { Button } from '~/components/ui/button'
 import {
   Dialog,
@@ -29,14 +27,7 @@ import {
   SelectValue,
 } from '~/components/ui/select'
 import { Textarea } from '~/components/ui/textarea'
-
-const formSchema = z.object({
-  email: z
-    .string({ required_error: 'Email is required.' })
-    .email({ message: 'Email is invalid.' }),
-  role: z.string({ required_error: 'Role is required.' }),
-  desc: z.string().optional(),
-})
+import { formSchema } from '../route'
 
 interface Props {
   open: boolean
@@ -49,22 +40,8 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
     constraint: getZodConstraint(formSchema),
-    onSubmit: (event, { submission }) => {
-      event.preventDefault()
-      if (submission?.status !== 'success') return
-      form.reset()
-      toast('You submitted the following values:', {
-        description: (
-          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(submission.value, null, 2)}
-            </code>
-          </pre>
-        ),
-      })
-      onOpenChange(false)
-    },
   })
+  const navigation = useNavigation()
 
   return (
     <Dialog
@@ -84,7 +61,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
             invitation. Assign a role to define their access level.
           </DialogDescription>
         </DialogHeader>
-        <Form {...getFormProps(form)} className="space-y-4">
+        <Form method="POST" {...getFormProps(form)} className="space-y-4">
           <div className="space-y-1">
             <Label htmlFor={fields.email.id}>Email</Label>
             <Input
@@ -150,7 +127,11 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
           </DialogClose>
-          <Button type="submit" form={form.id}>
+          <Button
+            form={form.id}
+            type="submit"
+            disabled={navigation.state === 'submitting'}
+          >
             Invite <IconSend />
           </Button>
         </DialogFooter>

@@ -52,7 +52,6 @@ export default function TaskDelete({
           }, 300) // the duration of the drawer close animation
         }
       }}
-      handleConfirm={() => {}}
       className="max-w-md"
       title={`Delete this task: ${task.id} ?`}
       desc={
