@@ -35,6 +35,8 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
   // Update the task
   await sleep(1000)
+  const taskIndex = tasks.findIndex((t) => t.id === submission.value.id)
+  tasks[taskIndex] = submission.value
 
   return redirectWithSuccess('/tasks', {
     message: 'Task updated successfully',
