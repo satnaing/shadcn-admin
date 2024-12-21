@@ -1,7 +1,6 @@
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
-import { Form } from 'react-router'
-import { toast } from 'sonner'
+import { Form, useNavigation } from 'react-router'
 import { z } from 'zod'
 import { PasswordInput } from '~/components/password-input'
 import { Button } from '~/components/ui/button'
@@ -23,67 +22,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select'
-import { userTypes } from '../../_shared/data/data'
-import type { User } from '../../_shared/data/schema'
+import { userTypes } from '../data/data'
+import type { User } from '../data/schema'
 
-const formSchema = z
-  .object({
-    firstName: z.string().min(1, { message: 'First Name is required.' }),
-    lastName: z.string().min(1, { message: 'Last Name is required.' }),
-    username: z.string().min(1, { message: 'Username is required.' }),
-    phoneNumber: z.string().min(1, { message: 'Phone number is required.' }),
-    email: z
-      .string()
-      .min(1, { message: 'Email is required.' })
-      .email({ message: 'Email is invalid.' }),
-    password: z.string().transform((pwd) => pwd.trim()),
-    role: z.string().min(1, { message: 'Role is required.' }),
-    confirmPassword: z.string().transform((pwd) => pwd.trim()),
-    isEdit: z.boolean(),
-  })
-  .superRefine(({ isEdit, password, confirmPassword }, ctx) => {
-    if (!isEdit || (isEdit && password !== '')) {
-      if (password === '') {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password is required.',
-          path: ['password'],
-        })
-      }
-
-      if (password.length < 8) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password must be at least 8 characters long.',
-          path: ['password'],
-        })
-      }
-
-      if (!password.match(/[a-z]/)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password must contain at least one lowercase letter.',
-          path: ['password'],
-        })
-      }
-
-      if (!password.match(/\d/)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password must contain at least one number.',
-          path: ['password'],
-        })
-      }
-
-      if (password !== confirmPassword) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Passwords don't match.",
-          path: ['confirmPassword'],
-        })
-      }
-    }
-  })
+const baseSchema = z.object({
+  firstName: z.string({ required_error: 'First Name is required.' }),
+  lastName: z.string({ required_error: 'Last Name is required.' }),
+  username: z.string({ required_error: 'Username is required.' }),
+  phoneNumber: z.string({ required_error: 'Phone number is required.' }),
+  email: z
+    .string({ required_error: 'Email is required.' })
+    .email({ message: 'Email is invalid.' }),
+  role: z.enum(['superadmin', 'admin', 'manager', 'cashier']),
+  password: z.string().transform((pwd) => pwd.trim()),
+  confirmPassword: z.string().transform((pwd) => pwd.trim()),
+})
+export const createSchema = baseSchema.merge(
+  z.object({ intent: z.literal('create') }),
+)
+export const editSchema = baseSchema.merge(
+  z.object({ intent: z.literal('edit'), id: z.string() }),
+)
+const formSchema = z.discriminatedUnion('intent', [createSchema, editSchema])
 
 interface Props {
   currentRow?: User
@@ -99,7 +59,6 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           ...currentRow,
           password: '',
           confirmPassword: '',
-          isEdit,
         }
       : {
           firstName: '',
@@ -110,28 +69,12 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           phoneNumber: '',
           password: '',
           confirmPassword: '',
-          isEdit,
         },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
-    onSubmit: (event, { submission }) => {
-      event.preventDefault()
-      if (submission?.status !== 'success') return
-      form.reset()
-      toast('You submitted the following values:', {
-        description: (
-          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(submission.value, null, 2)}
-            </code>
-          </pre>
-        ),
-      })
-      onOpenChange(false)
-    },
   })
-
   const isPasswordTouched = fields.password.dirty
+  const navigation = useNavigation()
 
   return (
     <Dialog
@@ -150,7 +93,11 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           </DialogDescription>
         </DialogHeader>
         <ScrollArea className="-mr-4 h-[26.25rem] w-full py-1 pr-4">
-          <Form {...getFormProps(form)} className="space-y-4 p-0.5">
+          <Form
+            method="POST"
+            {...getFormProps(form)}
+            className="space-y-4 p-0.5"
+          >
             <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
               <Label
                 htmlFor={fields.firstName.id}
@@ -337,7 +284,13 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           </Form>
         </ScrollArea>
         <DialogFooter>
-          <Button type="submit" form={form.id}>
+          <Button
+            type="submit"
+            form={form.id}
+            name="intent"
+            value={isEdit ? 'update' : 'create'}
+            disabled={navigation.state === 'submitting'}
+          >
             Save changes
           </Button>
         </DialogFooter>

@@ -8,10 +8,10 @@ import { Search } from '~/components/search'
 import { ThemeSwitch } from '~/components/theme-switch'
 import { Button } from '~/components/ui/button'
 import useDialogState from '~/hooks/use-dialog-state'
-import { type User, userListSchema } from '../_shared/data/schema'
+import { UsersActionDialog } from '../_shared/components/users-action-dialog'
+import type { User } from '../_shared/data/schema'
 import { users as initialUsers } from '../_shared/data/users'
 import type { Route } from './+types/route'
-import { UsersActionDialog } from './components/users-action-dialog'
 import { columns } from './components/users-columns'
 import { UsersTable } from './components/users-table'
 import UsersContextProvider, {
@@ -28,7 +28,6 @@ export default function Users({ loaderData: { users } }: Route.ComponentProps) {
   const [open, setOpen] = useDialogState<UsersDialogType>(null)
 
   // Parse user list
-  const userList = userListSchema.parse(users)
 
   return (
     <UsersContextProvider value={{ open, setOpen, currentRow, setCurrentRow }}>
@@ -55,23 +54,19 @@ export default function Users({ loaderData: { users } }: Route.ComponentProps) {
                 <span>Invite User</span> <IconMailPlus size={18} />
               </Link>
             </Button>
-            <Button className="space-x-1" onClick={() => setOpen('add')}>
-              <span>Add User</span> <IconUserPlus size={18} />
+            <Button className="space-x-1" asChild>
+              <Link to="/users/add">
+                <span>Add User</span> <IconUserPlus size={18} />
+              </Link>
             </Button>
           </div>
         </div>
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
-          <UsersTable data={userList} columns={columns} />
+          <UsersTable data={users} columns={columns} />
         </div>
 
         <Outlet />
       </Main>
-
-      <UsersActionDialog
-        key="user-add"
-        open={open === 'add'}
-        onOpenChange={() => setOpen('add')}
-      />
 
       {currentRow && (
         <UsersActionDialog
