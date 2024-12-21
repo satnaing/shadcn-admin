@@ -1,3 +1,4 @@
+import { Form, useNavigation } from 'react-router'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -39,6 +40,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     handleConfirm,
     ...actions
   } = props
+  const navigation = useNavigation()
   return (
     <AlertDialog {...actions}>
       <AlertDialogContent className={cn(className && className)}>
@@ -53,13 +55,18 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
           <AlertDialogCancel disabled={isLoading}>
             {cancelBtnText ?? 'Cancel'}
           </AlertDialogCancel>
-          <Button
-            variant={destructive ? 'destructive' : 'default'}
-            onClick={handleConfirm}
-            disabled={disabled || isLoading}
-          >
-            {confirmText ?? 'Continue'}
-          </Button>
+          <Form method="POST">
+            <Button
+              type="submit"
+              variant={destructive ? 'destructive' : 'default'}
+              onClick={handleConfirm}
+              disabled={
+                disabled || isLoading || navigation.state === 'submitting'
+              }
+            >
+              {confirmText ?? 'Continue'}
+            </Button>
+          </Form>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

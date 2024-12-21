@@ -2,7 +2,7 @@ import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { Form } from 'react-router'
 import { toast } from 'sonner'
-import { z } from 'zod'
+import type { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import {
   Dialog,
@@ -15,15 +15,7 @@ import {
 } from '~/components/ui/dialog'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
-
-const formSchema = z.object({
-  file: z
-    .instanceof(File, { message: 'Please upload a file.' })
-    .refine(
-      (file) => ['text/csv'].includes(file.type),
-      'Please upload csv format.',
-    ),
-})
+import { formSchema } from '../route'
 
 interface Props {
   open: boolean

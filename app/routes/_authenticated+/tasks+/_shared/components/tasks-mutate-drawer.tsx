@@ -1,7 +1,6 @@
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
-import { Form } from 'react-router'
-import { toast } from 'sonner'
+import { Form, useNavigation } from 'react-router'
 import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
@@ -52,23 +51,9 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
     },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
-    onSubmit: (event, { submission }) => {
-      event.preventDefault()
-      if (submission?.status !== 'success') return
-
-      onOpenChange(false)
-      form.reset()
-      toast('You submitted the following values:', {
-        description: (
-          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(submission.value, null, 2)}
-            </code>
-          </pre>
-        ),
-      })
-    },
   })
+
+  const navigation = useNavigation()
 
   return (
     <Sheet
@@ -88,7 +73,11 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             Click save when you&apos;re done.
           </SheetDescription>
         </SheetHeader>
-        <Form {...getFormProps(form)} className="flex-1 space-y-5">
+        <Form
+          method="POST"
+          {...getFormProps(form)}
+          className="flex-1 space-y-5"
+        >
           <div className="space-y-1">
             <Label htmlFor={fields.title.id}>Title</Label>
             <Input
@@ -223,7 +212,13 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>
-          <Button form={form.id} type="submit">
+          <Button
+            form={form.id}
+            type="submit"
+            name="intent"
+            value={isUpdate ? 'update' : 'create'}
+            disabled={navigation.state === 'submitting'}
+          >
             Save changes
           </Button>
         </SheetFooter>

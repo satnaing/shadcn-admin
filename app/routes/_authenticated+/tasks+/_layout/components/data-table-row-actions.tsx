@@ -1,6 +1,7 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { IconTrash } from '@tabler/icons-react'
 import type { Row } from '@tanstack/react-table'
+import { Link } from 'react-router'
 import { Button } from '~/components/ui/button'
 import {
   DropdownMenu,
@@ -15,9 +16,8 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu'
-import { useTasksContext } from '../context/tasks-context'
-import { labels } from '../data/data'
-import { taskSchema } from '../data/schema'
+import { labels } from '../../_shared/data/data'
+import { taskSchema } from '../../_shared/data/schema'
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>
@@ -27,8 +27,6 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const task = taskSchema.parse(row.original)
-
-  const { setOpen, setCurrentRow } = useTasksContext()
 
   return (
     <DropdownMenu modal={false}>
@@ -42,13 +40,8 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem
-          onClick={() => {
-            setCurrentRow(task)
-            setOpen('update')
-          }}
-        >
-          Edit
+        <DropdownMenuItem asChild>
+          <Link to={`/tasks/${task.id}/update`}>Edit</Link>
         </DropdownMenuItem>
         <DropdownMenuItem disabled>Make a copy</DropdownMenuItem>
         <DropdownMenuItem disabled>Favorite</DropdownMenuItem>
@@ -66,16 +59,13 @@ export function DataTableRowActions<TData>({
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => {
-            setCurrentRow(task)
-            setOpen('delete')
-          }}
-        >
-          Delete
-          <DropdownMenuShortcut>
-            <IconTrash size={16} />
-          </DropdownMenuShortcut>
+        <DropdownMenuItem asChild>
+          <Link to={`/tasks/${task.id}/delete`}>
+            Delete
+            <DropdownMenuShortcut>
+              <IconTrash size={16} />
+            </DropdownMenuShortcut>
+          </Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
