@@ -34,29 +34,81 @@ const baseSchema = z.object({
     .string({ required_error: 'Email is required.' })
     .email({ message: 'Email is invalid.' }),
   role: z.enum(['superadmin', 'admin', 'manager', 'cashier']),
-  password: z.string().transform((pwd) => pwd.trim()),
-  confirmPassword: z.string().transform((pwd) => pwd.trim()),
 })
+
 export const createSchema = baseSchema.merge(
-  z.object({ intent: z.literal('create') }),
+  z.object({
+    intent: z.literal('create'),
+    password: z.string().transform((pwd) => pwd.trim()),
+    confirmPassword: z.string().transform((pwd) => pwd.trim()),
+  }),
 )
+
 export const editSchema = baseSchema.merge(
-  z.object({ intent: z.literal('edit'), id: z.string() }),
+  z.object({ intent: z.literal('update') }),
 )
-const formSchema = z.discriminatedUnion('intent', [createSchema, editSchema])
+const formSchema = z
+  .discriminatedUnion('intent', [createSchema, editSchema])
+  .superRefine((arg, ctx) => {
+    if (arg.intent !== 'create') {
+      return
+    }
+    if (arg.password !== '') {
+      if (arg.password === undefined) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Password is required.',
+          path: ['password'],
+        })
+        return
+      }
+
+      if (arg.password.length < 8) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Password must be at least 8 characters long.',
+          path: ['password'],
+        })
+      }
+
+      if (!arg.password.match(/[a-z]/)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Password must contain at least one lowercase letter.',
+          path: ['password'],
+        })
+      }
+
+      if (!arg.password.match(/\d/)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Password must contain at least one number.',
+          path: ['password'],
+        })
+      }
+
+      if (arg.password !== arg.confirmPassword) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Passwords don't match.",
+          path: ['confirmPassword'],
+        })
+      }
+    }
+  })
 
 interface Props {
-  currentRow?: User
+  user?: User
   open: boolean
   onOpenChange: (open: boolean) => void
 }
 
-export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
-  const isEdit = !!currentRow
+export function UsersActionDialog({ user, open, onOpenChange }: Props) {
+  const isEdit = !!user
   const [form, fields] = useForm({
     defaultValue: isEdit
       ? {
-          ...currentRow,
+          ...user,
           password: '',
           confirmPassword: '',
         }
@@ -92,7 +144,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
             Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="-mr-4 h-[26.25rem] w-full py-1 pr-4">
+        <ScrollArea className="-mr-4 w-full py-1 pr-4">
           <Form
             method="POST"
             {...getFormProps(form)}
@@ -237,50 +289,54 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
-              <Label
-                htmlFor={fields.password.id}
-                className="col-span-2 text-right"
-              >
-                Password
-              </Label>
-              <PasswordInput
-                {...getInputProps(fields.password, { type: 'password' })}
-                key={fields.password.key}
-                placeholder="e.g., S3cur3P@ssw0rd"
-                className="col-span-4"
-              />
-              <div
-                id={fields.password.errorId}
-                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
-              >
-                {fields.password.errors}
-              </div>
-            </div>
+            {!isEdit && (
+              <>
+                <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+                  <Label
+                    htmlFor={fields.password.id}
+                    className="col-span-2 text-right"
+                  >
+                    Password
+                  </Label>
+                  <PasswordInput
+                    {...getInputProps(fields.password, { type: 'password' })}
+                    key={fields.password.key}
+                    placeholder="e.g., S3cur3P@ssw0rd"
+                    className="col-span-4"
+                  />
+                  <div
+                    id={fields.password.errorId}
+                    className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
+                  >
+                    {fields.password.errors}
+                  </div>
+                </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
-              <Label
-                htmlFor={fields.confirmPassword.id}
-                className="col-span-2 text-right"
-              >
-                Confirm Password
-              </Label>
-              <PasswordInput
-                disabled={!isPasswordTouched}
-                {...getInputProps(fields.confirmPassword, {
-                  type: 'password',
-                })}
-                key={fields.confirmPassword.key}
-                placeholder="e.g., S3cur3P@ssw0rd"
-                className="col-span-4"
-              />
-              <div
-                id={fields.confirmPassword.errorId}
-                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
-              >
-                {fields.confirmPassword.errors}
-              </div>
-            </div>
+                <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+                  <Label
+                    htmlFor={fields.confirmPassword.id}
+                    className="col-span-2 text-right"
+                  >
+                    Confirm Password
+                  </Label>
+                  <PasswordInput
+                    disabled={!isPasswordTouched}
+                    {...getInputProps(fields.confirmPassword, {
+                      type: 'password',
+                    })}
+                    key={fields.confirmPassword.key}
+                    placeholder="e.g., S3cur3P@ssw0rd"
+                    className="col-span-4"
+                  />
+                  <div
+                    id={fields.confirmPassword.errorId}
+                    className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
+                  >
+                    {fields.confirmPassword.errors}
+                  </div>
+                </div>
+              </>
+            )}
           </Form>
         </ScrollArea>
         <DialogFooter>

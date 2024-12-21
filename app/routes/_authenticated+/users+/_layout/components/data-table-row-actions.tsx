@@ -12,14 +12,12 @@ import {
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu'
 import type { User } from '../../_shared/data/schema'
-import { useUsersContext } from '../context/users-context'
 
 interface DataTableRowActionsProps {
   row: Row<User>
 }
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
-  const { setOpen, setCurrentRow } = useUsersContext()
   return (
     <>
       <DropdownMenu modal={false}>
@@ -33,16 +31,13 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
-          <DropdownMenuItem
-            onClick={() => {
-              setCurrentRow(row.original)
-              setOpen('edit')
-            }}
-          >
-            Edit
-            <DropdownMenuShortcut>
-              <IconEdit size={16} />
-            </DropdownMenuShortcut>
+          <DropdownMenuItem asChild>
+            <Link to={`/users/${row.original.id}/update`}>
+              Edit
+              <DropdownMenuShortcut>
+                <IconEdit size={16} />
+              </DropdownMenuShortcut>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild className="text-red-500">

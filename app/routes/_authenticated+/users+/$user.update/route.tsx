@@ -1,16 +1,29 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { data, useNavigate } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
 import {
   UsersActionDialog,
-  createSchema as formSchema,
+  editSchema as formSchema,
 } from '../_shared/components/users-action-dialog'
 import { users } from '../_shared/data/users'
 import type { Route } from './+types/route'
 
-export const action = async ({ request }: Route.ActionArgs) => {
+export const loader = ({ params }: Route.LoaderArgs) => {
+  const user = users.find((u) => u.id === params.user)
+  if (!user) {
+    throw data(null, { status: 404 })
+  }
+  return { user }
+}
+
+export const action = async ({ request, params }: Route.ActionArgs) => {
+  const user = users.find((u) => u.id === params.user)
+  if (!user) {
+    throw data(null, { status: 404 })
+  }
+
   const submission = parseWithZod(await request.formData(), {
     schema: formSchema,
   })
@@ -18,30 +31,33 @@ export const action = async ({ request }: Route.ActionArgs) => {
     return { lastResult: submission.reply() }
   }
 
-  // Create a new task
+  // Update the user
   await sleep(1000)
-  const newUser = {
+  const updateUser = {
     ...submission.value,
-    createdAt: new Date(),
+    id: user.id,
+    createdAt: user.createdAt,
+    status: user.status,
     updatedAt: new Date(),
-    id: crypto.randomUUID(),
-    status: 'active',
   } as const
-  users.unshift(newUser)
+  users[users.indexOf(user)] = updateUser
 
   return redirectWithSuccess('/users', {
-    message: 'User added successfully',
-    description: JSON.stringify(newUser),
+    message: 'User updated successfully',
+    description: JSON.stringify(updateUser),
   })
 }
 
-export default function UserAdd() {
+export default function UserUpdate({
+  loaderData: { user },
+}: Route.ComponentProps) {
   const [open, setOpen] = useState(true)
   const navigate = useNavigate()
 
   return (
     <UsersActionDialog
-      key="user-add"
+      key={`user-edit-${user.id}`}
+      user={user}
       open={open}
       onOpenChange={(v) => {
         if (!v) {

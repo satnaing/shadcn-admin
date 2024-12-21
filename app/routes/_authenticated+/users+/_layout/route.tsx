@@ -1,5 +1,4 @@
 import { IconMailPlus, IconUserPlus } from '@tabler/icons-react'
-import { useState } from 'react'
 import { Link, Outlet } from 'react-router'
 import { Header } from '~/components/layout/header'
 import { Main } from '~/components/layout/main'
@@ -7,30 +6,18 @@ import { ProfileDropdown } from '~/components/profile-dropdown'
 import { Search } from '~/components/search'
 import { ThemeSwitch } from '~/components/theme-switch'
 import { Button } from '~/components/ui/button'
-import useDialogState from '~/hooks/use-dialog-state'
-import { UsersActionDialog } from '../_shared/components/users-action-dialog'
-import type { User } from '../_shared/data/schema'
 import { users as initialUsers } from '../_shared/data/users'
 import type { Route } from './+types/route'
 import { columns } from './components/users-columns'
 import { UsersTable } from './components/users-table'
-import UsersContextProvider, {
-  type UsersDialogType,
-} from './context/users-context'
 
 export const loader = () => {
   return { users: initialUsers }
 }
 
 export default function Users({ loaderData: { users } }: Route.ComponentProps) {
-  // Dialog states
-  const [currentRow, setCurrentRow] = useState<User | null>(null)
-  const [open, setOpen] = useDialogState<UsersDialogType>(null)
-
-  // Parse user list
-
   return (
-    <UsersContextProvider value={{ open, setOpen, currentRow, setCurrentRow }}>
+    <>
       {/* ===== Top Heading ===== */}
       <Header sticky>
         <Search />
@@ -67,20 +54,6 @@ export default function Users({ loaderData: { users } }: Route.ComponentProps) {
 
         <Outlet />
       </Main>
-
-      {currentRow && (
-        <UsersActionDialog
-          key={`user-edit-${currentRow.id}`}
-          open={open === 'edit'}
-          onOpenChange={() => {
-            setOpen('edit')
-            setTimeout(() => {
-              setCurrentRow(null)
-            }, 500)
-          }}
-          currentRow={currentRow}
-        />
-      )}
-    </UsersContextProvider>
+    </>
   )
 }
