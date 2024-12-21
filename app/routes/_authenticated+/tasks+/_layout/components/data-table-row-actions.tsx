@@ -71,7 +71,7 @@ export function DataTableRowActions<TData>({
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSeparator />
-        <DropdownMenuItem asChild>
+        <DropdownMenuItem asChild className="text-red-500">
           <Link to={`/tasks/${task.id}/delete`}>
             Delete
             <DropdownMenuShortcut>

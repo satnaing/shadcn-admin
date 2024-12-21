@@ -15,18 +15,18 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 }
 
 export const action = async ({ params }: Route.ActionArgs) => {
-  const taskId = params.task
+  const taskIndex = tasks.findIndex((t) => t.id === params.task)
+  if (taskIndex === -1) {
+    throw data(null, { status: 404, statusText: 'Task not found' })
+  }
 
   // Delete the task
   await sleep(1000)
-  tasks.splice(
-    tasks.findIndex((t) => t.id === taskId),
-    1,
-  )
+  tasks.splice(taskIndex, 1)
 
   return redirectWithSuccess('/tasks', {
     message: 'Task deleted successfully',
-    description: `Task with ID ${taskId} has been deleted.`,
+    description: `Task with ID ${params.task} has been deleted.`,
   })
 }
 

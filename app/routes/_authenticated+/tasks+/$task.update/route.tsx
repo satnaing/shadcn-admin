@@ -29,11 +29,14 @@ export const action = async ({ request }: Route.ActionArgs) => {
   // Update the task
   await sleep(1000)
   const taskIndex = tasks.findIndex((t) => t.id === submission.value.id)
-  tasks[taskIndex] = submission.value
+  if (taskIndex === -1) {
+    throw data(null, { status: 404, statusText: 'Task not found' })
+  }
+  tasks.splice(taskIndex, 1, submission.value)
 
   return redirectWithSuccess('/tasks', {
     message: 'Task updated successfully',
-    description: JSON.stringify(submission.value),
+    description: `The task ${submission.value.id} has been updated.`,
   })
 }
 

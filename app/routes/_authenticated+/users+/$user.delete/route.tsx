@@ -2,18 +2,9 @@ import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
 import { data, useNavigate } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
-import { z } from 'zod'
 import { users } from '../_shared/data/users'
 import type { Route } from './+types/route'
 import { UsersDeleteDialog } from './components/users-delete-dialog'
-
-export const formSchema = z.object({
-  email: z
-    .string({ required_error: 'Email is required.' })
-    .email({ message: 'Email is invalid.' }),
-  role: z.string({ required_error: 'Role is required.' }),
-  desc: z.string().optional(),
-})
 
 export const loader = ({ params }: Route.LoaderArgs) => {
   const user = users.find((user) => user.id === params.user)
@@ -31,10 +22,9 @@ export const action = async ({ params }: Route.ActionArgs) => {
 
   await sleep(1000)
   // remove the user from the list
-  users.splice(
-    users.findIndex((u) => u.id === user.id),
-    1,
-  )
+  const updatedUsers = users.filter((u) => u.id !== user.id)
+  users.length = 0
+  users.push(...updatedUsers)
 
   return redirectWithSuccess('/users', {
     message: 'User deleted successfully!',

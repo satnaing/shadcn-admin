@@ -33,18 +33,20 @@ export const action = async ({ request, params }: Route.ActionArgs) => {
 
   // Update the user
   await sleep(1000)
-  const updateUser = {
+  const updatedUser = {
     ...submission.value,
     id: user.id,
     createdAt: user.createdAt,
     status: user.status,
     updatedAt: new Date(),
-  } as const
-  users[users.indexOf(user)] = updateUser
+  }
+  const updatedUsers = users.map((u) => (u.id === user.id ? updatedUser : u))
+  users.length = 0
+  users.push(...updatedUsers)
 
   return redirectWithSuccess('/users', {
     message: 'User updated successfully',
-    description: JSON.stringify(updateUser),
+    description: JSON.stringify(updatedUser),
   })
 }
 
