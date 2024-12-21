@@ -19,6 +19,10 @@ export const action = async ({ params }: Route.ActionArgs) => {
 
   // Delete the task
   await sleep(1000)
+  tasks.splice(
+    tasks.findIndex((t) => t.id === taskId),
+    1,
+  )
 
   return redirectWithSuccess('/tasks', {
     message: 'Task deleted successfully',

@@ -6,11 +6,16 @@ import { ProfileDropdown } from '~/components/profile-dropdown'
 import { Search } from '~/components/search'
 import { ThemeSwitch } from '~/components/theme-switch'
 import { Button } from '~/components/ui/button'
-import { tasks } from '../_shared/data/tasks'
+import { tasks as initialTasks } from '../_shared/data/tasks'
+import type { Route } from './+types/route'
 import { columns } from './components/columns'
 import { DataTable } from './components/data-table'
 
-export default function Tasks() {
+export const loader = () => {
+  return { tasks: initialTasks }
+}
+
+export default function Tasks({ loaderData: { tasks } }: Route.ComponentProps) {
   return (
     <>
       {/* ===== Top Heading ===== */}
