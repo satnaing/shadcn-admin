@@ -31,7 +31,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -40,14 +40,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       </head>
       <body className="scroll-smooth">
         <Toaster closeButton richColors />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <ThemeProvider attribute="class">{children}</ThemeProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
