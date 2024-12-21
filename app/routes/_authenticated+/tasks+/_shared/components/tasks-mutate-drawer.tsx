@@ -52,7 +52,6 @@ const formSchema = z.discriminatedUnion('intent', [createSchema, updateSchema])
 
 export function TasksMutateDrawer({ open, onOpenChange, task }: Props) {
   const isUpdate = !!task
-
   const [form, fields] = useForm({
     defaultValue: task ?? {
       title: '',
@@ -63,7 +62,6 @@ export function TasksMutateDrawer({ open, onOpenChange, task }: Props) {
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
   })
-
   const navigation = useNavigation()
 
   return (
@@ -71,7 +69,6 @@ export function TasksMutateDrawer({ open, onOpenChange, task }: Props) {
       open={open}
       onOpenChange={(v) => {
         onOpenChange(v)
-        form.reset()
       }}
     >
       <SheetContent className="flex flex-col">

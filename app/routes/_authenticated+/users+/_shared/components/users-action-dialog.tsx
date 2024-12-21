@@ -45,7 +45,7 @@ export const createSchema = baseSchema.merge(
 )
 
 export const editSchema = baseSchema.merge(
-  z.object({ intent: z.literal('update') }),
+  z.object({ intent: z.literal('edit') }),
 )
 
 const formSchema = z
@@ -133,7 +133,6 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
     <Dialog
       open={open}
       onOpenChange={(state) => {
-        form.reset()
         onOpenChange(state)
       }}
     >
@@ -345,7 +344,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
             type="submit"
             form={form.id}
             name="intent"
-            value={isEdit ? 'update' : 'create'}
+            value={isEdit ? 'edit' : 'create'}
             disabled={navigation.state === 'submitting'}
           >
             Save changes

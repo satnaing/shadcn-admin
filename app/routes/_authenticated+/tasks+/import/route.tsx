@@ -44,12 +44,12 @@ export default function TaskImport() {
       onOpenChange={(v) => {
         if (!v) {
           setOpen(false)
-          // wait for the drawer to close
+          // wait for the modal to close
           setTimeout(() => {
             navigate('/tasks', {
               viewTransition: true,
             })
-          }, 300) // the duration of the drawer close animation
+          }, 300) // the duration of the modal close animation
         }
       }}
     />
