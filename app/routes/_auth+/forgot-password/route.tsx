@@ -1,11 +1,39 @@
+import { parseWithZod } from '@conform-to/zod'
 import { setTimeout } from 'node:timers/promises'
 import { Link } from 'react-router'
+import { dataWithSuccess } from 'remix-toast'
+import { z } from 'zod'
 import { Card } from '~/components/ui/card'
+import type { Route } from './+types/route'
 import { ForgotForm } from './components/forgot-password-form'
 
-export const action = async () => {
-  await setTimeout(3000)
-  return {}
+export const formSchema = z.object({
+  email: z
+    .string({ required_error: 'Please enter your email' })
+    .email({ message: 'Invalid email address' }),
+})
+
+export const action = async ({ request }: Route.ActionArgs) => {
+  const submission = parseWithZod(await request.formData(), {
+    schema: formSchema,
+  })
+  if (submission.status !== 'success') {
+    return { lastResult: submission.reply() }
+  }
+  if (submission.value.email !== 'name@example.com') {
+    return {
+      lastResult: submission.reply({
+        formErrors: ['Email not found in our records. Please try again.'],
+      }),
+    }
+  }
+  await setTimeout(1000)
+  return dataWithSuccess(
+    { lastResult: submission.reply({ resetForm: true }) },
+    {
+      message: 'Password reset link sent to your email',
+    },
+  )
 }
 
 export default function ForgotPassword() {

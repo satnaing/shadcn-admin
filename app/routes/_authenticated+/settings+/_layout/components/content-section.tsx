@@ -19,7 +19,7 @@ export default function ContentSection({
         <p className="text-sm text-muted-foreground">{desc}</p>
       </div>
       <Separator className="my-4 flex-none" />
-      <ScrollArea className="faded-bottom -mx-4 flex-1 scroll-smooth px-4 md:pb-16">
+      <ScrollArea className="-mx-4 flex-1 scroll-smooth px-4 md:pb-16">
         <div className="-mx-1 px-1.5 lg:max-w-xl">{children}</div>
       </ScrollArea>
     </div>

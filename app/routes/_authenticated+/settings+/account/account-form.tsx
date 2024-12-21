@@ -2,9 +2,9 @@ import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { CalendarIcon, CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
 import { format } from 'date-fns'
-import { Form } from 'react-router'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import { Form, useActionData, useNavigation } from 'react-router'
+import type { z } from 'zod'
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import { Button } from '~/components/ui/button'
 import { Calendar } from '~/components/ui/calendar'
 import {
@@ -23,6 +23,7 @@ import {
   PopoverTrigger,
 } from '~/components/ui/popover'
 import { cn } from '~/lib/utils'
+import { accountFormSchema, type action } from './route'
 
 const languages = [
   { label: 'English', value: 'en' },
@@ -36,23 +37,6 @@ const languages = [
   { label: 'Chinese', value: 'zh' },
 ] as const
 
-const accountFormSchema = z.object({
-  name: z
-    .string({ required_error: 'Name must be at least 2 characters.' })
-    .min(2, {
-      message: 'Name must be at least 2 characters.',
-    })
-    .max(30, {
-      message: 'Name must not be longer than 30 characters.',
-    }),
-  dob: z.date({
-    required_error: 'A date of birth is required.',
-  }),
-  language: z.string({
-    required_error: 'Please select a language.',
-  }),
-})
-
 type AccountFormValues = z.infer<typeof accountFormSchema>
 
 // This can come from your database or API.
@@ -61,27 +45,17 @@ const defaultValue: Partial<AccountFormValues> = {
 }
 
 export function AccountForm() {
+  const actionData = useActionData<typeof action>()
   const [form, fields] = useForm<AccountFormValues>({
+    lastResult: actionData?.lastResult,
     defaultValue,
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: accountFormSchema }),
-    onSubmit: (event, { submission }) => {
-      event.preventDefault()
-      if (submission?.status !== 'success') return
-      toast('You submitted the following values:', {
-        description: (
-          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(submission.value, null, 2)}
-            </code>
-          </pre>
-        ),
-      })
-    },
   })
+  const navigation = useNavigation()
 
   return (
-    <Form {...getFormProps(form)} className="space-y-8">
+    <Form method="POST" {...getFormProps(form)} className="space-y-8">
       <div className="space-y-2">
         <Label htmlFor={fields.name.id}>Name</Label>
         <Input
@@ -232,7 +206,16 @@ export function AccountForm() {
         </div>
       </div>
 
-      <Button type="submit">Update account</Button>
+      {form.errors && (
+        <Alert variant="destructive">
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{form.errors}</AlertDescription>
+        </Alert>
+      )}
+
+      <Button type="submit" disabled={navigation.state === 'submitting'}>
+        Update account
+      </Button>
     </Form>
   )
 }

@@ -2,27 +2,21 @@ import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
 import type { HTMLAttributes } from 'react'
-import { Form, Link, useNavigation } from 'react-router'
-import { z } from 'zod'
+import { Form, Link, useActionData, useNavigation } from 'react-router'
 import { PasswordInput } from '~/components/password-input'
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
 import { cn } from '~/lib/utils'
+import { type action, formSchema } from '../route'
 
 type UserAuthFormProps = HTMLAttributes<HTMLFormElement>
 
-const formSchema = z.object({
-  email: z
-    .string({ required_error: 'Please enter your email' })
-    .email({ message: 'Invalid email address' }),
-  password: z.string({ required_error: 'Please enter your password' }).min(7, {
-    message: 'Password must be at least 7 characters long',
-  }),
-})
-
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+  const actionData = useActionData<typeof action>()
   const [form, { email, password }] = useForm({
+    lastResult: actionData?.lastResult,
     defaultValue: {
       email: '',
       password: '',
@@ -77,6 +71,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           {password.errors}
         </div>
       </div>
+
+      {form.errors && (
+        <Alert variant="destructive">
+          <AlertTitle>Login Error</AlertTitle>
+          <AlertDescription>{form.errors}</AlertDescription>
+        </Alert>
+      )}
 
       <Button className="mt-2" disabled={isLoading}>
         Login

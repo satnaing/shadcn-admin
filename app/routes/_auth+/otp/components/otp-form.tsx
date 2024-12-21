@@ -1,46 +1,27 @@
 import { getFormProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
-import { type HTMLAttributes, useState } from 'react'
-import { Form, useNavigation } from 'react-router'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import { useState, type HTMLAttributes } from 'react'
+import { Form, useActionData, useNavigation } from 'react-router'
 import { PinInput, PinInputField } from '~/components/pin-input'
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Separator } from '~/components/ui/separator'
 import { cn } from '~/lib/utils'
+import { formSchema, type action } from '../route'
 
 type OtpFormProps = HTMLAttributes<HTMLFormElement>
 
-const formSchema = z.object({
-  otp: z.string().min(1, { message: 'Please enter your otp code.' }),
-})
-
 export function OtpForm({ className, ...props }: OtpFormProps) {
-  const navigation = useNavigation()
-  const [disabledBtn, setDisabledBtn] = useState(true)
-
+  const actionData = useActionData<typeof action>()
   const [form, { otp }] = useForm({
+    lastResult: actionData?.lastResult,
     defaultValue: { otp: '' },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
-    onSubmit: (event, { submission }) => {
-      if (submission?.status !== 'success') {
-        event.preventDefault()
-        return
-      }
-
-      toast('You submitted the following values:', {
-        description: (
-          <pre className="mt-2 rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(submission.value, null, 2)}
-            </code>
-          </pre>
-        ),
-      })
-    },
   })
+  const navigation = useNavigation()
+  const [disabledBtn, setDisabledBtn] = useState(true)
 
   return (
     <Form
@@ -80,6 +61,14 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
         </PinInput>
         <input type="hidden" name={otp.name} value={otp.value} key={otp.key} />
       </div>
+
+      {form.errors && (
+        <Alert variant="destructive">
+          <AlertTitle>Login Error</AlertTitle>
+          <AlertDescription>{form.errors}</AlertDescription>
+        </Alert>
+      )}
+
       <Button
         className="mt-2"
         disabled={disabledBtn || navigation.state === 'submitting'}

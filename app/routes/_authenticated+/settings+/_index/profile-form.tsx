@@ -6,9 +6,9 @@ import {
 } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { XIcon } from 'lucide-react'
-import { Form, Link } from 'react-router'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import { Form, Link, useActionData, useNavigation } from 'react-router'
+import type { z } from 'zod'
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
@@ -20,26 +20,7 @@ import {
   SelectValue,
 } from '~/components/ui/select'
 import { Textarea } from '~/components/ui/textarea'
-
-const profileFormSchema = z.object({
-  username: z
-    .string()
-    .min(2, {
-      message: 'Username must be at least 2 characters.',
-    })
-    .max(30, {
-      message: 'Username must not be longer than 30 characters.',
-    }),
-  email: z
-    .string({
-      required_error: 'Please select an email to display.',
-    })
-    .email(),
-  bio: z.string().max(160).min(4),
-  urls: z
-    .array(z.string().url({ message: 'Please enter a valid URL.' }))
-    .optional(),
-})
+import { profileFormSchema, type action } from './route'
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>
 
@@ -50,25 +31,15 @@ const defaultValue: Partial<ProfileFormValues> = {
 }
 
 export default function ProfileForm() {
+  const actionData = useActionData<typeof action>()
   const [form, fields] = useForm({
+    lastResult: actionData?.lastResult,
     defaultValue,
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: profileFormSchema }),
-    onSubmit: (event, { submission }) => {
-      event.preventDefault()
-      if (submission?.status !== 'success') return
-      toast('You submitted the following values:', {
-        description: (
-          <pre className="mt-2 w-[320px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">
-              {JSON.stringify(submission.value, null, 2)}
-            </code>
-          </pre>
-        ),
-      })
-    },
   })
   const urls = fields.urls.getFieldList()
+  const navigation = useNavigation()
 
   return (
     <Form method="POST" {...getFormProps(form)} className="space-y-8">
@@ -94,6 +65,7 @@ export default function ProfileForm() {
       <div className="space-y-2">
         <Label htmlFor={fields.email.id}>Email</Label>
         <Select
+          key={fields.email.key}
           defaultValue={fields.email.initialValue}
           name={fields.email.name}
           onValueChange={(value) => {
@@ -129,6 +101,7 @@ export default function ProfileForm() {
         <Label htmlFor={fields.bio.id}>Bio</Label>
         <Textarea
           {...getTextareaProps(fields.bio)}
+          key={fields.bio.key}
           placeholder="Tell us a little bit about yourself"
           className="resize-none"
         />
@@ -192,7 +165,17 @@ export default function ProfileForm() {
           Add URL
         </Button>
       </div>
-      <Button type="submit">Update profile</Button>
+
+      {form.errors && (
+        <Alert variant="destructive">
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{form.errors}</AlertDescription>
+        </Alert>
+      )}
+
+      <Button type="submit" disabled={navigation.state === 'submitting'}>
+        Update profile
+      </Button>
     </Form>
   )
 }

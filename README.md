@@ -26,11 +26,11 @@ I've been creating dashboard UIs at work and for my personal projects. I always 
 
 **Routing:** [React Router v7](https://reactrouter.com/en/main) (Framework)
 
+**Form Validation:** [Conform](https://conform.guide/)
+
 **Type Checking:** [TypeScript](https://www.typescriptlang.org/)
 
 **Linting/Formatting:** [Biome](https://biomejs.dev/) & [Prettier](https://prettier.io/)
-
-**Form Validation:** [Conform](https://conform.guide/)
 
 **Icons:** [Tabler Icons](https://tabler.io/icons)
 

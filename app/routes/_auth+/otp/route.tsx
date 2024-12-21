@@ -1,11 +1,34 @@
+import { parseWithZod } from '@conform-to/zod'
 import { setTimeout } from 'node:timers/promises'
-import { Link, redirect } from 'react-router'
+import { Link } from 'react-router'
+import { redirectWithSuccess } from 'remix-toast'
+import { z } from 'zod'
 import { Card } from '~/components/ui/card'
+import type { Route } from './+types/route'
 import { OtpForm } from './components/otp-form'
 
-export const action = async () => {
-  await setTimeout(3000)
-  return redirect('/')
+export const formSchema = z.object({
+  otp: z.string({ required_error: 'Please enter your otp code.' }),
+})
+
+export const action = async ({ request }: Route.ActionArgs) => {
+  const submission = parseWithZod(await request.formData(), {
+    schema: formSchema,
+  })
+  if (submission.status !== 'success') {
+    return { lastResult: submission.reply() }
+  }
+
+  if (submission.value.otp !== '123456') {
+    return {
+      lastResult: submission.reply({ formErrors: ['Invalid OTP code'] }),
+    }
+  }
+  await setTimeout(1000)
+
+  throw await redirectWithSuccess('/', {
+    message: 'You have successfully logged in!',
+  })
 }
 
 export default function Otp() {

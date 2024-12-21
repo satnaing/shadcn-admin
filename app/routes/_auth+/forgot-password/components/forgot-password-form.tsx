@@ -1,29 +1,25 @@
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import type { HTMLAttributes } from 'react'
-import { Form, useNavigation } from 'react-router'
-import { z } from 'zod'
+import { Form, useActionData, useNavigation } from 'react-router'
+import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
 import { cn } from '~/lib/utils'
+import { formSchema, type action } from '../route'
 
 type ForgotFormProps = HTMLAttributes<HTMLFormElement>
 
-const formSchema = z.object({
-  email: z
-    .string({ required_error: 'Please enter your email' })
-    .email({ message: 'Invalid email address' }),
-})
-
 export function ForgotForm({ className, ...props }: ForgotFormProps) {
-  const navigation = useNavigation()
-
+  const actionData = useActionData<typeof action>()
   const [form, { email }] = useForm({
+    lastResult: actionData?.lastResult,
     defaultValue: { email: '' },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
   })
+  const navigation = useNavigation()
 
   return (
     <Form
@@ -46,6 +42,13 @@ export function ForgotForm({ className, ...props }: ForgotFormProps) {
           {email.errors}
         </div>
       </div>
+
+      {form.errors && (
+        <Alert variant="destructive">
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{form.errors}</AlertDescription>
+        </Alert>
+      )}
 
       <Button className="mt-2" disabled={navigation.state === 'submitting'}>
         Continue
