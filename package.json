@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format:check": "prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "knip": "knip"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -50,7 +51,6 @@
     "recharts": "^2.14.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "use-intl": "^3.26.0",
     "zod": "^3.23.8",
     "zustand": "^5.0.2"
   },
@@ -72,6 +72,7 @@
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.13.0",
+    "knip": "^5.41.1",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
