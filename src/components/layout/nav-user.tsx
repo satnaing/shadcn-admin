@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import {
   BadgeCheck,
   Bell,
@@ -22,7 +23,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
-import { Link } from '@tanstack/react-router'
 
 export function NavUser({
   user,
@@ -84,21 +84,21 @@ export function NavUser({
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
                 <Link to='/settings/account'>
-                <BadgeCheck />
-                Account
+                  <BadgeCheck />
+                  Account
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to='/settings/billing'>
-                <CreditCard />
-                Billing
+                  <CreditCard />
+                  Billing
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-              <Link to='/settings/notifications'>
-                <Bell />
-                Notifications
-              </Link>
+                <Link to='/settings/notifications'>
+                  <Bell />
+                  Notifications
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
