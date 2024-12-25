@@ -29,7 +29,7 @@ export default function Users() {
   return (
     <UsersContextProvider value={{ open, setOpen, currentRow, setCurrentRow }}>
       {/* ===== Top Heading ===== */}
-      <Header sticky>
+      <Header fixed>
         <Search />
         <div className='ml-auto flex items-center space-x-4'>
           <ThemeSwitch />
