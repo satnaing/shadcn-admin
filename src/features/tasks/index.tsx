@@ -25,7 +25,7 @@ export default function Tasks() {
   return (
     <TasksContextProvider value={{ open, setOpen, currentRow, setCurrentRow }}>
       {/* ===== Top Heading ===== */}
-      <Header sticky>
+      <Header fixed>
         <Search />
         <div className='ml-auto flex items-center space-x-4'>
           <ThemeSwitch />
