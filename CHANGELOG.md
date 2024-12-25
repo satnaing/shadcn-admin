@@ -1,3 +1,13 @@
+## v1.0.2 (2024-12-25)
+
+### Fix
+
+- update overall layout due to scroll-lock bug (#66)
+
+### Refactor
+
+- analyze and remove unused files/exports with knip (#67)
+
 ## v1.0.1 (2024-12-14)
 
 ### Fix
