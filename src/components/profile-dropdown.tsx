@@ -39,7 +39,7 @@ export function ProfileDropdown() {
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link to='/settings/billing'>Billing</Link>
+            <Link to='/settings'>Billing</Link>
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
