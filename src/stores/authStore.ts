@@ -3,7 +3,7 @@ import { create } from 'zustand'
 
 const ACCESS_TOKEN = 'thisisjustarandomstring'
 
-export interface AuthUser {
+interface AuthUser {
   accountNo: string
   email: string
   role: string[]
@@ -52,4 +52,4 @@ export const useAuthStore = create<AuthState>()((set) => {
   }
 })
 
-export const useAuth = () => useAuthStore((state) => state.auth)
+// export const useAuth = () => useAuthStore((state) => state.auth)
