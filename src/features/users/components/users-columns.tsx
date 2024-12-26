@@ -101,8 +101,9 @@ export const columns: ColumnDef<User>[] = [
         </div>
       )
     },
-    filterFn: 'weakEquals',
-    enableSorting: false,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
     enableHiding: false,
   },
   {
@@ -127,8 +128,9 @@ export const columns: ColumnDef<User>[] = [
         </div>
       )
     },
-    filterFn: 'weakEquals',
-    enableSorting: false,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
     enableHiding: false,
   },
   {
