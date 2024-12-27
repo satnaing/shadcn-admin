@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import useDialogState from '@/hooks/use-dialog-state'
 import { Task } from '../data/schema'
 
-export type TasksDialogType = 'create' | 'update' | 'delete' | 'import'
+type TasksDialogType = 'create' | 'update' | 'delete' | 'import'
 
 interface TasksContextType {
   open: TasksDialogType | null
@@ -14,21 +15,24 @@ const TasksContext = React.createContext<TasksContextType | null>(null)
 
 interface Props {
   children: React.ReactNode
-  value: TasksContextType
 }
 
-export default function TasksContextProvider({ children, value }: Props) {
-  return <TasksContext.Provider value={value}>{children}</TasksContext.Provider>
+export default function TasksProvider({ children }: Props) {
+  const [open, setOpen] = useDialogState<TasksDialogType>(null)
+  const [currentRow, setCurrentRow] = useState<Task | null>(null)
+  return (
+    <TasksContext value={{ open, setOpen, currentRow, setCurrentRow }}>
+      {children}
+    </TasksContext>
+  )
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useTasksContext = () => {
+export const useTasks = () => {
   const tasksContext = React.useContext(TasksContext)
 
   if (!tasksContext) {
-    throw new Error(
-      'useTasksContext has to be used within <TasksContext.Provider>'
-    )
+    throw new Error('useTasks has to be used within <TasksContext>')
   }
 
   return tasksContext
