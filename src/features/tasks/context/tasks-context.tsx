@@ -1,7 +1,12 @@
 import React from 'react'
 import { Task } from '../data/schema'
 
-export type TasksDialogType = 'create' | 'update' | 'delete' | 'import'
+export type TasksDialogType =
+  | 'create'
+  | 'update'
+  | 'delete'
+  | 'multiple-delete'
+  | 'import'
 
 interface TasksContextType {
   open: TasksDialogType | null
