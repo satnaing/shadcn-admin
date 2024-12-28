@@ -31,6 +31,9 @@ jobs:
       - name: Lint the code
         run: pnpm lint
 
+      - name: Analyze unused files and dependencies
+        run: pnpm knip
+
       - name: Run Prettier check
         run: pnpm format:check
 
