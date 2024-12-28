@@ -1,3 +1,18 @@
+## v1.0.3 (2024-12-28)
+
+### Feat
+
+- nav links added in profile dropdown (#68)
+
+### Fix
+
+- add gap between buttons in import task dialog (#70)
+- hide button sort if column cannot be hidden & update filterFn (#69)
+
+### Refactor
+
+- optimize states in users/tasks context (#71)
+
 ## v1.0.2 (2024-12-25)
 
 ### Fix
