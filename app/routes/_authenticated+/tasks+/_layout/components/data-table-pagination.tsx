@@ -86,7 +86,7 @@ export function DataTablePagination<TData>({
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
               setSearchParams((prev) => {
-                prev.set(searchParamKeys.page, '0')
+                prev.delete(searchParamKeys.page)
                 return prev
               })
             }}
@@ -101,7 +101,11 @@ export function DataTablePagination<TData>({
             className="h-8 w-8 p-0"
             onClick={() => {
               setSearchParams((prev) => {
-                prev.set(searchParamKeys.page, `${currentPage - 1}`)
+                if (currentPage === 1) {
+                  prev.delete(searchParamKeys.page)
+                } else {
+                  prev.set(searchParamKeys.page, `${currentPage - 1}`)
+                }
                 return prev
               })
             }}
