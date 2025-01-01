@@ -29,18 +29,24 @@ export interface PaginationProps {
 }
 
 export const PaginationSearchParamsSchema = z.object({
-  page: z.string().optional().default('0').transform(Number),
-  per_page: z
-    .union([
-      z.literal('10'),
-      z.literal('20'),
-      z.literal('30'),
-      z.literal('40'),
-      z.literal('50'),
-    ])
-    .optional()
-    .default('20')
-    .transform(Number),
+  page: z.preprocess(
+    (val) => (val === null ? undefined : val),
+    z.string().optional().default('0').transform(Number),
+  ),
+  per_page: z.preprocess(
+    (val) => (val === null ? undefined : val),
+    z
+      .union([
+        z.literal('10'),
+        z.literal('20'),
+        z.literal('30'),
+        z.literal('40'),
+        z.literal('50'),
+      ])
+      .optional()
+      .default('20')
+      .transform(Number),
+  ),
 })
 
 const searchParamKeys = {
@@ -129,7 +135,6 @@ export function DataTablePagination<TData>({
             onClick={() => {
               setSearchParams((prev) => {
                 prev.set(searchParamKeys.page, `${currentPage + 1}`)
-                console.log(`${currentPage + 1}`)
                 return prev
               })
             }}

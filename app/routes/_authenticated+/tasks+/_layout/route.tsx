@@ -1,8 +1,5 @@
-import { parseWithZod } from '@conform-to/zod'
 import { IconDownload, IconPlus } from '@tabler/icons-react'
-import { data, Link, Outlet } from 'react-router'
-import { dataWithSuccess } from 'remix-toast'
-import { z } from 'zod'
+import { Link, Outlet } from 'react-router'
 import { Header } from '~/components/layout/header'
 import { Main } from '~/components/layout/main'
 import { ProfileDropdown } from '~/components/profile-dropdown'
@@ -18,12 +15,14 @@ import {
 } from './components/data-table'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
-  const searchParams = new URLSearchParams(request.url.split('?')[1])
+  const searchParams = new URLSearchParams(new URL(request.url).searchParams)
   const { page: currentPage, per_page: pageSize } =
-    PaginationSearchParamsSchema.parse(
-      Object.fromEntries(searchParams.entries()),
-    )
+    PaginationSearchParamsSchema.parse({
+      page: searchParams.get('page'),
+      per_page: searchParams.get('per_page'),
+    })
 
+  // slice the tasks based on the current page and page size
   const tasks = initialTasks.slice(
     currentPage * pageSize,
     currentPage * pageSize + pageSize,
@@ -35,30 +34,6 @@ export const loader = ({ request }: Route.LoaderArgs) => {
     tasks,
     pagination: { currentPage, pageSize, totalPages, totalItems },
   }
-}
-
-export const action = async ({ request }: Route.ActionArgs) => {
-  const submission = parseWithZod(await request.formData(), {
-    schema: z.object({
-      id: z.string(),
-      label: z.string(),
-    }),
-  })
-  if (submission.status !== 'success') {
-    throw data(null, { status: 400 })
-  }
-
-  // update the task label
-  const task = initialTasks.find((task) => task.id === submission.value.id)
-  if (!task) {
-    throw data(null, { status: 404 })
-  }
-  task.label = submission.value.label
-
-  return dataWithSuccess(null, {
-    message: 'Task label updated successfully!',
-    description: `The task ${submission.value.id} has been updated with the label ${submission.value.label}.`,
-  })
 }
 
 export default function Tasks({
