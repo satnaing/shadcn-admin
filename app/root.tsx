@@ -38,7 +38,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <Meta />
         <Links />
       </head>
-      <body className="scroll-smooth">
+      <body className="group/body scroll-smooth">
         <Toaster closeButton richColors />
         <ThemeProvider attribute="class">{children}</ThemeProvider>
         <ScrollRestoration />

@@ -19,7 +19,7 @@ export default function Users({ loaderData: { users } }: Route.ComponentProps) {
   return (
     <>
       {/* ===== Top Heading ===== */}
-      <Header sticky>
+      <Header fixed>
         <Search />
         <div className="ml-auto flex items-center space-x-4">
           <ThemeSwitch />

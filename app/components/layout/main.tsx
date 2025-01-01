@@ -5,16 +5,17 @@ interface MainProps extends React.ComponentPropsWithRef<'main'> {
   fixed?: boolean
 }
 
-export const Main = ({ fixed, ref, ...props }: MainProps) => {
+export const Main = ({ fixed, ...props }: MainProps) => {
   return (
     <main
-      ref={ref}
       className={cn(
+        'peer-[.header-fixed]/header:mt-16',
         'px-4 py-6',
-        fixed && 'flex flex-grow flex-col overflow-hidden',
+        fixed && 'fixed-main flex flex-grow flex-col overflow-hidden',
       )}
       {...props}
     />
   )
 }
+
 Main.displayName = 'Main'
