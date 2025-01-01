@@ -14,8 +14,36 @@ import type { Route } from './+types/route'
 import { columns } from './components/columns'
 import { DataTable } from './components/data-table'
 
-export const loader = () => {
-  return { tasks: initialTasks }
+export const loader = ({ request }: Route.LoaderArgs) => {
+  const searchParams = new URLSearchParams(request.url.split('?')[1])
+  const { page: currentPage, per_page: pageSize } = z
+    .object({
+      page: z.string().optional().default('0').transform(Number),
+      per_page: z
+        .union([
+          z.literal('10'),
+          z.literal('20'),
+          z.literal('30'),
+          z.literal('40'),
+          z.literal('50'),
+        ])
+        .optional()
+        .default('20')
+        .transform(Number),
+    })
+    .parse(Object.fromEntries(searchParams.entries()))
+
+  const tasks = initialTasks.slice(
+    currentPage * pageSize,
+    currentPage * pageSize + pageSize,
+  )
+  const totalPages = Math.ceil(initialTasks.length / pageSize)
+  const totalItems = initialTasks.length
+
+  return {
+    tasks,
+    pagination: { currentPage, pageSize, totalPages, totalItems },
+  }
 }
 
 export const action = async ({ request }: Route.ActionArgs) => {
@@ -42,10 +70,11 @@ export const action = async ({ request }: Route.ActionArgs) => {
   })
 }
 
-export default function Tasks({ loaderData: { tasks } }: Route.ComponentProps) {
+export default function Tasks({
+  loaderData: { tasks, pagination },
+}: Route.ComponentProps) {
   return (
     <>
-      {/* ===== Top Heading ===== */}
       <Header sticky>
         <Search />
         <div className="ml-auto flex items-center space-x-4">
@@ -76,7 +105,7 @@ export default function Tasks({ loaderData: { tasks } }: Route.ComponentProps) {
           </div>
         </div>
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
-          <DataTable data={tasks} columns={columns} />
+          <DataTable data={tasks} columns={columns} pagination={pagination} />
         </div>
         <Outlet />
       </Main>
