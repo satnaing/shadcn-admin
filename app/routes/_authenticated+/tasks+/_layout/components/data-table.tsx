@@ -25,6 +25,7 @@ import {
   type PaginationProps,
 } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
+export { PaginationSearchParamsSchema } from './data-table-pagination'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]

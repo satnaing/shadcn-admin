@@ -6,6 +6,7 @@ import {
 } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
 import { useSearchParams } from 'react-router'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import {
   Select,
@@ -25,24 +26,31 @@ export interface PaginationProps {
   pageSize: number
   totalPages: number
   totalItems: number
-  searchParamKeys?: {
-    page: string
-    pageSize: string
-  }
 }
+
+export const PaginationSearchParamsSchema = z.object({
+  page: z.string().optional().default('0').transform(Number),
+  per_page: z
+    .union([
+      z.literal('10'),
+      z.literal('20'),
+      z.literal('30'),
+      z.literal('40'),
+      z.literal('50'),
+    ])
+    .optional()
+    .default('20')
+    .transform(Number),
+})
+
+const searchParamKeys = {
+  page: 'page',
+  pageSize: 'per_page',
+} as const
 
 export function DataTablePagination<TData>({
   table,
-  pagination: {
-    currentPage,
-    pageSize,
-    totalPages,
-    totalItems,
-    searchParamKeys = {
-      page: 'page',
-      pageSize: 'per_page',
-    },
-  },
+  pagination: { currentPage, pageSize, totalPages, totalItems },
 }: DataTablePaginationProps<TData>) {
   const [, setSearchParams] = useSearchParams()
 

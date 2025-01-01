@@ -12,26 +12,17 @@ import { Button } from '~/components/ui/button'
 import { tasks as initialTasks } from '../_shared/data/tasks'
 import type { Route } from './+types/route'
 import { columns } from './components/columns'
-import { DataTable } from './components/data-table'
+import {
+  DataTable,
+  PaginationSearchParamsSchema,
+} from './components/data-table'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
   const searchParams = new URLSearchParams(request.url.split('?')[1])
-  const { page: currentPage, per_page: pageSize } = z
-    .object({
-      page: z.string().optional().default('0').transform(Number),
-      per_page: z
-        .union([
-          z.literal('10'),
-          z.literal('20'),
-          z.literal('30'),
-          z.literal('40'),
-          z.literal('50'),
-        ])
-        .optional()
-        .default('20')
-        .transform(Number),
-    })
-    .parse(Object.fromEntries(searchParams.entries()))
+  const { page: currentPage, per_page: pageSize } =
+    PaginationSearchParamsSchema.parse(
+      Object.fromEntries(searchParams.entries()),
+    )
 
   const tasks = initialTasks.slice(
     currentPage * pageSize,
