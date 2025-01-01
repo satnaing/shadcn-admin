@@ -41,7 +41,7 @@ export default function Tasks({
 }: Route.ComponentProps) {
   return (
     <>
-      <Header sticky>
+      <Header fixed>
         <Search />
         <div className="ml-auto flex items-center space-x-4">
           <ThemeSwitch />
