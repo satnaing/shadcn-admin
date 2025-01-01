@@ -1,8 +1,5 @@
-import { parseWithZod } from '@conform-to/zod'
 import { IconDownload, IconPlus } from '@tabler/icons-react'
-import { data, Link, Outlet } from 'react-router'
-import { dataWithSuccess } from 'remix-toast'
-import { z } from 'zod'
+import { Link, Outlet } from 'react-router'
 import { Header } from '~/components/layout/header'
 import { Main } from '~/components/layout/main'
 import { ProfileDropdown } from '~/components/profile-dropdown'
@@ -12,40 +9,38 @@ import { Button } from '~/components/ui/button'
 import { tasks as initialTasks } from '../_shared/data/tasks'
 import type { Route } from './+types/route'
 import { columns } from './components/columns'
-import { DataTable } from './components/data-table'
+import {
+  DataTable,
+  PaginationSearchParamsSchema,
+} from './components/data-table'
 
-export const loader = () => {
-  return { tasks: initialTasks }
+export const loader = ({ request }: Route.LoaderArgs) => {
+  const searchParams = new URLSearchParams(new URL(request.url).searchParams)
+  const { page: currentPage, per_page: pageSize } =
+    PaginationSearchParamsSchema.parse({
+      page: searchParams.get('page'),
+      per_page: searchParams.get('per_page'),
+    })
+
+  // slice the tasks based on the current page and page size
+  const tasks = initialTasks.slice(
+    (currentPage - 1) * pageSize,
+    (currentPage - 1) * pageSize + pageSize,
+  )
+  const totalPages = Math.ceil(initialTasks.length / pageSize)
+  const totalItems = initialTasks.length
+
+  return {
+    tasks,
+    pagination: { currentPage, pageSize, totalPages, totalItems },
+  }
 }
 
-export const action = async ({ request }: Route.ActionArgs) => {
-  const submission = parseWithZod(await request.formData(), {
-    schema: z.object({
-      id: z.string(),
-      label: z.string(),
-    }),
-  })
-  if (submission.status !== 'success') {
-    throw data(null, { status: 400 })
-  }
-
-  // update the task label
-  const task = initialTasks.find((task) => task.id === submission.value.id)
-  if (!task) {
-    throw data(null, { status: 404 })
-  }
-  task.label = submission.value.label
-
-  return dataWithSuccess(null, {
-    message: 'Task label updated successfully!',
-    description: `The task ${submission.value.id} has been updated with the label ${submission.value.label}.`,
-  })
-}
-
-export default function Tasks({ loaderData: { tasks } }: Route.ComponentProps) {
+export default function Tasks({
+  loaderData: { tasks, pagination },
+}: Route.ComponentProps) {
   return (
     <>
-      {/* ===== Top Heading ===== */}
       <Header sticky>
         <Search />
         <div className="ml-auto flex items-center space-x-4">
@@ -76,7 +71,7 @@ export default function Tasks({ loaderData: { tasks } }: Route.ComponentProps) {
           </div>
         </div>
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
-          <DataTable data={tasks} columns={columns} />
+          <DataTable data={tasks} columns={columns} pagination={pagination} />
         </div>
         <Outlet />
       </Main>

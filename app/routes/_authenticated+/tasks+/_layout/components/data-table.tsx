@@ -8,7 +8,6 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
@@ -21,17 +20,23 @@ import {
   TableHeader,
   TableRow,
 } from '~/components/ui/table'
-import { DataTablePagination } from './data-table-pagination'
+import {
+  DataTablePagination,
+  type PaginationProps,
+} from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
+export { PaginationSearchParamsSchema } from './data-table-pagination'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  pagination: PaginationProps
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  pagination,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
@@ -57,7 +62,6 @@ export function DataTable<TData, TValue>({
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
@@ -116,7 +120,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} pagination={pagination} />
     </div>
   )
 }
