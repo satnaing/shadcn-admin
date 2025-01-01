@@ -3,9 +3,8 @@ import { Separator } from '~/components/ui/separator'
 import { SidebarTrigger } from '~/components/ui/sidebar'
 import { cn } from '~/lib/utils'
 
-interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
+interface HeaderProps extends React.ComponentPropsWithRef<'header'> {
   fixed?: boolean
-  ref?: React.Ref<HTMLElement>
 }
 
 export const Header = ({
