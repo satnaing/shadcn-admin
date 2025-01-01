@@ -24,8 +24,8 @@ export const loader = ({ request }: Route.LoaderArgs) => {
 
   // slice the tasks based on the current page and page size
   const tasks = initialTasks.slice(
-    currentPage * pageSize,
-    currentPage * pageSize + pageSize,
+    (currentPage - 1) * pageSize,
+    (currentPage - 1) * pageSize + pageSize,
   )
   const totalPages = Math.ceil(initialTasks.length / pageSize)
   const totalItems = initialTasks.length

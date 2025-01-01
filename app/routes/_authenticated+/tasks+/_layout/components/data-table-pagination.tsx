@@ -31,7 +31,7 @@ export interface PaginationProps {
 export const PaginationSearchParamsSchema = z.object({
   page: z.preprocess(
     (val) => (val === null ? undefined : val),
-    z.string().optional().default('0').transform(Number),
+    z.string().optional().default('1').transform(Number),
   ),
   per_page: z.preprocess(
     (val) => (val === null ? undefined : val),
@@ -91,7 +91,7 @@ export function DataTablePagination<TData>({
           </Select>
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {currentPage + 1} of {totalPages}
+          Page {currentPage} of {totalPages}
         </div>
         <div className="flex items-center space-x-2">
           <Button
@@ -99,12 +99,15 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
-              setSearchParams((prev) => {
-                prev.delete(searchParamKeys.page)
-                return prev
-              })
+              setSearchParams(
+                (prev) => {
+                  prev.delete(searchParamKeys.page)
+                  return prev
+                },
+                { preventScrollReset: true },
+              )
             }}
-            disabled={currentPage === 0}
+            disabled={currentPage === 1}
           >
             <span className="sr-only">Go to first page</span>
             <DoubleArrowLeftIcon className="h-4 w-4" />
@@ -114,16 +117,19 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() => {
-              setSearchParams((prev) => {
-                if (currentPage === 1) {
-                  prev.delete(searchParamKeys.page)
-                } else {
-                  prev.set(searchParamKeys.page, `${currentPage - 1}`)
-                }
-                return prev
-              })
+              setSearchParams(
+                (prev) => {
+                  if (currentPage === 2) {
+                    prev.delete(searchParamKeys.page)
+                  } else {
+                    prev.set(searchParamKeys.page, `${currentPage - 1}`)
+                  }
+                  return prev
+                },
+                { preventScrollReset: true },
+              )
             }}
-            disabled={currentPage === 0}
+            disabled={currentPage === 1}
           >
             <span className="sr-only">Go to previous page</span>
             <ChevronLeftIcon className="h-4 w-4" />
@@ -133,12 +139,15 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() => {
-              setSearchParams((prev) => {
-                prev.set(searchParamKeys.page, `${currentPage + 1}`)
-                return prev
-              })
+              setSearchParams(
+                (prev) => {
+                  prev.set(searchParamKeys.page, `${currentPage + 1}`)
+                  return prev
+                },
+                { preventScrollReset: true },
+              )
             }}
-            disabled={currentPage === totalPages - 1 || totalPages === 0}
+            disabled={currentPage === totalPages || totalPages === 1}
           >
             <span className="sr-only">Go to next page</span>
             <ChevronRightIcon className="h-4 w-4" />
@@ -148,12 +157,15 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
-              setSearchParams((prev) => {
-                prev.set(searchParamKeys.page, `${totalPages - 1}`)
-                return prev
-              })
+              setSearchParams(
+                (prev) => {
+                  prev.set(searchParamKeys.page, `${totalPages}`)
+                  return prev
+                },
+                { preventScrollReset: true },
+              )
             }}
-            disabled={currentPage === totalPages - 1 || totalPages === 0}
+            disabled={currentPage === totalPages || totalPages === 1}
           >
             <span className="sr-only">Go to last page</span>
             <DoubleArrowRightIcon className="h-4 w-4" />
