@@ -1,16 +1,30 @@
 import { tasks as initialTasks } from '../_shared/data/tasks'
 
-export const listFilteredTasks = (
-  filters: Record<string, string[]>,
-  currentPage: number,
-  pageSize: number,
-) => {
-  const tasks = initialTasks.filter((task) => {
-    return Object.entries(filters).every(([key, value]) => {
-      if (value.length === 0) return true
-      return value.includes((task as unknown as Record<string, string>)[key])
+interface ListFilteredTasksArgs {
+  title?: string
+  filters: Record<string, string[]>
+  currentPage: number
+  pageSize: number
+}
+
+export const listFilteredTasks = ({
+  title = '',
+  filters,
+  currentPage,
+  pageSize,
+}: ListFilteredTasksArgs) => {
+  const tasks = initialTasks
+    .filter((task) => {
+      // Filter by title
+      return task.title.toLowerCase().includes(title.toLowerCase())
     })
-  })
+    .filter((task) => {
+      // Filter by other filters
+      return Object.entries(filters).every(([key, value]) => {
+        if (value.length === 0) return true
+        return value.includes((task as unknown as Record<string, string>)[key])
+      })
+    })
 
   const totalPages = Math.ceil(tasks.length / pageSize)
   const totalItems = tasks.length

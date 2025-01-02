@@ -20,20 +20,23 @@ export const loader = ({ request }: Route.LoaderArgs) => {
   const {
     page: currentPage,
     per_page: pageSize,
+    title,
     ...filters
   } = FilterSearchParamsSchema.merge(PaginationSearchParamsSchema).parse({
     page: searchParams.get('page'),
     per_page: searchParams.get('per_page'),
+    title: searchParams.get('title'),
     status: searchParams.getAll('status'),
     priority: searchParams.getAll('priority'),
   })
 
   // listFilteredTasks is a server-side function that fetch tasks from the database
-  const { data: tasks, pagination } = listFilteredTasks(
+  const { data: tasks, pagination } = listFilteredTasks({
+    title,
     filters,
     currentPage,
     pageSize,
-  )
+  })
 
   // getFacetedCounts is a server-side function that fetches the counts of each filter
   const facetedCounts = getFacetedCounts(['status', 'priority'], filters)
