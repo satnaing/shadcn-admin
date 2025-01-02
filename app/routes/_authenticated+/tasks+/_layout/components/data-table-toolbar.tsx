@@ -1,5 +1,6 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { priorities, statuses } from '../../_shared/data/data'
@@ -9,6 +10,11 @@ import { DataTableViewOptions } from './data-table-view-options'
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
 }
+
+export const FilterSearchParamsSchema = z.object({
+  status: z.array(z.string()).optional().default([]),
+  priority: z.array(z.string()).optional().default([]),
+})
 
 export function DataTableToolbar<TData>({
   table,
@@ -29,14 +35,14 @@ export function DataTableToolbar<TData>({
         <div className="flex gap-x-2">
           {table.getColumn('status') && (
             <DataTableFacetedFilter
-              column={table.getColumn('status')}
+              searchParamKey="status"
               title="Status"
               options={statuses}
             />
           )}
           {table.getColumn('priority') && (
             <DataTableFacetedFilter
-              column={table.getColumn('priority')}
+              searchParamKey="priority"
               title="Priority"
               options={priorities}
             />

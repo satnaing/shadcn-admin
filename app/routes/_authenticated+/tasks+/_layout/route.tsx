@@ -11,28 +11,49 @@ import type { Route } from './+types/route'
 import { columns } from './components/columns'
 import {
   DataTable,
+  FilterSearchParamsSchema,
   PaginationSearchParamsSchema,
 } from './components/data-table'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
   const searchParams = new URLSearchParams(new URL(request.url).searchParams)
-  const { page: currentPage, per_page: pageSize } =
-    PaginationSearchParamsSchema.parse({
-      page: searchParams.get('page'),
-      per_page: searchParams.get('per_page'),
+  const {
+    page: currentPage,
+    per_page: pageSize,
+    ...filters
+  } = FilterSearchParamsSchema.merge(PaginationSearchParamsSchema).parse({
+    page: searchParams.get('page'),
+    per_page: searchParams.get('per_page'),
+    status: searchParams.getAll('status'),
+    priority: searchParams.getAll('priority'),
+  })
+
+  // filter the tasks based on the filters
+  const filteredTasks = initialTasks.filter((task) => {
+    return Object.entries(filters).every(([key, value]) => {
+      if (value.length === 0) return true
+      return value.includes((task as unknown as Record<string, string>)[key])
     })
+  })
+
+  // calculate the total pages based on the filtered tasks and page size
+  const totalPages = Math.ceil(filteredTasks.length / pageSize)
+  const totalItems = filteredTasks.length
 
   // slice the tasks based on the current page and page size
-  const tasks = initialTasks.slice(
+  const tasks = filteredTasks.slice(
     (currentPage - 1) * pageSize,
-    (currentPage - 1) * pageSize + pageSize,
+    currentPage * pageSize,
   )
-  const totalPages = Math.ceil(initialTasks.length / pageSize)
-  const totalItems = initialTasks.length
 
   return {
     tasks,
-    pagination: { currentPage, pageSize, totalPages, totalItems },
+    pagination: {
+      currentPage,
+      pageSize,
+      totalPages,
+      totalItems,
+    },
   }
 }
 
