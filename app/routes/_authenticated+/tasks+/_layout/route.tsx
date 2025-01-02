@@ -6,7 +6,6 @@ import { ProfileDropdown } from '~/components/profile-dropdown'
 import { Search } from '~/components/search'
 import { ThemeSwitch } from '~/components/theme-switch'
 import { Button } from '~/components/ui/button'
-import { tasks as initialTasks } from '../_shared/data/tasks'
 import type { Route } from './+types/route'
 import { columns } from './components/columns'
 import {
@@ -14,6 +13,7 @@ import {
   FilterSearchParamsSchema,
   PaginationSearchParamsSchema,
 } from './components/data-table'
+import { getFacetedCounts, listFilteredTasks } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
   const searchParams = new URLSearchParams(new URL(request.url).searchParams)
@@ -28,49 +28,19 @@ export const loader = ({ request }: Route.LoaderArgs) => {
     priority: searchParams.getAll('priority'),
   })
 
-  // filter the tasks based on the filters
-  const filteredTasks = initialTasks.filter((task) => {
-    return Object.entries(filters).every(([key, value]) => {
-      if (value.length === 0) return true
-      return value.includes((task as unknown as Record<string, string>)[key])
-    })
-  })
-
-  // calculate the total pages based on the filtered tasks and page size
-  const totalPages = Math.ceil(filteredTasks.length / pageSize)
-  const totalItems = filteredTasks.length
-
-  // slice the tasks based on the current page and page size
-  const tasks = filteredTasks.slice(
-    (currentPage - 1) * pageSize,
-    currentPage * pageSize,
+  // listFilteredTasks is a server-side function that fetch tasks from the database
+  const { data: tasks, pagination } = listFilteredTasks(
+    filters,
+    currentPage,
+    pageSize,
   )
 
-  const facetedCounts = {
-    priority: initialTasks.reduce(
-      (acc, task) => {
-        acc[task.priority] = (acc[task.priority] ?? 0) + 1
-        return acc
-      },
-      {} as Record<string, number>,
-    ),
-    status: initialTasks.reduce(
-      (acc, task) => {
-        acc[task.status] = (acc[task.status] ?? 0) + 1
-        return acc
-      },
-      {} as Record<string, number>,
-    ),
-  }
+  // getFacetedCounts is a server-side function that fetches the counts of each filter
+  const facetedCounts = getFacetedCounts(['status', 'priority'], filters)
 
   return {
     tasks,
-    pagination: {
-      currentPage,
-      pageSize,
-      totalPages,
-      totalItems,
-    },
+    pagination,
     facetedCounts,
   }
 }

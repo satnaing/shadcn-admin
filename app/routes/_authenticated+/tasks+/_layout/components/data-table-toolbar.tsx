@@ -12,10 +12,7 @@ export const FilterSearchParamsSchema = z.object({
   priority: z.array(z.string()).optional().default([]),
 })
 
-export interface FacetedCountProps {
-  priority: Record<string, number>
-  status: Record<string, number>
-}
+export type FacetedCountProps = Record<string, Record<string, number>>
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
