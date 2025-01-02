@@ -72,10 +72,13 @@ export function DataTablePagination<TData>({
           <Select
             defaultValue={`${pageSize}`}
             onValueChange={(value) => {
-              setSearchParams((prev) => {
-                prev.set(searchParamKeys.pageSize, value)
-                return prev
-              })
+              setSearchParams(
+                (prev) => {
+                  prev.set(searchParamKeys.pageSize, value)
+                  return prev
+                },
+                { preventScrollReset: true },
+              )
             }}
           >
             <SelectTrigger className="h-8 w-[70px]">
