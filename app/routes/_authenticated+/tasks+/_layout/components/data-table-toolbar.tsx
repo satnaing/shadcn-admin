@@ -1,13 +1,16 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
+import { useSearchParams } from 'react-router'
 import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { priorities, statuses } from '../../_shared/data/data'
+import { useDebounce } from '../hooks/use-debounce'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
 
 export const FilterSearchParamsSchema = z.object({
+  title: z.string().optional(),
   status: z.array(z.string()).optional().default([]),
   priority: z.array(z.string()).optional().default([]),
 })
@@ -24,16 +27,28 @@ export function DataTableToolbar<TData>({
   facetedCounts,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
+  const [searchParams, setSearchParams] = useSearchParams()
+  const debounce = useDebounce(200)
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2">
         <Input
+          type="search"
           placeholder="Filter tasks..."
-          value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
-          onChange={(event) =>
-            table.getColumn('title')?.setFilterValue(event.target.value)
-          }
+          defaultValue={searchParams.get('title') ?? ''}
+          onChange={(event) => {
+            const value = event.currentTarget.value
+            debounce(() => {
+              setSearchParams(
+                (prev) => {
+                  prev.set('title', value)
+                  return prev
+                },
+                { preventScrollReset: true },
+              )
+            })
+          }}
           className="h-8 w-[150px] lg:w-[250px]"
         />
         <div className="flex gap-x-2">
