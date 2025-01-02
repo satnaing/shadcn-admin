@@ -7,17 +7,24 @@ import { priorities, statuses } from '../../_shared/data/data'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
 
-interface DataTableToolbarProps<TData> {
-  table: Table<TData>
-}
-
 export const FilterSearchParamsSchema = z.object({
   status: z.array(z.string()).optional().default([]),
   priority: z.array(z.string()).optional().default([]),
 })
 
+export interface FacetedCountProps {
+  priority: Record<string, number>
+  status: Record<string, number>
+}
+
+interface DataTableToolbarProps<TData> {
+  table: Table<TData>
+  facetedCounts?: FacetedCountProps
+}
+
 export function DataTableToolbar<TData>({
   table,
+  facetedCounts,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
 
@@ -37,14 +44,20 @@ export function DataTableToolbar<TData>({
             <DataTableFacetedFilter
               searchParamKey="status"
               title="Status"
-              options={statuses}
+              options={statuses.map((status) => ({
+                ...status,
+                count: facetedCounts?.status[status.value],
+              }))}
             />
           )}
           {table.getColumn('priority') && (
             <DataTableFacetedFilter
               searchParamKey="priority"
               title="Priority"
-              options={priorities}
+              options={priorities.map((priority) => ({
+                ...priority,
+                count: facetedCounts?.priority[priority.value],
+              }))}
             />
           )}
         </div>

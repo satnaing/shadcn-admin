@@ -22,7 +22,7 @@ import {
   DataTablePagination,
   type PaginationProps,
 } from './data-table-pagination'
-import { DataTableToolbar } from './data-table-toolbar'
+import { DataTableToolbar, type FacetedCountProps } from './data-table-toolbar'
 export { PaginationSearchParamsSchema } from './data-table-pagination'
 export { FilterSearchParamsSchema } from './data-table-toolbar'
 
@@ -30,12 +30,14 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   pagination: PaginationProps
+  facetedCounts?: FacetedCountProps
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   pagination,
+  facetedCounts,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
@@ -66,7 +68,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      <DataTableToolbar table={table} facetedCounts={facetedCounts} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>

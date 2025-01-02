@@ -26,6 +26,7 @@ interface DataTableFacetedFilterProps {
   options: {
     label: string
     value: string
+    count?: number
     icon?: React.ComponentType<{ className?: string }>
   }[]
 }
@@ -118,11 +119,10 @@ export function DataTableFacetedFilter({
                       <option.icon className="h-4 w-4 text-muted-foreground" />
                     )}
                     <span>{option.label}</span>
-                    {selectedValues?.includes(option.value) && (
-                      <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
-                        {selectedValues.includes(option.value)}
-                      </span>
-                    )}
+
+                    <span className="ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs">
+                      {option.count}
+                    </span>
                   </CommandItem>
                 )
               })}

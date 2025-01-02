@@ -46,6 +46,23 @@ export const loader = ({ request }: Route.LoaderArgs) => {
     currentPage * pageSize,
   )
 
+  const facetedCounts = {
+    priority: initialTasks.reduce(
+      (acc, task) => {
+        acc[task.priority] = (acc[task.priority] ?? 0) + 1
+        return acc
+      },
+      {} as Record<string, number>,
+    ),
+    status: initialTasks.reduce(
+      (acc, task) => {
+        acc[task.status] = (acc[task.status] ?? 0) + 1
+        return acc
+      },
+      {} as Record<string, number>,
+    ),
+  }
+
   return {
     tasks,
     pagination: {
@@ -54,11 +71,12 @@ export const loader = ({ request }: Route.LoaderArgs) => {
       totalPages,
       totalItems,
     },
+    facetedCounts,
   }
 }
 
 export default function Tasks({
-  loaderData: { tasks, pagination },
+  loaderData: { tasks, pagination, facetedCounts },
 }: Route.ComponentProps) {
   return (
     <>
@@ -92,7 +110,12 @@ export default function Tasks({
           </div>
         </div>
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
-          <DataTable data={tasks} columns={columns} pagination={pagination} />
+          <DataTable
+            data={tasks}
+            columns={columns}
+            pagination={pagination}
+            facetedCounts={facetedCounts}
+          />
         </div>
         <Outlet />
       </Main>
