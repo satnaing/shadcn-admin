@@ -93,15 +93,21 @@ export function DataTableFacetedFilter({
                     key={option.value}
                     onSelect={() => {
                       if (isSelected) {
-                        setSearchParams((prev) => {
-                          prev.delete(searchParamKey, option.value)
-                          return prev
-                        })
+                        setSearchParams(
+                          (prev) => {
+                            prev.delete(searchParamKey, option.value)
+                            return prev
+                          },
+                          { preventScrollReset: true },
+                        )
                       } else {
-                        setSearchParams((prev) => {
-                          prev.append(searchParamKey, option.value)
-                          return prev
-                        })
+                        setSearchParams(
+                          (prev) => {
+                            prev.append(searchParamKey, option.value)
+                            return prev
+                          },
+                          { preventScrollReset: true },
+                        )
                       }
                     }}
                   >
@@ -133,10 +139,13 @@ export function DataTableFacetedFilter({
                 <CommandGroup>
                   <CommandItem
                     onSelect={() =>
-                      setSearchParams((prev) => {
-                        prev.delete(searchParamKey)
-                        return prev
-                      })
+                      setSearchParams(
+                        (prev) => {
+                          prev.delete(searchParamKey)
+                          return prev
+                        },
+                        { preventScrollReset: true },
+                      )
                     }
                     className="justify-center text-center"
                   >
