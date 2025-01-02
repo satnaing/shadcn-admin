@@ -1,17 +1,27 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { priorities, statuses } from '../../_shared/data/data'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
 
+export const FilterSearchParamsSchema = z.object({
+  status: z.array(z.string()).optional().default([]),
+  priority: z.array(z.string()).optional().default([]),
+})
+
+export type FacetedCountProps = Record<string, Record<string, number>>
+
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
+  facetedCounts?: FacetedCountProps
 }
 
 export function DataTableToolbar<TData>({
   table,
+  facetedCounts,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
 
@@ -29,16 +39,22 @@ export function DataTableToolbar<TData>({
         <div className="flex gap-x-2">
           {table.getColumn('status') && (
             <DataTableFacetedFilter
-              column={table.getColumn('status')}
+              searchParamKey="status"
               title="Status"
-              options={statuses}
+              options={statuses.map((status) => ({
+                ...status,
+                count: facetedCounts?.status[status.value],
+              }))}
             />
           )}
           {table.getColumn('priority') && (
             <DataTableFacetedFilter
-              column={table.getColumn('priority')}
+              searchParamKey="priority"
               title="Priority"
-              options={priorities}
+              options={priorities.map((priority) => ({
+                ...priority,
+                count: facetedCounts?.priority[priority.value],
+              }))}
             />
           )}
         </div>

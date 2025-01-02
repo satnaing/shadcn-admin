@@ -6,38 +6,47 @@ import { ProfileDropdown } from '~/components/profile-dropdown'
 import { Search } from '~/components/search'
 import { ThemeSwitch } from '~/components/theme-switch'
 import { Button } from '~/components/ui/button'
-import { tasks as initialTasks } from '../_shared/data/tasks'
 import type { Route } from './+types/route'
 import { columns } from './components/columns'
 import {
   DataTable,
+  FilterSearchParamsSchema,
   PaginationSearchParamsSchema,
 } from './components/data-table'
+import { getFacetedCounts, listFilteredTasks } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
   const searchParams = new URLSearchParams(new URL(request.url).searchParams)
-  const { page: currentPage, per_page: pageSize } =
-    PaginationSearchParamsSchema.parse({
-      page: searchParams.get('page'),
-      per_page: searchParams.get('per_page'),
-    })
+  const {
+    page: currentPage,
+    per_page: pageSize,
+    ...filters
+  } = FilterSearchParamsSchema.merge(PaginationSearchParamsSchema).parse({
+    page: searchParams.get('page'),
+    per_page: searchParams.get('per_page'),
+    status: searchParams.getAll('status'),
+    priority: searchParams.getAll('priority'),
+  })
 
-  // slice the tasks based on the current page and page size
-  const tasks = initialTasks.slice(
-    (currentPage - 1) * pageSize,
-    (currentPage - 1) * pageSize + pageSize,
+  // listFilteredTasks is a server-side function that fetch tasks from the database
+  const { data: tasks, pagination } = listFilteredTasks(
+    filters,
+    currentPage,
+    pageSize,
   )
-  const totalPages = Math.ceil(initialTasks.length / pageSize)
-  const totalItems = initialTasks.length
+
+  // getFacetedCounts is a server-side function that fetches the counts of each filter
+  const facetedCounts = getFacetedCounts(['status', 'priority'], filters)
 
   return {
     tasks,
-    pagination: { currentPage, pageSize, totalPages, totalItems },
+    pagination,
+    facetedCounts,
   }
 }
 
 export default function Tasks({
-  loaderData: { tasks, pagination },
+  loaderData: { tasks, pagination, facetedCounts },
 }: Route.ComponentProps) {
   return (
     <>
@@ -71,7 +80,12 @@ export default function Tasks({
           </div>
         </div>
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
-          <DataTable data={tasks} columns={columns} pagination={pagination} />
+          <DataTable
+            data={tasks}
+            columns={columns}
+            pagination={pagination}
+            facetedCounts={facetedCounts}
+          />
         </div>
         <Outlet />
       </Main>
