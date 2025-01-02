@@ -10,7 +10,10 @@ import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
 
 export const FilterSearchParamsSchema = z.object({
-  title: z.string().optional().default(''),
+  title: z.preprocess(
+    (val) => (val === null ? undefined : val),
+    z.string().optional().default(''),
+  ),
   status: z.array(z.string()).optional().default([]),
   priority: z.array(z.string()).optional().default([]),
 })

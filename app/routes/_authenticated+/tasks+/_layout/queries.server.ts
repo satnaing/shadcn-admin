@@ -1,14 +1,14 @@
 import { tasks as initialTasks } from '../_shared/data/tasks'
 
 interface ListFilteredTasksArgs {
-  title?: string
+  title: string
   filters: Record<string, string[]>
   currentPage: number
   pageSize: number
 }
 
 export const listFilteredTasks = ({
-  title = '',
+  title,
   filters,
   currentPage,
   pageSize,
@@ -40,21 +40,33 @@ export const listFilteredTasks = ({
   }
 }
 
-export const getFacetedCounts = (
-  facets: string[],
-  filters: Record<string, string[]>,
-) => {
+interface GetFacetedCountsArgs {
+  title: string
+  facets: string[]
+  filters: Record<string, string[]>
+}
+export const getFacetedCounts = ({
+  title,
+  facets,
+  filters,
+}: GetFacetedCountsArgs) => {
   const facetedCounts: Record<string, Record<string, number>> = {}
 
   // For each facet, filter the tasks based on the filters and count the occurrences
   for (const facet of facets) {
     // Filter the tasks based on the filters
-    const filteredTasks = initialTasks.filter((task) => {
-      return Object.entries(filters).every(([key, value]) => {
-        if (key === facet || value.length === 0) return true
-        return value.includes((task as Record<string, string>)[key])
+    const filteredTasks = initialTasks
+      .filter((task) => {
+        // Filter by title
+        return task.title.toLowerCase().includes(title.toLowerCase())
       })
-    })
+      // Filter by other filters
+      .filter((task) => {
+        return Object.entries(filters).every(([key, value]) => {
+          if (key === facet || value.length === 0) return true
+          return value.includes((task as Record<string, string>)[key])
+        })
+      })
 
     // Count the occurrences of each facet value
     facetedCounts[facet] = filteredTasks.reduce(

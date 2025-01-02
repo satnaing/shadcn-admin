@@ -39,7 +39,11 @@ export const loader = ({ request }: Route.LoaderArgs) => {
   })
 
   // getFacetedCounts is a server-side function that fetches the counts of each filter
-  const facetedCounts = getFacetedCounts(['status', 'priority'], filters)
+  const facetedCounts = getFacetedCounts({
+    title,
+    facets: ['status', 'priority'],
+    filters,
+  })
 
   return {
     tasks,
