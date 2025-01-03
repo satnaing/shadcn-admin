@@ -1,7 +1,7 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useSearchParams } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
 import { z } from 'zod'
 import type { Route } from './+types/route'
@@ -16,6 +16,7 @@ export const formSchema = z.object({
 })
 
 export const action = async ({ request }: Route.ActionArgs) => {
+  const url = new URL(request.url)
   const submission = parseWithZod(await request.formData(), {
     schema: formSchema,
   })
@@ -25,7 +26,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
   await sleep(1000)
 
-  return redirectWithSuccess('/users', {
+  return redirectWithSuccess(`/users?${url.searchParams.toString()}`, {
     message: 'User invited successfully!',
     description: JSON.stringify(submission.value),
   })
@@ -34,6 +35,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 export default function UserInvite() {
   const [open, setOpen] = useState(true)
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   return (
     <UsersInviteDialog
@@ -44,7 +46,7 @@ export default function UserInvite() {
           setOpen(false)
           // wait for the drawer to close
           setTimeout(() => {
-            navigate('/users')
+            navigate(`/users?${searchParams.toString()}`)
           }, 300) // the duration of the modal close animation
         }
       }}

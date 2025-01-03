@@ -1,24 +1,60 @@
 import { IconMailPlus, IconUserPlus } from '@tabler/icons-react'
-import { Link, Outlet } from 'react-router'
+import { Link, Outlet, useSearchParams } from 'react-router'
 import { Header } from '~/components/layout/header'
 import { Main } from '~/components/layout/main'
 import { ProfileDropdown } from '~/components/profile-dropdown'
 import { Search } from '~/components/search'
 import { ThemeSwitch } from '~/components/theme-switch'
 import { Button } from '~/components/ui/button'
-import { users as initialUsers } from '../_shared/data/users'
 import type { Route } from './+types/route'
 import { columns } from './components/users-columns'
 import { UsersTable } from './components/users-table'
+import {
+  FilterSchema,
+  PaginationSchema,
+  QuerySchema,
+} from './hooks/use-filter-pagination'
+import { getFacetedCounts, listFilteredUsers } from './queries.server'
 
-export const loader = () => {
-  return { users: initialUsers }
+export const loader = ({ request }: Route.LoaderArgs) => {
+  const searchParams = new URLSearchParams(new URL(request.url).searchParams)
+
+  const { username } = QuerySchema.parse({
+    username: searchParams.get('username'),
+  })
+
+  const { ...filters } = FilterSchema.parse({
+    status: searchParams.getAll('status'),
+    priority: searchParams.getAll('priority'),
+  })
+
+  const { page: currentPage, per_page: pageSize } = PaginationSchema.parse({
+    page: searchParams.get('page'),
+    per_page: searchParams.get('per_page'),
+  })
+
+  const { pagination, data: users } = listFilteredUsers({
+    username,
+    filters,
+    currentPage,
+    pageSize,
+  })
+
+  const facetedCounts = getFacetedCounts({
+    facets: ['status', 'role'],
+    username,
+    filters,
+  })
+
+  return { users, pagination, facetedCounts }
 }
 
-export default function Users({ loaderData: { users } }: Route.ComponentProps) {
+export default function Users({
+  loaderData: { users, pagination, facetedCounts },
+}: Route.ComponentProps) {
+  const [searchParams] = useSearchParams()
   return (
     <>
-      {/* ===== Top Heading ===== */}
       <Header fixed>
         <Search />
         <div className="ml-auto flex items-center space-x-4">
@@ -37,19 +73,24 @@ export default function Users({ loaderData: { users } }: Route.ComponentProps) {
           </div>
           <div className="flex gap-2">
             <Button variant="outline" className="space-x-1" asChild>
-              <Link to="/users/invite">
+              <Link to={`/users/invite?${searchParams.toString()}`}>
                 <span>Invite User</span> <IconMailPlus size={18} />
               </Link>
             </Button>
             <Button className="space-x-1" asChild>
-              <Link to="/users/add">
+              <Link to={`/users/add?${searchParams.toString()}`}>
                 <span>Add User</span> <IconUserPlus size={18} />
               </Link>
             </Button>
           </div>
         </div>
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0">
-          <UsersTable data={users} columns={columns} />
+          <UsersTable
+            data={users}
+            columns={columns}
+            pagination={pagination}
+            facetedCounts={facetedCounts}
+          />
         </div>
 
         <Outlet />

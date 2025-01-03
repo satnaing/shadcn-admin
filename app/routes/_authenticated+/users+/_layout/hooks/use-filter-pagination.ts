@@ -5,7 +5,7 @@ import { useDebounce } from '~/hooks/use-debounce'
 
 // Define the types for filters and pagination
 export const QuerySchema = z.object({
-  title: z.preprocess(
+  username: z.preprocess(
     (val) => (val === null ? undefined : val),
     z.string().optional().default(''),
   ),
@@ -13,7 +13,7 @@ export const QuerySchema = z.object({
 
 export const FilterSchema = z.object({
   status: z.array(z.string()).optional().default([]),
-  priority: z.array(z.string()).optional().default([]),
+  role: z.array(z.string()).optional().default([]),
 })
 
 export const PaginationSchema = z.object({
@@ -47,14 +47,14 @@ export function useFilterPagination() {
 
   const queries: Queries = useMemo(() => {
     return QuerySchema.parse({
-      title: searchParams.get('title'),
+      username: searchParams.get('username'),
     })
   }, [searchParams])
 
   const filters: Filters = useMemo(() => {
     return FilterSchema.parse({
       status: searchParams.getAll('status'),
-      priority: searchParams.getAll('priority'),
+      role: searchParams.getAll('role'),
     })
   }, [searchParams])
 

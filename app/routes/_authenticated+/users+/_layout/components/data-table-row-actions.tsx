@@ -1,7 +1,7 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { IconEdit, IconTrash } from '@tabler/icons-react'
 import type { Row } from '@tanstack/react-table'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 import { Button } from '~/components/ui/button'
 import {
   DropdownMenu,
@@ -18,6 +18,7 @@ interface DataTableRowActionsProps {
 }
 
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
+  const [searchParams] = useSearchParams()
   return (
     <>
       <DropdownMenu modal={false}>
@@ -32,7 +33,9 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
           <DropdownMenuItem asChild>
-            <Link to={`/users/${row.original.id}/update`}>
+            <Link
+              to={`/users/${row.original.id}/update?${searchParams.toString()}`}
+            >
               Edit
               <DropdownMenuShortcut>
                 <IconEdit size={16} />
@@ -41,7 +44,9 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild className="text-red-500">
-            <Link to={`/users/${row.original.id}/delete`}>
+            <Link
+              to={`/users/${row.original.id}/delete?${searchParams.toString()}`}
+            >
               Delete
               <DropdownMenuShortcut>
                 <IconTrash size={16} />
