@@ -1,22 +1,11 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
-import { useSearchParams } from 'react-router'
-import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { priorities, statuses } from '../../_shared/data/data'
-import { useDebounce } from '../hooks/use-debounce'
+import { useFilterPagination } from '../hooks/use-filter-pagination'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
-
-export const FilterSearchParamsSchema = z.object({
-  title: z.preprocess(
-    (val) => (val === null ? undefined : val),
-    z.string().optional().default(''),
-  ),
-  status: z.array(z.string()).optional().default([]),
-  priority: z.array(z.string()).optional().default([]),
-})
 
 export type FacetedCountProps = Record<string, Record<string, number>>
 
@@ -29,27 +18,21 @@ export function DataTableToolbar<TData>({
   table,
   facetedCounts,
 }: DataTableToolbarProps<TData>) {
-  const isFiltered = table.getState().columnFilters.length > 0
-  const [searchParams, setSearchParams] = useSearchParams()
-  const debounce = useDebounce(200)
+  const { queries, updateQueries, isFiltered, resetFilters } =
+    useFilterPagination()
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2">
         <Input
+          key={queries.title}
           type="search"
           placeholder="Filter tasks..."
-          defaultValue={searchParams.get('title') ?? ''}
+          defaultValue={queries.title}
           onChange={(event) => {
             const value = event.currentTarget.value
-            debounce(() => {
-              setSearchParams(
-                (prev) => {
-                  prev.set('title', value)
-                  return prev
-                },
-                { preventScrollReset: true },
-              )
+            updateQueries({
+              title: value,
             })
           }}
           className="h-8 w-[150px] lg:w-[250px]"
@@ -57,7 +40,7 @@ export function DataTableToolbar<TData>({
         <div className="flex gap-x-2">
           {table.getColumn('status') && (
             <DataTableFacetedFilter
-              searchParamKey="status"
+              filterKey="status"
               title="Status"
               options={statuses.map((status) => ({
                 ...status,
@@ -67,7 +50,7 @@ export function DataTableToolbar<TData>({
           )}
           {table.getColumn('priority') && (
             <DataTableFacetedFilter
-              searchParamKey="priority"
+              filterKey="priority"
               title="Priority"
               options={priorities.map((priority) => ({
                 ...priority,
@@ -79,7 +62,7 @@ export function DataTableToolbar<TData>({
         {isFiltered && (
           <Button
             variant="ghost"
-            onClick={() => table.resetColumnFilters()}
+            onClick={() => resetFilters()}
             className="h-8 px-2 lg:px-3"
           >
             Reset

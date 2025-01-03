@@ -21,8 +21,6 @@ import {
   type PaginationProps,
 } from './data-table-pagination'
 import { DataTableToolbar, type FacetedCountProps } from './data-table-toolbar'
-export { PaginationSearchParamsSchema } from './data-table-pagination'
-export { FilterSearchParamsSchema } from './data-table-toolbar'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
