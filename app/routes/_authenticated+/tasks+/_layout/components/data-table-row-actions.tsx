@@ -1,7 +1,7 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { IconTrash } from '@tabler/icons-react'
 import type { Row } from '@tanstack/react-table'
-import { Link, useFetcher } from 'react-router'
+import { Link, useFetcher, useSearchParams } from 'react-router'
 import { Button } from '~/components/ui/button'
 import {
   DropdownMenu,
@@ -28,6 +28,7 @@ export function DataTableRowActions<TData>({
 }: DataTableRowActionsProps<TData>) {
   const task = taskSchema.parse(row.original)
   const fetcher = useFetcher({ key: `task-label-${task.id}` })
+  const [searchParams] = useSearchParams()
 
   return (
     <DropdownMenu modal={false}>
@@ -42,7 +43,9 @@ export function DataTableRowActions<TData>({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem asChild>
-          <Link to={`/tasks/${task.id}/update`}>Edit</Link>
+          <Link to={`/tasks/${task.id}/update?${searchParams.toString()}`}>
+            Edit
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem disabled>Make a copy</DropdownMenuItem>
         <DropdownMenuItem disabled>Favorite</DropdownMenuItem>
@@ -72,7 +75,7 @@ export function DataTableRowActions<TData>({
         </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild className="text-red-500">
-          <Link to={`/tasks/${task.id}/delete`}>
+          <Link to={`/tasks/${task.id}/delete?${searchParams.toString()}`}>
             Delete
             <DropdownMenuShortcut>
               <IconTrash size={16} />
