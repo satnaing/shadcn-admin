@@ -27,6 +27,7 @@ export function DataTableToolbar<TData>({
         <Input
           key={queries.title}
           type="search"
+          autoFocus
           placeholder="Filter tasks..."
           defaultValue={queries.title}
           onChange={(event) => {
