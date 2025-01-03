@@ -47,7 +47,7 @@ export function useFilterPagination() {
 
   const queries: Queries = useMemo(() => {
     return QuerySchema.parse({
-      title: searchParams.get('title'),
+      username: searchParams.get('username'),
     })
   }, [searchParams])
 
