@@ -75,6 +75,7 @@ export function DataTablePagination<TData>({
               setSearchParams(
                 (prev) => {
                   prev.set(searchParamKeys.pageSize, value)
+                  prev.set(searchParamKeys.page, '1')
                   return prev
                 },
                 { preventScrollReset: true },
