@@ -8,26 +8,29 @@ import { ThemeSwitch } from '~/components/theme-switch'
 import { Button } from '~/components/ui/button'
 import type { Route } from './+types/route'
 import { columns } from './components/columns'
+import { DataTable } from './components/data-table'
 import {
-  DataTable,
-  FilterSearchParamsSchema,
-  PaginationSearchParamsSchema,
-} from './components/data-table'
+  FilterSchema,
+  PaginationSchema,
+  QuerySchema,
+} from './hooks/use-filter-pagination'
 import { getFacetedCounts, listFilteredTasks } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
   const searchParams = new URLSearchParams(new URL(request.url).searchParams)
-  const {
-    page: currentPage,
-    per_page: pageSize,
-    title,
-    ...filters
-  } = FilterSearchParamsSchema.merge(PaginationSearchParamsSchema).parse({
-    page: searchParams.get('page'),
-    per_page: searchParams.get('per_page'),
+
+  const { title } = QuerySchema.parse({
     title: searchParams.get('title'),
+  })
+
+  const { ...filters } = FilterSchema.parse({
     status: searchParams.getAll('status'),
     priority: searchParams.getAll('priority'),
+  })
+
+  const { page: currentPage, per_page: pageSize } = PaginationSchema.parse({
+    page: searchParams.get('page'),
+    per_page: searchParams.get('per_page'),
   })
 
   // listFilteredTasks is a server-side function that fetch tasks from the database

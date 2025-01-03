@@ -1,6 +1,5 @@
 import { CheckIcon, PlusCircledIcon } from '@radix-ui/react-icons'
 import type * as React from 'react'
-import { useSearchParams } from 'react-router'
 import { Badge } from '~/components/ui/badge'
 import { Button } from '~/components/ui/button'
 import {
@@ -19,10 +18,14 @@ import {
 } from '~/components/ui/popover'
 import { Separator } from '~/components/ui/separator'
 import { cn } from '~/lib/utils'
+import {
+  useFilterPagination,
+  type Filters,
+} from '../hooks/use-filter-pagination'
 
 interface DataTableFacetedFilterProps {
   title?: string
-  searchParamKey: string
+  filterKey: keyof Filters
   options: {
     label: string
     value: string
@@ -33,11 +36,11 @@ interface DataTableFacetedFilterProps {
 
 export function DataTableFacetedFilter({
   title,
-  searchParamKey,
+  filterKey,
   options,
 }: DataTableFacetedFilterProps) {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const selectedValues = searchParams.getAll(searchParamKey)
+  const { filters, updateFilters } = useFilterPagination()
+  const selectedValues = filters[filterKey]
 
   return (
     <Popover>
@@ -93,21 +96,15 @@ export function DataTableFacetedFilter({
                     key={option.value}
                     onSelect={() => {
                       if (isSelected) {
-                        setSearchParams(
-                          (prev) => {
-                            prev.delete(searchParamKey, option.value)
-                            return prev
-                          },
-                          { preventScrollReset: true },
-                        )
+                        updateFilters({
+                          [filterKey]: [
+                            ...selectedValues.filter((v) => v !== option.value),
+                          ],
+                        })
                       } else {
-                        setSearchParams(
-                          (prev) => {
-                            prev.append(searchParamKey, option.value)
-                            return prev
-                          },
-                          { preventScrollReset: true },
-                        )
+                        updateFilters({
+                          [filterKey]: [...selectedValues, option.value],
+                        })
                       }
                     }}
                   >
@@ -139,13 +136,9 @@ export function DataTableFacetedFilter({
                 <CommandGroup>
                   <CommandItem
                     onSelect={() =>
-                      setSearchParams(
-                        (prev) => {
-                          prev.delete(searchParamKey)
-                          return prev
-                        },
-                        { preventScrollReset: true },
-                      )
+                      updateFilters({
+                        [filterKey]: undefined,
+                      })
                     }
                     className="justify-center text-center"
                   >
