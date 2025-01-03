@@ -1,11 +1,11 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
 import { Button } from '~/components/ui/button'
-import { Input } from '~/components/ui/input'
 import { priorities, statuses } from '../../_shared/data/data'
 import { useFilterPagination } from '../hooks/use-filter-pagination'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
+import { SearchInput } from './search-input'
 
 export type FacetedCountProps = Record<string, Record<string, number>>
 
@@ -24,19 +24,16 @@ export function DataTableToolbar<TData>({
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2">
-        <Input
+        <SearchInput
           key={queries.title}
-          type="search"
           autoFocus
           placeholder="Filter tasks..."
           defaultValue={queries.title}
-          onChange={(event) => {
-            const value = event.currentTarget.value
+          onSearch={(value) => {
             updateQueries({
               title: value,
             })
           }}
-          className="h-8 w-[150px] lg:w-[250px]"
         />
         <div className="flex gap-x-2">
           {table.getColumn('status') && (
