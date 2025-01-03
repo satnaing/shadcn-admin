@@ -69,7 +69,6 @@ export function useFilterPagination() {
     debounce(() => {
       setSearchParams(
         (prev) => {
-          console.log({ newQueries })
           for (const [key, value] of Object.entries(newQueries)) {
             if (value === undefined || value === '') {
               prev.delete(key)
