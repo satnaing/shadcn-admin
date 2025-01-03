@@ -1,7 +1,7 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useSearchParams } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
 import {
   TasksMutateDrawer,
@@ -11,6 +11,7 @@ import { tasks } from '../_shared/data/tasks'
 import type { Route } from './+types/route'
 
 export const action = async ({ request }: Route.ActionArgs) => {
+  const url = new URL(request.url)
   const submission = parseWithZod(await request.formData(), {
     schema: createSchema,
   })
@@ -28,7 +29,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
   const id = `TASK-${String(maxIdNumber + 1).padStart(4, '0')}`
   tasks.unshift({ id, ...task })
 
-  return redirectWithSuccess('/tasks', {
+  return redirectWithSuccess(`/tasks?${url.searchParams.toString()}`, {
     message: 'Task created successfully',
     description: JSON.stringify(submission.value),
   })
@@ -37,6 +38,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 export default function TaskCreate() {
   const [open, setOpen] = useState(true)
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   return (
     <TasksMutateDrawer
@@ -47,7 +49,7 @@ export default function TaskCreate() {
           setOpen(false)
           // wait for the drawer to close
           setTimeout(() => {
-            navigate('/tasks', {
+            navigate(`/tasks?${searchParams.toString()}`, {
               viewTransition: true,
             })
           }, 300) // the duration of the drawer close animation

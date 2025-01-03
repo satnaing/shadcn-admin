@@ -28,11 +28,15 @@ export const listFilteredTasks = ({
 
   const totalPages = Math.ceil(tasks.length / pageSize)
   const totalItems = tasks.length
+  const newCurrentPage = Math.min(currentPage, totalPages)
 
   return {
-    data: tasks.slice((currentPage - 1) * pageSize, currentPage * pageSize),
+    data: tasks.slice(
+      (newCurrentPage - 1) * pageSize,
+      newCurrentPage * pageSize,
+    ),
     pagination: {
-      currentPage,
+      currentPage: newCurrentPage,
       pageSize,
       totalPages,
       totalItems,
@@ -41,13 +45,13 @@ export const listFilteredTasks = ({
 }
 
 interface GetFacetedCountsArgs {
-  title: string
   facets: string[]
+  title: string
   filters: Record<string, string[]>
 }
 export const getFacetedCounts = ({
-  title,
   facets,
+  title,
   filters,
 }: GetFacetedCountsArgs) => {
   const facetedCounts: Record<string, Record<string, number>> = {}

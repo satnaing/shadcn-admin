@@ -1,7 +1,7 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useSearchParams } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
 import { z } from 'zod'
 import type { Route } from './+types/route'
@@ -17,6 +17,7 @@ export const formSchema = z.object({
 })
 
 export const action = async ({ request }: Route.ActionArgs) => {
+  const url = new URL(request.url)
   const submission = parseWithZod(await request.formData(), {
     schema: formSchema,
   })
@@ -27,7 +28,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
   await sleep(1000)
 
   // Create a new task
-  return redirectWithSuccess('/tasks', {
+  return redirectWithSuccess(`/tasks?${url.search.toString()}`, {
     message: 'Tasks imported successfully.',
     description: JSON.stringify(submission.value),
   })
@@ -36,6 +37,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 export default function TaskImport() {
   const [open, setOpen] = useState(true)
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   return (
     <TasksImportDialog
@@ -46,7 +48,7 @@ export default function TaskImport() {
           setOpen(false)
           // wait for the modal to close
           setTimeout(() => {
-            navigate('/tasks', {
+            navigate(`/tasks?${searchParams.toString()}`, {
               viewTransition: true,
             })
           }, 300) // the duration of the modal close animation

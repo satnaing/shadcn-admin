@@ -1,6 +1,6 @@
 import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
-import { data, useNavigate } from 'react-router'
+import { data, useNavigate, useSearchParams } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
 import { ConfirmDialog } from '~/components/confirm-dialog'
 import { tasks } from '../_shared/data/tasks'
@@ -14,7 +14,8 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   return { task }
 }
 
-export const action = async ({ params }: Route.ActionArgs) => {
+export const action = async ({ request, params }: Route.ActionArgs) => {
+  const url = new URL(request.url)
   const taskIndex = tasks.findIndex((t) => t.id === params.task)
   if (taskIndex === -1) {
     throw data(null, { status: 404, statusText: 'Task not found' })
@@ -24,7 +25,7 @@ export const action = async ({ params }: Route.ActionArgs) => {
   await sleep(1000)
   tasks.splice(taskIndex, 1)
 
-  return redirectWithSuccess('/tasks', {
+  return redirectWithSuccess(`/tasks?${url.searchParams}`, {
     message: 'Task deleted successfully',
     description: `Task with ID ${params.task} has been deleted.`,
   })
@@ -35,6 +36,7 @@ export default function TaskDelete({
 }: Route.ComponentProps) {
   const [open, setOpen] = useState(true)
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   return (
     <ConfirmDialog
@@ -46,7 +48,7 @@ export default function TaskDelete({
           setOpen(false)
           // wait for the modal to close
           setTimeout(() => {
-            navigate('/tasks', {
+            navigate(`/tasks?${searchParams.toString()}`, {
               viewTransition: true,
             })
           }, 300) // the duration of the modal close animation

@@ -1,5 +1,5 @@
 import { IconDownload, IconPlus } from '@tabler/icons-react'
-import { Link, Outlet } from 'react-router'
+import { Link, Outlet, useSearchParams } from 'react-router'
 import { Header } from '~/components/layout/header'
 import { Main } from '~/components/layout/main'
 import { ProfileDropdown } from '~/components/profile-dropdown'
@@ -40,8 +40,8 @@ export const loader = ({ request }: Route.LoaderArgs) => {
 
   // getFacetedCounts is a server-side function that fetches the counts of each filter
   const facetedCounts = getFacetedCounts({
-    title,
     facets: ['status', 'priority'],
+    title,
     filters,
   })
 
@@ -55,6 +55,8 @@ export const loader = ({ request }: Route.LoaderArgs) => {
 export default function Tasks({
   loaderData: { tasks, pagination, facetedCounts },
 }: Route.ComponentProps) {
+  const [searchParams] = useSearchParams()
+
   return (
     <>
       <Header fixed>
@@ -75,12 +77,12 @@ export default function Tasks({
           </div>
           <div className="flex gap-2">
             <Button variant="outline" className="space-x-1" asChild>
-              <Link to="/tasks/import">
+              <Link to={`/tasks/import?${searchParams.toString()}`}>
                 <span>Import</span> <IconDownload size={18} />
               </Link>
             </Button>
             <Button className="space-x-1" asChild>
-              <Link to="/tasks/create">
+              <Link to={`/tasks/create?${searchParams.toString()}`}>
                 <span>Create</span> <IconPlus size={18} />
               </Link>
             </Button>
