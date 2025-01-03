@@ -45,7 +45,7 @@ export const action = async ({ request, params }: Route.ActionArgs) => {
   users.length = 0
   users.push(...updatedUsers)
 
-  return redirectWithSuccess(`/users${url.searchParams.toString()}`, {
+  return redirectWithSuccess(`/users?${url.searchParams.toString()}`, {
     message: 'User updated successfully',
     description: JSON.stringify(updatedUser),
   })

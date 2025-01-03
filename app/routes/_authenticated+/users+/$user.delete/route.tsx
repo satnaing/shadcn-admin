@@ -27,7 +27,7 @@ export const action = async ({ request, params }: Route.ActionArgs) => {
   users.length = 0
   users.push(...updatedUsers)
 
-  return redirectWithSuccess(`/users${url.searchParams.toString()}`, {
+  return redirectWithSuccess(`/users?${url.searchParams.toString()}`, {
     message: 'User deleted successfully!',
     description: `The user ${user.email} has been removed.`,
   })
@@ -50,7 +50,7 @@ export default function UserDelete({
           setOpen(false)
           // wait for the drawer to close
           setTimeout(() => {
-            navigate(`/users${searchParams.toString()}`)
+            navigate(`/users?${searchParams.toString()}`)
           }, 300) // the duration of the modal close animation
         }
       }}
