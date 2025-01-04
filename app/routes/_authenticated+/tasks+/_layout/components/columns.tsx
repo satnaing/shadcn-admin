@@ -1,4 +1,5 @@
 import type { ColumnDef } from '@tanstack/react-table'
+import { useFetcher } from 'react-router'
 import { Badge } from '~/components/ui/badge'
 import { Checkbox } from '~/components/ui/checkbox'
 import { labels, priorities, statuses } from '../../_shared/data/data'
@@ -47,10 +48,16 @@ export const columns: ColumnDef<Task>[] = [
     ),
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.label)
+      const fetcher = useFetcher({ key: `task-label-${row.original.id}` }) // for optimistic update
 
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
+          {label && (
+            <Badge variant="outline" className="capitalize">
+              {fetcher.formData?.get('label')?.toString() ?? label.label}
+            </Badge>
+          )}
+
           <span className="max-w-32 truncate font-medium sm:max-w-72 md:max-w-[31rem]">
             {row.getValue('title')}
           </span>
