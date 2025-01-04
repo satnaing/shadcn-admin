@@ -59,7 +59,7 @@ export function DataTableRowActions<TData>({
                 fetcher.submit(
                   { id: task.id, label: value },
                   {
-                    action: '/tasks',
+                    action: `/tasks/${task.id}/label`,
                     method: 'POST',
                   },
                 )
