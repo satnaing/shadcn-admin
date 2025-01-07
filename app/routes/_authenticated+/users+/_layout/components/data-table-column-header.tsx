@@ -46,7 +46,7 @@ export function DataTableColumnHeader<TData, TValue>({
             <span>{title}</span>
             {column.id === sort.sort_by && sort.sort_order === 'desc' ? (
               <ArrowDownIcon className="h-4 w-4" />
-            ) : (column.id === sort.sort_by && sort.sort_order) === 'asc' ? (
+            ) : column.id === sort.sort_by && sort.sort_order === 'asc' ? (
               <ArrowUpIcon className="h-4 w-4" />
             ) : (
               <CaretSortIcon className="h-4 w-4" />
