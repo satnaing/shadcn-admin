@@ -31,15 +31,20 @@ export const listFilteredUsers = ({
     })
     .sort((a, b) => {
       if (!sortBy) return 0
-      if (sortOrder === 'asc') {
-        return (a as unknown as Record<string, string>)[sortBy].localeCompare(
-          (b as unknown as Record<string, string>)[sortBy],
-        )
+
+      const aValue = a[sortBy as keyof typeof a]
+      const bValue = b[sortBy as keyof typeof b]
+
+      if (typeof aValue !== 'string' || typeof bValue !== 'string') {
+        console.warn(`Invalid sort field type for ${sortBy}`)
+        return 0
       }
-      return (b as unknown as Record<string, string>)[sortBy].localeCompare(
-        (a as unknown as Record<string, string>)[sortBy],
-      )
+
+      return sortOrder === 'asc'
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue)
     })
+
   const totalPages = Math.ceil(users.length / pageSize)
   const totalItems = users.length
   const newCurrentPage = Math.min(currentPage, totalPages)

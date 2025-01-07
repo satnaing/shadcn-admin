@@ -31,14 +31,26 @@ export const listFilteredTasks = ({
     })
     .sort((a, b) => {
       if (!sortBy) return 0
-      if (sortOrder === 'asc') {
-        return (a as Record<string, string>)[sortBy].localeCompare(
-          (b as Record<string, string>)[sortBy],
-        )
+
+      const aValue = (a as Record<string, unknown>)[sortBy]
+      const bValue = (b as Record<string, unknown>)[sortBy]
+
+      // Validate field existence
+      if (aValue === undefined || bValue === undefined) return 0
+
+      // Handle different types appropriately
+      if (typeof aValue === 'number' && typeof bValue === 'number') {
+        return sortOrder === 'asc' ? aValue - bValue : bValue - aValue
       }
-      return (b as Record<string, string>)[sortBy].localeCompare(
-        (a as Record<string, string>)[sortBy],
-      )
+
+      // Convert to string for string comparison
+      const aStr = String(aValue)
+      const bStr = String(bValue)
+
+      if (sortOrder === 'asc') {
+        return aStr.localeCompare(bStr)
+      }
+      return bStr.localeCompare(aStr)
     })
 
   const totalPages = Math.ceil(tasks.length / pageSize)
