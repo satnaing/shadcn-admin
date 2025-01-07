@@ -5,6 +5,8 @@ interface ListFilteredTasksArgs {
   filters: Record<string, string[]>
   currentPage: number
   pageSize: number
+  sortBy?: string
+  sortOrder?: 'asc' | 'desc'
 }
 
 export const listFilteredTasks = ({
@@ -12,6 +14,8 @@ export const listFilteredTasks = ({
   filters,
   currentPage,
   pageSize,
+  sortBy,
+  sortOrder,
 }: ListFilteredTasksArgs) => {
   const tasks = initialTasks
     .filter((task) => {
@@ -24,6 +28,17 @@ export const listFilteredTasks = ({
         if (value.length === 0) return true
         return value.includes((task as unknown as Record<string, string>)[key])
       })
+    })
+    .sort((a, b) => {
+      if (!sortBy) return 0
+      if (sortOrder === 'asc') {
+        return (a as Record<string, string>)[sortBy].localeCompare(
+          (b as Record<string, string>)[sortBy],
+        )
+      }
+      return (b as Record<string, string>)[sortBy].localeCompare(
+        (a as Record<string, string>)[sortBy],
+      )
     })
 
   const totalPages = Math.ceil(tasks.length / pageSize)

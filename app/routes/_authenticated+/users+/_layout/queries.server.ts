@@ -5,6 +5,8 @@ interface ListFilteredUsersArgs {
   filters: Record<string, string[]>
   currentPage: number
   pageSize: number
+  sortBy?: string
+  sortOrder: 'asc' | 'desc'
 }
 
 export const listFilteredUsers = ({
@@ -12,6 +14,8 @@ export const listFilteredUsers = ({
   filters,
   currentPage,
   pageSize,
+  sortBy,
+  sortOrder,
 }: ListFilteredUsersArgs) => {
   const users = initialUsers
     .filter((user) => {
@@ -25,7 +29,17 @@ export const listFilteredUsers = ({
         return value.includes((user as unknown as Record<string, string>)[key])
       })
     })
-
+    .sort((a, b) => {
+      if (!sortBy) return 0
+      if (sortOrder === 'asc') {
+        return (a as unknown as Record<string, string>)[sortBy].localeCompare(
+          (b as unknown as Record<string, string>)[sortBy],
+        )
+      }
+      return (b as unknown as Record<string, string>)[sortBy].localeCompare(
+        (a as unknown as Record<string, string>)[sortBy],
+      )
+    })
   const totalPages = Math.ceil(users.length / pageSize)
   const totalItems = users.length
   const newCurrentPage = Math.min(currentPage, totalPages)

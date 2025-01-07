@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router'
 import { z } from 'zod'
 import { useDebounce } from '~/hooks/use-debounce'
 
-// Define the types for filters and pagination
+// Define the types for queries, filters, pagination, and sorting
 export const QuerySchema = z.object({
   title: z.preprocess(
     (val) => (val === null ? undefined : val),
@@ -14,6 +14,20 @@ export const QuerySchema = z.object({
 export const FilterSchema = z.object({
   status: z.array(z.string()).optional().default([]),
   priority: z.array(z.string()).optional().default([]),
+})
+
+export const SortSchema = z.object({
+  sort_by: z.preprocess(
+    (val) => (val === null ? undefined : val),
+    z.string().optional(),
+  ),
+  sort_order: z.preprocess(
+    (val) => (val === null ? undefined : val),
+    z
+      .union([z.literal('asc'), z.literal('desc')])
+      .optional()
+      .default('asc'),
+  ),
 })
 
 export const PaginationSchema = z.object({
@@ -39,9 +53,10 @@ export const PaginationSchema = z.object({
 
 export type Queries = z.infer<typeof QuerySchema>
 export type Filters = z.infer<typeof FilterSchema>
+export type Sort = z.infer<typeof SortSchema>
 export type Pagination = z.infer<typeof PaginationSchema>
 
-export function useFilterPagination() {
+export function useDataTableState() {
   const [searchParams, setSearchParams] = useSearchParams()
   const debounce = useDebounce(200)
 
@@ -55,6 +70,13 @@ export function useFilterPagination() {
     return FilterSchema.parse({
       status: searchParams.getAll('status'),
       priority: searchParams.getAll('priority'),
+    })
+  }, [searchParams])
+
+  const sort: Sort = useMemo(() => {
+    return SortSchema.parse({
+      sort_by: searchParams.get('sort_by'),
+      sort_order: searchParams.get('sort_order') as 'asc' | 'desc' | null,
     })
   }, [searchParams])
 
@@ -81,6 +103,7 @@ export function useFilterPagination() {
         { preventScrollReset: true },
       )
     })
+    updatePagination({ page: undefined })
   }
 
   const updateFilters = (newFilters: Partial<Filters>) => {
@@ -102,6 +125,24 @@ export function useFilterPagination() {
       },
       { preventScrollReset: true },
     )
+    updatePagination({ page: undefined })
+  }
+
+  const updateSort = (newSort: Partial<Sort>) => {
+    setSearchParams(
+      (prev) => {
+        if (newSort.sort_by) {
+          prev.set('sort_by', newSort.sort_by)
+          prev.set('sort_order', newSort.sort_order || 'asc')
+        } else {
+          prev.delete('sort_by')
+          prev.delete('sort_order')
+        }
+        return prev
+      },
+      { preventScrollReset: true },
+    )
+    updatePagination({ page: undefined })
   }
 
   const updatePagination = (newPagination: Partial<Pagination>) => {
@@ -123,6 +164,7 @@ export function useFilterPagination() {
   const isFiltered =
     Object.values(filters).some((filterArray) => filterArray.length > 0) ||
     Object.values(queries).some((query) => query !== '')
+
   const resetFilters = () => {
     setSearchParams({}, { preventScrollReset: true })
   }
@@ -130,9 +172,11 @@ export function useFilterPagination() {
   return {
     queries,
     filters,
+    sort,
     pagination,
     updateQueries,
     updateFilters,
+    updateSort,
     updatePagination,
     isFiltered,
     resetFilters,

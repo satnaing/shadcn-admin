@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select'
-import { useFilterPagination } from '../hooks/use-filter-pagination'
+import { useDataTableState } from '../hooks/use-data-table-state'
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
@@ -31,7 +31,7 @@ export function DataTablePagination<TData>({
   table,
   pagination: { currentPage, pageSize, totalPages, totalItems },
 }: DataTablePaginationProps<TData>) {
-  const { updatePagination } = useFilterPagination()
+  const { updatePagination } = useDataTableState()
 
   return (
     <div className="flex items-center justify-between overflow-auto px-2">

@@ -18,10 +18,7 @@ import {
 } from '~/components/ui/popover'
 import { Separator } from '~/components/ui/separator'
 import { cn } from '~/lib/utils'
-import {
-  useFilterPagination,
-  type Filters,
-} from '../hooks/use-filter-pagination'
+import { useDataTableState, type Filters } from '../hooks/use-data-table-state'
 
 interface DataTableFacetedFilterProps {
   title?: string
@@ -39,7 +36,7 @@ export function DataTableFacetedFilter({
   filterKey,
   options,
 }: DataTableFacetedFilterProps) {
-  const { filters, updateFilters } = useFilterPagination()
+  const { filters, updateFilters } = useDataTableState()
   const selectedValues = filters[filterKey]
 
   return (

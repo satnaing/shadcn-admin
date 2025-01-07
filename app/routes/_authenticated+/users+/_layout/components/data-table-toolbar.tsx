@@ -2,7 +2,7 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
 import { Button } from '~/components/ui/button'
 import { userTypes } from '../../_shared/data/data'
-import { useFilterPagination } from '../hooks/use-filter-pagination'
+import { useDataTableState } from '../hooks/use-data-table-state'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
 import { SearchInput } from './search-input'
@@ -19,7 +19,7 @@ export function DataTableToolbar<TData>({
   facetedCounts,
 }: DataTableToolbarProps<TData>) {
   const { queries, updateQueries, isFiltered, resetFilters } =
-    useFilterPagination()
+    useDataTableState()
 
   return (
     <div className="flex items-center justify-between">
