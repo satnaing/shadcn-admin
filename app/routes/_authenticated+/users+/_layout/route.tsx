@@ -13,7 +13,8 @@ import {
   FilterSchema,
   PaginationSchema,
   QuerySchema,
-} from './hooks/use-filter-pagination'
+  SortSchema,
+} from './hooks/use-data-table-state'
 import { getFacetedCounts, listFilteredUsers } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
@@ -28,6 +29,11 @@ export const loader = ({ request }: Route.LoaderArgs) => {
     priority: searchParams.getAll('priority'),
   })
 
+  const { sort_by: sortBy, sort_order: sortOrder } = SortSchema.parse({
+    sort_by: searchParams.get('sort_by'),
+    sort_order: searchParams.get('sort_order'),
+  })
+
   const { page: currentPage, per_page: pageSize } = PaginationSchema.parse({
     page: searchParams.get('page'),
     per_page: searchParams.get('per_page'),
@@ -38,6 +44,8 @@ export const loader = ({ request }: Route.LoaderArgs) => {
     filters,
     currentPage,
     pageSize,
+    sortBy,
+    sortOrder,
   })
 
   const facetedCounts = getFacetedCounts({

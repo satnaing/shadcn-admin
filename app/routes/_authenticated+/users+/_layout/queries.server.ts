@@ -5,6 +5,8 @@ interface ListFilteredUsersArgs {
   filters: Record<string, string[]>
   currentPage: number
   pageSize: number
+  sortBy?: string
+  sortOrder: 'asc' | 'desc'
 }
 
 export const listFilteredUsers = ({
@@ -12,6 +14,8 @@ export const listFilteredUsers = ({
   filters,
   currentPage,
   pageSize,
+  sortBy,
+  sortOrder,
 }: ListFilteredUsersArgs) => {
   const users = initialUsers
     .filter((user) => {
@@ -24,6 +28,21 @@ export const listFilteredUsers = ({
         if (value.length === 0) return true
         return value.includes((user as unknown as Record<string, string>)[key])
       })
+    })
+    .sort((a, b) => {
+      if (!sortBy) return 0
+
+      const aValue = a[sortBy as keyof typeof a]
+      const bValue = b[sortBy as keyof typeof b]
+
+      if (typeof aValue !== 'string' || typeof bValue !== 'string') {
+        console.warn(`Invalid sort field type for ${sortBy}`)
+        return 0
+      }
+
+      return sortOrder === 'asc'
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue)
     })
 
   const totalPages = Math.ceil(users.length / pageSize)
