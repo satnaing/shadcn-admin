@@ -59,8 +59,6 @@ export const loader = ({ request }: Route.LoaderArgs) => {
   return {
     tasks,
     pagination,
-    sortBy,
-    sortOrder,
     facetedCounts,
   }
 }
