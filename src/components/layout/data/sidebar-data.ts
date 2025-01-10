@@ -1,7 +1,7 @@
 import {
   IconBarrierBlock,
   IconBrowserCheck,
-  IconBug,
+  IconBug, IconChartBar,
   IconError404,
   IconHelp,
   IconLayoutDashboard,
@@ -16,7 +16,6 @@ import {
   IconUserOff,
   IconUsers,
 } from '@tabler/icons-react'
-import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
@@ -52,7 +51,49 @@ export const sidebarData: SidebarData = {
           icon: IconLayoutDashboard,
         },
         {
-          title: 'Users',
+          title: 'Insights',
+          icon: IconChartBar,
+          items: [
+            {
+              title: 'KPI Dashboard',
+              url: '/insights',
+            },
+            {
+              title: 'Client Margin',
+              url: '/insights',
+            },
+            {
+              title: 'Staff Margin',
+              url: '/insights',
+            },
+            {
+              title: 'Payor Margin',
+              url: '/insights',
+            },
+            {
+              title: 'Service Margin',
+              url: '/insights',
+            }, {
+              title: 'Monthly Trends',
+              url: '/insights',
+            }, {
+              title: 'Messages',
+              url: '/insights',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      title: 'Users',
+      items: [
+        {
+          title: 'Clients',
+          url: '/users',
+          icon: IconLayoutDashboard,
+        },
+        {
+          title: 'Staff',
           url: '/users',
           icon: IconUsers,
         },
