@@ -1,7 +1,8 @@
 import {
   IconBarrierBlock,
   IconBrowserCheck,
-  IconBug, IconChartBar,
+  IconBug,
+  IconChartBar,
   IconError404,
   IconHelp,
   IconLayoutDashboard,
@@ -15,6 +16,14 @@ import {
   IconUserCog,
   IconUserOff,
   IconUsers,
+  IconCalendarStats,
+  IconVocabulary,
+  IconChartArcs,
+  IconUserDollar,
+  IconCalendarCheck,
+  IconCurrencyDollar,
+  IconList,
+  IconUserStar,
 } from '@tabler/icons-react'
 import { type SidebarData } from '../types'
 
@@ -81,6 +90,153 @@ export const sidebarData: SidebarData = {
               url: '/insights',
             },
           ],
+        },
+        {
+          title: 'Schedule',
+          icon: IconCalendarStats,
+          items: [
+            {
+              title: 'Shift Logs',
+              url: '/schedule',
+            },
+            {
+              title: 'Client',
+              url: '/schedule',
+            },
+            {
+              title: 'Staff',
+              url: '/schedule',
+            },
+            {
+              title: 'Day',
+              url: '/schedule',
+            },
+            {
+              title: 'Low Margin',
+              url: '/schedule',
+            },
+            {
+              title: 'Shift Monitor',
+              url: '/schedule',
+            },
+            {
+              title: 'Staff Shifts LIVE View',
+              url: '/schedule',
+            },
+            {
+              title: 'Staff Metrics',
+              url: '/schedule',
+            },
+          ],
+        },
+        {
+          title: 'Activities',
+          url: '/activities',
+          icon: IconVocabulary,
+        },
+        {
+          title: 'Reports',
+          icon: IconChartArcs,
+          items: [
+            {
+              title: 'Saved Reports',
+              url: '/reports',
+            },
+            {
+              title: 'Visits',
+              url: '/reports',
+            },
+            {
+              title: 'Client',
+              url: '/reports',
+            },
+            {
+              title: 'Staff',
+              url: '/reports',
+            },
+            {
+              title: 'Authorization',
+              url: '/reports',
+            },
+            {
+              title: 'Dates & Docs',
+              url: '/reports',
+            },
+            {
+              title: 'Fraud Exclusions',
+              url: '/reports',
+            },
+            {
+              title: 'Worker Registry',
+              url: '/reports',
+            },
+          ],
+        },
+        {
+          title: 'Payors',
+          url: '/payors',
+          icon: IconUserDollar,
+        },
+        {
+          title: 'Verification',
+          icon: IconCalendarCheck,
+          items: [
+            {
+              title: 'Verify',
+              url: '/verification',
+            },
+            {
+              title: 'EVV',
+              url: '/verification',
+            },
+          ],
+        },
+        {
+          title: 'Payroll',
+          icon: IconCurrencyDollar,
+          items: [
+            {
+              title: 'Summary',
+              url: '/payroll',
+            },
+            {
+              title: 'History',
+              url: '/payroll',
+            },
+          ],
+        },
+        {
+          title: 'Billing',
+          icon: IconCurrencyDollar,
+          items: [
+            {
+              title: 'Create',
+              url: '/billing',
+            },
+            {
+              title: 'Pending',
+              url: '/billing',
+            },
+            {
+              title: 'History',
+              url: '/billing',
+            },
+          ],
+        },
+        {
+          title: 'Referrals',
+          url: '/referrals',
+          icon: IconList,
+        },
+        {
+          title: 'System',
+          url: '/system',
+          icon: IconSettings,
+        },
+        {
+          title: 'Admin',
+          url: '/admin',
+          icon: IconUserStar,
         },
       ],
     },
