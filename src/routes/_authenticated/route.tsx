@@ -5,8 +5,12 @@ import { SearchProvider } from '@/context/search-context'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
 import SkipToMain from '@/components/skip-to-main'
+import { authMiddleware } from '@/lib/auth'
 
 export const Route = createFileRoute('/_authenticated')({
+  beforeLoad: () => {
+    authMiddleware()
+  },
   component: RouteComponent,
 })
 

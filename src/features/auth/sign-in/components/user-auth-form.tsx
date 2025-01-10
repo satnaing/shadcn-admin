@@ -2,7 +2,7 @@ import { HTMLAttributes, useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
+import { useAuthStore } from '@/stores/authStore'
 
 type UserAuthFormProps = HTMLAttributes<HTMLDivElement>
 
@@ -36,6 +37,8 @@ const formSchema = z.object({
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+  const { setUser, setAccessToken } = useAuthStore()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,14 +48,35 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
+    
+    try {
+      const dummyUser = {
+        accountNo: "ACC123456",
+        email: data.email,
+        role: ["user"],
+        exp: Date.now() + 24 * 60 * 60 * 1000 // 24 hours from now
+      }
+      
+      // Set dummy access token without JSON.stringify
+      setAccessToken("dummy_jwt_token")
+      setUser(dummyUser)
 
-    setTimeout(() => {
+      // Get redirect URL from search params
+      const searchParams = new URLSearchParams(window.location.search)
+      const redirectTo = searchParams.get('redirect')
+
+      // Redirect to saved URL or dashboard
+      navigate({ 
+        to: redirectTo || '/',
+        replace: true
+      })
+    } catch (error) {
+      console.error('Authentication error:', error)
+    } finally {
       setIsLoading(false)
-    }, 3000)
+    }
   }
 
   return (
