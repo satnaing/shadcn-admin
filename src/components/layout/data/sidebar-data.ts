@@ -1,7 +1,8 @@
 import {
   IconBarrierBlock,
   IconBrowserCheck,
-  IconBug, IconChartBar,
+  IconBug,
+  IconChartBar,
   IconError404,
   IconHelp,
   IconLayoutDashboard,
@@ -15,6 +16,14 @@ import {
   IconUserCog,
   IconUserOff,
   IconUsers,
+  IconCalendarStats,
+  IconVocabulary,
+  IconChartArcs,
+  IconUserDollar,
+  IconCalendarCheck,
+  IconCurrencyDollar,
+  IconList,
+  IconUserStar,
 } from '@tabler/icons-react'
 import { type SidebarData } from '../types'
 
@@ -84,7 +93,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Schedule',
-          icon: IconChartBar,
+          icon: IconCalendarStats,
           items: [
             {
               title: 'Shift Logs',
@@ -123,11 +132,11 @@ export const sidebarData: SidebarData = {
         {
           title: 'Activities',
           url: '/activities',
-          icon: IconLayoutDashboard,
+          icon: IconVocabulary,
         },
         {
           title: 'Reports',
-          icon: IconChartBar,
+          icon: IconChartArcs,
           items: [
             {
               title: 'Saved Reports',
@@ -166,11 +175,11 @@ export const sidebarData: SidebarData = {
         {
           title: 'Payors',
           url: '/payors',
-          icon: IconLayoutDashboard,
+          icon: IconUserDollar,
         },
         {
           title: 'Verification',
-          icon: IconChartBar,
+          icon: IconCalendarCheck,
           items: [
             {
               title: 'Verify',
@@ -184,7 +193,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Payroll',
-          icon: IconChartBar,
+          icon: IconCurrencyDollar,
           items: [
             {
               title: 'Summary',
@@ -198,7 +207,7 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Billing',
-          icon: IconChartBar,
+          icon: IconCurrencyDollar,
           items: [
             {
               title: 'Create',
@@ -217,17 +226,17 @@ export const sidebarData: SidebarData = {
         {
           title: 'Referrals',
           url: '/referrals',
-          icon: IconLayoutDashboard,
+          icon: IconList,
         },
         {
           title: 'System',
           url: '/system',
-          icon: IconLayoutDashboard,
+          icon: IconSettings,
         },
         {
           title: 'Admin',
           url: '/admin',
-          icon: IconLayoutDashboard,
+          icon: IconUserStar,
         },
       ],
     },
