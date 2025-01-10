@@ -2,15 +2,12 @@ import {
   IconBarrierBlock,
   IconBrowserCheck,
   IconBug,
-  IconChecklist,
   IconError404,
   IconHelp,
   IconLayoutDashboard,
   IconLock,
   IconLockAccess,
-  IconMessages,
   IconNotification,
-  IconPackages,
   IconPalette,
   IconServerOff,
   IconSettings,
@@ -24,25 +21,25 @@ import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
   user: {
-    name: 'satnaing',
-    email: 'satnaingdev@gmail.com',
-    avatar: '/avatars/shadcn.jpg',
+    name: 'ecaring',
+    email: 'hamid@ecaring.com',
+    avatar: '/images/ecaring.png',
   },
   teams: [
     {
-      name: 'Shadcn Admin',
-      logo: Command,
-      plan: 'Vite + ShadcnUI',
+      name: 'Ecaring',
+      logo: '/images/ecaring.png',
+      plan: 'Tenant',
     },
     {
       name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
+      logo: '/images/ecaring.png',
+      plan: 'Tenant',
     },
     {
       name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
+      logo: '/images/ecaring.png',
+      plan: 'Tenant',
     },
   ],
   navGroups: [
@@ -53,22 +50,6 @@ export const sidebarData: SidebarData = {
           title: 'Dashboard',
           url: '/',
           icon: IconLayoutDashboard,
-        },
-        {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: IconChecklist,
-        },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: IconPackages,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: IconMessages,
         },
         {
           title: 'Users',
