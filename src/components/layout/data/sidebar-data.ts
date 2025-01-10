@@ -60,34 +60,16 @@ export const sidebarData: SidebarData = {
           icon: IconLayoutDashboard,
         },
         {
-          title: 'Insights',
-          icon: IconChartBar,
+          title: 'Users',
+          icon: IconUsers,
           items: [
             {
-              title: 'KPI Dashboard',
-              url: '/insights',
+              title: 'Clients',
+              url: '/users',
             },
             {
-              title: 'Client Margin',
-              url: '/insights',
-            },
-            {
-              title: 'Staff Margin',
-              url: '/insights',
-            },
-            {
-              title: 'Payor Margin',
-              url: '/insights',
-            },
-            {
-              title: 'Service Margin',
-              url: '/insights',
-            }, {
-              title: 'Monthly Trends',
-              url: '/insights',
-            }, {
-              title: 'Messages',
-              url: '/insights',
+              title: 'Staff',
+              url: '/users',
             },
           ],
         },
@@ -130,9 +112,61 @@ export const sidebarData: SidebarData = {
           ],
         },
         {
-          title: 'Activities',
-          url: '/activities',
-          icon: IconVocabulary,
+          title: 'Verification',
+          icon: IconCalendarCheck,
+          items: [
+            {
+              title: 'Verify',
+              url: '/verification',
+            },
+            {
+              title: 'EVV',
+              url: '/verification',
+            },
+          ],
+        },
+        {
+          title: 'Referrals',
+          url: '/referrals',
+          icon: IconList,
+        },
+
+      ],
+    },
+    {
+      title: 'Report',
+      items: [
+        {
+          title: 'Insights',
+          icon: IconChartBar,
+          items: [
+            {
+              title: 'KPI Dashboard',
+              url: '/insights',
+            },
+            {
+              title: 'Client Margin',
+              url: '/insights',
+            },
+            {
+              title: 'Staff Margin',
+              url: '/insights',
+            },
+            {
+              title: 'Payor Margin',
+              url: '/insights',
+            },
+            {
+              title: 'Service Margin',
+              url: '/insights',
+            }, {
+              title: 'Monthly Trends',
+              url: '/insights',
+            }, {
+              title: 'Messages',
+              url: '/insights',
+            },
+          ],
         },
         {
           title: 'Reports',
@@ -173,23 +207,19 @@ export const sidebarData: SidebarData = {
           ],
         },
         {
+          title: 'Activities',
+          url: '/activities',
+          icon: IconVocabulary,
+        },
+      ],
+    },
+    {
+      title: 'Finance',
+      items: [
+        {
           title: 'Payors',
           url: '/payors',
           icon: IconUserDollar,
-        },
-        {
-          title: 'Verification',
-          icon: IconCalendarCheck,
-          items: [
-            {
-              title: 'Verify',
-              url: '/verification',
-            },
-            {
-              title: 'EVV',
-              url: '/verification',
-            },
-          ],
         },
         {
           title: 'Payroll',
@@ -223,38 +253,9 @@ export const sidebarData: SidebarData = {
             },
           ],
         },
-        {
-          title: 'Referrals',
-          url: '/referrals',
-          icon: IconList,
-        },
-        {
-          title: 'System',
-          url: '/system',
-          icon: IconSettings,
-        },
-        {
-          title: 'Admin',
-          url: '/admin',
-          icon: IconUserStar,
-        },
       ],
     },
-    {
-      title: 'Users',
-      items: [
-        {
-          title: 'Clients',
-          url: '/users',
-          icon: IconLayoutDashboard,
-        },
-        {
-          title: 'Staff',
-          url: '/users',
-          icon: IconUsers,
-        },
-      ],
-    },
+
     {
       title: 'Pages',
       items: [
@@ -314,8 +315,18 @@ export const sidebarData: SidebarData = {
       ],
     },
     {
-      title: 'Other',
+      title: 'Settings',
       items: [
+        {
+          title: 'System',
+          url: '/system',
+          icon: IconSettings,
+        },
+        {
+          title: 'Admin',
+          url: '/admin',
+          icon: IconUserStar,
+        },
         {
           title: 'Settings',
           icon: IconSettings,
