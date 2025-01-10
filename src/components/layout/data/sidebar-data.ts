@@ -82,6 +82,153 @@ export const sidebarData: SidebarData = {
             },
           ],
         },
+        {
+          title: 'Schedule',
+          icon: IconChartBar,
+          items: [
+            {
+              title: 'Shift Logs',
+              url: '/schedule',
+            },
+            {
+              title: 'Client',
+              url: '/schedule',
+            },
+            {
+              title: 'Staff',
+              url: '/schedule',
+            },
+            {
+              title: 'Day',
+              url: '/schedule',
+            },
+            {
+              title: 'Low Margin',
+              url: '/schedule',
+            },
+            {
+              title: 'Shift Monitor',
+              url: '/schedule',
+            },
+            {
+              title: 'Staff Shifts LIVE View',
+              url: '/schedule',
+            },
+            {
+              title: 'Staff Metrics',
+              url: '/schedule',
+            },
+          ],
+        },
+        {
+          title: 'Activities',
+          url: '/activities',
+          icon: IconLayoutDashboard,
+        },
+        {
+          title: 'Reports',
+          icon: IconChartBar,
+          items: [
+            {
+              title: 'Saved Reports',
+              url: '/reports',
+            },
+            {
+              title: 'Visits',
+              url: '/reports',
+            },
+            {
+              title: 'Client',
+              url: '/reports',
+            },
+            {
+              title: 'Staff',
+              url: '/reports',
+            },
+            {
+              title: 'Authorization',
+              url: '/reports',
+            },
+            {
+              title: 'Dates & Docs',
+              url: '/reports',
+            },
+            {
+              title: 'Fraud Exclusions',
+              url: '/reports',
+            },
+            {
+              title: 'Worker Registry',
+              url: '/reports',
+            },
+          ],
+        },
+        {
+          title: 'Payors',
+          url: '/payors',
+          icon: IconLayoutDashboard,
+        },
+        {
+          title: 'Verification',
+          icon: IconChartBar,
+          items: [
+            {
+              title: 'Verify',
+              url: '/verification',
+            },
+            {
+              title: 'EVV',
+              url: '/verification',
+            },
+          ],
+        },
+        {
+          title: 'Payroll',
+          icon: IconChartBar,
+          items: [
+            {
+              title: 'Summary',
+              url: '/payroll',
+            },
+            {
+              title: 'History',
+              url: '/payroll',
+            },
+          ],
+        },
+        {
+          title: 'Billing',
+          icon: IconChartBar,
+          items: [
+            {
+              title: 'Create',
+              url: '/billing',
+            },
+            {
+              title: 'Pending',
+              url: '/billing',
+            },
+            {
+              title: 'History',
+              url: '/billing',
+            },
+          ],
+        },
+        {
+          title: 'Referrals',
+          url: '/referrals',
+          icon: IconLayoutDashboard,
+        },
+        {
+          title: 'System',
+          url: '/system',
+          icon: IconLayoutDashboard,
+        },
+        {
+          title: 'Admin',
+          url: '/admin',
+          icon: IconLayoutDashboard,
+        },
       ],
     },
     {

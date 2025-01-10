@@ -34,17 +34,47 @@ const authForgotPasswordLazyImport = createFileRoute(
 const AuthenticatedSettingsRouteLazyImport = createFileRoute(
   '/_authenticated/settings',
 )()
+const AuthenticatedVerificationIndexLazyImport = createFileRoute(
+  '/_authenticated/verification/',
+)()
 const AuthenticatedUsersIndexLazyImport = createFileRoute(
   '/_authenticated/users/',
 )()
+const AuthenticatedSystemIndexLazyImport = createFileRoute(
+  '/_authenticated/system/',
+)()
 const AuthenticatedSettingsIndexLazyImport = createFileRoute(
   '/_authenticated/settings/',
+)()
+const AuthenticatedScheduleIndexLazyImport = createFileRoute(
+  '/_authenticated/schedule/',
+)()
+const AuthenticatedReportsIndexLazyImport = createFileRoute(
+  '/_authenticated/reports/',
+)()
+const AuthenticatedReferralsIndexLazyImport = createFileRoute(
+  '/_authenticated/referrals/',
+)()
+const AuthenticatedPayrollIndexLazyImport = createFileRoute(
+  '/_authenticated/payroll/',
+)()
+const AuthenticatedPayorsIndexLazyImport = createFileRoute(
+  '/_authenticated/payors/',
 )()
 const AuthenticatedInsightsIndexLazyImport = createFileRoute(
   '/_authenticated/insights/',
 )()
 const AuthenticatedHelpCenterIndexLazyImport = createFileRoute(
   '/_authenticated/help-center/',
+)()
+const AuthenticatedBillingIndexLazyImport = createFileRoute(
+  '/_authenticated/billing/',
+)()
+const AuthenticatedAdminIndexLazyImport = createFileRoute(
+  '/_authenticated/admin/',
+)()
+const AuthenticatedActivitiesIndexLazyImport = createFileRoute(
+  '/_authenticated/activities/',
 )()
 const AuthenticatedSettingsNotificationsLazyImport = createFileRoute(
   '/_authenticated/settings/notifications',
@@ -165,6 +195,17 @@ const auth500Route = auth500Import.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const AuthenticatedVerificationIndexLazyRoute =
+  AuthenticatedVerificationIndexLazyImport.update({
+    id: '/verification/',
+    path: '/verification/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/verification/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
 const AuthenticatedUsersIndexLazyRoute =
   AuthenticatedUsersIndexLazyImport.update({
     id: '/users/',
@@ -174,6 +215,15 @@ const AuthenticatedUsersIndexLazyRoute =
     import('./routes/_authenticated/users/index.lazy').then((d) => d.Route),
   )
 
+const AuthenticatedSystemIndexLazyRoute =
+  AuthenticatedSystemIndexLazyImport.update({
+    id: '/system/',
+    path: '/system/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/system/index.lazy').then((d) => d.Route),
+  )
+
 const AuthenticatedSettingsIndexLazyRoute =
   AuthenticatedSettingsIndexLazyImport.update({
     id: '/',
@@ -181,6 +231,51 @@ const AuthenticatedSettingsIndexLazyRoute =
     getParentRoute: () => AuthenticatedSettingsRouteLazyRoute,
   } as any).lazy(() =>
     import('./routes/_authenticated/settings/index.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedScheduleIndexLazyRoute =
+  AuthenticatedScheduleIndexLazyImport.update({
+    id: '/schedule/',
+    path: '/schedule/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/schedule/index.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedReportsIndexLazyRoute =
+  AuthenticatedReportsIndexLazyImport.update({
+    id: '/reports/',
+    path: '/reports/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/reports/index.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedReferralsIndexLazyRoute =
+  AuthenticatedReferralsIndexLazyImport.update({
+    id: '/referrals/',
+    path: '/referrals/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/referrals/index.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedPayrollIndexLazyRoute =
+  AuthenticatedPayrollIndexLazyImport.update({
+    id: '/payroll/',
+    path: '/payroll/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/payroll/index.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedPayorsIndexLazyRoute =
+  AuthenticatedPayorsIndexLazyImport.update({
+    id: '/payors/',
+    path: '/payors/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/payors/index.lazy').then((d) => d.Route),
   )
 
 const AuthenticatedInsightsIndexLazyRoute =
@@ -199,6 +294,35 @@ const AuthenticatedHelpCenterIndexLazyRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any).lazy(() =>
     import('./routes/_authenticated/help-center/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const AuthenticatedBillingIndexLazyRoute =
+  AuthenticatedBillingIndexLazyImport.update({
+    id: '/billing/',
+    path: '/billing/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/billing/index.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedAdminIndexLazyRoute =
+  AuthenticatedAdminIndexLazyImport.update({
+    id: '/admin/',
+    path: '/admin/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/admin/index.lazy').then((d) => d.Route),
+  )
+
+const AuthenticatedActivitiesIndexLazyRoute =
+  AuthenticatedActivitiesIndexLazyImport.update({
+    id: '/activities/',
+    path: '/activities/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/activities/index.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -377,6 +501,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsNotificationsLazyImport
       parentRoute: typeof AuthenticatedSettingsRouteLazyImport
     }
+    '/_authenticated/activities/': {
+      id: '/_authenticated/activities/'
+      path: '/activities'
+      fullPath: '/activities'
+      preLoaderRoute: typeof AuthenticatedActivitiesIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/billing/': {
+      id: '/_authenticated/billing/'
+      path: '/billing'
+      fullPath: '/billing'
+      preLoaderRoute: typeof AuthenticatedBillingIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/help-center/': {
       id: '/_authenticated/help-center/'
       path: '/help-center'
@@ -391,6 +536,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedInsightsIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/payors/': {
+      id: '/_authenticated/payors/'
+      path: '/payors'
+      fullPath: '/payors'
+      preLoaderRoute: typeof AuthenticatedPayorsIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/payroll/': {
+      id: '/_authenticated/payroll/'
+      path: '/payroll'
+      fullPath: '/payroll'
+      preLoaderRoute: typeof AuthenticatedPayrollIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/referrals/': {
+      id: '/_authenticated/referrals/'
+      path: '/referrals'
+      fullPath: '/referrals'
+      preLoaderRoute: typeof AuthenticatedReferralsIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/': {
+      id: '/_authenticated/reports/'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof AuthenticatedReportsIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/schedule/': {
+      id: '/_authenticated/schedule/'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof AuthenticatedScheduleIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/settings/': {
       id: '/_authenticated/settings/'
       path: '/'
@@ -398,11 +578,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsIndexLazyImport
       parentRoute: typeof AuthenticatedSettingsRouteLazyImport
     }
+    '/_authenticated/system/': {
+      id: '/_authenticated/system/'
+      path: '/system'
+      fullPath: '/system'
+      preLoaderRoute: typeof AuthenticatedSystemIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
       fullPath: '/users'
       preLoaderRoute: typeof AuthenticatedUsersIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/verification/': {
+      id: '/_authenticated/verification/'
+      path: '/verification'
+      fullPath: '/verification'
+      preLoaderRoute: typeof AuthenticatedVerificationIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
   }
@@ -439,18 +633,39 @@ const AuthenticatedSettingsRouteLazyRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteLazyRoute: typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedActivitiesIndexLazyRoute: typeof AuthenticatedActivitiesIndexLazyRoute
+  AuthenticatedAdminIndexLazyRoute: typeof AuthenticatedAdminIndexLazyRoute
+  AuthenticatedBillingIndexLazyRoute: typeof AuthenticatedBillingIndexLazyRoute
   AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
   AuthenticatedInsightsIndexLazyRoute: typeof AuthenticatedInsightsIndexLazyRoute
+  AuthenticatedPayorsIndexLazyRoute: typeof AuthenticatedPayorsIndexLazyRoute
+  AuthenticatedPayrollIndexLazyRoute: typeof AuthenticatedPayrollIndexLazyRoute
+  AuthenticatedReferralsIndexLazyRoute: typeof AuthenticatedReferralsIndexLazyRoute
+  AuthenticatedReportsIndexLazyRoute: typeof AuthenticatedReportsIndexLazyRoute
+  AuthenticatedScheduleIndexLazyRoute: typeof AuthenticatedScheduleIndexLazyRoute
+  AuthenticatedSystemIndexLazyRoute: typeof AuthenticatedSystemIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
+  AuthenticatedVerificationIndexLazyRoute: typeof AuthenticatedVerificationIndexLazyRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteLazyRoute:
     AuthenticatedSettingsRouteLazyRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedActivitiesIndexLazyRoute: AuthenticatedActivitiesIndexLazyRoute,
+  AuthenticatedAdminIndexLazyRoute: AuthenticatedAdminIndexLazyRoute,
+  AuthenticatedBillingIndexLazyRoute: AuthenticatedBillingIndexLazyRoute,
   AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
   AuthenticatedInsightsIndexLazyRoute: AuthenticatedInsightsIndexLazyRoute,
+  AuthenticatedPayorsIndexLazyRoute: AuthenticatedPayorsIndexLazyRoute,
+  AuthenticatedPayrollIndexLazyRoute: AuthenticatedPayrollIndexLazyRoute,
+  AuthenticatedReferralsIndexLazyRoute: AuthenticatedReferralsIndexLazyRoute,
+  AuthenticatedReportsIndexLazyRoute: AuthenticatedReportsIndexLazyRoute,
+  AuthenticatedScheduleIndexLazyRoute: AuthenticatedScheduleIndexLazyRoute,
+  AuthenticatedSystemIndexLazyRoute: AuthenticatedSystemIndexLazyRoute,
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
+  AuthenticatedVerificationIndexLazyRoute:
+    AuthenticatedVerificationIndexLazyRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -474,10 +689,20 @@ export interface FileRoutesByFullPath {
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
+  '/activities': typeof AuthenticatedActivitiesIndexLazyRoute
+  '/admin': typeof AuthenticatedAdminIndexLazyRoute
+  '/billing': typeof AuthenticatedBillingIndexLazyRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/insights': typeof AuthenticatedInsightsIndexLazyRoute
+  '/payors': typeof AuthenticatedPayorsIndexLazyRoute
+  '/payroll': typeof AuthenticatedPayrollIndexLazyRoute
+  '/referrals': typeof AuthenticatedReferralsIndexLazyRoute
+  '/reports': typeof AuthenticatedReportsIndexLazyRoute
+  '/schedule': typeof AuthenticatedScheduleIndexLazyRoute
   '/settings/': typeof AuthenticatedSettingsIndexLazyRoute
+  '/system': typeof AuthenticatedSystemIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
+  '/verification': typeof AuthenticatedVerificationIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -496,10 +721,20 @@ export interface FileRoutesByTo {
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
+  '/activities': typeof AuthenticatedActivitiesIndexLazyRoute
+  '/admin': typeof AuthenticatedAdminIndexLazyRoute
+  '/billing': typeof AuthenticatedBillingIndexLazyRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/insights': typeof AuthenticatedInsightsIndexLazyRoute
+  '/payors': typeof AuthenticatedPayorsIndexLazyRoute
+  '/payroll': typeof AuthenticatedPayrollIndexLazyRoute
+  '/referrals': typeof AuthenticatedReferralsIndexLazyRoute
+  '/reports': typeof AuthenticatedReportsIndexLazyRoute
+  '/schedule': typeof AuthenticatedScheduleIndexLazyRoute
   '/settings': typeof AuthenticatedSettingsIndexLazyRoute
+  '/system': typeof AuthenticatedSystemIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
+  '/verification': typeof AuthenticatedVerificationIndexLazyRoute
 }
 
 export interface FileRoutesById {
@@ -522,10 +757,20 @@ export interface FileRoutesById {
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
+  '/_authenticated/activities/': typeof AuthenticatedActivitiesIndexLazyRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexLazyRoute
+  '/_authenticated/billing/': typeof AuthenticatedBillingIndexLazyRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexLazyRoute
   '/_authenticated/insights/': typeof AuthenticatedInsightsIndexLazyRoute
+  '/_authenticated/payors/': typeof AuthenticatedPayorsIndexLazyRoute
+  '/_authenticated/payroll/': typeof AuthenticatedPayrollIndexLazyRoute
+  '/_authenticated/referrals/': typeof AuthenticatedReferralsIndexLazyRoute
+  '/_authenticated/reports/': typeof AuthenticatedReportsIndexLazyRoute
+  '/_authenticated/schedule/': typeof AuthenticatedScheduleIndexLazyRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexLazyRoute
+  '/_authenticated/system/': typeof AuthenticatedSystemIndexLazyRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
+  '/_authenticated/verification/': typeof AuthenticatedVerificationIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -548,10 +793,20 @@ export interface FileRouteTypes {
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
+    | '/activities'
+    | '/admin'
+    | '/billing'
     | '/help-center'
     | '/insights'
+    | '/payors'
+    | '/payroll'
+    | '/referrals'
+    | '/reports'
+    | '/schedule'
     | '/settings/'
+    | '/system'
     | '/users'
+    | '/verification'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/500'
@@ -569,10 +824,20 @@ export interface FileRouteTypes {
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
+    | '/activities'
+    | '/admin'
+    | '/billing'
     | '/help-center'
     | '/insights'
+    | '/payors'
+    | '/payroll'
+    | '/referrals'
+    | '/reports'
+    | '/schedule'
     | '/settings'
+    | '/system'
     | '/users'
+    | '/verification'
   id:
     | '__root__'
     | '/_authenticated'
@@ -593,10 +858,20 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
     | '/_authenticated/settings/notifications'
+    | '/_authenticated/activities/'
+    | '/_authenticated/admin/'
+    | '/_authenticated/billing/'
     | '/_authenticated/help-center/'
     | '/_authenticated/insights/'
+    | '/_authenticated/payors/'
+    | '/_authenticated/payroll/'
+    | '/_authenticated/referrals/'
+    | '/_authenticated/reports/'
+    | '/_authenticated/schedule/'
     | '/_authenticated/settings/'
+    | '/_authenticated/system/'
     | '/_authenticated/users/'
+    | '/_authenticated/verification/'
   fileRoutesById: FileRoutesById
 }
 
@@ -659,9 +934,19 @@ export const routeTree = rootRoute
       "children": [
         "/_authenticated/settings",
         "/_authenticated/",
+        "/_authenticated/activities/",
+        "/_authenticated/admin/",
+        "/_authenticated/billing/",
         "/_authenticated/help-center/",
         "/_authenticated/insights/",
-        "/_authenticated/users/"
+        "/_authenticated/payors/",
+        "/_authenticated/payroll/",
+        "/_authenticated/referrals/",
+        "/_authenticated/reports/",
+        "/_authenticated/schedule/",
+        "/_authenticated/system/",
+        "/_authenticated/users/",
+        "/_authenticated/verification/"
       ]
     },
     "/(auth)/500": {
@@ -728,6 +1013,18 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/settings/notifications.lazy.tsx",
       "parent": "/_authenticated/settings"
     },
+    "/_authenticated/activities/": {
+      "filePath": "_authenticated/activities/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/admin/": {
+      "filePath": "_authenticated/admin/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/billing/": {
+      "filePath": "_authenticated/billing/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/help-center/": {
       "filePath": "_authenticated/help-center/index.lazy.tsx",
       "parent": "/_authenticated"
@@ -736,12 +1033,40 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/insights/index.lazy.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/payors/": {
+      "filePath": "_authenticated/payors/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/payroll/": {
+      "filePath": "_authenticated/payroll/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/referrals/": {
+      "filePath": "_authenticated/referrals/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/": {
+      "filePath": "_authenticated/reports/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/schedule/": {
+      "filePath": "_authenticated/schedule/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/settings/": {
       "filePath": "_authenticated/settings/index.lazy.tsx",
       "parent": "/_authenticated/settings"
     },
+    "/_authenticated/system/": {
+      "filePath": "_authenticated/system/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/users/": {
       "filePath": "_authenticated/users/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/verification/": {
+      "filePath": "_authenticated/verification/index.lazy.tsx",
       "parent": "/_authenticated"
     }
   }
