@@ -13,7 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select'
-import { Separator } from '~/components/ui/separator'
 import { HStack } from '~/components/ui/stack'
 import type { Task } from '../data/schema'
 
@@ -52,20 +51,6 @@ export function TasksMutateForm({ task }: { task?: Task }) {
 
   return (
     <Form method="POST" {...getFormProps(form)} className="space-y-5">
-      <div className="text-center sm:text-left">
-        <h2 className="text-lg font-semibold text-foreground">
-          {isUpdate ? 'Update' : 'Create'} Task
-        </h2>
-        <div className="text-sm text-muted-foreground">
-          {isUpdate
-            ? 'Update the task by providing necessary info. '
-            : 'Add a new task by providing necessary info. '}
-          Click save when you&apos;re done.
-        </div>
-      </div>
-
-      <Separator className="my-4 lg:my-6" />
-
       <input
         {...getInputProps(fields.id, { type: 'hidden' })}
         key={fields.id.key}

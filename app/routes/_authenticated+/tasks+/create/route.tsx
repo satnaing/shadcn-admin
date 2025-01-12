@@ -1,6 +1,7 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { redirectWithSuccess } from 'remix-toast'
+import { Separator } from '~/components/ui/separator'
 import {
   TasksMutateForm,
   createSchema,
@@ -34,5 +35,19 @@ export const action = async ({ request }: Route.ActionArgs) => {
 }
 
 export default function TaskCreate() {
-  return <TasksMutateForm />
+  return (
+    <div>
+      <div className="text-center sm:text-left">
+        <h2 className="text-lg font-semibold text-foreground">Create Task</h2>
+        <div className="text-sm text-muted-foreground">
+          Add a new task by providing necessary info. Click save when
+          you&apos;re done.
+        </div>
+      </div>
+
+      <Separator className="my-4 lg:my-6" />
+
+      <TasksMutateForm />
+    </div>
+  )
 }

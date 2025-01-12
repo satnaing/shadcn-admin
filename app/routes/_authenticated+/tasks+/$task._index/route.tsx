@@ -2,6 +2,7 @@ import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { data } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
+import { Separator } from '~/components/ui/separator'
 import {
   TasksMutateForm,
   updateSchema,
@@ -43,5 +44,19 @@ export const action = async ({ request }: Route.ActionArgs) => {
 export default function TaskEdit({
   loaderData: { task },
 }: Route.ComponentProps) {
-  return <TasksMutateForm task={task} />
+  return (
+    <div>
+      <div className="text-center sm:text-left">
+        <h2 className="text-lg font-semibold text-foreground">Update Task</h2>
+        <div className="text-sm text-muted-foreground">
+          Update the task by providing necessary info. Click save when
+          you&apos;re done.
+        </div>
+      </div>
+
+      <Separator className="my-4 lg:my-6" />
+
+      <TasksMutateForm task={task} />
+    </div>
+  )
 }
