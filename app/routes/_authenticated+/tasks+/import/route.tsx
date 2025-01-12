@@ -20,6 +20,10 @@ export const formSchema = z.object({
     ),
 })
 
+export const handle = {
+  breadcrumb: () => ({ label: 'Import' }),
+}
+
 export const action = async ({ request }: Route.ActionArgs) => {
   const url = new URL(request.url)
   const submission = parseWithZod(await request.formData(), {

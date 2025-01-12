@@ -10,6 +10,10 @@ import {
 import { tasks } from '../_shared/data/tasks'
 import type { Route } from './+types/route'
 
+export const handle = {
+  breadcrumb: () => ({ label: 'Edit' }),
+}
+
 export const loader = async ({ params }: Route.LoaderArgs) => {
   const task = tasks.find((t) => t.id === params.task)
   if (!task) {
@@ -47,10 +51,10 @@ export default function TaskEdit({
   return (
     <div>
       <div className="text-center sm:text-left">
-        <h2 className="text-lg font-semibold text-foreground">Update Task</h2>
+        <h2 className="text-lg font-semibold text-foreground">Edit Task</h2>
         <div className="text-sm text-muted-foreground">
-          Update the task by providing necessary info. Click save when
-          you&apos;re done.
+          Edit the task by providing necessary info. Click save when you&apos;re
+          done.
         </div>
       </div>
 

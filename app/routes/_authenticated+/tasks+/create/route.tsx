@@ -9,6 +9,10 @@ import {
 import { tasks } from '../_shared/data/tasks'
 import type { Route } from './+types/route'
 
+export const handle = {
+  breadcrumb: () => ({ label: 'Create' }),
+}
+
 export const action = async ({ request }: Route.ActionArgs) => {
   const url = new URL(request.url)
   const submission = parseWithZod(await request.formData(), {
