@@ -1,12 +1,11 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
-import { useState } from 'react'
-import { data, useNavigate, useSearchParams } from 'react-router'
+import { data } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
 import {
-  TasksMutateDrawer,
+  TasksMutateForm,
   updateSchema,
-} from '../_shared/components/tasks-mutate-drawer'
+} from '../_shared/components/tasks-mutate-form'
 import { tasks } from '../_shared/data/tasks'
 import type { Route } from './+types/route'
 
@@ -44,26 +43,5 @@ export const action = async ({ request }: Route.ActionArgs) => {
 export default function TaskEdit({
   loaderData: { task },
 }: Route.ComponentProps) {
-  const [open, setOpen] = useState(true)
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-
-  return (
-    <TasksMutateDrawer
-      key="task-update"
-      task={task}
-      open={open}
-      onOpenChange={(v) => {
-        if (!v) {
-          setOpen(false)
-          // wait for the drawer to close
-          setTimeout(() => {
-            navigate(`/tasks?${searchParams.toString()}`, {
-              viewTransition: true,
-            })
-          }, 300) // the duration of the drawer close animation
-        }
-      }}
-    />
-  )
+  return <TasksMutateForm task={task} />
 }
