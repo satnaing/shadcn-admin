@@ -11,10 +11,11 @@ export const SearchInput = ({
   ...rest
 }: SearchInputProps) => {
   const isImeOn = useRef(false) // IME = Input Method Editor, e.g. Japanese keyboard
-  const [prevText, setPrevText] = useState('')
+  const [prevText, setPrevText] = useState<string | undefined>(undefined)
 
   const handleChange = (text: string) => {
     if (prevText === text) return
+    console.log({ text })
     if (text === '') {
       // onCompositionEnd may not be called in Chrome when clearing text
       isImeOn.current = false
