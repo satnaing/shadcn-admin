@@ -54,8 +54,7 @@ export default function TaskImport() {
       <div className="text-center sm:text-left">
         <h2 className="text-lg font-semibold text-foreground">Create Task</h2>
         <div className="text-sm text-muted-foreground">
-          Add a new task by providing necessary info. Click save when
-          you&apos;re done.
+          Import tasks quickly from a CSV file.
         </div>
       </div>
 
