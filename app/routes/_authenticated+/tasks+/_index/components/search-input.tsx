@@ -15,7 +15,6 @@ export const SearchInput = ({
 
   const handleChange = (text: string) => {
     if (prevText === text) return
-    console.log({ text })
     if (text === '') {
       // onCompositionEnd may not be called in Chrome when clearing text
       isImeOn.current = false
