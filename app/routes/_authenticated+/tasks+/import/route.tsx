@@ -51,7 +51,7 @@ export default function TaskImport() {
   return (
     <div>
       <div className="text-center sm:text-left">
-        <h2 className="text-lg font-semibold text-foreground">Create Task</h2>
+        <h2 className="text-lg font-semibold text-foreground">Import Task</h2>
         <div className="text-sm text-muted-foreground">
           Import tasks quickly from a CSV file.
         </div>
