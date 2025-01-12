@@ -9,7 +9,7 @@ import {
   BreadcrumbSeparator,
 } from '~/components/ui/breadcrumb'
 
-interface AppBreadcrumbItem {
+interface MatchedBreadcrumbItem {
   label: string
   to?: string
   isCurrentPage?: boolean
@@ -28,12 +28,11 @@ function isBreadcrumbHandle(
 
 export const useBreadcrumbs = () => {
   const matches = useMatches()
-  console.log({ matches })
   const breadcrumbMatches = matches.filter((match) =>
     isBreadcrumbHandle(match.handle),
   )
 
-  const breadcrumbs = breadcrumbMatches.map((match, idx) => {
+  const breadcrumbItems = breadcrumbMatches.map((match, idx) => {
     if (!isBreadcrumbHandle(match.handle)) {
       return null
     }
@@ -41,7 +40,7 @@ export const useBreadcrumbs = () => {
       ...match.handle.breadcrumb(match.data),
       isCurrentPage: idx === breadcrumbMatches.length - 1,
     }
-  }) as AppBreadcrumbItem[]
+  }) as MatchedBreadcrumbItem[]
 
   const Breadcrumbs = () => {
     return (
@@ -54,7 +53,7 @@ export const useBreadcrumbs = () => {
               </BreadcrumbLink>
             </BreadcrumbItem>
 
-            {breadcrumbs.map((item, idx) => {
+            {breadcrumbItems.map((item, idx) => {
               return (
                 <React.Fragment key={idx}>
                   <BreadcrumbSeparator />
@@ -76,5 +75,5 @@ export const useBreadcrumbs = () => {
     )
   }
 
-  return { breadcrumbs, Breadcrumbs }
+  return { Breadcrumbs }
 }
