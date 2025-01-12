@@ -25,7 +25,6 @@ export const handle = {
 }
 
 export const action = async ({ request }: Route.ActionArgs) => {
-  const url = new URL(request.url)
   const submission = parseWithZod(await request.formData(), {
     schema: formSchema,
   })
@@ -36,7 +35,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
   await sleep(1000)
 
   // Create a new task
-  return redirectWithSuccess(`/tasks?${url.search.toString()}`, {
+  return redirectWithSuccess('tasks', {
     message: 'Tasks imported successfully.',
     description: JSON.stringify(submission.value),
   })

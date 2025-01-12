@@ -1,5 +1,5 @@
 import { IconDownload, IconPlus } from '@tabler/icons-react'
-import { Link, useSearchParams } from 'react-router'
+import { Link } from 'react-router'
 import { Button } from '~/components/ui/button'
 import type { Route } from './+types/route'
 import { columns } from './components/columns'
@@ -61,8 +61,6 @@ export const loader = ({ request }: Route.LoaderArgs) => {
 export default function Tasks({
   loaderData: { tasks, pagination, facetedCounts },
 }: Route.ComponentProps) {
-  const [searchParams] = useSearchParams()
-
   return (
     <div>
       <div className="mb-2 flex flex-wrap items-center justify-between gap-x-4 space-y-2">
@@ -74,12 +72,12 @@ export default function Tasks({
         </div>
         <div className="flex gap-2">
           <Button variant="outline" className="space-x-1" asChild>
-            <Link to={`/tasks/import?${searchParams.toString()}`}>
+            <Link to="/tasks/import">
               <span>Import</span> <IconDownload size={18} />
             </Link>
           </Button>
           <Button className="space-x-1" asChild>
-            <Link to={`/tasks/create?${searchParams.toString()}`}>
+            <Link to="/tasks/create">
               <span>Create</span> <IconPlus size={18} />
             </Link>
           </Button>

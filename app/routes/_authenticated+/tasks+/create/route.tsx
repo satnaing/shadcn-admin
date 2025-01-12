@@ -14,7 +14,6 @@ export const handle = {
 }
 
 export const action = async ({ request }: Route.ActionArgs) => {
-  const url = new URL(request.url)
   const submission = parseWithZod(await request.formData(), {
     schema: createSchema,
   })
@@ -32,7 +31,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
   const id = `TASK-${String(maxIdNumber + 1).padStart(4, '0')}`
   tasks.unshift({ id, ...task })
 
-  return redirectWithSuccess(`/tasks?${url.searchParams.toString()}`, {
+  return redirectWithSuccess('/tasks', {
     message: 'Task created successfully',
     description: JSON.stringify(submission.value),
   })
