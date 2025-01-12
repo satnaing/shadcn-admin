@@ -1,17 +1,19 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
-import { useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
+import { Separator } from '~/components/ui/separator'
 import {
-  TasksMutateDrawer,
+  TasksMutateForm,
   createSchema,
-} from '../_shared/components/tasks-mutate-drawer'
+} from '../_shared/components/tasks-mutate-form'
 import { tasks } from '../_shared/data/tasks'
 import type { Route } from './+types/route'
 
+export const handle = {
+  breadcrumb: () => ({ label: 'Create' }),
+}
+
 export const action = async ({ request }: Route.ActionArgs) => {
-  const url = new URL(request.url)
   const submission = parseWithZod(await request.formData(), {
     schema: createSchema,
   })
@@ -29,32 +31,26 @@ export const action = async ({ request }: Route.ActionArgs) => {
   const id = `TASK-${String(maxIdNumber + 1).padStart(4, '0')}`
   tasks.unshift({ id, ...task })
 
-  return redirectWithSuccess(`/tasks?${url.searchParams.toString()}`, {
+  return redirectWithSuccess('/tasks', {
     message: 'Task created successfully',
     description: JSON.stringify(submission.value),
   })
 }
 
 export default function TaskCreate() {
-  const [open, setOpen] = useState(true)
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-
   return (
-    <TasksMutateDrawer
-      key="task-create"
-      open={open}
-      onOpenChange={(v) => {
-        if (!v) {
-          setOpen(false)
-          // wait for the drawer to close
-          setTimeout(() => {
-            navigate(`/tasks?${searchParams.toString()}`, {
-              viewTransition: true,
-            })
-          }, 300) // the duration of the drawer close animation
-        }
-      }}
-    />
+    <div>
+      <div className="text-center sm:text-left">
+        <h2 className="text-lg font-semibold text-foreground">Create Task</h2>
+        <div className="text-sm text-muted-foreground">
+          Add a new task by providing necessary info. Click save when
+          you&apos;re done.
+        </div>
+      </div>
+
+      <Separator className="my-4 lg:my-6" />
+
+      <TasksMutateForm />
+    </div>
   )
 }
