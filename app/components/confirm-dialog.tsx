@@ -1,4 +1,4 @@
-import { Form, useNavigation } from 'react-router'
+import { Form, useNavigation, type FetcherWithComponents } from 'react-router'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,7 +11,7 @@ import {
 import { Button } from '~/components/ui/button'
 import { cn } from '~/lib/utils'
 
-interface ConfirmDialogProps {
+interface ConfirmDialogProps<T> {
   open: boolean
   onOpenChange: (open: boolean) => void
   title: React.ReactNode
@@ -21,11 +21,13 @@ interface ConfirmDialogProps {
   confirmText?: React.ReactNode
   destructive?: boolean
   isLoading?: boolean
+  fetcher?: FetcherWithComponents<T>
+  action?: string
   className?: string
   children?: React.ReactNode
 }
 
-export function ConfirmDialog(props: ConfirmDialogProps) {
+export function ConfirmDialog<T>(props: ConfirmDialogProps<T>) {
   const {
     title,
     desc,
@@ -36,9 +38,12 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     destructive,
     isLoading,
     disabled = false,
+    fetcher,
+    action,
     ...actions
   } = props
   const navigation = useNavigation()
+
   return (
     <AlertDialog {...actions}>
       <AlertDialogContent className={cn(className && className)}>
@@ -53,17 +58,31 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
           <AlertDialogCancel disabled={isLoading}>
             {cancelBtnText ?? 'Cancel'}
           </AlertDialogCancel>
-          <Form method="POST">
-            <Button
-              type="submit"
-              variant={destructive ? 'destructive' : 'default'}
-              disabled={
-                disabled || isLoading || navigation.state === 'submitting'
-              }
-            >
-              {confirmText ?? 'Continue'}
-            </Button>
-          </Form>
+          {fetcher ? (
+            <fetcher.Form method="POST" action={action}>
+              <Button
+                type="submit"
+                variant={destructive ? 'destructive' : 'default'}
+                disabled={
+                  disabled || isLoading || fetcher.state === 'submitting'
+                }
+              >
+                {confirmText ?? 'Continue'}
+              </Button>
+            </fetcher.Form>
+          ) : (
+            <Form method="POST" action={action}>
+              <Button
+                type="submit"
+                variant={destructive ? 'destructive' : 'default'}
+                disabled={
+                  disabled || isLoading || navigation.state === 'submitting'
+                }
+              >
+                {confirmText ?? 'Continue'}
+              </Button>
+            </Form>
+          )}
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

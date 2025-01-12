@@ -41,7 +41,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
   })
 }
 
-export default function TaskUpdate({
+export default function TaskEdit({
   loaderData: { task },
 }: Route.ComponentProps) {
   const [open, setOpen] = useState(true)

@@ -1,11 +1,14 @@
+import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
-import { useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router'
+import { Form } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
 import { z } from 'zod'
+import { Button } from '~/components/ui/button'
+import { Input } from '~/components/ui/input'
+import { Label } from '~/components/ui/label'
+import { HStack } from '~/components/ui/stack'
 import type { Route } from './+types/route'
-import { TasksImportDialog } from './components/tasks-import-dialog'
 
 export const formSchema = z.object({
   file: z
@@ -35,25 +38,31 @@ export const action = async ({ request }: Route.ActionArgs) => {
 }
 
 export default function TaskImport() {
-  const [open, setOpen] = useState(true)
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
+  const [form, { file }] = useForm<z.infer<typeof formSchema>>({
+    defaultValue: { file: undefined },
+    onValidate: ({ formData }) =>
+      parseWithZod(formData, { schema: formSchema }),
+  })
 
   return (
-    <TasksImportDialog
-      key="tasks-import"
-      open={open}
-      onOpenChange={(v) => {
-        if (!v) {
-          setOpen(false)
-          // wait for the modal to close
-          setTimeout(() => {
-            navigate(`/tasks?${searchParams.toString()}`, {
-              viewTransition: true,
-            })
-          }, 300) // the duration of the modal close animation
-        }
-      }}
-    />
+    <Form {...getFormProps(form)}>
+      <div className="mb-2 space-y-1">
+        <Label htmlFor={file.id}>File</Label>
+        <Input {...getInputProps(file, { type: 'file' })} key={file.key} />
+        <div
+          id={file.errorId}
+          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+        >
+          {file.errors}
+        </div>
+      </div>
+
+      <HStack>
+        <Button variant="outline">Close</Button>
+        <Button type="submit" form={form.id}>
+          Import
+        </Button>
+      </HStack>
+    </Form>
   )
 }
