@@ -1,3 +1,6 @@
+@import '@fontsource/inter';
+@import '@fontsource/manrope';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

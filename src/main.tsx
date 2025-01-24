@@ -14,6 +14,7 @@ import { ThemeProvider } from './context/theme-context'
 import './index.css'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
+import { FontProvider } from './context/font-context'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -98,7 +99,9 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
-          <RouterProvider router={router} />
+          <FontProvider>
+            <RouterProvider router={router} />
+          </FontProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </StrictMode>
