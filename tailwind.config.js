@@ -1,5 +1,6 @@
 import tailwindCssAnimate from 'tailwindcss-animate'
-const { fontFamily } = require('tailwindcss/defaultTheme');
+
+const { fontFamily } = require('tailwindcss/defaultTheme')
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -16,7 +17,7 @@ export default {
     extend: {
       fontFamily: {
         inter: ['Inter', ...fontFamily.sans],
-        manrope: ['manrope', ...fontFamily.mono], 
+        manrope: ['Manrope', ...fontFamily.mono],
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -76,8 +77,6 @@ export default {
         },
       },
     },
-
-
   },
   plugins: [tailwindCssAnimate],
 }

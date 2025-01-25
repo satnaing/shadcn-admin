@@ -32,8 +32,9 @@ const appearanceFormSchema = z.object({
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
 
 export function AppearanceForm() {
-
   const { font, setFont } = useFont();
+
+
   const { theme, setTheme } = useTheme()
 
 
@@ -54,8 +55,8 @@ export function AppearanceForm() {
 
   function onSubmit(data: AppearanceFormValues) {
 
-    data.theme != theme && setTheme(data.theme);
-    data.font != font && setFont(data.font);
+    if (data.theme != theme) setTheme(data.theme);
+    if (data.font != font) setFont(data.font);
 
 
     toast({
