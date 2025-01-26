@@ -43,24 +43,24 @@ export default function SignIn() {
     <Card className="p-6">
       <div className="flex flex-col space-y-2 text-left">
         <h1 className="text-2xl font-semibold tracking-tight">Login</h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Enter your email and password below <br />
           to log into your account
         </p>
       </div>
       <UserAuthForm />
-      <p className="mt-4 px-8 text-center text-sm text-muted-foreground">
+      <p className="text-muted-foreground mt-4 px-8 text-center text-sm">
         By clicking login, you agree to our{' '}
         <a
           href="/terms"
-          className="underline underline-offset-4 hover:text-primary"
+          className="hover:text-primary underline underline-offset-4"
         >
           Terms of Service
         </a>{' '}
         and{' '}
         <a
           href="/privacy"
-          className="underline underline-offset-4 hover:text-primary"
+          className="hover:text-primary underline underline-offset-4"
         >
           Privacy Policy
         </a>

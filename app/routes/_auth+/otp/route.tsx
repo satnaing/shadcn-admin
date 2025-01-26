@@ -38,17 +38,17 @@ export default function Otp() {
         <h1 className="text-md font-semibold tracking-tight">
           Two-factor Authentication
         </h1>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground text-sm">
           Please enter the authentication code. <br /> We have sent the
           authentication code to your email.
         </p>
       </div>
       <OtpForm />
-      <p className="mt-4 px-8 text-center text-sm text-muted-foreground">
+      <p className="text-muted-foreground mt-4 px-8 text-center text-sm">
         Haven't received it?{' '}
         <Link
           to="/sign-in"
-          className="underline underline-offset-4 hover:text-primary"
+          className="hover:text-primary underline underline-offset-4"
         >
           Resend a new code.
         </Link>

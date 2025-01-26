@@ -41,8 +41,8 @@ export default function TaskCreate() {
   return (
     <div>
       <div className="text-center sm:text-left">
-        <h2 className="text-lg font-semibold text-foreground">Create Task</h2>
-        <div className="text-sm text-muted-foreground">
+        <h2 className="text-foreground text-lg font-semibold">Create Task</h2>
+        <div className="text-muted-foreground text-sm">
           Add a new task by providing necessary info. Click save when
           you&apos;re done.
         </div>

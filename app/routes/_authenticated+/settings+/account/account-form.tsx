@@ -63,12 +63,12 @@ export function AccountForm() {
           key={fields.name.key}
           placeholder="Your name"
         />
-        <div className="text-[0.8rem] text-muted-foreground">
+        <div className="text-muted-foreground text-[0.8rem]">
           This is the name that will be displayed on your profile and in emails.
         </div>
         <div
           id={fields.name.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.name.errors}
         </div>
@@ -118,12 +118,12 @@ export function AccountForm() {
           value={fields.dob.value}
           key={fields.dob.key}
         />
-        <div className="text-[0.8rem] text-muted-foreground">
+        <div className="text-muted-foreground text-[0.8rem]">
           Your date of birth is used to calculate your age.
         </div>
         <div
           id={fields.dob.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.dob.errors}
         </div>
@@ -195,12 +195,12 @@ export function AccountForm() {
           value={fields.language.value}
           key={fields.language.key}
         />
-        <div className="text-[0.8rem] text-muted-foreground">
+        <div className="text-muted-foreground text-[0.8rem]">
           This is the language that will be used in the dashboard.
         </div>
         <div
           id={fields.language.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.language.errors}
         </div>

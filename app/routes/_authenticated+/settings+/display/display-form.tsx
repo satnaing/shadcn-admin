@@ -57,14 +57,14 @@ export function DisplayForm() {
       <div className="space-y-2">
         <div className="mb-4">
           <Label className="text-base">Sidebar</Label>
-          <div className="text-[0.8rem] text-muted-foreground">
+          <div className="text-muted-foreground text-[0.8rem]">
             Select the items you want to display in the sidebar.
           </div>
         </div>
 
         {items.map((item) => (
           <div
-            className="flex flex-row items-start space-x-3 space-y-0"
+            className="flex flex-row items-start space-y-0 space-x-3"
             key={item.id}
           >
             <Checkbox
@@ -94,7 +94,7 @@ export function DisplayForm() {
             key={item.name}
           />
         ))}
-        <div className="text-[0.8rem] font-medium text-destructive empty:hidden">
+        <div className="text-destructive text-[0.8rem] font-medium empty:hidden">
           {fields.items.errors}
         </div>
       </div>

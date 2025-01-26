@@ -23,7 +23,7 @@ export function UsersDeleteDialog({ open, onOpenChange, user }: Props) {
       title={
         <span className="text-destructive">
           <IconAlertTriangle
-            className="mr-1 inline-block stroke-destructive"
+            className="stroke-destructive mr-1 inline-block"
             size={18}
           />{' '}
           Delete User

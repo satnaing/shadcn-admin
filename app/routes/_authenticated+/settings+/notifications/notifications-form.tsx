@@ -41,14 +41,14 @@ export function NotificationsForm() {
           defaultValue={fields.type.value}
           className="flex flex-col space-y-1"
         >
-          <div className="flex items-center space-x-3 space-y-0">
+          <div className="flex items-center space-y-0 space-x-3">
             <RadioGroupItem id={`${fields.type.id}-all`} value="all" />
             <Label htmlFor={`${fields.type.id}-all`} className="font-normal">
               All new messages
             </Label>
           </div>
 
-          <div className="flex items-center space-x-3 space-y-0">
+          <div className="flex items-center space-y-0 space-x-3">
             <RadioGroupItem
               id={`${fields.type.id}-mentions`}
               value="mentions"
@@ -61,7 +61,7 @@ export function NotificationsForm() {
             </Label>
           </div>
 
-          <div className="flex items-center space-x-3 space-y-0">
+          <div className="flex items-center space-y-0 space-x-3">
             <RadioGroupItem id={`${fields.type.id}-none`} value="none" />
             <Label htmlFor={`${fields.type.id}-none`} className="font-normal">
               Nothing
@@ -70,7 +70,7 @@ export function NotificationsForm() {
         </RadioGroup>
         <div
           id={fields.type.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.type.errors}
         </div>
@@ -87,7 +87,7 @@ export function NotificationsForm() {
               >
                 Communication emails
               </Label>
-              <div className="text-[0.8rem] text-muted-foreground">
+              <div className="text-muted-foreground text-[0.8rem]">
                 Receive emails about your account activity.
               </div>
             </div>
@@ -104,7 +104,7 @@ export function NotificationsForm() {
               <Label htmlFor={fields.marketing_emails.id} className="text-base">
                 Marketing emails
               </Label>
-              <div className="text-[0.8rem] text-muted-foreground">
+              <div className="text-muted-foreground text-[0.8rem]">
                 Receive emails about new products, features, and more.
               </div>
             </div>
@@ -121,7 +121,7 @@ export function NotificationsForm() {
               <Label htmlFor={fields.social_emails.id} className="text-base">
                 Social emails
               </Label>
-              <div className="text-[0.8rem] text-muted-foreground">
+              <div className="text-muted-foreground text-[0.8rem]">
                 Receive emails for friend requests, follows, and more.
               </div>
             </div>
@@ -138,7 +138,7 @@ export function NotificationsForm() {
               <Label htmlFor={fields.security_emails.id} className="text-base">
                 Security emails
               </Label>
-              <div className="text-[0.8rem] text-muted-foreground">
+              <div className="text-muted-foreground text-[0.8rem]">
                 Receive emails about your account activity and security.
               </div>
             </div>
@@ -158,7 +158,7 @@ export function NotificationsForm() {
         </div>
       </div>
 
-      <div className="relative flex flex-row items-start space-x-3 space-y-0">
+      <div className="relative flex flex-row items-start space-y-0 space-x-3">
         <Checkbox
           id={fields.mobile.id}
           name={fields.mobile.name}
@@ -170,7 +170,7 @@ export function NotificationsForm() {
           <Label htmlFor={fields.mobile.id}>
             Use different settings for my mobile devices
           </Label>
-          <div className="text-[0.8rem] text-muted-foreground">
+          <div className="text-muted-foreground text-[0.8rem]">
             You can manage your mobile notifications in the{' '}
             <Link
               to="/settings"
