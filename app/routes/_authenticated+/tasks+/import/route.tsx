@@ -51,8 +51,8 @@ export default function TaskImport() {
   return (
     <div>
       <div className="text-center sm:text-left">
-        <h2 className="text-lg font-semibold text-foreground">Import Task</h2>
-        <div className="text-sm text-muted-foreground">
+        <h2 className="text-foreground text-lg font-semibold">Import Task</h2>
+        <div className="text-muted-foreground text-sm">
           Import tasks quickly from a CSV file.
         </div>
       </div>
@@ -65,7 +65,7 @@ export default function TaskImport() {
           <Input {...getInputProps(file, { type: 'file' })} key={file.key} />
           <div
             id={file.errorId}
-            className="text-[0.8rem] font-medium text-destructive empty:hidden"
+            className="text-destructive text-[0.8rem] font-medium empty:hidden"
           >
             {file.errors}
           </div>

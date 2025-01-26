@@ -50,13 +50,13 @@ export default function ProfileForm() {
           key={fields.username.key}
           placeholder="shadcn"
         />
-        <div className="text-[0.8rem] text-muted-foreground">
+        <div className="text-muted-foreground text-[0.8rem]">
           This is your public display name. It can be your real name or a
           pseudonym. You can only change this once every 30 days.
         </div>
         <div
           id={fields.username.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.username.errors}
         </div>
@@ -85,13 +85,13 @@ export default function ProfileForm() {
             <SelectItem value="m@support.com">m@support.com</SelectItem>
           </SelectContent>
         </Select>
-        <div className="text-[0.8rem] text-muted-foreground">
+        <div className="text-muted-foreground text-[0.8rem]">
           You can manage verified email addresses in your{' '}
           <Link to="/">email settings</Link>.
         </div>
         <div
           id={fields.email.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.email.errors}
         </div>
@@ -105,13 +105,13 @@ export default function ProfileForm() {
           placeholder="Tell us a little bit about yourself"
           className="resize-none"
         />
-        <div className="text-[0.8rem] text-muted-foreground">
+        <div className="text-muted-foreground text-[0.8rem]">
           You can <span>@mention</span> other users and organizations to link to
           them.
         </div>
         <div
           id={fields.bio.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.bio.errors}
         </div>
@@ -119,7 +119,7 @@ export default function ProfileForm() {
 
       <div className="space-y-2">
         <Label htmlFor={fields.urls.id}>URLs</Label>
-        <div className="text-[0.8rem] text-muted-foreground">
+        <div className="text-muted-foreground text-[0.8rem]">
           Add links to your website, blog, or social media profiles.
         </div>
 
@@ -147,7 +147,7 @@ export default function ProfileForm() {
             </div>
             <div
               id={url.errorId}
-              className="text-[0.8rem] font-medium text-destructive empty:hidden"
+              className="text-destructive text-[0.8rem] font-medium empty:hidden"
             >
               {url.errors}
             </div>

@@ -150,7 +150,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
             {...getFormProps(form)}
             className="space-y-4 p-0.5"
           >
-            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
               <Label
                 htmlFor={fields.firstName.id}
                 className="col-span-2 text-right"
@@ -165,13 +165,13 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.firstName.errorId}
-                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
+                className="text-destructive col-span-4 col-start-3 text-[0.8rem] font-medium empty:hidden"
               >
                 {fields.firstName.errors}
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
               <Label
                 htmlFor={fields.lastName.id}
                 className="col-span-2 text-right"
@@ -186,13 +186,13 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.lastName.errorId}
-                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
+                className="text-destructive col-span-4 col-start-3 text-[0.8rem] font-medium empty:hidden"
               >
                 {fields.lastName.errors}
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
               <Label
                 htmlFor={fields.username.id}
                 className="col-span-2 text-right"
@@ -207,13 +207,13 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.username.errorId}
-                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
+                className="text-destructive col-span-4 col-start-3 text-[0.8rem] font-medium empty:hidden"
               >
                 {fields.username.errors}
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
               <Label
                 htmlFor={fields.email.id}
                 className="col-span-2 text-right"
@@ -228,13 +228,13 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.email.errorId}
-                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
+                className="text-destructive col-span-4 col-start-3 text-[0.8rem] font-medium empty:hidden"
               >
                 {fields.email.errors}
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
               <Label
                 htmlFor={fields.phoneNumber.id}
                 className="col-span-2 text-right"
@@ -249,13 +249,13 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               />
               <div
                 id={fields.phoneNumber.errorId}
-                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
+                className="text-destructive col-span-4 col-start-3 text-[0.8rem] font-medium empty:hidden"
               >
                 {fields.phoneNumber.errors}
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
               <Label htmlFor={fields.role.id} className="col-span-2 text-right">
                 Role
               </Label>
@@ -283,7 +283,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </Select>
               <div
                 id={fields.email.errorId}
-                className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
+                className="text-destructive col-span-4 col-start-3 text-[0.8rem] font-medium empty:hidden"
               >
                 {fields.role.errors}
               </div>
@@ -291,7 +291,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
 
             {!isEdit && (
               <>
-                <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+                <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
                   <Label
                     htmlFor={fields.password.id}
                     className="col-span-2 text-right"
@@ -306,13 +306,13 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
                   />
                   <div
                     id={fields.password.errorId}
-                    className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
+                    className="text-destructive col-span-4 col-start-3 text-[0.8rem] font-medium empty:hidden"
                   >
                     {fields.password.errors}
                   </div>
                 </div>
 
-                <div className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
+                <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
                   <Label
                     htmlFor={fields.confirmPassword.id}
                     className="col-span-2 text-right"
@@ -330,7 +330,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
                   />
                   <div
                     id={fields.confirmPassword.errorId}
-                    className="col-span-4 col-start-3 text-[0.8rem] font-medium text-destructive empty:hidden"
+                    className="text-destructive col-span-4 col-start-3 text-[0.8rem] font-medium empty:hidden"
                   >
                     {fields.confirmPassword.errors}
                   </div>

@@ -37,7 +37,7 @@ export function ForgotForm({ className, ...props }: ForgotFormProps) {
         />
         <div
           id={email.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {email.errors}
         </div>

@@ -64,7 +64,7 @@ export function TasksMutateForm({ task }: { task?: Task }) {
         />
         <div
           id={fields.title.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.title.errors}
         </div>
@@ -96,7 +96,7 @@ export function TasksMutateForm({ task }: { task?: Task }) {
         </Select>
         <div
           id={fields.status.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.status.errors}
         </div>
@@ -137,7 +137,7 @@ export function TasksMutateForm({ task }: { task?: Task }) {
         </RadioGroup>
         <div
           id={fields.label.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.label.errors}
         </div>
@@ -178,7 +178,7 @@ export function TasksMutateForm({ task }: { task?: Task }) {
         </RadioGroup>
         <div
           id={fields.priority.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {fields.priority.errors}
         </div>

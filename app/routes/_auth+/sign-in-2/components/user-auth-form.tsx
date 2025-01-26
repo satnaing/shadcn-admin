@@ -43,7 +43,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         />
         <div
           id={email.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {email.errors}
         </div>
@@ -54,7 +54,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <Label htmlFor={password.id}>Password</Label>
           <Link
             to="/forgot-password"
-            className="text-sm font-medium text-muted-foreground hover:opacity-75"
+            className="text-muted-foreground text-sm font-medium hover:opacity-75"
           >
             Forgot password?
           </Link>
@@ -66,7 +66,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         />
         <div
           id={password.errorId}
-          className="text-[0.8rem] font-medium text-destructive empty:hidden"
+          className="text-destructive text-[0.8rem] font-medium empty:hidden"
         >
           {password.errors}
         </div>
@@ -88,7 +88,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">
+          <span className="bg-background text-muted-foreground px-2">
             Or continue with
           </span>
         </div>
