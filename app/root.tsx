@@ -14,14 +14,10 @@ import { toast } from 'sonner'
 import { Toaster } from '~/components/ui/sonner'
 import type { Route } from './+types/root'
 import { ThemeProvider } from './components/theme-provider'
-import styles from './index.css?url'
+import './index.css'
 
 export const meta: Route.MetaFunction = () => {
   return [{ title: 'Shadcn Admin React Router v7' }]
-}
-
-export const links: Route.LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles }]
 }
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
