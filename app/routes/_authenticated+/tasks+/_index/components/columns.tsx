@@ -2,8 +2,9 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { useFetcher } from 'react-router'
 import { Badge } from '~/components/ui/badge'
 import { Checkbox } from '~/components/ui/checkbox'
-import { labels, priorities, statuses } from '../../_shared/data/data'
+import { labels } from '../../_shared/data/data'
 import type { Task } from '../../_shared/data/schema'
+import { FILTER_FIELD_LABELS } from '../config'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
 
@@ -71,7 +72,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Status" />
     ),
     cell: ({ row }) => {
-      const status = statuses.find(
+      const status = FILTER_FIELD_LABELS.status.find(
         (status) => status.value === row.getValue('status'),
       )
 
@@ -98,7 +99,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Priority" />
     ),
     cell: ({ row }) => {
-      const priority = priorities.find(
+      const priority = FILTER_FIELD_LABELS.priority.find(
         (priority) => priority.value === row.getValue('priority'),
       )
 

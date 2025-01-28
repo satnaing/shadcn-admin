@@ -75,9 +75,9 @@ export function useDataTableState() {
 
   const filters: Filters = useMemo(() => {
     return FilterSchema.parse(
-      FILTER_FIELDS.map((field) => {
-        return [field, searchParams.getAll(field)]
-      }),
+      Object.fromEntries(
+        FILTER_FIELDS.map((field) => [field, searchParams.getAll(field)]),
+      ),
     )
   }, [searchParams])
 
@@ -156,12 +156,15 @@ export function useDataTableState() {
   const updatePagination = (newPagination: Partial<Pagination>) => {
     setSearchParams(
       (prev) => {
-        if (newPagination.page === 1) {
+        if (newPagination.page === 1 || newPagination.page === undefined) {
           prev.delete('page')
         } else {
           prev.set('page', String(newPagination.page))
         }
-        if (newPagination.per_page === Number(PAGINATION_PER_PAGE_DEFAULT)) {
+        if (
+          newPagination.per_page === Number(PAGINATION_PER_PAGE_DEFAULT) ||
+          newPagination.per_page === undefined
+        ) {
           prev.delete('per_page')
         } else {
           prev.set('per_page', String(newPagination.per_page))

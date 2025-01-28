@@ -1,7 +1,7 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
 import { Button } from '~/components/ui/button'
-import { priorities, statuses } from '../../_shared/data/data'
+import { FILTER_FIELD_LABELS, FILTER_FIELDS } from '../config'
 import { useDataTableState } from '../hooks/use-data-table-state'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
@@ -36,25 +36,21 @@ export function DataTableToolbar<TData>({
           }}
         />
         <div className="flex gap-x-2">
-          {table.getColumn('status') && (
-            <DataTableFacetedFilter
-              filterKey="status"
-              title="Status"
-              options={statuses.map((status) => ({
-                ...status,
-                count: facetedCounts?.status[status.value],
-              }))}
-            />
-          )}
-          {table.getColumn('priority') && (
-            <DataTableFacetedFilter
-              filterKey="priority"
-              title="Priority"
-              options={priorities.map((priority) => ({
-                ...priority,
-                count: facetedCounts?.priority[priority.value],
-              }))}
-            />
+          {FILTER_FIELDS.filter((filterKey) => table.getColumn(filterKey)).map(
+            (filterKey) => {
+              const options = FILTER_FIELD_LABELS[filterKey]
+              return (
+                <DataTableFacetedFilter
+                  key={filterKey}
+                  filterKey={filterKey}
+                  title={filterKey}
+                  options={options.map((option) => ({
+                    ...option,
+                    count: facetedCounts?.[filterKey][option.value],
+                  }))}
+                />
+              )
+            },
           )}
         </div>
         {isFiltered && (

@@ -1,3 +1,63 @@
-export const FILTER_FIELDS = ['status', 'priority', 'assignee'] as const
+import {
+  IconArrowDown,
+  IconArrowRight,
+  IconArrowUp,
+  IconCircle,
+  IconCircleCheck,
+  IconCircleX,
+  IconExclamationCircle,
+  IconStopwatch,
+} from '@tabler/icons-react'
+
+export const FILTER_FIELD_LABELS = {
+  status: [
+    {
+      value: 'backlog',
+      label: 'Backlog',
+      icon: IconExclamationCircle,
+    },
+    {
+      value: 'todo',
+      label: 'Todo',
+      icon: IconCircle,
+    },
+    {
+      value: 'in progress',
+      label: 'In Progress',
+      icon: IconStopwatch,
+    },
+    {
+      value: 'done',
+      label: 'Done',
+      icon: IconCircleCheck,
+    },
+    {
+      value: 'canceled',
+      label: 'Canceled',
+      icon: IconCircleX,
+    },
+  ],
+  priority: [
+    {
+      label: 'Low',
+      value: 'low',
+      icon: IconArrowDown,
+    },
+    {
+      label: 'Medium',
+      value: 'medium',
+      icon: IconArrowRight,
+    },
+    {
+      label: 'High',
+      value: 'high',
+      icon: IconArrowUp,
+    },
+  ],
+} as const
+export const FILTER_FIELDS = Object.keys(
+  FILTER_FIELD_LABELS,
+) as (keyof typeof FILTER_FIELD_LABELS)[]
+
 export const PAGINATION_PER_PAGE_ITEMS = ['10', '20', '30', '40', '50'] as const
 export const PAGINATION_PER_PAGE_DEFAULT = PAGINATION_PER_PAGE_ITEMS[0]
