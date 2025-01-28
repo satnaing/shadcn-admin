@@ -1,5 +1,3 @@
-import { z } from 'zod'
-
-export const perPageItems = ['10', '20', '30', '40', '50'] as const
-export const defaultPerPage = perPageItems[0]
-export const perPageItemsSchema = z.enum(perPageItems)
+export const FILTER_FIELDS = ['status', 'priority', 'assignee'] as const
+export const PAGINATION_PER_PAGE_ITEMS = ['10', '20', '30', '40', '50'] as const
+export const PAGINATION_PER_PAGE_DEFAULT = PAGINATION_PER_PAGE_ITEMS[0]

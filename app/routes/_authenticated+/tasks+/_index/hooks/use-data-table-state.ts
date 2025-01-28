@@ -2,7 +2,11 @@ import { useMemo } from 'react'
 import { useSearchParams } from 'react-router'
 import { z } from 'zod'
 import { useDebounce } from '~/hooks/use-debounce'
-import { defaultPerPage, perPageItems, perPageItemsSchema } from '../config'
+import {
+  FILTER_FIELDS,
+  PAGINATION_PER_PAGE_DEFAULT,
+  PAGINATION_PER_PAGE_ITEMS,
+} from '../config'
 
 // Define the types for queries, filters, pagination, and sorting
 export const QuerySchema = z.object({
@@ -12,10 +16,18 @@ export const QuerySchema = z.object({
   ),
 })
 
-export const FilterSchema = z.object({
-  status: z.array(z.string()).optional().default([]),
-  priority: z.array(z.string()).optional().default([]),
-})
+export const FilterSchema = z.object(
+  FILTER_FIELDS.reduce(
+    (acc, field) => {
+      acc[field] = z.array(z.string()).optional().default([])
+      return acc
+    },
+    {} as Record<
+      (typeof FILTER_FIELDS)[number],
+      z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodString, 'many'>>>
+    >,
+  ),
+)
 
 export const SortSchema = z.object({
   sort_by: z.preprocess(
@@ -38,7 +50,11 @@ export const PaginationSchema = z.object({
   ),
   per_page: z.preprocess(
     (val) => (val === null ? undefined : val),
-    perPageItemsSchema.optional().default(perPageItems[0]).transform(Number),
+    z
+      .enum(PAGINATION_PER_PAGE_ITEMS)
+      .optional()
+      .default(PAGINATION_PER_PAGE_DEFAULT)
+      .transform(Number),
   ),
 })
 
@@ -58,10 +74,11 @@ export function useDataTableState() {
   }, [searchParams])
 
   const filters: Filters = useMemo(() => {
-    return FilterSchema.parse({
-      status: searchParams.getAll('status'),
-      priority: searchParams.getAll('priority'),
-    })
+    return FilterSchema.parse(
+      FILTER_FIELDS.map((field) => {
+        return [field, searchParams.getAll(field)]
+      }),
+    )
   }, [searchParams])
 
   const sort: Sort = useMemo(() => {
@@ -144,7 +161,7 @@ export function useDataTableState() {
         } else {
           prev.set('page', String(newPagination.page))
         }
-        if (newPagination.per_page === Number(defaultPerPage)) {
+        if (newPagination.per_page === Number(PAGINATION_PER_PAGE_DEFAULT)) {
           prev.delete('per_page')
         } else {
           prev.set('per_page', String(newPagination.per_page))
