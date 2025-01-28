@@ -2,7 +2,6 @@ import { IconDownload, IconPlus } from '@tabler/icons-react'
 import { Link } from 'react-router'
 import { Button } from '~/components/ui/button'
 import type { Route } from './+types/route'
-import { columns } from './components/columns'
 import { DataTable } from './components/data-table'
 import {
   FILTER_FIELDS,
@@ -11,6 +10,7 @@ import {
   QuerySchema,
   SortSchema,
 } from './config'
+import { columns } from './config/columns'
 import { getFacetedCounts, listFilteredTasks } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
