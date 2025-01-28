@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select'
+import { perPageItems } from '../config'
 import { useDataTableState } from '../hooks/use-data-table-state'
 
 interface DataTablePaginationProps<TData> {
@@ -55,8 +56,8 @@ export function DataTablePagination<TData>({
               <SelectValue placeholder={`${pageSize}`} />
             </SelectTrigger>
             <SelectContent side="top">
-              {[10, 20, 30, 40, 50].map((pageSize) => (
-                <SelectItem key={pageSize} value={`${pageSize}`}>
+              {perPageItems.map((pageSize) => (
+                <SelectItem key={pageSize} value={pageSize}>
                   {pageSize}
                 </SelectItem>
               ))}

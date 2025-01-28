@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { useSearchParams } from 'react-router'
 import { z } from 'zod'
 import { useDebounce } from '~/hooks/use-debounce'
+import { defaultPerPage, perPageItems, perPageItemsSchema } from '../config'
 
 // Define the types for queries, filters, pagination, and sorting
 export const QuerySchema = z.object({
@@ -37,17 +38,7 @@ export const PaginationSchema = z.object({
   ),
   per_page: z.preprocess(
     (val) => (val === null ? undefined : val),
-    z
-      .union([
-        z.literal('10'),
-        z.literal('20'),
-        z.literal('30'),
-        z.literal('40'),
-        z.literal('50'),
-      ])
-      .optional()
-      .default('20')
-      .transform(Number),
+    perPageItemsSchema.optional().default(perPageItems[0]).transform(Number),
   ),
 })
 
@@ -148,12 +139,15 @@ export function useDataTableState() {
   const updatePagination = (newPagination: Partial<Pagination>) => {
     setSearchParams(
       (prev) => {
-        for (const [key, value] of Object.entries(newPagination)) {
-          if (value !== undefined) {
-            prev.set(key, String(value))
-          } else {
-            prev.delete(key)
-          }
+        if (newPagination.page === 1) {
+          prev.delete('page')
+        } else {
+          prev.set('page', String(newPagination.page))
+        }
+        if (newPagination.per_page === Number(defaultPerPage)) {
+          prev.delete('per_page')
+        } else {
+          prev.set('per_page', String(newPagination.per_page))
         }
         return prev
       },
