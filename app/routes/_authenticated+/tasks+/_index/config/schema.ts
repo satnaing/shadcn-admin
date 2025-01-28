@@ -71,7 +71,6 @@ export const PaginationSchema = z.object({
 // Parse query parameters from the request
 export const parseQueryParams = (request: Request) => {
   const searchParams = new URL(request.url).searchParams
-  console.log({ SearchSchema })
   const search = SearchSchema.parse(
     Object.fromEntries(
       SEARCH_FIELDS.map((field) => [field, searchParams.get(field)]),
