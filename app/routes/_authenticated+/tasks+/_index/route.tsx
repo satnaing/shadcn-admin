@@ -4,13 +4,13 @@ import { Button } from '~/components/ui/button'
 import type { Route } from './+types/route'
 import { columns } from './components/columns'
 import { DataTable } from './components/data-table'
-import { FILTER_FIELDS } from './config'
 import {
+  FILTER_FIELDS,
   FilterSchema,
   PaginationSchema,
   QuerySchema,
   SortSchema,
-} from './hooks/use-data-table-state'
+} from './config'
 import { getFacetedCounts, listFilteredTasks } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
