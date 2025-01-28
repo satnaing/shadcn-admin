@@ -1,7 +1,7 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 import type { Table } from '@tanstack/react-table'
 import { Button } from '~/components/ui/button'
-import { FILTER_FIELD_LABELS, FILTER_FIELDS } from '../config/constants'
+import { FILTER_FIELD_LABELS, FILTER_FIELDS } from '../config'
 import { useDataTableState } from '../hooks/use-data-table-state'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'

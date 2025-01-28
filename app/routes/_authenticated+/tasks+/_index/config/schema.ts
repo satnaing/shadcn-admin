@@ -54,3 +54,7 @@ export const PaginationSchema = z.object({
       .transform(Number),
   ),
 })
+
+export const SearchParamsQuery = QuerySchema.merge(FilterSchema)
+  .merge(SortSchema)
+  .merge(PaginationSchema)

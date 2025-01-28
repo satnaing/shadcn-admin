@@ -3,35 +3,27 @@ import { Link } from 'react-router'
 import { Button } from '~/components/ui/button'
 import type { Route } from './+types/route'
 import { DataTable } from './components/data-table'
-import {
-  FILTER_FIELDS,
-  FilterSchema,
-  PaginationSchema,
-  QuerySchema,
-  SortSchema,
-} from './config'
+import { SearchParamsQuery } from './config'
 import { columns } from './config/columns'
 import { getFacetedCounts, listFilteredTasks } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
   const searchParams = new URLSearchParams(new URL(request.url).searchParams)
 
-  const { title } = QuerySchema.parse({
+  const {
+    title,
+    status,
+    priority,
+    sort_by: sortBy,
+    sort_order: sortOrder,
+    page,
+    per_page: perPage,
+  } = SearchParamsQuery.parse({
     title: searchParams.get('title'),
-  })
-
-  const { ...filters } = FilterSchema.parse(
-    Object.fromEntries(
-      FILTER_FIELDS.map((field) => [field, searchParams.getAll(field)]),
-    ),
-  )
-
-  const { sort_by: sortBy, sort_order: sortOrder } = SortSchema.parse({
+    status: searchParams.getAll('status'),
+    priority: searchParams.getAll('priority'),
     sort_by: searchParams.get('sort_by'),
     sort_order: searchParams.get('sort_order'),
-  })
-
-  const { page: currentPage, per_page: pageSize } = PaginationSchema.parse({
     page: searchParams.get('page'),
     per_page: searchParams.get('per_page'),
   })
@@ -39,9 +31,9 @@ export const loader = ({ request }: Route.LoaderArgs) => {
   // listFilteredTasks is a server-side function that fetch tasks from the database
   const { data: tasks, pagination } = listFilteredTasks({
     title,
-    filters,
-    currentPage,
-    pageSize,
+    filters: { status, priority },
+    page,
+    perPage,
     sortBy,
     sortOrder,
   })
@@ -50,7 +42,7 @@ export const loader = ({ request }: Route.LoaderArgs) => {
   const facetedCounts = getFacetedCounts({
     facets: ['status', 'priority'],
     title,
-    filters,
+    filters: { status, priority },
   })
 
   return {

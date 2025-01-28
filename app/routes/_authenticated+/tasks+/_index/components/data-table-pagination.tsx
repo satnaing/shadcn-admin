@@ -22,15 +22,15 @@ interface DataTablePaginationProps<TData> {
 }
 
 export interface PaginationProps {
-  currentPage: number
-  pageSize: number
+  page: number
+  perPage: number
   totalPages: number
   totalItems: number
 }
 
 export function DataTablePagination<TData>({
   table,
-  pagination: { currentPage, pageSize, totalPages, totalItems },
+  pagination: { page, perPage, totalPages, totalItems },
 }: DataTablePaginationProps<TData>) {
   const { updatePagination } = useDataTableState()
 
@@ -44,7 +44,7 @@ export function DataTablePagination<TData>({
         <div className="flex items-center space-x-2">
           <p className="hidden text-sm font-medium sm:block">Rows per page</p>
           <Select
-            defaultValue={`${pageSize}`}
+            defaultValue={`${perPage}`}
             onValueChange={(value) => {
               updatePagination({
                 page: 1,
@@ -53,7 +53,7 @@ export function DataTablePagination<TData>({
             }}
           >
             <SelectTrigger className="h-8 w-[70px]">
-              <SelectValue placeholder={`${pageSize}`} />
+              <SelectValue placeholder={`${perPage}`} />
             </SelectTrigger>
             <SelectContent side="top">
               {PAGINATION_PER_PAGE_ITEMS.map((pageSize) => (
@@ -65,7 +65,7 @@ export function DataTablePagination<TData>({
           </Select>
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {currentPage} of {totalPages}
+          Page {page} of {totalPages}
         </div>
         <div className="flex items-center space-x-2">
           <Button
@@ -77,7 +77,7 @@ export function DataTablePagination<TData>({
                 page: undefined, // delete page param
               })
             }}
-            disabled={currentPage === 1}
+            disabled={page === 1}
           >
             <span className="sr-only">Go to first page</span>
             <DoubleArrowLeftIcon className="h-4 w-4" />
@@ -88,10 +88,10 @@ export function DataTablePagination<TData>({
             className="h-8 w-8 p-0"
             onClick={() => {
               updatePagination({
-                page: currentPage === 2 ? undefined : currentPage - 1,
+                page: page === 2 ? undefined : page - 1,
               })
             }}
-            disabled={currentPage === 1}
+            disabled={page === 1}
           >
             <span className="sr-only">Go to previous page</span>
             <ChevronLeftIcon className="h-4 w-4" />
@@ -102,10 +102,10 @@ export function DataTablePagination<TData>({
             className="h-8 w-8 p-0"
             onClick={() => {
               updatePagination({
-                page: currentPage + 1,
+                page: page + 1,
               })
             }}
-            disabled={currentPage === totalPages || totalPages === 1}
+            disabled={page === totalPages || totalPages === 1}
           >
             <span className="sr-only">Go to next page</span>
             <ChevronRightIcon className="h-4 w-4" />
@@ -119,7 +119,7 @@ export function DataTablePagination<TData>({
                 page: totalPages,
               })
             }}
-            disabled={currentPage === totalPages || totalPages === 1}
+            disabled={page === totalPages || totalPages === 1}
           >
             <span className="sr-only">Go to last page</span>
             <DoubleArrowRightIcon className="h-4 w-4" />

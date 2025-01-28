@@ -4,8 +4,8 @@ import type { FILTER_FIELDS } from './config'
 interface ListFilteredTasksArgs {
   title: string
   filters: Record<string, string[]>
-  currentPage: number
-  pageSize: number
+  page: number
+  perPage: number
   sortBy?: string
   sortOrder?: 'asc' | 'desc'
 }
@@ -13,8 +13,8 @@ interface ListFilteredTasksArgs {
 export const listFilteredTasks = ({
   title,
   filters,
-  currentPage,
-  pageSize,
+  page,
+  perPage,
   sortBy,
   sortOrder,
 }: ListFilteredTasksArgs) => {
@@ -54,18 +54,15 @@ export const listFilteredTasks = ({
       return bStr.localeCompare(aStr)
     })
 
-  const totalPages = Math.ceil(tasks.length / pageSize)
+  const totalPages = Math.ceil(tasks.length / perPage)
   const totalItems = tasks.length
-  const newCurrentPage = Math.min(currentPage, totalPages)
+  const newCurrentPage = Math.min(page, totalPages)
 
   return {
-    data: tasks.slice(
-      (newCurrentPage - 1) * pageSize,
-      newCurrentPage * pageSize,
-    ),
+    data: tasks.slice((newCurrentPage - 1) * perPage, newCurrentPage * perPage),
     pagination: {
-      currentPage: newCurrentPage,
-      pageSize,
+      page,
+      perPage,
       totalPages,
       totalItems,
     },
