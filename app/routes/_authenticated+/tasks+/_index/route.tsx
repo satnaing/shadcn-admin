@@ -3,34 +3,17 @@ import { Link } from 'react-router'
 import { Button } from '~/components/ui/button'
 import type { Route } from './+types/route'
 import { DataTable } from './components/data-table'
-import { SearchParamsQuery, columns } from './config'
+import { columns, parseSearchParams } from './config'
 import { getFacetedCounts, listFilteredTasks } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
-  const searchParams = new URLSearchParams(new URL(request.url).searchParams)
-
-  const {
-    title,
-    status,
-    priority,
-    sort_by: sortBy,
-    sort_order: sortOrder,
-    page,
-    per_page: perPage,
-  } = SearchParamsQuery.parse({
-    title: searchParams.get('title'),
-    status: searchParams.getAll('status'),
-    priority: searchParams.getAll('priority'),
-    sort_by: searchParams.get('sort_by'),
-    sort_order: searchParams.get('sort_order'),
-    page: searchParams.get('page'),
-    per_page: searchParams.get('per_page'),
-  })
+  const { title, filters, page, perPage, sortBy, sortOrder } =
+    parseSearchParams(request)
 
   // listFilteredTasks is a server-side function that fetch tasks from the database
   const { data: tasks, pagination } = listFilteredTasks({
     title,
-    filters: { status, priority },
+    filters,
     page,
     perPage,
     sortBy,
@@ -41,7 +24,7 @@ export const loader = ({ request }: Route.LoaderArgs) => {
   const facetedCounts = getFacetedCounts({
     facets: ['status', 'priority'],
     title,
-    filters: { status, priority },
+    filters,
   })
 
   return {

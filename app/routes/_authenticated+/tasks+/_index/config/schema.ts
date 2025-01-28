@@ -55,6 +55,25 @@ export const PaginationSchema = z.object({
   ),
 })
 
-export const SearchParamsQuery = QuerySchema.merge(FilterSchema)
-  .merge(SortSchema)
-  .merge(PaginationSchema)
+export const parseSearchParams = (request: Request) => {
+  const searchParams = new URL(request.url).searchParams
+  const { title } = QuerySchema.parse({
+    title: searchParams.get('title'),
+  })
+  const filters = FilterSchema.parse({
+    ...Object.fromEntries(
+      FILTER_FIELDS.map((field) => [field, searchParams.getAll(field)]),
+    ),
+  })
+  const { sort_by: sortBy, sort_order: sortOrder } = SortSchema.parse({
+    sort_by: searchParams.get('sort_by'),
+    sort_order: searchParams.get('sort_order'),
+  })
+
+  const { page, per_page: perPage } = PaginationSchema.parse({
+    page: searchParams.get('page'),
+    per_page: searchParams.get('per_page'),
+  })
+
+  return { title, filters, sortBy, sortOrder, page, perPage }
+}
