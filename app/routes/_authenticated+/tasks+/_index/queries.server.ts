@@ -1,5 +1,18 @@
+import type { Task } from '../_shared/data/schema'
 import { tasks as initialTasks } from '../_shared/data/tasks'
 import type { FILTER_FIELDS, Search } from './config'
+
+const matchesSearch = (task: Task, search: Search) => {
+  const searchTerms = Object.values(search)
+    .filter(Boolean)
+    .map((value) => value.toLowerCase())
+  if (searchTerms.length === 0) return true
+  const taskString = Object.values(task)
+    .map((value) => String(value).toLowerCase())
+    .join(' ')
+
+  return searchTerms.every((term) => taskString.includes(term))
+}
 
 interface ListFilteredTasksArgs {
   search: Search
@@ -19,14 +32,7 @@ export const listFilteredTasks = ({
   sortOrder,
 }: ListFilteredTasksArgs) => {
   const tasks = initialTasks
-    .filter((task) => {
-      // filter by search query
-      return Object.values(search).every((value) => {
-        return Object.values(task).some((taskValue) => {
-          return String(taskValue).toLowerCase().includes(value.toLowerCase())
-        })
-      })
-    })
+    .filter((task) => matchesSearch(task, search))
     .filter((task) => {
       // Filter by other filters
       return Object.entries(filters).every(([key, value]) => {
@@ -89,14 +95,7 @@ export const getFacetedCounts = ({
   for (const facet of facets) {
     // Filter the tasks based on the filters
     const filteredTasks = initialTasks
-      .filter((task) => {
-        // filter by search query
-        return Object.values(search).every((value) => {
-          return Object.values(task).some((taskValue) => {
-            return String(taskValue).toLowerCase().includes(value.toLowerCase())
-          })
-        })
-      })
+      .filter((task) => matchesSearch(task, search))
       // Filter by other filters
       .filter((task) => {
         return Object.entries(filters).every(([key, value]) => {
