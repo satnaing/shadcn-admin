@@ -1,76 +1,35 @@
 import { useMemo } from 'react'
 import { useSearchParams } from 'react-router'
-import { z } from 'zod'
 import { useDebounce } from '~/hooks/use-debounce'
-
-// Define the types for queries, filters, pagination, and sorting
-export const QuerySchema = z.object({
-  title: z.preprocess(
-    (val) => (val === null ? undefined : val),
-    z.string().optional().default(''),
-  ),
-})
-
-export const FilterSchema = z.object({
-  status: z.array(z.string()).optional().default([]),
-  priority: z.array(z.string()).optional().default([]),
-})
-
-export const SortSchema = z.object({
-  sort_by: z.preprocess(
-    (val) => (val === null ? undefined : val),
-    z.string().optional(),
-  ),
-  sort_order: z.preprocess(
-    (val) => (val === null ? undefined : val),
-    z
-      .union([z.literal('asc'), z.literal('desc')])
-      .optional()
-      .default('asc'),
-  ),
-})
-
-export const PaginationSchema = z.object({
-  page: z.preprocess(
-    (val) => (val === null ? undefined : val),
-    z.string().optional().default('1').transform(Number),
-  ),
-  per_page: z.preprocess(
-    (val) => (val === null ? undefined : val),
-    z
-      .union([
-        z.literal('10'),
-        z.literal('20'),
-        z.literal('30'),
-        z.literal('40'),
-        z.literal('50'),
-      ])
-      .optional()
-      .default('20')
-      .transform(Number),
-  ),
-})
-
-export type Queries = z.infer<typeof QuerySchema>
-export type Filters = z.infer<typeof FilterSchema>
-export type Sort = z.infer<typeof SortSchema>
-export type Pagination = z.infer<typeof PaginationSchema>
+import {
+  FILTER_FIELDS,
+  FilterSchema,
+  PAGINATION_PER_PAGE_DEFAULT,
+  PaginationSchema,
+  SearchSchema,
+  SortSchema,
+  type Filters,
+  type Pagination,
+  type Search,
+  type Sort,
+} from '../config'
 
 export function useDataTableState() {
   const [searchParams, setSearchParams] = useSearchParams()
   const debounce = useDebounce(200)
 
-  const queries: Queries = useMemo(() => {
-    return QuerySchema.parse({
+  const search: Search = useMemo(() => {
+    return SearchSchema.parse({
       title: searchParams.get('title'),
     })
   }, [searchParams])
 
   const filters: Filters = useMemo(() => {
-    return FilterSchema.parse({
-      status: searchParams.getAll('status'),
-      priority: searchParams.getAll('priority'),
-    })
+    return FilterSchema.parse(
+      Object.fromEntries(
+        FILTER_FIELDS.map((field) => [field, searchParams.getAll(field)]),
+      ),
+    )
   }, [searchParams])
 
   const sort: Sort = useMemo(() => {
@@ -87,11 +46,11 @@ export function useDataTableState() {
     })
   }, [searchParams])
 
-  const updateQueries = (newQueries: Partial<Queries>) => {
+  const updateSearch = (newSearch: Partial<Search>) => {
     debounce(() => {
       setSearchParams(
         (prev) => {
-          for (const [key, value] of Object.entries(newQueries)) {
+          for (const [key, value] of Object.entries(newSearch)) {
             if (value === undefined || value === '') {
               prev.delete(key)
             } else {
@@ -148,12 +107,18 @@ export function useDataTableState() {
   const updatePagination = (newPagination: Partial<Pagination>) => {
     setSearchParams(
       (prev) => {
-        for (const [key, value] of Object.entries(newPagination)) {
-          if (value !== undefined) {
-            prev.set(key, String(value))
-          } else {
-            prev.delete(key)
-          }
+        if (newPagination.page === 1 || newPagination.page === undefined) {
+          prev.delete('page')
+        } else {
+          prev.set('page', String(newPagination.page))
+        }
+        if (
+          newPagination.per_page === Number(PAGINATION_PER_PAGE_DEFAULT) ||
+          newPagination.per_page === undefined
+        ) {
+          prev.delete('per_page')
+        } else {
+          prev.set('per_page', String(newPagination.per_page))
         }
         return prev
       },
@@ -163,18 +128,18 @@ export function useDataTableState() {
 
   const isFiltered =
     Object.values(filters).some((filterArray) => filterArray.length > 0) ||
-    Object.values(queries).some((query) => query !== '')
+    Object.values(search).some((query) => query !== '')
 
   const resetFilters = () => {
     setSearchParams({}, { preventScrollReset: true })
   }
 
   return {
-    queries,
+    search,
     filters,
     sort,
     pagination,
-    updateQueries,
+    updateSearch,
     updateFilters,
     updateSort,
     updatePagination,

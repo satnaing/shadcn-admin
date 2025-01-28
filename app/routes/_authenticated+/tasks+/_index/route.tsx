@@ -2,44 +2,20 @@ import { IconDownload, IconPlus } from '@tabler/icons-react'
 import { Link } from 'react-router'
 import { Button } from '~/components/ui/button'
 import type { Route } from './+types/route'
-import { columns } from './components/columns'
 import { DataTable } from './components/data-table'
-import {
-  FilterSchema,
-  PaginationSchema,
-  QuerySchema,
-  SortSchema,
-} from './hooks/use-data-table-state'
+import { columns, parseQueryParams } from './config'
 import { getFacetedCounts, listFilteredTasks } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
-  const searchParams = new URLSearchParams(new URL(request.url).searchParams)
-
-  const { title } = QuerySchema.parse({
-    title: searchParams.get('title'),
-  })
-
-  const { ...filters } = FilterSchema.parse({
-    status: searchParams.getAll('status'),
-    priority: searchParams.getAll('priority'),
-  })
-
-  const { sort_by: sortBy, sort_order: sortOrder } = SortSchema.parse({
-    sort_by: searchParams.get('sort_by'),
-    sort_order: searchParams.get('sort_order'),
-  })
-
-  const { page: currentPage, per_page: pageSize } = PaginationSchema.parse({
-    page: searchParams.get('page'),
-    per_page: searchParams.get('per_page'),
-  })
+  const { search, filters, page, perPage, sortBy, sortOrder } =
+    parseQueryParams(request)
 
   // listFilteredTasks is a server-side function that fetch tasks from the database
   const { data: tasks, pagination } = listFilteredTasks({
-    title,
+    search,
     filters,
-    currentPage,
-    pageSize,
+    page,
+    perPage,
     sortBy,
     sortOrder,
   })
@@ -47,7 +23,7 @@ export const loader = ({ request }: Route.LoaderArgs) => {
   // getFacetedCounts is a server-side function that fetches the counts of each filter
   const facetedCounts = getFacetedCounts({
     facets: ['status', 'priority'],
-    title,
+    search,
     filters,
   })
 

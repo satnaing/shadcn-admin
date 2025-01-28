@@ -18,7 +18,8 @@ import {
 } from '~/components/ui/popover'
 import { Separator } from '~/components/ui/separator'
 import { cn } from '~/lib/utils'
-import { useDataTableState, type Filters } from '../hooks/use-data-table-state'
+import type { Filters } from '../config'
+import { useDataTableState } from '../hooks/use-data-table-state'
 
 interface DataTableFacetedFilterProps {
   title?: string
@@ -44,7 +45,7 @@ export function DataTableFacetedFilter({
       <PopoverTrigger asChild>
         <Button variant="outline" size="sm" className="h-8 border-dashed">
           <PlusCircledIcon className="h-4 w-4" />
-          {title}
+          <span className="capitalize">{title}</span>
           {selectedValues?.length > 0 && (
             <>
               <Separator orientation="vertical" className="h-4" />

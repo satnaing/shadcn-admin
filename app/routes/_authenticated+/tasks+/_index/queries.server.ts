@@ -1,27 +1,38 @@
+import type { Task } from '../_shared/data/schema'
 import { tasks as initialTasks } from '../_shared/data/tasks'
+import type { FILTER_FIELDS, Search } from './config'
+
+const matchesSearch = (task: Task, search: Search) => {
+  const searchTerms = Object.values(search)
+    .filter(Boolean)
+    .map((value) => value.toLowerCase())
+  if (searchTerms.length === 0) return true
+  const taskString = Object.values(task)
+    .map((value) => String(value).toLowerCase())
+    .join(' ')
+
+  return searchTerms.every((term) => taskString.includes(term))
+}
 
 interface ListFilteredTasksArgs {
-  title: string
+  search: Search
   filters: Record<string, string[]>
-  currentPage: number
-  pageSize: number
+  page: number
+  perPage: number
   sortBy?: string
   sortOrder?: 'asc' | 'desc'
 }
 
 export const listFilteredTasks = ({
-  title,
+  search,
   filters,
-  currentPage,
-  pageSize,
+  page,
+  perPage,
   sortBy,
   sortOrder,
 }: ListFilteredTasksArgs) => {
   const tasks = initialTasks
-    .filter((task) => {
-      // Filter by title
-      return task.title.toLowerCase().includes(title.toLowerCase())
-    })
+    .filter((task) => matchesSearch(task, search))
     .filter((task) => {
       // Filter by other filters
       return Object.entries(filters).every(([key, value]) => {
@@ -53,18 +64,15 @@ export const listFilteredTasks = ({
       return bStr.localeCompare(aStr)
     })
 
-  const totalPages = Math.ceil(tasks.length / pageSize)
+  const totalPages = Math.ceil(tasks.length / perPage)
   const totalItems = tasks.length
-  const newCurrentPage = Math.min(currentPage, totalPages)
+  const newCurrentPage = Math.min(page, totalPages)
 
   return {
-    data: tasks.slice(
-      (newCurrentPage - 1) * pageSize,
-      newCurrentPage * pageSize,
-    ),
+    data: tasks.slice((newCurrentPage - 1) * perPage, newCurrentPage * perPage),
     pagination: {
-      currentPage: newCurrentPage,
-      pageSize,
+      page,
+      perPage,
       totalPages,
       totalItems,
     },
@@ -72,13 +80,13 @@ export const listFilteredTasks = ({
 }
 
 interface GetFacetedCountsArgs {
-  facets: string[]
-  title: string
+  facets: typeof FILTER_FIELDS
+  search: Search
   filters: Record<string, string[]>
 }
 export const getFacetedCounts = ({
   facets,
-  title,
+  search,
   filters,
 }: GetFacetedCountsArgs) => {
   const facetedCounts: Record<string, Record<string, number>> = {}
@@ -87,10 +95,7 @@ export const getFacetedCounts = ({
   for (const facet of facets) {
     // Filter the tasks based on the filters
     const filteredTasks = initialTasks
-      .filter((task) => {
-        // Filter by title
-        return task.title.toLowerCase().includes(title.toLowerCase())
-      })
+      .filter((task) => matchesSearch(task, search))
       // Filter by other filters
       .filter((task) => {
         return Object.entries(filters).every(([key, value]) => {
