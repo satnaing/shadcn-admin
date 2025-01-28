@@ -18,19 +18,18 @@ export function DataTableToolbar<TData>({
   table,
   facetedCounts,
 }: DataTableToolbarProps<TData>) {
-  const { queries, updateQueries, isFiltered, resetFilters } =
-    useDataTableState()
+  const { search, updateSearch, isFiltered, resetFilters } = useDataTableState()
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2">
         <SearchInput
-          key={queries.title}
+          key={search.title}
           autoFocus
           placeholder="Filter tasks..."
-          defaultValue={queries.title}
+          defaultValue={search.title}
           onSearch={(value) => {
-            updateQueries({
+            updateSearch({
               title: value,
             })
           }}

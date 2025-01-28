@@ -3,16 +3,27 @@ import {
   FILTER_FIELDS,
   PAGINATION_PER_PAGE_DEFAULT,
   PAGINATION_PER_PAGE_ITEMS,
+  SEARCH_FIELDS,
 } from '../config'
 
-// Define the types for queries, filters, pagination, and sorting
-export const QuerySchema = z.object({
-  title: z.preprocess(
-    (val) => (val === null ? undefined : val),
-    z.string().optional().default(''),
+// Define the schema for the search query
+export const SearchSchema = z.object(
+  SEARCH_FIELDS.reduce(
+    (acc, field) => {
+      acc[field] = z.preprocess(
+        (val) => (val === null ? undefined : val),
+        z.string().optional().default(''),
+      )
+      return acc
+    },
+    {} as Record<
+      (typeof SEARCH_FIELDS)[number],
+      z.ZodEffects<z.ZodDefault<z.ZodOptional<z.ZodString>>, string, unknown>
+    >,
   ),
-})
+)
 
+// Define the schema for filters
 export const FilterSchema = z.object(
   FILTER_FIELDS.reduce(
     (acc, field) => {
@@ -26,6 +37,7 @@ export const FilterSchema = z.object(
   ),
 )
 
+// Define the schema for sorting
 export const SortSchema = z.object({
   sort_by: z.preprocess(
     (val) => (val === null ? undefined : val),
@@ -40,6 +52,7 @@ export const SortSchema = z.object({
   ),
 })
 
+// Define the schema for pagination
 export const PaginationSchema = z.object({
   page: z.preprocess(
     (val) => (val === null ? undefined : val),
@@ -55,16 +68,20 @@ export const PaginationSchema = z.object({
   ),
 })
 
-export const parseSearchParams = (request: Request) => {
+// Parse query parameters from the request
+export const parseQueryParams = (request: Request) => {
   const searchParams = new URL(request.url).searchParams
-  const { title } = QuerySchema.parse({
-    title: searchParams.get('title'),
-  })
-  const filters = FilterSchema.parse({
-    ...Object.fromEntries(
+  console.log({ SearchSchema })
+  const search = SearchSchema.parse(
+    Object.fromEntries(
+      SEARCH_FIELDS.map((field) => [field, searchParams.get(field)]),
+    ),
+  )
+  const filters = FilterSchema.parse(
+    Object.fromEntries(
       FILTER_FIELDS.map((field) => [field, searchParams.getAll(field)]),
     ),
-  })
+  )
   const { sort_by: sortBy, sort_order: sortOrder } = SortSchema.parse({
     sort_by: searchParams.get('sort_by'),
     sort_order: searchParams.get('sort_order'),
@@ -75,5 +92,5 @@ export const parseSearchParams = (request: Request) => {
     per_page: searchParams.get('per_page'),
   })
 
-  return { title, filters, sortBy, sortOrder, page, perPage }
+  return { search, filters, sortBy, sortOrder, page, perPage }
 }

@@ -3,16 +3,16 @@ import { Link } from 'react-router'
 import { Button } from '~/components/ui/button'
 import type { Route } from './+types/route'
 import { DataTable } from './components/data-table'
-import { columns, parseSearchParams } from './config'
+import { columns, parseQueryParams } from './config'
 import { getFacetedCounts, listFilteredTasks } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {
-  const { title, filters, page, perPage, sortBy, sortOrder } =
-    parseSearchParams(request)
+  const { search, filters, page, perPage, sortBy, sortOrder } =
+    parseQueryParams(request)
 
   // listFilteredTasks is a server-side function that fetch tasks from the database
   const { data: tasks, pagination } = listFilteredTasks({
-    title,
+    search,
     filters,
     page,
     perPage,
@@ -23,7 +23,7 @@ export const loader = ({ request }: Route.LoaderArgs) => {
   // getFacetedCounts is a server-side function that fetches the counts of each filter
   const facetedCounts = getFacetedCounts({
     facets: ['status', 'priority'],
-    title,
+    search,
     filters,
   })
 

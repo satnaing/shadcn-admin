@@ -9,6 +9,9 @@ import {
   IconStopwatch,
 } from '@tabler/icons-react'
 
+// Search fields
+export const SEARCH_FIELDS = ['title'] as const
+
 // Faceted filter options
 export const FILTER_FIELD_LABELS = {
   status: [

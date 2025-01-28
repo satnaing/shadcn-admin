@@ -1,8 +1,8 @@
 import { tasks as initialTasks } from '../_shared/data/tasks'
-import type { FILTER_FIELDS } from './config'
+import type { FILTER_FIELDS, Search } from './config'
 
 interface ListFilteredTasksArgs {
-  title: string
+  search: Search
   filters: Record<string, string[]>
   page: number
   perPage: number
@@ -11,7 +11,7 @@ interface ListFilteredTasksArgs {
 }
 
 export const listFilteredTasks = ({
-  title,
+  search,
   filters,
   page,
   perPage,
@@ -20,8 +20,12 @@ export const listFilteredTasks = ({
 }: ListFilteredTasksArgs) => {
   const tasks = initialTasks
     .filter((task) => {
-      // Filter by title
-      return task.title.toLowerCase().includes(title.toLowerCase())
+      // filter by search query
+      return Object.values(search).every((value) => {
+        return Object.values(task).some((taskValue) => {
+          return String(taskValue).toLowerCase().includes(value.toLowerCase())
+        })
+      })
     })
     .filter((task) => {
       // Filter by other filters
@@ -71,12 +75,12 @@ export const listFilteredTasks = ({
 
 interface GetFacetedCountsArgs {
   facets: typeof FILTER_FIELDS
-  title: string
+  search: Search
   filters: Record<string, string[]>
 }
 export const getFacetedCounts = ({
   facets,
-  title,
+  search,
   filters,
 }: GetFacetedCountsArgs) => {
   const facetedCounts: Record<string, Record<string, number>> = {}
@@ -86,8 +90,12 @@ export const getFacetedCounts = ({
     // Filter the tasks based on the filters
     const filteredTasks = initialTasks
       .filter((task) => {
-        // Filter by title
-        return task.title.toLowerCase().includes(title.toLowerCase())
+        // filter by search query
+        return Object.values(search).every((value) => {
+          return Object.values(task).some((taskValue) => {
+            return String(taskValue).toLowerCase().includes(value.toLowerCase())
+          })
+        })
       })
       // Filter by other filters
       .filter((task) => {

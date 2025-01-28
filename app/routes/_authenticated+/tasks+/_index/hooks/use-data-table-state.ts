@@ -6,11 +6,11 @@ import {
   FilterSchema,
   PAGINATION_PER_PAGE_DEFAULT,
   PaginationSchema,
-  QuerySchema,
+  SearchSchema,
   SortSchema,
   type Filters,
   type Pagination,
-  type Queries,
+  type Search,
   type Sort,
 } from '../config'
 
@@ -18,8 +18,8 @@ export function useDataTableState() {
   const [searchParams, setSearchParams] = useSearchParams()
   const debounce = useDebounce(200)
 
-  const queries: Queries = useMemo(() => {
-    return QuerySchema.parse({
+  const search: Search = useMemo(() => {
+    return SearchSchema.parse({
       title: searchParams.get('title'),
     })
   }, [searchParams])
@@ -46,11 +46,11 @@ export function useDataTableState() {
     })
   }, [searchParams])
 
-  const updateQueries = (newQueries: Partial<Queries>) => {
+  const updateSearch = (newSearch: Partial<Search>) => {
     debounce(() => {
       setSearchParams(
         (prev) => {
-          for (const [key, value] of Object.entries(newQueries)) {
+          for (const [key, value] of Object.entries(newSearch)) {
             if (value === undefined || value === '') {
               prev.delete(key)
             } else {
@@ -128,18 +128,18 @@ export function useDataTableState() {
 
   const isFiltered =
     Object.values(filters).some((filterArray) => filterArray.length > 0) ||
-    Object.values(queries).some((query) => query !== '')
+    Object.values(search).some((query) => query !== '')
 
   const resetFilters = () => {
     setSearchParams({}, { preventScrollReset: true })
   }
 
   return {
-    queries,
+    search,
     filters,
     sort,
     pagination,
-    updateQueries,
+    updateSearch,
     updateFilters,
     updateSort,
     updatePagination,
