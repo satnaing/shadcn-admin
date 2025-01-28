@@ -1,4 +1,5 @@
 import { tasks as initialTasks } from '../_shared/data/tasks'
+import type { FILTER_FIELDS } from './config'
 
 interface ListFilteredTasksArgs {
   title: string
@@ -72,7 +73,7 @@ export const listFilteredTasks = ({
 }
 
 interface GetFacetedCountsArgs {
-  facets: string[]
+  facets: typeof FILTER_FIELDS
   title: string
   filters: Record<string, string[]>
 }

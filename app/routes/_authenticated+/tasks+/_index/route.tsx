@@ -4,6 +4,7 @@ import { Button } from '~/components/ui/button'
 import type { Route } from './+types/route'
 import { columns } from './components/columns'
 import { DataTable } from './components/data-table'
+import { FILTER_FIELDS } from './config'
 import {
   FilterSchema,
   PaginationSchema,
@@ -19,10 +20,11 @@ export const loader = ({ request }: Route.LoaderArgs) => {
     title: searchParams.get('title'),
   })
 
-  const { ...filters } = FilterSchema.parse({
-    status: searchParams.getAll('status'),
-    priority: searchParams.getAll('priority'),
-  })
+  const { ...filters } = FilterSchema.parse(
+    Object.fromEntries(
+      FILTER_FIELDS.map((field) => [field, searchParams.getAll(field)]),
+    ),
+  )
 
   const { sort_by: sortBy, sort_order: sortOrder } = SortSchema.parse({
     sort_by: searchParams.get('sort_by'),
