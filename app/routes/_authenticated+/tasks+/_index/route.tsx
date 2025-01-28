@@ -3,8 +3,7 @@ import { Link } from 'react-router'
 import { Button } from '~/components/ui/button'
 import type { Route } from './+types/route'
 import { DataTable } from './components/data-table'
-import { SearchParamsQuery } from './config'
-import { columns } from './config/columns'
+import { SearchParamsQuery, columns } from './config'
 import { getFacetedCounts, listFilteredTasks } from './queries.server'
 
 export const loader = ({ request }: Route.LoaderArgs) => {

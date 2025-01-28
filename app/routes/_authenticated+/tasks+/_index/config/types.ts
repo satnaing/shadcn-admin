@@ -1,5 +1,5 @@
 import type { z } from 'zod'
-import { FILTER_FIELD_LABELS, PAGINATION_PER_PAGE_ITEMS } from './constants'
+import { PAGINATION_PER_PAGE_ITEMS } from './constants'
 import type {
   FilterSchema,
   PaginationSchema,
@@ -7,9 +7,6 @@ import type {
   SortSchema,
 } from './schema'
 
-export const FILTER_FIELDS = Object.keys(
-  FILTER_FIELD_LABELS,
-) as (keyof typeof FILTER_FIELD_LABELS)[]
 export const PAGINATION_PER_PAGE_DEFAULT = PAGINATION_PER_PAGE_ITEMS[0]
 
 export type Queries = z.infer<typeof QuerySchema>

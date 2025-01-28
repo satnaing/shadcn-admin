@@ -3,6 +3,6 @@ import { flatRoutes } from 'remix-flat-routes'
 
 export default remixRoutesOptionAdapter((defineRotue) =>
   flatRoutes('routes', defineRotue, {
-    ignoredRouteFiles: ['**/_shared/**'],
+    ignoredRouteFiles: ['**/_shared/**', '**/index.ts'],
   }),
 )

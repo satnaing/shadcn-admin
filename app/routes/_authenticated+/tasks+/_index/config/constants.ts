@@ -56,6 +56,9 @@ export const FILTER_FIELD_LABELS = {
     },
   ],
 } as const
+export const FILTER_FIELDS = Object.keys(
+  FILTER_FIELD_LABELS,
+) as (keyof typeof FILTER_FIELD_LABELS)[]
 
 // Pagination items per page options
 export const PAGINATION_PER_PAGE_ITEMS = ['10', '20', '30', '40', '50'] as const
