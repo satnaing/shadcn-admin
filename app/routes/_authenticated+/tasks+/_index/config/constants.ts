@@ -40,9 +40,9 @@ export const FILTER_FIELD_LABELS = {
   ],
   priority: [
     {
-      label: 'Low',
-      value: 'low',
-      icon: IconArrowDown,
+      label: 'High',
+      value: 'high',
+      icon: IconArrowUp,
     },
     {
       label: 'Medium',
@@ -50,9 +50,9 @@ export const FILTER_FIELD_LABELS = {
       icon: IconArrowRight,
     },
     {
-      label: 'High',
-      value: 'high',
-      icon: IconArrowUp,
+      label: 'Low',
+      value: 'low',
+      icon: IconArrowDown,
     },
   ],
 } as const
