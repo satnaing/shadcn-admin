@@ -18,21 +18,15 @@ export function DataTableToolbar<TData>({
   table,
   facetedCounts,
 }: DataTableToolbarProps<TData>) {
-  const { search, updateSearch, isFiltered, resetFilters } = useDataTableState()
+  const { search, isFiltered, resetFilters } = useDataTableState()
 
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2">
         <SearchInput
           key={search.title}
-          autoFocus
           placeholder="Search..."
           defaultValue={search.title}
-          onSearch={(value) => {
-            updateSearch({
-              title: value,
-            })
-          }}
         />
         <div className="flex gap-x-2">
           {FILTER_FIELDS.filter((filterKey) => table.getColumn(filterKey)).map(
@@ -55,11 +49,12 @@ export function DataTableToolbar<TData>({
         {isFiltered && (
           <Button
             variant="ghost"
+            size="sm"
             onClick={() => resetFilters()}
             className="h-8 px-2 lg:px-3"
           >
             Reset
-            <Cross2Icon className="ml-2 h-4 w-4" />
+            <Cross2Icon />
           </Button>
         )}
       </div>
