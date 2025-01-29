@@ -3,25 +3,16 @@ import {
   FILTER_FIELDS,
   PAGINATION_PER_PAGE_DEFAULT,
   PAGINATION_PER_PAGE_ITEMS,
-  SEARCH_FIELDS,
+  SEARCH_FIELD,
 } from '../config'
 
 // Define the schema for the search query
-export const SearchSchema = z.object(
-  SEARCH_FIELDS.reduce(
-    (acc, field) => {
-      acc[field] = z.preprocess(
-        (val) => (val === null ? undefined : val),
-        z.string().optional().default(''),
-      )
-      return acc
-    },
-    {} as Record<
-      (typeof SEARCH_FIELDS)[number],
-      z.ZodEffects<z.ZodDefault<z.ZodOptional<z.ZodString>>, string, unknown>
-    >,
+export const SearchSchema = z.object({
+  [SEARCH_FIELD]: z.preprocess(
+    (val) => (val === null ? undefined : val),
+    z.string().optional().default(''),
   ),
-)
+})
 
 // Define the schema for filters
 export const FilterSchema = z.object(
@@ -71,11 +62,9 @@ export const PaginationSchema = z.object({
 // Parse query parameters from the request
 export const parseQueryParams = (request: Request) => {
   const searchParams = new URL(request.url).searchParams
-  const search = SearchSchema.parse(
-    Object.fromEntries(
-      SEARCH_FIELDS.map((field) => [field, searchParams.get(field)]),
-    ),
-  )
+  const search = SearchSchema.parse({
+    [SEARCH_FIELD]: searchParams.get(SEARCH_FIELD),
+  })
   const filters = FilterSchema.parse(
     Object.fromEntries(
       FILTER_FIELDS.map((field) => [field, searchParams.getAll(field)]),
