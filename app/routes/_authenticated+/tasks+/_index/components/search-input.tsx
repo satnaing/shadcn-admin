@@ -44,21 +44,6 @@ export const SearchInput = ({ className, ...rest }: SearchInputProps) => {
           Search
         </Button>
       </div>
-
-      {/* <Input
-        type="search"
-        name={SEARCH_FIELD}
-        autoFocus
-        className="h-8 w-[150px] lg:w-[250px]"
-        {...rest}
-      />
-      <Button
-        type="submit"
-        variant="outline"
-        className="inline-block h-8 flex-shrink-0 px-4 py-0"
-      >
-        Search
-      </Button> */}
     </form>
   )
 }
