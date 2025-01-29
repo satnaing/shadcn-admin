@@ -1,11 +1,12 @@
 import tailwindCssAnimate from 'tailwindcss-animate'
-
-const { fontFamily } = require('tailwindcss/defaultTheme')
+import { fontFamily } from 'tailwindcss/defaultTheme'
+import { fonts } from './src/config/fonts'
 
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
   content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}'],
+  safelist: fonts.map((font) => `font-${font}`),
   theme: {
     container: {
       center: 'true',
@@ -17,7 +18,7 @@ export default {
     extend: {
       fontFamily: {
         inter: ['Inter', ...fontFamily.sans],
-        manrope: ['Manrope', ...fontFamily.mono],
+        manrope: ['Manrope', ...fontFamily.sans],
       },
       borderRadius: {
         lg: 'var(--radius)',
