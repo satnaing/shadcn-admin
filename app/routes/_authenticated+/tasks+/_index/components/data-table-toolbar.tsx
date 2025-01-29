@@ -26,7 +26,7 @@ export function DataTableToolbar<TData>({
         <SearchInput
           key={search.title}
           autoFocus
-          placeholder="Filter tasks..."
+          placeholder="Search..."
           defaultValue={search.title}
           onSearch={(value) => {
             updateSearch({
