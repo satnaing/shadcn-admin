@@ -83,7 +83,10 @@ export function DataTableFacetedFilter({
       </PopoverTrigger>
       <PopoverContent className="w-[280px] p-0" align="start">
         <Command>
-          <CommandInput placeholder={title} />
+          <CommandInput
+            placeholder={title}
+            className="placeholder:capitalize"
+          />
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup>
