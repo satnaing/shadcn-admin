@@ -10,12 +10,6 @@ export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
 }>()({
   component: () => {
-
-
-
-
-
-
     return (
       <>
         <Outlet />
