@@ -121,11 +121,11 @@ export const columns: ColumnDef<User>[] = [
       }
 
       return (
-        <div className='flex gap-x-2 items-center'>
+        <div className='flex items-center gap-x-2'>
           {userType.icon && (
             <userType.icon size={16} className='text-muted-foreground' />
           )}
-          <span className='capitalize text-sm'>{row.getValue('role')}</span>
+          <span className='text-sm capitalize'>{row.getValue('role')}</span>
         </div>
       )
     },

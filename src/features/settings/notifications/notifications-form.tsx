@@ -62,7 +62,7 @@ export function NotificationsForm() {
           control={form.control}
           name='type'
           render={({ field }) => (
-            <FormItem className='space-y-3 relative'>
+            <FormItem className='relative space-y-3'>
               <FormLabel>Notify me about...</FormLabel>
               <FormControl>
                 <RadioGroup
@@ -193,7 +193,7 @@ export function NotificationsForm() {
           control={form.control}
           name='mobile'
           render={({ field }) => (
-            <FormItem className='flex flex-row items-start space-x-3 space-y-0 relative'>
+            <FormItem className='relative flex flex-row items-start space-x-3 space-y-0'>
               <FormControl>
                 <Checkbox
                   checked={field.value}

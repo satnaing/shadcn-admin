@@ -145,7 +145,7 @@ export default function Chats() {
           {/* Right Side */}
           <div
             className={cn(
-              'absolute inset-0 hidden left-full z-50 w-full flex-1 flex-col rounded-md border bg-primary-foreground shadow-sm transition-all duration-200 sm:static sm:z-auto sm:flex',
+              'absolute inset-0 left-full z-50 hidden w-full flex-1 flex-col rounded-md border bg-primary-foreground shadow-sm transition-all duration-200 sm:static sm:z-auto sm:flex',
               mobileSelectedUser && 'left-0 flex'
             )}
           >

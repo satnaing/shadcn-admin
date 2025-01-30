@@ -88,7 +88,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
           <form
             id='tasks-form'
             onSubmit={form.handleSubmit(onSubmit)}
-            className='space-y-5 flex-1'
+            className='flex-1 space-y-5'
           >
             <FormField
               control={form.control}
@@ -129,7 +129,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
               control={form.control}
               name='label'
               render={({ field }) => (
-                <FormItem className='space-y-3 relative'>
+                <FormItem className='relative space-y-3'>
                   <FormLabel>Label</FormLabel>
                   <FormControl>
                     <RadioGroup
@@ -167,7 +167,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
               control={form.control}
               name='priority'
               render={({ field }) => (
-                <FormItem className='space-y-3 relative'>
+                <FormItem className='relative space-y-3'>
                   <FormLabel>Priority</FormLabel>
                   <FormControl>
                     <RadioGroup
