@@ -78,7 +78,7 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
         form.reset()
       }}
     >
-      <DialogContent className='sm:max-w-sm gap-2'>
+      <DialogContent className='gap-2 sm:max-w-sm'>
         <DialogHeader className='text-left'>
           <DialogTitle>Import Tasks</DialogTitle>
           <DialogDescription>
@@ -91,7 +91,7 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
               control={form.control}
               name='file'
               render={() => (
-                <FormItem className='space-y-1 mb-2'>
+                <FormItem className='mb-2 space-y-1'>
                   <FormLabel>File</FormLabel>
                   <FormControl>
                     <Input type='file' {...fileRef} className='h-8' />
