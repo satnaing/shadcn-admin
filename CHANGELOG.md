@@ -1,3 +1,16 @@
+## v1.1.0 (2025-01-30)
+
+### Feat
+
+- allow changing font family in setting
+
+### Fix
+
+- update sidebar color in dark mode for consistent look (#87)
+- use overflow-clip in table paginations (#86)
+- **style**: update global scrollbar style (#82)
+- toolbar filter placeholder typo in user table (#76)
+
 ## v1.0.3 (2024-12-28)
 
 ### Fix
