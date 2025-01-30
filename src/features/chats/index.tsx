@@ -26,23 +26,25 @@ import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 // Fake Data
 import { conversations } from './data/convo.json'
+import CreateConversationModal from '@/components/create-conversation-dialog'
 
 type ChatUser = (typeof conversations)[number]
 type Convo = ChatUser['messages'][number]
 
 export default function Chats() {
   const [search, setSearch] = useState('')
-  const [selectedUser, setSelectedUser] = useState<ChatUser>(conversations[0])
+  const [selectedUser, setSelectedUser] = useState<ChatUser | null>(null)
   const [mobileSelectedUser, setMobileSelectedUser] = useState<ChatUser | null>(
     null
   )
+  const [createConversationDialogOpened, setCreateConversationDialog] = useState(false)
 
   // Filtered data based on the search query
   const filteredChatList = conversations.filter(({ fullName }) =>
     fullName.toLowerCase().includes(search.trim().toLowerCase())
   )
 
-  const currentMessage = selectedUser.messages.reduce(
+  const currentMessage = selectedUser?.messages.reduce(
     (acc: Record<string, Convo[]>, obj) => {
       const key = format(obj.timestamp, 'd MMM, yyyy')
 
@@ -58,6 +60,15 @@ export default function Chats() {
     },
     {}
   )
+
+  const users = conversations.map((user) => ({
+    id: user.id,
+    profile: user.profile,
+    username: user.username,
+    fullName: user.fullName,
+    title: user.title,
+  }))
+
 
   return (
     <>
@@ -81,7 +92,9 @@ export default function Chats() {
                   <IconMessages size={20} />
                 </div>
 
-                <Button size='icon' variant='ghost' className='rounded-lg'>
+                <Button size='icon' variant='ghost'
+                  onClick={() => setCreateConversationDialog(true)}
+                  className='rounded-lg'>
                   <IconEdit size={24} className='stroke-muted-foreground' />
                 </Button>
               </div>
@@ -113,7 +126,7 @@ export default function Chats() {
                       type='button'
                       className={cn(
                         `-mx-1 flex w-full rounded-md px-2 py-2 text-left text-sm hover:bg-secondary/75`,
-                        selectedUser.id === id && 'sm:bg-muted'
+                        selectedUser?.id === id && 'sm:bg-muted'
                       )}
                       onClick={() => {
                         setSelectedUser(chatUsr)
@@ -143,7 +156,8 @@ export default function Chats() {
           </div>
 
           {/* Right Side */}
-          <div
+
+          {selectedUser ? <div
             className={cn(
               'absolute inset-0 left-full z-50 hidden w-full flex-1 flex-col rounded-md border bg-primary-foreground shadow-sm transition-all duration-200 sm:static sm:z-auto sm:flex',
               mobileSelectedUser && 'left-0 flex'
@@ -297,7 +311,29 @@ export default function Chats() {
               </form>
             </div>
           </div>
+            :
+            <div className={cn(
+              'absolute inset-0 left-full z-50 hidden w-full flex-1 flex-col justify-center rounded-md border bg-primary-foreground shadow-sm transition-all duration-200 sm:static sm:z-auto sm:flex',
+            )}>
+              <div className="flex flex-col items-center space-y-6">
+                <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center">
+                  <IconMessages className="w-8 h-8" />
+                </div>
+                <div className="text-center space-y-2">
+                  <h1 className="text-xl font-semibold">Your messages</h1>
+                  <p className="text-sm text-gray-400">Send a message to start a chat.</p>
+                </div>
+                <Button
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-6"
+                  onClick={() => setCreateConversationDialog(true)}
+                >
+                  Send message
+                </Button>
+              </div>
+            </div>
+          }
         </section>
+        <CreateConversationModal users={users} onOpenChange={setCreateConversationDialog} open={createConversationDialogOpened} />
       </Main>
     </>
   )
