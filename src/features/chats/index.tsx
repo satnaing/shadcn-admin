@@ -19,6 +19,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
+import CreateConversationModal from '@/components/create-conversation-dialog'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
@@ -26,7 +27,6 @@ import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 // Fake Data
 import { conversations } from './data/convo.json'
-import CreateConversationModal from '@/components/create-conversation-dialog'
 
 type ChatUser = (typeof conversations)[number]
 type Convo = ChatUser['messages'][number]
@@ -37,7 +37,8 @@ export default function Chats() {
   const [mobileSelectedUser, setMobileSelectedUser] = useState<ChatUser | null>(
     null
   )
-  const [createConversationDialogOpened, setCreateConversationDialog] = useState(false)
+  const [createConversationDialogOpened, setCreateConversationDialog] =
+    useState(false)
 
   // Filtered data based on the search query
   const filteredChatList = conversations.filter(({ fullName }) =>
@@ -69,7 +70,6 @@ export default function Chats() {
     title: user.title,
   }))
 
-
   return (
     <>
       {/* ===== Top Heading ===== */}
@@ -92,9 +92,12 @@ export default function Chats() {
                   <IconMessages size={20} />
                 </div>
 
-                <Button size='icon' variant='ghost'
+                <Button
+                  size='icon'
+                  variant='ghost'
                   onClick={() => setCreateConversationDialog(true)}
-                  className='rounded-lg'>
+                  className='rounded-lg'
+                >
                   <IconEdit size={24} className='stroke-muted-foreground' />
                 </Button>
               </div>
@@ -157,183 +160,195 @@ export default function Chats() {
 
           {/* Right Side */}
 
-          {selectedUser ? <div
-            className={cn(
-              'absolute inset-0 left-full z-50 hidden w-full flex-1 flex-col rounded-md border bg-primary-foreground shadow-sm transition-all duration-200 sm:static sm:z-auto sm:flex',
-              mobileSelectedUser && 'left-0 flex'
-            )}
-          >
-            {/* Top Part */}
-            <div className='mb-1 flex flex-none justify-between rounded-t-md bg-secondary p-4 shadow-lg'>
-              {/* Left */}
-              <div className='flex gap-3'>
-                <Button
-                  size='icon'
-                  variant='ghost'
-                  className='-ml-2 h-full sm:hidden'
-                  onClick={() => setMobileSelectedUser(null)}
-                >
-                  <IconArrowLeft />
-                </Button>
-                <div className='flex items-center gap-2 lg:gap-4'>
-                  <Avatar className='size-9 lg:size-11'>
-                    <AvatarImage
-                      src={selectedUser.profile}
-                      alt={selectedUser.username}
-                    />
-                    <AvatarFallback>{selectedUser.username}</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <span className='col-start-2 row-span-2 text-sm font-medium lg:text-base'>
-                      {selectedUser.fullName}
-                    </span>
-                    <span className='col-start-2 row-span-2 row-start-2 line-clamp-1 block max-w-32 text-ellipsis text-nowrap text-xs text-muted-foreground lg:max-w-none lg:text-sm'>
-                      {selectedUser.title}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right */}
-              <div className='-mr-1 flex items-center gap-1 lg:gap-2'>
-                <Button
-                  size='icon'
-                  variant='ghost'
-                  className='hidden size-8 rounded-full sm:inline-flex lg:size-10'
-                >
-                  <IconVideo size={22} className='stroke-muted-foreground' />
-                </Button>
-                <Button
-                  size='icon'
-                  variant='ghost'
-                  className='hidden size-8 rounded-full sm:inline-flex lg:size-10'
-                >
-                  <IconPhone size={22} className='stroke-muted-foreground' />
-                </Button>
-                <Button
-                  size='icon'
-                  variant='ghost'
-                  className='h-10 rounded-md sm:h-8 sm:w-4 lg:h-10 lg:w-6'
-                >
-                  <IconDotsVertical className='stroke-muted-foreground sm:size-5' />
-                </Button>
-              </div>
-            </div>
-
-            {/* Conversation */}
-            <div className='flex flex-1 flex-col gap-2 rounded-md px-4 pb-4 pt-0'>
-              <div className='flex size-full flex-1'>
-                <div className='chat-text-container relative -mr-4 flex flex-1 flex-col overflow-y-hidden'>
-                  <div className='chat-flex flex h-40 w-full flex-grow flex-col-reverse justify-start gap-4 overflow-y-auto py-2 pb-4 pr-4'>
-                    {currentMessage &&
-                      Object.keys(currentMessage).map((key) => (
-                        <Fragment key={key}>
-                          {currentMessage[key].map((msg, index) => (
-                            <div
-                              key={`${msg.sender}-${msg.timestamp}-${index}`}
-                              className={cn(
-                                'chat-box max-w-72 break-words px-3 py-2 shadow-lg',
-                                msg.sender === 'You'
-                                  ? 'self-end rounded-[16px_16px_0_16px] bg-primary/85 text-primary-foreground/75'
-                                  : 'self-start rounded-[16px_16px_16px_0] bg-secondary'
-                              )}
-                            >
-                              {msg.message}{' '}
-                              <span
-                                className={cn(
-                                  'mt-1 block text-xs font-light italic text-muted-foreground',
-                                  msg.sender === 'You' && 'text-right'
-                                )}
-                              >
-                                {format(msg.timestamp, 'h:mm a')}
-                              </span>
-                            </div>
-                          ))}
-                          <div className='text-center text-xs'>{key}</div>
-                        </Fragment>
-                      ))}
-                  </div>
-                </div>
-              </div>
-              <form className='flex w-full flex-none gap-2'>
-                <div className='flex flex-1 items-center gap-2 rounded-md border border-input px-2 py-1 focus-within:outline-none focus-within:ring-1 focus-within:ring-ring lg:gap-4'>
-                  <div className='space-x-1'>
-                    <Button
-                      size='icon'
-                      type='button'
-                      variant='ghost'
-                      className='h-8 rounded-md'
-                    >
-                      <IconPlus size={20} className='stroke-muted-foreground' />
-                    </Button>
-                    <Button
-                      size='icon'
-                      type='button'
-                      variant='ghost'
-                      className='hidden h-8 rounded-md lg:inline-flex'
-                    >
-                      <IconPhotoPlus
-                        size={20}
-                        className='stroke-muted-foreground'
-                      />
-                    </Button>
-                    <Button
-                      size='icon'
-                      type='button'
-                      variant='ghost'
-                      className='hidden h-8 rounded-md lg:inline-flex'
-                    >
-                      <IconPaperclip
-                        size={20}
-                        className='stroke-muted-foreground'
-                      />
-                    </Button>
-                  </div>
-                  <label className='flex-1'>
-                    <span className='sr-only'>Chat Text Box</span>
-                    <input
-                      type='text'
-                      placeholder='Type your messages...'
-                      className='h-8 w-full bg-inherit focus-visible:outline-none'
-                    />
-                  </label>
+          {selectedUser ? (
+            <div
+              className={cn(
+                'absolute inset-0 left-full z-50 hidden w-full flex-1 flex-col rounded-md border bg-primary-foreground shadow-sm transition-all duration-200 sm:static sm:z-auto sm:flex',
+                mobileSelectedUser && 'left-0 flex'
+              )}
+            >
+              {/* Top Part */}
+              <div className='mb-1 flex flex-none justify-between rounded-t-md bg-secondary p-4 shadow-lg'>
+                {/* Left */}
+                <div className='flex gap-3'>
                   <Button
-                    variant='ghost'
                     size='icon'
-                    className='hidden sm:inline-flex'
+                    variant='ghost'
+                    className='-ml-2 h-full sm:hidden'
+                    onClick={() => setMobileSelectedUser(null)}
                   >
-                    <IconSend size={20} />
+                    <IconArrowLeft />
+                  </Button>
+                  <div className='flex items-center gap-2 lg:gap-4'>
+                    <Avatar className='size-9 lg:size-11'>
+                      <AvatarImage
+                        src={selectedUser.profile}
+                        alt={selectedUser.username}
+                      />
+                      <AvatarFallback>{selectedUser.username}</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <span className='col-start-2 row-span-2 text-sm font-medium lg:text-base'>
+                        {selectedUser.fullName}
+                      </span>
+                      <span className='col-start-2 row-span-2 row-start-2 line-clamp-1 block max-w-32 text-ellipsis text-nowrap text-xs text-muted-foreground lg:max-w-none lg:text-sm'>
+                        {selectedUser.title}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right */}
+                <div className='-mr-1 flex items-center gap-1 lg:gap-2'>
+                  <Button
+                    size='icon'
+                    variant='ghost'
+                    className='hidden size-8 rounded-full sm:inline-flex lg:size-10'
+                  >
+                    <IconVideo size={22} className='stroke-muted-foreground' />
+                  </Button>
+                  <Button
+                    size='icon'
+                    variant='ghost'
+                    className='hidden size-8 rounded-full sm:inline-flex lg:size-10'
+                  >
+                    <IconPhone size={22} className='stroke-muted-foreground' />
+                  </Button>
+                  <Button
+                    size='icon'
+                    variant='ghost'
+                    className='h-10 rounded-md sm:h-8 sm:w-4 lg:h-10 lg:w-6'
+                  >
+                    <IconDotsVertical className='stroke-muted-foreground sm:size-5' />
                   </Button>
                 </div>
-                <Button className='h-full sm:hidden'>
-                  <IconSend size={18} /> Send
-                </Button>
-              </form>
-            </div>
-          </div>
-            :
-            <div className={cn(
-              'absolute inset-0 left-full z-50 hidden w-full flex-1 flex-col justify-center rounded-md border bg-primary-foreground shadow-sm transition-all duration-200 sm:static sm:z-auto sm:flex',
-            )}>
-              <div className="flex flex-col items-center space-y-6">
-                <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center">
-                  <IconMessages className="w-8 h-8" />
+              </div>
+
+              {/* Conversation */}
+              <div className='flex flex-1 flex-col gap-2 rounded-md px-4 pb-4 pt-0'>
+                <div className='flex size-full flex-1'>
+                  <div className='chat-text-container relative -mr-4 flex flex-1 flex-col overflow-y-hidden'>
+                    <div className='chat-flex flex h-40 w-full flex-grow flex-col-reverse justify-start gap-4 overflow-y-auto py-2 pb-4 pr-4'>
+                      {currentMessage &&
+                        Object.keys(currentMessage).map((key) => (
+                          <Fragment key={key}>
+                            {currentMessage[key].map((msg, index) => (
+                              <div
+                                key={`${msg.sender}-${msg.timestamp}-${index}`}
+                                className={cn(
+                                  'chat-box max-w-72 break-words px-3 py-2 shadow-lg',
+                                  msg.sender === 'You'
+                                    ? 'self-end rounded-[16px_16px_0_16px] bg-primary/85 text-primary-foreground/75'
+                                    : 'self-start rounded-[16px_16px_16px_0] bg-secondary'
+                                )}
+                              >
+                                {msg.message}{' '}
+                                <span
+                                  className={cn(
+                                    'mt-1 block text-xs font-light italic text-muted-foreground',
+                                    msg.sender === 'You' && 'text-right'
+                                  )}
+                                >
+                                  {format(msg.timestamp, 'h:mm a')}
+                                </span>
+                              </div>
+                            ))}
+                            <div className='text-center text-xs'>{key}</div>
+                          </Fragment>
+                        ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-center space-y-2">
-                  <h1 className="text-xl font-semibold">Your messages</h1>
-                  <p className="text-sm text-gray-400">Send a message to start a chat.</p>
+                <form className='flex w-full flex-none gap-2'>
+                  <div className='flex flex-1 items-center gap-2 rounded-md border border-input px-2 py-1 focus-within:outline-none focus-within:ring-1 focus-within:ring-ring lg:gap-4'>
+                    <div className='space-x-1'>
+                      <Button
+                        size='icon'
+                        type='button'
+                        variant='ghost'
+                        className='h-8 rounded-md'
+                      >
+                        <IconPlus
+                          size={20}
+                          className='stroke-muted-foreground'
+                        />
+                      </Button>
+                      <Button
+                        size='icon'
+                        type='button'
+                        variant='ghost'
+                        className='hidden h-8 rounded-md lg:inline-flex'
+                      >
+                        <IconPhotoPlus
+                          size={20}
+                          className='stroke-muted-foreground'
+                        />
+                      </Button>
+                      <Button
+                        size='icon'
+                        type='button'
+                        variant='ghost'
+                        className='hidden h-8 rounded-md lg:inline-flex'
+                      >
+                        <IconPaperclip
+                          size={20}
+                          className='stroke-muted-foreground'
+                        />
+                      </Button>
+                    </div>
+                    <label className='flex-1'>
+                      <span className='sr-only'>Chat Text Box</span>
+                      <input
+                        type='text'
+                        placeholder='Type your messages...'
+                        className='h-8 w-full bg-inherit focus-visible:outline-none'
+                      />
+                    </label>
+                    <Button
+                      variant='ghost'
+                      size='icon'
+                      className='hidden sm:inline-flex'
+                    >
+                      <IconSend size={20} />
+                    </Button>
+                  </div>
+                  <Button className='h-full sm:hidden'>
+                    <IconSend size={18} /> Send
+                  </Button>
+                </form>
+              </div>
+            </div>
+          ) : (
+            <div
+              className={cn(
+                'absolute inset-0 left-full z-50 hidden w-full flex-1 flex-col justify-center rounded-md border bg-primary-foreground shadow-sm transition-all duration-200 sm:static sm:z-auto sm:flex'
+              )}
+            >
+              <div className='flex flex-col items-center space-y-6'>
+                <div className='flex h-16 w-16 items-center justify-center rounded-full border-2 border-white'>
+                  <IconMessages className='h-8 w-8' />
+                </div>
+                <div className='space-y-2 text-center'>
+                  <h1 className='text-xl font-semibold'>Your messages</h1>
+                  <p className='text-sm text-gray-400'>
+                    Send a message to start a chat.
+                  </p>
                 </div>
                 <Button
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-6"
+                  className='bg-blue-500 px-6 text-white hover:bg-blue-600'
                   onClick={() => setCreateConversationDialog(true)}
                 >
                   Send message
                 </Button>
               </div>
             </div>
-          }
+          )}
         </section>
-        <CreateConversationModal users={users} onOpenChange={setCreateConversationDialog} open={createConversationDialogOpened} />
+        <CreateConversationModal
+          users={users}
+          onOpenChange={setCreateConversationDialog}
+          open={createConversationDialogOpened}
+        />
       </Main>
     </>
   )
