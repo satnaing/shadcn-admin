@@ -17,25 +17,16 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import { ChatUser } from '../data/chat-types'
 
-interface User {
-  id: string
-  profile: string
-  username: string
-  fullName: string
-  title: string
-}
+type User = Omit<ChatUser, 'messages'>
 
 type Props = {
   users: User[]
   open: boolean
   onOpenChange: (open: boolean) => void
 }
-export default function CreateConversationModal({
-  users,
-  onOpenChange,
-  open,
-}: Props) {
+export function NewChat({ users, onOpenChange, open }: Props) {
   const [selectedUsers, setSelectedUsers] = useState<User[]>([])
 
   const handleSelectUser = (user: User) => {
