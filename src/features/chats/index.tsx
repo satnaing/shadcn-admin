@@ -19,17 +19,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
-import CreateConversationModal from '@/components/create-conversation-dialog'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
+import { NewChat } from './components/new-chat'
+import { type ChatUser, type Convo } from './data/chat-types'
 // Fake Data
 import { conversations } from './data/convo.json'
-
-type ChatUser = (typeof conversations)[number]
-type Convo = ChatUser['messages'][number]
 
 export default function Chats() {
   const [search, setSearch] = useState('')
@@ -62,13 +60,7 @@ export default function Chats() {
     {}
   )
 
-  const users = conversations.map((user) => ({
-    id: user.id,
-    profile: user.profile,
-    username: user.username,
-    fullName: user.fullName,
-    title: user.title,
-  }))
+  const users = conversations.map(({ messages, ...user }) => user)
 
   return (
     <>
@@ -159,7 +151,6 @@ export default function Chats() {
           </div>
 
           {/* Right Side */}
-
           {selectedUser ? (
             <div
               className={cn(
@@ -344,7 +335,7 @@ export default function Chats() {
             </div>
           )}
         </section>
-        <CreateConversationModal
+        <NewChat
           users={users}
           onOpenChange={setCreateConversationDialog}
           open={createConversationDialogOpened}
