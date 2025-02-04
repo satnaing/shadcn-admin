@@ -89,7 +89,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
           <Command className='rounded-lg border'>
             <CommandInput
               placeholder='Search people...'
-              className='text-white'
+              className='text-foreground'
             />
             <CommandList>
               <CommandEmpty>No people found.</CommandEmpty>
