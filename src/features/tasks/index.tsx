@@ -1,3 +1,4 @@
+import TiptapEditor from '@/components/editor'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
@@ -35,8 +36,10 @@ export default function Tasks() {
           <DataTable data={tasks} columns={columns} />
         </div>
       </Main>
-
-      <TasksDialogs />
+      <div className='min-h-screen flex flex-col'>
+        <TiptapEditor />
+        <TasksDialogs />
+      </div>
     </TasksProvider>
   )
 }
