@@ -5,14 +5,17 @@ import {
   BubbleMenu,
 } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-// import BulletList from '@tiptap/extension-bullet-list'
-// import Document from '@tiptap/extension-document'
-// import ListItem from '@tiptap/extension-list-item'
-// import Paragraph from '@tiptap/extension-paragraph'
-// import Text from '@tiptap/extension-text'
+import TaskItem from '@tiptap/extension-task-item'
+import TaskList from '@tiptap/extension-task-list'
 
 // define your extension array
-const extensions = [StarterKit]
+const extensions = [
+  StarterKit,
+  TaskList,
+  TaskItem.configure({
+    nested: true,
+  }),
+]
 
 const content = '<p>Hello World!</p>'
 
