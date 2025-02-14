@@ -10,6 +10,7 @@ import { TasksDialogs } from './components/tasks-dialogs'
 import { TasksPrimaryButtons } from './components/tasks-primary-buttons'
 import TasksProvider from './context/tasks-context'
 import { tasks } from './data/tasks'
+import { Toolbar } from '@/components/editor/toolbar/Toolbar'
 
 export default function Tasks() {
   return (
@@ -37,6 +38,7 @@ export default function Tasks() {
         </div>
       </Main>
       <div className='min-h-screen flex flex-col'>
+        <Toolbar />
         <TiptapEditor />
         <TasksDialogs />
       </div>
