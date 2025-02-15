@@ -12,6 +12,7 @@ import { Main } from '@/components/layout/main'
 import { TopNav } from '@/components/layout/top-nav'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
+import { ToggleFullscreen } from '@/components/toggle-fullscreen'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { Overview } from './components/overview'
 import { RecentSales } from './components/recent-sales'
@@ -24,6 +25,7 @@ export default function Dashboard() {
         <TopNav links={topNav} />
         <div className='ml-auto flex items-center space-x-4'>
           <Search />
+          <ToggleFullscreen />
           <ThemeSwitch />
           <ProfileDropdown />
         </div>
