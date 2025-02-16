@@ -18,6 +18,12 @@ import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
 import { Route as auth500Import } from './routes/(auth)/500'
+import { Route as AuthenticatedEducationNewEducationImport } from './routes/_authenticated/education/new-education'
+import { Route as AuthenticatedEducationNewCategoryImport } from './routes/_authenticated/education/new-category'
+import { Route as AuthenticatedEducationEditEducationImport } from './routes/_authenticated/education/edit-education'
+import { Route as AuthenticatedEducationEditCategoryImport } from './routes/_authenticated/education/edit-category'
+import { Route as AuthenticatedEducationAllEducationsImport } from './routes/_authenticated/education/all-educations'
+import { Route as AuthenticatedEducationAllCategoriesImport } from './routes/_authenticated/education/all-categories'
 
 // Create Virtual Routes
 
@@ -272,6 +278,48 @@ const AuthenticatedSettingsAccountLazyRoute =
     ),
   )
 
+const AuthenticatedEducationNewEducationRoute =
+  AuthenticatedEducationNewEducationImport.update({
+    id: '/education/new-education',
+    path: '/education/new-education',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedEducationNewCategoryRoute =
+  AuthenticatedEducationNewCategoryImport.update({
+    id: '/education/new-category',
+    path: '/education/new-category',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedEducationEditEducationRoute =
+  AuthenticatedEducationEditEducationImport.update({
+    id: '/education/edit-education',
+    path: '/education/edit-education',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedEducationEditCategoryRoute =
+  AuthenticatedEducationEditCategoryImport.update({
+    id: '/education/edit-category',
+    path: '/education/edit-category',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedEducationAllEducationsRoute =
+  AuthenticatedEducationAllEducationsImport.update({
+    id: '/education/all-educations',
+    path: '/education/all-educations',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedEducationAllCategoriesRoute =
+  AuthenticatedEducationAllCategoriesImport.update({
+    id: '/education/all-categories',
+    path: '/education/all-categories',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -372,6 +420,48 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/education/all-categories': {
+      id: '/_authenticated/education/all-categories'
+      path: '/education/all-categories'
+      fullPath: '/education/all-categories'
+      preLoaderRoute: typeof AuthenticatedEducationAllCategoriesImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/education/all-educations': {
+      id: '/_authenticated/education/all-educations'
+      path: '/education/all-educations'
+      fullPath: '/education/all-educations'
+      preLoaderRoute: typeof AuthenticatedEducationAllEducationsImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/education/edit-category': {
+      id: '/_authenticated/education/edit-category'
+      path: '/education/edit-category'
+      fullPath: '/education/edit-category'
+      preLoaderRoute: typeof AuthenticatedEducationEditCategoryImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/education/edit-education': {
+      id: '/_authenticated/education/edit-education'
+      path: '/education/edit-education'
+      fullPath: '/education/edit-education'
+      preLoaderRoute: typeof AuthenticatedEducationEditEducationImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/education/new-category': {
+      id: '/_authenticated/education/new-category'
+      path: '/education/new-category'
+      fullPath: '/education/new-category'
+      preLoaderRoute: typeof AuthenticatedEducationNewCategoryImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/education/new-education': {
+      id: '/_authenticated/education/new-education'
+      path: '/education/new-education'
+      fullPath: '/education/new-education'
+      preLoaderRoute: typeof AuthenticatedEducationNewEducationImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/settings/account': {
@@ -478,6 +568,12 @@ const AuthenticatedSettingsRouteLazyRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteLazyRoute: typeof AuthenticatedSettingsRouteLazyRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedEducationAllCategoriesRoute: typeof AuthenticatedEducationAllCategoriesRoute
+  AuthenticatedEducationAllEducationsRoute: typeof AuthenticatedEducationAllEducationsRoute
+  AuthenticatedEducationEditCategoryRoute: typeof AuthenticatedEducationEditCategoryRoute
+  AuthenticatedEducationEditEducationRoute: typeof AuthenticatedEducationEditEducationRoute
+  AuthenticatedEducationNewCategoryRoute: typeof AuthenticatedEducationNewCategoryRoute
+  AuthenticatedEducationNewEducationRoute: typeof AuthenticatedEducationNewEducationRoute
   AuthenticatedAppsIndexLazyRoute: typeof AuthenticatedAppsIndexLazyRoute
   AuthenticatedChatsIndexLazyRoute: typeof AuthenticatedChatsIndexLazyRoute
   AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
@@ -489,6 +585,18 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteLazyRoute:
     AuthenticatedSettingsRouteLazyRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedEducationAllCategoriesRoute:
+    AuthenticatedEducationAllCategoriesRoute,
+  AuthenticatedEducationAllEducationsRoute:
+    AuthenticatedEducationAllEducationsRoute,
+  AuthenticatedEducationEditCategoryRoute:
+    AuthenticatedEducationEditCategoryRoute,
+  AuthenticatedEducationEditEducationRoute:
+    AuthenticatedEducationEditEducationRoute,
+  AuthenticatedEducationNewCategoryRoute:
+    AuthenticatedEducationNewCategoryRoute,
+  AuthenticatedEducationNewEducationRoute:
+    AuthenticatedEducationNewEducationRoute,
   AuthenticatedAppsIndexLazyRoute: AuthenticatedAppsIndexLazyRoute,
   AuthenticatedChatsIndexLazyRoute: AuthenticatedChatsIndexLazyRoute,
   AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
@@ -513,6 +621,12 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404LazyRoute
   '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
+  '/education/all-categories': typeof AuthenticatedEducationAllCategoriesRoute
+  '/education/all-educations': typeof AuthenticatedEducationAllEducationsRoute
+  '/education/edit-category': typeof AuthenticatedEducationEditCategoryRoute
+  '/education/edit-education': typeof AuthenticatedEducationEditEducationRoute
+  '/education/new-category': typeof AuthenticatedEducationNewCategoryRoute
+  '/education/new-education': typeof AuthenticatedEducationNewEducationRoute
   '/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
@@ -537,6 +651,12 @@ export interface FileRoutesByTo {
   '/404': typeof errors404LazyRoute
   '/503': typeof errors503LazyRoute
   '/': typeof AuthenticatedIndexRoute
+  '/education/all-categories': typeof AuthenticatedEducationAllCategoriesRoute
+  '/education/all-educations': typeof AuthenticatedEducationAllEducationsRoute
+  '/education/edit-category': typeof AuthenticatedEducationEditCategoryRoute
+  '/education/edit-education': typeof AuthenticatedEducationEditEducationRoute
+  '/education/new-category': typeof AuthenticatedEducationNewCategoryRoute
+  '/education/new-education': typeof AuthenticatedEducationNewEducationRoute
   '/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
@@ -565,6 +685,12 @@ export interface FileRoutesById {
   '/(errors)/500': typeof errors500LazyRoute
   '/(errors)/503': typeof errors503LazyRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/education/all-categories': typeof AuthenticatedEducationAllCategoriesRoute
+  '/_authenticated/education/all-educations': typeof AuthenticatedEducationAllEducationsRoute
+  '/_authenticated/education/edit-category': typeof AuthenticatedEducationEditCategoryRoute
+  '/_authenticated/education/edit-education': typeof AuthenticatedEducationEditEducationRoute
+  '/_authenticated/education/new-category': typeof AuthenticatedEducationNewCategoryRoute
+  '/_authenticated/education/new-education': typeof AuthenticatedEducationNewEducationRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
@@ -593,6 +719,12 @@ export interface FileRouteTypes {
     | '/404'
     | '/503'
     | '/'
+    | '/education/all-categories'
+    | '/education/all-educations'
+    | '/education/edit-category'
+    | '/education/edit-education'
+    | '/education/new-category'
+    | '/education/new-education'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -616,6 +748,12 @@ export interface FileRouteTypes {
     | '/404'
     | '/503'
     | '/'
+    | '/education/all-categories'
+    | '/education/all-educations'
+    | '/education/edit-category'
+    | '/education/edit-education'
+    | '/education/new-category'
+    | '/education/new-education'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -642,6 +780,12 @@ export interface FileRouteTypes {
     | '/(errors)/500'
     | '/(errors)/503'
     | '/_authenticated/'
+    | '/_authenticated/education/all-categories'
+    | '/_authenticated/education/all-educations'
+    | '/_authenticated/education/edit-category'
+    | '/_authenticated/education/edit-education'
+    | '/_authenticated/education/new-category'
+    | '/_authenticated/education/new-education'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
@@ -714,6 +858,12 @@ export const routeTree = rootRoute
       "children": [
         "/_authenticated/settings",
         "/_authenticated/",
+        "/_authenticated/education/all-categories",
+        "/_authenticated/education/all-educations",
+        "/_authenticated/education/edit-category",
+        "/_authenticated/education/edit-education",
+        "/_authenticated/education/new-category",
+        "/_authenticated/education/new-education",
         "/_authenticated/apps/",
         "/_authenticated/chats/",
         "/_authenticated/help-center/",
@@ -767,6 +917,30 @@ export const routeTree = rootRoute
     },
     "/_authenticated/": {
       "filePath": "_authenticated/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/education/all-categories": {
+      "filePath": "_authenticated/education/all-categories.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/education/all-educations": {
+      "filePath": "_authenticated/education/all-educations.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/education/edit-category": {
+      "filePath": "_authenticated/education/edit-category.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/education/edit-education": {
+      "filePath": "_authenticated/education/edit-education.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/education/new-category": {
+      "filePath": "_authenticated/education/new-category.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/education/new-education": {
+      "filePath": "_authenticated/education/new-education.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/settings/account": {

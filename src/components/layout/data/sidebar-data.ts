@@ -19,7 +19,7 @@ import {
   IconUserOff,
   IconUsers,
 } from '@tabler/icons-react'
-import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
+import { AudioWaveform, Command, GalleryVerticalEnd, GraduationCap } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
@@ -177,6 +177,72 @@ export const sidebarData: SidebarData = {
           title: 'Help Center',
           url: '/help-center',
           icon: IconHelp,
+        },
+      ],
+    },
+    {
+      title: 'Content Making',
+      items: [
+        {
+          title: 'Education',
+          icon: GraduationCap,
+          items: [
+            {
+              title: 'All Educations',
+              url: '/education/all-educations',
+            },
+            {
+              title: 'New Education',
+              url: '/education/new-education',
+            },
+            {
+              title: 'Edit Education',
+              url: '/education/edit-education',
+            },
+            {
+              title: 'All Categories',
+              url: '/education/all-categories',
+            },
+            {
+              title: 'New Category',
+              url: '/education/new-category',
+            },
+            {
+              title: 'Edit Category',
+              url: '/education/edit-category',
+            },
+          ],
+        },
+        {
+          title: 'Errors',
+          icon: IconBug,
+          items: [
+            {
+              title: 'Unauthorized',
+              url: '/401',
+              icon: IconLock,
+            },
+            {
+              title: 'Forbidden',
+              url: '/403',
+              icon: IconUserOff,
+            },
+            {
+              title: 'Not Found',
+              url: '/404',
+              icon: IconError404,
+            },
+            {
+              title: 'Internal Server Error',
+              url: '/500',
+              icon: IconServerOff,
+            },
+            {
+              title: 'Maintenance Error',
+              url: '/503',
+              icon: IconBarrierBlock,
+            },
+          ],
         },
       ],
     },
