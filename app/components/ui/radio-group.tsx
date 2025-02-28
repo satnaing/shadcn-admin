@@ -1,43 +1,43 @@
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
-import { Circle } from 'lucide-react'
+import { CircleIcon } from 'lucide-react'
 import type * as React from 'react'
+
 import { cn } from '~/lib/utils'
 
-const RadioGroup = ({
+function RadioGroup({
   className,
-  ref,
   ...props
-}: React.ComponentPropsWithRef<typeof RadioGroupPrimitive.Root>) => {
+}: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
   return (
     <RadioGroupPrimitive.Root
-      className={cn('grid gap-2', className)}
+      data-slot="radio-group"
+      className={cn('grid gap-3', className)}
       {...props}
-      ref={ref}
     />
   )
 }
-RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
 
-const RadioGroupItem = ({
+function RadioGroupItem({
   className,
-  ref,
   ...props
-}: React.ComponentPropsWithRef<typeof RadioGroupPrimitive.Item>) => {
+}: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {
   return (
     <RadioGroupPrimitive.Item
-      ref={ref}
+      data-slot="radio-group-item"
       className={cn(
-        'border-primary text-primary focus-visible:ring-ring aspect-square h-4 w-4 rounded-full border shadow-sm focus:outline-hidden focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50',
+        'border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
         className,
       )}
       {...props}
     >
-      <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-        <Circle className="fill-primary h-3.5 w-3.5" />
+      <RadioGroupPrimitive.Indicator
+        data-slot="radio-group-indicator"
+        className="relative flex items-center justify-center"
+      >
+        <CircleIcon className="fill-primary absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   )
 }
-RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName
 
 export { RadioGroup, RadioGroupItem }
