@@ -150,7 +150,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
             {...getFormProps(form)}
             className="space-y-4 p-0.5"
           >
-            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
+            <div className="grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1">
               <Label
                 htmlFor={fields.firstName.id}
                 className="col-span-2 text-right"
@@ -171,7 +171,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
+            <div className="grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1">
               <Label
                 htmlFor={fields.lastName.id}
                 className="col-span-2 text-right"
@@ -192,7 +192,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
+            <div className="grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1">
               <Label
                 htmlFor={fields.username.id}
                 className="col-span-2 text-right"
@@ -213,7 +213,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
+            <div className="grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1">
               <Label
                 htmlFor={fields.email.id}
                 className="col-span-2 text-right"
@@ -234,7 +234,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
+            <div className="grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1">
               <Label
                 htmlFor={fields.phoneNumber.id}
                 className="col-span-2 text-right"
@@ -255,7 +255,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </div>
             </div>
 
-            <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
+            <div className="grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1">
               <Label htmlFor={fields.role.id} className="col-span-2 text-right">
                 Role
               </Label>
@@ -291,7 +291,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
 
             {!isEdit && (
               <>
-                <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
+                <div className="grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1">
                   <Label
                     htmlFor={fields.password.id}
                     className="col-span-2 text-right"
@@ -312,7 +312,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-6 items-center gap-x-4 space-y-0 gap-y-1">
+                <div className="grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1">
                   <Label
                     htmlFor={fields.confirmPassword.id}
                     className="col-span-2 text-right"
