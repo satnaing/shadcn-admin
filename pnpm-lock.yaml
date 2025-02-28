@@ -3306,7 +3306,7 @@ snapshots:
 
   '@babel/generator@7.17.7':
     dependencies:
-      '@babel/types': 7.17.0
+      '@babel/types': 7.26.9
       jsesc: 2.5.2
       source-map: 0.5.7
     optional: true
