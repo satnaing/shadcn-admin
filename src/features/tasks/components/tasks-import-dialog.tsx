@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from '@/hooks/use-toast'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -56,8 +56,7 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
         size: file[0].size,
         type: file[0].type,
       }
-      toast({
-        title: 'You have imported the following file:',
+      toast.message('You have imported the following file:', {
         description: (
           <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
             <code className='text-white'>

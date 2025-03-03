@@ -1,4 +1,4 @@
-import { toast } from '@/hooks/use-toast'
+import { toast } from 'sonner'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { useTasks } from '../context/tasks-context'
 import { TasksImportDialog } from './tasks-import-dialog'
@@ -49,8 +49,7 @@ export function TasksDialogs() {
               setTimeout(() => {
                 setCurrentRow(null)
               }, 500)
-              toast({
-                title: 'The following task has been deleted:',
+              toast.message('The following task has been deleted:', {
                 description: (
                   <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
                     <code className='text-white'>

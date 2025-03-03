@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from '@/hooks/use-toast'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -61,8 +61,7 @@ export function DisplayForm() {
   })
 
   function onSubmit(data: DisplayFormValues) {
-    toast({
-      title: 'You submitted the following values:',
+    toast.message('You submitted the following values:', {
       description: (
         <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
           <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
@@ -94,7 +93,7 @@ export function DisplayForm() {
                     return (
                       <FormItem
                         key={item.id}
-                        className='flex flex-row items-start space-x-3 space-y-0'
+                        className='flex flex-row items-start space-y-0 space-x-3'
                       >
                         <FormControl>
                           <Checkbox

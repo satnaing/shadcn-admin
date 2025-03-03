@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import {
   Select,
   SelectContent,
@@ -55,13 +55,12 @@ export default function SidebarNav({
       </div>
 
       <ScrollArea
-        orientation='horizontal'
         type='always'
-        className='hidden w-full min-w-40 bg-background px-1 py-2 md:block'
+        className='bg-background hidden w-full min-w-40 px-1 py-2 md:block'
       >
         <nav
           className={cn(
-            'flex space-x-2 py-1 lg:flex-col lg:space-x-0 lg:space-y-1',
+            'flex space-x-2 py-1 lg:flex-col lg:space-y-1 lg:space-x-0',
             className
           )}
           {...props}
@@ -83,6 +82,7 @@ export default function SidebarNav({
             </Link>
           ))}
         </nav>
+        <ScrollBar orientation='horizontal' />
       </ScrollArea>
     </>
   )

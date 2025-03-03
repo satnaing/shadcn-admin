@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { IconCheck, IconX } from '@tabler/icons-react'
-import { toast } from '@/hooks/use-toast'
+import { toast } from 'sonner'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -48,8 +48,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
   }, [open])
 
   const onSubmit = () => {
-    toast({
-      title: 'You submitted the following values:',
+    toast.message('You submitted the following values:', {
       description: (
         <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
           <code className='text-white'>
@@ -73,7 +72,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
               <Badge key={user.id} variant='default'>
                 {user.fullName}
                 <button
-                  className='ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2'
+                  className='ring-offset-background focus:ring-ring ml-1 rounded-full outline-hidden focus:ring-2 focus:ring-offset-2'
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       handleRemoveUser(user.id)
@@ -81,7 +80,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
                   }}
                   onClick={() => handleRemoveUser(user.id)}
                 >
-                  <IconX className='h-3 w-3 text-muted-foreground hover:text-foreground' />
+                  <IconX className='text-muted-foreground hover:text-foreground h-3 w-3' />
                 </button>
               </Badge>
             ))}

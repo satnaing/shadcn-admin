@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { IconMailPlus, IconSend } from '@tabler/icons-react'
-import { toast } from '@/hooks/use-toast'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -49,8 +49,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
 
   const onSubmit = (values: UserInviteForm) => {
     form.reset()
-    toast({
-      title: 'You submitted the following values:',
+    toast.message('You submitted the following values:', {
       description: (
         <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
           <code className='text-white'>{JSON.stringify(values, null, 2)}</code>
