@@ -73,8 +73,8 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
         form.reset()
       }}
     >
-      <SheetContent className='flex flex-col'>
-        <SheetHeader className='text-left'>
+      <SheetContent className='p-2'>
+        <SheetHeader>
           <SheetTitle>{isUpdate ? 'Update' : 'Create'} Task</SheetTitle>
           <SheetDescription>
             {isUpdate
@@ -87,7 +87,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
           <form
             id='tasks-form'
             onSubmit={form.handleSubmit(onSubmit)}
-            className='flex-1 space-y-5'
+            className='flex-1 space-y-5 px-4'
           >
             <FormField
               control={form.control}
@@ -200,7 +200,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
             />
           </form>
         </Form>
-        <SheetFooter className='gap-2'>
+        <SheetFooter className='flex flex-row justify-end gap-2'>
           <SheetClose asChild>
             <Button variant='outline'>Close</Button>
           </SheetClose>
