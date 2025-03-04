@@ -153,6 +153,21 @@
   }
 }
 
+@utility scrollbar-hidden {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@utility faded-bottom {
+  @apply after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:hidden after:h-32 after:w-full after:bg-linear-[180deg,_transparent_10%,var(--background)_70%] after:md:block;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
