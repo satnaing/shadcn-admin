@@ -38,7 +38,7 @@ export const Header = ({
       )}
       {...props}
     >
-      <SidebarTrigger variant='outline' className='size-9' />
+      <SidebarTrigger variant='outline' className='-ml-1 size-9 sm:size-7' />
       <Separator orientation='vertical' className='h-6' />
       {children}
     </header>
