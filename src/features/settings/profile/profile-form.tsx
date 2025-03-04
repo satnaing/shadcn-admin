@@ -148,7 +148,7 @@ export default function ProfileForm() {
             </FormItem>
           )}
         />
-        <div>
+        <div className='space-y-2'>
           {fields.map((field, index) => (
             <FormField
               control={form.control}
@@ -174,7 +174,6 @@ export default function ProfileForm() {
             type='button'
             variant='outline'
             size='sm'
-            className='mt-2'
             onClick={() => append({ value: '' })}
           >
             Add URL
