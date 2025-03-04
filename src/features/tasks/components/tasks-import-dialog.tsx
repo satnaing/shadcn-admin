@@ -101,7 +101,7 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
             />
           </form>
         </Form>
-        <DialogFooter className='gap-2 sm:gap-0'>
+        <DialogFooter className='gap-y-2'>
           <DialogClose asChild>
             <Button variant='outline'>Close</Button>
           </DialogClose>
