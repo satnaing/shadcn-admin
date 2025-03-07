@@ -2,15 +2,15 @@ import {
   IconBarrierBlock,
   IconBrowserCheck,
   IconBug,
+  IconCalendar,
   IconChecklist,
   IconError404,
   IconHelp,
   IconLayoutDashboard,
   IconLock,
   IconLockAccess,
-  IconMessages,
+  IconNetwork,
   IconNotification,
-  IconPackages,
   IconPalette,
   IconServerOff,
   IconSettings,
@@ -19,7 +19,7 @@ import {
   IconUserOff,
   IconUsers,
 } from '@tabler/icons-react'
-import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
+import { Command} from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
@@ -30,19 +30,9 @@ export const sidebarData: SidebarData = {
   },
   teams: [
     {
-      name: 'Shadcn Admin',
+      name: 'Penster.ai',
       logo: Command,
-      plan: 'Vite + ShadcnUI',
-    },
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
+      plan: 'AI based company',
     },
   ],
   navGroups: [
@@ -55,20 +45,19 @@ export const sidebarData: SidebarData = {
           icon: IconLayoutDashboard,
         },
         {
-          title: 'Tasks',
-          url: '/tasks',
+          title: 'Bulliten',
+          url: '/bulliten',
           icon: IconChecklist,
         },
         {
-          title: 'Apps',
-          url: '/apps',
-          icon: IconPackages,
+          title: 'Calender & Scheduling',
+          url: '/calender',
+          icon: IconCalendar,
         },
         {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: IconMessages,
+          title: 'Wrok Flow',
+          url: '/work-flow',
+          icon: IconNetwork,
         },
         {
           title: 'Users',
