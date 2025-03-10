@@ -3,11 +3,9 @@ import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 
-
-export default function WorkFlow() {
-  
+export default function Content() {
   return (
-    <>
+   <>
 
 <Header fixed>
               <Search />
@@ -16,8 +14,7 @@ export default function WorkFlow() {
                 <ProfileDropdown />
               </div>
             </Header>
-      
-      
-    </>
+      <p>Content Page</p>
+   </>
   )
 }

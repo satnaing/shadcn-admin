@@ -1,22 +1,16 @@
 import {
-  IconBarrierBlock,
+  IconArrowCapsule,
   IconBrowserCheck,
-  IconBug,
   IconCalendar,
   IconChecklist,
-  IconError404,
-  IconHelp,
+  IconDatabase,
+  IconGraph,
   IconLayoutDashboard,
-  IconLock,
-  IconLockAccess,
-  IconNetwork,
   IconNotification,
   IconPalette,
-  IconServerOff,
   IconSettings,
   IconTool,
   IconUserCog,
-  IconUserOff,
   IconUsers,
 } from '@tabler/icons-react'
 import { Command} from 'lucide-react'
@@ -37,7 +31,7 @@ export const sidebarData: SidebarData = {
   ],
   navGroups: [
     {
-      title: 'General',
+      title: 'Main',
       items: [
         {
           title: 'Dashboard',
@@ -45,20 +39,33 @@ export const sidebarData: SidebarData = {
           icon: IconLayoutDashboard,
         },
         {
-          title: 'Bulliten',
-          url: '/bulliten',
+          title: 'Content',
+          url: '/content',
           icon: IconChecklist,
         },
         {
-          title: 'Calender & Scheduling',
+          title: 'Calender',
           url: '/calender',
           icon: IconCalendar,
         },
         {
           title: 'Wrok Flow',
           url: '/work-flow',
-          icon: IconNetwork,
+          icon: IconGraph,
         },
+
+        {
+          title: 'Integrations',
+          url: '/integration',
+          icon: IconArrowCapsule,
+
+        },
+        {
+          title: 'Referncedata',
+          url: '/referencedata',
+          icon: IconDatabase,
+        },
+        
         {
           title: 'Users',
           url: '/users',
@@ -66,70 +73,9 @@ export const sidebarData: SidebarData = {
         },
       ],
     },
+    
     {
-      title: 'Pages',
-      items: [
-        {
-          title: 'Auth',
-          icon: IconLockAccess,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/sign-in',
-            },
-            {
-              title: 'Sign In (2 Col)',
-              url: '/sign-in-2',
-            },
-            {
-              title: 'Sign Up',
-              url: '/sign-up',
-            },
-            {
-              title: 'Forgot Password',
-              url: '/forgot-password',
-            },
-            {
-              title: 'OTP',
-              url: '/otp',
-            },
-          ],
-        },
-        {
-          title: 'Errors',
-          icon: IconBug,
-          items: [
-            {
-              title: 'Unauthorized',
-              url: '/401',
-              icon: IconLock,
-            },
-            {
-              title: 'Forbidden',
-              url: '/403',
-              icon: IconUserOff,
-            },
-            {
-              title: 'Not Found',
-              url: '/404',
-              icon: IconError404,
-            },
-            {
-              title: 'Internal Server Error',
-              url: '/500',
-              icon: IconServerOff,
-            },
-            {
-              title: 'Maintenance Error',
-              url: '/503',
-              icon: IconBarrierBlock,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: 'Other',
+      title: 'Settings',
       items: [
         {
           title: 'Settings',
@@ -162,11 +108,7 @@ export const sidebarData: SidebarData = {
             },
           ],
         },
-        {
-          title: 'Help Center',
-          url: '/help-center',
-          icon: IconHelp,
-        },
+        
       ],
     },
   ],
