@@ -3,9 +3,9 @@ import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 
-export default function Dashboard() {
+export default function Content() {
   return (
-    <>
+   <>
 
 <Header fixed>
               <Search />
@@ -14,9 +14,7 @@ export default function Dashboard() {
                 <ProfileDropdown />
               </div>
             </Header>
-      <p>DashBoard  Page</p>
-    </>
+      <p>Content Page</p>
+   </>
   )
 }
-
-
