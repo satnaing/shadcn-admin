@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
-import { toast } from '@/hooks/use-toast'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -45,8 +45,7 @@ export function NotificationsForm() {
   })
 
   function onSubmit(data: NotificationsFormValues) {
-    toast({
-      title: 'You submitted the following values:',
+    toast.message('You submitted the following values:', {
       description: (
         <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
           <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
@@ -70,7 +69,7 @@ export function NotificationsForm() {
                   defaultValue={field.value}
                   className='flex flex-col space-y-1'
                 >
-                  <FormItem className='flex items-center space-x-3 space-y-0'>
+                  <FormItem className='flex items-center space-y-0 space-x-3'>
                     <FormControl>
                       <RadioGroupItem value='all' />
                     </FormControl>
@@ -78,7 +77,7 @@ export function NotificationsForm() {
                       All new messages
                     </FormLabel>
                   </FormItem>
-                  <FormItem className='flex items-center space-x-3 space-y-0'>
+                  <FormItem className='flex items-center space-y-0 space-x-3'>
                     <FormControl>
                       <RadioGroupItem value='mentions' />
                     </FormControl>
@@ -86,7 +85,7 @@ export function NotificationsForm() {
                       Direct messages and mentions
                     </FormLabel>
                   </FormItem>
-                  <FormItem className='flex items-center space-x-3 space-y-0'>
+                  <FormItem className='flex items-center space-y-0 space-x-3'>
                     <FormControl>
                       <RadioGroupItem value='none' />
                     </FormControl>
@@ -193,7 +192,7 @@ export function NotificationsForm() {
           control={form.control}
           name='mobile'
           render={({ field }) => (
-            <FormItem className='relative flex flex-row items-start space-x-3 space-y-0'>
+            <FormItem className='relative flex flex-row items-start space-y-0 space-x-3'>
               <FormControl>
                 <Checkbox
                   checked={field.value}

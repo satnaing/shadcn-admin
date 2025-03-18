@@ -82,7 +82,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                     <FormLabel>Password</FormLabel>
                     <Link
                       to='/forgot-password'
-                      className='text-sm font-medium text-muted-foreground hover:opacity-75'
+                      className='text-muted-foreground text-sm font-medium hover:opacity-75'
                     >
                       Forgot password?
                     </Link>
@@ -103,7 +103,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 <span className='w-full border-t' />
               </div>
               <div className='relative flex justify-center text-xs uppercase'>
-                <span className='bg-background px-2 text-muted-foreground'>
+                <span className='bg-background text-muted-foreground px-2'>
                   Or continue with
                 </span>
               </div>
@@ -112,7 +112,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             <div className='flex items-center gap-2'>
               <Button
                 variant='outline'
-                className='w-full'
+                className='flex-1'
                 type='button'
                 disabled={isLoading}
               >
@@ -120,7 +120,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               </Button>
               <Button
                 variant='outline'
-                className='w-full'
+                className='flex-1'
                 type='button'
                 disabled={isLoading}
               >

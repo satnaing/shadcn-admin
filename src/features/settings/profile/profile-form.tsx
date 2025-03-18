@@ -2,8 +2,8 @@ import { z } from 'zod'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
-import { toast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -72,8 +72,7 @@ export default function ProfileForm() {
   })
 
   function onSubmit(data: ProfileFormValues) {
-    toast({
-      title: 'You submitted the following values:',
+    toast.message('You submitted the following values:', {
       description: (
         <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
           <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
@@ -149,7 +148,7 @@ export default function ProfileForm() {
             </FormItem>
           )}
         />
-        <div>
+        <div className='space-y-2'>
           {fields.map((field, index) => (
             <FormField
               control={form.control}
@@ -175,7 +174,6 @@ export default function ProfileForm() {
             type='button'
             variant='outline'
             size='sm'
-            className='mt-2'
             onClick={() => append({ value: '' })}
           >
             Add URL
