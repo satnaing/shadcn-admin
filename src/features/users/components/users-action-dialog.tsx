@@ -22,7 +22,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { PasswordInput } from '@/components/password-input'
 import { SelectDropdown } from '@/components/select-dropdown'
 import { userTypes } from '../data/data'
@@ -149,7 +148,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
             Click save when you&apos;re done.
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className='-mr-4 h-[26.25rem] w-full py-1 pr-4'>
+        <div className='-mr-4 h-[26.25rem] w-full overflow-y-auto py-1 pr-4'>
           <Form {...form}>
             <form
               id='user-form'
@@ -316,7 +315,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               />
             </form>
           </Form>
-        </ScrollArea>
+        </div>
         <DialogFooter>
           <Button type='submit' form='user-form'>
             Save changes
