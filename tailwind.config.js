@@ -1,6 +1,9 @@
 import tailwindCssAnimate from 'tailwindcss-animate'
-import { fontFamily } from 'tailwindcss/defaultTheme'
+import defaultTheme from 'tailwindcss/defaultTheme'
 import { fonts } from './src/config/fonts'
+
+// Use destructuring with fallback to ensure fontFamily is defined
+const { fontFamily = { sans: ['sans-serif'] } } = defaultTheme || {}
 
 /** @type {import('tailwindcss').Config} */
 export default {
