@@ -19,7 +19,7 @@ const ScrollArea = React.forwardRef<
     <ScrollAreaPrimitive.Viewport
       className={cn(
         'h-full w-full rounded-[inherit]',
-        orientation === 'horizontal' && '!overflow-x-auto'
+        orientation === 'horizontal' && 'overflow-x-auto!'
       )}
     >
       {children}

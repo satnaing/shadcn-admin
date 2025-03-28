@@ -110,7 +110,7 @@ export default function Apps() {
             </SelectContent>
           </Select>
         </div>
-        <Separator className='shadow' />
+        <Separator className='shadow-sm' />
         <ul className='faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 md:grid-cols-2 lg:grid-cols-3'>
           {filteredApps.map((app) => (
             <li
