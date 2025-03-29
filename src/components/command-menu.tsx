@@ -8,6 +8,7 @@ import {
 } from '@tabler/icons-react'
 import { useSearch } from '@/context/search-context'
 import { useTheme } from '@/context/theme-context'
+import { useUser } from '@/context/user-context'
 import {
   CommandDialog,
   CommandEmpty,
@@ -17,7 +18,7 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import { sidebarData } from './layout/data/sidebar-data'
+import { getSidebarData } from './layout/data/sidebar-data'
 import { ScrollArea } from './ui/scroll-area'
 
 export function CommandMenu() {
@@ -39,7 +40,7 @@ export function CommandMenu() {
       <CommandList>
         <ScrollArea type='hover' className='h-72 pr-1'>
           <CommandEmpty>No results found.</CommandEmpty>
-          {sidebarData.navGroups.map((group) => (
+          {getSidebarData(useUser()).navGroups.map((group) => (
             <CommandGroup key={group.title} heading={group.title}>
               {group.items.map((navItem, i) => {
                 if (navItem.url)
