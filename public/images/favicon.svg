@@ -1,4 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="24" height="24"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokewidth="2" strokelinecap="round" strokelinejoin="round">
-  <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"></path>
-</svg><style>@media (prefers-color-scheme: light) { :root { filter: contrast(1) brightness(0.8); } }
-</style></svg>
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="500" height="500" rx="125" fill="white"/>
+<rect width="500" height="500" rx="125" fill="url(#paint0_linear_3732_8)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M104.437 147.768C100.053 148.93 97 152.898 97 157.434V356.431C97 362.995 103.218 367.779 109.563 366.097L186.258 345.763V394.431C186.258 400.995 192.476 405.779 198.821 404.097L396.563 351.669C400.947 350.506 404 346.539 404 342.003V143.005C404 136.441 397.782 131.657 391.437 133.339L314.742 153.674V105.005C314.742 98.441 308.524 93.6571 302.179 95.3394L104.437 147.768ZM314.742 153.674L193.695 185.767C189.311 186.93 186.258 190.898 186.258 195.434V345.763L307.305 313.669C311.689 312.507 314.742 308.539 314.742 304.003V153.674Z" fill="white"/>
+<defs>
+<linearGradient id="paint0_linear_3732_8" x1="250" y1="0" x2="250" y2="500" gradientUnits="userSpaceOnUse">
+<stop stop-color="#1F1F21"/>
+<stop offset="1" stop-color="#00B6B0"/>
+</linearGradient>
+</defs>
+</svg>
