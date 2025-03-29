@@ -2,21 +2,22 @@ import { HTMLAttributes, useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { redirect } from '@tanstack/react-router'
 // import { Link } from '@tanstack/react-router'
 import { IconBrandGoogle } from '@tabler/icons-react'
+import { Import } from 'lucide-react'
 import { cn } from '@/lib/utils'
+// import { Input } from '@/components/ui/input'
+// import { PasswordInput } from '@/components/password-input'
+import supabase from '@/utils/supabase/client'
 import { Button } from '@/components/ui/button'
 import {
-  Form,
-  // FormControl,
+  Form, // FormControl,
   // FormField,
   // FormItem,
   // FormLabel,
   // FormMessage,
 } from '@/components/ui/form'
-// import { Input } from '@/components/ui/input'
-// import { PasswordInput } from '@/components/password-input'
-import supabase from '@/utils/supabase/client'
 
 type UserAuthFormProps = HTMLAttributes<HTMLDivElement>
 
@@ -60,19 +61,19 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     <div className={cn('grid gap-6', className)} {...props}>
       {/* <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}> */}
-          <div className='grid gap-2'></div>
-            <div className='relative my-2'>
-              <Button
-                variant='outline'
-                className='w-full'
-                type='button'
-                disabled={isLoading}
-                onClick={handleGoogleSignIn}
-              >
-                <IconBrandGoogle className='h-4 w-4' /> Google
-              </Button>
-          </div>
-        {/* </form>
+      <div className='grid gap-2'></div>
+      <div className='relative my-2'>
+        <Button
+          variant='outline'
+          className='w-full'
+          type='button'
+          disabled={isLoading}
+          onClick={handleGoogleSignIn}
+        >
+          <IconBrandGoogle className='h-4 w-4' /> Google
+        </Button>
+      </div>
+      {/* </form>
       </Form> */}
     </div>
   )
@@ -80,13 +81,11 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
 async function handleGoogleSignIn() {
   try {
-    const baseUrl = process.env.VITE_PUBLIC_SITE_URL;
+    const baseUrl = import.meta.env.VITE_PUBLIC_SITE_URL
     if (!baseUrl) {
-      alert('Base URL is not defined');
-      return;
+      alert('Base URL is not defined')
+      return
     }
-    alert('Base URL is not defined');
-
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
@@ -96,19 +95,22 @@ async function handleGoogleSignIn() {
           prompt: 'consent',
         },
       },
-    });
+    })
 
     if (error) {
-      alert(error);
+      alert(error)
       // window.location.href = data.url;
-      return;
+      return
     }
-    alert(data ?? "No data");
-
     if (data.url) {
-      window.location.href = data.url; // use the redirect API for your server framework
+      console.log(data.url)
+      // redirect({
+      //   to: data.url,
+      //   throw: true,
+      // })
     }
-  } catch (_error) {
-    // console.error(`Unexpected failure: ${error}`);
+    // window.open(data.url)
+  } catch (error) {
+    console.error(`Unexpected failure: ${error}`)
   }
 }
