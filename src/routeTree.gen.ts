@@ -17,6 +17,7 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route
 import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
+import { Route as authCallbackImport } from './routes/(auth)/callback'
 import { Route as auth500Import } from './routes/(auth)/500'
 
 // Create Virtual Routes
@@ -165,6 +166,12 @@ const authOtpRoute = authOtpImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const authCallbackRoute = authCallbackImport.update({
+  id: '/(auth)/callback',
+  path: '/callback',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const auth500Route = auth500Import.update({
   id: '/(auth)/500',
   path: '/500',
@@ -288,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/500'
       fullPath: '/500'
       preLoaderRoute: typeof auth500Import
+      parentRoute: typeof rootRoute
+    }
+    '/(auth)/callback': {
+      id: '/(auth)/callback'
+      path: '/callback'
+      fullPath: '/callback'
+      preLoaderRoute: typeof authCallbackImport
       parentRoute: typeof rootRoute
     }
     '/(auth)/otp': {
@@ -502,6 +516,7 @@ const AuthenticatedRouteRouteWithChildren =
 export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteRouteWithChildren
   '/500': typeof errors500LazyRoute
+  '/callback': typeof authCallbackRoute
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
   '/settings': typeof AuthenticatedSettingsRouteLazyRouteWithChildren
@@ -527,6 +542,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/500': typeof errors500LazyRoute
+  '/callback': typeof authCallbackRoute
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
   '/forgot-password': typeof authForgotPasswordLazyRoute
@@ -553,6 +569,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/(auth)/500': typeof auth500Route
+  '/(auth)/callback': typeof authCallbackRoute
   '/(auth)/otp': typeof authOtpRoute
   '/(auth)/sign-in': typeof authSignInRoute
   '/_authenticated/settings': typeof AuthenticatedSettingsRouteLazyRouteWithChildren
@@ -582,6 +599,7 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/500'
+    | '/callback'
     | '/otp'
     | '/sign-in'
     | '/settings'
@@ -606,6 +624,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/500'
+    | '/callback'
     | '/otp'
     | '/sign-in'
     | '/forgot-password'
@@ -630,6 +649,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/(auth)/500'
+    | '/(auth)/callback'
     | '/(auth)/otp'
     | '/(auth)/sign-in'
     | '/_authenticated/settings'
@@ -658,6 +678,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   auth500Route: typeof auth500Route
+  authCallbackRoute: typeof authCallbackRoute
   authOtpRoute: typeof authOtpRoute
   authSignInRoute: typeof authSignInRoute
   authForgotPasswordLazyRoute: typeof authForgotPasswordLazyRoute
@@ -673,6 +694,7 @@ export interface RootRouteChildren {
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   auth500Route: auth500Route,
+  authCallbackRoute: authCallbackRoute,
   authOtpRoute: authOtpRoute,
   authSignInRoute: authSignInRoute,
   authForgotPasswordLazyRoute: authForgotPasswordLazyRoute,
@@ -697,6 +719,7 @@ export const routeTree = rootRoute
       "children": [
         "/_authenticated",
         "/(auth)/500",
+        "/(auth)/callback",
         "/(auth)/otp",
         "/(auth)/sign-in",
         "/(auth)/forgot-password",
@@ -723,6 +746,9 @@ export const routeTree = rootRoute
     },
     "/(auth)/500": {
       "filePath": "(auth)/500.tsx"
+    },
+    "/(auth)/callback": {
+      "filePath": "(auth)/callback.tsx"
     },
     "/(auth)/otp": {
       "filePath": "(auth)/otp.tsx"
