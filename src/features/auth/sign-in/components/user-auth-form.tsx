@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/form'
 // import { Input } from '@/components/ui/input'
 // import { PasswordInput } from '@/components/password-input'
+import supabase from '@/utils/supabase/client'
 
 type UserAuthFormProps = HTMLAttributes<HTMLDivElement>
 
@@ -57,29 +58,57 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className='grid gap-2'>
+      {/* <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}> */}
+          <div className='grid gap-2'></div>
             <div className='relative my-2'>
-              <div className='absolute inset-0 flex items-center'>
-                <span className='w-full border-t' />
-              </div>
-            </div>
-
-            <div className='flex items-center gap-2'>
               <Button
                 variant='outline'
                 className='w-full'
                 type='button'
                 disabled={isLoading}
+                onClick={handleGoogleSignIn}
               >
                 <IconBrandGoogle className='h-4 w-4' /> Google
               </Button>
-
-            </div>
           </div>
-        </form>
-      </Form>
+        {/* </form>
+      </Form> */}
     </div>
   )
+}
+
+async function handleGoogleSignIn() {
+  try {
+    const baseUrl = process.env.VITE_PUBLIC_SITE_URL;
+    if (!baseUrl) {
+      alert('Base URL is not defined');
+      return;
+    }
+    alert('Base URL is not defined');
+
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${baseUrl}/auth/callback`,
+        queryParams: {
+          access_type: 'offline',
+          prompt: 'consent',
+        },
+      },
+    });
+
+    if (error) {
+      alert(error);
+      // window.location.href = data.url;
+      return;
+    }
+    alert(data ?? "No data");
+
+    if (data.url) {
+      window.location.href = data.url; // use the redirect API for your server framework
+    }
+  } catch (_error) {
+    // console.error(`Unexpected failure: ${error}`);
+  }
 }
