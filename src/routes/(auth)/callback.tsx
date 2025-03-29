@@ -24,15 +24,16 @@ export const Route = createFileRoute('/(auth)/callback')({
     if (error) {
       throw new Error(error.message)
     }
-    return data
+    return redirect({ to: '/' })
   },
-  component: AuthCallback,
+  // component: AuthCallback,
   // ssr: true,
 })
 
 export function AuthCallback() {
   const data = Route.useLoaderData()
-  redirect({ to: '/' })
+  console.log(data)
+  // return redirect({ to: '/' })
   return (
     <div>
       <h1>Auth Callback</h1>
@@ -40,7 +41,3 @@ export function AuthCallback() {
     </div>
   )
 }
-
-// function RouteComponent() {
-//   return <div>Hello "/(auth)/callback"!</div>
-// }
