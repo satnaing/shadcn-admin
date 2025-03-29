@@ -55,12 +55,12 @@ export function ProfileDropdown() {
           <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <a href='/sign-out'>
+        <Link to='/sign-out'>
           <DropdownMenuItem>
             Log out
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
-        </a>
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   )
