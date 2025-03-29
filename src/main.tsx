@@ -16,30 +16,6 @@ import './index.css'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
 
-// import supabase from './utils/supabase/client'
-
-
-// async function testSupabaseConnection() {
-//   try {
-//     const { data, error } = await supabase
-//       .from('chat_messages') // 사용 가능한 테이블 이름으로 변경
-//       .select('*')
-//       .limit(1);
-
-//     if (error) {
-//       // eslint-disable-next-line no-console
-//       console.error('Supabase 연결 실패:', error);
-//     } else {
-//       // eslint-disable-next-line no-console
-//       console.log('Supabase 연결 성공:', data);
-//     }
-//   } catch (error) {
-//     // eslint-disable-next-line no-console
-//     console.error('Supabase 연결 중 오류 발생:', error);
-//   }
-// }
-
-// testSupabaseConnection();
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
