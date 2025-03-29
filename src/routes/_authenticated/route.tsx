@@ -1,6 +1,8 @@
 import Cookies from 'js-cookie'
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
+import { AuthSessionMissingError } from '@supabase/supabase-js'
 import { cn } from '@/lib/utils'
+import supabase from '@/utils/supabase/client'
 import { SearchProvider } from '@/context/search-context'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
@@ -8,6 +10,15 @@ import SkipToMain from '@/components/skip-to-main'
 
 export const Route = createFileRoute('/_authenticated')({
   component: RouteComponent,
+  loader: async () => {
+    const { data, error } = await supabase.auth.getUser()
+    if (error instanceof AuthSessionMissingError) {
+      return redirect({
+        to: '/sign-in',
+      })
+    } else if (error) throw error
+    return data
+  },
 })
 
 function RouteComponent() {
