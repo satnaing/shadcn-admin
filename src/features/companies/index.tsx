@@ -8,32 +8,12 @@ import { UsersDialogs } from './components/companies-dialogs'
 import { UsersPrimaryButtons } from './components/companies-primary-buttons'
 import { CompaniesTable } from './components/companies-table'
 import UsersProvider from './context/companies-context'
-import { companyListSchema } from './data/schema'
-import supabase from '@/utils/supabase/client'
-import { useState, useEffect } from 'react'
-import { z } from 'zod'
+import { useCompanyListQuery } from './services/selectCompanyList'
 
 export default function Users() {
-  const [companyList, setCompanyList] = useState<z.infer<typeof companyListSchema>>([]);
+  const { data,  isLoading } = useCompanyListQuery();
 
-  useEffect(() => {
-    const getCompanies = async () => {
-      const { data, error } = await supabase
-        .schema('enum')
-        .from('companies')
-        .select('*');
-      
-      if (error) {
-        console.error('Error fetching companies:', error);
-        return;
-      }
-      
-      setCompanyList(data || []);
-      console.log('Companies data:', data);
-    };
-    
-    getCompanies();
-  },[]);
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <UsersProvider>
@@ -56,7 +36,7 @@ export default function Users() {
           <UsersPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
-          <CompaniesTable data={companyList} columns={columns} />
+          <CompaniesTable data={data ?? []} columns={columns} />
         </div>
       </Main>
 
