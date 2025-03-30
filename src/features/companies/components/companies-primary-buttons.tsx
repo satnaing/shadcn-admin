@@ -1,6 +1,6 @@
 import { IconBuildingPlus } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
-import { useCompanies } from '../context/users-context'
+import { useCompanies } from '../context/companies-context'
 
 export function UsersPrimaryButtons() {
   const { setOpen } = useCompanies()

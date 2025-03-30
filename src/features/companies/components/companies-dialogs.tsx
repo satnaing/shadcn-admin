@@ -1,6 +1,6 @@
-import { useCompanies } from '../context/users-context'
-import { CompaniesActionDialog } from './users-action-dialog'
-import { CompaniesDeleteDialog } from './users-delete-dialog'
+import { useCompanies } from '../context/companies-context'
+import { CompaniesActionDialog } from './companies-action-dialog'
+import { CompaniesDeleteDialog } from './companies-delete-dialog'
 
 export function UsersDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useCompanies()
