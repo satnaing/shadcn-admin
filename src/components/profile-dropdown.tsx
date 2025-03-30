@@ -1,4 +1,4 @@
-import { Link, redirect } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { useUser } from '@/context/user-context'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
