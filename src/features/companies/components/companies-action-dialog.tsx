@@ -3,7 +3,6 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -22,68 +21,15 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-// import { PasswordInput } from '@/components/password-input'
-// import { SelectDropdown } from '@/components/select-dropdown'
-// import { userTypes } from '../data/data'
 import { Company } from '../data/schema'
+import { useInsertCompanyMutation } from '../services/insertCompany';
 
+// formSchema에서 role을 제거
 const formSchema = z.object({
-  // firstName: z.string().min(1, { message: 'First Name is required.' }),
-  // lastName: z.string().min(1, { message: 'Last Name is required.' }),
   company_name: z.string().min(1, { message: '회사이름을 입력해주세요.' }),
-  // phoneNumber: z.string().min(1, { message: 'Phone number is required.' }),
-  // email: z
-  //   .string()
-  //   .min(1, { message: 'Email is required.' })
-  //   .email({ message: 'Email is invalid.' }),
-  // password: z.string().transform((pwd) => pwd.trim()),
-  role: z.string().min(1, { message: 'Role is required.' }),
-  // confirmPassword: z.string().transform((pwd) => pwd.trim()),
   isEdit: z.boolean(),
 })
-// .superRefine(({ isEdit, password, confirmPassword }, ctx) => {
-//   if (!isEdit || (isEdit && password !== '')) {
-//     if (password === '') {
-//       ctx.addIssue({
-//         code: z.ZodIssueCode.custom,
-//         message: 'Password is required.',
-//         path: ['password'],
-//       })
-//     }
 
-//     if (password.length < 8) {
-//       ctx.addIssue({
-//         code: z.ZodIssueCode.custom,
-//         message: 'Password must be at least 8 characters long.',
-//         path: ['password'],
-//       })
-//     }
-
-//     if (!password.match(/[a-z]/)) {
-//       ctx.addIssue({
-//         code: z.ZodIssueCode.custom,
-//         message: 'Password must contain at least one lowercase letter.',
-//         path: ['password'],
-//       })
-//     }
-
-//     if (!password.match(/\d/)) {
-//       ctx.addIssue({
-//         code: z.ZodIssueCode.custom,
-//         message: 'Password must contain at least one number.',
-//         path: ['password'],
-//       })
-//     }
-
-//     if (password !== confirmPassword) {
-//       ctx.addIssue({
-//         code: z.ZodIssueCode.custom,
-//         message: "Passwords don't match.",
-//         path: ['confirmPassword'],
-//       })
-//     }
-//   }
-// })
 type CompanyForm = z.infer<typeof formSchema>
 
 interface Props {
@@ -103,38 +49,27 @@ export function CompaniesActionDialog({
     defaultValues: isEdit
       ? {
           ...currentRow,
-          // password: '',
-          // confirmPassword: '',
           isEdit,
         }
       : {
           company_name: '',
-          // firstName: '',
-          // lastName: '',
-          // username: '',
-          // email: '',
-          // role: '',
-          // phoneNumber: '',
-          // password: '',
-          // confirmPassword: '',
           isEdit,
         },
   })
 
-  const onSubmit = (values: CompanyForm) => {
-    form.reset()
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      ),
-    })
-    onOpenChange(false)
-  }
+  const { mutate: insertCompany, isLoading } = useInsertCompanyMutation()
 
-  // const isPasswordTouched = !!form.formState.dirtyFields.password
+  const onSubmit = async (value: CompanyForm) => {
+    try {
+
+      await insertCompany({ newCompany: { company_name: value.company_name } })
+
+      form.reset()
+      // onOpenChange(false)
+    } catch (error) {
+      // 에러 처리: 이미 insertCompany 내부에서 toast가 처리되므로 이곳에서는 필요 없음
+    }
+  }
 
   return (
     <Dialog
@@ -169,7 +104,7 @@ export function CompaniesActionDialog({
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='john_doe'
+                        placeholder='회사 이름 입력'
                         className='col-span-4'
                         {...field}
                       />
@@ -178,73 +113,12 @@ export function CompaniesActionDialog({
                   </FormItem>
                 )}
               />
-              {/* <FormField
-                control={form.control}
-                name='role'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
-                    <FormLabel className='col-span-2 text-right'>
-                      역할
-                    </FormLabel>
-                    <SelectDropdown
-                      defaultValue={field.value}
-                      onValueChange={field.onChange}
-                      placeholder='Select a role'
-                      className='col-span-4'
-                      items={userTypes.map(({ label, value }) => ({
-                        label,
-                        value,
-                      }))}
-                    />
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              /> */}
-              {/* <FormField
-                control={form.control}
-                name='password'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
-                    <FormLabel className='col-span-2 text-right'>
-                      Password
-                    </FormLabel>
-                    <FormControl>
-                      <PasswordInput
-                        placeholder='e.g., S3cur3P@ssw0rd'
-                        className='col-span-4'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='confirmPassword'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
-                    <FormLabel className='col-span-2 text-right'>
-                      Confirm Password
-                    </FormLabel>
-                    <FormControl>
-                      <PasswordInput
-                        disabled={!isPasswordTouched}
-                        placeholder='e.g., S3cur3P@ssw0rd'
-                        className='col-span-4'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              /> */}
             </form>
           </Form>
         </div>
         <DialogFooter>
-          <Button type='submit' form='user-form'>
-            Save changes
+          <Button type='submit' form='user-form' disabled={isLoading}>
+            {isLoading ? 'Saving...' : 'Save changes'}
           </Button>
         </DialogFooter>
       </DialogContent>

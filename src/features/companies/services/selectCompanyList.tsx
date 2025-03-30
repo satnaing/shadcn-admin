@@ -1,10 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "@/utils/supabase/client";
-import { Database } from "@/utils/supabase/database.types";
+import { CompanySupabase } from "../data/schema";
 
-export type selectCompanyListType = Database["enum"]["Tables"]["companies"]["Row"];
-
-export const selectCompanyList = async (): Promise<selectCompanyListType[]> => {
+export const selectCompanyList = async (): Promise<CompanySupabase[]> => {
   const { data, error } = await supabase
     .schema("enum")
     .from("companies")
