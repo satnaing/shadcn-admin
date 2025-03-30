@@ -7,19 +7,19 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ConfirmDialog } from '@/components/confirm-dialog'
-import { User } from '../data/schema'
+import { Company } from '../data/schema'
 
 interface Props {
   open: boolean
   onOpenChange: (open: boolean) => void
-  currentRow: User
+  currentRow: Company
 }
 
-export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
+export function CompaniesDeleteDialog({ open, onOpenChange, currentRow }: Props) {
   const [value, setValue] = useState('')
 
   const handleDelete = () => {
-    if (value.trim() !== currentRow.username) return
+    if (value.trim() !== currentRow.companyName) return
 
     onOpenChange(false)
     toast({
@@ -39,47 +39,46 @@ export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
       open={open}
       onOpenChange={onOpenChange}
       handleConfirm={handleDelete}
-      disabled={value.trim() !== currentRow.username}
+      disabled={value.trim() !== currentRow.companyName}
       title={
         <span className='text-destructive'>
           <IconAlertTriangle
             className='mr-1 inline-block stroke-destructive'
             size={18}
           />{' '}
-          Delete User
+          회사 삭제
         </span>
       }
       desc={
         <div className='space-y-4'>
           <p className='mb-2'>
-            Are you sure you want to delete{' '}
-            <span className='font-bold'>{currentRow.username}</span>?
+            회사{' '}<span className='font-bold'>{currentRow.companyName}</span>를 정말 삭제하시겠습니까?{' '}
             <br />
-            This action will permanently remove the user with the role of{' '}
+            이 작업을 수행하면{' '}
             <span className='font-bold'>
               {currentRow.role.toUpperCase()}
-            </span>{' '}
-            from the system. This cannot be undone.
+            </span>을 가진 회사가 삭제됩니다.<br/>이 작업은 되돌릴 수 없습니다.
           </p>
 
           <Label className='my-2'>
-            Username:
+            회사이름:
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder='Enter username to confirm deletion.'
+              placeholder='삭제를 확인하려면 회사 이름을 입력하세요.'
             />
           </Label>
 
           <Alert variant='destructive'>
-            <AlertTitle>Warning!</AlertTitle>
+            <AlertTitle>경고!</AlertTitle>
             <AlertDescription>
-              Please be carefull, this operation can not be rolled back.
+              이 작업은 되돌릴 수 없으니 신중히 진행해주세요.
             </AlertDescription>
           </Alert>
         </div>
       }
-      confirmText='Delete'
+      cancelBtnText='취소'
+      confirmText='삭제하기'
       destructive
     />
   )

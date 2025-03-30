@@ -1,27 +1,19 @@
-import { useUsers } from '../context/users-context'
-import { UsersActionDialog } from './users-action-dialog'
-import { UsersDeleteDialog } from './users-delete-dialog'
-import { UsersInviteDialog } from './users-invite-dialog'
+import { useCompanies } from '../context/users-context'
+import { CompaniesActionDialog } from './users-action-dialog'
+import { CompaniesDeleteDialog } from './users-delete-dialog'
 
 export function UsersDialogs() {
-  const { open, setOpen, currentRow, setCurrentRow } = useUsers()
+  const { open, setOpen, currentRow, setCurrentRow } = useCompanies()
   return (
     <>
-      <UsersActionDialog
+      <CompaniesActionDialog
         key='user-add'
         open={open === 'add'}
         onOpenChange={() => setOpen('add')}
       />
-
-      <UsersInviteDialog
-        key='user-invite'
-        open={open === 'invite'}
-        onOpenChange={() => setOpen('invite')}
-      />
-
       {currentRow && (
         <>
-          <UsersActionDialog
+          <CompaniesActionDialog
             key={`user-edit-${currentRow.id}`}
             open={open === 'edit'}
             onOpenChange={() => {
@@ -33,7 +25,7 @@ export function UsersDialogs() {
             currentRow={currentRow}
           />
 
-          <UsersDeleteDialog
+          <CompaniesDeleteDialog
             key={`user-delete-${currentRow.id}`}
             open={open === 'delete'}
             onOpenChange={() => {

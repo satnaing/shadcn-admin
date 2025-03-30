@@ -1,20 +1,20 @@
-import { IconMailPlus, IconUserPlus } from '@tabler/icons-react'
+import { IconBuildingPlus } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
-import { useUsers } from '../context/users-context'
+import { useCompanies } from '../context/users-context'
 
 export function UsersPrimaryButtons() {
-  const { setOpen } = useUsers()
+  const { setOpen } = useCompanies()
   return (
     <div className='flex gap-2'>
-      <Button
+      {/* <Button
         variant='outline'
         className='space-x-1'
         onClick={() => setOpen('invite')}
       >
-        <span>Invite User</span> <IconMailPlus size={18} />
-      </Button>
+        <span>xlsx로 등록</span>
+      </Button> */}
       <Button className='space-x-1' onClick={() => setOpen('add')}>
-        <span>Add User</span> <IconUserPlus size={18} />
+        <span>회사 추가</span> <IconBuildingPlus size={18} />
       </Button>
     </div>
   )

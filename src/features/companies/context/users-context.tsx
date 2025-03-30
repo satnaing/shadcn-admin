@@ -1,39 +1,39 @@
 import React, { useState } from 'react'
 import useDialogState from '@/hooks/use-dialog-state'
-import { User } from '../data/schema'
+import { Company } from '../data/schema'
 
-type UsersDialogType = 'invite' | 'add' | 'edit' | 'delete'
+type CompaniesDialogType = 'invite' | 'add' | 'edit' | 'delete'
 
-interface UsersContextType {
-  open: UsersDialogType | null
-  setOpen: (str: UsersDialogType | null) => void
-  currentRow: User | null
-  setCurrentRow: React.Dispatch<React.SetStateAction<User | null>>
+interface CompaniesContextType {
+  open: CompaniesDialogType | null
+  setOpen: (str: CompaniesDialogType | null) => void
+  currentRow: Company | null
+  setCurrentRow: React.Dispatch<React.SetStateAction<Company | null>>
 }
 
-const UsersContext = React.createContext<UsersContextType | null>(null)
+const CompaniesContext = React.createContext<CompaniesContextType | null>(null)
 
 interface Props {
   children: React.ReactNode
 }
 
-export default function UsersProvider({ children }: Props) {
-  const [open, setOpen] = useDialogState<UsersDialogType>(null)
-  const [currentRow, setCurrentRow] = useState<User | null>(null)
+export default function CompaniesProvider({ children }: Props) {
+  const [open, setOpen] = useDialogState<CompaniesDialogType>(null)
+  const [currentRow, setCurrentRow] = useState<Company | null>(null)
 
   return (
-    <UsersContext value={{ open, setOpen, currentRow, setCurrentRow }}>
+    <CompaniesContext value={{ open, setOpen, currentRow, setCurrentRow }}>
       {children}
-    </UsersContext>
+    </CompaniesContext>
   )
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useUsers = () => {
-  const usersContext = React.useContext(UsersContext)
+export const useCompanies = () => {
+  const usersContext = React.useContext(CompaniesContext)
 
   if (!usersContext) {
-    throw new Error('useUsers has to be used within <UsersContext>')
+    throw new Error('useCompanies has to be used within <CompanyiesContext>')
   }
 
   return usersContext

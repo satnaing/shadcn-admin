@@ -1,17 +1,17 @@
 import { faker } from '@faker-js/faker'
 
-export const users = Array.from({ length: 20 }, () => {
+export const companies = Array.from({ length: 20 }, () => {
   const firstName = faker.person.firstName()
   const lastName = faker.person.lastName()
   return {
     id: faker.string.uuid(),
-    firstName,
-    lastName,
-    username: faker.internet
+    // firstName,
+    // lastName,
+    companyName: faker.internet
       .username({ firstName, lastName })
       .toLocaleLowerCase(),
-    email: faker.internet.email({ firstName }).toLocaleLowerCase(),
-    phoneNumber: faker.phone.number({ style: 'international' }),
+    // email: faker.internet.email({ firstName }).toLocaleLowerCase(),
+    // phoneNumber: faker.phone.number({ style: 'international' }),
     status: faker.helpers.arrayElement([
       'active',
       'inactive',
