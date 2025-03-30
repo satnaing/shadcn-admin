@@ -20,6 +20,7 @@ import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
 import { Route as authCallbackImport } from './routes/(auth)/callback'
 import { Route as auth500Import } from './routes/(auth)/500'
+
 // Create Virtual Routes
 
 const errors503LazyImport = createFileRoute('/(errors)/503')()

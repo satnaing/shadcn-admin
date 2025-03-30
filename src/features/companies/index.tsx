@@ -1,5 +1,6 @@
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
+import Loader from '@/components/loader'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
@@ -11,9 +12,8 @@ import UsersProvider from './context/companies-context'
 import { useCompanyListQuery } from './services/selectCompanyList'
 
 export default function Users() {
-  const { data,  isLoading } = useCompanyListQuery();
-
-  if (isLoading) return <p>Loading...</p>;
+  const { data, isLoading } = useCompanyListQuery()
+  if (isLoading) return <Loader />
 
   return (
     <UsersProvider>
