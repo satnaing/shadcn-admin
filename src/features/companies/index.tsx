@@ -9,11 +9,31 @@ import { UsersPrimaryButtons } from './components/companies-primary-buttons'
 import { CompaniesTable } from './components/companies-table'
 import UsersProvider from './context/companies-context'
 import { companyListSchema } from './data/schema'
-import { companies } from './data/companies'
+import supabase from '@/utils/supabase/client'
+import { useState, useEffect } from 'react'
+import { z } from 'zod'
 
 export default function Users() {
-  // Parse user list
-  const userList = companyListSchema.parse(companies)
+  const [companyList, setCompanyList] = useState<z.infer<typeof companyListSchema>>([]);
+
+  useEffect(() => {
+    const getCompanies = async () => {
+      const { data, error } = await supabase
+        .schema('enum')
+        .from('companies')
+        .select('*');
+      
+      if (error) {
+        console.error('Error fetching companies:', error);
+        return;
+      }
+      
+      setCompanyList(data || []);
+      console.log('Companies data:', data);
+    };
+    
+    getCompanies();
+  },[]);
 
   return (
     <UsersProvider>
@@ -36,7 +56,7 @@ export default function Users() {
           <UsersPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
-          <CompaniesTable data={userList} columns={columns} />
+          <CompaniesTable data={companyList} columns={columns} />
         </div>
       </Main>
 

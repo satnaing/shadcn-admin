@@ -2,8 +2,8 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { userTypes } from '../data/data'
-import { DataTableFacetedFilter } from './data-table-faceted-filter'
+// import { userTypes } from '../data/data'
+// import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
 
 interface DataTableToolbarProps<TData> {
@@ -21,15 +21,15 @@ export function DataTableToolbar<TData>({
         <Input
           placeholder='회사이름 검색'
           value={
-            (table.getColumn('companyName')?.getFilterValue() as string) ?? ''
+            (table.getColumn('company_name')?.getFilterValue() as string) ?? ''
           }
           onChange={(event) =>
-            table.getColumn('companyName')?.setFilterValue(event.target.value)
+            table.getColumn('company_name')?.setFilterValue(event.target.value)
           }
           className='h-8 w-[150px] lg:w-[250px]'
         />
         <div className='flex gap-x-2'>
-          {table.getColumn('status') && (
+          {/* {table.getColumn('status') && (
             <DataTableFacetedFilter
               column={table.getColumn('status')}
               title='Status'
@@ -47,7 +47,7 @@ export function DataTableToolbar<TData>({
               title='Role'
               options={userTypes.map((t) => ({ ...t }))}
             />
-          )}
+          )} */}
         </div>
         {isFiltered && (
           <Button

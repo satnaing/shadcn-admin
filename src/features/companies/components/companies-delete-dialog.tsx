@@ -15,11 +15,15 @@ interface Props {
   currentRow: Company
 }
 
-export function CompaniesDeleteDialog({ open, onOpenChange, currentRow }: Props) {
+export function CompaniesDeleteDialog({
+  open,
+  onOpenChange,
+  currentRow,
+}: Props) {
   const [value, setValue] = useState('')
 
   const handleDelete = () => {
-    if (value.trim() !== currentRow.companyName) return
+    if (value.trim() !== currentRow.company_name) return
 
     onOpenChange(false)
     toast({
@@ -39,7 +43,7 @@ export function CompaniesDeleteDialog({ open, onOpenChange, currentRow }: Props)
       open={open}
       onOpenChange={onOpenChange}
       handleConfirm={handleDelete}
-      disabled={value.trim() !== currentRow.companyName}
+      disabled={value.trim() !== currentRow.company_name}
       title={
         <span className='text-destructive'>
           <IconAlertTriangle
@@ -52,12 +56,11 @@ export function CompaniesDeleteDialog({ open, onOpenChange, currentRow }: Props)
       desc={
         <div className='space-y-4'>
           <p className='mb-2'>
-            회사{' '}<span className='font-bold'>{currentRow.companyName}</span>를 정말 삭제하시겠습니까?{' '}
-            <br />
-            이 작업을 수행하면{' '}
-            <span className='font-bold'>
-              {currentRow.role.toUpperCase()}
-            </span>을 가진 회사가 삭제됩니다.<br/>이 작업은 되돌릴 수 없습니다.
+            회사 <span className='font-bold'>{currentRow.company_name}</span>를
+            정말 삭제하시겠습니까? <br />이 작업을 수행하면{' '}
+            {/* <span className='font-bold'>{currentRow.role.toUpperCase()}</span>을
+            가진 회사가 삭제됩니다. */}
+            <br />이 작업은 되돌릴 수 없습니다.
           </p>
 
           <Label className='my-2'>

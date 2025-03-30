@@ -23,68 +23,67 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 // import { PasswordInput } from '@/components/password-input'
-import { SelectDropdown } from '@/components/select-dropdown'
-import { userTypes } from '../data/data'
+// import { SelectDropdown } from '@/components/select-dropdown'
+// import { userTypes } from '../data/data'
 import { Company } from '../data/schema'
 
-const formSchema = z
-  .object({
-    // firstName: z.string().min(1, { message: 'First Name is required.' }),
-    // lastName: z.string().min(1, { message: 'Last Name is required.' }),
-    companyName: z.string().min(1, { message: '회사이름을 입력해주세요.' }),
-    // phoneNumber: z.string().min(1, { message: 'Phone number is required.' }),
-    // email: z
-    //   .string()
-    //   .min(1, { message: 'Email is required.' })
-    //   .email({ message: 'Email is invalid.' }),
-    // password: z.string().transform((pwd) => pwd.trim()),
-    role: z.string().min(1, { message: 'Role is required.' }),
-    // confirmPassword: z.string().transform((pwd) => pwd.trim()),
-    isEdit: z.boolean(),
-  })
-  // .superRefine(({ isEdit, password, confirmPassword }, ctx) => {
-  //   if (!isEdit || (isEdit && password !== '')) {
-  //     if (password === '') {
-  //       ctx.addIssue({
-  //         code: z.ZodIssueCode.custom,
-  //         message: 'Password is required.',
-  //         path: ['password'],
-  //       })
-  //     }
+const formSchema = z.object({
+  // firstName: z.string().min(1, { message: 'First Name is required.' }),
+  // lastName: z.string().min(1, { message: 'Last Name is required.' }),
+  company_name: z.string().min(1, { message: '회사이름을 입력해주세요.' }),
+  // phoneNumber: z.string().min(1, { message: 'Phone number is required.' }),
+  // email: z
+  //   .string()
+  //   .min(1, { message: 'Email is required.' })
+  //   .email({ message: 'Email is invalid.' }),
+  // password: z.string().transform((pwd) => pwd.trim()),
+  role: z.string().min(1, { message: 'Role is required.' }),
+  // confirmPassword: z.string().transform((pwd) => pwd.trim()),
+  isEdit: z.boolean(),
+})
+// .superRefine(({ isEdit, password, confirmPassword }, ctx) => {
+//   if (!isEdit || (isEdit && password !== '')) {
+//     if (password === '') {
+//       ctx.addIssue({
+//         code: z.ZodIssueCode.custom,
+//         message: 'Password is required.',
+//         path: ['password'],
+//       })
+//     }
 
-  //     if (password.length < 8) {
-  //       ctx.addIssue({
-  //         code: z.ZodIssueCode.custom,
-  //         message: 'Password must be at least 8 characters long.',
-  //         path: ['password'],
-  //       })
-  //     }
+//     if (password.length < 8) {
+//       ctx.addIssue({
+//         code: z.ZodIssueCode.custom,
+//         message: 'Password must be at least 8 characters long.',
+//         path: ['password'],
+//       })
+//     }
 
-  //     if (!password.match(/[a-z]/)) {
-  //       ctx.addIssue({
-  //         code: z.ZodIssueCode.custom,
-  //         message: 'Password must contain at least one lowercase letter.',
-  //         path: ['password'],
-  //       })
-  //     }
+//     if (!password.match(/[a-z]/)) {
+//       ctx.addIssue({
+//         code: z.ZodIssueCode.custom,
+//         message: 'Password must contain at least one lowercase letter.',
+//         path: ['password'],
+//       })
+//     }
 
-  //     if (!password.match(/\d/)) {
-  //       ctx.addIssue({
-  //         code: z.ZodIssueCode.custom,
-  //         message: 'Password must contain at least one number.',
-  //         path: ['password'],
-  //       })
-  //     }
+//     if (!password.match(/\d/)) {
+//       ctx.addIssue({
+//         code: z.ZodIssueCode.custom,
+//         message: 'Password must contain at least one number.',
+//         path: ['password'],
+//       })
+//     }
 
-  //     if (password !== confirmPassword) {
-  //       ctx.addIssue({
-  //         code: z.ZodIssueCode.custom,
-  //         message: "Passwords don't match.",
-  //         path: ['confirmPassword'],
-  //       })
-  //     }
-  //   }
-  // })
+//     if (password !== confirmPassword) {
+//       ctx.addIssue({
+//         code: z.ZodIssueCode.custom,
+//         message: "Passwords don't match.",
+//         path: ['confirmPassword'],
+//       })
+//     }
+//   }
+// })
 type CompanyForm = z.infer<typeof formSchema>
 
 interface Props {
@@ -93,7 +92,11 @@ interface Props {
   onOpenChange: (open: boolean) => void
 }
 
-export function CompaniesActionDialog({ currentRow, open, onOpenChange }: Props) {
+export function CompaniesActionDialog({
+  currentRow,
+  open,
+  onOpenChange,
+}: Props) {
   const isEdit = !!currentRow
   const form = useForm<CompanyForm>({
     resolver: zodResolver(formSchema),
@@ -105,12 +108,12 @@ export function CompaniesActionDialog({ currentRow, open, onOpenChange }: Props)
           isEdit,
         }
       : {
-          companyName: '',
+          company_name: '',
           // firstName: '',
           // lastName: '',
           // username: '',
           // email: '',
-          role: '',
+          // role: '',
           // phoneNumber: '',
           // password: '',
           // confirmPassword: '',
@@ -158,7 +161,7 @@ export function CompaniesActionDialog({ currentRow, open, onOpenChange }: Props)
             >
               <FormField
                 control={form.control}
-                name='companyName'
+                name='company_name'
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
                     <FormLabel className='col-span-2 text-right'>
@@ -175,7 +178,7 @@ export function CompaniesActionDialog({ currentRow, open, onOpenChange }: Props)
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name='role'
                 render={({ field }) => (
@@ -196,7 +199,7 @@ export function CompaniesActionDialog({ currentRow, open, onOpenChange }: Props)
                     <FormMessage className='col-span-4 col-start-3' />
                   </FormItem>
                 )}
-              />
+              /> */}
               {/* <FormField
                 control={form.control}
                 name='password'
