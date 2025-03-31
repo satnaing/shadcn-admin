@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { Company } from '../data/schema'
+import { useDeleteCompanyMutation } from '../services/deleteCompany'
 
 interface Props {
   open: boolean
@@ -22,20 +23,23 @@ export function CompaniesDeleteDialog({
 }: Props) {
   const [value, setValue] = useState('')
 
-  const handleDelete = () => {
+  const { mutate: deleteCompanyMutation, isLoading } = useDeleteCompanyMutation()
+  
+  const handleDelete = async () => {
     if (value.trim() !== currentRow.company_name) return
-
+    await deleteCompanyMutation({company_id: currentRow.company_id})
     onOpenChange(false)
-    toast({
-      title: 'The following user has been deleted:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>
-            {JSON.stringify(currentRow, null, 2)}
-          </code>
-        </pre>
-      ),
-    })
+    
+    // toast({
+    //   title: 'The following user has been deleted:',
+    //   description: (
+    //     <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
+    //       <code className='text-white'>
+    //         {JSON.stringify(currentRow, null, 2)}
+    //       </code>
+    //     </pre>
+    //   ),
+    // })
   }
 
   return (
@@ -43,7 +47,7 @@ export function CompaniesDeleteDialog({
       open={open}
       onOpenChange={onOpenChange}
       handleConfirm={handleDelete}
-      disabled={value.trim() !== currentRow.company_name}
+      disabled={value.trim() !== currentRow.company_name || isLoading}
       title={
         <span className='text-destructive'>
           <IconAlertTriangle
