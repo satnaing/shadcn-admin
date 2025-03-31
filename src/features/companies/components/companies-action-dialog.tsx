@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Company } from '../data/schema'
-import { useInsertCompanyMutation } from '../services/insertCompany';
+import { useInsertCompanyMutation } from '../services/insertCompany'
 
 // formSchema에서 role을 제거
 const formSchema = z.object({
@@ -60,15 +60,10 @@ export function CompaniesActionDialog({
   const { mutate: insertCompany, isLoading } = useInsertCompanyMutation()
 
   const onSubmit = async (value: CompanyForm) => {
-    try {
+    await insertCompany({ newCompany: { company_name: value.company_name } })
 
-      await insertCompany({ newCompany: { company_name: value.company_name } })
-
-      form.reset()
-      // onOpenChange(false)
-    } catch (error) {
-      // 에러 처리: 이미 insertCompany 내부에서 toast가 처리되므로 이곳에서는 필요 없음
-    }
+    form.reset()
+    // onOpenChange(false)
   }
 
   return (
