@@ -33,7 +33,7 @@ export const useCompanies = () => {
   const usersContext = React.useContext(CompaniesContext)
 
   if (!usersContext) {
-    throw new Error('useCompanies has to be used within <CompanyiesContext>')
+    throw new Error('useCompanies has to be used within <CompaniesContext>')
   }
 
   return usersContext

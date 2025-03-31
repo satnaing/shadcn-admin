@@ -86,7 +86,7 @@ export const getSidebarData = (user: User | null): SidebarData => {
             icon: IconUsers,
           },
           {
-            title: 'Companies',
+            title: '산업체',
             url: '/companies',
             icon: IconBuildings,
           },

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { IconAlertTriangle } from '@tabler/icons-react'
-import { toast } from '@/hooks/use-toast'
+// import { toast } from '@/hooks/use-toast'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -29,7 +29,7 @@ export function CompaniesDeleteDialog({
     if (value.trim() !== currentRow.company_name) return
     await deleteCompanyMutation({company_id: currentRow.company_id})
     onOpenChange(false)
-    
+
     // toast({
     //   title: 'The following user has been deleted:',
     //   description: (

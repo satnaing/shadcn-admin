@@ -2,7 +2,7 @@ import { IconBuildingPlus } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
 import { useCompanies } from '../context/companies-context'
 
-export function UsersPrimaryButtons() {
+export function CompaniesPrimaryButtons() {
   const { setOpen } = useCompanies()
   return (
     <div className='flex gap-2'>

@@ -2,12 +2,12 @@ import { useCompanies } from '../context/companies-context'
 import { CompaniesActionDialog } from './companies-action-dialog'
 import { CompaniesDeleteDialog } from './companies-delete-dialog'
 
-export function UsersDialogs() {
+export function CompaniesDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useCompanies()
   return (
     <>
       <CompaniesActionDialog
-        key='user-add'
+        key='company-add'
         open={open === 'add'}
         onOpenChange={() => setOpen('add')}
       />

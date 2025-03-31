@@ -5,13 +5,13 @@ import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { columns } from './components/companies-columns'
-import { UsersDialogs } from './components/companies-dialogs'
-import { UsersPrimaryButtons } from './components/companies-primary-buttons'
+import { CompaniesDialogs } from './components/companies-dialogs'
+import { CompaniesPrimaryButtons } from './components/companies-primary-buttons'
 import { CompaniesTable } from './components/companies-table'
 import UsersProvider from './context/companies-context'
 import { useCompanyListQuery } from './services/selectCompanyList'
 
-export default function Users() {
+export default function Companies() {
   const { data, isLoading } = useCompanyListQuery()
   if (isLoading) return <Loader />
 
@@ -33,14 +33,14 @@ export default function Users() {
               부산소마고 학생들이 취업/현장실습한 회사들의 목록입니다.
             </p>
           </div>
-          <UsersPrimaryButtons />
+          <CompaniesPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
           <CompaniesTable data={data ?? []} columns={columns} />
         </div>
       </Main>
 
-      <UsersDialogs />
+      <CompaniesDialogs />
     </UsersProvider>
   )
 }
