@@ -23,6 +23,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Company } from '../data/schema'
 import { useInsertCompanyMutation } from '../services/insertCompany'
+import { useUpdateCompanyMutation } from '../services/updateCompany'
 
 // formSchema에서 role을 제거
 const formSchema = z.object({
@@ -58,11 +59,19 @@ export function CompaniesActionDialog({
   })
 
   const { mutate: insertCompany, isLoading } = useInsertCompanyMutation()
+  const { mutate: updateCompany } = useUpdateCompanyMutation()
 
   const onSubmit = async (value: CompanyForm) => {
-    await insertCompany({ newCompany: { company_name: value.company_name } })
-
-    form.reset()
+    if(isEdit) {
+      await updateCompany({
+        company_id: currentRow?.company_id,
+        company_name: value.company_name,
+      })
+      onOpenChange(false)
+    }else{
+      await insertCompany({ newCompany: { company_name: value.company_name } })
+      form.reset()
+    }
     // onOpenChange(false)
   }
 
