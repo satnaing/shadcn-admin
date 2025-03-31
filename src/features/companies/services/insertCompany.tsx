@@ -50,7 +50,7 @@ export const useInsertCompanyMutation = () => {
         title: '데이터 삽입 실패!',
         description: (
           <pre className='mt-2 w-[340px] max-w-full overflow-x-auto rounded-md bg-slate-950 p-4'>
-            <code className='whitespace-pre-wrap break-words text-white'>
+            <code className='whitespace-pre-wrap text-white'>
               {errorMessage}
             </code>
           </pre>
