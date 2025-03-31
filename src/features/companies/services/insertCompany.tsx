@@ -33,11 +33,16 @@ export const useInsertCompanyMutation = () => {
       toast({
         variant: "default",
         title: '데이터 삽입 성공!',
-        description: `회사: ${data.company_name}`,
+        description: (
+          <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
+            <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
+          </pre>
+        ),
       })
     },
     onError: (error) => {
-      console.error("Error inserting company:", error);
+      throw new Error(`${error}`);
+      // console.error("Error inserting company:", error);
     },
   });
 
