@@ -64,7 +64,7 @@ export const columns: ColumnDef<Company>[] = [
     cell: ({ row }) => {
       return <LongText>{row.getValue('hr_manager_name')}</LongText>
     },
-    id: '인사담당자',
+    // id: '인사담당자',
     },
     {
     accessorKey: 'hr_manager_phone',
@@ -74,7 +74,7 @@ export const columns: ColumnDef<Company>[] = [
     cell: ({ row }) => (
       <div className='w-fit text-nowrap'>{row.getValue('hr_manager_phone')}</div>
     ),
-    id: '연락처'
+    // id: '연락처'
   },
   {
     accessorKey: 'company_address',
@@ -84,7 +84,7 @@ export const columns: ColumnDef<Company>[] = [
     cell: ({ row }) => {
       return <LongText>{row.getValue('company_address')}</LongText>
     },
-    id: '주소',
+    // id: '주소',
     },
   //   {
   //   accessorKey: 'hr_manager_phone',
