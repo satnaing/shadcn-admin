@@ -4,13 +4,13 @@ import supabase from '@/utils/supabase/client'
 import { useToast } from '@/hooks/use-toast'
 import { CompanySupabase } from '../data/schema'
 
-export const insertCompany = async (newCompany: {
-  newCompany: Pick<CompanySupabase, 'company_name'>
-}): Promise<CompanySupabase> => {
+export const insertCompany = async (
+  newCompany: Omit<CompanySupabase, 'company_id'>
+): Promise<CompanySupabase> => {
   const { data, error } = await supabase
     .schema('enum')
     .from('companies')
-    .insert([newCompany.newCompany])
+    .insert(newCompany)
     .select('*')
     .single()
   if (error) {
