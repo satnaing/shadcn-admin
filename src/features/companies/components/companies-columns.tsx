@@ -65,14 +65,16 @@ export const columns: ColumnDef<Company>[] = [
       return <LongText>{row.getValue('hr_manager_name')}</LongText>
     },
     // id: '인사담당자',
-    },
-    {
+  },
+  {
     accessorKey: 'hr_manager_phone',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='연락처' />
     ),
     cell: ({ row }) => (
-      <div className='w-fit text-nowrap'>{row.getValue('hr_manager_phone')}</div>
+      <div className='w-fit text-nowrap'>
+        {row.getValue('hr_manager_phone')}
+      </div>
     ),
     // id: '연락처'
   },
@@ -85,7 +87,7 @@ export const columns: ColumnDef<Company>[] = [
       return <LongText>{row.getValue('company_address')}</LongText>
     },
     // id: '주소',
-    },
+  },
   //   {
   //   accessorKey: 'hr_manager_phone',
   //   header: ({ column }) => (
