@@ -1,6 +1,5 @@
 import { z } from 'zod'
-import { Database } from "@/utils/supabase/database.types";
-
+import { Database } from '@/utils/supabase/database.types'
 
 // const companyStatusSchema = z.union([
 //   z.literal('active'),
@@ -20,6 +19,9 @@ import { Database } from "@/utils/supabase/database.types";
 const companySchema = z.object({
   company_id: z.number(),
   company_name: z.string(),
+  hr_manager_name: z.string(),
+  hr_manager_phone: z.string(),
+  company_address: z.string(),
   // email: z.string(),
   // phoneNumber: z.string(),
   // status: companyStatusSchema,
@@ -31,4 +33,4 @@ export type Company = z.infer<typeof companySchema>
 
 export const companyListSchema = z.array(companySchema)
 
-export type CompanySupabase = Database["enum"]["Tables"]["companies"]["Row"]
+export type CompanySupabase = Database['enum']['Tables']['companies']['Row']

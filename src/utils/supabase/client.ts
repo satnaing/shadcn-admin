@@ -5,7 +5,7 @@ const supabase = createClient<Database>(
   import.meta.env.VITE_PUBLIC_SUPABASE_URL,
   import.meta.env.VITE_PUBLIC_SUPABASE_ANON_KEY,
   {
-    db: { schema: 'public' }
+    db: { schema: 'public' },
   }
 )
 

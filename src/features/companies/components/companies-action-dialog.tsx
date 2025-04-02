@@ -28,6 +28,9 @@ import { useUpdateCompanyMutation } from '../services/updateCompany'
 // formSchema에서 role을 제거
 const formSchema = z.object({
   company_name: z.string().min(1, { message: '회사이름을 입력해주세요.' }),
+  hr_manager_name: z.string().min(1, { message: '인사 담당자 이름을 입력해주세요.' }),
+  hr_manager_phone: z.string().min(1, { message: '인사 담당자 연락처를 입력해주세요.' }),
+  company_address : z.string().min(1, { message: '회사 주소를 입력해주세요.' }),
   isEdit: z.boolean(),
 })
 
@@ -54,6 +57,9 @@ export function CompaniesActionDialog({
         }
       : {
           company_name: '',
+          hr_manager_name: '',
+          hr_manager_phone: '',
+          company_address: '',
           isEdit,
         },
   })
@@ -62,14 +68,22 @@ export function CompaniesActionDialog({
   const { mutate: updateCompany } = useUpdateCompanyMutation()
 
   const onSubmit = async (value: CompanyForm) => {
-    if(isEdit) {
+    if (isEdit) {
       await updateCompany({
-        company_id: currentRow?.company_id,
+        company_id: currentRow.company_id,
         company_name: value.company_name,
+        hr_manager_name: value.hr_manager_name,
+        hr_manager_phone: value.hr_manager_phone,
+        company_address: value.company_address,
       })
       onOpenChange(false)
-    }else{
-      await insertCompany({ newCompany: { company_name: value.company_name } })
+    } else {
+      await insertCompany({
+        company_name: value.company_name,
+        hr_manager_name: value.hr_manager_name,
+        hr_manager_phone: value.hr_manager_phone,
+        company_address: value.company_address,
+      });
       form.reset()
     }
     // onOpenChange(false)
@@ -85,7 +99,9 @@ export function CompaniesActionDialog({
     >
       <DialogContent className='sm:max-w-lg'>
         <DialogHeader className='text-left'>
-          <DialogTitle>{isEdit ? 'Edit Company' : 'Add New Company'}</DialogTitle>
+          <DialogTitle>
+            {isEdit ? 'Edit Company' : 'Add New Company'}
+          </DialogTitle>
           <DialogDescription>
             {isEdit ? 'Update the user here. ' : 'Create new user here. '}
             Click save when you&apos;re done.
@@ -102,13 +118,70 @@ export function CompaniesActionDialog({
                 control={form.control}
                 name='company_name'
                 render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0'>
+                  <FormItem className='grid items-center grid-cols-6 space-y-0 gap-x-4 gap-y-1'>
                     <FormLabel className='col-span-2 text-right'>
                       회사이름
                     </FormLabel>
                     <FormControl>
                       <Input
                         placeholder='회사 이름 입력'
+                        className='col-span-4'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className='col-span-4 col-start-3' />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='hr_manager_name'
+                render={({ field }) => (
+                  <FormItem className='grid items-center grid-cols-6 space-y-0 gap-x-4 gap-y-1'>
+                    <FormLabel className='col-span-2 text-right'>
+                      인사 담당자 이름
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='인사 담당자 이름 입력'
+                        className='col-span-4'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className='col-span-4 col-start-3' />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='hr_manager_phone'
+                render={({ field }) => (
+                  <FormItem className='grid items-center grid-cols-6 space-y-0 gap-x-4 gap-y-1'>
+                    <FormLabel className='col-span-2 text-right'>
+                      인사 담당자 연락처
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='인사 담당자 연락처 입력'
+                        className='col-span-4'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className='col-span-4 col-start-3' />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='company_address'
+                render={({ field }) => (
+                  <FormItem className='grid items-center grid-cols-6 space-y-0 gap-x-4 gap-y-1'>
+                    <FormLabel className='col-span-2 text-right'>
+                      회사 주소
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='회사 주소 입력'
                         className='col-span-4'
                         {...field}
                       />

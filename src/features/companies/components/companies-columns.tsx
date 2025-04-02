@@ -56,25 +56,43 @@ export const columns: ColumnDef<Company>[] = [
     },
     enableHiding: false,
   },
-  // {
-  //   id: 'fullName',
+  {
+    accessorKey: 'hr_manager_name',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='인사담당자' />
+    ),
+    cell: ({ row }) => {
+      return <LongText>{row.getValue('hr_manager_name')}</LongText>
+    },
+    // id: '인사담당자',
+    },
+    {
+    accessorKey: 'hr_manager_phone',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='연락처' />
+    ),
+    cell: ({ row }) => (
+      <div className='w-fit text-nowrap'>{row.getValue('hr_manager_phone')}</div>
+    ),
+    // id: '연락처'
+  },
+  {
+    accessorKey: 'company_address',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='주소' />
+    ),
+    cell: ({ row }) => {
+      return <LongText>{row.getValue('company_address')}</LongText>
+    },
+    // id: '주소',
+    },
+  //   {
+  //   accessorKey: 'hr_manager_phone',
   //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title='Name' />
-  //   ),
-  //   cell: ({ row }) => {
-  //     const { firstName, lastName } = row.original
-  //     const fullName = `${firstName} ${lastName}`
-  //     return <LongText className='max-w-36'>{fullName}</LongText>
-  //   },
-  //   meta: { className: 'w-36' },
-  // },
-  // {
-  //   accessorKey: 'email',
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title='Email' />
+  //     <DataTableColumnHeader column={column} title='연락처' />
   //   ),
   //   cell: ({ row }) => (
-  //     <div className='w-fit text-nowrap'>{row.getValue('email')}</div>
+  //     <div className='w-fit text-nowrap'>{row.getValue('hr_manager_phone')}</div>
   //   ),
   // },
   // {

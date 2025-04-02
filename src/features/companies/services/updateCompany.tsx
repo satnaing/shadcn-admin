@@ -9,7 +9,7 @@ export const updateCompany = async (
   const { data, error } = await supabase
     .schema('enum')
     .from('companies')
-    .update({ company_name: company.company_name })
+    .update(company)
     .eq('company_id', company.company_id)
     .select('*')
     .single()

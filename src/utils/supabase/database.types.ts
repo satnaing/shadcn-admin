@@ -353,16 +353,25 @@ export type Database = {
       }
       companies: {
         Row: {
+          company_address: string | null
           company_id: number
           company_name: string
+          hr_manager_name: string | null
+          hr_manager_phone: string | null
         }
         Insert: {
+          company_address?: string | null
           company_id?: number
           company_name: string
+          hr_manager_name?: string | null
+          hr_manager_phone?: string | null
         }
         Update: {
+          company_address?: string | null
           company_id?: number
           company_name?: string
+          hr_manager_name?: string | null
+          hr_manager_phone?: string | null
         }
         Relationships: []
       }
@@ -1376,6 +1385,7 @@ export type Database = {
           benefit: string
           company_id: number
           company_number: number
+          created_at: string | null
           end_date: string | null
           job_id: number
           military_service_status_id: number
@@ -1388,6 +1398,7 @@ export type Database = {
           benefit: string
           company_id: number
           company_number: number
+          created_at?: string | null
           end_date?: string | null
           job_id: number
           military_service_status_id: number
@@ -1400,6 +1411,7 @@ export type Database = {
           benefit?: string
           company_id?: number
           company_number?: number
+          created_at?: string | null
           end_date?: string | null
           job_id?: number
           military_service_status_id?: number
@@ -1529,6 +1541,7 @@ export type Database = {
           birthday: string
           department_id: number
           email: string | null
+          gender: boolean
           graduate_at: string | null
           join_at: string
           name: string
@@ -1540,6 +1553,7 @@ export type Database = {
           birthday: string
           department_id: number
           email?: string | null
+          gender?: boolean
           graduate_at?: string | null
           join_at: string
           name?: string
@@ -1551,6 +1565,7 @@ export type Database = {
           birthday?: string
           department_id?: number
           email?: string | null
+          gender?: boolean
           graduate_at?: string | null
           join_at?: string
           name?: string
