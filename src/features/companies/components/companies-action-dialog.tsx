@@ -41,10 +41,7 @@ export function CompaniesActionDialog({
       isEdit
         ? { ...currentRow, isEdit }
         : {
-            company_name: '',
-            hr_manager_name: '',
-            hr_manager_phone: '',
-            company_address: '',
+          ...Object.fromEntries(Object.keys(companyFieldMetadata).map(key => [key, ''])),
             isEdit,
           },
     [currentRow, isEdit]
