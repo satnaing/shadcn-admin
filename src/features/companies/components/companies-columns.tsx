@@ -5,8 +5,20 @@ import { Checkbox } from '@/components/ui/checkbox'
 import LongText from '@/components/long-text'
 // import { callTypes, userTypes } from '../data/data'
 import { Company } from '../data/schema'
+import { companyFieldMetadata } from '../data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
+
+const COMPANY_REPRESENTATIVE_FIELD_ATTRIBUTE = {
+  meta: {
+    className: cn(
+      'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
+      'bg-background transition-, duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
+      'sticky left-6 md:table-cell'
+    ),
+  },
+  enableHiding: false,
+}
 
 export const columns: ColumnDef<Company>[] = [
   {
@@ -39,122 +51,23 @@ export const columns: ColumnDef<Company>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  {
-    accessorKey: 'company_name',
+  ...Object.entries(companyFieldMetadata).map(([name, metadata]) => ({
+    accessorKey: name,
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='company_name' />
-    ),
-    cell: ({ row }) => (
-      <LongText className='max-w-36'>{row.getValue('company_name')}</LongText>
-    ),
-    meta: {
-      className: cn(
-        'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
-        'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-        'sticky left-6 md:table-cell'
-      ),
-    },
-    enableHiding: false,
-  },
-  {
-    accessorKey: 'hr_manager_name',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='인사담당자' />
+      <DataTableColumnHeader
+        column={column}
+        title={metadata.label}
+      />
     ),
     cell: ({ row }) => {
-      return <LongText>{row.getValue('hr_manager_name')}</LongText>
+      const value = row.getValue(name);
+      return <LongText className='max-w-36'>{value}</LongText>;
     },
-    // id: '인사담당자',
-  },
-  {
-    accessorKey: 'hr_manager_phone',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='연락처' />
-    ),
-    cell: ({ row }) => (
-      <div className='w-fit text-nowrap'>
-        {row.getValue('hr_manager_phone')}
-      </div>
-    ),
-    // id: '연락처'
-  },
-  {
-    accessorKey: 'company_address',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='주소' />
-    ),
-    cell: ({ row }) => {
-      return <LongText>{row.getValue('company_address')}</LongText>
-    },
-    // id: '주소',
-  },
-  //   {
-  //   accessorKey: 'hr_manager_phone',
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title='연락처' />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <div className='w-fit text-nowrap'>{row.getValue('hr_manager_phone')}</div>
-  //   ),
-  // },
-  // {
-  //   accessorKey: 'phoneNumber',
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title='Phone Number' />
-  //   ),
-  //   cell: ({ row }) => <div>{row.getValue('phoneNumber')}</div>,
-  //   enableSorting: false,
-  // },
-  // {
-  //   accessorKey: 'status',
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title='Status' />
-  //   ),
-  //   cell: ({ row }) => {
-  //     const { status } = row.original
-  //     const badgeColor = callTypes.get(status)
-  //     return (
-  //       <div className='flex space-x-2'>
-  //         <Badge variant='outline' className={cn('capitalize', badgeColor)}>
-  //           {row.getValue('status')}
-  //         </Badge>
-  //       </div>
-  //     )
-  //   },
-  //   filterFn: (row, id, value) => {
-  //     return value.includes(row.getValue(id))
-  //   },
-  //   enableHiding: false,
-  //   enableSorting: false,
-  // },
-  // {
-  //   accessorKey: 'role',
-  //   header: ({ column }) => (
-  //     <DataTableColumnHeader column={column} title='Role' />
-  //   ),
-  //   cell: ({ row }) => {
-  //     const { role } = row.original
-  //     const userType = userTypes.find(({ value }) => value === role)
+    ...(metadata.isRepresentative && {
+      ...COMPANY_REPRESENTATIVE_FIELD_ATTRIBUTE,
+    }),
+  })),
 
-  //     if (!userType) {
-  //       return null
-  //     }
-
-  //     return (
-  //       <div className='flex items-center gap-x-2'>
-  //         {userType.icon && (
-  //           <userType.icon size={16} className='text-muted-foreground' />
-  //         )}
-  //         <span className='text-sm capitalize'>{row.getValue('role')}</span>
-  //       </div>
-  //     )
-  //   },
-  //   filterFn: (row, id, value) => {
-  //     return value.includes(row.getValue(id))
-  //   },
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
   {
     id: 'actions',
     cell: DataTableRowActions,

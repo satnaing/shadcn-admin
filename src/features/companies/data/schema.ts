@@ -10,7 +10,6 @@ export const companySchema = z.object({
   isEdit: z.boolean(),
 })
 
-export const COMPANY_REPRESENTATIVE_FIELD = 'company_name' as const;
 
 export const companyFormSchema = companySchema.omit({ company_id: true })
 export const companyWithoutEdit = companySchema.omit({ isEdit: true })
@@ -22,12 +21,15 @@ export type CompanyFormFieldType = keyof Omit<Company, 'company_id' | 'isEdit'>
 
 export const companyFieldMetadata: Record<
 CompanyFormFieldType, 
-  { label: string; placeholder: string;}
+{ label: string; placeholder: string; isRepresentative?: boolean }
 > = {
-  company_name: { label: '회사 이름', placeholder: '예: ABC 주식회사' },
+  company_name: { label: '회사 이름', placeholder: '예: ABC 주식회사', isRepresentative: true },
   hr_manager_name: { label: '인사 담당자 이름', placeholder: '예: 홍길동' },
   hr_manager_phone: { label: '인사 담당자 연락처', placeholder: '예: 010-1234-5678' },
   company_address: { label: '회사 주소', placeholder: '예: 서울특별시 강남구' },
 }
+
+export const COMPANY_REPRESENTATIVE_FIELD = Object.entries(companyFieldMetadata)
+  .find(([_, metadata]) => metadata.isRepresentative === true)?.[0];
 
 export type CompanySupabase = Database['enum']['Tables']['companies']['Row']
