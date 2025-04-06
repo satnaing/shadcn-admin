@@ -10,6 +10,8 @@ export const companySchema = z.object({
   isEdit: z.boolean(),
 })
 
+export const COMPANY_REPRESENTATIVE_FIELD = 'company_name' as const;
+
 export const companyFormSchema = companySchema.omit({ company_id: true })
 export const companyWithoutEdit = companySchema.omit({ isEdit: true })
 
