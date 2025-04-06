@@ -36,7 +36,17 @@ export default function Companies() {
           <CompaniesPrimaryButtons />
         </div>
         <div className='flex-1 px-4 py-1 -mx-4 overflow-auto lg:flex-row lg:space-x-12 lg:space-y-0'>
-          <CompaniesTable data={data ?? []} columns={columns} />
+          <CompaniesTable
+            data={
+              (data ?? []).map((item) => ({
+                ...item,
+                hr_manager_name: item.hr_manager_name || '',
+                hr_manager_phone: item.hr_manager_phone || '',
+                company_address: item.company_address || '',
+              }))
+            }
+            columns={columns}
+          />
         </div>
       </Main>
 
