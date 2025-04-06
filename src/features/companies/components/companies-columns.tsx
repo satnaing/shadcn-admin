@@ -1,4 +1,4 @@
-import { ColumnDef } from '@tanstack/react-table'
+import { ColumnDef, Column, Row } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
 // import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -53,15 +53,15 @@ export const columns: ColumnDef<Company>[] = [
   },
   ...Object.entries(companyFieldMetadata).map(([name, metadata]) => ({
     accessorKey: name,
-    header: ({ column }) => (
+    header: ({ column }: { column: Column<Company> }) => (
       <DataTableColumnHeader
         column={column}
         title={metadata.label}
       />
     ),
-    cell: ({ row }) => {
+    cell: ({ row }: { row: Row<Company> }) => {
       const value = row.getValue(name);
-      return <LongText className='max-w-36'>{value}</LongText>;
+      return <LongText className='max-w-36'>{String(value)}</LongText>;
     },
     ...(metadata.isRepresentative && {
       ...COMPANY_REPRESENTATIVE_FIELD_ATTRIBUTE,
