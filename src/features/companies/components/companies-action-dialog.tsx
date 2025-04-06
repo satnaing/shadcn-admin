@@ -62,25 +62,18 @@ export function CompaniesActionDialog({
 
   const { mutate: insertCompany, isLoading } = useInsertCompanyMutation()
   const { mutate: updateCompany } = useUpdateCompanyMutation()
-
   const onSubmit = async (value: CompanyForm) => {
-    if (isEdit) {
-      await updateCompany({
-        company_id: currentRow.company_id,
-        company_name: value.company_name,
-        hr_manager_name: value.hr_manager_name,
-        hr_manager_phone: value.hr_manager_phone,
-        company_address: value.company_address,
-      })
+    const { isEdit: _, ...payload } = value
+    try {
+      if (isEdit && currentRow) {
+        await updateCompany({ ...payload, company_id: currentRow.company_id })
+      } else {
+        await insertCompany(payload)
+        form.reset(defaultValues)
+      }
       onOpenChange(false)
-    } else {
-      await insertCompany({
-        company_name: value.company_name,
-        hr_manager_name: value.hr_manager_name,
-        hr_manager_phone: value.hr_manager_phone,
-        company_address: value.company_address,
-      })
-      form.reset(defaultValues)
+    } catch (error) {
+      console.error('Error submitting form:', error)
     }
   }
 
