@@ -71,10 +71,10 @@ export function CompaniesActionDialog({
         await insertCompany(payload)
         form.reset(defaultValues)
       }
-      onOpenChange(false)
     } catch (error) {
       console.error('Error submitting form:', error)
     }
+    onOpenChange(false)
   }
 
   return (
