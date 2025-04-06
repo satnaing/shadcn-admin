@@ -11,15 +11,13 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Form } from '@/components/ui/form';
-import { companyFormSchema, CompanyForm as CompanyForm1, companyFieldMetadata, CompanyFormFieldType } from '../data/newSchema';
+import { companyFormSchema, CompanyForm, companyFieldMetadata, CompanyFormFieldType } from '../data/newSchema';
 import { Company } from '../data/schema';
 import { useInsertCompanyMutation } from '../services/insertCompany';
 import { useUpdateCompanyMutation } from '../services/updateCompany';
 import React from 'react';
 import { CompanyFormField } from './companiesActionField';
 
-const formSchema = companyFormSchema;
-type CompanyForm = CompanyForm1;
 
 interface Props {
   currentRow?: Company;
@@ -44,7 +42,7 @@ export function CompaniesActionDialog({ currentRow, open, onOpenChange }: Props)
   );
 
   const form = useForm<CompanyForm>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(companyFormSchema),
     defaultValues,
   });
 

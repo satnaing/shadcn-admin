@@ -1,14 +1,14 @@
 import React from 'react';
-import { Controller } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 import { FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { CompanyFormField as CompanyFormFieldType } from '../data/newSchema';
+import { CompanyForm, CompanyFormFieldType } from '../data/newSchema';
 
 export interface CompanyFormFieldProps {
   name: CompanyFormFieldType;
   label: string;
   placeholder: string;
-  control: any;
+  control: Control<CompanyForm>;
 }
 
 export const CompanyFormField: React.FC<CompanyFormFieldProps> = React.memo(
