@@ -23,11 +23,12 @@ export function CompaniesDeleteDialog({
 }: Props) {
   const [value, setValue] = useState('')
 
-  const { mutate: deleteCompanyMutation, isLoading } = useDeleteCompanyMutation()
-  
+  const { mutate: deleteCompanyMutation, isLoading } =
+    useDeleteCompanyMutation()
+
   const handleDelete = async () => {
     if (value.trim() !== currentRow.company_name) return
-    await deleteCompanyMutation({company_id: currentRow.company_id})
+    await deleteCompanyMutation({ company_id: currentRow.company_id })
     onOpenChange(false)
 
     // toast({
