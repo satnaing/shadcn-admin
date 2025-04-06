@@ -30,6 +30,6 @@ CompanyFormFieldType,
 }
 
 export const COMPANY_REPRESENTATIVE_FIELD = Object.entries(companyFieldMetadata)
-  .find(([_, metadata]) => metadata.isRepresentative === true)?.[0];
+  .find(([_, metadata]) => metadata.isRepresentative === true)?.[0] ?? Object.keys(companyFieldMetadata)[0];
 
 export type CompanySupabase = Database['enum']['Tables']['companies']['Row']
