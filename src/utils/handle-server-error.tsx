@@ -2,6 +2,7 @@ import { AxiosError } from 'axios'
 import { PostgrestError } from '@supabase/supabase-js'
 import postgrestErrorCodes from '@/utils/postgrestErrorCodes.json'
 import { toast } from '@/hooks/use-toast'
+import CodeBlock from '@/components/code-block'
 
 export function handleServerError(error: unknown) {
   // eslint-disable-next-line no-console
@@ -38,10 +39,6 @@ export function handleServerError(error: unknown) {
   toast({
     variant: 'destructive',
     title: errTitle,
-    description: (
-      <pre className='mt-2 w-[340px] max-w-full overflow-x-auto rounded-md bg-slate-950 p-4'>
-        <code className='whitespace-pre-wrap text-white'>{errDescription}</code>
-      </pre>
-    ),
+    description: <CodeBlock>{errDescription}</CodeBlock>,
   })
 }
