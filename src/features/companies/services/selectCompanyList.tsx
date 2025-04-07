@@ -12,9 +12,10 @@ export const selectCompanyList = async (): Promise<CompanySupabase[]> => {
     console.error("Error fetching companies:", error);
     throw new Error(error.message);
   }
-
-  return data || [];
+  
+  return data;
 };
+
 
 // ✅ TanStack Query를 활용한 커스텀 훅
 export const useCompanyListQuery = () => {
