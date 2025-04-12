@@ -26,7 +26,7 @@ function RouteComponent() {
             'transition-[width] duration-200 ease-linear',
             'flex h-svh flex-col',
             'group-data-[scroll-locked=1]/body:h-full',
-            'group-data-[scroll-locked=1]/body:has-[main.fixed-main]:h-svh'
+            'has-[main.fixed-main]:group-data-[scroll-locked=1]/body:h-svh'
           )}
         >
           <Outlet />

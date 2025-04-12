@@ -137,7 +137,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
                       defaultValue={field.value}
                       className='flex flex-col space-y-1'
                     >
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='documentation' />
                         </FormControl>
@@ -145,13 +145,13 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
                           Documentation
                         </FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='feature' />
                         </FormControl>
                         <FormLabel className='font-normal'>Feature</FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='bug' />
                         </FormControl>
@@ -175,19 +175,19 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
                       defaultValue={field.value}
                       className='flex flex-col space-y-1'
                     >
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='high' />
                         </FormControl>
                         <FormLabel className='font-normal'>High</FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='medium' />
                         </FormControl>
                         <FormLabel className='font-normal'>Medium</FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='low' />
                         </FormControl>
