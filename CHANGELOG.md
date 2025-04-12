@@ -1,3 +1,16 @@
+## v1.2.0 (2025-04-12)
+
+### Feat
+
+- add loading indicator during page transitions (#119)
+- add light favicons and theme-based switching (#112)
+- add new chat dialog in chats page (#90)
+
+### Fix
+
+- add fallback font for fontFamily (#110)
+- broken focus behavior in add user dialog (#113)
+
 ## v1.1.0 (2025-01-30)
 
 ### Feat
