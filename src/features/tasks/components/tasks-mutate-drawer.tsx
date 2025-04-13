@@ -81,7 +81,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
           <form
             id='tasks-form'
             onSubmit={form.handleSubmit(onSubmit)}
-            className='flex-1 space-y-5'
+            className='flex-1 space-y-5 px-4'
           >
             <FormField
               control={form.control}
