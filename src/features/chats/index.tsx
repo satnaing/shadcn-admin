@@ -316,12 +316,12 @@ export default function Chats() {
               )}
             >
               <div className='flex flex-col items-center space-y-6'>
-                <div className='flex h-16 w-16 items-center justify-center rounded-full border-2 border-white'>
-                  <IconMessages className='h-8 w-8' />
+                <div className='border-border flex size-16 items-center justify-center rounded-full border-2'>
+                  <IconMessages className='size-8' />
                 </div>
                 <div className='space-y-2 text-center'>
                   <h1 className='text-xl font-semibold'>Your messages</h1>
-                  <p className='text-sm text-gray-400'>
+                  <p className='text-muted-foreground text-sm'>
                     Send a message to start a chat.
                   </p>
                 </div>
