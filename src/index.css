@@ -107,14 +107,6 @@
 }
 
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-
   * {
     @apply border-border outline-ring/50;
     scrollbar-width: thin;
@@ -125,6 +117,11 @@
   }
   body {
     @apply bg-background text-foreground min-h-svh w-full;
+  }
+
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
   }
 
   /* Prevent focus zoom on mobile devices */
