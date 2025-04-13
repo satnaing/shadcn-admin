@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 
 interface ScrollAreaProps
   extends React.ComponentProps<typeof ScrollAreaPrimitive.Root> {
-  orientation: 'vertical' | 'horizontal'
+  orientation?: 'vertical' | 'horizontal'
 }
 
 function ScrollArea({

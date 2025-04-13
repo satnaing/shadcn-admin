@@ -11,7 +11,7 @@ export const Route = createFileRoute('/_authenticated')({
 })
 
 function RouteComponent() {
-  const defaultOpen = Cookies.get('sidebar:state') !== 'false'
+  const defaultOpen = Cookies.get('sidebar_state') !== 'false'
   return (
     <SearchProvider>
       <SidebarProvider defaultOpen={defaultOpen}>
