@@ -13,7 +13,7 @@
     "knip": "knip"
   },
   "dependencies": {
-    "@hookform/resolvers": "^3.9.1",
+    "@hookform/resolvers": "^5.0.1",
     "@radix-ui/react-alert-dialog": "^1.1.7",
     "@radix-ui/react-avatar": "^1.1.4",
     "@radix-ui/react-checkbox": "^1.1.5",
@@ -63,7 +63,7 @@
     "@tanstack/react-query-devtools": "^5.74.0",
     "@tanstack/router-devtools": "^1.116.0",
     "@tanstack/router-plugin": "^1.116.1",
-    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.1",
