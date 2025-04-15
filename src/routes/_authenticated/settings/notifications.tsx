@@ -1,7 +1,7 @@
-import { createLazyFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import SettingsNotifications from '@/features/settings/notifications'
 
-export const Route = createLazyFileRoute(
+export const Route = createFileRoute(
   '/_authenticated/settings/notifications'
 )({
   component: SettingsNotifications,
