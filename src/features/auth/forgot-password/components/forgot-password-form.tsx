@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-type ForgotFormProps = HTMLAttributes<HTMLDivElement>
+type ForgotFormProps = HTMLAttributes<HTMLFormElement>
 
 const formSchema = z.object({
   email: z
@@ -23,7 +23,7 @@ const formSchema = z.object({
     .email({ message: 'Invalid email address' }),
 })
 
-export function ForgotForm({ className, ...props }: ForgotFormProps) {
+export function ForgotPasswordForm({ className, ...props }: ForgotFormProps) {
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -42,29 +42,29 @@ export function ForgotForm({ className, ...props }: ForgotFormProps) {
   }
 
   return (
-    <div className={cn('grid gap-6', className)} {...props}>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className='grid gap-2'>
-            <FormField
-              control={form.control}
-              name='email'
-              render={({ field }) => (
-                <FormItem className='space-y-1'>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder='name@example.com' {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button className='mt-2' disabled={isLoading}>
-              Continue
-            </Button>
-          </div>
-        </form>
-      </Form>
-    </div>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={cn('grid gap-2', className)}
+        {...props}
+      >
+        <FormField
+          control={form.control}
+          name='email'
+          render={({ field }) => (
+            <FormItem className='space-y-1'>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder='name@example.com' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button className='mt-2' disabled={isLoading}>
+          Continue
+        </Button>
+      </form>
+    </Form>
   )
 }

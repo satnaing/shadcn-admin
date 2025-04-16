@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from '@/hooks/use-toast'
+import { showSubmittedData } from '@/utils/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -56,16 +56,7 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
         size: file[0].size,
         type: file[0].type,
       }
-      toast({
-        title: 'You have imported the following file:',
-        description: (
-          <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-            <code className='text-white'>
-              {JSON.stringify(fileDetails, null, 2)}
-            </code>
-          </pre>
-        ),
-      })
+      showSubmittedData(fileDetails, 'You have imported the following file:')
     }
     onOpenChange(false)
   }
@@ -102,7 +93,7 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
             />
           </form>
         </Form>
-        <DialogFooter className='gap-2 sm:gap-0'>
+        <DialogFooter className='gap-2'>
           <DialogClose asChild>
             <Button variant='outline'>Close</Button>
           </DialogClose>

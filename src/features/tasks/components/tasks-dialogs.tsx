@@ -1,4 +1,4 @@
-import { toast } from '@/hooks/use-toast'
+import { showSubmittedData } from '@/utils/show-submitted-data'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { useTasks } from '../context/tasks-context'
 import { TasksImportDialog } from './tasks-import-dialog'
@@ -49,16 +49,10 @@ export function TasksDialogs() {
               setTimeout(() => {
                 setCurrentRow(null)
               }, 500)
-              toast({
-                title: 'The following task has been deleted:',
-                description: (
-                  <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-                    <code className='text-white'>
-                      {JSON.stringify(currentRow, null, 2)}
-                    </code>
-                  </pre>
-                ),
-              })
+              showSubmittedData(
+                currentRow,
+                'The following task has been deleted:'
+              )
             }}
             className='max-w-md'
             title={`Delete this task: ${currentRow.id} ?`}

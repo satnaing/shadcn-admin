@@ -110,8 +110,8 @@ export default function Apps() {
             </SelectContent>
           </Select>
         </div>
-        <Separator className='shadow' />
-        <ul className='faded-bottom no-scrollbar grid gap-4 overflow-auto pb-16 pt-4 md:grid-cols-2 lg:grid-cols-3'>
+        <Separator className='shadow-sm' />
+        <ul className='faded-bottom no-scrollbar grid gap-4 overflow-auto pt-4 pb-16 md:grid-cols-2 lg:grid-cols-3'>
           {filteredApps.map((app) => (
             <li
               key={app.name}
@@ -119,7 +119,7 @@ export default function Apps() {
             >
               <div className='mb-8 flex items-center justify-between'>
                 <div
-                  className={`flex size-10 items-center justify-center rounded-lg bg-muted p-2`}
+                  className={`bg-muted flex size-10 items-center justify-center rounded-lg p-2`}
                 >
                   {app.logo}
                 </div>

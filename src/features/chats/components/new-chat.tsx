@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { IconCheck, IconX } from '@tabler/icons-react'
-import { toast } from '@/hooks/use-toast'
+import { showSubmittedData } from '@/utils/show-submitted-data'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -47,19 +47,6 @@ export function NewChat({ users, onOpenChange, open }: Props) {
     }
   }, [open])
 
-  const onSubmit = () => {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>
-            {JSON.stringify(selectedUsers, null, 2)}
-          </code>
-        </pre>
-      ),
-    })
-  }
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className='sm:max-w-[600px]'>
@@ -68,12 +55,12 @@ export function NewChat({ users, onOpenChange, open }: Props) {
         </DialogHeader>
         <div className='flex flex-col gap-4'>
           <div className='flex flex-wrap items-center gap-2'>
-            <span className='text-sm text-zinc-400'>To:</span>
+            <span className='text-muted-foreground text-sm'>To:</span>
             {selectedUsers.map((user) => (
               <Badge key={user.id} variant='default'>
                 {user.fullName}
                 <button
-                  className='ml-1 rounded-full outline-none ring-offset-background focus:ring-2 focus:ring-ring focus:ring-offset-2'
+                  className='ring-offset-background focus:ring-ring ml-1 rounded-full outline-hidden focus:ring-2 focus:ring-offset-2'
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       handleRemoveUser(user.id)
@@ -81,7 +68,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
                   }}
                   onClick={() => handleRemoveUser(user.id)}
                 >
-                  <IconX className='h-3 w-3 text-muted-foreground hover:text-foreground' />
+                  <IconX className='text-muted-foreground hover:text-foreground h-3 w-3' />
                 </button>
               </Badge>
             ))}
@@ -110,8 +97,8 @@ export function NewChat({ users, onOpenChange, open }: Props) {
                         <span className='text-sm font-medium'>
                           {user.fullName}
                         </span>
-                        <span className='text-xs text-zinc-400'>
-                          {user.username}
+                        <span className='text-muted-foreground text-xs'>
+                          {user.username} aa
                         </span>
                       </div>
                     </div>
@@ -126,7 +113,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
           </Command>
           <Button
             variant={'default'}
-            onClick={onSubmit}
+            onClick={() => showSubmittedData(selectedUsers)}
             disabled={selectedUsers.length === 0}
           >
             Chat
