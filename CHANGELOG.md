@@ -1,3 +1,17 @@
+## v1.3.0 (2025-04-16)
+
+### Fix
+
+- replace custom otp with input-otp component (#131)
+- disable layout animation on mobile (#130)
+- upgrade react-day-picker and update calendar component (#129)
+
+### Others
+
+- upgrade Tailwind CSS to v4 (#125)
+- upgrade dependencies (#128)
+- configure automatic code-splitting (#127)
+
 ## v1.2.0 (2025-04-12)
 
 ### Feat
