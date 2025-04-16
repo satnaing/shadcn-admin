@@ -66,16 +66,16 @@ importers:
         specifier: ^3.31.0
         version: 3.31.0(react@19.1.0)
       '@tailwindcss/vite':
-        specifier: ^4.1.3
+        specifier: ^4.1.4
         version: 4.1.4(vite@6.2.6(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(tsx@4.19.3))
       '@tanstack/react-query':
-        specifier: ^5.74.0
+        specifier: ^5.74.3
         version: 5.74.3(react@19.1.0)
       '@tanstack/react-router':
         specifier: ^1.116.0
         version: 1.116.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@tanstack/react-table':
-        specifier: ^8.21.2
+        specifier: ^8.21.3
         version: 8.21.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       axios:
         specifier: ^1.8.4
@@ -123,7 +123,7 @@ importers:
         specifier: ^3.2.0
         version: 3.2.0
       tailwindcss:
-        specifier: ^4.1.3
+        specifier: ^4.1.4
         version: 4.1.4
       tw-animate-css:
         specifier: ^1.2.5
@@ -145,7 +145,7 @@ importers:
         specifier: ^5.73.3
         version: 5.73.3(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)
       '@tanstack/react-query-devtools':
-        specifier: ^5.74.0
+        specifier: ^5.74.3
         version: 5.74.3(@tanstack/react-query@5.74.3(react@19.1.0))(react@19.1.0)
       '@tanstack/router-devtools':
         specifier: ^1.116.0
@@ -163,13 +163,13 @@ importers:
         specifier: ^22.14.1
         version: 22.14.1
       '@types/react':
-        specifier: ^19.1.1
+        specifier: ^19.1.2
         version: 19.1.2
       '@types/react-dom':
         specifier: ^19.1.2
         version: 19.1.2(@types/react@19.1.2)
       '@vitejs/plugin-react-swc':
-        specifier: ^3.8.1
+        specifier: ^3.9.0
         version: 3.9.0(vite@6.2.6(@types/node@22.14.1)(jiti@2.4.2)(lightningcss@1.29.2)(tsx@4.19.3))
       eslint:
         specifier: ^9.24.0
@@ -184,7 +184,7 @@ importers:
         specifier: ^16.0.0
         version: 16.0.0
       knip:
-        specifier: ^5.50.3
+        specifier: ^5.50.4
         version: 5.50.4(@types/node@22.14.1)(typescript@5.8.3)
       prettier:
         specifier: ^3.5.3
@@ -196,7 +196,7 @@ importers:
         specifier: ~5.8.3
         version: 5.8.3
       typescript-eslint:
-        specifier: ^8.29.1
+        specifier: ^8.30.1
         version: 8.30.1(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.3)
       vite:
         specifier: ^6.2.6
