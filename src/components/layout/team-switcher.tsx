@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ChevronsUpDown, Plus } from 'lucide-react'
+import { ChevronsUpDown, Command, Plus } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -82,5 +82,29 @@ export function TeamSwitcher({
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
+  )
+}
+
+export function DefaultTeam() {
+  return (
+    <SidebarMenu>
+    <SidebarMenuItem>
+    <SidebarMenuButton
+        size='lg'
+        className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
+      >
+        <div className='bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg'>
+          <Command className='size-4' />
+        </div>
+        <div className='grid flex-1 text-left text-sm leading-tight'>
+          <span className='truncate font-semibold'>
+            Aweme Admin
+          </span>
+          <span className='truncate text-xs'>V1.0.0</span>
+        </div>
+        {/* <ChevronsUpDown className='ml-auto' /> */}
+      </SidebarMenuButton>
+    </SidebarMenuItem>
+  </SidebarMenu>
   )
 }
