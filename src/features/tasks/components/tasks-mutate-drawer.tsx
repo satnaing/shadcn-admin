@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { toast } from '@/hooks/use-toast'
+import { showSubmittedData } from '@/utils/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -56,14 +56,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
     // do something with the form data
     onOpenChange(false)
     form.reset()
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    })
+    showSubmittedData(data)
   }
 
   return (
@@ -88,7 +81,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
           <form
             id='tasks-form'
             onSubmit={form.handleSubmit(onSubmit)}
-            className='flex-1 space-y-5'
+            className='flex-1 space-y-5 px-4'
           >
             <FormField
               control={form.control}
@@ -137,7 +130,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
                       defaultValue={field.value}
                       className='flex flex-col space-y-1'
                     >
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='documentation' />
                         </FormControl>
@@ -145,13 +138,13 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
                           Documentation
                         </FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='feature' />
                         </FormControl>
                         <FormLabel className='font-normal'>Feature</FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='bug' />
                         </FormControl>
@@ -175,19 +168,19 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
                       defaultValue={field.value}
                       className='flex flex-col space-y-1'
                     >
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='high' />
                         </FormControl>
                         <FormLabel className='font-normal'>High</FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='medium' />
                         </FormControl>
                         <FormLabel className='font-normal'>Medium</FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-x-3 space-y-0'>
+                      <FormItem className='flex items-center space-y-0 space-x-3'>
                         <FormControl>
                           <RadioGroupItem value='low' />
                         </FormControl>
