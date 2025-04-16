@@ -14,10 +14,9 @@ export default function SignIn() {
     <AuthLayout>
       <Card className='gap-4'>
         <CardHeader>
-          <CardTitle className='text-lg tracking-tight'>Login</CardTitle>
+          <CardTitle className='text-lg tracking-tight'>登录</CardTitle>
           <CardDescription>
-            Enter your email and password below to <br />
-            log into your account
+            请输入您的用户名和密码以进行登录 <br />
           </CardDescription>
         </CardHeader>
         <CardContent>

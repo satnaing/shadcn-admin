@@ -1,8 +1,8 @@
-import { HTMLAttributes, useState } from 'react'
+import { HTMLAttributes, useEffect, useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -16,26 +16,30 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
+import { authService } from '@/services/auth.service'
+import { useAuthStore } from '@/stores/authStore'
+import { toast } from 'sonner'
 
 type UserAuthFormProps = HTMLAttributes<HTMLFormElement>
 
 const formSchema = z.object({
   email: z
     .string()
-    .min(1, { message: 'Please enter your email' })
-    .email({ message: 'Invalid email address' }),
+    .min(1, { message: '请输入您的用户名' }),
   password: z
     .string()
     .min(1, {
-      message: 'Please enter your password',
+      message: '请输入您的密码',
     })
-    .min(7, {
-      message: 'Password must be at least 7 characters long',
+    .min(5, {
+      message: '密码长度至少为5个字符',
     }),
 })
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+  const { setUser } = useAuthStore((state) => state.auth)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,14 +49,55 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
+  useEffect(() => {
+    // 如果用户已登录，则重定向到首页
+    if (useAuthStore.getState().auth.user) {
+      toast.success('您已登录, 正在重定向到首页...')
+      const searchParams = new URLSearchParams(window.location.search)
+        const redirectUrl = searchParams.get('redirect') || '/'
+        navigate({ to: redirectUrl })
+    }
+  }, [useAuthStore.getState().auth.user])
 
-    setTimeout(() => {
+  /**
+   * 处理表单提交
+   * @param data 表单数据
+   */
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    try {
+      setIsLoading(true)
+      
+      // 调用登录API
+      const response = await authService.login({
+        username: data.email,
+        password: data.password,
+      })
+
+      if (response.success) {
+        // 登录成功处理
+        toast.success('登录成功')
+        
+        // 获取用户信息
+        const userInfo = await authService.getUserInfo()
+        if (userInfo) {
+          setUser(userInfo)
+        }
+        
+        // 导航到首页或重定向的URL
+        const searchParams = new URLSearchParams(window.location.search)
+        const redirectUrl = searchParams.get('redirect') || '/'
+        navigate({ to: redirectUrl })
+      } else {
+        // 登录失败处理
+        toast.error(response.message || '登录失败')
+      }
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('登录过程中出错:', error)
+      toast.error('登录过程中出错，请稍后再试')
+    } finally {
       setIsLoading(false)
-    }, 3000)
+    }
   }
 
   return (
@@ -67,9 +112,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>用户名</FormLabel>
               <FormControl>
-                <Input placeholder='name@example.com' {...field} />
+                <Input placeholder='请输入用户名' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -80,22 +125,22 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           name='password'
           render={({ field }) => (
             <FormItem className='relative'>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>密码</FormLabel>
               <FormControl>
-                <PasswordInput placeholder='********' {...field} />
+                <PasswordInput placeholder='请输入密码' {...field} />
               </FormControl>
               <FormMessage />
               <Link
                 to='/forgot-password'
                 className='text-muted-foreground absolute -top-0.5 right-0 text-sm font-medium hover:opacity-75'
               >
-                Forgot password?
+                忘记密码?
               </Link>
             </FormItem>
           )}
         />
         <Button className='mt-2' disabled={isLoading}>
-          Login
+          {isLoading ? '登录中...' : '登录'}
         </Button>
 
         <div className='relative my-2'>
@@ -104,7 +149,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </div>
           <div className='relative flex justify-center text-xs uppercase'>
             <span className='bg-background text-muted-foreground px-2'>
-              Or continue with
+              或继续使用
             </span>
           </div>
         </div>
