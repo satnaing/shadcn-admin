@@ -52,10 +52,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   useEffect(() => {
     // 如果用户已登录，则重定向到首页
     if (useAuthStore.getState().auth.user) {
-      toast.success('您已登录, 正在重定向到首页...')
+      toast.success('您已登录, 正在跳转...', {
+        duration: 2000,
+      })
       const searchParams = new URLSearchParams(window.location.search)
-        const redirectUrl = searchParams.get('redirect') || '/'
-        navigate({ to: redirectUrl })
+      const redirectUrl = searchParams.get('redirect') || '/'
+      navigate({ to: redirectUrl })
     }
   }, [useAuthStore.getState().auth.user])
 
@@ -66,7 +68,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
       setIsLoading(true)
-      
+
       // 调用登录API
       const response = await authService.login({
         username: data.email,
@@ -76,13 +78,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       if (response.success) {
         // 登录成功处理
         toast.success('登录成功')
-        
+
         // 获取用户信息
         const userInfo = await authService.getUserInfo()
         if (userInfo) {
           setUser(userInfo)
         }
-        
+
         // 导航到首页或重定向的URL
         const searchParams = new URLSearchParams(window.location.search)
         const redirectUrl = searchParams.get('redirect') || '/'
