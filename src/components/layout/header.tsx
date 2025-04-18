@@ -5,6 +5,7 @@ import { SidebarTrigger } from '@/components/ui/sidebar'
 
 interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   fixed?: boolean
+  hideSpacer?: boolean
   ref?: React.Ref<HTMLElement>
 }
 
@@ -12,6 +13,7 @@ export const Header = ({
   className,
   fixed,
   children,
+  hideSpacer,
   ...props
 }: HeaderProps) => {
   const [offset, setOffset] = React.useState(0)
@@ -39,7 +41,7 @@ export const Header = ({
       {...props}
     >
       <SidebarTrigger variant='outline' className='scale-125 sm:scale-100' />
-      <Separator orientation='vertical' className='h-6' />
+      {!hideSpacer && <Separator orientation='vertical' className='h-6' />}
       {children}
     </header>
   )

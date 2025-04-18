@@ -91,7 +91,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         navigate({ to: redirectUrl })
       } else {
         // 登录失败处理
-        toast.error(response.message || '登录失败')
+        toast.error(response.message || '登录失败', {
+          duration: 5000,
+        })
       }
     } catch (error) {
       // eslint-disable-next-line no-console

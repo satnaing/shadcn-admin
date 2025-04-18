@@ -18,6 +18,7 @@ import {
   IconUserCog,
   IconUserOff,
   IconUsers,
+  IconUsersGroup,
 } from '@tabler/icons-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { type SidebarData } from '../types'
@@ -46,6 +47,21 @@ export const sidebarData: SidebarData = {
     },
   ],
   navGroups: [
+    {
+      title: '账号',
+      items: [
+        // {
+        //   title: '账号列表',
+        //   url: '/account/list',
+        //   icon: IconLayoutDashboard,
+        // },
+        {
+          title: '账号分组',
+          url: '/account/groups',
+          icon: IconUsersGroup,
+        },
+      ],
+    },
     {
       title: 'General',
       items: [
