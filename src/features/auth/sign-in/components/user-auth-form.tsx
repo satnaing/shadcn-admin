@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
-import { authService } from '@/services/auth.service'
+import { authService } from '@/services/auth-service'
 import { useAuthStore } from '@/stores/authStore'
 import { toast } from 'sonner'
 

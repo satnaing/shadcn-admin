@@ -23,7 +23,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
-import { authService } from '@/services/auth.service'
+import { authService } from '@/services/auth-service'
 import { useAuthStore } from '@/stores/authStore'
 import { toast } from 'sonner'
 

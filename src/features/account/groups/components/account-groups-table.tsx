@@ -21,7 +21,7 @@ import { DataTableToolbar } from './data-table-toolbar'
 import { Spinner } from '@/components/ui/spinner'
 import { columns } from './account-groups-columns'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import { getAccountGroups, GROUP_URL } from '@/services/account-groups'
+import { getAccountGroups, GROUP_URL } from '@/services/account-group-service'
 
 export function AccountGroupsTable() {
   const [sorting, setSorting] = useState<SortingState>([

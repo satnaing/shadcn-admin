@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { useAccountGroupsContext } from '../context/account-groups-context'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { GROUP_URL, deleteAccountGroup } from '@/services/account-groups'
+import { GROUP_URL, deleteAccountGroup } from '@/services/account-group-service'
 import { toast } from 'sonner'
 
 export function AccountGroupsDeleteDialog() {

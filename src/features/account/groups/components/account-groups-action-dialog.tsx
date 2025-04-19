@@ -35,7 +35,7 @@ import {
   UpdateAccountGroupInput
 } from '../data/schema'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createAccountGroup, GROUP_URL, updateAccountGroup } from '@/services/account-groups'
+import { createAccountGroup, GROUP_URL, updateAccountGroup } from '@/services/account-group-service'
 import { toast } from 'sonner'
 
 export function AccountGroupsActionDialog() {

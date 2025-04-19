@@ -5,16 +5,6 @@ import { ColumnFiltersState, PaginationState, SortingState } from '@tanstack/rea
 
 export const GROUP_URL = `account/groups`
 
-// export type GetAccountGroupsParams = {
-//   pageNumber: number
-//   pageSize: number
-//   sort?: string
-//   keyword?: string
-//   region?: string
-
-//   direction?: string
-// }
-
 // 获取所有账号组
 export async function getAccountGroups(pageable: PaginationState, columnFilters: ColumnFiltersState, sorting: SortingState): Promise<PagedModel<AccountGroup>> {
   // 处理过滤条件
