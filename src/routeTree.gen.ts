@@ -64,6 +64,9 @@ const AuthenticatedSettingsAppearanceLazyImport = createFileRoute(
 const AuthenticatedSettingsAccountLazyImport = createFileRoute(
   '/_authenticated/settings/account',
 )()
+const AuthenticatedAccountListIndexLazyImport = createFileRoute(
+  '/_authenticated/account/list/',
+)()
 const AuthenticatedAccountGroupsIndexLazyImport = createFileRoute(
   '/_authenticated/account/groups/',
 )()
@@ -275,6 +278,17 @@ const AuthenticatedSettingsAccountLazyRoute =
     ),
   )
 
+const AuthenticatedAccountListIndexLazyRoute =
+  AuthenticatedAccountListIndexLazyImport.update({
+    id: '/account/list/',
+    path: '/account/list/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/account/list/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
 const AuthenticatedAccountGroupsIndexLazyRoute =
   AuthenticatedAccountGroupsIndexLazyImport.update({
     id: '/account/groups/',
@@ -465,6 +479,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAccountGroupsIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/account/list/': {
+      id: '/_authenticated/account/list/'
+      path: '/account/list'
+      fullPath: '/account/list'
+      preLoaderRoute: typeof AuthenticatedAccountListIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
   }
 }
 
@@ -505,6 +526,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTasksIndexLazyRoute: typeof AuthenticatedTasksIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
   AuthenticatedAccountGroupsIndexLazyRoute: typeof AuthenticatedAccountGroupsIndexLazyRoute
+  AuthenticatedAccountListIndexLazyRoute: typeof AuthenticatedAccountListIndexLazyRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -518,6 +540,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
   AuthenticatedAccountGroupsIndexLazyRoute:
     AuthenticatedAccountGroupsIndexLazyRoute,
+  AuthenticatedAccountListIndexLazyRoute:
+    AuthenticatedAccountListIndexLazyRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -548,6 +572,7 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
   '/account/groups': typeof AuthenticatedAccountGroupsIndexLazyRoute
+  '/account/list': typeof AuthenticatedAccountListIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
@@ -573,6 +598,7 @@ export interface FileRoutesByTo {
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
   '/account/groups': typeof AuthenticatedAccountGroupsIndexLazyRoute
+  '/account/list': typeof AuthenticatedAccountListIndexLazyRoute
 }
 
 export interface FileRoutesById {
@@ -602,6 +628,7 @@ export interface FileRoutesById {
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexLazyRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
   '/_authenticated/account/groups/': typeof AuthenticatedAccountGroupsIndexLazyRoute
+  '/_authenticated/account/list/': typeof AuthenticatedAccountListIndexLazyRoute
 }
 
 export interface FileRouteTypes {
@@ -631,6 +658,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/users'
     | '/account/groups'
+    | '/account/list'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/500'
@@ -655,6 +683,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/users'
     | '/account/groups'
+    | '/account/list'
   id:
     | '__root__'
     | '/_authenticated'
@@ -682,6 +711,7 @@ export interface FileRouteTypes {
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
     | '/_authenticated/account/groups/'
+    | '/_authenticated/account/list/'
   fileRoutesById: FileRoutesById
 }
 
@@ -749,7 +779,8 @@ export const routeTree = rootRoute
         "/_authenticated/help-center/",
         "/_authenticated/tasks/",
         "/_authenticated/users/",
-        "/_authenticated/account/groups/"
+        "/_authenticated/account/groups/",
+        "/_authenticated/account/list/"
       ]
     },
     "/(auth)/500": {
@@ -842,6 +873,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/account/groups/": {
       "filePath": "_authenticated/account/groups/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/account/list/": {
+      "filePath": "_authenticated/account/list/index.lazy.tsx",
       "parent": "/_authenticated"
     }
   }
