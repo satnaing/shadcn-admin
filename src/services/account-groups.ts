@@ -1,12 +1,27 @@
 import { AccountGroup, CreateAccountGroupInput, UpdateAccountGroupInput } from '@/features/account/groups/data/schema'
 import axios from '@/lib/axios'
-import { Page } from '@/types/page'
+import { Page, Pageable } from '@/types/page'
+import { ColumnFiltersState } from '@tanstack/react-table'
 
-const API_URL = `${import.meta.env.VITE_API_URL || ''}/account-groups`
+const API_URL = `${import.meta.env.VITE_API_URL || ''}/account/groups`
+
+// export type GetAccountGroupsParams = {
+//   pageNumber: number
+//   pageSize: number
+//   sort?: string
+//   keyword?: string
+//   region?: string
+
+//   direction?: string
+// }
 
 // 获取所有账号组
-export async function getAccountGroups(): Promise<Page<AccountGroup>> {
-  const response = await axios.get(API_URL)
+export async function getAccountGroups(pageable: Pageable, columnFilters: ColumnFiltersState): Promise<Page<AccountGroup>> {
+  const predicate = columnFilters.reduce((acc, filter) => {
+    return { ...acc, [filter.id]: filter.value }
+  }, {})
+  console.log("predicate", predicate);
+  const response = await axios.get(API_URL, { params: { ...pageable, ...predicate } })
   return response.data
 }
 

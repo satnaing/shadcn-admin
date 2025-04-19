@@ -10,6 +10,10 @@ const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  // 添加参数序列化配置，使数组参数不带[]后缀
+  paramsSerializer: {
+    indexes: null // 设置为null时，数组参数格式为 'id=1&id=2' 而非 'id[]=1&id[]=2'
+  }
 })
 
 /**

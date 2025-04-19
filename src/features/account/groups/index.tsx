@@ -9,9 +9,7 @@ import AccountGroupsProvider from './context/account-groups-context'
 import { useAccountGroups } from './hooks/use-account-groups'
 
 export default function AccountGroups() {
-  // 使用自定义Hook获取账号组数据
-  const { data, isLoading, ...rest } = useAccountGroups()
-  console.log(data, isLoading, rest);
+  
   return (
     <AccountGroupsProvider>
       <Header fixed hideSpacer>
@@ -31,11 +29,7 @@ export default function AccountGroups() {
           <AccountGroupsPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-          <AccountGroupsTable
-            data={data}
-            columns={columns}
-            isLoading={isLoading}
-          />
+          <AccountGroupsTable/>
         </div>
       </Main>
 

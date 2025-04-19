@@ -1,13 +1,10 @@
 import { useState } from 'react'
 import {
-  ColumnDef,
   ColumnFiltersState,
   SortingState,
   VisibilityState,
   flexRender,
   getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
@@ -22,24 +19,27 @@ import {
 import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
 import { Spinner } from '@/components/ui/spinner'
-import { AccountGroup } from '../data/schema'
-import { Page } from '@/types/page'
+import { columns } from './account-groups-columns'
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { getAccountGroups } from '@/services/account-groups'
 
-interface AccountGroupsTableProps<TData extends AccountGroup, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data?: Page<TData>
-  isLoading?: boolean
-}
-
-export function AccountGroupsTable<TData extends AccountGroup, TValue>({
-  columns,
-  data,
-  isLoading = false,
-}: AccountGroupsTableProps<TData, TValue>) {
+export function AccountGroupsTable() {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
+  const [pagination, setPagination] = useState({
+    pageIndex: 0, //initial page index
+    pageSize: 10, //default page size
+  });
+
+  const { data, isLoading, ...rest } = useQuery({
+    queryKey: ['account-groups', pagination, columnFilters],
+    queryFn: () => getAccountGroups(pagination, columnFilters),
+    placeholderData: keepPreviousData,
+  })
+
+  console.log("useQuery", isLoading, rest, data);
 
   const table = useReactTable({
     data: data?.content || [],
@@ -47,23 +47,23 @@ export function AccountGroupsTable<TData extends AccountGroup, TValue>({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
-    // getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     manualPagination: true, // 手动分页
+    manualFiltering: true, // 手动筛选，由服务端处理
+    pageCount: data?.totalPages || 0,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
       rowSelection,
-      pagination: {
-        pageIndex: data?.number || 0,
-        pageSize: data?.size || 20,
-      },
+      pagination: pagination,
     },
   })
+
+
 
   if (isLoading) {
     return (
@@ -87,9 +87,9 @@ export function AccountGroupsTable<TData extends AccountGroup, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}

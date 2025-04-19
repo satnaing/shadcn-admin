@@ -6,37 +6,6 @@ import { DataTableViewOptions } from './data-table-view-options'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { AccountGroup, AccountGroupRegions } from '../data/schema'
 
-// 状态筛选选项
-const statuses = [
-  {
-    value: 'active',
-    label: '活跃',
-  },
-  {
-    value: 'inactive',
-    label: '禁用',
-  },
-]
-
-// 权限级别筛选选项
-const permissionLevels = [
-  {
-    value: 'admin',
-    label: '管理员',
-  },
-  {
-    value: 'moderator',
-    label: '协管员',
-  },
-  {
-    value: 'user',
-    label: '普通用户',
-  },
-  {
-    value: 'guest',
-    label: '访客',
-  },
-]
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -58,22 +27,6 @@ export function DataTableToolbar<TData extends AccountGroup>({
           }
           className="h-8 w-[150px] lg:w-[250px]"
         />
-        {/* 状态筛选器 */}
-        {table.getColumn('status') && (
-          <DataTableFacetedFilter
-            column={table.getColumn('status')}
-            title="状态"
-            options={statuses}
-          />
-        )}
-        {/* 权限级别筛选器 */}
-        {table.getColumn('permissionLevel') && (
-          <DataTableFacetedFilter
-            column={table.getColumn('permissionLevel')}
-            title="权限级别"
-            options={permissionLevels}
-          />
-        )}
         {/* 地区筛选器 */}  
         {table.getColumn('region') && (
           <DataTableFacetedFilter

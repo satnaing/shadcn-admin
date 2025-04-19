@@ -1,10 +1,9 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { 
-  createAccountGroup, 
-  deleteAccountGroup, 
-  getAccountGroups, 
-  updateAccountGroup 
+import {
+  createAccountGroup,
+  deleteAccountGroup,
+  updateAccountGroup
 } from '@/services/account-groups'
 import { CreateAccountGroupInput, UpdateAccountGroupInput } from '../data/schema'
 
@@ -12,17 +11,18 @@ import { CreateAccountGroupInput, UpdateAccountGroupInput } from '../data/schema
 export const ACCOUNT_GROUPS_QUERY_KEY = ['account-groups']
 
 // 获取账号组列表Hook
-export function useAccountGroups() {
-  return useQuery({
-    queryKey: ACCOUNT_GROUPS_QUERY_KEY,
-    queryFn: getAccountGroups,
-  })
-}
+// export function useAccountGroups(params: GetAccountGroupsParams) {
+//   return useQuery({
+//     queryKey: ['account-groups', params.page, params.size],
+//     queryFn: () => getAccountGroups(params),
+//     placeholderData: keepPreviousData,
+//   })
+// }
 
 // 创建账号组Hook
 export function useCreateAccountGroup() {
   const queryClient = useQueryClient()
-  
+
   return useMutation({
     mutationFn: (data: CreateAccountGroupInput) => createAccountGroup(data),
     onSuccess: () => {
@@ -39,7 +39,7 @@ export function useCreateAccountGroup() {
 // 更新账号组Hook
 export function useUpdateAccountGroup() {
   const queryClient = useQueryClient()
-  
+
   return useMutation({
     mutationFn: (data: UpdateAccountGroupInput) => updateAccountGroup(data),
     onSuccess: () => {
@@ -56,7 +56,7 @@ export function useUpdateAccountGroup() {
 // 删除账号组Hook
 export function useDeleteAccountGroup() {
   const queryClient = useQueryClient()
-  
+
   return useMutation({
     mutationFn: (id: string) => deleteAccountGroup(id),
     onSuccess: () => {

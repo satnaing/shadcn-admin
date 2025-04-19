@@ -1,31 +1,11 @@
 import { format } from 'date-fns'
 import { ColumnDef } from '@tanstack/react-table'
 import { Badge } from '@/components/ui/badge'
-import { AccountGroup, accountGroupFieldMap, AccountGroupStatus } from '../data/schema'
+import { AccountGroup, accountGroupFieldMap, AccountGroupRegions, AccountGroupStatus } from '../data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
 import { cn } from '@/lib/utils'
 import { Checkbox } from '@/components/ui/checkbox'
-
-// 状态标签映射
-const statusMap: Record<AccountGroupStatus, { label: string; variant: 'default' | 'destructive' | 'outline' | 'secondary' }> = {
-  active: {
-    label: '活跃',
-    variant: 'default',
-  },
-  inactive: {
-    label: '禁用',
-    variant: 'destructive',
-  },
-}
-
-// 权限级别映射
-const permissionLevelMap = {
-  admin: '管理员',
-  moderator: '协管员',
-  user: '普通用户',
-  guest: '访客',
-}
 
 // 表格列定义
 export const columns: ColumnDef<AccountGroup>[] = [
@@ -81,7 +61,15 @@ export const columns: ColumnDef<AccountGroup>[] = [
   {
     accessorKey: 'region',
     header: ({ column }) => <DataTableColumnHeader column={column} title={accountGroupFieldMap.region} />,
-    cell: ({ row }) => <div className="text-center">{row.getValue('region')}</div>,
+    cell: ({ row }) => {
+      const region = row.getValue('region')
+      const regionInfo = AccountGroupRegions.shape[region as keyof typeof AccountGroupRegions.shape]
+      return (
+        <Badge className="text-center">
+          { regionInfo.value }
+        </Badge>
+      )
+    },
   },
   {
     accessorKey: 'totalFollowing',
@@ -92,34 +80,6 @@ export const columns: ColumnDef<AccountGroup>[] = [
     accessorKey: 'totalFollowers',
     header: ({ column }) => <DataTableColumnHeader column={column} title={accountGroupFieldMap.totalFollowers} />,
     cell: ({ row }) => <div className="text-center">{row.getValue('totalFollowers')}</div>,
-  },
-  {
-    accessorKey: 'status',
-    header: ({ column }) => <DataTableColumnHeader column={column} title={accountGroupFieldMap.status} />,
-    cell: ({ row }) => {
-      const status = row.getValue('status') as AccountGroupStatus || 'active'
-      const statusInfo = statusMap[status]
-      
-      return (
-        <Badge variant={statusInfo?.variant}>
-          {statusInfo?.label}
-        </Badge>
-      )
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
-  },
-  {
-    accessorKey: 'permissionLevel',
-    header: ({ column }) => <DataTableColumnHeader column={column} title={accountGroupFieldMap.permissionLevel} />,
-    cell: ({ row }) => {
-      const permissionLevel = row.getValue('permissionLevel') as string
-      return permissionLevelMap[permissionLevel as keyof typeof permissionLevelMap] || permissionLevel
-    },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
-    },
   },
   {
     accessorKey: 'createdAt',
@@ -133,6 +93,7 @@ export const columns: ColumnDef<AccountGroup>[] = [
   },
   {
     id: 'actions',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="操作" />,
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ] 

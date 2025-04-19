@@ -91,3 +91,9 @@ export interface Page<T> {
    */
   empty: boolean;
 } 
+
+export interface Pageable {
+  pageIndex: number;
+  pageSize: number;
+  sort?: string;
+}

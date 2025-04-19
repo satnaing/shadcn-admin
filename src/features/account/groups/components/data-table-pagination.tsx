@@ -49,7 +49,7 @@ export function DataTablePagination<TData>({
             </SelectContent>
           </Select>
         </div>
-        <div className='flex w-[100px] items-center justify-center text-sm font-medium'>
+        <div className='flex items-center justify-center text-sm font-medium'>
           第 {table.getState().pagination.pageIndex + 1} 页，共{' '}
           {table.getPageCount()} 页
         </div>
