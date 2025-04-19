@@ -35,7 +35,7 @@ import {
   UpdateAccountGroupInput
 } from '../data/schema'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createAccountGroup, GROUP_URL, updateAccountGroup } from '@/services/account-group-service'
+import { accountGroupService } from '@/services/account-group-service'
 import { toast } from 'sonner'
 
 export function AccountGroupsActionDialog() {
@@ -46,10 +46,10 @@ export function AccountGroupsActionDialog() {
 
   // 创建和更新的mutation hooks
   const createMutation = useMutation({
-    mutationFn: (data: CreateAccountGroupInput) => createAccountGroup(data),
+    mutationFn: (data: CreateAccountGroupInput) => accountGroupService.create(data),
     onSuccess: () => {
       toast.success('账号组创建成功', { duration: 2000 })
-      queryClient.invalidateQueries({ queryKey: [GROUP_URL] })
+      queryClient.invalidateQueries({ queryKey: [accountGroupService.path] })
     },
     onError: (error) => {
       console.error('创建账号组失败:', error)
@@ -58,10 +58,10 @@ export function AccountGroupsActionDialog() {
   })
 
   const updateMutation = useMutation({
-    mutationFn: (data: UpdateAccountGroupInput) => updateAccountGroup(data),
+    mutationFn: (data: UpdateAccountGroupInput) => accountGroupService.update(data),
     onSuccess: () => {
       toast.success('账号组更新成功', { duration: 2000 })
-      queryClient.invalidateQueries({ queryKey: [GROUP_URL] })
+      queryClient.invalidateQueries({ queryKey: [accountGroupService.path] })
     },
     onError: (error) => {
       console.error('更新账号组失败:', error)

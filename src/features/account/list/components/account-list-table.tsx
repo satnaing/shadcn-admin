@@ -1,5 +1,6 @@
 import {
   ColumnFiltersState,
+  PaginationState,
   SortingState,
   VisibilityState,
   flexRender,
@@ -12,7 +13,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useCallback, useEffect, useState } from 'react'
-import { accountService } from '@/services/account-services'
+import {accountService} from '@/services/account-services'
 
 import {
   Table,
@@ -39,6 +40,10 @@ export function AccountListTable() {
   const [data, setData] = useState<Account[]>([])
   const [accountGroups, setAccountGroups] = useState<{ id: number, name: string }[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0, //initial page index
+    pageSize: 10, //default page size
+  });
   
   // 上下文
   const { selectedAccounts, setSelectedAccounts, refreshTrigger } = useAccountListContext()
@@ -47,7 +52,7 @@ export function AccountListTable() {
   const fetchAccounts = useCallback(async () => {
     setIsLoading(true)
     try {
-      const response = await accountService.getAccounts()
+      const response = await accountService.page(pagination, columnFilters, sorting)
       setData(response.content || [])
     } catch (error) {
       console.error('获取账号列表失败', error)
@@ -59,8 +64,8 @@ export function AccountListTable() {
   // 获取账号分组数据
   const fetchAccountGroups = useCallback(async () => {
     try {
-      const response = await accountService.getAccountGroups()
-      setAccountGroups(response.content || [])
+      // const response = await accountService.getAccountGroups()
+      // setAccountGroups(response.content || [])
     } catch (error) {
       console.error('获取账号分组失败', error)
     }

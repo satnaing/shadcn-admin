@@ -29,10 +29,10 @@ export function AccountListDeleteDialog() {
       // 调用批量删除API
       if (accountIds.length === 1) {
         // 单个删除
-        await accountService.deleteAccount(accountIds[0])
+        await accountService.deleteById(accountIds[0].toString())
       } else {
         // 批量删除
-        await accountService.batchDeleteAccounts(accountIds)
+        await accountService.deleteById(accountIds.toString())
       }
       
       // 操作成功提示

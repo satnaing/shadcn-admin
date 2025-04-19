@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { useAccountGroupsContext } from '../context/account-groups-context'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { GROUP_URL, deleteAccountGroup } from '@/services/account-group-service'
+import { accountGroupService } from '@/services/account-group-service'
 import { toast } from 'sonner'
 
 export function AccountGroupsDeleteDialog() {
@@ -18,10 +18,10 @@ export function AccountGroupsDeleteDialog() {
   const queryClient = useQueryClient()
 
   const deleteMutation = useMutation({
-    mutationFn: (id: string) => deleteAccountGroup(id),
+    mutationFn: (id: string) => accountGroupService.deleteById(id),
     onSuccess: () => {
       toast.success('账号组删除成功')
-      queryClient.invalidateQueries({ queryKey: [GROUP_URL] })
+      queryClient.invalidateQueries({ queryKey: [accountGroupService.path] })
     },
     onError: (error) => {
       console.error('删除账号组失败:', error)

@@ -21,7 +21,7 @@ import { DataTableToolbar } from './data-table-toolbar'
 import { Spinner } from '@/components/ui/spinner'
 import { columns } from './account-groups-columns'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import { getAccountGroups, GROUP_URL } from '@/services/account-group-service'
+import { accountGroupService } from '@/services/account-group-service'
 
 export function AccountGroupsTable() {
   const [sorting, setSorting] = useState<SortingState>([
@@ -35,10 +35,9 @@ export function AccountGroupsTable() {
     pageSize: 10, //default page size
   });
 
-
   const { data, isLoading } = useQuery({
-    queryKey: [GROUP_URL, pagination, columnFilters, sorting],
-    queryFn: () => getAccountGroups(pagination, columnFilters, sorting),
+    queryKey: [accountGroupService.path, pagination, columnFilters, sorting],
+    queryFn: () => accountGroupService.page(pagination, columnFilters, sorting),
     placeholderData: keepPreviousData,
   })
 
