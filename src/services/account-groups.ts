@@ -1,9 +1,9 @@
 import { AccountGroup, CreateAccountGroupInput, UpdateAccountGroupInput } from '@/features/account/groups/data/schema'
 import axios from '@/lib/axios'
-import { Page, Pageable } from '@/types/page'
-import { ColumnFiltersState, SortingState } from '@tanstack/react-table'
+import { PagedModel } from '@/types/page'
+import { ColumnFiltersState, PaginationState, SortingState } from '@tanstack/react-table'
 
-const API_URL = `${import.meta.env.VITE_API_URL || ''}/account/groups`
+export const GROUP_URL = `account/groups`
 
 // export type GetAccountGroupsParams = {
 //   pageNumber: number
@@ -16,7 +16,7 @@ const API_URL = `${import.meta.env.VITE_API_URL || ''}/account/groups`
 // }
 
 // 获取所有账号组
-export async function getAccountGroups(pageable: Pageable, columnFilters: ColumnFiltersState, sorting: SortingState): Promise<Page<AccountGroup>> {
+export async function getAccountGroups(pageable: PaginationState, columnFilters: ColumnFiltersState, sorting: SortingState): Promise<PagedModel<AccountGroup>> {
   // 处理过滤条件
   const filters = columnFilters.reduce((acc, filter) => {
     return { ...acc, [filter.id]: filter.value }
@@ -28,7 +28,7 @@ export async function getAccountGroups(pageable: Pageable, columnFilters: Column
     : undefined
   
   // 发送请求
-  const response = await axios.get(API_URL, { 
+  const response = await axios.get(GROUP_URL, { 
     params: { 
       ...pageable, 
       ...filters, 
@@ -40,7 +40,7 @@ export async function getAccountGroups(pageable: Pageable, columnFilters: Column
 
 // 根据ID获取单个账号组
 export async function getAccountGroupById(id: string): Promise<AccountGroup> {
-  const response = await axios.get(`${API_URL}/${id}`)
+  const response = await axios.get(`${GROUP_URL}/${id}`)
   return response.data
 }
 
@@ -48,7 +48,7 @@ export async function getAccountGroupById(id: string): Promise<AccountGroup> {
 export async function createAccountGroup(
   data: CreateAccountGroupInput
 ): Promise<AccountGroup> {
-  const response = await axios.post(API_URL, data)
+  const response = await axios.post(GROUP_URL, data)
   return response.data
 }
 
@@ -56,11 +56,11 @@ export async function createAccountGroup(
 export async function updateAccountGroup(
   data: UpdateAccountGroupInput
 ): Promise<AccountGroup> {
-  const response = await axios.put(`${API_URL}/${data.id}`, data)
+  const response = await axios.put(`${GROUP_URL}/${data.id}`, data)
   return response.data
 }
 
 // 删除账号组
 export async function deleteAccountGroup(id: string): Promise<void> {
-  await axios.delete(`${API_URL}/${id}`)
+  await axios.delete(`${GROUP_URL}/${id}`)
 } 

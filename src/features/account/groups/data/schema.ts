@@ -15,23 +15,6 @@ export const AccountGroupRegions = z.object({
 export const AccountGroupRegionEnum = AccountGroupRegions.keyof();
 export type AccountGroupRegionEnum = typeof AccountGroupRegionEnum;
 
-// 定义账号组状态枚举
-export const accountGroupStatusSchema = z.union([
-  z.literal('active'),   // 活跃
-  z.literal('inactive'), // 禁用
-])
-
-export type AccountGroupStatus = z.infer<typeof accountGroupStatusSchema>
-
-// 账号组权限级别枚举
-const accountGroupPermissionLevelSchema = z.union([
-  z.literal('admin'),     // 管理员
-  z.literal('moderator'), // 协管员
-  z.literal('user'),      // 普通用户
-  z.literal('guest'),     // 访客
-])
-export type AccountGroupPermissionLevel = z.infer<typeof accountGroupPermissionLevelSchema>
-
 // 账号组数据模型
 export const accountGroupSchema = z.object({
   id: z.string(),
@@ -41,8 +24,6 @@ export const accountGroupSchema = z.object({
   accountCount: z.number(),
   totalFollowing: z.number(),
   totalFollowers: z.number(),
-  status: accountGroupStatusSchema,
-  permissionLevel: accountGroupPermissionLevelSchema,
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
 })
@@ -57,8 +38,6 @@ export const accountGroupFieldMap: Record<keyof AccountGroup, string> = {
   accountCount: "账号数量",
   totalFollowing: "关注总数",
   totalFollowers: "粉丝总数",
-  status: "状态",
-  permissionLevel: "权限级别",
   createdAt: "创建时间",
   updatedAt: "更新时间",
 }

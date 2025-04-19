@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
@@ -31,41 +30,55 @@ import { useAccountGroupsContext } from '../context/account-groups-context'
 import {
   AccountGroupRegionEnum,
   AccountGroupRegions,
-  CreateAccountGroupInput, 
-  createAccountGroupSchema 
+  CreateAccountGroupInput,
+  createAccountGroupSchema,
+  UpdateAccountGroupInput
 } from '../data/schema'
-import { useCreateAccountGroup, useUpdateAccountGroup } from '../hooks/use-account-groups'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { createAccountGroup, GROUP_URL, updateAccountGroup } from '@/services/account-groups'
+import { toast } from 'sonner'
 
 export function AccountGroupsActionDialog() {
-  const { open, setOpen, currentGroup } = useAccountGroupsContext()
+  const { open, setOpen, currentGroup, setCurrentGroup } = useAccountGroupsContext()
   const isEditing = open === 'edit'
-  
+
+  const queryClient = useQueryClient()
+
   // 创建和更新的mutation hooks
-  const createMutation = useCreateAccountGroup()
-  const updateMutation = useUpdateAccountGroup()
-  
+  const createMutation = useMutation({
+    mutationFn: (data: CreateAccountGroupInput) => createAccountGroup(data),
+    onSuccess: () => {
+      toast.success('账号组创建成功', { duration: 2000 })
+      queryClient.invalidateQueries({ queryKey: [GROUP_URL] })
+    },
+    onError: (error) => {
+      console.error('创建账号组失败:', error)
+      toast.error('创建账号组失败')
+    },
+  })
+
+  const updateMutation = useMutation({
+    mutationFn: (data: UpdateAccountGroupInput) => updateAccountGroup(data),
+    onSuccess: () => {
+      toast.success('账号组更新成功', { duration: 2000 })
+      queryClient.invalidateQueries({ queryKey: [GROUP_URL] })
+    },
+    onError: (error) => {
+      console.error('更新账号组失败:', error)
+      toast.error('更新账号组失败')
+    },
+  })
+
   // 表单实例
   const form = useForm<CreateAccountGroupInput>({
     resolver: zodResolver(createAccountGroupSchema),
     defaultValues: {
-      name: '',
-      description: '',
-      region: AccountGroupRegionEnum.enum.China,
+      name: currentGroup?.name || '',
+      description: currentGroup?.description || '',
+      region: currentGroup?.region || AccountGroupRegionEnum.enum.CN,
     },
   })
-  
-  // 当编辑模式下，填充表单
-  useEffect(() => {
-    if (isEditing && currentGroup) {
-      const { name, description, region } = currentGroup
-      form.reset({
-        name,
-        description,
-        region,
-      })
-    }
-  }, [currentGroup, form, isEditing])
-  
+
   // 提交表单
   const onSubmit = (data: CreateAccountGroupInput) => {
     if (isEditing && currentGroup) {
@@ -90,6 +103,7 @@ export function AccountGroupsActionDialog() {
 
   // 关闭对话框
   const onClose = () => {
+    setCurrentGroup(null)
     setOpen(null)
     form.reset()
   }
@@ -102,8 +116,8 @@ export function AccountGroupsActionDialog() {
         <DialogHeader>
           <DialogTitle>{isEditing ? '编辑账号组' : '创建账号组'}</DialogTitle>
           <DialogDescription>
-            {isEditing 
-              ? '修改账号组的信息和权限设置。' 
+            {isEditing
+              ? '修改账号组的信息和权限设置。'
               : '创建一个新的账号组并设置其基本信息。'
             }
           </DialogDescription>
@@ -124,7 +138,7 @@ export function AccountGroupsActionDialog() {
                 </FormItem>
               )}
             />
-            
+
             {/* 描述字段 */}
             <FormField
               control={form.control}
@@ -143,7 +157,7 @@ export function AccountGroupsActionDialog() {
                 </FormItem>
               )}
             />
-            
+
             {/* 地区字段 */}
             <FormField
               control={form.control}
@@ -151,8 +165,8 @@ export function AccountGroupsActionDialog() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>地区</FormLabel>
-                  <Select 
-                    onValueChange={field.onChange} 
+                  <Select
+                    onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
@@ -172,11 +186,11 @@ export function AccountGroupsActionDialog() {
                 </FormItem>
               )}
             />
-            
+
             <DialogFooter>
-              <Button 
-                type="button" 
-                variant="outline" 
+              <Button
+                type="button"
+                variant="outline"
                 onClick={onClose}
                 disabled={isLoading}
               >

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import {
   ColumnFiltersState,
+  PaginationState,
   SortingState,
   VisibilityState,
   flexRender,
   getCoreRowModel,
-  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
 import {
@@ -21,7 +21,7 @@ import { DataTableToolbar } from './data-table-toolbar'
 import { Spinner } from '@/components/ui/spinner'
 import { columns } from './account-groups-columns'
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import { getAccountGroups } from '@/services/account-groups'
+import { getAccountGroups, GROUP_URL } from '@/services/account-groups'
 
 export function AccountGroupsTable() {
   const [sorting, setSorting] = useState<SortingState>([
@@ -30,14 +30,14 @@ export function AccountGroupsTable() {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
-  const [pagination, setPagination] = useState({
+  const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0, //initial page index
     pageSize: 10, //default page size
   });
 
-  
+
   const { data, isLoading } = useQuery({
-    queryKey: ['account-groups', pagination, columnFilters, sorting],
+    queryKey: [GROUP_URL, pagination, columnFilters, sorting],
     queryFn: () => getAccountGroups(pagination, columnFilters, sorting),
     placeholderData: keepPreviousData,
   })
@@ -54,7 +54,7 @@ export function AccountGroupsTable() {
     manualPagination: true, // 手动分页
     manualFiltering: true, // 手动筛选
     manualSorting: true, // 手动排序
-    pageCount: data?.totalPages || 0,
+    pageCount: data?.page.totalPages || 0,
     state: {
       sorting,
       columnFilters,

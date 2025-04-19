@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import { ColumnDef } from '@tanstack/react-table'
 import { Badge } from '@/components/ui/badge'
-import { AccountGroup, accountGroupFieldMap, AccountGroupRegions, AccountGroupStatus } from '../data/schema'
+import { AccountGroup, accountGroupFieldMap, AccountGroupRegions } from '../data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
 import { cn } from '@/lib/utils'

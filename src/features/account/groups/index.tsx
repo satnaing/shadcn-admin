@@ -1,12 +1,10 @@
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { columns } from './components/account-groups-columns'
 import { AccountGroupsDialogs } from './components/account-groups-dialogs'
 import { AccountGroupsPrimaryButtons } from './components/account-groups-primary-buttons'
 import { AccountGroupsTable } from './components/account-groups-table'
 import AccountGroupsProvider from './context/account-groups-context'
-import { useAccountGroups } from './hooks/use-account-groups'
 
 export default function AccountGroups() {
   
