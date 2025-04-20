@@ -28,7 +28,6 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { useAccountGroupsContext } from '../context/account-groups-context'
 import {
-  AccountGroupRegionEnum,
   AccountGroupRegions,
   CreateAccountGroupInput,
   createAccountGroupSchema,
@@ -75,7 +74,7 @@ export function AccountGroupsActionDialog() {
     defaultValues: {
       name: currentGroup?.name || '',
       description: currentGroup?.description || '',
-      region: currentGroup?.region || AccountGroupRegionEnum.enum.CN,
+      region: currentGroup?.region || undefined,
     },
   })
 

@@ -1,5 +1,26 @@
-import { Account } from "@/features/account/list/data/schema";
+import { Account, ImportAccountsInput } from "@/features/account/list/data/schema";
 import { BaseCrudService } from "./base-curd-service";
+import axios from "@/lib/axios";
+
+/**
+ * 导入结果接口
+ */
+export interface ImportResult {
+  /**
+   * 成功导入的数量
+   */
+  importCount: number;
+  
+  /**
+   * 导入失败的数量
+   */
+  errorCount?: number;
+  
+  /**
+   * 错误信息列表
+   */
+  errors?: string[];
+}
 
 /**
  * 账号组服务类
@@ -9,8 +30,16 @@ class AccountService extends BaseCrudService<Account> {
     constructor() {
       super('accounts')
     }
+    
+    /**
+     * 导入账号
+     * @param formData 包含文件和可选分组ID的表单数据
+     * @returns 导入结果响应
+     */
+    async importAccounts(formData: ImportAccountsInput) {
+      return await axios.post<ImportResult>(`${this.path}/import`, formData);
+    }
 }
-
 
 export const accountService = new AccountService()
 
