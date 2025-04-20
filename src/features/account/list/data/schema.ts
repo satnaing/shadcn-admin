@@ -67,7 +67,7 @@ export type UpdateAccountGroupInput = z.infer<typeof updateAccountGroupSchema>
 
 // 导入账号请求数据模型
 export const importAccountsSchema = z.object({
-  jsonl: z.string().optional(),
-  groupId: z.string().optional()
+  jsonl: z.string(),
+  groupId: z.string()
 })
 export type ImportAccountsInput = z.infer<typeof importAccountsSchema> 
