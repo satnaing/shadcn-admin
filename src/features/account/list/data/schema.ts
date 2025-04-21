@@ -1,15 +1,16 @@
 import { z } from 'zod'
 import { accountGroupSchema } from '../../groups/data/schema';
 
+export const AccountStatus = z.object({
+  '0': z.literal('未知'),
+  '1': z.literal('正常'),
+  '2': z.literal('异常')
+});
 // 账号状态枚举
-export const AccountStatusEnum = z.enum(['0', '1', '2']);
+export const AccountStatusEnum = AccountStatus.keyof();
 export type AccountStatusEnum = z.infer<typeof AccountStatusEnum>;
 
-export const AccountStatusMap = {
-  '0': '未知',
-  '1': '正常',
-  '2': '异常'
-};
+
 
 // 账号数据模型
 export const accountSchema = z.object({
@@ -21,17 +22,14 @@ export const accountSchema = z.object({
   avatar: z.string().nullable(),
   nickname: z.string().nullable(),
   signature: z.string().nullable(),
-  // shortId: z.string().nullable(),
-
-  // nickname: z.string().nullable(),
-  // avatar: z.string().nullable(),
-  // following: z.number().default(0),
-  // followers: z.number().default(0),
-  // status: z.coerce.number().default(1),
-  // region: z.string().nullable(),
-  // deviceId: z.string().nullable(),
-  // installId: z.string().nullable(),
-  // sessionId: z.string().nullable(),
+  following: z.number().default(0),
+  followers: z.number().default(0),
+  awemeCount: z.number().default(0),
+  status: z.coerce.number().default(1),
+  region: z.string().nullable(),
+  deviceId: z.string().nullable(),
+  installId: z.string().nullable(),
+  sessionId: z.string().nullable(),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date().nullable(),
 })
@@ -43,16 +41,18 @@ export const accountFieldMap: Record<keyof Account, string> = {
   group: "分组",
   uid: "抖音UID",
   secUid: "安全UID",
-  // username: "用户名",
-  // nickname: "昵称",
-  // avatar: "头像",
-  // following: "关注数",
-  // followers: "粉丝数",
-  // status: "状态",
-  // region: "地区",
-  // deviceId: "设备ID",
-  // installId: "安装ID",
-  // sessionId: "会话ID",
+  username: "用户名",
+  nickname: "昵称",
+  signature: "签名",
+  avatar: "头像",
+  following: "关注数",
+  followers: "粉丝数",
+  awemeCount: "作品数",
+  status: "状态",
+  region: "地区",
+  deviceId: "设备ID",
+  installId: "安装ID",
+  sessionId: "会话ID",
   createdAt: "创建时间",
   updatedAt: "更新时间",
 }

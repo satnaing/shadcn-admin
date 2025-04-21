@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useAccountListContext } from '../context/account-list-context'
 import { accountService } from '@/services/account-services'
 
@@ -23,7 +22,7 @@ export function AccountListDeleteDialog() {
   const deleteMutation = useMutation({
     mutationFn: (id: string) => accountService.deleteById(id),
     onSuccess: () => {
-      toast.success('账号删除成功')
+      toast.success('账号删除成功', { duration: 2000 })
       queryClient.invalidateQueries({ queryKey: [accountService.path] })
       setOpen(null)
     },

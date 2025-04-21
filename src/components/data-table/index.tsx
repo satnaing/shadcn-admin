@@ -3,11 +3,10 @@ import {
     ColumnFiltersState,
     PaginationState,
     SortingState,
-    Table as ReactTable,
-    VisibilityState,
     flexRender,
     getCoreRowModel,
     useReactTable,
+    Table as ReactTable,
 } from '@tanstack/react-table'
 import { useState } from 'react'
 import {
@@ -24,10 +23,15 @@ import { PagedModel } from '@/types/page'
 import { BaseCrudService } from '@/services/base-curd-service'
 import ProTablePagination from './data-table-pagination'
 
+// 表格工具栏组件Props
+export interface DataTableToolbarProps<TData> {
+    table: ReactTable<TData>
+}
+
 interface DataTableProps<T> {
     columns: ColumnDef<T>[]
     service: BaseCrudService<T>
-    Toolbar?: React.ComponentType<{ table: ReactTable<T> }>
+    Toolbar?: React.ComponentType<DataTableToolbarProps<T>>
 }
 
 // 账号表格组件实现
@@ -36,8 +40,6 @@ export function DataTable<T>({ columns, service, Toolbar }: DataTableProps<T>) {
         { id: 'createdAt', desc: true },
     ])
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
-    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-    const [rowSelection, setRowSelection] = useState({})
     const [pagination, setPagination] = useState<PaginationState>({
         pageIndex: 0, //initial page index
         pageSize: 10, //default page size
@@ -55,8 +57,6 @@ export function DataTable<T>({ columns, service, Toolbar }: DataTableProps<T>) {
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
         getCoreRowModel: getCoreRowModel(),
-        onColumnVisibilityChange: setColumnVisibility,
-        onRowSelectionChange: setRowSelection,
         onPaginationChange: setPagination,
         manualPagination: true, // 手动分页
         manualFiltering: true, // 手动筛选
@@ -65,10 +65,11 @@ export function DataTable<T>({ columns, service, Toolbar }: DataTableProps<T>) {
         state: {
             sorting,
             columnFilters,
-            columnVisibility,
-            rowSelection,
             pagination,
         },
+        // debugTable: true,
+        // debugColumns: true,
+        // debugAll: true,
     })
 
     if (isLoading) {

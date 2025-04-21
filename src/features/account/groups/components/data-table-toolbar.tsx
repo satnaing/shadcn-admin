@@ -3,8 +3,8 @@ import { X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { DataTableViewOptions } from './data-table-view-options'
-import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { AccountGroup, AccountGroupRegions } from '../data/schema'
+import { DataTableFacetedFilter } from '@/components/data-table/data-table-faceted-filter'
 
 
 interface DataTableToolbarProps<TData> {

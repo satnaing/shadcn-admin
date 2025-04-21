@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 import { Account, accountFieldMap } from '../data/schema'
+
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>
 }

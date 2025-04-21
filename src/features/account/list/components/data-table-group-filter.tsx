@@ -10,6 +10,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
+  CommandLoading,
   CommandSeparator,
 } from '@/components/ui/command'
 import {
@@ -18,29 +19,38 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { Separator } from '@/components/ui/separator'
+import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
+import { accountGroupService } from '@/services/account-group-service'
+import { Option } from '@/types/options'
+import { Spinner } from '@/components/ui/spinner'
 
-// 表格分面筛选选项
-interface DataTableFacetedFilterOption {
-  label: string
-  value: string | number
-  icon?: React.ComponentType<{ className?: string }>
-}
-
-// 表格分面筛选组件Props
-interface DataTableFacetedFilterProps<TData, TValue> {
+interface DataTableGroupFilterProps<TData, TValue> {
   column?: Column<TData, TValue>
   title?: string
-  options: DataTableFacetedFilterOption[]
 }
 
-// 表格分面筛选组件实现
-export function DataTableFacetedFilter<TData, TValue>({
+export function DataTableGroupFilter<TData, TValue>({
   column,
   title,
-  options,
-}: DataTableFacetedFilterProps<TData, TValue>) {
-  const facets = column?.getFacetedUniqueValues()
-  const selectedValues = new Set(column?.getFilterValue() as string[])
+}: DataTableGroupFilterProps<TData, TValue>) {
+  const [selectedOptions, setSelectedOptions] = useState<{ [key: string]: Option }>({})
+  const selectedValues = column?.getFilterValue()
+  const [searchTerm, setSearchTerm] = useState<string>('')
+
+  const { data: options, isLoading, ...rest } = useQuery({
+    queryKey: [`${accountGroupService.path}/options`, searchTerm],
+    queryFn: () => accountGroupService.getOptions(searchTerm, 7),
+    // placeholderData: keepPreviousData,
+  })
+
+  console.log("DataTableGroupFilter: ", Object.keys(selectedOptions).length, isLoading, rest)
+
+  useEffect(() => {
+    if (!selectedValues) {
+      setSelectedOptions({})
+    }
+  }, [selectedValues])
 
   return (
     <Popover>
@@ -48,59 +58,58 @@ export function DataTableFacetedFilter<TData, TValue>({
         <Button variant='outline' size='sm' className='h-8 border-dashed'>
           <PlusCircle className='mr-2 h-4 w-4' />
           {title}
-          {selectedValues?.size > 0 && (
+          {Object.keys(selectedOptions).length > 0 && (
             <>
               <Separator orientation='vertical' className='mx-2 h-4' />
               <Badge
                 variant='secondary'
                 className='rounded-sm px-1 font-normal lg:hidden'
               >
-                {selectedValues.size}
+                {Object.keys(selectedOptions).length}
               </Badge>
               <div className='hidden space-x-1 lg:flex'>
-                {selectedValues.size > 2 ? (
-                  <Badge
-                    variant='secondary'
-                    className='rounded-sm px-1 font-normal'
-                  >
-                    {selectedValues.size} 已选
-                  </Badge>
-                ) : (
-                  options
-                    .filter((option) => selectedValues.has(option.value))
-                    .map((option) => (
-                      <Badge
-                        variant='secondary'
-                        key={String(option.value)}
-                        className='rounded-sm px-1 font-normal'
-                      >
-                        {option.label}
-                      </Badge>
-                    ))
-                )}
+                {Object.values(selectedOptions)
+                  .map((option) => (
+                    <Badge
+                      variant='secondary'
+                      key={option.value}
+                      className='rounded-sm px-1 font-normal'
+                    >
+                      {option.label}
+                    </Badge>
+                  ))}
               </div>
             </>
           )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className='w-[200px] p-0' align='start'>
-        <Command>
-          <CommandInput placeholder={title} />
+        <Command shouldFilter={false}>
+          <CommandInput placeholder={title} value={searchTerm} onValueChange={setSearchTerm} />
           <CommandList>
-            <CommandEmpty>没有找到结果</CommandEmpty>
+            {isLoading && <CommandLoading>
+              <div className="flex items-center justify-center py-4">
+                <Spinner className="h-4 w-4" />
+                <span className="ml-2 text-sm text-muted-foreground">加载中...</span>
+              </div>
+            </CommandLoading>}
+            <CommandEmpty>无匹配结果</CommandEmpty>
             <CommandGroup>
-              {options.map((option) => {
-                const isSelected = selectedValues.has(option.value)
+              {options?.map((option) => {
+                const isSelected = selectedOptions[option.value]
+                console.log("map: ", option)
                 return (
                   <CommandItem
-                    key={String(option.value)}
+                    value={option.value}
+                    key={option.value}
                     onSelect={() => {
                       if (isSelected) {
-                        selectedValues.delete(option.value)
+                        delete selectedOptions[option.value]
                       } else {
-                        selectedValues.add(option.value)
+                        selectedOptions[option.value] = option
                       }
-                      const filterValues = Array.from(selectedValues)
+
+                      const filterValues = Object.keys(selectedOptions)
                       column?.setFilterValue(
                         filterValues.length ? filterValues : undefined
                       )
@@ -116,25 +125,20 @@ export function DataTableFacetedFilter<TData, TValue>({
                     >
                       <Check className={cn('h-4 w-4')} />
                     </div>
-                    {option.icon && (
-                      <option.icon className='mr-2 h-4 w-4 text-muted-foreground' />
-                    )}
                     <span>{option.label}</span>
-                    {facets?.get(option.value) && (
-                      <span className='ml-auto flex h-4 w-4 items-center justify-center font-mono text-xs'>
-                        {facets.get(option.value)}
-                      </span>
-                    )}
                   </CommandItem>
                 )
               })}
             </CommandGroup>
-            {selectedValues.size > 0 && (
+            {Object.keys(selectedOptions).length > 0 && (
               <>
                 <CommandSeparator />
                 <CommandGroup>
                   <CommandItem
-                    onSelect={() => column?.setFilterValue(undefined)}
+                    onSelect={() => {
+                      column?.setFilterValue(undefined)
+                      setSelectedOptions({})
+                    }}
                     className='justify-center text-center'
                   >
                     清除筛选

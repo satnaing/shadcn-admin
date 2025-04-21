@@ -1,5 +1,4 @@
 import { AccountListDeleteDialog } from './account-list-delete-dialog'
-import { AccountListUpdateGroupDialog } from './account-list-update-group-dialog'
 import { AccountListImportDialog } from './account-list-import-dialog'
 import { useAccountListContext } from '../context/account-list-context'
 
@@ -9,7 +8,6 @@ export function AccountListDialogs() {
   return (
     <>
       {open === 'delete' && <AccountListDeleteDialog />}
-      {open === 'updateGroup' && <AccountListUpdateGroupDialog />}
       {open === 'import' && <AccountListImportDialog />}
     </>
   )

@@ -45,7 +45,7 @@ export function AccountListImportDialog() {
     },
   })
 
-  const { data: groupOptions, isLoading: groupOptionsLoading } = useQuery({
+  const { data: groupOptions } = useQuery({
     queryKey: [`${accountGroupService.path}/options`, searchTerm],
     queryFn: () => accountGroupService.getOptions(searchTerm),
     placeholderData: keepPreviousData,
@@ -74,7 +74,6 @@ export function AccountListImportDialog() {
   // 提交导入
   const onSubmit = async (data: ImportAccountsInput) => {
     improtMutation.mutate(data)
-
   }
 
   return (
@@ -136,14 +135,14 @@ export function AccountListImportDialog() {
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent className="w-[200px] p-0">
-                      <Command>
+                      <Command shouldFilter={false}>
                         <CommandInput placeholder="搜索分组..." onValueChange={setSearchTerm} />
                         <CommandList>
                           <CommandEmpty>未能找到组.</CommandEmpty>
                           <CommandGroup>
                             {groupOptions?.map((group) => (
                               <CommandItem
-                                value={group.label}
+                                value={group.value}
                                 key={group.value}
                                 onSelect={() => {
                                   form.setValue("groupId", group.value)
