@@ -13,7 +13,7 @@ export const AccountStatusMap = {
 
 // 账号数据模型
 export const accountSchema = z.object({
-  id: z.number(),
+  id: z.string(),
   uid: z.string(),
   secUid: z.string(),
   group: accountGroupSchema,

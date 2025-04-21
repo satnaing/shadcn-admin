@@ -22,17 +22,12 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const account = row.original as Account
+  const { setOpen, setCurrent } = useAccountListContext()
 
-  // 处理删除操作
-  const handleDelete = () => {
-    setSelectedAccounts([account])
+  // 删除账号组
+  const onDelete = () => {
+    setCurrent(account)
     setOpen('delete')
-  }
-
-  // 处理更新分组操作
-  const handleUpdateGroup = () => {
-    setSelectedAccounts([account])
-    setOpen('updateGroup')
   }
 
   return (
@@ -47,11 +42,7 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-[160px]'>
-        <DropdownMenuItem onClick={handleUpdateGroup}>
-          <Edit className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
-          修改分组
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleDelete}>
+        <DropdownMenuItem onClick={onDelete}>
           <Trash className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
           删除
           <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
