@@ -1,10 +1,13 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
 import { Account, AccountStatusMap } from '../data/schema'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
+import { format } from 'date-fns'
+import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
+import { Button } from '@/components/ui/button'
+import { toast } from 'sonner'
 
 // 账号列表表格列定义
 export const columns: ColumnDef<Account>[] = [
@@ -28,80 +31,94 @@ export const columns: ColumnDef<Account>[] = [
         aria-label='选择行'
       />
     ),
-    enableSorting: false,
-    enableHiding: false,
   },
   // ID列
   {
     accessorKey: 'id',
     header: ({ column }) => <DataTableColumnHeader column={column} title='ID' />,
-    cell: ({ row }) => <div className='w-[40px]'>{row.getValue('id')}</div>,
-    enableSorting: true,
-    enableHiding: false,
-  },
-  // 头像和昵称列
-  {
-    accessorKey: 'nickname',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='昵称' />,
+    // cell: ({ row }) => <div>{row.getValue('id')}</div>,
     cell: ({ row }) => {
-      const account = row.original
-      return (
-        <div className='flex items-center'>
-          <Avatar className='h-8 w-8 mr-2'>
-            <AvatarImage src={account.avatar || ''} alt={account.nickname || ''} />
-            <AvatarFallback>{(account.nickname || '').substring(0, 2)}</AvatarFallback>
-          </Avatar>
-          <span className='font-medium'>{account.nickname || '--'}</span>
-        </div>
-      )
+      const original = row.original
+      return <div className='flex flex-col items-start gap-2'>
+        <Button variant="outline" size="xs" onClick={() => {
+          navigator.clipboard.writeText(original.uid)
+          toast.success('UID已复制到剪贴板')
+        }}>
+          复制UID
+        </Button>
+        <Button variant="outline" size="xs" onClick={() => {
+          navigator.clipboard.writeText(original.secUid)
+          toast.success('SECUID已复制到剪贴板')
+        }}>
+          复制SECUID
+        </Button>
+      </div>
     },
-    enableSorting: true,
   },
-  // 用户名列
-  {
+    // 分组列
+    {
+      accessorKey: 'group',
+      header: ({ column }) => <DataTableColumnHeader column={column} title='分组' />,
+      cell: ({ row }) => {
+        const group = row.original.group
+        return <div>{group ? group.name : '--'}</div>
+      },
+    },
+   // 用户名列
+   {
     accessorKey: 'username',
     header: ({ column }) => <DataTableColumnHeader column={column} title='用户名' />,
     cell: ({ row }) => <div>{row.getValue('username') || '--'}</div>,
   },
-  // UID列
+  // 头像
   {
-    accessorKey: 'uid',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='UID' />,
-    cell: ({ row }) => <div className='font-medium'>{row.getValue('uid') || '--'}</div>,
+    accessorKey: 'avatar',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='头像' />,
+    cell: ({ row }) => <Avatar className='h-14 w-14 mr-2'>
+      <AvatarImage src={row.getValue('avatar') || ''} alt={row.getValue('nickname') || ''} />
+      <AvatarFallback delayMs={600}></AvatarFallback>
+    </Avatar>,
+    enableSorting: false,
   },
-  // 分组列
+  // 昵称等基本信息
   {
-    accessorKey: 'group',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='分组' />,
+    accessorKey: 'nickname',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='昵称' />,
     cell: ({ row }) => {
-      const group = row.original.group
-      return <div>{group ? group.name : '--'}</div>
+      return <div className='flex flex-col items-start gap-2 font-normal text-xs'>
+        <div><Badge className='mr-2 font-normal' variant="outline">昵称</Badge><span>{row.getValue('nickname') || '--'}</span></div>
+        <div><Badge className='mr-2 font-normal' variant="outline">签名</Badge><span>{ row.original.signature || '--'}</span></div>
+      </div>
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id)?.id)
-    },
+    enableSorting: false,
   },
   // 关注数列
   {
     accessorKey: 'following',
     header: ({ column }) => <DataTableColumnHeader column={column} title='关注数' />,
-    cell: ({ row }) => <div className='text-right'>{row.getValue('following')}</div>,
+    cell: ({ row }) => <div className='text-center'>{row.getValue('following')}</div>,
   },
   // 粉丝数列
   {
     accessorKey: 'followers',
     header: ({ column }) => <DataTableColumnHeader column={column} title='粉丝数' />,
-    cell: ({ row }) => <div className='text-right'>{row.getValue('followers')}</div>,
+    cell: ({ row }) => <div className='text-center'>{row.getValue('followers')}</div>,
+  },
+  // 作品数列
+  {
+    accessorKey: 'awemeCount',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='作品数' />,
+    cell: ({ row }) => <div className='text-center'>{row.getValue('awemeCount')}</div>,
   },
   // 状态列
   {
     accessorKey: 'status',
     header: ({ column }) => <DataTableColumnHeader column={column} title='状态' />,
     cell: ({ row }) => {
-      const status = row.getValue('status') as number
+      const status = row.getValue('status')
       return (
-        <Badge variant={status === 1 ? 'default' : 'destructive'}>
-          {AccountStatusMap[status.toString()] || '未知'}
+        <Badge variant={status === '1' ? 'default' : status === '0' ? 'secondary' : 'destructive'}>
+          {AccountStatusMap[status as keyof typeof AccountStatusMap] || '未知'}
         </Badge>
       )
     },
@@ -109,18 +126,31 @@ export const columns: ColumnDef<Account>[] = [
       return value.includes(row.getValue(id))
     },
   },
+  // 地区列
+  {
+    accessorKey: 'region',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='地区' />,
+    cell: ({ row }) => <div className='text-center'>{row.getValue('region')}</div>,
+  },
   // 创建时间列
   {
-    accessorKey: 'createAt',
+    accessorKey: 'createdAt',
     header: ({ column }) => <DataTableColumnHeader column={column} title='创建时间' />,
-    cell: ({ row }) => {
-      const date = row.getValue('createAt') as Date
-      return <div className='font-medium'>{date.toLocaleString()}</div>
+    cell: ({ row }) => format(row.getValue('createdAt'), 'yyyy-MM-dd HH:mm:ss'),
+  },
+  // 更新时间列
+  {
+    accessorKey: 'updatedAt',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='更新时间' />,
+    cell: ({ row }) =>{
+      const updatedAt = row.getValue('updatedAt')
+      return <div className='text-center'>{updatedAt ? format(updatedAt as Date, 'yyyy-MM-dd HH:mm:ss') : '--'}</div>
     },
   },
   // 操作列
   {
     id: 'actions',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='操作' />,
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ] 

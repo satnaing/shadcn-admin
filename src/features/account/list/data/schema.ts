@@ -1,36 +1,39 @@
 import { z } from 'zod'
+import { accountGroupSchema } from '../../groups/data/schema';
 
 // 账号状态枚举
-export const AccountStatusEnum = z.enum(['1', '0']);
+export const AccountStatusEnum = z.enum(['0', '1', '2']);
 export type AccountStatusEnum = z.infer<typeof AccountStatusEnum>;
 
 export const AccountStatusMap = {
+  '0': '未知',
   '1': '正常',
-  '0': '异常'
+  '2': '异常'
 };
 
 // 账号数据模型
 export const accountSchema = z.object({
   id: z.number(),
-  group: z.object({
-    id: z.number(),
-    name: z.string()
-  }).nullable(),
-  uid: z.string().nullable(),
-  secUid: z.string().nullable(),
-  shortId: z.string().nullable(),
-  username: z.string().nullable(),
-  nickname: z.string().nullable(),
+  uid: z.string(),
+  secUid: z.string(),
+  group: accountGroupSchema,
+  username: z.string(),
   avatar: z.string().nullable(),
-  following: z.number().default(0),
-  followers: z.number().default(0),
-  status: z.coerce.number().default(1),
-  region: z.string().nullable(),
-  deviceId: z.string().nullable(),
-  installId: z.string().nullable(),
-  sessionId: z.string().nullable(),
-  createAt: z.coerce.date(),
-  updateAt: z.coerce.date().nullable(),
+  nickname: z.string().nullable(),
+  signature: z.string().nullable(),
+  // shortId: z.string().nullable(),
+
+  // nickname: z.string().nullable(),
+  // avatar: z.string().nullable(),
+  // following: z.number().default(0),
+  // followers: z.number().default(0),
+  // status: z.coerce.number().default(1),
+  // region: z.string().nullable(),
+  // deviceId: z.string().nullable(),
+  // installId: z.string().nullable(),
+  // sessionId: z.string().nullable(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date().nullable(),
 })
 export type Account = z.infer<typeof accountSchema>
 
@@ -40,19 +43,18 @@ export const accountFieldMap: Record<keyof Account, string> = {
   group: "分组",
   uid: "抖音UID",
   secUid: "安全UID",
-  shortId: "短ID",
-  username: "用户名",
-  nickname: "昵称",
-  avatar: "头像",
-  following: "关注数",
-  followers: "粉丝数",
-  status: "状态",
-  region: "地区",
-  deviceId: "设备ID",
-  installId: "安装ID",
-  sessionId: "会话ID",
-  createAt: "创建时间",
-  updateAt: "更新时间",
+  // username: "用户名",
+  // nickname: "昵称",
+  // avatar: "头像",
+  // following: "关注数",
+  // followers: "粉丝数",
+  // status: "状态",
+  // region: "地区",
+  // deviceId: "设备ID",
+  // installId: "安装ID",
+  // sessionId: "会话ID",
+  createdAt: "创建时间",
+  updatedAt: "更新时间",
 }
 
 // 账号列表模型

@@ -22,7 +22,6 @@ export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const account = row.original as Account
-  const { setOpen, setSelectedAccounts } = useAccountListContext()
 
   // 处理删除操作
   const handleDelete = () => {

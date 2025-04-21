@@ -9,10 +9,8 @@ type AccountListDialogType = 'import' | 'delete' | 'updateGroup'
 interface AccountListContextType {
   open: AccountListDialogType | null
   setOpen: (str: AccountListDialogType | null) => void
-  selectedAccounts: Account[]
-  setSelectedAccounts: React.Dispatch<React.SetStateAction<Account[]>>
-  refreshTrigger: number
-  refreshData: () => void
+  current: Account | null
+  setCurrent: React.Dispatch<React.SetStateAction<Account | null>>
 }
 
 // 创建上下文
@@ -26,22 +24,15 @@ interface Props {
 // 上下文提供者组件
 export default function AccountListProvider({ children }: Props) {
   const [open, setOpen] = useDialogState<AccountListDialogType>(null)
-  const [selectedAccounts, setSelectedAccounts] = useState<Account[]>([])
-  const [refreshTrigger, setRefreshTrigger] = useState(0)
-
-  const refreshData = () => {
-    setRefreshTrigger(prev => prev + 1)
-  }
+  const [current, setCurrent] = useState<Account | null>(null)
 
   return (
     <AccountListContext.Provider 
       value={{ 
         open, 
         setOpen, 
-        selectedAccounts, 
-        setSelectedAccounts,
-        refreshTrigger,
-        refreshData
+        current,
+        setCurrent
       }}
     >
       {children}

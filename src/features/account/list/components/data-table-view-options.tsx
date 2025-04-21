@@ -1,7 +1,6 @@
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
+import { MixerHorizontalIcon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
-import { SlidersHorizontal } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -10,13 +9,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
-
-// 表格视图选项组件Props
+import { Account, accountFieldMap } from '../data/schema'
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>
 }
 
-// 表格视图选项组件实现
 export function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptionsProps<TData>) {
@@ -26,10 +23,10 @@ export function DataTableViewOptions<TData>({
         <Button
           variant='outline'
           size='sm'
-          className='ml-auto h-8 flex'
+          className='ml-auto hidden h-8 lg:flex'
         >
-          <SlidersHorizontal className='mr-2 h-4 w-4' />
-          视图
+          <MixerHorizontalIcon className='mr-2 h-4 w-4' />
+          显示选项
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-[150px]'>
@@ -49,11 +46,7 @@ export function DataTableViewOptions<TData>({
                 checked={column.getIsVisible()}
                 onCheckedChange={(value) => column.toggleVisibility(!!value)}
               >
-                {column.id === 'status' 
-                  ? '状态' 
-                  : column.id === 'group' 
-                  ? '分组' 
-                  : column.id}
+                {accountFieldMap[column.id as keyof Account] || column.id}
               </DropdownMenuCheckboxItem>
             )
           })}

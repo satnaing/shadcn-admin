@@ -1,58 +1,29 @@
 import { Table } from '@tanstack/react-table'
 import { X } from 'lucide-react'
-import { useState, useEffect } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { DataTableViewOptions } from './data-table-view-options'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
-import { useAccountListContext } from '../context/account-list-context'
+import { DataTableViewOptions } from './data-table-view-options'
 
 // 表格工具栏组件Props
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
-  accountGroups: { id: number, name: string }[]
 }
 
 // 表格工具栏组件实现
 export function DataTableToolbar<TData>({
   table,
-  accountGroups,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
-  const { selectedAccounts, setOpen } = useAccountListContext()
-  const [searchValue, setSearchValue] = useState('')
-
-  // 全局筛选处理
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      table.setGlobalFilter(searchValue)
-    }, 300)
-
-    return () => clearTimeout(timer)
-  }, [searchValue, table])
-
-  // 批量删除处理
-  const handleBatchDelete = () => {
-    if (selectedAccounts.length > 0) {
-      setOpen('delete')
-    }
-  }
-
-  // 批量修改分组处理
-  const handleBatchUpdateGroup = () => {
-    if (selectedAccounts.length > 0) {
-      setOpen('updateGroup')
-    }
-  }
 
   return (
     <div className='flex flex-wrap items-center justify-between'>
       <div className='flex flex-1 items-center space-x-2'>
         <Input
           placeholder='搜索账号...'
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          value={(table.getColumn('username')?.getFilterValue() as string) ?? ''}
+          onChange={(e) => table.getColumn('username')?.setFilterValue(e.target.value)}
           className='h-8 w-[150px] lg:w-[250px]'
         />
         {table.getColumn('status') && (
@@ -65,16 +36,13 @@ export function DataTableToolbar<TData>({
             ]}
           />
         )}
-        {table.getColumn('group') && accountGroups.length > 0 && (
+        {/* {table.getColumn('group') && (
           <DataTableFacetedFilter
             column={table.getColumn('group')}
             title='分组'
-            options={accountGroups.map(group => ({
-              value: group.id,
-              label: group.name
-            }))}
+            options={[]}
           />
-        )}
+        )} */}
         {isFiltered && (
           <Button
             variant='ghost'
@@ -86,7 +54,7 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
-      <div className='flex items-center space-x-2'>
+      {/* <div className='flex items-center space-x-2'>
         {selectedAccounts.length > 0 && (
           <>
             <Button 
@@ -107,8 +75,9 @@ export function DataTableToolbar<TData>({
             </Button>
           </>
         )}
-        <DataTableViewOptions table={table} />
-      </div>
+        
+      </div> */}
+      <DataTableViewOptions table={table} />
     </div>
   )
 } 
