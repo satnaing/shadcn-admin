@@ -1,5 +1,5 @@
 import { Row } from '@tanstack/react-table'
-import { MoreHorizontal, Trash, Edit } from 'lucide-react'
+import { MoreHorizontal, Trash, Edit, RefreshCcw } from 'lucide-react'
 import { useAccountListContext } from '../context/account-list-context'
 import { Account } from '../data/schema'
 
@@ -46,6 +46,11 @@ export function DataTableRowActions<TData>({
           <Trash className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
           删除
           <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <RefreshCcw className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
+          刷新
+          <DropdownMenuShortcut>⌘X</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
