@@ -23,6 +23,36 @@ export interface ImportResult {
 }
 
 /**
+ * 刷新账号结果接口
+ */
+export interface RefreshResult {
+  /**
+   * 是否成功
+   */
+  success: boolean;
+  
+  /**
+   * 结果消息
+   */
+  message: string;
+  
+  /**
+   * 用户名
+   */
+  username?: string;
+  
+  /**
+   * 昵称
+   */
+  nickname?: string;
+  
+  /**
+   * 更新时间
+   */
+  updatedAt?: string;
+}
+
+/**
  * 账号组服务类
  * 继承自基础分页服务，提供账号组相关的操作
  */
@@ -38,6 +68,17 @@ class AccountService extends BaseCrudService<Account> {
      */
     async importAccounts(formData: ImportAccountsInput) {
       return await axios.post<ImportResult>(`${this.path}/import`, formData);
+    }
+    
+    /**
+     * 刷新账号
+     * 通过TikTok API获取最新的账号数据并更新
+     * 
+     * @param id 账号ID
+     * @returns 刷新结果
+     */
+    async refreshAccount(id: string) {
+      return await axios.post<RefreshResult>(`${this.path}/${id}/refresh`);
     }
 }
 

@@ -2,6 +2,8 @@ import { Row } from '@tanstack/react-table'
 import { MoreHorizontal, Trash, Edit, RefreshCcw } from 'lucide-react'
 import { useAccountListContext } from '../context/account-list-context'
 import { Account } from '../data/schema'
+import { accountService } from '@/services/account-services'
+import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -11,6 +13,9 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
+import { Result } from '@/types/result'
 
 // 表格行操作组件Props
 interface DataTableRowActionsProps<TData> {
@@ -24,11 +29,22 @@ export function DataTableRowActions<TData>({
   const account = row.original as Account
   const { setOpen, setCurrent } = useAccountListContext()
 
-  // 删除账号组
+  // 删除账号
   const onDelete = () => {
     setCurrent(account)
     setOpen('delete')
   }
+
+  const { mutate: refreshAccount, isPending: isRefreshing } = useMutation({
+    mutationFn: () => accountService.refreshAccount(account.id),
+    onSuccess: () => {
+      toast.success(`账号 ${account.username} 刷新成功`)
+    },
+    onError: (error: AxiosError<Result<unknown>>) => {
+      console.error('刷新账号失败', error)
+      toast.error(`${error.response?.data?.message || error.message}`, { duration: 5000, description: error.response?.data?.desc })
+    }
+  })
 
   return (
     <DropdownMenu>
@@ -42,15 +58,15 @@ export function DataTableRowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-[160px]'>
+        <DropdownMenuItem onClick={() => refreshAccount()} disabled={isRefreshing}>
+          <RefreshCcw className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
+          {isRefreshing ? '刷新中...' : '刷新'}
+          <DropdownMenuShortcut>⌘R</DropdownMenuShortcut>
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={onDelete}>
           <Trash className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
           删除
           <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <RefreshCcw className='mr-2 h-3.5 w-3.5 text-muted-foreground/70' />
-          刷新
-          <DropdownMenuShortcut>⌘X</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
