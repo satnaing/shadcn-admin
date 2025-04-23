@@ -18,7 +18,7 @@ export const Route = createRootRouteWithContext<{
         <Toaster duration={50000} />
         {import.meta.env.MODE === 'development' && (
           <>
-            <ReactQueryDevtools buttonPosition='bottom-right' />
+            <ReactQueryDevtools buttonPosition='bottom-left' />
             <TanStackRouterDevtools position='bottom-right' />
           </>
         )}
