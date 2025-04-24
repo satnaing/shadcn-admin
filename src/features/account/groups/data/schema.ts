@@ -25,7 +25,7 @@ export const accountGroupSchema = z.object({
   totalFollowing: z.number(),
   totalFollowers: z.number(),
   createdAt: z.coerce.date(),
-  updatedAt: z.coerce.date(),
+  updatedAt: z.coerce.date().optional(),
 })
 export type AccountGroup = z.infer<typeof accountGroupSchema>
 

@@ -2,13 +2,13 @@ import { z } from 'zod'
 import { accountGroupSchema } from '../../groups/data/schema';
 
 export const AccountStatus = z.object({
-  '0': z.literal('未知'),
-  '1': z.literal('正常'),
-  '2': z.literal('异常')
-});
-// 账号状态枚举
+  '-1': z.literal('未知'),
+  '0': z.literal('正常'),
+  '1': z.literal('异常')
+});// 账号状态枚举
 export const AccountStatusEnum = AccountStatus.keyof();
 export type AccountStatusEnum = z.infer<typeof AccountStatusEnum>;
+
 
 
 
@@ -25,7 +25,7 @@ export const accountSchema = z.object({
   following: z.number().default(0),
   followers: z.number().default(0),
   awemeCount: z.number().default(0),
-  status: z.coerce.number().default(1),
+  status: z.coerce.number().default(-1),
   region: z.string().nullable(),
   deviceId: z.string().nullable(),
   installId: z.string().nullable(),

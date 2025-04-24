@@ -13,7 +13,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { Result } from '@/types/result'
 
@@ -29,6 +29,8 @@ export function DataTableRowActions<TData>({
   const account = row.original as Account
   const { setOpen, setCurrent } = useAccountListContext()
 
+  const queryClient = useQueryClient()
+  
   // 删除账号
   const onDelete = () => {
     setCurrent(account)
@@ -38,7 +40,8 @@ export function DataTableRowActions<TData>({
   const { mutate: refreshAccount, isPending: isRefreshing } = useMutation({
     mutationFn: () => accountService.refreshAccount(account.id),
     onSuccess: () => {
-      toast.success(`账号 ${account.username} 刷新成功`)
+      toast.success(`账号刷新成功`, { duration: 2000 })
+      queryClient.invalidateQueries({ queryKey: [accountService.path] })
     },
     onError: (error: AxiosError<Result<unknown>>) => {
       console.error('刷新账号失败', error)

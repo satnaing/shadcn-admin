@@ -8,6 +8,7 @@ import { format } from 'date-fns'
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 // 账号列表表格列定义
 export const columns: ColumnDef<Account>[] = [
@@ -75,7 +76,7 @@ export const columns: ColumnDef<Account>[] = [
     accessorKey: 'avatar',
     header: ({ column }) => <DataTableColumnHeader column={column} title={accountFieldMap.avatar} />,
     cell: ({ row }) => <Avatar className='h-14 w-14 mr-2'>
-      <AvatarImage src={row.getValue('avatar') || ''} alt={row.getValue('nickname') || ''} />
+      <AvatarImage src={row.getValue('avatar') || undefined} alt={row.getValue('nickname') || ''} />
       <AvatarFallback delayMs={600}></AvatarFallback>
     </Avatar>,
     enableSorting: false,
@@ -116,11 +117,20 @@ export const columns: ColumnDef<Account>[] = [
     header: ({ column }) => <DataTableColumnHeader column={column} title={accountFieldMap.status} />,
     cell: ({ row }) => {
       const status = row.getValue('status')
-      const statusValue = AccountStatus.shape[status as AccountStatusEnum]
+      const statusValue = AccountStatus.shape[status as AccountStatusEnum] || AccountStatus.shape['1']
       return (
-        <Badge variant={status === '1' ? 'default' : status === '0' ? 'secondary' : 'destructive'}>
-          {statusValue.value}
-        </Badge>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Badge variant={status === '0' ? 'default' : status === '-1' ? 'secondary' : 'destructive'}>
+                {statusValue.value}
+              </Badge>
+            </TooltipTrigger>
+            <TooltipContent>
+              {`StatusCode:${status}`}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )
     },
   },
