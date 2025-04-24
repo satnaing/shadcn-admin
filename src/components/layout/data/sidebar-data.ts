@@ -13,6 +13,7 @@ import {
   IconNotification,
   IconPackages,
   IconPalette,
+  IconPasswordUser,
   IconServerOff,
   IconSettings,
   IconTool,
@@ -55,10 +56,20 @@ export const sidebarData: SidebarData = {
           url: '/account/list',
           icon: IconUsers,
         },
-        {
+        {   
           title: '账号分组',
           url: '/account/groups',
           icon: IconFolderUp,
+        },
+      ],
+    },
+    {
+      title: '任务',
+      items: [
+        {
+          title: '粉丝采集',
+          url: '/task/followers',
+          icon: IconPasswordUser,
         },
       ],
     },
