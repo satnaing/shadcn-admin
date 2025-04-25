@@ -68,7 +68,7 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: '粉丝采集',
-          url: '/task/followers',
+          url: '/task/follower-collect',
           icon: IconPasswordUser,
         },
       ],

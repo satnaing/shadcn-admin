@@ -18,6 +18,7 @@ import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
 import { Route as auth500Import } from './routes/(auth)/500'
+import { Route as AuthenticatedTaskFollowerCollectIndexImport } from './routes/_authenticated/task/follower-collect/index'
 
 // Create Virtual Routes
 
@@ -300,6 +301,13 @@ const AuthenticatedAccountGroupsIndexLazyRoute =
     ),
   )
 
+const AuthenticatedTaskFollowerCollectIndexRoute =
+  AuthenticatedTaskFollowerCollectIndexImport.update({
+    id: '/task/follower-collect/',
+    path: '/task/follower-collect/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -472,6 +480,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/task/follower-collect/': {
+      id: '/_authenticated/task/follower-collect/'
+      path: '/task/follower-collect'
+      fullPath: '/task/follower-collect'
+      preLoaderRoute: typeof AuthenticatedTaskFollowerCollectIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/account/groups/': {
       id: '/_authenticated/account/groups/'
       path: '/account/groups'
@@ -525,6 +540,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
   AuthenticatedTasksIndexLazyRoute: typeof AuthenticatedTasksIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
+  AuthenticatedTaskFollowerCollectIndexRoute: typeof AuthenticatedTaskFollowerCollectIndexRoute
   AuthenticatedAccountGroupsIndexLazyRoute: typeof AuthenticatedAccountGroupsIndexLazyRoute
   AuthenticatedAccountListIndexLazyRoute: typeof AuthenticatedAccountListIndexLazyRoute
 }
@@ -538,6 +554,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
   AuthenticatedTasksIndexLazyRoute: AuthenticatedTasksIndexLazyRoute,
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
+  AuthenticatedTaskFollowerCollectIndexRoute:
+    AuthenticatedTaskFollowerCollectIndexRoute,
   AuthenticatedAccountGroupsIndexLazyRoute:
     AuthenticatedAccountGroupsIndexLazyRoute,
   AuthenticatedAccountListIndexLazyRoute:
@@ -571,6 +589,7 @@ export interface FileRoutesByFullPath {
   '/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
+  '/task/follower-collect': typeof AuthenticatedTaskFollowerCollectIndexRoute
   '/account/groups': typeof AuthenticatedAccountGroupsIndexLazyRoute
   '/account/list': typeof AuthenticatedAccountListIndexLazyRoute
 }
@@ -597,6 +616,7 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsIndexLazyRoute
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
+  '/task/follower-collect': typeof AuthenticatedTaskFollowerCollectIndexRoute
   '/account/groups': typeof AuthenticatedAccountGroupsIndexLazyRoute
   '/account/list': typeof AuthenticatedAccountListIndexLazyRoute
 }
@@ -627,6 +647,7 @@ export interface FileRoutesById {
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexLazyRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
+  '/_authenticated/task/follower-collect/': typeof AuthenticatedTaskFollowerCollectIndexRoute
   '/_authenticated/account/groups/': typeof AuthenticatedAccountGroupsIndexLazyRoute
   '/_authenticated/account/list/': typeof AuthenticatedAccountListIndexLazyRoute
 }
@@ -657,6 +678,7 @@ export interface FileRouteTypes {
     | '/settings/'
     | '/tasks'
     | '/users'
+    | '/task/follower-collect'
     | '/account/groups'
     | '/account/list'
   fileRoutesByTo: FileRoutesByTo
@@ -682,6 +704,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/tasks'
     | '/users'
+    | '/task/follower-collect'
     | '/account/groups'
     | '/account/list'
   id:
@@ -710,6 +733,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
+    | '/_authenticated/task/follower-collect/'
     | '/_authenticated/account/groups/'
     | '/_authenticated/account/list/'
   fileRoutesById: FileRoutesById
@@ -779,6 +803,7 @@ export const routeTree = rootRoute
         "/_authenticated/help-center/",
         "/_authenticated/tasks/",
         "/_authenticated/users/",
+        "/_authenticated/task/follower-collect/",
         "/_authenticated/account/groups/",
         "/_authenticated/account/list/"
       ]
@@ -869,6 +894,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/users/": {
       "filePath": "_authenticated/users/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/task/follower-collect/": {
+      "filePath": "_authenticated/task/follower-collect/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/account/groups/": {
