@@ -25,8 +25,10 @@ export const useAuthStore = create<AuthState>()((set) => {
       set((state) => ({ ...state, auth: { ...state.auth, user } }))
     }).catch((error) => {
       console.error('获取用户信息失败:', error)
-      localStorage.removeItem('user')
-      set((state) => ({ ...state, auth: { ...state.auth, user: null } }))
+      if (error.response.status === 401) {  
+        localStorage.removeItem('user')
+        set((state) => ({ ...state, auth: { ...state.auth, user: null } }))
+      }
     })
   };
 
