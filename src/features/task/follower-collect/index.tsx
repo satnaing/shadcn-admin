@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/header";
 import { ThemeSwitch } from "@/components/theme-switch";
 import DataTableProvider from "@/components/data-table/data-table-context";
-import { FollowerCollectTask } from "./data/schema";
+import { CollectFollowerTask } from "./data/schema";
 import { Main } from "@/components/layout/main";
 import { DataTable } from "@/components/data-table";
 import { columns } from "./components/follower-collect-task-columns";
@@ -16,7 +16,7 @@ type DataTableDialogType = 'create'
  */
 export default function FollowerCollectPage() {
   return (
-    <DataTableProvider<FollowerCollectTask, DataTableDialogType> >
+    <DataTableProvider<CollectFollowerTask, DataTableDialogType> >
       <Header fixed hideSpacer>
         <div className='ml-auto flex items-center space-x-4'>
           <ThemeSwitch />
@@ -33,7 +33,7 @@ export default function FollowerCollectPage() {
           <FollowerCollectPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-          <DataTable<FollowerCollectTask> columns={columns} service={followerCollectService} /* Toolbar={DataTableToolbar} */ />
+          <DataTable<CollectFollowerTask> columns={columns} service={followerCollectService} /* Toolbar={DataTableToolbar} */ />
         </div>
       </Main>
       <FollowerCollectDialogs />

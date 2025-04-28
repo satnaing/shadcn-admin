@@ -5,6 +5,7 @@ import {
   IconChecklist,
   IconError404,
   IconFolderUp,
+  IconFriends,
   IconHelp,
   IconLayoutDashboard,
   IconLock,
@@ -70,6 +71,16 @@ export const sidebarData: SidebarData = {
           title: '粉丝采集',
           url: '/task/follower-collect',
           icon: IconPasswordUser,
+        },
+      ],
+    },
+    {
+      title: '数据',
+      items: [
+        {
+          title: '好友列表',
+          url: '/tiktok/friend',
+          icon: IconFriends,
         },
       ],
     },

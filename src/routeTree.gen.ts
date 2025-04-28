@@ -18,6 +18,7 @@ import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
 import { Route as auth500Import } from './routes/(auth)/500'
+import { Route as AuthenticatedTiktokFriendIndexImport } from './routes/_authenticated/tiktok/friend/index'
 import { Route as AuthenticatedTaskFollowerCollectIndexImport } from './routes/_authenticated/task/follower-collect/index'
 
 // Create Virtual Routes
@@ -301,6 +302,13 @@ const AuthenticatedAccountGroupsIndexLazyRoute =
     ),
   )
 
+const AuthenticatedTiktokFriendIndexRoute =
+  AuthenticatedTiktokFriendIndexImport.update({
+    id: '/tiktok/friend/',
+    path: '/tiktok/friend/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
 const AuthenticatedTaskFollowerCollectIndexRoute =
   AuthenticatedTaskFollowerCollectIndexImport.update({
     id: '/task/follower-collect/',
@@ -487,6 +495,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedTaskFollowerCollectIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/tiktok/friend/': {
+      id: '/_authenticated/tiktok/friend/'
+      path: '/tiktok/friend'
+      fullPath: '/tiktok/friend'
+      preLoaderRoute: typeof AuthenticatedTiktokFriendIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/account/groups/': {
       id: '/_authenticated/account/groups/'
       path: '/account/groups'
@@ -541,6 +556,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTasksIndexLazyRoute: typeof AuthenticatedTasksIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
   AuthenticatedTaskFollowerCollectIndexRoute: typeof AuthenticatedTaskFollowerCollectIndexRoute
+  AuthenticatedTiktokFriendIndexRoute: typeof AuthenticatedTiktokFriendIndexRoute
   AuthenticatedAccountGroupsIndexLazyRoute: typeof AuthenticatedAccountGroupsIndexLazyRoute
   AuthenticatedAccountListIndexLazyRoute: typeof AuthenticatedAccountListIndexLazyRoute
 }
@@ -556,6 +572,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
   AuthenticatedTaskFollowerCollectIndexRoute:
     AuthenticatedTaskFollowerCollectIndexRoute,
+  AuthenticatedTiktokFriendIndexRoute: AuthenticatedTiktokFriendIndexRoute,
   AuthenticatedAccountGroupsIndexLazyRoute:
     AuthenticatedAccountGroupsIndexLazyRoute,
   AuthenticatedAccountListIndexLazyRoute:
@@ -590,6 +607,7 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
   '/task/follower-collect': typeof AuthenticatedTaskFollowerCollectIndexRoute
+  '/tiktok/friend': typeof AuthenticatedTiktokFriendIndexRoute
   '/account/groups': typeof AuthenticatedAccountGroupsIndexLazyRoute
   '/account/list': typeof AuthenticatedAccountListIndexLazyRoute
 }
@@ -617,6 +635,7 @@ export interface FileRoutesByTo {
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
   '/task/follower-collect': typeof AuthenticatedTaskFollowerCollectIndexRoute
+  '/tiktok/friend': typeof AuthenticatedTiktokFriendIndexRoute
   '/account/groups': typeof AuthenticatedAccountGroupsIndexLazyRoute
   '/account/list': typeof AuthenticatedAccountListIndexLazyRoute
 }
@@ -648,6 +667,7 @@ export interface FileRoutesById {
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexLazyRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
   '/_authenticated/task/follower-collect/': typeof AuthenticatedTaskFollowerCollectIndexRoute
+  '/_authenticated/tiktok/friend/': typeof AuthenticatedTiktokFriendIndexRoute
   '/_authenticated/account/groups/': typeof AuthenticatedAccountGroupsIndexLazyRoute
   '/_authenticated/account/list/': typeof AuthenticatedAccountListIndexLazyRoute
 }
@@ -679,6 +699,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/users'
     | '/task/follower-collect'
+    | '/tiktok/friend'
     | '/account/groups'
     | '/account/list'
   fileRoutesByTo: FileRoutesByTo
@@ -705,6 +726,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/users'
     | '/task/follower-collect'
+    | '/tiktok/friend'
     | '/account/groups'
     | '/account/list'
   id:
@@ -734,6 +756,7 @@ export interface FileRouteTypes {
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
     | '/_authenticated/task/follower-collect/'
+    | '/_authenticated/tiktok/friend/'
     | '/_authenticated/account/groups/'
     | '/_authenticated/account/list/'
   fileRoutesById: FileRoutesById
@@ -804,6 +827,7 @@ export const routeTree = rootRoute
         "/_authenticated/tasks/",
         "/_authenticated/users/",
         "/_authenticated/task/follower-collect/",
+        "/_authenticated/tiktok/friend/",
         "/_authenticated/account/groups/",
         "/_authenticated/account/list/"
       ]
@@ -898,6 +922,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/task/follower-collect/": {
       "filePath": "_authenticated/task/follower-collect/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/tiktok/friend/": {
+      "filePath": "_authenticated/tiktok/friend/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/account/groups/": {

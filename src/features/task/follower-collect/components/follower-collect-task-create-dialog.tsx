@@ -23,7 +23,7 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 import { toast } from 'sonner'
 import { useDataTableContext } from '@/components/data-table/data-table-context'
 import { followerCollectService } from '@/services/follower-collect-service'
-import { CreateFollowerCollectTaskInput, createFollowerCollectTaskSchema } from '../data/schema'
+import { CreateCollectFollowerTaskInput, createCollectFollowerTaskSchema } from '../data/schema'
 import { Popover, PopoverTrigger } from '@radix-ui/react-popover'
 import { cn } from '@/lib/utils'
 import { accountGroupService } from '@/services/account-group-service'
@@ -41,7 +41,7 @@ export function FollowerCollectTaskCreateDialog() {
 
   // 创建和更新的mutation hooks
   const createMutation = useMutation({
-    mutationFn: (data: CreateFollowerCollectTaskInput) => followerCollectService.create(data),
+    mutationFn: (data: CreateCollectFollowerTaskInput) => followerCollectService.create(data),
     onSuccess: () => {
       toast.success('粉丝采集任务创建成功', { duration: 2000 })
       queryClient.invalidateQueries({ queryKey: [followerCollectService.path] })
@@ -53,8 +53,8 @@ export function FollowerCollectTaskCreateDialog() {
   })
 
   // 表单实例
-  const form = useForm<CreateFollowerCollectTaskInput>({
-    resolver: zodResolver(createFollowerCollectTaskSchema),
+  const form = useForm<CreateCollectFollowerTaskInput>({
+    resolver: zodResolver(createCollectFollowerTaskSchema),
     defaultValues: {
       name: current?.name || '',
       description: current?.description || '',
@@ -69,7 +69,7 @@ export function FollowerCollectTaskCreateDialog() {
   })
 
   // 提交表单
-  const onSubmit = (data: CreateFollowerCollectTaskInput) => {
+  const onSubmit = (data: CreateCollectFollowerTaskInput) => {
     createMutation.mutate(data, {
         onSuccess: () => {
           setOpen(null)
