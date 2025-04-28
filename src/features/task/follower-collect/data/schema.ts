@@ -1,56 +1,21 @@
-import { AccountGroup, accountGroupSchema } from "@/features/account/groups/data/schema";
+import { accountGroupSchema } from "@/features/account/groups/data/schema";
 import { z } from "zod";
 
 /**
  * 任务状态枚举
  */
-export enum TaskStatus {
-  /**
-   * 创建
-   */
-  CREATED = "CREATED",
-
-  /**
-   * 初始化中
-   */
-  INITIALIZING = "INITIALIZING",
-
-  /**
-   * 初始化完成
-   */
-  INITIALIZED = "INITIALIZED",
-
-  /**
-   * 处理中
-   */
-  PROCESSING = "PROCESSING",
-
-  /**
-   * 完成
-   */
-  COMPLETED = "COMPLETED",
-
-  /**
-   * 失败
-   */
-  FAILED = "FAILED",
-
-  /**
-   * 停止
-   */
-  STOPPED = "STOPPED",
-
-  /**
-   * 暂停
-   */
-  PAUSED = "PAUSED",
-
-  /**
-   * 恢复
-   */
-  RESUMED = "RESUMED",
-}
-export const TaskStatusEnum = z.nativeEnum(TaskStatus);
+export const TaskStatus = z.object({
+  CREATED: z.literal('创建'),
+  INITIALIZING: z.literal('初始化中'),
+  INITIALIZED: z.literal('初始化完成'),
+  PROCESSING: z.literal('处理中'),
+  COMPLETED: z.literal('完成'),
+  FAILED: z.literal('失败'),
+  STOPPED: z.literal('停止'),
+  PAUSED: z.literal('暂停'),
+  RESUMED: z.literal('恢复'),
+})
+export const TaskStatusEnum = TaskStatus.keyof();
 export type TaskStatusEnum = z.infer<typeof TaskStatusEnum>;
 
 /**
@@ -63,6 +28,7 @@ export const followerCollectTaskSchema = z.object({
   group: accountGroupSchema,
   total: z.number(),
   processed: z.number(),
+  totalFans: z.number(),
   status: TaskStatusEnum,
   createdAt: z.string(),
   updatedAt: z.string(),
@@ -77,8 +43,9 @@ export const followerCollectTaskFieldMap: Record<keyof FollowerCollectTask, stri
   name: "任务名称",
   description: "任务描述",
   group: "账号组",
-  total: "总粉丝数",
-  processed: "已处理粉丝数",
+  total: "任务数",
+  processed: "完成数",
+  totalFans: "采集数",
   status: "任务状态",
   createdAt: "创建时间",
   updatedAt: "更新时间",

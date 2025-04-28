@@ -1,13 +1,9 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Badge } from '@/components/ui/badge'
 import { format } from 'date-fns'
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
-import { Button } from '@/components/ui/button'
-import { toast } from 'sonner'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { FollowerCollectTask, followerCollectTaskFieldMap } from '../data/schema'
+import { FollowerCollectTask, followerCollectTaskFieldMap, TaskStatus, TaskStatusEnum } from '../data/schema'
+import { IconCircleDashedLetterI, IconCircleDotted, IconCircleDottedLetterI, IconClockCancel, IconClockOff, IconClockPause, IconClockPlay, IconClockQuestion, IconClockStop, IconProgress } from '@tabler/icons-react'
 
 // 账号列表表格列定义
 export const columns: ColumnDef<FollowerCollectTask>[] = [
@@ -71,11 +67,60 @@ export const columns: ColumnDef<FollowerCollectTask>[] = [
     header: ({ column }) => <DataTableColumnHeader column={column} title={followerCollectTaskFieldMap.processed} />,
     cell: ({ row }) => <div>{row.getValue('processed')}</div>
   },
+  // 总粉丝数列
+  {
+    accessorKey: 'totalFans',
+    header: ({ column }) => <DataTableColumnHeader column={column} title={followerCollectTaskFieldMap.totalFans} />,
+    cell: ({ row }) => <div>{row.getValue('totalFans')}</div>
+  },
   // 任务状态列
   {
     accessorKey: 'status',
     header: ({ column }) => <DataTableColumnHeader column={column} title={followerCollectTaskFieldMap.status} />,
-    cell: ({ row }) => <div>{row.getValue('status')}</div>
+    cell: ({ row }) => {
+      const status = row.original.status
+      const statusValue = TaskStatus.shape[status as TaskStatusEnum] || TaskStatus.shape['CREATED']
+      let icon = null
+      switch (status) {
+        case 'CREATED':
+          icon = <IconCircleDotted  className='text-muted-foreground mr-2 h-4 w-4' />
+          break
+        case 'INITIALIZING':
+          icon = <IconCircleDottedLetterI className='text-muted-foreground mr-2 h-4 w-4' />
+          break
+        case 'INITIALIZED':
+          icon = <IconCircleDashedLetterI className='text-muted-foreground mr-2 h-4 w-4' />
+          break
+        case 'PROCESSING':
+          icon = <IconProgress className='text-muted-foreground mr-2 h-4 w-4' />
+          break
+        case 'COMPLETED':
+          icon = <IconClockCancel className='text-muted-foreground mr-2 h-4 w-4' />
+          break
+        case 'FAILED':
+          icon = <IconClockOff className='text-muted-foreground mr-2 h-4 w-4' />
+          break
+        case 'STOPPED':
+          icon = <IconClockStop className='text-muted-foreground mr-2 h-4 w-4' />
+          break
+        case 'PAUSED':
+          icon = <IconClockPause className='text-muted-foreground mr-2 h-4 w-4' />
+          break
+        case 'RESUMED':
+          icon = <IconClockPlay className='text-muted-foreground mr-2 h-4 w-4' />
+          break
+        default:
+          icon = <IconClockQuestion className='text-muted-foreground mr-2 h-4 w-4' />
+          break
+      }
+
+      return (
+        <div className='flex items-center'>
+          {icon}
+          <span>{statusValue.value}</span>
+        </div>
+      )
+    }
   },
   // 创建时间列
   {
