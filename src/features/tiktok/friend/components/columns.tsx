@@ -56,6 +56,11 @@ export const columns: ColumnDef<TiktokFriend>[] = [
     cell: ({ row }) => <Badge variant="outline">{row.original.task.name}</Badge>
   },
   {
+    accessorKey: 'accountGroup',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="账号组" />,
+    cell: ({ row }) => <Badge variant="outline">{row.original.task.group.name}</Badge>
+  },
+  {
     accessorKey: 'account',
     header: ({ column }) => <DataTableColumnHeader column={column} title={friendListFieldMap.account} />,
     cell: ({ row }) => <Badge variant="outline">{row.original.account.username}</Badge>
@@ -69,21 +74,23 @@ export const columns: ColumnDef<TiktokFriend>[] = [
   {
     accessorKey: 'avatar',
     header: ({ column }) => <DataTableColumnHeader column={column} title={friendListFieldMap.avatar} />,
-    cell: ({ row }) => <Avatar className='h-14 w-14 mr-2'>{row.getValue('avatar')}
+    cell: ({ row }) => <Avatar className='h-14 w-14 mr-2'>
       <AvatarImage src={row.getValue('avatar') || undefined} alt={row.getValue('nickname') || ''} />
       <AvatarFallback delayMs={600}></AvatarFallback>
     </Avatar>,
     enableSorting: false,
   },
+  // 昵称等基本信息
   {
     accessorKey: 'nickname',
     header: ({ column }) => <DataTableColumnHeader column={column} title={friendListFieldMap.nickname} />,
-    cell: ({ row }) => <div>{row.getValue('nickname')}</div>
-  },
-  {
-    accessorKey: 'signature',
-    header: ({ column }) => <DataTableColumnHeader column={column} title={friendListFieldMap.signature} />,
-    cell: ({ row }) => <div>{row.getValue('signature')}</div>
+    cell: ({ row }) => {
+      return <div className='flex flex-col items-start gap-2 font-normal text-xs'>
+        <div><Badge className='mr-2 font-normal' variant="outline">昵称</Badge><span>{row.getValue('nickname') || '--'}</span></div>
+        <div><Badge className='mr-2 font-normal' variant="outline">签名</Badge><span>{row.original.signature || '--'}</span></div>
+      </div>
+    },
+    enableSorting: false,
   },
   {
     accessorKey: 'followingCount',
@@ -110,15 +117,16 @@ export const columns: ColumnDef<TiktokFriend>[] = [
     header: ({ column }) => <DataTableColumnHeader column={column} title={friendListFieldMap.totalFavorited} />,
     cell: ({ row }) => <div>{row.getValue('totalFavorited')}</div>
   },
+  // 地区列
   {
     accessorKey: 'region',
     header: ({ column }) => <DataTableColumnHeader column={column} title={friendListFieldMap.region} />,
-    cell: ({ row }) => <div>{row.getValue('region')}</div>
+    cell: ({ row }) => <Badge variant="outline">{row.getValue('region')}</Badge>,
   },
   {
     accessorKey: 'language',
     header: ({ column }) => <DataTableColumnHeader column={column} title={friendListFieldMap.language} />,
-    cell: ({ row }) => <div>{row.getValue('language')}</div>
+    cell: ({ row }) => <Badge variant="outline">{row.getValue('language')}</Badge>
   },
   {
     accessorKey: 'createdAt',
