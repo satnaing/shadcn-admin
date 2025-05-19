@@ -14,7 +14,6 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as ClerkRouteImport } from './routes/clerk/route'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
-import { Route as ClerkUserManagementImport } from './routes/clerk/user-management'
 import { Route as errors503Import } from './routes/(errors)/503'
 import { Route as errors500Import } from './routes/(errors)/500'
 import { Route as errors404Import } from './routes/(errors)/404'
@@ -25,6 +24,7 @@ import { Route as authSignIn2Import } from './routes/(auth)/sign-in-2'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
 import { Route as authForgotPasswordImport } from './routes/(auth)/forgot-password'
+import { Route as ClerkAuthenticatedRouteImport } from './routes/clerk/_authenticated/route'
 import { Route as ClerkauthRouteImport } from './routes/clerk/(auth)/route'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings/route'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
@@ -33,6 +33,7 @@ import { Route as AuthenticatedSettingsIndexImport } from './routes/_authenticat
 import { Route as AuthenticatedHelpCenterIndexImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedChatsIndexImport } from './routes/_authenticated/chats/index'
 import { Route as AuthenticatedAppsIndexImport } from './routes/_authenticated/apps/index'
+import { Route as ClerkAuthenticatedUserManagementImport } from './routes/clerk/_authenticated/user-management'
 import { Route as ClerkauthSignUpImport } from './routes/clerk/(auth)/sign-up'
 import { Route as ClerkauthSignInImport } from './routes/clerk/(auth)/sign-in'
 import { Route as AuthenticatedSettingsNotificationsImport } from './routes/_authenticated/settings/notifications'
@@ -57,12 +58,6 @@ const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-
-const ClerkUserManagementRoute = ClerkUserManagementImport.update({
-  id: '/user-management',
-  path: '/user-management',
-  getParentRoute: () => ClerkRouteRoute,
 } as any)
 
 const errors503Route = errors503Import.update({
@@ -125,6 +120,11 @@ const authForgotPasswordRoute = authForgotPasswordImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ClerkAuthenticatedRouteRoute = ClerkAuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => ClerkRouteRoute,
+} as any)
+
 const ClerkauthRouteRoute = ClerkauthRouteImport.update({
   id: '/(auth)',
   getParentRoute: () => ClerkRouteRoute,
@@ -176,6 +176,13 @@ const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexImport.update({
   path: '/apps/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+
+const ClerkAuthenticatedUserManagementRoute =
+  ClerkAuthenticatedUserManagementImport.update({
+    id: '/user-management',
+    path: '/user-management',
+    getParentRoute: () => ClerkAuthenticatedRouteRoute,
+  } as any)
 
 const ClerkauthSignUpRoute = ClerkauthSignUpImport.update({
   id: '/sign-up',
@@ -249,6 +256,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClerkauthRouteImport
       parentRoute: typeof ClerkRouteImport
     }
+    '/clerk/_authenticated': {
+      id: '/clerk/_authenticated'
+      path: ''
+      fullPath: '/clerk'
+      preLoaderRoute: typeof ClerkAuthenticatedRouteImport
+      parentRoute: typeof ClerkRouteImport
+    }
     '/(auth)/forgot-password': {
       id: '/(auth)/forgot-password'
       path: '/forgot-password'
@@ -319,13 +333,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof errors503Import
       parentRoute: typeof rootRoute
     }
-    '/clerk/user-management': {
-      id: '/clerk/user-management'
-      path: '/user-management'
-      fullPath: '/clerk/user-management'
-      preLoaderRoute: typeof ClerkUserManagementImport
-      parentRoute: typeof ClerkRouteImport
-    }
     '/_authenticated/': {
       id: '/_authenticated/'
       path: '/'
@@ -374,6 +381,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/clerk/sign-up'
       preLoaderRoute: typeof ClerkauthSignUpImport
       parentRoute: typeof ClerkauthRouteImport
+    }
+    '/clerk/_authenticated/user-management': {
+      id: '/clerk/_authenticated/user-management'
+      path: '/user-management'
+      fullPath: '/clerk/user-management'
+      preLoaderRoute: typeof ClerkAuthenticatedUserManagementImport
+      parentRoute: typeof ClerkAuthenticatedRouteImport
     }
     '/_authenticated/apps/': {
       id: '/_authenticated/apps/'
@@ -482,14 +496,29 @@ const ClerkauthRouteRouteWithChildren = ClerkauthRouteRoute._addFileChildren(
   ClerkauthRouteRouteChildren,
 )
 
+interface ClerkAuthenticatedRouteRouteChildren {
+  ClerkAuthenticatedUserManagementRoute: typeof ClerkAuthenticatedUserManagementRoute
+}
+
+const ClerkAuthenticatedRouteRouteChildren: ClerkAuthenticatedRouteRouteChildren =
+  {
+    ClerkAuthenticatedUserManagementRoute:
+      ClerkAuthenticatedUserManagementRoute,
+  }
+
+const ClerkAuthenticatedRouteRouteWithChildren =
+  ClerkAuthenticatedRouteRoute._addFileChildren(
+    ClerkAuthenticatedRouteRouteChildren,
+  )
+
 interface ClerkRouteRouteChildren {
   ClerkauthRouteRoute: typeof ClerkauthRouteRouteWithChildren
-  ClerkUserManagementRoute: typeof ClerkUserManagementRoute
+  ClerkAuthenticatedRouteRoute: typeof ClerkAuthenticatedRouteRouteWithChildren
 }
 
 const ClerkRouteRouteChildren: ClerkRouteRouteChildren = {
   ClerkauthRouteRoute: ClerkauthRouteRouteWithChildren,
-  ClerkUserManagementRoute: ClerkUserManagementRoute,
+  ClerkAuthenticatedRouteRoute: ClerkAuthenticatedRouteRouteWithChildren,
 }
 
 const ClerkRouteRouteWithChildren = ClerkRouteRoute._addFileChildren(
@@ -498,7 +527,7 @@ const ClerkRouteRouteWithChildren = ClerkRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteRouteWithChildren
-  '/clerk': typeof ClerkRouteRouteWithChildren
+  '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/clerk/': typeof ClerkauthRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
@@ -511,7 +540,6 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/clerk/user-management': typeof ClerkUserManagementRoute
   '/': typeof AuthenticatedIndexRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
@@ -519,6 +547,7 @@ export interface FileRoutesByFullPath {
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/clerk/sign-in': typeof ClerkauthSignInRoute
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
+  '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
@@ -528,7 +557,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
-  '/clerk': typeof ClerkauthRouteRouteWithChildren
+  '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
@@ -539,7 +568,6 @@ export interface FileRoutesByTo {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/clerk/user-management': typeof ClerkUserManagementRoute
   '/': typeof AuthenticatedIndexRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
@@ -547,6 +575,7 @@ export interface FileRoutesByTo {
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/clerk/sign-in': typeof ClerkauthSignInRoute
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
+  '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
@@ -561,6 +590,7 @@ export interface FileRoutesById {
   '/clerk': typeof ClerkRouteRouteWithChildren
   '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/clerk/(auth)': typeof ClerkauthRouteRouteWithChildren
+  '/clerk/_authenticated': typeof ClerkAuthenticatedRouteRouteWithChildren
   '/(auth)/forgot-password': typeof authForgotPasswordRoute
   '/(auth)/otp': typeof authOtpRoute
   '/(auth)/sign-in': typeof authSignInRoute
@@ -571,7 +601,6 @@ export interface FileRoutesById {
   '/(errors)/404': typeof errors404Route
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
-  '/clerk/user-management': typeof ClerkUserManagementRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
@@ -579,6 +608,7 @@ export interface FileRoutesById {
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/clerk/(auth)/sign-in': typeof ClerkauthSignInRoute
   '/clerk/(auth)/sign-up': typeof ClerkauthSignUpRoute
+  '/clerk/_authenticated/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
@@ -604,7 +634,6 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
-    | '/clerk/user-management'
     | '/'
     | '/settings/account'
     | '/settings/appearance'
@@ -612,6 +641,7 @@ export interface FileRouteTypes {
     | '/settings/notifications'
     | '/clerk/sign-in'
     | '/clerk/sign-up'
+    | '/clerk/user-management'
     | '/apps'
     | '/chats'
     | '/help-center'
@@ -631,7 +661,6 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
-    | '/clerk/user-management'
     | '/'
     | '/settings/account'
     | '/settings/appearance'
@@ -639,6 +668,7 @@ export interface FileRouteTypes {
     | '/settings/notifications'
     | '/clerk/sign-in'
     | '/clerk/sign-up'
+    | '/clerk/user-management'
     | '/apps'
     | '/chats'
     | '/help-center'
@@ -651,6 +681,7 @@ export interface FileRouteTypes {
     | '/clerk'
     | '/_authenticated/settings'
     | '/clerk/(auth)'
+    | '/clerk/_authenticated'
     | '/(auth)/forgot-password'
     | '/(auth)/otp'
     | '/(auth)/sign-in'
@@ -661,7 +692,6 @@ export interface FileRouteTypes {
     | '/(errors)/404'
     | '/(errors)/500'
     | '/(errors)/503'
-    | '/clerk/user-management'
     | '/_authenticated/'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
@@ -669,6 +699,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/notifications'
     | '/clerk/(auth)/sign-in'
     | '/clerk/(auth)/sign-up'
+    | '/clerk/_authenticated/user-management'
     | '/_authenticated/apps/'
     | '/_authenticated/chats/'
     | '/_authenticated/help-center/'
@@ -748,7 +779,7 @@ export const routeTree = rootRoute
       "filePath": "clerk/route.tsx",
       "children": [
         "/clerk/(auth)",
-        "/clerk/user-management"
+        "/clerk/_authenticated"
       ]
     },
     "/_authenticated/settings": {
@@ -768,6 +799,13 @@ export const routeTree = rootRoute
       "children": [
         "/clerk/(auth)/sign-in",
         "/clerk/(auth)/sign-up"
+      ]
+    },
+    "/clerk/_authenticated": {
+      "filePath": "clerk/_authenticated/route.tsx",
+      "parent": "/clerk",
+      "children": [
+        "/clerk/_authenticated/user-management"
       ]
     },
     "/(auth)/forgot-password": {
@@ -800,10 +838,6 @@ export const routeTree = rootRoute
     "/(errors)/503": {
       "filePath": "(errors)/503.tsx"
     },
-    "/clerk/user-management": {
-      "filePath": "clerk/user-management.tsx",
-      "parent": "/clerk"
-    },
     "/_authenticated/": {
       "filePath": "_authenticated/index.tsx",
       "parent": "/_authenticated"
@@ -831,6 +865,10 @@ export const routeTree = rootRoute
     "/clerk/(auth)/sign-up": {
       "filePath": "clerk/(auth)/sign-up.tsx",
       "parent": "/clerk/(auth)"
+    },
+    "/clerk/_authenticated/user-management": {
+      "filePath": "clerk/_authenticated/user-management.tsx",
+      "parent": "/clerk/_authenticated"
     },
     "/_authenticated/apps/": {
       "filePath": "_authenticated/apps/index.tsx",
