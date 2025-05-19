@@ -5,21 +5,13 @@ import {
   useNavigate,
   useRouter,
 } from '@tanstack/react-router'
-import {
-  IconArrowUpRight,
-  IconLoader2,
-  IconQuestionMark,
-} from '@tabler/icons-react'
+import { IconArrowUpRight, IconLoader2 } from '@tabler/icons-react'
 import { SignedIn, useAuth, UserButton } from '@clerk/clerk-react'
 import { ClerkLogo } from '@/assets/clerk-logo'
 import { Button } from '@/components/ui/button'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
+import { LearnMore } from '@/components/learn-more'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { columns } from '@/features/users/components/users-columns'
@@ -72,7 +64,11 @@ function UserManagement() {
                   <p className='text-muted-foreground'>
                     Manage your users and their roles here.
                   </p>
-                  <LearnMore open={opened} onOpenChange={setOpened}>
+                  <LearnMore
+                    open={opened}
+                    onOpenChange={setOpened}
+                    contentProps={{ side: 'right' }}
+                  >
                     <p>
                       This is the same as{' '}
                       <Link
@@ -184,32 +180,5 @@ function Unauthorized() {
         </div>
       </div>
     </div>
-  )
-}
-
-function LearnMore({
-  children,
-  ...props
-}: {
-  open: boolean
-  onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
-  children: React.ReactNode
-}) {
-  return (
-    <Popover {...props}>
-      <PopoverTrigger asChild>
-        <Button variant='outline' size='icon' className='size-5 rounded-full'>
-          <span className='sr-only'>Learn more</span>
-          <IconQuestionMark className='size-3' />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent
-        side='top'
-        align='start'
-        className='text-muted-foreground text-sm'
-      >
-        {children}
-      </PopoverContent>
-    </Popover>
   )
 }

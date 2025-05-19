@@ -34,9 +34,8 @@ function ClerkAuthLayout() {
         <div className='relative z-20 mt-auto'>
           <blockquote className='space-y-2'>
             <p className='text-lg'>
-              &ldquo;This template has saved me countless hours of work and
-              helped me deliver stunning designs to my clients faster than ever
-              before.&rdquo;
+              &ldquo; Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Sint, magni debitis inventore asperiores velit! &rdquo;
             </p>
             <footer className='text-sm'>John Doe</footer>
           </blockquote>
