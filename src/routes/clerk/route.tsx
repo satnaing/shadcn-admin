@@ -20,6 +20,7 @@ function RouteComponent() {
       signInUrl='/clerk/sign-in'
       signUpUrl='/clerk/sign-up'
       signInFallbackRedirectUrl='/clerk/user-management'
+      signUpFallbackRedirectUrl='/clerk/user-management'
     >
       <Outlet />
     </ClerkProvider>
