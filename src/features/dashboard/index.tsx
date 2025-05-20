@@ -11,6 +11,7 @@ import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { TopNav } from '@/components/layout/top-nav'
 import { ProfileDropdown } from '@/components/profile-dropdown'
+import { NotificationBell } from '@/components/notification-bell'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { Overview } from './components/overview'
@@ -25,6 +26,7 @@ export default function Dashboard() {
         <div className='ml-auto flex items-center space-x-4'>
           <Search />
           <ThemeSwitch />
+          <NotificationBell />
           <ProfileDropdown />
         </div>
       </Header>

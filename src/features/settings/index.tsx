@@ -13,6 +13,7 @@ import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import SidebarNav from './components/sidebar-nav'
+import { NotificationBell } from '@/components/notification-bell'
 
 export default function Settings() {
   return (
@@ -22,6 +23,7 @@ export default function Settings() {
         <Search />
         <div className='ml-auto flex items-center space-x-4'>
           <ThemeSwitch />
+          <NotificationBell />
           <ProfileDropdown />
         </div>
       </Header>

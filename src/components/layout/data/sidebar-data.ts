@@ -4,13 +4,10 @@ import {
   IconBug,
   IconChecklist,
   IconError404,
-  IconHelp,
   IconLayoutDashboard,
   IconLock,
   IconLockAccess,
-  IconMessages,
   IconNotification,
-  IconPackages,
   IconPalette,
   IconServerOff,
   IconSettings,
@@ -19,7 +16,7 @@ import {
   IconUserOff,
   IconUsers,
 } from '@tabler/icons-react'
-import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
+import { Command } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
@@ -33,16 +30,6 @@ export const sidebarData: SidebarData = {
       name: 'Shadcn Admin',
       logo: Command,
       plan: 'Vite + ShadcnUI',
-    },
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
     },
   ],
   navGroups: [
@@ -58,17 +45,6 @@ export const sidebarData: SidebarData = {
           title: 'Tasks',
           url: '/tasks',
           icon: IconChecklist,
-        },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: IconPackages,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: IconMessages,
         },
         {
           title: 'Users',
@@ -172,11 +148,6 @@ export const sidebarData: SidebarData = {
               icon: IconBrowserCheck,
             },
           ],
-        },
-        {
-          title: 'Help Center',
-          url: '/help-center',
-          icon: IconHelp,
         },
       ],
     },

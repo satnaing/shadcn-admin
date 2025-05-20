@@ -9,6 +9,7 @@ import { TasksDialogs } from './components/tasks-dialogs'
 import { TasksPrimaryButtons } from './components/tasks-primary-buttons'
 import TasksProvider from './context/tasks-context'
 import { tasks } from './data/tasks'
+import { NotificationBell } from '@/components/notification-bell'
 
 export default function Tasks() {
   return (
@@ -17,6 +18,7 @@ export default function Tasks() {
         <Search />
         <div className='ml-auto flex items-center space-x-4'>
           <ThemeSwitch />
+          <NotificationBell />
           <ProfileDropdown />
         </div>
       </Header>
