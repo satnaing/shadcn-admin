@@ -77,9 +77,8 @@ export const sidebarData: SidebarData = {
           icon: IconUsers,
         },
         {
-          title: 'Clerk',
+          title: 'Secured by Clerk',
           icon: ClerkLogo,
-          badge: 'Sponsored',
           items: [
             {
               title: 'Sign In',
