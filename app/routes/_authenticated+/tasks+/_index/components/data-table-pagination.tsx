@@ -73,9 +73,7 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
-              updatePagination({
-                page: undefined, // delete page param
-              })
+              updatePagination({ page: undefined })
             }}
             disabled={page === 1}
           >
@@ -87,9 +85,7 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() => {
-              updatePagination({
-                page: page === 2 ? undefined : page - 1,
-              })
+              updatePagination({ page: page === 2 ? undefined : page - 1 })
             }}
             disabled={page === 1}
           >
@@ -101,9 +97,7 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="h-8 w-8 p-0"
             onClick={() => {
-              updatePagination({
-                page: page + 1,
-              })
+              updatePagination({ page: page + 1 })
             }}
             disabled={page === totalPages || totalPages === 1}
           >
@@ -115,9 +109,7 @@ export function DataTablePagination<TData>({
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
-              updatePagination({
-                page: totalPages,
-              })
+              updatePagination({ page: totalPages })
             }}
             disabled={page === totalPages || totalPages === 1}
           >

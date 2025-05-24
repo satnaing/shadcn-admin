@@ -1,7 +1,8 @@
 import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
-import { data, useNavigate, useSearchParams } from 'react-router'
+import { data, href } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
+import { useSmartNavigation } from '~/hooks/use-smart-navigation'
 import { users } from '../_shared/data/users'
 import type { Route } from './+types/route'
 import { UsersDeleteDialog } from './components/users-delete-dialog'
@@ -37,8 +38,7 @@ export default function UserDelete({
   loaderData: { user },
 }: Route.ComponentProps) {
   const [open, setOpen] = useState(true)
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
+  const { goBack } = useSmartNavigation({ baseUrl: href('/users') })
 
   return (
     <UsersDeleteDialog
@@ -50,7 +50,7 @@ export default function UserDelete({
           setOpen(false)
           // wait for the drawer to close
           setTimeout(() => {
-            navigate(`/users?${searchParams.toString()}`)
+            goBack()
           }, 300) // the duration of the modal close animation
         }
       }}

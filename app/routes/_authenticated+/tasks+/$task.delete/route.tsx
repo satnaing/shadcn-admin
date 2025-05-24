@@ -1,6 +1,6 @@
 import { setTimeout as sleep } from 'node:timers/promises'
 import { useEffect } from 'react'
-import { data, useFetcher } from 'react-router'
+import { data, href, useFetcher } from 'react-router'
 import { dataWithSuccess } from 'remix-toast'
 import { ConfirmDialog } from '~/components/confirm-dialog'
 import type { Task } from '../_shared/data/schema'
@@ -52,7 +52,7 @@ export function TaskDeleteConfirmDialog({
       className="max-w-md"
       title={`Delete this task: ${task.id} ?`}
       fetcher={fetcher}
-      action={`/tasks/${task.id}/delete`}
+      action={href('/tasks/:task/delete', { task: task.id })}
       desc={
         <>
           You are about to delete a task with the ID <strong>{task.id}</strong>.{' '}
