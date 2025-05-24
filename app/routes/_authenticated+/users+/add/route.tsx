@@ -1,8 +1,9 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router'
+import { href } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
+import { useSmartNavigation } from '~/hooks/use-smart-navigation'
 import {
   UsersActionDialog,
   createSchema as formSchema,
@@ -38,8 +39,9 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
 export default function UserAdd() {
   const [open, setOpen] = useState(true)
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
+  const { goBack } = useSmartNavigation({
+    baseUrl: href('/users'),
+  })
 
   return (
     <UsersActionDialog
@@ -48,9 +50,11 @@ export default function UserAdd() {
       onOpenChange={(v) => {
         if (!v) {
           setOpen(false)
+          console.log('UserAdd dialog closed')
           // wait for the modal to close
           setTimeout(() => {
-            navigate(`/users?${searchParams.toString()}`)
+            console.log('Navigating back to users list')
+            goBack()
           }, 300) // the duration of the modal close animation
         }
       }}

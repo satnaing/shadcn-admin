@@ -1,6 +1,6 @@
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
-import { Form, Link, useNavigation } from 'react-router'
+import { Form, href, Link, useNavigation } from 'react-router'
 import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from '~/components/ui/select'
 import { HStack } from '~/components/ui/stack'
+import { useSmartNavigation } from '~/hooks/use-smart-navigation'
 import type { Task } from '../data/schema'
 
 export const createSchema = z.object({
@@ -48,6 +49,7 @@ export function TasksMutateForm({ task }: { task?: Task }) {
       parseWithZod(formData, { schema: formSchema }),
   })
   const navigation = useNavigation()
+  const { backUrl } = useSmartNavigation({ baseUrl: href('/tasks') })
 
   return (
     <Form method="POST" {...getFormProps(form)} className="space-y-5">
@@ -186,7 +188,7 @@ export function TasksMutateForm({ task }: { task?: Task }) {
 
       <HStack className="gap-2">
         <Button variant="link" asChild>
-          <Link to="/tasks">Cancel</Link>
+          <Link to={backUrl}>Cancel</Link>
         </Button>
         <Button
           form={form.id}

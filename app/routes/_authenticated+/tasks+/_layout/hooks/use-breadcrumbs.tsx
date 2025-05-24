@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useMatches } from 'react-router'
+import { href, Link, useMatches } from 'react-router'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -49,7 +49,7 @@ export const useBreadcrumbs = () => {
           <BreadcrumbList className="px-4">
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link to="/">Home</Link>
+                <Link to={href('/')}>Home</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
 

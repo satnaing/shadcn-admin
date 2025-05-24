@@ -1,8 +1,9 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
-import { data, useNavigate, useSearchParams } from 'react-router'
+import { data, href } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
+import { useSmartNavigation } from '~/hooks/use-smart-navigation'
 import {
   UsersActionDialog,
   editSchema as formSchema,
@@ -55,9 +56,7 @@ export default function UserUpdate({
   loaderData: { user },
 }: Route.ComponentProps) {
   const [open, setOpen] = useState(true)
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-
+  const { goBack } = useSmartNavigation({ baseUrl: href('/users') })
   return (
     <UsersActionDialog
       key={`user-edit-${user.id}`}
@@ -68,7 +67,7 @@ export default function UserUpdate({
           setOpen(false)
           // wait for the modal to close
           setTimeout(() => {
-            navigate(`/users?${searchParams.toString()}`)
+            goBack()
           }, 300) // the duration of the modal close animation
         }
       }}

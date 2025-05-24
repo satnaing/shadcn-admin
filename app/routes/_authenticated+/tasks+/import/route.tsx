@@ -1,7 +1,7 @@
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
-import { Form, Link } from 'react-router'
+import { Form, href, Link } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
 import { z } from 'zod'
 import { Button } from '~/components/ui/button'
@@ -9,6 +9,7 @@ import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
 import { Separator } from '~/components/ui/separator'
 import { HStack } from '~/components/ui/stack'
+import { useSmartNavigation } from '~/hooks/use-smart-navigation'
 import type { Route } from './+types/route'
 
 export const formSchema = z.object({
@@ -47,6 +48,7 @@ export default function TaskImport() {
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
   })
+  const { backUrl } = useSmartNavigation({ baseUrl: href('/tasks') })
 
   return (
     <div>
@@ -73,7 +75,7 @@ export default function TaskImport() {
 
         <HStack>
           <Button variant="link" asChild>
-            <Link to="/tasks">Cancel</Link>
+            <Link to={backUrl}>Cancel</Link>
           </Button>
           <Button type="submit">Import</Button>
         </HStack>

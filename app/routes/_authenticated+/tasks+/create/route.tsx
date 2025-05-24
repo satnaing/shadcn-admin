@@ -1,5 +1,6 @@
 import { parseWithZod } from '@conform-to/zod'
 import { setTimeout as sleep } from 'node:timers/promises'
+import { href } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
 import { Separator } from '~/components/ui/separator'
 import {
@@ -31,7 +32,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
   const id = `TASK-${String(maxIdNumber + 1).padStart(4, '0')}`
   tasks.unshift({ id, ...task })
 
-  return redirectWithSuccess('/tasks', {
+  return redirectWithSuccess(href('/tasks'), {
     message: 'Task created successfully',
     description: JSON.stringify(submission.value),
   })

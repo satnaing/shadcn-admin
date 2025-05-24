@@ -1,6 +1,7 @@
 import { IconDownload, IconPlus } from '@tabler/icons-react'
-import { Link } from 'react-router'
+import { href, Link } from 'react-router'
 import { Button } from '~/components/ui/button'
+import { useSmartNavigation } from '~/hooks/use-smart-navigation'
 import type { Route } from './+types/route'
 import { DataTable } from './components/data-table'
 import { columns, parseQueryParams } from './config'
@@ -37,6 +38,8 @@ export const loader = ({ request }: Route.LoaderArgs) => {
 export default function Tasks({
   loaderData: { tasks, pagination, facetedCounts },
 }: Route.ComponentProps) {
+  useSmartNavigation({ autoSave: true, baseUrl: href('/tasks') })
+
   return (
     <div>
       <div className="mb-2 flex flex-wrap items-center justify-between space-y-2 gap-x-4">
@@ -48,12 +51,12 @@ export default function Tasks({
         </div>
         <div className="flex gap-2">
           <Button variant="outline" className="space-x-1" asChild>
-            <Link to="/tasks/import">
+            <Link to={href('/tasks/import')}>
               <span>Import</span> <IconDownload size={18} />
             </Link>
           </Button>
           <Button className="space-x-1" asChild>
-            <Link to="/tasks/create">
+            <Link to={href('/tasks/create')}>
               <span>Create</span> <IconPlus size={18} />
             </Link>
           </Button>

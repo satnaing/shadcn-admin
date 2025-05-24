@@ -1,11 +1,12 @@
 import { IconMailPlus, IconUserPlus } from '@tabler/icons-react'
-import { Link, Outlet, useSearchParams } from 'react-router'
+import { href, Link, Outlet } from 'react-router'
 import { Header } from '~/components/layout/header'
 import { Main } from '~/components/layout/main'
 import { ProfileDropdown } from '~/components/profile-dropdown'
 import { Search } from '~/components/search'
 import { ThemeSwitch } from '~/components/theme-switch'
 import { Button } from '~/components/ui/button'
+import { useSmartNavigation } from '~/hooks/use-smart-navigation'
 import type { Route } from './+types/route'
 import { columns } from './components/users-columns'
 import { UsersTable } from './components/users-table'
@@ -60,7 +61,8 @@ export const loader = ({ request }: Route.LoaderArgs) => {
 export default function Users({
   loaderData: { users, pagination, facetedCounts },
 }: Route.ComponentProps) {
-  const [searchParams] = useSearchParams()
+  useSmartNavigation({ autoSave: true, baseUrl: href('/users') })
+
   return (
     <>
       <Header fixed>
@@ -81,12 +83,12 @@ export default function Users({
           </div>
           <div className="flex gap-2">
             <Button variant="outline" className="space-x-1" asChild>
-              <Link to={`/users/invite?${searchParams.toString()}`}>
+              <Link to={href('/users/invite')}>
                 <span>Invite User</span> <IconMailPlus size={18} />
               </Link>
             </Button>
             <Button className="space-x-1" asChild>
-              <Link to={`/users/add?${searchParams.toString()}`}>
+              <Link to={href('/users/add')}>
                 <span>Add User</span> <IconUserPlus size={18} />
               </Link>
             </Button>
