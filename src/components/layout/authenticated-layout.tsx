@@ -6,7 +6,11 @@ import { SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
 import SkipToMain from '@/components/skip-to-main'
 
-export function AuthenticatedLayout() {
+interface Props {
+  children?: React.ReactNode
+}
+
+export function AuthenticatedLayout({ children }: Props) {
   const defaultOpen = Cookies.get('sidebar_state') !== 'false'
   return (
     <SearchProvider>
@@ -25,7 +29,7 @@ export function AuthenticatedLayout() {
             'has-[main.fixed-main]:group-data-[scroll-locked=1]/body:h-svh'
           )}
         >
-          <Outlet />
+          {children ? children : <Outlet />}
         </div>
       </SidebarProvider>
     </SearchProvider>
