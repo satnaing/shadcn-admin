@@ -54,7 +54,6 @@
     "remix-toast": "^3.1.0",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.3.0",
-    "vite": "6.3.5",
     "zod": "^3.25.28"
   },
   "devDependencies": {
@@ -74,6 +73,7 @@
     "tailwindcss": "^4.1.7",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "~5.8.3",
+    "vite": "6.3.5",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "pnpm": {
