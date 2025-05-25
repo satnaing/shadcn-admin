@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select'
+import { Separator } from '~/components/ui/separator'
 import { HStack } from '~/components/ui/stack'
 import { useSmartNavigation } from '~/hooks/use-smart-navigation'
 import type { Task } from '../data/schema'
@@ -186,7 +187,9 @@ export function TasksMutateForm({ task }: { task?: Task }) {
         </div>
       </div>
 
-      <HStack className="gap-2">
+      <Separator className="my-4 lg:my-6" />
+
+      <HStack className="justify-end gap-2">
         <Button variant="link" asChild>
           <Link to={backUrl}>Cancel</Link>
         </Button>

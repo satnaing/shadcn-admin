@@ -73,7 +73,9 @@ export default function TaskImport() {
           </div>
         </div>
 
-        <HStack>
+        <Separator className="my-4 lg:my-6" />
+
+        <HStack className="justify-end">
           <Button variant="link" asChild>
             <Link to={backUrl}>Cancel</Link>
           </Button>
