@@ -1,3 +1,14 @@
+## v1.4.0 (2025-05-25)
+
+### Feat
+
+- **clerk**: add Clerk for auth and protected route (#146)
+
+### Fix
+
+- add an indicator for nested pages in search (#147)
+- update faded-bottom color with css variable (#139)
+
 ## v1.3.0 (2025-04-16)
 
 ### Fix
