@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import {
   IconArrowRightDashed,
+  IconChevronRight,
   IconDeviceLaptop,
   IconMoon,
   IconSun,
@@ -60,8 +61,8 @@ export function CommandMenu() {
 
                 return navItem.items?.map((subItem, i) => (
                   <CommandItem
-                    key={`${subItem.url}-${i}`}
-                    value={subItem.title}
+                    key={`${navItem.title}-${subItem.url}-${i}`}
+                    value={`${navItem.title}-${subItem.url}`}
                     onSelect={() => {
                       runCommand(() => navigate({ to: subItem.url }))
                     }}
@@ -69,7 +70,7 @@ export function CommandMenu() {
                     <div className='mr-2 flex h-4 w-4 items-center justify-center'>
                       <IconArrowRightDashed className='text-muted-foreground/80 size-2' />
                     </div>
-                    {subItem.title}
+                    {navItem.title} <IconChevronRight /> {subItem.title}
                   </CommandItem>
                 ))
               })}
