@@ -18,6 +18,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import {
+  Card,
+  CardContent,
+} from '@/components/ui/card'
+import { Label as UILabel } from '@/components/ui/label'
 
 const appearanceFormSchema = z.object({
   theme: z.enum(['light', 'dark'], {
@@ -83,6 +88,23 @@ export function AppearanceForm() {
               <FormDescription className='font-manrope'>
                 Set the font you want to use in the dashboard.
               </FormDescription>
+              <div className={cn('space-y-2 mt-4',
+                form.watch('font') === font && 'hidden'
+              )}>
+                <UILabel className='text-sm font-medium'>Font Preview</UILabel>
+                <FormDescription>
+                  Preview how the selected font will look in your dashboard.
+                </FormDescription>
+                <Card className='mt-6'>
+                  <CardContent>
+                    <div className={cn('space-y-4', `font-${form.watch('font')}`)}>
+                      <div className='text-2xl font-medium'>Aa</div>
+                      <div className='text-lg'>The quick brown fox jumps over the lazy dog</div>
+                      <div className='text-sm text-muted-foreground'>1234567890</div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
               <FormMessage />
             </FormItem>
           )}
