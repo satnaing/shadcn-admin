@@ -3,7 +3,9 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
-import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
+import { IconBrandGithub } from '@tabler/icons-react'
+import { IconBrandGoogle } from '@tabler/icons-react'
+
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -110,11 +112,25 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         </div>
 
         <div className='grid grid-cols-2 gap-2'>
-          <Button variant='outline' type='button' disabled={isLoading}>
+          <Button
+            variant='outline'
+            type='button'
+            disabled={isLoading}
+            onClick={() => {
+              window.location.href = 'http://localhost:3003/v1/auth/login/google'
+            }}
+          >
             <IconBrandGithub className='h-4 w-4' /> GitHub
           </Button>
-          <Button variant='outline' type='button' disabled={isLoading}>
-            <IconBrandFacebook className='h-4 w-4' /> Facebook
+          <Button
+            variant='outline'
+            type='button'
+            disabled={isLoading}
+            onClick={() => {
+              window.location.href = 'http://localhost:3003/v1/auth/login/google'
+            }}
+          >
+            <IconBrandGoogle className='h-4 w-4' /> Google
           </Button>
         </div>
       </form>

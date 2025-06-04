@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-router'
 import { IconArrowUpRight, IconLoader2 } from '@tabler/icons-react'
 import { SignedIn, useAuth, UserButton } from '@clerk/clerk-react'
-import { ClerkLogo } from '@/assets/clerk-logo'
+// import { ClerkLogo } from '@/assets/clerk-logo'
 import { Button } from '@/components/ui/button'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
@@ -123,7 +123,7 @@ function Unauthorized() {
   // Navigate to sign-in page when countdown hits 0
   useEffect(() => {
     if (countdown > 0) return
-    navigate({ to: '/clerk/sign-in' })
+    navigate({ to: '/sign-in' })
   }, [countdown, navigate])
 
   return (
@@ -160,8 +160,8 @@ function Unauthorized() {
           <Button variant='outline' onClick={() => history.go(-1)}>
             Go Back
           </Button>
-          <Button onClick={() => navigate({ to: '/clerk/sign-in' })}>
-            <ClerkLogo className='invert' /> Sign in
+          <Button onClick={() => navigate({ to: '/sign-in' })}>
+            Sign in
           </Button>
         </div>
         <div className='mt-4 h-8 text-center'>

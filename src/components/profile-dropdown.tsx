@@ -55,7 +55,31 @@ export function ProfileDropdown() {
           <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={async () => {
+            try {
+              // Get token from cookies
+              const token = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('token='))
+                ?.split('=')[1];
+              const res = await fetch('http://localhost:3003/v1/auth/logout', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                  'Authorization': token ? `Bearer ${token}` : '',
+                },
+              });
+              if (res.ok) {
+                window.location.href = '/sign-in';
+              } else {
+                alert('Logout failed.');
+              }
+            } catch (_) {
+              alert('Logout failed.');
+            }
+          }}
+        >
           Log out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

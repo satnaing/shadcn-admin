@@ -8,12 +8,24 @@ import { UsersDialogs } from './components/users-dialogs'
 import { UsersPrimaryButtons } from './components/users-primary-buttons'
 import { UsersTable } from './components/users-table'
 import UsersProvider from './context/users-context'
-import { userListSchema } from './data/schema'
-import { users } from './data/users'
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
 
 export default function Users() {
-  // Parse user list
-  const userList = userListSchema.parse(users)
+  const { data: userList, isLoading, isError, error } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      // Replace with your real API endpoint
+      const res = await axios.get('http://localhost:3003/v1/users/all')
+      // If you want to validate with zod schema:
+      // return userListSchema.parse(res.data)
+  
+      return res.data
+    },
+  })
+
+  if (isLoading) return <div>Loading users...</div>
+  if (isError) return <div>Error: {error.message}</div>
 
   return (
     <UsersProvider>
