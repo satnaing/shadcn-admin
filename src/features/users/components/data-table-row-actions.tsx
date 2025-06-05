@@ -46,6 +46,7 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => {
+           
               setCurrentRow(row.original)
               setOpen('delete')
             }}

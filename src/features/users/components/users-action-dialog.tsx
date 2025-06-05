@@ -30,14 +30,14 @@ const formSchema = z.object({
   fname: z.string().min(1, { message: 'First Name is required.' }),
   lname: z.string().min(1, { message: 'Last Name is required.' }),
   email: z.string().min(1, { message: 'Email is required.' }).email({ message: 'Email is invalid.' }),
-  phonenumber: z.string().optional(),
-  issuperadmin: z.enum(['yes', 'no'], { required_error: 'Please select if user is superadmin.' }),
+  phone_number: z.string().optional(),
+  is_super_admin: z.enum(['yes', 'no'], { required_error: 'Please select if user is superadmin.' }),
   services: z.array(z.string()),
   roles: z.array(z.string()),
   permissions: z.array(z.string()),
   isEdit: z.boolean(),
 }).superRefine((data, ctx) => {
-  if (data.issuperadmin === 'no') {
+  if (data.is_super_admin === 'no') {
     if (!data.services || data.services.length === 0) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -71,19 +71,25 @@ interface Props {
 
 export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
 
+
+  console.log('currentRow:', currentRow);
+
   const isEdit = !!currentRow;
+
+  
   const form = useForm<UserForm>({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
       ? {
           ...currentRow,
+          is_super_admin: currentRow.role === 'superadmin' ? 'yes' :'no' ,
           isEdit,
         }
       : {
           fname: '',
           lname: '',
           email: '',
-          issuperadmin: 'no',
+          is_super_admin: 'no',
           services: [],
           roles: [],
           permissions: [],
@@ -144,13 +150,13 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
   const onSubmit = async (values: UserForm) => {
     try {
       let payload;
-      if (values.issuperadmin === 'yes') {
+      if (values.is_super_admin === 'yes') {
         // Only send basic user details for superadmin
         payload = {
           email: values.email,
           fname: values.fname,
           lname: values.lname,
-          phone_number: values.phonenumber || '',
+          phone_number: values.phone_number || '',
           is_super_admin: true,
           assignments: [],
         };
@@ -191,11 +197,14 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           };
         }).filter(Boolean);
 
+
+       
+
         payload = {
           email: values.email,
           fname: values.fname,
           lname: values.lname,
-          phone_number: values.phonenumber || '',
+          phone_number: values.phone_number || '',
           is_super_admin: false,
           assignments,
         };
@@ -315,7 +324,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               />
               <FormField
                 control={form.control}
-                name='phonenumber'
+                name='phone_number'
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
                     <FormLabel className='col-span-2 text-right'>
@@ -335,7 +344,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               />
               <FormField
                 control={form.control}
-                name='issuperadmin'
+                name='is_super_admin'
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center gap-x-4 gap-y-1'>
                     <FormLabel className='col-span-2 text-right'>Is Superadmin?</FormLabel>
@@ -369,7 +378,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                 control={form.control}
                 name='services'
                 render={({ field }) => {
-                  const issuperadmin = form.watch('issuperadmin');
+                  const issuperadmin = form.watch('is_super_admin');
                   const selectedRoles = form.watch('roles') || [];
                   const selectedPermissions = form.watch('permissions') || [];
 
@@ -399,7 +408,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                                   <label className='font-semibold flex items-center gap-2'>
                                     <input
                                       type='checkbox'
-                                      checked={field.value.includes(serviceId)}
+                                      checked={field.value?.includes(serviceId)}
                                       onChange={e => {
                                         const checked = e.target.checked;
                                         if (checked) {
@@ -415,7 +424,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                                     {service.name}
                                   </label>
                                   {/* Roles for this service */}
-                                  {field.value.includes(serviceId) && (
+                                  {field.value?.includes(serviceId) && (
                                     <div className='ml-6 mt-2'>
                                       <div className='font-medium mb-1'>Roles:</div>
                                       {allRoles.map(role => {
