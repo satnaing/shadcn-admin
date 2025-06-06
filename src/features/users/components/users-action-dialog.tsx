@@ -1,5 +1,3 @@
-
-
 import React from 'react'
 import axios from 'axios'
 import { z } from 'zod'
@@ -24,7 +22,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { User } from '../data/schema'
-
 
 const formSchema = z.object({
   fname: z.string().min(1, { message: 'First Name is required.' }),
@@ -61,6 +58,7 @@ const formSchema = z.object({
     }
   }
 });
+
 type UserForm = z.infer<typeof formSchema>;
 
 interface Props {
@@ -70,25 +68,24 @@ interface Props {
 }
 
 export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
-
-
   console.log('currentRow:', currentRow);
 
   const isEdit = !!currentRow;
 
-  
   const form = useForm<UserForm>({
     resolver: zodResolver(formSchema),
+    mode: 'onChange', // This ensures validation runs on change
     defaultValues: isEdit
       ? {
           ...currentRow,
-          is_super_admin: currentRow.role === 'superadmin' ? 'yes' :'no' ,
+          is_super_admin: currentRow.role === 'superadmin' ? 'yes' : 'no',
           isEdit,
         }
       : {
           fname: '',
           lname: '',
           email: '',
+          phone_number: '',
           is_super_admin: 'no',
           services: [],
           roles: [],
@@ -101,22 +98,21 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
   interface Service {
     id: string | number;
     name: string;
-    // Add other properties if needed
   }
   const [services, setServices] = React.useState<Service[]>([]);
   const [loadingServices, setLoadingServices] = React.useState(true);
+  
   React.useEffect(() => {
     setLoadingServices(true);
-    // Get token from cookies
     const getToken = () => {
       const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
       return match ? decodeURIComponent(match[1]) : '';
     };
     const token = getToken();
-    // Allow console for debugging
-    // eslint-disable-next-line no-console
+    
     console.log(document.cookie);
     console.log('Token:', token);
+    
     axios.get('http://localhost:3003/v1/superadmin/allService', {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -131,15 +127,13 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
   }, []);
 
   // --- Static roles/permissions for demo ---
-  // These should be fetched from API in real app
-  // For now, hardcode with ids for mapping (from your DB)
   const allRoles = [
     { id: 6, name: 'Superadmin', value: 'superadmin' },
     { id: 2, name: 'Manager', value: 'manager' },
     { id: 3, name: 'Viewer', value: 'viewer' },
     { id: 1, name: 'Regular User', value: 'regularuser' },
   ];
-  // Permissions with ids
+  
   const allPermissions = [
     { id: 1, value: 'read', label: 'Can view user information' },
     { id: 2, value: 'update', label: 'Can update user information' },
@@ -147,12 +141,26 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
     { id: 6, value: 'create', label: 'Can create resources' },
   ];
 
+  // Watch form values
+  const watchedValues = form.watch();
+  const isSuperAdmin = watchedValues.is_super_admin === 'yes';
+
+  // Effect to clear services/roles/permissions when switching to superadmin
+  React.useEffect(() => {
+    if (isSuperAdmin) {
+      form.setValue('services', []);
+      form.setValue('roles', []);
+      form.setValue('permissions', []);
+    }
+  }, [isSuperAdmin, form]);
+
   const onSubmit = async (values: UserForm) => {
     try {
+      debugger;
       let payload;
       if (values.is_super_admin === 'yes') {
-        // Only send basic user details for superadmin
         payload = {
+          id:currentRow?.id,
           email: values.email,
           fname: values.fname,
           lname: values.lname,
@@ -161,9 +169,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           assignments: [],
         };
       } else {
-        // Build assignments array as per required payload
         const assignments = values.services.map(serviceId => {
-          // Find selected role for this service (should only be one per service)
           const roleKey = values.roles.find(r => r.startsWith(`${serviceId}:`));
           if (!roleKey) return null;
           const roleValue = roleKey.split(':')[1];
@@ -171,10 +177,8 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           const role_id = roleObj ? roleObj.id : null;
           if (!role_id) return null;
 
-          // For permissions, only for regularuser role
           let permission_ids: number[] = [];
           if (roleValue === 'regularuser') {
-            // Collect permission ids for this service/role
             permission_ids = values.permissions
               .filter(p => p.startsWith(`${serviceId}:${roleValue}:`))
               .map(p => {
@@ -184,7 +188,6 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
               })
               .filter((id): id is number => id !== null);
           } else if (roleValue === 'manager') {
-            // For manager, assign CRU permissions (read, update, create)
             permission_ids = allPermissions
               .filter(ap => ['read', 'update', 'create'].includes(ap.value))
               .map(ap => ap.id);
@@ -197,10 +200,8 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           };
         }).filter(Boolean);
 
-
-       
-
         payload = {
+          id:currentRow?.id,
           email: values.email,
           fname: values.fname,
           lname: values.lname,
@@ -213,10 +214,10 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       console.log('Submitting user data:', payload);
       console.log('Form values:', JSON.stringify(payload));
 
-      // Get token from cookies
       const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
       const token = match ? decodeURIComponent(match[1]) : '';
-      await axios.post(
+      
+      await axios.put(
         'http://localhost:3003/v1/superadmin/user',
         payload,
         {
@@ -226,6 +227,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
           withCredentials: true,
         }
       );
+      
       alert('User added successfully!');
       form.reset();
       onOpenChange(false);
@@ -237,8 +239,6 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       }
     }
   }
-
-
 
   return (
     <Dialog
@@ -378,7 +378,6 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                 control={form.control}
                 name='services'
                 render={({ field }) => {
-                  const issuperadmin = form.watch('is_super_admin');
                   const selectedRoles = form.watch('roles') || [];
                   const selectedPermissions = form.watch('permissions') || [];
 
@@ -398,88 +397,113 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                       <FormLabel className='col-span-2 text-right pt-2'>Services</FormLabel>
                       <FormControl>
                         <div className='col-span-4 flex flex-col gap-4'>
-                          {issuperadmin === 'yes' ? (
-                            <div className='text-muted-foreground pointer-events-none opacity-60'>All services/roles/permissions are granted to superadmin.</div>
+                          {isSuperAdmin ? (
+                            <div className='text-muted-foreground pointer-events-none opacity-60'>
+                              All services/roles/permissions are granted to superadmin.
+                            </div>
                           ) : (
                             services.map(service => {
                               const serviceId = String(service.id);
+                              const isServiceSelected = field.value?.includes(serviceId);
+                              
                               return (
                                 <div key={serviceId} className='border rounded p-2'>
                                   <label className='font-semibold flex items-center gap-2'>
                                     <input
                                       type='checkbox'
-                                      checked={field.value?.includes(serviceId)}
+                                      checked={isServiceSelected}
                                       onChange={e => {
                                         const checked = e.target.checked;
+                                        let newServices = [...(field.value || [])];
+                                        
                                         if (checked) {
-                                          field.onChange([...field.value, serviceId]);
+                                          if (!newServices.includes(serviceId)) {
+                                            newServices.push(serviceId);
+                                          }
                                         } else {
-                                          field.onChange(field.value.filter(v => v !== serviceId));
+                                          newServices = newServices.filter(v => v !== serviceId);
                                           // Remove roles/permissions for this service
-                                          form.setValue('roles', selectedRoles.filter(r => !r.startsWith(`${serviceId}:`)));
-                                          form.setValue('permissions', selectedPermissions.filter(p => !p.startsWith(`${serviceId}:`)));
+                                          const newRoles = selectedRoles.filter(r => !r.startsWith(`${serviceId}:`));
+                                          const newPermissions = selectedPermissions.filter(p => !p.startsWith(`${serviceId}:`));
+                                          form.setValue('roles', newRoles);
+                                          form.setValue('permissions', newPermissions);
                                         }
+                                        
+                                        field.onChange(newServices);
                                       }}
                                     />
                                     {service.name}
                                   </label>
+                                  
                                   {/* Roles for this service */}
-                                  {field.value?.includes(serviceId) && (
+                                  {isServiceSelected && (
                                     <div className='ml-6 mt-2'>
                                       <div className='font-medium mb-1'>Roles:</div>
                                       {allRoles.map(role => {
                                         const roleKey = `${serviceId}:${role.value}`;
-                                        const checked = selectedRoles.includes(roleKey);
+                                        const isRoleSelected = selectedRoles.includes(roleKey);
+                                        
                                         return (
-                                          <label key={role.value} className='flex items-center gap-2 ml-2'>
-                                            <input
-                                              type='checkbox'
-                                              checked={checked}
-                                              onChange={e => {
-                                                const checked = e.target.checked;
-                                                let newRoles = [...selectedRoles];
-                                                if (checked) {
-                                                  // Allow multiple roles per service
-                                                  if (!newRoles.includes(roleKey)) {
-                                                    newRoles.push(roleKey);
+                                          <div key={role.value} className='ml-2'>
+                                            <label className='flex items-center gap-2'>
+                                              <input
+                                                type='checkbox'
+                                                checked={isRoleSelected}
+                                                onChange={e => {
+                                                  const checked = e.target.checked;
+                                                  let newRoles = [...selectedRoles];
+                                                  
+                                                  if (checked) {
+                                                    if (!newRoles.includes(roleKey)) {
+                                                      newRoles.push(roleKey);
+                                                    }
+                                                  } else {
+                                                    newRoles = newRoles.filter(r => r !== roleKey);
+                                                    // Remove permissions for this role
+                                                    const newPermissions = selectedPermissions.filter(p => !p.startsWith(`${serviceId}:${role.value}:`));
+                                                    form.setValue('permissions', newPermissions);
                                                   }
-                                                } else {
-                                                  newRoles = newRoles.filter(r => r !== roleKey);
-                                                  // Remove permissions for this role
-                                                  form.setValue('permissions', selectedPermissions.filter(p => !p.startsWith(`${serviceId}:${role.value}:`)));
-                                                }
-                                                form.setValue('roles', newRoles);
-                                              }}
-                                            />
-                                            {role.name}
-                                            {/* Permissions for this role */}
-                                            {checked && role.value === 'regularuser' && (
-                                              <span className='ml-4'>
+                                                  
+                                                  form.setValue('roles', newRoles);
+                                                }}
+                                              />
+                                              {role.name}
+                                            </label>
+                                            
+                                            {/* Permissions for regularuser role */}
+                                            {isRoleSelected && role.value === 'regularuser' && (
+                                              <div className='ml-6 mt-1 flex flex-wrap gap-2'>
                                                 {allPermissions.map(perm => {
                                                   const permKey = `${serviceId}:${role.value}:${perm.value}`;
+                                                  const isPermSelected = selectedPermissions.includes(permKey);
+                                                  
                                                   return (
-                                                    <label key={perm.id} className='mr-2'>
+                                                    <label key={perm.id} className='flex items-center gap-1'>
                                                       <input
                                                         type='checkbox'
-                                                        checked={selectedPermissions.includes(permKey)}
+                                                        checked={isPermSelected}
                                                         onChange={e => {
                                                           const checked = e.target.checked;
                                                           let newPerms = [...selectedPermissions];
+                                                          
                                                           if (checked) {
-                                                            newPerms.push(permKey);
+                                                            if (!newPerms.includes(permKey)) {
+                                                              newPerms.push(permKey);
+                                                            }
                                                           } else {
                                                             newPerms = newPerms.filter(p => p !== permKey);
                                                           }
+                                                          
                                                           form.setValue('permissions', newPerms);
                                                         }}
                                                       />
-                                                      {perm.value}
+                                                      <span className='text-sm'>{perm.value}</span>
                                                     </label>
                                                   );
                                                 })}
-                                              </span>
+                                              </div>
                                             )}
-                                          </label>
+                                          </div>
                                         );
                                       })}
                                     </div>
@@ -495,14 +519,18 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                   );
                 }}
               />
-              <DialogFooter>
-                <Button type='submit' disabled={false}>
-                  Save changes
-                </Button>
-              </DialogFooter>
             </form>
           </Form>
         </div>
+        <DialogFooter>
+          <Button 
+            type='submit' 
+            form='user-form'
+            disabled={!form.formState.isValid || form.formState.isSubmitting}
+          >
+            {form.formState.isSubmitting ? 'Saving...' : 'Save changes'}
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )
