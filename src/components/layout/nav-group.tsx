@@ -29,7 +29,7 @@ import {
 import { NavCollapsible, NavItem, NavLink, type NavGroup } from './types'
 
 export function NavGroup({ title, items }: NavGroup) {
-  const { state } = useSidebar()
+  const { state, isMobile } = useSidebar()
   const href = useLocation({ select: (location) => location.href })
   return (
     <SidebarGroup>
@@ -41,7 +41,7 @@ export function NavGroup({ title, items }: NavGroup) {
           if (!item.items)
             return <SidebarMenuLink key={key} item={item} href={href} />
 
-          if (state === 'collapsed')
+          if (state === 'collapsed' && !isMobile)
             return (
               <SidebarMenuCollapsedDropdown key={key} item={item} href={href} />
             )
