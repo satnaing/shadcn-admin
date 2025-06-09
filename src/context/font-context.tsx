@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { fonts } from '@/config/fonts'
+import { fonts } from '@/constant/fonts'
 
 type Font = (typeof fonts)[number]
 

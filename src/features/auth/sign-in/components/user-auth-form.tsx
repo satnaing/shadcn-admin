@@ -3,7 +3,8 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
-import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
+import { IconBrandGoogle } from '@tabler/icons-react'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -16,6 +17,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
+import { signInWithGoogle, signInWithPassword } from '../../utils/auth.util'
 
 type UserAuthFormProps = HTMLAttributes<HTMLFormElement>
 
@@ -45,14 +47,18 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
-
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    const { session, error } = await signInWithPassword(data)
+    setIsLoading(false)
+    if (error) {
+      toast.error(error.message)
+    } else if (session?.user?.user_metadata?.userId) {
+      form.reset()
+    } else {
+      toast.error("You're not authorized")
+      form.reset()
+    }
   }
 
   return (
@@ -109,12 +115,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </div>
         </div>
 
-        <div className='grid grid-cols-2 gap-2'>
-          <Button variant='outline' type='button' disabled={isLoading}>
-            <IconBrandGithub className='h-4 w-4' /> GitHub
-          </Button>
-          <Button variant='outline' type='button' disabled={isLoading}>
-            <IconBrandFacebook className='h-4 w-4' /> Facebook
+        <div className='grid grid-cols-1'>
+          <Button
+            variant='outline'
+            type='button'
+            disabled={isLoading}
+            onClick={signInWithGoogle}
+          >
+            <IconBrandGoogle className='h-4 w-4' /> Google
           </Button>
         </div>
       </form>
