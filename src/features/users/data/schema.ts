@@ -1,32 +1,30 @@
 import { z } from 'zod'
+import { Database } from '@/utils/supabase/database.types'
 
-const userStatusSchema = z.union([
-  z.literal('active'),
-  z.literal('inactive'),
-  z.literal('invited'),
-  z.literal('suspended'),
-])
-export type UserStatus = z.infer<typeof userStatusSchema>
+type BaseType = Database['student']['Tables']
 
-const userRoleSchema = z.union([
-  z.literal('superadmin'),
-  z.literal('admin'),
-  z.literal('cashier'),
-  z.literal('manager'),
-])
+export type UserSupabase = BaseType['student']['Row']
+export type FieldTrainingType = BaseType['field_training']['Row']
 
-const userSchema = z.object({
-  id: z.string(),
-  firstName: z.string(),
-  lastName: z.string(),
-  username: z.string(),
+export const userSchema = z.object({
+  student_id: z.string(),
+  name: z.string(),
+  join_at: z.string(),
   email: z.string(),
-  phoneNumber: z.string(),
-  status: userStatusSchema,
-  role: userRoleSchema,
-  createdAt: z.coerce.date(),
-  updatedAt: z.coerce.date(),
+  phone: z.string(),
+  user_status: z.string()
 })
+
 export type User = z.infer<typeof userSchema>
 
-export const userListSchema = z.array(userSchema)
+type UserKeyType = keyof Omit<User, 'student_id'>
+
+export const userColumnsMetaData: Record<
+UserKeyType, 
+{label: string, isRepresentative?: boolean}> = {
+  name: {label: '학생 이름', isRepresentative: true},
+  join_at: {label: '학생 기수'},
+  email: {label: '학생 이메일'},
+  phone: {label: '학생 연락처'},
+  user_status: {label: '현재 상태'}
+}
