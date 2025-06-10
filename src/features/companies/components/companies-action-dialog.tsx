@@ -80,11 +80,11 @@ export function CompaniesActionDialog({
       <DialogContent className='sm:max-w-lg'>
         <DialogHeader className='text-left'>
           <DialogTitle>
-            {isEdit ? 'Edit Company' : 'Add New Company'}
+            {isEdit ? '회사 수정하기' : '회사 추가하기'}
           </DialogTitle>
           <DialogDescription>
-            {isEdit ? 'Update the user here. ' : 'Create new user here. '}
-            Click save when you&apos;re done.
+            {isEdit ? '수정할 정보를 입력하고 ' : '추가할 회사를 작성하고, '}
+            저장하기 버튼을 누르세요.
           </DialogDescription>
         </DialogHeader>
         <div className='-mr-4 h-[26.25rem] w-full overflow-y-auto py-1 pr-4'>
@@ -108,7 +108,7 @@ export function CompaniesActionDialog({
         </div>
         <DialogFooter>
           <Button type='submit' form='user-form' disabled={isLoading}>
-            {isLoading ? 'Saving...' : 'Save changes'}
+            {isLoading ? '저장 중...' : '저장하기'}
           </Button>
         </DialogFooter>
       </DialogContent>

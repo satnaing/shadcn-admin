@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { IconAlertTriangle } from '@tabler/icons-react'
-import { toast } from '@/hooks/use-toast'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -19,19 +18,9 @@ export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
   const [value, setValue] = useState('')
 
   const handleDelete = () => {
-    if (value.trim() !== currentRow.username) return
+    if (value.trim() !== currentRow.name) return
 
     onOpenChange(false)
-    toast({
-      title: 'The following user has been deleted:',
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>
-            {JSON.stringify(currentRow, null, 2)}
-          </code>
-        </pre>
-      ),
-    })
   }
 
   return (
@@ -39,47 +28,45 @@ export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
       open={open}
       onOpenChange={onOpenChange}
       handleConfirm={handleDelete}
-      disabled={value.trim() !== currentRow.username}
+      disabled={value.trim() !== currentRow.name}
       title={
         <span className='text-destructive'>
           <IconAlertTriangle
             className='mr-1 inline-block stroke-destructive'
             size={18}
           />{' '}
-          Delete User
+          학생 정보 삭제하기
         </span>
       }
       desc={
         <div className='space-y-4'>
           <p className='mb-2'>
-            Are you sure you want to delete{' '}
-            <span className='font-bold'>{currentRow.username}</span>?
+            학생 {' '}
+            <span className='font-bold'>{currentRow.name}</span>를 정말 삭제하시겠습니까?
             <br />
-            This action will permanently remove the user with the role of{' '}
-            <span className='font-bold'>
-              {currentRow.role.toUpperCase()}
-            </span>{' '}
-            from the system. This cannot be undone.
+            이 작업은 수행하면{' '}되돌릴 수 없습니다.<br /><br/>
+            
           </p>
 
           <Label className='my-2'>
-            Username:
+            학생 이름
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder='Enter username to confirm deletion.'
+              placeholder='삭제하려면 학생 이름을 입력하세요.'
             />
           </Label>
 
           <Alert variant='destructive'>
-            <AlertTitle>Warning!</AlertTitle>
+            <AlertTitle>경고!</AlertTitle>
             <AlertDescription>
-              Please be carefull, this operation can not be rolled back.
+              이 작업은 되돌릴 수 없으니 신중히 진행해주세요.
             </AlertDescription>
           </Alert>
         </div>
       }
-      confirmText='Delete'
+      cancelBtnText='취소'
+      confirmText='삭제하기'
       destructive
     />
   )
