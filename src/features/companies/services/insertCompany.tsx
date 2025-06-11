@@ -8,7 +8,6 @@ export const insertCompany = async (
   newCompany: Omit<CompanySupabase, 'company_id'>
 ): Promise<CompanySupabase> => {
   const { data, error } = await supabase
-    .schema('enum')
     .from('companies')
     .insert(newCompany)
     .select('*')

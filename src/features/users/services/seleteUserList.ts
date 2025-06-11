@@ -6,7 +6,6 @@ import { getFieldTrainingStatus } from "@/utils/users/getFieldTrainingStatus";
 
 const seleteUserList = async () => {
   const { data, error } = await supabase
-    .schema('student')
     .from('student')
     .select(`student_id, name, join_at, email, phone,
       field_training(*)`)
@@ -29,9 +28,9 @@ const seleteUserList = async () => {
 
 export const useUserListQuery = () => {
   return useQuery({
-    queryKey: ['students'],
+    queryKey: ['users'],
     queryFn: seleteUserList,
-    staleTime: 60000,
+    staleTime: 120000,
     retry: 3
   })
 }

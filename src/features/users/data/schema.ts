@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { Database } from '@/utils/supabase/database.types'
 
-type BaseType = Database['student']['Tables']
+type BaseType = Database['public']['Tables']
 
 export type UserSupabase = BaseType['student']['Row']
 export type FieldTrainingType = BaseType['field_training']['Row']

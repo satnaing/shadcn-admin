@@ -333,132 +333,7 @@ export type Database = {
   }
   enum: {
     Tables: {
-      certificates: {
-        Row: {
-          certificate_id: number
-          certificate_name: string
-          is_software: boolean
-        }
-        Insert: {
-          certificate_id?: number
-          certificate_name: string
-          is_software: boolean
-        }
-        Update: {
-          certificate_id?: number
-          certificate_name?: string
-          is_software?: boolean
-        }
-        Relationships: []
-      }
-      companies: {
-        Row: {
-          company_address: string | null
-          company_id: number
-          company_name: string
-          hr_manager_name: string | null
-          hr_manager_phone: string | null
-        }
-        Insert: {
-          company_address?: string | null
-          company_id?: number
-          company_name: string
-          hr_manager_name?: string | null
-          hr_manager_phone?: string | null
-        }
-        Update: {
-          company_address?: string | null
-          company_id?: number
-          company_name?: string
-          hr_manager_name?: string | null
-          hr_manager_phone?: string | null
-        }
-        Relationships: []
-      }
-      competitions: {
-        Row: {
-          competition_duration: unknown | null
-          competition_id: number
-          competition_name: string
-        }
-        Insert: {
-          competition_duration?: unknown | null
-          competition_id?: number
-          competition_name: string
-        }
-        Update: {
-          competition_duration?: unknown | null
-          competition_id?: number
-          competition_name?: string
-        }
-        Relationships: []
-      }
-      job_positions: {
-        Row: {
-          position_id: number
-          position_name: string
-        }
-        Insert: {
-          position_id?: number
-          position_name: string
-        }
-        Update: {
-          position_id?: number
-          position_name?: string
-        }
-        Relationships: []
-      }
-      jobs: {
-        Row: {
-          job_id: number
-          job_name: string
-        }
-        Insert: {
-          job_id?: number
-          job_name: string
-        }
-        Update: {
-          job_id?: number
-          job_name?: string
-        }
-        Relationships: []
-      }
-      skills: {
-        Row: {
-          language: boolean
-          skill_id: number
-          skill_name: string
-        }
-        Insert: {
-          language: boolean
-          skill_id?: number
-          skill_name: string
-        }
-        Update: {
-          language?: boolean
-          skill_id?: number
-          skill_name?: string
-        }
-        Relationships: []
-      }
-      universities: {
-        Row: {
-          university_department: string
-          university_id: number
-          university_name: string
-        }
-        Insert: {
-          university_department: string
-          university_id?: number
-          university_name: string
-        }
-        Update: {
-          university_department?: string
-          university_id?: number
-          university_name?: string
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
@@ -525,152 +400,7 @@ export type Database = {
   }
   profile: {
     Tables: {
-      profile: {
-        Row: {
-          created_at: string
-          email: string | null
-          isTeam: boolean
-          link: string[] | null
-          owner: string | null
-          profile_id: string
-          profile_name: string
-        }
-        Insert: {
-          created_at?: string
-          email?: string | null
-          isTeam: boolean
-          link?: string[] | null
-          owner?: string | null
-          profile_id?: string
-          profile_name: string
-        }
-        Update: {
-          created_at?: string
-          email?: string | null
-          isTeam?: boolean
-          link?: string[] | null
-          owner?: string | null
-          profile_id?: string
-          profile_name?: string
-        }
-        Relationships: []
-      }
-      profile_competitions: {
-        Row: {
-          competition_id: number
-          prize: string
-          profile_id: string | null
-        }
-        Insert: {
-          competition_id?: number
-          prize: string
-          profile_id?: string | null
-        }
-        Update: {
-          competition_id?: number
-          prize?: string
-          profile_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "profile_competitions_profile_id_fkey"
-            columns: ["profile_id"]
-            referencedRelation: "profile"
-            referencedColumns: ["profile_id"]
-          },
-        ]
-      }
-      profile_introduce: {
-        Row: {
-          introduce: string
-          profile_id: string
-        }
-        Insert: {
-          introduce: string
-          profile_id?: string
-        }
-        Update: {
-          introduce?: string
-          profile_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "profile_introduce_profile_id_fkey"
-            columns: ["profile_id"]
-            referencedRelation: "profile"
-            referencedColumns: ["profile_id"]
-          },
-        ]
-      }
-      profile_link: {
-        Row: {
-          alt: string | null
-          link: string
-          profile_id: string
-        }
-        Insert: {
-          alt?: string | null
-          link: string
-          profile_id?: string
-        }
-        Update: {
-          alt?: string | null
-          link?: string
-          profile_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "profile_link_profile_id_fkey"
-            columns: ["profile_id"]
-            referencedRelation: "profile"
-            referencedColumns: ["profile_id"]
-          },
-        ]
-      }
-      profile_permission: {
-        Row: {
-          profile_id: string
-          student_id: string
-        }
-        Insert: {
-          profile_id: string
-          student_id?: string
-        }
-        Update: {
-          profile_id?: string
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "profile_permission_profile_id_fkey"
-            columns: ["profile_id"]
-            referencedRelation: "profile"
-            referencedColumns: ["profile_id"]
-          },
-        ]
-      }
-      profile_skills: {
-        Row: {
-          profile_id: string
-          skill_id: number
-        }
-        Insert: {
-          profile_id?: string
-          skill_id?: number
-        }
-        Update: {
-          profile_id?: string
-          skill_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "profile_skills_profile_id_fkey"
-            columns: ["profile_id"]
-            referencedRelation: "profile"
-            referencedColumns: ["profile_id"]
-          },
-        ]
-      }
+      [_ in never]: never
     }
     Views: {
       v_profile_certificates: {
@@ -690,14 +420,7 @@ export type Database = {
           prize: string | null
           profile_id: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "profile_competitions_profile_id_fkey"
-            columns: ["profile_id"]
-            referencedRelation: "profile"
-            referencedColumns: ["profile_id"]
-          },
-        ]
+        Relationships: []
       }
       v_profile_skills: {
         Row: {
@@ -706,14 +429,7 @@ export type Database = {
           skill_id: number | null
           skill_name: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "profile_skills_profile_id_fkey"
-            columns: ["profile_id"]
-            referencedRelation: "profile"
-            referencedColumns: ["profile_id"]
-          },
-        ]
+        Relationships: []
       }
     }
     Functions: {
@@ -915,6 +631,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      after_courses: {
+        Row: {
+          after_course_id: number
+          after_course_name: string
+          created_at: string
+        }
+        Insert: {
+          after_course_id?: number
+          after_course_name: string
+          created_at?: string
+        }
+        Update: {
+          after_course_id?: number
+          after_course_name?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
+      certificates: {
+        Row: {
+          certificate_id: number
+          certificate_name: string
+          is_software: boolean
+        }
+        Insert: {
+          certificate_id?: number
+          certificate_name: string
+          is_software: boolean
+        }
+        Update: {
+          certificate_id?: number
+          certificate_name?: string
+          is_software?: boolean
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           content: string
@@ -946,6 +698,48 @@ export type Database = {
           },
         ]
       }
+      companies: {
+        Row: {
+          company_address: string | null
+          company_id: number
+          company_name: string
+          hr_manager_name: string | null
+          hr_manager_phone: string | null
+        }
+        Insert: {
+          company_address?: string | null
+          company_id?: number
+          company_name: string
+          hr_manager_name?: string | null
+          hr_manager_phone?: string | null
+        }
+        Update: {
+          company_address?: string | null
+          company_id?: number
+          company_name?: string
+          hr_manager_name?: string | null
+          hr_manager_phone?: string | null
+        }
+        Relationships: []
+      }
+      competitions: {
+        Row: {
+          competition_duration: unknown | null
+          competition_id: number
+          competition_name: string
+        }
+        Insert: {
+          competition_duration?: unknown | null
+          competition_id?: number
+          competition_name: string
+        }
+        Update: {
+          competition_duration?: unknown | null
+          competition_id?: number
+          competition_name?: string
+        }
+        Relationships: []
+      }
       conversations: {
         Row: {
           conversation_id: string
@@ -967,6 +761,764 @@ export type Database = {
           participant_ids?: string[]
           unread_user_ids?: string[]
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      courses: {
+        Row: {
+          course_id: number
+          course_name: string
+          grade: number
+        }
+        Insert: {
+          course_id?: number
+          course_name: string
+          grade: number
+        }
+        Update: {
+          course_id?: number
+          course_name?: string
+          grade?: number
+        }
+        Relationships: []
+      }
+      departments: {
+        Row: {
+          department_id: number
+          department_name: string
+        }
+        Insert: {
+          department_id?: number
+          department_name: string
+        }
+        Update: {
+          department_id?: number
+          department_name?: string
+        }
+        Relationships: []
+      }
+      dream_jobs: {
+        Row: {
+          company_id: number
+          dream_job_id: number
+          grade: number
+          job_id: number
+          student_id: string
+        }
+        Insert: {
+          company_id: number
+          dream_job_id: number
+          grade: number
+          job_id: number
+          student_id?: string
+        }
+        Update: {
+          company_id?: number
+          dream_job_id?: number
+          grade?: number
+          job_id?: number
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dream_job_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+          {
+            foreignKeyName: "dream_jobs_company_id_fkey"
+            columns: ["company_id"]
+            referencedRelation: "companies"
+            referencedColumns: ["company_id"]
+          },
+          {
+            foreignKeyName: "dream_jobs_job_id_fkey"
+            columns: ["job_id"]
+            referencedRelation: "jobs"
+            referencedColumns: ["job_id"]
+          },
+        ]
+      }
+      employment_companies: {
+        Row: {
+          benefit: string
+          company_id: number
+          company_number: number
+          created_at: string | null
+          end_date: string | null
+          job_id: number
+          military_service_status_id: number
+          position_id: number
+          salary: number
+          start_date: string
+          student_id: string
+        }
+        Insert: {
+          benefit: string
+          company_id: number
+          company_number: number
+          created_at?: string | null
+          end_date?: string | null
+          job_id: number
+          military_service_status_id: number
+          position_id: number
+          salary: number
+          start_date: string
+          student_id?: string
+        }
+        Update: {
+          benefit?: string
+          company_id?: number
+          company_number?: number
+          created_at?: string | null
+          end_date?: string | null
+          job_id?: number
+          military_service_status_id?: number
+          position_id?: number
+          salary?: number
+          start_date?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "employment_companies_company_id_fkey1"
+            columns: ["company_id"]
+            referencedRelation: "companies"
+            referencedColumns: ["company_id"]
+          },
+          {
+            foreignKeyName: "employment_companies_job_id_fkey1"
+            columns: ["job_id"]
+            referencedRelation: "jobs"
+            referencedColumns: ["job_id"]
+          },
+          {
+            foreignKeyName: "employment_companies_military_service_status_id_fkey"
+            columns: ["military_service_status_id"]
+            referencedRelation: "military_service_statuses"
+            referencedColumns: ["military_service_status_id"]
+          },
+          {
+            foreignKeyName: "employment_companies_position_id_fkey1"
+            columns: ["position_id"]
+            referencedRelation: "job_positions"
+            referencedColumns: ["position_id"]
+          },
+          {
+            foreignKeyName: "employment_companies_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+        ]
+      }
+      field_training: {
+        Row: {
+          company_id: number
+          created_at: string
+          end_date: string
+          job_id: number
+          lead_or_part: boolean
+          start_date: string
+          student_id: string
+        }
+        Insert: {
+          company_id: number
+          created_at?: string
+          end_date: string
+          job_id: number
+          lead_or_part: boolean
+          start_date: string
+          student_id?: string
+        }
+        Update: {
+          company_id?: number
+          created_at?: string
+          end_date?: string
+          job_id?: number
+          lead_or_part?: boolean
+          start_date?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "field_training_company_id_fkey1"
+            columns: ["company_id"]
+            referencedRelation: "companies"
+            referencedColumns: ["company_id"]
+          },
+          {
+            foreignKeyName: "field_training_job_id_fkey1"
+            columns: ["job_id"]
+            referencedRelation: "jobs"
+            referencedColumns: ["job_id"]
+          },
+          {
+            foreignKeyName: "field_training_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+        ]
+      }
+      job_positions: {
+        Row: {
+          position_id: number
+          position_name: string
+        }
+        Insert: {
+          position_id?: number
+          position_name: string
+        }
+        Update: {
+          position_id?: number
+          position_name?: string
+        }
+        Relationships: []
+      }
+      jobs: {
+        Row: {
+          job_id: number
+          job_name: string
+        }
+        Insert: {
+          job_id?: number
+          job_name: string
+        }
+        Update: {
+          job_id?: number
+          job_name?: string
+        }
+        Relationships: []
+      }
+      middle_schools: {
+        Row: {
+          middle_school_id: number
+          middle_school_name: string
+        }
+        Insert: {
+          middle_school_id?: number
+          middle_school_name: string
+        }
+        Update: {
+          middle_school_id?: number
+          middle_school_name?: string
+        }
+        Relationships: []
+      }
+      military_service_statuses: {
+        Row: {
+          military_service_status_id: number
+          military_service_status_name: string
+        }
+        Insert: {
+          military_service_status_id?: number
+          military_service_status_name: string
+        }
+        Update: {
+          military_service_status_id?: number
+          military_service_status_name?: string
+        }
+        Relationships: []
+      }
+      military_services: {
+        Row: {
+          created_at: string
+          military_service_duration: unknown | null
+          military_service_status_id: number
+          student_id: string
+        }
+        Insert: {
+          created_at?: string
+          military_service_duration?: unknown | null
+          military_service_status_id: number
+          student_id?: string
+        }
+        Update: {
+          created_at?: string
+          military_service_duration?: unknown | null
+          military_service_status_id?: number
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "military_services_military_service_status_id_fkey"
+            columns: ["military_service_status_id"]
+            referencedRelation: "military_service_statuses"
+            referencedColumns: ["military_service_status_id"]
+          },
+          {
+            foreignKeyName: "military_services_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+        ]
+      }
+      profile: {
+        Row: {
+          created_at: string
+          email: string | null
+          isTeam: boolean
+          link: string[] | null
+          owner: string | null
+          profile_id: string
+          profile_name: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          isTeam: boolean
+          link?: string[] | null
+          owner?: string | null
+          profile_id?: string
+          profile_name: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          isTeam?: boolean
+          link?: string[] | null
+          owner?: string | null
+          profile_id?: string
+          profile_name?: string
+        }
+        Relationships: []
+      }
+      profile_competitions: {
+        Row: {
+          competition_id: number
+          prize: string
+          profile_id: string | null
+        }
+        Insert: {
+          competition_id?: number
+          prize: string
+          profile_id?: string | null
+        }
+        Update: {
+          competition_id?: number
+          prize?: string
+          profile_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_competitions_competition_id_fkey"
+            columns: ["competition_id"]
+            referencedRelation: "competitions"
+            referencedColumns: ["competition_id"]
+          },
+          {
+            foreignKeyName: "profile_competitions_profile_id_fkey"
+            columns: ["profile_id"]
+            referencedRelation: "profile"
+            referencedColumns: ["profile_id"]
+          },
+        ]
+      }
+      profile_introduce: {
+        Row: {
+          introduce: string
+          profile_id: string
+        }
+        Insert: {
+          introduce: string
+          profile_id?: string
+        }
+        Update: {
+          introduce?: string
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_introduce_profile_id_fkey"
+            columns: ["profile_id"]
+            referencedRelation: "profile"
+            referencedColumns: ["profile_id"]
+          },
+        ]
+      }
+      profile_link: {
+        Row: {
+          alt: string | null
+          link: string
+          profile_id: string
+        }
+        Insert: {
+          alt?: string | null
+          link: string
+          profile_id?: string
+        }
+        Update: {
+          alt?: string | null
+          link?: string
+          profile_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_link_profile_id_fkey"
+            columns: ["profile_id"]
+            referencedRelation: "profile"
+            referencedColumns: ["profile_id"]
+          },
+        ]
+      }
+      profile_permission: {
+        Row: {
+          profile_id: string
+          student_id: string
+        }
+        Insert: {
+          profile_id: string
+          student_id?: string
+        }
+        Update: {
+          profile_id?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_permission_profile_id_fkey"
+            columns: ["profile_id"]
+            referencedRelation: "profile"
+            referencedColumns: ["profile_id"]
+          },
+          {
+            foreignKeyName: "profile_permission_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+        ]
+      }
+      profile_skills: {
+        Row: {
+          profile_id: string
+          skill_id: number
+        }
+        Insert: {
+          profile_id?: string
+          skill_id?: number
+        }
+        Update: {
+          profile_id?: string
+          skill_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_profile_skills_skill_id"
+            columns: ["skill_id"]
+            referencedRelation: "skills"
+            referencedColumns: ["skill_id"]
+          },
+          {
+            foreignKeyName: "profile_skills_profile_id_fkey"
+            columns: ["profile_id"]
+            referencedRelation: "profile"
+            referencedColumns: ["profile_id"]
+          },
+          {
+            foreignKeyName: "profile_skills_skill_id_fkey"
+            columns: ["skill_id"]
+            referencedRelation: "skills"
+            referencedColumns: ["skill_id"]
+          },
+        ]
+      }
+      skills: {
+        Row: {
+          language: boolean | null
+          skill_id: number
+          skill_name: string
+        }
+        Insert: {
+          language?: boolean | null
+          skill_id?: number
+          skill_name: string
+        }
+        Update: {
+          language?: boolean | null
+          skill_id?: number
+          skill_name?: string
+        }
+        Relationships: []
+      }
+      student: {
+        Row: {
+          birthday: string
+          department_id: number
+          email: string | null
+          gender: boolean
+          graduate_at: string | null
+          join_at: string
+          name: string
+          phone: string
+          profile: string
+          student_id: string
+        }
+        Insert: {
+          birthday: string
+          department_id: number
+          email?: string | null
+          gender?: boolean
+          graduate_at?: string | null
+          join_at: string
+          name?: string
+          phone: string
+          profile: string
+          student_id?: string
+        }
+        Update: {
+          birthday?: string
+          department_id?: number
+          email?: string | null
+          gender?: boolean
+          graduate_at?: string | null
+          join_at?: string
+          name?: string
+          phone?: string
+          profile?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_department_id_fkey"
+            columns: ["department_id"]
+            referencedRelation: "departments"
+            referencedColumns: ["department_id"]
+          },
+        ]
+      }
+      student_after_courses: {
+        Row: {
+          after_course_id: number
+          grade: number
+          student_id: string
+        }
+        Insert: {
+          after_course_id: number
+          grade: number
+          student_id: string
+        }
+        Update: {
+          after_course_id?: number
+          grade?: number
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_after_courses_after_course_id_fkey"
+            columns: ["after_course_id"]
+            referencedRelation: "after_courses"
+            referencedColumns: ["after_course_id"]
+          },
+          {
+            foreignKeyName: "student_after_courses_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+        ]
+      }
+      student_certificates: {
+        Row: {
+          certificate_id: number
+          student_id: string
+        }
+        Insert: {
+          certificate_id: number
+          student_id?: string
+        }
+        Update: {
+          certificate_id?: number
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_certificates_certificate_id_fkey1"
+            columns: ["certificate_id"]
+            referencedRelation: "certificates"
+            referencedColumns: ["certificate_id"]
+          },
+          {
+            foreignKeyName: "student_certificates_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+        ]
+      }
+      student_competitions: {
+        Row: {
+          competition_id: number
+          prize: string | null
+          student_id: string
+        }
+        Insert: {
+          competition_id?: number
+          prize?: string | null
+          student_id: string
+        }
+        Update: {
+          competition_id?: number
+          prize?: string | null
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_competitions_competition_id_fkey1"
+            columns: ["competition_id"]
+            referencedRelation: "competitions"
+            referencedColumns: ["competition_id"]
+          },
+          {
+            foreignKeyName: "student_competitions_student_id_fkey2"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+        ]
+      }
+      student_courses: {
+        Row: {
+          course_id: number
+          student_id: string
+        }
+        Insert: {
+          course_id: number
+          student_id: string
+        }
+        Update: {
+          course_id?: number
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_courses_course_id_fkey"
+            columns: ["course_id"]
+            referencedRelation: "courses"
+            referencedColumns: ["course_id"]
+          },
+          {
+            foreignKeyName: "student_courses_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+        ]
+      }
+      student_jobs: {
+        Row: {
+          job_id: number
+          student_id: string
+        }
+        Insert: {
+          job_id: number
+          student_id: string
+        }
+        Update: {
+          job_id?: number
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_jobs_job_id_fkey1"
+            columns: ["job_id"]
+            referencedRelation: "jobs"
+            referencedColumns: ["job_id"]
+          },
+          {
+            foreignKeyName: "student_jobs_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+        ]
+      }
+      student_middle_schools: {
+        Row: {
+          "1st_score": number | null
+          "2nd_score": number | null
+          middle_school_id: number
+          middle_school_score: number | null
+          student_id: string
+        }
+        Insert: {
+          "1st_score"?: number | null
+          "2nd_score"?: number | null
+          middle_school_id: number
+          middle_school_score?: number | null
+          student_id?: string
+        }
+        Update: {
+          "1st_score"?: number | null
+          "2nd_score"?: number | null
+          middle_school_id?: number
+          middle_school_score?: number | null
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_middle_schools_middle_school_id_fkey"
+            columns: ["middle_school_id"]
+            referencedRelation: "middle_schools"
+            referencedColumns: ["middle_school_id"]
+          },
+          {
+            foreignKeyName: "student_middle_schools_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+        ]
+      }
+      student_universities: {
+        Row: {
+          created_at: string
+          student_id: string
+          university_id: number
+        }
+        Insert: {
+          created_at?: string
+          student_id: string
+          university_id?: number
+        }
+        Update: {
+          created_at?: string
+          student_id?: string
+          university_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_universities_student_id_fkey"
+            columns: ["student_id"]
+            referencedRelation: "student"
+            referencedColumns: ["student_id"]
+          },
+          {
+            foreignKeyName: "student_universities_university_id_fkey1"
+            columns: ["university_id"]
+            referencedRelation: "universities"
+            referencedColumns: ["university_id"]
+          },
+        ]
+      }
+      universities: {
+        Row: {
+          university_department: string
+          university_id: number
+          university_name: string
+        }
+        Insert: {
+          university_department: string
+          university_id?: number
+          university_name: string
+        }
+        Update: {
+          university_department?: string
+          university_id?: number
+          university_name?: string
         }
         Relationships: []
       }
@@ -1298,480 +1850,23 @@ export type Database = {
   }
   student: {
     Tables: {
-      after_courses: {
-        Row: {
-          after_course_id: number
-          after_course_name: string
-          grade: number
-        }
-        Insert: {
-          after_course_id?: number
-          after_course_name: string
-          grade: number
-        }
-        Update: {
-          after_course_id?: number
-          after_course_name?: string
-          grade?: number
-        }
-        Relationships: []
-      }
-      courses: {
-        Row: {
-          course_id: number
-          course_name: string
-          grade: number
-        }
-        Insert: {
-          course_id?: number
-          course_name: string
-          grade: number
-        }
-        Update: {
-          course_id?: number
-          course_name?: string
-          grade?: number
-        }
-        Relationships: []
-      }
-      departments: {
-        Row: {
-          department_id: number
-          department_name: string
-        }
-        Insert: {
-          department_id?: number
-          department_name: string
-        }
-        Update: {
-          department_id?: number
-          department_name?: string
-        }
-        Relationships: []
-      }
-      dream_jobs: {
-        Row: {
-          company_id: number
-          dream_job_id: number
-          grade: number
-          job_id: number
-          student_id: string
-        }
-        Insert: {
-          company_id: number
-          dream_job_id: number
-          grade: number
-          job_id: number
-          student_id?: string
-        }
-        Update: {
-          company_id?: number
-          dream_job_id?: number
-          grade?: number
-          job_id?: number
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "dream_job_student_id_fkey"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      employment_companies: {
-        Row: {
-          benefit: string
-          company_id: number
-          company_number: number
-          created_at: string | null
-          end_date: string | null
-          job_id: number
-          military_service_status_id: number
-          position_id: number
-          salary: number
-          start_date: string
-          student_id: string
-        }
-        Insert: {
-          benefit: string
-          company_id: number
-          company_number: number
-          created_at?: string | null
-          end_date?: string | null
-          job_id: number
-          military_service_status_id: number
-          position_id: number
-          salary: number
-          start_date: string
-          student_id?: string
-        }
-        Update: {
-          benefit?: string
-          company_id?: number
-          company_number?: number
-          created_at?: string | null
-          end_date?: string | null
-          job_id?: number
-          military_service_status_id?: number
-          position_id?: number
-          salary?: number
-          start_date?: string
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "employment_companies_military_service_status_id_fkey"
-            columns: ["military_service_status_id"]
-            referencedRelation: "military_service_statuses"
-            referencedColumns: ["military_service_status_id"]
-          },
-          {
-            foreignKeyName: "employment_companies_student_id_fkey"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      field_training: {
-        Row: {
-          company_id: number
-          created_at: string
-          end_date: string
-          job_id: number
-          lead_or_part: boolean
-          start_date: string
-          student_id: string
-        }
-        Insert: {
-          company_id: number
-          created_at?: string
-          end_date: string
-          job_id: number
-          lead_or_part: boolean
-          start_date: string
-          student_id?: string
-        }
-        Update: {
-          company_id?: number
-          created_at?: string
-          end_date?: string
-          job_id?: number
-          lead_or_part?: boolean
-          start_date?: string
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "field_training_student_id_fkey"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      middle_schools: {
-        Row: {
-          middle_school_id: number
-          middle_school_name: string
-        }
-        Insert: {
-          middle_school_id?: number
-          middle_school_name: string
-        }
-        Update: {
-          middle_school_id?: number
-          middle_school_name?: string
-        }
-        Relationships: []
-      }
-      military_service_statuses: {
-        Row: {
-          military_service_status_id: number
-          military_service_status_name: string
-        }
-        Insert: {
-          military_service_status_id?: number
-          military_service_status_name: string
-        }
-        Update: {
-          military_service_status_id?: number
-          military_service_status_name?: string
-        }
-        Relationships: []
-      }
-      military_services: {
-        Row: {
-          created_at: string
-          military_service_duration: unknown | null
-          military_service_status_id: number
-          student_id: string
-        }
-        Insert: {
-          created_at?: string
-          military_service_duration?: unknown | null
-          military_service_status_id: number
-          student_id?: string
-        }
-        Update: {
-          created_at?: string
-          military_service_duration?: unknown | null
-          military_service_status_id?: number
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "military_services_military_service_status_id_fkey"
-            columns: ["military_service_status_id"]
-            referencedRelation: "military_service_statuses"
-            referencedColumns: ["military_service_status_id"]
-          },
-          {
-            foreignKeyName: "military_services_student_id_fkey"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      student: {
-        Row: {
-          birthday: string
-          department_id: number
-          email: string | null
-          gender: boolean
-          graduate_at: string | null
-          join_at: string
-          name: string
-          phone: string
-          profile: string
-          student_id: string
-        }
-        Insert: {
-          birthday: string
-          department_id: number
-          email?: string | null
-          gender?: boolean
-          graduate_at?: string | null
-          join_at: string
-          name?: string
-          phone: string
-          profile: string
-          student_id?: string
-        }
-        Update: {
-          birthday?: string
-          department_id?: number
-          email?: string | null
-          gender?: boolean
-          graduate_at?: string | null
-          join_at?: string
-          name?: string
-          phone?: string
-          profile?: string
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "student_department_id_fkey"
-            columns: ["department_id"]
-            referencedRelation: "departments"
-            referencedColumns: ["department_id"]
-          },
-        ]
-      }
-      student_after_courses: {
-        Row: {
-          after_course_id: number
-          student_id: string
-        }
-        Insert: {
-          after_course_id: number
-          student_id: string
-        }
-        Update: {
-          after_course_id?: number
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "student_after_courses_after_course_id_fkey"
-            columns: ["after_course_id"]
-            referencedRelation: "after_courses"
-            referencedColumns: ["after_course_id"]
-          },
-          {
-            foreignKeyName: "student_after_courses_student_id_fkey"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      student_certificates: {
-        Row: {
-          certificate_id: number
-          student_id: string
-        }
-        Insert: {
-          certificate_id: number
-          student_id?: string
-        }
-        Update: {
-          certificate_id?: number
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "student_certificates_student_id_fkey"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      student_competitions: {
-        Row: {
-          competition_id: number
-          prize: string | null
-          student_id: string
-        }
-        Insert: {
-          competition_id?: number
-          prize?: string | null
-          student_id: string
-        }
-        Update: {
-          competition_id?: number
-          prize?: string | null
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "student_competitions_student_id_fkey2"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      student_courses: {
-        Row: {
-          course_id: number
-          student_id: string
-        }
-        Insert: {
-          course_id: number
-          student_id: string
-        }
-        Update: {
-          course_id?: number
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "student_courses_course_id_fkey"
-            columns: ["course_id"]
-            referencedRelation: "courses"
-            referencedColumns: ["course_id"]
-          },
-          {
-            foreignKeyName: "student_courses_student_id_fkey"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      student_jobs: {
-        Row: {
-          job_id: number
-          student_id: string
-        }
-        Insert: {
-          job_id: number
-          student_id: string
-        }
-        Update: {
-          job_id?: number
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "student_jobs_student_id_fkey"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      student_middle_schools: {
-        Row: {
-          "1st_score": number | null
-          "2nd_score": number | null
-          middle_school_id: number
-          middle_school_score: number | null
-          student_id: string
-        }
-        Insert: {
-          "1st_score"?: number | null
-          "2nd_score"?: number | null
-          middle_school_id: number
-          middle_school_score?: number | null
-          student_id?: string
-        }
-        Update: {
-          "1st_score"?: number | null
-          "2nd_score"?: number | null
-          middle_school_id?: number
-          middle_school_score?: number | null
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "student_middle_schools_middle_school_id_fkey"
-            columns: ["middle_school_id"]
-            referencedRelation: "middle_schools"
-            referencedColumns: ["middle_school_id"]
-          },
-          {
-            foreignKeyName: "student_middle_schools_student_id_fkey"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
-      student_universities: {
-        Row: {
-          created_at: string
-          student_id: string
-          university_id: number
-        }
-        Insert: {
-          created_at?: string
-          student_id: string
-          university_id?: number
-        }
-        Update: {
-          created_at?: string
-          student_id?: string
-          university_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "student_universities_student_id_fkey"
-            columns: ["student_id"]
-            referencedRelation: "student"
-            referencedColumns: ["student_id"]
-          },
-        ]
-      }
+      [_ in never]: never
     }
     Views: {
-      [_ in never]: never
+      get_dashboard_student_table_data: {
+        Row: {
+          company_name: string | null
+          department_name: string | null
+          email: string | null
+          gender: boolean | null
+          graduate_at: string | null
+          job_name: string | null
+          name: string | null
+          phone: string | null
+          student_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
