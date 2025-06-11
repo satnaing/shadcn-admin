@@ -59,7 +59,7 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }: { row: Row<User> }) => {
       const value = row.getValue(name)
 
-      return getUserComponent(name, String(value))
+      return getUserComponent(name, String(value ?? ''))
     },
     ...(metadata.isRepresentative && {
       ...USER_REPRESENTATIVE_FIELD_ATTRIBUTE
