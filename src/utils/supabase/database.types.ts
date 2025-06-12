@@ -444,177 +444,7 @@ export type Database = {
   }
   project: {
     Tables: {
-      markdown_pictures: {
-        Row: {
-          image_id: number
-          "\bimage_url": string
-          mark_id: number
-        }
-        Insert: {
-          image_id?: number
-          "\bimage_url": string
-          mark_id: number
-        }
-        Update: {
-          image_id?: number
-          "\bimage_url"?: string
-          mark_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "markdown_picture_mark_id_fkey"
-            columns: ["mark_id"]
-            referencedRelation: "project_markdown"
-            referencedColumns: ["mark_id"]
-          },
-        ]
-      }
-      project_category: {
-        Row: {
-          category_id: number
-          category_name: string
-        }
-        Insert: {
-          category_id?: number
-          category_name: string
-        }
-        Update: {
-          category_id?: number
-          category_name?: string
-        }
-        Relationships: []
-      }
-      project_contributors: {
-        Row: {
-          description: string
-          project_id: number
-          student_id: string
-        }
-        Insert: {
-          description: string
-          project_id?: number
-          student_id?: string
-        }
-        Update: {
-          description?: string
-          project_id?: number
-          student_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "project_contributor_project_id_fkey"
-            columns: ["project_id"]
-            referencedRelation: "projects"
-            referencedColumns: ["project_id"]
-          },
-        ]
-      }
-      project_likes: {
-        Row: {
-          profile_id: string
-          project_id: number
-        }
-        Insert: {
-          profile_id?: string
-          project_id: number
-        }
-        Update: {
-          profile_id?: string
-          project_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "project_likes_project_id_fkey"
-            columns: ["project_id"]
-            referencedRelation: "projects"
-            referencedColumns: ["project_id"]
-          },
-        ]
-      }
-      project_markdown: {
-        Row: {
-          mark_desc: string | null
-          mark_id: number
-          project_id: number
-        }
-        Insert: {
-          mark_desc?: string | null
-          mark_id?: number
-          project_id: number
-        }
-        Update: {
-          mark_desc?: string | null
-          mark_id?: number
-          project_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "project_markdown_project_id_fkey"
-            columns: ["project_id"]
-            referencedRelation: "projects"
-            referencedColumns: ["project_id"]
-          },
-        ]
-      }
-      project_permissions: {
-        Row: {
-          authority: boolean | null
-          profile_id: string
-          project_id: number
-        }
-        Insert: {
-          authority?: boolean | null
-          profile_id?: string
-          project_id?: number
-        }
-        Update: {
-          authority?: boolean | null
-          profile_id?: string
-          project_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "project_permissions_project_id_fkey"
-            columns: ["project_id"]
-            referencedRelation: "projects"
-            referencedColumns: ["project_id"]
-          },
-        ]
-      }
-      projects: {
-        Row: {
-          category_id: number
-          created_at: string
-          description: string
-          project_id: number
-          project_name: string
-          status: number
-        }
-        Insert: {
-          category_id: number
-          created_at?: string
-          description: string
-          project_id?: number
-          project_name: string
-          status: number
-        }
-        Update: {
-          category_id?: number
-          created_at?: string
-          description?: string
-          project_id?: number
-          project_name?: string
-          status?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "projects_category_id_fkey"
-            columns: ["category_id"]
-            referencedRelation: "project_category"
-            referencedColumns: ["category_id"]
-          },
-        ]
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
@@ -992,6 +822,31 @@ export type Database = {
         }
         Relationships: []
       }
+      markdown_pictures: {
+        Row: {
+          image_id: number
+          "\bimage_url": string
+          mark_id: number
+        }
+        Insert: {
+          image_id?: number
+          "\bimage_url": string
+          mark_id: number
+        }
+        Update: {
+          image_id?: number
+          "\bimage_url"?: string
+          mark_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "markdown_picture_mark_id_fkey"
+            columns: ["mark_id"]
+            referencedRelation: "project_markdown"
+            referencedColumns: ["mark_id"]
+          },
+        ]
+      }
       middle_schools: {
         Row: {
           middle_school_id: number
@@ -1024,21 +879,21 @@ export type Database = {
       }
       military_services: {
         Row: {
-          created_at: string
-          military_service_duration: unknown | null
+          end_date: string
           military_service_status_id: number
+          start_date: string
           student_id: string
         }
         Insert: {
-          created_at?: string
-          military_service_duration?: unknown | null
+          end_date?: string
           military_service_status_id: number
+          start_date?: string
           student_id?: string
         }
         Update: {
-          created_at?: string
-          military_service_duration?: unknown | null
+          end_date?: string
           military_service_status_id?: number
+          start_date?: string
           student_id?: string
         }
         Relationships: [
@@ -1226,6 +1081,158 @@ export type Database = {
           },
         ]
       }
+      project_category: {
+        Row: {
+          category_id: number
+          category_name: string
+        }
+        Insert: {
+          category_id?: number
+          category_name: string
+        }
+        Update: {
+          category_id?: number
+          category_name?: string
+        }
+        Relationships: []
+      }
+      project_contributors: {
+        Row: {
+          description: string
+          project_id: number
+          student_id: string
+        }
+        Insert: {
+          description: string
+          project_id?: number
+          student_id?: string
+        }
+        Update: {
+          description?: string
+          project_id?: number
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_contributor_project_id_fkey"
+            columns: ["project_id"]
+            referencedRelation: "projects"
+            referencedColumns: ["project_id"]
+          },
+        ]
+      }
+      project_likes: {
+        Row: {
+          profile_id: string
+          project_id: number
+        }
+        Insert: {
+          profile_id?: string
+          project_id: number
+        }
+        Update: {
+          profile_id?: string
+          project_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_likes_project_id_fkey"
+            columns: ["project_id"]
+            referencedRelation: "projects"
+            referencedColumns: ["project_id"]
+          },
+        ]
+      }
+      project_markdown: {
+        Row: {
+          mark_desc: string | null
+          mark_id: number
+          project_id: number
+        }
+        Insert: {
+          mark_desc?: string | null
+          mark_id?: number
+          project_id: number
+        }
+        Update: {
+          mark_desc?: string | null
+          mark_id?: number
+          project_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_markdown_project_id_fkey"
+            columns: ["project_id"]
+            referencedRelation: "projects"
+            referencedColumns: ["project_id"]
+          },
+        ]
+      }
+      project_permissions: {
+        Row: {
+          authority: boolean | null
+          profile_id: string
+          project_id: number
+        }
+        Insert: {
+          authority?: boolean | null
+          profile_id?: string
+          project_id?: number
+        }
+        Update: {
+          authority?: boolean | null
+          profile_id?: string
+          project_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_permissions_profile_id_fkey1"
+            columns: ["profile_id"]
+            referencedRelation: "profile"
+            referencedColumns: ["profile_id"]
+          },
+          {
+            foreignKeyName: "project_permissions_project_id_fkey"
+            columns: ["project_id"]
+            referencedRelation: "projects"
+            referencedColumns: ["project_id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          category_id: number
+          created_at: string
+          description: string
+          project_id: number
+          project_name: string
+          status: number
+        }
+        Insert: {
+          category_id: number
+          created_at?: string
+          description: string
+          project_id?: number
+          project_name: string
+          status: number
+        }
+        Update: {
+          category_id?: number
+          created_at?: string
+          description?: string
+          project_id?: number
+          project_name?: string
+          status?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_category_id_fkey"
+            columns: ["category_id"]
+            referencedRelation: "project_category"
+            referencedColumns: ["category_id"]
+          },
+        ]
+      }
       skills: {
         Row: {
           language: boolean | null
@@ -1246,39 +1253,39 @@ export type Database = {
       }
       student: {
         Row: {
-          birthday: string
+          birthday: string | null
           department_id: number
           email: string | null
-          gender: boolean
+          gender: boolean | null
           graduate_at: string | null
           join_at: string
           name: string
-          phone: string
-          profile: string
+          phone: string | null
+          profile: string | null
           student_id: string
         }
         Insert: {
-          birthday: string
+          birthday?: string | null
           department_id: number
           email?: string | null
-          gender?: boolean
+          gender?: boolean | null
           graduate_at?: string | null
           join_at: string
           name?: string
-          phone: string
-          profile: string
+          phone?: string | null
+          profile?: string | null
           student_id?: string
         }
         Update: {
-          birthday?: string
+          birthday?: string | null
           department_id?: number
           email?: string | null
-          gender?: boolean
+          gender?: boolean | null
           graduate_at?: string | null
           join_at?: string
           name?: string
-          phone?: string
-          profile?: string
+          phone?: string | null
+          profile?: string | null
           student_id?: string
         }
         Relationships: [
