@@ -18,6 +18,7 @@ import {
   IconUserCog,
   IconUserOff,
   IconUsers,
+  IconUsersGroup,
 } from '@tabler/icons-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 // import { ClerkLogo } from '@/assets/clerk-logo'
@@ -55,92 +56,101 @@ export const sidebarData: SidebarData = {
           url: '/',
           icon: IconLayoutDashboard,
         },
-        {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: IconChecklist,
-        },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: IconPackages,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: IconMessages,
-        },
+        /****REMOVED FROM SIDE BAR IN UI , BUT LINK STILL AVAILABLE */
+        // {
+        //   title: 'Tasks',
+        //   url: '/tasks',
+        //   icon: IconChecklist,
+        // },
+        // {
+        //   title: 'Apps',
+        //   url: '/apps',
+        //   icon: IconPackages,
+        // },
+        // {
+        //   title: 'Chats',
+        //   url: '/chats',
+        //   badge: '3',
+        //   icon: IconMessages,
+        // },
         {
           title: 'Users',
           url: '/users',
           icon: IconUsers,
         },
+        {
+          title: 'Customers',
+          url: '/customers',
+          icon: IconUsersGroup,
+        },
+         
+        
         // Clerk links removed
       ],
     },
-    {
-      title: 'Pages',
-      items: [
-        {
-          title: 'Auth',
-          icon: IconLockAccess,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/sign-in',
-            },
-            {
-              title: 'Sign In (2 Col)',
-              url: '/sign-in-2',
-            },
-            {
-              title: 'Sign Up',
-              url: '/sign-up',
-            },
-            {
-              title: 'Forgot Password',
-              url: '/forgot-password',
-            },
-            {
-              title: 'OTP',
-              url: '/otp',
-            },
-          ],
-        },
-        {
-          title: 'Errors',
-          icon: IconBug,
-          items: [
-            {
-              title: 'Unauthorized',
-              url: '/401',
-              icon: IconLock,
-            },
-            {
-              title: 'Forbidden',
-              url: '/403',
-              icon: IconUserOff,
-            },
-            {
-              title: 'Not Found',
-              url: '/404',
-              icon: IconError404,
-            },
-            {
-              title: 'Internal Server Error',
-              url: '/500',
-              icon: IconServerOff,
-            },
-            {
-              title: 'Maintenance Error',
-              url: '/503',
-              icon: IconBarrierBlock,
-            },
-          ],
-        },
-      ],
-    },
+    /****REMOVED FROM SIDE BAR IN UI , BUT LINK STILL AVAILABLE */
+    // {
+    //   title: 'Pages',
+    //   items: [
+    //     {
+    //       title: 'Auth',
+    //       icon: IconLockAccess,
+    //       items: [
+    //         {
+    //           title: 'Sign In',
+    //           url: '/sign-in',
+    //         },
+    //         {
+    //           title: 'Sign In (2 Col)',
+    //           url: '/sign-in-2',
+    //         },
+    //         {
+    //           title: 'Sign Up',
+    //           url: '/sign-up',
+    //         },
+    //         {
+    //           title: 'Forgot Password',
+    //           url: '/forgot-password',
+    //         },
+    //         {
+    //           title: 'OTP',
+    //           url: '/otp',
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       title: 'Errors',
+    //       icon: IconBug,
+    //       items: [
+    //         {
+    //           title: 'Unauthorized',
+    //           url: '/401',
+    //           icon: IconLock,
+    //         },
+    //         {
+    //           title: 'Forbidden',
+    //           url: '/403',
+    //           icon: IconUserOff,
+    //         },
+    //         {
+    //           title: 'Not Found',
+    //           url: '/404',
+    //           icon: IconError404,
+    //         },
+    //         {
+    //           title: 'Internal Server Error',
+    //           url: '/500',
+    //           icon: IconServerOff,
+    //         },
+    //         {
+    //           title: 'Maintenance Error',
+    //           url: '/503',
+    //           icon: IconBarrierBlock,
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
     {
       title: 'Other',
       items: [
