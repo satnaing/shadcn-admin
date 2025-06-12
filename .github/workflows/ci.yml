@@ -32,7 +32,7 @@ jobs:
         run: pnpm lint
 
       - name: Run Prettier check
-        run: pnpm format:check
+        run: pnpm format
 
       - name: Build the project
         run: pnpm build

@@ -1,7 +1,7 @@
 import { useState, type JSX } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router'
 import { buttonVariants } from '~/components/ui/button'
-import { ScrollArea } from '~/components/ui/scroll-area'
+import { ScrollArea, ScrollBar } from '~/components/ui/scroll-area'
 import {
   Select,
   SelectContent,
@@ -54,7 +54,6 @@ export default function SidebarNav({
       </div>
 
       <ScrollArea
-        orientation="horizontal"
         type="always"
         className="bg-background hidden w-full min-w-40 px-1 py-2 md:block"
       >
@@ -82,6 +81,7 @@ export default function SidebarNav({
             </Link>
           ))}
         </nav>
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </>
   )
