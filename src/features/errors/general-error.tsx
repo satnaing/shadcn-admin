@@ -1,6 +1,7 @@
-import { useNavigate, useRouter } from '@tanstack/react-router'
+import { useRouter } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { signOut } from '../auth/utils/auth.util'
 
 interface GeneralErrorProps extends React.HTMLAttributes<HTMLDivElement> {
   minimal?: boolean
@@ -10,7 +11,6 @@ export default function GeneralError({
   className,
   minimal = false,
 }: GeneralErrorProps) {
-  const navigate = useNavigate()
   const { history } = useRouter()
   return (
     <div className={cn('h-svh w-full', className)}>
@@ -27,7 +27,7 @@ export default function GeneralError({
             <Button variant='outline' onClick={() => history.go(-1)}>
               Go Back
             </Button>
-            <Button onClick={() => navigate({ to: '/' })}>Back to Home</Button>
+            <Button onClick={signOut}>Logout</Button>
           </div>
         )}
       </div>
