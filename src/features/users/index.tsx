@@ -24,7 +24,7 @@ export default function Users() {
       console.log('Token:', token);
 
       try {
-        const response = await axios.get('http://localhost:3003/v1/superadmin/all', {
+        const response = await axios.get('http://localhost:3003/v1/superadmin/allUser', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
