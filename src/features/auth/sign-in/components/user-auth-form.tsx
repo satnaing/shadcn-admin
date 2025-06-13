@@ -6,6 +6,9 @@ import { Link } from '@tanstack/react-router'
 import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { useNavigate } from '@tanstack/react-router'
+
+
 import {
   Form,
   FormControl,
@@ -36,6 +39,7 @@ const formSchema = z.object({
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -49,6 +53,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true)
     // eslint-disable-next-line no-console
     console.log(data)
+    navigate({ to: '/onboarding' })
 
     setTimeout(() => {
       setIsLoading(false)

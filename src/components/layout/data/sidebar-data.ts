@@ -2,6 +2,7 @@ import {
   IconBarrierBlock,
   IconBrowserCheck,
   IconBug,
+  IconChartCandle,
   IconChecklist,
   IconError404,
   IconHelp,
@@ -28,6 +29,7 @@ export const sidebarData: SidebarData = {
     email: 'satnaingdev@gmail.com',
     avatar: '/avatars/shadcn.jpg',
   },
+
   teams: [
     {
       name: 'Shadcn Admin',
@@ -74,6 +76,11 @@ export const sidebarData: SidebarData = {
           title: 'Users',
           url: '/users',
           icon: IconUsers,
+        },
+        {
+          title: 'Onboard',
+          url: '/onboarding',
+          icon: IconChartCandle,
         },
       ],
     },
@@ -139,6 +146,7 @@ export const sidebarData: SidebarData = {
         },
       ],
     },
+    
     {
       title: 'Other',
       items: [
