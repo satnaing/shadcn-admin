@@ -95,6 +95,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      diffnote:
+        specifier: ^0.0.1
+        version: 0.0.1
       input-otp:
         specifier: ^1.4.2
         version: 1.4.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1789,6 +1792,9 @@ packages:
   diff@7.0.0:
     resolution: {integrity: sha512-PJWHUb1RFevKCwaFA9RlG5tCd+FO5iRh9A8HEtkmBH2Li03iJriB6m6JIN4rGz3K3JLawI7/veA1xzRKP6ISBw==}
     engines: {node: '>=0.3.1'}
+
+  diffnote@0.0.1:
+    resolution: {integrity: sha512-rFT+fTXMm2SX9A9g/d++LcWHZGhppyoGFPfxA1QUCbtVhJBTXv9T3dsYjTnXt0XDKrZq5F9gZRi9aNrARvZP5w==}
 
   dom-helpers@5.2.1:
     resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
@@ -4246,6 +4252,8 @@ snapshots:
   detect-node-es@1.1.0: {}
 
   diff@7.0.0: {}
+
+  diffnote@0.0.1: {}
 
   dom-helpers@5.2.1:
     dependencies:

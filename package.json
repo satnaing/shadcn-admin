@@ -42,6 +42,7 @@
     "clsx": "^2.1.1",
     "cmdk": "1.1.1",
     "date-fns": "^4.1.0",
+    "diffnote": "^0.0.1",
     "input-otp": "^1.4.2",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.488.0",
@@ -81,5 +82,6 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.2.7"
-  }
+  },
+  "packageManager": "pnpm@10.11.0+sha512.6540583f41cc5f628eb3d9773ecee802f4f9ef9923cc45b69890fb47991d4b092964694ec3a4f738a420c918a333062c8b925d312f42e4f0c263eb603551f977"
 }
