@@ -26,8 +26,8 @@ export default defineConfig({
   define: {
     __DIFFNOTE_PREVIEW_BRANCH__:
       process.env.CF_PAGES_BRANCH !== 'main'
-        ? process.env.CF_PAGES_BRANCH
-        : undefined,
+        ? JSON.stringify(process.env.CF_PAGES_BRANCH)
+        : '""',
   },
 
   resolve: {
