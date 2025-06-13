@@ -1,24 +1,26 @@
 import {
-  IconBarrierBlock,
+  //IconBarrierBlock,
   IconBrowserCheck,
-  IconBug,
-  IconChecklist,
-  IconError404,
+ // IconBug,
+  //IconChecklist,
+  //IconError404,
   IconHelp,
   IconLayoutDashboard,
-  IconLock,
-  IconLockAccess,
-  IconMessages,
+  //IconLock,
+  //IconLockAccess,
+  //IconMessages,
   IconNotification,
-  IconPackages,
+  //IconPackages,
   IconPalette,
-  IconServerOff,
+ // IconServerOff,
   IconSettings,
   IconTool,
   IconUserCog,
-  IconUserOff,
+  //IconUserOff,
   IconUsers,
   IconUsersGroup,
+  IconMoneybag,
+  IconReceiptRupee,
 } from '@tabler/icons-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 // import { ClerkLogo } from '@/assets/clerk-logo'
@@ -82,6 +84,16 @@ export const sidebarData: SidebarData = {
           title: 'Customers',
           url: '/customers',
           icon: IconUsersGroup,
+        },
+        {
+          title: 'UPI',
+          url: '/upi',
+          icon: IconMoneybag,
+        },
+        {
+          title: 'BBPS',
+          url: '/bbps',
+          icon: IconReceiptRupee,
         },
          
         

@@ -10,6 +10,8 @@ import { UsersTable } from './components/users-table';
 import UsersProvider from './context/users-context';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { useState } from 'react';
+import{ UsersSearch } from './components/search-users';
 
 const getToken = () => {
   const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
@@ -39,6 +41,38 @@ export default function Users() {
     },
   });
 
+  const [filteredUsers, setFilteredUsers] = useState(null);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
+
+  const handleSearch = async (params: { id: string; email: string; phone: string; createdAt: string }) => {
+    setSearchLoading(true);
+    setSearchError(null);
+    try {
+      const token = getToken();
+      // Only include non-empty params
+      const filteredParams: Record<string, string> = {};
+      if (params.id) filteredParams.id = params.id;
+      if (params.email) filteredParams.email = params.email;
+      if (params.phone) filteredParams.phone = params.phone;
+      if (params.createdAt) filteredParams.createdAt = params.createdAt;
+
+      const response = await axios.get('http://localhost:3003/v1/superadmin/user', {
+        params: filteredParams,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+      setFilteredUsers(response.data);
+    } catch (err: any) {
+      setSearchError(err?.message || 'Failed to search users');
+    } finally {
+      setSearchLoading(false);
+    }
+  };
+
+
   if (isLoading) return <div>Loading users...</div>;
   if (isError) return <div>Error: {error.message}</div>;
 
@@ -62,8 +96,15 @@ export default function Users() {
           </div>
           <UsersPrimaryButtons />
         </div>
+        <UsersSearch onSearch={handleSearch}  onReset={() => setFilteredUsers(null)} />
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12">
-          <UsersTable data={userList} columns={columns} />
+          {searchLoading ? (
+            <div>Searching users...</div>
+          ) : searchError ? (
+            <div>Error: {searchError}</div>
+          ) : (
+            <UsersTable data={filteredUsers !== null ? filteredUsers : userList} columns={columns} />
+          )}
         </div>
       </Main>
 

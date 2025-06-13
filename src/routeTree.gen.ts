@@ -28,11 +28,13 @@ import { Route as ClerkAuthenticatedRouteImport } from './routes/clerk/_authenti
 import { Route as ClerkauthRouteImport } from './routes/clerk/(auth)/route'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings/route'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
+import { Route as AuthenticatedUpiIndexImport } from './routes/_authenticated/upi/index'
 import { Route as AuthenticatedTasksIndexImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexImport } from './routes/_authenticated/settings/index'
 import { Route as AuthenticatedHelpCenterIndexImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedCustomersIndexImport } from './routes/_authenticated/customers/index'
 import { Route as AuthenticatedChatsIndexImport } from './routes/_authenticated/chats/index'
+import { Route as AuthenticatedBbpsIndexImport } from './routes/_authenticated/bbps/index'
 import { Route as AuthenticatedAppsIndexImport } from './routes/_authenticated/apps/index'
 import { Route as ClerkAuthenticatedUserManagementImport } from './routes/clerk/_authenticated/user-management'
 import { Route as ClerkauthSignUpImport } from './routes/clerk/(auth)/sign-up'
@@ -145,6 +147,12 @@ const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
+const AuthenticatedUpiIndexRoute = AuthenticatedUpiIndexImport.update({
+  id: '/upi/',
+  path: '/upi/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
 const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexImport.update({
   id: '/tasks/',
   path: '/tasks/',
@@ -176,6 +184,12 @@ const AuthenticatedCustomersIndexRoute =
 const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexImport.update({
   id: '/chats/',
   path: '/chats/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
+const AuthenticatedBbpsIndexRoute = AuthenticatedBbpsIndexImport.update({
+  id: '/bbps/',
+  path: '/bbps/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
@@ -404,6 +418,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppsIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/bbps/': {
+      id: '/_authenticated/bbps/'
+      path: '/bbps'
+      fullPath: '/bbps'
+      preLoaderRoute: typeof AuthenticatedBbpsIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/chats/': {
       id: '/_authenticated/chats/'
       path: '/chats'
@@ -437,6 +458,13 @@ declare module '@tanstack/react-router' {
       path: '/tasks'
       fullPath: '/tasks'
       preLoaderRoute: typeof AuthenticatedTasksIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/upi/': {
+      id: '/_authenticated/upi/'
+      path: '/upi'
+      fullPath: '/upi'
+      preLoaderRoute: typeof AuthenticatedUpiIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/users/': {
@@ -478,10 +506,12 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
+  AuthenticatedBbpsIndexRoute: typeof AuthenticatedBbpsIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedCustomersIndexRoute: typeof AuthenticatedCustomersIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
+  AuthenticatedUpiIndexRoute: typeof AuthenticatedUpiIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
 }
 
@@ -489,10 +519,12 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
+  AuthenticatedBbpsIndexRoute: AuthenticatedBbpsIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedCustomersIndexRoute: AuthenticatedCustomersIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
+  AuthenticatedUpiIndexRoute: AuthenticatedUpiIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
 }
 
@@ -566,11 +598,13 @@ export interface FileRoutesByFullPath {
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
+  '/bbps': typeof AuthenticatedBbpsIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/customers': typeof AuthenticatedCustomersIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
+  '/upi': typeof AuthenticatedUpiIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
 }
 
@@ -595,11 +629,13 @@ export interface FileRoutesByTo {
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
+  '/bbps': typeof AuthenticatedBbpsIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/customers': typeof AuthenticatedCustomersIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
+  '/upi': typeof AuthenticatedUpiIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
 }
 
@@ -629,11 +665,13 @@ export interface FileRoutesById {
   '/clerk/(auth)/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/_authenticated/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
+  '/_authenticated/bbps/': typeof AuthenticatedBbpsIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
   '/_authenticated/customers/': typeof AuthenticatedCustomersIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
+  '/_authenticated/upi/': typeof AuthenticatedUpiIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
 }
 
@@ -663,11 +701,13 @@ export interface FileRouteTypes {
     | '/clerk/sign-up'
     | '/clerk/user-management'
     | '/apps'
+    | '/bbps'
     | '/chats'
     | '/customers'
     | '/help-center'
     | '/settings/'
     | '/tasks'
+    | '/upi'
     | '/users'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -691,11 +731,13 @@ export interface FileRouteTypes {
     | '/clerk/sign-up'
     | '/clerk/user-management'
     | '/apps'
+    | '/bbps'
     | '/chats'
     | '/customers'
     | '/help-center'
     | '/settings'
     | '/tasks'
+    | '/upi'
     | '/users'
   id:
     | '__root__'
@@ -723,11 +765,13 @@ export interface FileRouteTypes {
     | '/clerk/(auth)/sign-up'
     | '/clerk/_authenticated/user-management'
     | '/_authenticated/apps/'
+    | '/_authenticated/bbps/'
     | '/_authenticated/chats/'
     | '/_authenticated/customers/'
     | '/_authenticated/help-center/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
+    | '/_authenticated/upi/'
     | '/_authenticated/users/'
   fileRoutesById: FileRoutesById
 }
@@ -792,10 +836,12 @@ export const routeTree = rootRoute
         "/_authenticated/settings",
         "/_authenticated/",
         "/_authenticated/apps/",
+        "/_authenticated/bbps/",
         "/_authenticated/chats/",
         "/_authenticated/customers/",
         "/_authenticated/help-center/",
         "/_authenticated/tasks/",
+        "/_authenticated/upi/",
         "/_authenticated/users/"
       ]
     },
@@ -898,6 +944,10 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/apps/index.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/bbps/": {
+      "filePath": "_authenticated/bbps/index.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/chats/": {
       "filePath": "_authenticated/chats/index.tsx",
       "parent": "/_authenticated"
@@ -916,6 +966,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/tasks/": {
       "filePath": "_authenticated/tasks/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/upi/": {
+      "filePath": "_authenticated/upi/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/users/": {
