@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -34,25 +33,8 @@ export function ProfileDropdown() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem asChild>
-            <Link to='/settings'>
-              Profile
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link to='/settings'>
-              Billing
-              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link to='/settings'>
-              Settings
-              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
+
+          <DropdownMenuItem>User Role</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>

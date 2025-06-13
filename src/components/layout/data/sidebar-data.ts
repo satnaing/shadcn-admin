@@ -1,19 +1,21 @@
 import {
   IconBarrierBlock,
-  IconBrowserCheck,
   IconBug,
   IconChecklist,
   IconError404,
   IconLayoutDashboard,
   IconLock,
   IconLockAccess,
-  IconNotification,
-  IconPalette,
   IconServerOff,
-  IconSettings,
-  IconTool,
-  IconUserCog,
   IconUserOff,
+  IconBuildingStore,
+  IconDevices,
+  IconPrinter,
+  IconSettingsPlus,
+  IconRecycle,
+  IconReport,
+  IconCreditCardRefund,
+  IconCapture,
   IconUsers,
 } from '@tabler/icons-react'
 import { Command } from 'lucide-react'
@@ -27,9 +29,9 @@ export const sidebarData: SidebarData = {
   },
   teams: [
     {
-      name: 'Shadcn Admin',
+      name: 'IT Asset Management',
       logo: Command,
-      plan: 'Vite + ShadcnUI',
+      //plan: 'Vite + ShadcnUI',
     },
   ],
   navGroups: [
@@ -56,6 +58,104 @@ export const sidebarData: SidebarData = {
     {
       title: 'Pages',
       items: [
+        {
+          title: 'Inventory',
+          icon: IconBuildingStore,
+          items: [
+            {
+              title: 'Devices',
+              url: '/inventory/devices',
+              icon: IconDevices,
+            },
+            {
+              title: 'Devices Categories',
+              url: '/inventory/devices-categories',
+              icon: IconSettingsPlus,
+            },
+            {
+              title: 'Cartridges',
+              url: '/inventory/cartridges',
+              icon: IconPrinter,
+            },
+            {
+              title: 'Cartridges Categories',
+              url: '/inventory/cartridges-categories',
+              icon: IconSettingsPlus,
+            },
+          ]
+        },
+
+        {
+          title: 'Acquisition',
+          icon: IconCapture,
+          items: [
+            {
+              title: 'My Requests',
+              url: '/acquisition/requests',
+            },
+            {
+              title: 'My Devices',
+              url: '/acquisition/my-devices'
+            },
+            {
+              title: 'WaitList',
+              url: '/acquisition/waitlist'
+            },
+
+          ]
+        },
+
+        {
+          title: 'Handover',
+          icon: IconCreditCardRefund,
+          items: [
+            {
+              title: 'My Requests',
+              url: '/handover/requests',
+            },
+            {
+              title: 'Handover Requests',
+              url: '/handover/handover-list'
+            },
+          ]
+        },
+        {
+          title: 'Disposal',
+          icon: IconRecycle,
+          items: [
+            {
+              title: 'My Requests',
+              url: '/disposal/requests',
+            },
+            {
+              title: 'Disposal Requests',
+              url: '/disposal/disposal-requests-list'
+            },
+            {
+              title: 'Disposal List',
+              url: '/disposal/disposed-devices'
+            }
+          ]
+        },
+        {
+          title: 'Reports',
+          icon: IconReport,
+          items: [
+            {
+              title: 'Inventory Report',
+              url: '/reports/inventory',
+            },
+            {
+              title: 'Acquisition Report',
+              url: '/reports/acquisition'
+            },
+            {
+              title: 'Handover Report',
+              url: '/reports/handover'
+            },
+          ]
+        },
+
         {
           title: 'Auth',
           icon: IconLockAccess,
@@ -110,42 +210,6 @@ export const sidebarData: SidebarData = {
               title: 'Maintenance Error',
               url: '/503',
               icon: IconBarrierBlock,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: 'Other',
-      items: [
-        {
-          title: 'Settings',
-          icon: IconSettings,
-          items: [
-            {
-              title: 'Profile',
-              url: '/settings',
-              icon: IconUserCog,
-            },
-            {
-              title: 'Account',
-              url: '/settings/account',
-              icon: IconTool,
-            },
-            {
-              title: 'Appearance',
-              url: '/settings/appearance',
-              icon: IconPalette,
-            },
-            {
-              title: 'Notifications',
-              url: '/settings/notifications',
-              icon: IconNotification,
-            },
-            {
-              title: 'Display',
-              url: '/settings/display',
-              icon: IconBrowserCheck,
             },
           ],
         },

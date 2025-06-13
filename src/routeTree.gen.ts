@@ -23,14 +23,25 @@ import { Route as authSignIn2Import } from './routes/(auth)/sign-in-2'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
 import { Route as authForgotPasswordImport } from './routes/(auth)/forgot-password'
-import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings/route'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedTasksIndexImport } from './routes/_authenticated/tasks/index'
-import { Route as AuthenticatedSettingsIndexImport } from './routes/_authenticated/settings/index'
-import { Route as AuthenticatedSettingsNotificationsImport } from './routes/_authenticated/settings/notifications'
-import { Route as AuthenticatedSettingsDisplayImport } from './routes/_authenticated/settings/display'
-import { Route as AuthenticatedSettingsAppearanceImport } from './routes/_authenticated/settings/appearance'
-import { Route as AuthenticatedSettingsAccountImport } from './routes/_authenticated/settings/account'
+import { Route as AuthenticatedReportsInventoryImport } from './routes/_authenticated/reports/inventory'
+import { Route as AuthenticatedReportsHandoverImport } from './routes/_authenticated/reports/handover'
+import { Route as AuthenticatedReportsAcquisitionImport } from './routes/_authenticated/reports/acquisition'
+import { Route as AuthenticatedInventoryDevicesCategoriesImport } from './routes/_authenticated/inventory/devices-categories'
+import { Route as AuthenticatedInventoryDevicesImport } from './routes/_authenticated/inventory/devices'
+import { Route as AuthenticatedInventoryCartridgesCategoriesImport } from './routes/_authenticated/inventory/cartridges-categories'
+import { Route as AuthenticatedInventoryCartridgesImport } from './routes/_authenticated/inventory/cartridges'
+import { Route as AuthenticatedHandoverRequestsImport } from './routes/_authenticated/handover/requests'
+import { Route as AuthenticatedHandoverHandoverListImport } from './routes/_authenticated/handover/handover-list'
+import { Route as AuthenticatedDisposalRequestsImport } from './routes/_authenticated/disposal/requests'
+import { Route as AuthenticatedDisposalDisposedDevicesImport } from './routes/_authenticated/disposal/disposed-devices'
+import { Route as AuthenticatedDisposalDisposalRequestsListImport } from './routes/_authenticated/disposal/disposal-requests-list'
+import { Route as AuthenticatedConfigurationsRolesImport } from './routes/_authenticated/configurations/roles'
+import { Route as AuthenticatedConfigurationsDepartmentsImport } from './routes/_authenticated/configurations/departments'
+import { Route as AuthenticatedAcquisitionWaitlistImport } from './routes/_authenticated/acquisition/waitlist'
+import { Route as AuthenticatedAcquisitionRequestsImport } from './routes/_authenticated/acquisition/requests'
+import { Route as AuthenticatedAcquisitionMyDevicesImport } from './routes/_authenticated/acquisition/my-devices'
 
 // Create/Update Routes
 
@@ -105,14 +116,6 @@ const authForgotPasswordRoute = authForgotPasswordImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthenticatedSettingsRouteRoute = AuthenticatedSettingsRouteImport.update(
-  {
-    id: '/settings',
-    path: '/settings',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any,
-)
-
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
   id: '/users/',
   path: '/users/',
@@ -125,40 +128,123 @@ const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexImport.update({
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
-const AuthenticatedSettingsIndexRoute = AuthenticatedSettingsIndexImport.update(
-  {
-    id: '/',
-    path: '/',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any,
-)
-
-const AuthenticatedSettingsNotificationsRoute =
-  AuthenticatedSettingsNotificationsImport.update({
-    id: '/notifications',
-    path: '/notifications',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
+const AuthenticatedReportsInventoryRoute =
+  AuthenticatedReportsInventoryImport.update({
+    id: '/reports/inventory',
+    path: '/reports/inventory',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
-const AuthenticatedSettingsDisplayRoute =
-  AuthenticatedSettingsDisplayImport.update({
-    id: '/display',
-    path: '/display',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
+const AuthenticatedReportsHandoverRoute =
+  AuthenticatedReportsHandoverImport.update({
+    id: '/reports/handover',
+    path: '/reports/handover',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
-const AuthenticatedSettingsAppearanceRoute =
-  AuthenticatedSettingsAppearanceImport.update({
-    id: '/appearance',
-    path: '/appearance',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
+const AuthenticatedReportsAcquisitionRoute =
+  AuthenticatedReportsAcquisitionImport.update({
+    id: '/reports/acquisition',
+    path: '/reports/acquisition',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
-const AuthenticatedSettingsAccountRoute =
-  AuthenticatedSettingsAccountImport.update({
-    id: '/account',
-    path: '/account',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
+const AuthenticatedInventoryDevicesCategoriesRoute =
+  AuthenticatedInventoryDevicesCategoriesImport.update({
+    id: '/inventory/devices-categories',
+    path: '/inventory/devices-categories',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedInventoryDevicesRoute =
+  AuthenticatedInventoryDevicesImport.update({
+    id: '/inventory/devices',
+    path: '/inventory/devices',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedInventoryCartridgesCategoriesRoute =
+  AuthenticatedInventoryCartridgesCategoriesImport.update({
+    id: '/inventory/cartridges-categories',
+    path: '/inventory/cartridges-categories',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedInventoryCartridgesRoute =
+  AuthenticatedInventoryCartridgesImport.update({
+    id: '/inventory/cartridges',
+    path: '/inventory/cartridges',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedHandoverRequestsRoute =
+  AuthenticatedHandoverRequestsImport.update({
+    id: '/handover/requests',
+    path: '/handover/requests',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedHandoverHandoverListRoute =
+  AuthenticatedHandoverHandoverListImport.update({
+    id: '/handover/handover-list',
+    path: '/handover/handover-list',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedDisposalRequestsRoute =
+  AuthenticatedDisposalRequestsImport.update({
+    id: '/disposal/requests',
+    path: '/disposal/requests',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedDisposalDisposedDevicesRoute =
+  AuthenticatedDisposalDisposedDevicesImport.update({
+    id: '/disposal/disposed-devices',
+    path: '/disposal/disposed-devices',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedDisposalDisposalRequestsListRoute =
+  AuthenticatedDisposalDisposalRequestsListImport.update({
+    id: '/disposal/disposal-requests-list',
+    path: '/disposal/disposal-requests-list',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedConfigurationsRolesRoute =
+  AuthenticatedConfigurationsRolesImport.update({
+    id: '/configurations/roles',
+    path: '/configurations/roles',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedConfigurationsDepartmentsRoute =
+  AuthenticatedConfigurationsDepartmentsImport.update({
+    id: '/configurations/departments',
+    path: '/configurations/departments',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedAcquisitionWaitlistRoute =
+  AuthenticatedAcquisitionWaitlistImport.update({
+    id: '/acquisition/waitlist',
+    path: '/acquisition/waitlist',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedAcquisitionRequestsRoute =
+  AuthenticatedAcquisitionRequestsImport.update({
+    id: '/acquisition/requests',
+    path: '/acquisition/requests',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+
+const AuthenticatedAcquisitionMyDevicesRoute =
+  AuthenticatedAcquisitionMyDevicesImport.update({
+    id: '/acquisition/my-devices',
+    path: '/acquisition/my-devices',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -171,13 +257,6 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRoute
-    }
-    '/_authenticated/settings': {
-      id: '/_authenticated/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
-      parentRoute: typeof AuthenticatedRouteImport
     }
     '/(auth)/forgot-password': {
       id: '/(auth)/forgot-password'
@@ -256,40 +335,124 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
-    '/_authenticated/settings/account': {
-      id: '/_authenticated/settings/account'
-      path: '/account'
-      fullPath: '/settings/account'
-      preLoaderRoute: typeof AuthenticatedSettingsAccountImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
+    '/_authenticated/acquisition/my-devices': {
+      id: '/_authenticated/acquisition/my-devices'
+      path: '/acquisition/my-devices'
+      fullPath: '/acquisition/my-devices'
+      preLoaderRoute: typeof AuthenticatedAcquisitionMyDevicesImport
+      parentRoute: typeof AuthenticatedRouteImport
     }
-    '/_authenticated/settings/appearance': {
-      id: '/_authenticated/settings/appearance'
-      path: '/appearance'
-      fullPath: '/settings/appearance'
-      preLoaderRoute: typeof AuthenticatedSettingsAppearanceImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
+    '/_authenticated/acquisition/requests': {
+      id: '/_authenticated/acquisition/requests'
+      path: '/acquisition/requests'
+      fullPath: '/acquisition/requests'
+      preLoaderRoute: typeof AuthenticatedAcquisitionRequestsImport
+      parentRoute: typeof AuthenticatedRouteImport
     }
-    '/_authenticated/settings/display': {
-      id: '/_authenticated/settings/display'
-      path: '/display'
-      fullPath: '/settings/display'
-      preLoaderRoute: typeof AuthenticatedSettingsDisplayImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
+    '/_authenticated/acquisition/waitlist': {
+      id: '/_authenticated/acquisition/waitlist'
+      path: '/acquisition/waitlist'
+      fullPath: '/acquisition/waitlist'
+      preLoaderRoute: typeof AuthenticatedAcquisitionWaitlistImport
+      parentRoute: typeof AuthenticatedRouteImport
     }
-    '/_authenticated/settings/notifications': {
-      id: '/_authenticated/settings/notifications'
-      path: '/notifications'
-      fullPath: '/settings/notifications'
-      preLoaderRoute: typeof AuthenticatedSettingsNotificationsImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
+    '/_authenticated/configurations/departments': {
+      id: '/_authenticated/configurations/departments'
+      path: '/configurations/departments'
+      fullPath: '/configurations/departments'
+      preLoaderRoute: typeof AuthenticatedConfigurationsDepartmentsImport
+      parentRoute: typeof AuthenticatedRouteImport
     }
-    '/_authenticated/settings/': {
-      id: '/_authenticated/settings/'
-      path: '/'
-      fullPath: '/settings/'
-      preLoaderRoute: typeof AuthenticatedSettingsIndexImport
-      parentRoute: typeof AuthenticatedSettingsRouteImport
+    '/_authenticated/configurations/roles': {
+      id: '/_authenticated/configurations/roles'
+      path: '/configurations/roles'
+      fullPath: '/configurations/roles'
+      preLoaderRoute: typeof AuthenticatedConfigurationsRolesImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/disposal/disposal-requests-list': {
+      id: '/_authenticated/disposal/disposal-requests-list'
+      path: '/disposal/disposal-requests-list'
+      fullPath: '/disposal/disposal-requests-list'
+      preLoaderRoute: typeof AuthenticatedDisposalDisposalRequestsListImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/disposal/disposed-devices': {
+      id: '/_authenticated/disposal/disposed-devices'
+      path: '/disposal/disposed-devices'
+      fullPath: '/disposal/disposed-devices'
+      preLoaderRoute: typeof AuthenticatedDisposalDisposedDevicesImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/disposal/requests': {
+      id: '/_authenticated/disposal/requests'
+      path: '/disposal/requests'
+      fullPath: '/disposal/requests'
+      preLoaderRoute: typeof AuthenticatedDisposalRequestsImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/handover/handover-list': {
+      id: '/_authenticated/handover/handover-list'
+      path: '/handover/handover-list'
+      fullPath: '/handover/handover-list'
+      preLoaderRoute: typeof AuthenticatedHandoverHandoverListImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/handover/requests': {
+      id: '/_authenticated/handover/requests'
+      path: '/handover/requests'
+      fullPath: '/handover/requests'
+      preLoaderRoute: typeof AuthenticatedHandoverRequestsImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/inventory/cartridges': {
+      id: '/_authenticated/inventory/cartridges'
+      path: '/inventory/cartridges'
+      fullPath: '/inventory/cartridges'
+      preLoaderRoute: typeof AuthenticatedInventoryCartridgesImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/inventory/cartridges-categories': {
+      id: '/_authenticated/inventory/cartridges-categories'
+      path: '/inventory/cartridges-categories'
+      fullPath: '/inventory/cartridges-categories'
+      preLoaderRoute: typeof AuthenticatedInventoryCartridgesCategoriesImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/inventory/devices': {
+      id: '/_authenticated/inventory/devices'
+      path: '/inventory/devices'
+      fullPath: '/inventory/devices'
+      preLoaderRoute: typeof AuthenticatedInventoryDevicesImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/inventory/devices-categories': {
+      id: '/_authenticated/inventory/devices-categories'
+      path: '/inventory/devices-categories'
+      fullPath: '/inventory/devices-categories'
+      preLoaderRoute: typeof AuthenticatedInventoryDevicesCategoriesImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/acquisition': {
+      id: '/_authenticated/reports/acquisition'
+      path: '/reports/acquisition'
+      fullPath: '/reports/acquisition'
+      preLoaderRoute: typeof AuthenticatedReportsAcquisitionImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/handover': {
+      id: '/_authenticated/reports/handover'
+      path: '/reports/handover'
+      fullPath: '/reports/handover'
+      preLoaderRoute: typeof AuthenticatedReportsHandoverImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/reports/inventory': {
+      id: '/_authenticated/reports/inventory'
+      path: '/reports/inventory'
+      fullPath: '/reports/inventory'
+      preLoaderRoute: typeof AuthenticatedReportsInventoryImport
+      parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/tasks/': {
       id: '/_authenticated/tasks/'
@@ -310,39 +473,55 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-interface AuthenticatedSettingsRouteRouteChildren {
-  AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute
-  AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
-  AuthenticatedSettingsDisplayRoute: typeof AuthenticatedSettingsDisplayRoute
-  AuthenticatedSettingsNotificationsRoute: typeof AuthenticatedSettingsNotificationsRoute
-  AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
-}
-
-const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteChildren =
-  {
-    AuthenticatedSettingsAccountRoute: AuthenticatedSettingsAccountRoute,
-    AuthenticatedSettingsAppearanceRoute: AuthenticatedSettingsAppearanceRoute,
-    AuthenticatedSettingsDisplayRoute: AuthenticatedSettingsDisplayRoute,
-    AuthenticatedSettingsNotificationsRoute:
-      AuthenticatedSettingsNotificationsRoute,
-    AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
-  }
-
-const AuthenticatedSettingsRouteRouteWithChildren =
-  AuthenticatedSettingsRouteRoute._addFileChildren(
-    AuthenticatedSettingsRouteRouteChildren,
-  )
-
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedAcquisitionMyDevicesRoute: typeof AuthenticatedAcquisitionMyDevicesRoute
+  AuthenticatedAcquisitionRequestsRoute: typeof AuthenticatedAcquisitionRequestsRoute
+  AuthenticatedAcquisitionWaitlistRoute: typeof AuthenticatedAcquisitionWaitlistRoute
+  AuthenticatedConfigurationsDepartmentsRoute: typeof AuthenticatedConfigurationsDepartmentsRoute
+  AuthenticatedConfigurationsRolesRoute: typeof AuthenticatedConfigurationsRolesRoute
+  AuthenticatedDisposalDisposalRequestsListRoute: typeof AuthenticatedDisposalDisposalRequestsListRoute
+  AuthenticatedDisposalDisposedDevicesRoute: typeof AuthenticatedDisposalDisposedDevicesRoute
+  AuthenticatedDisposalRequestsRoute: typeof AuthenticatedDisposalRequestsRoute
+  AuthenticatedHandoverHandoverListRoute: typeof AuthenticatedHandoverHandoverListRoute
+  AuthenticatedHandoverRequestsRoute: typeof AuthenticatedHandoverRequestsRoute
+  AuthenticatedInventoryCartridgesRoute: typeof AuthenticatedInventoryCartridgesRoute
+  AuthenticatedInventoryCartridgesCategoriesRoute: typeof AuthenticatedInventoryCartridgesCategoriesRoute
+  AuthenticatedInventoryDevicesRoute: typeof AuthenticatedInventoryDevicesRoute
+  AuthenticatedInventoryDevicesCategoriesRoute: typeof AuthenticatedInventoryDevicesCategoriesRoute
+  AuthenticatedReportsAcquisitionRoute: typeof AuthenticatedReportsAcquisitionRoute
+  AuthenticatedReportsHandoverRoute: typeof AuthenticatedReportsHandoverRoute
+  AuthenticatedReportsInventoryRoute: typeof AuthenticatedReportsInventoryRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedAcquisitionMyDevicesRoute:
+    AuthenticatedAcquisitionMyDevicesRoute,
+  AuthenticatedAcquisitionRequestsRoute: AuthenticatedAcquisitionRequestsRoute,
+  AuthenticatedAcquisitionWaitlistRoute: AuthenticatedAcquisitionWaitlistRoute,
+  AuthenticatedConfigurationsDepartmentsRoute:
+    AuthenticatedConfigurationsDepartmentsRoute,
+  AuthenticatedConfigurationsRolesRoute: AuthenticatedConfigurationsRolesRoute,
+  AuthenticatedDisposalDisposalRequestsListRoute:
+    AuthenticatedDisposalDisposalRequestsListRoute,
+  AuthenticatedDisposalDisposedDevicesRoute:
+    AuthenticatedDisposalDisposedDevicesRoute,
+  AuthenticatedDisposalRequestsRoute: AuthenticatedDisposalRequestsRoute,
+  AuthenticatedHandoverHandoverListRoute:
+    AuthenticatedHandoverHandoverListRoute,
+  AuthenticatedHandoverRequestsRoute: AuthenticatedHandoverRequestsRoute,
+  AuthenticatedInventoryCartridgesRoute: AuthenticatedInventoryCartridgesRoute,
+  AuthenticatedInventoryCartridgesCategoriesRoute:
+    AuthenticatedInventoryCartridgesCategoriesRoute,
+  AuthenticatedInventoryDevicesRoute: AuthenticatedInventoryDevicesRoute,
+  AuthenticatedInventoryDevicesCategoriesRoute:
+    AuthenticatedInventoryDevicesCategoriesRoute,
+  AuthenticatedReportsAcquisitionRoute: AuthenticatedReportsAcquisitionRoute,
+  AuthenticatedReportsHandoverRoute: AuthenticatedReportsHandoverRoute,
+  AuthenticatedReportsInventoryRoute: AuthenticatedReportsInventoryRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
 }
@@ -352,7 +531,6 @@ const AuthenticatedRouteRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteRouteWithChildren
-  '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
@@ -364,11 +542,23 @@ export interface FileRoutesByFullPath {
   '/500': typeof errors500Route
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
-  '/settings/account': typeof AuthenticatedSettingsAccountRoute
-  '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/settings/display': typeof AuthenticatedSettingsDisplayRoute
-  '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/settings/': typeof AuthenticatedSettingsIndexRoute
+  '/acquisition/my-devices': typeof AuthenticatedAcquisitionMyDevicesRoute
+  '/acquisition/requests': typeof AuthenticatedAcquisitionRequestsRoute
+  '/acquisition/waitlist': typeof AuthenticatedAcquisitionWaitlistRoute
+  '/configurations/departments': typeof AuthenticatedConfigurationsDepartmentsRoute
+  '/configurations/roles': typeof AuthenticatedConfigurationsRolesRoute
+  '/disposal/disposal-requests-list': typeof AuthenticatedDisposalDisposalRequestsListRoute
+  '/disposal/disposed-devices': typeof AuthenticatedDisposalDisposedDevicesRoute
+  '/disposal/requests': typeof AuthenticatedDisposalRequestsRoute
+  '/handover/handover-list': typeof AuthenticatedHandoverHandoverListRoute
+  '/handover/requests': typeof AuthenticatedHandoverRequestsRoute
+  '/inventory/cartridges': typeof AuthenticatedInventoryCartridgesRoute
+  '/inventory/cartridges-categories': typeof AuthenticatedInventoryCartridgesCategoriesRoute
+  '/inventory/devices': typeof AuthenticatedInventoryDevicesRoute
+  '/inventory/devices-categories': typeof AuthenticatedInventoryDevicesCategoriesRoute
+  '/reports/acquisition': typeof AuthenticatedReportsAcquisitionRoute
+  '/reports/handover': typeof AuthenticatedReportsHandoverRoute
+  '/reports/inventory': typeof AuthenticatedReportsInventoryRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
 }
@@ -385,11 +575,23 @@ export interface FileRoutesByTo {
   '/500': typeof errors500Route
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
-  '/settings/account': typeof AuthenticatedSettingsAccountRoute
-  '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/settings/display': typeof AuthenticatedSettingsDisplayRoute
-  '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/settings': typeof AuthenticatedSettingsIndexRoute
+  '/acquisition/my-devices': typeof AuthenticatedAcquisitionMyDevicesRoute
+  '/acquisition/requests': typeof AuthenticatedAcquisitionRequestsRoute
+  '/acquisition/waitlist': typeof AuthenticatedAcquisitionWaitlistRoute
+  '/configurations/departments': typeof AuthenticatedConfigurationsDepartmentsRoute
+  '/configurations/roles': typeof AuthenticatedConfigurationsRolesRoute
+  '/disposal/disposal-requests-list': typeof AuthenticatedDisposalDisposalRequestsListRoute
+  '/disposal/disposed-devices': typeof AuthenticatedDisposalDisposedDevicesRoute
+  '/disposal/requests': typeof AuthenticatedDisposalRequestsRoute
+  '/handover/handover-list': typeof AuthenticatedHandoverHandoverListRoute
+  '/handover/requests': typeof AuthenticatedHandoverRequestsRoute
+  '/inventory/cartridges': typeof AuthenticatedInventoryCartridgesRoute
+  '/inventory/cartridges-categories': typeof AuthenticatedInventoryCartridgesCategoriesRoute
+  '/inventory/devices': typeof AuthenticatedInventoryDevicesRoute
+  '/inventory/devices-categories': typeof AuthenticatedInventoryDevicesCategoriesRoute
+  '/reports/acquisition': typeof AuthenticatedReportsAcquisitionRoute
+  '/reports/handover': typeof AuthenticatedReportsHandoverRoute
+  '/reports/inventory': typeof AuthenticatedReportsInventoryRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
 }
@@ -397,7 +599,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/(auth)/forgot-password': typeof authForgotPasswordRoute
   '/(auth)/otp': typeof authOtpRoute
   '/(auth)/sign-in': typeof authSignInRoute
@@ -409,11 +610,23 @@ export interface FileRoutesById {
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
   '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
-  '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
-  '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
+  '/_authenticated/acquisition/my-devices': typeof AuthenticatedAcquisitionMyDevicesRoute
+  '/_authenticated/acquisition/requests': typeof AuthenticatedAcquisitionRequestsRoute
+  '/_authenticated/acquisition/waitlist': typeof AuthenticatedAcquisitionWaitlistRoute
+  '/_authenticated/configurations/departments': typeof AuthenticatedConfigurationsDepartmentsRoute
+  '/_authenticated/configurations/roles': typeof AuthenticatedConfigurationsRolesRoute
+  '/_authenticated/disposal/disposal-requests-list': typeof AuthenticatedDisposalDisposalRequestsListRoute
+  '/_authenticated/disposal/disposed-devices': typeof AuthenticatedDisposalDisposedDevicesRoute
+  '/_authenticated/disposal/requests': typeof AuthenticatedDisposalRequestsRoute
+  '/_authenticated/handover/handover-list': typeof AuthenticatedHandoverHandoverListRoute
+  '/_authenticated/handover/requests': typeof AuthenticatedHandoverRequestsRoute
+  '/_authenticated/inventory/cartridges': typeof AuthenticatedInventoryCartridgesRoute
+  '/_authenticated/inventory/cartridges-categories': typeof AuthenticatedInventoryCartridgesCategoriesRoute
+  '/_authenticated/inventory/devices': typeof AuthenticatedInventoryDevicesRoute
+  '/_authenticated/inventory/devices-categories': typeof AuthenticatedInventoryDevicesCategoriesRoute
+  '/_authenticated/reports/acquisition': typeof AuthenticatedReportsAcquisitionRoute
+  '/_authenticated/reports/handover': typeof AuthenticatedReportsHandoverRoute
+  '/_authenticated/reports/inventory': typeof AuthenticatedReportsInventoryRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
 }
@@ -422,7 +635,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
-    | '/settings'
     | '/forgot-password'
     | '/otp'
     | '/sign-in'
@@ -434,11 +646,23 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/'
-    | '/settings/account'
-    | '/settings/appearance'
-    | '/settings/display'
-    | '/settings/notifications'
-    | '/settings/'
+    | '/acquisition/my-devices'
+    | '/acquisition/requests'
+    | '/acquisition/waitlist'
+    | '/configurations/departments'
+    | '/configurations/roles'
+    | '/disposal/disposal-requests-list'
+    | '/disposal/disposed-devices'
+    | '/disposal/requests'
+    | '/handover/handover-list'
+    | '/handover/requests'
+    | '/inventory/cartridges'
+    | '/inventory/cartridges-categories'
+    | '/inventory/devices'
+    | '/inventory/devices-categories'
+    | '/reports/acquisition'
+    | '/reports/handover'
+    | '/reports/inventory'
     | '/tasks'
     | '/users'
   fileRoutesByTo: FileRoutesByTo
@@ -454,17 +678,28 @@ export interface FileRouteTypes {
     | '/500'
     | '/503'
     | '/'
-    | '/settings/account'
-    | '/settings/appearance'
-    | '/settings/display'
-    | '/settings/notifications'
-    | '/settings'
+    | '/acquisition/my-devices'
+    | '/acquisition/requests'
+    | '/acquisition/waitlist'
+    | '/configurations/departments'
+    | '/configurations/roles'
+    | '/disposal/disposal-requests-list'
+    | '/disposal/disposed-devices'
+    | '/disposal/requests'
+    | '/handover/handover-list'
+    | '/handover/requests'
+    | '/inventory/cartridges'
+    | '/inventory/cartridges-categories'
+    | '/inventory/devices'
+    | '/inventory/devices-categories'
+    | '/reports/acquisition'
+    | '/reports/handover'
+    | '/reports/inventory'
     | '/tasks'
     | '/users'
   id:
     | '__root__'
     | '/_authenticated'
-    | '/_authenticated/settings'
     | '/(auth)/forgot-password'
     | '/(auth)/otp'
     | '/(auth)/sign-in'
@@ -476,11 +711,23 @@ export interface FileRouteTypes {
     | '/(errors)/500'
     | '/(errors)/503'
     | '/_authenticated/'
-    | '/_authenticated/settings/account'
-    | '/_authenticated/settings/appearance'
-    | '/_authenticated/settings/display'
-    | '/_authenticated/settings/notifications'
-    | '/_authenticated/settings/'
+    | '/_authenticated/acquisition/my-devices'
+    | '/_authenticated/acquisition/requests'
+    | '/_authenticated/acquisition/waitlist'
+    | '/_authenticated/configurations/departments'
+    | '/_authenticated/configurations/roles'
+    | '/_authenticated/disposal/disposal-requests-list'
+    | '/_authenticated/disposal/disposed-devices'
+    | '/_authenticated/disposal/requests'
+    | '/_authenticated/handover/handover-list'
+    | '/_authenticated/handover/requests'
+    | '/_authenticated/inventory/cartridges'
+    | '/_authenticated/inventory/cartridges-categories'
+    | '/_authenticated/inventory/devices'
+    | '/_authenticated/inventory/devices-categories'
+    | '/_authenticated/reports/acquisition'
+    | '/_authenticated/reports/handover'
+    | '/_authenticated/reports/inventory'
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
   fileRoutesById: FileRoutesById
@@ -540,21 +787,26 @@ export const routeTree = rootRoute
     "/_authenticated": {
       "filePath": "_authenticated/route.tsx",
       "children": [
-        "/_authenticated/settings",
         "/_authenticated/",
+        "/_authenticated/acquisition/my-devices",
+        "/_authenticated/acquisition/requests",
+        "/_authenticated/acquisition/waitlist",
+        "/_authenticated/configurations/departments",
+        "/_authenticated/configurations/roles",
+        "/_authenticated/disposal/disposal-requests-list",
+        "/_authenticated/disposal/disposed-devices",
+        "/_authenticated/disposal/requests",
+        "/_authenticated/handover/handover-list",
+        "/_authenticated/handover/requests",
+        "/_authenticated/inventory/cartridges",
+        "/_authenticated/inventory/cartridges-categories",
+        "/_authenticated/inventory/devices",
+        "/_authenticated/inventory/devices-categories",
+        "/_authenticated/reports/acquisition",
+        "/_authenticated/reports/handover",
+        "/_authenticated/reports/inventory",
         "/_authenticated/tasks/",
         "/_authenticated/users/"
-      ]
-    },
-    "/_authenticated/settings": {
-      "filePath": "_authenticated/settings/route.tsx",
-      "parent": "/_authenticated",
-      "children": [
-        "/_authenticated/settings/account",
-        "/_authenticated/settings/appearance",
-        "/_authenticated/settings/display",
-        "/_authenticated/settings/notifications",
-        "/_authenticated/settings/"
       ]
     },
     "/(auth)/forgot-password": {
@@ -591,25 +843,73 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/index.tsx",
       "parent": "/_authenticated"
     },
-    "/_authenticated/settings/account": {
-      "filePath": "_authenticated/settings/account.tsx",
-      "parent": "/_authenticated/settings"
+    "/_authenticated/acquisition/my-devices": {
+      "filePath": "_authenticated/acquisition/my-devices.tsx",
+      "parent": "/_authenticated"
     },
-    "/_authenticated/settings/appearance": {
-      "filePath": "_authenticated/settings/appearance.tsx",
-      "parent": "/_authenticated/settings"
+    "/_authenticated/acquisition/requests": {
+      "filePath": "_authenticated/acquisition/requests.tsx",
+      "parent": "/_authenticated"
     },
-    "/_authenticated/settings/display": {
-      "filePath": "_authenticated/settings/display.tsx",
-      "parent": "/_authenticated/settings"
+    "/_authenticated/acquisition/waitlist": {
+      "filePath": "_authenticated/acquisition/waitlist.tsx",
+      "parent": "/_authenticated"
     },
-    "/_authenticated/settings/notifications": {
-      "filePath": "_authenticated/settings/notifications.tsx",
-      "parent": "/_authenticated/settings"
+    "/_authenticated/configurations/departments": {
+      "filePath": "_authenticated/configurations/departments.tsx",
+      "parent": "/_authenticated"
     },
-    "/_authenticated/settings/": {
-      "filePath": "_authenticated/settings/index.tsx",
-      "parent": "/_authenticated/settings"
+    "/_authenticated/configurations/roles": {
+      "filePath": "_authenticated/configurations/roles.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/disposal/disposal-requests-list": {
+      "filePath": "_authenticated/disposal/disposal-requests-list.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/disposal/disposed-devices": {
+      "filePath": "_authenticated/disposal/disposed-devices.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/disposal/requests": {
+      "filePath": "_authenticated/disposal/requests.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/handover/handover-list": {
+      "filePath": "_authenticated/handover/handover-list.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/handover/requests": {
+      "filePath": "_authenticated/handover/requests.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/inventory/cartridges": {
+      "filePath": "_authenticated/inventory/cartridges.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/inventory/cartridges-categories": {
+      "filePath": "_authenticated/inventory/cartridges-categories.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/inventory/devices": {
+      "filePath": "_authenticated/inventory/devices.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/inventory/devices-categories": {
+      "filePath": "_authenticated/inventory/devices-categories.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/acquisition": {
+      "filePath": "_authenticated/reports/acquisition.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/handover": {
+      "filePath": "_authenticated/reports/handover.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/reports/inventory": {
+      "filePath": "_authenticated/reports/inventory.tsx",
+      "parent": "/_authenticated"
     },
     "/_authenticated/tasks/": {
       "filePath": "_authenticated/tasks/index.tsx",
