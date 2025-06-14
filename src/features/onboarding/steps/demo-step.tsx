@@ -4,8 +4,8 @@ import { useState } from "react"
 import { useNavigate } from "@tanstack/react-router"
 import { ThumbsUp, ThumbsDown, CheckCircle2, Clock, MessageSquare, Heart, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { OnboardingCard } from "@/components/onboarding/onboarding-card"
-import { OnboardingNavigation } from "@/components/onboarding/onboarding-navigation"
+import { OnboardingCard } from "@/features/onboarding/onboarding-card"
+import { OnboardingNavigation } from "@/features/onboarding/onboarding-navigation"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   Dialog,

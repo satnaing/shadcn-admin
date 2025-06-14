@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { PostSettingsStep } from '@/components/onboarding/steps/post-settings-step'
-import { OnboardingLayout } from '@/components/onboarding/onboarding-layout'
+import { PostSettingsStep } from '@/features/onboarding/steps/post-settings-step'
+import { OnboardingLayout } from '@/features/onboarding/onboarding-layout'
 
 export const Route = createFileRoute('/onboarding/post-settings')({
   component: () => (

@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react"
 import { Download, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { OnboardingCard } from "@/components/onboarding/onboarding-card"
-import { OnboardingNavigation } from "@/components/onboarding/onboarding-navigation"
+import { OnboardingCard } from "@/features/onboarding/onboarding-card"
+import { OnboardingNavigation } from "@/features/onboarding/onboarding-navigation"
 import { useOnboarding } from "@/context/onboarding-context"
 
 export function ExtensionStep() {
