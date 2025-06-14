@@ -4,6 +4,7 @@ import { CompaniesDeleteDialog } from './companies-delete-dialog'
 
 export function CompaniesDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useCompanies()
+  
   return (
     <>
       <CompaniesActionDialog

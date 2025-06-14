@@ -5,9 +5,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 import { useEditUser } from "../context/edit-context";
 import { UserDetailType } from "../data/schema";
+import { useAfterCourses } from "@/features/users/services/after-courses/selectAfterCourses"
 
 export const AfterCourses = ({ datas }: {datas: UserDetailType['student_after_courses']}) => {
-  const { editingSection } = useEditUser()
+  const { editingSection, editData, setEditData } = useEditUser()
+  const { data: afterCoursesDatas = []} = useAfterCourses()
 
   const grades: number[] = [1, 2, 3]
   const gradeGroup = grades.map(grade => {
@@ -37,9 +39,13 @@ export const AfterCourses = ({ datas }: {datas: UserDetailType['student_after_co
                     <SelectValue placeholder='방과후 선택'></SelectValue>
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1">React</SelectItem>
-                    <SelectItem value="2">React</SelectItem>
-                    <SelectItem value="3">React</SelectItem>
+                    {afterCoursesDatas.map(afterCourse => (
+                      <SelectItem 
+                        value={String(afterCourse.after_course_id)}
+                      >
+                        {afterCourse.after_course_name}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <div>
@@ -56,7 +62,9 @@ export const AfterCourses = ({ datas }: {datas: UserDetailType['student_after_co
                           size="icon"
                           className="h-2 w-2 rounded-full"
                         >
-                          <CircleX size={12} />
+                          <CircleX 
+                            size={12}
+                          />
                         </Button>
                         </Badge>
                     ))}

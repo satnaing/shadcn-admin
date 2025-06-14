@@ -107,7 +107,7 @@ export function CompaniesActionDialog({
           </Form>
         </div>
         <DialogFooter>
-          <Button type='submit' form='user-form' disabled={isLoading}>
+          <Button type='submit' form='user-form' isDisabled={isLoading}>
             {isLoading ? '저장 중...' : '저장하기'}
           </Button>
         </DialogFooter>
