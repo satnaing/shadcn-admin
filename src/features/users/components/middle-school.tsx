@@ -3,11 +3,10 @@ import { Input } from "@/components/ui/input";
 
 import { useEditUser } from "../context/edit-context"
 import { UserDetailType } from "../data/schema";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export const MiddleSchool = ({ datas }: {datas: UserDetailType['student_middle_schools']}) => {
   const { editingSection } = useEditUser()
-  
+
   return (
     <div>
     {editingSection === 'middle_school' ? (
@@ -32,16 +31,11 @@ export const MiddleSchool = ({ datas }: {datas: UserDetailType['student_middle_s
 
         <div className="space-y-2">
           <Label>입학전형</Label>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder='입학전형을 선택하세요.' />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="1">일반전형</SelectItem>
-              <SelectItem value="2">특별전형</SelectItem>
-              <SelectItem value="3">사회통합전형</SelectItem>
-            </SelectContent>
-          </Select>
+          <Input
+            // value={editData.middleSchool?.admissionType || ""}
+            onChange={() => {}}
+            placeholder="예: 일반전형, 특별전형 등"
+          />
         </div>
 
         <div className="grid grid-cols-2 gap-4">

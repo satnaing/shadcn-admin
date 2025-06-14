@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { Database } from '@/utils/supabase/database.types'
 
-export type BaseType = Database['public']['Tables']
+type BaseType = Database['public']['Tables']
 
 export type UserSupabase = BaseType['student']['Row']
 export type FieldTrainingType = BaseType['field_training']['Row']
@@ -68,11 +68,6 @@ export interface UserDetailType {
 }
 
 export type UserEditType = {
-  editData: {
-    action: 'update' | 'delete',
-    data: {
-      [Type in keyof Omit<UserDetailType, 'student_id' | 'name' | 'departments'>]?: UserDetailType[Type] | null
-    }
-  }[]
+  [Type in keyof Omit<UserDetailType, 'student_id' | 'name' | 'departments'>]?: UserDetailType[Type] | null
 }
 
