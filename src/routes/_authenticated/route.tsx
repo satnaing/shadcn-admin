@@ -18,13 +18,17 @@ export const Route = createFileRoute('/_authenticated')({
         to: '/sign-in',
       })
     } else if (error) throw error
+    else if (!(await checkAdmin(data.user.id))) {
+      return redirect({
+        to: '/403',
+      })
+    }
     return data
   },
 })
 
 function RouteComponent() {
   const data: { user: User } = Route.useLoaderData()
-  console.log(data)
   const defaultOpen = Cookies.get('sidebar:state') !== 'false'
 
   return (
@@ -51,4 +55,11 @@ function RouteComponent() {
       </SearchProvider>
     </UserProvider>
   )
+}
+async function checkAdmin(id: string) {
+  const { data } = await supabase
+    .from('web_admin_permission')
+    .select('auth_id')
+    .eq('auth_id', id)
+  return data && data.length > 0
 }
