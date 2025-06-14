@@ -19,6 +19,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
 import { signInWithGoogle, signInWithPassword } from '../../utils/auth.util'
+import { toast } from 'sonner'
 
 type UserAuthFormProps = HTMLAttributes<HTMLFormElement>
 
@@ -48,16 +49,31 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     },
   })
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
+const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  setIsLoading(true)
+  try {
+    const { error } = await signInWithPassword(data)
 
-
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    if (error) {
+      toast.error(error.message || 'Invalid email or password')
+    } else {
+      toast.success('Login successful!')
+    }
+  } catch (err) {
+    toast.error('Unexpected error occurred')
+    
+    if (err instanceof Error) {
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error(err)
+      }
+    }
+  } finally {
+    setIsLoading(false)
   }
+}
+
+
 
   return (
     <Form {...form}>
@@ -98,9 +114,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             </FormItem>
           )}
         />
-        <Button className='mt-2' disabled={isLoading}>
-          Login
-        </Button>
+        <Button
+  className='mt-2'
+  type='submit'
+  disabled={isLoading}
+>
+  Login
+</Button>
 
         <div className='relative my-2'>
           <div className='absolute inset-0 flex items-center'>
@@ -118,7 +138,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             variant='outline'
             type='button'
             disabled={isLoading}
-            onClick={signInWithGoogle || signInWithPassword}
+            onClick={signInWithGoogle }
           >
             <IconBrandGoogle className='h-4 w-4' /> Google
           </Button>

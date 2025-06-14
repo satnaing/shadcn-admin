@@ -10,7 +10,17 @@ export async function signInWithPassword(data: {
 }) {
   const supabase = SupabaseInstance.getSupabase()
   const res = await supabase.auth.signInWithPassword(data)
-  return { session: res?.data?.session, error: res?.error }
+  const session = res?.data?.session
+  const error = res?.error
+  if (session) {
+    Cookies.set(AuthEnum.AUTH_COOKIE_KEY, JSON.stringify(session), {
+      expires: 7,
+      secure: true,
+      sameSite: 'Lax',
+    })
+  }
+
+  return { session, error }
 }
 
 export async function signInWithGoogle() {
@@ -26,7 +36,6 @@ export async function signInWithGoogle() {
     },
   })
   if (error) {
-    console.log(error)
     toast('Tech tango glitch, Retry, please!', { type: 'error' })
   }
 }
@@ -51,6 +60,14 @@ export async function signUpWithPassword(payload: {
 
   if (error || !data?.user?.identities?.length) {
     throw new Error(error?.message || 'Email already exists')
+  }
+
+  if (data.session) {
+    Cookies.set(AuthEnum.AUTH_COOKIE_KEY, JSON.stringify(data.session), {
+      expires: 7,
+      secure: true,
+      sameSite: 'Lax',
+    })
   }
 
   return data?.user
