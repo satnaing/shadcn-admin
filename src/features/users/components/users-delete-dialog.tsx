@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { User } from '../data/schema'
+import { useDeleteUserMutation } from '../services/deleteUser'
 
 interface Props {
   open: boolean
@@ -17,9 +18,11 @@ interface Props {
 export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
   const [value, setValue] = useState('')
 
-  const handleDelete = () => {
-    if (value.trim() !== currentRow.name) return
+  const { mutate: deleteUserMutation } = useDeleteUserMutation()
 
+  const handleDelete = async () => {
+    if (value.trim() !== currentRow.name) return
+    await deleteUserMutation({ student_id: currentRow.student_id })
     onOpenChange(false)
   }
 
