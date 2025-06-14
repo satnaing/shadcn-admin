@@ -5,9 +5,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 import { useEditUser } from "../context/edit-context";
 import { UserDetailType } from "../data/schema";
+import { useAfterCoursesQuery } from "../services/after-courses/selectAfterCourses";
 
 export const AfterCourses = ({ datas }: {datas: UserDetailType['student_after_courses']}) => {
   const { editingSection } = useEditUser()
+  const { data: afterCourses = [] } = useAfterCoursesQuery() 
 
   const grades: number[] = [1, 2, 3]
   const gradeGroup = grades.map(grade => {
@@ -37,9 +39,9 @@ export const AfterCourses = ({ datas }: {datas: UserDetailType['student_after_co
                     <SelectValue placeholder='방과후 선택'></SelectValue>
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1">React</SelectItem>
-                    <SelectItem value="2">React</SelectItem>
-                    <SelectItem value="3">React</SelectItem>
+                    {afterCourses.map(afterCourse => (
+                      <SelectItem value={String(afterCourse.after_course_id)}>{afterCourse.after_course_name}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 <div>
