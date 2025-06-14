@@ -1,8 +1,8 @@
 import supabase from "@/utils/supabase/client";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { UsersDetailType } from "../data/schema";
+import { UserDetailType } from "../data/schema";
 
-export const useUserDetailQuery = (student_id: string): UseQueryResult<UsersDetailType, Error> => {
+export const useUserDetailQuery = (student_id: string): UseQueryResult<UserDetailType, Error> => {
   const selectUserDatas = async () => {
     const { data, error } = await supabase
       .from('student')
@@ -23,7 +23,9 @@ export const useUserDetailQuery = (student_id: string): UseQueryResult<UsersDeta
           competitions(*)
         ),
         field_training(
-          *
+          *,
+          companies(*),
+          jobs(*)
         ),
         student_universities(
           universities(*)

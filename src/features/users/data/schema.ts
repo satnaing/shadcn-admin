@@ -28,3 +28,46 @@ UserKeyType,
   phone: {label: '학생 연락처'},
   user_status: {label: '현재 상태'}
 }
+
+export interface UserDetailType {
+  student_id: string,
+  name: string
+  departments: BaseType['departments']['Row'],
+  field_training: (BaseType['field_training']['Row'] & {
+    companies: BaseType['companies']['Row'],
+    jobs: BaseType['jobs']['Row']
+  })[],
+  military_services: BaseType['military_services']['Row'] & {
+    military_service_statuses: Pick<BaseType['military_service_statuses']['Row'], 'military_service_status_name'>
+  },
+  profile: {
+    profile_skills: {
+      skills: BaseType['skills']['Row']
+    }[],
+    project_permissions: {
+      projects: Pick<BaseType['projects']['Row'], 'project_id' | 'project_name'>
+    }[]
+  },
+  student_after_courses: {
+    grade: number,
+    after_courses: BaseType['after_courses']['Row']
+  }[],
+  student_certificates: {
+    certificates: BaseType['certificates']['Row']
+  }[],
+  student_competitions: {
+    prize: string,
+    competitions: BaseType['competitions']['Row']
+  }[],
+  student_middle_schools: BaseType['student_middle_schools']['Row'] & {
+    middle_schools: BaseType['middle_schools']['Row']
+  },
+  student_universities: {
+    universities: BaseType['universities']['Row']
+  }[]
+}
+
+export type UserEditType = {
+  [Type in keyof Omit<UserDetailType, 'student_id' | 'name' | 'departments'>]?: UserDetailType[Type] | null
+}
+
