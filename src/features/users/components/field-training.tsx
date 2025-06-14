@@ -1,12 +1,27 @@
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import { CircleX } from "lucide-react";
 import { Label } from "@/components/ui/label";
+import { Calendar } from "@/components/ui/calendar";
 
 import { useEditUser } from "../context/edit-context";
 import { UserDetailType } from "../data/schema";
+import { addDays } from "date-fns";
+import { DateRange } from "react-day-picker";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCompanyListQuery } from "@/features/companies/services/selectCompanyList";
+import { useJobListQuery } from "../services/field-training/selectJobList";
 
 export const FieldTraining = ({ datas }: {datas: UserDetailType['field_training']}) => {
   const { editingSection } = useEditUser()
+  const { data: companies = [] } = useCompanyListQuery()
+  const { data: jobs = [] } = useJobListQuery()
+  const today = new Date();
+  const [date, setDate] = useState<DateRange | undefined>({
+    from: today,
+    to: addDays(today, 3),
+  });
 
   return (
     <div>
@@ -14,39 +29,55 @@ export const FieldTraining = ({ datas }: {datas: UserDetailType['field_training'
       <div className="space-y-4">
         {/* 현장실습 목록 */}
         <div className="space-y-4">
-          {Array.isArray(editData.fieldTraining) &&
-            editData.fieldTraining.map((training, idx) => (
+          {datas.length > 0 &&
+            datas.map((data, idx) => (
               <div key={idx} className="border rounded-md p-3 relative">
                 <Button
                   variant="ghost"
                   size="icon"
                   className="absolute top-2 right-2 h-6 w-6 rounded-full"
-                  onClick={() => {
-                    const newFieldTraining = [
-                      ...(editData.fieldTraining || []),
-                    ];
-                    newFieldTraining.splice(idx, 1);
-                    setEditData({
-                      ...editData,
-                      fieldTraining: newFieldTraining,
-                    });
-                  }}
+                  onClick={() => {}}
                 >
                   <CircleX size={16} />
                 </Button>
 
                 <div className="grid grid-cols-1 gap-3">
                   <div className="space-y-2">
-                    <Label>실습 기간</Label>
+                    <span className="font-medium">실습 기간</span>
+                    <div className="flex justify-center">
+                      <Calendar
+                        mode="range"
+                        selected={date}
+                        onSelect={setDate}
+                        className="rounded-lg border border-border p-2"
+                      />
+                    </div>
                   </div>
                   <div className="space-y-2">
-                    <Label>실습 직무</Label>
+                    <span className="font-medium">실습 직무</span>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder='실습 직무를 선택하세요.' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {jobs.map(job => (
+                          <SelectItem value={String(job.job_id)}>{job.job_name}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label>회사명</Label>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>근무 기간</Label>
+                    <span className="font-medium">회사명</span>
+                    <Select>
+                      <SelectTrigger>
+                        <SelectValue placeholder='회사명을 선택하세요.' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {companies.map(company => (
+                          <SelectItem value={String(company.company_id)}>{company.company_name}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
