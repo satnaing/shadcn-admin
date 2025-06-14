@@ -19,7 +19,7 @@ const seleteUserList = async () => {
     name: student.name,
     join_at: getCohort(student.join_at),
     email: student.email ?? '',
-    phone: student.phone,
+    phone: student.phone ?? '',
     user_status: getFieldTrainingStatus(student.field_training)
   }))
 
