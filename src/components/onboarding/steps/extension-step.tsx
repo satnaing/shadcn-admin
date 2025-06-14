@@ -42,7 +42,7 @@ export function ExtensionStep() {
         <div className="flex flex-col items-center space-y-6 py-4">
           <div className="relative w-full max-w-md h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center overflow-hidden">
   <img
-    src="https://lh3.googleusercontent.com/gciAyVtg2Y35HfarPfKkfESnxN04F59r885B-_UNpk5NSd-e_BFLLaFD1jihwhiHr0nDdYmup5YlGhxFi1TTrMpWww"
+    src="https://lh3.googleusercontent.com/gciAyVtg2Y35HfarPfKkfESnxN04F59r885B-_UNpk5NSd-e_BFLLaFD1jihwhiHr0nDdYmup5YlGhxFi1TTrMpWww=s1280-w1280-h800"
     alt="Extension Screenshot"
     className="object-cover w-full h-full"
   />
