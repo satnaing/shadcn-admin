@@ -57,9 +57,13 @@ function RouteComponent() {
   )
 }
 async function checkAdmin(id: string) {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from('web_admin_permission')
     .select('auth_id')
     .eq('auth_id', id)
+  if (error) {
+    console.error('Error checking admin permissions:', error)
+    throw error
+  }
   return data && data.length > 0
 }
