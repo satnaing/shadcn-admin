@@ -4,7 +4,6 @@ import { CompanySupabase } from "../data/schema";
 
 export const selectCompanyList = async (): Promise<CompanySupabase[]> => {
   const { data, error } = await supabase
-    .schema("enum")
     .from("companies")
     .select("*");
 

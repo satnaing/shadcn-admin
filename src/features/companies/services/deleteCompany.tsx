@@ -7,7 +7,6 @@ export const deleteCompany = async (
   company_id: Pick<CompanySupabase, 'company_id'>
 ): Promise<CompanySupabase> => {
   const { data ,error } = await supabase
-    .schema('enum')
     .from('companies')
     .delete()
     .eq('company_id', company_id.company_id)

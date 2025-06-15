@@ -7,7 +7,6 @@ export const updateCompany = async (
   company: CompanySupabase
 ): Promise<CompanySupabase> => {
   const { data, error } = await supabase
-    .schema('enum')
     .from('companies')
     .update(company)
     .eq('company_id', company.company_id)

@@ -62,18 +62,19 @@ export function CompaniesDeleteDialog({
         <div className='space-y-4'>
           <p className='mb-2'>
             회사 <span className='font-bold'>{currentRow.company_name}</span>를
-            정말 삭제하시겠습니까? <br />이 작업을 수행하면{' '}
+            정말 삭제하시겠습니까? <br />이 작업은 수행하면{' '}
             {/* <span className='font-bold'>{currentRow.role.toUpperCase()}</span>을
             가진 회사가 삭제됩니다. */}
-            <br />이 작업은 되돌릴 수 없습니다.
+            되돌릴 수 없습니다.
+            <br /><br/>
           </p>
 
           <Label className='my-2'>
-            회사이름:
+            회사이름
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder='삭제를 확인하려면 회사 이름을 입력하세요.'
+              placeholder='삭제하려면 회사 이름을 입력하세요.'
             />
           </Label>
 

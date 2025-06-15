@@ -1,40 +1,26 @@
 import { useUsers } from '../context/users-context'
-import { UsersActionDialog } from './users-action-dialog'
 import { UsersDeleteDialog } from './users-delete-dialog'
-import { UsersInviteDialog } from './users-invite-dialog'
+import { StudentDetail } from './StudentDetail'
+import EditProvider from '../context/edit-context'
 
 export function UsersDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useUsers()
   return (
     <>
-      <UsersActionDialog
-        key='user-add'
-        open={open === 'add'}
-        onOpenChange={() => setOpen('add')}
-      />
-
-      <UsersInviteDialog
-        key='user-invite'
-        open={open === 'invite'}
-        onOpenChange={() => setOpen('invite')}
-      />
-
       {currentRow && (
         <>
-          <UsersActionDialog
-            key={`user-edit-${currentRow.id}`}
-            open={open === 'edit'}
-            onOpenChange={() => {
-              setOpen('edit')
-              setTimeout(() => {
-                setCurrentRow(null)
-              }, 500)
-            }}
-            currentRow={currentRow}
-          />
+          {open === 'edit' && (
+            <div className="w-full lg:w-[420px] h-[calc(100vh-150px)] sticky top-[80px]">
+              <EditProvider>
+                <StudentDetail
+                  student_id={currentRow.student_id}
+                />
+              </EditProvider>
+            </div>
+          )}
 
           <UsersDeleteDialog
-            key={`user-delete-${currentRow.id}`}
+            key={`user-delete-${currentRow.student_id}`}
             open={open === 'delete'}
             onOpenChange={() => {
               setOpen('delete')

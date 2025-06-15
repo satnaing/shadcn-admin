@@ -5,15 +5,15 @@ import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { columns } from './components/users-columns'
 import { UsersDialogs } from './components/users-dialogs'
-import { UsersPrimaryButtons } from './components/users-primary-buttons'
+// import { UsersPrimaryButtons } from './components/users-primary-buttons'
 import { UsersTable } from './components/users-table'
 import UsersProvider from './context/users-context'
-import { userListSchema } from './data/schema'
-import { users } from './data/users'
+import { useUserListQuery } from './services/seleteUserList'
+import Loader from '@/components/loader'
 
 export default function Users() {
-  // Parse user list
-  const userList = userListSchema.parse(users)
+  const { data, isLoading } = useUserListQuery()
+  if (isLoading) return <Loader />
 
   return (
     <UsersProvider>
@@ -25,22 +25,23 @@ export default function Users() {
         </div>
       </Header>
 
+
       <Main>
-        <div className='mb-2 flex flex-wrap items-center justify-between space-y-2'>
-          <div>
-            <h2 className='text-2xl font-bold tracking-tight'>User List</h2>
-            <p className='text-muted-foreground'>
-              Manage your users and their roles here.
-            </p>
-          </div>
-          <UsersPrimaryButtons />
+        <div className="mb-2">
+          <h2 className="text-2xl font-bold tracking-tight">학생 목록</h2>
+          <p className="text-muted-foreground">
+            부산소프트웨어마이스터고 학생들을 관리할 수 있는 페이지입니다.
+          </p>
         </div>
-        <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-x-12 lg:space-y-0'>
-          <UsersTable data={userList} columns={columns} />
+
+        <div className="flex flex-col lg:flex-row gap-3">
+          <div className="flex-1">
+            <UsersTable data={data ?? []} columns={columns} />
+          </div>
+
+          <UsersDialogs />
         </div>
       </Main>
-
-      <UsersDialogs />
     </UsersProvider>
   )
 }
