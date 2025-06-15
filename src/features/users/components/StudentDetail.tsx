@@ -18,6 +18,8 @@ import { StudentUniversity } from "./student-university";
 import { MilitaryService } from "./military-service";
 import { MiddleSchool } from "./middle-school";
 import { UserDetailType } from "../data/schema";
+import { handleFieldTraining } from "../services/field-training/handleFieldTraining";
+import { useUserListQuery } from "../services/seleteUserList";
 
 type ValueItemsType = {
   label: string,
@@ -59,12 +61,18 @@ const componentsMap: Record<DetailType, ValueItemsType> = {
 }
 
 export function StudentDetail({ student_id }: { student_id: string }) {
-  const { editingSection, setEditingSection, setEditData } = useEditUser()
-  const { data, isLoading } = useUserDetailQuery(student_id)
+  const { editingSection, setEditingSection, editData, setEditData } = useEditUser()
+  const { data, isLoading, refetch, isFetching} = useUserDetailQuery(student_id)
+  const { refetch: userRefetch } = useUserListQuery()
 
-  console.log(data)
-  const saveEiditing = () => {
+  const saveEiditing = async () => {
+    if (!editData) return
 
+    await handleFieldTraining(editData)
+    await refetch()
+    setEditingSection(null)
+    await userRefetch()
+    setEditData(null)
   }
 
   const cancelEditing = () => {
@@ -72,7 +80,7 @@ export function StudentDetail({ student_id }: { student_id: string }) {
     setEditData(null)
   }
 
-  if (isLoading) return <div className="space-y-6 h-full overflow-auto p-1"><Loader /></div>
+  if (isLoading || isFetching) return <div className="space-y-6 h-full overflow-auto p-1"><Loader /></div>
 
   return (
       <div className="space-y-6 h-full overflow-auto p-1">

@@ -68,6 +68,9 @@ export interface UserDetailType {
 }
 
 export type UserEditType = {
-  [Type in keyof Omit<UserDetailType, 'student_id' | 'name' | 'departments'>]?: UserDetailType[Type] | null
-}
+  action: 'add' | 'update' | 'delete',
+  datas: {
+    field_training?: BaseType['field_training']['Update']
+  }
+}[]
 
