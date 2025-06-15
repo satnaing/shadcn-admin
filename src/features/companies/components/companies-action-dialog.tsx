@@ -56,7 +56,7 @@ export function CompaniesActionDialog({
     if (!open) {
       form.reset(defaultValues)
     }
-  }, [open, defaultValues, form])
+  }, [open])
 
   const { mutate: insertCompany, isLoading } = useInsertCompanyMutation()
   const { mutate: updateCompany } = useUpdateCompanyMutation()
