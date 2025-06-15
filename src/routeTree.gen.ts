@@ -14,7 +14,6 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated/route'
-import { Route as AuthenticatedIndexImport } from './routes/_authenticated/index'
 import { Route as authSignOutImport } from './routes/(auth)/sign-out'
 import { Route as authSignInImport } from './routes/(auth)/sign-in'
 import { Route as authOtpImport } from './routes/(auth)/otp'
@@ -23,6 +22,7 @@ import { Route as auth500Import } from './routes/(auth)/500'
 
 // Create Virtual Routes
 
+const AuthenticatedIndexLazyImport = createFileRoute('/_authenticated/')()
 const errors503LazyImport = createFileRoute('/(errors)/503')()
 const errors500LazyImport = createFileRoute('/(errors)/500')()
 const errors404LazyImport = createFileRoute('/(errors)/404')()
@@ -77,11 +77,13 @@ const AuthenticatedRouteRoute = AuthenticatedRouteImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AuthenticatedIndexRoute = AuthenticatedIndexImport.update({
+const AuthenticatedIndexLazyRoute = AuthenticatedIndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/_authenticated/index.lazy').then((d) => d.Route),
+)
 
 const errors503LazyRoute = errors503LazyImport
   .update({
@@ -411,7 +413,7 @@ declare module '@tanstack/react-router' {
       id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedIndexImport
+      preLoaderRoute: typeof AuthenticatedIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/settings/account': {
@@ -524,7 +526,7 @@ const AuthenticatedSettingsRouteLazyRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteLazyRoute: typeof AuthenticatedSettingsRouteLazyRouteWithChildren
-  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+  AuthenticatedIndexLazyRoute: typeof AuthenticatedIndexLazyRoute
   AuthenticatedAppsIndexLazyRoute: typeof AuthenticatedAppsIndexLazyRoute
   AuthenticatedChatsIndexLazyRoute: typeof AuthenticatedChatsIndexLazyRoute
   AuthenticatedCompaniesIndexLazyRoute: typeof AuthenticatedCompaniesIndexLazyRoute
@@ -536,7 +538,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteLazyRoute:
     AuthenticatedSettingsRouteLazyRouteWithChildren,
-  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+  AuthenticatedIndexLazyRoute: AuthenticatedIndexLazyRoute,
   AuthenticatedAppsIndexLazyRoute: AuthenticatedAppsIndexLazyRoute,
   AuthenticatedChatsIndexLazyRoute: AuthenticatedChatsIndexLazyRoute,
   AuthenticatedCompaniesIndexLazyRoute: AuthenticatedCompaniesIndexLazyRoute,
@@ -563,7 +565,7 @@ export interface FileRoutesByFullPath {
   '/403': typeof errors403LazyRoute
   '/404': typeof errors404LazyRoute
   '/503': typeof errors503LazyRoute
-  '/': typeof AuthenticatedIndexRoute
+  '/': typeof AuthenticatedIndexLazyRoute
   '/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
@@ -590,7 +592,7 @@ export interface FileRoutesByTo {
   '/403': typeof errors403LazyRoute
   '/404': typeof errors404LazyRoute
   '/503': typeof errors503LazyRoute
-  '/': typeof AuthenticatedIndexRoute
+  '/': typeof AuthenticatedIndexLazyRoute
   '/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
@@ -621,7 +623,7 @@ export interface FileRoutesById {
   '/(errors)/404': typeof errors404LazyRoute
   '/(errors)/500': typeof errors500LazyRoute
   '/(errors)/503': typeof errors503LazyRoute
-  '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/': typeof AuthenticatedIndexLazyRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountLazyRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceLazyRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayLazyRoute
@@ -846,7 +848,7 @@ export const routeTree = rootRoute
       "filePath": "(errors)/503.lazy.tsx"
     },
     "/_authenticated/": {
-      "filePath": "_authenticated/index.tsx",
+      "filePath": "_authenticated/index.lazy.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/settings/account": {
