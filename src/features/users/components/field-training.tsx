@@ -29,7 +29,6 @@ export const FieldTraining = ({ datas }: { datas: UserDetailType['field_training
   const [addFieldTraining, setAddFieldTraining] = useState<addFieldTrainingType | null>(null);
   const [add, setAdd] = useState<boolean>(false);
 
-  // 초기값 설정
   useEffect(() => {
     if (!editingSection) {
       setUpdateDate({
@@ -43,7 +42,6 @@ export const FieldTraining = ({ datas }: { datas: UserDetailType['field_training
     }
   }, [editingSection, currentFieldTraining]);
 
-  // ✅ updateDate 또는 updateJob이 변경되었을 때 하나의 setEditData만 호출
   useEffect(() => {
     if (
       editingSection === 'filed_training' &&
