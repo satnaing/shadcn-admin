@@ -19,7 +19,7 @@ export const StudentUniversity = ({ datas }: {datas: UserDetailType['student_uni
           >
             <Checkbox
               id="higherEducation"
-              checked={editData.education?.higherEducation}
+              // checked={editData.education?.higherEducation}
               onCheckedChange={() => {}}
             />
             진학여부
@@ -31,7 +31,7 @@ export const StudentUniversity = ({ datas }: {datas: UserDetailType['student_uni
             <div className="space-y-2">
               <Label>학교명</Label>
               <Input
-                value={editData.education?.schoolName || ""}
+                // value={editData.education?.schoolName || ""}
                 onChange={() => {}}
                 placeholder="학교명 입력"
               />
@@ -39,7 +39,7 @@ export const StudentUniversity = ({ datas }: {datas: UserDetailType['student_uni
             <div className="space-y-2">
               <Label>학과명</Label>
               <Input
-                value={editData.education?.majorName || ""}
+                // value={editData.education?.majorName || ""}
                 onChange={() => {}}
                 placeholder="학과명 입력"
               />
