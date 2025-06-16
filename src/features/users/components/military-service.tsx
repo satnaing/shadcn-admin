@@ -35,19 +35,14 @@ export const MilitaryService = ({ datas }: {datas: UserDetailType['military_serv
           >
             <Checkbox
               id="militaryCompleted"
-              checked={editData.militaryService?.completed}
-              onCheckedChange={() =>
-                handleInputChange(
-                  "militaryService.completed",
-                  !editData.militaryService?.completed
-                )
-              }
+              // checked={editData.militaryService?.completed}
+              onCheckedChange={() => {}}
             />
             병역여부
           </Label>
         </div>
 
-        {editData.militaryService?.completed && (
+        {/* {editData.militaryService?.completed && (
           <div className="space-y-2">
             <Label>복무기간</Label>
             <Input
@@ -61,7 +56,7 @@ export const MilitaryService = ({ datas }: {datas: UserDetailType['military_serv
               placeholder="예: 18개월"
             />
           </div>
-        )}
+        )} */}
       </div>
     ) : (
       datas ? (
