@@ -1,12 +1,15 @@
-import { getFormProps, getInputProps, useForm } from '@conform-to/react'
+import { getFormProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
-import { useState, type HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 import { Form, useActionData, useNavigation } from 'react-router'
-import { PinInput, PinInputField } from '~/components/pin-input'
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert'
 import { Button } from '~/components/ui/button'
-import { Input } from '~/components/ui/input'
-import { Separator } from '~/components/ui/separator'
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from '~/components/ui/input-otp'
 import { cn } from '~/lib/utils'
 import { formSchema, type action } from '../route'
 
@@ -21,7 +24,6 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
       parseWithZod(formData, { schema: formSchema }),
   })
   const navigation = useNavigation()
-  const [disabledBtn, setDisabledBtn] = useState(true)
 
   return (
     <Form
@@ -31,35 +33,30 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
       {...props}
     >
       <div className="space-y-1">
-        <PinInput
-          className="flex h-10 justify-between"
+        <InputOTP
+          name={otp.name}
+          maxLength={6}
+          containerClassName="justify-center"
           onComplete={(value) => {
             form.update({
               name: otp.name,
               value,
             })
-            setDisabledBtn(false)
-          }}
-          onIncomplete={(value) => {
-            form.update({
-              name: otp.name,
-              value,
-            })
-            setDisabledBtn(true)
           }}
         >
-          {Array.from({ length: 7 }, (_, i) => {
-            if (i === 3) return <Separator key={i} orientation="vertical" />
-            return (
-              <PinInputField
-                key={i}
-                component={Input}
-                className={`${!otp.valid ? 'border-red-500' : ''}`}
-              />
-            )
-          })}
-        </PinInput>
-        <input {...getInputProps(otp, { type: 'hidden' })} />
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+          </InputOTPGroup>
+
+          <InputOTPSeparator />
+          <InputOTPGroup>
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+          </InputOTPGroup>
+        </InputOTP>
       </div>
 
       {form.errors && (
@@ -71,7 +68,11 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
 
       <Button
         className="mt-2"
-        disabled={disabledBtn || navigation.state === 'submitting'}
+        disabled={
+          otp.value === undefined ||
+          otp.value.length < 6 ||
+          navigation.state === 'submitting'
+        }
       >
         Verify
       </Button>
