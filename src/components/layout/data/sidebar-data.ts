@@ -76,7 +76,7 @@ export const sidebarData: SidebarData = {
           url: '/users',
           icon: IconUsers,
         },
-        // Clerk links removed
+        // Clerk links removed   
       ],
     },
     {
