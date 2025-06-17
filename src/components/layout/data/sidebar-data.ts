@@ -57,7 +57,7 @@ export const getSidebarData = (user: User | null): SidebarData => {
         title: 'General',
         items: [
           {
-            title: '대쉬보드',
+            title: '대시보드',
             url: '/',
             icon: IconLayoutDashboard,
           },
