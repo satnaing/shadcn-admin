@@ -55,6 +55,7 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "~5.8.3",
     "vite": "6.3.5",
+    "vite-plugin-devtools-json": "0.2.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "pnpm": {
