@@ -32,7 +32,6 @@ export function ForgotForm({ className, ...props }: ForgotFormProps) {
         <Label htmlFor={email.id}>Email</Label>
         <Input
           {...getInputProps(email, { type: 'email' })}
-          key={email.key}
           placeholder="name@example.com"
         />
         <div

@@ -54,15 +54,11 @@ export function TasksMutateForm({ task }: { task?: Task }) {
 
   return (
     <Form method="POST" {...getFormProps(form)} className="space-y-5">
-      <input
-        {...getInputProps(fields.id, { type: 'hidden' })}
-        key={fields.id.key}
-      />
+      <input {...getInputProps(fields.id, { type: 'hidden' })} />
       <div className="space-y-1">
         <Label htmlFor={fields.title.id}>Title</Label>
         <Input
           {...getInputProps(fields.title, { type: 'text' })}
-          key={fields.title.key}
           placeholder="Enter a title"
         />
         <div
@@ -76,7 +72,6 @@ export function TasksMutateForm({ task }: { task?: Task }) {
       <div className="space-y-1">
         <Label htmlFor={fields.status.id}>Status</Label>
         <Select
-          key={fields.status.key}
           name={fields.status.name}
           defaultValue={fields.status.initialValue}
           onValueChange={(value) => {
@@ -108,7 +103,6 @@ export function TasksMutateForm({ task }: { task?: Task }) {
       <div className="space-y-3">
         <Label htmlFor={fields.label.id}>Label</Label>
         <RadioGroup
-          key={fields.label.key}
           name={fields.label.name}
           defaultValue={fields.label.initialValue}
           onValueChange={(value) => {
@@ -149,7 +143,6 @@ export function TasksMutateForm({ task }: { task?: Task }) {
       <div className="space-y-3">
         <Label htmlFor={fields.priority.id}>Priority</Label>
         <RadioGroup
-          key={fields.priority.key}
           name={fields.priority.name}
           defaultValue={fields.priority.initialValue}
           onValueChange={(value) => {

@@ -66,7 +66,6 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
             <Label htmlFor={fields.email.id}>Email</Label>
             <Input
               {...getInputProps(fields.email, { type: 'email' })}
-              key={fields.email.key}
               placeholder="eg: john.doe@gmail.com"
             />
             <div
@@ -80,7 +79,6 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
           <div className="space-y-1">
             <Label htmlFor={fields.role.id}>Role</Label>
             <Select
-              key={fields.role.key}
               name={fields.role.name}
               defaultValue={fields.role.initialValue}
               onValueChange={(value) => {

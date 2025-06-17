@@ -159,7 +159,6 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </Label>
               <Input
                 {...getInputProps(fields.firstName, { type: 'text' })}
-                key={fields.firstName.key}
                 placeholder="John"
                 className="col-span-4"
               />
@@ -180,7 +179,6 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </Label>
               <Input
                 {...getInputProps(fields.lastName, { type: 'text' })}
-                key={fields.lastName.key}
                 placeholder="Doe"
                 className="col-span-4"
               />
@@ -201,7 +199,6 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </Label>
               <Input
                 {...getInputProps(fields.username, { type: 'text' })}
-                key={fields.username.key}
                 placeholder="john_doe"
                 className="col-span-4"
               />
@@ -222,7 +219,6 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </Label>
               <Input
                 {...getInputProps(fields.email, { type: 'email' })}
-                key={fields.email.key}
                 placeholder="john.doe@gmail.com"
                 className="col-span-4"
               />
@@ -243,7 +239,6 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
               </Label>
               <Input
                 {...getInputProps(fields.phoneNumber, { type: 'tel' })}
-                key={fields.phoneNumber.key}
                 placeholder="+123456789"
                 className="col-span-4"
               />
@@ -260,7 +255,6 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
                 Role
               </Label>
               <Select
-                key={fields.role.key}
                 name={fields.role.name}
                 defaultValue={fields.role.initialValue}
                 onValueChange={(value) => {
@@ -300,7 +294,6 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
                   </Label>
                   <PasswordInput
                     {...getInputProps(fields.password, { type: 'password' })}
-                    key={fields.password.key}
                     placeholder="e.g., S3cur3P@ssw0rd"
                     className="col-span-4"
                   />
@@ -324,7 +317,6 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
                     {...getInputProps(fields.confirmPassword, {
                       type: 'password',
                     })}
-                    key={fields.confirmPassword.key}
                     placeholder="e.g., S3cur3P@ssw0rd"
                     className="col-span-4"
                   />

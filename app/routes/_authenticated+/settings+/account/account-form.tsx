@@ -60,7 +60,6 @@ export function AccountForm() {
         <Label htmlFor={fields.name.id}>Name</Label>
         <Input
           {...getInputProps(fields.name, { type: 'text' })}
-          key={fields.name.key}
           placeholder="Your name"
         />
         <div className="text-muted-foreground text-[0.8rem]">
@@ -112,12 +111,7 @@ export function AccountForm() {
             />
           </PopoverContent>
         </Popover>
-        <input
-          type="hidden"
-          name={fields.dob.name}
-          value={fields.dob.value}
-          key={fields.dob.key}
-        />
+        <input {...getInputProps(fields.dob, { type: 'hidden' })} />
         <div className="text-muted-foreground text-[0.8rem]">
           Your date of birth is used to calculate your age.
         </div>
@@ -189,12 +183,7 @@ export function AccountForm() {
             </Command>
           </PopoverContent>
         </Popover>
-        <input
-          type="hidden"
-          name={fields.language.name}
-          value={fields.language.value}
-          key={fields.language.key}
-        />
+        <input {...getInputProps(fields.language, { type: 'hidden' })} />
         <div className="text-muted-foreground text-[0.8rem]">
           This is the language that will be used in the dashboard.
         </div>
