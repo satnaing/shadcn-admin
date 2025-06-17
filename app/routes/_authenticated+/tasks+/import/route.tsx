@@ -64,7 +64,7 @@ export default function TaskImport() {
       <Form {...getFormProps(form)}>
         <div className="mb-2 space-y-1">
           <Label htmlFor={file.id}>File</Label>
-          <Input {...getInputProps(file, { type: 'file' })} key={file.key} />
+          <Input {...getInputProps(file, { type: 'file' })} />
           <div
             id={file.errorId}
             className="text-destructive text-[0.8rem] font-medium empty:hidden"

@@ -38,7 +38,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         <Label htmlFor={email.id}>Email</Label>
         <Input
           {...getInputProps(email, { type: 'email' })}
-          key={email.key}
           placeholder="name@example.com"
         />
         <div
@@ -61,7 +60,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         </div>
         <PasswordInput
           {...getInputProps(password, { type: 'password' })}
-          key={password.key}
           placeholder="********"
         />
         <div

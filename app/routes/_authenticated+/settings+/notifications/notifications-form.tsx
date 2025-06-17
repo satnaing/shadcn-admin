@@ -35,7 +35,6 @@ export function NotificationsForm() {
       <div className="relative space-y-3">
         <Label htmlFor={fields.type.id}>Notify me about...</Label>
         <RadioGroup
-          key={fields.type.key}
           name={fields.type.name}
           id={fields.type.id}
           defaultValue={fields.type.value}
@@ -95,7 +94,6 @@ export function NotificationsForm() {
               id={fields.communication_emails.id}
               name={fields.communication_emails.name}
               defaultChecked={fields.communication_emails.value === 'on'}
-              key={fields.communication_emails.key}
             />
           </div>
 
@@ -112,7 +110,6 @@ export function NotificationsForm() {
               id={fields.marketing_emails.id}
               name={fields.marketing_emails.name}
               defaultChecked={fields.marketing_emails.value === 'on'}
-              key={fields.marketing_emails.key}
             />
           </div>
 
@@ -129,7 +126,6 @@ export function NotificationsForm() {
               id={fields.social_emails.id}
               name={fields.social_emails.name}
               defaultChecked={fields.social_emails.value === 'on'}
-              key={fields.social_emails.key}
             />
           </div>
 
@@ -145,7 +141,6 @@ export function NotificationsForm() {
             <Switch
               id={fields.security_emails.id}
               defaultChecked={fields.security_emails.value === 'on'}
-              key={fields.security_emails.key}
               disabled
               aria-readonly
             />
@@ -163,7 +158,6 @@ export function NotificationsForm() {
           id={fields.mobile.id}
           name={fields.mobile.name}
           defaultChecked={fields.mobile.value === 'on'}
-          key={fields.mobile.key}
         />
 
         <div className="space-y-1 leading-none">

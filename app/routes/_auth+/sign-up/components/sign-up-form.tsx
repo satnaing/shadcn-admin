@@ -40,7 +40,6 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
         <Label htmlFor={email.id}>Email</Label>
         <Input
           {...getInputProps(email, { type: 'email' })}
-          key={email.id}
           placeholder="name@example.com"
         />
         <div
@@ -55,7 +54,6 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
         <Label htmlFor={password.id}>Password</Label>
         <PasswordInput
           {...getInputProps(password, { type: 'password' })}
-          key={password.id}
           placeholder="********"
         />
         <div
@@ -70,7 +68,6 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
         <Label htmlFor={confirmPassword.id}>Confirm Password</Label>
         <PasswordInput
           {...getInputProps(confirmPassword, { type: 'password' })}
-          key={confirmPassword.id}
           placeholder="********"
         />
         <div

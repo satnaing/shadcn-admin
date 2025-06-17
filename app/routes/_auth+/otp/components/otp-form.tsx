@@ -1,4 +1,4 @@
-import { getFormProps, useForm } from '@conform-to/react'
+import { getFormProps, getInputProps, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import { useState, type HTMLAttributes } from 'react'
 import { Form, useActionData, useNavigation } from 'react-router'
@@ -59,7 +59,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
             )
           })}
         </PinInput>
-        <input type="hidden" name={otp.name} value={otp.value} key={otp.key} />
+        <input {...getInputProps(otp, { type: 'hidden' })} />
       </div>
 
       {form.errors && (
