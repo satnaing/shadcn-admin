@@ -19,7 +19,7 @@ import { RecentSales } from './components/recent-sales'
 
 export default function Dashboard() {
   const { theme } = useTheme()
-  const grafanaSrc = `/d/degaj6kbosoowe/bsmhubtest?orgId=1&from=now-2y&to=now&timezone=browser&var-join_at_year=$__all&refresh=auto&kiosk&theme=${
+  const grafanaSrc = `/d/degaj6kbosoowe/bsmhubtest?orgId=1&from=now-30d&to=now&timezone=browser&var-join_at_year=$__all&refresh=auto&kiosk&theme=${
     theme === 'system'
       ? window.matchMedia('(prefers-color-scheme: dark)').matches
         ? 'dark'
