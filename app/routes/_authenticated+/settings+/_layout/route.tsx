@@ -26,7 +26,7 @@ export default function Settings() {
         </div>
       </Header>
 
-      <Main fixed>
+      <Main>
         <div className="space-y-0.5">
           <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
             Settings
