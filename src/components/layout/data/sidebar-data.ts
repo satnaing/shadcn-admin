@@ -18,6 +18,7 @@ import {
   IconUserCog,
   IconUserOff,
   IconUsers,
+  IconReceiptRupee,
 } from '@tabler/icons-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 // import { ClerkLogo } from '@/assets/clerk-logo'
@@ -77,6 +78,11 @@ export const sidebarData: SidebarData = {
           icon: IconUsers,
         },
         // Clerk links removed   
+        {
+          title: 'BBPS',
+          url: '/bbps',
+          icon: IconReceiptRupee,
+        }
       ],
     },
     {
