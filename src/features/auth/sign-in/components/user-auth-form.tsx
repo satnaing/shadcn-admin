@@ -21,6 +21,8 @@ import { PasswordInput } from '@/components/password-input'
 
 type UserAuthFormProps = HTMLAttributes<HTMLFormElement>
 
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 const formSchema = z.object({
   email: z
     .string()
@@ -117,7 +119,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             type='button'
             disabled={isLoading}
             onClick={() => {
-              window.location.href = 'http://localhost:3003/v1/auth/login/google'
+              window.location.href = `${BACKEND_BASE_URL}/v1/auth/login/google`
             }}
           >
             <IconBrandGithub className='h-4 w-4' /> GitHub
@@ -127,7 +129,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             type='button'
             disabled={isLoading}
             onClick={() => {
-              window.location.href = 'http://localhost:3003/v1/auth/login/google'
+              window.location.href = `${BACKEND_BASE_URL}/v1/auth/login/google`
             }}
           >
             <IconBrandGoogle className='h-4 w-4' /> Google

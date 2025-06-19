@@ -15,6 +15,8 @@ const getToken = () => {
   const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
   return match ? decodeURIComponent(match[1]) : '';
 };
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 
 export default function Users() {
   const { data: userList, isLoading, isError, error } = useQuery({
@@ -24,7 +26,7 @@ export default function Users() {
       console.log('Token:', token);
 
       try {
-        const response = await axios.get('http://localhost:3003/v1/superadmin/allUser', {
+        const response = await axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allUser`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
