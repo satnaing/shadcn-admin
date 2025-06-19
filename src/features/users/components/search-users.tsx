@@ -3,13 +3,13 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 interface UsersSearchProps {
-  onSearch: (params: { id: string; email: string; phone: string; createdAt: string }) => void;
+  onSearch: (params: { userId: string; email: string; phone: string; createdAt: string }) => void;
   onReset: () => void;
 }
 
 export function UsersSearch({ onSearch, onReset }: UsersSearchProps) {
   const [fields, setFields] = useState({
-    id: '',
+    userId: '',
     email: '',
     phone: '',
     createdAt: '',
@@ -25,7 +25,7 @@ export function UsersSearch({ onSearch, onReset }: UsersSearchProps) {
     onSearch(fields);
   };
   const handleReset = () => {
-    setFields({ id: '', email: '', phone: '', createdAt: '' });
+    setFields({ userId: '', email: '', phone: '', createdAt: '' });
     onReset();
   };
 
@@ -33,7 +33,7 @@ export function UsersSearch({ onSearch, onReset }: UsersSearchProps) {
     <form onSubmit={handleSearch} className="flex gap-2 items-end flex-wrap">
       <div>
         <label className="block text-xs mb-1">User ID</label>
-        <Input name="id" value={fields.id} onChange={handleChange} placeholder="User ID" />
+        <Input name="userId" value={fields.userId} onChange={handleChange} placeholder="User ID" />
       </div>
       <div>
         <label className="block text-xs mb-1">Email</label>
