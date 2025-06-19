@@ -672,41 +672,32 @@ export type Database = {
       }
       employment_companies: {
         Row: {
-          benefit: string
           company_id: number
-          company_number: number
-          created_at: string | null
+          created_at: string
+          employment_id: number
           end_date: string | null
           job_id: number
-          military_service_status_id: number
-          position_id: number
-          salary: number
+          salary: number | null
           start_date: string
           student_id: string
         }
         Insert: {
-          benefit: string
           company_id: number
-          company_number: number
-          created_at?: string | null
+          created_at?: string
+          employment_id?: number
           end_date?: string | null
           job_id: number
-          military_service_status_id: number
-          position_id: number
-          salary: number
+          salary?: number | null
           start_date: string
           student_id?: string
         }
         Update: {
-          benefit?: string
           company_id?: number
-          company_number?: number
-          created_at?: string | null
+          created_at?: string
+          employment_id?: number
           end_date?: string | null
           job_id?: number
-          military_service_status_id?: number
-          position_id?: number
-          salary?: number
+          salary?: number | null
           start_date?: string
           student_id?: string
         }
@@ -724,18 +715,6 @@ export type Database = {
             referencedColumns: ["job_id"]
           },
           {
-            foreignKeyName: "employment_companies_military_service_status_id_fkey"
-            columns: ["military_service_status_id"]
-            referencedRelation: "military_service_statuses"
-            referencedColumns: ["military_service_status_id"]
-          },
-          {
-            foreignKeyName: "employment_companies_position_id_fkey1"
-            columns: ["position_id"]
-            referencedRelation: "job_positions"
-            referencedColumns: ["position_id"]
-          },
-          {
             foreignKeyName: "employment_companies_student_id_fkey"
             columns: ["student_id"]
             referencedRelation: "student"
@@ -747,27 +726,27 @@ export type Database = {
         Row: {
           company_id: number
           created_at: string
-          end_date: string
+          end_date: string | null
           job_id: number
-          lead_or_part: boolean
+          lead_or_part: boolean | null
           start_date: string
           student_id: string
         }
         Insert: {
           company_id: number
           created_at?: string
-          end_date: string
+          end_date?: string | null
           job_id: number
-          lead_or_part: boolean
+          lead_or_part?: boolean | null
           start_date: string
           student_id?: string
         }
         Update: {
           company_id?: number
           created_at?: string
-          end_date?: string
+          end_date?: string | null
           job_id?: number
-          lead_or_part?: boolean
+          lead_or_part?: boolean | null
           start_date?: string
           student_id?: string
         }
@@ -885,9 +864,9 @@ export type Database = {
           student_id: string
         }
         Insert: {
-          end_date?: string
+          end_date: string
           military_service_status_id: number
-          start_date?: string
+          start_date: string
           student_id?: string
         }
         Update: {
@@ -1263,6 +1242,7 @@ export type Database = {
           phone: string | null
           profile: string | null
           student_id: string
+          student_number: number | null
         }
         Insert: {
           birthday?: string | null
@@ -1275,6 +1255,7 @@ export type Database = {
           phone?: string | null
           profile?: string | null
           student_id?: string
+          student_number?: number | null
         }
         Update: {
           birthday?: string | null
@@ -1287,6 +1268,7 @@ export type Database = {
           phone?: string | null
           profile?: string | null
           student_id?: string
+          student_number?: number | null
         }
         Relationships: [
           {
@@ -1529,12 +1511,74 @@ export type Database = {
         }
         Relationships: []
       }
+      web_admin_permission: {
+        Row: {
+          auth_id: string
+          created_at: string
+        }
+        Insert: {
+          auth_id: string
+          created_at?: string
+        }
+        Update: {
+          auth_id?: string
+          created_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      delete_claim: {
+        Args: {
+          uid: string
+          claim: string
+        }
+        Returns: string
+      }
+      get_claim: {
+        Args: {
+          uid: string
+          claim: string
+        }
+        Returns: Json
+      }
+      get_claims: {
+        Args: {
+          uid: string
+        }
+        Returns: Json
+      }
+      get_my_claim: {
+        Args: {
+          claim: string
+        }
+        Returns: Json
+      }
+      get_my_claims: {
+        Args: Record<PropertyKey, never>
+        Returns: Json
+      }
+      is_claims_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      set_claim: {
+        Args: {
+          uid: string
+          claim: string
+          value: Json
+        }
+        Returns: string
+      }
+      stu_to_pro: {
+        Args: {
+          student_id_input: string
+        }
+        Returns: string
+      }
     }
     Enums: {
       collection_item_type: "collection" | "project"
