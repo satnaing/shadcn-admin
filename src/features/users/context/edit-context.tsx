@@ -6,6 +6,7 @@ export type DetailType =
   | "certificates"
   | "activities"
   | "filed_training"
+  | "employment"
   | "university"
   | "military"
   | "middle_school"

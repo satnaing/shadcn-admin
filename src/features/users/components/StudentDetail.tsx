@@ -14,6 +14,7 @@ import { AfterCourses } from "./after-courses";
 import { StudentCertificates } from "./student-certificates";
 import { StudentActivities } from "./student-activities";
 import { FieldTraining } from "./field-training";
+import { Employment } from "./employment";
 import { StudentUniversity } from "./student-university";
 import { MilitaryService } from "./military-service";
 import { MiddleSchool } from "./middle-school";
@@ -45,6 +46,10 @@ const componentsMap: Record<DetailType, ValueItemsType> = {
   filed_training: {
     label: "현장 실습",
     component: (data) => <FieldTraining datas={data.field_training} />
+  },
+  employment: {
+    label: "취업",
+    component: (data) => <Employment datas={data.field_training} />
   },
   university: {
     label: "대학교 진학",
