@@ -67,6 +67,8 @@ interface Props {
   onOpenChange: (open: boolean) => void
 }
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
   console.log('currentRow:', currentRow);
 
@@ -113,7 +115,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
     console.log(document.cookie);
     console.log('Token:', token);
     
-    axios.get('http://localhost:3003/v1/superadmin/allService', {
+    axios.get(`${BACKEND_URL}/v1/superadmin/allService`, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -218,7 +220,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       const token = match ? decodeURIComponent(match[1]) : '';
       
       await axios.put(
-        'http://localhost:3003/v1/superadmin/user',
+        `${BACKEND_URL}/v1/superadmin/user`,
         payload,
         {
           headers: {

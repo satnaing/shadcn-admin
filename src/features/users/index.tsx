@@ -26,6 +26,8 @@ const getToken = () => {
   return match ? decodeURIComponent(match[1]) : '';
 };
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export default function Users() {
   const [pageIndex, setPageIndex] = useState(0); // 0-based
   const [pageSize] = useState(10);
@@ -41,7 +43,7 @@ export default function Users() {
       page: String(pageIndex + 1), // send as string
       limit: String(pageSize),     // send as string
     };
-    const response = await axios.get('http://localhost:3003/v1/superadmin/allUser', {
+    const response = await axios.get(`${BACKEND_URL}/v1/superadmin/allUser`, {
       params,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -70,7 +72,7 @@ export default function Users() {
       if (params.email) filteredParams.email = params.email;
       if (params.phone) filteredParams.phone = params.phone;
       if (params.createdAt) filteredParams.dateCreated = params.createdAt; // map to backend param
-      const response = await axios.get('http://localhost:3003/v1/superadmin/allUser', {
+      const response = await axios.get(`${BACKEND_URL}/v1/superadmin/allUser`, {
         params: filteredParams,
         headers: {
           Authorization: `Bearer ${token}`,

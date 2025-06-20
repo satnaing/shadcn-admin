@@ -1,10 +1,12 @@
- //code when api will be ready
+//code when api will be ready
 
 // import { useState } from 'react';
 // import { Button } from '@/components/ui/button';
 // import { Dialog, DialogContent, DialogTitle, DialogClose } from '@/components/ui/dialog';
 // import { useQuery } from '@tanstack/react-query';
 // import axios from 'axios';
+
+// const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 // export function ViewCustomerButton({ customerId }: { customerId: string }) {
 //   const [open, setOpen] = useState(false);
@@ -13,7 +15,7 @@
 //   const { data, isLoading, isError } = useQuery({
 //     queryKey: ['customer', customerId],
 //     queryFn: async () => {
-//       const response = await axios.get(`http://localhost:3003/v1/superadmin/customers/${customerId}`);
+//       const response = await axios.get(`${BACKEND_URL}/v1/superadmin/customers/${customerId}`);
 //       return response.data;
 //     },
 //     enabled: open, // Only fetch when modal is open

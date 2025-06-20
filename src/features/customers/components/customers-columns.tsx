@@ -3,9 +3,6 @@ import { cn } from '@/lib/utils'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Customer } from '../data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
-import { ViewCustomerButton } from './view-customer-button'
-
- 
 
 export const columns: ColumnDef<Customer>[] = [
   {
@@ -41,18 +38,31 @@ export const columns: ColumnDef<Customer>[] = [
   {
     accessorKey: 'id',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='User ID' />
+      <DataTableColumnHeader column={column} title='ID' />
     ),
     cell: ({ row }) => (
       <div className='w-fit text-nowrap'>{row.getValue('id')}</div>
     ),
-    meta: {
-      className: cn(
-        'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
-        'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-        'sticky left-6 md:table-cell'
-      ),
-    },
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'name',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Name' />
+    ),
+    cell: ({ row }) => (
+      <div className='w-fit text-nowrap'>{row.getValue('name')}</div>
+    ),
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'mobile',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Mobile' />
+    ),
+    cell: ({ row }) => (
+      <div className='w-fit text-nowrap'>{row.getValue('mobile')}</div>
+    ),
     enableHiding: false,
   },
   {
@@ -63,63 +73,76 @@ export const columns: ColumnDef<Customer>[] = [
     cell: ({ row }) => (
       <div className='w-fit text-nowrap'>{row.getValue('email')}</div>
     ),
+    enableHiding: false,
   },
   {
-    accessorKey: 'firstName',
+    accessorKey: 'dob',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='First Name' />
+      <DataTableColumnHeader column={column} title='DOB' />
     ),
     cell: ({ row }) => (
-      <div className='w-fit text-nowrap'>{row.getValue('firstName')}</div>
+      <div className='w-fit text-nowrap'>{row.getValue('dob')}</div>
     ),
+    enableHiding: false,
   },
   {
-    accessorKey: 'lastName',
+    accessorKey: 'pin_code',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Last Name' />
+      <DataTableColumnHeader column={column} title='Pin Code' />
     ),
     cell: ({ row }) => (
-      <div className='w-fit text-nowrap'>{row.getValue('lastName')}</div>
+      <div className='w-fit text-nowrap'>{row.getValue('pin_code')}</div>
     ),
+    enableHiding: false,
   },
   {
-    accessorKey: 'phoneNumber',
+    accessorKey: 'vpa',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Phone Number' />
+      <DataTableColumnHeader column={column} title='VPA' />
     ),
     cell: ({ row }) => (
-      <div className='w-fit text-nowrap'>{row.getValue('phoneNumber')}</div>
+      <div className='w-fit text-nowrap'>{row.getValue('vpa')}</div>
     ),
+    enableHiding: false,
   },
-    {
-        accessorKey: 'refferal_code',
-        header: ({ column }) => (
-        <DataTableColumnHeader column={column} title='Referral Code' />
-        ),
-        cell: ({ row }) => (
-        <div className='w-fit text-nowrap'>{row.getValue('refferal_code')}</div>
-        ),
-    },
-    {
-  id: 'actions',
-  header: 'Actions',
-  cell: ({ row }) => (
-    <ViewCustomerButton customerId={row.original.id} />
-  ),
-  enableSorting: false,
-  enableHiding: false,
-},
-{
-  id: 'search',
-  accessorFn: row => row, // Pass the whole row for filtering
-  header: () => null,
-  cell: () => null,
-  enableHiding: true,
-  enableSorting: false,
-  enableColumnFilter: true,
-   // You can define a custom filter function here if needed, or remove this line if not required
-   filterFn: 'orSearch'as any,
-}
-    
-     
+  {
+    accessorKey: 'upi_linked',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='UPI Linked' />
+    ),
+    cell: ({ row }) => (
+      <div className='w-fit text-nowrap'>{row.getValue('upi_linked')}</div>
+    ),
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'utm_source',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='UTM Source' />
+    ),
+    cell: ({ row }) => (
+      <div className='w-fit text-nowrap'>{row.getValue('utm_source')}</div>
+    ),
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'category',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Category' />
+    ),
+    cell: ({ row }) => (
+      <div className='w-fit text-nowrap'>{row.getValue('category')}</div>
+    ),
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'created_at',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Created At' />
+    ),
+    cell: ({ row }) => (
+      <div className='w-fit text-nowrap'>{row.getValue('created_at')}</div>
+    ),
+    enableHiding: false,
+  },
 ]

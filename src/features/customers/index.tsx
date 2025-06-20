@@ -4,43 +4,60 @@ import { ProfileDropdown } from '@/components/profile-dropdown';
 import { Search } from '@/components/search';
 import { ThemeSwitch } from '@/components/theme-switch';
 import { columns } from './components/customers-columns';
-
-
 import { CustomersTable } from './components/customers-table';
-import { customer as mockCustomers } from './data/customer'; // <-- Import mock data
- 
-// import { useQuery } from '@tanstack/react-query';
-// import axios from 'axios';
+import { CustomersSearch } from './components/search-customers';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useState } from 'react';
 
-// const getToken = () => {
-//   const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
-//   return match ? decodeURIComponent(match[1]) : '';
-// };
+const getToken = () => {
+  const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
+  return match ? decodeURIComponent(match[1]) : '';
+};
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function Customers() {
-    // const { data: customerList, isLoading, isError, error } = useQuery({
-    //   queryKey: ['customers'],
-    //   queryFn: async () => {
-    //     const token = getToken();
-    //     try {
-    //       // Update the endpoint to our customers API
-    //       const response = await axios.get(' API ', {
-    //         headers: {
-    //           Authorization: `Bearer ${token}`,
-    //         },
-    //         withCredentials: true,
-    //       });
-    //       return response.data;
-    //     } catch (err) {
-    //       throw err;
-    //     }
-    //   },
-    // });
+  const [pageIndex, setPageIndex] = useState(0); // 0-based, default page=1
+  const [pageSize, setPageSize] = useState(10); // default limit=10
+  const [searchParams, setSearchParams] = useState<{ id?: string; email?: string; mobile?: string }>({});
 
-    // if (isLoading) return <div>Loading customers...</div>;
-    // if (isError) return <div>Error: {error.message}</div>;
-  
-  const customerList = mockCustomers; // Use mock data for now
+  const fetchCustomers = async () => {
+    const token = getToken();
+    const params: any = {
+      page: String(pageIndex + 1),
+      limit: String(pageSize),
+      ...searchParams,
+    };
+    // Remove empty params
+    Object.keys(params).forEach((k) => (params[k] === undefined || params[k] === '') && delete params[k]);
+    const response = await axios.get(`${BACKEND_URL}/v1/customer/allCustomers`, {
+      params,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      withCredentials: true,
+    });
+    // Assume response.data.customers or response.data.data or response.data
+    return response.data.customers || response.data.data || response.data;
+  };
+  //console.log("response data", response.data);
+
+  const { data: customerList = [], isLoading } = useQuery({
+    queryKey: ['customers', pageIndex, pageSize, searchParams],
+    queryFn: fetchCustomers,
+    // keepPreviousData: true, // Removed due to type error with current react-query version
+  });
+
+  const handleSearch = (params: { id?: string; email?: string; mobile?: string }) => {
+    setSearchParams(params);
+    setPageIndex(0);
+  };
+  const handleReset = () => {
+    setSearchParams({});
+    setPageIndex(0);
+  };
+
   return (
     <>
       <Header fixed>
@@ -50,7 +67,6 @@ export default function Customers() {
           <ProfileDropdown />
         </div>
       </Header>
-
       <Main>
         <div className="mb-2 flex flex-wrap items-center justify-between space-y-2">
           <div>
@@ -59,14 +75,10 @@ export default function Customers() {
               Manage your customers and their details here.
             </p>
           </div>
-           
         </div>
-        {/* <DataTableToolbar
-        data={mockCustomers}
-        onFilter={setFilteredCustomers}
-        /> */}
+        <CustomersSearch onSearch={handleSearch} onReset={handleReset} />
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12">
-          <CustomersTable data={customerList} columns={columns} />
+          <CustomersTable data={customerList} columns={columns} pageIndex={pageIndex} setPageIndex={setPageIndex} pageSize={pageSize} setPageSize={setPageSize} isLoading={isLoading} />
         </div>
       </Main>
     </>

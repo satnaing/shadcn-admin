@@ -39,6 +39,8 @@ const formSchema = z.object({
     }),
 })
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { setUser } = useAuth()
@@ -55,10 +57,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true)
     try {
       // 1. Login and get JWT
-      const response = await axios.post(
-        'http://localhost:3003/v1/auth/login',
-        data
-      )
+      const response = await axios.post(`${BACKEND_URL}/v1/auth/login`, data)
       const token = response.data.token
       localStorage.setItem('token', token)
       // 2. Fetch user info with JWT
@@ -133,7 +132,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             type='button'
             disabled={isLoading}
             onClick={() => {
-              window.location.href = 'http://localhost:3003/v1/auth/login/google'
+              window.location.href = `${BACKEND_URL}/v1/auth/login/google`
             }}
           >
             <IconBrandGithub className='h-4 w-4' /> GitHub
@@ -143,7 +142,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             type='button'
             disabled={isLoading}
             onClick={() => {
-              window.location.href = 'http://localhost:3003/v1/auth/login/google'
+              window.location.href = `${BACKEND_URL}/v1/auth/login/google`
             }}
           >
             <IconBrandGoogle className='h-4 w-4' /> Google

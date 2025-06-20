@@ -6,7 +6,7 @@ export interface UserAccess {
   allowedServices: string[]; // e.g. ['users', 'customers']
 }
 
-const AuthContext = createContext<{ user: UserAccess | null, setUser: (u: UserAccess | null) => void }>({
+export const AuthContext = createContext<{ user: UserAccess | null, setUser: (u: UserAccess | null) => void }>({
   user: null,
   setUser: () => {},
 });

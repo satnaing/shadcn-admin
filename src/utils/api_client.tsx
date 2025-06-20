@@ -1,13 +1,13 @@
-
 import { getToken } from '../lib/utils.ts';
 import axios from 'axios';
- export const deleteUserById = async ({userId}:{userId:string}) =>  {
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+export const deleteUserById = async ({userId}:{userId:string}) =>  {
     const token = getToken()
     if(!token){
         return "user not authorized";
     }
     try {
-    const response =   await axios.delete(`http://localhost:3003/v1/superadmin/user/${userId}`, {
+    const response =   await axios.delete(`${BACKEND_URL}/v1/superadmin/user/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

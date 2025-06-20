@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 // import { userTypes } from '../data/data'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
-import { SearchFilter } from './search-filter'
+
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -20,7 +20,7 @@ export function DataTableToolbar<TData>({
     <div className='flex items-center justify-between'>
       <div className='flex items-center gap-x-2'>
         {/* Search filter */}
-        <SearchFilter table={table} />
+        {/* <SearchFilter table={table} /> */}
         {/* Uncomment if you want to add a username filter back in the future */}
         {/* <Input
           placeholder='Filter by username...'
