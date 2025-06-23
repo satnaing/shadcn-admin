@@ -22,10 +22,10 @@ type addFieldTrainingType = Pick<
   'company_id' | 'start_date' | 'end_date' | 'job_id'
 >
 
-export const FieldTraining = ({
+export const Employment = ({
   datas,
 }: {
-  datas: UserDetailType['field_training']
+  datas: UserDetailType['employment_companies']
 }) => {
   const { editingSection, setEditData } = useEditUser()
   const { currentRow } = useUsers()
@@ -63,7 +63,7 @@ export const FieldTraining = ({
 
   useEffect(() => {
     if (
-      editingSection === 'field_training' &&
+      editingSection === 'employment' &&
       updateDate?.from &&
       updateDate?.to &&
       updateJob !== null &&
@@ -74,7 +74,7 @@ export const FieldTraining = ({
         {
           action: 'update',
           datas: {
-            field_training: {
+            employment_companies: {
               student_id: currentRow.student_id,
               company_id: currentFieldTraining.company_id,
               job_id: updateJob,
@@ -89,15 +89,15 @@ export const FieldTraining = ({
 
   return (
     <div>
-      {editingSection === 'field_training' ? (
+      {editingSection === 'employment' ? (
         <div className='space-y-4'>
-          {/* 현장실습 수정 */}
+          {/* 취업 수정 */}
           <div className='space-y-4'>
             {currentFieldTraining && (
               <div className='relative rounded-md border p-3'>
                 <div className='grid grid-cols-1 gap-3'>
                   <div className='space-y-2'>
-                    <span className='font-medium'>실습 기간</span>
+                    <span className='font-medium'>취업 기간</span>
                     <div className='flex justify-center'>
                       <Calendar
                         mode='range'
@@ -108,13 +108,13 @@ export const FieldTraining = ({
                     </div>
                   </div>
                   <div className='space-y-2'>
-                    <span className='font-medium'>실습 직무</span>
+                    <span className='font-medium'>취업 직무</span>
                     <Select
                       value={String(updateJob)}
                       onValueChange={(value) => setUpdateJob(Number(value))}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder='실습 직무를 선택하세요.' />
+                        <SelectValue placeholder='취업 직무를 선택하세요.' />
                       </SelectTrigger>
                       <SelectContent>
                         {jobs.map((job) => (
@@ -154,14 +154,14 @@ export const FieldTraining = ({
             )}
           </div>
 
-          {/* 새 현장실습 추가 */}
+          {/* 새 취업 추가 */}
           <div
             className={`${add ? 'border' : 'border border-dashed'} rounded-md p-3`}
           >
-            <h4 className='mb-3 font-medium'>새 현장실습 추가</h4>
+            <h4 className='mb-3 font-medium'>새 취업 추가</h4>
             <div className='grid grid-cols-1 gap-3'>
               <div className='space-y-2'>
-                <span className='font-medium'>실습 기간</span>
+                <span className='font-medium'>취업 기간</span>
                 <div className='flex justify-center'>
                   <Calendar
                     mode='range'
@@ -180,7 +180,7 @@ export const FieldTraining = ({
                 </div>
               </div>
               <div className='space-y-2'>
-                <span className='font-medium'>실습 직무</span>
+                <span className='font-medium'>취업 직무</span>
                 <Select
                   onValueChange={(value) => {
                     setAddFieldTraining((prev) => ({
@@ -190,7 +190,7 @@ export const FieldTraining = ({
                   }}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder='실습 직무를 선택하세요.' />
+                    <SelectValue placeholder='취업 직무를 선택하세요.' />
                   </SelectTrigger>
                   <SelectContent>
                     {jobs.map((job) => (
@@ -253,11 +253,11 @@ export const FieldTraining = ({
                         },
                       ])
                     } else {
-                      alert('누락된 현장 실습 정보가 있습니다.')
+                      alert('누락된 취업 정보가 있습니다.')
                     }
                   }}
                 >
-                  현장실습 추가
+                  취업 추가
                 </Button>
               )}
             </div>
@@ -271,14 +271,14 @@ export const FieldTraining = ({
                 <dl className='space-y-2'>
                   <div className='flex gap-2'>
                     <dt className='w-24 flex-shrink-0 font-medium'>
-                      실습 기간:
+                      취업 기간:
                     </dt>
                     <dd>{currentFieldTraining.start_date ?? '-'}</dd> ~{' '}
                     <dd>{currentFieldTraining.end_date ?? '-'}</dd>
                   </div>
                   <div className='flex gap-2'>
                     <dt className='w-24 flex-shrink-0 font-medium'>
-                      실습 직무:
+                      취업 직무:
                     </dt>
                     <dd>{currentFieldTraining.jobs.job_name ?? '-'}</dd>
                   </div>
@@ -293,7 +293,7 @@ export const FieldTraining = ({
             </div>
           ) : (
             <div className='mt-4 flex justify-center'>
-              학생의 현장 실습 정보가 존재하지 않습니다.
+              학생의 취업 정보가 존재하지 않습니다.
             </div>
           )}
         </div>

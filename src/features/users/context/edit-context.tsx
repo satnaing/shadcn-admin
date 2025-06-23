@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import { UserEditType } from '../data/schema';
+import React, { useState } from 'react'
+import { UserEditType } from '../data/schema'
 
 export type DetailType =
-  | "after_courses"
-  | "certificates"
-  | "activities"
-  | "filed_training"
-  | "university"
-  | "military"
-  | "middle_school"
+  | 'after_courses'
+  | 'certificates'
+  | 'activities'
+  | 'field_training'
+  | 'employment'
+  | 'university'
+  | 'military'
+  | 'middle_school'
 
 interface EditContextType {
-  editingSection: DetailType | null,
-  setEditingSection: (str: DetailType | null) => void,
-  editData: UserEditType | null,
-  setEditData: (str: UserEditType | null) => void,
+  editingSection: DetailType | null
+  setEditingSection: (str: DetailType | null) => void
+  editData: UserEditType | null
+  setEditData: (str: UserEditType | null) => void
 }
 
 const EditContext = React.createContext<EditContextType | null>(null)
@@ -28,11 +29,14 @@ export default function EditProvider({ children }: Props) {
   const [editData, setEditData] = useState<UserEditType | null>(null)
 
   return (
-    <EditContext 
-      value={{ 
-        editingSection, setEditingSection, 
-        editData, setEditData,
-      }}>
+    <EditContext
+      value={{
+        editingSection,
+        setEditingSection,
+        editData,
+        setEditData,
+      }}
+    >
       {children}
     </EditContext>
   )
@@ -43,7 +47,7 @@ export const useEditUser = () => {
   const editContext = React.useContext(EditContext)
 
   if (!editContext) {
-    throw new Error("error")
+    throw new Error('error')
   }
 
   return editContext
