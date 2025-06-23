@@ -243,9 +243,8 @@ export const Employment = ({
                         {
                           action: 'add',
                           datas: {
-                            field_training: {
+                            employment_companies: {
                               ...addFieldTraining,
-                              lead_or_part: false,
                               student_id: currentRow.student_id,
                               created_at: String(new Date()),
                             },

@@ -87,6 +87,7 @@ export function StudentDetail({ student_id }: { student_id: string }) {
     if (!editData) return
     if (editingSection === 'field_training') await handleFieldTraining(editData)
     else if (editingSection === 'employment') await handleEmployment(editData)
+    console.log(editData)
     await refetch()
     setEditingSection(null)
     await userRefetch()

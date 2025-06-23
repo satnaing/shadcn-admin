@@ -18,7 +18,8 @@ export const handleEmployment = async (editDataList: UserEditType) => {
       // !data.end_date ||
       !data.student_id
     ) {
-      alert('누락된 현장 실습 정보가 있습니다.')
+      alert('누락된 취업 정보가 있습니다.')
+      console.log(editData, data)
       continue
     }
 
