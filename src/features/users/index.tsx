@@ -25,6 +25,8 @@ const getToken = () => {
   const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
   return match ? decodeURIComponent(match[1]) : '';
 };
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -54,10 +56,27 @@ export default function Users() {
     return response.data.users || response.data.data || response.data;
   };
 
+ 
   // react-query for paginated users
   const { data: userList, isLoading, isError, error, refetch } = useQuery({
     queryKey: ['users', pageIndex, pageSize],
     queryFn: fetchUsers,
+ 
+      try {
+        const response = await axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allUser`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        });
+        console.log('Response:', response.data);
+        return response.data;
+      } catch (err) {
+        console.error('Error fetching users:', err);
+        throw err;
+      }
+    },
+ 
   });
 
   // Search handler (independent of pagination)
