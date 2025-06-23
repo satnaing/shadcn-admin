@@ -31,7 +31,7 @@ export default function Customers() {
     };
     // Remove empty params
     Object.keys(params).forEach((k) => (params[k] === undefined || params[k] === '') && delete params[k]);
-    const response = await axios.get(`${BACKEND_URL}/v1/customer/allCustomers`, {
+    const response = await axios.get(`${BACKEND_URL}/v1/customer/getCustomers`, {
       params,
       headers: {
         Authorization: `Bearer ${token}`,

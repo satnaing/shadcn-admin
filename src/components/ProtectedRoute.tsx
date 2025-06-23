@@ -25,7 +25,7 @@ export function ProtectedRoute({ requiredService, children }: ProtectedRouteProp
     }catch(r){
         console.log(r);
     }
-git a
+
   },);
 
   async function ensureUserFetched() {
