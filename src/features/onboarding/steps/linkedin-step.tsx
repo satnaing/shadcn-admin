@@ -86,13 +86,13 @@ export function LinkedInStep() {
             </div>
           )}
         </div>
+
+        {isConnected &&
+        <OnboardingNavigation nextStep="/onboarding/" />
+        }
       </OnboardingCard>
 
-      <OnboardingNavigation
-        prevStep="/onboarding/extension"
-        nextStep="/onboarding/post-settings"
-        nextLabel={isConnected ? "Continue" : "Skip for now"}
-      />
+     
     </div>
   )
 }

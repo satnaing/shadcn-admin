@@ -33,3 +33,16 @@ export interface IMedia {
   _id: string
   url: string
 }
+
+
+export interface IProfileResponseFromExtension {
+  userAgent: string;
+  ja3Text?: string;
+  isWindowsBasedSystem: boolean;
+  profileUrn?: string;
+  publicIdentifier?: string;
+  firstName?: string;
+  lastName?: string;
+  linkedinToken: string;
+  csrfToken: string;
+}

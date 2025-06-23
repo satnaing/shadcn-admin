@@ -1,169 +1,163 @@
 "use client"
 
-import { useState, useEffect, type KeyboardEvent } from "react"
-import { Filter, Globe, Hash, Calendar } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Slider } from "@/components/ui/slider"
-import { Badge } from "@/components/ui/badge"
-import { OnboardingCard } from "@/features/onboarding/onboarding-card"
-import { OnboardingNavigation } from "@/features/onboarding/onboarding-navigation"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useOnboarding } from "@/context/onboarding-context"
+import { useState } from "react"
+import {
+  Users,
+  ShoppingCart,
+  Megaphone,
+  Lightbulb,
+  Package,
+  Palette,
+  Code,
+  DollarSign,
+  Settings,
+  Headphones,
+  UserCheck,
+  MessageSquare,
+  Scale,
+  GraduationCap,
+  BookOpen,
+  Info,
+} from "lucide-react"
+import { OnboardingCard } from "../onboarding-card"
+import { OnboardingNavigation } from "../onboarding-navigation"
 
 export function PostSettingsStep() {
-  const { data, updateData, markStepCompleted } = useOnboarding()
-  const [currentKeyword, setCurrentKeyword] = useState("")
+  const [selectedRole, setSelectedRole] = useState("Marketing")
 
-  // Use stored values from context
-  const keywords = data.keywords
-  const commentsPerDay = data.commentsPerDay
-  const authorTitle = data.authorTitle
-  const geography = data.geography
+  const roles = [
+    { id: "Leadership", label: "Leadership", icon: Users },
+    { id: "Sales", label: "Sales", icon: ShoppingCart },
+    { id: "Marketing", label: "Marketing", icon: Megaphone },
+    { id: "Consulting", label: "Consulting", icon: Lightbulb },
+    { id: "Product", label: "Product", icon: Package },
+    { id: "Design", label: "Design", icon: Palette },
+    { id: "Engineering", label: "Engineering", icon: Code },
+    { id: "Finance", label: "Finance", icon: DollarSign },
+    { id: "Operations", label: "Operations", icon: Settings },
+    { id: "Support", label: "Support", icon: Headphones },
+    { id: "HR", label: "HR", icon: UserCheck },
+    { id: "Communications", label: "Communications", icon: MessageSquare },
+    { id: "Legal", label: "Legal", icon: Scale },
+    { id: "Teacher", label: "Teacher", icon: GraduationCap },
+    { id: "Student", label: "Student", icon: BookOpen },
+  ]
 
-  const addKeyword = () => {
-    if (currentKeyword && !keywords.includes(currentKeyword)) {
-      const updatedKeywords = [...keywords, currentKeyword]
-      updateData({ keywords: updatedKeywords })
-      setCurrentKeyword("")
-    }
+  const handleRoleSelect = (roleId: string) => {
+    setSelectedRole(roleId)
   }
-
-  const removeKeyword = (keyword: string) => {
-    const updatedKeywords = keywords.filter((k) => k !== keyword)
-    updateData({ keywords: updatedKeywords })
-  }
-
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault()
-      addKeyword()
-    }
-  }
-
-  // Mark step as visited when component mounts or when form is filled
-  useEffect(() => {
-    const isFormFilled =
-      keywords.length > 0 || commentsPerDay !== 10 || authorTitle !== "generic" || geography !== "global"
-    if (isFormFilled) {
-      markStepCompleted("post-settings")
-    }
-  }, [keywords, commentsPerDay, authorTitle, geography, markStepCompleted])
 
   return (
-    <div className="space-y-8">
-      <OnboardingCard
-        title="Post Evaluation Settings"
-        description="Configure how we find and select LinkedIn posts for commenting."
-      >
-        <div className="space-y-6">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Hash className="h-4 w-4 text-muted-foreground" />
-              <Label htmlFor="keywords">Target Keywords</Label>
-            </div>
-            <div className="flex gap-2">
-              <Input
-                id="keywords"
-                value={currentKeyword}
-                onChange={(e) => setCurrentKeyword(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Add keywords (e.g., marketing, leadership)"
-                className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              />
-              <Button
-                type="button"
-                onClick={addKeyword}
-                variant="secondary"
-                className="relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95"
-              >
-                Add
-              </Button>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {keywords.map((keyword) => (
-                <Badge key={keyword} variant="secondary" className="px-3 py-1">
-                  {keyword}
-                  <button className="ml-2 text-xs" onClick={() => removeKeyword(keyword)}>
-                    ×
-                  </button>
-                </Badge>
-              ))}
-              {keywords.length === 0 && <span className="text-sm text-muted-foreground">No keywords added yet</span>}
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-muted-foreground" />
-              <Label>Comments Per Day: {commentsPerDay}</Label>
-            </div>
-            <Slider
-              value={[commentsPerDay]}
-              max={50}
-              step={1}
-              onValueChange={(value) => updateData({ commentsPerDay: value[0] })}
-              className="py-4"
-            />
-            <span className="text-xs text-muted-foreground">Limit how many comments are posted daily (1-50)</span>
-          </div>
-
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Filter className="h-4 w-4 text-muted-foreground" />
-              <Label htmlFor="author-title">Author Titles</Label>
-            </div>
-            <Select value={authorTitle} onValueChange={(value) => updateData({ authorTitle: value })}>
-              <SelectTrigger
-                id="author-title"
-                className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              >
-                <SelectValue placeholder="Select title preference" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="generic">Generic Titles (Recommended)</SelectItem>
-                <SelectItem value="specific">Specific Titles</SelectItem>
-                <SelectItem value="all">All Titles</SelectItem>
-              </SelectContent>
-            </Select>
-            <span className="text-xs text-muted-foreground">
-              Generic titles like "Chief" cover most C-level positions
-            </span>
-          </div>
-
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <Globe className="h-4 w-4 text-muted-foreground" />
-              <Label htmlFor="geography">Geography</Label>
-            </div>
-            <Select value={geography} onValueChange={(value) => updateData({ geography: value })}>
-              <SelectTrigger
-                id="geography"
-                className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              >
-                <SelectValue placeholder="Select geographic focus" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="global">Global</SelectItem>
-                <SelectItem value="north-america">North America</SelectItem>
-                <SelectItem value="europe">Europe</SelectItem>
-                <SelectItem value="asia">Asia</SelectItem>
-                <SelectItem value="custom">Custom</SelectItem>
-              </SelectContent>
-            </Select>
+    <OnboardingCard
+      title="Choose Targeted Keywords"
+      description="This help us to understand on which post you want to comment"
+    >
+      <div className="mb-6">
+        <div className="flex items-center gap-2 mb-4">
+          <span className="text-foreground font-semibold">Select your keywords</span>
+          <div className="w-4 h-4 rounded-full border border-border flex items-center justify-center">
+            <Info className="w-3 h-3 text-muted-foreground" />
           </div>
         </div>
-      </OnboardingCard>
 
-      <OnboardingNavigation
-        prevStep="/onboarding/linkedin"
-        nextStep="/onboarding/comment-settings"
-        onNext={() => {
-          markStepCompleted("post-settings")
-          return true
-        }}
-      />
-    </div>
+        <div className="space-y-3">
+          {/* Row 1 */}
+          <div className="flex flex-wrap gap-3">
+            {roles.slice(0, 4).map((role) => {
+              const IconComponent = role.icon
+              const isSelected = selectedRole === role.id
+
+              return (
+                <button
+                  key={role.id}
+                  onClick={() => handleRoleSelect(role.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
+                    isSelected
+                      ? "bg-primary/10 border-primary text-primary"
+                      : "bg-card border-border text-card-foreground hover:border-primary/30 hover:shadow-sm"
+                  }`}
+                >
+                  <IconComponent className="w-4 h-4" />
+                  <span className="text-sm font-medium">{role.label}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Row 2 */}
+          <div className="flex flex-wrap gap-3">
+            {roles.slice(4, 8).map((role) => {
+              const IconComponent = role.icon
+              const isSelected = selectedRole === role.id
+
+              return (
+                <button
+                  key={role.id}
+                  onClick={() => handleRoleSelect(role.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
+                    isSelected
+                      ? "bg-primary/10 border-primary text-primary"
+                      : "bg-card border-border text-card-foreground hover:border-primary/30 hover:shadow-sm"
+                  }`}
+                >
+                  <IconComponent className="w-4 h-4" />
+                  <span className="text-sm font-medium">{role.label}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Row 3 */}
+          <div className="flex flex-wrap gap-3">
+            {roles.slice(8, 12).map((role) => {
+              const IconComponent = role.icon
+              const isSelected = selectedRole === role.id
+
+              return (
+                <button
+                  key={role.id}
+                  onClick={() => handleRoleSelect(role.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
+                    isSelected
+                      ? "bg-primary/10 border-primary text-primary"
+                      : "bg-card border-border text-card-foreground hover:border-primary/30 hover:shadow-sm"
+                  }`}
+                >
+                  <IconComponent className="w-4 h-4" />
+                  <span className="text-sm font-medium">{role.label}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Row 4 */}
+          <div className="flex flex-wrap gap-3">
+            {roles.slice(12).map((role) => {
+              const IconComponent = role.icon
+              const isSelected = selectedRole === role.id
+
+              return (
+                <button
+                  key={role.id}
+                  onClick={() => handleRoleSelect(role.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
+                    isSelected
+                      ? "bg-primary/10 border-primary text-primary"
+                      : "bg-card border-border text-card-foreground hover:border-primary/30 hover:shadow-sm"
+                  }`}
+                >
+                  <IconComponent className="w-4 h-4" />
+                  <span className="text-sm font-medium">{role.label}</span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        <p className="mt-4 text-sm text-muted-foreground">Your selection helps us tailor your dashboard experience</p>
+      </div>
+
+      <OnboardingNavigation nextStep="/onboarding/comment-settings" />
+    </OnboardingCard>
   )
 }

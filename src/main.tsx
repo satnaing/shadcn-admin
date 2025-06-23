@@ -8,7 +8,7 @@ import {
 } from '@tanstack/react-query'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { toast } from 'sonner'
-import { useAuthStore } from '@/stores/auth.store'
+// import { useAuthStore } from '@/stores/auth.store'
 import { handleServerError } from '@/utils/handle-server-error'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
@@ -73,13 +73,10 @@ const router = createRouter({
   routeTree,
   context: {
     queryClient,
-    get auth() {
-      const { isSessionLoaded, session } = useAuthStore()
-      return {
-        isSignedIn: !!session?.user?.id,
-        isSessionLoaded,
-        session,
-      }
+    auth: {
+      isSignedIn: false,
+      isSessionLoaded: false,
+      session: null,
     },
   },
   defaultPreload: 'intent',

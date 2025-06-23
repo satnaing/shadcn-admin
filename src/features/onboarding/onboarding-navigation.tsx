@@ -39,7 +39,7 @@ export function OnboardingNavigation({
           variant="outline"
           onClick={() => navigate({ to: prevStep })}
           disabled={loading}
-          className="group relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95"
+          className="group relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95 bg-card text-card-foreground border-border hover:bg-accent hover:text-accent-foreground"
         >
           <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
           Back
@@ -52,7 +52,7 @@ export function OnboardingNavigation({
         <Button
           onClick={handleNext}
           disabled={loading}
-          className="group relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95"
+          className="group relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95 bg-primary text-primary-foreground hover:bg-primary/90"
         >
           {loading ? (
             <>

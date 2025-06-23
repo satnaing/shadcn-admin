@@ -30,6 +30,7 @@ export interface OnboardingData {
 
   // Demo step
   autoApprove: boolean
+  authorTitles: string[]
 }
 
 // Define the context shape
@@ -66,6 +67,7 @@ const defaultOnboardingData: OnboardingData = {
 
   // Demo step
   autoApprove: false,
+  authorTitles:[]
 }
 
 // Create the context
