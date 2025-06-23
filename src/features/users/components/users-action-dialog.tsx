@@ -66,6 +66,9 @@ interface Props {
 
 
 
+
+
+
 function mapUserToFormDefaults(user: User) {
   // Map services, roles, and permissions from backend structure
   const services: string[] = [];
@@ -104,6 +107,7 @@ function mapUserToFormDefaults(user: User) {
     isEdit: true,
   };
 }
+
 
 export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
   console.log('UsersActionDialog rendered');
@@ -168,8 +172,10 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
     console.log(document.cookie);
     console.log('Token:', token);
     
-    axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allService`, {
-      headers: {
+
+    
+     axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allService`, {
+       headers: {
         'Authorization': `Bearer ${token}`,
       },
       withCredentials: true,
@@ -287,8 +293,9 @@ console.log('isEdit:', isEdit);
         );
         alert('User added successfully!');
       }
+  
       queryClient.invalidateQueries({ queryKey: ['users'] });
-      form.reset();
+       form.reset();
       onOpenChange(false);
     } catch (err) {
       console.error('User action error:', err);

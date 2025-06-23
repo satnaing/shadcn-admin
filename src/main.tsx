@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import { AxiosError } from 'axios'
 import {
@@ -8,13 +8,14 @@ import {
 } from '@tanstack/react-query'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 import { toast } from 'sonner'
-import { useAuthStore } from '@/stores/authStore'
+import { useAuth, AuthProvider } from '@/context/auth-context'
 import { handleServerError } from '@/utils/handle-server-error'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
 import './index.css'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
+import { fetchUserInfoFromApi } from '@/utils/fetch-user-info'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -51,7 +52,8 @@ const queryClient = new QueryClient({
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
           toast.error('Session expired!')
-          useAuthStore.getState().auth.reset()
+          const { setUser } = useAuth()
+          setUser(null)
           const redirect = `${router.history.location.href}`
           router.navigate({ to: '/sign-in', search: { redirect } })
         }
@@ -81,6 +83,25 @@ declare module '@tanstack/react-router' {
     router: typeof router
   }
 }
+const getToken = () => {
+  const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
+  return match ? decodeURIComponent(match[1]) : '';
+};
+
+function AppRoot({ children }: { children: React.ReactNode }) {
+  const { setUser } = useAuth()
+  useEffect(() => {
+    const token =  getToken();
+    if (token) {
+      // Fetch user info from /v1/auth/me
+      fetchUserInfoFromApi(token).then((user) => {
+        setUser(user)
+      })
+    }
+  }, [setUser])
+  return <>{children}</>
+}
+
 
 // Render the app
 const rootElement = document.getElementById('root')!
@@ -88,13 +109,17 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
-          <FontProvider>
-            <RouterProvider router={router} />
-          </FontProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
+      <AuthProvider>
+        <AppRoot>
+          <QueryClientProvider client={queryClient}>
+            <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
+              <FontProvider>
+                <RouterProvider router={router} />
+              </FontProvider>
+            </ThemeProvider>
+          </QueryClientProvider>
+        </AppRoot>
+      </AuthProvider>
     </StrictMode>
   )
 }

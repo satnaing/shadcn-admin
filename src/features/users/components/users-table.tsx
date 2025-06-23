@@ -23,7 +23,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { User } from '../data/schema'
-import { DataTablePagination } from './data-table-pagination'
+
 import { DataTableToolbar } from './data-table-toolbar'
 
 declare module '@tanstack/react-table' {
@@ -127,7 +127,7 @@ export function UsersTable({ columns, data }: DataTableProps) {
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+       
     </div>
   )
 }
