@@ -6,7 +6,7 @@
 // import { useQuery } from '@tanstack/react-query';
 // import axios from 'axios';
 
-// const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+// const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 // export function ViewCustomerButton({ customerId }: { customerId: string }) {
 //   const [open, setOpen] = useState(false);
@@ -15,7 +15,7 @@
 //   const { data, isLoading, isError } = useQuery({
 //     queryKey: ['customer', customerId],
 //     queryFn: async () => {
-//       const response = await axios.get(`${BACKEND_URL}/v1/superadmin/customers/${customerId}`);
+//       const response = await axios.get(`${BACKEND_BASE_URL}/v1/superadmin/customers/${customerId}`);
 //       return response.data;
 //     },
 //     enabled: open, // Only fetch when modal is open

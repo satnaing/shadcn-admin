@@ -41,8 +41,6 @@ const formSchema = z.object({
     }),
 })
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
-
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { setUser } = useAuth()
@@ -59,7 +57,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true)
     try {
       // 1. Login and get JWT
-      const response = await axios.post(`${BACKEND_URL}/v1/auth/login`, data)
+      const response = await axios.post(`${BACKEND_BASE_URL}/v1/auth/login`, data)
       const token = response.data.token
       localStorage.setItem('token', token)
       // 2. Fetch user info with JWT
@@ -67,7 +65,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       setUser(user)
       // 3. Redirect to dashboard or home
       window.location.href = '/'
-    } catch (err) {
+    } catch (_err) {
       // handle error (show toast, etc)
     } finally {
       setIsLoading(false)

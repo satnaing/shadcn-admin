@@ -15,7 +15,7 @@ const getToken = () => {
   return match ? decodeURIComponent(match[1]) : '';
 };
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 export default function Customers() {
   const [pageIndex, setPageIndex] = useState(0); // 0-based, default page=1
@@ -24,14 +24,14 @@ export default function Customers() {
 
   const fetchCustomers = async () => {
     const token = getToken();
-    const params: any = {
+    const params: Record<string, string> = {
       page: String(pageIndex + 1),
       limit: String(pageSize),
       ...searchParams,
     };
     // Remove empty params
     Object.keys(params).forEach((k) => (params[k] === undefined || params[k] === '') && delete params[k]);
-    const response = await axios.get(`${BACKEND_URL}/v1/customer/getCustomers`, {
+    const response = await axios.get(`${BACKEND_BASE_URL}/v1/customer/getCustomers`, {
       params,
       headers: {
         Authorization: `Bearer ${token}`,

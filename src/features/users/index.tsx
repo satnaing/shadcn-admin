@@ -27,16 +27,25 @@ const getToken = () => {
 };
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-
 export default function Users() {
   const [pageIndex, setPageIndex] = useState(0); // 0-based
   const [pageSize] = useState(10);
   // const [totalCount, setTotalCount] = useState(0);
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
-  const [searchResults, setSearchResults] = useState<any[] | null>(null);
+  interface User {
+    id: string;
+    email: string;
+    role: "superadmin" | "admin" | "cashier" | "manager";
+    firstName: string;
+    lastName: string;
+    username: string;
+    phoneNumber: string;
+    status: "active" | "inactive" | "invited" | "suspended";
+    createdAt: Date;
+    updatedAt: Date;
+  }
+  const [searchResults, setSearchResults] = useState<User[] | null>(null);
 
   // Backend-driven pagination (default table view)
   const fetchUsers = async () => {
@@ -45,7 +54,7 @@ export default function Users() {
       page: String(pageIndex + 1), // send as string
       limit: String(pageSize),     // send as string
     };
-    const response = await axios.get(`${BACKEND_URL}/v1/superadmin/allUser`, {
+    const response = await axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allUser`, {
       params,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -61,23 +70,9 @@ export default function Users() {
   const { data: userList, isLoading, isError, error, refetch } = useQuery({
     queryKey: ['users', pageIndex, pageSize],
     queryFn: fetchUsers,
- 
-      try {
-        const response = await axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allUser`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        });
-        console.log('Response:', response.data);
-        return response.data;
-      } catch (err) {
-        console.error('Error fetching users:', err);
-        throw err;
-      }
-    },
- 
   });
+
+
 
   // Search handler (independent of pagination)
   const handleSearch = async (params: { userId: string; email: string; phone: string; createdAt: string }) => {
@@ -91,7 +86,7 @@ export default function Users() {
       if (params.email) filteredParams.email = params.email;
       if (params.phone) filteredParams.phone = params.phone;
       if (params.createdAt) filteredParams.dateCreated = params.createdAt; // map to backend param
-      const response = await axios.get(`${BACKEND_URL}/v1/superadmin/allUser`, {
+      const response = await axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allUser`, {
         params: filteredParams,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -99,8 +94,12 @@ export default function Users() {
         withCredentials: true,
       });
       setSearchResults(response.data.users || response.data.data || response.data);
-    } catch (err: any) {
-      setSearchError(err?.message || 'Failed to search users');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setSearchError(err.message);
+      } else {
+        setSearchError('Failed to search users');
+      }
     } finally {
       setSearchLoading(false);
     }
