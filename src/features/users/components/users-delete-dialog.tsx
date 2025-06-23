@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { User } from '../data/schema'
+import { deleteUserById } from '@/utils/api_client'
 
 interface Props {
   open: boolean
@@ -17,12 +18,19 @@ interface Props {
 
 export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
   const [value, setValue] = useState('')
+  const [isDeletiing, setIsDeleting] = useState(false)
 
-  const handleDelete = () => {
-    if (value.trim() !== currentRow.username) return
+  const handleDelete = async() =>  {
+    if (value.trim() !== currentRow.email) return
+    setIsDeleting(true)
 
+    const response = await deleteUserById({userId: currentRow.id})
+
+    if(response==="success"){
+      showSubmittedData( 'The following user has been deleted, please refresh the page')
+    }
     onOpenChange(false)
-    showSubmittedData(currentRow, 'The following user has been deleted:')
+    
   }
 
   return (
@@ -30,14 +38,14 @@ export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
       open={open}
       onOpenChange={onOpenChange}
       handleConfirm={handleDelete}
-      disabled={value.trim() !== currentRow.username}
+      disabled={value.trim() !== currentRow.email}
       title={
         <span className='text-destructive'>
           <IconAlertTriangle
             className='stroke-destructive mr-1 inline-block'
             size={18}
           />{' '}
-          Delete User
+          {isDeletiing?"Deleting...":"Delete User"}
         </span>
       }
       desc={
@@ -48,7 +56,7 @@ export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
             <br />
             This action will permanently remove the user with the role of{' '}
             <span className='font-bold'>
-              {currentRow.role.toUpperCase()}
+              {currentRow.email}
             </span>{' '}
             from the system. This cannot be undone.
           </p>
@@ -71,6 +79,7 @@ export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
         </div>
       }
       confirmText='Delete'
+
       destructive
     />
   )

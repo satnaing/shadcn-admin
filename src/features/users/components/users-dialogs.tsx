@@ -8,6 +8,7 @@ export function UsersDialogs() {
   return (
     <>
       <UsersActionDialog
+        currentRow={currentRow!}
         key='user-add'
         open={open === 'add'}
         onOpenChange={() => setOpen('add')}

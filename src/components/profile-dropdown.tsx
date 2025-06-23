@@ -12,6 +12,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
+ 
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
+
 export function ProfileDropdown() {
   return (
     <DropdownMenu modal={false}>
@@ -55,7 +59,34 @@ export function ProfileDropdown() {
           <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={async () => {
+            try {
+              // Get token from cookies
+              const token = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('token='))
+                ?.split('=')[1];
+ 
+
+              const res = await fetch(`${BACKEND_BASE_URL}/v1/auth/logout`, {
+
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                  'Authorization': token ? `Bearer ${token}` : '',
+                },
+              });
+              if (res.ok) {
+                window.location.href = '/sign-in';
+              } else {
+                alert('Logout failed.');
+              }
+            } catch (_) {
+              alert('Logout failed.');
+            }
+          }}
+        >
           Log out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

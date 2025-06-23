@@ -1,11 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router'
-import Tasks from '@/features/tasks'
+import BBPS from '@/features/BBPS'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
 
-export const Route = createFileRoute('/_authenticated/tasks/')({
+export const Route = createFileRoute('/_authenticated/bbps/')({
   component: () => (
-    <ProtectedRoute requiredService="tasks">
-      <Tasks />
+    <ProtectedRoute requiredService="BBPS">
+      <BBPS />
     </ProtectedRoute>
   ),
 })
