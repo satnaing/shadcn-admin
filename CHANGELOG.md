@@ -1,3 +1,15 @@
+## v1.4.1 (2025-06-25)
+
+### Fix
+
+- user list overflow in chat (#160)
+- prevent showing collapsed menu on mobile (#155)
+- white background select dropdown in dark mode (#149)
+
+### Refactor
+
+- update font config guide in fonts.ts (#164)
+
 ## v1.4.0 (2025-05-25)
 
 ### Feat
