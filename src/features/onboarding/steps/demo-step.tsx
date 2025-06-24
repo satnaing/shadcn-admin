@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useNavigate } from "@tanstack/react-router"
 import {
   ThumbsUp,
@@ -13,6 +13,7 @@ import {
   MessageCircle,
   Share,
   Heart,
+  Globe
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useOnboarding } from "@/context/onboarding-context"
@@ -26,9 +27,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { AutoDismissSuccessModal } from "../auto-dismisal"
 
-// Mock LinkedIn posts with generated comments
 const DEMO_POSTS = [
   {
     id: 1,
@@ -72,7 +71,9 @@ const DEMO_POSTS = [
 ]
 
 export function DemoStep() {
-  const navigate = useNavigate()
+  // ... (keep all the same state and handler functions)
+
+    const navigate = useNavigate()
   const { data, updateData, markStepCompleted } = useOnboarding()
   const [approvalDialogOpen, setApprovalDialogOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -100,74 +101,59 @@ export function DemoStep() {
     }, 1500)
   }
 
-  const [showSuccess, setShowSuccess] = useState(false)
-
-  // Auto-show the modal when component mounts
-  useEffect(() => {
-    setShowSuccess(true)
-  }, [])
 
   return (
-    <div className="space-y-8">
-      <div className="space-y-8">
-        <div className="p-6">{showSuccess && <AutoDismissSuccessModal />}</div>
-      </div>
-
+    <div className="space-y-8 mt-10">
       {/* Header Section */}
       <div className="-mt-10 space-y-6 text-center">
-        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-2">
+        <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
           <Sparkles className="h-4 w-4 text-primary" />
           <span className="text-sm font-medium text-primary">AI-Powered Comments</span>
         </div>
 
-        <h2 className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-4xl font-bold font-clash text-transparent">
+        <h2 className="text-4xl font-bold tracking-tight">
           See AI Comments in Action
         </h2>
 
-        <p className="mx-auto max-w-3xl text-lg leading-relaxed text-muted-foreground">
+        <p className="mx-auto max-w-3xl text-lg text-muted-foreground">
           Here are examples of AI-generated comments that match your professional tone. Each comment is personalized and
           engaging to help you build meaningful connections.
         </p>
       </div>
 
       {/* Posts Grid */}
-      <div className="grid grid-cols-1 gap-8 p-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {DEMO_POSTS.map((post, index) => (
           <div
             key={post.id}
             className={cn(
-              "group cursor-pointer overflow-hidden rounded-lg border bg-card shadow-lg backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl",
-              "bg-gradient-to-br from-card via-card to-muted/30",
-              activePost === index
-                ? "scale-[1.02] bg-gradient-to-br from-primary/5 to-card shadow-2xl ring-2 ring-primary ring-offset-4"
-                : "hover:bg-gradient-to-br hover:from-muted/50 hover:to-card",
+              "group overflow-hidden rounded-lg border bg-card shadow-sm transition-all hover:shadow-md",
+              activePost === index ? "ring-2 ring-secondary" : ""
             )}
             onClick={() => setActivePost(activePost === index ? null : index)}
           >
             {/* LinkedIn Post Section */}
-            <div className="relative border-b border-border">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-
+            <div className="border-b">
               {/* Post Header */}
               <div className="flex flex-col space-y-6 p-6 pb-4">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-4">
                     <div className="relative">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-primary via-primary to-primary/80 shadow-lg ring-2 ring-primary/20">
-                        <span className="text-sm font-bold text-primary-foreground">{post.author.initials}</span>
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
+                        <span className="text-sm font-bold">{post.author.initials}</span>
                       </div>
-                      <div className="absolute -right-1 -bottom-1 h-4 w-4 rounded-full border-2 border-card bg-primary shadow-sm"></div>
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h3 className="truncate text-base font-bold text-card-foreground">{post.author.name}</h3>
-                      <p className="truncate text-sm font-medium text-muted-foreground">{post.author.title}</p>
-                      <p className="mt-1 text-xs text-muted-foreground">2h • 🌐</p>
-                    </div>
+                      <h3 className="truncate text-base font-bold">{post.author.name}</h3>
+                      <p className="truncate text-sm text-muted-foreground">{post.author.title}</p>
+<p className="mt-1 text-xs text-muted-foreground flex items-center gap-1">
+  2h • <Globe className="w-3 h-3" />
+</p>                    </div>
                   </div>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="h-8 w-8 p-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 text-muted-foreground hover:text-foreground"
+                    className="h-8 w-8 p-0 opacity-0 group-hover:opacity-100"
                   >
                     <MoreHorizontal className="h-4 w-4" />
                   </Button>
@@ -176,7 +162,7 @@ export function DemoStep() {
 
               {/* Post Content */}
               <div className="p-6 pb-4">
-                <p className="line-clamp-4 text-sm leading-relaxed font-medium text-card-foreground">{post.content}</p>
+                <p className="text-sm">{post.content}</p>
               </div>
 
               {/* Post Actions */}
@@ -184,7 +170,7 @@ export function DemoStep() {
                 <div className="flex w-full items-center justify-between">
                   <div className="flex items-center gap-1">
                     <div className="flex items-center gap-1">
-                      <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary">
+                      <div className="flex h-5 w-5 items-center justify-center rounded-full bg-green-400">
                         <ThumbsUp className="h-3 w-3 text-primary-foreground" />
                       </div>
                       <div className="-ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-destructive">
@@ -195,50 +181,48 @@ export function DemoStep() {
                   </div>
                   <span className="text-xs text-muted-foreground">5 comments</span>
                 </div>
-                <div className="mt-3 flex items-center justify-around border-t border-border pt-3">
+                <div className="mt-3 flex items-center justify-around border-t pt-3">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="flex items-center gap-2 text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                    className="flex items-center gap-2"
                   >
                     <ThumbsUp className="h-4 w-4" />
-                    <span className="text-xs font-medium">Like</span>
+                    <span className="text-xs">Like</span>
                   </Button>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="flex items-center gap-2 text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                    className="flex items-center gap-2"
                   >
                     <MessageCircle className="h-4 w-4" />
-                    <span className="text-xs font-medium">Comment</span>
+                    <span className="text-xs">Comment</span>
                   </Button>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="flex items-center gap-2 text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                    className="flex items-center gap-2"
                   >
                     <Share className="h-4 w-4" />
-                    <span className="text-xs font-medium">Share</span>
+                    <span className="text-xs">Share</span>
                   </Button>
                 </div>
               </div>
             </div>
 
             {/* AI Comment Section */}
-            <div className="relative bg-gradient-to-br from-primary/5 via-primary/3 to-accent/5">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/3 to-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
-
+            <div className="bg-muted/50">
               {/* AI Comment Header */}
               <div className="flex flex-col space-y-6 p-6 pb-3">
                 <div className="flex items-center justify-between">
-                  <Badge className="bg-primary text-primary-foreground text-xs font-medium shadow-md hover:bg-primary/90">
+                  <Badge className="bg-primary">
                     <Sparkles className="mr-1.5 h-3 w-3" />
                     AI Comment
                   </Badge>
                   <div className="flex items-center gap-2">
                     <div className="flex items-center gap-1">
                       <div className="h-2 w-2 animate-pulse rounded-full bg-primary"></div>
-                      <span className="text-xs font-medium text-muted-foreground">Ready</span>
+                      <span className="text-xs text-muted-foreground">Ready</span>
                     </div>
                   </div>
                 </div>
@@ -248,14 +232,13 @@ export function DemoStep() {
               <div className="p-6 pb-3">
                 <div className="flex items-start gap-3">
                   <div className="relative">
-                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary via-primary to-primary/80 shadow-md ring-2 ring-primary/20">
-                      <span className="text-xs font-bold text-primary-foreground">AI</span>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-muted">
+                      <span className="text-xs font-bold">AI</span>
                     </div>
-                    <div className="absolute -right-0.5 -bottom-0.5 h-3 w-3 rounded-full border-2 border-card bg-primary shadow-sm"></div>
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="rounded-lg border border-border bg-card/60 p-3 shadow-sm backdrop-blur-sm">
-                      <p className="line-clamp-4 text-xs leading-relaxed font-medium text-card-foreground">
+                    <div className="rounded-lg border bg-background p-3">
+                      <p className="text-xs">
                         {post.generatedComment}
                       </p>
                     </div>
@@ -269,15 +252,15 @@ export function DemoStep() {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="h-8 flex-1 border-border text-xs font-medium text-muted-foreground transition-all duration-200 hover:border-primary hover:bg-primary/5 hover:text-primary"
+                    className="flex-1"
                   >
-                    ✏️ Edit
+                  Edit
                   </Button>
                   <Button
                     size="sm"
-                    className="h-8 flex-1 bg-primary text-primary-foreground text-xs font-medium shadow-md transition-all duration-200 hover:bg-primary/90 hover:shadow-lg"
+                    className="flex-1"
                   >
-                    🚀 Post
+                  Post
                   </Button>
                 </div>
               </div>
@@ -287,8 +270,8 @@ export function DemoStep() {
       </div>
 
       {/* Call to Action */}
-      <div className="mt-12 rounded-xl bg-gradient-to-r from-primary/5 to-accent/5 border border-primary/10 p-8 text-center">
-        <h3 className="mb-2 text-xl font-bold font-clash text-foreground">How do these AI-generated comments look?</h3>
+      <div className="mt-12 rounded-lg border bg-muted/50 p-8 text-center">
+        <h3 className="mb-2 text-xl font-bold">How do these AI-generated comments look?</h3>
         <p className="mx-auto mb-6 max-w-2xl text-muted-foreground">
           Our AI creates personalized, professional comments that match your tone and style. Click on any card above to
           see more details.
@@ -297,7 +280,6 @@ export function DemoStep() {
           <Button
             variant="outline"
             size="lg"
-            className="relative flex items-center gap-2 overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95 bg-card border-border text-card-foreground hover:bg-accent hover:text-accent-foreground"
             onClick={handleDislikeDemo}
           >
             <ThumbsDown className="h-5 w-5" />
@@ -305,7 +287,6 @@ export function DemoStep() {
           </Button>
           <Button
             size="lg"
-            className="relative flex items-center gap-2 overflow-hidden bg-primary text-primary-foreground transition-all duration-300 hover:shadow-md active:scale-95 hover:bg-primary/90"
             onClick={handleLikeDemo}
           >
             <ThumbsUp className="h-5 w-5" />
@@ -315,10 +296,10 @@ export function DemoStep() {
       </div>
 
       <Dialog open={approvalDialogOpen} onOpenChange={setApprovalDialogOpen}>
-        <DialogContent className="sm:max-w-md bg-popover border-border">
+        <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="font-bold font-clash text-popover-foreground">Almost done!</DialogTitle>
-            <DialogDescription className="text-muted-foreground">
+            <DialogTitle>Almost done!</DialogTitle>
+            <DialogDescription>
               Would you like us to automatically post comments without your approval?
             </DialogDescription>
           </DialogHeader>
@@ -326,10 +307,8 @@ export function DemoStep() {
           <div className="flex items-center gap-4 py-4">
             <div
               className={cn(
-                "flex-1 cursor-pointer rounded-lg border p-4 transition-all duration-300",
-                autoApprove
-                  ? "border-primary bg-primary/5 shadow-sm"
-                  : "border-border hover:border-primary/30 hover:bg-primary/5",
+                "flex-1 cursor-pointer rounded-lg border p-4",
+                autoApprove ? "border-primary bg-primary/5" : "border-border"
               )}
               onClick={() => updateData({ autoApprove: true })}
             >
@@ -337,22 +316,20 @@ export function DemoStep() {
                 <div
                   className={cn(
                     "flex h-8 w-8 items-center justify-center rounded-full",
-                    autoApprove ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground",
+                    autoApprove ? "bg-primary text-primary-foreground" : "bg-muted"
                   )}
                 >
                   <CheckCircle2 className="h-4 w-4" />
                 </div>
-                <span className="font-medium text-popover-foreground">Automatic</span>
+                <span className="font-medium">Automatic</span>
               </div>
-              <p className="text-muted-foreground text-sm">Post comments automatically without approval</p>
+              <p className="text-sm text-muted-foreground">Post comments automatically without approval</p>
             </div>
 
             <div
               className={cn(
-                "flex-1 cursor-pointer rounded-lg border p-4 transition-all duration-300",
-                !autoApprove
-                  ? "border-primary bg-primary/5 shadow-sm"
-                  : "border-border hover:border-primary/30 hover:bg-primary/5",
+                "flex-1 cursor-pointer rounded-lg border p-4",
+                !autoApprove ? "border-primary bg-primary/5" : "border-border"
               )}
               onClick={() => updateData({ autoApprove: false })}
             >
@@ -360,14 +337,14 @@ export function DemoStep() {
                 <div
                   className={cn(
                     "flex h-8 w-8 items-center justify-center rounded-full",
-                    !autoApprove ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground",
+                    !autoApprove ? "bg-primary text-primary-foreground" : "bg-muted"
                   )}
                 >
                   <Clock className="h-4 w-4" />
                 </div>
-                <span className="font-medium text-popover-foreground">Manual Review</span>
+                <span className="font-medium">Manual Review</span>
               </div>
-              <p className="text-muted-foreground text-sm">Review and approve comments before posting</p>
+              <p className="text-sm text-muted-foreground">Review and approve comments before posting</p>
             </div>
           </div>
 
@@ -375,14 +352,12 @@ export function DemoStep() {
             <Button
               variant="outline"
               onClick={() => setApprovalDialogOpen(false)}
-              className="relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95 bg-card border-border text-card-foreground hover:bg-accent hover:text-accent-foreground"
             >
               Cancel
             </Button>
             <Button
               onClick={finishOnboarding}
               disabled={loading}
-              className="relative overflow-hidden bg-primary text-primary-foreground transition-all duration-300 hover:shadow-md active:scale-95 hover:bg-primary/90"
             >
               {loading ? (
                 <>

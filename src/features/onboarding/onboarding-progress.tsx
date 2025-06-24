@@ -11,7 +11,7 @@ const STEPS = [
   { path: "/onboarding/linkedin", label: "LinkedIn" },
   { path: "/onboarding/post-settings", label: "Post Settings" },
   { path: "/onboarding/comment-settings", label: "Comment Settings" },
-  { path: "/onboarding/other-settings", label: "Other Settings" },
+  // { path: "/onboarding/other-settings", label: "Other Settings" },
 ]
 
 const STAGE_MESSAGES = [
@@ -45,14 +45,15 @@ export function OnboardingProgress() {
 
   return (
     <div className="space-y-10 mb-20">
-      <div className="flex justify-between items-center">
-        <div className="space-y-1">
-          <h2 className="text-xl font-bold font-clash text-foreground">Your Setup Progress</h2>
-          <p className="text-sm text-muted-foreground">{currentMessage}</p>
-        </div>
-        <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full border border-primary/20">
+      <div className="flex justify-center items-center">
+       <div className="space-y-1 text-center">
+  <h2 className="text-xl font-bold text-foreground">Your Setup Progress</h2>
+  <p className="text-sm text-muted-foreground">{currentMessage}</p>
+</div>
+
+        {/* <span className="text-sm font-medium bg-primary/10 text-primary px-3 py-1 rounded-full border border-primary/20">
           {Math.round(progress)}% Complete
-        </span>
+        </span> */}
       </div>
 
       <div className="relative mt-8 px-5">

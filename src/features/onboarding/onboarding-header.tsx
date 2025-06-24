@@ -5,18 +5,18 @@ import { ThemeSwitch } from "@/components/theme-switch"
 
 export function OnboardingHeader() {
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-md border-b border-border/50">
+    <header className="sticky top-0 z-40 backdrop-blur-md ">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
 
 
 
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-lime-500  shadow-md">
-            <span className="text-sm font-bold text-primary-foreground font-clash">C</span>
-          </div>
+          {/* <div className="flex h-8 w-8 items-center justify-center rounded-full bg-lime-500  shadow-md">
+            <span className="text-sm font-bold text-primary-foreground">C</span>
+          </div> */}
 
 
-          <span className="text-xl font-bold font-clash text-foreground">Commentify</span>
+          <span className="text-xl font-bold  text-foreground">Commentify</span>
         </div>
         <div className="flex items-center gap-4">
           <Link to="/">

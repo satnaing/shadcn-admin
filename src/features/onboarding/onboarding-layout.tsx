@@ -15,7 +15,7 @@ export function OnboardingLayout({ children }: OnboardingLayoutProps) {
 
   return (
     <OnboardingProvider>
-      <div className="min-h-screen flex flex-col bg-gradient-to-b from-background via-muted/30 to-muted/50">
+      <div className="min-h-screen flex flex-col">
         <OnboardingHeader />
         <div className="flex-1 flex flex-col lg:flex-row">
           <main className={cn("flex-1 py-8 px-4 md:px-8", isDemoStep ? "container max-w-6xl" : "container max-w-4xl")}>

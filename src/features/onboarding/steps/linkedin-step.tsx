@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Linkedin, CheckCircle2 } from "lucide-react"
+import { Linkedin, CheckCircle2, Info } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { OnboardingCard } from "@/features/onboarding/onboarding-card"
 import { OnboardingNavigation } from "@/features/onboarding/onboarding-navigation"
 import { useOnboarding } from "@/context/onboarding-context"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export function LinkedInStep() {
   const { data, updateData, markStepCompleted } = useOnboarding()
@@ -43,7 +44,23 @@ export function LinkedInStep() {
   return (
     <div className="space-y-8">
       <OnboardingCard
-        title="Connect Your LinkedIn Account"
+        title={
+          <div className="flex items-center gap-2">
+            Connect Your LinkedIn Account
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="w-4 h-4 rounded-full border border-border flex items-center justify-center cursor-help">
+                    <Info className="w-3 h-3 text-muted-foreground" />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent side="right" className="max-w-xs">
+                  <p>We use LinkedIn's secure API to access only<br/>the data needed for automated commenting</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
+        }
         description="We need access to your LinkedIn account to automate comments on your behalf."
       >
         <div className="flex flex-col items-center space-y-6 py-4">
@@ -66,14 +83,25 @@ export function LinkedInStep() {
             </div>
           ) : (
             <div className="space-y-6 w-full max-w-md">
-             <div className="relative w-full max-w-md h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center overflow-hidden">
-  <img
-    src="https://res.cloudinary.com/djpcpmrjd/image/upload/v1749773556/uploads/file-1749773555007-74175948-linkedin.jpg.jpg"
-    alt="Linkedin Screenshot"
-    className="object-cover w-full h-full"
-  />
-</div>
-
+              <div className="relative w-full max-w-md h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center overflow-hidden">
+                <img
+                  src="https://res.cloudinary.com/djpcpmrjd/image/upload/v1749773556/uploads/file-1749773555007-74175948-linkedin.jpg.jpg"
+                  alt="Linkedin Screenshot"
+                  className="object-cover w-full h-full"
+                />
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="absolute bottom-2 right-2 w-4 h-4 rounded-full border border-border flex items-center justify-center cursor-help bg-background">
+                        <Info className="w-3 h-3 text-muted-foreground" />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className="max-w-xs">
+                      <p>Your LinkedIn profile information will be used<br/>to personalize generated comments</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
 
               <Button
                 className="w-full relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95"
@@ -87,12 +115,9 @@ export function LinkedInStep() {
           )}
         </div>
 
-        {isConnected &&
-        <OnboardingNavigation nextStep="/onboarding/" />
-        }
+        {/* Move OnboardingNavigation outside the centered container */}
+        {isConnected && <OnboardingNavigation nextStep="/onboarding/post-settings" />}
       </OnboardingCard>
-
-     
     </div>
   )
 }
