@@ -107,7 +107,7 @@ export default function Chats() {
               </label>
             </div>
 
-            <ScrollArea className='-mx-3 h-full p-3'>
+            <ScrollArea className='-mx-3 h-full overflow-scroll p-3'>
               {filteredChatList.map((chatUsr) => {
                 const { id, profile, username, messages, fullName } = chatUsr
                 const lastConvo = messages[0]
