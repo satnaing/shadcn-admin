@@ -1,0 +1,88 @@
+
+namespace: staging  
+deployment_name: admin-web
+replicaCount: 1  
+
+Labels:
+  env: dev
+
+nodeSelector: {}
+
+image:
+  repository: ''
+  pullPolicy: IfNotPresent
+  tag: latest 
+
+configMap:
+  data:
+    SERVICE_NAME: admin-web
+    NODE_ENV: dev
+
+secret:
+  data:
+    ADMINWEB: ${ADMINWEB}
+  enabled: false
+  names:
+    - metasecret
+    - digigold-secret
+
+service:
+  type: ClusterIP  
+  restPort: 3000  # REST API port
+  grpcNorthSouthPort: 3003  # gRPC North-South traffic port
+  grpcEastWestPort: 3002  # gRPC East-West traffic port
+
+serviceAccount:
+  create: false  # Set to true if a dedicated service account is required
+  name: 'admin'
+  annotations: {}
+
+# gRPC and HTTP settings
+grpcNorthSouth:
+  enabled: false
+
+grpcEastWest:
+  enabled: false
+
+http:
+  enabled: true
+
+# Istio settings
+istio:
+  enabled: true
+  gateway: 'ingress-gateway'
+  hosts:
+    - 'admin-staging.stashfin.com'
+
+# API Gateway Mapping settings
+mapping:
+  host: 'admin-staging.stashfin.com'  # Existing host reference
+  restPrefix: /
+  # grpcNorthSouthPrefix: /service.meta/
+  # grpcEastWestPrefix: /service.meta/
+  # grpcNorthSouthRewrite: /service.meta/
+  secretName: eqx-staging  # TLS certificate secret name
+
+# Healthcheck settings for liveness and readiness probes
+healthcheck:
+  enabled: false
+  Path: /health
+  # livenessPath: /health
+  port: 3000
+
+# Resource limits and requests (update as needed)
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# Horizontal Pod Autoscaler (HPA) settings
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80  # Scale up if CPU usage exceeds 80%
+  targetMemoryUtilizationPercentage: 80  # Uncomment to enable memory-based scaling

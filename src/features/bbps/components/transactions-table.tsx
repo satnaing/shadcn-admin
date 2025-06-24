@@ -11,7 +11,7 @@ import {
   useReactTable,
   getCoreRowModel,
   getPaginationRowModel,
-  //ColumnDef,
+  ColumnDef,
   flexRender,
   getSortedRowModel,
   SortingState,
@@ -33,7 +33,8 @@ export interface Transaction {
 }
 
 interface TransactionsTableProps {
-  data: Transaction[]
+  data: Transaction[],
+  columns: ColumnDef<Transaction>[]
 }
 
 export function TransactionsTable({ data }: TransactionsTableProps) {
