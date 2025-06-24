@@ -12,6 +12,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
+ 
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
+
 export function ProfileDropdown() {
   return (
     <DropdownMenu modal={false}>
@@ -63,7 +67,10 @@ export function ProfileDropdown() {
                 .split('; ')
                 .find(row => row.startsWith('token='))
                 ?.split('=')[1];
-              const res = await fetch('http://localhost:3003/v1/auth/logout', {
+ 
+
+              const res = await fetch(`${BACKEND_BASE_URL}/v1/auth/logout`, {
+
                 method: 'POST',
                 credentials: 'include',
                 headers: {

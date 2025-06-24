@@ -1,5 +1,11 @@
-import axios from 'axios'
-import { getToken } from '../lib/utils.ts'
+
+import { getToken } from '../lib/utils.ts';
+import axios from 'axios';
+ 
+ 
+
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 
 export const deleteUserById = async ({ userId }: { userId: string }) => {
   const token = getToken()
@@ -8,8 +14,9 @@ export const deleteUserById = async ({ userId }: { userId: string }) => {
   }
   try {
     const response = await axios.delete(
-      `http://localhost:3003/v1/superadmin/removeUser/${userId}`,
+      `${BACKEND_BASE_URL}/v1/superadmin/removeUser/${userId}`,
       {
+
         headers: {
           Authorization: `Bearer ${token}`,
         },

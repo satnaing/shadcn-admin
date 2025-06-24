@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
 import { IconBrandGithub } from '@tabler/icons-react'
 import { IconBrandGoogle } from '@tabler/icons-react'
+import axios from 'axios'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -18,8 +19,12 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
+import { useAuth } from '@/context/auth-context'
+import { fetchUserInfoFromApi } from '@/utils/fetch-user-info'
 
 type UserAuthFormProps = HTMLAttributes<HTMLFormElement>
+
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 const formSchema = z.object({
   email: z
@@ -38,6 +43,7 @@ const formSchema = z.object({
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
+  const { setUser } = useAuth()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,14 +53,23 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
-
-    setTimeout(() => {
+    try {
+      // 1. Login and get JWT
+      const response = await axios.post(`${BACKEND_BASE_URL}/v1/auth/login`, data)
+      const token = response.data.token
+      localStorage.setItem('token', token)
+      // 2. Fetch user info with JWT
+      const user = await fetchUserInfoFromApi(token)
+      setUser(user)
+      // 3. Redirect to dashboard or home
+      window.location.href = '/'
+    } catch (_err) {
+      // handle error (show toast, etc)
+    } finally {
       setIsLoading(false)
-    }, 3000)
+    }
   }
 
   return (
@@ -117,7 +132,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             type='button'
             disabled={isLoading}
             onClick={() => {
-              window.location.href = 'http://localhost:3003/v1/auth/login/google'
+ 
+ 
+              window.location.href = `${BACKEND_BASE_URL}/v1/auth/login/google`
+
             }}
           >
             <IconBrandGithub className='h-4 w-4' /> GitHub
@@ -127,7 +145,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             type='button'
             disabled={isLoading}
             onClick={() => {
-              window.location.href = 'http://localhost:3003/v1/auth/login/google'
+ 
+ 
+              window.location.href = `${BACKEND_BASE_URL}/v1/auth/login/google`
             }}
           >
             <IconBrandGoogle className='h-4 w-4' /> Google

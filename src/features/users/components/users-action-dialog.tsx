@@ -24,6 +24,8 @@ import { Input } from '@/components/ui/input'
 import { User } from '../data/schema'
 import { useQueryClient } from '@tanstack/react-query'
 
+const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+
 const formSchema = z.object({
   fname: z.string().min(1, { message: 'First Name is required.' }),
   lname: z.string().min(1, { message: 'Last Name is required.' }),
@@ -62,21 +64,10 @@ interface Props {
   onOpenChange: (open: boolean) => void
 }
 
-// function mapUserToFormDefaults(user: User) {
-//   console.log('Mapping user to form defaults:', user);
-//   return {
-//     fname: user.fname || user.firstName || '',
-//     lname: user.lname || user.lastName || '',
-//     email: user.email || '',
-//     phone_number: user.phone_number || user.phoneNumber || '',
-//     services: Array.isArray((user as any).services)
-//       ? (user as any).services.map((s: any) => typeof s === 'object' ? String(s.id) : String(s))
-//       : [],
-//     roles: Array.isArray((user as any).roles) ? (user as any).roles : [],
-//     permissions: Array.isArray((user as any).permissions) ? (user as any).permissions : [],
-//     isEdit: true,
-//   };
-// }
+
+
+
+
 
 function mapUserToFormDefaults(user: User) {
   // Map services, roles, and permissions from backend structure
@@ -116,6 +107,7 @@ function mapUserToFormDefaults(user: User) {
     isEdit: true,
   };
 }
+
 
 export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
   console.log('UsersActionDialog rendered');
@@ -180,8 +172,10 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
     console.log(document.cookie);
     console.log('Token:', token);
     
-    axios.get('http://localhost:3003/v1/superadmin/allService', {
-      headers: {
+
+    
+     axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allService`, {
+       headers: {
         'Authorization': `Bearer ${token}`,
       },
       withCredentials: true,
@@ -266,7 +260,7 @@ console.log('isEdit:', isEdit);
         const token = match ? decodeURIComponent(match[1]) : '';
         console.log('Edit payload:', payload);
         await axios.put(
-          `http://localhost:3003/v1/superadmin/updateUser`,
+          `${BACKEND_BASE_URL}/v1/superadmin/updateUser`,
           payload,
           {
             headers: {
@@ -288,7 +282,7 @@ console.log('isEdit:', isEdit);
         const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
         const token = match ? decodeURIComponent(match[1]) : '';
         await axios.post(
-          'http://localhost:3003/v1/superadmin/addUser',
+          `${BACKEND_BASE_URL}/v1/superadmin/addUser`,
           payload,
           {
             headers: {
@@ -299,8 +293,9 @@ console.log('isEdit:', isEdit);
         );
         alert('User added successfully!');
       }
+  
       queryClient.invalidateQueries({ queryKey: ['users'] });
-      form.reset();
+       form.reset();
       onOpenChange(false);
     } catch (err) {
       console.error('User action error:', err);
