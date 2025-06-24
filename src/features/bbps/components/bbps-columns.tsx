@@ -1,44 +1,66 @@
-import type { Transaction } from './transactions-table';
+import { ColumnDef } from '@tanstack/react-table'
+import type { Transaction } from './transactions-table'
+import { DataTableColumnHeader } from './data-table-column-header'
 
-export const bbpsColumns: { accessorKey: keyof Transaction; header: string }[] = [
+export const bbpsColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: 'id',
-    header: 'Transaction ID',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Transaction ID' />
+    ),
   },
   {
     accessorKey: 'bbpsReferenceCode',
-    header: 'BBPS Reference Code',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='BBPS Reference Code' />
+    ),
   },
-  { accessorKey: 'customerName',
-     header: 'Customer Name' 
-    },
   {
-    accessorKey: 'customerNumber',
-    header: 'Customer Number',
+    accessorKey: 'customerName',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Customer Name' />
+    ),
+  },
+  {
+    accessorKey: 'mobileNumber',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Mobile Number' />
+    ),
   },
   {
     accessorKey: 'category',
-    header: 'Category',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Category' />
+    ),
   },
   {
     accessorKey: 'billerName',
-    header: 'Biller Name',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Biller Name' />
+    ),
   },
   {
     accessorKey: 'billAmount',
-    header: 'Bill Amount',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Bill Amount' />
+    ),
   },
   {
     accessorKey: 'paymentMode',
-    header: 'Payment Mode',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Payment Mode' />
+    ),
   },
   {
     accessorKey: 'transactionStatus',
-    header: 'Transaction Status',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Transaction Status' />
+    ),
   },
   {
     accessorKey: 'transactionDate',
-    header: 'Transaction Date',
-  }, 
-
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Transaction Date' />
+    ),
+  },
 ]

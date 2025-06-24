@@ -11,15 +11,19 @@ import {
   useReactTable,
   getCoreRowModel,
   getPaginationRowModel,
-  ColumnDef,
+  //ColumnDef,
+  flexRender,
+  getSortedRowModel,
+  SortingState,
 } from '@tanstack/react-table'
 import * as React from 'react'
+import { bbpsColumns } from './bbps-columns'
 
 export interface Transaction {
   id: string
   bbpsReferenceCode: string
   customerName: string
-  customerNumber: string
+  mobileNumber: string
   category: string
   billerName: string
   billAmount: number
@@ -28,45 +32,48 @@ export interface Transaction {
   transactionDate: string
 }
 
-interface Column {
-  accessorKey: keyof Transaction
-  header: string
-}
-
 interface TransactionsTableProps {
   data: Transaction[]
-  columns: Column[]
 }
 
-export function TransactionsTable({ data, columns }: TransactionsTableProps) {
+export function TransactionsTable({ data }: TransactionsTableProps) {
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
     pageSize: 10,
   })
-
-  const columnDefs = columns.map((col) => ({
-    accessorKey: col.accessorKey,
-    header: col.header,
-  })) as ColumnDef<Transaction, any>[]
+  const [sorting, setSorting] = React.useState<SortingState>([])
 
   const table = useReactTable({
     data,
-    columns: columnDefs,
-    state: { pagination },
+    columns: bbpsColumns,
+    state: { pagination, sorting },
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
   })
 
   return (
     <div className='space-y-4'>
       <Table>
         <TableHeader>
-          <TableRow>
-            {columns.map((col) => (
-              <TableHead key={col.accessorKey}>{col.header}</TableHead>
-            ))}
-          </TableRow>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                )
+              })}
+            </TableRow>
+          ))}
         </TableHeader>
         <TableBody>
           {table.getRowModel().rows.map((row) => (
