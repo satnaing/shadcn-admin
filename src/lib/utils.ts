@@ -9,6 +9,6 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export const getToken = () => {
-    const match = document.cookie.match(/(?:^|; )token=([^;]*)/)
+    const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/)
     return match ? decodeURIComponent(match[1]) : ''
   }
