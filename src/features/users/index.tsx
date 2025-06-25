@@ -22,7 +22,7 @@ declare global {
 }
 
 const getToken = () => {
-  const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
+  const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);
   return match ? decodeURIComponent(match[1]) : '';
 };
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;

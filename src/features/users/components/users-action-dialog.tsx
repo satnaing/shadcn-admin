@@ -186,7 +186,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
   React.useEffect(() => {
     setLoadingServices(true);
     const getToken = () => {
-      const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
+      const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);
       return match ? decodeURIComponent(match[1]) : '';
     };
     const token = getToken();

@@ -11,7 +11,7 @@ import axios from 'axios';
 import { useState } from 'react';
 
 const getToken = () => {
-  const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
+  const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);
   return match ? decodeURIComponent(match[1]) : '';
 };
 
