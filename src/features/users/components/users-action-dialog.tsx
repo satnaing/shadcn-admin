@@ -301,7 +301,7 @@ console.log('isEdit:', isEdit);
           phone_number: values.phone_number || '',
           assignments,
         };
-        const match = document.cookie.match(/(?:^|; )token=([^;]*)/);
+        const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);
         const token = match ? decodeURIComponent(match[1]) : '';
         await axios.post(
           `${BACKEND_BASE_URL}/v1/superadmin/addUser`,
