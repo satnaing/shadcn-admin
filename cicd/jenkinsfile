@@ -1,0 +1,41 @@
+pipeline {
+    agent { label 'cloud-eqx' }
+    options {
+        disableConcurrentBuilds(abortPrevious: true)
+    }
+    triggers {
+        pollSCM('H/5 * * * *')  // Polls the repo every 5 minutes
+    }
+    environment {
+        AWS_REGION = 'ap-south-1'
+        ECR_REPO = '261962657740.dkr.ecr.ap-south-1.amazonaws.com'
+        GOOGLE_CHAT_WEBHOOK_URL = 'https://chat.googleapis.com/v1/spaces/AAAApDxURgA/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=ayajkdVUtdsxtNjaXpplwDeLDPwJ2iAjra9xE3wxjuU'
+        CREDENTIAL_ID = "stashfin2-github-jenkins-integrate"
+        GIT_REPO_URLS = 'github.com/stashfin2/infraverse.git'
+    }
+
+    stages {
+        stage('Clone Infraverse') {
+            steps {
+                container('dind'){
+                    script {
+                        withCredentials([usernamePassword(credentialsId: "stashfin2-github-jenkins-integrate", usernameVariable: 'GITHUB_APP_ID', passwordVariable: 'GITHUB_APP_TOKEN')]) {
+                            sh "rm -rf infraverse && git clone --branch eqx-dev https://${GITHUB_APP_ID}:${GITHUB_APP_TOKEN}@github.com/stashfin2/infraverse.git"
+                        }
+                        sh 'ls -l infraverse'
+                    }
+                }
+            }
+        }
+        stage('Load Pipeline') {
+            steps {
+                container('dind') {
+                    script {
+                        infra = load "${env.WORKSPACE}/infraverse/Jenkinsfile-eqx.groovy"
+                        infra.executePipeline()
+                    }
+                }
+            }
+        }
+    }
+}

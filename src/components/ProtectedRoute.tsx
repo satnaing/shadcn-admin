@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '@/context/auth-context';
 import { fetchUserInfoFromApi } from '@/utils/fetch-user-info';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 
 interface ProtectedRouteProps {
   requiredService: string;
@@ -19,19 +19,8 @@ export function ProtectedRoute({ requiredService, children }: ProtectedRouteProp
   const navigate = useNavigate();
 
   useEffect(() => {
-    
-    try{
-       ensureUserFetched(); 
-    }catch(r){
-        console.log(r);
-    }
-
-  },);
-
-  async function ensureUserFetched() {
-        debugger;
+    async function ensureUserFetched() {
       if (!user) {
-
         setLoading(true);
         const token = getToken();
         console.log('[ProtectedRoute] No user in context, token:', token);
@@ -47,23 +36,29 @@ export function ProtectedRoute({ requiredService, children }: ProtectedRouteProp
         console.log('[ProtectedRoute] User already in context:', user);
       }
     }
+    ensureUserFetched();
+    // eslint-disable-next-line
+  }, []);
+
+  const isUnauthorized =
+    user &&
+    (!user.allowedServices ||
+      !user.allowedServices.map((s: string) => s.toLowerCase()).includes(requiredService.toLowerCase()));
 
   useEffect(() => {
-    console.log('[ProtectedRoute] Checking access for service:', requiredService, 'User:', user);
-    if (user && user.allowedServices && !user.allowedServices.includes(requiredService)) {
-      setTimeout(() => {
-        window.alert('YOU ARE NOT AUTHORIZED');
-        navigate('/dashboard');
-      }, 0);
+    if (isUnauthorized) {
+      window.alert('YOU ARE NOT AUTHORIZED');
+      navigate({ to: '/' });
     }
-  }, [user, requiredService, navigate]);
+  }, [isUnauthorized, navigate]);
 
   if (loading || !user) {
     console.log('[ProtectedRoute] Loading or no user. Loading:', loading, 'User:', user);
     return null;
   }
-  if (!user.allowedServices || !user.allowedServices.includes(requiredService)) {
-    console.warn('[ProtectedRoute] User does not have access to this service:', requiredService);
+  console.log('[ProtectedRoute] Debug allowedServices:', user.allowedServices, 'requiredService:', requiredService);
+  if (isUnauthorized) {
+    console.warn('[ProtectedRoute] User does not have access to this service:', requiredService, 'Allowed:', user.allowedServices);
     return null;
   }
 

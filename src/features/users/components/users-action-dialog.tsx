@@ -24,6 +24,27 @@ import { Input } from '@/components/ui/input'
 import { User } from '../data/schema'
 import { useQueryClient } from '@tanstack/react-query'
 
+interface BackendPermission {
+  name: string;
+}
+
+interface BackendRole {
+  role_name: string;
+  permissions: BackendPermission[];
+}
+
+interface BackendService {
+  service_id: string | number;
+  roles: BackendRole[];
+}
+
+type DialogUser = User & {
+  services?: BackendService[];
+  fname?: string;
+  lname?: string;
+  phone_number?: string;
+};
+
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 const formSchema = z.object({
@@ -70,13 +91,14 @@ interface Props {
 
 
 function mapUserToFormDefaults(user: User) {
+  const detailedUser = user as DialogUser;
   // Map services, roles, and permissions from backend structure
   const services: string[] = [];
   const roles: string[] = [];
   const permissions: string[] = [];
 
-  if (Array.isArray((user as any).services)) {
-    for (const svc of (user as any).services) {
+  if (Array.isArray(detailedUser.services)) {
+    for (const svc of detailedUser.services) {
       const serviceId = String(svc.service_id);
       services.push(serviceId);
 
@@ -97,10 +119,10 @@ function mapUserToFormDefaults(user: User) {
   }
 
   return {
-    fname: (user as any).fname || (user as any).firstName || '',
-    lname: (user as any).lname || (user as any).lastName || '',
+    fname: detailedUser.fname || detailedUser.firstName || '',
+    lname: detailedUser.lname || detailedUser.lastName || '',
     email: user.email || '',
-    phone_number: (user as any).phone_number || (user as any).phoneNumber || '',
+    phone_number: detailedUser.phone_number || detailedUser.phoneNumber || '',
     services,
     roles,
     permissions,

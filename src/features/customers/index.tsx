@@ -31,7 +31,7 @@ export default function Customers() {
     };
     // Remove empty params
     Object.keys(params).forEach((k) => (params[k] === undefined || params[k] === '') && delete params[k]);
-    const response = await axios.get(`${BACKEND_BASE_URL}/v1/customer/getCustomers`, {
+    const response = await axios.get(`${BACKEND_BASE_URL}/v1/customer/allCustomers`, {
       params,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export default function Customers() {
       withCredentials: true,
     });
     // Assume response.data.customers or response.data.data or response.data
-    return response.data.customers || response.data.data || response.data;
+    return response.data.data.customers || response.data.data || response.data;
   };
   //console.log("response data", response.data);
 
