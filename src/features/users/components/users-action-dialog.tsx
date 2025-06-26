@@ -172,7 +172,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
         });
       }
     }
-  }, [open, isEdit, currentRow]);
+  }, [open, isEdit, currentRow,form]);
 
   // --- Fetch services from API ---
   interface Service {
@@ -278,9 +278,15 @@ console.log('isEdit:', isEdit);
         if (currentRow?.firstName) payload.fname = currentRow.firstName;
         if (currentRow?.lastName) payload.lname = currentRow.lastName;
         if (currentRow?.phoneNumber) payload.phone_number = currentRow.phoneNumber;
-        const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);
-        const token = match ? decodeURIComponent(match[1]) : '';
+
+        const getToken = () => {
+          const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);
+          return match ? decodeURIComponent(match[1]) : '';
+        };
+        const token = getToken();
+          
         console.log('Edit payload:', payload);
+        console.log('Token:', token);
         await axios.put(
           `${BACKEND_BASE_URL}/v1/superadmin/updateUser`,
           payload,
