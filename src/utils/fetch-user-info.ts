@@ -3,13 +3,23 @@ import { UserAccess } from '@/context/auth-context';
 
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
-export async function fetchUserInfoFromApi(token: string): Promise<UserAccess | null> {
+function getTokenFromCookie() {
+  const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);
+  return match ? decodeURIComponent(match[1]) : '';
+}
 
-  console.log('Fetching user info from API with token:', token);
+export async function fetchUserInfoFromApi(token?: string): Promise<UserAccess | null> {
+  // If no token provided, try to get from cookie
+  const authToken = token || getTokenFromCookie();
+  if (!authToken) {
+    console.warn('No auth token found for fetching user info.');
+    return null;
+  }
+  console.log('Fetching user info from API with token:', authToken);
   try {
     const response = await axios.get(`${BACKEND_BASE_URL}/v1/auth/me`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${authToken}`,
       },
     });
     const user = response.data;
@@ -27,10 +37,13 @@ export async function fetchUserInfoFromApi(token: string): Promise<UserAccess | 
         });
     return {
       id: user.id,
+      email: user.email, // Add email from API response
+      name: user.name, // Try to get name from API response
       is_super_admin,
       allowedServices,
     };
-  } catch (_) {
+  } catch (err) {
+    console.error('Error fetching user info:', err);
     return null;
   }
 }

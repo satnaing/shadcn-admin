@@ -52,8 +52,6 @@ const queryClient = new QueryClient({
       if (error instanceof AxiosError) {
         if (error.response?.status === 401) {
           toast.error('Session expired!')
-          const { setUser } = useAuth()
-          setUser(null)
           const redirect = `${router.history.location.href}`
           router.navigate({ to: '/sign-in', search: { redirect } })
         }
@@ -88,21 +86,58 @@ const getToken = () => {
   return match ? decodeURIComponent(match[1]) : '';
 };
 
+import { useQueryErrorResetBoundary } from '@tanstack/react-query'
+
 function AppRoot({ children }: { children: React.ReactNode }) {
   const { setUser } = useAuth()
+  const { reset } = useQueryErrorResetBoundary?.() || {}
+
   useEffect(() => {
-    const token =  getToken();
-    if (token) {
-      // Fetch user info from /v1/auth/me
-      fetchUserInfoFromApi(token).then((user) => {
-        setUser(user)
-      })
+    let attempts = 0;
+    const maxAttempts = 10;
+    const interval = 150;
+    function tryFetchUser() {
+      const token = getToken();
+      if (token) {
+        fetchUserInfoFromApi(token).then((user) => {
+          setUser(user)
+        })
+      } else if (attempts < maxAttempts) {
+        attempts++;
+        setTimeout(tryFetchUser, interval);
+      }
     }
+    tryFetchUser();
   }, [setUser])
-  return <>{children}</>
+
+  useEffect(() => {
+    const handleSessionExpired = (event) => {
+      setUser(null)
+      reset?.()
+    }
+    window.addEventListener('session-expired', handleSessionExpired)
+    return () => {
+      window.removeEventListener('session-expired', handleSessionExpired)
+    }
+  }, [setUser, reset])
+
+  useEffect(() => {
+    const handleUserLoggedIn = async (event) => {
+      const token = getToken();
+      if (token) {
+        await queryClient.clear();
+        const user = await fetchUserInfoFromApi(token);
+        setUser(user);
+      }
+    };
+    window.addEventListener('user-logged-in', handleUserLoggedIn);
+    return () => {
+      window.removeEventListener('user-logged-in', handleUserLoggedIn);
+    };
+  }, [setUser]);
+
+  return <>{children}</>;
 }
-
-
 // Render the app
 const rootElement = document.getElementById('root')!
 if (!rootElement.innerHTML) {

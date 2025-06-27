@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from '@/components/ui/select'
 
 interface SimpleDataTablePaginationProps {
   pageIndex: number
@@ -18,8 +18,8 @@ interface SimpleDataTablePaginationProps {
 export function SimpleDataTablePagination({
   pageIndex,
   setPageIndex,
-  pageSize,
-  setPageSize,
+  //pageSize,
+  //setPageSize,
   isLastPage,
 }: SimpleDataTablePaginationProps) {
   return (
@@ -46,7 +46,7 @@ export function SimpleDataTablePagination({
           <span className='sr-only'>Go to next page</span>
           {'>'}
         </Button>
-        <span className='mx-2 text-sm font-medium'>| Rows per page:</span>
+        {/* <span className='mx-2 text-sm font-medium'>| Rows per page:</span>
         <Select
           value={`${pageSize}`}
           onValueChange={(value) => {
@@ -63,7 +63,7 @@ export function SimpleDataTablePagination({
               </SelectItem>
             ))}
           </SelectContent>
-        </Select>
+        </Select> */}
       </div>
     </div>
   )

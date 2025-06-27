@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -8,32 +8,35 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useAuth } from '@/context/auth-context'
 
- 
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
-
 export function ProfileDropdown() {
+  const { user } = useAuth();
+  const email = user?.email || '';
+  const avatarLetters = email.slice(0, 2).toUpperCase() || 'U';
+
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
           <Avatar className='h-8 w-8'>
-            <AvatarImage src='/avatars/01.png' alt='@shadcn' />
-            <AvatarFallback>SN</AvatarFallback>
+            {/* Optionally use AvatarImage if you have user images */}
+            {/* <AvatarImage src={user?.avatarUrl} alt={email} /> */}
+            <AvatarFallback>{avatarLetters}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56' align='end' forceMount>
         <DropdownMenuLabel className='font-normal'>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm leading-none font-medium'>satnaing</p>
-            <p className='text-muted-foreground text-xs leading-none'>
-              satnaingdev@gmail.com
-            </p>
+            <p className='text-sm leading-none font-medium'>{email }</p>
+            {/* <p className='text-muted-foreground text-xs leading-none'>
+              {email}
+            </p> */}
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
@@ -41,54 +44,33 @@ export function ProfileDropdown() {
           <DropdownMenuItem asChild>
             <Link to='/settings'>
               Profile
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link to='/settings'>
-              Billing
-              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link to='/settings'>
-              Settings
-              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-            </Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>New Team</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={async () => {
             try {
-              // Get token from cookies
+              localStorage.removeItem('token');
+              document.cookie = 'auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
               const token = document.cookie
                 .split('; ')
-                .find(row => row.startsWith('token='))
+                .find(row => row.startsWith('auth_token='))
                 ?.split('=')[1];
- 
-
-              const res = await fetch(`${BACKEND_BASE_URL}/v1/auth/logout`, {
-
+              await fetch(`${BACKEND_BASE_URL}/v1/auth/logout`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
                   'Authorization': token ? `Bearer ${token}` : '',
                 },
               });
-              if (res.ok) {
-                window.location.href = '/sign-in';
-              } else {
-                alert('Logout failed.');
-              }
+              window.location.href = '/sign-in';
             } catch (_) {
               alert('Logout failed.');
             }
           }}
         >
           Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

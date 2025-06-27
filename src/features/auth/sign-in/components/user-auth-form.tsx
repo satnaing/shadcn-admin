@@ -6,7 +6,6 @@ import { Link } from '@tanstack/react-router'
 import { IconBrandGithub } from '@tabler/icons-react'
 import { IconBrandGoogle } from '@tabler/icons-react'
 import axios from 'axios'
-import { useQueryClient } from '@tanstack/react-query'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -45,7 +44,6 @@ const formSchema = z.object({
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { setUser } = useAuth()
-  const queryClient = useQueryClient()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,19 +56,25 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
     try {
+      console.log('[LOGIN] Submitting login form with data:', data)
       // 1. Login and get JWT
       const response = await axios.post(`${BACKEND_BASE_URL}/v1/auth/login`, data)
       const token = response.data.token
       localStorage.setItem('token', token)
-      // 2. Clear React Query cache and reset user context
-      await queryClient.clear()
-      setUser(null)
-      // 3. Fetch user info with JWT
+      document.cookie = `auth_token=${token}; path=/;`;
+      console.log('[LOGIN] Token set in localStorage and cookie:', token)
+      // 2. Fetch user info with JWT
+      console.log('[LOGIN] Calling fetchUserInfoFromApi...')
       const user = await fetchUserInfoFromApi(token)
+      console.log('[LOGIN] User info fetched:', user)
       setUser(user)
-      // 4. Redirect to dashboard or home (full reload to ensure fresh state)
-      window.location.href = '/'
-    } catch (_err) {
+      // 3. Dispatch event to update user state everywhere
+      window.dispatchEvent(new Event('user-logged-in'));
+      // 4. Redirect to dashboard or home immediately
+      console.log('[LOGIN] Redirecting to home after login...')
+      window.location.href = '/';
+    } catch (err) {
+      console.error('[LOGIN] Error during login:', err)
       // handle error (show toast, etc)
     } finally {
       setIsLoading(false)
