@@ -28,8 +28,9 @@ export interface Transaction {
   billerName: string
   billAmount: number
   paymentMode: string
-  transactionStatus: 'Success' | 'Pending' | 'Failed'
+  transactionStatus: string
   transactionDate: string
+  orderId: string
 }
 
 interface TransactionsTableProps {

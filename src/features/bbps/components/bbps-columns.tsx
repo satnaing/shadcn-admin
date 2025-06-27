@@ -63,4 +63,10 @@ export const bbpsColumns: ColumnDef<Transaction>[] = [
       <DataTableColumnHeader column={column} title='Transaction Date' />
     ),
   },
+  {
+    accessorKey: 'orderId',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Order ID' />
+    ),
+  },
 ]
