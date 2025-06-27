@@ -111,7 +111,7 @@ function AppRoot({ children }: { children: React.ReactNode }) {
   }, [setUser])
 
   useEffect(() => {
-    const handleSessionExpired = (event) => {
+    const handleSessionExpired = () => {
       setUser(null)
       reset?.()
     }
@@ -122,7 +122,7 @@ function AppRoot({ children }: { children: React.ReactNode }) {
   }, [setUser, reset])
 
   useEffect(() => {
-    const handleUserLoggedIn = async (event) => {
+    const handleUserLoggedIn = async (_event: unknown) => {
       const token = getToken();
       if (token) {
         await queryClient.clear();
