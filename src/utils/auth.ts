@@ -20,6 +20,7 @@ export function getUserFromToken(token: string): UserAccess {
 
   return {
     id: decoded.id,
+    email: decoded.email || '', // Add email from decoded JWT, fallback to empty string
     is_super_admin,
     allowedServices,
   };
