@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { TransactionTablePagination } from './transactions-table-pagination'
+// import { TransactionTablePagination } from './transactions-table-pagination'
 import {
   useReactTable,
   getCoreRowModel,
@@ -89,7 +89,7 @@ export function TransactionsTable({ data }: TransactionsTableProps) {
           ))}
         </TableBody>
       </Table>
-      <TransactionTablePagination table={table} />
+      {/* <TransactionTablePagination table={table} /> */}
     </div>
   )
 }

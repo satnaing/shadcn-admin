@@ -11,7 +11,7 @@ import { TransactionSearch } from './components/transaction-search'
 import { TransactionsTable, Transaction } from './components/transactions-table'
 import { Separator } from '@/components/ui/separator'
 import { bbpsColumns } from './components/bbps-columns'
-// import { DataTablePagination } from '../users/components/data-table-pagination'
+import { BBPSTablePagination } from './components/bbps-table-pagination'
 
 // const BACKEND_BASE_URL = 'https://eqxstaging.stashfin.com/admin'
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL
@@ -156,7 +156,7 @@ export default function BBPS() {
           ) : (
             <>
               <TransactionsTable data={mappedData} columns={bbpsColumns} />
-              {/* <DataTablePagination pageIndex={pageIndex} setPageIndex={setPageIndex} /> */}
+              <BBPSTablePagination pageIndex={pageIndex} setPageIndex={setPageIndex} />
             </>
           )}
         </div>
