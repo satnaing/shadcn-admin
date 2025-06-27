@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState } from 'react';
 
 export interface UserAccess {
   id: string;
+  email: string; // Added email field
+  name?: string; // Optional name field
   is_super_admin: boolean;
   allowedServices: string[]; // e.g. ['users', 'customers']
 }
