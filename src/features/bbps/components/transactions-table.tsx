@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { TransactionTablePagination } from './transactions-table-pagination'
+// import { TransactionTablePagination } from './transactions-table-pagination'
 import {
   useReactTable,
   getCoreRowModel,
@@ -28,8 +28,9 @@ export interface Transaction {
   billerName: string
   billAmount: number
   paymentMode: string
-  transactionStatus: 'Success' | 'Pending' | 'Failed'
+  transactionStatus: string
   transactionDate: string
+  orderId: string
 }
 
 interface TransactionsTableProps {
@@ -88,7 +89,7 @@ export function TransactionsTable({ data }: TransactionsTableProps) {
           ))}
         </TableBody>
       </Table>
-      <TransactionTablePagination table={table} />
+      {/* <TransactionTablePagination table={table} /> */}
     </div>
   )
 }
