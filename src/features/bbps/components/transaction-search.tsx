@@ -15,7 +15,8 @@ interface TransactionSearchProps {
     id: string
     bbpsReferenceCode: string
     phone: string
-    transactionDate: string
+    start_date: string
+    end_date: string
     category: string
   }) => void
   onReset: () => void
@@ -29,7 +30,8 @@ export function TransactionSearch({
     id: '',
     bbpsReferenceCode: '',
     phone: '',
-    transactionDate: '',
+    start_date: '',
+    end_date: '',
     category: '',
   })
 
@@ -49,7 +51,8 @@ export function TransactionSearch({
       id: '',
       bbpsReferenceCode: '',
       phone: '',
-      transactionDate: '',
+      start_date: '',
+      end_date: '',
       category: '',
     })
     onReset()
@@ -99,8 +102,8 @@ export function TransactionSearch({
               <IconCalendar size={18} />
             </span>
             <Input
-              name='startAt'
-              value={fields.transactionDate}
+              name='start_date'
+              value={fields.start_date}
               onChange={handleChange}
               placeholder='Pick a start date'
               className='pl-8'
@@ -114,8 +117,8 @@ export function TransactionSearch({
               <IconCalendar size={18} />
             </span>
             <Input
-              name='endAt'
-              value={fields.transactionDate}
+              name='end_date'
+              value={fields.end_date}
               onChange={handleChange}
               placeholder='Pick a end date'
               className='pl-8'
@@ -132,11 +135,13 @@ export function TransactionSearch({
               <SelectValue placeholder='Select Category' />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value='a'>Mobile Recharge</SelectItem>
-              <SelectItem value='b'>DTH</SelectItem>
-              <SelectItem value='c'>Insurance</SelectItem>
-              <SelectItem value='d'>Electricity</SelectItem>
-              <SelectItem value='e'>Water</SelectItem>
+              <SelectItem value='Prepaid'>Prepaid</SelectItem>
+              <SelectItem value='Postpaid'>Postpaid</SelectItem>
+              <SelectItem value='Gas'>Gas</SelectItem>
+              <SelectItem value='Electricity'>Electricity</SelectItem>
+              <SelectItem value='DTH'>DTH</SelectItem>
+              <SelectItem value='Credit Card'>Credit Card</SelectItem>
+              <SelectItem value='Fastag'>Fastag</SelectItem>
             </SelectContent>
           </Select>
         </div>
