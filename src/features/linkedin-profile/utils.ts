@@ -1,21 +1,12 @@
-import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-import { toast } from 'react-toastify';
-import { envConfig } from "@/config/env.config";
-import { QueryService } from "@/services/query.service";
+import { envConfig } from "config/env.config";
+import { toast } from "react-toastify";
+import { QueryService } from "services/query.service";
 import {
   GET_PROFILE_DETAILS,
   LINK_LI_ACCOUNT,
-} from "@/constant/browserEvents.constant";
-import { IProfileResponseFromExtension } from "@/features/auth/interface/user.interface";
-import { ProfileQueryEnum } from "@/features/linkedin-profile/query/profile.query";
-
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-
-
+} from "./constants/browserEvents.constant";
+import { IProfileResponseFromExtension } from "./interface/profile.interface";
+import { ProfileQueryEnum } from "./query/profile.query";
 
 export const checkIsExtensionInstalled = async (
   extensionId: string,

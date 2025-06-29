@@ -6,41 +6,43 @@ import { useOnboarding } from '@/context/onboarding-context'
 import { Button } from '@/components/ui/button'
 import { OnboardingCard } from '@/features/onboarding/onboarding-card'
 import { OnboardingNavigation } from '../onboarding-navigation'
-import { envConfig } from "@/config/env.config";
-import {
-  checkIsExtensionInstalled,
-} from "@/lib/utils";
+import { envConfig } from "@/config/env.config"
+import { checkIsExtensionInstalled } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export function ExtensionStep() {
-  const [isExtensionInstalled, setIsExtensionInstalled] = useState(false);
+  const [isChecking, setIsChecking] = useState(true)
   const { data, updateData, markStepCompleted } = useOnboarding()
-  const [checking, setChecking] = useState(false)
-
-  // Use the stored value from context
   const isInstalled = data.isExtensionInstalled
 
-  const checkIfExtensionIsInstalled = async () => {
-    const isInstalled = await checkIsExtensionInstalled(
-      envConfig.chromeExtensionId,
-      envConfig.chromeExtensionIconUrl
-    );
-    setIsExtensionInstalled(isInstalled);
-    setChecking(false)
-    updateData({ isExtensionInstalled: true })
-    markStepCompleted('extension')
-  };
-
-  useEffect(() => {
-    checkIfExtensionIsInstalled();
-  }, []);
-
-  // Mark step as visited when component mounts
-  useEffect(() => {
-    if (isInstalled) {
-      markStepCompleted('extension')
+  const checkExtensionInstallation = async () => {
+    try {
+      setIsChecking(true)
+      const installed = await checkIsExtensionInstalled(
+        envConfig.chromeExtensionId,
+        envConfig.chromeExtensionIconUrl
+      )
+      
+      if (installed) {
+        updateData({ isExtensionInstalled: true })
+        markStepCompleted('extension')
+      }
+    } catch (error) {
+      console.error('Error checking extension:', error)
+    } finally {
+      setIsChecking(false)
     }
-  }, [isInstalled, markStepCompleted])
+  }
+
+  useEffect(() => {
+    // Initial check
+    checkExtensionInstallation()
+
+    // Set up periodic checks every 2 seconds
+    const intervalId = setInterval(checkExtensionInstallation, 2000)
+
+    return () => clearInterval(intervalId)
+  }, [])
 
   return (
     <div className='space-y-8'>
@@ -66,11 +68,24 @@ export function ExtensionStep() {
       >
         <div className='flex flex-col items-center space-y-6 py-4'>
           <div className='relative flex h-64 w-full max-w-md items-center justify-center overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800'>
-            <img
-              // src='https://res.cloudinary.com/djpcpmrjd/image/upload/v1750668232/uploads/file-1750668230803-776491940-unnamed.png.png'
-              // alt='Extension Screenshot'
-              // className='h-full w-full object-cover'
-            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              {isChecking ? (
+                <div className="animate-pulse text-muted-foreground">
+                  Checking for extension...
+                </div>
+              ) : (
+                <div className="text-center p-4">
+                  <div className="text-lg font-medium mb-2">
+                    {isInstalled ? 'Extension Active' : 'Extension Required'}
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {isInstalled 
+                      ? 'Our extension is ready to automate your LinkedIn comments'
+                      : 'Install to enable automated commenting on LinkedIn'}
+                  </p>
+                </div>
+              )}
+            </div>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -85,7 +100,12 @@ export function ExtensionStep() {
             </TooltipProvider>
           </div>
 
-          {isInstalled ? (
+          {isChecking ? (
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <div className="h-4 w-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              <span>Checking installation status...</span>
+            </div>
+          ) : isInstalled ? (
             <div className='flex items-center gap-2 text-green-500 dark:text-green-400'>
               <CheckCircle2 className='h-5 w-5' />
               <span className='font-medium'>
@@ -97,44 +117,18 @@ export function ExtensionStep() {
               <Button
                 className='relative w-full overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95'
                 onClick={() =>
-                  window.open('https://chromewebstore.google.com/detail/commentify-automate-linke/efmnkiklpnaekhleodlncoembopfmjca?hl=en-US', '_blank')
+                  window.open(envConfig.extensionUrl || 'https://chromewebstore.google.com', '_blank')
                 }
               >
                 <Download className='mr-2 h-4 w-4' />
                 Install Extension
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="absolute -right-2 -top-2 w-4 h-4 rounded-full border border-border flex items-center justify-center cursor-help bg-background">
-                        <Info className="w-3 h-3 text-muted-foreground" />
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent side="left" className="max-w-xs">
-                      <p>You'll be redirected to the Chrome Web Store<br/>to complete the installation process</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+              
               </Button>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <span>Why do we need this?</span>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="w-4 h-4 rounded-full border border-border flex items-center justify-center cursor-help">
-                        <Info className="w-3 h-3 text-muted-foreground" />
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent side="right" className="max-w-xs">
-                      <p>The extension is required to interact with LinkedIn<br/>securely and automate comments without<br/>violating their terms of service</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </div>
+           
             </div>
           )}
         </div>
         
-        {/* Move OnboardingNavigation outside the centered container */}
         {isInstalled && <OnboardingNavigation nextStep='/onboarding/linkedin' />}
       </OnboardingCard>
     </div>

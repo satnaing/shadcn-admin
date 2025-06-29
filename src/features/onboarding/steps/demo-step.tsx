@@ -27,6 +27,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import RotatingNotification from "../rotating-notification"
 
 const DEMO_POSTS = [
   {
@@ -371,6 +372,7 @@ export function DemoStep() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      <RotatingNotification />
     </div>
   )
 }

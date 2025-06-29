@@ -71,6 +71,7 @@
     "@tanstack/router-devtools": "^1.116.0",
     "@tanstack/router-plugin": "^1.116.1",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/chrome": "^0.0.328",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.2",
