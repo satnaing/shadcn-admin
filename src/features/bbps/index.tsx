@@ -27,6 +27,8 @@ interface TransactionSearchFields {
   category?: string
   start_date?: string
   end_date?: string
+  customerId?: string
+  paymentStatus?: string
 }
 
 export default function BBPS() {
@@ -43,6 +45,8 @@ export default function BBPS() {
     if (searchParams) {
       if (searchParams.id) params.transaction_id = searchParams.id
       if (searchParams.bbpsReferenceCode) params.bbps_ref_no = searchParams.bbpsReferenceCode
+      if (searchParams.customerId) params.customer_id = searchParams.customerId
+      if (searchParams.paymentStatus) params.status = searchParams.paymentStatus
       if (searchParams.phone) params.mobile = searchParams.phone
       if (searchParams.category) params.category = searchParams.category
       if (searchParams.start_date) params.start_date = searchParams.start_date
@@ -68,9 +72,10 @@ export default function BBPS() {
     return [];
   }
 
-  const { data, isLoading, isError, error, refetch } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ['bbps-transactions', pageIndex, pageSize, searchParams],
     queryFn: fetchTransactions,
+    enabled: searchParams !== null, // Only fetch when a search is performed
   })
 
   // Defensive mapping
@@ -79,6 +84,8 @@ export default function BBPS() {
     return {
       id: String(t.transaction_id ?? ''),
       bbpsReferenceCode: String(t.bbps_ref_no ?? ''),
+      customerId: String(t.customer_id ?? ''),
+      pgTxnRefId: String(t.pg_txn_ref_id ?? ''),
       customerName: String(t.name ?? ''),
       mobileNumber: String(t.mobile ?? ''),
       category: String(t.category ?? ''),
@@ -87,7 +94,6 @@ export default function BBPS() {
       paymentMode: String(t.mode ?? ''),
       transactionStatus: String(t.status ?? 'Pending'),
       transactionDate: String(t.transaction_date ?? ''),
-      orderId: String(t.order_id ?? ''),
     }
   })
 
@@ -95,14 +101,12 @@ export default function BBPS() {
   const handleSearch = (fields: TransactionSearchFields) => {
     setSearchParams(fields)
     setPageIndex(0) // Reset to first page on new search
-    refetch()
   }
 
   // Reset handler
   const handleReset = () => {
     setSearchParams(null)
     setPageIndex(0)
-    refetch()
   }
 
   // A better error message display
@@ -156,7 +160,11 @@ export default function BBPS() {
           ) : (
             <>
               <TransactionsTable data={mappedData} columns={bbpsColumns} />
-              <BBPSTablePagination pageIndex={pageIndex} setPageIndex={setPageIndex} />
+              <BBPSTablePagination
+                pageIndex={pageIndex}
+                setPageIndex={setPageIndex}
+                hasNextPage={mappedData.length === pageSize}
+              />
             </>
           )}
         </div>

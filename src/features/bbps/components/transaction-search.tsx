@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { IconDeviceMobile, IconCalendar } from '@tabler/icons-react'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -18,6 +19,8 @@ interface TransactionSearchProps {
     start_date: string
     end_date: string
     category: string
+    customerId: string
+    paymentStatus: string
   }) => void
   onReset: () => void
 }
@@ -33,6 +36,8 @@ export function TransactionSearch({
     start_date: '',
     end_date: '',
     category: '',
+    customerId: '',
+    paymentStatus: '',
   })
 
   const handleChange = (
@@ -43,7 +48,15 @@ export function TransactionSearch({
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    //console.log(fields)
+    const areAllFieldsEmpty = Object.values(fields).every(
+      (value) => value === ''
+    )
+    if (areAllFieldsEmpty) {
+      toast.warning('Please fill at least one search field.', {
+        duration: 5000,
+      })
+      return
+    }
     onSearch(fields)
   }
   const handleReset = () => {
@@ -54,6 +67,8 @@ export function TransactionSearch({
       start_date: '',
       end_date: '',
       category: '',
+      customerId: '',
+      paymentStatus: '',
     })
     onReset()
   }
@@ -61,23 +76,38 @@ export function TransactionSearch({
   return (
     <form onSubmit={handleSearch} className='flex flex-wrap gap-2'>
       {/* Inputs row */}
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2'>
         <div>
-          <label className='mb-1 block text-xs font-semibold'>Transaction ID</label>
+          <label className='mb-1 block text-xs font-semibold'>
+           PG Transaction ID
+          </label>
           <Input
             name='id'
             value={fields.id}
             onChange={handleChange}
-            placeholder='Enter Transaction ID'
+            placeholder='Enter PG Transaction ID'
           />
         </div>
         <div>
-          <label className='mb-1 block text-xs font-semibold'>BBPS Reference Code</label>
+          <label className='mb-1 block text-xs font-semibold'>
+            BBPS Reference Code
+          </label>
           <Input
             name='bbpsReferenceCode'
             value={fields.bbpsReferenceCode}
             onChange={handleChange}
             placeholder='Enter BBPS Reference Code'
+          />
+        </div>
+        <div>
+          <label className='mb-1 block text-xs font-semibold'>
+            Customer ID
+          </label>
+          <Input
+            name='customerId'
+            value={fields.customerId}
+            onChange={handleChange}
+            placeholder='Enter Customer ID'
           />
         </div>
         <div>
@@ -142,6 +172,28 @@ export function TransactionSearch({
               <SelectItem value='DTH'>DTH</SelectItem>
               <SelectItem value='Credit Card'>Credit Card</SelectItem>
               <SelectItem value='Fastag'>Fastag</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <label className='mb-1 block text-xs font-semibold'>
+            Payment Status
+          </label>
+          <Select
+            value={fields.paymentStatus}
+            onValueChange={(value) =>
+              setFields({ ...fields, paymentStatus: value })
+            }
+          >
+            <SelectTrigger className='w-full'>
+              <SelectValue placeholder='Select Payment Status' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value='initiated'>Initiated</SelectItem>
+              <SelectItem value='success'>Success</SelectItem>
+              <SelectItem value='payment_processing_error'>
+                Payment Processing Error
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
