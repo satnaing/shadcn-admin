@@ -8,7 +8,7 @@ import { UsersDialogs } from './components/users-dialogs';
 import { UsersPrimaryButtons } from './components/users-primary-buttons';
 import { UsersTable } from './components/users-table';
 import UsersProvider from './context/users-context';
-import { useQuery } from '@tanstack/react-query';
+//import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useState } from 'react';
 import { DataTablePagination } from './components/data-table-pagination'
@@ -30,7 +30,6 @@ const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 export default function Users() {
   const [pageIndex, setPageIndex] = useState(0); // 0-based
   const [pageSize] = useState(10);
-  // const [totalCount, setTotalCount] = useState(0);
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   interface User {
@@ -47,37 +46,22 @@ export default function Users() {
   }
   const [searchResults, setSearchResults] = useState<User[] | null>(null);
 
-  // Backend-driven pagination (default table view)
-  const fetchUsers = async () => {
-    const token = getToken();
-    const params = {
-      page: String(pageIndex + 1), // send as string
-      limit: String(pageSize),     // send as string
-    };
-    const response = await axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allUser`, {
-      params,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      withCredentials: true,
-    });
-    // setTotalCount(response.data.totalCount || response.data.total || 0);
-    return response.data.users || response.data.data || response.data;
-  };
+  // Remove default paginated fetch
+  // const { data: userList, isLoading, isError, error, refetch } = useQuery({ ... });
 
- 
-  // react-query for paginated users
-  const { data: userList, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ['users', pageIndex, pageSize],
-    queryFn: fetchUsers,
-  });
+  // Only fetch/search users when search is performed
+  const [userList, setUserList] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState<any>(null);
 
-
-
-  // Search handler (independent of pagination)
-  const handleSearch = async (params: { userId: string; email: string; phone: string; createdAt: string }) => {
+  // Search handler with pagination
+  const handleSearch = async (params: { userId: string; email: string; phone: string; createdAt: string }, page: number = 0) => {
     setSearchLoading(true);
     setSearchError(null);
+    setIsLoading(true);
+    setIsError(false);
+    setError(null);
     setSearchResults(null);
     try {
       const token = getToken();
@@ -85,7 +69,9 @@ export default function Users() {
       if (params.userId) filteredParams.userId = params.userId;
       if (params.email) filteredParams.email = params.email;
       if (params.phone) filteredParams.phone = params.phone;
-      if (params.createdAt) filteredParams.dateCreated = params.createdAt; // map to backend param
+      if (params.createdAt) filteredParams.dateCreated = params.createdAt;
+      filteredParams.page = String(page + 1);
+      filteredParams.limit = String(pageSize);
       const response = await axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allUser`, {
         params: filteredParams,
         headers: {
@@ -93,8 +79,15 @@ export default function Users() {
         },
         withCredentials: true,
       });
-      setSearchResults(response.data.users || response.data.data || response.data);
+      const results = response.data.users || response.data.data || response.data;
+      setUserList(results);
+      setSearchResults(results);
+      setPageIndex(page);
     } catch (err: unknown) {
+      setUserList([]);
+      setSearchResults([]);
+      setIsError(true);
+      setError(err);
       if (err instanceof Error) {
         setSearchError(err.message);
       } else {
@@ -102,20 +95,34 @@ export default function Users() {
       }
     } finally {
       setSearchLoading(false);
+      setIsLoading(false);
     }
   };
 
-  // Reset search and return to paginated view
+  // Reset search and table
   const handleReset = () => {
     setSearchResults(null);
     setSearchError(null);
     setSearchLoading(false);
-    refetch();
+    setUserList([]);
+    setPageIndex(0);
   };
 
-  // Debug: log pageIndex changes
+  // Pagination for search results
   const handleSetPageIndex = (idx: number) => {
-   // console.log('Setting pageIndex:', idx);
+    if (searchResults !== null) {
+      // Re-run search with new page
+      handleSearch(
+        {
+          userId: '',
+          email: '',
+          phone: '',
+          createdAt: '',
+          // You may want to keep the last search params in state for real use
+        },
+        idx
+      );
+    }
     setPageIndex(idx);
   };
 
@@ -123,9 +130,6 @@ export default function Users() {
   if (typeof window !== 'undefined') {
     window.__isLastPage = Array.isArray(userList) && userList.length < pageSize;
   }
-
-  if (isLoading) return <div>Loading users...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <UsersProvider>
@@ -148,13 +152,11 @@ export default function Users() {
         </div>
         <UsersSearch onSearch={handleSearch} onReset={handleReset} />
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12">
-          {searchLoading ? (
+          {searchLoading || isLoading ? (
             <div>Searching users...</div>
-          ) : searchError ? (
-            <div>Error: {searchError}</div>
+          ) : searchError || isError ? (
+            <div>Error: {searchError || (error && error.message)}</div>
           ) : searchResults ? (
-            <UsersTable data={searchResults} columns={columns} />
-          ) : (
             <>
               <UsersTable data={userList} columns={columns} />
               <DataTablePagination
@@ -162,6 +164,8 @@ export default function Users() {
                 setPageIndex={handleSetPageIndex}
               />
             </>
+          ) : (
+            <UsersTable data={[]} columns={columns} emptyMessage={'Please search to see users.'} />
           )}
         </div>
       </Main>

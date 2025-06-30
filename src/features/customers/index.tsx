@@ -1,14 +1,13 @@
+import { useState } from 'react';
 import { Header } from '@/components/layout/header';
 import { Main } from '@/components/layout/main';
 import { ProfileDropdown } from '@/components/profile-dropdown';
 import { Search } from '@/components/search';
 import { ThemeSwitch } from '@/components/theme-switch';
-import { columns } from './components/customers-columns';
+import { allColumns, defaultColumns } from './components/customers-columns';
 import { CustomersTable } from './components/customers-table';
 import { CustomersSearch } from './components/search-customers';
-import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useState } from 'react';
 
 const getToken = () => {
   const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);
@@ -18,44 +17,67 @@ const getToken = () => {
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 export default function Customers() {
-  const [pageIndex, setPageIndex] = useState(0); // 0-based, default page=1
-  const [pageSize, setPageSize] = useState(10); // default limit=10
+  const [customerList, setCustomerList] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  // const [isError, setIsError] = useState(false);
+  // const [error, setError] = useState<any>(null);
+  const [searchParamsState, setSearchParamsState] = useState<{ id?: string; email?: string; mobile?: string }>({});
+
+  // Pagination
+  const [pageIndex, setPageIndex] = useState(0); // 0-based
+  const [pageSize, setPageSize] = useState(10);
   const [searchParams, setSearchParams] = useState<{ id?: string; email?: string; mobile?: string }>({});
+  const [showAllColumns, setShowAllColumns] = useState(false);
+  const visibleColumns = showAllColumns ? allColumns : defaultColumns;
 
-  const fetchCustomers = async () => {
-    const token = getToken();
-    const params: Record<string, string> = {
-      page: String(pageIndex + 1),
-      limit: String(pageSize),
-      ...searchParams,
-    };
-    // Remove empty params
-    Object.keys(params).forEach((k) => (params[k] === undefined || params[k] === '') && delete params[k]);
-    const response = await axios.get(`${BACKEND_BASE_URL}/v1/customer/allCustomers`, {
-      params,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      withCredentials: true,
-    });
-    // Assume response.data.customers or response.data.data or response.data
-    return response.data.data.customers || response.data.data || response.data;
-  };
-  //console.log("response data", response.data);
-
-  const { data: customerList = [], isLoading } = useQuery({
-    queryKey: ['customers', pageIndex, pageSize, searchParams],
-    queryFn: fetchCustomers,
-    // keepPreviousData: true, // Removed due to type error with current react-query version
-  });
-
-  const handleSearch = (params: { id?: string; email?: string; mobile?: string }) => {
+  // Only fetch/search customers when search is performed
+  const handleSearch = async (params: { id?: string; email?: string; mobile?: string }, page: number = 0) => {
     setSearchParams(params);
-    setPageIndex(0);
+    setSearchParamsState(params);
+    setPageIndex(page);
+    setIsLoading(true);
+    // setIsError(false);
+    // setError(null);
+    try {
+      const token = getToken();
+      const searchParamsWithPage: Record<string, string> = {
+        page: String(page + 1),
+        limit: String(pageSize),
+        ...(params.id ? { id: params.id } : {}),
+        ...(params.email ? { email: params.email } : {}),
+        ...(params.mobile ? { mobile: params.mobile } : {}),
+      };
+      Object.keys(searchParamsWithPage).forEach((k) => (searchParamsWithPage[k as keyof typeof searchParamsWithPage] === undefined || searchParamsWithPage[k as keyof typeof searchParamsWithPage] === '') && delete (searchParamsWithPage as any)[k]);
+      const response = await axios.get(`${BACKEND_BASE_URL}/v1/customer/allCustomers`, {
+        params: searchParamsWithPage,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+      setCustomerList(response.data.data.customers || response.data.data || response.data || []);
+    } catch (_e) {
+      setCustomerList([]);
+      // setIsError(true);
+      // setError(_e);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   const handleReset = () => {
     setSearchParams({});
+    setSearchParamsState({});
     setPageIndex(0);
+    setCustomerList([]);
+  };
+
+  // Pagination for search results
+  const handleSetPageIndex = (idx: number) => {
+    if (Object.keys(searchParamsState).length > 0) {
+      handleSearch(searchParamsState, idx);
+    }
+    setPageIndex(idx);
   };
 
   return (
@@ -77,8 +99,25 @@ export default function Customers() {
           </div>
         </div>
         <CustomersSearch onSearch={handleSearch} onReset={handleReset} />
+        <div className="mb-2 flex items-center">
+          <button
+            className="ml-auto rounded border bg-muted px-3 py-1 text-xs transition-colors hover:bg-accent"
+            onClick={() => setShowAllColumns((v) => !v)}
+          >
+            {showAllColumns ? 'Show Less Columns' : 'Show More Columns'}
+          </button>
+        </div>
         <div className="-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12">
-          <CustomersTable data={customerList} columns={columns} pageIndex={pageIndex} setPageIndex={setPageIndex} pageSize={pageSize} setPageSize={setPageSize} isLoading={isLoading} />
+          <CustomersTable
+            data={customerList}
+            columns={visibleColumns}
+            pageIndex={pageIndex}
+            setPageIndex={handleSetPageIndex}
+            pageSize={pageSize}
+            setPageSize={setPageSize}
+            isLoading={isLoading}
+            emptyMessage={Object.keys(searchParams).length === 0 ? 'Please search to see customers.' : 'No customers found.'}
+          />
         </div>
       </Main>
     </>

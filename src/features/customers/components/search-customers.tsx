@@ -31,6 +31,8 @@ export function CustomersSearch({ onSearch, onReset }: CustomersSearchProps) {
     onReset();
   };
 
+  const isAnyFieldFilled = Object.values(fields).some((v) => v.trim() !== '');
+
   return (
     <form onSubmit={handleSearch} className="flex gap-2 items-end flex-wrap">
       <div>
@@ -45,7 +47,7 @@ export function CustomersSearch({ onSearch, onReset }: CustomersSearchProps) {
         <label className="block text-xs mb-1">Mobile</label>
         <Input name="mobile" value={fields.mobile} onChange={handleChange} placeholder="Mobile" />
       </div>
-      <Button type="submit" className="h-9">Search</Button>
+      <Button type="submit" className="h-9" disabled={!isAnyFieldFilled}>Search</Button>
       <Button type="button" variant="outline" className="h-9" onClick={handleReset}>
         Reset
       </Button>
