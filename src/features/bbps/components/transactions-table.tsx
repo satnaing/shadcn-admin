@@ -17,11 +17,12 @@ import {
   SortingState,
 } from '@tanstack/react-table'
 import * as React from 'react'
-import { bbpsColumns } from './bbps-columns'
 
 export interface Transaction {
   id: string
   bbpsReferenceCode: string
+  customerId: string
+  pgTxnRefId: string
   customerName: string
   mobileNumber: string
   category: string
@@ -30,7 +31,6 @@ export interface Transaction {
   paymentMode: string
   transactionStatus: string
   transactionDate: string
-  orderId: string
 }
 
 interface TransactionsTableProps {
@@ -38,7 +38,7 @@ interface TransactionsTableProps {
   columns: ColumnDef<Transaction>[]
 }
 
-export function TransactionsTable({ data }: TransactionsTableProps) {
+export function TransactionsTable({ data, columns }: TransactionsTableProps) {
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
     pageSize: 10,
@@ -47,7 +47,7 @@ export function TransactionsTable({ data }: TransactionsTableProps) {
 
   const table = useReactTable({
     data,
-    columns: bbpsColumns,
+    columns,
     state: { pagination, sorting },
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
@@ -78,15 +78,26 @@ export function TransactionsTable({ data }: TransactionsTableProps) {
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
-                  {cell.getValue() as React.ReactNode}
-                </TableCell>
-              ))}
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => (
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && 'selected'}
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length} className='h-24 text-center'>
+                No results.
+              </TableCell>
             </TableRow>
-          ))}
+          )}
         </TableBody>
       </Table>
       {/* <TransactionTablePagination table={table} /> */}

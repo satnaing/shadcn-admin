@@ -9,10 +9,11 @@ export const bbpsColumns: ColumnDef<Transaction>[] = [
       <DataTableColumnHeader column={column} title='Transaction ID' />
     ),
   },
+  
   {
-    accessorKey: 'bbpsReferenceCode',
+    accessorKey: 'customerId',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='BBPS Reference Code' />
+      <DataTableColumnHeader column={column} title='Customer ID' />
     ),
   },
   {
@@ -64,9 +65,15 @@ export const bbpsColumns: ColumnDef<Transaction>[] = [
     ),
   },
   {
-    accessorKey: 'orderId',
+    accessorKey: 'pgTxnRefId',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Order ID' />
+      <DataTableColumnHeader column={column} title='PG Transaction Ref ID' />
+    ),
+  },
+  {
+    accessorKey: 'bbpsReferenceCode',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='BBPS Reference Code' />
     ),
   },
 ]

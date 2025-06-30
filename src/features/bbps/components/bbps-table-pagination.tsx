@@ -4,12 +4,12 @@ import { Button } from '@/components/ui/button'
 interface DataTablePaginationProps {
   pageIndex: number
   setPageIndex: (index: number) => void
-
+  hasNextPage: boolean
 }
 export function BBPSTablePagination({
   pageIndex,
   setPageIndex,
-  
+  hasNextPage,
 }: DataTablePaginationProps) {
 
   return (
@@ -31,7 +31,7 @@ export function BBPSTablePagination({
           variant='outline'
           className='h-8 w-8 p-0'
           onClick={() => setPageIndex(pageIndex + 1)}
-          disabled={typeof window !== 'undefined' && window.__isLastPage}
+          disabled={!hasNextPage}
         >
           <span className='sr-only'>Go to next page</span>
           <ChevronRightIcon className='h-4 w-4' />
