@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
-import CommentifyPreview from '@/assets/images/auth-preview.svg'
-import CommentifyLogo from '@/assets/images/logo.svg'
+import linkifyPreview from '@/assets/images/auth-preview.svg'
+import linkifyLogo from '@/assets/images/logo.svg'
 import { testimonialPeoples } from '@/components/layout/data/auth-page-data'
 import AuthWrapper from '../auth-wrapper'
 import { UserAuthForm } from './components/user-auth-form'
@@ -12,12 +12,12 @@ export default function SignIn2() {
         <div className='bg-muted relative hidden h-full flex-col p-10 text-white lg:flex dark:border-r'>
           <div className='absolute inset-0 bg-zinc-900' />
           <div className='relative z-20 flex items-center text-lg font-medium'>
-            <img src={CommentifyLogo} className='relative' alt='Commentify' />
+            <img src={linkifyLogo} className='relative' alt='linkify' />
           </div>
 
           <div className='relative z-20 m-auto'>
             <img
-              src={CommentifyPreview}
+              src={linkifyPreview}
               className='max-w-[600px]'
               alt='Commfentify'
             />
@@ -46,8 +46,7 @@ export default function SignIn2() {
             <blockquote className='space-y-2'>
               <p className='text-lg'>
                 &ldquo;Clients started telling me they saw my name everywhere.
-                That’s when I knew Commentify was doing its job
-                perfectly.&rdquo;
+                That’s when I knew linkify was doing its job perfectly.&rdquo;
               </p>
               <footer className='text-sm'>Ethan R., CMO at GrowthX</footer>
             </blockquote>

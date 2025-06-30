@@ -6,13 +6,13 @@ export const envConfig = {
     (import.meta.env.VITE_OPEN_REPLAY_ID as string) || '71jGSol3gtbBFlTgM5qL',
   extensionUrl:
     (import.meta.env.VITE_EXTENSION_URL as string) ||
-    'https://chromewebstore.google.com/detail/commentify-automate-linke/efmnkiklpnaekhleodlncoembopfmjca',
+    'https://chromewebstore.google.com/detail/linkify-automate-linke/efmnkiklpnaekhleodlncoembopfmjca',
   crispApiKey:
     (import.meta.env.VITE_CRISP_API_KEY as string) ||
     '517b7dc4-a006-4383-afcc-4c3e3416cd05',
   chromeExtensionId:
     (import.meta.env.VITE_CHROME_EXTENSION_ID as string) ||
-    'hgbkkbbapbgeannfblcdaaoajldpbdbc',
+    'efmnkiklpnaekhleodlncoembopfmjca',
   chromeExtensionIconUrl:
     (import.meta.env.VITE_CHROME_EXTENSION_ICON_URL as string) || 'icon-34.png',
   postHogKey:
@@ -21,4 +21,3 @@ export const envConfig = {
   postHogHost:
     (import.meta.env.VITE_POSTHOG_HOST as string) || 'https://us.i.posthog.com',
 }
-  
