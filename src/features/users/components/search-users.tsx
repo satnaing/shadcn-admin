@@ -85,6 +85,8 @@ export function UsersSearch({ onSearch, onReset }: UsersSearchProps) {
     onReset();
   };
 
+  const isAnyFieldFilled = Object.values(fields).some((v) => v.trim() !== '');
+
   return (
     <form onSubmit={handleSearch} className="flex gap-2 items-end flex-wrap">
       <div>
@@ -107,7 +109,7 @@ export function UsersSearch({ onSearch, onReset }: UsersSearchProps) {
         <Input name="createdAt" value={fields.createdAt} onChange={handleChange} placeholder="YYYY-MM-DD" />
         {errors.createdAt && <span className="text-xs text-red-500">{errors.createdAt}</span>}
       </div>
-      <Button type="submit" className="h-9">Search</Button>
+      <Button type="submit" className="h-9" disabled={!isAnyFieldFilled}>Search</Button>
       <Button type="button" variant="outline" className="h-9" onClick={handleReset}>
         Reset
       </Button>

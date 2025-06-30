@@ -38,7 +38,7 @@ interface DataTableProps {
   data: User[]
 }
 
-export function UsersTable({ columns, data }: DataTableProps) {
+export function UsersTable({ columns, data, emptyMessage }: DataTableProps & { emptyMessage?: string }) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -120,7 +120,7 @@ export function UsersTable({ columns, data }: DataTableProps) {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  No results.
+                  {emptyMessage || 'No results.'}
                 </TableCell>
               </TableRow>
             )}

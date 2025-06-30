@@ -32,9 +32,10 @@ interface DataTableProps {
   pageSize: number
   setPageSize: (size: number) => void
   isLoading?: boolean
+  emptyMessage?: string // Add emptyMessage prop
 }
 
-export function CustomersTable({ columns, data, pageIndex, setPageIndex, pageSize, setPageSize, isLoading }: DataTableProps) {
+export function CustomersTable({ columns, data, pageIndex, setPageIndex, pageSize, setPageSize, isLoading, emptyMessage }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -119,7 +120,7 @@ export function CustomersTable({ columns, data, pageIndex, setPageIndex, pageSiz
             colSpan={columns.length}
             className='h-24 text-center'
           >
-            No results.
+            {emptyMessage || 'No results.'}
           </TableCell>
           </TableRow>
         )}
