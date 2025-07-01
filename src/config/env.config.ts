@@ -21,3 +21,5 @@ export const envConfig = {
   postHogHost:
     (import.meta.env.VITE_POSTHOG_HOST as string) || 'https://us.i.posthog.com',
 }
+
+

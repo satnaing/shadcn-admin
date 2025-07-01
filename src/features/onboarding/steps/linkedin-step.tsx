@@ -18,6 +18,8 @@ export function LinkedInStep() {
   const { linkProfile, isLinkingProfile } = useLinkProfile()
   const [isExtensionInstalled, setIsExtensionInstalled] = useState(false)
   const [isLinking, setIsLinking] = useState(false)
+  const [extensionProfileData, setExtensionProfileData] = useState(null)
+  const [isCollectingProfile, setIsCollectingProfile] = useState(false)
 
   const checkIfExtensionIsInstalled = async () => {
     const isInstalled = await checkIsExtensionInstalled(
@@ -25,26 +27,50 @@ export function LinkedInStep() {
       envConfig.chromeExtensionIconUrl
     )
     setIsExtensionInstalled(isInstalled)
+    return isInstalled
+  }
+
+  const collectUserInformation = async () => {
+    setIsCollectingProfile(true)
+    try {
+      // Check if extension is installed first
+      const isInstalled = await checkIfExtensionIsInstalled()
+      if (!isInstalled) {
+        setIsCollectingProfile(false)
+        return
+      }
+
+      // Try to get profile details from extension
+      const profileDetails = await getProfileDetailsFromExtension()
+      
+      if (profileDetails && profileDetails.firstName && profileDetails.lastName) {
+        console.log("Auto-collected profile details:", profileDetails)
+        setExtensionProfileData(profileDetails)
+        
+        // Automatically link the profile
+        await linkProfile(profileDetails)
+      }
+    } catch (error) {
+      console.log("Could not auto-collect profile data:", error)
+      // Silently fail - user can manually connect
+    } finally {
+      setIsCollectingProfile(false)
+    }
   }
 
   const handleLinking = async () => {
+    // If no profile data found, redirect to LinkedIn
+    if (!extensionProfileData) {
+      window.open('https://linkedin.com/', '_blank')
+      return
+    }
+
     setIsLinking(true)
     try {
-      const profileDetails = await getProfileDetailsFromExtension()
-      await linkProfile(profileDetails)
+      // Link the profile (data already collected)
+      await linkProfile(extensionProfileData)
       
-      // Update onboarding context with the first profile
-      if (profiles?.length) {
-        updateData({
-          isLinkedInConnected: true,
-          userProfile: {
-            name: `${profiles[0].firstName} ${profiles[0].lastName}`,
-            title: profiles[0].about || "LinkedIn Member", // Using 'about' instead of 'headline'
-            avatar: "/placeholder.svg", // Default avatar since profilePicture isn't in IProfile
-          },
-        })
-        markStepCompleted("linkedin")
-      }
+      console.log("Profile linked successfully")
     } catch (error) {
       console.error("Error linking profile:", error)
     } finally {
@@ -53,7 +79,8 @@ export function LinkedInStep() {
   }
 
   useEffect(() => {
-    checkIfExtensionIsInstalled()
+    // Auto-collect user information when component mounts
+    collectUserInformation()
   }, [])
 
   // Mark step as completed if we have profiles
@@ -142,45 +169,55 @@ export function LinkedInStep() {
             </div>
           ) : (
             <div className="space-y-6 w-full max-w-md">
-              <div className="relative w-full max-w-md h-64 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center overflow-hidden">
-                <img
-                  src="https://res.cloudinary.com/djpcpmrjd/image/upload/v1749773556/uploads/file-1749773555007-74175948-linkedin.jpg.jpg"
-                  alt="LinkedIn Screenshot"
-                  className="object-cover w-full h-full"
-                />
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="absolute bottom-2 right-2 w-4 h-4 rounded-full border border-border flex items-center justify-center cursor-help bg-background">
-                        <Info className="w-3 h-3 text-muted-foreground" />
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent side="top" className="max-w-xs">
-                      <p>Your LinkedIn profile information will be used<br/>to personalize generated comments</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </div>
+              {/* Show extension profile data if available */}
+              {extensionProfileData && (
+                <div className="flex flex-col items-center space-y-4 w-full">
+                  <div className="flex items-center gap-2 text-green-500 dark:text-green-400">
+                    <CheckCircle2 className="h-5 w-5" />
+                    <span className="font-medium">Profile data fetched!</span>
+                  </div>
 
-              {isExtensionInstalled ? (
-                <Button
-                  className="w-full relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95"
-                  onClick={handleLinking}
-                  disabled={isLinking || isLinkingProfile}
-                >
-                  <Linkedin className="mr-2 h-4 w-4" />
-                  {isLinking || isLinkingProfile ? "Connecting..." : "Connect LinkedIn"}
-                </Button>
-              ) : (
-                <div className="text-center text-sm text-muted-foreground">
-                  <p>Please install our <a href={envConfig.extensionUrl} className="text-primary underline" target="_blank">Chrome extension</a> first</p>
+                  <div className="flex flex-col gap-4 p-4  rounded-lg w-full">
+                    <div className="flex items-center gap-4 p-3 border rounded">
+                      <div className="relative h-16 w-16 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                        <span className="text-muted-foreground">
+                          {extensionProfileData.firstName?.charAt(0)}{extensionProfileData.lastName?.charAt(0)}
+                        </span>
+                      </div>
+                      <div>
+                        <h3 className="font-medium">{extensionProfileData.firstName} {extensionProfileData.lastName}</h3>
+                        <p className="text-sm font-medium text-muted-foreground">
+                          {extensionProfileData.publicIdentifier}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              )}
+
+              {!extensionProfileData && !isCollectingProfile && (
+                <>
+                  {isExtensionInstalled ? (
+                    <Button
+                      className="w-full relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95"
+                      onClick={handleLinking}
+                      disabled={isLinking || isLinkingProfile}
+                    >
+                      <Linkedin className="mr-2 h-4 w-4" />
+                      {isLinking || isLinkingProfile ? "Connecting..." : "Go to LinkedIn"}
+                    </Button>
+                  ) : (
+                    <div className="text-center text-sm text-muted-foreground">
+                      <p>Please install our <a href={envConfig.extensionUrl} className="text-primary underline" target="_blank">Chrome extension</a> first</p>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           )}
         </div>
 
-        {profiles?.length && <OnboardingNavigation nextStep="/onboarding/post-settings" />}
+        {(profiles?.length || extensionProfileData) && <OnboardingNavigation nextStep="/onboarding/post-settings" />}
       </OnboardingCard>
     </div>
   )
