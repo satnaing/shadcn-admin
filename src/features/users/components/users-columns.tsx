@@ -83,7 +83,7 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: 'phone_number',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Phone Number' />
+      <DataTableColumnHeader column={column} title='Mobile' />
     ),
     cell: ({ row }) => (
       <div className='w-fit text-nowrap'>{row.getValue('phone_number')}</div>

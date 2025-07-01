@@ -17,7 +17,14 @@ const getToken = () => {
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
 
 export default function Customers() {
-  const [customerList, setCustomerList] = useState<any[]>([]);
+  type Customer = {
+    id: string;
+    email: string;
+    mobile: string;
+    // Add other customer fields as needed
+  };
+  
+    const [customerList, setCustomerList] = useState<Customer[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   // const [isError, setIsError] = useState(false);
   // const [error, setError] = useState<any>(null);
@@ -47,7 +54,14 @@ export default function Customers() {
         ...(params.email ? { email: params.email } : {}),
         ...(params.mobile ? { mobile: params.mobile } : {}),
       };
-      Object.keys(searchParamsWithPage).forEach((k) => (searchParamsWithPage[k as keyof typeof searchParamsWithPage] === undefined || searchParamsWithPage[k as keyof typeof searchParamsWithPage] === '') && delete (searchParamsWithPage as any)[k]);
+      Object.keys(searchParamsWithPage).forEach((k) => {
+        if (
+          searchParamsWithPage[k as keyof typeof searchParamsWithPage] === undefined ||
+          searchParamsWithPage[k as keyof typeof searchParamsWithPage] === ''
+        ) {
+          delete searchParamsWithPage[k];
+        }
+      });
       const response = await axios.get(`${BACKEND_BASE_URL}/v1/customer/allCustomers`, {
         params: searchParamsWithPage,
         headers: {
