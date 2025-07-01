@@ -25,7 +25,7 @@ export const bbpsColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: 'mobileNumber',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Mobile Number' />
+      <DataTableColumnHeader column={column} title='Mobile' />
     ),
   },
   {

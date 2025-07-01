@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { IconDeviceMobile, IconCalendar } from '@tabler/icons-react'
-import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -15,7 +14,7 @@ interface TransactionSearchProps {
   onSearch: (params: {
     id: string
     bbpsReferenceCode: string
-    phone: string
+    mobileNumber: string
     start_date: string
     end_date: string
     category: string
@@ -32,7 +31,7 @@ export function TransactionSearch({
   const [fields, setFields] = useState({
     id: '',
     bbpsReferenceCode: '',
-    phone: '',
+    mobileNumber: '',
     start_date: '',
     end_date: '',
     category: '',
@@ -48,22 +47,13 @@ export function TransactionSearch({
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    const areAllFieldsEmpty = Object.values(fields).every(
-      (value) => value === ''
-    )
-    if (areAllFieldsEmpty) {
-      toast.warning('Please fill at least one search field.', {
-        duration: 5000,
-      })
-      return
-    }
     onSearch(fields)
   }
   const handleReset = () => {
     setFields({
       id: '',
       bbpsReferenceCode: '',
-      phone: '',
+      mobileNumber: '',
       start_date: '',
       end_date: '',
       category: '',
@@ -111,16 +101,16 @@ export function TransactionSearch({
           />
         </div>
         <div>
-          <label className='mb-1 block text-xs font-semibold'>Phone</label>
+          <label className='mb-1 block text-xs font-semibold'>Mobile </label>
           <div className='relative'>
             <span className='absolute top-1/2 left-2 -translate-y-1/2 text-gray-400'>
               <IconDeviceMobile size={18} />
             </span>
             <Input
-              name='phone'
-              value={fields.phone}
+              name='mobileNumber'
+              value={fields.mobileNumber}
               onChange={handleChange}
-              placeholder='Enter Phone Number'
+              placeholder='Enter Mobile Number'
               className='pl-8'
             />
           </div>
@@ -135,7 +125,7 @@ export function TransactionSearch({
               name='start_date'
               value={fields.start_date}
               onChange={handleChange}
-              placeholder='Pick a start date'
+              placeholder='YYYY-MM-DD'
               className='pl-8'
             />
           </div>
@@ -150,7 +140,7 @@ export function TransactionSearch({
               name='end_date'
               value={fields.end_date}
               onChange={handleChange}
-              placeholder='Pick a end date'
+              placeholder='YYYY-MM-DD'
               className='pl-8'
             />
           </div>
@@ -200,7 +190,7 @@ export function TransactionSearch({
       </div>
       {/* Buttons row */}
       <div className='flex gap-2 w-full mt-2'>
-        <Button type='submit' className='h-9'>
+        <Button type='submit' className='h-9' disabled={Object.values(fields).every((value) => value === '')}>
           Search
         </Button>
         <Button
