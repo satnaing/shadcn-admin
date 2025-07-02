@@ -54,6 +54,12 @@ export function DownloadExcelDialog() {
           withCredentials: true,
         }
       );
+      const blob = new Blob([response.data]);
+      if (blob.size < 2000) {
+        alert('No transactions found for the selected range.');
+        setDownloading(false);
+        return;
+      }
       // Extract filename from Content-Disposition header
       let filename = 'bbps-transactions.xlsx';
       const disposition = response.headers['content-disposition'];
@@ -64,7 +70,7 @@ export function DownloadExcelDialog() {
         }
       }
       // Create a blob and download
-      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const url = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
       link.setAttribute('download', filename);
