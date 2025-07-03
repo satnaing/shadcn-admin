@@ -94,6 +94,7 @@ export default function BBPS() {
       paymentMode: String(t.mode ?? ''),
       transactionStatus: String(t.status ?? 'Pending'),
       transactionDate: String(t.transaction_date ?? ''),
+      customer_account_no: String(t.customer_account_no ?? ''),
     }
   })
 

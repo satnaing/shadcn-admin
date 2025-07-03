@@ -30,6 +30,7 @@ export interface Transaction {
   paymentMode: string
   transactionStatus: string
   transactionDate: string
+  customer_account_no?: string
 }
 
 interface TransactionsTableProps {

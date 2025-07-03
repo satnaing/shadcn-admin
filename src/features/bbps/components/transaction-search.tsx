@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IconDeviceMobile, IconCalendar, IconDownload } from '@tabler/icons-react'
+import { IconCalendar, IconDownload } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -15,7 +15,6 @@ interface TransactionSearchProps {
   onSearch: (params: {
     id: string
     bbpsReferenceCode: string
-    mobileNumber: string
     start_date: string
     end_date: string
     category: string
@@ -32,7 +31,6 @@ export function TransactionSearch({
   const [fields, setFields] = useState({
     id: '',
     bbpsReferenceCode: '',
-    mobileNumber: '',
     start_date: '',
     end_date: '',
     category: '',
@@ -60,7 +58,6 @@ export function TransactionSearch({
     setFields({
       id: '',
       bbpsReferenceCode: '',
-      mobileNumber: '',
       start_date: '',
       end_date: '',
       category: '',
@@ -77,7 +74,6 @@ export function TransactionSearch({
       ...(fields.bbpsReferenceCode && { bbps_ref_no: fields.bbpsReferenceCode }),
       ...(fields.customerId && { customer_id: fields.customerId }),
       ...(fields.paymentStatus && { status: fields.paymentStatus }),
-      ...(fields.mobileNumber && { mobile: fields.mobileNumber }),
       ...(fields.category && { category: fields.category }),
       ...(fields.start_date && { start_date: fields.start_date }),
       ...(fields.end_date && { end_date: fields.end_date }),
@@ -155,21 +151,6 @@ export function TransactionSearch({
             onChange={handleChange}
             placeholder='Enter Customer ID'
           />
-        </div>
-        <div>
-          <label className='mb-1 block text-xs font-semibold'>Mobile </label>
-          <div className='relative'>
-            <span className='absolute top-1/2 left-2 -translate-y-1/2 text-gray-400'>
-              <IconDeviceMobile size={18} />
-            </span>
-            <Input
-              name='mobileNumber'
-              value={fields.mobileNumber}
-              onChange={handleChange}
-              placeholder='Enter Mobile Number' 
-              className='pl-8'
-            />
-          </div>
         </div>
         <div>
           <label className='mb-1 block text-xs font-semibold'>Start Date</label>
