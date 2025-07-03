@@ -12,7 +12,6 @@ import { TransactionsTable, Transaction } from './components/transactions-table'
 import { Separator } from '@/components/ui/separator'
 import { bbpsColumns } from './components/bbps-columns'
 import { BBPSTablePagination } from './components/bbps-table-pagination'
-import { DownloadExcelDialog } from './components/excel-download-button'
 
 // const BACKEND_BASE_URL = 'https://eqxstaging.stashfin.com/admin'
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL
@@ -144,7 +143,6 @@ export default function BBPS() {
               Search and view bill payment transactions with detailed filters.
             </p>
           </div>
-          <DownloadExcelDialog />
         </div>
         <TransactionSearch onSearch={handleSearch} onReset={handleReset} />
         <Separator className='shadow-sm mt-4' />
