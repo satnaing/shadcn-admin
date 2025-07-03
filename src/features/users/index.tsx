@@ -39,7 +39,7 @@ export default function Users() {
     firstName: string;
     lastName: string;
     username: string;
-    phoneNumber: string;
+    mobile: string;
     status: "active" | "inactive" | "invited" | "suspended";
     createdAt: Date;
     updatedAt: Date;
@@ -53,10 +53,20 @@ export default function Users() {
   const [userList, setUserList] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<unknown>(null);
 
   // Search handler with pagination
-  const handleSearch = async (params: { userId: string; email: string; phone: string; createdAt: string }, page: number = 0) => {
+  const handleSearch = async (params: { userId: string; email: string; mobile: string; createdAt: string }, page: number = 0) => {
+    // Only search if at least one field is filled
+    const hasAnyField = Object.values(params).some((v) => v && v.trim() !== '');
+    if (!hasAnyField) {
+      setUserList([]);
+      setSearchResults([]);
+      setSearchError(null);
+      setSearchLoading(false);
+      setIsLoading(false);
+      return;
+    }
     setSearchLoading(true);
     setSearchError(null);
     setIsLoading(true);
@@ -68,7 +78,7 @@ export default function Users() {
       const filteredParams: Record<string, string> = {};
       if (params.userId) filteredParams.userId = params.userId;
       if (params.email) filteredParams.email = params.email;
-      if (params.phone) filteredParams.phone = params.phone;
+      if (params.mobile) filteredParams.phone_number = params.mobile;
       if (params.createdAt) filteredParams.dateCreated = params.createdAt;
       filteredParams.page = String(page + 1);
       filteredParams.limit = String(pageSize);
@@ -79,9 +89,21 @@ export default function Users() {
         },
         withCredentials: true,
       });
-      const results = response.data.users || response.data.data || response.data;
-      setUserList(results);
-      setSearchResults(results);
+      let results = response.data.users || response.data.data || response.data;
+      // Frontend filtering for mobile if backend does not filter
+      if ('_frontendMobileSearch' in params && params._frontendMobileSearch) {
+        results = results.filter((user: Record<string, unknown>) =>
+          user.phone_number === params._frontendMobileSearch ||
+          user.mobile === params._frontendMobileSearch ||
+          user.phoneNumber === params._frontendMobileSearch
+        );
+      }
+      const mappedResults = results.map((user: Record<string, unknown>) => ({
+        ...user,
+        mobile: (user as { phone_number?: string }).phone_number || (user as { mobile?: string }).mobile || (user as { phoneNumber?: string }).phoneNumber || '',
+      }));
+      setUserList(mappedResults);
+      setSearchResults(mappedResults);
       setPageIndex(page);
     } catch (err: unknown) {
       setUserList([]);
@@ -116,7 +138,7 @@ export default function Users() {
         {
           userId: '',
           email: '',
-          phone: '',
+          mobile: '',
           createdAt: '',
           // You may want to keep the last search params in state for real use
         },
@@ -155,7 +177,7 @@ export default function Users() {
           {searchLoading || isLoading ? (
             <div>Searching users...</div>
           ) : searchError || isError ? (
-            <div>Error: {searchError || (error && error.message)}</div>
+            <div>Error: {searchError || (typeof error === 'object' && error && 'message' in error ? (error as { message?: string }).message : '')}</div>
           ) : searchResults ? (
             <>
               <UsersTable data={userList} columns={columns} />

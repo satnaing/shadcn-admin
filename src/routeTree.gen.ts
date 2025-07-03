@@ -34,6 +34,7 @@ import { Route as AuthenticatedSettingsIndexImport } from './routes/_authenticat
 import { Route as AuthenticatedHelpCenterIndexImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedCustomersIndexImport } from './routes/_authenticated/customers/index'
 import { Route as AuthenticatedChatsIndexImport } from './routes/_authenticated/chats/index'
+import { Route as AuthenticatedBureauIndexImport } from './routes/_authenticated/bureau/index'
 import { Route as AuthenticatedBbpsIndexImport } from './routes/_authenticated/bbps/index'
 import { Route as AuthenticatedAppsIndexImport } from './routes/_authenticated/apps/index'
 import { Route as ClerkAuthenticatedUserManagementImport } from './routes/clerk/_authenticated/user-management'
@@ -184,6 +185,12 @@ const AuthenticatedCustomersIndexRoute =
 const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexImport.update({
   id: '/chats/',
   path: '/chats/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+
+const AuthenticatedBureauIndexRoute = AuthenticatedBureauIndexImport.update({
+  id: '/bureau/',
+  path: '/bureau/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
@@ -425,6 +432,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBbpsIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/bureau/': {
+      id: '/_authenticated/bureau/'
+      path: '/bureau'
+      fullPath: '/bureau'
+      preLoaderRoute: typeof AuthenticatedBureauIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/chats/': {
       id: '/_authenticated/chats/'
       path: '/chats'
@@ -507,6 +521,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedBbpsIndexRoute: typeof AuthenticatedBbpsIndexRoute
+  AuthenticatedBureauIndexRoute: typeof AuthenticatedBureauIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedCustomersIndexRoute: typeof AuthenticatedCustomersIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
@@ -520,6 +535,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedBbpsIndexRoute: AuthenticatedBbpsIndexRoute,
+  AuthenticatedBureauIndexRoute: AuthenticatedBureauIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedCustomersIndexRoute: AuthenticatedCustomersIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
@@ -599,6 +615,7 @@ export interface FileRoutesByFullPath {
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/bbps': typeof AuthenticatedBbpsIndexRoute
+  '/bureau': typeof AuthenticatedBureauIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/customers': typeof AuthenticatedCustomersIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
@@ -630,6 +647,7 @@ export interface FileRoutesByTo {
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/bbps': typeof AuthenticatedBbpsIndexRoute
+  '/bureau': typeof AuthenticatedBureauIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/customers': typeof AuthenticatedCustomersIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
@@ -666,6 +684,7 @@ export interface FileRoutesById {
   '/clerk/_authenticated/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
   '/_authenticated/bbps/': typeof AuthenticatedBbpsIndexRoute
+  '/_authenticated/bureau/': typeof AuthenticatedBureauIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
   '/_authenticated/customers/': typeof AuthenticatedCustomersIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
@@ -702,6 +721,7 @@ export interface FileRouteTypes {
     | '/clerk/user-management'
     | '/apps'
     | '/bbps'
+    | '/bureau'
     | '/chats'
     | '/customers'
     | '/help-center'
@@ -732,6 +752,7 @@ export interface FileRouteTypes {
     | '/clerk/user-management'
     | '/apps'
     | '/bbps'
+    | '/bureau'
     | '/chats'
     | '/customers'
     | '/help-center'
@@ -766,6 +787,7 @@ export interface FileRouteTypes {
     | '/clerk/_authenticated/user-management'
     | '/_authenticated/apps/'
     | '/_authenticated/bbps/'
+    | '/_authenticated/bureau/'
     | '/_authenticated/chats/'
     | '/_authenticated/customers/'
     | '/_authenticated/help-center/'
@@ -837,6 +859,7 @@ export const routeTree = rootRoute
         "/_authenticated/",
         "/_authenticated/apps/",
         "/_authenticated/bbps/",
+        "/_authenticated/bureau/",
         "/_authenticated/chats/",
         "/_authenticated/customers/",
         "/_authenticated/help-center/",
@@ -946,6 +969,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/bbps/": {
       "filePath": "_authenticated/bbps/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/bureau/": {
+      "filePath": "_authenticated/bureau/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/chats/": {

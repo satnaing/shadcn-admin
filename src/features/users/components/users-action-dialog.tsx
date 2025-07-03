@@ -43,6 +43,7 @@ type DialogUser = User & {
   fname?: string;
   lname?: string;
   phone_number?: string;
+  phoneNumber?: string;
 };
 
 const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
@@ -118,11 +119,21 @@ function mapUserToFormDefaults(user: User) {
     }
   }
 
+  // Map mobile from all possible backend fields
+  let mobile = '';
+  if (detailedUser.mobile) {
+    mobile = detailedUser.mobile;
+  } else if (detailedUser.phone_number) {
+    mobile = detailedUser.phone_number;
+  } else if (detailedUser.phoneNumber) {
+    mobile = detailedUser.phoneNumber;
+  }
+
   return {
     fname: detailedUser.fname || detailedUser.firstName || '',
     lname: detailedUser.lname || detailedUser.lastName || '',
     email: user.email || '',
-    phone_number: detailedUser.phone_number || detailedUser.phoneNumber || '',
+    phone_number: mobile,
     services,
     roles,
     permissions,
@@ -277,7 +288,7 @@ console.log('isEdit:', isEdit);
         };
         if (currentRow?.firstName) payload.fname = currentRow.firstName;
         if (currentRow?.lastName) payload.lname = currentRow.lastName;
-        if (currentRow?.phoneNumber) payload.phone_number = currentRow.phoneNumber;
+        if (currentRow?.mobile) payload.phone_number = currentRow.mobile;
 
         const getToken = () => {
           const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);

@@ -18,7 +18,7 @@ import {
  // IconUserCog,
   //IconUserOff,
   IconUsers,
-
+  IconClipboardText,
   IconUsersGroup,
   IconMoneybag,
   IconReceiptRupee,
@@ -97,7 +97,11 @@ export const sidebarData: SidebarData = {
           url: '/bbps',
           icon: IconReceiptRupee,
         },
-         
+         {
+          title: 'Bureau',
+          url: '/bureau',
+          icon: IconClipboardText,
+         }
         
         // Clerk links removed
       ],

@@ -55,16 +55,20 @@ export const allColumns: ColumnDef<Customer>[] = [
 		),
 		enableHiding: false,
 	},
-	{
-		accessorKey: 'mobile',
-		header: ({ column }) => (
-			<DataTableColumnHeader column={column} title='Mobile' />
-		),
-		cell: ({ row }) => (
-			<div className='w-fit text-nowrap'>{row.getValue('mobile')}</div>
-		),
-		enableHiding: false,
-	},
+   {
+	   accessorKey: 'mobile',
+	   header: ({ column }) => (
+		   <DataTableColumnHeader column={column} title='Mobile' />
+	   ),
+	   cell: ({ row }) => {
+		   const mobile = row.getValue('mobile') as string;
+		   if (!mobile) return '';
+		   const visible = mobile.slice(-4);
+		   const masked = '*'.repeat(Math.max(0, mobile.length - 4)) + visible;
+		   return <div className='w-fit text-nowrap'>{masked}</div>;
+	   },
+	   enableHiding: false,
+   },
 	{
 		accessorKey: 'email',
 		header: ({ column }) => (

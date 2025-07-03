@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 interface UsersSearchProps {
-  onSearch: (params: { userId: string; email: string; phone: string; createdAt: string }) => void;
+  onSearch: (params: { userId: string; email: string; mobile: string; createdAt: string; _frontendMobileSearch?: string }) => void;
   onReset: () => void;
 }
 
@@ -11,13 +11,13 @@ export function UsersSearch({ onSearch, onReset }: UsersSearchProps) {
   const [fields, setFields] = useState({
     userId: '',
     email: '',
-    phone: '',
+    mobile: '',
     createdAt: '',
   });
   const [errors, setErrors] = useState({
     userId: '',
     email: '',
-    phone: '',
+    mobile: '',
     createdAt: '',
   });
 
@@ -32,11 +32,11 @@ export function UsersSearch({ onSearch, onReset }: UsersSearchProps) {
     if (name === 'userId') {
       if (!isDigits(value)) error = 'Only digits allowed';
     }
-    if (name === 'phone') {
+    if (name === 'mobile') {
       if (!isDigits(value)) {
         error = 'Only digits allowed';
       } else if (value && value.length !== 10) {
-        error = 'Phone must be exactly 10 digits';
+        error = 'Mobile must be exactly 10 digits';
       }
     }
     if (name === 'createdAt' && value && !isDate(value)) {
@@ -58,12 +58,12 @@ export function UsersSearch({ onSearch, onReset }: UsersSearchProps) {
       newErrors.userId = 'Only digits allowed';
       valid = false;
     }
-    if (fields.phone) {
-      if (!isDigits(fields.phone)) {
-        newErrors.phone = 'Only digits allowed';
+    if (fields.mobile) {
+      if (!isDigits(fields.mobile)) {
+        newErrors.mobile = 'Only digits allowed';
         valid = false;
-      } else if (fields.phone.length !== 10) {
-        newErrors.phone = 'Phone must be exactly 10 digits';
+      } else if (fields.mobile.length !== 10) {
+        newErrors.mobile = 'Mobile must be exactly 10 digits';
         valid = false;
       }
     }
@@ -77,11 +77,19 @@ export function UsersSearch({ onSearch, onReset }: UsersSearchProps) {
     }
     setErrors(newErrors);
     if (!valid) return;
-    onSearch(fields);
+    // Debug: log the search fields
+    
+    console.log('User search fields:', JSON.stringify(fields));
+    // Add frontend filtering as a temporary workaround if backend does not filter
+    onSearch({
+      ...fields,
+      // Add a special flag to indicate mobile search for frontend filtering
+      _frontendMobileSearch: fields.mobile
+    });
   };
   const handleReset = () => {
-    setFields({ userId: '', email: '', phone: '', createdAt: '' });
-    setErrors({ userId: '', email: '', phone: '', createdAt: '' });
+    setFields({ userId: '', email: '', mobile: '', createdAt: '' });
+    setErrors({ userId: '', email: '', mobile: '', createdAt: '' });
     onReset();
   };
 
@@ -100,9 +108,9 @@ export function UsersSearch({ onSearch, onReset }: UsersSearchProps) {
         {errors.email && <span className="text-xs text-red-500">{errors.email}</span>}
       </div>
       <div>
-        <label className="block text-xs mb-1">Phone</label>
-        <Input name="phone" value={fields.phone} onChange={handleChange} placeholder="Phone" inputMode="numeric" className={errors.phone ? 'border-red-500' : ''} />
-        {errors.phone && <span className="text-xs text-red-500">{errors.phone}</span>}
+        <label className="block text-xs mb-1">Mobile</label>
+        <Input name="mobile" value={fields.mobile} onChange={handleChange} placeholder="Mobile" inputMode="numeric" className={errors.mobile ? 'border-red-500' : ''} />
+        {errors.mobile && <span className="text-xs text-red-500">{errors.mobile}</span>}
       </div>
       <div>
         <label className="block text-xs mb-1">Created Date</label>
