@@ -23,7 +23,7 @@ const getToken = () => {
 interface TransactionSearchFields {
   id?: string
   bbpsReferenceCode?: string
-  phone?: string
+  mobileNumber?: string
   category?: string
   start_date?: string
   end_date?: string
@@ -47,7 +47,7 @@ export default function BBPS() {
       if (searchParams.bbpsReferenceCode) params.bbps_ref_no = searchParams.bbpsReferenceCode
       if (searchParams.customerId) params.customer_id = searchParams.customerId
       if (searchParams.paymentStatus) params.status = searchParams.paymentStatus
-      if (searchParams.phone) params.mobile = searchParams.phone
+      if (searchParams.mobileNumber) params.mobile = searchParams.mobileNumber
       if (searchParams.category) params.category = searchParams.category
       if (searchParams.start_date) params.start_date = searchParams.start_date
       if (searchParams.end_date) params.end_date = searchParams.end_date
@@ -94,6 +94,7 @@ export default function BBPS() {
       paymentMode: String(t.mode ?? ''),
       transactionStatus: String(t.status ?? 'Pending'),
       transactionDate: String(t.transaction_date ?? ''),
+      customer_account_no: String(t.customer_account_no ?? ''),
     }
   })
 
@@ -144,10 +145,9 @@ export default function BBPS() {
             </p>
           </div>
         </div>
-
         <TransactionSearch onSearch={handleSearch} onReset={handleReset} />
         <Separator className='shadow-sm mt-4' />
-        <div className='my-4'>
+        <div className='my-4 flex items-center justify-between'>
           <h2 className='text-2xl font-bold tracking-tight'>
             Transaction Results
           </h2>

@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { IconDeviceMobile, IconCalendar } from '@tabler/icons-react'
-import { toast } from 'sonner'
+import { IconCalendar, IconDownload } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -10,12 +9,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import axios from 'axios'
 
 interface TransactionSearchProps {
   onSearch: (params: {
     id: string
     bbpsReferenceCode: string
-    phone: string
     start_date: string
     end_date: string
     category: string
@@ -32,13 +31,18 @@ export function TransactionSearch({
   const [fields, setFields] = useState({
     id: '',
     bbpsReferenceCode: '',
-    phone: '',
     start_date: '',
     end_date: '',
     category: '',
     customerId: '',
     paymentStatus: '',
   })
+
+  const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+  const getToken = () => {
+    const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/)
+    return match ? decodeURIComponent(match[1]) : ''
+  }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -48,22 +52,12 @@ export function TransactionSearch({
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    const areAllFieldsEmpty = Object.values(fields).every(
-      (value) => value === ''
-    )
-    if (areAllFieldsEmpty) {
-      toast.warning('Please fill at least one search field.', {
-        duration: 5000,
-      })
-      return
-    }
     onSearch(fields)
   }
   const handleReset = () => {
     setFields({
       id: '',
       bbpsReferenceCode: '',
-      phone: '',
       start_date: '',
       end_date: '',
       category: '',
@@ -71,6 +65,54 @@ export function TransactionSearch({
       paymentStatus: '',
     })
     onReset()
+  }
+
+  const handleDownload = async () => {
+    const token = getToken();
+    const params = {
+      ...(fields.id && { transaction_id: fields.id }),
+      ...(fields.bbpsReferenceCode && { bbps_ref_no: fields.bbpsReferenceCode }),
+      ...(fields.customerId && { customer_id: fields.customerId }),
+      ...(fields.paymentStatus && { status: fields.paymentStatus }),
+      ...(fields.category && { category: fields.category }),
+      ...(fields.start_date && { start_date: fields.start_date }),
+      ...(fields.end_date && { end_date: fields.end_date }),
+      isDownload: true,
+    };
+    try {
+      const response = await axios.get(
+        `${BACKEND_BASE_URL}/v1/bbps/getAllTransactions`,
+        {
+          params,
+          headers: { Authorization: `Bearer ${token}` },
+          responseType: 'blob',
+          withCredentials: true,
+        }
+      );
+      let filename = 'bbps-transactions.xlsx';
+      const disposition = response.headers['content-disposition'];
+      if (disposition) {
+        const match = disposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+        if (match && match[1]) {
+          filename = match[1].replace(/['"]/g, '');
+        }
+      }
+      const blob = new Blob([response.data]);
+      if (blob.size < 2000) {
+        alert('No transactions found for the selected range.');
+        return;
+      }
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', filename);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode?.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch {
+      alert('Failed to download Excel.');
+    }
   }
 
   return (
@@ -111,21 +153,6 @@ export function TransactionSearch({
           />
         </div>
         <div>
-          <label className='mb-1 block text-xs font-semibold'>Phone</label>
-          <div className='relative'>
-            <span className='absolute top-1/2 left-2 -translate-y-1/2 text-gray-400'>
-              <IconDeviceMobile size={18} />
-            </span>
-            <Input
-              name='phone'
-              value={fields.phone}
-              onChange={handleChange}
-              placeholder='Enter Phone Number'
-              className='pl-8'
-            />
-          </div>
-        </div>
-        <div>
           <label className='mb-1 block text-xs font-semibold'>Start Date</label>
           <div className='relative'>
             <span className='absolute top-1/2 left-2 -translate-y-1/2 text-gray-400'>
@@ -135,7 +162,7 @@ export function TransactionSearch({
               name='start_date'
               value={fields.start_date}
               onChange={handleChange}
-              placeholder='Pick a start date'
+              placeholder='YYYY-MM-DD'
               className='pl-8'
             />
           </div>
@@ -150,7 +177,7 @@ export function TransactionSearch({
               name='end_date'
               value={fields.end_date}
               onChange={handleChange}
-              placeholder='Pick a end date'
+              placeholder='YYYY-MM-DD'
               className='pl-8'
             />
           </div>
@@ -200,7 +227,7 @@ export function TransactionSearch({
       </div>
       {/* Buttons row */}
       <div className='flex gap-2 w-full mt-2'>
-        <Button type='submit' className='h-9'>
+        <Button type='submit' className='h-9' disabled={Object.values(fields).every((value) => value === '')}>
           Search
         </Button>
         <Button
@@ -210,6 +237,16 @@ export function TransactionSearch({
           onClick={handleReset}
         >
           Reset
+        </Button>
+        <Button
+          type='button'
+          variant='outline'
+          className='h-9'
+          onClick={handleDownload}
+          disabled={Object.values(fields).every((value) => value === '')}
+        >
+          <IconDownload className='mr-1' />
+          Download Report
         </Button>
       </div>
     </form>
