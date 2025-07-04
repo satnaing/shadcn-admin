@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Icon, Spinner, Text } from "@chakra-ui/react";
 import Card from "components/card/Card";
-import { envConfig } from "config/env.config";
+import { envConfig } from "@/config/env.config";
 import { useEffect, useState } from "react";
 import { FaLinkedin } from "react-icons/fa";
 import { tw } from "twind";

@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 const TESTIMONIALS = {
   default: {
     quote:
-      'linkify has transformed how I engage on LinkedIn. The AI-generated comments are thoughtful and have significantly increased my network growth.',
+      'commentify has transformed how I engage on LinkedIn. The AI-generated comments are thoughtful and have significantly increased my network growth.',
     author: 'Michael Chen',
     title: 'Marketing Director',
     avatar: '/placeholder.svg?height=64&width=64',
@@ -21,7 +21,7 @@ const TESTIMONIALS = {
   },
   linkedin: {
     quote:
-      "The LinkedIn integration is seamless. I was worried about security, but linkify's authentication process is top-notch and secure.",
+      "The LinkedIn integration is seamless. I was worried about security, but commentify's authentication process is top-notch and secure.",
     author: 'David Rodriguez',
     title: 'CTO',
     avatar: '/placeholder.svg?height=64&width=64',
@@ -70,7 +70,7 @@ export function OnboardingTestimonials() {
           <h3 className='mb-2 text-xl font-bold'>What our users say</h3>
           <p className='text-muted-foreground text-sm'>
             Join thousands of professionals who are saving time and growing
-            their network with linkify
+            their network with commentify
           </p>
         </div>
 
@@ -136,7 +136,7 @@ export function OnboardingTestimonials() {
               'comment-settings',
               'demo',
             ].includes(currentStep) &&
-              'Complete all onboarding steps for the best experience with linkify.'}
+              'Complete all onboarding steps for the best experience with commentify.'}
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
-import { envConfig } from "config/env.config";
+import { envConfig } from "@/config/env.config";
 import { toast } from "react-toastify";
-import { QueryService } from "services/query.service";
+import { QueryService } from "@/services/query.service";
 import {
   GET_PROFILE_DETAILS,
   LINK_LI_ACCOUNT,

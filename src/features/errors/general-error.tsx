@@ -1,3 +1,5 @@
+'use client'
+
 import { useRouter } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -11,7 +13,13 @@ export default function GeneralError({
   className,
   minimal = false,
 }: GeneralErrorProps) {
-  const { history } = useRouter()
+  const { history, navigate } = useRouter()
+
+  const handleLogout = async () => {
+    await signOut()
+    navigate({ to: '/sign-in' }) // 👈 Redirect to /sign-in
+  }
+
   return (
     <div className={cn('h-svh w-full', className)}>
       <div className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'>
@@ -27,7 +35,7 @@ export default function GeneralError({
             <Button variant='outline' onClick={() => history.go(-1)}>
               Go Back
             </Button>
-            <Button onClick={signOut}>Logout</Button>
+            <Button onClick={handleLogout}>Logout</Button> {/* 👈 Updated */}
           </div>
         )}
       </div>

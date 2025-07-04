@@ -12,7 +12,7 @@ export function OnboardingHeader() {
             <span className="text-sm font-bold text-primary-foreground">C</span>
           </div> */}
 
-          <span className='text-foreground text-xl font-bold'>linkify</span>
+          <span className='text-foreground text-xl font-bold'>commentify</span>
         </div>
         <div className='flex items-center gap-4'>
           <Link to='/'>

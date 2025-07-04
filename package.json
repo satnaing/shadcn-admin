@@ -13,6 +13,9 @@
     "knip": "knip"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.21.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@hookform/resolvers": "^5.0.1",
     "@openreplay/tracker": "^16.3.0",
     "@radix-ui/react-alert-dialog": "^1.1.7",
@@ -44,6 +47,7 @@
     "clsx": "^2.1.1",
     "cmdk": "1.1.1",
     "date-fns": "^4.1.0",
+    "framer-motion": "^12.23.0",
     "input-otp": "^1.4.2",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.488.0",
@@ -52,6 +56,8 @@
     "react-day-picker": "9.6.6",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.55.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.6.3",
     "react-toastify": "^11.0.5",
     "react-top-loading-bar": "^3.0.2",
     "react-use": "^17.6.0",
