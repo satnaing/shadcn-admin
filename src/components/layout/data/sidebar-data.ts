@@ -18,6 +18,8 @@ import {
   IconUserCog,
   IconUserOff,
   IconUsers,
+  IconMap,
+  IconPencil,
 } from '@tabler/icons-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { ClerkLogo } from '@/assets/clerk-logo'
@@ -75,6 +77,16 @@ export const sidebarData: SidebarData = {
           title: 'Users',
           url: '/users',
           icon: IconUsers,
+        },
+        {
+          title: 'Map',
+          url: '/map',
+          icon: IconMap,
+        },
+        {
+          title: 'Draw',
+          url: '/draw',
+          icon: IconPencil,
         },
         {
           title: 'Secured by Clerk',
