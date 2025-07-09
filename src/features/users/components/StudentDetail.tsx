@@ -85,9 +85,23 @@ export function StudentDetail({ student_id }: { student_id: string }) {
 
   const saveEditing = async () => {
     if (!editData) return
-    if (editingSection === 'field_training') await handleFieldTraining(editData)
-    else if (editingSection === 'employment') await handleEmployment(editData)
-    console.log(editData)
+
+    // 현장실습 데이터 처리
+    const fieldTrainingData = editData.filter(
+      (item) => 'field_training' in item.datas
+    )
+    if (fieldTrainingData.length > 0) {
+      await handleFieldTraining(fieldTrainingData)
+    }
+
+    // 취업 데이터 처리
+    const employmentData = editData.filter(
+      (item) => 'employment_companies' in item.datas
+    )
+    if (employmentData.length > 0) {
+      await handleEmployment(employmentData)
+    }
+
     await refetch()
     setEditingSection(null)
     await userRefetch()

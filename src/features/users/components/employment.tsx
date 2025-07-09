@@ -85,7 +85,7 @@ export const Employment = ({
         },
       ])
     }
-  }, [updateDate, updateJob, editingSection])
+  }, [updateDate, updateJob, editingSection, currentFieldTraining, currentRow, setEditData])
 
   return (
     <div>
