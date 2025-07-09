@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
 import { useCompanyListQuery } from '@/features/companies/services/selectCompanyList'
 import { useEditUser } from '../context/edit-context'
 import { useUsers } from '../context/users-context'
@@ -38,6 +39,7 @@ export const Employment = ({
 
   const [updateDate, setUpdateDate] = useState<DateRange | undefined>(undefined)
   const [updateJob, setUpdateJob] = useState<number | null>(null)
+  const [isWorking, setIsWorking] = useState<boolean>(true)
 
   const [addDate, setAddDate] = useState<DateRange | undefined>(undefined)
   const [addFieldTraining, setAddFieldTraining] =
@@ -55,6 +57,7 @@ export const Employment = ({
           : new Date(),
       })
       setUpdateJob(currentFieldTraining?.job_id ?? null)
+      setIsWorking(currentFieldTraining?.is_working ?? true)
       setAddDate(undefined)
       setAddFieldTraining(null)
       setAdd(false)
@@ -80,12 +83,21 @@ export const Employment = ({
               job_id: updateJob,
               start_date: updateDate.from.toISOString().split('T')[0],
               end_date: updateDate.to.toISOString().split('T')[0],
+              is_working: isWorking,
             },
           },
         },
       ])
     }
-  }, [updateDate, updateJob, editingSection, currentFieldTraining, currentRow, setEditData])
+  }, [
+    updateDate,
+    updateJob,
+    isWorking,
+    editingSection,
+    currentFieldTraining,
+    currentRow,
+    setEditData,
+  ])
 
   return (
     <div>
@@ -148,6 +160,16 @@ export const Employment = ({
                         ))}
                       </SelectContent>
                     </Select>
+                  </div>
+                  <div className='space-y-2'>
+                    <div className='flex items-center space-x-2'>
+                      <Switch
+                        id='is-working'
+                        checked={isWorking}
+                        onCheckedChange={setIsWorking}
+                      />
+                      <span className='font-medium'>취업중</span>
+                    </div>
                   </div>
                 </div>
               </div>
