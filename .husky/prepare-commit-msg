@@ -1,0 +1,1 @@
+pnpx jira-prepare-commit-msg $1
