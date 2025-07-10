@@ -231,17 +231,12 @@ export const FieldTraining = ({
                 </Select>
               </div>
               <div className='flex items-center space-x-2'>
+                <span className='font-medium'>취업</span>
                 <Switch
                   id='auto-employment'
                   checked={autoEmployment}
                   onCheckedChange={setAutoEmployment}
                 />
-                <Label
-                  htmlFor='auto-employment'
-                  className='text-sm font-medium'
-                >
-                  취업
-                </Label>
               </div>
               {!add && (
                 <Button
