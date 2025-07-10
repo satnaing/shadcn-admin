@@ -1,1 +1,2 @@
+#!/usr/bin/env sh
 pnpx jira-prepare-commit-msg $1
