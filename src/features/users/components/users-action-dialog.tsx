@@ -143,8 +143,6 @@ function mapUserToFormDefaults(user: User) {
 
 
 export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
-  console.log('UsersActionDialog rendered');
-  console.log('currentRow:', currentRow);
   const queryClient = useQueryClient();
   const isEdit = !!currentRow;
 
@@ -201,12 +199,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       return match ? decodeURIComponent(match[1]) : '';
     };
     const token = getToken();
-    
-    console.log(document.cookie);
-    console.log('Token:', token);
-    
 
-    
      axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allService`, {
        headers: {
         'Authorization': `Bearer ${token}`,
@@ -220,10 +213,8 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       .catch(() => setLoadingServices(false));
   }, []);
 
-console.log('isEdit:', isEdit);
 // console.log('currentRow:', currentRow);
-  console.log('getValue:', form.formState.defaultValues);
-  console.log('form values:', form.getValues());
+ 
 
   // --- Static roles/permissions for demo ---
   const allRoles = [
@@ -296,8 +287,7 @@ console.log('isEdit:', isEdit);
         };
         const token = getToken();
           
-        console.log('Edit payload:', payload);
-        console.log('Token:', token);
+      
         await axios.put(
           `${BACKEND_BASE_URL}/v1/superadmin/updateUser`,
           payload,
@@ -337,7 +327,6 @@ console.log('isEdit:', isEdit);
        form.reset();
       onOpenChange(false);
     } catch (err) {
-      console.error('User action error:', err);
       if (axios.isAxiosError(err)) {
         alert(err.response?.data?.message || 'Failed to save user. Please try again.');
       } else {
