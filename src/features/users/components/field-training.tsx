@@ -31,8 +31,9 @@ export const FieldTraining = ({
   const { editingSection, setEditData } = useEditUser()
   const { currentRow } = useUsers()
 
-  const { data: companies = [], refetch } = useCompanyListQuery()
-  const { data: jobs = [] } = useJobListQuery()
+  const { data: companies = [], refetch: refetchCompanies } =
+    useCompanyListQuery()
+  const { data: jobs = [], refetch: refetchJobs } = useJobListQuery()
 
   const currentFieldTraining =
     datas.length > 0 ? getCurrentFieldTraining({ datas }) : null
@@ -130,7 +131,7 @@ export const FieldTraining = ({
                           type='job'
                           onClick={() => {}}
                           onSuccess={() => {
-                            refetch()
+                            refetchJobs()
                           }}
                         />
                       </SelectContent>
@@ -158,8 +159,7 @@ export const FieldTraining = ({
                           type='company'
                           onClick={() => {}}
                           onSuccess={() => {
-                            // 회사 목록 새로고침
-                            refetch()
+                            refetchCompanies()
                           }}
                         />
                       </SelectContent>
@@ -219,6 +219,9 @@ export const FieldTraining = ({
                       onClick={() => {
                         // 여기에 직무 추가 로직 구현 예정
                       }}
+                      onSuccess={() => {
+                        refetchJobs()
+                      }}
                     />
                   </SelectContent>
                 </Select>
@@ -251,8 +254,7 @@ export const FieldTraining = ({
                         // 여기에 회사 추가 로직 구현 예정
                       }}
                       onSuccess={() => {
-                        // 회사 목록 새로고침
-                        refetch()
+                        refetchCompanies()
                       }}
                     />
                   </SelectContent>
