@@ -285,7 +285,7 @@ export const FieldTraining = ({
                                 .toISOString()
                                 .split('T')[0],
                               end_date: null, // 취업 종료일은 null로 설정
-                              created_at: String(new Date()),
+                              created_at: new Date().toISOString(),
                             },
                           },
                         })
