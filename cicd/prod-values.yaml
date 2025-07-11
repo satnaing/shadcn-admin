@@ -51,11 +51,11 @@ istio:
   enabled: true
   gateway: 'ingress-gateway'
   hosts:
-    - 'admin-staging.stashfin.com'
+    - 'admin-eqx.stashfin.com'
 
 # API Gateway Mapping settings
 mapping:
-  host: 'admin-staging.stashfin.com'  # Existing host reference
+  host: 'admin-eqx.stashfin.com'  # Existing host reference
   restPrefix: /
   # grpcNorthSouthPrefix: /service.meta/
   # grpcEastWestPrefix: /service.meta/
