@@ -126,7 +126,13 @@ export const FieldTraining = ({
                             {job.job_name}
                           </SelectItem>
                         ))}
-                        <AddFieldTrainingOption type='job' onClick={() => {}} />
+                        <AddFieldTrainingOption
+                          type='job'
+                          onClick={() => {}}
+                          onSuccess={() => {
+                            refetch()
+                          }}
+                        />
                       </SelectContent>
                     </Select>
                   </div>
