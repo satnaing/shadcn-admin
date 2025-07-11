@@ -163,12 +163,12 @@ export const Employment = ({
                   </div>
                   <div className='space-y-2'>
                     <div className='flex items-center space-x-2'>
+                      <span className='font-medium'>취업 중</span>
                       <Switch
                         id='is-working'
                         checked={isWorking}
                         onCheckedChange={setIsWorking}
                       />
-                      <span className='font-medium'>취업중</span>
                     </div>
                   </div>
                 </div>
