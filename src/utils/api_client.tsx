@@ -27,7 +27,6 @@ export const deleteUserById = async ({ userId }: { userId: string }) => {
       return 'success'
     }
   } catch (err) {
-    console.error('Failed to delete user:', err)
-    alert('Failed to delete user. Please try again.')
+    throw new Error(`Failed to delete user ${err}` );
   }
 }
