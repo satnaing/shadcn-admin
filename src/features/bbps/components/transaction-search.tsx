@@ -192,11 +192,10 @@ export function TransactionSearch({
               <SelectValue placeholder='Select Category' />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value='Prepaid'>Prepaid</SelectItem>
-              <SelectItem value='Postpaid'>Postpaid</SelectItem>
+              <SelectItem value='Mobile Prepaid'>Prepaid</SelectItem>
+              <SelectItem value='Mobile Postpaid'>Postpaid</SelectItem>
               <SelectItem value='Gas'>Gas</SelectItem>
               <SelectItem value='Electricity'>Electricity</SelectItem>
-              <SelectItem value='DTH'>DTH</SelectItem>
               <SelectItem value='Credit Card'>Credit Card</SelectItem>
               <SelectItem value='Fastag'>Fastag</SelectItem>
             </SelectContent>

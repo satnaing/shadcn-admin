@@ -143,8 +143,6 @@ function mapUserToFormDefaults(user: User) {
 
 
 export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
-  console.log('UsersActionDialog rendered');
-  console.log('currentRow:', currentRow);
   const queryClient = useQueryClient();
   const isEdit = !!currentRow;
 
@@ -201,12 +199,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       return match ? decodeURIComponent(match[1]) : '';
     };
     const token = getToken();
-    
-    console.log(document.cookie);
-    console.log('Token:', token);
-    
 
-    
      axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allService`, {
        headers: {
         'Authorization': `Bearer ${token}`,
@@ -220,24 +213,56 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
       .catch(() => setLoadingServices(false));
   }, []);
 
-console.log('isEdit:', isEdit);
-// console.log('currentRow:', currentRow);
-  console.log('getValue:', form.formState.defaultValues);
-  console.log('form values:', form.getValues());
+ 
 
-  // --- Static roles/permissions for demo ---
-  const allRoles = [
-    { id: 2, name: 'Manager', value: 'manager' },
-    { id: 3, name: 'Viewer', value: 'viewer' },
-    { id: 1, name: 'Regular User', value: 'regularuser' },
-  ];
-  
-  const allPermissions = [
-    { id: 1, value: 'read', label: 'Can view user information' },
-    { id: 2, value: 'update', label: 'Can update user information' },
-    { id: 3, value: 'delete', label: 'Can delete user information' },
-    { id: 6, value: 'create', label: 'Can create resources' },
-  ];
+  // --- Fetch roles and permissions from API ---
+  const [allRoles, setAllRoles] = React.useState<{ id: number; name: string; value: string }[]>([]);
+  const [allPermissions, setAllPermissions] = React.useState<{ id: number; value: string; label: string }[]>([]);
+  const [loadingRoles, setLoadingRoles] = React.useState(true);
+  const [loadingPermissions, setLoadingPermissions] = React.useState(true);
+
+  React.useEffect(() => {
+    if (!open) return;
+    setLoadingRoles(true);
+    setLoadingPermissions(true);
+    const getToken = () => {
+      const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/);
+      return match ? decodeURIComponent(match[1]) : '';
+    };
+    const token = getToken();
+
+    // Fetch roles
+    axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allRoles`, {
+      headers: { 'Authorization': `Bearer ${token}` },
+      withCredentials: true,
+    })
+      .then(res => {
+        // API returns [{id, name}]; add value field for compatibility
+        setAllRoles(res.data.map((role: { id: number; name: string }) => ({
+          id: role.id,
+          name: role.name,
+          value: role.name // or use role.value if available
+        })));
+        setLoadingRoles(false);
+      })
+      .catch(() => setLoadingRoles(false));
+
+    // Fetch permissions
+    axios.get(`${BACKEND_BASE_URL}/v1/superadmin/allPermissions`, {
+      headers: { 'Authorization': `Bearer ${token}` },
+      withCredentials: true,
+    })
+      .then(res => {
+        // API returns [{id, name}]; map to {id, value, label}
+        setAllPermissions(res.data.map((perm: {id: number; name :string}) => ({
+          id: perm.id,
+          value: perm.name,
+          label: perm.name // or a more descriptive label if available
+        })));
+        setLoadingPermissions(false);
+      })
+      .catch(() => setLoadingPermissions(false));
+  }, [open]);
 
  
 
@@ -296,8 +321,7 @@ console.log('isEdit:', isEdit);
         };
         const token = getToken();
           
-        console.log('Edit payload:', payload);
-        console.log('Token:', token);
+      
         await axios.put(
           `${BACKEND_BASE_URL}/v1/superadmin/updateUser`,
           payload,
@@ -337,7 +361,6 @@ console.log('isEdit:', isEdit);
        form.reset();
       onOpenChange(false);
     } catch (err) {
-      console.error('User action error:', err);
       if (axios.isAxiosError(err)) {
         alert(err.response?.data?.message || 'Failed to save user. Please try again.');
       } else {
@@ -463,12 +486,13 @@ console.log('isEdit:', isEdit);
                   const selectedRoles = form.watch('roles') || [];
                   const selectedPermissions = form.watch('permissions') || [];
 
-                  if (loadingServices) {
+
+                  if (loadingServices || loadingRoles || loadingPermissions) {
                     return (
                       <FormItem className='grid grid-cols-6 items-start gap-x-4 gap-y-1'>
                         <FormLabel className='col-span-2 text-right pt-2'>Services</FormLabel>
                         <FormControl>
-                          <div className='col-span-4'>Loading services...</div>
+                          <div className='col-span-4'>Loading services, roles, or permissions...</div>
                         </FormControl>
                       </FormItem>
                     );
