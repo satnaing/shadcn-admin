@@ -50,7 +50,7 @@ http:
 # Istio settings
 istio:
   enabled: true
-  gateway: 'ingress-gateway'
+  gateway: 'prod-gateway'
   hosts:
     - 'admin-eqx.stashfin.com'
 
