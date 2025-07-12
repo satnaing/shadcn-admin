@@ -3,6 +3,7 @@ import { DateRange } from 'react-day-picker'
 import { getCurrentFieldTraining } from '@/utils/users/getCurrentFieldTraining'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -10,10 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
 import { useCompanyListQuery } from '@/features/companies/services/selectCompanyList'
 import { useEditUser } from '../context/edit-context'
 import { useUsers } from '../context/users-context'
-import { UserDetailType } from '../data/schema'
+import { UserDetailType, UserEditType } from '../data/schema'
 import { FieldTrainingUpdate } from '../services/field-training/handleFieldTraining'
 import { useJobListQuery } from '../services/field-training/selectJobList'
 
@@ -43,6 +45,7 @@ export const FieldTraining = ({
   const [addFieldTraining, setAddFieldTraining] =
     useState<addFieldTrainingType | null>(null)
   const [add, setAdd] = useState<boolean>(false)
+  const [autoEmployment, setAutoEmployment] = useState<boolean>(false)
 
   useEffect(() => {
     if (!editingSection) {
@@ -58,6 +61,7 @@ export const FieldTraining = ({
       setAddDate(undefined)
       setAddFieldTraining(null)
       setAdd(false)
+      setAutoEmployment(false)
     }
   }, [editingSection, currentFieldTraining])
 
@@ -85,7 +89,7 @@ export const FieldTraining = ({
         },
       ])
     }
-  }, [updateDate, updateJob, editingSection])
+  }, [updateDate, updateJob, editingSection, currentFieldTraining, currentRow, setEditData])
 
   return (
     <div>
@@ -226,6 +230,14 @@ export const FieldTraining = ({
                   </SelectContent>
                 </Select>
               </div>
+              <div className='flex items-center space-x-2'>
+                <span className='font-medium'>취업</span>
+                <Switch
+                  id='auto-employment'
+                  checked={autoEmployment}
+                  onCheckedChange={setAutoEmployment}
+                />
+              </div>
               {!add && (
                 <Button
                   className='mt-2'
@@ -239,9 +251,10 @@ export const FieldTraining = ({
                       addFieldTraining.end_date
                     ) {
                       setAdd(true)
-                      setEditData([
+
+                      const editDataArray: UserEditType = [
                         {
-                          action: 'add',
+                          action: 'add' as const,
                           datas: {
                             field_training: {
                               ...addFieldTraining,
@@ -251,7 +264,34 @@ export const FieldTraining = ({
                             },
                           },
                         },
-                      ])
+                      ]
+
+                      if (autoEmployment) {
+                        const employmentStartDate = new Date(
+                          addFieldTraining.end_date
+                        )
+                        employmentStartDate.setDate(
+                          employmentStartDate.getDate() + 1
+                        )
+
+                        editDataArray.push({
+                          action: 'add' as const,
+                          datas: {
+                            employment_companies: {
+                              student_id: currentRow.student_id,
+                              company_id: addFieldTraining.company_id,
+                              job_id: addFieldTraining.job_id,
+                              start_date: employmentStartDate
+                                .toISOString()
+                                .split('T')[0],
+                              end_date: null, // 취업 종료일은 null로 설정
+                              created_at: new Date().toISOString(),
+                            },
+                          },
+                        })
+                      }
+
+                      setEditData(editDataArray)
                     } else {
                       alert('누락된 현장 실습 정보가 있습니다.')
                     }

@@ -35,6 +35,7 @@ export const handleEmployment = async (editDataList: UserEditType) => {
       start_date: data.start_date,
       end_date: data.end_date,
       job_id: data.job_id,
+      is_working: data.is_working,
     }
 
     switch (editData.action) {
