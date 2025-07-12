@@ -1,6 +1,5 @@
 import {
   // IconBarrierBlock,
-  IconBrowserCheck,
   // IconBug,
   // IconChartCandle,  
   IconChecklist,
@@ -87,25 +86,21 @@ export const sidebarData: SidebarData = {
               icon: IconUserCog,
             },
             {
-              title: 'Account',
+              title: 'Post Settings',
               url: '/settings/account',
               icon: IconTool,
+            },
+            {
+              title: 'Comments Settings',
+              url: '/settings/notifications',
+              icon: IconNotification,
             },
             {
               title: 'Appearance',
               url: '/settings/appearance',
               icon: IconPalette,
             },
-            {
-              title: 'Notifications',
-              url: '/settings/notifications',
-              icon: IconNotification,
-            },
-            {
-              title: 'Display',
-              url: '/settings/display',
-              icon: IconBrowserCheck,
-            },
+            
           ],
         },
         // {
