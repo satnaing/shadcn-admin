@@ -57,13 +57,13 @@ const sidebarNavItems = [
   {
     title: 'Post Settings',
     icon: <IconTool size={18} />,
-    href: '/settings/account',
+    href: '/settings/post',
   },
 
   {
     title: 'Comments',
     icon: <IconNotification size={18} />,
-    href: '/settings/notifications',
+    href: '/settings/comments',
   },
     {
     title: 'Appearance',

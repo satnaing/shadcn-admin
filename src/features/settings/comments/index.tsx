@@ -1,5 +1,5 @@
 import ContentSection from '../components/content-section'
-import { NotificationsForm } from './notifications-form'
+import { CommentsForm } from './comments-form'
 
 export default function SettingsNotifications() {
   return (
@@ -7,7 +7,7 @@ export default function SettingsNotifications() {
       title='Notifications'
       desc='Configure how you receive notifications.'
     >
-      <NotificationsForm />
+      <CommentsForm />
     </ContentSection>
   )
 }

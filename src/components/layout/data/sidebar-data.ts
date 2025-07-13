@@ -87,12 +87,12 @@ export const sidebarData: SidebarData = {
             },
             {
               title: 'Post Settings',
-              url: '/settings/account',
+              url: '/settings/post',
               icon: IconTool,
             },
             {
               title: 'Comments Settings',
-              url: '/settings/notifications',
+              url: '/settings/comments',
               icon: IconNotification,
             },
             {

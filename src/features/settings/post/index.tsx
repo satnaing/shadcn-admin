@@ -1,5 +1,5 @@
 import ContentSection from '../components/content-section'
-import { AccountForm } from './account-form'
+import { PostForm } from './post-form'
 
 export default function SettingsAccount() {
   return (
@@ -8,7 +8,7 @@ export default function SettingsAccount() {
       desc='Update your account settings. Set your preferred language and
           timezone.'
     >
-      <AccountForm />
+      <PostForm />
     </ContentSection>
   )
 }
