@@ -18,6 +18,7 @@ import { useUsers } from '../context/users-context'
 import { UserDetailType, UserEditType } from '../data/schema'
 import { FieldTrainingUpdate } from '../services/field-training/handleFieldTraining'
 import { useJobListQuery } from '../services/field-training/selectJobList'
+import { AddFieldTrainingOption } from './add-field-training-option'
 
 type addFieldTrainingType = Pick<
   FieldTrainingUpdate,
@@ -32,8 +33,9 @@ export const FieldTraining = ({
   const { editingSection, setEditData } = useEditUser()
   const { currentRow } = useUsers()
 
-  const { data: companies = [] } = useCompanyListQuery()
-  const { data: jobs = [] } = useJobListQuery()
+  const { data: companies = [], refetch: refetchCompanies } =
+    useCompanyListQuery()
+  const { data: jobs = [], refetch: refetchJobs } = useJobListQuery()
 
   const currentFieldTraining =
     datas.length > 0 ? getCurrentFieldTraining({ datas }) : null
@@ -129,6 +131,13 @@ export const FieldTraining = ({
                             {job.job_name}
                           </SelectItem>
                         ))}
+                        <AddFieldTrainingOption
+                          type='job'
+                          onClick={() => {}}
+                          onSuccess={() => {
+                            refetchJobs()
+                          }}
+                        />
                       </SelectContent>
                     </Select>
                   </div>
@@ -150,6 +159,13 @@ export const FieldTraining = ({
                             {company.company_name}
                           </SelectItem>
                         ))}
+                        <AddFieldTrainingOption
+                          type='company'
+                          onClick={() => {}}
+                          onSuccess={() => {
+                            refetchCompanies()
+                          }}
+                        />
                       </SelectContent>
                     </Select>
                   </div>
@@ -202,6 +218,15 @@ export const FieldTraining = ({
                         {job.job_name}
                       </SelectItem>
                     ))}
+                    <AddFieldTrainingOption
+                      type='job'
+                      onClick={() => {
+                        // 여기에 직무 추가 로직 구현 예정
+                      }}
+                      onSuccess={() => {
+                        refetchJobs()
+                      }}
+                    />
                   </SelectContent>
                 </Select>
               </div>
@@ -227,6 +252,15 @@ export const FieldTraining = ({
                         {company.company_name}
                       </SelectItem>
                     ))}
+                    <AddFieldTrainingOption
+                      type='company'
+                      onClick={() => {
+                        // 여기에 회사 추가 로직 구현 예정
+                      }}
+                      onSuccess={() => {
+                        refetchCompanies()
+                      }}
+                    />
                   </SelectContent>
                 </Select>
               </div>
