@@ -9,15 +9,21 @@ import { showSubmittedData } from '@/utils/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import {
-  Form,
-} from '@/components/ui/form'
+import { Form } from '@/components/ui/form'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { buildSearchUrl } from '@/features/settings/utils/linkedin.util'
 
 const notificationsFormSchema = z.object({
   keywords: z.array(z.string()).max(6),
   authorTitles: z.array(z.string()),
   geography: z.enum(['global', 'north-america', 'europe', 'asia']),
+  numberOfPostsToScrapePerDay: z.number().min(1).max(50),
+  engagementThreshold: z.enum(['strict', 'moderate', 'disabled']),
+  skipHiringPosts: z.boolean(),
+  skipJobUpdatePosts: z.boolean(),
+  skipArticlePosts: z.boolean(),
+  autoSchedule: z.boolean(),
+  rules: z.string().optional(),
 })
 
 type NotificationsFormValues = z.infer<typeof notificationsFormSchema>
@@ -44,7 +50,14 @@ export function PostForm() {
     defaultValues: {
       keywords: ["AI", "SaaS"],
       authorTitles: [],
-      geography: "global"
+      geography: "global",
+      numberOfPostsToScrapePerDay: 20,
+      engagementThreshold: "moderate",
+      skipHiringPosts: true,
+      skipJobUpdatePosts: true,
+      skipArticlePosts: true,
+      autoSchedule: true,
+      rules: ""
     }
   })
 
@@ -53,6 +66,9 @@ export function PostForm() {
   const selectedKeywords = form.watch("keywords") || []
   const authorTitles = form.watch("authorTitles") || []
   const geography = form.watch("geography")
+
+  // Build LinkedIn search URL for selected keywords
+  const liSearchUrl = buildSearchUrl(selectedKeywords)
 
   const handleKeywordSelect = (keyword: string) => {
     if (selectedKeywords.includes(keyword)) {
@@ -109,11 +125,12 @@ export function PostForm() {
         onSubmit={form.handleSubmit((data) => showSubmittedData(data))}
         className="space-y-8"
       >
+       
         {/* Keywords Section */}
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-4">
             <Hash className="w-4 h-4 text-muted-foreground" />
-            <span className="text-foreground font-semibold">Select keywords (Choose up to 6)</span>
+            <span className="text-foreground font-semibold">Target Keywords (Choose up to 6)</span>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -183,8 +200,63 @@ export function PostForm() {
             </div>
           </div>
 
-          <p className="mt-4 text-sm text-muted-foreground">
-            {selectedKeywords.length}/6 keywords selected
+          <div className="mt-4 flex justify-between items-center">
+            <p className="text-sm text-muted-foreground">
+              {selectedKeywords.length}/6 keywords selected
+            </p>
+            {selectedKeywords.length > 0 && (
+              <a 
+                href={liSearchUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm text-blue-500 hover:underline"
+              >
+                Preview LinkedIn posts for these keywords
+              </a>
+            )}
+          </div>
+        </div>
+
+        {/* Posts Per Day */}
+        <div className="mb-6">
+          <Label className="text-foreground font-semibold">Number of posts to comment per day</Label>
+          <Input
+            type="number"
+            min={1}
+            max={50}
+            className="mt-2 w-32"
+            {...form.register("numberOfPostsToScrapePerDay", { valueAsNumber: true })}
+          />
+          <p className="mt-2 text-sm text-muted-foreground">
+            Max. 50 posts per day
+          </p>
+        </div>
+
+        {/* Engagement Threshold */}
+        <div className="mb-6">
+          <Label className="text-foreground font-semibold">Comment Monitoring Based on Engagement</Label>
+          <div className="flex flex-wrap gap-3 mt-3">
+            {[
+              { value: "strict", label: "Strict Engagement Check" },
+              { value: "moderate", label: "Moderate Engagement Check" },
+              { value: "disabled", label: "Comment Immediately" }
+            ].map((option) => (
+              <button
+                type="button"
+                key={option.value}
+                onClick={() => form.setValue("engagementThreshold", option.value as any)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 ${
+                  form.watch("engagementThreshold") === option.value
+                    ? "bg-primary/10 border-primary text-primary"
+                    : "bg-card border-border text-card-foreground hover:border-primary/30 hover:shadow-sm"
+                }`}
+              >
+                <span className="text-sm font-medium">{option.label}</span>
+              </button>
+            ))}
+          </div>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Choose when to post comments based on the engagement level
           </p>
         </div>
 
@@ -323,6 +395,65 @@ export function PostForm() {
               </div>
             </div>
           )}
+        </div>
+
+        {/* Skip Options */}
+        <div className="space-y-4 mb-6">
+          <Label className="text-foreground font-semibold">Skip commenting on</Label>
+          <div className="flex flex-wrap gap-4">
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="skipHiringPosts"
+                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                {...form.register("skipHiringPosts")}
+              />
+              <Label htmlFor="skipHiringPosts">Hiring Posts</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="skipJobUpdatePosts"
+                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                {...form.register("skipJobUpdatePosts")}
+              />
+              <Label htmlFor="skipJobUpdatePosts">Job Update Posts</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="skipArticlePosts"
+                className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                {...form.register("skipArticlePosts")}
+              />
+              <Label htmlFor="skipArticlePosts">Article Posts</Label>
+            </div>
+          </div>
+        </div>
+
+        {/* Auto Schedule */}
+        <div className="flex items-center space-x-2 mb-6">
+          <input
+            type="checkbox"
+            id="autoSchedule"
+            className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+            {...form.register("autoSchedule")}
+          />
+          <Label htmlFor="autoSchedule">Post comments automatically</Label>
+        </div>
+
+        {/* Additional Rules */}
+        <div className="mb-6">
+          <Label className="text-foreground font-semibold">Additional Post Evaluation Rules</Label>
+          <textarea
+            className="mt-2 flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+            placeholder="Set a rule, e.g., Skip posts with hashtags like #ad or #sponsored."
+            rows={3}
+            {...form.register("rules")}
+          />
+          <p className="mt-2 text-sm text-muted-foreground">
+            Specify rules to decide if a post is worth commenting on.
+          </p>
         </div>
 
         <Button type="submit">Update settings</Button>
