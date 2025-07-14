@@ -1,18 +1,12 @@
 import { envConfig } from '@/config/env.config'
+import { QueryService } from '@/services/query.service'
+import { toast } from 'react-toastify'
 import {
   GET_PROFILE_DETAILS,
   LINK_LI_ACCOUNT,
-} from '@/constant/browserEvents.constant'
-import { QueryService } from '@/services/query.service'
-import { type ClassValue, clsx } from 'clsx'
-import { toast } from 'react-toastify'
-import { twMerge } from 'tailwind-merge'
-import { IProfileResponseFromExtension } from '@/features/auth/interface/user.interface'
-import { ProfileQueryEnum } from '@/features/users/query/profile.query'
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
+} from './constants/browserEvents.constant'
+import { ProfileQueryEnum } from './query/profile.query'
+import { IProfileResponseFromExtension } from './interface/profile.interface'
 
 export const checkIsExtensionInstalled = async (
   extensionId: string,
