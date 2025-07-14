@@ -6,6 +6,8 @@ import { IProfile } from '@/features/linkedin-profile/interface/profile.interfac
 
 // src/context/profile.context.tsx
 
+// src/context/profile.context.tsx
+
 interface ProfileContextType {
   activeProfile: IProfile | null
   setActiveProfile: (profile: IProfile) => void

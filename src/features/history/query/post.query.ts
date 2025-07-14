@@ -1,6 +1,6 @@
+import { QueryService } from '@/services/query.service'
 import { useInfiniteQuery, useMutation, useQuery } from 'react-query'
 import { toast } from 'react-toastify'
-import { QueryService } from 'services/query.service'
 import {
   approvePosts,
   editPostComment,

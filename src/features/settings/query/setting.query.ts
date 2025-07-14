@@ -1,43 +1,68 @@
+import { AxiosError } from 'axios'
 import { useMutation } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
-import { createSetting, updateSetting } from '../api/setting.api'
+import { createSetting, updateSetting } from '../types/setting.api'
+import { ISettingPayload } from '../types/setting.api'
 
-export const useCreateSettingQuery = ({ history }: { history: any }) => {
-  const { mutate, isLoading } = useMutation(createSetting, {
-    onSuccess: () => {
-      history.push(`/`)
-    },
-    onError: (error: any) => {
-      toast(
-        error?.response?.data?.message ||
-          error?.message ||
-          'Something went wrong while creating leads',
-        {
-          type: 'error',
-        }
-      )
-    },
-  })
+type UserPlan = 'starter' | 'pro' | 'premium'
 
-  return { createSetting: mutate, isCreatingSetting: isLoading }
+type SettingPayload = ISettingPayload & {
+  userPlan?: UserPlan
 }
 
-export const useUpdateSettingQuery = ({ history }: { history: any }) => {
-  const { mutate, isLoading } = useMutation(updateSetting, {
+export const useCreateSettingQuery = () => {
+  const router = useRouter()
+
+  const { mutate, isPending } = useMutation<
+    unknown,
+    AxiosError<{ message?: string }>,
+    SettingPayload
+  >({
+    mutationFn: createSetting,
     onSuccess: () => {
-      history.push(`/`)
+      router.push('/')
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast(
         error?.response?.data?.message ||
           error?.message ||
-          'Something went wrong while creating leads',
-        {
-          type: 'error',
-        }
+          'Something went wrong while creating settings',
+        { type: 'error' }
       )
     },
   })
 
-  return { updateSetting: mutate, isUpdatingSetting: isLoading }
+  return {
+    createSetting: mutate,
+    isCreatingSetting: isPending,
+  }
+}
+
+export const useUpdateSettingQuery = () => {
+  const router = useRouter()
+
+  const { mutate, isPending } = useMutation<
+    unknown,
+    AxiosError<{ message?: string }>,
+    SettingPayload
+  >({
+    mutationFn: updateSetting,
+    onSuccess: () => {
+      router.push('/')
+    },
+    onError: (error) => {
+      toast(
+        error?.response?.data?.message ||
+          error?.message ||
+          'Something went wrong while updating settings',
+        { type: 'error' }
+      )
+    },
+  })
+
+  return {
+    updateSetting: mutate,
+    isUpdatingSetting: isPending,
+  }
 }

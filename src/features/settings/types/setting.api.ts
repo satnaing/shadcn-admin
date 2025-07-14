@@ -1,5 +1,4 @@
 import { axiosInstance } from '@/utils/axios.util'
-import { ISettingPayload } from '../interface/setting.interface'
 
 export async function createSetting(
   payload: ISettingPayload & { userPlan?: 'starter' | 'pro' | 'premium' }
@@ -26,4 +25,23 @@ export async function updateSetting(
     data: payload,
   })
   return data
+}
+
+// interface/setting.interface.ts
+
+export interface ISettingPayload {
+  profileId: string
+  name: string
+  value: string
+  // Add any additional fields used in the payload
+}
+
+export type UserPlan = 'starter' | 'pro' | 'premium'
+
+export type CreateSettingPayload = Omit<ISettingPayload, 'profileId'> & {
+  userPlan?: UserPlan
+}
+
+export type UpdateSettingPayload = ISettingPayload & {
+  userPlan?: UserPlan
 }
