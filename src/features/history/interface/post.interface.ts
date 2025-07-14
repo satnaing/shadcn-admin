@@ -1,4 +1,4 @@
-import { IProfile } from "views/admin/linkedin-profile/interface/profile.interface";
+import { IProfile } from "@/features/linkedin-profile/interface/profile.interface";
 import { CommentStatusEnum } from "../enum/comment.enum";
 
 export interface IPost {
