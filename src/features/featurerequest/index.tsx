@@ -27,7 +27,7 @@ const appText = new Map<string, string>([
   ['notConnected', 'Not Connected'],
 ])
 
-export default function Apps() {
+export default function FeatureRequest() {
   const [sort, setSort] = useState('ascending')
   const [appType, setAppType] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')

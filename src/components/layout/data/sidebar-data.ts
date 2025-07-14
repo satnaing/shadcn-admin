@@ -46,12 +46,12 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'History',
-          url: '/tasks',
+          url: '/history',
           icon: IconChecklist,
         },
         {
           title: 'Feature Request',
-          url: '/apps',
+          url: '/featurerequest',
           icon: IconPackages,
         },
         {
