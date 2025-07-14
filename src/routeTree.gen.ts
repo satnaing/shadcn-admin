@@ -36,7 +36,6 @@ import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_auth
 import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
 import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
 import { Route as AuthenticatedSettingsPostRouteImport } from './routes/_authenticated/settings/post'
-import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsCommentsRouteImport } from './routes/_authenticated/settings/comments'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 
@@ -179,12 +178,6 @@ const AuthenticatedSettingsPostRoute =
     path: '/post',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-const AuthenticatedSettingsDisplayRoute =
-  AuthenticatedSettingsDisplayRouteImport.update({
-    id: '/display',
-    path: '/display',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any)
 const AuthenticatedSettingsCommentsRoute =
   AuthenticatedSettingsCommentsRouteImport.update({
     id: '/comments',
@@ -221,7 +214,6 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingIndexRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/comments': typeof AuthenticatedSettingsCommentsRoute
-  '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/post': typeof AuthenticatedSettingsPostRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
@@ -251,7 +243,6 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingIndexRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/comments': typeof AuthenticatedSettingsCommentsRoute
-  '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/post': typeof AuthenticatedSettingsPostRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
@@ -284,7 +275,6 @@ export interface FileRoutesById {
   '/onboarding/': typeof OnboardingIndexRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/comments': typeof AuthenticatedSettingsCommentsRoute
-  '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/_authenticated/settings/post': typeof AuthenticatedSettingsPostRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
@@ -318,7 +308,6 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/settings/appearance'
     | '/settings/comments'
-    | '/settings/display'
     | '/settings/post'
     | '/apps'
     | '/chats'
@@ -348,7 +337,6 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/settings/appearance'
     | '/settings/comments'
-    | '/settings/display'
     | '/settings/post'
     | '/apps'
     | '/chats'
@@ -380,7 +368,6 @@ export interface FileRouteTypes {
     | '/onboarding/'
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/comments'
-    | '/_authenticated/settings/display'
     | '/_authenticated/settings/post'
     | '/_authenticated/apps/'
     | '/_authenticated/chats/'
@@ -602,13 +589,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsPostRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
-    '/_authenticated/settings/display': {
-      id: '/_authenticated/settings/display'
-      path: '/display'
-      fullPath: '/settings/display'
-      preLoaderRoute: typeof AuthenticatedSettingsDisplayRouteImport
-      parentRoute: typeof AuthenticatedSettingsRouteRoute
-    }
     '/_authenticated/settings/comments': {
       id: '/_authenticated/settings/comments'
       path: '/comments'
@@ -629,7 +609,6 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
   AuthenticatedSettingsCommentsRoute: typeof AuthenticatedSettingsCommentsRoute
-  AuthenticatedSettingsDisplayRoute: typeof AuthenticatedSettingsDisplayRoute
   AuthenticatedSettingsPostRoute: typeof AuthenticatedSettingsPostRoute
   AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
 }
@@ -638,7 +617,6 @@ const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteCh
   {
     AuthenticatedSettingsAppearanceRoute: AuthenticatedSettingsAppearanceRoute,
     AuthenticatedSettingsCommentsRoute: AuthenticatedSettingsCommentsRoute,
-    AuthenticatedSettingsDisplayRoute: AuthenticatedSettingsDisplayRoute,
     AuthenticatedSettingsPostRoute: AuthenticatedSettingsPostRoute,
     AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
   }
