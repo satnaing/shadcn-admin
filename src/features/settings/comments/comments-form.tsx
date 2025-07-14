@@ -1,16 +1,19 @@
-"use client"
+'use client'
 
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { planSetting } from '@/config/plan-setting.config'
+import {
+  MessageSquare,
+  Settings,
+  Smile,
+  Info,
+  Hash,
+  ArrowLeft,
+} from 'lucide-react'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { Button } from '@/components/ui/button'
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Switch } from "@/components/ui/switch"
-import { Input } from "@/components/ui/input"
-import { MessageSquare, Settings, Smile, Info, Hash, ArrowLeft } from "lucide-react"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import {
   Form,
   FormControl,
@@ -20,12 +23,27 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 import { useGetUserQuery } from '@/features/auth/query/user.query'
-import { planSetting } from '@/config/plan-setting.config'
 
 const commentSettingsSchema = z.object({
   about: z.string().min(10, {
-    message: "Profile description must be at least 10 characters.",
+    message: 'Profile description must be at least 10 characters.',
   }),
   length: z.enum(['short', 'medium', 'long']),
   commentsPerDay: z.number().min(0).max(100),
@@ -50,10 +68,15 @@ const defaultValues: Partial<CommentSettingsValues> = {
 
 export function CommentsForm({ prev }: { prev?: () => void }) {
   const { data: user } = useGetUserQuery()
-  const userPlan = user?.subscribedProduct?.name?.toLowerCase() as 'starter' | 'pro' | 'premium'
-  
-  const shouldDisplayTagAuthorSetting = planSetting['tagAuthor']?.[userPlan] ?? false
-  const shouldDisplayCommentRulesSetting = planSetting['commentRules']?.[userPlan] ?? false
+  const userPlan = user?.subscribedProduct?.name?.toLowerCase() as
+    | 'starter'
+    | 'pro'
+    | 'premium'
+
+  const shouldDisplayTagAuthorSetting =
+    planSetting['tagAuthor']?.[userPlan] ?? false
+  const shouldDisplayCommentRulesSetting =
+    planSetting['commentRules']?.[userPlan] ?? false
 
   const form = useForm<CommentSettingsValues>({
     resolver: zodResolver(commentSettingsSchema),
@@ -67,7 +90,7 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
       // Add any additional transformations here
     }
     showSubmittedData(payload)
-    
+
     // If you need to call an API:
     // if (activeProfile?._id) {
     //   updateOrCreateSetting({
@@ -80,31 +103,35 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
         {/* Profile Info */}
-        
 
         {/* About Profile Section */}
         <FormField
           control={form.control}
-          name="about"
+          name='about'
           render={({ field }) => (
             <FormItem>
-              <div className="flex items-center gap-2 mb-2">
-                <MessageSquare className="w-4 h-4 text-muted-foreground" />
-                <FormLabel className="text-foreground font-semibold">About You</FormLabel>
+              <div className='mb-2 flex items-center gap-2'>
+                <MessageSquare className='text-muted-foreground h-4 w-4' />
+                <FormLabel className='text-foreground font-semibold'>
+                  About You
+                </FormLabel>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <div className="w-4 h-4 rounded-full border border-border flex items-center justify-center cursor-help">
-                        <Info className="w-3 h-3 text-muted-foreground" />
+                      <div className='border-border flex h-4 w-4 cursor-help items-center justify-center rounded-full border'>
+                        <Info className='text-muted-foreground h-3 w-3' />
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent side="right" className="max-w-xs">
-                      <p>Describe your background to help generate<br/>comments that match your expertise<br/>and professional voice</p>
+                    <TooltipContent side='right' className='max-w-xs'>
+                      <p>
+                        Describe your background to help generate
+                        <br />
+                        comments that match your expertise
+                        <br />
+                        and professional voice
+                      </p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -112,7 +139,7 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
               <FormControl>
                 <Textarea
                   placeholder="I'm a digital marketer... I help people... I've helped 50+ founders to... After many failures, I learned that..."
-                  className="min-h-[120px]"
+                  className='min-h-[120px]'
                   {...field}
                 />
               </FormControl>
@@ -128,21 +155,27 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
         {shouldDisplayCommentRulesSetting && (
           <FormField
             control={form.control}
-            name="rules"
+            name='rules'
             render={({ field }) => (
               <FormItem>
-                <div className="flex items-center gap-2 mb-2">
-                  <Hash className="w-4 h-4 text-muted-foreground" />
-                  <FormLabel className="text-foreground font-semibold">Additional Comment Generation Rules</FormLabel>
+                <div className='mb-2 flex items-center gap-2'>
+                  <Hash className='text-muted-foreground h-4 w-4' />
+                  <FormLabel className='text-foreground font-semibold'>
+                    Additional Comment Generation Rules
+                  </FormLabel>
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <div className="w-4 h-4 rounded-full border border-border flex items-center justify-center cursor-help">
-                          <Info className="w-3 h-3 text-muted-foreground" />
+                        <div className='border-border flex h-4 w-4 cursor-help items-center justify-center rounded-full border'>
+                          <Info className='text-muted-foreground h-3 w-3' />
                         </div>
                       </TooltipTrigger>
-                      <TooltipContent side="right" className="max-w-xs">
-                        <p>Write additional rules to customize<br/>how comments should be generated</p>
+                      <TooltipContent side='right' className='max-w-xs'>
+                        <p>
+                          Write additional rules to customize
+                          <br />
+                          how comments should be generated
+                        </p>
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -150,7 +183,7 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
                 <FormControl>
                   <Textarea
                     placeholder="Write additional rules, e.g., Avoid phrases like 'Great post' or 'Nice work."
-                    className="min-h-[100px]"
+                    className='min-h-[100px]'
                     {...field}
                   />
                 </FormControl>
@@ -161,42 +194,49 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
         )}
 
         {/* Comment Settings Section */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Settings className="w-4 h-4 text-muted-foreground" />
-            <h3 className="text-lg font-medium">Comment Settings</h3>
+        <div className='space-y-4'>
+          <div className='flex items-center gap-2'>
+            <Settings className='text-muted-foreground h-4 w-4' />
+            <h3 className='text-lg font-medium'>Comment Settings</h3>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="w-4 h-4 rounded-full border border-border flex items-center justify-center cursor-help">
-                    <Info className="w-3 h-3 text-muted-foreground" />
+                  <div className='border-border flex h-4 w-4 cursor-help items-center justify-center rounded-full border'>
+                    <Info className='text-muted-foreground h-3 w-3' />
                   </div>
                 </TooltipTrigger>
-                <TooltipContent side="right" className="max-w-xs">
-                  <p>Control the length of generated comments and<br/>set your preferred daily comment volume</p>
+                <TooltipContent side='right' className='max-w-xs'>
+                  <p>
+                    Control the length of generated comments and
+                    <br />
+                    set your preferred daily comment volume
+                  </p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
             {/* Comment Length */}
             <FormField
               control={form.control}
-              name="length"
+              name='length'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Comment Length</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select comment length" />
+                        <SelectValue placeholder='Select comment length' />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="short">Short (10 words)</SelectItem>
-                      <SelectItem value="medium">Medium (15 words)</SelectItem>
-                      <SelectItem value="long">Long (25 words)</SelectItem>
+                      <SelectItem value='short'>Short (10 words)</SelectItem>
+                      <SelectItem value='medium'>Medium (15 words)</SelectItem>
+                      <SelectItem value='long'>Long (25 words)</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -207,19 +247,19 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
             {/* Comments Per Day */}
             <FormField
               control={form.control}
-              name="commentsPerDay"
+              name='commentsPerDay'
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex items-center gap-2">
+                  <div className='flex items-center gap-2'>
                     <FormLabel>Comments Per Day</FormLabel>
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <div className="w-4 h-4 rounded-full border border-border flex items-center justify-center cursor-help">
-                            <Info className="w-3 h-3 text-muted-foreground" />
+                          <div className='border-border flex h-4 w-4 cursor-help items-center justify-center rounded-full border'>
+                            <Info className='text-muted-foreground h-3 w-3' />
                           </div>
                         </TooltipTrigger>
-                        <TooltipContent side="right" className="max-w-xs">
+                        <TooltipContent side='right' className='max-w-xs'>
                           <p>Set your preferred daily comment volume</p>
                         </TooltipContent>
                       </Tooltip>
@@ -227,12 +267,15 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
                   </div>
                   <FormControl>
                     <Input
-                      type="number"
+                      type='number'
                       min={0}
                       max={100}
                       {...field}
                       onChange={(e) => {
-                        const val = Math.min(100, Math.max(0, Number(e.target.value)))
+                        const val = Math.min(
+                          100,
+                          Math.max(0, Number(e.target.value))
+                        )
                         field.onChange(val)
                       }}
                     />
@@ -245,34 +288,32 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
         </div>
 
         {/* Writer Settings Section */}
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Smile className="w-4 h-4 text-muted-foreground" />
-            <h3 className="text-lg font-medium">Writer Settings</h3>
+        <div className='space-y-4'>
+          <div className='flex items-center gap-2'>
+            <Smile className='text-muted-foreground h-4 w-4' />
+            <h3 className='text-lg font-medium'>Writer Settings</h3>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div className="w-4 h-4 rounded-full border border-border flex items-center justify-center cursor-help">
-                    <Info className="w-3 h-3 text-muted-foreground" />
+                  <div className='border-border flex h-4 w-4 cursor-help items-center justify-center rounded-full border'>
+                    <Info className='text-muted-foreground h-3 w-3' />
                   </div>
                 </TooltipTrigger>
-                <TooltipContent side="right" className="max-w-xs">
+                <TooltipContent side='right' className='max-w-xs'>
                   <p>Customize the tone and style of your automated comments</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
           </div>
 
-          <div className="space-y-4">
+          <div className='space-y-4'>
             <FormField
               control={form.control}
-              name="turnOnEmoji"
+              name='turnOnEmoji'
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">
-                      Turn on emoji
-                    </FormLabel>
+                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
+                  <div className='space-y-0.5'>
+                    <FormLabel className='text-base'>Turn on emoji</FormLabel>
                     <FormDescription>
                       Include relevant emojis in comments
                     </FormDescription>
@@ -289,11 +330,11 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
 
             <FormField
               control={form.control}
-              name="turnOnExclamations"
+              name='turnOnExclamations'
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">
+                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
+                  <div className='space-y-0.5'>
+                    <FormLabel className='text-base'>
                       Turn on exclamations
                     </FormLabel>
                     <FormDescription>
@@ -312,11 +353,11 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
 
             <FormField
               control={form.control}
-              name="turnOnHashtags"
+              name='turnOnHashtags'
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">
+                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
+                  <div className='space-y-0.5'>
+                    <FormLabel className='text-base'>
                       Turn on hashtags
                     </FormLabel>
                     <FormDescription>
@@ -336,11 +377,11 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
             {shouldDisplayTagAuthorSetting && (
               <FormField
                 control={form.control}
-                name="tagAuthor"
+                name='tagAuthor'
                 render={({ field }) => (
-                  <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                    <div className="space-y-0.5">
-                      <FormLabel className="text-base">
+                  <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
+                    <div className='space-y-0.5'>
+                      <FormLabel className='text-base'>
                         Tag Post Author
                       </FormLabel>
                       <FormDescription>
@@ -361,18 +402,14 @@ export function CommentsForm({ prev }: { prev?: () => void }) {
         </div>
 
         {/* Form Actions */}
-        <div className="flex justify-between">
+        <div className='flex justify-between'>
           {prev && (
-            <Button 
-              variant="outline" 
-              onClick={prev}
-              className="gap-2"
-            >
-              <ArrowLeft className="w-4 h-4" />
+            <Button variant='outline' onClick={prev} className='gap-2'>
+              <ArrowLeft className='h-4 w-4' />
               Back
             </Button>
           )}
-          <Button type="submit">Update settings</Button>
+          <Button type='submit'>Update settings</Button>
         </div>
       </form>
     </Form>

@@ -1,7 +1,7 @@
-import Tracker from "@openreplay/tracker";
+import Tracker from '@openreplay/tracker'
 
 export class OpenReplayInstance {
-  private static instance: Tracker;
+  private static instance: Tracker
 
   public static getInstance(projectId: string): Tracker {
     if (!OpenReplayInstance.instance) {
@@ -15,8 +15,8 @@ export class OpenReplayInstance {
           capturePayload: true,
           captureInIframes: true,
         },
-      });
+      })
     }
-    return OpenReplayInstance.instance;
+    return OpenReplayInstance.instance
   }
 }

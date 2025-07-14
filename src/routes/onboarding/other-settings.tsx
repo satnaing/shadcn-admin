@@ -7,5 +7,5 @@ export const Route = createFileRoute('/onboarding/other-settings')({
     <OnboardingLayout>
       <OtherSettingStep />
     </OnboardingLayout>
-  )
+  ),
 })

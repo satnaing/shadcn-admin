@@ -1,40 +1,59 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { Edit3, Sparkles, MessageCircle, Users, TrendingUp, Zap } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
+import { useState, useEffect } from 'react'
+import {
+  Edit3,
+  Sparkles,
+  MessageCircle,
+  Users,
+  TrendingUp,
+  Zap,
+} from 'lucide-react'
+import { cn } from '@/lib/utils'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
 const NOTIFICATION_DATA = [
   {
     icon: Edit3,
-    title: "Make it yours: Edit any element with familiar tools",
-    subtitle: "Click any text, image, or object to edit directly - just like in PowerPoint or Google Slides.",
+    title: 'Make it yours: Edit any element with familiar tools',
+    subtitle:
+      'Click any text, image, or object to edit directly - just like in PowerPoint or Google Slides.',
   },
   {
     icon: Sparkles,
-    title: "AI-Powered Comments: Generate engaging responses instantly",
-    subtitle: "Our AI analyzes post context and creates authentic, professional comments that drive engagement.",
+    title: 'AI-Powered Comments: Generate engaging responses instantly',
+    subtitle:
+      'Our AI analyzes post context and creates authentic, professional comments that drive engagement.',
   },
   {
     icon: MessageCircle,
-    title: "Smart Engagement: Boost your LinkedIn presence",
-    subtitle: "Automatically generate thoughtful comments that spark meaningful conversations with your network.",
+    title: 'Smart Engagement: Boost your LinkedIn presence',
+    subtitle:
+      'Automatically generate thoughtful comments that spark meaningful conversations with your network.',
   },
   {
     icon: Users,
-    title: "Professional Networking: Connect with purpose",
-    subtitle: "Build stronger relationships with personalized, context-aware interactions across your feed.",
+    title: 'Professional Networking: Connect with purpose',
+    subtitle:
+      'Build stronger relationships with personalized, context-aware interactions across your feed.',
   },
   {
     icon: TrendingUp,
-    title: "Analytics Dashboard: Track your engagement growth",
-    subtitle: "Monitor comment performance, engagement rates, and network growth with detailed insights.",
+    title: 'Analytics Dashboard: Track your engagement growth',
+    subtitle:
+      'Monitor comment performance, engagement rates, and network growth with detailed insights.',
   },
   {
     icon: Zap,
-    title: "Lightning Fast: Generate comments in seconds",
-    subtitle: "Save hours of time with instant, high-quality comment generation powered by advanced AI.",
+    title: 'Lightning Fast: Generate comments in seconds',
+    subtitle:
+      'Save hours of time with instant, high-quality comment generation powered by advanced AI.',
   },
 ]
 
@@ -88,42 +107,42 @@ export default function RotatingNotification() {
     <>
       {/* Background Blur Overlay - stays until completed */}
       {!isCompleted && (
-        <div className="fixed inset-0 bg-background/20 backdrop-blur-sm z-40 transition-all duration-300" />
+        <div className='bg-background/20 fixed inset-0 z-40 backdrop-blur-sm transition-all duration-300' />
       )}
 
-      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 max-w-lg w-full mx-4">
+      <div className='fixed bottom-8 left-1/2 z-50 mx-4 w-full max-w-lg -translate-x-1/2 transform'>
         <Card
           className={cn(
-            "rounded-3xl shadow-lg border border-border bg-card transition-all duration-500",
-            isCompleted && "opacity-0 translate-y-4",
+            'border-border bg-card rounded-3xl border shadow-lg transition-all duration-500',
+            isCompleted && 'translate-y-4 opacity-0'
           )}
         >
-          <CardHeader className="pb-3">
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0">
+          <CardHeader className='pb-3'>
+            <div className='flex items-start gap-3'>
+              <div className='flex-shrink-0'>
                 <div
                   className={cn(
-                    "w-10 h-10 bg-primary rounded-2xl flex items-center justify-center shadow-sm transition-opacity duration-300",
-                    textVisible ? "opacity-100" : "opacity-60",
+                    'bg-primary flex h-10 w-10 items-center justify-center rounded-2xl shadow-sm transition-opacity duration-300',
+                    textVisible ? 'opacity-100' : 'opacity-60'
                   )}
                 >
-                  <IconComponent className="w-5 h-5 text-primary-foreground" />
+                  <IconComponent className='text-primary-foreground h-5 w-5' />
                 </div>
               </div>
 
-              <div className="flex-1 min-w-0 space-y-1">
+              <div className='min-w-0 flex-1 space-y-1'>
                 <CardTitle
                   className={cn(
-                    "text-base font-bold text-foreground leading-tight transition-opacity duration-300",
-                    textVisible ? "opacity-100" : "opacity-0",
+                    'text-foreground text-base leading-tight font-bold transition-opacity duration-300',
+                    textVisible ? 'opacity-100' : 'opacity-0'
                   )}
                 >
                   {currentNotification.title}
                 </CardTitle>
                 <CardDescription
                   className={cn(
-                    "text-xs text-muted-foreground leading-relaxed transition-opacity duration-300 delay-75",
-                    textVisible ? "opacity-100" : "opacity-0",
+                    'text-muted-foreground text-xs leading-relaxed transition-opacity delay-75 duration-300',
+                    textVisible ? 'opacity-100' : 'opacity-0'
                   )}
                 >
                   {currentNotification.subtitle}
@@ -132,18 +151,18 @@ export default function RotatingNotification() {
             </div>
           </CardHeader>
 
-          <CardContent className="pt-0">
+          <CardContent className='pt-0'>
             {/* Progress Bar */}
-            <div className="relative">
-              <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
+            <div className='relative'>
+              <div className='bg-muted h-2 w-full overflow-hidden rounded-full'>
                 <div
-                  className="h-full bg-primary transition-all duration-500 ease-out"
+                  className='bg-primary h-full transition-all duration-500 ease-out'
                   style={{
                     width: `${progress}%`,
                     backgroundImage:
-                      "linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%)",
-                    backgroundSize: "200% 100%",
-                    animation: "shimmer 2s infinite",
+                      'linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%)',
+                    backgroundSize: '200% 100%',
+                    animation: 'shimmer 2s infinite',
                   }}
                 />
               </div>

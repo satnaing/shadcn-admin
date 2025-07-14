@@ -1,4 +1,4 @@
-import { 
+import {
   IconChecklist,
   IconLayoutDashboard,
   IconNotification,
@@ -54,7 +54,7 @@ export const sidebarData: SidebarData = {
           url: '/apps',
           icon: IconPackages,
         },
-         {
+        {
           title: 'Settings',
           icon: IconSettings,
           items: [
@@ -78,7 +78,6 @@ export const sidebarData: SidebarData = {
               url: '/settings/appearance',
               icon: IconPalette,
             },
-            
           ],
         },
       ],

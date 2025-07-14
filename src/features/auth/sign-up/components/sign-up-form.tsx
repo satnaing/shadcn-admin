@@ -78,19 +78,18 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
   }
 
   const handleGoogleSignIn = async () => {
-  try {
-    setIsLoading(true)
-    await signInWithGoogle()
-  } catch (err) {
-    toast.error('Google sign-in failed')
-    if (err instanceof Error) {
-      toast.error(err.message)
+    try {
+      setIsLoading(true)
+      await signInWithGoogle()
+    } catch (err) {
+      toast.error('Google sign-in failed')
+      if (err instanceof Error) {
+        toast.error(err.message)
+      }
+    } finally {
+      setIsLoading(false)
     }
-  } finally {
-    setIsLoading(false)
   }
-}
-
 
   return (
     <Form {...form}>

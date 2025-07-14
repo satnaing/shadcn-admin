@@ -5,8 +5,8 @@ import {
   GET_PROFILE_DETAILS,
   LINK_LI_ACCOUNT,
 } from './constants/browserEvents.constant'
-import { ProfileQueryEnum } from './query/profile.query'
 import { IProfileResponseFromExtension } from './interface/profile.interface'
+import { ProfileQueryEnum } from './query/profile.query'
 
 export const checkIsExtensionInstalled = async (
   extensionId: string,

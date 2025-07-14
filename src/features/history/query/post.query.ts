@@ -1,17 +1,17 @@
-import { useInfiniteQuery, useMutation, useQuery } from "react-query";
-import { toast } from "react-toastify";
-import { QueryService } from "services/query.service";
+import { useInfiniteQuery, useMutation, useQuery } from 'react-query'
+import { toast } from 'react-toastify'
+import { QueryService } from 'services/query.service'
 import {
   approvePosts,
   editPostComment,
   getCompletedPosts,
   getPendingPosts,
-} from "../api/post.api";
-import { IPost } from "../interface/post.interface";
+} from '../api/post.api'
+import { IPost } from '../interface/post.interface'
 
 export enum PostQueryEnum {
-  GET_COMPLETED_POSTS = "get-completed-posts",
-  GET_PENDING_POSTS = "get-pending-posts",
+  GET_COMPLETED_POSTS = 'get-completed-posts',
+  GET_PENDING_POSTS = 'get-pending-posts',
 }
 
 export const useGetCompletedPostsQuery = () => {
@@ -26,14 +26,14 @@ export const useGetCompletedPostsQuery = () => {
   } = useInfiniteQuery({
     queryKey: PostQueryEnum.GET_COMPLETED_POSTS,
     queryFn: async ({ pageParam = 0 }) => {
-      const response = await getCompletedPosts(pageParam);
-      return response;
+      const response = await getCompletedPosts(pageParam)
+      return response
     },
     placeholderData: null,
     retry: 1,
     getPreviousPageParam: (firstPage) => firstPage.prevPage ?? undefined,
     getNextPageParam: (lastPage) => lastPage.nextPage ?? undefined,
-  });
+  })
 
   return {
     data,
@@ -43,8 +43,8 @@ export const useGetCompletedPostsQuery = () => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  };
-};
+  }
+}
 
 export const useGetPendingPostsQuery = (page: number) => {
   const { isLoading, isError, error, data, isFetching, isPreviousData } =
@@ -52,7 +52,7 @@ export const useGetPendingPostsQuery = (page: number) => {
       queryKey: [PostQueryEnum.GET_PENDING_POSTS, page],
       queryFn: () => getPendingPosts(page),
       keepPreviousData: true,
-    });
+    })
 
   return {
     isLoading,
@@ -61,55 +61,55 @@ export const useGetPendingPostsQuery = (page: number) => {
     data,
     isFetching,
     isPreviousData,
-  };
-};
+  }
+}
 
 export const useUpdatePostComment = (cb: (data: string) => void) => {
   const { mutate, isLoading } = useMutation(editPostComment, {
     onSuccess: (data: IPost) => {
-      cb(data?.activityUrn);
-      toast("Comment updated successfully", {
-        type: "success",
-      });
+      cb(data?.activityUrn)
+      toast('Comment updated successfully', {
+        type: 'success',
+      })
     },
     onError: (error: any) => {
       toast(
         error?.response?.data?.message ||
           error?.message ||
-          "Something went wrong while editing comment",
+          'Something went wrong while editing comment',
         {
-          type: "error",
+          type: 'error',
         }
-      );
+      )
     },
-  });
+  })
 
-  return { updateComment: mutate, isUpdatingComment: isLoading };
-};
+  return { updateComment: mutate, isUpdatingComment: isLoading }
+}
 
 export const useApprovePosts = (page: number, successCb: () => void) => {
   const { mutate, isLoading } = useMutation(approvePosts, {
     onSuccess: (data: { success: boolean; message: string }) => {
       if (data?.success) {
-        const queryClient = QueryService.getQueryClient();
-        queryClient.invalidateQueries([PostQueryEnum.GET_PENDING_POSTS, page]);
-        successCb();
+        const queryClient = QueryService.getQueryClient()
+        queryClient.invalidateQueries([PostQueryEnum.GET_PENDING_POSTS, page])
+        successCb()
         toast(data?.message, {
-          type: "success",
-        });
+          type: 'success',
+        })
       }
     },
     onError: (error: any) => {
       toast(
         error?.response?.data?.message ||
           error?.message ||
-          "Something went wrong while editing comment",
+          'Something went wrong while editing comment',
         {
-          type: "error",
+          type: 'error',
         }
-      );
+      )
     },
-  });
+  })
 
-  return { approvePosts: mutate, isApprovingPosts: isLoading };
-};
+  return { approvePosts: mutate, isApprovingPosts: isLoading }
+}

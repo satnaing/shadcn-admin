@@ -8,6 +8,7 @@ import { NavigationProgress } from '@/components/navigation-progress'
 import useAuth from '@/features/auth/hooks/useAuth'
 import GeneralError from '@/features/errors/general-error'
 import NotFoundError from '@/features/errors/not-found-error'
+
 // Create a proper React component
 function RootComponent() {
   useAuth()

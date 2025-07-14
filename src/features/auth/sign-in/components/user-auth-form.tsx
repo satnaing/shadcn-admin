@@ -4,10 +4,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
 import { IconBrandGoogle } from '@tabler/icons-react'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-
-
 import {
   Form,
   FormControl,
@@ -19,7 +18,6 @@ import {
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
 import { signInWithGoogle, signInWithPassword } from '../../utils/auth.util'
-import { toast } from 'sonner'
 
 type UserAuthFormProps = HTMLAttributes<HTMLFormElement>
 
@@ -49,31 +47,29 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     },
   })
 
-const onSubmit = async (data: z.infer<typeof formSchema>) => {
-  setIsLoading(true)
-  try {
-    const { error } = await signInWithPassword(data)
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setIsLoading(true)
+    try {
+      const { error } = await signInWithPassword(data)
 
-    if (error) {
-      toast.error(error.message || 'Invalid email or password')
-    } else {
-      toast.success('Login successful!')
-    }
-  } catch (err) {
-    toast.error('Unexpected error occurred')
-    
-    if (err instanceof Error) {
-      if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.error(err)
+      if (error) {
+        toast.error(error.message || 'Invalid email or password')
+      } else {
+        toast.success('Login successful!')
       }
+    } catch (err) {
+      toast.error('Unexpected error occurred')
+
+      if (err instanceof Error) {
+        if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
+          console.error(err)
+        }
+      }
+    } finally {
+      setIsLoading(false)
     }
-  } finally {
-    setIsLoading(false)
   }
-}
-
-
 
   return (
     <Form {...form}>
@@ -114,13 +110,9 @@ const onSubmit = async (data: z.infer<typeof formSchema>) => {
             </FormItem>
           )}
         />
-        <Button
-  className='mt-2'
-  type='submit'
-  disabled={isLoading}
->
-  Login
-</Button>
+        <Button className='mt-2' type='submit' disabled={isLoading}>
+          Login
+        </Button>
 
         <div className='relative my-2'>
           <div className='absolute inset-0 flex items-center'>
@@ -138,7 +130,7 @@ const onSubmit = async (data: z.infer<typeof formSchema>) => {
             variant='outline'
             type='button'
             disabled={isLoading}
-            onClick={signInWithGoogle }
+            onClick={signInWithGoogle}
           >
             <IconBrandGoogle className='h-4 w-4' /> Google
           </Button>

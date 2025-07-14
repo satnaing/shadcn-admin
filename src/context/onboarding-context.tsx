@@ -1,6 +1,12 @@
-"use client"
+'use client'
 
-import { createContext, useContext, useState, type ReactNode, useCallback } from "react"
+import {
+  createContext,
+  useContext,
+  useState,
+  type ReactNode,
+  useCallback,
+} from 'react'
 
 // Define the shape of our onboarding data
 export interface OnboardingData {
@@ -55,23 +61,25 @@ const defaultOnboardingData: OnboardingData = {
   // Post settings step
   keywords: [],
   commentsPerDay: 10,
-  authorTitle: "generic",
-  geography: "global",
+  authorTitle: 'generic',
+  geography: 'global',
 
   // Comment settings step
-  aboutProfile: "",
-  additionalRules: "",
+  aboutProfile: '',
+  additionalRules: '',
   useEmojis: true,
   useExclamations: true,
-  commentStyle: "balanced",
+  commentStyle: 'balanced',
 
   // Demo step
   autoApprove: false,
-  authorTitles:[]
+  authorTitles: [],
 }
 
 // Create the context
-const OnboardingContext = createContext<OnboardingContextType | undefined>(undefined)
+const OnboardingContext = createContext<OnboardingContextType | undefined>(
+  undefined
+)
 
 interface OnboardingProviderProps {
   children: ReactNode
@@ -103,11 +111,14 @@ export function OnboardingProvider({ children }: OnboardingProviderProps) {
         setCompletedSteps((prev) => [...prev, step])
       }
     },
-    [completedSteps],
+    [completedSteps]
   )
 
   // Check if step is completed
-  const isStepCompleted = useCallback((step: string) => completedSteps.includes(step), [completedSteps])
+  const isStepCompleted = useCallback(
+    (step: string) => completedSteps.includes(step),
+    [completedSteps]
+  )
 
   return (
     <OnboardingContext.Provider
@@ -129,7 +140,7 @@ export function OnboardingProvider({ children }: OnboardingProviderProps) {
 export function useOnboarding() {
   const context = useContext(OnboardingContext)
   if (context === undefined) {
-    throw new Error("useOnboarding must be used within an OnboardingProvider")
+    throw new Error('useOnboarding must be used within an OnboardingProvider')
   }
   return context
 }

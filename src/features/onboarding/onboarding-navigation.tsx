@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { useNavigate } from "@tanstack/react-router"
-import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useNavigate } from '@tanstack/react-router'
+import { ArrowLeft, ArrowRight, Loader2 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 interface OnboardingNavigationProps {
   prevStep?: string
@@ -15,7 +15,7 @@ interface OnboardingNavigationProps {
 export function OnboardingNavigation({
   prevStep,
   nextStep,
-  nextLabel = "Continue",
+  nextLabel = 'Continue',
   onNext,
   loading = false,
 }: OnboardingNavigationProps) {
@@ -33,15 +33,15 @@ export function OnboardingNavigation({
   }
 
   return (
-    <div className="flex justify-between mt-8">
+    <div className='mt-8 flex justify-between'>
       {prevStep ? (
         <Button
-          variant="outline"
+          variant='outline'
           onClick={() => navigate({ to: prevStep })}
           disabled={loading}
-          className="group relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95 bg-card text-card-foreground border-border hover:bg-accent hover:text-accent-foreground"
+          className='group bg-card text-card-foreground border-border hover:bg-accent hover:text-accent-foreground relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95'
         >
-          <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+          <ArrowLeft className='mr-2 h-4 w-4 transition-transform group-hover:-translate-x-0.5' />
           Back
         </Button>
       ) : (
@@ -52,17 +52,17 @@ export function OnboardingNavigation({
         <Button
           onClick={handleNext}
           disabled={loading}
-          className="group relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95 bg-primary text-primary-foreground hover:bg-primary/90"
+          className='group bg-primary text-primary-foreground hover:bg-primary/90 relative overflow-hidden transition-all duration-300 hover:shadow-md active:scale-95'
         >
           {loading ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Loader2 className='mr-2 h-4 w-4 animate-spin' />
               Loading...
             </>
           ) : (
             <>
               {nextLabel}
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              <ArrowRight className='ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5' />
             </>
           )}
         </Button>

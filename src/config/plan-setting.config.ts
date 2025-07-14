@@ -1,11 +1,11 @@
-type PlanSettingValue = number | string | boolean;
+type PlanSettingValue = number | string | boolean
 
 export const planSetting: Record<
   string,
   {
-    starter: PlanSettingValue;
-    pro: PlanSettingValue;
-    premium: PlanSettingValue;
+    starter: PlanSettingValue
+    pro: PlanSettingValue
+    premium: PlanSettingValue
   }
 > = {
   numberOfPostsToScrapePerDay: {
@@ -33,4 +33,4 @@ export const planSetting: Record<
     pro: true,
     premium: true,
   },
-};
+}

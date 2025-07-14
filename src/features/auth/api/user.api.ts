@@ -9,8 +9,6 @@ export async function getUser() {
   return data as IUser
 }
 
-
-
 // ../api/user.api.ts
 // import { IUser, UserSubscriptionStatus } from '../interface/user.interface'
 

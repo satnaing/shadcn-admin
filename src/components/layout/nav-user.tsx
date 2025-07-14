@@ -1,6 +1,14 @@
 // nav-user.tsx
+import { useEffect, useState } from 'react'
 import { Link, useRouter } from '@tanstack/react-router'
-import { ChevronsUpDown, LogOut, Sparkles, Settings, HelpCircle } from 'lucide-react'
+import { SupabaseInstance } from '@/services/supabase.service'
+import {
+  ChevronsUpDown,
+  LogOut,
+  Sparkles,
+  Settings,
+  HelpCircle,
+} from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -17,40 +25,40 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
-import { useEffect, useState } from 'react'
 import { getAuthToken, signOut } from '@/features/auth/utils/auth.util'
-import { SupabaseInstance } from '@/services/supabase.service'
 
 export function NavUser() {
   const { isMobile } = useSidebar()
   const router = useRouter()
-  const [user, setUser] = useState<{ 
-    name: string; 
-    email: string; 
-    avatar?: string 
+  const [user, setUser] = useState<{
+    name: string
+    email: string
+    avatar?: string
   } | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchUser = async () => {
       const token = getAuthToken()
-      
+
       if (!token) {
         setLoading(false)
         return
       }
 
       const supabase = SupabaseInstance.getSupabase()
-      
+
       try {
         // Get the current user session
-        const { data: { user } } = await supabase.auth.getUser()
-        
+        const {
+          data: { user },
+        } = await supabase.auth.getUser()
+
         if (user) {
           setUser({
             name: user.user_metadata?.full_name || user.email || 'User',
             email: user.email || '',
-            avatar: user.user_metadata?.avatar_url
+            avatar: user.user_metadata?.avatar_url,
           })
         }
       } catch (error) {
@@ -84,7 +92,7 @@ export function NavUser() {
       <SidebarMenu>
         <SidebarMenuItem>
           <SidebarMenuButton size='lg' asChild>
-            <Link to="/sign-in">Sign In</Link>
+            <Link to='/sign-in'>Sign In</Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
@@ -103,7 +111,10 @@ export function NavUser() {
               <Avatar className='h-8 w-8 rounded-lg'>
                 <AvatarImage src={user.avatar} alt={user.name} />
                 <AvatarFallback className='rounded-lg'>
-                  {user.name.split(' ').map(n => n[0]).join('')}
+                  {user.name
+                    .split(' ')
+                    .map((n) => n[0])
+                    .join('')}
                 </AvatarFallback>
               </Avatar>
               <div className='grid flex-1 text-left text-sm leading-tight'>
@@ -124,7 +135,10 @@ export function NavUser() {
                 <Avatar className='h-10 w-10 rounded-lg'>
                   <AvatarImage src={user.avatar} alt={user.name} />
                   <AvatarFallback className='rounded-lg'>
-                    {user.name.split(' ').map(n => n[0]).join('')}
+                    {user.name
+                      .split(' ')
+                      .map((n) => n[0])
+                      .join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div className='grid flex-1 text-left text-sm leading-tight'>
@@ -133,38 +147,38 @@ export function NavUser() {
                 </div>
               </div>
             </DropdownMenuLabel>
-            
+
             <DropdownMenuSeparator />
-            
+
             <DropdownMenuItem>
-              <Sparkles className="mr-2 h-4 w-4" />
+              <Sparkles className='mr-2 h-4 w-4' />
               Upgrade to Pro
             </DropdownMenuItem>
-            
+
             <DropdownMenuSeparator />
-            
+
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link to="/settings" className="w-full">
-                  <Settings className="mr-2 h-4 w-4" />
+                <Link to='/settings' className='w-full'>
+                  <Settings className='mr-2 h-4 w-4' />
                   Settings
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link to="/settings" className="w-full">
-                  <HelpCircle className="mr-2 h-4 w-4" />
+                <Link to='/settings' className='w-full'>
+                  <HelpCircle className='mr-2 h-4 w-4' />
                   Help Center
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            
+
             <DropdownMenuSeparator />
-            
+
             <DropdownMenuItem
-              className="text-red-600 focus:text-red-600 focus:bg-red-50"
+              className='text-red-600 focus:bg-red-50 focus:text-red-600'
               onClick={handleLogout}
             >
-              <LogOut className="mr-2 h-4 w-4" />
+              <LogOut className='mr-2 h-4 w-4' />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

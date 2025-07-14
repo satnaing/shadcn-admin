@@ -1,29 +1,29 @@
-import { axiosInstance } from "@/utils/axios.util";
-import { ISettingPayload } from "../interface/setting.interface";
+import { axiosInstance } from '@/utils/axios.util'
+import { ISettingPayload } from '../interface/setting.interface'
 
 export async function createSetting(
-  payload: ISettingPayload & { userPlan?: "starter" | "pro" | "premium" }
+  payload: ISettingPayload & { userPlan?: 'starter' | 'pro' | 'premium' }
 ) {
-  const url = payload?.userPlan ? `/setting/${payload?.userPlan}` : `/setting`;
+  const url = payload?.userPlan ? `/setting/${payload?.userPlan}` : `/setting`
   const { data } = await axiosInstance({
-    method: "POST",
+    method: 'POST',
     url,
     data: payload,
-  });
-  return data;
+  })
+  return data
 }
 
 export async function updateSetting(
-  payload: ISettingPayload & { userPlan?: "starter" | "pro" | "premium" }
+  payload: ISettingPayload & { userPlan?: 'starter' | 'pro' | 'premium' }
 ) {
   const url = payload?.userPlan
     ? `/setting/${payload?.userPlan}/${payload?.profileId}`
-    : `/setting/${payload?.profileId}`;
+    : `/setting/${payload?.profileId}`
 
   const { data } = await axiosInstance({
-    method: "PATCH",
+    method: 'PATCH',
     url,
     data: payload,
-  });
-  return data;
+  })
+  return data
 }
