@@ -1,4 +1,4 @@
-import ContentSection from '../components/content-section'
+import ContentSection from '../comments/components/content-section'
 import { PostForm } from './post-form'
 
 export default function SettingsAccount() {

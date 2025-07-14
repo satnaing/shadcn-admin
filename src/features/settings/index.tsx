@@ -11,7 +11,7 @@ import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import SidebarNav from './components/sidebar-nav'
+import SidebarNav from './comments/components/sidebar-nav'
 
 export default function Settings() {
   return (
@@ -65,10 +65,9 @@ const sidebarNavItems = [
     icon: <IconNotification size={18} />,
     href: '/settings/comments',
   },
-    {
+  {
     title: 'Appearance',
     icon: <IconPalette size={18} />,
     href: '/settings/appearance',
   },
-
 ]

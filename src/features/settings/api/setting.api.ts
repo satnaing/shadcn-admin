@@ -1,4 +1,4 @@
-import { axiosInstance } from "utils/axios.util";
+import { axiosInstance } from "@/utils/axios.util";
 import { ISettingPayload } from "../interface/setting.interface";
 
 export async function createSetting(

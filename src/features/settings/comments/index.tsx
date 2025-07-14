@@ -1,5 +1,5 @@
-import ContentSection from '../components/content-section'
 import { CommentsForm } from './comments-form'
+import ContentSection from './components/content-section'
 
 export default function SettingsNotifications() {
   return (

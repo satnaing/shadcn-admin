@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { useGetUserQuery } from '@/features/auth/query/user.query'
-import { planSetting } from '@/features/settings/config/plan-setting.config'
+import { planSetting } from '@/config/plan-setting.config'
 
 const commentSettingsSchema = z.object({
   about: z.string().min(10, {
