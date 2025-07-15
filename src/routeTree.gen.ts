@@ -30,13 +30,11 @@ import { Route as authOtpRouteImport } from './routes/(auth)/otp'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
 import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
-import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
 import { Route as AuthenticatedHistoryIndexRouteImport } from './routes/_authenticated/history/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedFeaturerequestIndexRouteImport } from './routes/_authenticated/featurerequest/index'
 import { Route as AuthenticatedSettingsPostRouteImport } from './routes/_authenticated/settings/post'
 import { Route as AuthenticatedSettingsCommentsRouteImport } from './routes/_authenticated/settings/comments'
-import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -144,12 +142,6 @@ const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
   path: '/users/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedSettingsIndexRoute =
-  AuthenticatedSettingsIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any)
 const AuthenticatedHistoryIndexRoute =
   AuthenticatedHistoryIndexRouteImport.update({
     id: '/history/',
@@ -180,12 +172,6 @@ const AuthenticatedSettingsCommentsRoute =
     path: '/comments',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-const AuthenticatedSettingsAppearanceRoute =
-  AuthenticatedSettingsAppearanceRouteImport.update({
-    id: '/appearance',
-    path: '/appearance',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '': typeof AuthenticatedRouteRouteWithChildren
@@ -208,16 +194,15 @@ export interface FileRoutesByFullPath {
   '/onboarding/post-settings': typeof OnboardingPostSettingsRoute
   '/': typeof AuthenticatedIndexRoute
   '/onboarding': typeof OnboardingIndexRoute
-  '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/comments': typeof AuthenticatedSettingsCommentsRoute
   '/settings/post': typeof AuthenticatedSettingsPostRoute
   '/featurerequest': typeof AuthenticatedFeaturerequestIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/history': typeof AuthenticatedHistoryIndexRoute
-  '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRoutesByTo {
+  '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
   '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
@@ -236,13 +221,11 @@ export interface FileRoutesByTo {
   '/onboarding/post-settings': typeof OnboardingPostSettingsRoute
   '/': typeof AuthenticatedIndexRoute
   '/onboarding': typeof OnboardingIndexRoute
-  '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/comments': typeof AuthenticatedSettingsCommentsRoute
   '/settings/post': typeof AuthenticatedSettingsPostRoute
   '/featurerequest': typeof AuthenticatedFeaturerequestIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/history': typeof AuthenticatedHistoryIndexRoute
-  '/settings': typeof AuthenticatedSettingsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRoutesById {
@@ -267,13 +250,11 @@ export interface FileRoutesById {
   '/onboarding/post-settings': typeof OnboardingPostSettingsRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/onboarding/': typeof OnboardingIndexRoute
-  '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/comments': typeof AuthenticatedSettingsCommentsRoute
   '/_authenticated/settings/post': typeof AuthenticatedSettingsPostRoute
   '/_authenticated/featurerequest/': typeof AuthenticatedFeaturerequestIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/history/': typeof AuthenticatedHistoryIndexRoute
-  '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRouteTypes {
@@ -299,16 +280,15 @@ export interface FileRouteTypes {
     | '/onboarding/post-settings'
     | '/'
     | '/onboarding'
-    | '/settings/appearance'
     | '/settings/comments'
     | '/settings/post'
     | '/featurerequest'
     | '/help-center'
     | '/history'
-    | '/settings/'
     | '/users'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/settings'
     | '/forgot-password'
     | '/otp'
     | '/sign-in'
@@ -327,13 +307,11 @@ export interface FileRouteTypes {
     | '/onboarding/post-settings'
     | '/'
     | '/onboarding'
-    | '/settings/appearance'
     | '/settings/comments'
     | '/settings/post'
     | '/featurerequest'
     | '/help-center'
     | '/history'
-    | '/settings'
     | '/users'
   id:
     | '__root__'
@@ -357,13 +335,11 @@ export interface FileRouteTypes {
     | '/onboarding/post-settings'
     | '/_authenticated/'
     | '/onboarding/'
-    | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/comments'
     | '/_authenticated/settings/post'
     | '/_authenticated/featurerequest/'
     | '/_authenticated/help-center/'
     | '/_authenticated/history/'
-    | '/_authenticated/settings/'
     | '/_authenticated/users/'
   fileRoutesById: FileRoutesById
 }
@@ -537,13 +513,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/settings/': {
-      id: '/_authenticated/settings/'
-      path: '/'
-      fullPath: '/settings/'
-      preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport
-      parentRoute: typeof AuthenticatedSettingsRouteRoute
-    }
     '/_authenticated/history/': {
       id: '/_authenticated/history/'
       path: '/history'
@@ -579,29 +548,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsCommentsRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
-    '/_authenticated/settings/appearance': {
-      id: '/_authenticated/settings/appearance'
-      path: '/appearance'
-      fullPath: '/settings/appearance'
-      preLoaderRoute: typeof AuthenticatedSettingsAppearanceRouteImport
-      parentRoute: typeof AuthenticatedSettingsRouteRoute
-    }
   }
 }
 
 interface AuthenticatedSettingsRouteRouteChildren {
-  AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
   AuthenticatedSettingsCommentsRoute: typeof AuthenticatedSettingsCommentsRoute
   AuthenticatedSettingsPostRoute: typeof AuthenticatedSettingsPostRoute
-  AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
 }
 
 const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteChildren =
   {
-    AuthenticatedSettingsAppearanceRoute: AuthenticatedSettingsAppearanceRoute,
     AuthenticatedSettingsCommentsRoute: AuthenticatedSettingsCommentsRoute,
     AuthenticatedSettingsPostRoute: AuthenticatedSettingsPostRoute,
-    AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
   }
 
 const AuthenticatedSettingsRouteRouteWithChildren =

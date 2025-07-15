@@ -59,11 +59,6 @@ export const sidebarData: SidebarData = {
           icon: IconSettings,
           items: [
             {
-              title: 'Profile',
-              url: '/settings',
-              icon: IconUserCog,
-            },
-            {
               title: 'Post Settings',
               url: '/settings/post',
               icon: IconTool,
@@ -72,11 +67,6 @@ export const sidebarData: SidebarData = {
               title: 'Comments Settings',
               url: '/settings/comments',
               icon: IconNotification,
-            },
-            {
-              title: 'Appearance',
-              url: '/settings/appearance',
-              icon: IconPalette,
             },
           ],
         },
