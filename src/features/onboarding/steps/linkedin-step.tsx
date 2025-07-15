@@ -63,7 +63,6 @@ export function LinkedInStep() {
         profileDetails.firstName &&
         profileDetails.lastName
       ) {
-        console.log('Auto-collected profile details:', profileDetails)
         setExtensionProfileData(profileDetails)
 
         // Automatically link the profile
@@ -89,7 +88,6 @@ export function LinkedInStep() {
       // Link the profile (data already collected)
       await linkProfile(extensionProfileData)
 
-      console.log('Profile linked successfully')
     } catch (error) {
       console.error('Error linking profile:', error)
     } finally {

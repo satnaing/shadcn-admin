@@ -8,7 +8,7 @@ function MainLoader() {
     >
       <img src={commentifyLogo} alt='Logo' className='min-w-[200px]' />
       <div className='max-w-8'>
-        <IconFidgetSpinner className='animate-spin' size='md' />
+        <IconFidgetSpinner className='animate-spin' />
       </div>
     </div>
   )
