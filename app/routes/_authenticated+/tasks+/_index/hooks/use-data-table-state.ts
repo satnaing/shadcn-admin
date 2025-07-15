@@ -112,13 +112,12 @@ export function useDataTableState() {
         } else {
           prev.set('page', String(newPagination.page))
         }
-        if (
-          newPagination.per_page === Number(PAGINATION_PER_PAGE_DEFAULT) ||
-          newPagination.per_page === undefined
-        ) {
-          prev.delete('per_page')
-        } else {
-          prev.set('per_page', String(newPagination.per_page))
+        if (newPagination.per_page !== undefined) {
+          if (newPagination.per_page === Number(PAGINATION_PER_PAGE_DEFAULT)) {
+            prev.delete('per_page')
+          } else {
+            prev.set('per_page', String(newPagination.per_page))
+          }
         }
         return prev
       },
