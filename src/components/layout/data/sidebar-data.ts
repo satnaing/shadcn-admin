@@ -3,10 +3,8 @@ import {
   IconLayoutDashboard,
   IconNotification,
   IconPackages,
-  IconPalette,
   IconSettings,
   IconTool,
-  IconUserCog,
 } from '@tabler/icons-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { type SidebarData } from '../types'
