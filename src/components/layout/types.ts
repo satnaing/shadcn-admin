@@ -6,11 +6,6 @@ interface User {
   avatar: string
 }
 
-interface Team {
-  name: string
-  logo: React.ElementType
-  plan: string
-}
 
 interface BaseNavItem {
   title: string
@@ -35,10 +30,19 @@ interface NavGroup {
   items: NavItem[]
 }
 
-interface SidebarData {
-  user: User
-  teams: Team[]
-  navGroups: NavGroup[]
+
+
+interface BottomGroups {
+  title: string
+  items: NavItem[]
 }
 
-export type { SidebarData, NavGroup, NavItem, NavCollapsible, NavLink }
+
+
+interface SidebarData {
+  user: User
+  navGroups: NavGroup[]
+  bottomGroups : BottomGroups[]
+}
+
+export type { SidebarData, NavGroup, NavItem, NavCollapsible, NavLink, BottomGroups }

@@ -1,4 +1,5 @@
 import {
+  IconCash,
   IconChecklist,
   IconLayoutDashboard,
   IconNotification,
@@ -6,7 +7,6 @@ import {
   IconSettings,
   IconTool,
 } from '@tabler/icons-react'
-import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
@@ -16,23 +16,6 @@ export const sidebarData: SidebarData = {
     avatar: '/avatars/shadcn.jpg',
   },
 
-  teams: [
-    {
-      name: 'Shadcn Admin',
-      logo: Command,
-      plan: 'Vite + ShadcnUI',
-    },
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
-    },
-  ],
   navGroups: [
     {
       title: 'General',
@@ -46,16 +29,6 @@ export const sidebarData: SidebarData = {
           title: 'History',
           url: '/history',
           icon: IconChecklist,
-        },
-        {
-          title: 'Feature Request',
-          url: '/featurerequest',
-          icon: IconPackages,
-        },
-        {
-          title: 'Pricing',
-          url: '/pricing',
-          icon: IconPackages,
         },
         {
           title: 'Settings',
@@ -76,4 +49,21 @@ export const sidebarData: SidebarData = {
       ],
     },
   ],
+  bottomGroups :[
+    {
+      title: 'Function',
+      items: [
+        {
+          title: 'Feature Request',
+          url: '/featurerequest',
+          icon: IconPackages,
+        },
+        {
+          title: 'Pricing',
+          url: '/pricing',
+          icon: IconCash,
+        },
+      ],
+    }
+  ]
 }
