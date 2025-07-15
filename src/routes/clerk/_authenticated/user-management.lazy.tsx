@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import {
-  createFileRoute,
+  createLazyFileRoute,
   Link,
   useNavigate,
   useRouter,
@@ -22,7 +22,9 @@ import UsersProvider from '@/features/users/context/users-context'
 import { userListSchema } from '@/features/users/data/schema'
 import { users } from '@/features/users/data/users'
 
-export const Route = createFileRoute('/clerk/_authenticated/user-management')({
+export const Route = createLazyFileRoute(
+  '/clerk/_authenticated/user-management'
+)({
   component: UserManagement,
 })
 

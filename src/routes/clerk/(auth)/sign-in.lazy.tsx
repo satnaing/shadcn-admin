@@ -1,8 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 import { SignIn } from '@clerk/clerk-react'
 import { Skeleton } from '@/components/ui/skeleton'
 
-export const Route = createFileRoute('/clerk/(auth)/sign-in')({
+export const Route = createLazyFileRoute('/clerk/(auth)/sign-in')({
   component: () => (
     <SignIn
       initialValues={{

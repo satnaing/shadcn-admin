@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router'
+import { createLazyFileRoute, Outlet } from '@tanstack/react-router'
 import { IconExternalLink, IconKeyOff } from '@tabler/icons-react'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -8,7 +8,7 @@ import { AuthenticatedLayout } from '@/components/layout/authenticated-layout'
 import { Main } from '@/components/layout/main'
 import { ThemeSwitch } from '@/components/theme-switch'
 
-export const Route = createFileRoute('/clerk')({
+export const Route = createLazyFileRoute('/clerk')({
   component: RouteComponent,
 })
 
