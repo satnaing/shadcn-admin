@@ -30,6 +30,7 @@ import { Route as authOtpRouteImport } from './routes/(auth)/otp'
 import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
 import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
+import { Route as AuthenticatedPricingIndexRouteImport } from './routes/_authenticated/pricing/index'
 import { Route as AuthenticatedHistoryIndexRouteImport } from './routes/_authenticated/history/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedFeaturerequestIndexRouteImport } from './routes/_authenticated/featurerequest/index'
@@ -142,6 +143,12 @@ const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
   path: '/users/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPricingIndexRoute =
+  AuthenticatedPricingIndexRouteImport.update({
+    id: '/pricing/',
+    path: '/pricing/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedHistoryIndexRoute =
   AuthenticatedHistoryIndexRouteImport.update({
     id: '/history/',
@@ -199,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/featurerequest': typeof AuthenticatedFeaturerequestIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/history': typeof AuthenticatedHistoryIndexRoute
+  '/pricing': typeof AuthenticatedPricingIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRoutesByTo {
@@ -226,6 +234,7 @@ export interface FileRoutesByTo {
   '/featurerequest': typeof AuthenticatedFeaturerequestIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/history': typeof AuthenticatedHistoryIndexRoute
+  '/pricing': typeof AuthenticatedPricingIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRoutesById {
@@ -255,6 +264,7 @@ export interface FileRoutesById {
   '/_authenticated/featurerequest/': typeof AuthenticatedFeaturerequestIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/history/': typeof AuthenticatedHistoryIndexRoute
+  '/_authenticated/pricing/': typeof AuthenticatedPricingIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
 }
 export interface FileRouteTypes {
@@ -285,6 +295,7 @@ export interface FileRouteTypes {
     | '/featurerequest'
     | '/help-center'
     | '/history'
+    | '/pricing'
     | '/users'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -312,6 +323,7 @@ export interface FileRouteTypes {
     | '/featurerequest'
     | '/help-center'
     | '/history'
+    | '/pricing'
     | '/users'
   id:
     | '__root__'
@@ -340,6 +352,7 @@ export interface FileRouteTypes {
     | '/_authenticated/featurerequest/'
     | '/_authenticated/help-center/'
     | '/_authenticated/history/'
+    | '/_authenticated/pricing/'
     | '/_authenticated/users/'
   fileRoutesById: FileRoutesById
 }
@@ -513,6 +526,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/pricing/': {
+      id: '/_authenticated/pricing/'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof AuthenticatedPricingIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/history/': {
       id: '/_authenticated/history/'
       path: '/history'
@@ -573,6 +593,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedFeaturerequestIndexRoute: typeof AuthenticatedFeaturerequestIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedHistoryIndexRoute: typeof AuthenticatedHistoryIndexRoute
+  AuthenticatedPricingIndexRoute: typeof AuthenticatedPricingIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
 }
 
@@ -582,6 +603,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedFeaturerequestIndexRoute: AuthenticatedFeaturerequestIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedHistoryIndexRoute: AuthenticatedHistoryIndexRoute,
+  AuthenticatedPricingIndexRoute: AuthenticatedPricingIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
 }
 

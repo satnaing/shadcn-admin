@@ -53,6 +53,11 @@ export const sidebarData: SidebarData = {
           icon: IconPackages,
         },
         {
+          title: 'Pricing',
+          url: '/pricing',
+          icon: IconPackages,
+        },
+        {
           title: 'Settings',
           icon: IconSettings,
           items: [
