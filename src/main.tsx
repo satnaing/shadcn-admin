@@ -99,8 +99,6 @@ if (!rootElement.innerHTML) {
         <ThemeProvider defaultTheme='light' storageKey='vite-ui-theme'>
           <FontProvider>
             <ProfileProvider>
-              {' '}
-              {/* Add ProfileProvider here */}
               <RouterProvider router={router} />
             </ProfileProvider>
           </FontProvider>

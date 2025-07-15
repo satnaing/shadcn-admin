@@ -2,11 +2,8 @@
 'use client'
 
 import * as React from 'react'
-import { IProfile } from '@/features/linkedin-profile/interface/profile.interface'
+import { IProfile } from '@/features/users/interface/profile.interface'
 
-// src/context/profile.context.tsx
-
-// src/context/profile.context.tsx
 
 interface ProfileContextType {
   activeProfile: IProfile | null
