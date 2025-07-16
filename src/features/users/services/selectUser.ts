@@ -25,12 +25,12 @@ export const useUserDetailQuery = (
           prize,
           competitions(*)
         ),
-        field_training(
+        field_training!left(
           *,
           companies(*),
           jobs(*)
         ),
-        employment_companies(
+        employment_companies!left(
           *,
           companies(*),
           jobs(*)

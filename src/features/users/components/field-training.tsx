@@ -48,6 +48,7 @@ export const FieldTraining = ({
     useState<addFieldTrainingType | null>(null)
   const [add, setAdd] = useState<boolean>(false)
   const [autoEmployment, setAutoEmployment] = useState<boolean>(false)
+  const [deleteToggle, setDeleteToggle] = useState<boolean>(false)
 
   useEffect(() => {
     if (!editingSection) {
@@ -64,6 +65,7 @@ export const FieldTraining = ({
       setAddFieldTraining(null)
       setAdd(false)
       setAutoEmployment(false)
+      setDeleteToggle(false)
     }
   }, [editingSection, currentFieldTraining])
 
@@ -168,6 +170,36 @@ export const FieldTraining = ({
                         />
                       </SelectContent>
                     </Select>
+                  </div>
+                  <div className='flex items-center justify-between pt-2'>
+                    <div className='flex items-center space-x-2'>
+                      <Switch
+                        id='delete-field-training'
+                        checked={deleteToggle}
+                        onCheckedChange={(checked) => {
+                          setDeleteToggle(checked)
+                          if (checked && currentFieldTraining && currentRow) {
+                            setEditData([
+                              {
+                                action: 'delete',
+                                datas: {
+                                  field_training: {
+                                    student_id: currentRow.student_id,
+                                    company_id: currentFieldTraining.company_id,
+                                    job_id: currentFieldTraining.job_id,
+                                    start_date: currentFieldTraining.start_date,
+                                    end_date: currentFieldTraining.end_date ?? '',
+                                  },
+                                },
+                              },
+                            ])
+                          }
+                        }}
+                      />
+                      <Label htmlFor='delete-field-training' className='text-destructive font-medium'>
+                        삭제
+                      </Label>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -46,6 +46,7 @@ export const handleFieldTraining = async (editDataList: UserEditType) => {
           .update(updateData)
           .eq('student_id', data.student_id)
           .eq('company_id', data.company_id)
+          .is('deleted_at', null);
 
         if (error) throw new Error(error.message);
         break;
@@ -54,10 +55,11 @@ export const handleFieldTraining = async (editDataList: UserEditType) => {
       case 'delete': {
         const { error } = await supabase
           .from('field_training')
-          .delete()
+          .update({ deleted_at: new Date().toISOString() })
           .eq('student_id', data.student_id)
           .eq('company_id', data.company_id)
-          .eq('job_id', data.job_id);
+          .eq('job_id', data.job_id)
+          .is('deleted_at', null);
 
         if (error) throw new Error(error.message);
         break;
