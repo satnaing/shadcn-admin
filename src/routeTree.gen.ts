@@ -33,7 +33,6 @@ import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authentic
 import { Route as AuthenticatedPricingIndexRouteImport } from './routes/_authenticated/pricing/index'
 import { Route as AuthenticatedHistoryIndexRouteImport } from './routes/_authenticated/history/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
-import { Route as AuthenticatedFeaturerequestIndexRouteImport } from './routes/_authenticated/featurerequest/index'
 import { Route as AuthenticatedSettingsPostRouteImport } from './routes/_authenticated/settings/post'
 import { Route as AuthenticatedSettingsCommentsRouteImport } from './routes/_authenticated/settings/comments'
 
@@ -161,12 +160,6 @@ const AuthenticatedHelpCenterIndexRoute =
     path: '/help-center/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedFeaturerequestIndexRoute =
-  AuthenticatedFeaturerequestIndexRouteImport.update({
-    id: '/featurerequest/',
-    path: '/featurerequest/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
 const AuthenticatedSettingsPostRoute =
   AuthenticatedSettingsPostRouteImport.update({
     id: '/post',
@@ -203,7 +196,6 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingIndexRoute
   '/settings/comments': typeof AuthenticatedSettingsCommentsRoute
   '/settings/post': typeof AuthenticatedSettingsPostRoute
-  '/featurerequest': typeof AuthenticatedFeaturerequestIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/history': typeof AuthenticatedHistoryIndexRoute
   '/pricing': typeof AuthenticatedPricingIndexRoute
@@ -231,7 +223,6 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingIndexRoute
   '/settings/comments': typeof AuthenticatedSettingsCommentsRoute
   '/settings/post': typeof AuthenticatedSettingsPostRoute
-  '/featurerequest': typeof AuthenticatedFeaturerequestIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
   '/history': typeof AuthenticatedHistoryIndexRoute
   '/pricing': typeof AuthenticatedPricingIndexRoute
@@ -261,7 +252,6 @@ export interface FileRoutesById {
   '/onboarding/': typeof OnboardingIndexRoute
   '/_authenticated/settings/comments': typeof AuthenticatedSettingsCommentsRoute
   '/_authenticated/settings/post': typeof AuthenticatedSettingsPostRoute
-  '/_authenticated/featurerequest/': typeof AuthenticatedFeaturerequestIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/_authenticated/history/': typeof AuthenticatedHistoryIndexRoute
   '/_authenticated/pricing/': typeof AuthenticatedPricingIndexRoute
@@ -292,7 +282,6 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/settings/comments'
     | '/settings/post'
-    | '/featurerequest'
     | '/help-center'
     | '/history'
     | '/pricing'
@@ -320,7 +309,6 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/settings/comments'
     | '/settings/post'
-    | '/featurerequest'
     | '/help-center'
     | '/history'
     | '/pricing'
@@ -349,7 +337,6 @@ export interface FileRouteTypes {
     | '/onboarding/'
     | '/_authenticated/settings/comments'
     | '/_authenticated/settings/post'
-    | '/_authenticated/featurerequest/'
     | '/_authenticated/help-center/'
     | '/_authenticated/history/'
     | '/_authenticated/pricing/'
@@ -547,13 +534,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHelpCenterIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/featurerequest/': {
-      id: '/_authenticated/featurerequest/'
-      path: '/featurerequest'
-      fullPath: '/featurerequest'
-      preLoaderRoute: typeof AuthenticatedFeaturerequestIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/settings/post': {
       id: '/_authenticated/settings/post'
       path: '/post'
@@ -590,7 +570,6 @@ const AuthenticatedSettingsRouteRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
-  AuthenticatedFeaturerequestIndexRoute: typeof AuthenticatedFeaturerequestIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedHistoryIndexRoute: typeof AuthenticatedHistoryIndexRoute
   AuthenticatedPricingIndexRoute: typeof AuthenticatedPricingIndexRoute
@@ -600,7 +579,6 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
-  AuthenticatedFeaturerequestIndexRoute: AuthenticatedFeaturerequestIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedHistoryIndexRoute: AuthenticatedHistoryIndexRoute,
   AuthenticatedPricingIndexRoute: AuthenticatedPricingIndexRoute,

@@ -55,7 +55,7 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'Feature Request',
-          url: '/featurerequest',
+          url: 'https://commentify.canny.io',
           icon: IconPackages,
         },
         {

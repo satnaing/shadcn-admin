@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useRouter } from '@tanstack/react-router'
-import { SupabaseInstance } from '@/services/supabase.service'
 import { LogOut, User, CreditCard, Settings } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -14,10 +13,12 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { getAuthToken, signOut } from '@/features/auth/utils/auth.util'
+import { signOut } from '@/features/auth/utils/auth.util'
+import { useAuthStore } from '@/stores/auth.store'
 
 export function ProfileDropdown() {
   const router = useRouter()
+  const session = useAuthStore((state) => state.session)
   const [user, setUser] = useState<{
     name: string
     email: string
@@ -26,39 +27,17 @@ export function ProfileDropdown() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const token = getAuthToken()
-
-      if (!token) {
-        setLoading(false)
-        return
-      }
-
-      const supabase = SupabaseInstance.getSupabase()
-
-      try {
-        // Get the current user session
-        const {
-          data: { user },
-        } = await supabase.auth.getUser()
-
-        if (user) {
-          setUser({
-            name: user.user_metadata?.full_name || user.email || 'User',
-            email: user.email || '',
-            avatar: user.user_metadata?.avatar_url,
-          })
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error fetching user:', error)
-      } finally {
-        setLoading(false)
-      }
+    if (session?.user) {
+      setUser({
+        name: session.user.user_metadata?.full_name || session.user.email || 'User',
+        email: session.user.email || '',
+        avatar: session.user.user_metadata?.avatar_url,
+      })
+      setLoading(false)
+    } else {
+      setLoading(false)
     }
-
-    fetchUser()
-  }, [])
+  }, [session])
 
   const handleLogout = async () => {
     await signOut()
