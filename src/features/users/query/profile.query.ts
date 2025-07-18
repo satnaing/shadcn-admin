@@ -17,7 +17,7 @@ export const useGetAllProfileQuery = () => {
 
 export const useDeleteProfile = () => {
   const queryClient = QueryService.getQueryClient()
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: deleteProfile,
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -36,12 +36,12 @@ export const useDeleteProfile = () => {
     },
   })
 
-  return { deleteProfile: mutate, isDeletingProfile: isLoading }
+  return { deleteProfile: mutate, isDeletingProfile: isPending }
 }
 
 export const useLinkProfile = () => {
   const queryClient = QueryService.getQueryClient()
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: linkProfile,
     onSuccess: (response) => {
       if (response?.profile) {
@@ -57,5 +57,5 @@ export const useLinkProfile = () => {
     },
   })
 
-  return { linkProfile: mutate, isLinkingProfile: isLoading }
+  return { linkProfile: mutate, isLinkingProfile: isPending }
 }

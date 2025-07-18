@@ -1,5 +1,5 @@
 import { QueryService } from '@/services/query.service'
-import { useInfiniteQuery, useMutation, useQuery } from 'react-query'
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import {
   approvePosts,
@@ -17,7 +17,7 @@ export enum PostQueryEnum {
 export const useGetCompletedPostsQuery = () => {
   const {
     data,
-    isLoading,
+    isPending,
     isFetching,
     isFetched,
     isFetchingNextPage,
@@ -37,7 +37,7 @@ export const useGetCompletedPostsQuery = () => {
 
   return {
     data,
-    isLoading,
+    isPending,
     isFetching,
     isFetched,
     isFetchingNextPage,
@@ -47,7 +47,7 @@ export const useGetCompletedPostsQuery = () => {
 }
 
 export const useGetPendingPostsQuery = (page: number) => {
-  const { isLoading, isError, error, data, isFetching, isPreviousData } =
+  const { isPending, isError, error, data, isFetching, isPreviousData } =
     useQuery({
       queryKey: [PostQueryEnum.GET_PENDING_POSTS, page],
       queryFn: () => getPendingPosts(page),
@@ -55,7 +55,7 @@ export const useGetPendingPostsQuery = (page: number) => {
     })
 
   return {
-    isLoading,
+    isPending,
     isError,
     error,
     data,
@@ -65,7 +65,7 @@ export const useGetPendingPostsQuery = (page: number) => {
 }
 
 export const useUpdatePostComment = (cb: (data: string) => void) => {
-  const { mutate, isLoading } = useMutation(editPostComment, {
+  const { mutate, isPending } = useMutation(editPostComment, {
     onSuccess: (data: IPost) => {
       cb(data?.activityUrn)
       toast('Comment updated successfully', {
@@ -84,11 +84,11 @@ export const useUpdatePostComment = (cb: (data: string) => void) => {
     },
   })
 
-  return { updateComment: mutate, isUpdatingComment: isLoading }
+  return { updateComment: mutate, isUpdatingComment: isPending }
 }
 
 export const useApprovePosts = (page: number, successCb: () => void) => {
-  const { mutate, isLoading } = useMutation(approvePosts, {
+  const { mutate, isPending } = useMutation(approvePosts, {
     onSuccess: (data: { success: boolean; message: string }) => {
       if (data?.success) {
         const queryClient = QueryService.getQueryClient()
@@ -111,5 +111,5 @@ export const useApprovePosts = (page: number, successCb: () => void) => {
     },
   })
 
-  return { approvePosts: mutate, isApprovingPosts: isLoading }
+  return { approvePosts: mutate, isApprovingPosts: isPending }
 }

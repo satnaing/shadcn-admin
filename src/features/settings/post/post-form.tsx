@@ -168,7 +168,7 @@ export function PostForm() {
         className='space-y-8'
       >
         {/* Keywords Section */}
-        <div className='mb-6'>
+        <div className='mb-8'>
           <div className='mb-4 flex items-center gap-2'>
             <Hash className='text-muted-foreground h-4 w-4' />
             <span className='text-foreground font-semibold'>
@@ -214,7 +214,7 @@ export function PostForm() {
                           : 'bg-card border-border text-card-foreground hover:border-primary/30 hover:shadow-sm'
                     }`}
                   >
-                    <span className='text-sm font-medium'>{keyword}</span>
+                    <span className='text-sm font-normal'>{keyword}</span>
                   </button>
                 )
               })}
@@ -230,8 +230,8 @@ export function PostForm() {
                       : 'bg-card border-border text-card-foreground hover:border-primary/30 hover:shadow-sm'
                   }`}
                 >
-                  <span className='flex items-center gap-1 text-sm font-medium'>
-                    <PlusCircle className='h-4 w-4' />
+                  <span className='flex items-center gap-1 text-sm font-normal'>
+                    <PlusCircle className='h-4 w-4 font-normal' />
                     Other
                   </span>
                 </button>
@@ -258,7 +258,7 @@ export function PostForm() {
                 href={liSearchUrl}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='text-sm text-blue-500 hover:underline'
+                className='text-sm text-gray-500 hover:underline mr-20'
               >
                 Preview LinkedIn posts for these keywords
               </a>
@@ -267,7 +267,7 @@ export function PostForm() {
         </div>
 
         {/* Posts Per Day */}
-        <div className='mb-6'>
+        <div className='mb-8'>
           <Label className='text-foreground font-semibold'>
             Number of posts to comment per day
           </Label>
@@ -281,12 +281,12 @@ export function PostForm() {
             })}
           />
           <p className='text-muted-foreground mt-2 text-sm'>
-            Max. 50 posts per day
+            Max. 100 posts per day
           </p>
         </div>
 
         {/* Engagement Threshold */}
-        <div className='mb-6'>
+        <div className='mb-8'>
           <Label className='text-foreground font-semibold'>
             Comment Monitoring Based on Engagement
           </Label>
@@ -308,7 +308,7 @@ export function PostForm() {
                     : 'bg-card border-border text-card-foreground hover:border-primary/30 hover:shadow-sm'
                 }`}
               >
-                <span className='text-sm font-medium'>{option.label}</span>
+                <span className='text-sm font-normal'>{option.label}</span>
               </button>
             ))}
           </div>
@@ -318,7 +318,7 @@ export function PostForm() {
         </div>
 
         {/* Author Titles Section */}
-        <div className='mb-6 space-y-2'>
+        <div className='mb-8 space-y-2'>
           <div
             className='group flex cursor-pointer items-center justify-between'
             onClick={() => setIsAuthorTitlesExpanded(!isAuthorTitlesExpanded)}
@@ -370,7 +370,7 @@ export function PostForm() {
                           : 'bg-card border-border text-card-foreground hover:border-primary/30 hover:shadow-sm'
                       }`}
                     >
-                      <span className='text-sm font-medium'>{title}</span>
+                      <span className='text-sm font-normal'>{title}</span>
                     </button>
                   )
                 })}
@@ -381,7 +381,7 @@ export function PostForm() {
                     onClick={handleTitleOtherClick}
                     className='border-border bg-card text-card-foreground hover:border-primary/30 flex items-center gap-2 rounded-lg border px-4 py-2 transition-all duration-200 hover:shadow-sm'
                   >
-                    <span className='flex items-center gap-1 text-sm font-medium'>
+                    <span className='flex items-center gap-1 text-sm font-normal'>
                       <PlusCircle className='h-4 w-4' />
                       Other
                     </span>
@@ -406,7 +406,7 @@ export function PostForm() {
         </div>
 
         {/* Geography Section */}
-        <div className='mb-6 space-y-2'>
+        <div className='mb-8 space-y-2'>
           <div
             className='group flex cursor-pointer items-center justify-between'
             onClick={() => setIsGeographyExpanded(!isGeographyExpanded)}
@@ -466,7 +466,7 @@ export function PostForm() {
                           : 'bg-card border-border text-card-foreground hover:border-primary/30 hover:shadow-sm'
                       }`}
                     >
-                      <span className='text-sm font-medium'>{displayName}</span>
+                      <span className='text-sm font-normal'>{displayName}</span>
                     </button>
                   )
                 })}
@@ -476,7 +476,7 @@ export function PostForm() {
         </div>
 
         {/* Skip Options */}
-        <div className='mb-6 space-y-4'>
+        <div className='mb-8 space-y-4'>
           <Label className='text-foreground font-semibold'>
             Skip commenting on
           </Label>
@@ -512,7 +512,7 @@ export function PostForm() {
         </div>
 
         {/* Auto Schedule */}
-        <div className='mb-6 flex items-center space-x-2'>
+        <div className='mb-8 flex items-center space-x-2'>
           <input
             type='checkbox'
             id='autoSchedule'
@@ -523,7 +523,7 @@ export function PostForm() {
         </div>
 
         {/* Additional Rules */}
-        <div className='mb-6'>
+        <div className='mb-8'>
           <Label className='text-foreground font-semibold'>
             Additional Post Evaluation Rules
           </Label>

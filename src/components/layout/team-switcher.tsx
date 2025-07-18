@@ -1,7 +1,9 @@
 // src/components/team-switcher.tsx
 import * as React from 'react'
-import { envConfig } from '@/config/env.config'
+import { useState } from 'react'
+import { LinkedInLogoIcon } from '@radix-ui/react-icons'
 import { ChevronsUpDown, Plus } from 'lucide-react'
+import { getProfileDetailsFromExtension } from '@/utils/utils'
 import { useProfile } from '@/context/profile.context'
 import {
   DropdownMenu,
@@ -18,12 +20,26 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar'
 import { ProfileStatusEnum } from '@/features/users/enum/profile.enum'
+import {
+  // useDeleteProfile,
+  useLinkProfile,
+} from '@/features/users/query/profile.query'
 import { useGetAllProfileQuery } from '@/features/users/query/profile.query'
 
 export function TeamSwitcher() {
   const { isMobile } = useSidebar()
   const { data: profiles, isLoading } = useGetAllProfileQuery()
+  const [isLinking, setIsLinking] = useState(false)
+  const { isLinkingProfile, linkProfile } = useLinkProfile()
+
   const { activeProfile, setActiveProfile } = useProfile()
+
+  const handleLinking = async () => {
+    setIsLinking(true)
+    const profileDetails = await getProfileDetailsFromExtension()
+    await  linkProfile(profileDetails)
+    setIsLinking(false)
+  }
 
   React.useEffect(() => {
     if (profiles && profiles.length > 0 && !activeProfile) {
@@ -45,7 +61,14 @@ export function TeamSwitcher() {
     return (
       <SidebarMenu>
         <SidebarMenuItem>
-          <SidebarMenuButton size='lg'>No profiles connected</SidebarMenuButton>
+          <SidebarMenuButton
+            size='lg'
+            onClick={handleLinking}
+            className='gap-2'
+          >
+            <LinkedInLogoIcon className='h-5 w-5' />
+            {isLinking || isLinkingProfile ? 'Connecting...' : 'Connect Linkedin Profile'}
+          </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
     )
@@ -130,17 +153,17 @@ export function TeamSwitcher() {
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
+
             <DropdownMenuItem
               className='gap-2 p-2'
-              onClick={() => {
-                window.open(envConfig.extensionUrl, '_blank')
-              }}
+              disabled={isLinking}
+              onClick={handleLinking}
             >
               <div className='bg-background flex size-6 items-center justify-center rounded-md border'>
                 <Plus className='size-4' />
               </div>
               <div className='text-muted-foreground font-medium'>
-                Connect new profile
+                {isLinking ? 'Connecting...' : 'Connect new profile'}
               </div>
             </DropdownMenuItem>
           </DropdownMenuContent>

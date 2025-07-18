@@ -1,5 +1,5 @@
 import { Outlet } from '@tanstack/react-router'
-import { Separator } from '@/components/ui/separator'
+// import { Separator } from '@/components/ui/separator'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
@@ -21,7 +21,7 @@ export default function Settings() {
       <Main fixed>
 
         
-        <div className='space-y-0.5'>
+        {/* <div className='space-y-0.5'>
           <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>
             Settings
           </h1>
@@ -29,7 +29,7 @@ export default function Settings() {
             Manage your account settings and set e-mail preferences.
           </p>
         </div>
-        <Separator className='my-4 lg:my-6' />
+        <Separator className='my-4 lg:my-6' /> */}
 
 
 

@@ -4,9 +4,9 @@ import { toast } from 'react-toastify'
 import {
   GET_PROFILE_DETAILS,
   LINK_LI_ACCOUNT,
-} from './constants/browserEvents.constant'
-import { IProfileResponseFromExtension } from './interface/profile.interface'
-import { ProfileQueryEnum } from './query/profile.query'
+} from '../features/users/constants/browserEvents.constant'
+import { IProfileResponseFromExtension } from '../features/users/interface/profile.interface'
+import { ProfileQueryEnum } from '../features/users/query/profile.query'
 
 export const checkIsExtensionInstalled = async (
   extensionId: string,
@@ -59,7 +59,7 @@ export const handleResponseFromExtension = async () => {
     const response = await linkLinkedInProfileFromExtension()
     if (response?.profileUrn) {
       toast('Connected', { type: 'success' })
-      queryClient.invalidateQueries(ProfileQueryEnum.GET_ALL_PROFILE)
+      queryClient.invalidateQueries({queryKey: [ProfileQueryEnum.GET_ALL_PROFILE]})
     } else if (response?.errorCode && response?.message) {
       toast(response.message, { type: 'error' })
     } else if (response?.message) {
@@ -67,10 +67,15 @@ export const handleResponseFromExtension = async () => {
     } else {
       window.open('https://www.linkedin.com', '_blank')
     }
-  } catch (error: any) {
-    toast(error ?? error?.message ?? 'Something went wrong while connected', {
-      type: 'error',
-    })
-    window.open('https://www.linkedin.com', '_blank')
-  }
+} catch (error: unknown) {
+  const errorMessage = error instanceof Error 
+    ? error.message 
+    : 'Something went wrong while connecting';
+  
+  toast(errorMessage, {
+    type: 'error',
+  });
+  
+  window.open('https://www.linkedin.com', '_blank');
+}
 }
