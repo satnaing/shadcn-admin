@@ -45,18 +45,11 @@ const languages = [
 const accountFormSchema = z.object({
   name: z
     .string()
-    .min(2, {
-      message: 'Name must be at least 2 characters.',
-    })
-    .max(30, {
-      message: 'Name must not be longer than 30 characters.',
-    }),
-  dob: z.date({
-    required_error: 'A date of birth is required.',
-  }),
-  language: z.string({
-    required_error: 'Please select a language.',
-  }),
+    .min(1, 'Please enter your name.')
+    .min(2, 'Name must be at least 2 characters.')
+    .max(30, 'Name must not be longer than 30 characters.'),
+  dob: z.date('Please select your date of birth.'),
+  language: z.string('Please select a language.'),
 })
 
 type AccountFormValues = z.infer<typeof accountFormSchema>

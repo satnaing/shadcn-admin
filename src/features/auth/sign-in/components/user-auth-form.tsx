@@ -20,18 +20,13 @@ import { PasswordInput } from '@/components/password-input'
 type UserAuthFormProps = HTMLAttributes<HTMLFormElement>
 
 const formSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'Please enter your email' })
-    .email({ message: 'Invalid email address' }),
+  email: z.email({
+    error: (iss) => (iss.input === '' ? 'Please enter your email' : undefined),
+  }),
   password: z
     .string()
-    .min(1, {
-      message: 'Please enter your password',
-    })
-    .min(7, {
-      message: 'Password must be at least 7 characters long',
-    }),
+    .min(1, 'Please enter your password')
+    .min(7, 'Password must be at least 7 characters long'),
 })
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
