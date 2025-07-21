@@ -29,8 +29,9 @@ export interface Transaction {
   billAmount: number
   paymentMode: string
   transactionStatus: string
-  transactionDate: string
-  customer_account_no?: string
+  createdAt: string
+  updaredAt: string
+  account_no?: string
 }
 
 interface TransactionsTableProps {

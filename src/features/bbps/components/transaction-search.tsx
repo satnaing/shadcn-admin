@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
 import { IconCalendar, IconDownload } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -9,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import axios from 'axios'
+import { MultiSelect } from '@/components/ui/multi-select'
 
 interface TransactionSearchProps {
   onSearch: (params: {
@@ -17,28 +19,41 @@ interface TransactionSearchProps {
     bbpsReferenceCode: string
     start_date: string
     end_date: string
-    category: string
+    category: string[]
     customerId: string
+    accountNo: string
     paymentStatus: string
   }) => void
   onReset: () => void
 }
 
+type CategoryOption = { name: string; id: string }
+
 export function TransactionSearch({
   onSearch,
   onReset,
 }: TransactionSearchProps) {
-  const [fields, setFields] = useState({
+  const [fields, setFields] = useState<{
+    id: string
+    bbpsReferenceCode: string
+    start_date: string
+    end_date: string
+    category: string[]
+    customerId: string
+    accountNo: string
+    paymentStatus: string
+  }>({
     id: '',
     bbpsReferenceCode: '',
     start_date: '',
     end_date: '',
-    category: '',
+    category: [],
     customerId: '',
+    accountNo: '',
     paymentStatus: '',
   })
 
-  const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL;
+  const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL
   const getToken = () => {
     const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/)
     return match ? decodeURIComponent(match[1]) : ''
@@ -60,68 +75,110 @@ export function TransactionSearch({
       bbpsReferenceCode: '',
       start_date: '',
       end_date: '',
-      category: '',
+      category: [],
       customerId: '',
+      accountNo: '',
       paymentStatus: '',
     })
     onReset()
   }
+  const [categoryOptions, setCategoryOptions] = useState<CategoryOption[]>([])
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const token = getToken()
+        const response = await axios.get(
+          `${BACKEND_BASE_URL}/v1/bbps/getAllCategories`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+          }
+        )
+
+        const categories: CategoryOption[] = response.data.categories.map(
+          (name: string) => ({
+            id: name,
+            name,
+          })
+        )
+        setCategoryOptions(categories)
+      } catch (error) {
+    throw new Error(`Failed to fetch categories: ${error}`)
+    }
+    }
+
+    fetchCategories()
+  }, [BACKEND_BASE_URL])
 
   const handleDownload = async () => {
-    const token = getToken();
+    const token = getToken()
     const params = {
       ...(fields.id && { transaction_id: fields.id }),
-      ...(fields.bbpsReferenceCode && { bbps_ref_no: fields.bbpsReferenceCode }),
+      ...(fields.bbpsReferenceCode && {
+        bbps_ref_no: fields.bbpsReferenceCode,
+      }),
       ...(fields.customerId && { customer_id: fields.customerId }),
+      ...(fields.accountNo && { account_no: fields.accountNo }),
       ...(fields.paymentStatus && { status: fields.paymentStatus }),
-      ...(fields.category && { category: fields.category }),
+      ...(fields.category.length > 0 && {
+        category: fields.category,
+      }),
       ...(fields.start_date && { start_date: fields.start_date }),
       ...(fields.end_date && { end_date: fields.end_date }),
       isDownload: true,
-    };
+    }
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         `${BACKEND_BASE_URL}/v1/bbps/getAllTransactions`,
+        params,
         {
-          params,
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
           responseType: 'blob',
           withCredentials: true,
         }
-      );
-      let filename = 'bbps-transactions.xlsx';
-      const disposition = response.headers['content-disposition'];
+      )
+      let filename = 'bbps-transactions.xlsx'
+      const disposition = response.headers['content-disposition']
       if (disposition) {
-        const match = disposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+        const match = disposition.match(
+          /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/
+        )
         if (match && match[1]) {
-          filename = match[1].replace(/['"]/g, '');
+          filename = match[1].replace(/['"]/g, '')
         }
       }
-      const blob = new Blob([response.data]);
+      const blob = new Blob([response.data])
       if (blob.size < 2000) {
-        alert('No transactions found for the selected range.');
-        return;
+        alert('No transactions found for the selected range.')
+        return
       }
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', filename);
-      document.body.appendChild(link);
-      link.click();
-      link.parentNode?.removeChild(link);
-      window.URL.revokeObjectURL(url);
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', filename)
+      document.body.appendChild(link)
+      link.click()
+      link.parentNode?.removeChild(link)
+      window.URL.revokeObjectURL(url)
     } catch {
-      alert('Failed to download Excel.');
+      alert('Failed to download Excel.')
     }
   }
 
   return (
     <form onSubmit={handleSearch} className='flex flex-wrap gap-2'>
       {/* Inputs row */}
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2'>
+      <div className='grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
         <div>
           <label className='mb-1 block text-xs font-semibold'>
-           PG Transaction ID
+            PG Transaction ID
           </label>
           <Input
             name='id'
@@ -150,6 +207,15 @@ export function TransactionSearch({
             value={fields.customerId}
             onChange={handleChange}
             placeholder='Enter Customer ID'
+          />
+        </div>
+        <div>
+          <label className='mb-1 block text-xs font-semibold'>Account No</label>
+          <Input
+            name='accountNo'
+            value={fields.accountNo}
+            onChange={handleChange}
+            placeholder='Enter Account No'
           />
         </div>
         <div>
@@ -184,23 +250,20 @@ export function TransactionSearch({
         </div>
         <div>
           <label className='mb-1 block text-xs font-semibold'>Category</label>
-          <Select
-            value={fields.category}
-            onValueChange={(value) => setFields({ ...fields, category: value })}
-          >
-            <SelectTrigger className='w-full'>
-              <SelectValue placeholder='Select Category' />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value='Mobile Prepaid'>Prepaid</SelectItem>
-              <SelectItem value='Mobile Postpaid'>Postpaid</SelectItem>
-              <SelectItem value='Gas'>Gas</SelectItem>
-              <SelectItem value='Electricity'>Electricity</SelectItem>
-              <SelectItem value='Credit Card'>Credit Card</SelectItem>
-              <SelectItem value='Fastag'>Fastag</SelectItem>
-            </SelectContent>
-          </Select>
+          <MultiSelect
+            options={categoryOptions.map((option) => ({
+              value: option.id,
+              label: option.name,
+            }))}
+            onValueChange={(selectedList) => {
+              setFields({ ...fields, category: selectedList })
+            }}
+            defaultValue={fields.category}
+            placeholder='Select Categories'
+            className='w-full'
+          />
         </div>
+
         <div>
           <label className='mb-1 block text-xs font-semibold'>
             Payment Status
@@ -225,10 +288,18 @@ export function TransactionSearch({
         </div>
       </div>
       {/* Buttons row */}
-      <div className='flex gap-2 w-full mt-2'>
-        <Button type='submit' className='h-9' disabled={Object.values(fields).every((value) => value === '')}>
+      <div className='mt-2 flex w-full gap-2'>
+        <Button
+          type='submit'
+          className='h-9'
+          disabled={Object.values(fields).every(
+            (value) =>
+              value === '' || (Array.isArray(value) && value.length === 0)
+          )}
+        >
           Search
         </Button>
+
         <Button
           type='button'
           variant='outline'
@@ -242,7 +313,7 @@ export function TransactionSearch({
           variant='outline'
           className='h-9'
           onClick={handleDownload}
-          disabled={Object.values(fields).every((value) => value === '')}
+          disabled={Object.values(fields).every((value) => value === '' ||(Array.isArray(value) && value.length === 0))}
         >
           <IconDownload className='mr-1' />
           Download Report

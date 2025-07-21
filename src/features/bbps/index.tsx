@@ -24,10 +24,11 @@ interface TransactionSearchFields {
   id?: string
   bbpsReferenceCode?: string
   mobileNumber?: string
-  category?: string
+  category?: string[]
   start_date?: string
   end_date?: string
   customerId?: string
+  accountNo?: string
   paymentStatus?: string
 }
 
@@ -37,8 +38,8 @@ export default function BBPS() {
   const [searchParams, setSearchParams] = useState<TransactionSearchFields | null>(null)
 
   // Build query params for API
-  const buildQueryParams = (): Record<string, string> => {
-    const params: Record<string, string> = {
+  const buildQueryParams = (): Record<string, string | string[]> => {
+    const params: Record<string, string | string[]> = {
       page: String(pageIndex + 1),
       limit: String(pageSize),
     }
@@ -46,9 +47,10 @@ export default function BBPS() {
       if (searchParams.id) params.transaction_id = searchParams.id
       if (searchParams.bbpsReferenceCode) params.bbps_ref_no = searchParams.bbpsReferenceCode
       if (searchParams.customerId) params.customer_id = searchParams.customerId
+      if (searchParams.accountNo) params.account_no = searchParams.accountNo
       if (searchParams.paymentStatus) params.status = searchParams.paymentStatus
       if (searchParams.mobileNumber) params.mobile = searchParams.mobileNumber
-      if (searchParams.category) params.category = searchParams.category
+      if (searchParams.category && searchParams.category.length > 0) params.category = searchParams.category
       if (searchParams.start_date) params.start_date = searchParams.start_date
       if (searchParams.end_date) params.end_date = searchParams.end_date
     }
@@ -58,14 +60,18 @@ export default function BBPS() {
   const fetchTransactions = async (): Promise<Record<string, unknown>[]> => {
     const token = getToken();
     const params = buildQueryParams();
-    const response = await axios.get(
-      `${BACKEND_BASE_URL}/v1/bbps/getAllTransactions`,
-      {
-        params,
-        headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true,
-      }
-    );
+    const response = await axios.post(
+           `${BACKEND_BASE_URL}/v1/bbps/getAllTransactions`,
+           params, 
+           {
+             headers: {
+               Authorization: `Bearer ${token}`,
+               'Content-Type': 'application/json',
+             },
+            //  responseType: 'blob',
+             withCredentials: true,
+           }
+         );
     if (response.data?.data?.transactions) {
       return response.data.data.transactions;
     }
@@ -93,8 +99,9 @@ export default function BBPS() {
       billAmount: Number(t.bill_amount) || 0,
       paymentMode: String(t.mode ?? ''),
       transactionStatus: String(t.status ?? 'Pending'),
-      transactionDate: String(t.transaction_date ?? ''),
-      customer_account_no: String(t.customer_account_no ?? ''),
+      createdAt: String(t.created_at ?? ''),
+      updaredAt: String(t.updated_at ?? ''),
+      account_no: String(t.account_no ?? ''),
     }
   })
 
