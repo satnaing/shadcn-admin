@@ -27,11 +27,11 @@ import { SelectDropdown } from '@/components/select-dropdown'
 import { userTypes } from '../data/data'
 
 const formSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'Email is required.' })
-    .email({ message: 'Email is invalid.' }),
-  role: z.string().min(1, { message: 'Role is required.' }),
+  email: z.email({
+    error: (iss) =>
+      iss.input === '' ? 'Please enter an email to invite.' : undefined,
+  }),
+  role: z.string().min(1, 'Role is required.'),
   desc: z.string().optional(),
 })
 type UserInviteForm = z.infer<typeof formSchema>

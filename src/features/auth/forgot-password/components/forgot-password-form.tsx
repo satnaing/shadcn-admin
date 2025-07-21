@@ -17,10 +17,9 @@ import { Input } from '@/components/ui/input'
 type ForgotFormProps = HTMLAttributes<HTMLFormElement>
 
 const formSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'Please enter your email' })
-    .email({ message: 'Invalid email address' }),
+  email: z.email({
+    error: (iss) => (iss.input === '' ? 'Please enter your email' : undefined),
+  }),
 })
 
 export function ForgotPasswordForm({ className, ...props }: ForgotFormProps) {

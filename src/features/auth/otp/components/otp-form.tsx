@@ -24,7 +24,7 @@ import {
 type OtpFormProps = HTMLAttributes<HTMLFormElement>
 
 const formSchema = z.object({
-  otp: z.string().min(1, { message: 'Please enter your otp code.' }),
+  otp: z.string().min(6, 'Please enter your otp code.'),
 })
 
 export function OtpForm({ className, ...props }: OtpFormProps) {
