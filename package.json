@@ -46,7 +46,7 @@
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.523.0",
     "react": "^19.1.0",
-    "react-day-picker": "9.7.0",
+    "react-day-picker": "9.8.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.58.1",
     "react-top-loading-bar": "^3.0.2",
