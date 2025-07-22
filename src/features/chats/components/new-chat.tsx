@@ -60,7 +60,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
               <Badge key={user.id} variant='default'>
                 {user.fullName}
                 <button
-                  className='ring-offset-background focus:ring-ring ml-1 rounded-full outline-hidden focus:ring-2 focus:ring-offset-2'
+                  className='ring-offset-background focus:ring-ring ms-1 rounded-full outline-hidden focus:ring-2 focus:ring-offset-2'
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       handleRemoveUser(user.id)

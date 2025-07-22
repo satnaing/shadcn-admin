@@ -62,7 +62,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
       }}
     >
       <DialogContent className='sm:max-w-md'>
-        <DialogHeader className='text-left'>
+        <DialogHeader className='text-start'>
           <DialogTitle className='flex items-center gap-2'>
             <IconMailPlus /> Invite User
           </DialogTitle>
