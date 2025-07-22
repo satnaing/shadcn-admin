@@ -23,10 +23,8 @@ export function ProtectedRoute({ requiredService, children }: ProtectedRouteProp
       if (!user) {
         setLoading(true);
         const token = getToken();
-        console.log('[ProtectedRoute] No user in context, token:', token);
         if (token) {
           const userInfo = await fetchUserInfoFromApi(token);
-          console.log('[ProtectedRoute] User info fetched from API:', userInfo);
           setUser(userInfo);
         } else {
           console.warn('[ProtectedRoute] No token found in cookies.');

@@ -59,7 +59,7 @@ const formSchema = z.object({
   isEdit: z.boolean(),
 }).superRefine((data, ctx) => {
   {
-    if (!data.services || data.services.length === 0) {
+    if (!data.services || data.services.length === 0 ) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['services'],
@@ -75,7 +75,6 @@ const formSchema = z.object({
     } 
   }
 });
-
 
 
 type UserForm = z.infer<typeof formSchema>;
@@ -257,7 +256,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
         setAllPermissions(res.data.map((perm: {id: number; name :string}) => ({
           id: perm.id,
           value: perm.name,
-          label: perm.name // or a more descriptive label if available
+          label: perm.name 
         })));
         setLoadingPermissions(false);
       })
