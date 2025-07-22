@@ -17,9 +17,9 @@ export const bbpsColumns: ColumnDef<Transaction>[] = [
     ),
   },
   {
-    accessorKey: 'customer_account_no',
+    accessorKey: 'account_no',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Customer Account No' />
+      <DataTableColumnHeader column={column} title='Account No' />
     ),
   },
   {
@@ -53,9 +53,15 @@ export const bbpsColumns: ColumnDef<Transaction>[] = [
     ),
   },
   {
-    accessorKey: 'transactionDate',
+    accessorKey: 'createdAt',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Transaction Date' />
+      <DataTableColumnHeader column={column} title='Created At' />
+    ),
+  },
+  {
+    accessorKey: 'updaredAt',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Updated At' />
     ),
   },
   {
