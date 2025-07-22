@@ -1,3 +1,4 @@
+import { DirSwitch } from '@/components/dir-switch'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
@@ -17,6 +18,7 @@ export default function Tasks() {
         <Search />
         <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
+          <DirSwitch />
           <ProfileDropdown />
         </div>
       </Header>
