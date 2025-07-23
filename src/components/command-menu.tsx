@@ -38,7 +38,7 @@ export function CommandMenu() {
     <CommandDialog modal open={open} onOpenChange={setOpen}>
       <CommandInput placeholder='Type a command or search...' />
       <CommandList>
-        <ScrollArea type='hover' className='h-72 pr-1'>
+        <ScrollArea type='hover' className='h-72 pe-1'>
           <CommandEmpty>No results found.</CommandEmpty>
           {sidebarData.navGroups.map((group) => (
             <CommandGroup key={group.title} heading={group.title}>
@@ -52,7 +52,7 @@ export function CommandMenu() {
                         runCommand(() => navigate({ to: navItem.url }))
                       }}
                     >
-                      <div className='mr-2 flex h-4 w-4 items-center justify-center'>
+                      <div className='me-2 flex h-4 w-4 items-center justify-center'>
                         <IconArrowRightDashed className='text-muted-foreground/80 size-2' />
                       </div>
                       {navItem.title}
@@ -67,7 +67,7 @@ export function CommandMenu() {
                       runCommand(() => navigate({ to: subItem.url }))
                     }}
                   >
-                    <div className='mr-2 flex h-4 w-4 items-center justify-center'>
+                    <div className='me-2 flex h-4 w-4 items-center justify-center'>
                       <IconArrowRightDashed className='text-muted-foreground/80 size-2' />
                     </div>
                     {navItem.title} <IconChevronRight /> {subItem.title}
