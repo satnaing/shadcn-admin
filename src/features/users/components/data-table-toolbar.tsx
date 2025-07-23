@@ -2,7 +2,7 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { userTypes } from '../data/data'
+import { roles } from '../data/data'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
 import { DataTableViewOptions } from './data-table-view-options'
 
@@ -45,7 +45,7 @@ export function DataTableToolbar<TData>({
             <DataTableFacetedFilter
               column={table.getColumn('role')}
               title='Role'
-              options={userTypes.map((t) => ({ ...t }))}
+              options={roles.map((t) => ({ ...t }))}
             />
           )}
         </div>

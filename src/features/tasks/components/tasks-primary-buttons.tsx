@@ -1,4 +1,4 @@
-import { IconDownload, IconPlus } from '@tabler/icons-react'
+import { Download, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useTasks } from '../context/tasks-context'
 
@@ -11,10 +11,10 @@ export function TasksPrimaryButtons() {
         className='space-x-1'
         onClick={() => setOpen('import')}
       >
-        <span>Import</span> <IconDownload size={18} />
+        <span>Import</span> <Download size={18} />
       </Button>
       <Button className='space-x-1' onClick={() => setOpen('create')}>
-        <span>Create</span> <IconPlus size={18} />
+        <span>Create</span> <Plus size={18} />
       </Button>
     </div>
   )

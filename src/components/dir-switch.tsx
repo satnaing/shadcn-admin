@@ -1,4 +1,4 @@
-import { IconCheck } from '@tabler/icons-react'
+import { Check } from 'lucide-react'
 import { PilcrowLeftIcon, PilcrowRightIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useDirection } from '@/context/direction-context'
@@ -25,14 +25,14 @@ export function DirSwitch() {
       <DropdownMenuContent align='end'>
         <DropdownMenuItem onClick={() => setDir('ltr')}>
           Left to Right (LTR)
-          <IconCheck
+          <Check
             size={14}
             className={cn('ms-auto', dir !== 'ltr' && 'hidden')}
           />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setDir('rtl')}>
           Right to Left (RTL)
-          <IconCheck
+          <Check
             size={14}
             className={cn('ms-auto', dir !== 'rtl' && 'hidden')}
           />

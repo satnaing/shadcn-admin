@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router'
-import { IconExternalLink, IconKeyOff } from '@tabler/icons-react'
 import { ClerkProvider } from '@clerk/clerk-react'
+import { ExternalLink, Key } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
 import { SidebarTrigger } from '@/components/ui/sidebar'
@@ -46,7 +46,7 @@ function MissingClerkPubKey() {
       <Main className='flex flex-col items-center justify-start'>
         <div className='max-w-2xl'>
           <Alert>
-            <IconKeyOff className='size-4' />
+            <Key className='size-4' />
             <AlertTitle>No Publishable Key Found!</AlertTitle>
             <AlertDescription>
               <p className='text-balance'>
@@ -68,7 +68,7 @@ function MissingClerkPubKey() {
                 >
                   Clerk
                   <sup>
-                    <IconExternalLink className='inline-block size-4' />
+                    <ExternalLink className='inline-block size-4' />
                   </sup>
                 </a>{' '}
                 Dashboard, navigate to the API keys page.

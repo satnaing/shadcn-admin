@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import LongText from '@/components/long-text'
-import { callTypes, userTypes } from '../data/data'
+import { callTypes, roles } from '../data/data'
 import { User } from '../data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
@@ -114,7 +114,7 @@ export const columns: ColumnDef<User>[] = [
     ),
     cell: ({ row }) => {
       const { role } = row.original
-      const userType = userTypes.find(({ value }) => value === role)
+      const userType = roles.find(({ value }) => value === role)
 
       if (!userType) {
         return null

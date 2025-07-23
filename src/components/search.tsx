@@ -1,4 +1,4 @@
-import { IconSearch } from '@tabler/icons-react'
+import { SearchIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useSearch } from '@/context/search-context'
 import { Button } from './ui/button'
@@ -20,9 +20,10 @@ export function Search({ className = '', placeholder = 'Search' }: Props) {
       )}
       onClick={() => setOpen(true)}
     >
-      <IconSearch
+      <SearchIcon
         aria-hidden='true'
         className='absolute start-1.5 top-1/2 -translate-y-1/2'
+        size={16}
       />
       <span className='ms-3'>{placeholder}</span>
       <kbd className='bg-muted pointer-events-none absolute end-[0.3rem] top-[0.3rem] hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex'>
