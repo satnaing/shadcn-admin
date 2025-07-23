@@ -24,7 +24,7 @@ export const columns: ColumnDef<User>[] = [
     ),
     meta: {
       className: cn(
-        'sticky md:table-cell left-0 z-10 rounded-tl',
+        'sticky md:table-cell start-0 z-10 rounded-tl',
         'bg-background group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted'
       ),
     },
@@ -51,7 +51,7 @@ export const columns: ColumnDef<User>[] = [
       className: cn(
         'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
         'bg-background group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-        'sticky left-6 md:table-cell'
+        'sticky start-6 md:table-cell'
       ),
     },
     enableHiding: false,

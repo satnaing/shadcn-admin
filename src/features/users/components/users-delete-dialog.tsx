@@ -34,7 +34,7 @@ export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
       title={
         <span className='text-destructive'>
           <IconAlertTriangle
-            className='stroke-destructive mr-1 inline-block'
+            className='stroke-destructive me-1 inline-block'
             size={18}
           />{' '}
           Delete User
