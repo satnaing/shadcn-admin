@@ -1,3 +1,10 @@
+## v1.4.2 (2025-07-23)
+
+### Fix
+
+- remove unnecessary transitions in table (#176)
+- overflow background in tables (#175)
+
 ## v1.4.1 (2025-06-25)
 
 ### Fix
