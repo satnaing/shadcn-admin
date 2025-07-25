@@ -1,4 +1,4 @@
-import { IconMailPlus, IconUserPlus } from '@tabler/icons-react'
+import { MailPlus, UserPlus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useUsers } from '../context/users-context'
 
@@ -11,10 +11,10 @@ export function UsersPrimaryButtons() {
         className='space-x-1'
         onClick={() => setOpen('invite')}
       >
-        <span>Invite User</span> <IconMailPlus size={18} />
+        <span>Invite User</span> <MailPlus size={18} />
       </Button>
       <Button className='space-x-1' onClick={() => setOpen('add')}>
-        <span>Add User</span> <IconUserPlus size={18} />
+        <span>Add User</span> <UserPlus size={18} />
       </Button>
     </div>
   )

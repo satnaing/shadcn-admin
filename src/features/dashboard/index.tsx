@@ -22,7 +22,7 @@ export default function Dashboard() {
       {/* ===== Top Heading ===== */}
       <Header>
         <TopNav links={topNav} />
-        <div className='ml-auto flex items-center space-x-4'>
+        <div className='ms-auto flex items-center space-x-4'>
           <Search />
           <ThemeSwitch />
           <ProfileDropdown />
@@ -165,7 +165,7 @@ export default function Dashboard() {
                 <CardHeader>
                   <CardTitle>Overview</CardTitle>
                 </CardHeader>
-                <CardContent className='pl-2'>
+                <CardContent className='ps-2'>
                   <Overview />
                 </CardContent>
               </Card>

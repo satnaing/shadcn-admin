@@ -1,12 +1,6 @@
 import React from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import {
-  IconArrowRightDashed,
-  IconChevronRight,
-  IconDeviceLaptop,
-  IconMoon,
-  IconSun,
-} from '@tabler/icons-react'
+import { ArrowRight, ChevronRight, Laptop, Moon, Sun } from 'lucide-react'
 import { useSearch } from '@/context/search-context'
 import { useTheme } from '@/context/theme-context'
 import {
@@ -38,7 +32,7 @@ export function CommandMenu() {
     <CommandDialog modal open={open} onOpenChange={setOpen}>
       <CommandInput placeholder='Type a command or search...' />
       <CommandList>
-        <ScrollArea type='hover' className='h-72 pr-1'>
+        <ScrollArea type='hover' className='h-72 pe-1'>
           <CommandEmpty>No results found.</CommandEmpty>
           {sidebarData.navGroups.map((group) => (
             <CommandGroup key={group.title} heading={group.title}>
@@ -52,8 +46,8 @@ export function CommandMenu() {
                         runCommand(() => navigate({ to: navItem.url }))
                       }}
                     >
-                      <div className='mr-2 flex h-4 w-4 items-center justify-center'>
-                        <IconArrowRightDashed className='text-muted-foreground/80 size-2' />
+                      <div className='me-2 flex h-4 w-4 items-center justify-center'>
+                        <ArrowRight className='text-muted-foreground/80 size-2' />
                       </div>
                       {navItem.title}
                     </CommandItem>
@@ -67,10 +61,10 @@ export function CommandMenu() {
                       runCommand(() => navigate({ to: subItem.url }))
                     }}
                   >
-                    <div className='mr-2 flex h-4 w-4 items-center justify-center'>
-                      <IconArrowRightDashed className='text-muted-foreground/80 size-2' />
+                    <div className='me-2 flex h-4 w-4 items-center justify-center'>
+                      <ArrowRight className='text-muted-foreground/80 size-2' />
                     </div>
-                    {navItem.title} <IconChevronRight /> {subItem.title}
+                    {navItem.title} <ChevronRight /> {subItem.title}
                   </CommandItem>
                 ))
               })}
@@ -79,14 +73,14 @@ export function CommandMenu() {
           <CommandSeparator />
           <CommandGroup heading='Theme'>
             <CommandItem onSelect={() => runCommand(() => setTheme('light'))}>
-              <IconSun /> <span>Light</span>
+              <Sun /> <span>Light</span>
             </CommandItem>
             <CommandItem onSelect={() => runCommand(() => setTheme('dark'))}>
-              <IconMoon className='scale-90' />
+              <Moon className='scale-90' />
               <span>Dark</span>
             </CommandItem>
             <CommandItem onSelect={() => runCommand(() => setTheme('system'))}>
-              <IconDeviceLaptop />
+              <Laptop />
               <span>System</span>
             </CommandItem>
           </CommandGroup>

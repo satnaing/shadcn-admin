@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { IconCheck, IconX } from '@tabler/icons-react'
+import { Check, X } from 'lucide-react'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -60,7 +60,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
               <Badge key={user.id} variant='default'>
                 {user.fullName}
                 <button
-                  className='ring-offset-background focus:ring-ring ml-1 rounded-full outline-hidden focus:ring-2 focus:ring-offset-2'
+                  className='ring-offset-background focus:ring-ring ms-1 rounded-full outline-hidden focus:ring-2 focus:ring-offset-2'
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       handleRemoveUser(user.id)
@@ -68,7 +68,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
                   }}
                   onClick={() => handleRemoveUser(user.id)}
                 >
-                  <IconX className='text-muted-foreground hover:text-foreground h-3 w-3' />
+                  <X className='text-muted-foreground hover:text-foreground h-3 w-3' />
                 </button>
               </Badge>
             ))}
@@ -104,7 +104,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
                     </div>
 
                     {selectedUsers.find((u) => u.id === user.id) && (
-                      <IconCheck className='h-4 w-4' />
+                      <Check className='h-4 w-4' />
                     )}
                   </CommandItem>
                 ))}

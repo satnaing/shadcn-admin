@@ -1,6 +1,6 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Row } from '@tanstack/react-table'
-import { IconTrash } from '@tabler/icons-react'
+import { Trash2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -74,7 +74,7 @@ export function DataTableRowActions<TData>({
         >
           Delete
           <DropdownMenuShortcut>
-            <IconTrash size={16} />
+            <Trash2 size={16} />
           </DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -1,24 +1,24 @@
 import {
-  IconBarrierBlock,
-  IconBrowserCheck,
-  IconBug,
-  IconChecklist,
-  IconError404,
-  IconHelp,
-  IconLayoutDashboard,
-  IconLock,
-  IconLockAccess,
-  IconMessages,
-  IconNotification,
-  IconPackages,
-  IconPalette,
-  IconServerOff,
-  IconSettings,
-  IconTool,
-  IconUserCog,
-  IconUserOff,
-  IconUsers,
-} from '@tabler/icons-react'
+  Construction,
+  LayoutDashboard,
+  Monitor,
+  Bug,
+  ListTodo,
+  FileX,
+  HelpCircle,
+  Lock,
+  Bell,
+  Package,
+  Palette,
+  ServerOff,
+  Settings,
+  Wrench,
+  UserCog,
+  UserX,
+  Users,
+  MessagesSquare,
+  ShieldCheck,
+} from 'lucide-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { ClerkLogo } from '@/assets/clerk-logo'
 import { type SidebarData } from '../types'
@@ -53,28 +53,28 @@ export const sidebarData: SidebarData = {
         {
           title: 'Dashboard',
           url: '/',
-          icon: IconLayoutDashboard,
+          icon: LayoutDashboard,
         },
         {
           title: 'Tasks',
           url: '/tasks',
-          icon: IconChecklist,
+          icon: ListTodo,
         },
         {
           title: 'Apps',
           url: '/apps',
-          icon: IconPackages,
+          icon: Package,
         },
         {
           title: 'Chats',
           url: '/chats',
           badge: '3',
-          icon: IconMessages,
+          icon: MessagesSquare,
         },
         {
           title: 'Users',
           url: '/users',
-          icon: IconUsers,
+          icon: Users,
         },
         {
           title: 'Secured by Clerk',
@@ -101,7 +101,7 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'Auth',
-          icon: IconLockAccess,
+          icon: ShieldCheck,
           items: [
             {
               title: 'Sign In',
@@ -127,32 +127,32 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Errors',
-          icon: IconBug,
+          icon: Bug,
           items: [
             {
               title: 'Unauthorized',
               url: '/401',
-              icon: IconLock,
+              icon: Lock,
             },
             {
               title: 'Forbidden',
               url: '/403',
-              icon: IconUserOff,
+              icon: UserX,
             },
             {
               title: 'Not Found',
               url: '/404',
-              icon: IconError404,
+              icon: FileX,
             },
             {
               title: 'Internal Server Error',
               url: '/500',
-              icon: IconServerOff,
+              icon: ServerOff,
             },
             {
               title: 'Maintenance Error',
               url: '/503',
-              icon: IconBarrierBlock,
+              icon: Construction,
             },
           ],
         },
@@ -163,39 +163,39 @@ export const sidebarData: SidebarData = {
       items: [
         {
           title: 'Settings',
-          icon: IconSettings,
+          icon: Settings,
           items: [
             {
               title: 'Profile',
               url: '/settings',
-              icon: IconUserCog,
+              icon: UserCog,
             },
             {
               title: 'Account',
               url: '/settings/account',
-              icon: IconTool,
+              icon: Wrench,
             },
             {
               title: 'Appearance',
               url: '/settings/appearance',
-              icon: IconPalette,
+              icon: Palette,
             },
             {
               title: 'Notifications',
               url: '/settings/notifications',
-              icon: IconNotification,
+              icon: Bell,
             },
             {
               title: 'Display',
               url: '/settings/display',
-              icon: IconBrowserCheck,
+              icon: Monitor,
             },
           ],
         },
         {
           title: 'Help Center',
           url: '/help-center',
-          icon: IconHelp,
+          icon: HelpCircle,
         },
       ],
     },

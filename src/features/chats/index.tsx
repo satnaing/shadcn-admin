@@ -2,18 +2,18 @@ import { useState } from 'react'
 import { Fragment } from 'react/jsx-runtime'
 import { format } from 'date-fns'
 import {
-  IconArrowLeft,
-  IconDotsVertical,
-  IconEdit,
-  IconMessages,
-  IconPaperclip,
-  IconPhone,
-  IconPhotoPlus,
-  IconPlus,
-  IconSearch,
-  IconSend,
-  IconVideo,
-} from '@tabler/icons-react'
+  ArrowLeft,
+  MoreVertical,
+  Edit,
+  Paperclip,
+  Phone,
+  ImagePlus,
+  Plus,
+  Search as SearchIcon,
+  Send,
+  Video,
+  MessagesSquare,
+} from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -67,7 +67,7 @@ export default function Chats() {
       {/* ===== Top Heading ===== */}
       <Header>
         <Search />
-        <div className='ml-auto flex items-center space-x-4'>
+        <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <ProfileDropdown />
         </div>
@@ -81,7 +81,7 @@ export default function Chats() {
               <div className='flex items-center justify-between py-2'>
                 <div className='flex gap-2'>
                   <h1 className='text-2xl font-bold'>Inbox</h1>
-                  <IconMessages size={20} />
+                  <MessagesSquare size={20} />
                 </div>
 
                 <Button
@@ -90,12 +90,12 @@ export default function Chats() {
                   onClick={() => setCreateConversationDialog(true)}
                   className='rounded-lg'
                 >
-                  <IconEdit size={24} className='stroke-muted-foreground' />
+                  <Edit size={24} className='stroke-muted-foreground' />
                 </Button>
               </div>
 
-              <label className='border-input focus-within:ring-ring flex h-12 w-full items-center space-x-0 rounded-md border pl-2 focus-within:ring-1 focus-within:outline-hidden'>
-                <IconSearch size={15} className='mr-2 stroke-slate-500' />
+              <label className='border-input focus-within:ring-ring flex h-12 w-full items-center space-x-0 rounded-md border ps-2 focus-within:ring-1 focus-within:outline-hidden'>
+                <SearchIcon size={15} className='me-2 stroke-slate-500' />
                 <span className='sr-only'>Search</span>
                 <input
                   type='text'
@@ -120,7 +120,7 @@ export default function Chats() {
                     <button
                       type='button'
                       className={cn(
-                        `hover:bg-secondary/75 -mx-1 flex w-full rounded-md px-2 py-2 text-left text-sm`,
+                        `hover:bg-secondary/75 -mx-1 flex w-full rounded-md px-2 py-2 text-start text-sm`,
                         selectedUser?.id === id && 'sm:bg-muted'
                       )}
                       onClick={() => {
@@ -154,8 +154,8 @@ export default function Chats() {
           {selectedUser ? (
             <div
               className={cn(
-                'bg-primary-foreground absolute inset-0 left-full z-50 hidden w-full flex-1 flex-col rounded-md border shadow-xs transition-all duration-200 sm:static sm:z-auto sm:flex',
-                mobileSelectedUser && 'left-0 flex'
+                'bg-primary-foreground absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col rounded-md border shadow-xs transition-all duration-200 sm:static sm:z-auto sm:flex',
+                mobileSelectedUser && 'start-0 flex'
               )}
             >
               {/* Top Part */}
@@ -165,10 +165,10 @@ export default function Chats() {
                   <Button
                     size='icon'
                     variant='ghost'
-                    className='-ml-2 h-full sm:hidden'
+                    className='-ms-2 h-full sm:hidden'
                     onClick={() => setMobileSelectedUser(null)}
                   >
-                    <IconArrowLeft />
+                    <ArrowLeft className='rtl:rotate-180' />
                   </Button>
                   <div className='flex items-center gap-2 lg:gap-4'>
                     <Avatar className='size-9 lg:size-11'>
@@ -190,27 +190,27 @@ export default function Chats() {
                 </div>
 
                 {/* Right */}
-                <div className='-mr-1 flex items-center gap-1 lg:gap-2'>
+                <div className='-me-1 flex items-center gap-1 lg:gap-2'>
                   <Button
                     size='icon'
                     variant='ghost'
                     className='hidden size-8 rounded-full sm:inline-flex lg:size-10'
                   >
-                    <IconVideo size={22} className='stroke-muted-foreground' />
+                    <Video size={22} className='stroke-muted-foreground' />
                   </Button>
                   <Button
                     size='icon'
                     variant='ghost'
                     className='hidden size-8 rounded-full sm:inline-flex lg:size-10'
                   >
-                    <IconPhone size={22} className='stroke-muted-foreground' />
+                    <Phone size={22} className='stroke-muted-foreground' />
                   </Button>
                   <Button
                     size='icon'
                     variant='ghost'
                     className='h-10 rounded-md sm:h-8 sm:w-4 lg:h-10 lg:w-6'
                   >
-                    <IconDotsVertical className='stroke-muted-foreground sm:size-5' />
+                    <MoreVertical className='stroke-muted-foreground sm:size-5' />
                   </Button>
                 </div>
               </div>
@@ -218,8 +218,8 @@ export default function Chats() {
               {/* Conversation */}
               <div className='flex flex-1 flex-col gap-2 rounded-md px-4 pt-0 pb-4'>
                 <div className='flex size-full flex-1'>
-                  <div className='chat-text-container relative -mr-4 flex flex-1 flex-col overflow-y-hidden'>
-                    <div className='chat-flex flex h-40 w-full grow flex-col-reverse justify-start gap-4 overflow-y-auto py-2 pr-4 pb-4'>
+                  <div className='chat-text-container relative -me-4 flex flex-1 flex-col overflow-y-hidden'>
+                    <div className='chat-flex flex h-40 w-full grow flex-col-reverse justify-start gap-4 overflow-y-auto py-2 pe-4 pb-4'>
                       {currentMessage &&
                         Object.keys(currentMessage).map((key) => (
                           <Fragment key={key}>
@@ -237,7 +237,7 @@ export default function Chats() {
                                 <span
                                   className={cn(
                                     'text-muted-foreground mt-1 block text-xs font-light italic',
-                                    msg.sender === 'You' && 'text-right'
+                                    msg.sender === 'You' && 'text-end'
                                   )}
                                 >
                                   {format(msg.timestamp, 'h:mm a')}
@@ -259,7 +259,15 @@ export default function Chats() {
                         variant='ghost'
                         className='h-8 rounded-md'
                       >
-                        <IconPlus
+                        <Plus size={20} className='stroke-muted-foreground' />
+                      </Button>
+                      <Button
+                        size='icon'
+                        type='button'
+                        variant='ghost'
+                        className='hidden h-8 rounded-md lg:inline-flex'
+                      >
+                        <ImagePlus
                           size={20}
                           className='stroke-muted-foreground'
                         />
@@ -270,18 +278,7 @@ export default function Chats() {
                         variant='ghost'
                         className='hidden h-8 rounded-md lg:inline-flex'
                       >
-                        <IconPhotoPlus
-                          size={20}
-                          className='stroke-muted-foreground'
-                        />
-                      </Button>
-                      <Button
-                        size='icon'
-                        type='button'
-                        variant='ghost'
-                        className='hidden h-8 rounded-md lg:inline-flex'
-                      >
-                        <IconPaperclip
+                        <Paperclip
                           size={20}
                           className='stroke-muted-foreground'
                         />
@@ -300,11 +297,11 @@ export default function Chats() {
                       size='icon'
                       className='hidden sm:inline-flex'
                     >
-                      <IconSend size={20} />
+                      <Send size={20} />
                     </Button>
                   </div>
                   <Button className='h-full sm:hidden'>
-                    <IconSend size={18} /> Send
+                    <Send size={18} /> Send
                   </Button>
                 </form>
               </div>
@@ -312,12 +309,12 @@ export default function Chats() {
           ) : (
             <div
               className={cn(
-                'bg-primary-foreground absolute inset-0 left-full z-50 hidden w-full flex-1 flex-col justify-center rounded-md border shadow-xs transition-all duration-200 sm:static sm:z-auto sm:flex'
+                'bg-primary-foreground absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col justify-center rounded-md border shadow-xs transition-all duration-200 sm:static sm:z-auto sm:flex'
               )}
             >
               <div className='flex flex-col items-center space-y-6'>
                 <div className='border-border flex size-16 items-center justify-center rounded-full border-2'>
-                  <IconMessages className='size-8' />
+                  <MessagesSquare className='size-8' />
                 </div>
                 <div className='space-y-2 text-center'>
                   <h1 className='text-xl font-semibold'>Your messages</h1>
