@@ -9,10 +9,10 @@ interface MainProps extends React.HTMLAttributes<HTMLElement> {
 export const Main = ({ fixed, className, ...props }: MainProps) => {
   return (
     <main
+      data-layout={fixed ? 'fixed' : 'auto'}
       className={cn(
-        'peer-[.header-fixed]/header:mt-16',
         'px-4 py-6',
-        fixed && 'fixed-main flex grow flex-col overflow-hidden',
+        fixed && 'flex grow flex-col overflow-hidden',
         className
       )}
       {...props}
