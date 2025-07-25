@@ -24,7 +24,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
 import { SelectDropdown } from '@/components/select-dropdown'
-import { userTypes } from '../data/data'
+import { roles } from '../data/data'
 import { User } from '../data/schema'
 
 const formSchema = z
@@ -260,7 +260,7 @@ export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
                       onValueChange={field.onChange}
                       placeholder='Select a role'
                       className='col-span-4'
-                      items={userTypes.map(({ label, value }) => ({
+                      items={roles.map(({ label, value }) => ({
                         label,
                         value,
                       }))}

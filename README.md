@@ -67,7 +67,7 @@ If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest 
 
 **Linting/Formatting:** [Eslint](https://eslint.org/) & [Prettier](https://prettier.io/)
 
-**Icons:** [Tabler Icons](https://tabler.io/icons)
+**Icons:** [Lucide Icons](https://lucide.dev/icons/), [Tabler Icons](https://tabler.io/icons) (Brand icons only)
 
 **Auth (partial):** [Clerk](https://go.clerk.com/GttUAaK)
 
