@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IconMailPlus, IconSend } from '@tabler/icons-react'
+import { MailPlus, Send } from 'lucide-react'
 import { showSubmittedData } from '@/utils/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import {
@@ -24,7 +24,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { SelectDropdown } from '@/components/select-dropdown'
-import { userTypes } from '../data/data'
+import { roles } from '../data/data'
 
 const formSchema = z.object({
   email: z.email({
@@ -64,7 +64,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
       <DialogContent className='sm:max-w-md'>
         <DialogHeader className='text-start'>
           <DialogTitle className='flex items-center gap-2'>
-            <IconMailPlus /> Invite User
+            <MailPlus /> Invite User
           </DialogTitle>
           <DialogDescription>
             Invite new user to join your team by sending them an email
@@ -104,7 +104,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
                     defaultValue={field.value}
                     onValueChange={field.onChange}
                     placeholder='Select a role'
-                    items={userTypes.map(({ label, value }) => ({
+                    items={roles.map(({ label, value }) => ({
                       label,
                       value,
                     }))}
@@ -137,7 +137,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
             <Button variant='outline'>Cancel</Button>
           </DialogClose>
           <Button type='submit' form='user-invite-form'>
-            Invite <IconSend />
+            Invite <Send />
           </Button>
         </DialogFooter>
       </DialogContent>

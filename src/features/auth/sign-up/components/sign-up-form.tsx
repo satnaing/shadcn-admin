@@ -2,7 +2,7 @@ import { HTMLAttributes, useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
+import { IconFacebook, IconGithub } from '@/assets/brand-icons'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -125,7 +125,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
             type='button'
             disabled={isLoading}
           >
-            <IconBrandGithub className='h-4 w-4' /> GitHub
+            <IconGithub className='h-4 w-4' /> GitHub
           </Button>
           <Button
             variant='outline'
@@ -133,7 +133,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
             type='button'
             disabled={isLoading}
           >
-            <IconBrandFacebook className='h-4 w-4' /> Facebook
+            <IconFacebook className='h-4 w-4' /> Facebook
           </Button>
         </div>
       </form>

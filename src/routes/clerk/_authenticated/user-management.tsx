@@ -5,8 +5,8 @@ import {
   useNavigate,
   useRouter,
 } from '@tanstack/react-router'
-import { IconArrowUpRight, IconLoader2 } from '@tabler/icons-react'
 import { SignedIn, useAuth, UserButton } from '@clerk/clerk-react'
+import { ExternalLink, Loader2 } from 'lucide-react'
 import { ClerkLogo } from '@/assets/clerk-logo'
 import { Button } from '@/components/ui/button'
 import { Header } from '@/components/layout/header'
@@ -33,7 +33,7 @@ function UserManagement() {
   if (!isLoaded) {
     return (
       <div className='flex h-svh items-center justify-center'>
-        <IconLoader2 className='size-8 animate-spin' />
+        <Loader2 className='size-8 animate-spin' />
       </div>
     )
   }
@@ -82,7 +82,7 @@ function UserManagement() {
                     <p className='mt-4'>
                       You can sign out or manage/delete your account via the
                       User Profile menu in the top-right corner of the page.
-                      <IconArrowUpRight className='inline-block size-4' />
+                      <ExternalLink className='inline-block size-4' />
                     </p>
                   </LearnMore>
                 </div>
