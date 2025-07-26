@@ -5,8 +5,11 @@ import { IconCollapsibleOffcanvas } from '@/assets/custom/icon-collapsible-offca
 import { IconLayoutFloating } from '@/assets/custom/icon-layout-floating'
 import { IconLayoutInset } from '@/assets/custom/icon-layout-inset'
 import { IconLayoutSidebar } from '@/assets/custom/icon-layout-sidebar'
+import { IconThemeDark } from '@/assets/custom/icon-theme-dark'
+import { IconThemeLight } from '@/assets/custom/icon-theme-light'
 import { cn } from '@/lib/utils'
 import { Collapsible, useLayout } from '@/context/layout-context'
+import { useTheme } from '@/context/theme-context'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -29,12 +32,15 @@ export function ConfigDrawer() {
       </SheetTrigger>
       <SheetContent className='flex flex-col'>
         <SheetHeader className='text-start'>
-          <SheetTitle>Theme config</SheetTitle>
-          <SheetDescription>Theme config description</SheetDescription>
+          <SheetTitle>Theme Settings</SheetTitle>
+          <SheetDescription>
+            Customize theme settings to match preference.
+          </SheetDescription>
         </SheetHeader>
-        <div className='space-y-6 p-4'>
+        <div className='space-y-6 px-4'>
           <LayoutConfig />
           <CollapsibleConfig />
+          <ThemeConfig />
         </div>
         <SheetFooter className='gap-2'>
           <Button variant='destructive' type='submit'>
@@ -43,6 +49,51 @@ export function ConfigDrawer() {
         </SheetFooter>
       </SheetContent>
     </Sheet>
+  )
+}
+
+function ThemeConfig() {
+  const { theme, setTheme } = useTheme()
+  return (
+    <div>
+      <div className='text-muted-foreground mb-2 text-sm font-semibold'>
+        Theme
+      </div>
+      <RadioGroup.Root
+        value={theme}
+        onValueChange={setTheme}
+        className='grid w-full max-w-md grid-cols-3 gap-4'
+      >
+        {[
+          {
+            value: 'light',
+            label: 'Light',
+            icon: IconThemeLight,
+          },
+          {
+            value: 'dark',
+            label: 'Dark',
+            icon: IconThemeDark,
+          },
+        ].map((option) => (
+          <RadioGroup.Item
+            key={option.value}
+            value={option.value}
+            className={cn('group', 'transition duration-200 ease-in')}
+          >
+            <div
+              className={cn(
+                'ring-border rounded-[6px] ring-[1px]',
+                'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl'
+              )}
+            >
+              <option.icon />
+            </div>
+            <div className='mt-1 text-xs'>{option.label}</div>
+          </RadioGroup.Item>
+        ))}
+      </RadioGroup.Root>
+    </div>
   )
 }
 
@@ -78,15 +129,17 @@ function LayoutConfig() {
           <RadioGroup.Item
             key={option.value}
             value={option.value}
-            className={cn(
-              'group',
-              'transition duration-200 ease-in',
-              'ring-border rounded-[6px] ring-[1px]',
-              'data-[state=checked]:ring-primary data-[state=checked]:shadow-2xl'
-            )}
+            className={cn('group', 'transition duration-200 ease-in')}
           >
-            <option.icon className='stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground mask-clip-border' />
-            <span className='sr-only'>{option.label}</span>
+            <div
+              className={cn(
+                'ring-border rounded-[6px] ring-[1px]',
+                'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl'
+              )}
+            >
+              <option.icon className='stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground' />
+            </div>
+            <div className='mt-1 text-xs'>{option.label}</div>
           </RadioGroup.Item>
         ))}
       </RadioGroup.Root>
@@ -127,15 +180,17 @@ function CollapsibleConfig() {
           <RadioGroup.Item
             key={option.value}
             value={option.value}
-            className={cn(
-              'group',
-              'transition duration-200 ease-in',
-              'ring-border rounded-[6px] ring-[1px]',
-              'data-[state=checked]:ring-primary data-[state=checked]:shadow-2xl'
-            )}
+            className={cn('group', 'transition duration-200 ease-in')}
           >
-            <option.icon className='stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground mask-clip-border' />
-            <span className='sr-only'>{option.label}</span>
+            <div
+              className={cn(
+                'ring-border rounded-[6px] ring-[1px]',
+                'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl'
+              )}
+            >
+              <option.icon className='stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground' />
+            </div>
+            <div className='mt-1 text-xs'>{option.label}</div>
           </RadioGroup.Item>
         ))}
       </RadioGroup.Root>
