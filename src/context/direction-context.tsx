@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { DirectionProvider as RdxDirProvider } from '@radix-ui/react-direction'
 
-type Direction = 'ltr' | 'rtl'
+export type Direction = 'ltr' | 'rtl'
 
 const DirectionContext = createContext<{
   dir: Direction

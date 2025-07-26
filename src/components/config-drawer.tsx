@@ -1,13 +1,16 @@
+import { SVGProps } from 'react'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import { Settings } from 'lucide-react'
 import { IconCollapsibleIcon } from '@/assets/custom/icon-collapsible-icon'
 import { IconCollapsibleOffcanvas } from '@/assets/custom/icon-collapsible-offcanvas'
+import { IconDir } from '@/assets/custom/icon-dir'
 import { IconLayoutFloating } from '@/assets/custom/icon-layout-floating'
 import { IconLayoutInset } from '@/assets/custom/icon-layout-inset'
 import { IconLayoutSidebar } from '@/assets/custom/icon-layout-sidebar'
 import { IconThemeDark } from '@/assets/custom/icon-theme-dark'
 import { IconThemeLight } from '@/assets/custom/icon-theme-light'
 import { cn } from '@/lib/utils'
+import { useDirection } from '@/context/direction-context'
 import { Collapsible, useLayout } from '@/context/layout-context'
 import { useTheme } from '@/context/theme-context'
 import { Button } from '@/components/ui/button'
@@ -40,6 +43,7 @@ export function ConfigDrawer() {
         <div className='space-y-6 px-4'>
           <LayoutConfig />
           <CollapsibleConfig />
+          <DirConfig />
           <ThemeConfig />
         </div>
         <SheetFooter className='gap-2'>
@@ -49,6 +53,55 @@ export function ConfigDrawer() {
         </SheetFooter>
       </SheetContent>
     </Sheet>
+  )
+}
+
+function DirConfig() {
+  const { dir, setDir } = useDirection()
+  return (
+    <div>
+      <div className='text-muted-foreground mb-2 text-sm font-semibold'>
+        Direction
+      </div>
+      <RadioGroup.Root
+        value={dir}
+        onValueChange={setDir}
+        className='grid w-full max-w-md grid-cols-3 gap-4'
+      >
+        {[
+          {
+            value: 'ltr',
+            label: 'Left to Right',
+            icon: (props: SVGProps<SVGSVGElement>) => (
+              <IconDir dir='ltr' {...props} />
+            ),
+          },
+          {
+            value: 'rtl',
+            label: 'Right to Left',
+            icon: (props: SVGProps<SVGSVGElement>) => (
+              <IconDir dir='rtl' {...props} />
+            ),
+          },
+        ].map((option) => (
+          <RadioGroup.Item
+            key={option.value}
+            value={option.value}
+            className={cn('group', 'transition duration-200 ease-in')}
+          >
+            <div
+              className={cn(
+                'ring-border rounded-[6px] ring-[1px]',
+                'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl'
+              )}
+            >
+              <option.icon className='stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground' />
+            </div>
+            <div className='mt-1 text-xs'>{option.label}</div>
+          </RadioGroup.Item>
+        ))}
+      </RadioGroup.Root>
+    </div>
   )
 }
 
