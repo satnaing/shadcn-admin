@@ -13,9 +13,10 @@ import { handleServerError } from '@/utils/handle-server-error'
 import { DirectionProvider } from './context/direction-context'
 import { FontProvider } from './context/font-context'
 import { ThemeProvider } from './context/theme-context'
-import './index.css'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
+// Styles
+import './styles/index.css'
 
 const queryClient = new QueryClient({
   defaultOptions: {
