@@ -9,6 +9,7 @@ import { IconLayoutInset } from '@/assets/custom/icon-layout-inset'
 import { IconLayoutSidebar } from '@/assets/custom/icon-layout-sidebar'
 import { IconThemeDark } from '@/assets/custom/icon-theme-dark'
 import { IconThemeLight } from '@/assets/custom/icon-theme-light'
+import { IconThemeSystem } from '@/assets/custom/icon-theme-system'
 import { cn } from '@/lib/utils'
 import { useDirection } from '@/context/direction-context'
 import { Collapsible, useLayout } from '@/context/layout-context'
@@ -270,6 +271,11 @@ function ThemeConfig() {
         className='grid w-full max-w-md grid-cols-3 gap-4'
       >
         {[
+          {
+            value: 'system',
+            label: 'System',
+            icon: IconThemeSystem,
+          },
           {
             value: 'light',
             label: 'Light',
