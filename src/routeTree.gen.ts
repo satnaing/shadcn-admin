@@ -27,6 +27,7 @@ import { Route as authForgotPasswordImport } from './routes/(auth)/forgot-passwo
 import { Route as ClerkAuthenticatedRouteImport } from './routes/clerk/_authenticated/route'
 import { Route as ClerkauthRouteImport } from './routes/clerk/(auth)/route'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings/route'
+import { Route as AuthenticatedWealthIfaIndexImport } from './routes/_authenticated/wealth-ifa/index'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedUpiIndexImport } from './routes/_authenticated/upi/index'
 import { Route as AuthenticatedTasksIndexImport } from './routes/_authenticated/tasks/index'
@@ -141,6 +142,13 @@ const AuthenticatedSettingsRouteRoute = AuthenticatedSettingsRouteImport.update(
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any,
 )
+
+const AuthenticatedWealthIfaIndexRoute =
+  AuthenticatedWealthIfaIndexImport.update({
+    id: '/wealth-ifa/',
+    path: '/wealth-ifa/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
   id: '/users/',
@@ -488,6 +496,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/wealth-ifa/': {
+      id: '/_authenticated/wealth-ifa/'
+      path: '/wealth-ifa'
+      fullPath: '/wealth-ifa'
+      preLoaderRoute: typeof AuthenticatedWealthIfaIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
   }
 }
 
@@ -528,6 +543,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUpiIndexRoute: typeof AuthenticatedUpiIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
+  AuthenticatedWealthIfaIndexRoute: typeof AuthenticatedWealthIfaIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -542,6 +558,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUpiIndexRoute: AuthenticatedUpiIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
+  AuthenticatedWealthIfaIndexRoute: AuthenticatedWealthIfaIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -623,6 +640,7 @@ export interface FileRoutesByFullPath {
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/upi': typeof AuthenticatedUpiIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/wealth-ifa': typeof AuthenticatedWealthIfaIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -655,6 +673,7 @@ export interface FileRoutesByTo {
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/upi': typeof AuthenticatedUpiIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/wealth-ifa': typeof AuthenticatedWealthIfaIndexRoute
 }
 
 export interface FileRoutesById {
@@ -692,6 +711,7 @@ export interface FileRoutesById {
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/upi/': typeof AuthenticatedUpiIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
+  '/_authenticated/wealth-ifa/': typeof AuthenticatedWealthIfaIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -729,6 +749,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/upi'
     | '/users'
+    | '/wealth-ifa'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/clerk'
@@ -760,6 +781,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/upi'
     | '/users'
+    | '/wealth-ifa'
   id:
     | '__root__'
     | '/_authenticated'
@@ -795,6 +817,7 @@ export interface FileRouteTypes {
     | '/_authenticated/tasks/'
     | '/_authenticated/upi/'
     | '/_authenticated/users/'
+    | '/_authenticated/wealth-ifa/'
   fileRoutesById: FileRoutesById
 }
 
@@ -865,7 +888,8 @@ export const routeTree = rootRoute
         "/_authenticated/help-center/",
         "/_authenticated/tasks/",
         "/_authenticated/upi/",
-        "/_authenticated/users/"
+        "/_authenticated/users/",
+        "/_authenticated/wealth-ifa/"
       ]
     },
     "/clerk": {
@@ -1001,6 +1025,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/users/": {
       "filePath": "_authenticated/users/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/wealth-ifa/": {
+      "filePath": "_authenticated/wealth-ifa/index.tsx",
       "parent": "/_authenticated"
     }
   }

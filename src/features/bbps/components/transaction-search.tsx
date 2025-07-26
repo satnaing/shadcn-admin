@@ -4,6 +4,7 @@ import axios from 'axios'
 import { IconCalendar, IconDownload } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { MultiSelect } from '@/components/ui/multi-select'
 import {
   Select,
   SelectContent,
@@ -11,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { MultiSelect } from '@/components/ui/multi-select'
 
 interface TransactionSearchProps {
   onSearch: (params: {
@@ -107,8 +107,8 @@ export function TransactionSearch({
         )
         setCategoryOptions(categories)
       } catch (error) {
-    throw new Error(`Failed to fetch categories: ${error}`)
-    }
+        throw new Error(`Failed to fetch categories: ${error}`)
+      }
     }
 
     fetchCategories()
@@ -313,7 +313,10 @@ export function TransactionSearch({
           variant='outline'
           className='h-9'
           onClick={handleDownload}
-          disabled={Object.values(fields).every((value) => value === '' ||(Array.isArray(value) && value.length === 0))}
+          disabled={Object.values(fields).every(
+            (value) =>
+              value === '' || (Array.isArray(value) && value.length === 0)
+          )}
         >
           <IconDownload className='mr-1' />
           Download Report

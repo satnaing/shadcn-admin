@@ -15,7 +15,6 @@ export async function fetchUserInfoFromApi(token?: string): Promise<UserAccess |
     console.warn('No auth token found for fetching user info.');
     return null;
   }
-  console.log('Fetching user info from API with token:', authToken);
   try {
     const response = await axios.get(`${BACKEND_BASE_URL}/v1/auth/me`, {
       headers: {
@@ -26,13 +25,14 @@ export async function fetchUserInfoFromApi(token?: string): Promise<UserAccess |
     // Map backend fields to UserAccess
     const is_super_admin = !!user.is_super_admin || user.is_super_admin === 1;
     const allowedServices = is_super_admin
-      ? ['users', 'customers', 'upi', 'bbps' , 'bureau'] // all service keys for superadmin
+      ? ['users', 'customers', 'upi', 'bbps' , 'bureau', 'wealth-ifa'] // all service keys for superadmin
       : (user.services || user.allowedServices || []).map((s: { service_name?: string }) => {
           if (s.service_name === 'Users') return 'users';
           if (s.service_name === 'Customers') return 'customers';
           if (s.service_name === 'UPI') return 'upi';
           if (s.service_name === 'BBPS') return 'bbps';
           if (s.service_name === 'Bureau') return 'bureau';
+          if (s.service_name === 'Wealth IFA') return 'wealth-ifa';
           // Add more mappings as needed
           return s.service_name?.toLowerCase().replace(/\s+/g, '-');
         });
