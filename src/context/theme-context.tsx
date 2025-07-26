@@ -16,6 +16,7 @@ type ThemeProviderState = {
   resolvedTheme: ResolvedTheme
   theme: Theme
   setTheme: (theme: Theme) => void
+  resetTheme: () => void
 }
 
 const initialState: ThemeProviderState = {
@@ -23,6 +24,7 @@ const initialState: ThemeProviderState = {
   resolvedTheme: 'light',
   theme: DEFAULT_THEME,
   setTheme: () => null,
+  resetTheme: () => {},
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
@@ -80,9 +82,15 @@ export function ThemeProvider({
     _setTheme(theme)
   }
 
+  const resetTheme = () => {
+    localStorage.removeItem(storageKey)
+    _setTheme(DEFAULT_THEME)
+  }
+
   const value = {
     defaultTheme,
     resolvedTheme,
+    resetTheme,
     theme,
     setTheme,
   }

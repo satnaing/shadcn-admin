@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
 import { Root as Radio, Item } from '@radix-ui/react-radio-group'
-import { CircleCheck, Settings } from 'lucide-react'
+import { CircleCheck, RotateCcw, Settings } from 'lucide-react'
 import { IconCollapsibleIcon } from '@/assets/custom/icon-collapsible-icon'
 import { IconCollapsibleOffcanvas } from '@/assets/custom/icon-collapsible-offcanvas'
 import { IconDir } from '@/assets/custom/icon-dir'
@@ -26,6 +26,16 @@ import {
 import { useSidebar } from './ui/sidebar'
 
 export function ConfigDrawer() {
+  const { resetDir } = useDirection()
+  const { resetTheme } = useTheme()
+  const { resetLayout } = useLayout()
+
+  const handleReset = () => {
+    resetDir()
+    resetTheme()
+    resetLayout()
+  }
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -41,18 +51,51 @@ export function ConfigDrawer() {
           </SheetDescription>
         </SheetHeader>
         <div className='space-y-6 px-4'>
+          <ThemeConfig />
           <LayoutConfig />
           <CollapsibleConfig />
           <DirConfig />
-          <ThemeConfig />
         </div>
         <SheetFooter className='gap-2'>
-          <Button variant='destructive' type='submit'>
+          <Button variant='destructive' onClick={handleReset}>
             Reset
           </Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>
+  )
+}
+
+function SectionTitle({
+  title,
+  showReset = false,
+  onReset,
+  className,
+}: {
+  title: string
+  showReset?: boolean
+  onReset?: () => void
+  className?: string
+}) {
+  return (
+    <div
+      className={cn(
+        'text-muted-foreground mb-2 flex items-center gap-2 text-sm font-semibold',
+        className
+      )}
+    >
+      {title}
+      {showReset && onReset && (
+        <Button
+          size='icon'
+          variant='secondary'
+          className='size-4 rounded-full'
+          onClick={onReset}
+        >
+          <RotateCcw className='size-3' />
+        </Button>
+      )}
+    </div>
   )
 }
 
@@ -99,12 +142,14 @@ function RadioGroupItem({
 }
 
 function LayoutConfig() {
-  const { variant, setVariant } = useLayout()
+  const { defaultVariant, variant, setVariant } = useLayout()
   return (
     <div>
-      <div className='text-muted-foreground mb-2 text-sm font-semibold'>
-        Layout
-      </div>
+      <SectionTitle
+        title='Layout'
+        showReset={defaultVariant !== variant}
+        onReset={() => setVariant(defaultVariant)}
+      />
       <Radio
         value={variant}
         onValueChange={setVariant}
@@ -136,12 +181,14 @@ function LayoutConfig() {
 
 function CollapsibleConfig() {
   const { setOpen } = useSidebar()
-  const { collapsible, setCollapsible } = useLayout()
+  const { defaultCollapsible, collapsible, setCollapsible } = useLayout()
   return (
     <div>
-      <div className='text-muted-foreground mb-2 text-sm font-semibold'>
-        Collapsible
-      </div>
+      <SectionTitle
+        title='Collapsible'
+        showReset={defaultCollapsible !== collapsible}
+        onReset={() => setCollapsible(defaultCollapsible)}
+      />
       <Radio
         value={collapsible}
         onValueChange={(v: Collapsible) => {
@@ -172,12 +219,14 @@ function CollapsibleConfig() {
 }
 
 function DirConfig() {
-  const { dir, setDir } = useDirection()
+  const { defaultDir, dir, setDir } = useDirection()
   return (
     <div>
-      <div className='text-muted-foreground mb-2 text-sm font-semibold'>
-        Direction
-      </div>
+      <SectionTitle
+        title='Direction'
+        showReset={defaultDir !== dir}
+        onReset={() => setDir(defaultDir)}
+      />
       <Radio
         value={dir}
         onValueChange={setDir}
@@ -207,14 +256,16 @@ function DirConfig() {
 }
 
 function ThemeConfig() {
-  const { resolvedTheme, setTheme } = useTheme()
+  const { defaultTheme, theme, setTheme } = useTheme()
   return (
     <div>
-      <div className='text-muted-foreground mb-2 text-sm font-semibold'>
-        Theme
-      </div>
+      <SectionTitle
+        title='Theme'
+        showReset={theme !== defaultTheme}
+        onReset={() => setTheme(defaultTheme)}
+      />
       <Radio
-        value={resolvedTheme}
+        value={theme}
         onValueChange={setTheme}
         className='grid w-full max-w-md grid-cols-3 gap-4'
       >

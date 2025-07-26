@@ -10,21 +10,29 @@ const LAYOUT_VARIANT_COOKIE_NAME = 'layout_variant'
 const LAYOUT_COOKIE_MAX_AGE = 60 * 60 * 24 * 7 // 7 days
 
 // Default values
+const DEFAULT_VARIANT = 'inset'
 const DEFAULT_COLLAPSIBLE = 'icon'
-const DEFAULT_VARIANT = 'floating'
 
 interface LayoutContextType {
+  resetLayout: () => void
+
+  defaultCollapsible: Collapsible
   collapsible: Collapsible
   setCollapsible: (collapsible: Collapsible) => void
 
+  defaultVariant: Variant
   variant: Variant
   setVariant: (variant: Variant) => void
 }
 
 const LayoutContext = createContext<LayoutContextType>({
-  collapsible: 'icon',
+  resetLayout: () => {},
+  defaultCollapsible: DEFAULT_COLLAPSIBLE,
+  collapsible: DEFAULT_COLLAPSIBLE,
   setCollapsible: () => {},
-  variant: 'floating',
+
+  defaultVariant: DEFAULT_VARIANT,
+  variant: DEFAULT_VARIANT,
   setVariant: () => {},
 })
 
@@ -56,9 +64,22 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
     setCookie(LAYOUT_VARIANT_COOKIE_NAME, variant)
   }, [variant])
 
+  const resetLayout = () => {
+    setCollapsible(DEFAULT_COLLAPSIBLE)
+    setVariant(DEFAULT_VARIANT)
+  }
+
   return (
     <LayoutContext.Provider
-      value={{ collapsible, setCollapsible, variant, setVariant }}
+      value={{
+        defaultCollapsible: DEFAULT_COLLAPSIBLE,
+        defaultVariant: DEFAULT_VARIANT,
+        resetLayout,
+        collapsible,
+        setCollapsible,
+        variant,
+        setVariant,
+      }}
     >
       {children}
     </LayoutContext.Provider>
