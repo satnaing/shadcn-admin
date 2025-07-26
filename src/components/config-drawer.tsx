@@ -207,14 +207,14 @@ function DirConfig() {
 }
 
 function ThemeConfig() {
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   return (
     <div>
       <div className='text-muted-foreground mb-2 text-sm font-semibold'>
         Theme
       </div>
       <Radio
-        value={theme}
+        value={resolvedTheme}
         onValueChange={setTheme}
         className='grid w-full max-w-md grid-cols-3 gap-4'
       >
