@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
-import * as RadioGroup from '@radix-ui/react-radio-group'
-import { Settings } from 'lucide-react'
+import { Root as Radio, Item } from '@radix-ui/react-radio-group'
+import { CircleCheck, Settings } from 'lucide-react'
 import { IconCollapsibleIcon } from '@/assets/custom/icon-collapsible-icon'
 import { IconCollapsibleOffcanvas } from '@/assets/custom/icon-collapsible-offcanvas'
 import { IconDir } from '@/assets/custom/icon-dir'
@@ -30,14 +30,14 @@ export function ConfigDrawer() {
     <Sheet>
       <SheetTrigger asChild>
         <Button size='icon' variant='ghost'>
-          <Settings className='' />
+          <Settings />
         </Button>
       </SheetTrigger>
       <SheetContent className='flex flex-col'>
         <SheetHeader className='text-start'>
           <SheetTitle>Theme Settings</SheetTitle>
           <SheetDescription>
-            Customize theme settings to match preference.
+            Adjust the appearance and layout to suit your preferences.
           </SheetDescription>
         </SheetHeader>
         <div className='space-y-6 px-4'>
@@ -56,97 +56,45 @@ export function ConfigDrawer() {
   )
 }
 
-function DirConfig() {
-  const { dir, setDir } = useDirection()
+function RadioGroupItem({
+  item,
+  isTheme = false,
+}: {
+  item: {
+    value: string
+    label: string
+    icon: (props: SVGProps<SVGSVGElement>) => React.ReactElement
+  }
+  isTheme?: boolean
+}) {
   return (
-    <div>
-      <div className='text-muted-foreground mb-2 text-sm font-semibold'>
-        Direction
-      </div>
-      <RadioGroup.Root
-        value={dir}
-        onValueChange={setDir}
-        className='grid w-full max-w-md grid-cols-3 gap-4'
+    <Item
+      value={item.value}
+      className={cn('group outline-none', 'transition duration-200 ease-in')}
+    >
+      <div
+        className={cn(
+          'ring-border relative rounded-[6px] ring-[1px]',
+          'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl',
+          'group-focus-visible:ring-2'
+        )}
       >
-        {[
-          {
-            value: 'ltr',
-            label: 'Left to Right',
-            icon: (props: SVGProps<SVGSVGElement>) => (
-              <IconDir dir='ltr' {...props} />
-            ),
-          },
-          {
-            value: 'rtl',
-            label: 'Right to Left',
-            icon: (props: SVGProps<SVGSVGElement>) => (
-              <IconDir dir='rtl' {...props} />
-            ),
-          },
-        ].map((option) => (
-          <RadioGroup.Item
-            key={option.value}
-            value={option.value}
-            className={cn('group', 'transition duration-200 ease-in')}
-          >
-            <div
-              className={cn(
-                'ring-border rounded-[6px] ring-[1px]',
-                'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl'
-              )}
-            >
-              <option.icon className='stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground' />
-            </div>
-            <div className='mt-1 text-xs'>{option.label}</div>
-          </RadioGroup.Item>
-        ))}
-      </RadioGroup.Root>
-    </div>
-  )
-}
-
-function ThemeConfig() {
-  const { theme, setTheme } = useTheme()
-  return (
-    <div>
-      <div className='text-muted-foreground mb-2 text-sm font-semibold'>
-        Theme
+        <CircleCheck
+          className={cn(
+            'fill-primary size-6 stroke-white',
+            'group-data-[state=unchecked]:hidden',
+            'absolute top-0 right-0 translate-x-1/2 -translate-y-1/2'
+          )}
+        />
+        <item.icon
+          className={cn(
+            !isTheme &&
+              'stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground'
+          )}
+        />
       </div>
-      <RadioGroup.Root
-        value={theme}
-        onValueChange={setTheme}
-        className='grid w-full max-w-md grid-cols-3 gap-4'
-      >
-        {[
-          {
-            value: 'light',
-            label: 'Light',
-            icon: IconThemeLight,
-          },
-          {
-            value: 'dark',
-            label: 'Dark',
-            icon: IconThemeDark,
-          },
-        ].map((option) => (
-          <RadioGroup.Item
-            key={option.value}
-            value={option.value}
-            className={cn('group', 'transition duration-200 ease-in')}
-          >
-            <div
-              className={cn(
-                'ring-border rounded-[6px] ring-[1px]',
-                'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl'
-              )}
-            >
-              <option.icon />
-            </div>
-            <div className='mt-1 text-xs'>{option.label}</div>
-          </RadioGroup.Item>
-        ))}
-      </RadioGroup.Root>
-    </div>
+      <div className='mt-1 text-xs'>{item.label}</div>
+    </Item>
   )
 }
 
@@ -157,7 +105,7 @@ function LayoutConfig() {
       <div className='text-muted-foreground mb-2 text-sm font-semibold'>
         Layout
       </div>
-      <RadioGroup.Root
+      <Radio
         value={variant}
         onValueChange={setVariant}
         className='grid w-full max-w-md grid-cols-3 gap-4'
@@ -178,24 +126,10 @@ function LayoutConfig() {
             label: 'Sidebar',
             icon: IconLayoutSidebar,
           },
-        ].map((option) => (
-          <RadioGroup.Item
-            key={option.value}
-            value={option.value}
-            className={cn('group', 'transition duration-200 ease-in')}
-          >
-            <div
-              className={cn(
-                'ring-border rounded-[6px] ring-[1px]',
-                'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl'
-              )}
-            >
-              <option.icon className='stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground' />
-            </div>
-            <div className='mt-1 text-xs'>{option.label}</div>
-          </RadioGroup.Item>
+        ].map((item) => (
+          <RadioGroupItem key={item.value} item={item} />
         ))}
-      </RadioGroup.Root>
+      </Radio>
     </div>
   )
 }
@@ -208,7 +142,7 @@ function CollapsibleConfig() {
       <div className='text-muted-foreground mb-2 text-sm font-semibold'>
         Collapsible
       </div>
-      <RadioGroup.Root
+      <Radio
         value={collapsible}
         onValueChange={(v: Collapsible) => {
           setOpen(false)
@@ -229,24 +163,76 @@ function CollapsibleConfig() {
             label: 'Offcanvas',
             icon: IconCollapsibleOffcanvas,
           },
-        ].map((option) => (
-          <RadioGroup.Item
-            key={option.value}
-            value={option.value}
-            className={cn('group', 'transition duration-200 ease-in')}
-          >
-            <div
-              className={cn(
-                'ring-border rounded-[6px] ring-[1px]',
-                'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl'
-              )}
-            >
-              <option.icon className='stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground' />
-            </div>
-            <div className='mt-1 text-xs'>{option.label}</div>
-          </RadioGroup.Item>
+        ].map((item) => (
+          <RadioGroupItem key={item.value} item={item} />
         ))}
-      </RadioGroup.Root>
+      </Radio>
+    </div>
+  )
+}
+
+function DirConfig() {
+  const { dir, setDir } = useDirection()
+  return (
+    <div>
+      <div className='text-muted-foreground mb-2 text-sm font-semibold'>
+        Direction
+      </div>
+      <Radio
+        value={dir}
+        onValueChange={setDir}
+        className='grid w-full max-w-md grid-cols-3 gap-4'
+      >
+        {[
+          {
+            value: 'ltr',
+            label: 'Left to Right',
+            icon: (props: SVGProps<SVGSVGElement>) => (
+              <IconDir dir='ltr' {...props} />
+            ),
+          },
+          {
+            value: 'rtl',
+            label: 'Right to Left',
+            icon: (props: SVGProps<SVGSVGElement>) => (
+              <IconDir dir='rtl' {...props} />
+            ),
+          },
+        ].map((item) => (
+          <RadioGroupItem key={item.value} item={item} />
+        ))}
+      </Radio>
+    </div>
+  )
+}
+
+function ThemeConfig() {
+  const { theme, setTheme } = useTheme()
+  return (
+    <div>
+      <div className='text-muted-foreground mb-2 text-sm font-semibold'>
+        Theme
+      </div>
+      <Radio
+        value={theme}
+        onValueChange={setTheme}
+        className='grid w-full max-w-md grid-cols-3 gap-4'
+      >
+        {[
+          {
+            value: 'light',
+            label: 'Light',
+            icon: IconThemeLight,
+          },
+          {
+            value: 'dark',
+            label: 'Dark',
+            icon: IconThemeDark,
+          },
+        ].map((item) => (
+          <RadioGroupItem key={item.value} item={item} isTheme />
+        ))}
+      </Radio>
     </div>
   )
 }
