@@ -21,8 +21,6 @@ const serviceNameToKey = (name: string) => {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { user } = useAuth()
 
-  // Debug: log user object
-  console.log('Sidebar user:', user)
 
   // Separate navGroups for 'Services' and 'Other'
   const servicesGroup = sidebarData.navGroups.find(

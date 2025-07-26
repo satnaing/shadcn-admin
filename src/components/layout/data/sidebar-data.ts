@@ -22,6 +22,7 @@ import {
   IconUsersGroup,
   IconMoneybag,
   IconReceiptRupee,
+  IconDevicesCheck
 } from '@tabler/icons-react'
 import { Command } from 'lucide-react'
 // import { ClerkLogo } from '@/assets/clerk-logo'
@@ -39,16 +40,6 @@ export const sidebarData: SidebarData = {
       logo: Command,
       plan: 'Stashfin',
     },
-    // {
-    //   name: 'Acme Inc',
-    //   logo: GalleryVerticalEnd,
-    //   plan: 'Enterprise',
-    // },
-    // {
-    //   name: 'Acme Corp.',
-    //   logo: AudioWaveform,
-    //   plan: 'Startup',
-    // },
   ],
   navGroups: [
     {
@@ -59,23 +50,6 @@ export const sidebarData: SidebarData = {
           url: '/',
           icon: IconLayoutDashboard,
         },
-        /****REMOVED FROM SIDE BAR IN UI , BUT LINK STILL AVAILABLE */
-        // {
-        //   title: 'Tasks',
-        //   url: '/tasks',
-        //   icon: IconChecklist,
-        // },
-        // {
-        //   title: 'Apps',
-        //   url: '/apps',
-        //   icon: IconPackages,
-        // },
-        // {
-        //   title: 'Chats',
-        //   url: '/chats',
-        //   badge: '3',
-        //   icon: IconMessages,
-        // },
         {
           title: 'Users',
           url: '/users',
@@ -101,6 +75,11 @@ export const sidebarData: SidebarData = {
           title: 'Bureau',
           url: '/bureau',
           icon: IconClipboardText,
+         },
+         {
+          title: 'Wealth IFA',
+          url: '/wealth-ifa',
+          icon: IconDevicesCheck,
          }
         
         // Clerk links removed
