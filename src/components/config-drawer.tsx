@@ -43,14 +43,19 @@ export function ConfigDrawer() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button size='icon' variant='ghost'>
-          <Settings />
+        <Button
+          size='icon'
+          variant='ghost'
+          aria-label='Open theme settings'
+          aria-describedby='config-drawer-description'
+        >
+          <Settings aria-hidden='true' />
         </Button>
       </SheetTrigger>
       <SheetContent className='flex flex-col'>
         <SheetHeader className='pb-0 text-start'>
           <SheetTitle>Theme Settings</SheetTitle>
-          <SheetDescription>
+          <SheetDescription id='config-drawer-description'>
             Adjust the appearance and layout to suit your preferences.
           </SheetDescription>
         </SheetHeader>
@@ -61,7 +66,11 @@ export function ConfigDrawer() {
           <DirConfig />
         </div>
         <SheetFooter className='gap-2'>
-          <Button variant='destructive' onClick={handleReset}>
+          <Button
+            variant='destructive'
+            onClick={handleReset}
+            aria-label='Reset all settings to default values'
+          >
             Reset
           </Button>
         </SheetFooter>
@@ -118,6 +127,8 @@ function RadioGroupItem({
     <Item
       value={item.value}
       className={cn('group outline-none', 'transition duration-200 ease-in')}
+      aria-label={`Select ${item.label.toLowerCase()}`}
+      aria-describedby={`${item.value}-description`}
     >
       <div
         className={cn(
@@ -125,6 +136,9 @@ function RadioGroupItem({
           'group-data-[state=checked]:ring-primary group-data-[state=checked]:shadow-2xl',
           'group-focus-visible:ring-2'
         )}
+        role='img'
+        aria-hidden='false'
+        aria-label={`${item.label} option preview`}
       >
         <CircleCheck
           className={cn(
@@ -132,15 +146,23 @@ function RadioGroupItem({
             'group-data-[state=unchecked]:hidden',
             'absolute top-0 right-0 translate-x-1/2 -translate-y-1/2'
           )}
+          aria-hidden='true'
         />
         <item.icon
           className={cn(
             !isTheme &&
               'stroke-primary fill-primary group-data-[state=unchecked]:stroke-muted-foreground group-data-[state=unchecked]:fill-muted-foreground'
           )}
+          aria-hidden='true'
         />
       </div>
-      <div className='mt-1 text-xs'>{item.label}</div>
+      <div
+        className='mt-1 text-xs'
+        id={`${item.value}-description`}
+        aria-live='polite'
+      >
+        {item.label}
+      </div>
     </Item>
   )
 }
@@ -158,6 +180,8 @@ function ThemeConfig() {
         value={theme}
         onValueChange={setTheme}
         className='grid w-full max-w-md grid-cols-3 gap-4'
+        aria-label='Select theme preference'
+        aria-describedby='theme-description'
       >
         {[
           {
@@ -179,6 +203,9 @@ function ThemeConfig() {
           <RadioGroupItem key={item.value} item={item} isTheme />
         ))}
       </Radio>
+      <div id='theme-description' className='sr-only'>
+        Choose between system preference, light mode, or dark mode
+      </div>
     </div>
   )
 }
@@ -196,6 +223,8 @@ function SidebarConfig() {
         value={variant}
         onValueChange={setVariant}
         className='grid w-full max-w-md grid-cols-3 gap-4'
+        aria-label='Select sidebar style'
+        aria-describedby='sidebar-description'
       >
         {[
           {
@@ -217,6 +246,9 @@ function SidebarConfig() {
           <RadioGroupItem key={item.value} item={item} />
         ))}
       </Radio>
+      <div id='sidebar-description' className='sr-only'>
+        Choose between inset, floating, or standard sidebar layout
+      </div>
     </div>
   )
 }
@@ -248,6 +280,8 @@ function LayoutConfig() {
           setCollapsible(v as Collapsible)
         }}
         className='grid w-full max-w-md grid-cols-3 gap-4'
+        aria-label='Select layout style'
+        aria-describedby='layout-description'
       >
         {[
           {
@@ -269,6 +303,9 @@ function LayoutConfig() {
           <RadioGroupItem key={item.value} item={item} />
         ))}
       </Radio>
+      <div id='layout-description' className='sr-only'>
+        Choose between default expanded, compact icon-only, or full layout mode
+      </div>
     </div>
   )
 }
@@ -286,6 +323,8 @@ function DirConfig() {
         value={dir}
         onValueChange={setDir}
         className='grid w-full max-w-md grid-cols-3 gap-4'
+        aria-label='Select site direction'
+        aria-describedby='direction-description'
       >
         {[
           {
@@ -306,6 +345,9 @@ function DirConfig() {
           <RadioGroupItem key={item.value} item={item} />
         ))}
       </Radio>
+      <div id='direction-description' className='sr-only'>
+        Choose between left-to-right or right-to-left site direction
+      </div>
     </div>
   )
 }
