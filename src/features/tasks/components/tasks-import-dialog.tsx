@@ -85,7 +85,7 @@ export function TasksImportDialog({ open, onOpenChange }: Props) {
                 <FormItem className='mb-2 space-y-1'>
                   <FormLabel>File</FormLabel>
                   <FormControl>
-                    <Input type='file' {...fileRef} className='h-8' />
+                    <Input type='file' {...fileRef} className='h-8 py-0' />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
