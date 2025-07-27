@@ -45,13 +45,13 @@ export function ConfigDrawer() {
         </Button>
       </SheetTrigger>
       <SheetContent className='flex flex-col'>
-        <SheetHeader className='text-start'>
+        <SheetHeader className='pb-0 text-start'>
           <SheetTitle>Theme Settings</SheetTitle>
           <SheetDescription>
             Adjust the appearance and layout to suit your preferences.
           </SheetDescription>
         </SheetHeader>
-        <div className='space-y-6 px-4'>
+        <div className='space-y-6 overflow-y-auto px-4'>
           <ThemeConfig />
           <LayoutConfig />
           <CollapsibleConfig />
