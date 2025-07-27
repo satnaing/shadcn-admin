@@ -32,6 +32,7 @@ If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest 
 
 - scroll-area
 - sonner
+- separator
 
 ### RTL Updated Components
 

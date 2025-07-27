@@ -1,19 +1,27 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { DirectionProvider as RdxDirProvider } from '@radix-ui/react-direction'
 
-type Direction = 'ltr' | 'rtl'
+export type Direction = 'ltr' | 'rtl'
 
-const DirectionContext = createContext<{
+const DEFAULT_DIRECTION = 'ltr'
+
+interface DirectionContextType {
+  defaultDir: Direction
   dir: Direction
   setDir: (dir: Direction) => void
-}>({
-  dir: 'ltr',
+  resetDir: () => void
+}
+
+const DirectionContext = createContext<DirectionContextType>({
+  defaultDir: DEFAULT_DIRECTION,
+  dir: DEFAULT_DIRECTION,
   setDir: () => {},
+  resetDir: () => {},
 })
 
 export function DirectionProvider({ children }: { children: React.ReactNode }) {
   const [dir, _setDir] = useState<Direction>(
-    () => (localStorage.getItem('dir') as Direction) || 'ltr'
+    () => (localStorage.getItem('dir') as Direction) || DEFAULT_DIRECTION
   )
 
   useEffect(() => {
@@ -26,8 +34,15 @@ export function DirectionProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('dir', dir)
   }
 
+  const resetDir = () => {
+    _setDir(DEFAULT_DIRECTION)
+    localStorage.removeItem('dir')
+  }
+
   return (
-    <DirectionContext value={{ dir, setDir }}>
+    <DirectionContext
+      value={{ defaultDir: DEFAULT_DIRECTION, dir, setDir, resetDir }}
+    >
       <RdxDirProvider dir={dir}>{children}</RdxDirProvider>
     </DirectionContext>
   )
