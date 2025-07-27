@@ -1,11 +1,16 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { fonts } from '@/config/fonts'
+import { getCookie, setCookie, removeCookie } from '@/lib/cookies'
 
 type Font = (typeof fonts)[number]
+
+const FONT_COOKIE_NAME = 'font'
+const FONT_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
 interface FontContextType {
   font: Font
   setFont: (font: Font) => void
+  resetFont: () => void
 }
 
 const FontContext = createContext<FontContextType | undefined>(undefined)
@@ -14,7 +19,7 @@ export const FontProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [font, _setFont] = useState<Font>(() => {
-    const savedFont = localStorage.getItem('font')
+    const savedFont = getCookie(FONT_COOKIE_NAME)
     return fonts.includes(savedFont as Font) ? (savedFont as Font) : fonts[0]
   })
 
@@ -31,11 +36,18 @@ export const FontProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [font])
 
   const setFont = (font: Font) => {
-    localStorage.setItem('font', font)
+    setCookie(FONT_COOKIE_NAME, font, FONT_COOKIE_MAX_AGE)
     _setFont(font)
   }
 
-  return <FontContext value={{ font, setFont }}>{children}</FontContext>
+  const resetFont = () => {
+    removeCookie(FONT_COOKIE_NAME)
+    _setFont(fonts[0])
+  }
+
+  return (
+    <FontContext value={{ font, setFont, resetFont }}>{children}</FontContext>
+  )
 }
 
 // eslint-disable-next-line react-refresh/only-export-components

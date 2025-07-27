@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import Cookies from 'js-cookie'
+import { getCookie, setCookie } from '@/lib/cookies'
 
 export type Collapsible = 'offcanvas' | 'icon' | 'none'
 export type Variant = 'inset' | 'sidebar' | 'floating'
@@ -40,28 +40,26 @@ interface LayoutProviderProps {
   children: React.ReactNode
 }
 
-// Helper function to set cookie
-function setCookie(name: string, value: string): void {
-  document.cookie = `${name}=${value}; path=/; max-age=${LAYOUT_COOKIE_MAX_AGE}`
-}
-
 export function LayoutProvider({ children }: LayoutProviderProps) {
   const [collapsible, setCollapsible] = useState<Collapsible>(
     () =>
-      (Cookies.get(LAYOUT_COLLAPSIBLE_COOKIE_NAME) as Collapsible) ||
+      (getCookie(LAYOUT_COLLAPSIBLE_COOKIE_NAME) as Collapsible) ||
       DEFAULT_COLLAPSIBLE
   )
   const [variant, setVariant] = useState<Variant>(
-    () =>
-      (Cookies.get(LAYOUT_VARIANT_COOKIE_NAME) as Variant) || DEFAULT_VARIANT
+    () => (getCookie(LAYOUT_VARIANT_COOKIE_NAME) as Variant) || DEFAULT_VARIANT
   )
 
   useEffect(() => {
-    setCookie(LAYOUT_COLLAPSIBLE_COOKIE_NAME, collapsible)
+    setCookie(
+      LAYOUT_COLLAPSIBLE_COOKIE_NAME,
+      collapsible,
+      LAYOUT_COOKIE_MAX_AGE
+    )
   }, [collapsible])
 
   useEffect(() => {
-    setCookie(LAYOUT_VARIANT_COOKIE_NAME, variant)
+    setCookie(LAYOUT_VARIANT_COOKIE_NAME, variant, LAYOUT_COOKIE_MAX_AGE)
   }, [variant])
 
   const resetLayout = () => {
@@ -70,7 +68,7 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
   }
 
   return (
-    <LayoutContext.Provider
+    <LayoutContext
       value={{
         defaultCollapsible: DEFAULT_COLLAPSIBLE,
         defaultVariant: DEFAULT_VARIANT,
@@ -82,7 +80,7 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
       }}
     >
       {children}
-    </LayoutContext.Provider>
+    </LayoutContext>
   )
 }
 

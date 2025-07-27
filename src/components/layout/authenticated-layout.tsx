@@ -1,5 +1,5 @@
-import Cookies from 'js-cookie'
 import { Outlet } from '@tanstack/react-router'
+import { getCookie } from '@/lib/cookies'
 import { cn } from '@/lib/utils'
 import { LayoutProvider } from '@/context/layout-context'
 import { SearchProvider } from '@/context/search-context'
@@ -23,7 +23,7 @@ interface Props {
 }
 
 export function AuthenticatedLayout({ children }: Props) {
-  const defaultOpen = Cookies.get('sidebar_state') !== 'false'
+  const defaultOpen = getCookie('sidebar_state') !== 'false'
   return (
     <SearchProvider>
       <SidebarProvider defaultOpen={defaultOpen}>
