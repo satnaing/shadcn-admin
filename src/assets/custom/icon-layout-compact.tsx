@@ -1,9 +1,9 @@
 import { SVGProps } from 'react'
 
-export function IconCollapsibleIcon(props: SVGProps<SVGSVGElement>) {
+export function IconLayoutCompact(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      data-name='Layer 1'
+      data-name='icon-layout-compact'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 79.86 51.14'
       {...props}

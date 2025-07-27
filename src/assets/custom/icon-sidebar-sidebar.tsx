@@ -1,9 +1,9 @@
 import { SVGProps } from 'react'
 
-export function IconLayoutSidebar(props: SVGProps<SVGSVGElement>) {
+export function IconSidebarSidebar(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      data-name='icon-layout-sidebar'
+      data-name='icon-sidebar-sidebar'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 79.86 51.14'
       {...props}

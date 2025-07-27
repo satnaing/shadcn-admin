@@ -7,7 +7,7 @@ export function IconThemeSystem({
 }: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      data-name='Layer 1'
+      data-name='icon-theme-system'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 79.86 51.14'
       className={cn(

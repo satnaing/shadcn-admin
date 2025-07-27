@@ -1,9 +1,9 @@
 import { SVGProps } from 'react'
 
-export function IconLayoutFloating(props: SVGProps<SVGSVGElement>) {
+export function IconSidebarFloating(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      data-name='icon-layout-floating'
+      data-name='icon-sidebar-floating'
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 79.86 51.14'
       {...props}

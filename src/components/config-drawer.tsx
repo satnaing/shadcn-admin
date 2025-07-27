@@ -1,13 +1,13 @@
 import { SVGProps } from 'react'
 import { Root as Radio, Item } from '@radix-ui/react-radio-group'
 import { CircleCheck, RotateCcw, Settings } from 'lucide-react'
-import { IconCollapsibleDefault } from '@/assets/custom/icon-collapsible-default'
-import { IconCollapsibleIcon } from '@/assets/custom/icon-collapsible-icon'
-import { IconCollapsibleOffcanvas } from '@/assets/custom/icon-collapsible-offcanvas'
 import { IconDir } from '@/assets/custom/icon-dir'
-import { IconLayoutFloating } from '@/assets/custom/icon-layout-floating'
-import { IconLayoutInset } from '@/assets/custom/icon-layout-inset'
-import { IconLayoutSidebar } from '@/assets/custom/icon-layout-sidebar'
+import { IconLayoutCompact } from '@/assets/custom/icon-layout-compact'
+import { IconLayoutDefault } from '@/assets/custom/icon-layout-default'
+import { IconLayoutFull } from '@/assets/custom/icon-layout-full'
+import { IconSidebarFloating } from '@/assets/custom/icon-sidebar-floating'
+import { IconSidebarInset } from '@/assets/custom/icon-sidebar-inset'
+import { IconSidebarSidebar } from '@/assets/custom/icon-sidebar-sidebar'
 import { IconThemeDark } from '@/assets/custom/icon-theme-dark'
 import { IconThemeLight } from '@/assets/custom/icon-theme-light'
 import { IconThemeSystem } from '@/assets/custom/icon-theme-system'
@@ -54,8 +54,8 @@ export function ConfigDrawer() {
         </SheetHeader>
         <div className='space-y-6 overflow-y-auto px-4'>
           <ThemeConfig />
+          <SidebarConfig />
           <LayoutConfig />
-          <CollapsibleConfig />
           <DirConfig />
         </div>
         <SheetFooter className='gap-2'>
@@ -143,12 +143,50 @@ function RadioGroupItem({
   )
 }
 
-function LayoutConfig() {
+function ThemeConfig() {
+  const { defaultTheme, theme, setTheme } = useTheme()
+  return (
+    <div>
+      <SectionTitle
+        title='Theme'
+        showReset={theme !== defaultTheme}
+        onReset={() => setTheme(defaultTheme)}
+      />
+      <Radio
+        value={theme}
+        onValueChange={setTheme}
+        className='grid w-full max-w-md grid-cols-3 gap-4'
+      >
+        {[
+          {
+            value: 'system',
+            label: 'System',
+            icon: IconThemeSystem,
+          },
+          {
+            value: 'light',
+            label: 'Light',
+            icon: IconThemeLight,
+          },
+          {
+            value: 'dark',
+            label: 'Dark',
+            icon: IconThemeDark,
+          },
+        ].map((item) => (
+          <RadioGroupItem key={item.value} item={item} isTheme />
+        ))}
+      </Radio>
+    </div>
+  )
+}
+
+function SidebarConfig() {
   const { defaultVariant, variant, setVariant } = useLayout()
   return (
     <div>
       <SectionTitle
-        title='Layout'
+        title='Sidebar'
         showReset={defaultVariant !== variant}
         onReset={() => setVariant(defaultVariant)}
       />
@@ -161,17 +199,17 @@ function LayoutConfig() {
           {
             value: 'inset',
             label: 'Inset',
-            icon: IconLayoutInset,
+            icon: IconSidebarInset,
           },
           {
             value: 'floating',
             label: 'Floating',
-            icon: IconLayoutFloating,
+            icon: IconSidebarFloating,
           },
           {
             value: 'sidebar',
             label: 'Sidebar',
-            icon: IconLayoutSidebar,
+            icon: IconSidebarSidebar,
           },
         ].map((item) => (
           <RadioGroupItem key={item.value} item={item} />
@@ -181,7 +219,7 @@ function LayoutConfig() {
   )
 }
 
-function CollapsibleConfig() {
+function LayoutConfig() {
   const { open, setOpen } = useSidebar()
   const { defaultCollapsible, collapsible, setCollapsible } = useLayout()
 
@@ -190,7 +228,7 @@ function CollapsibleConfig() {
   return (
     <div>
       <SectionTitle
-        title='Collapsible'
+        title='Layout'
         showReset={radioState !== 'default'}
         onReset={() => {
           setOpen(true)
@@ -213,17 +251,17 @@ function CollapsibleConfig() {
           {
             value: 'default',
             label: 'Default',
-            icon: IconCollapsibleDefault,
+            icon: IconLayoutDefault,
           },
           {
             value: 'icon',
-            label: 'Icon',
-            icon: IconCollapsibleIcon,
+            label: 'Compact',
+            icon: IconLayoutCompact,
           },
           {
             value: 'offcanvas',
-            label: 'Offcanvas',
-            icon: IconCollapsibleOffcanvas,
+            label: 'Full layout',
+            icon: IconLayoutFull,
           },
         ].map((item) => (
           <RadioGroupItem key={item.value} item={item} />
@@ -264,44 +302,6 @@ function DirConfig() {
           },
         ].map((item) => (
           <RadioGroupItem key={item.value} item={item} />
-        ))}
-      </Radio>
-    </div>
-  )
-}
-
-function ThemeConfig() {
-  const { defaultTheme, theme, setTheme } = useTheme()
-  return (
-    <div>
-      <SectionTitle
-        title='Theme'
-        showReset={theme !== defaultTheme}
-        onReset={() => setTheme(defaultTheme)}
-      />
-      <Radio
-        value={theme}
-        onValueChange={setTheme}
-        className='grid w-full max-w-md grid-cols-3 gap-4'
-      >
-        {[
-          {
-            value: 'system',
-            label: 'System',
-            icon: IconThemeSystem,
-          },
-          {
-            value: 'light',
-            label: 'Light',
-            icon: IconThemeLight,
-          },
-          {
-            value: 'dark',
-            label: 'Dark',
-            icon: IconThemeDark,
-          },
-        ].map((item) => (
-          <RadioGroupItem key={item.value} item={item} isTheme />
         ))}
       </Radio>
     </div>
