@@ -28,11 +28,13 @@ import {
 import { useSidebar } from './ui/sidebar'
 
 export function ConfigDrawer() {
+  const { setOpen } = useSidebar()
   const { resetDir } = useDirection()
   const { resetTheme } = useTheme()
   const { resetLayout } = useLayout()
 
   const handleReset = () => {
+    setOpen(true)
     resetDir()
     resetTheme()
     resetLayout()
