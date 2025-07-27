@@ -68,7 +68,7 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
   }
 
   return (
-    <LayoutContext.Provider
+    <LayoutContext
       value={{
         defaultCollapsible: DEFAULT_COLLAPSIBLE,
         defaultVariant: DEFAULT_VARIANT,
@@ -80,7 +80,7 @@ export function LayoutProvider({ children }: LayoutProviderProps) {
       }}
     >
       {children}
-    </LayoutContext.Provider>
+    </LayoutContext>
   )
 }
 

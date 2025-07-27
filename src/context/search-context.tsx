@@ -27,10 +27,10 @@ export function SearchProvider({ children }: Props) {
   }, [])
 
   return (
-    <SearchContext.Provider value={{ open, setOpen }}>
+    <SearchContext value={{ open, setOpen }}>
       {children}
       <CommandMenu />
-    </SearchContext.Provider>
+    </SearchContext>
   )
 }
 
@@ -39,7 +39,7 @@ export const useSearch = () => {
   const searchContext = React.useContext(SearchContext)
 
   if (!searchContext) {
-    throw new Error('useSearch has to be used within <SearchContext.Provider>')
+    throw new Error('useSearch has to be used within SearchProvider')
   }
 
   return searchContext
