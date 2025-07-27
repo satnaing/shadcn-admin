@@ -1,9 +1,12 @@
 import { createContext, useContext, useEffect, useState, useMemo } from 'react'
+import { getCookie, setCookie, removeCookie } from '@/lib/cookies'
 
 type Theme = 'dark' | 'light' | 'system'
 type ResolvedTheme = Exclude<Theme, 'system'>
 
 const DEFAULT_THEME = 'system'
+const THEME_COOKIE_NAME = 'vite-ui-theme'
+const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -27,16 +30,16 @@ const initialState: ThemeProviderState = {
   resetTheme: () => {},
 }
 
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
+const ThemeContext = createContext<ThemeProviderState>(initialState)
 
 export function ThemeProvider({
   children,
   defaultTheme = DEFAULT_THEME,
-  storageKey = 'vite-ui-theme',
+  storageKey = THEME_COOKIE_NAME,
   ...props
 }: ThemeProviderProps) {
   const [theme, _setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+    () => (getCookie(storageKey) as Theme) || defaultTheme
   )
 
   // Optimized: Memoize the resolved theme calculation to prevent unnecessary re-computations
@@ -73,16 +76,16 @@ export function ThemeProvider({
   }, [theme, resolvedTheme])
 
   const setTheme = (theme: Theme) => {
-    localStorage.setItem(storageKey, theme)
+    setCookie(storageKey, theme, THEME_COOKIE_MAX_AGE)
     _setTheme(theme)
   }
 
   const resetTheme = () => {
-    localStorage.removeItem(storageKey)
+    removeCookie(storageKey)
     _setTheme(DEFAULT_THEME)
   }
 
-  const value = {
+  const contextValue = {
     defaultTheme,
     resolvedTheme,
     resetTheme,
@@ -91,15 +94,15 @@ export function ThemeProvider({
   }
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeContext value={contextValue} {...props}>
       {children}
-    </ThemeProviderContext.Provider>
+    </ThemeContext>
   )
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => {
-  const context = useContext(ThemeProviderContext)
+  const context = useContext(ThemeContext)
 
   if (context === undefined)
     throw new Error('useTheme must be used within a ThemeProvider')
