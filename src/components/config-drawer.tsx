@@ -1,6 +1,7 @@
 import { SVGProps } from 'react'
 import { Root as Radio, Item } from '@radix-ui/react-radio-group'
 import { CircleCheck, RotateCcw, Settings } from 'lucide-react'
+import { IconCollapsibleDefault } from '@/assets/custom/icon-collapsible-default'
 import { IconCollapsibleIcon } from '@/assets/custom/icon-collapsible-icon'
 import { IconCollapsibleOffcanvas } from '@/assets/custom/icon-collapsible-offcanvas'
 import { IconDir } from '@/assets/custom/icon-dir'
@@ -181,26 +182,39 @@ function LayoutConfig() {
 }
 
 function CollapsibleConfig() {
-  const { setOpen } = useSidebar()
+  const { open, setOpen } = useSidebar()
   const { defaultCollapsible, collapsible, setCollapsible } = useLayout()
+
+  const radioState = open ? 'default' : collapsible
+
   return (
     <div>
       <SectionTitle
         title='Collapsible'
-        showReset={defaultCollapsible !== collapsible}
-        onReset={() => setCollapsible(defaultCollapsible)}
+        showReset={radioState !== 'default'}
+        onReset={() => {
+          setOpen(true)
+          setCollapsible(defaultCollapsible)
+        }}
       />
       <Radio
-        value={collapsible}
-        onValueChange={(v: Collapsible) => {
+        value={radioState}
+        onValueChange={(v) => {
+          if (v === 'default') {
+            setOpen(true)
+            return
+          }
           setOpen(false)
-          setTimeout(() => {
-            setCollapsible(v)
-          }, 100)
+          setCollapsible(v as Collapsible)
         }}
         className='grid w-full max-w-md grid-cols-3 gap-4'
       >
         {[
+          {
+            value: 'default',
+            label: 'Default',
+            icon: IconCollapsibleDefault,
+          },
           {
             value: 'icon',
             label: 'Icon',
