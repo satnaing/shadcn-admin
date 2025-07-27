@@ -1,3 +1,4 @@
+import { ConfigDrawer } from '@/components/config-drawer'
 import { DirSwitch } from '@/components/dir-switch'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
@@ -19,6 +20,7 @@ export default function Tasks() {
         <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
           <DirSwitch />
+          <ConfigDrawer />
           <ProfileDropdown />
         </div>
       </Header>

@@ -1,10 +1,22 @@
 import Cookies from 'js-cookie'
 import { Outlet } from '@tanstack/react-router'
 import { cn } from '@/lib/utils'
+import { LayoutProvider } from '@/context/layout-context'
 import { SearchProvider } from '@/context/search-context'
-import { SidebarProvider } from '@/components/ui/sidebar'
+import {
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarInset,
+  SidebarProvider,
+  SidebarRail,
+} from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
 import SkipToMain from '@/components/skip-to-main'
+import { sidebarData } from './data/sidebar-data'
+import { NavGroup } from './nav-group'
+import { NavUser } from './nav-user'
+import { TeamSwitcher } from './team-switcher'
 
 interface Props {
   children?: React.ReactNode
@@ -15,22 +27,36 @@ export function AuthenticatedLayout({ children }: Props) {
   return (
     <SearchProvider>
       <SidebarProvider defaultOpen={defaultOpen}>
-        <SkipToMain />
-        <AppSidebar />
-        <div
-          id='content'
-          className={cn(
-            'ms-auto w-full max-w-full',
-            'peer-data-[state=collapsed]:w-[calc(100%-var(--sidebar-width-icon)-1rem)]',
-            'peer-data-[state=expanded]:w-[calc(100%-var(--sidebar-width))]',
-            'sm:transition-[width] sm:duration-200 sm:ease-linear',
-            'flex h-svh flex-col',
-            'group-data-[scroll-locked=1]/body:h-full',
-            'has-[main.fixed-main]:group-data-[scroll-locked=1]/body:h-svh'
-          )}
-        >
-          {children ? children : <Outlet />}
-        </div>
+        <LayoutProvider>
+          <SkipToMain />
+          <AppSidebar>
+            <SidebarHeader>
+              <TeamSwitcher teams={sidebarData.teams} />
+            </SidebarHeader>
+            <SidebarContent>
+              {sidebarData.navGroups.map((props) => (
+                <NavGroup key={props.title} {...props} />
+              ))}
+            </SidebarContent>
+            <SidebarFooter>
+              <NavUser user={sidebarData.user} />
+            </SidebarFooter>
+            <SidebarRail />
+          </AppSidebar>
+          <SidebarInset
+            className={cn(
+              // If layout is fixed, set the height
+              // to 100svh to prevent overflow
+              'has-[[data-layout=fixed]]:h-svh',
+
+              // If layout is fixed and sidebar is inset,
+              // set the height to 100svh - 1rem (total margins) to prevent overflow
+              'peer-data-[variant=inset]:has-[[data-layout=fixed]]:h-[calc(100svh-1rem)]'
+            )}
+          >
+            {children ?? <Outlet />}
+          </SidebarInset>
+        </LayoutProvider>
       </SidebarProvider>
     </SearchProvider>
   )
