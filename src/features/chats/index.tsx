@@ -94,7 +94,12 @@ export default function Chats() {
                 </Button>
               </div>
 
-              <label className='border-input focus-within:ring-ring flex h-12 w-full items-center space-x-0 rounded-md border ps-2 focus-within:ring-1 focus-within:outline-hidden'>
+              <label
+                className={cn(
+                  'focus-within:ring-ring focus-within:ring-1 focus-within:outline-hidden',
+                  'border-border flex h-10 w-full items-center space-x-0 rounded-md border ps-2'
+                )}
+              >
                 <SearchIcon size={15} className='me-2 stroke-slate-500' />
                 <span className='sr-only'>Search</span>
                 <input
@@ -120,7 +125,8 @@ export default function Chats() {
                     <button
                       type='button'
                       className={cn(
-                        `hover:bg-secondary/75 -mx-1 flex w-full rounded-md px-2 py-2 text-start text-sm`,
+                        'group hover:bg-accent hover:text-accent-foreground',
+                        `flex w-full rounded-md px-2 py-2 text-start text-sm`,
                         selectedUser?.id === id && 'sm:bg-muted'
                       )}
                       onClick={() => {
@@ -137,7 +143,7 @@ export default function Chats() {
                           <span className='col-start-2 row-span-2 font-medium'>
                             {fullName}
                           </span>
-                          <span className='text-muted-foreground col-start-2 row-span-2 row-start-2 line-clamp-2 text-ellipsis'>
+                          <span className='text-muted-foreground group-hover:text-accent-foreground/90 col-start-2 row-span-2 row-start-2 line-clamp-2 text-ellipsis'>
                             {lastMsg}
                           </span>
                         </div>
@@ -154,12 +160,12 @@ export default function Chats() {
           {selectedUser ? (
             <div
               className={cn(
-                'bg-primary-foreground absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col rounded-md border shadow-xs transition-all duration-200 sm:static sm:z-auto sm:flex',
+                'bg-background absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col rounded-md border shadow-xs sm:static sm:z-auto sm:flex',
                 mobileSelectedUser && 'start-0 flex'
               )}
             >
               {/* Top Part */}
-              <div className='bg-secondary mb-1 flex flex-none justify-between rounded-t-md p-4 shadow-lg'>
+              <div className='bg-card mb-1 flex flex-none justify-between rounded-t-md p-4 shadow-lg'>
                 {/* Left */}
                 <div className='flex gap-3'>
                   <Button
@@ -229,15 +235,16 @@ export default function Chats() {
                                 className={cn(
                                   'chat-box max-w-72 px-3 py-2 break-words shadow-lg',
                                   msg.sender === 'You'
-                                    ? 'bg-primary/85 text-primary-foreground/75 self-end rounded-[16px_16px_0_16px]'
-                                    : 'bg-secondary self-start rounded-[16px_16px_16px_0]'
+                                    ? 'bg-primary/90 text-primary-foreground/75 self-end rounded-[16px_16px_0_16px]'
+                                    : 'bg-muted self-start rounded-[16px_16px_16px_0]'
                                 )}
                               >
                                 {msg.message}{' '}
                                 <span
                                   className={cn(
-                                    'text-muted-foreground mt-1 block text-xs font-light italic',
-                                    msg.sender === 'You' && 'text-end'
+                                    'text-foreground/75 mt-1 block text-xs font-light italic',
+                                    msg.sender === 'You' &&
+                                      'text-primary-foreground/85 text-end'
                                   )}
                                 >
                                   {format(msg.timestamp, 'h:mm a')}
@@ -251,7 +258,7 @@ export default function Chats() {
                   </div>
                 </div>
                 <form className='flex w-full flex-none gap-2'>
-                  <div className='border-input focus-within:ring-ring flex flex-1 items-center gap-2 rounded-md border px-2 py-1 focus-within:ring-1 focus-within:outline-hidden lg:gap-4'>
+                  <div className='border-input bg-card focus-within:ring-ring flex flex-1 items-center gap-2 rounded-md border px-2 py-1 focus-within:ring-1 focus-within:outline-hidden lg:gap-4'>
                     <div className='space-x-1'>
                       <Button
                         size='icon'
@@ -309,7 +316,7 @@ export default function Chats() {
           ) : (
             <div
               className={cn(
-                'bg-primary-foreground absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col justify-center rounded-md border shadow-xs transition-all duration-200 sm:static sm:z-auto sm:flex'
+                'bg-card absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col justify-center rounded-md border shadow-xs sm:static sm:z-auto sm:flex'
               )}
             >
               <div className='flex flex-col items-center space-y-6'>
@@ -322,10 +329,7 @@ export default function Chats() {
                     Send a message to start a chat.
                   </p>
                 </div>
-                <Button
-                  className='bg-blue-500 px-6 text-white hover:bg-blue-600'
-                  onClick={() => setCreateConversationDialog(true)}
-                >
+                <Button onClick={() => setCreateConversationDialog(true)}>
                   Send message
                 </Button>
               </div>

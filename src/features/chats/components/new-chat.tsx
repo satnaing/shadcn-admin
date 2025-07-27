@@ -54,8 +54,8 @@ export function NewChat({ users, onOpenChange, open }: Props) {
           <DialogTitle>New message</DialogTitle>
         </DialogHeader>
         <div className='flex flex-col gap-4'>
-          <div className='flex flex-wrap items-center gap-2'>
-            <span className='text-muted-foreground text-sm'>To:</span>
+          <div className='flex flex-wrap items-baseline-last gap-2'>
+            <span className='text-muted-foreground min-h-6 text-sm'>To:</span>
             {selectedUsers.map((user) => (
               <Badge key={user.id} variant='default'>
                 {user.fullName}
@@ -85,7 +85,7 @@ export function NewChat({ users, onOpenChange, open }: Props) {
                   <CommandItem
                     key={user.id}
                     onSelect={() => handleSelectUser(user)}
-                    className='flex items-center justify-between gap-2'
+                    className='hover:bg-accent hover:text-accent-foreground flex items-center justify-between gap-2'
                   >
                     <div className='flex items-center gap-2'>
                       <img
@@ -97,8 +97,8 @@ export function NewChat({ users, onOpenChange, open }: Props) {
                         <span className='text-sm font-medium'>
                           {user.fullName}
                         </span>
-                        <span className='text-muted-foreground text-xs'>
-                          {user.username} aa
+                        <span className='text-accent-foreground/70 text-xs'>
+                          {user.username}
                         </span>
                       </div>
                     </div>
