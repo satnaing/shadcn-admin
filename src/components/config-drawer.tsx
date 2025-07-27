@@ -213,7 +213,7 @@ function ThemeConfig() {
 function SidebarConfig() {
   const { defaultVariant, variant, setVariant } = useLayout()
   return (
-    <div>
+    <div className='max-md:hidden'>
       <SectionTitle
         title='Sidebar'
         showReset={defaultVariant !== variant}
@@ -260,7 +260,7 @@ function LayoutConfig() {
   const radioState = open ? 'default' : collapsible
 
   return (
-    <div>
+    <div className='max-md:hidden'>
       <SectionTitle
         title='Layout'
         showReset={radioState !== 'default'}
