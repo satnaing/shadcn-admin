@@ -131,27 +131,27 @@ export const sidebarData: SidebarData = {
           items: [
             {
               title: 'Unauthorized',
-              url: '/401',
+              url: '/errors/unauthorized',
               icon: Lock,
             },
             {
               title: 'Forbidden',
-              url: '/403',
+              url: '/errors/forbidden',
               icon: UserX,
             },
             {
               title: 'Not Found',
-              url: '/404',
+              url: '/errors/not-found',
               icon: FileX,
             },
             {
               title: 'Internal Server Error',
-              url: '/500',
+              url: '/errors/internal-server-error',
               icon: ServerOff,
             },
             {
               title: 'Maintenance Error',
-              url: '/503',
+              url: '/errors/maintenance-error',
               icon: Construction,
             },
           ],
