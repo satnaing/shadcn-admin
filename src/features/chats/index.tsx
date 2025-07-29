@@ -160,12 +160,12 @@ export default function Chats() {
           {selectedUser ? (
             <div
               className={cn(
-                'bg-background absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col rounded-md border shadow-xs sm:static sm:z-auto sm:flex',
+                'bg-background absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col border shadow-xs sm:static sm:z-auto sm:flex sm:rounded-md',
                 mobileSelectedUser && 'start-0 flex'
               )}
             >
               {/* Top Part */}
-              <div className='bg-card mb-1 flex flex-none justify-between rounded-t-md p-4 shadow-lg'>
+              <div className='bg-card mb-1 flex flex-none justify-between p-4 shadow-lg sm:rounded-t-md'>
                 {/* Left */}
                 <div className='flex gap-3'>
                   <Button
