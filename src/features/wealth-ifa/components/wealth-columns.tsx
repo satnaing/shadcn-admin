@@ -1,16 +1,19 @@
-import {ColumnDef} from '@tanstack/react-table';
-import type {WealthData} from './wealth-table';
-import {DataTableColumnHeader} from './data-table-column-header';
-import { StatusCell } from './status-cell';
+import { ColumnDef } from '@tanstack/react-table'
+import { DataTableColumnHeader } from './data-table-column-header'
+import { StatusCell } from './status-cell'
+import type { WealthData } from './wealth-table'
 
-
-export const wealthColumns = (searchParams: {
-    customerId: string;
-    mobile: string;
-    pan: string;
-    email: string;
-} | null, pageIndex: number): ColumnDef<WealthData>[] => [
-   {
+export const wealthColumns = (
+  searchParams: {
+    customerId: string
+    mobile: string
+    pan: string
+    email: string
+  } | null,
+  pageIndex: number,
+  handleFileDownload?: (url: string, name: string) => void
+): ColumnDef<WealthData>[] => [
+  {
     accessorKey: 'status',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Status' />
@@ -29,93 +32,140 @@ export const wealthColumns = (searchParams: {
   },
   {
     accessorKey: 'customerId',
-    header: ({column}) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Customer ID' />
     ),
   },
   {
     accessorKey: 'name',
-    header: ({column}) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Name' />
     ),
   },
   {
     accessorKey: 'mobile',
-    header: ({column}) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Mobile' />
     ),
   },
   {
     accessorKey: 'product',
-    header: ({column}) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Product' />
     ),
   },
   {
     accessorKey: 'pan',
-    header: ({column}) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title='PAN' />
     ),
   },
   {
     accessorKey: 'accountNumber',
-    header: ({column}) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Account Number' />
     ),
   },
   {
     accessorKey: 'bankName',
-    header: ({column}) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Bank Name' />
     ),
   },
   {
     accessorKey: 'ifsc',
-    header: ({column}) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title='IFSC' />
     ),
   },
   {
     accessorKey: 'email',
-    header: ({column}) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Email' />
     ),
   },
   {
     accessorKey: 'aadhar',
-    header: ({column}) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Aadhar' />
     ),
   },
   {
     accessorKey: 'panImgUrl',
-    header: ({column}) => (
-      <DataTableColumnHeader column={column} title='PAN Image URL' />
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='PAN' />
     ),
+    cell: ({ row }) => {
+      const url = row.original.panImgUrl
+      return url ? (
+        <button
+          className='text-blue-600 hover:underline'
+          onClick={() =>
+            handleFileDownload?.(url, `${row.original.customerId}_PAN.jpeg`)
+          }
+        >
+          Download PAN
+        </button>
+      ) : (
+        <span className='text-gray-400'>N/A</span>
+      )
+    },
   },
   {
     accessorKey: 'aadharImgUrl',
-    header: ({column}) => (
-      <DataTableColumnHeader column={column} title='Aadhar Image URL' />
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Aadhar' />
     ),
+    cell: ({ row }) => {
+      const url = row.original.aadharImgUrl
+      return url ? (
+        <button
+          className='text-blue-600 hover:underline'
+          onClick={() =>
+            handleFileDownload?.(url, `${row.original.customerId}_Aadhar.jpeg`)
+          }
+        >
+          Download Aadhar
+        </button>
+      ) : (
+        <span className='text-gray-400'>N/A</span>
+      )
     },
-    {
+  },
+  {
     accessorKey: 'cancelledChequeImgUrl',
-    header: ({column}) => (
-      <DataTableColumnHeader column={column} title='Cancelled Cheque Image URL' />
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Cancelled Cheque' />
     ),
-    },
-   
-    {
-      accessorKey: 'arn',
-      header:({column})=>(
-        <DataTableColumnHeader column = {column} title='ARN'/>
+    cell: ({ row }) => {
+      const url = row.original.cancelledChequeImgUrl
+      return url ? (
+        <button
+          className='text-blue-600 hover:underline'
+          onClick={() =>
+            handleFileDownload?.(
+              url,
+              `${row.original.customerId}_Cancelled_Cheque.jpeg`
+            )
+          }
+        >
+          Download Cancelled Cheque
+        </button>
+      ) : (
+        <span className='text-gray-400'>N/A</span>
       )
     },
-    {
-      accessorKey: 'companyName',
-      header: ({column})=>(
-       < DataTableColumnHeader column={column} title='Company Name'/>
-      )
-    }
+  },
+  {
+    accessorKey: 'arn',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='ARN' />
+    ),
+  },
+  {
+    accessorKey: 'companyName',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Company Name' />
+    ),
+  },
 ]

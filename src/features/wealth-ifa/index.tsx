@@ -105,6 +105,29 @@ export default function WealthIFA() {
     companyName: String(item.company_name ?? ''),
   }))
 
+  const handleFileDownload = async (fileUrl: string, fileName: string) => {
+  try {
+    const token = getToken()
+    const response = await axios.get(`${BACKEND_BASE_URL}/v1/wealth/ifa/file`, {
+      params: { url: fileUrl },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      responseType: 'blob',
+    })
+
+    const blob = new Blob([response.data])
+    const downloadUrl = window.URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = downloadUrl
+    a.download = fileName
+    a.click()
+    window.URL.revokeObjectURL(downloadUrl)
+  } catch (error) {
+    alert(`Failed to download file: ${getErrorMessage(error)}`)
+  }
+}
+
 
   const getErrorMessage = (err: unknown): string => {
     if (isAxiosError(err)) {
@@ -130,7 +153,7 @@ export default function WealthIFA() {
     setPageIndex(0)
   }
 
-  const columns = wealthColumns(searchParams, pageIndex)
+  const columns = wealthColumns(searchParams, pageIndex, handleFileDownload);
   return (
     <div>
       <Header>
