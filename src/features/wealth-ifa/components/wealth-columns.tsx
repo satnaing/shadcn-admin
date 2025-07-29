@@ -1,19 +1,30 @@
 import {ColumnDef} from '@tanstack/react-table';
 import type {WealthData} from './wealth-table';
 import {DataTableColumnHeader} from './data-table-column-header';
-import StatusModal from './status-modal';
-import axios from 'axios';
+import { StatusCell } from './status-cell';
 
-const getToken = () =>{
-  const match = document.cookie.match(/(?:^|; )auth_token=([^;]*)/)
-  return match ? decodeURIComponent(match[1]) : null;
-}
 
-export const wealthColumns: ColumnDef<WealthData>[] = [
-  {
-    accessorKey: 'id',
-    header: ({column}) => (
-      <DataTableColumnHeader column={column} title='ID' />
+export const wealthColumns = (searchParams: {
+    customerId: string;
+    mobile: string;
+    pan: string;
+    email: string;
+} | null, pageIndex: number): ColumnDef<WealthData>[] => [
+   {
+    accessorKey: 'status',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Status' />
+    ),
+    cell: ({ row }) => (
+      <StatusCell
+        data={{
+          name: row.original.name,
+          status: row.original.status,
+          customerId: row.original.customerId,
+        }}
+        searchParams={searchParams}
+        pageIndex={pageIndex}
+      />
     ),
   },
   {
@@ -94,48 +105,7 @@ export const wealthColumns: ColumnDef<WealthData>[] = [
       <DataTableColumnHeader column={column} title='Cancelled Cheque Image URL' />
     ),
     },
-    {
-    accessorKey: 'status',
-    header: ({column}) => (
-      <DataTableColumnHeader column={column} title='Status' />
-    ),
-    cell: ({ row })=>{
-      const data = row.original
-
-      if(data.status==='pending'){
-        return (<StatusModal 
-        name={data.name}
-        onSubmit={async(newStatus)=>{
-          try{
-            const token = getToken();
-            await axios.post(
-              `${import.meta.env.VITE_BACKEND_BASE_URL}/v1/wealth/ifa/update-user`,
-              {
-                customerId: data.customerId,
-                status: newStatus,
-              },
-              {
-                headers: {
-                  Authorization : `Bearer ${token}`,
-                },
-              }
-            )
-            alert(`Status updated to ${newStatus}`)
-            window.location.reload()
-          } catch(error){
-            alert(`failed to update status: ${error}`)
-          }
-        }}
-        >
-          <span className="cursor-pointer underline text-blue-500">
-            {data.status}
-          </span>
-        </StatusModal>
-        )
-      }
-      return <span className='capitalize' >{data.status}</span>
-    }
-    },
+   
     {
       accessorKey: 'arn',
       header:({column})=>(

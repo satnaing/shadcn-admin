@@ -105,6 +105,7 @@ export default function WealthIFA() {
     companyName: String(item.company_name ?? ''),
   }))
 
+
   const getErrorMessage = (err: unknown): string => {
     if (isAxiosError(err)) {
       if (err.response?.data?.message) {
@@ -128,6 +129,8 @@ export default function WealthIFA() {
     setSearchParams(null)
     setPageIndex(0)
   }
+
+  const columns = wealthColumns(searchParams, pageIndex)
   return (
     <div>
       <Header>
@@ -163,7 +166,7 @@ export default function WealthIFA() {
             <div className='text-red-500'>Error: {getErrorMessage(error)}</div>
           ) : (
             <>
-              <WealthTable data={mappedData} columns={wealthColumns} />
+            <WealthTable columns={columns} data={mappedData} />
               <WealthTablePagination
                 pageIndex={pageIndex}
                 setPageIndex={setPageIndex}
