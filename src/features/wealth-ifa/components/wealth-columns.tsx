@@ -10,12 +10,48 @@ const getToken = () =>{
 }
 
 export const wealthColumns: ColumnDef<WealthData>[] = [
-  {
-    accessorKey: 'id',
+   {
+    accessorKey: 'status',
     header: ({column}) => (
-      <DataTableColumnHeader column={column} title='ID' />
+      <DataTableColumnHeader column={column} title='Status' />
     ),
-  },
+    cell: ({ row })=>{
+      const data = row.original
+
+      if(data.status==='pending'){
+        return (<StatusModal 
+        name={data.name}
+        onSubmit={async(newStatus)=>{
+          try{
+            const token = getToken();
+            await axios.post(
+              `${import.meta.env.VITE_BACKEND_BASE_URL}/v1/wealth/ifa/update-user`,
+              {
+                customerId: data.customerId,
+                status: newStatus,
+              },
+              {
+                headers: {
+                  Authorization : `Bearer ${token}`,
+                },
+              }
+            )
+            alert(`Status updated to ${newStatus}`)
+            window.location.reload()
+          } catch(error){
+            alert(`failed to update status: ${error}`)
+          }
+        }}
+        >
+          <span className="cursor-pointer underline text-blue-500">
+            {data.status}
+          </span>
+        </StatusModal>
+        )
+      }
+      return <span className='capitalize' >{data.status}</span>
+    }
+    },
   {
     accessorKey: 'customerId',
     header: ({column}) => (
@@ -94,48 +130,7 @@ export const wealthColumns: ColumnDef<WealthData>[] = [
       <DataTableColumnHeader column={column} title='Cancelled Cheque Image URL' />
     ),
     },
-    {
-    accessorKey: 'status',
-    header: ({column}) => (
-      <DataTableColumnHeader column={column} title='Status' />
-    ),
-    cell: ({ row })=>{
-      const data = row.original
-
-      if(data.status==='pending'){
-        return (<StatusModal 
-        name={data.name}
-        onSubmit={async(newStatus)=>{
-          try{
-            const token = getToken();
-            await axios.post(
-              `${import.meta.env.VITE_BACKEND_BASE_URL}/v1/wealth/ifa/update-user`,
-              {
-                customerId: data.customerId,
-                status: newStatus,
-              },
-              {
-                headers: {
-                  Authorization : `Bearer ${token}`,
-                },
-              }
-            )
-            alert(`Status updated to ${newStatus}`)
-            window.location.reload()
-          } catch(error){
-            alert(`failed to update status: ${error}`)
-          }
-        }}
-        >
-          <span className="cursor-pointer underline text-blue-500">
-            {data.status}
-          </span>
-        </StatusModal>
-        )
-      }
-      return <span className='capitalize' >{data.status}</span>
-    }
-    },
+   
     {
       accessorKey: 'arn',
       header:({column})=>(
