@@ -52,7 +52,10 @@ export function AuthenticatedLayout({ children }: Props) {
               // If layout is fixed and sidebar is inset,
               // set the height to 100svh - 1rem (total margins) to prevent overflow
               // 'peer-data-[variant=inset]:has-[[data-layout=fixed]]:h-[calc(100svh-1rem)]',
-              'peer-data-[variant=inset]:has-[[data-layout=fixed]]:h-[calc(100svh-(var(--spacing)*4))]'
+              'peer-data-[variant=inset]:has-[[data-layout=fixed]]:h-[calc(100svh-(var(--spacing)*4))]',
+
+              // Set content container, so we can use container queries
+              '@container/content'
             )}
           >
             {children ?? <Outlet />}
