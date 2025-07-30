@@ -14,6 +14,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { cn } from '@/lib/utils'
 import {
   Table,
   TableBody,
@@ -79,7 +80,10 @@ export function UsersTable({ columns, data }: DataTableProps) {
                     <TableHead
                       key={header.id}
                       colSpan={header.colSpan}
-                      className={header.column.columnDef.meta?.className ?? ''}
+                      className={cn(
+                        'bg-background group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
+                        header.column.columnDef.meta?.className ?? ''
+                      )}
                     >
                       {header.isPlaceholder
                         ? null
@@ -104,7 +108,10 @@ export function UsersTable({ columns, data }: DataTableProps) {
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className={cell.column.columnDef.meta?.className ?? ''}
+                      className={cn(
+                        'bg-background group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
+                        cell.column.columnDef.meta?.className ?? ''
+                      )}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
