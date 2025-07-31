@@ -47,7 +47,7 @@
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.488.0",
-    "multiselect-react-dropdown": "^2.0.25",
+    "mo-oauth-sdk": "^1.0.0",
     "react": "^19.1.0",
     "react-day-picker": "9.6.6",
     "react-dom": "^19.1.0",

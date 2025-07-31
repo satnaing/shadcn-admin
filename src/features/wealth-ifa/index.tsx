@@ -116,11 +116,39 @@ export default function WealthIFA() {
       responseType: 'blob',
     })
 
-    const blob = new Blob([response.data])
+    // Extract MIME type from response headers
+    const contentType = response.headers['content-type'] || 'application/octet-stream'
+    
+    // Extract file extension from the fileUrl
+    const getFileExtensionFromUrl = (url: string): string => {
+      try {
+        // Decode the URL to handle encoded characters
+        const decodedUrl = decodeURIComponent(url)
+        // Extract the filename from the URL path
+        const urlParts = decodedUrl.split('/')
+        const filename = urlParts[urlParts.length - 1]
+        // Extract extension from filename
+        const extensionMatch = filename.match(/\.([^.]+)$/)
+        if (extensionMatch) {
+          return '.' + extensionMatch[1].toLowerCase()
+        }
+        return ''
+      } catch (_error) {
+        return ''
+      }
+    }
+    
+    // Get file extension from URL
+    const fileExtension = getFileExtensionFromUrl(fileUrl)
+    
+    // Create final filename with correct extension
+    const finalFileName = fileExtension ? fileName + fileExtension : fileName
+    
+    const blob = new Blob([response.data], { type: contentType })
     const downloadUrl = window.URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = downloadUrl
-    a.download = fileName
+    a.download = finalFileName
     a.click()
     window.URL.revokeObjectURL(downloadUrl)
   } catch (error) {
