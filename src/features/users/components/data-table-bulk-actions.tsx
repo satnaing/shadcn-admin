@@ -10,6 +10,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { UsersMultiDeleteDialog } from './users-multi-delete-dialog'
 
 interface DataTableBulkActionsProps<TData> {
   table: Table<TData>
@@ -33,7 +34,7 @@ export function DataTableBulkActions<TData>({
 }: DataTableBulkActionsProps<TData>) {
   const selectedRows = table.getFilteredSelectedRowModel().rows
   const selectedCount = selectedRows.length
-  const [_showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const toolbarRef = useRef<HTMLDivElement>(null)
   const [announcement, setAnnouncement] = useState('')
 
@@ -281,6 +282,12 @@ export function DataTableBulkActions<TData>({
           </Tooltip>
         </div>
       </div>
+
+      <UsersMultiDeleteDialog
+        table={table}
+        open={showDeleteConfirm}
+        onOpenChange={setShowDeleteConfirm}
+      />
     </>
   )
 }
