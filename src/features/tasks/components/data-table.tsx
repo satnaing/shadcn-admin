@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className='space-y-4'>
+    <div className='space-y-4 max-sm:has-[div[role="toolbar"]]:mb-16'>
       <DataTableToolbar table={table} />
       <div className='overflow-hidden rounded-md border'>
         <Table>
