@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Table } from '@tanstack/react-table'
+import { type Table } from '@tanstack/react-table'
 import { Trash2, UserX, UserCheck, Mail } from 'lucide-react'
 import { toast } from 'sonner'
 import { sleep } from '@/utils/sleep'
@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { BulkActionsToolbar } from '@/components/bulk-actions-toolbar'
-import { User } from '../data/schema'
+import { type User } from '../data/schema'
 import { UsersMultiDeleteDialog } from './users-multi-delete-dialog'
 
 interface DataTableBulkActionsProps<TData> {

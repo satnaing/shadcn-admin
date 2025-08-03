@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Table } from '@tanstack/react-table'
+import { type Table } from '@tanstack/react-table'
 import { Trash2, CircleArrowUp, ArrowUpDown, Download } from 'lucide-react'
 import { toast } from 'sonner'
 import { sleep } from '@/utils/sleep'
@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/tooltip'
 import { BulkActionsToolbar } from '@/components/bulk-actions-toolbar'
 import { priorities, statuses } from '../data/data'
-import { Task } from '../data/schema'
+import { type Task } from '../data/schema'
 import { TasksMultiDeleteDialog } from './tasks-multi-delete-dialog'
 
 interface DataTableBulkActionsProps<TData> {

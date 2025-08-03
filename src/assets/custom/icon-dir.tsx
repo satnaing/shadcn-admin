@@ -1,6 +1,6 @@
-import { SVGProps } from 'react'
+import { type SVGProps } from 'react'
 import { cn } from '@/lib/utils'
-import { Direction } from '@/context/direction-context'
+import { type Direction } from '@/context/direction-context'
 
 interface Props extends SVGProps<SVGSVGElement> {
   dir: Direction

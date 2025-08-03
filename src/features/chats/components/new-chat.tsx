@@ -17,7 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { ChatUser } from '../data/chat-types'
+import { type ChatUser } from '../data/chat-types'
 
 type User = Omit<ChatUser, 'messages'>
 

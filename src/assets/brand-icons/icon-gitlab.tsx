@@ -1,4 +1,4 @@
-import { SVGProps } from 'react'
+import { type SVGProps } from 'react'
 import { cn } from '@/lib/utils'
 
 export function IconGitlab({ className, ...props }: SVGProps<SVGSVGElement>) {
