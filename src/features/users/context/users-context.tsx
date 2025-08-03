@@ -13,11 +13,7 @@ interface UsersContextType {
 
 const UsersContext = React.createContext<UsersContextType | null>(null)
 
-interface Props {
-  children: React.ReactNode
-}
-
-export default function UsersProvider({ children }: Props) {
+export function UsersProvider({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useDialogState<UsersDialogType>(null)
   const [currentRow, setCurrentRow] = useState<User | null>(null)
 

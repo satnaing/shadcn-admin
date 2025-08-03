@@ -16,7 +16,7 @@ import { ThemeSwitch } from '@/components/theme-switch'
 import { Overview } from './components/overview'
 import { RecentSales } from './components/recent-sales'
 
-export default function Dashboard() {
+export function Dashboard() {
   return (
     <>
       {/* ===== Top Heading ===== */}
