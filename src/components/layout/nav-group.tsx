@@ -53,11 +53,11 @@ export function NavGroup({ title, items }: NavGroup) {
   )
 }
 
-const NavBadge = ({ children }: { children: ReactNode }) => (
-  <Badge className='rounded-full px-1 py-0 text-xs'>{children}</Badge>
-)
+function NavBadge({ children }: { children: ReactNode }) {
+  return <Badge className='rounded-full px-1 py-0 text-xs'>{children}</Badge>
+}
 
-const SidebarMenuLink = ({ item, href }: { item: NavLink; href: string }) => {
+function SidebarMenuLink({ item, href }: { item: NavLink; href: string }) {
   const { setOpenMobile } = useSidebar()
   return (
     <SidebarMenuItem>
@@ -76,13 +76,13 @@ const SidebarMenuLink = ({ item, href }: { item: NavLink; href: string }) => {
   )
 }
 
-const SidebarMenuCollapsible = ({
+function SidebarMenuCollapsible({
   item,
   href,
 }: {
   item: NavCollapsible
   href: string
-}) => {
+}) {
   const { setOpenMobile } = useSidebar()
   return (
     <Collapsible
@@ -122,13 +122,13 @@ const SidebarMenuCollapsible = ({
   )
 }
 
-const SidebarMenuCollapsedDropdown = ({
+function SidebarMenuCollapsedDropdown({
   item,
   href,
 }: {
   item: NavCollapsible
   href: string
-}) => {
+}) {
   return (
     <SidebarMenuItem>
       <DropdownMenu>
