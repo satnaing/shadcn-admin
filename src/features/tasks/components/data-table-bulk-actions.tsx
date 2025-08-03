@@ -62,17 +62,6 @@ export function DataTableBulkActions<TData>({
     }
   }, [selectedCount])
 
-  // Focus management - focus the toolbar when it appears
-  useEffect(() => {
-    if (selectedCount > 0 && toolbarRef.current) {
-      // Small delay to ensure the toolbar is rendered
-      const timer = setTimeout(() => {
-        toolbarRef.current?.focus()
-      }, 100)
-      return () => clearTimeout(timer)
-    }
-  }, [selectedCount])
-
   if (selectedCount === 0) {
     return null
   }
@@ -160,10 +149,35 @@ export function DataTableBulkActions<TData>({
         event.preventDefault()
         buttons[buttons.length - 1]?.focus()
         break
-      case 'Escape':
+      case 'Escape': {
+        // Check if the Escape key came from a dropdown trigger or content
+        // We can't check dropdown state because Radix UI closes it before our handler runs
+        const target = event.target as HTMLElement
+        const activeElement = document.activeElement as HTMLElement
+
+        // Check if the event target or currently focused element is a dropdown trigger
+        const isFromDropdownTrigger =
+          target?.getAttribute('data-slot') === 'dropdown-menu-trigger' ||
+          activeElement?.getAttribute('data-slot') ===
+            'dropdown-menu-trigger' ||
+          target?.closest('[data-slot="dropdown-menu-trigger"]') ||
+          activeElement?.closest('[data-slot="dropdown-menu-trigger"]')
+
+        // Check if the focused element is inside dropdown content (which is portaled)
+        const isFromDropdownContent =
+          activeElement?.closest('[data-slot="dropdown-menu-content"]') ||
+          target?.closest('[data-slot="dropdown-menu-content"]')
+
+        if (isFromDropdownTrigger || isFromDropdownContent) {
+          // Escape was meant for the dropdown - don't clear selection
+          return
+        }
+
+        // Escape was meant for the toolbar - clear selection
         event.preventDefault()
         handleClearSelection()
         break
+      }
     }
   }
 
