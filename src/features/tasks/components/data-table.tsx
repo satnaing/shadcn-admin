@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/table'
 import { DataTablePagination } from '../components/data-table-pagination'
 import { DataTableToolbar } from '../components/data-table-toolbar'
+import { DataTableBulkActions } from './data-table-bulk-actions'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -64,7 +65,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className='space-y-4'>
+    <div className='space-y-4 max-sm:has-[div[role="toolbar"]]:mb-16'>
       <DataTableToolbar table={table} />
       <div className='overflow-hidden rounded-md border'>
         <Table>
@@ -117,6 +118,7 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <DataTablePagination table={table} />
+      <DataTableBulkActions table={table} />
     </div>
   )
 }
