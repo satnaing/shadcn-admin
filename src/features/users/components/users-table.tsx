@@ -24,6 +24,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { User } from '../data/schema'
+import { DataTableBulkActions } from './data-table-bulk-actions'
 import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
 
@@ -68,7 +69,7 @@ export function UsersTable({ columns, data }: DataTableProps) {
   })
 
   return (
-    <div className='space-y-4'>
+    <div className='space-y-4 max-sm:has-[div[role="toolbar"]]:mb-16'>
       <DataTableToolbar table={table} />
       <div className='overflow-hidden rounded-md border'>
         <Table>
@@ -135,6 +136,7 @@ export function UsersTable({ columns, data }: DataTableProps) {
         </Table>
       </div>
       <DataTablePagination table={table} />
+      <DataTableBulkActions table={table} />
     </div>
   )
 }
