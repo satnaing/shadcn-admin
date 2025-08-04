@@ -5,8 +5,6 @@ import { ProfileDropdown } from '@/components/profile-dropdown';
 import { Search } from '@/components/search';
 import { ThemeSwitch } from '@/components/theme-switch';
 import { PurgeConsentForm } from './components/purge-consent-form';
-import { ResponseDisplay } from './components/response-display';
-
 interface PurgeResponse {
   status: number;
   message: string;
@@ -14,7 +12,7 @@ interface PurgeResponse {
 }
 
 export default function BureauConsent() {
-  const [response, setResponse] = useState<PurgeResponse | null>(null);
+  const [_response, setResponse] = useState<PurgeResponse | null>(null);
 
   const handleResponse = (newResponse: PurgeResponse | null) => {
     setResponse(newResponse);
@@ -40,7 +38,6 @@ export default function BureauConsent() {
         </div>
 
         <PurgeConsentForm onResponse={handleResponse} />
-        <ResponseDisplay response={response} />
       </Main>
     </>
   );
