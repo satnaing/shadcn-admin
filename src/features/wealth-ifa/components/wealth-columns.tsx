@@ -101,7 +101,7 @@ export const wealthColumns = (
         <button
           className='text-blue-600 hover:underline'
           onClick={() =>
-            handleFileDownload?.(url, `${row.original.customerId}_PAN.jpeg`)
+            handleFileDownload?.(url, `${row.original.customerId}_PAN`)
           }
         >
           Download PAN
@@ -122,7 +122,7 @@ export const wealthColumns = (
         <button
           className='text-blue-600 hover:underline'
           onClick={() =>
-            handleFileDownload?.(url, `${row.original.customerId}_Aadhar.jpeg`)
+            handleFileDownload?.(url, `${row.original.customerId}_Aadhar`)
           }
         >
           Download Aadhar
@@ -145,7 +145,7 @@ export const wealthColumns = (
           onClick={() =>
             handleFileDownload?.(
               url,
-              `${row.original.customerId}_Cancelled_Cheque.jpeg`
+              `${row.original.customerId}_Cancelled_Cheque`
             )
           }
         >
