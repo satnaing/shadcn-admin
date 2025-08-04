@@ -25,7 +25,7 @@ import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
 import { SelectDropdown } from '@/components/select-dropdown'
 import { roles } from '../data/data'
-import { User } from '../data/schema'
+import { type User } from '../data/schema'
 
 const formSchema = z
   .object({

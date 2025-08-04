@@ -42,6 +42,15 @@ export default tseslint.config(
           ignoreRestSiblings: true,
         },
       ],
+      // Enforce type-only imports for TypeScript types
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+          fixStyle: 'inline-type-imports',
+          disallowTypeAnnotations: false,
+        },
+      ],
     },
   }
 )

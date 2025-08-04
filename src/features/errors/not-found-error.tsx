@@ -1,7 +1,7 @@
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { Button } from '@/components/ui/button'
 
-export default function NotFoundError() {
+export function NotFoundError() {
   const navigate = useNavigate()
   const { history } = useRouter()
   return (

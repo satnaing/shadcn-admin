@@ -18,7 +18,7 @@ import { columns } from '@/features/users/components/users-columns'
 import { UsersDialogs } from '@/features/users/components/users-dialogs'
 import { UsersPrimaryButtons } from '@/features/users/components/users-primary-buttons'
 import { UsersTable } from '@/features/users/components/users-table'
-import UsersProvider from '@/features/users/context/users-context'
+import { UsersProvider } from '@/features/users/context/users-context'
 import { userListSchema } from '@/features/users/data/schema'
 import { users } from '@/features/users/data/users'
 

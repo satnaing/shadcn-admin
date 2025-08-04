@@ -7,10 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import AuthLayout from '../auth-layout'
+import { AuthLayout } from '../auth-layout'
 import { ForgotPasswordForm } from './components/forgot-password-form'
 
-export default function ForgotPassword() {
+export function ForgotPassword() {
   return (
     <AuthLayout>
       <Card className='gap-4'>

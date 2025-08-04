@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 
-export default function MaintenanceError() {
+export function MaintenanceError() {
   return (
     <div className='h-svh'>
       <div className='m-auto flex h-full w-full flex-col items-center justify-center gap-2'>
