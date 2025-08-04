@@ -33,17 +33,18 @@ export function PurgeConsentForm({ onResponse }: PurgeConsentFormProps) {
     setIsLoading(true);
 
     try {
+
+      const customer_id = Number(customerId);
+      const params = { customer_id : customer_id };
       const token = getToken();
-      const response = await axios.post(`${BACKEND_BASE_URL}/v1/bureau/purge-bureau`, {
-        customer_id: Number(customerId) },
-         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-            withCredentials: true,
-          },
-        }
-      );
+      const response = await axios.post(`${BACKEND_BASE_URL}/v1/bureau/purge-bureau`, 
+       params,
+       { headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        withCredentials: true,
+      });
 
       const result: PurgeResponse = {
         status: response.status,
@@ -54,9 +55,13 @@ export function PurgeConsentForm({ onResponse }: PurgeConsentFormProps) {
       onResponse(result);
 
       if (result.success) {
-        toast.success(`Consent purged successfully for Customer ID: ${customerId}`);
+        toast.success(`Consent purged successfully for Customer ID: ${customerId}`, {
+  duration: 5000, 
+});
       } else {
-        toast.error(`Failed to purge consent for Customer ID: ${customerId}`);
+        toast.error(`Failed to purge consent for Customer ID: ${customerId}`,{
+  duration: 5000, 
+});
       }
 
     } catch (error: any) {
@@ -67,7 +72,9 @@ export function PurgeConsentForm({ onResponse }: PurgeConsentFormProps) {
       };
 
       onResponse(result);
-      toast.error(`Failed to purge consent for Customer ID: ${customerId}. ${result.message}`);
+      toast.error(`Failed to purge consent for Customer ID: ${customerId}. ${result.message}`,{
+        duration: 5000,
+      });
     } finally {
       setIsLoading(false);
     }
