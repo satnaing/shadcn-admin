@@ -35,13 +35,15 @@ export function PurgeConsentForm({ onResponse }: PurgeConsentFormProps) {
     try {
       const token = getToken();
       const response = await axios.post(`${BACKEND_BASE_URL}/v1/bureau/purge-bureau`, {
-        data: { customer_id: Number(customerId) },
-        headers: { 
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        withCredentials: true,
-      });
+        customer_id: Number(customerId) },
+         {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+            withCredentials: true,
+          },
+        }
+      );
 
       const result: PurgeResponse = {
         status: response.status,
