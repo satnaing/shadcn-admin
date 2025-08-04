@@ -26,7 +26,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import { type NavCollapsible, type NavItem, type NavLink, type NavGroup } from './types'
+import {
+  type NavCollapsible,
+  type NavItem,
+  type NavLink,
+  type NavGroup,
+} from './types'
 
 export function NavGroup({ title, items }: NavGroup) {
   const { state, isMobile } = useSidebar()
