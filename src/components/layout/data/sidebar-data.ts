@@ -86,6 +86,11 @@ export const sidebarData: SidebarData = {
           title: 'Credit Repair',
           url: '/credit-repair',
           icon: IconTrendingUp,
+         },
+         {
+          title: 'Purge Bureau Consent',
+          url: '/bureau-consent',
+          icon: IconClipboardText,
          }
         
         // Clerk links removed
