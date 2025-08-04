@@ -18,7 +18,7 @@ interface Props {
   contentClassName?: string
 }
 
-export default function LongText({
+export function LongText({
   children,
   className = '',
   contentClassName = '',

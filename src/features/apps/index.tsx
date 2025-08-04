@@ -23,7 +23,7 @@ const appText = new Map<string, string>([
   ['notConnected', 'Not Connected'],
 ])
 
-export default function Apps() {
+export function Apps() {
   const [sort, setSort] = useState('ascending')
   const [appType, setAppType] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')

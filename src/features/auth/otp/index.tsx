@@ -7,10 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import AuthLayout from '../auth-layout'
+import { AuthLayout } from '../auth-layout'
 import { OtpForm } from './components/otp-form'
 
-export default function Otp() {
+export function Otp() {
   return (
     <AuthLayout>
       <Card className='gap-4'>

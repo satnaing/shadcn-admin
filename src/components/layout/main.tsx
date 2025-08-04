@@ -7,7 +7,7 @@ interface MainProps extends React.HTMLAttributes<HTMLElement> {
   ref?: React.Ref<HTMLElement>
 }
 
-export const Main = ({ fixed, className, fluid, ...props }: MainProps) => {
+export function Main({ fixed, className, fluid, ...props }: MainProps) {
   return (
     <main
       data-layout={fixed ? 'fixed' : 'auto'}
@@ -26,5 +26,3 @@ export const Main = ({ fixed, className, fluid, ...props }: MainProps) => {
     />
   )
 }
-
-Main.displayName = 'Main'
