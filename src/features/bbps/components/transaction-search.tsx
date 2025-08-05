@@ -23,6 +23,7 @@ interface TransactionSearchProps {
     customerId: string
     accountNo: string
     paymentStatus: string
+    billerStatus: string
   }) => void
   onReset: () => void
 }
@@ -42,6 +43,7 @@ export function TransactionSearch({
     customerId: string
     accountNo: string
     paymentStatus: string
+    billerStatus: string
   }>({
     id: '',
     bbpsReferenceCode: '',
@@ -51,6 +53,7 @@ export function TransactionSearch({
     customerId: '',
     accountNo: '',
     paymentStatus: '',
+    billerStatus: '',
   })
 
   const BACKEND_BASE_URL = import.meta.env.VITE_BACKEND_BASE_URL
@@ -79,6 +82,7 @@ export function TransactionSearch({
       customerId: '',
       accountNo: '',
       paymentStatus: '',
+      billerStatus: '',
     })
     onReset()
   }
@@ -124,6 +128,7 @@ export function TransactionSearch({
       ...(fields.customerId && { customer_id: fields.customerId }),
       ...(fields.accountNo && { account_no: fields.accountNo }),
       ...(fields.paymentStatus && { status: fields.paymentStatus }),
+      ...(fields.billerStatus && { biller_status: fields.billerStatus }),
       ...(fields.category.length > 0 && {
         category: fields.category,
       }),
@@ -286,6 +291,24 @@ export function TransactionSearch({
             </SelectContent>
           </Select>
         </div>
+        <div>
+          <label className='mb-1 block text-xs font-semibold'>Biller Status</label>
+          <Select
+            value={fields.billerStatus}
+            onValueChange={(value) =>
+              setFields({ ...fields, billerStatus: value })
+            }
+          >
+            <SelectTrigger className='w-full'>
+              <SelectValue placeholder='Select Biller Status' />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value='pending'>Pending</SelectItem>
+              <SelectItem value='success'>Success</SelectItem>
+              <SelectItem value='failed'>Failed</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>  
       </div>
       {/* Buttons row */}
       <div className='mt-2 flex w-full gap-2'>

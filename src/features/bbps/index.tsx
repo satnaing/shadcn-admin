@@ -30,6 +30,7 @@ interface TransactionSearchFields {
   customerId?: string
   accountNo?: string
   paymentStatus?: string
+  billerStatus?: string
 }
 
 export default function BBPS() {
@@ -49,6 +50,7 @@ export default function BBPS() {
       if (searchParams.customerId) params.customer_id = searchParams.customerId
       if (searchParams.accountNo) params.account_no = searchParams.accountNo
       if (searchParams.paymentStatus) params.status = searchParams.paymentStatus
+      if (searchParams.billerStatus) params.biller_status = searchParams.billerStatus
       if (searchParams.mobileNumber) params.mobile = searchParams.mobileNumber
       if (searchParams.category && searchParams.category.length > 0) params.category = searchParams.category
       if (searchParams.start_date) params.start_date = searchParams.start_date
@@ -97,8 +99,9 @@ export default function BBPS() {
       category: String(t.category ?? ''),
       billerName: String(t.biller_name ?? ''),
       billAmount: Number(t.bill_amount) || 0,
+      billerStatus: String(t.biller_status ?? ''),
       paymentMode: String(t.mode ?? ''),
-      transactionStatus: String(t.status ?? 'Pending'),
+      paymentStatus: String(t.status ?? 'Pending'),
       createdAt: String(t.created_at ?? ''),
       updaredAt: String(t.updated_at ?? ''),
       account_no: String(t.account_no ?? ''),
