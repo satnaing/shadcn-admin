@@ -27,8 +27,9 @@ export interface Transaction {
   category: string
   billerName: string
   billAmount: number
+  billerStatus: string
   paymentMode: string
-  transactionStatus: string
+  paymentStatus: string
   createdAt: string
   updaredAt: string
   account_no?: string

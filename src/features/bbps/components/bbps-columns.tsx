@@ -41,6 +41,12 @@ export const bbpsColumns: ColumnDef<Transaction>[] = [
     ),
   },
   {
+    accessorKey: 'billerStatus',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Biller Status' />
+    ),
+  },
+  {
     accessorKey: 'paymentMode',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Payment Mode' />
