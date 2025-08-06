@@ -93,13 +93,17 @@ const formSchema = z
   )
 type UserForm = z.infer<typeof formSchema>
 
-interface Props {
+type UserActionDialogProps = {
   currentRow?: User
   open: boolean
   onOpenChange: (open: boolean) => void
 }
 
-export function UsersActionDialog({ currentRow, open, onOpenChange }: Props) {
+export function UsersActionDialog({
+  currentRow,
+  open,
+  onOpenChange,
+}: UserActionDialogProps) {
   const isEdit = !!currentRow
   const form = useForm<UserForm>({
     resolver: zodResolver(formSchema),

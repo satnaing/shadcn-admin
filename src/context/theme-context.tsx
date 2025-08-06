@@ -27,7 +27,7 @@ const initialState: ThemeProviderState = {
   resolvedTheme: 'light',
   theme: DEFAULT_THEME,
   setTheme: () => null,
-  resetTheme: () => {},
+  resetTheme: () => null,
 }
 
 const ThemeContext = createContext<ThemeProviderState>(initialState)
@@ -104,8 +104,7 @@ export function ThemeProvider({
 export const useTheme = () => {
   const context = useContext(ThemeContext)
 
-  if (context === undefined)
-    throw new Error('useTheme must be used within a ThemeProvider')
+  if (!context) throw new Error('useTheme must be used within a ThemeProvider')
 
   return context
 }

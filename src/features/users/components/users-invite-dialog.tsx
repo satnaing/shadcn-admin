@@ -34,14 +34,18 @@ const formSchema = z.object({
   role: z.string().min(1, 'Role is required.'),
   desc: z.string().optional(),
 })
+
 type UserInviteForm = z.infer<typeof formSchema>
 
-interface Props {
+type UserInviteDialogProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
 }
 
-export function UsersInviteDialog({ open, onOpenChange }: Props) {
+export function UsersInviteDialog({
+  open,
+  onOpenChange,
+}: UserInviteDialogProps) {
   const form = useForm<UserInviteForm>({
     resolver: zodResolver(formSchema),
     defaultValues: { email: '', role: '', desc: '' },

@@ -1,4 +1,4 @@
-import { type HTMLAttributes, useState } from 'react'
+import { useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,15 +14,16 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 
-type ForgotFormProps = HTMLAttributes<HTMLFormElement>
-
 const formSchema = z.object({
   email: z.email({
     error: (iss) => (iss.input === '' ? 'Please enter your email' : undefined),
   }),
 })
 
-export function ForgotPasswordForm({ className, ...props }: ForgotFormProps) {
+export function ForgotPasswordForm({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLFormElement>) {
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({

@@ -25,7 +25,7 @@ import {
 import { SelectDropdown } from '@/components/select-dropdown'
 import { type Task } from '../data/schema'
 
-interface Props {
+type TaskMutateDrawerProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
   currentRow?: Task
@@ -37,12 +37,16 @@ const formSchema = z.object({
   label: z.string().min(1, 'Please select a label.'),
   priority: z.string().min(1, 'Please choose a priority.'),
 })
-type TasksForm = z.infer<typeof formSchema>
+type TaskForm = z.infer<typeof formSchema>
 
-export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
+export function TasksMutateDrawer({
+  open,
+  onOpenChange,
+  currentRow,
+}: TaskMutateDrawerProps) {
   const isUpdate = !!currentRow
 
-  const form = useForm<TasksForm>({
+  const form = useForm<TaskForm>({
     resolver: zodResolver(formSchema),
     defaultValues: currentRow ?? {
       title: '',
@@ -52,7 +56,7 @@ export function TasksMutateDrawer({ open, onOpenChange, currentRow }: Props) {
     },
   })
 
-  const onSubmit = (data: TasksForm) => {
+  const onSubmit = (data: TaskForm) => {
     // do something with the form data
     onOpenChange(false)
     form.reset()

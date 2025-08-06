@@ -9,13 +9,17 @@ import { Label } from '@/components/ui/label'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { type User } from '../data/schema'
 
-interface Props {
+type UserDeleteDialogProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
   currentRow: User
 }
 
-export function UsersDeleteDialog({ open, onOpenChange, currentRow }: Props) {
+export function UsersDeleteDialog({
+  open,
+  onOpenChange,
+  currentRow,
+}: UserDeleteDialogProps) {
   const [value, setValue] = useState('')
 
   const handleDelete = () => {

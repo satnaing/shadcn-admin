@@ -18,11 +18,11 @@ import { NavGroup } from './nav-group'
 import { NavUser } from './nav-user'
 import { TeamSwitcher } from './team-switcher'
 
-interface Props {
+type AuthenticatedLayoutProps = {
   children?: React.ReactNode
 }
 
-export function AuthenticatedLayout({ children }: Props) {
+export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
   const defaultOpen = getCookie('sidebar_state') !== 'false'
   return (
     <SearchProvider>

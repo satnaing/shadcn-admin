@@ -2,7 +2,6 @@ import { useState } from 'react'
 import {
   type ColumnDef,
   type ColumnFiltersState,
-  type RowData,
   type SortingState,
   type VisibilityState,
   flexRender,
@@ -30,12 +29,12 @@ import { DataTableToolbar } from './data-table-toolbar'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface ColumnMeta<TData extends RowData, TValue> {
+  interface ColumnMeta<TData, TValue> {
     className: string
   }
 }
 
-interface DataTableProps {
+type DataTableProps = {
   columns: ColumnDef<User>[]
   data: User[]
 }

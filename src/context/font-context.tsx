@@ -7,13 +7,13 @@ type Font = (typeof fonts)[number]
 const FONT_COOKIE_NAME = 'font'
 const FONT_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
-interface FontContextType {
+type FontContextType = {
   font: Font
   setFont: (font: Font) => void
   resetFont: () => void
 }
 
-const FontContext = createContext<FontContextType | undefined>(undefined)
+const FontContext = createContext<FontContextType | null>(null)
 
 export const FontProvider: React.FC<{ children: React.ReactNode }> = ({
   children,

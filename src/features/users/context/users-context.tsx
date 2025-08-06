@@ -4,7 +4,7 @@ import { type User } from '../data/schema'
 
 type UsersDialogType = 'invite' | 'add' | 'edit' | 'delete'
 
-interface UsersContextType {
+type UsersContextType = {
   open: UsersDialogType | null
   setOpen: (str: UsersDialogType | null) => void
   currentRow: User | null

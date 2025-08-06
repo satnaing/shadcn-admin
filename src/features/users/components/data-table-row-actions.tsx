@@ -13,7 +13,7 @@ import {
 import { useUsers } from '../context/users-context'
 import { type User } from '../data/schema'
 
-interface DataTableRowActionsProps {
+type DataTableRowActionsProps = {
   row: Row<User>
 }
 

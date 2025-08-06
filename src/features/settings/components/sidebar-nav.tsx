@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
+type SidebarNavProps = React.HTMLAttributes<HTMLElement> & {
   items: {
     href: string
     title: string

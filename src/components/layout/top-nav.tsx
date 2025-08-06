@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
+type TopNavProps = React.HTMLAttributes<HTMLElement> & {
   links: {
     title: string
     href: string
