@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { fonts } from '@/config/fonts'
 import { getCookie, setCookie, removeCookie } from '@/lib/cookies'
 
@@ -15,9 +15,7 @@ type FontContextType = {
 
 const FontContext = createContext<FontContextType | null>(null)
 
-export const FontProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export function FontProvider({ children }: { children: React.ReactNode }) {
   const [font, _setFont] = useState<Font>(() => {
     const savedFont = getCookie(FONT_COOKIE_NAME)
     return fonts.includes(savedFont as Font) ? (savedFont as Font) : fonts[0]

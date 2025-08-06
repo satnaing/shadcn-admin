@@ -1,8 +1,8 @@
 import React from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { ArrowRight, ChevronRight, Laptop, Moon, Sun } from 'lucide-react'
-import { useSearch } from '@/context/search-context'
-import { useTheme } from '@/context/theme-context'
+import { useSearch } from '@/context/search-provider'
+import { useTheme } from '@/context/theme-provider'
 import {
   CommandDialog,
   CommandEmpty,
