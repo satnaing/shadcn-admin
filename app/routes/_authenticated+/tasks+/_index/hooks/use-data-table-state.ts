@@ -108,7 +108,11 @@ export function useDataTableState() {
     setSearchParams(
       (prev) => {
         if (newPagination.page !== undefined) {
-          prev.set('page', String(newPagination.page))
+          if (newPagination.page === 1) {
+            prev.delete('page')
+          } else {
+            prev.set('page', String(newPagination.page))
+          }
         }
 
         if (newPagination.per_page !== undefined) {

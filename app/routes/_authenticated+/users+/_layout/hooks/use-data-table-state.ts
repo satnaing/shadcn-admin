@@ -3,6 +3,11 @@ import { useSearchParams } from 'react-router'
 import { z } from 'zod'
 import { useDebounce } from '~/hooks/use-debounce'
 
+// Constants
+export const PAGINATION_PER_PAGE_DEFAULT = '20'
+export const PAGINATION_PER_PAGE_ITEMS = ['10', '20', '30', '40', '50'] as const
+export type PerPageString = (typeof PAGINATION_PER_PAGE_ITEMS)[number]
+
 // Define the types for filters and pagination
 export const QuerySchema = z.object({
   username: z.preprocess(
@@ -38,15 +43,9 @@ export const PaginationSchema = z.object({
   per_page: z.preprocess(
     (val) => (val === null ? undefined : val),
     z
-      .union([
-        z.literal('10'),
-        z.literal('20'),
-        z.literal('30'),
-        z.literal('40'),
-        z.literal('50'),
-      ])
+      .enum(PAGINATION_PER_PAGE_ITEMS)
       .optional()
-      .default('20')
+      .default(PAGINATION_PER_PAGE_DEFAULT)
       .transform(Number),
   ),
 })
@@ -157,7 +156,7 @@ export function useDataTableState() {
         }
 
         if (newPagination.per_page !== undefined) {
-          if (newPagination.per_page === 20) {
+          if (newPagination.per_page === Number(PAGINATION_PER_PAGE_DEFAULT)) {
             prev.delete('per_page')
           } else {
             prev.set('per_page', String(newPagination.per_page))
