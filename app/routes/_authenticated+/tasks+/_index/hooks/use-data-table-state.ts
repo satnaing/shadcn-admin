@@ -57,12 +57,12 @@ export function useDataTableState() {
               prev.set(key, value)
             }
           }
+          prev.delete('page')
           return prev
         },
         { preventScrollReset: true },
       )
     })
-    updatePagination({ page: undefined })
   }
 
   const updateFilters = (newFilters: Partial<Filters>) => {
@@ -80,11 +80,11 @@ export function useDataTableState() {
             prev.delete(key)
           }
         }
+        prev.delete('page')
         return prev
       },
       { preventScrollReset: true },
     )
-    updatePagination({ page: undefined })
   }
 
   const updateSort = (newSort: Partial<Sort>) => {
@@ -97,28 +97,26 @@ export function useDataTableState() {
           prev.delete('sort_by')
           prev.delete('sort_order')
         }
+        prev.delete('page')
         return prev
       },
       { preventScrollReset: true },
     )
-    updatePagination({ page: undefined })
   }
 
   const updatePagination = (newPagination: Partial<Pagination>) => {
     setSearchParams(
       (prev) => {
-        if (newPagination.page === 1 || newPagination.page === undefined) {
-          prev.delete('page')
-        } else {
+        if (newPagination.page !== undefined) {
           prev.set('page', String(newPagination.page))
         }
-        if (
-          newPagination.per_page === Number(PAGINATION_PER_PAGE_DEFAULT) ||
-          newPagination.per_page === undefined
-        ) {
-          prev.delete('per_page')
-        } else {
-          prev.set('per_page', String(newPagination.per_page))
+
+        if (newPagination.per_page !== undefined) {
+          if (newPagination.per_page === Number(PAGINATION_PER_PAGE_DEFAULT)) {
+            prev.delete('per_page')
+          } else {
+            prev.set('per_page', String(newPagination.per_page))
+          }
         }
         return prev
       },
