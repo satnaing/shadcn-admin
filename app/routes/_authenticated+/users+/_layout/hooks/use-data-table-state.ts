@@ -98,12 +98,12 @@ export function useDataTableState() {
               prev.set(key, value)
             }
           }
+          prev.delete('page')
           return prev
         },
         { preventScrollReset: true },
       )
     })
-    updatePagination({ page: undefined })
   }
 
   const updateFilters = (newFilters: Partial<Filters>) => {
@@ -121,11 +121,11 @@ export function useDataTableState() {
             prev.delete(key)
           }
         }
+        prev.delete('page')
         return prev
       },
       { preventScrollReset: true },
     )
-    updatePagination({ page: undefined })
   }
 
   const updateSort = (newSort: Partial<Sort>) => {
@@ -138,21 +138,29 @@ export function useDataTableState() {
           prev.delete('sort_by')
           prev.delete('sort_order')
         }
+        prev.delete('page')
         return prev
       },
       { preventScrollReset: true },
     )
-    updatePagination({ page: undefined })
   }
 
   const updatePagination = (newPagination: Partial<Pagination>) => {
     setSearchParams(
       (prev) => {
-        for (const [key, value] of Object.entries(newPagination)) {
-          if (value !== undefined) {
-            prev.set(key, String(value))
+        if (newPagination.page !== undefined) {
+          if (newPagination.page === 1) {
+            prev.delete('page')
           } else {
-            prev.delete(key)
+            prev.set('page', String(newPagination.page))
+          }
+        }
+
+        if (newPagination.per_page !== undefined) {
+          if (newPagination.per_page === 20) {
+            prev.delete('per_page')
+          } else {
+            prev.set('per_page', String(newPagination.per_page))
           }
         }
         return prev

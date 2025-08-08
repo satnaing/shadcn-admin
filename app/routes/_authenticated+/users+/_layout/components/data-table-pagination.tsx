@@ -45,9 +45,13 @@ export function DataTablePagination<TData>({
           <Select
             defaultValue={`${pageSize}`}
             onValueChange={(value) => {
+              const newPerPage = Number(value)
+              const newTotalPages = Math.ceil(totalItems / newPerPage)
+
               updatePagination({
-                page: 1,
-                per_page: Number(value),
+                per_page: newPerPage,
+                // Only reset page if current page would be invalid with new per_page
+                ...(currentPage > newTotalPages ? { page: newTotalPages } : {}),
               })
             }}
           >
@@ -73,7 +77,7 @@ export function DataTablePagination<TData>({
             className="hidden h-8 w-8 p-0 lg:flex"
             onClick={() => {
               updatePagination({
-                page: undefined, // delete page param
+                page: 1,
               })
             }}
             disabled={currentPage === 1}
@@ -87,7 +91,7 @@ export function DataTablePagination<TData>({
             className="h-8 w-8 p-0"
             onClick={() => {
               updatePagination({
-                page: currentPage === 2 ? undefined : currentPage - 1,
+                page: currentPage - 1,
               })
             }}
             disabled={currentPage === 1}
