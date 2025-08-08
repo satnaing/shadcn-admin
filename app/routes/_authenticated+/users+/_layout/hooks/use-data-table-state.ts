@@ -6,7 +6,7 @@ import { useDebounce } from '~/hooks/use-debounce'
 // Constants
 export const PAGINATION_PER_PAGE_DEFAULT = '20'
 export const PAGINATION_PER_PAGE_ITEMS = ['10', '20', '30', '40', '50'] as const
-export type PerPageString = typeof PAGINATION_PER_PAGE_ITEMS[number]
+export type PerPageString = (typeof PAGINATION_PER_PAGE_ITEMS)[number]
 
 // Define the types for filters and pagination
 export const QuerySchema = z.object({
