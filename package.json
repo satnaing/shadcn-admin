@@ -60,6 +60,9 @@
     "vite-plugin-devtools-json": "0.4.1",
     "vite-tsconfig-paths": "^5.1.4"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "pnpm": {
     "onlyBuiltDependencies": [
       "@biomejs/biome",
