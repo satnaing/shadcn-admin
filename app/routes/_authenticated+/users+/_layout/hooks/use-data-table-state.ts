@@ -6,6 +6,7 @@ import { useDebounce } from '~/hooks/use-debounce'
 // Constants
 export const PAGINATION_PER_PAGE_DEFAULT = '20'
 export const PAGINATION_PER_PAGE_ITEMS = ['10', '20', '30', '40', '50'] as const
+export type PerPageString = typeof PAGINATION_PER_PAGE_ITEMS[number]
 
 // Define the types for filters and pagination
 export const QuerySchema = z.object({
@@ -42,13 +43,7 @@ export const PaginationSchema = z.object({
   per_page: z.preprocess(
     (val) => (val === null ? undefined : val),
     z
-      .union([
-        z.literal('10'),
-        z.literal('20'),
-        z.literal('30'),
-        z.literal('40'),
-        z.literal('50'),
-      ])
+      .enum(PAGINATION_PER_PAGE_ITEMS)
       .optional()
       .default(PAGINATION_PER_PAGE_DEFAULT)
       .transform(Number),
