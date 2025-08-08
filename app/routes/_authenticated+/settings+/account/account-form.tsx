@@ -1,5 +1,5 @@
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
-import { parseWithZod } from '@conform-to/zod'
+import { parseWithZod } from '@conform-to/zod/v4'
 import { CalendarIcon, CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
 import { format } from 'date-fns'
 import { Form, useActionData, useNavigation } from 'react-router'
@@ -131,7 +131,6 @@ export function AccountForm() {
             <Button
               id={fields.language.id}
               variant="outline"
-              // biome-ignore lint/a11y/useSemanticElements: <explanation>
               role="combobox"
               className={cn(
                 'w-[200px] justify-between',

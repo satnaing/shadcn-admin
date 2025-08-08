@@ -4,7 +4,7 @@ import {
   getTextareaProps,
   useForm,
 } from '@conform-to/react'
-import { getZodConstraint, parseWithZod } from '@conform-to/zod'
+import { getZodConstraint, parseWithZod } from '@conform-to/zod/v4'
 import { IconMailPlus, IconSend } from '@tabler/icons-react'
 import { Form, useNavigation } from 'react-router'
 import { Button } from '~/components/ui/button'

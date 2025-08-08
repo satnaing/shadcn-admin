@@ -1,4 +1,4 @@
-import { parseWithZod } from '@conform-to/zod'
+import { parseWithZod } from '@conform-to/zod/v4'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { data } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
@@ -14,7 +14,7 @@ export const handle = {
   breadcrumb: () => ({ label: 'Edit' }),
 }
 
-export const loader = async ({ params }: Route.LoaderArgs) => {
+export const loader = ({ params }: Route.LoaderArgs) => {
   const task = tasks.find((t) => t.id === params.task)
   if (!task) {
     throw data(null, { status: 404 })

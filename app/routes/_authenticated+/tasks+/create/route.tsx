@@ -1,4 +1,4 @@
-import { parseWithZod } from '@conform-to/zod'
+import { parseWithZod } from '@conform-to/zod/v4'
 import { setTimeout as sleep } from 'node:timers/promises'
 import { href } from 'react-router'
 import { redirectWithSuccess } from 'remix-toast'
@@ -24,7 +24,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
   // Create a new task
   await sleep(1000)
-  const { intent, ...task } = submission.value
+  const { intent: _intent, ...task } = submission.value
   const maxIdNumber = tasks.reduce((max, t) => {
     const idNumber = Number.parseInt(t.id.split('-')[1])
     return idNumber > max ? idNumber : max
