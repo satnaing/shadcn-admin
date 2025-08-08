@@ -26,7 +26,7 @@ export function TeamSwitcher({
   }[]
 }) {
   const { isMobile } = useSidebar()
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: teams array is guaranteed to have at least one element
   const [activeTeam, setActiveTeam] = React.useState(teams[0]!)
 
   return (

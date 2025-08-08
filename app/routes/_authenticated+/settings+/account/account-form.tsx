@@ -131,7 +131,6 @@ export function AccountForm() {
             <Button
               id={fields.language.id}
               variant="outline"
-              // biome-ignore lint/a11y/useSemanticElements: <explanation>
               role="combobox"
               className={cn(
                 'w-[200px] justify-between',

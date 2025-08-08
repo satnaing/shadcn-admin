@@ -44,34 +44,32 @@ export const useBreadcrumbs = () => {
 
   const Breadcrumbs = () => {
     return (
-      <>
-        <Breadcrumb>
-          <BreadcrumbList className="px-4">
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to={href('/')}>Home</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
+      <Breadcrumb>
+        <BreadcrumbList className="px-4">
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link to={href('/')}>Home</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
 
-            {breadcrumbItems.map((item, idx) => {
-              return (
-                <React.Fragment key={idx}>
-                  <BreadcrumbSeparator />
-                  <BreadcrumbItem>
-                    {item.to ? (
-                      <BreadcrumbLink asChild>
-                        <Link to={item.to}>{item.label}</Link>
-                      </BreadcrumbLink>
-                    ) : (
-                      <BreadcrumbPage>{item.label}</BreadcrumbPage>
-                    )}
-                  </BreadcrumbItem>
-                </React.Fragment>
-              )
-            })}
-          </BreadcrumbList>
-        </Breadcrumb>
-      </>
+          {breadcrumbItems.map((item, idx) => {
+            return (
+              <React.Fragment key={idx}>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  {item.to ? (
+                    <BreadcrumbLink asChild>
+                      <Link to={item.to}>{item.label}</Link>
+                    </BreadcrumbLink>
+                  ) : (
+                    <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                  )}
+                </BreadcrumbItem>
+              </React.Fragment>
+            )
+          })}
+        </BreadcrumbList>
+      </Breadcrumb>
     )
   }
 
