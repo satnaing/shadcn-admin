@@ -1,5 +1,5 @@
 import { getFormProps, getInputProps, useForm } from '@conform-to/react'
-import { parseWithZod } from '@conform-to/zod'
+import { parseWithZod } from "@conform-to/zod/v4"
 import { Form, useNavigation } from 'react-router'
 import { z } from 'zod'
 import { PasswordInput } from '~/components/password-input'

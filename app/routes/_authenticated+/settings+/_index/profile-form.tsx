@@ -4,7 +4,7 @@ import {
   getTextareaProps,
   useForm,
 } from '@conform-to/react'
-import { parseWithZod } from '@conform-to/zod'
+import { parseWithZod } from "@conform-to/zod/v4"
 import { XIcon } from 'lucide-react'
 import { Form, Link, useActionData, useNavigation } from 'react-router'
 import type { z } from 'zod'

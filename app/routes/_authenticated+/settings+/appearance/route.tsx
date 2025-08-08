@@ -1,4 +1,4 @@
-import { parseWithZod } from '@conform-to/zod'
+import { parseWithZod } from "@conform-to/zod/v4"
 import { setTimeout } from 'node:timers/promises'
 import { dataWithSuccess } from 'remix-toast'
 import { z } from 'zod'

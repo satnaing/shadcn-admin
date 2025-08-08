@@ -1,4 +1,4 @@
-import { parseWithZod } from '@conform-to/zod'
+import { parseWithZod } from "@conform-to/zod/v4"
 import { setTimeout as sleep } from 'node:timers/promises'
 import { useState } from 'react'
 import { data, href } from 'react-router'
