@@ -1,8 +1,8 @@
 import { Outlet } from '@tanstack/react-router'
 import { getCookie } from '@/lib/cookies'
 import { cn } from '@/lib/utils'
-import { LayoutProvider } from '@/context/layout-context'
-import { SearchProvider } from '@/context/search-context'
+import { LayoutProvider } from '@/context/layout-provider'
+import { SearchProvider } from '@/context/search-provider'
 import {
   SidebarContent,
   SidebarFooter,
@@ -18,11 +18,11 @@ import { NavGroup } from './nav-group'
 import { NavUser } from './nav-user'
 import { TeamSwitcher } from './team-switcher'
 
-interface Props {
+type AuthenticatedLayoutProps = {
   children?: React.ReactNode
 }
 
-export function AuthenticatedLayout({ children }: Props) {
+export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
   const defaultOpen = getCookie('sidebar_state') !== 'false'
   return (
     <SearchProvider>

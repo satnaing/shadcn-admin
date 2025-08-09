@@ -6,7 +6,7 @@ import { type Task } from '../data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
 
-export const columns: ColumnDef<Task>[] = [
+export const tasksColumns: ColumnDef<Task>[] = [
   {
     id: 'select',
     header: ({ table }) => (

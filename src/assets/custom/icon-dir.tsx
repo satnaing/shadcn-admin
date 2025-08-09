@@ -1,12 +1,12 @@
 import { type SVGProps } from 'react'
 import { cn } from '@/lib/utils'
-import { type Direction } from '@/context/direction-context'
+import { type Direction } from '@/context/direction-provider'
 
-interface Props extends SVGProps<SVGSVGElement> {
+type IconDirProps = SVGProps<SVGSVGElement> & {
   dir: Direction
 }
 
-export function IconDir({ dir, className, ...props }: Props) {
+export function IconDir({ dir, className, ...props }: IconDirProps) {
   return (
     <svg
       data-name={`icon-dir-${dir}`}

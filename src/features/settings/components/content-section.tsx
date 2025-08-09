@@ -1,6 +1,6 @@
 import { Separator } from '@/components/ui/separator'
 
-interface ContentSectionProps {
+type ContentSectionProps = {
   title: string
   desc: string
   children: React.JSX.Element

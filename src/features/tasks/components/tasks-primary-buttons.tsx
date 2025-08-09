@@ -1,6 +1,6 @@
 import { Download, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useTasks } from '../context/tasks-context'
+import { useTasks } from './tasks-provider'
 
 export function TasksPrimaryButtons() {
   const { setOpen } = useTasks()

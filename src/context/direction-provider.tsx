@@ -8,19 +8,14 @@ const DEFAULT_DIRECTION = 'ltr'
 const DIRECTION_COOKIE_NAME = 'dir'
 const DIRECTION_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
 
-interface DirectionContextType {
+type DirectionContextType = {
   defaultDir: Direction
   dir: Direction
   setDir: (dir: Direction) => void
   resetDir: () => void
 }
 
-const DirectionContext = createContext<DirectionContextType>({
-  defaultDir: DEFAULT_DIRECTION,
-  dir: DEFAULT_DIRECTION,
-  setDir: () => {},
-  resetDir: () => {},
-})
+const DirectionContext = createContext<DirectionContextType | null>(null)
 
 export function DirectionProvider({ children }: { children: React.ReactNode }) {
   const [dir, _setDir] = useState<Direction>(

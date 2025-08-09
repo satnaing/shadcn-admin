@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
 
-interface ConfirmDialogProps {
+type ConfirmDialogProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
   title: React.ReactNode

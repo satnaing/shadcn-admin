@@ -20,7 +20,7 @@ import { priorities, statuses } from '../data/data'
 import { type Task } from '../data/schema'
 import { TasksMultiDeleteDialog } from './tasks-multi-delete-dialog'
 
-interface DataTableBulkActionsProps<TData> {
+type DataTableBulkActionsProps<TData> = {
   table: Table<TData>
 }
 

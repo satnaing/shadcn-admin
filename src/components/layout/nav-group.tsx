@@ -30,10 +30,10 @@ import {
   type NavCollapsible,
   type NavItem,
   type NavLink,
-  type NavGroup,
+  type NavGroup as NavGroupProps,
 } from './types'
 
-export function NavGroup({ title, items }: NavGroup) {
+export function NavGroup({ title, items }: NavGroupProps) {
   const { state, isMobile } = useSidebar()
   const href = useLocation({ select: (location) => location.href })
   return (

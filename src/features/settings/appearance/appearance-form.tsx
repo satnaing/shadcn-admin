@@ -5,8 +5,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { fonts } from '@/config/fonts'
 import { cn } from '@/lib/utils'
 import { showSubmittedData } from '@/utils/show-submitted-data'
-import { useFont } from '@/context/font-context'
-import { useTheme } from '@/context/theme-context'
+import { useFont } from '@/context/font-provider'
+import { useTheme } from '@/context/theme-provider'
 import { Button, buttonVariants } from '@/components/ui/button'
 import {
   Form,

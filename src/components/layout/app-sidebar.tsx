@@ -1,4 +1,4 @@
-import { useLayout } from '@/context/layout-context'
+import { useLayout } from '@/context/layout-provider'
 import { Sidebar } from '@/components/ui/sidebar'
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

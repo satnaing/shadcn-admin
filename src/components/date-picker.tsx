@@ -8,7 +8,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 
-interface Props {
+type DatePickerProps = {
   selected: Date | undefined
   onSelect: (date: Date | undefined) => void
   placeholder?: string
@@ -18,7 +18,7 @@ export function DatePicker({
   selected,
   onSelect,
   placeholder = 'Pick a date',
-}: Props) {
+}: DatePickerProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>

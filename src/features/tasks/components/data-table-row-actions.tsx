@@ -15,11 +15,11 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { useTasks } from '../context/tasks-context'
 import { labels } from '../data/data'
 import { taskSchema } from '../data/schema'
+import { useTasks } from './tasks-provider'
 
-interface DataTableRowActionsProps<TData> {
+type DataTableRowActionsProps<TData> = {
   row: Row<TData>
 }
 

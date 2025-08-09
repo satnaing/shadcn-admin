@@ -1,4 +1,4 @@
-import { type HTMLAttributes, useState } from 'react'
+import { useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,8 +17,6 @@ import {
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
 
-type UserAuthFormProps = HTMLAttributes<HTMLFormElement>
-
 const formSchema = z.object({
   email: z.email({
     error: (iss) => (iss.input === '' ? 'Please enter your email' : undefined),
@@ -29,7 +27,10 @@ const formSchema = z.object({
     .min(7, 'Password must be at least 7 characters long'),
 })
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+export function UserAuthForm({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLFormElement>) {
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({

@@ -8,7 +8,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 
-interface Props extends React.ComponentProps<typeof Root> {
+type LearnMoreProps = React.ComponentProps<typeof Root> & {
   contentProps?: React.ComponentProps<typeof Content>
   triggerProps?: React.ComponentProps<typeof Trigger>
 }
@@ -18,7 +18,7 @@ export function LearnMore({
   contentProps,
   triggerProps,
   ...props
-}: Props) {
+}: LearnMoreProps) {
   return (
     <Popover {...props}>
       <PopoverTrigger

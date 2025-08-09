@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { getCookie, setCookie } from '@/lib/cookies'
 
 export type Collapsible = 'offcanvas' | 'icon' | 'none'
@@ -13,7 +13,7 @@ const LAYOUT_COOKIE_MAX_AGE = 60 * 60 * 24 * 7 // 7 days
 const DEFAULT_VARIANT = 'inset'
 const DEFAULT_COLLAPSIBLE = 'icon'
 
-interface LayoutContextType {
+type LayoutContextType = {
   resetLayout: () => void
 
   defaultCollapsible: Collapsible
@@ -25,63 +25,53 @@ interface LayoutContextType {
   setVariant: (variant: Variant) => void
 }
 
-const LayoutContext = createContext<LayoutContextType>({
-  resetLayout: () => {},
-  defaultCollapsible: DEFAULT_COLLAPSIBLE,
-  collapsible: DEFAULT_COLLAPSIBLE,
-  setCollapsible: () => {},
+const LayoutContext = createContext<LayoutContextType | null>(null)
 
-  defaultVariant: DEFAULT_VARIANT,
-  variant: DEFAULT_VARIANT,
-  setVariant: () => {},
-})
-
-interface LayoutProviderProps {
+type LayoutProviderProps = {
   children: React.ReactNode
 }
 
 export function LayoutProvider({ children }: LayoutProviderProps) {
-  const [collapsible, setCollapsible] = useState<Collapsible>(
-    () =>
-      (getCookie(LAYOUT_COLLAPSIBLE_COOKIE_NAME) as Collapsible) ||
-      DEFAULT_COLLAPSIBLE
-  )
-  const [variant, setVariant] = useState<Variant>(
-    () => (getCookie(LAYOUT_VARIANT_COOKIE_NAME) as Variant) || DEFAULT_VARIANT
-  )
+  const [collapsible, _setCollapsible] = useState<Collapsible>(() => {
+    const saved = getCookie(LAYOUT_COLLAPSIBLE_COOKIE_NAME)
+    return (saved as Collapsible) || DEFAULT_COLLAPSIBLE
+  })
 
-  useEffect(() => {
+  const [variant, _setVariant] = useState<Variant>(() => {
+    const saved = getCookie(LAYOUT_VARIANT_COOKIE_NAME)
+    return (saved as Variant) || DEFAULT_VARIANT
+  })
+
+  const setCollapsible = (newCollapsible: Collapsible) => {
+    _setCollapsible(newCollapsible)
     setCookie(
       LAYOUT_COLLAPSIBLE_COOKIE_NAME,
-      collapsible,
+      newCollapsible,
       LAYOUT_COOKIE_MAX_AGE
     )
-  }, [collapsible])
+  }
 
-  useEffect(() => {
-    setCookie(LAYOUT_VARIANT_COOKIE_NAME, variant, LAYOUT_COOKIE_MAX_AGE)
-  }, [variant])
+  const setVariant = (newVariant: Variant) => {
+    _setVariant(newVariant)
+    setCookie(LAYOUT_VARIANT_COOKIE_NAME, newVariant, LAYOUT_COOKIE_MAX_AGE)
+  }
 
   const resetLayout = () => {
     setCollapsible(DEFAULT_COLLAPSIBLE)
     setVariant(DEFAULT_VARIANT)
   }
 
-  return (
-    <LayoutContext
-      value={{
-        defaultCollapsible: DEFAULT_COLLAPSIBLE,
-        defaultVariant: DEFAULT_VARIANT,
-        resetLayout,
-        collapsible,
-        setCollapsible,
-        variant,
-        setVariant,
-      }}
-    >
-      {children}
-    </LayoutContext>
-  )
+  const contextValue: LayoutContextType = {
+    resetLayout,
+    defaultCollapsible: DEFAULT_COLLAPSIBLE,
+    collapsible,
+    setCollapsible,
+    defaultVariant: DEFAULT_VARIANT,
+    variant,
+    setVariant,
+  }
+
+  return <LayoutContext value={contextValue}>{children}</LayoutContext>
 }
 
 // Define the hook for the provider
