@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      
+
   pull_request:
     branches:
       - main
@@ -20,13 +20,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install pnpm
-        run: npm install -g pnpm  
+        run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Lint the code
         run: pnpm lint
