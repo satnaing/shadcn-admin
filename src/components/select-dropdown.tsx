@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-interface SelectDropdownProps {
+type SelectDropdownProps = {
   onValueChange?: (value: string) => void
   defaultValue: string | undefined
   placeholder?: string

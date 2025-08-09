@@ -13,7 +13,7 @@ import { BulkActionsToolbar } from '@/components/bulk-actions-toolbar'
 import { type User } from '../data/schema'
 import { UsersMultiDeleteDialog } from './users-multi-delete-dialog'
 
-interface DataTableBulkActionsProps<TData> {
+type DataTableBulkActionsProps<TData> = {
   table: Table<TData>
 }
 

@@ -21,12 +21,12 @@ import { type ChatUser } from '../data/chat-types'
 
 type User = Omit<ChatUser, 'messages'>
 
-type Props = {
+type NewChatProps = {
   users: User[]
   open: boolean
   onOpenChange: (open: boolean) => void
 }
-export function NewChat({ users, onOpenChange, open }: Props) {
+export function NewChat({ users, onOpenChange, open }: NewChatProps) {
   const [selectedUsers, setSelectedUsers] = useState<User[]>([])
 
   const handleSelectUser = (user: User) => {

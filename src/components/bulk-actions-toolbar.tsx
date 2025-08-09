@@ -11,7 +11,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 
-interface BulkActionsToolbarProps<TData> {
+type BulkActionsToolbarProps<TData> = {
   table: Table<TData>
   entityName: string
   children: React.ReactNode
