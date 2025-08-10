@@ -18,7 +18,6 @@ import { UsersDialogs } from '@/features/users/components/users-dialogs'
 import { UsersPrimaryButtons } from '@/features/users/components/users-primary-buttons'
 import { UsersProvider } from '@/features/users/components/users-provider'
 import { UsersTable } from '@/features/users/components/users-table'
-import { userListSchema } from '@/features/users/data/schema'
 import { users } from '@/features/users/data/users'
 
 export const Route = createFileRoute('/clerk/_authenticated/user-management')({
@@ -44,8 +43,6 @@ function UserManagement() {
     return <Unauthorized />
   }
 
-  // Parse user list
-  const userList = userListSchema.parse(users)
   return (
     <>
       <SignedIn>
@@ -92,7 +89,7 @@ function UserManagement() {
               <UsersPrimaryButtons />
             </div>
             <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-              <UsersTable data={userList} navigate={navigate} search={search} />
+              <UsersTable data={users} navigate={navigate} search={search} />
             </div>
           </Main>
 

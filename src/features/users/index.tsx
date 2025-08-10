@@ -8,14 +8,13 @@ import { UsersDialogs } from './components/users-dialogs'
 import { UsersPrimaryButtons } from './components/users-primary-buttons'
 import { UsersProvider } from './components/users-provider'
 import { UsersTable } from './components/users-table'
-import { userListSchema } from './data/schema'
 import { users } from './data/users'
 
 const route = getRouteApi('/_authenticated/users/')
 
 export function Users() {
-  // Parse user list
-  const userList = userListSchema.parse(users)
+  const search = route.useSearch()
+  const navigate = route.useNavigate()
 
   return (
     <UsersProvider>
@@ -38,11 +37,7 @@ export function Users() {
           <UsersPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-          <UsersTable
-            data={userList}
-            search={route.useSearch()}
-            navigate={route.useNavigate()}
-          />
+          <UsersTable data={users} search={search} navigate={navigate} />
         </div>
       </Main>
 
