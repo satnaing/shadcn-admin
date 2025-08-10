@@ -85,7 +85,7 @@ export function TasksImportDialog({
               control={form.control}
               name='file'
               render={() => (
-                <FormItem className='mb-2 space-y-1'>
+                <FormItem className='my-2'>
                   <FormLabel>File</FormLabel>
                   <FormControl>
                     <Input type='file' {...fileRef} className='h-8 py-0' />

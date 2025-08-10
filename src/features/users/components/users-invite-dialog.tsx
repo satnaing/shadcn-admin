@@ -102,7 +102,7 @@ export function UsersInviteDialog({
               control={form.control}
               name='role'
               render={({ field }) => (
-                <FormItem className='space-y-1'>
+                <FormItem>
                   <FormLabel>Role</FormLabel>
                   <SelectDropdown
                     defaultValue={field.value}
