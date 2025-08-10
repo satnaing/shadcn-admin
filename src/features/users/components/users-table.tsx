@@ -1,7 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
-  type ColumnDef,
-  type ColumnFiltersState,
   type SortingState,
   type VisibilityState,
   flexRender,
@@ -14,6 +12,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
+import { type NavigateFn, useTableUrlState } from '@/hooks/use-table-url-state'
 import {
   Table,
   TableBody,
@@ -26,6 +25,7 @@ import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
 import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
+import { usersColumns as columns } from './users-columns'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -35,37 +35,62 @@ declare module '@tanstack/react-table' {
 }
 
 type DataTableProps = {
-  columns: ColumnDef<User>[]
   data: User[]
+  search: Record<string, unknown>
+  navigate: NavigateFn
 }
 
-export function UsersTable({ columns, data }: DataTableProps) {
+export function UsersTable({ data, search, navigate }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
+
+  const {
+    columnFilters,
+    onColumnFiltersChange,
+    pagination,
+    onPaginationChange,
+    ensurePageInRange,
+  } = useTableUrlState({
+    search,
+    navigate,
+    pagination: { defaultPage: 1, defaultPageSize: 10 },
+    globalFilter: { enabled: false },
+    columnFilters: [
+      // username per-column text filter
+      { columnId: 'username', searchKey: 'username', type: 'string' },
+      { columnId: 'status', searchKey: 'status', type: 'array' },
+      { columnId: 'role', searchKey: 'role', type: 'array' },
+    ],
+  })
 
   const table = useReactTable({
     data,
     columns,
     state: {
       sorting,
-      columnVisibility,
+      pagination,
       rowSelection,
       columnFilters,
+      columnVisibility,
     },
     enableRowSelection: true,
+    onPaginationChange,
+    onColumnFiltersChange,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
+    getPaginationRowModel: getPaginationRowModel(),
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
+
+  useEffect(() => {
+    ensurePageInRange(table.getPageCount())
+  }, [table, ensurePageInRange])
 
   return (
     <div className='space-y-4 max-sm:has-[div[role="toolbar"]]:mb-16'>
