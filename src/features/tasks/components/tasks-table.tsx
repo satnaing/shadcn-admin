@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { getRouteApi } from '@tanstack/react-router'
 import {
   type ColumnFiltersState,
   type SortingState,
   type VisibilityState,
+  type PaginationState,
+  type OnChangeFn,
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -26,16 +29,94 @@ import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
 import { tasksColumns as columns } from './tasks-columns'
 
+const route = getRouteApi('/_authenticated/tasks/')
+
 type DataTableProps = {
   data: Task[]
 }
 
 export function TasksTable({ data }: DataTableProps) {
-  const [globalFilter, setGlobalFilter] = useState('')
+  const navigate = route.useNavigate()
+  const {
+    page = 1,
+    pageSize = 10,
+    status = [],
+    priority = [],
+    filter = '',
+  } = route.useSearch()
+
+  const initColFilters: ColumnFiltersState = [
+    ...(status.length > 0 ? [{ id: 'status', value: status }] : []),
+    ...(priority.length > 0 ? [{ id: 'priority', value: priority }] : []),
+  ]
+
+  // Local UI-only states
+  const [globalFilter, setGlobalFilter] = useState(filter)
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [columnFilters, setColumnFilters] =
+    useState<ColumnFiltersState>(initColFilters)
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+
+  // Update global filter state and sync with search params
+  const onGlobalFilterChange: OnChangeFn<string> = (updater) => {
+    const filter =
+      typeof updater === 'function' ? updater(globalFilter) : updater
+    setGlobalFilter(filter)
+    navigate({
+      search: (prev) => ({
+        ...prev,
+        page: undefined,
+        filter: filter.trim() !== '' ? filter : undefined,
+      }),
+    })
+  }
+
+  // Update filter state and sync with search params
+  const onColumnFiltersChange: OnChangeFn<ColumnFiltersState> = (updater) => {
+    const next =
+      typeof updater === 'function' ? updater(columnFilters) : updater
+
+    setColumnFilters(next)
+
+    const status = next.flatMap(({ id, value }) =>
+      id === 'status' ? value : []
+    )
+    const priority = next.flatMap(({ id, value }) =>
+      id === 'priority' ? value : []
+    )
+
+    navigate({
+      search: (prev) => ({
+        ...prev,
+        page: undefined,
+        status: status.length > 0 ? status : undefined,
+        priority: priority.length > 0 ? priority : undefined,
+      }),
+    })
+  }
+
+  // Derive pagination state from URL search params (single source of truth)
+  const pagination: PaginationState = useMemo(
+    () => ({ pageIndex: Math.max(0, page - 1), pageSize }),
+    [page, pageSize]
+  )
+
+  // Update pagination state and sync with search params
+  const onPaginationChange: OnChangeFn<PaginationState> = (updater) => {
+    const next = typeof updater === 'function' ? updater(pagination) : updater
+
+    const nextPage = next.pageIndex + 1
+    const nextPageSize = next.pageSize
+
+    navigate({
+      search: (prev) => ({
+        ...prev,
+        page: nextPage <= 1 ? undefined : nextPage,
+        pageSize: nextPageSize === 10 ? undefined : nextPageSize,
+      }),
+    })
+  }
 
   const table = useReactTable({
     data,
@@ -46,13 +127,12 @@ export function TasksTable({ data }: DataTableProps) {
       rowSelection,
       columnFilters,
       globalFilter,
+      pagination,
     },
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: (row, _columnId, filterValue) => {
       const id = String(row.getValue('id')).toLowerCase()
       const title = String(row.getValue('title')).toLowerCase()
@@ -66,7 +146,22 @@ export function TasksTable({ data }: DataTableProps) {
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    onPaginationChange,
+    onGlobalFilterChange,
+    onColumnFiltersChange,
   })
+
+  const pageCount = table.getPageCount()
+
+  // Clamp out-of-range pages to the last available page when data shrinks or user enters a large page
+  useEffect(() => {
+    if (pageCount > 0 && page > pageCount) {
+      navigate({
+        search: (prev) => ({ ...prev, page: undefined }),
+        replace: true,
+      })
+    }
+  }, [page, pageCount, navigate])
 
   return (
     <div className='space-y-4 max-sm:has-[div[role="toolbar"]]:mb-16'>
