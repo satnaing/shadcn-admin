@@ -63,9 +63,9 @@ export function NotificationsForm() {
                 <RadioGroup
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  className='flex flex-col space-y-1'
+                  className='flex flex-col gap-2'
                 >
-                  <FormItem className='flex items-center space-y-0 space-x-3'>
+                  <FormItem className='flex items-center'>
                     <FormControl>
                       <RadioGroupItem value='all' />
                     </FormControl>
@@ -73,7 +73,7 @@ export function NotificationsForm() {
                       All new messages
                     </FormLabel>
                   </FormItem>
-                  <FormItem className='flex items-center space-y-0 space-x-3'>
+                  <FormItem className='flex items-center'>
                     <FormControl>
                       <RadioGroupItem value='mentions' />
                     </FormControl>
@@ -81,7 +81,7 @@ export function NotificationsForm() {
                       Direct messages and mentions
                     </FormLabel>
                   </FormItem>
-                  <FormItem className='flex items-center space-y-0 space-x-3'>
+                  <FormItem className='flex items-center'>
                     <FormControl>
                       <RadioGroupItem value='none' />
                     </FormControl>
@@ -188,7 +188,7 @@ export function NotificationsForm() {
           control={form.control}
           name='mobile'
           render={({ field }) => (
-            <FormItem className='relative flex flex-row items-start space-y-0 space-x-3'>
+            <FormItem className='relative flex flex-row items-start'>
               <FormControl>
                 <Checkbox
                   checked={field.value}

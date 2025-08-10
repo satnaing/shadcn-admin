@@ -145,7 +145,7 @@ export function AccountForm() {
                           >
                             <CheckIcon
                               className={cn(
-                                'me-2 h-4 w-4',
+                                'size-4',
                                 language.value === field.value
                                   ? 'opacity-100'
                                   : 'opacity-0'

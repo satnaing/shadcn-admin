@@ -87,7 +87,7 @@ export function AppearanceForm() {
           control={form.control}
           name='theme'
           render={({ field }) => (
-            <FormItem className='space-y-1'>
+            <FormItem>
               <FormLabel>Theme</FormLabel>
               <FormDescription>
                 Select the theme for the dashboard.

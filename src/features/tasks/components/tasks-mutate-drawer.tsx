@@ -85,13 +85,13 @@ export function TasksMutateDrawer({
           <form
             id='tasks-form'
             onSubmit={form.handleSubmit(onSubmit)}
-            className='flex-1 space-y-5 px-4'
+            className='flex-1 space-y-6 overflow-y-auto px-4'
           >
             <FormField
               control={form.control}
               name='title'
               render={({ field }) => (
-                <FormItem className='space-y-1'>
+                <FormItem>
                   <FormLabel>Title</FormLabel>
                   <FormControl>
                     <Input {...field} placeholder='Enter a title' />
@@ -104,7 +104,7 @@ export function TasksMutateDrawer({
               control={form.control}
               name='status'
               render={({ field }) => (
-                <FormItem className='space-y-1'>
+                <FormItem>
                   <FormLabel>Status</FormLabel>
                   <SelectDropdown
                     defaultValue={field.value}
@@ -126,7 +126,7 @@ export function TasksMutateDrawer({
               control={form.control}
               name='label'
               render={({ field }) => (
-                <FormItem className='relative space-y-3'>
+                <FormItem className='relative'>
                   <FormLabel>Label</FormLabel>
                   <FormControl>
                     <RadioGroup
@@ -134,7 +134,7 @@ export function TasksMutateDrawer({
                       defaultValue={field.value}
                       className='flex flex-col space-y-1'
                     >
-                      <FormItem className='flex items-center space-y-0 space-x-3'>
+                      <FormItem className='flex items-center'>
                         <FormControl>
                           <RadioGroupItem value='documentation' />
                         </FormControl>
@@ -142,13 +142,13 @@ export function TasksMutateDrawer({
                           Documentation
                         </FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-y-0 space-x-3'>
+                      <FormItem className='flex items-center'>
                         <FormControl>
                           <RadioGroupItem value='feature' />
                         </FormControl>
                         <FormLabel className='font-normal'>Feature</FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-y-0 space-x-3'>
+                      <FormItem className='flex items-center'>
                         <FormControl>
                           <RadioGroupItem value='bug' />
                         </FormControl>
@@ -164,7 +164,7 @@ export function TasksMutateDrawer({
               control={form.control}
               name='priority'
               render={({ field }) => (
-                <FormItem className='relative space-y-3'>
+                <FormItem className='relative'>
                   <FormLabel>Priority</FormLabel>
                   <FormControl>
                     <RadioGroup
@@ -172,19 +172,19 @@ export function TasksMutateDrawer({
                       defaultValue={field.value}
                       className='flex flex-col space-y-1'
                     >
-                      <FormItem className='flex items-center space-y-0 space-x-3'>
+                      <FormItem className='flex items-center'>
                         <FormControl>
                           <RadioGroupItem value='high' />
                         </FormControl>
                         <FormLabel className='font-normal'>High</FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-y-0 space-x-3'>
+                      <FormItem className='flex items-center'>
                         <FormControl>
                           <RadioGroupItem value='medium' />
                         </FormControl>
                         <FormLabel className='font-normal'>Medium</FormLabel>
                       </FormItem>
-                      <FormItem className='flex items-center space-y-0 space-x-3'>
+                      <FormItem className='flex items-center'>
                         <FormControl>
                           <RadioGroupItem value='low' />
                         </FormControl>

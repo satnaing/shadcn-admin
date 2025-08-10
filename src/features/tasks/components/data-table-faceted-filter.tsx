@@ -42,7 +42,7 @@ export function DataTableFacetedFilter<TData, TValue>({
     <Popover>
       <PopoverTrigger asChild>
         <Button variant='outline' size='sm' className='h-8 border-dashed'>
-          <PlusCircledIcon className='me-2 h-4 w-4' />
+          <PlusCircledIcon className='size-4' />
           {title}
           {selectedValues?.size > 0 && (
             <>
@@ -104,7 +104,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                   >
                     <div
                       className={cn(
-                        'border-primary me-2 flex h-4 w-4 items-center justify-center rounded-sm border',
+                        'border-primary flex size-4 items-center justify-center rounded-sm border',
                         isSelected
                           ? 'bg-primary text-primary-foreground'
                           : 'opacity-50 [&_svg]:invisible'
@@ -113,7 +113,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                       <CheckIcon className={cn('text-background h-4 w-4')} />
                     </div>
                     {option.icon && (
-                      <option.icon className='text-muted-foreground me-2 h-4 w-4' />
+                      <option.icon className='text-muted-foreground size-4' />
                     )}
                     <span>{option.label}</span>
                     {facets?.get(option.value) && (

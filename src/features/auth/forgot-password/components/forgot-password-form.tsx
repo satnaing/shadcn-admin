@@ -52,7 +52,7 @@ export function ForgotPasswordForm({
           control={form.control}
           name='email'
           render={({ field }) => (
-            <FormItem className='space-y-1'>
+            <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input placeholder='name@example.com' {...field} />
