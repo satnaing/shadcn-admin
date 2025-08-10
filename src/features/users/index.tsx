@@ -1,15 +1,17 @@
+import { getRouteApi } from '@tanstack/react-router'
 import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
-import { usersColumns } from './components/users-columns'
 import { UsersDialogs } from './components/users-dialogs'
 import { UsersPrimaryButtons } from './components/users-primary-buttons'
 import { UsersProvider } from './components/users-provider'
 import { UsersTable } from './components/users-table'
 import { userListSchema } from './data/schema'
 import { users } from './data/users'
+
+const route = getRouteApi('/_authenticated/users/')
 
 export function Users() {
   // Parse user list
@@ -36,7 +38,11 @@ export function Users() {
           <UsersPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-          <UsersTable data={userList} columns={usersColumns} />
+          <UsersTable
+            data={userList}
+            search={route.useSearch()}
+            navigate={route.useNavigate()}
+          />
         </div>
       </Main>
 
