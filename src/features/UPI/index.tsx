@@ -31,8 +31,8 @@ export default function UPI() {
   const [searchParams, setSearchParams] = useState<UPISearchFields | null>(null)
 
   // Build query params for API
-  const buildQueryParams = (): Record<string, any> => {
-    const params: Record<string, any> = {
+  const buildQueryParams = (): Record<string, string | number | boolean> => {
+    const params: Record<string, string | number | boolean> = {
       page: pageIndex + 1,
       limit: pageSize,
     }
@@ -73,7 +73,7 @@ export default function UPI() {
 
   // Defensive mapping
   const mappedData: UPITransaction[] = (data || []).map((item) => {
-    const t = item as Record<string, unknown>
+    const t = item as unknown as Record<string, unknown>
     return {
       customer_id: String(t.customer_id ?? ''),
       payer_vpa: String(t.payer_vpa ?? ''),
