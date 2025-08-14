@@ -54,7 +54,7 @@ export function UPISearch({
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    const searchParams: any = {}
+    const searchParams: Record<string, string | boolean> = {}
     if (fields.customer_id) searchParams.customer_id = fields.customer_id
     if (fields.utr) searchParams.utr = fields.utr
     if (fields.txn_status) searchParams.txn_status = fields.txn_status
@@ -90,8 +90,8 @@ export function UPISearch({
         if (response.data?.status) {
           setStatusOptions(response.data.status)
         }
-      } catch (error) {
-        console.error('Failed to fetch status types:', error)
+      } catch (_error) {
+        // Silently handle error for status types fetch
       }
     }
 
@@ -148,8 +148,7 @@ export function UPISearch({
       link.click()
       link.parentNode?.removeChild(link)
       window.URL.revokeObjectURL(url)
-    } catch (error) {
-      console.error('Failed to download:', error)
+    } catch (_error) {
       alert('Failed to download Excel file.')
     }
   }
