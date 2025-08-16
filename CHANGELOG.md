@@ -1,3 +1,41 @@
+## v2.0.0 (2025-08-16)
+
+### BREAKING CHANGE
+
+- CSS file structure has been reorganized
+
+### Feat
+
+- add search param sync in apps route (#200)
+- improve tables and sync table states with search param (#199)
+- add data table bulk action toolbar (#196)
+- add config drawer and update overall layout (#186)
+- RTL support (#179)
+
+### Fix
+
+- adjust layout styles in search and top nav in dashboard page
+- update spacing and layout styles
+- update faceted icon color
+- improve user table hover & selected styles (#195)
+- add max-width for large screens to improve responsiveness (#194)
+- adjust chat border radius for better responsiveness (#193)
+- update hard-coded or inconsistent colors (#191)
+- use variable for inset layout height calculation
+- faded-bottom overflow issue in inset layout
+- hide unnecessary configs on mobile (#189)
+- adjust file input text vertical alignment (#188)
+
+### Refactor
+
+- enforce consistency and code quality (#198)
+- improve code quality and consistency (#197)
+- update error routes (#192)
+- remove DirSwitch component and its usage in Tasks (#190)
+- standardize using cookie as persist state (#187)
+- separate CSS into modular theme and base styles (#185)
+- replace tabler icons with lucide icons (#183)
+
 ## v1.4.2 (2025-07-23)
 
 ### Fix
