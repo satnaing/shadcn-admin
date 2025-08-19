@@ -3,7 +3,7 @@ import axios from 'axios'
 import { IconDownload } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Checkbox } from '@/components/ui/checkbox'
+//import { Checkbox } from '@/components/ui/checkbox'
 import {
   Select,
   SelectContent,
@@ -11,10 +11,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+//import { nullable } from 'zod'
 
 interface UPISearchProps {
   onSearch: (params: {
-    customer_id?: string
+    customer_id?: number
     utr?: string
     txn_status?: string
     isDownload?: boolean
@@ -27,12 +28,12 @@ export function UPISearch({
   onReset,
 }: UPISearchProps) {
   const [fields, setFields] = useState<{
-    customer_id: string
+    customer_id?: number
     utr: string
     txn_status: string
     isDownload: boolean
   }>({
-    customer_id: '',
+    //customer_id: 0,
     utr: '',
     txn_status: '',
     isDownload: false,
@@ -47,14 +48,18 @@ export function UPISearch({
   }
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFields({ ...fields, [e.target.name]: e.target.value })
-  }
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  let value: string | number = e.target.value
+ if (e.target.name === 'customer_id') {
+  value = e.target.value ? Number(e.target.value) : '' // empty string when cleared
+}
+  setFields({ ...fields, [e.target.name]: value })
+}
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-    const searchParams: Record<string, string | boolean> = {}
+    const searchParams: Record<string, string | boolean | number> = {}
     if (fields.customer_id) searchParams.customer_id = fields.customer_id
     if (fields.utr) searchParams.utr = fields.utr
     if (fields.txn_status) searchParams.txn_status = fields.txn_status
@@ -64,7 +69,7 @@ export function UPISearch({
 
   const handleReset = () => {
     setFields({
-      customer_id: '',
+      //customer_id: '',
       utr: '',
       txn_status: '',
       isDownload: false,
@@ -170,13 +175,13 @@ export function UPISearch({
         </div>
         <div>
           <label className='mb-1 block text-xs font-semibold'>
-            UTR Number
+            Txn Ref Number
           </label>
           <Input
             name='utr'
             value={fields.utr}
             onChange={handleChange}
-            placeholder='Enter UTR Number'
+            placeholder='Enter Txn Ref Number'
           />
         </div>
         <div>
@@ -201,7 +206,7 @@ export function UPISearch({
             </SelectContent>
           </Select>
         </div>
-        <div className='flex items-center space-x-2 pt-6'>
+        {/* <div className='flex items-center space-x-2 pt-6'>
           <Checkbox
             id='isDownload'
             checked={fields.isDownload}
@@ -215,7 +220,7 @@ export function UPISearch({
           >
             Download File
           </label>
-        </div>
+        </div> */}
       </div>
       {/* Buttons row */}
       <div className='mt-2 flex w-full gap-2'>

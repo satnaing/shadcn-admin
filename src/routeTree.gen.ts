@@ -29,6 +29,7 @@ import { Route as ClerkauthRouteImport } from './routes/clerk/(auth)/route'
 import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings/route'
 import { Route as AuthenticatedWealthIfaIndexImport } from './routes/_authenticated/wealth-ifa/index'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
+import { Route as AuthenticatedUpianalyticsIndexImport } from './routes/_authenticated/upi_analytics/index'
 import { Route as AuthenticatedUpiIndexImport } from './routes/_authenticated/upi/index'
 import { Route as AuthenticatedTasksIndexImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexImport } from './routes/_authenticated/settings/index'
@@ -157,6 +158,13 @@ const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
   path: '/users/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+
+const AuthenticatedUpianalyticsIndexRoute =
+  AuthenticatedUpianalyticsIndexImport.update({
+    id: '/upi_analytics/',
+    path: '/upi_analytics/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 const AuthenticatedUpiIndexRoute = AuthenticatedUpiIndexImport.update({
   id: '/upi/',
@@ -519,6 +527,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUpiIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/upi_analytics/': {
+      id: '/_authenticated/upi_analytics/'
+      path: '/upi_analytics'
+      fullPath: '/upi_analytics'
+      preLoaderRoute: typeof AuthenticatedUpianalyticsIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
@@ -574,6 +589,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUpiIndexRoute: typeof AuthenticatedUpiIndexRoute
+  AuthenticatedUpianalyticsIndexRoute: typeof AuthenticatedUpianalyticsIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
   AuthenticatedWealthIfaIndexRoute: typeof AuthenticatedWealthIfaIndexRoute
 }
@@ -591,6 +607,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUpiIndexRoute: AuthenticatedUpiIndexRoute,
+  AuthenticatedUpianalyticsIndexRoute: AuthenticatedUpianalyticsIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
   AuthenticatedWealthIfaIndexRoute: AuthenticatedWealthIfaIndexRoute,
 }
@@ -675,6 +692,7 @@ export interface FileRoutesByFullPath {
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/upi': typeof AuthenticatedUpiIndexRoute
+  '/upi_analytics': typeof AuthenticatedUpianalyticsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/wealth-ifa': typeof AuthenticatedWealthIfaIndexRoute
 }
@@ -710,6 +728,7 @@ export interface FileRoutesByTo {
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/upi': typeof AuthenticatedUpiIndexRoute
+  '/upi_analytics': typeof AuthenticatedUpianalyticsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/wealth-ifa': typeof AuthenticatedWealthIfaIndexRoute
 }
@@ -750,6 +769,7 @@ export interface FileRoutesById {
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/upi/': typeof AuthenticatedUpiIndexRoute
+  '/_authenticated/upi_analytics/': typeof AuthenticatedUpianalyticsIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
   '/_authenticated/wealth-ifa/': typeof AuthenticatedWealthIfaIndexRoute
 }
@@ -790,6 +810,7 @@ export interface FileRouteTypes {
     | '/settings/'
     | '/tasks'
     | '/upi'
+    | '/upi_analytics'
     | '/users'
     | '/wealth-ifa'
   fileRoutesByTo: FileRoutesByTo
@@ -824,6 +845,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/tasks'
     | '/upi'
+    | '/upi_analytics'
     | '/users'
     | '/wealth-ifa'
   id:
@@ -862,6 +884,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
     | '/_authenticated/upi/'
+    | '/_authenticated/upi_analytics/'
     | '/_authenticated/users/'
     | '/_authenticated/wealth-ifa/'
   fileRoutesById: FileRoutesById
@@ -936,6 +959,7 @@ export const routeTree = rootRoute
         "/_authenticated/help-center/",
         "/_authenticated/tasks/",
         "/_authenticated/upi/",
+        "/_authenticated/upi_analytics/",
         "/_authenticated/users/",
         "/_authenticated/wealth-ifa/"
       ]
@@ -1077,6 +1101,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/upi/": {
       "filePath": "_authenticated/upi/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/upi_analytics/": {
+      "filePath": "_authenticated/upi_analytics/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/users/": {

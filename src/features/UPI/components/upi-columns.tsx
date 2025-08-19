@@ -42,7 +42,7 @@ export const upiColumns: ColumnDef<UPITransaction>[] = [
   {
     accessorKey: 'utr',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='UTR Number' />
+      <DataTableColumnHeader column={column} title='Transaction Ref Number' />
     ),
   },
   {

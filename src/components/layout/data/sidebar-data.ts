@@ -68,6 +68,11 @@ export const sidebarData: SidebarData = {
           icon: IconMoneybag,
         },
         {
+          title: 'UPI Analytics',
+          url: '/upi_analytics',
+          icon: IconMoneybag,
+        },
+        {
           title: 'BBPS',
           url: '/bbps',
           icon: IconReceiptRupee,
