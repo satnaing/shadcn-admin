@@ -25,7 +25,7 @@ export async function fetchUserInfoFromApi(token?: string): Promise<UserAccess |
     // Map backend fields to UserAccess
     const is_super_admin = !!user.is_super_admin || user.is_super_admin === 1;
     const allowedServices = is_super_admin
-      ? ['users', 'customers', 'upi', 'bbps' , 'bureau', 'bureau-consent', 'wealth-ifa','credit-repair'] // all service keys for superadmin
+      ? ['users', 'customers', 'upi', 'bbps' , 'bureau', 'bureau-consent', 'wealth-ifa','credit-repair','upi-analytics'] // all service keys for superadmin
       : (user.services || user.allowedServices || []).map((s: { service_name?: string }) => {
           if (s.service_name === 'Users') return 'users';
           if (s.service_name === 'Customers') return 'customers';
@@ -35,6 +35,7 @@ export async function fetchUserInfoFromApi(token?: string): Promise<UserAccess |
           if (s.service_name === 'Bureau Consent') return 'bureau-consent';
           if (s.service_name === 'Wealth IFA') return 'wealth-ifa';
           if (s.service_name === 'Credit Repair') return 'credit-repair';
+          if( s.service_name === 'UPI Analytics') return 'upi-analytics';
           // Add more mappings as needed
           return s.service_name?.toLowerCase().replace(/\s+/g, '-');
         });

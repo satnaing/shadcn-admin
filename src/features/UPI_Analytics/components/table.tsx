@@ -16,29 +16,26 @@ import {
   SortingState,
 } from '@tanstack/react-table'
 import * as React from 'react'
+ 
 
-export interface UPITransaction {
-  customer_id: number
-  payer_vpa: string
-  mobile: string
-  payee_vpa: string
-  payee_acc_number: string
-  payee_ifsc: string
-  utr: string
-  amount: string
-  txn_status: string
-  response_code: string
-  response_message: string
-  created_at: string
-  updated_at: string
+export interface UPIAnalytics {
+
+    span: string
+    unique_users_onboarded: number 
+    users_linked_bank_account: number
+    unique_bank_account: number
+    users_linked_rupay_creditcard: number
+    users_linked_credit_line: number
+    upi_lite_setup_users: number    
+    users_setup_auto_pay: number
 }
 
-interface UPITransactionsTableProps {
-  data: UPITransaction[],
-  columns: ColumnDef<UPITransaction>[]
+interface UPIAnalyticsTableProps {
+  data: UPIAnalytics[],
+  columns: ColumnDef<UPIAnalytics>[]
 }
 
-export function UPITransactionsTable({ data, columns }: UPITransactionsTableProps) {
+export function UPIAnalyticsTable({ data, columns }: UPIAnalyticsTableProps) {
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
     pageSize: 10,
