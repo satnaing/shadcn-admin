@@ -77,6 +77,11 @@ export const sidebarData: SidebarData = {
           url: '/bbps',
           icon: IconReceiptRupee,
         },
+        {
+          title: 'BBPS Fileupload',
+          url: '/bbps-fileupload',
+          icon: IconReceiptRupee,
+        },
          {
           title: 'Bureau',
           url: '/bureau',

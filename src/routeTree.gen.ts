@@ -40,6 +40,7 @@ import { Route as AuthenticatedChatsIndexImport } from './routes/_authenticated/
 import { Route as AuthenticatedBureauIndexImport } from './routes/_authenticated/bureau/index'
 import { Route as AuthenticatedBureauConsentIndexImport } from './routes/_authenticated/bureau-consent/index'
 import { Route as AuthenticatedBbpsIndexImport } from './routes/_authenticated/bbps/index'
+import { Route as AuthenticatedBbpsFileuploadIndexImport } from './routes/_authenticated/bbps-fileupload/index'
 import { Route as AuthenticatedAppsIndexImport } from './routes/_authenticated/apps/index'
 import { Route as ClerkAuthenticatedUserManagementImport } from './routes/clerk/_authenticated/user-management'
 import { Route as ClerkauthSignUpImport } from './routes/clerk/(auth)/sign-up'
@@ -231,6 +232,13 @@ const AuthenticatedBbpsIndexRoute = AuthenticatedBbpsIndexImport.update({
   path: '/bbps/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+
+const AuthenticatedBbpsFileuploadIndexRoute =
+  AuthenticatedBbpsFileuploadIndexImport.update({
+    id: '/bbps-fileupload/',
+    path: '/bbps-fileupload/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexImport.update({
   id: '/apps/',
@@ -457,6 +465,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppsIndexImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/bbps-fileupload/': {
+      id: '/_authenticated/bbps-fileupload/'
+      path: '/bbps-fileupload'
+      fullPath: '/bbps-fileupload'
+      preLoaderRoute: typeof AuthenticatedBbpsFileuploadIndexImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/bbps/': {
       id: '/_authenticated/bbps/'
       path: '/bbps'
@@ -580,6 +595,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
+  AuthenticatedBbpsFileuploadIndexRoute: typeof AuthenticatedBbpsFileuploadIndexRoute
   AuthenticatedBbpsIndexRoute: typeof AuthenticatedBbpsIndexRoute
   AuthenticatedBureauConsentIndexRoute: typeof AuthenticatedBureauConsentIndexRoute
   AuthenticatedBureauIndexRoute: typeof AuthenticatedBureauIndexRoute
@@ -598,6 +614,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
+  AuthenticatedBbpsFileuploadIndexRoute: AuthenticatedBbpsFileuploadIndexRoute,
   AuthenticatedBbpsIndexRoute: AuthenticatedBbpsIndexRoute,
   AuthenticatedBureauConsentIndexRoute: AuthenticatedBureauConsentIndexRoute,
   AuthenticatedBureauIndexRoute: AuthenticatedBureauIndexRoute,
@@ -682,6 +699,7 @@ export interface FileRoutesByFullPath {
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
+  '/bbps-fileupload': typeof AuthenticatedBbpsFileuploadIndexRoute
   '/bbps': typeof AuthenticatedBbpsIndexRoute
   '/bureau-consent': typeof AuthenticatedBureauConsentIndexRoute
   '/bureau': typeof AuthenticatedBureauIndexRoute
@@ -718,6 +736,7 @@ export interface FileRoutesByTo {
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
+  '/bbps-fileupload': typeof AuthenticatedBbpsFileuploadIndexRoute
   '/bbps': typeof AuthenticatedBbpsIndexRoute
   '/bureau-consent': typeof AuthenticatedBureauConsentIndexRoute
   '/bureau': typeof AuthenticatedBureauIndexRoute
@@ -759,6 +778,7 @@ export interface FileRoutesById {
   '/clerk/(auth)/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/_authenticated/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
+  '/_authenticated/bbps-fileupload/': typeof AuthenticatedBbpsFileuploadIndexRoute
   '/_authenticated/bbps/': typeof AuthenticatedBbpsIndexRoute
   '/_authenticated/bureau-consent/': typeof AuthenticatedBureauConsentIndexRoute
   '/_authenticated/bureau/': typeof AuthenticatedBureauIndexRoute
@@ -800,6 +820,7 @@ export interface FileRouteTypes {
     | '/clerk/sign-up'
     | '/clerk/user-management'
     | '/apps'
+    | '/bbps-fileupload'
     | '/bbps'
     | '/bureau-consent'
     | '/bureau'
@@ -835,6 +856,7 @@ export interface FileRouteTypes {
     | '/clerk/sign-up'
     | '/clerk/user-management'
     | '/apps'
+    | '/bbps-fileupload'
     | '/bbps'
     | '/bureau-consent'
     | '/bureau'
@@ -874,6 +896,7 @@ export interface FileRouteTypes {
     | '/clerk/(auth)/sign-up'
     | '/clerk/_authenticated/user-management'
     | '/_authenticated/apps/'
+    | '/_authenticated/bbps-fileupload/'
     | '/_authenticated/bbps/'
     | '/_authenticated/bureau-consent/'
     | '/_authenticated/bureau/'
@@ -950,6 +973,7 @@ export const routeTree = rootRoute
         "/_authenticated/settings",
         "/_authenticated/",
         "/_authenticated/apps/",
+        "/_authenticated/bbps-fileupload/",
         "/_authenticated/bbps/",
         "/_authenticated/bureau-consent/",
         "/_authenticated/bureau/",
@@ -1061,6 +1085,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/apps/": {
       "filePath": "_authenticated/apps/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/bbps-fileupload/": {
+      "filePath": "_authenticated/bbps-fileupload/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/bbps/": {

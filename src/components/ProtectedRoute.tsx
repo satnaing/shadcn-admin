@@ -13,7 +13,7 @@ const getToken = () => {
 };
 
 export function ProtectedRoute({ requiredService, children }: ProtectedRouteProps) {
-  console.log('[ProtectedRoute] Component rendered. requiredService:', requiredService);
+  //console.log('[ProtectedRoute] Component rendered. requiredService:', requiredService);
   const { user, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export function ProtectedRoute({ requiredService, children }: ProtectedRouteProp
         }
         setLoading(false);
       } else {
-        console.log('[ProtectedRoute] User already in context:', user);
+        //console.log('[ProtectedRoute] User already in context:', user);
       }
     }
     ensureUserFetched();
@@ -51,15 +51,15 @@ export function ProtectedRoute({ requiredService, children }: ProtectedRouteProp
   }, [isUnauthorized, navigate]);
 
   if (loading || !user) {
-    console.log('[ProtectedRoute] Loading or no user. Loading:', loading, 'User:', user);
+    //console.log('[ProtectedRoute] Loading or no user. Loading:', loading, 'User:', user);
     return null;
   }
-  console.log('[ProtectedRoute] Debug allowedServices:', user.allowedServices, 'requiredService:', requiredService);
+  //console.log('[ProtectedRoute] Debug allowedServices:', user.allowedServices, 'requiredService:', requiredService);
   if (isUnauthorized) {
     console.warn('[ProtectedRoute] User does not have access to this service:', requiredService, 'Allowed:', user.allowedServices);
     return null;
   }
 
-  console.log('[ProtectedRoute] User authorized for service:', requiredService);
+  //console.log('[ProtectedRoute] User authorized for service:', requiredService);
   return <>{children}</>;
 }

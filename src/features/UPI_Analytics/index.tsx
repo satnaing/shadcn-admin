@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+ 
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import axios, { isAxiosError } from 'axios'
@@ -56,7 +56,7 @@ export default function Upi_Analytics() {
       }
     );
     if (response.data?.reports) {
-      console.log(response.data?.reports || [])
+      //console.log(response.data?.reports || [])
       return response.data?.reports || [];
     }
     return [];
@@ -73,7 +73,7 @@ export default function Upi_Analytics() {
 
 
 
-  console.log(data)
+  //console.log(data)
 
   // Defensive mapping
   const mappedData: UPIAnalytics[] = (data || []).map((item : any) => {
