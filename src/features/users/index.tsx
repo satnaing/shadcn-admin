@@ -11,7 +11,7 @@ import { UsersProvider } from './components/users-provider'
 import { UsersTable } from './components/users-table'
 import { users } from './data/users'
 
-const route = getRouteApi('/_authenticated/users/')
+const route = getRouteApi('/users/')
 
 export function Users() {
   const search = route.useSearch()

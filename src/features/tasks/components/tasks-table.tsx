@@ -27,7 +27,7 @@ import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
 import { tasksColumns as columns } from './tasks-columns'
 
-const route = getRouteApi('/_authenticated/tasks/')
+const route = getRouteApi('/tasks/')
 
 type DataTableProps = {
   data: Task[]

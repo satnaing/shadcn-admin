@@ -17,35 +17,10 @@ import {
   UserX,
   Users,
   MessagesSquare,
-  ShieldCheck,
 } from 'lucide-react'
-import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
-import { ClerkLogo } from '@/assets/clerk-logo'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
-  user: {
-    name: 'satnaing',
-    email: 'satnaingdev@gmail.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
-  teams: [
-    {
-      name: 'Shadcn Admin',
-      logo: Command,
-      plan: 'Vite + ShadcnUI',
-    },
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
-    },
-  ],
   navGroups: [
     {
       title: 'General',
@@ -76,82 +51,39 @@ export const sidebarData: SidebarData = {
           url: '/users',
           icon: Users,
         },
-        {
-          title: 'Secured by Clerk',
-          icon: ClerkLogo,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/clerk/sign-in',
-            },
-            {
-              title: 'Sign Up',
-              url: '/clerk/sign-up',
-            },
-            {
-              title: 'User Management',
-              url: '/clerk/user-management',
-            },
-          ],
-        },
       ],
     },
     {
       title: 'Pages',
       items: [
-        {
-          title: 'Auth',
-          icon: ShieldCheck,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/sign-in',
-            },
-            {
-              title: 'Sign In (2 Col)',
-              url: '/sign-in-2',
-            },
-            {
-              title: 'Sign Up',
-              url: '/sign-up',
-            },
-            {
-              title: 'Forgot Password',
-              url: '/forgot-password',
-            },
-            {
-              title: 'OTP',
-              url: '/otp',
-            },
-          ],
-        },
+
         {
           title: 'Errors',
           icon: Bug,
           items: [
             {
               title: 'Unauthorized',
-              url: '/errors/unauthorized',
+              url: '/401',
               icon: Lock,
             },
             {
               title: 'Forbidden',
-              url: '/errors/forbidden',
+              url: '/403',
               icon: UserX,
             },
             {
               title: 'Not Found',
-              url: '/errors/not-found',
+              url: '/404',
               icon: FileX,
             },
             {
               title: 'Internal Server Error',
-              url: '/errors/internal-server-error',
+              url: '/500',
               icon: ServerOff,
             },
             {
               title: 'Maintenance Error',
-              url: '/errors/maintenance-error',
+              url: '/503',
               icon: Construction,
             },
           ],

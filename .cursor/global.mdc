@@ -1,0 +1,6 @@
+---
+alwaysApply: true
+---
+- This project uses pnpm, use that to run commands
+
+This is a starter template repo for working with shadcn and vite, which we are going to be customizing to work with Swan, my SaaS app. Swan is an AI go-to-market engineer that builds agentic Sales workflows ontop of your CRM / other external signals and B2B data / research etc.
