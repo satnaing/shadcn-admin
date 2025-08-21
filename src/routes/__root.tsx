@@ -9,6 +9,7 @@ import { GeneralError } from '@/features/errors/general-error'
 import { NotFoundError } from '@/features/errors/not-found-error'
 import { AuthenticatedLayout } from '@/components/layout/authenticated-layout'
 import { isPublicRoute } from '@/lib/auth'
+import { GraphQLProvider } from '@/lib/graphql'
 import { Loader2 } from 'lucide-react'
 
 // Import your Publishable Key
@@ -36,7 +37,7 @@ function RootComponent() {
       signInFallbackRedirectUrl='/'
       signUpFallbackRedirectUrl='/'
     >
-      <AuthWrapper />
+        <AuthWrapper />
     </ClerkProvider>
   )
 }
@@ -78,7 +79,7 @@ function AuthWrapper() {
   const shouldWrapWithLayout = !isPublic && !['/sign-in', '/sign-up'].includes(location.pathname)
   
   return (
-    <>
+    <GraphQLProvider>
       <NavigationProgress />
       {shouldWrapWithLayout ? (
         <AuthenticatedLayout>
@@ -94,6 +95,6 @@ function AuthWrapper() {
           <TanStackRouterDevtools position='bottom-right' />
         </>
       )}
-    </>
+    </GraphQLProvider>
   )
 }

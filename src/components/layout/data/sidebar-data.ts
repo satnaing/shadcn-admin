@@ -36,7 +36,7 @@ export const sidebarData: SidebarData = {
           icon: ListTodo,
         },
         {
-          title: 'Apps',
+          title: 'Integrations',
           url: '/apps',
           icon: Package,
         },

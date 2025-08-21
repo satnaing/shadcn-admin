@@ -14,6 +14,8 @@ dist-ssr
 
 .env
 
+schema.graphql
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

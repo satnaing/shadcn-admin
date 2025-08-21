@@ -1,0 +1,87 @@
+# GraphQL operations file
+# Add your queries, mutations, and subscriptions here
+
+# Integrations queries
+query Integrations {
+  integrations {
+    apps
+  }
+}
+
+query SlackIntegration {
+  slackIntegration {
+    enabled
+    channelId
+    slackTeamId
+    channelName
+    notificationsType
+    sendDailyDigest
+    sendPlayReminders
+    inboxChannel
+  }
+}
+
+query CrmIntegration {
+  crmIntegration {
+    id
+    createdAt
+    app
+    enabled
+    updatedAt
+    companiesToCreate
+    contactsToCreate
+    excludeLists
+    notesToCreate
+    excludeContactsWithoutEmail
+  }
+}
+
+query CrmLists($q: String) {
+  crmLists(query: $q) {
+    data {
+      listId
+      name
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+query SlackChannels {
+  slackChannels {
+    id
+    name
+  }
+}
+
+query SlackUsers($channelId: String!) {
+  slackUsers(channelId: $channelId) {
+    id
+    name
+    realName
+    email
+    isBot
+  }
+}
+
+# Integrations mutations
+mutation SlackIntegrationUpdate($input: SlackIntegrationUpdateInput!) {
+  slackIntegrationUpdate(input: $input) {
+    success
+  }
+}
+
+mutation CrmIntegrationUpdate($input: CrmIntegrationUpdateInput!) {
+  crmIntegrationUpdate(input: $input) {
+    id
+    createdAt
+    app
+    enabled
+    updatedAt
+    companiesToCreate
+    contactsToCreate
+    excludeLists
+    notesToCreate
+    excludeContactsWithoutEmail
+  }
+}

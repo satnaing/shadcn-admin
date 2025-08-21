@@ -1,0 +1,170 @@
+import { type Control, Controller, useWatch } from 'react-hook-form'
+import { Label } from '@/components/ui/label'
+import { Checkbox } from '@/components/ui/checkbox'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Badge } from '@/components/ui/badge'
+import { useSlackUsersQuery } from '@/graphql/operations/operations.generated'
+
+interface SlackUserSelectorProps {
+  control: Control<any>
+  name: string
+  channelId?: string
+  label?: string
+  helperText?: string
+  isRequired?: boolean
+  isDisabled?: boolean
+  onChange?: (value: any) => void
+  taggingDisabledFieldName?: string
+  onTaggingDisabledChange?: (taggingDisabled: boolean) => void
+}
+
+export function SlackUserSelector({
+  control,
+  name,
+  channelId,
+  label,
+  helperText,
+  isRequired = false,
+  isDisabled = false,
+  onChange,
+  taggingDisabledFieldName,
+  onTaggingDisabledChange,
+}: SlackUserSelectorProps) {
+  const { data: slackUsersData, loading: slackUsersLoading } = useSlackUsersQuery({
+    variables: { channelId: channelId || '' },
+    skip: !channelId,
+  })
+
+  // Watch the taggingDisabled field value to control the dropdown state
+  const taggingDisabled = useWatch({
+    control,
+    name: taggingDisabledFieldName || '',
+    disabled: !taggingDisabledFieldName,
+  })
+
+  const userOptions =
+    slackUsersData?.slackUsers
+      ?.filter((u) => !u.isBot)
+      .map((user) => ({
+        value: user.id,
+        label: `${user.realName || user.name} (${user.id})`,
+      })) || []
+
+  return (
+    <div className='space-y-2'>
+      <Label className='text-sm font-medium'>{label}</Label>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field, fieldState }) => {
+          // Convert string array from form to display value
+          const selectedUsers = Array.isArray(field.value) ? field.value : []
+
+          return (
+            <div className='space-y-2'>
+              <div className='min-h-10 rounded-md border border-input bg-background px-3 py-2'>
+                {!channelId ? (
+                  <span className='text-sm text-muted-foreground'>Select a channel first</span>
+                ) : taggingDisabled ? (
+                  <span className='text-sm text-muted-foreground'>Tagging disabled</span>
+                ) : slackUsersLoading ? (
+                  <span className='text-sm text-muted-foreground'>Loading users...</span>
+                ) : selectedUsers.length === 0 ? (
+                  <span className='text-sm text-muted-foreground'>Select users...</span>
+                ) : (
+                  <div className='flex flex-wrap gap-1'>
+                    {selectedUsers.map((userId: string) => {
+                      const user = userOptions.find((opt) => opt.value === userId)
+                      return user ? (
+                        <Badge key={userId} variant='secondary' className='text-xs'>
+                          {user.label}
+                          <button
+                            type='button'
+                            className='ml-1 text-muted-foreground hover:text-foreground'
+                            onClick={() => {
+                              const newValue = selectedUsers.filter((id) => id !== userId)
+                              field.onChange(newValue)
+                              onChange?.(newValue)
+                            }}
+                          >
+                            ×
+                          </button>
+                        </Badge>
+                      ) : null
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {channelId && !taggingDisabled && !slackUsersLoading && (
+                <Select
+                  disabled={isDisabled || !channelId || taggingDisabled}
+                  value=''
+                  onValueChange={(value) => {
+                    if (!selectedUsers.includes(value)) {
+                      const newValue = [...selectedUsers, value]
+                      field.onChange(newValue)
+                      onChange?.(newValue)
+                    }
+                  }}
+                >
+                  <SelectTrigger className='w-full'>
+                    <SelectValue placeholder='Add a user...' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {userOptions
+                      .filter((opt) => !selectedUsers.includes(opt.value))
+                      .map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+              )}
+
+              {fieldState.error && (
+                <p className='text-sm text-destructive'>{fieldState.error.message}</p>
+              )}
+            </div>
+          )
+        }}
+      />
+
+      {taggingDisabledFieldName && (
+        <Controller
+          control={control}
+          name={taggingDisabledFieldName}
+          render={({ field }) => (
+            <div className='flex items-center space-x-2'>
+              <Checkbox
+                id='disable-tagging'
+                checked={field.value || false}
+                onCheckedChange={(checked) => {
+                  field.onChange(checked)
+                  onTaggingDisabledChange?.(checked as boolean)
+                }}
+              />
+              <Label
+                htmlFor='disable-tagging'
+                className='text-sm font-normal text-muted-foreground'
+              >
+                Disable tagging users in messages
+              </Label>
+            </div>
+          )}
+        />
+      )}
+
+      <p className='text-sm text-muted-foreground'>
+        {channelId ? helperText : 'Please select a channel first to load users'}
+      </p>
+    </div>
+  )
+}

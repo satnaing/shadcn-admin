@@ -1,0 +1,32 @@
+overwrite: true
+schema: "http://localhost:4001/graphql"
+documents:
+  - "src/**/*.graphql"
+generates:
+  src/graphql/global/fragmentTypes.generated.ts:
+    plugins:
+      - fragment-matcher
+  src/graphql/global/types.generated.ts:
+    plugins:
+      - typescript
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      extension: .generated.tsx
+      baseTypesPath: graphql/global/types.generated.ts
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      gqlImport: "@apollo/client#gql"
+      withHooks: true
+      withComponent: false
+      withHOC: false
+      apolloReactCommonImportFrom: "@apollo/client"
+      apolloReactComponentsImportFrom: "@apollo/client"
+      apolloReactHocImportFrom: "@apollo/client"
+      apolloReactHooksImportFrom: "@apollo/client"
+
+  ./schema.graphql:
+      plugins:
+        - schema-ast
