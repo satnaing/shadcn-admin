@@ -14,7 +14,7 @@ export function SignIn() {
     <AuthLayout>
       <Card className='gap-4'>
         <CardHeader>
-          <CardTitle className='text-lg tracking-tight'>Login</CardTitle>
+          <CardTitle className='text-lg tracking-tight'>Sign in</CardTitle>
           <CardDescription>
             Enter your email and password below to <br />
             log into your account
@@ -25,7 +25,7 @@ export function SignIn() {
         </CardContent>
         <CardFooter>
           <p className='text-muted-foreground px-8 text-center text-sm'>
-            By clicking login, you agree to our{' '}
+            By clicking sign in, you agree to our{' '}
             <a
               href='/terms'
               className='hover:text-primary underline underline-offset-4'

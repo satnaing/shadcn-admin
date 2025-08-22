@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
+import { Loader2, LogIn } from 'lucide-react'
 import { IconFacebook, IconGithub } from '@/assets/brand-icons'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -91,7 +92,8 @@ export function UserAuthForm({
           )}
         />
         <Button className='mt-2' disabled={isLoading}>
-          Login
+          {isLoading ? <Loader2 className='animate-spin' /> : <LogIn />}
+          Sign in
         </Button>
 
         <div className='relative my-2'>
