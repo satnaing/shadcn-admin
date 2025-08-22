@@ -2,7 +2,11 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from '@tanstack/react-router'
+import { ArrowRight, Loader2 } from 'lucide-react'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
+import { sleep } from '@/utils/sleep'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -24,6 +28,7 @@ export function ForgotPasswordForm({
   className,
   ...props
 }: React.HTMLAttributes<HTMLFormElement>) {
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -36,9 +41,16 @@ export function ForgotPasswordForm({
     // eslint-disable-next-line no-console
     console.log(data)
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    toast.promise(sleep(2000), {
+      loading: 'Sending email...',
+      success: () => {
+        setIsLoading(false)
+        form.reset()
+        navigate({ to: '/otp' })
+        return `Email sent to ${data.email}`
+      },
+      error: 'Error',
+    })
   }
 
   return (
@@ -63,6 +75,7 @@ export function ForgotPasswordForm({
         />
         <Button className='mt-2' disabled={isLoading}>
           Continue
+          {isLoading ? <Loader2 className='animate-spin' /> : <ArrowRight />}
         </Button>
       </form>
     </Form>
