@@ -9,13 +9,36 @@ import { UsersDialogs } from './components/users-dialogs'
 import { UsersPrimaryButtons } from './components/users-primary-buttons'
 import { UsersProvider } from './components/users-provider'
 import { UsersTable } from './components/users-table'
-import { users } from './data/users'
+import { useUsersQuery } from './hooks/use-users-query'
 
 const route = getRouteApi('/_authenticated/users/')
 
 export function Users() {
   const search = route.useSearch()
   const navigate = route.useNavigate()
+
+  const { data, isLoading, error } = useUsersQuery({
+    page: search.page,
+    pageSize: search.pageSize,
+    status: search.status,
+    role: search.role,
+    username: search.username,
+  })
+  const users = data?.data || []
+  const pagination = data?.pagination
+
+  if (error) {
+    return (
+      <div className='flex h-screen items-center justify-center'>
+        <div className='text-center'>
+          <h2 className='text-2xl font-bold text-red-600'>
+            Error Loading Users
+          </h2>
+          <p className='text-muted-foreground'>{error.message}</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <UsersProvider>
@@ -39,7 +62,13 @@ export function Users() {
           <UsersPrimaryButtons />
         </div>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
-          <UsersTable data={users} search={search} navigate={navigate} />
+          <UsersTable
+            data={users}
+            search={search}
+            navigate={navigate}
+            isLoading={isLoading}
+            pagination={pagination}
+          />
         </div>
       </Main>
 

@@ -6,9 +6,6 @@ import {
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
@@ -26,6 +23,10 @@ import { roles } from '../data/data'
 import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
 import { usersColumns as columns } from './users-columns'
+import {
+  UsersTablePaginationSkeleton,
+  UsersTableRowSkeleton,
+} from './users-skeletons'
 
 declare module '@tanstack/react-table' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -38,13 +39,27 @@ type DataTableProps = {
   data: User[]
   search: Record<string, unknown>
   navigate: NavigateFn
+  isLoading?: boolean
+  pagination?: {
+    page: number
+    pageSize: number
+    total: number
+    totalPages: number
+  }
 }
 
-export function UsersTable({ data, search, navigate }: DataTableProps) {
+export function UsersTable({
+  data,
+  search,
+  navigate,
+  isLoading = false,
+  pagination: serverPagination,
+}: DataTableProps) {
   // Local UI-only states
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([])
+  const [previousPageCount, setPreviousPageCount] = useState<number>(0)
 
   // Local state management for table (uncomment to use local-only state, not synced with URL)
   // const [columnFilters, onColumnFiltersChange] = useState<ColumnFiltersState>([])
@@ -70,6 +85,18 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
     ],
   })
 
+  // update previous page count when we have valid server pagination and ...
+  useEffect(() => {
+    if (serverPagination?.totalPages && !isLoading) {
+      setPreviousPageCount(serverPagination.totalPages)
+    }
+  }, [serverPagination?.totalPages, isLoading])
+  // ... use it as a fallback while loading next page
+  const currentPageCount = serverPagination?.totalPages || previousPageCount
+  // but also make sure to check if this is the first load and do not show any
+  // concrete pagination values in this case, rather render a skeleton
+  const isFirstLoad = isLoading && !data?.length && previousPageCount === 0
+
   const table = useReactTable({
     data,
     columns,
@@ -86,10 +113,9 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
-    getPaginationRowModel: getPaginationRowModel(),
+    manualPagination: true,
+    pageCount: currentPageCount,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
@@ -150,7 +176,12 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {isLoading ? (
+              // Show skeleton rows while loading
+              Array.from({ length: pagination.pageSize }).map((_, index) => (
+                <UsersTableRowSkeleton key={`skeleton-${index}`} />
+              ))
+            ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -186,7 +217,11 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      {isFirstLoad ? (
+        <UsersTablePaginationSkeleton />
+      ) : currentPageCount ? (
+        <DataTablePagination table={table} />
+      ) : null}
       <DataTableBulkActions table={table} />
     </div>
   )

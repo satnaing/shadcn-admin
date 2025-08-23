@@ -32,7 +32,8 @@ async function fetchUsers(params: UsersQueryParams): Promise<UsersResponse> {
   if (params.username) url.searchParams.set('username', params.username)
 
   const response = await fetch(url.toString())
-  if (!response.ok) throw new Error(`Failed to fetch users: ${response.statusText}`)
+  if (!response.ok)
+    throw new Error(`Failed to fetch users: ${response.statusText}`)
   const responseData: UsersResponse = await response.json()
   const validatedData = userListSchema.parse(responseData.data)
 

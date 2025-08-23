@@ -1,5 +1,5 @@
-import { users } from '@/features/users/data/users'
 import { http, HttpResponse } from 'msw'
+import { users } from '@/features/users/data/users'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
 
