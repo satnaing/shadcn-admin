@@ -6,6 +6,9 @@ import {
   getCoreRowModel,
   getFacetedRowModel,
   getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
@@ -39,6 +42,7 @@ type DataTableProps = {
   data: User[]
   search: Record<string, unknown>
   navigate: NavigateFn
+  paginationMode?: 'client' | 'server'
   isLoading?: boolean
   pagination?: {
     page: number
@@ -52,14 +56,15 @@ export function UsersTable({
   data,
   search,
   navigate,
+  paginationMode = 'client',
   isLoading = false,
-  pagination: serverPagination,
+  pagination: serverPaginationData,
 }: DataTableProps) {
   // Local UI-only states
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [sorting, setSorting] = useState<SortingState>([])
-  const [previousPageCount, setPreviousPageCount] = useState<number>(0)
+  const [lastKnownPageCount, setLastKnownPageCount] = useState<number>(0)
 
   // Local state management for table (uncomment to use local-only state, not synced with URL)
   // const [columnFilters, onColumnFiltersChange] = useState<ColumnFiltersState>([])
@@ -87,15 +92,23 @@ export function UsersTable({
 
   // update previous page count when we have valid server pagination and ...
   useEffect(() => {
-    if (serverPagination?.totalPages && !isLoading) {
-      setPreviousPageCount(serverPagination.totalPages)
+    if (serverPaginationData?.totalPages && !isLoading) {
+      setLastKnownPageCount(serverPaginationData.totalPages)
     }
-  }, [serverPagination?.totalPages, isLoading])
+  }, [serverPaginationData?.totalPages, isLoading])
   // ... use it as a fallback while loading next page
-  const currentPageCount = serverPagination?.totalPages || previousPageCount
+  const pageCount = serverPaginationData?.totalPages || lastKnownPageCount
   // but also make sure to check if this is the first load and do not show any
   // concrete pagination values in this case, rather render a skeleton
-  const isFirstLoad = isLoading && !data?.length && previousPageCount === 0
+  const isFirstLoad =
+    isLoading && pageCount === 0 && paginationMode === 'server'
+  // there is also a chance that there is no data, in which case we should
+  // not render the pagination controls at all; if paginatio mode is "client", all
+  // the data items are already there and so we can do a simple length check, while
+  // if we are "in server mode" the items are loaded and "pushed" to `data` with
+  // a delay and so we need to check the `pageCount` instead
+  const shouldShowPaginationControls =
+    paginationMode === 'client' ? data.length > 0 : pageCount > 0
 
   const table = useReactTable({
     data,
@@ -113,8 +126,18 @@ export function UsersTable({
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
-    manualPagination: true,
-    pageCount: currentPageCount,
+    // Server-side pagination configuration
+    ...(paginationMode === 'server' && {
+      manualPagination: true,
+      pageCount,
+    }),
+    // Client-side pagination configuration
+    ...(paginationMode === 'client' && {
+      getPaginationRowModel: getPaginationRowModel(),
+      getFilteredRowModel: getFilteredRowModel(),
+      getSortedRowModel: getSortedRowModel(),
+    }),
+    // Common row models
     getCoreRowModel: getCoreRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
@@ -176,7 +199,7 @@ export function UsersTable({
             ))}
           </TableHeader>
           <TableBody>
-            {isLoading ? (
+            {isLoading && paginationMode === 'server' ? (
               // Show skeleton rows while loading
               Array.from({ length: pagination.pageSize }).map((_, index) => (
                 <UsersTableRowSkeleton key={`skeleton-${index}`} />
@@ -219,7 +242,7 @@ export function UsersTable({
       </div>
       {isFirstLoad ? (
         <UsersTablePaginationSkeleton />
-      ) : currentPageCount ? (
+      ) : shouldShowPaginationControls ? (
         <DataTablePagination table={table} />
       ) : null}
       <DataTableBulkActions table={table} />

@@ -66,8 +66,9 @@ export function Users() {
             data={users}
             search={search}
             navigate={navigate}
-            isLoading={isLoading}
             pagination={pagination}
+            paginationMode='server'
+            isLoading={isLoading}
           />
         </div>
       </Main>
