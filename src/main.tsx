@@ -18,10 +18,7 @@ import { routeTree } from './routeTree.gen'
 // Styles
 import './styles/index.css'
 
-if (
-  import.meta.env.DEV &&
-  import.meta.env.VITE_MOCK_SERVICE_WORKER_ENABLED === '1'
-) {
+if (import.meta.env.VITE_MOCK_SERVICE_WORKER_ENABLED !== 'false') {
   const { worker } = await import('./mocks/browser')
   worker.start({ onUnhandledRequest: 'bypass' })
 }

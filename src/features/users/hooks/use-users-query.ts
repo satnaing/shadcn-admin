@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { User, userListSchema } from '../data/schema'
+import { type User, userListSchema } from '../data/schema'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
 
