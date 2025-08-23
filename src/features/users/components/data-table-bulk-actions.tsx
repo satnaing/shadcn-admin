@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { type Table } from '@tanstack/react-table'
 import { Trash2, UserX, UserCheck, Mail } from 'lucide-react'
 import { toast } from 'sonner'
-import { sleep } from '@/utils/sleep'
+import { sleep } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Tooltip,
