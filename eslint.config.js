@@ -51,6 +51,8 @@ export default tseslint.config(
           disallowTypeAnnotations: false,
         },
       ],
+      // Prevent duplicate imports from the same module
+      'no-duplicate-imports': 'error',
     },
   }
 )
