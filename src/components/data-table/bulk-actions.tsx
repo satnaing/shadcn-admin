@@ -11,7 +11,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 
-type BulkActionsToolbarProps<TData> = {
+type DataTableBulkActionsProps<TData> = {
   table: Table<TData>
   entityName: string
   children: React.ReactNode
@@ -27,11 +27,11 @@ type BulkActionsToolbarProps<TData> = {
  * @param {React.ReactNode} props.children The action buttons to be rendered inside the toolbar.
  * @returns {React.ReactNode | null} The rendered component or null if no rows are selected.
  */
-export function BulkActionsToolbar<TData>({
+export function DataTableBulkActions<TData>({
   table,
   entityName,
   children,
-}: BulkActionsToolbarProps<TData>): React.ReactNode | null {
+}: DataTableBulkActionsProps<TData>): React.ReactNode | null {
   const selectedRows = table.getFilteredSelectedRowModel().rows
   const selectedCount = selectedRows.length
   const toolbarRef = useRef<HTMLDivElement>(null)

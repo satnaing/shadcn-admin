@@ -21,10 +21,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
+import { roles } from '../data/data'
 import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
-import { DataTablePagination } from './data-table-pagination'
-import { DataTableToolbar } from './data-table-toolbar'
 import { usersColumns as columns } from './users-columns'
 
 declare module '@tanstack/react-table' {
@@ -100,7 +100,28 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
 
   return (
     <div className='space-y-4 max-sm:has-[div[role="toolbar"]]:mb-16'>
-      <DataTableToolbar table={table} />
+      <DataTableToolbar
+        table={table}
+        searchPlaceholder='Filter users...'
+        searchKey='username'
+        filters={[
+          {
+            columnId: 'status',
+            title: 'Status',
+            options: [
+              { label: 'Active', value: 'active' },
+              { label: 'Inactive', value: 'inactive' },
+              { label: 'Invited', value: 'invited' },
+              { label: 'Suspended', value: 'suspended' },
+            ],
+          },
+          {
+            columnId: 'role',
+            title: 'Role',
+            options: roles.map((role) => ({ ...role })),
+          },
+        ]}
+      />
       <div className='overflow-hidden rounded-md border'>
         <Table>
           <TableHeader>
