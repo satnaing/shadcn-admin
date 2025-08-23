@@ -1,3 +1,15 @@
+## v2.1.0 (2025-08-23)
+
+### Feat
+
+- enhance data table pagination with page numbers (#207)
+- enhance auth flow with sign-out dialogs and redirect functionality (#206)
+
+### Refactor
+
+- reorganize utility files into `lib/` folder (#209)
+- extract data-table components and reorganize structure (#208)
+
 ## v2.0.0 (2025-08-16)
 
 ### BREAKING CHANGE
