@@ -34,7 +34,6 @@ export function SlackChannelSelector({
   name,
   label = 'Notification Channel',
   helperText = 'Select a channel for notifications',
-  isRequired = false,
   isDisabled = false,
   onChange,
 }: SlackChannelSelectorProps) {

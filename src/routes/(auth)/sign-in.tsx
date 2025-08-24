@@ -19,9 +19,6 @@ function SignInComponent() {
   
   return (
     <SignIn
-      initialValues={{
-        emailAddress: 'workemail@acme.com',
-      }}
       fallback={<Skeleton className='h-[30rem] w-[25rem]' />}
       forceRedirectUrl={redirectUrl}
     />

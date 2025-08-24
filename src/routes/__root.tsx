@@ -1,8 +1,8 @@
 import { type QueryClient } from '@tanstack/react-query'
-import { createRootRouteWithContext, Outlet, useLocation, useNavigate } from '@tanstack/react-router'
+import { createRootRouteWithContext, Outlet, useLocation } from '@tanstack/react-router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { ClerkProvider, useAuth } from '@clerk/clerk-react'
+import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
 import { Toaster } from '@/components/ui/sonner'
 import { NavigationProgress } from '@/components/navigation-progress'
 import { GeneralError } from '@/features/errors/general-error'
@@ -10,7 +10,8 @@ import { NotFoundError } from '@/features/errors/not-found-error'
 import { AuthenticatedLayout } from '@/components/layout/authenticated-layout'
 import { isPublicRoute } from '@/lib/auth'
 import { GraphQLProvider } from '@/lib/graphql'
-import { Loader2 } from 'lucide-react'
+import { useClerkAppearance } from '@/lib/clerk-theme'
+import { useTheme } from '@/context/theme-provider'
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -28,8 +29,12 @@ function RootComponent() {
     throw new Error('Missing Clerk Publishable Key')
   }
 
+  const { resolvedTheme } = useTheme()
+  const appearance = useClerkAppearance(resolvedTheme)
+
   return (
     <ClerkProvider
+      appearance={appearance}
       publishableKey={PUBLISHABLE_KEY}
       afterSignOutUrl='/sign-in'
       signInUrl='/sign-in'
@@ -43,55 +48,44 @@ function RootComponent() {
 }
 
 function AuthWrapper() {
-  const { isLoaded, isSignedIn } = useAuth()
   const location = useLocation()
-  const navigate = useNavigate()
-  
-  // Show loading state while Clerk is initializing
-  if (!isLoaded) {
-    return (
-      <div className='flex h-svh items-center justify-center'>
-        <Loader2 className='size-8 animate-spin' />
-      </div>
-    )
-  }
   
   // Check if current route is public
   const isPublic = isPublicRoute(location.pathname)
   
-  // If not signed in and trying to access protected route, redirect to sign-in
-  if (!isSignedIn && !isPublic) {
-    navigate({ 
-      to: '/sign-in', 
-      search: { redirect: location.href },
-      replace: true 
-    })
-    return null
+  // If route is public, render without authentication checks
+  if (isPublic) {
+    return (
+      <GraphQLProvider>
+        <NavigationProgress />
+        <Outlet />
+        <Toaster duration={5000} richColors />
+        {import.meta.env.MODE === 'development' && (
+          <>
+            <ReactQueryDevtools buttonPosition='bottom-left' />
+            <TanStackRouterDevtools position='bottom-right' />
+          </>
+        )}
+      </GraphQLProvider>
+    )
   }
-  
-  // If signed in and trying to access auth pages, redirect to home
-  if (isSignedIn && (location.pathname === '/sign-in' || location.pathname === '/sign-up')) {
-    navigate({ to: '/', replace: true })
-    return null
-  }
-  
-  // For non-auth routes, wrap with AuthenticatedLayout
-  const shouldWrapWithLayout = !isPublic && !['/sign-in', '/sign-up'].includes(location.pathname)
-  
+
+  // For protected routes, use Clerk's authentication components
   return (
     <GraphQLProvider>
       <NavigationProgress />
-      {shouldWrapWithLayout ? (
+      <SignedIn>
         <AuthenticatedLayout>
           <Outlet />
         </AuthenticatedLayout>
-      ) : (
-        <Outlet />
-      )}
-      <Toaster duration={5000} />
+      </SignedIn>
+      <SignedOut>
+        <RedirectToSignIn redirectUrl={location.href}/>
+      </SignedOut>
+      <Toaster duration={5000} richColors/>
       {import.meta.env.MODE === 'development' && (
         <>
-          <ReactQueryDevtools buttonPosition='bottom-left' />
+          <ReactQueryDevtools buttonPosition='top-left' />
           <TanStackRouterDevtools position='bottom-right' />
         </>
       )}

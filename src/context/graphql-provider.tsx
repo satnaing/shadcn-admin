@@ -1,7 +1,7 @@
 import { useMemo, type ReactNode } from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { useAuth } from '@clerk/clerk-react';
-import { createApolloClient } from './apollo-client';
+import { createApolloClient } from '../lib/graphql/apollo-client';
 
 // Constants for localStorage keys
 const GLOBAL_ORG_KEY = 'swan.global_org_id';

@@ -1,13 +1,9 @@
-import { useState, useEffect, useCallback } from 'react'
-import { useForm, Controller } from 'react-hook-form'
-import { Search, ExternalLink } from 'lucide-react'
-import { debounce } from 'lodash'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { Separator } from '@/components/ui/separator'
 import {
   Dialog,
   DialogContent,
@@ -16,22 +12,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { useToast } from '@/hooks/use-toast'
+import { toast } from 'sonner'
 import { ConnectedBadge } from '@/features/integrations/components/connected-badge'
 import {
   useCrmIntegrationQuery,
   useCrmIntegrationUpdateMutation,
-  useCrmListsQuery,
 } from '@/graphql/operations/operations.generated'
 import type { CrmIntegrationUpdateInput } from '@/graphql/global/types.generated'
-import { CrmCompanyCreate, CrmContactCreate } from '@/graphql/global/types.generated'
 import { getAuthUrlHandler } from '@/features/integrations/utils/auth-helpers'
 
 const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5173'
@@ -77,17 +64,6 @@ type HubSpotConnectModalProps = {
 }
 
 export function HubSpotConnectModal({ isOpen, onClose, isConnected }: HubSpotConnectModalProps) {
-  const { toast } = useToast()
-  const [query, setQuery] = useState('')
-
-  const {
-    data: listsData,
-    refetch,
-    loading: listsLoading,
-  } = useCrmListsQuery({
-    skip: !isConnected,
-    variables: { q: query },
-  })
 
   const {
     data: crmIntegrationData,
@@ -100,26 +76,9 @@ export function HubSpotConnectModal({ isOpen, onClose, isConnected }: HubSpotCon
     refetchCrmIntegration()
   })
 
-  const debouncedRefetch = useCallback(
-    (q: string) => {
-      const debouncedFn = debounce(() => refetch({ q }), 800, { trailing: true })
-      debouncedFn()
-    },
-    [refetch],
-  )
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value)
-    debouncedRefetch(e.target.value)
-  }
-
-  const lists = listsData?.crmLists?.data || []
-
-  const { control, register, reset, watch, handleSubmit } = useForm<CrmIntegrationUpdateInput>({
+  const { register, reset, handleSubmit } = useForm<CrmIntegrationUpdateInput>({
     defaultValues: {
       enabled: true,
-      excludeLists: [],
-      excludeContactsWithoutEmail: false,
     },
   })
 
@@ -129,26 +88,21 @@ export function HubSpotConnectModal({ isOpen, onClose, isConnected }: HubSpotCon
       reset({
         enabled: d.enabled,
         excludeLists: d.excludeLists,
-        companiesToCreate: d.companiesToCreate,
-        contactsToCreate: d.contactsToCreate,
-        notesToCreate: d.notesToCreate,
         excludeContactsWithoutEmail: d.excludeContactsWithoutEmail,
       })
     }
   }, [reset, crmIntegrationData])
 
-  const [companySyncOption, enabled] = watch(['companiesToCreate', 'enabled'])
 
   const onSubmit = handleSubmit(async (data) => {
     await update({ variables: { input: data } })
-    toast({
-      title: 'Settings updated',
+    toast.success('Settings updated', {
       description: 'Your HubSpot integration settings have been saved.',
     })
   })
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className='max-w-2xl max-h-[90vh] overflow-y-auto'>
         <form onSubmit={onSubmit}>
           <DialogHeader>
@@ -176,190 +130,12 @@ export function HubSpotConnectModal({ isOpen, onClose, isConnected }: HubSpotCon
                 company research. Connecting will create all the necessary properties for Swan.
               </p>
             ) : (
-              <>
                 <div className='flex items-center justify-between'>
                   <Label htmlFor='enabled' className='text-base font-semibold'>
                     Enabled
                   </Label>
                   <Switch id='enabled' {...register('enabled')} />
                 </div>
-
-                <Separator />
-
-                {/* Exclusion Lists */}
-                <div className='space-y-2'>
-                  <Label className='text-base font-semibold'>Exclusion Lists</Label>
-                  <p className='text-sm text-muted-foreground'>
-                    Companies found in the selected lists will be excluded from identification
-                  </p>
-                  <div className='relative'>
-                    <Search className='absolute left-2 top-2.5 h-4 w-4 text-muted-foreground' />
-                    <Input
-                      placeholder='Search lists...'
-                      value={query}
-                      onChange={handleSearch}
-                      className='pl-8'
-                      disabled={!enabled}
-                    />
-                  </div>
-                  <Controller
-                    control={control}
-                    name='excludeLists'
-                    render={({ field }) => (
-                      <Select
-                        disabled={!enabled || listsLoading}
-                        value={field.value?.join(',')}
-                        onValueChange={(value) => field.onChange(value ? value.split(',') : [])}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder='Select lists...' />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {lists.map((list) => (
-                            <SelectItem key={list.listId} value={list.listId}>
-                              {list.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    )}
-                  />
-                </div>
-
-                <Separator />
-
-                {/* Company Sync Options */}
-                <div className='space-y-2'>
-                  <Label className='text-base font-semibold'>Companies to Sync</Label>
-                  <p className='text-sm text-muted-foreground'>
-                    Identified companies will be created/updated on Hubspot based on their domain.
-                    Synced data includes all research questions and company information
-                  </p>
-                  <Controller
-                    control={control}
-                    name='companiesToCreate'
-                    render={({ field }) => (
-                      <RadioGroup
-                        value={field.value}
-                        onValueChange={field.onChange}
-                        disabled={!enabled}
-                      >
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value={CrmCompanyCreate.All} id='all-companies' />
-                          <Label htmlFor='all-companies'>All companies</Label>
-                        </div>
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem
-                            value={CrmCompanyCreate.TargetMarket}
-                            id='target-companies'
-                          />
-                          <Label htmlFor='target-companies'>Only companies in my Segments</Label>
-                        </div>
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value={CrmCompanyCreate.None} id='no-companies' />
-                          <Label htmlFor='no-companies'>Don't sync companies</Label>
-                        </div>
-                      </RadioGroup>
-                    )}
-                  />
-                </div>
-
-                <Separator />
-
-                {/* Contact Sync Options */}
-                <div className='space-y-2'>
-                  <Label className='text-base font-semibold'>Contacts to Sync</Label>
-                  <p className='text-sm text-muted-foreground'>
-                    Identified contacts will be created in Hubspot based on their email. Synced data
-                    includes all found contact information
-                  </p>
-                  <Controller
-                    control={control}
-                    name='contactsToCreate'
-                    render={({ field }) => (
-                      <RadioGroup
-                        value={field.value}
-                        onValueChange={field.onChange}
-                        disabled={!enabled || companySyncOption === CrmCompanyCreate.None}
-                      >
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value={CrmContactCreate.All} id='all-contacts' />
-                          <Label htmlFor='all-contacts'>All contacts</Label>
-                        </div>
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value={CrmContactCreate.Visitor} id='visitor-contacts' />
-                          <Label htmlFor='visitor-contacts'>Only visitors</Label>
-                        </div>
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value={CrmContactCreate.None} id='no-contacts' />
-                          <Label htmlFor='no-contacts'>Don't sync contacts</Label>
-                        </div>
-                      </RadioGroup>
-                    )}
-                  />
-                </div>
-
-                <Separator />
-
-                {/* Contact Email Policy */}
-                <div className='space-y-2'>
-                  <Label className='text-base font-semibold'>Contact Email Policy</Label>
-                  <p className='text-sm text-muted-foreground'>
-                    Control whether contacts without email addresses should be synced to Hubspot
-                  </p>
-                  <Controller
-                    control={control}
-                    name='excludeContactsWithoutEmail'
-                    render={({ field }) => (
-                      <RadioGroup
-                        value={field.value ? 'true' : 'false'}
-                        onValueChange={(val) => field.onChange(val === 'true')}
-                        disabled={!enabled || companySyncOption === CrmCompanyCreate.None}
-                      >
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value='false' id='sync-all' />
-                          <Label htmlFor='sync-all'>Sync all contacts</Label>
-                        </div>
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value='true' id='sync-with-email' />
-                          <Label htmlFor='sync-with-email'>Only sync contacts with email addresses</Label>
-                        </div>
-                      </RadioGroup>
-                    )}
-                  />
-                </div>
-
-                <Separator />
-
-                {/* Notes Sync Options */}
-                <div className='space-y-2'>
-                  <Label className='text-base font-semibold'>Session Notes</Label>
-                  <p className='text-sm text-muted-foreground'>
-                    Add a note to company records listing the session details such as timestamp and
-                    pages visited
-                  </p>
-                  <Controller
-                    control={control}
-                    name='notesToCreate'
-                    render={({ field }) => (
-                      <RadioGroup
-                        value={field.value}
-                        onValueChange={field.onChange}
-                        disabled={!enabled || companySyncOption === CrmCompanyCreate.None}
-                      >
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value='COMPANY' id='company-notes' />
-                          <Label htmlFor='company-notes'>Add notes to company records</Label>
-                        </div>
-                        <div className='flex items-center space-x-2'>
-                          <RadioGroupItem value='NONE' id='no-notes' />
-                          <Label htmlFor='no-notes'>Don't create notes</Label>
-                        </div>
-                      </RadioGroup>
-                    )}
-                  />
-                </div>
-              </>
             )}
           </div>
 
@@ -376,8 +152,8 @@ export function HubSpotConnectModal({ isOpen, onClose, isConnected }: HubSpotCon
                 >
                   Reconnect
                 </Button>
-                <Button type='submit' disabled={updateIsLoading}>
-                  {updateIsLoading ? 'Saving...' : 'Save'}
+                <Button type='submit' loading={updateIsLoading}>
+                  Save
                 </Button>
               </div>
             ) : (

@@ -1,0 +1,123 @@
+query Playbooks {
+    playbooks {
+        id
+        name
+        description
+        isEnabled
+        createdAt
+        updatedAt
+        deletedAt
+        scenarioCount
+    }
+}
+
+query Playbook($id: String!) {
+    playbook(id: $id) {
+        id
+        name
+        description
+        isEnabled
+        createdAt
+        updatedAt
+        deletedAt
+        scenarios {
+            id
+            name
+            description
+            actionPlan
+            updatedAt
+            createdAt
+        }
+    }
+}
+
+mutation PlaybookUpdate($input: PlaybookUpdateInput!) {
+    playbookUpdate(input: $input) {
+        id
+        name
+        description
+        isEnabled
+        createdAt
+        updatedAt
+        deletedAt
+        orgId
+    }
+}
+
+
+
+mutation PlaybookScenarioCreate($input: PlaybookScenarioCreateInput!) {
+    playbookScenarioCreate(input: $input) {
+        id
+        name
+        description
+        actionPlan
+        createdAt
+        updatedAt
+        playbookId
+    }
+}
+
+mutation PlaybookScenarioUpdate($input: PlaybookScenarioUpdateInput!) {
+    playbookScenarioUpdate(input: $input) {
+        id
+        name
+        description
+        actionPlan
+        createdAt
+        updatedAt
+        playbookId
+    }
+}
+
+mutation PlaybookScenariosDelete($input: BatchModelDeleteInput!) {
+    playbookScenariosDelete(input: $input) {
+        success
+        count
+    }
+}
+
+query Triggers($filters: TriggerFilters) {
+    triggers(filters: $filters) {
+        id
+        name
+        type
+        description
+        config
+        isEnabled
+        createdAt
+        updatedAt
+        playbookId
+        orgId
+    }
+}
+
+query TrackingScript {
+    trackingScript {
+        id
+        domain
+        isVerified
+        excludedPaths
+        allowedCountryCodes
+        minimumSessionTimeSec
+        identificationMode
+        dailyLimit
+        createdAt
+        updatedAt
+    }
+}
+
+mutation TrackingScriptUpdate($input: TrackingScriptUpdateInput!) {
+    trackingScriptUpdate(input: $input) {
+        id
+        domain
+        isVerified
+        excludedPaths
+        allowedCountryCodes
+        minimumSessionTimeSec
+        identificationMode
+        dailyLimit
+        createdAt
+        updatedAt
+    }
+}

@@ -1148,6 +1148,7 @@ export type PersonaUpsertInput = {
   maxContacts: Scalars['Float']['input'];
   name: Scalars['String']['input'];
   targetMarketIds: Array<Scalars['String']['input']>;
+  valueProp?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Playbook = {
@@ -1164,7 +1165,6 @@ export type Playbook = {
   outreachInstructions?: Maybe<Scalars['String']['output']>;
   scenarioCount: Scalars['Float']['output'];
   scenarios: Array<PlaybookScenario>;
-  triggerId?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTimeISO']['output'];
 };
 
@@ -1339,6 +1339,7 @@ export type Query = {
   targetMarket?: Maybe<TargetMarket>;
   targetMarkets: Array<TargetMarket>;
   trackingScript: TrackingScript;
+  triggers: Array<Trigger>;
   user: User;
   userOrgs: Array<UserOrg>;
   users: PaginatedUsers;
@@ -1482,6 +1483,11 @@ export type QuerySlackUsersArgs = {
 
 export type QueryTargetMarketArgs = {
   id: Scalars['String']['input'];
+};
+
+
+export type QueryTriggersArgs = {
+  filters?: InputMaybe<TriggerFilters>;
 };
 
 
@@ -1917,6 +1923,31 @@ export type TrackingScriptUpdateInput = {
   identificationMode: TrackingScriptIdentificationMode;
   minimumSessionTimeSec?: InputMaybe<Scalars['Int']['input']>;
 };
+
+export type Trigger = {
+  __typename?: 'Trigger';
+  /** [RecordStringAny] */
+  config: Scalars['JSON']['output'];
+  createdAt: Scalars['DateTimeISO']['output'];
+  deletedAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  isEnabled: Scalars['Boolean']['output'];
+  name: Scalars['String']['output'];
+  orgId: Scalars['String']['output'];
+  playbookId?: Maybe<Scalars['String']['output']>;
+  type: TriggerType;
+  updatedAt: Scalars['DateTimeISO']['output'];
+};
+
+export type TriggerFilters = {
+  playbookId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export enum TriggerType {
+  CompanyAddedToList = 'COMPANY_ADDED_TO_LIST',
+  NewWebsiteVisitor = 'NEW_WEBSITE_VISITOR'
+}
 
 export type User = {
   __typename?: 'User';

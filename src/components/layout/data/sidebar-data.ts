@@ -1,22 +1,18 @@
 import {
-  Construction,
   LayoutDashboard,
   Monitor,
-  Bug,
   ListTodo,
-  FileX,
-  HelpCircle,
-  Lock,
   Bell,
   Package,
   Palette,
-  ServerOff,
   Settings,
   Wrench,
   UserCog,
-  UserX,
   Users,
   MessagesSquare,
+  Target,
+  BookOpen,
+  PlayCircle,
 } from 'lucide-react'
 import { type SidebarData } from '../types'
 
@@ -31,13 +27,18 @@ export const sidebarData: SidebarData = {
           icon: LayoutDashboard,
         },
         {
+          title: 'Playbooks',
+          url: '/playbooks',
+          icon: PlayCircle,
+        },
+        {
           title: 'Tasks',
           url: '/tasks',
           icon: ListTodo,
         },
         {
           title: 'Integrations',
-          url: '/apps',
+          url: '/integrations',
           icon: Package,
         },
         {
@@ -53,46 +54,20 @@ export const sidebarData: SidebarData = {
         },
       ],
     },
-    {
-      title: 'Pages',
-      items: [
-
-        {
-          title: 'Errors',
-          icon: Bug,
-          items: [
-            {
-              title: 'Unauthorized',
-              url: '/401',
-              icon: Lock,
-            },
-            {
-              title: 'Forbidden',
-              url: '/403',
-              icon: UserX,
-            },
-            {
-              title: 'Not Found',
-              url: '/404',
-              icon: FileX,
-            },
-            {
-              title: 'Internal Server Error',
-              url: '/500',
-              icon: ServerOff,
-            },
-            {
-              title: 'Maintenance Error',
-              url: '/503',
-              icon: Construction,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: 'Other',
-      items: [
+          {
+        title: 'Other',
+        items: [
+          {
+            title: 'Knowledge',
+            icon: BookOpen,
+            items: [
+              {
+                title: 'ICP Profiles',
+                url: '/knowledge/icp',
+                icon: Target,
+              },
+            ],
+          },
         {
           title: 'Settings',
           icon: Settings,
@@ -123,11 +98,6 @@ export const sidebarData: SidebarData = {
               icon: Monitor,
             },
           ],
-        },
-        {
-          title: 'Help Center',
-          url: '/help-center',
-          icon: HelpCircle,
         },
       ],
     },

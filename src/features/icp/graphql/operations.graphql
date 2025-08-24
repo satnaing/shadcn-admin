@@ -1,0 +1,82 @@
+# ICP / Target Markets operations
+fragment targetMarketFields on TargetMarket {
+  id
+  questions {
+    id
+  }
+  personas {
+    id
+  }
+  color
+  customerType
+  notificationChannel
+  inboxChannel
+  hqLocations
+  maxEmployees
+  minEmployees
+  minRevenue
+  maxRevenue
+  industry
+  name
+  extraRequirements
+  type
+  size
+  createdAt
+}
+
+fragment personaFields on Persona {
+  id
+  name
+  targetMarkets {
+    id
+    targetMarketId
+  }
+  description
+  maxContacts
+  createdAt
+}
+
+query TargetMarkets {
+  targetMarkets {
+    ...targetMarketFields
+  }
+}
+
+query TargetMarket($id: String!) {
+  targetMarket(id: $id) {
+    ...targetMarketFields
+    personas {
+      ...personaFields
+    }
+  }
+}
+
+mutation TargetMarketUpsert($input: TargetMarketUpsertInput!) {
+  targetMarketUpsert(input: $input) {
+    ...targetMarketFields
+  }
+}
+
+mutation TargetMarketDelete($input: TargetMarketDeleteInput!) {
+  targetMarketDelete(input: $input) {
+    success
+  }
+}
+
+query Personas($filter: PersonaFilters) {
+  personas(filter: $filter) {
+    ...personaFields
+  }
+}
+
+mutation PersonaUpsert($input: PersonaUpsertInput!) {
+  personaUpsert(input: $input) {
+    ...personaFields
+  }
+}
+
+mutation PersonasDelete($input: BatchModelDeleteInput!) {
+  personasDelete(input: $input) {
+    success
+  }
+}

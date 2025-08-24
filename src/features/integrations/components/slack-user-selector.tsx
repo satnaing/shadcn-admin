@@ -30,7 +30,6 @@ export function SlackUserSelector({
   channelId,
   label,
   helperText,
-  isRequired = false,
   isDisabled = false,
   onChange,
   taggingDisabledFieldName,

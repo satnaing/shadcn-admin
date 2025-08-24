@@ -15,13 +15,16 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
 import { Route as TasksIndexRouteImport } from './routes/tasks/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
+import { Route as PlaybooksIndexRouteImport } from './routes/playbooks/index'
+import { Route as IntegrationsIndexRouteImport } from './routes/integrations/index'
 import { Route as HelpCenterIndexRouteImport } from './routes/help-center/index'
 import { Route as ChatsIndexRouteImport } from './routes/chats/index'
-import { Route as AppsIndexRouteImport } from './routes/apps/index'
 import { Route as SettingsNotificationsRouteImport } from './routes/settings/notifications'
 import { Route as SettingsDisplayRouteImport } from './routes/settings/display'
 import { Route as SettingsAppearanceRouteImport } from './routes/settings/appearance'
 import { Route as SettingsAccountRouteImport } from './routes/settings/account'
+import { Route as PlaybooksNewRouteImport } from './routes/playbooks/new'
+import { Route as PlaybooksPlaybookIdRouteImport } from './routes/playbooks/$playbookId'
 import { Route as errors503RouteImport } from './routes/(errors)/503'
 import { Route as errors500RouteImport } from './routes/(errors)/500'
 import { Route as errors404RouteImport } from './routes/(errors)/404'
@@ -29,6 +32,9 @@ import { Route as errors403RouteImport } from './routes/(errors)/403'
 import { Route as errors401RouteImport } from './routes/(errors)/401'
 import { Route as authSignUpRouteImport } from './routes/(auth)/sign-up'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
+import { Route as KnowledgeIcpIndexRouteImport } from './routes/knowledge/icp/index'
+import { Route as KnowledgeIcpNewRouteImport } from './routes/knowledge/icp/new'
+import { Route as KnowledgeIcpProfileIdRouteImport } from './routes/knowledge/icp/$profileId'
 
 const SettingsRouteRoute = SettingsRouteRouteImport.update({
   id: '/settings',
@@ -59,6 +65,16 @@ const SettingsIndexRoute = SettingsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SettingsRouteRoute,
 } as any)
+const PlaybooksIndexRoute = PlaybooksIndexRouteImport.update({
+  id: '/playbooks/',
+  path: '/playbooks/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IntegrationsIndexRoute = IntegrationsIndexRouteImport.update({
+  id: '/integrations/',
+  path: '/integrations/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HelpCenterIndexRoute = HelpCenterIndexRouteImport.update({
   id: '/help-center/',
   path: '/help-center/',
@@ -67,11 +83,6 @@ const HelpCenterIndexRoute = HelpCenterIndexRouteImport.update({
 const ChatsIndexRoute = ChatsIndexRouteImport.update({
   id: '/chats/',
   path: '/chats/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppsIndexRoute = AppsIndexRouteImport.update({
-  id: '/apps/',
-  path: '/apps/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsNotificationsRoute = SettingsNotificationsRouteImport.update({
@@ -93,6 +104,16 @@ const SettingsAccountRoute = SettingsAccountRouteImport.update({
   id: '/account',
   path: '/account',
   getParentRoute: () => SettingsRouteRoute,
+} as any)
+const PlaybooksNewRoute = PlaybooksNewRouteImport.update({
+  id: '/playbooks/new',
+  path: '/playbooks/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlaybooksPlaybookIdRoute = PlaybooksPlaybookIdRouteImport.update({
+  id: '/playbooks/$playbookId',
+  path: '/playbooks/$playbookId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const errors503Route = errors503RouteImport.update({
   id: '/(errors)/503',
@@ -129,6 +150,21 @@ const authSignInRoute = authSignInRouteImport.update({
   path: '/sign-in',
   getParentRoute: () => authRouteRoute,
 } as any)
+const KnowledgeIcpIndexRoute = KnowledgeIcpIndexRouteImport.update({
+  id: '/knowledge/icp/',
+  path: '/knowledge/icp/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeIcpNewRoute = KnowledgeIcpNewRouteImport.update({
+  id: '/knowledge/icp/new',
+  path: '/knowledge/icp/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KnowledgeIcpProfileIdRoute = KnowledgeIcpProfileIdRouteImport.update({
+  id: '/knowledge/icp/$profileId',
+  path: '/knowledge/icp/$profileId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof authRouteRouteWithChildren
@@ -140,16 +176,22 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
+  '/playbooks/$playbookId': typeof PlaybooksPlaybookIdRoute
+  '/playbooks/new': typeof PlaybooksNewRoute
   '/settings/account': typeof SettingsAccountRoute
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
-  '/apps': typeof AppsIndexRoute
   '/chats': typeof ChatsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
+  '/integrations': typeof IntegrationsIndexRoute
+  '/playbooks': typeof PlaybooksIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/tasks': typeof TasksIndexRoute
   '/users': typeof UsersIndexRoute
+  '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
+  '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
+  '/knowledge/icp': typeof KnowledgeIcpIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof authRouteRouteWithChildren
@@ -160,16 +202,22 @@ export interface FileRoutesByTo {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
+  '/playbooks/$playbookId': typeof PlaybooksPlaybookIdRoute
+  '/playbooks/new': typeof PlaybooksNewRoute
   '/settings/account': typeof SettingsAccountRoute
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
-  '/apps': typeof AppsIndexRoute
   '/chats': typeof ChatsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
+  '/integrations': typeof IntegrationsIndexRoute
+  '/playbooks': typeof PlaybooksIndexRoute
   '/settings': typeof SettingsIndexRoute
   '/tasks': typeof TasksIndexRoute
   '/users': typeof UsersIndexRoute
+  '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
+  '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
+  '/knowledge/icp': typeof KnowledgeIcpIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -183,16 +231,22 @@ export interface FileRoutesById {
   '/(errors)/404': typeof errors404Route
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
+  '/playbooks/$playbookId': typeof PlaybooksPlaybookIdRoute
+  '/playbooks/new': typeof PlaybooksNewRoute
   '/settings/account': typeof SettingsAccountRoute
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
-  '/apps/': typeof AppsIndexRoute
   '/chats/': typeof ChatsIndexRoute
   '/help-center/': typeof HelpCenterIndexRoute
+  '/integrations/': typeof IntegrationsIndexRoute
+  '/playbooks/': typeof PlaybooksIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/tasks/': typeof TasksIndexRoute
   '/users/': typeof UsersIndexRoute
+  '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
+  '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
+  '/knowledge/icp/': typeof KnowledgeIcpIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -206,16 +260,22 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
+    | '/playbooks/$playbookId'
+    | '/playbooks/new'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
-    | '/apps'
     | '/chats'
     | '/help-center'
+    | '/integrations'
+    | '/playbooks'
     | '/settings/'
     | '/tasks'
     | '/users'
+    | '/knowledge/icp/$profileId'
+    | '/knowledge/icp/new'
+    | '/knowledge/icp'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -226,16 +286,22 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
+    | '/playbooks/$playbookId'
+    | '/playbooks/new'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
-    | '/apps'
     | '/chats'
     | '/help-center'
+    | '/integrations'
+    | '/playbooks'
     | '/settings'
     | '/tasks'
     | '/users'
+    | '/knowledge/icp/$profileId'
+    | '/knowledge/icp/new'
+    | '/knowledge/icp'
   id:
     | '__root__'
     | '/'
@@ -248,16 +314,22 @@ export interface FileRouteTypes {
     | '/(errors)/404'
     | '/(errors)/500'
     | '/(errors)/503'
+    | '/playbooks/$playbookId'
+    | '/playbooks/new'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
-    | '/apps/'
     | '/chats/'
     | '/help-center/'
+    | '/integrations/'
+    | '/playbooks/'
     | '/settings/'
     | '/tasks/'
     | '/users/'
+    | '/knowledge/icp/$profileId'
+    | '/knowledge/icp/new'
+    | '/knowledge/icp/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -269,11 +341,17 @@ export interface RootRouteChildren {
   errors404Route: typeof errors404Route
   errors500Route: typeof errors500Route
   errors503Route: typeof errors503Route
-  AppsIndexRoute: typeof AppsIndexRoute
+  PlaybooksPlaybookIdRoute: typeof PlaybooksPlaybookIdRoute
+  PlaybooksNewRoute: typeof PlaybooksNewRoute
   ChatsIndexRoute: typeof ChatsIndexRoute
   HelpCenterIndexRoute: typeof HelpCenterIndexRoute
+  IntegrationsIndexRoute: typeof IntegrationsIndexRoute
+  PlaybooksIndexRoute: typeof PlaybooksIndexRoute
   TasksIndexRoute: typeof TasksIndexRoute
   UsersIndexRoute: typeof UsersIndexRoute
+  KnowledgeIcpProfileIdRoute: typeof KnowledgeIcpProfileIdRoute
+  KnowledgeIcpNewRoute: typeof KnowledgeIcpNewRoute
+  KnowledgeIcpIndexRoute: typeof KnowledgeIcpIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -320,6 +398,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsIndexRouteImport
       parentRoute: typeof SettingsRouteRoute
     }
+    '/playbooks/': {
+      id: '/playbooks/'
+      path: '/playbooks'
+      fullPath: '/playbooks'
+      preLoaderRoute: typeof PlaybooksIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/integrations/': {
+      id: '/integrations/'
+      path: '/integrations'
+      fullPath: '/integrations'
+      preLoaderRoute: typeof IntegrationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/help-center/': {
       id: '/help-center/'
       path: '/help-center'
@@ -332,13 +424,6 @@ declare module '@tanstack/react-router' {
       path: '/chats'
       fullPath: '/chats'
       preLoaderRoute: typeof ChatsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/apps/': {
-      id: '/apps/'
-      path: '/apps'
-      fullPath: '/apps'
-      preLoaderRoute: typeof AppsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings/notifications': {
@@ -368,6 +453,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/settings/account'
       preLoaderRoute: typeof SettingsAccountRouteImport
       parentRoute: typeof SettingsRouteRoute
+    }
+    '/playbooks/new': {
+      id: '/playbooks/new'
+      path: '/playbooks/new'
+      fullPath: '/playbooks/new'
+      preLoaderRoute: typeof PlaybooksNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/playbooks/$playbookId': {
+      id: '/playbooks/$playbookId'
+      path: '/playbooks/$playbookId'
+      fullPath: '/playbooks/$playbookId'
+      preLoaderRoute: typeof PlaybooksPlaybookIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(errors)/503': {
       id: '/(errors)/503'
@@ -418,6 +517,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authSignInRouteImport
       parentRoute: typeof authRouteRoute
     }
+    '/knowledge/icp/': {
+      id: '/knowledge/icp/'
+      path: '/knowledge/icp'
+      fullPath: '/knowledge/icp'
+      preLoaderRoute: typeof KnowledgeIcpIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/icp/new': {
+      id: '/knowledge/icp/new'
+      path: '/knowledge/icp/new'
+      fullPath: '/knowledge/icp/new'
+      preLoaderRoute: typeof KnowledgeIcpNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/knowledge/icp/$profileId': {
+      id: '/knowledge/icp/$profileId'
+      path: '/knowledge/icp/$profileId'
+      fullPath: '/knowledge/icp/$profileId'
+      preLoaderRoute: typeof KnowledgeIcpProfileIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -464,11 +584,17 @@ const rootRouteChildren: RootRouteChildren = {
   errors404Route: errors404Route,
   errors500Route: errors500Route,
   errors503Route: errors503Route,
-  AppsIndexRoute: AppsIndexRoute,
+  PlaybooksPlaybookIdRoute: PlaybooksPlaybookIdRoute,
+  PlaybooksNewRoute: PlaybooksNewRoute,
   ChatsIndexRoute: ChatsIndexRoute,
   HelpCenterIndexRoute: HelpCenterIndexRoute,
+  IntegrationsIndexRoute: IntegrationsIndexRoute,
+  PlaybooksIndexRoute: PlaybooksIndexRoute,
   TasksIndexRoute: TasksIndexRoute,
   UsersIndexRoute: UsersIndexRoute,
+  KnowledgeIcpProfileIdRoute: KnowledgeIcpProfileIdRoute,
+  KnowledgeIcpNewRoute: KnowledgeIcpNewRoute,
+  KnowledgeIcpIndexRoute: KnowledgeIcpIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

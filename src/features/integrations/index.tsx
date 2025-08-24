@@ -2,12 +2,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Header } from '@/components/layout/header'
-import { Main } from '@/components/layout/main'
-import { ProfileDropdown } from '@/components/profile-dropdown'
-import { Search } from '@/components/search'
-import { ThemeSwitch } from '@/components/theme-switch'
-import { ConfigDrawer } from '@/components/config-drawer'
+import { Page } from '@/components/page'
 import { HubSpotConnectModal } from '@/features/integrations/components/hubspot-connect-modal'
 import { SlackConnectModal } from '@/features/integrations/components/slack-connect-modal'
 import { useIntegrationsQuery } from '@/graphql/operations/operations.generated'
@@ -48,29 +43,12 @@ export function Integrations() {
   const apps = integrations?.integrations?.apps || []
 
   return (
-    <>
-      {/* ===== Top Heading ===== */}
-      <Header>
-        <Search />
-        <div className='ms-auto flex items-center gap-4'>
-          <ThemeSwitch />
-          <ConfigDrawer />
-          <ProfileDropdown />
-        </div>
-      </Header>
-
-      {/* ===== Content ===== */}
-      <Main fixed>
-        <div>
-          <h1 className='text-2xl font-bold tracking-tight'>
-            Integrations
-          </h1>
-          <p className='text-muted-foreground'>
-            Connect to platforms to seamlessly sync your Swan data
-          </p>
-        </div>
-
-        <div className='grid gap-4 pt-6 pb-16 md:grid-cols-2 lg:grid-cols-3'>
+    <Page
+      title="Integrations"
+      description="Connect to platforms to seamlessly sync your Swan data"
+      mainFixed
+    >
+      <div className='grid gap-4 pt-6 pb-16 md:grid-cols-2 lg:grid-cols-3'>
           {ALL_INTEGRATIONS.map((integration) => {
             const isConnected = apps.includes(integration.app)
             
@@ -126,8 +104,7 @@ export function Integrations() {
               </Card>
             )
           })}
-        </div>
-      </Main>
-    </>
+      </div>
+    </Page>
   )
 }
