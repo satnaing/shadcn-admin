@@ -8,7 +8,7 @@ import { NavigationProgress } from '@/components/navigation-progress'
 import { GeneralError } from '@/features/errors/general-error'
 import { NotFoundError } from '@/features/errors/not-found-error'
 import { AuthenticatedLayout } from '@/components/layout/authenticated-layout'
-import { isPublicRoute } from '@/lib/auth'
+import { isFullscreenRoute, isPublicRoute } from '@/lib/auth'
 import { GraphQLProvider } from '@/lib/graphql'
 import { useClerkAppearance } from '@/lib/clerk-theme'
 import { useTheme } from '@/context/theme-provider'
@@ -52,6 +52,7 @@ function AuthWrapper() {
   
   // Check if current route is public
   const isPublic = isPublicRoute(location.pathname)
+  const isFullscreen = isFullscreenRoute(location.pathname)
   
   // If route is public, render without authentication checks
   if (isPublic) {
@@ -59,6 +60,28 @@ function AuthWrapper() {
       <GraphQLProvider>
         <NavigationProgress />
         <Outlet />
+        <Toaster duration={5000} richColors />
+        {import.meta.env.MODE === 'development' && (
+          <>
+            <ReactQueryDevtools buttonPosition='bottom-left' />
+            <TanStackRouterDevtools position='bottom-right' />
+          </>
+        )}
+      </GraphQLProvider>
+    )
+  }
+
+  // For OAuth callback routes, use authentication but no sidebar
+  if (isFullscreen) {
+    return (
+      <GraphQLProvider>
+        <NavigationProgress />
+        <SignedIn>
+          <Outlet />
+        </SignedIn>
+        <SignedOut>
+          <Outlet />
+        </SignedOut>
         <Toaster duration={5000} richColors />
         {import.meta.env.MODE === 'development' && (
           <>

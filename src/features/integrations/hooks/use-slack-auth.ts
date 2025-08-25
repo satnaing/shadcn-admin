@@ -18,7 +18,7 @@ const generateAuthUrl = () => {
     `?client_id=${SLACK_CLIENT_ID}` +
     `&scope=${SCOPES}` +
     `&state=${state}` +
-    `&redirect_uri=${APP_URL}/api/oauth/callback/slack`
+    `&redirect_uri=${APP_URL}/oauth/callback/slack`
   )
 }
 

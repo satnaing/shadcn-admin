@@ -9,9 +9,17 @@ export const PUBLIC_ROUTES = [
   '/503',
 ]
 
+export const FULLSCREEN_ROUTES = [
+  '/oauth/callback',
+]
+
 // Check if a route is public
 export function isPublicRoute(pathname: string): boolean {
   return PUBLIC_ROUTES.some(route => pathname.startsWith(route))
+}
+
+export function isFullscreenRoute(pathname: string): boolean {
+  return FULLSCREEN_ROUTES.some(route => pathname.startsWith(route))
 }
 
 // Parse redirect URL from search params

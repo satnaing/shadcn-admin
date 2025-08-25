@@ -52,6 +52,13 @@ export type CrmIntegrationUpdateMutationVariables = Types.Exact<{
 
 export type CrmIntegrationUpdateMutation = { __typename?: 'Mutation', crmIntegrationUpdate: { __typename?: 'CrmIntegration', id: string, createdAt: any, app: Types.CrmApp, enabled: boolean, updatedAt: any, companiesToCreate: Types.CrmCompanyCreate, contactsToCreate: Types.CrmContactCreate, excludeLists: any, notesToCreate: Types.CrmNoteCreate, excludeContactsWithoutEmail: boolean } };
 
+export type OauthLoginMutationVariables = Types.Exact<{
+  input: Types.OauthLoginInput;
+}>;
+
+
+export type OauthLoginMutation = { __typename?: 'Mutation', oauthLogin: { __typename?: 'GenericResolverResponse', success: boolean } };
+
 
 export const IntegrationsDocument = gql`
     query Integrations {
@@ -390,3 +397,36 @@ export function useCrmIntegrationUpdateMutation(baseOptions?: ApolloReactHooks.M
 export type CrmIntegrationUpdateMutationHookResult = ReturnType<typeof useCrmIntegrationUpdateMutation>;
 export type CrmIntegrationUpdateMutationResult = ApolloReactCommon.MutationResult<CrmIntegrationUpdateMutation>;
 export type CrmIntegrationUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<CrmIntegrationUpdateMutation, CrmIntegrationUpdateMutationVariables>;
+export const OauthLoginDocument = gql`
+    mutation OauthLogin($input: OauthLoginInput!) {
+  oauthLogin(input: $input) {
+    success
+  }
+}
+    `;
+export type OauthLoginMutationFn = ApolloReactCommon.MutationFunction<OauthLoginMutation, OauthLoginMutationVariables>;
+
+/**
+ * __useOauthLoginMutation__
+ *
+ * To run a mutation, you first call `useOauthLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useOauthLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [oauthLoginMutation, { data, loading, error }] = useOauthLoginMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useOauthLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<OauthLoginMutation, OauthLoginMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<OauthLoginMutation, OauthLoginMutationVariables>(OauthLoginDocument, options);
+      }
+export type OauthLoginMutationHookResult = ReturnType<typeof useOauthLoginMutation>;
+export type OauthLoginMutationResult = ApolloReactCommon.MutationResult<OauthLoginMutation>;
+export type OauthLoginMutationOptions = ApolloReactCommon.BaseMutationOptions<OauthLoginMutation, OauthLoginMutationVariables>;

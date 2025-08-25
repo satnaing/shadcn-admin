@@ -33,6 +33,7 @@ import { Route as errors401RouteImport } from './routes/(errors)/401'
 import { Route as authSignUpRouteImport } from './routes/(auth)/sign-up'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
 import { Route as KnowledgeIcpIndexRouteImport } from './routes/knowledge/icp/index'
+import { Route as OauthCallbackAppRouteImport } from './routes/oauth/callback/$app'
 import { Route as KnowledgeIcpNewRouteImport } from './routes/knowledge/icp/new'
 import { Route as KnowledgeIcpProfileIdRouteImport } from './routes/knowledge/icp/$profileId'
 
@@ -155,6 +156,11 @@ const KnowledgeIcpIndexRoute = KnowledgeIcpIndexRouteImport.update({
   path: '/knowledge/icp/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OauthCallbackAppRoute = OauthCallbackAppRouteImport.update({
+  id: '/oauth/callback/$app',
+  path: '/oauth/callback/$app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KnowledgeIcpNewRoute = KnowledgeIcpNewRouteImport.update({
   id: '/knowledge/icp/new',
   path: '/knowledge/icp/new',
@@ -191,6 +197,7 @@ export interface FileRoutesByFullPath {
   '/users': typeof UsersIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
   '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
+  '/oauth/callback/$app': typeof OauthCallbackAppRoute
   '/knowledge/icp': typeof KnowledgeIcpIndexRoute
 }
 export interface FileRoutesByTo {
@@ -217,6 +224,7 @@ export interface FileRoutesByTo {
   '/users': typeof UsersIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
   '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
+  '/oauth/callback/$app': typeof OauthCallbackAppRoute
   '/knowledge/icp': typeof KnowledgeIcpIndexRoute
 }
 export interface FileRoutesById {
@@ -246,6 +254,7 @@ export interface FileRoutesById {
   '/users/': typeof UsersIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
   '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
+  '/oauth/callback/$app': typeof OauthCallbackAppRoute
   '/knowledge/icp/': typeof KnowledgeIcpIndexRoute
 }
 export interface FileRouteTypes {
@@ -275,6 +284,7 @@ export interface FileRouteTypes {
     | '/users'
     | '/knowledge/icp/$profileId'
     | '/knowledge/icp/new'
+    | '/oauth/callback/$app'
     | '/knowledge/icp'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -301,6 +311,7 @@ export interface FileRouteTypes {
     | '/users'
     | '/knowledge/icp/$profileId'
     | '/knowledge/icp/new'
+    | '/oauth/callback/$app'
     | '/knowledge/icp'
   id:
     | '__root__'
@@ -329,6 +340,7 @@ export interface FileRouteTypes {
     | '/users/'
     | '/knowledge/icp/$profileId'
     | '/knowledge/icp/new'
+    | '/oauth/callback/$app'
     | '/knowledge/icp/'
   fileRoutesById: FileRoutesById
 }
@@ -351,6 +363,7 @@ export interface RootRouteChildren {
   UsersIndexRoute: typeof UsersIndexRoute
   KnowledgeIcpProfileIdRoute: typeof KnowledgeIcpProfileIdRoute
   KnowledgeIcpNewRoute: typeof KnowledgeIcpNewRoute
+  OauthCallbackAppRoute: typeof OauthCallbackAppRoute
   KnowledgeIcpIndexRoute: typeof KnowledgeIcpIndexRoute
 }
 
@@ -524,6 +537,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KnowledgeIcpIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/oauth/callback/$app': {
+      id: '/oauth/callback/$app'
+      path: '/oauth/callback/$app'
+      fullPath: '/oauth/callback/$app'
+      preLoaderRoute: typeof OauthCallbackAppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/knowledge/icp/new': {
       id: '/knowledge/icp/new'
       path: '/knowledge/icp/new'
@@ -594,6 +614,7 @@ const rootRouteChildren: RootRouteChildren = {
   UsersIndexRoute: UsersIndexRoute,
   KnowledgeIcpProfileIdRoute: KnowledgeIcpProfileIdRoute,
   KnowledgeIcpNewRoute: KnowledgeIcpNewRoute,
+  OauthCallbackAppRoute: OauthCallbackAppRoute,
   KnowledgeIcpIndexRoute: KnowledgeIcpIndexRoute,
 }
 export const routeTree = rootRouteImport

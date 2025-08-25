@@ -85,3 +85,9 @@ mutation CrmIntegrationUpdate($input: CrmIntegrationUpdateInput!) {
     excludeContactsWithoutEmail
   }
 }
+
+mutation OauthLogin($input: OauthLoginInput!) {
+  oauthLogin(input: $input) {
+    success
+  }
+}
