@@ -18,6 +18,7 @@ import { Route as SettingsIndexRouteImport } from './routes/settings/index'
 import { Route as PlaysIndexRouteImport } from './routes/plays/index'
 import { Route as IntegrationsIndexRouteImport } from './routes/integrations/index'
 import { Route as HelpCenterIndexRouteImport } from './routes/help-center/index'
+import { Route as ConnectedAccountsIndexRouteImport } from './routes/connected-accounts/index'
 import { Route as ChatsIndexRouteImport } from './routes/chats/index'
 import { Route as SettingsNotificationsRouteImport } from './routes/settings/notifications'
 import { Route as SettingsDisplayRouteImport } from './routes/settings/display'
@@ -80,6 +81,11 @@ const IntegrationsIndexRoute = IntegrationsIndexRouteImport.update({
 const HelpCenterIndexRoute = HelpCenterIndexRouteImport.update({
   id: '/help-center/',
   path: '/help-center/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnectedAccountsIndexRoute = ConnectedAccountsIndexRouteImport.update({
+  id: '/connected-accounts/',
+  path: '/connected-accounts/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChatsIndexRoute = ChatsIndexRouteImport.update({
@@ -195,6 +201,7 @@ export interface FileRoutesByFullPath {
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
   '/chats': typeof ChatsIndexRoute
+  '/connected-accounts': typeof ConnectedAccountsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
   '/integrations': typeof IntegrationsIndexRoute
   '/plays': typeof PlaysIndexRoute
@@ -223,6 +230,7 @@ export interface FileRoutesByTo {
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
   '/chats': typeof ChatsIndexRoute
+  '/connected-accounts': typeof ConnectedAccountsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
   '/integrations': typeof IntegrationsIndexRoute
   '/plays': typeof PlaysIndexRoute
@@ -254,6 +262,7 @@ export interface FileRoutesById {
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
   '/chats/': typeof ChatsIndexRoute
+  '/connected-accounts/': typeof ConnectedAccountsIndexRoute
   '/help-center/': typeof HelpCenterIndexRoute
   '/integrations/': typeof IntegrationsIndexRoute
   '/plays/': typeof PlaysIndexRoute
@@ -285,6 +294,7 @@ export interface FileRouteTypes {
     | '/settings/display'
     | '/settings/notifications'
     | '/chats'
+    | '/connected-accounts'
     | '/help-center'
     | '/integrations'
     | '/plays'
@@ -313,6 +323,7 @@ export interface FileRouteTypes {
     | '/settings/display'
     | '/settings/notifications'
     | '/chats'
+    | '/connected-accounts'
     | '/help-center'
     | '/integrations'
     | '/plays'
@@ -343,6 +354,7 @@ export interface FileRouteTypes {
     | '/settings/display'
     | '/settings/notifications'
     | '/chats/'
+    | '/connected-accounts/'
     | '/help-center/'
     | '/integrations/'
     | '/plays/'
@@ -368,6 +380,7 @@ export interface RootRouteChildren {
   PlaysPlaybookIdRoute: typeof PlaysPlaybookIdRoute
   PlaysNewRoute: typeof PlaysNewRoute
   ChatsIndexRoute: typeof ChatsIndexRoute
+  ConnectedAccountsIndexRoute: typeof ConnectedAccountsIndexRoute
   HelpCenterIndexRoute: typeof HelpCenterIndexRoute
   IntegrationsIndexRoute: typeof IntegrationsIndexRoute
   PlaysIndexRoute: typeof PlaysIndexRoute
@@ -443,6 +456,13 @@ declare module '@tanstack/react-router' {
       path: '/help-center'
       fullPath: '/help-center'
       preLoaderRoute: typeof HelpCenterIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connected-accounts/': {
+      id: '/connected-accounts/'
+      path: '/connected-accounts'
+      fullPath: '/connected-accounts'
+      preLoaderRoute: typeof ConnectedAccountsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chats/': {
@@ -627,6 +647,7 @@ const rootRouteChildren: RootRouteChildren = {
   PlaysPlaybookIdRoute: PlaysPlaybookIdRoute,
   PlaysNewRoute: PlaysNewRoute,
   ChatsIndexRoute: ChatsIndexRoute,
+  ConnectedAccountsIndexRoute: ConnectedAccountsIndexRoute,
   HelpCenterIndexRoute: HelpCenterIndexRoute,
   IntegrationsIndexRoute: IntegrationsIndexRoute,
   PlaysIndexRoute: PlaysIndexRoute,

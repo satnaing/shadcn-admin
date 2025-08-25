@@ -95,7 +95,7 @@ export default function ICPForm({ profile, isNew }: ICPFormProps) {
       toast.success(
         isNew ? 'ICP profile created' : 'ICP profile updated',
         {
-          description: isNew ? 'Your new ICP profile has been created successfully.' : 'Your changes have been saved.',
+          description: isNew ? 'Your new ICP profile has been created successfully. You may now add personas to this profile.' : 'Your changes have been saved.',
         }
       );
 

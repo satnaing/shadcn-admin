@@ -1,0 +1,40 @@
+query ConnectedAccounts {
+    connectedAccounts {
+        id
+        name
+        profilePicUrl
+        isLinkedinEnabled
+        dailyConnectionRequests
+        dailyMessagesSent
+
+        # linkedin fields
+        isLinkedinEnabled
+        linkedinExternalId
+
+        # email fields
+        isEmailEnabled
+        emailProvider
+        emailExternalId
+        email
+
+        createdAt
+    }
+}
+
+mutation ConnectAccountUrl ($input: ConnectedAccountConnectionUrlInput!) {
+    connectedAccountConnectionUrl(input: $input) {
+        url
+    }
+}
+
+mutation ReconnectAccountUrl($input: ConnectedAccountReconnectionUrlInput!) {
+  connectedAccountReconnectionUrl(input: $input) {
+    url  
+  }
+}
+
+mutation ConnectedAccountDelete($input: ConnectedAccountDeleteInput!) {
+    connectedAccountDelete(input: $input) {
+        count
+    }
+}

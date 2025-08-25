@@ -1,4 +1,4 @@
-import { useParams } from '@tanstack/react-router';
+import { useParams, useLocation } from '@tanstack/react-router';
 import { useTargetMarketQuery } from '../graphql/operations.generated';
 import { Page } from '@/components/page';
 import { Separator } from '@/components/ui/separator';
@@ -8,17 +8,29 @@ import PersonasSection from './components/personas-section';
 import { ICPProfileSkeleton } from './components/icp-profile-skeleton';
 
 export default function ICPProfilePage() {
-  const { profileId } = useParams({ from: '/knowledge/icp/$profileId' });
-  const isNew = profileId === 'new';
+  const location = useLocation();
+  const isNewRoute = location.pathname === '/knowledge/icp/new';
+  
+  // Always call useParams, but only use it if not on new route
+  let profileId: string | undefined;
+  try {
+    const params = useParams({ from: '/knowledge/icp/$profileId' });
+    profileId = isNewRoute ? undefined : params.profileId;
+  } catch {
+    // If useParams fails (e.g., on /new route), profileId remains undefined
+    profileId = undefined;
+  }
+  
+  const isNew = !profileId || profileId === 'new';
 
   const { data, loading } = useTargetMarketQuery({
-    variables: { id: profileId },
+    variables: { id: profileId || '' },
     skip: !profileId || isNew,
   });
 
   if (loading && !isNew) {
     return (
-      <Page title="ICP Profile" backPath="/icp">
+      <Page title="ICP Profile" backPath="/knowledge/icp">
         <ICPProfileSkeleton />
       </Page>
     );

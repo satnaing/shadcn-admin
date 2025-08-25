@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import ICPProfilePage from '@/features/icp/profile';
+import ICPProfilePage from '@/features/knowledge/icp/profile';
 
 export const Route = createFileRoute('/knowledge/icp/$profileId')({
   component: ICPProfilePage,

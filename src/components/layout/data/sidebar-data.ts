@@ -4,6 +4,7 @@ import {
   BookOpen,
   PlayCircle,
   Building2,
+  UserCheck,
 } from 'lucide-react'
 import { type SidebarData } from '../types'
 
@@ -37,6 +38,11 @@ export const sidebarData: SidebarData = {
               icon: Target,
             },
           ],
+        },
+        {
+          title: 'Connected Accounts',
+          url: '/connected-accounts',
+          icon: UserCheck,
         },
         {
           title: 'Integrations',

@@ -1,11 +1,6 @@
-import { createFileRoute, redirect } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
+import ICPProfilePage from '@/features/knowledge/icp/profile';
 
 export const Route = createFileRoute('/knowledge/icp/new')({
-  beforeLoad: () => {
-    // Redirect to the profile page with 'new' as the profileId
-    throw redirect({
-      to: '/knowledge/icp/$profileId',
-      params: { profileId: 'new' },
-    });
-  },
+  component: () => <ICPProfilePage />,
 });
