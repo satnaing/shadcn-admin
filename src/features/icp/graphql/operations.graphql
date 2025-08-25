@@ -27,6 +27,7 @@ fragment targetMarketFields on TargetMarket {
 fragment personaFields on Persona {
   id
   name
+  valueProp
   targetMarkets {
     id
     targetMarketId

@@ -28,7 +28,7 @@ import type { CrmIntegrationUpdateInput } from '@/graphql/global/types.generated
 import { getAuthUrlHandler } from '@/features/integrations/utils/auth-helpers'
 import { Loadable } from '@/components/loadable'
 
-const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5173'
+const APP_URL = import.meta.env.VITE_APP_URL
 const IS_PROD = import.meta.env.VITE_ENV === 'production'
 
 const SCOPES = [
@@ -62,7 +62,7 @@ const AUTH_URL =
   `?client_id=${HUBSPOT_CLIENT_ID}` +
   `&scope=${encodeURIComponent(SCOPES)}` +
   `&optional_scope=${encodeURIComponent(OPTIONAL_SCOPES)}` +
-  `&redirect_uri=${APP_URL}/api/oauth/callback/hubspot`
+  `&redirect_uri=${APP_URL}/oauth/callback/hubspot`
 
 type HubSpotConnectModalProps = {
   isOpen: boolean

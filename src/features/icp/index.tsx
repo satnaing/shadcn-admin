@@ -77,7 +77,7 @@ export default function ICPPage() {
           description="Get started by defining your first profile"
           ctaText="Create ICP Profile"
           ctaIcon={Plus}
-          onCtaClick={() => navigate({ to: '/icp/new' })}
+          onCtaClick={() => navigate({ to: '/knowledge/icp/new' })}
         />
       </Page>
     );

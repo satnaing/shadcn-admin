@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Zap, Settings, Plus, Users, Eye } from 'lucide-react';
+import { Zap, Plus, Users, Eye } from 'lucide-react';
 import { toast } from 'sonner';
 import { useTriggersQuery } from '../../../graphql/operations.generated';
 import { TriggerType, type Trigger } from '@/graphql/global/types.generated';
@@ -58,10 +58,6 @@ export function PlaybookTriggers({ playbookId }: PlaybookTriggersProps) {
 
   const handleAddTrigger = () => {
     toast.info('Adding new triggers coming soon!');
-  };
-
-  const handleConfigureTriggers = () => {
-    toast.info('Bulk trigger configuration coming soon!');
   };
 
   return (

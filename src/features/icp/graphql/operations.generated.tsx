@@ -6,7 +6,7 @@ import * as ApolloReactHooks from '@apollo/client';
 const defaultOptions = {} as const;
 export type TargetMarketFieldsFragment = { __typename?: 'TargetMarket', id: string, color?: string | null, customerType?: Types.CustomerType | null, notificationChannel?: any | null, inboxChannel?: any | null, hqLocations: any, maxEmployees?: number | null, minEmployees?: number | null, minRevenue?: any | null, maxRevenue?: any | null, industry?: string | null, name?: string | null, extraRequirements?: string | null, type: Types.TargetMarketType, size: number, createdAt: any, questions?: Array<{ __typename?: 'Question', id: string }> | null, personas?: Array<{ __typename?: 'Persona', id: string }> | null };
 
-export type PersonaFieldsFragment = { __typename?: 'Persona', id: string, name: string, description?: string | null, maxContacts: number, createdAt: any, targetMarkets: Array<{ __typename?: 'PersonaTargetMarket', id: string, targetMarketId: string }> };
+export type PersonaFieldsFragment = { __typename?: 'Persona', id: string, name: string, valueProp?: string | null, description?: string | null, maxContacts: number, createdAt: any, targetMarkets: Array<{ __typename?: 'PersonaTargetMarket', id: string, targetMarketId: string }> };
 
 export type TargetMarketsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -18,7 +18,7 @@ export type TargetMarketQueryVariables = Types.Exact<{
 }>;
 
 
-export type TargetMarketQuery = { __typename?: 'Query', targetMarket?: { __typename?: 'TargetMarket', id: string, color?: string | null, customerType?: Types.CustomerType | null, notificationChannel?: any | null, inboxChannel?: any | null, hqLocations: any, maxEmployees?: number | null, minEmployees?: number | null, minRevenue?: any | null, maxRevenue?: any | null, industry?: string | null, name?: string | null, extraRequirements?: string | null, type: Types.TargetMarketType, size: number, createdAt: any, personas?: Array<{ __typename?: 'Persona', id: string, name: string, description?: string | null, maxContacts: number, createdAt: any, targetMarkets: Array<{ __typename?: 'PersonaTargetMarket', id: string, targetMarketId: string }> }> | null, questions?: Array<{ __typename?: 'Question', id: string }> | null } | null };
+export type TargetMarketQuery = { __typename?: 'Query', targetMarket?: { __typename?: 'TargetMarket', id: string, color?: string | null, customerType?: Types.CustomerType | null, notificationChannel?: any | null, inboxChannel?: any | null, hqLocations: any, maxEmployees?: number | null, minEmployees?: number | null, minRevenue?: any | null, maxRevenue?: any | null, industry?: string | null, name?: string | null, extraRequirements?: string | null, type: Types.TargetMarketType, size: number, createdAt: any, personas?: Array<{ __typename?: 'Persona', id: string, name: string, valueProp?: string | null, description?: string | null, maxContacts: number, createdAt: any, targetMarkets: Array<{ __typename?: 'PersonaTargetMarket', id: string, targetMarketId: string }> }> | null, questions?: Array<{ __typename?: 'Question', id: string }> | null } | null };
 
 export type TargetMarketUpsertMutationVariables = Types.Exact<{
   input: Types.TargetMarketUpsertInput;
@@ -39,14 +39,14 @@ export type PersonasQueryVariables = Types.Exact<{
 }>;
 
 
-export type PersonasQuery = { __typename?: 'Query', personas: Array<{ __typename?: 'Persona', id: string, name: string, description?: string | null, maxContacts: number, createdAt: any, targetMarkets: Array<{ __typename?: 'PersonaTargetMarket', id: string, targetMarketId: string }> }> };
+export type PersonasQuery = { __typename?: 'Query', personas: Array<{ __typename?: 'Persona', id: string, name: string, valueProp?: string | null, description?: string | null, maxContacts: number, createdAt: any, targetMarkets: Array<{ __typename?: 'PersonaTargetMarket', id: string, targetMarketId: string }> }> };
 
 export type PersonaUpsertMutationVariables = Types.Exact<{
   input: Types.PersonaUpsertInput;
 }>;
 
 
-export type PersonaUpsertMutation = { __typename?: 'Mutation', personaUpsert: { __typename?: 'Persona', id: string, name: string, description?: string | null, maxContacts: number, createdAt: any, targetMarkets: Array<{ __typename?: 'PersonaTargetMarket', id: string, targetMarketId: string }> } };
+export type PersonaUpsertMutation = { __typename?: 'Mutation', personaUpsert: { __typename?: 'Persona', id: string, name: string, valueProp?: string | null, description?: string | null, maxContacts: number, createdAt: any, targetMarkets: Array<{ __typename?: 'PersonaTargetMarket', id: string, targetMarketId: string }> } };
 
 export type PersonasDeleteMutationVariables = Types.Exact<{
   input: Types.BatchModelDeleteInput;
@@ -85,6 +85,7 @@ export const PersonaFieldsFragmentDoc = gql`
     fragment personaFields on Persona {
   id
   name
+  valueProp
   targetMarkets {
     id
     targetMarketId
