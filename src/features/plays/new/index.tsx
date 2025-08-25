@@ -42,7 +42,7 @@ export default function PlaybookNewPage() {
         <div className="flex items-center gap-2">
           <Button 
             variant="outline" 
-            onClick={() => navigate({ to: '/playbooks' })}
+            onClick={() => navigate({ to: '/plays' })}
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Cancel

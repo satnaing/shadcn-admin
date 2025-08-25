@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import {
   Dialog,
@@ -12,6 +11,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '@/components/ui/form'
 import { toast } from 'sonner'
 import { ConnectedBadge } from '@/features/integrations/components/connected-badge'
 import {
@@ -20,6 +26,7 @@ import {
 } from '@/graphql/operations/operations.generated'
 import type { CrmIntegrationUpdateInput } from '@/graphql/global/types.generated'
 import { getAuthUrlHandler } from '@/features/integrations/utils/auth-helpers'
+import { Loadable } from '@/components/loadable'
 
 const APP_URL = import.meta.env.VITE_APP_URL || 'http://localhost:5173'
 const IS_PROD = import.meta.env.VITE_ENV === 'production'
@@ -59,15 +66,15 @@ const AUTH_URL =
 
 type HubSpotConnectModalProps = {
   isOpen: boolean
-  onClose: () => void
-  isConnected: boolean
-}
+  onOpenChange: (open: boolean) => void
+} 
 
-export function HubSpotConnectModal({ isOpen, onClose, isConnected }: HubSpotConnectModalProps) {
+export function HubSpotConnectModal({ isOpen, onOpenChange }: HubSpotConnectModalProps) {
 
   const {
     data: crmIntegrationData,
     refetch: refetchCrmIntegration,
+    loading,
   } = useCrmIntegrationQuery()
 
   const [update, { loading: updateIsLoading }] = useCrmIntegrationUpdateMutation()
@@ -76,22 +83,20 @@ export function HubSpotConnectModal({ isOpen, onClose, isConnected }: HubSpotCon
     refetchCrmIntegration()
   })
 
-  const { register, reset, handleSubmit } = useForm<CrmIntegrationUpdateInput>({
+  const form = useForm<CrmIntegrationUpdateInput>({
     defaultValues: {
       enabled: true,
     },
   })
 
+  const { setValue, handleSubmit } = form
+
   useEffect(() => {
-    const d = crmIntegrationData?.crmIntegration
-    if (d) {
-      reset({
-        enabled: d.enabled,
-        excludeLists: d.excludeLists,
-        excludeContactsWithoutEmail: d.excludeContactsWithoutEmail,
-      })
+    const i = crmIntegrationData?.crmIntegration
+    if (i) {
+      setValue('enabled', i.enabled)
     }
-  }, [reset, crmIntegrationData])
+  }, [setValue, crmIntegrationData])
 
 
   const onSubmit = handleSubmit(async (data) => {
@@ -102,13 +107,14 @@ export function HubSpotConnectModal({ isOpen, onClose, isConnected }: HubSpotCon
   })
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className='max-w-2xl max-h-[90vh] overflow-y-auto'>
-        <form onSubmit={onSubmit}>
+        <Form {...form}>
+          <form onSubmit={onSubmit}>
           <DialogHeader>
             <div className='flex items-center gap-3'>
               <DialogTitle>HubSpot</DialogTitle>
-              {isConnected && <ConnectedBadge />}
+              {crmIntegrationData?.crmIntegration && <ConnectedBadge />}
             </div>
             <DialogDescription>
               <a
@@ -122,25 +128,38 @@ export function HubSpotConnectModal({ isOpen, onClose, isConnected }: HubSpotCon
             </DialogDescription>
           </DialogHeader>
 
+        <Loadable isLoading={loading}>  
           <div className='space-y-6 py-6'>
-            {!isConnected ? (
+            {!crmIntegrationData?.crmIntegration ? (
               <p className='text-sm text-muted-foreground'>
                 Connect your Hubspot account to allow for seamless integration with your CRM. Sync
                 identified visitors and automatically update your CRM with contact information and
                 company research. Connecting will create all the necessary properties for Swan.
               </p>
             ) : (
-                <div className='flex items-center justify-between'>
-                  <Label htmlFor='enabled' className='text-base font-semibold'>
-                    Enabled
-                  </Label>
-                  <Switch id='enabled' {...register('enabled')} />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="enabled"
+                  render={({ field }) => (
+                    <FormItem className='flex items-center justify-between'>
+                      <FormLabel className='text-base font-semibold'>
+                        Enabled
+                      </FormLabel>
+                      <FormControl>
+                        <Switch
+                          checked={field.value ?? false}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
             )}
           </div>
+          </Loadable>
 
           <DialogFooter>
-            {isConnected ? (
+            {crmIntegrationData?.crmIntegration ? (
               <div className='flex gap-2'>
                 <Button
                   type='button'
@@ -169,6 +188,7 @@ export function HubSpotConnectModal({ isOpen, onClose, isConnected }: HubSpotCon
             )}
           </DialogFooter>
         </form>
+        </Form>
       </DialogContent>
     </Dialog>
   )

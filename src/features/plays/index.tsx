@@ -32,7 +32,7 @@ export default function PlaybooksPage() {
   const playbooks = data?.playbooks || [];
 
   const handleCardClick = (playbookId: string) => {
-    navigate({ to: '/playbooks/$playbookId', params: { playbookId } });
+    navigate({ to: '/plays/$playbookId', params: { playbookId } });
   };
 
   const handleTogglePlaybook = async (e: React.MouseEvent, playbook: any) => {
@@ -65,8 +65,8 @@ export default function PlaybooksPage() {
   if (loading) {
     return (
       <Page 
-        title="Playbooks" 
-        description="Automate your workflow processes with playbooks"
+        title="Plays" 
+        description="Automate your workflow processes with plays"
       >
         <PlaybooksSkeleton />
       </Page>
@@ -76,16 +76,16 @@ export default function PlaybooksPage() {
   if (playbooks.length === 0) {
     return (
       <Page
-        title="Playbooks"
-        description="Automate your workflow processes with playbooks"
+        title="Plays"
+        description="Automate your workflow processes with plays"
       >
         <EmptyState
           Icon={PlayCircle}
-          title="No playbooks created"
-          description="Get started by creating your first playbook"
-          ctaText="Create Playbook"
+          title="No plays created"
+          description="Get started by creating your first play"
+          ctaText="Create Play"
           ctaIcon={Plus}
-          onCtaClick={() => navigate({ to: '/playbooks/new' })}
+          onCtaClick={() => navigate({ to: '/plays/new' })}
         />
       </Page>
     );
@@ -93,12 +93,12 @@ export default function PlaybooksPage() {
 
   return (
     <Page
-      title="Playbooks"
-      description="Automate your workflow processes with playbooks"
+      title="Plays"
+      description="Automate your workflow processes with plays"
       actions={
-        <Button onClick={() => navigate({ to: '/playbooks/new' })}>
+        <Button onClick={() => navigate({ to: '/plays/new' })}>
           <Plus className="mr-2 h-4 w-4" />
-          Create Playbook
+          Create Play
         </Button>
       }
     >

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, PlayCircle, PauseCircle, Plus, Settings, Layers } from 'lucide-react';
 import { useNavigate, useParams } from '@tanstack/react-router';
-import { usePlaybookQuery, usePlaybookUpdateMutation } from '../graphql/operations.generated';
+import { usePlaybookQuery, usePlaybookUpdateMutation } from '../../graphql/operations.generated';
 import { toast } from 'sonner';
 import { PlaybookDetailSkeleton } from './components/skeleton';
 import { EditableText } from '@/components/editable-text';
@@ -12,7 +12,7 @@ import { ScenarioModal } from './components/scenario-modal';
 import { PlaybookTriggers } from './components/playbook-triggers';
 
 export default function PlaybookDetailPage() {
-  const { playbookId } = useParams({ from: '/playbooks/$playbookId' });
+  const { playbookId } = useParams({ from: '/plays/$playbookId' });
   const navigate = useNavigate();
   const [selectedScenario, setSelectedScenario] = useState<any>(null);
   const [createScenarioOpen, setCreateScenarioOpen] = useState(false);
@@ -93,7 +93,7 @@ export default function PlaybookDetailPage() {
     return (
       <Page
         actions={
-          <Button variant="outline" onClick={() => navigate({ to: '/playbooks' })}>
+          <Button variant="outline" onClick={() => navigate({ to: '/plays' })}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Playbooks
           </Button>
@@ -108,7 +108,7 @@ export default function PlaybookDetailPage() {
     return (
       <Page
         actions={
-          <Button variant="outline" onClick={() => navigate({ to: '/playbooks' })}>
+          <Button variant="outline" onClick={() => navigate({ to: '/plays' })}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Playbooks
           </Button>
@@ -132,7 +132,7 @@ export default function PlaybookDetailPage() {
     <Page
       actions={
         <div className="flex items-center gap-2">
-          <Button variant="outline" onClick={() => navigate({ to: '/playbooks' })}>
+          <Button variant="outline" onClick={() => navigate({ to: '/plays' })}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back
           </Button>

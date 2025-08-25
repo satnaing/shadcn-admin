@@ -22,17 +22,18 @@ import {
   useSlackIntegrationUpdateMutation,
 } from '@/graphql/operations/operations.generated'
 import type { SlackIntegrationUpdateInput } from '@/graphql/global/types.generated'
+import { Loadable } from '@/components/loadable'
 
 type SlackConnectModalProps = {
   isOpen: boolean
-  onClose: () => void
-  isConnected: boolean
+  onOpenChange: (open: boolean) => void
 }
 
-export function SlackConnectModal({ isOpen, onClose, isConnected }: SlackConnectModalProps) {
+export function SlackConnectModal({ isOpen, onOpenChange }: SlackConnectModalProps) {
 
   const {
     data,
+    loading,
     startPolling,
     stopPolling,
     refetch: refetchSlackIntegration,
@@ -52,7 +53,7 @@ export function SlackConnectModal({ isOpen, onClose, isConnected }: SlackConnect
     },
   })
 
-  const connected = isConnected || data?.slackIntegration
+  const connected = data?.slackIntegration
   const slackIntegration = data?.slackIntegration
 
   const { control, reset, getValues } = useForm<SlackIntegrationUpdateInput>()
@@ -77,7 +78,7 @@ export function SlackConnectModal({ isOpen, onClose, isConnected }: SlackConnect
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+    <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent className='max-w-2xl max-h-[90vh] overflow-y-auto'>
         <DialogHeader>
           <div className='flex items-center gap-3'>
@@ -86,6 +87,7 @@ export function SlackConnectModal({ isOpen, onClose, isConnected }: SlackConnect
           </div>
         </DialogHeader>
 
+      <Loadable isLoading={loading}>
         <div className='space-y-6 py-6'>
           {!connected ? (
             <>
@@ -128,6 +130,7 @@ export function SlackConnectModal({ isOpen, onClose, isConnected }: SlackConnect
             </>
           )}
         </div>
+        </Loadable>
 
         <DialogFooter>
           <div className='flex gap-2'>
@@ -137,7 +140,7 @@ export function SlackConnectModal({ isOpen, onClose, isConnected }: SlackConnect
               </Button>
             )}
             {connected ? (
-              <Button onClick={onClose}>Done</Button>
+              <Button onClick={() => onOpenChange(false)}>Done</Button>
             ) : (
               <Button
                 onClick={(e) => {

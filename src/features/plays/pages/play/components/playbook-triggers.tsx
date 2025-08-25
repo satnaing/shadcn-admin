@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Button } from '@/components/ui/button';
 import { Zap, Settings, Plus, Users, Eye } from 'lucide-react';
 import { toast } from 'sonner';
-import { useTriggersQuery } from '../../graphql/operations.generated';
+import { useTriggersQuery } from '../../../graphql/operations.generated';
 import { TriggerType, type Trigger } from '@/graphql/global/types.generated';
 import { TriggerConfigModal } from './trigger-config-modal';
 

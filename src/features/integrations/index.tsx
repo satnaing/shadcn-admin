@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Page } from '@/components/page'
@@ -14,8 +13,7 @@ type Integration = {
   logo: string | React.ReactNode
   Component: React.FC<{
     isOpen: boolean
-    onClose: () => void
-    isConnected: boolean
+    onOpenChange: (open: boolean) => void
   }>
 }
 
@@ -81,24 +79,13 @@ export function Integrations() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>{integration.description}</CardDescription>
-                  <Button
-                    variant={isConnected ? 'outline' : 'default'}
-                    size='sm'
-                    className='mt-4 w-full'
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      setOpenModal(integration.name)
-                    }}
-                  >
-                    {isConnected ? 'Manage' : 'Connect'}
-                  </Button>
                 </CardContent>
                 
                 {openModal === integration.name && (
                   <integration.Component
+                    key={integration.name}
                     isOpen={openModal === integration.name}
-                    isConnected={isConnected}
-                    onClose={() => setOpenModal('')}
+                    onOpenChange={(open) => !open && setOpenModal('')}
                   />
                 )}
               </Card>

@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
+import { Loadable } from '@/components/loadable'
 import { useSlackUsersQuery } from '@/graphql/operations/operations.generated'
 
 interface SlackUserSelectorProps {
@@ -67,39 +68,43 @@ export function SlackUserSelector({
 
           return (
             <div className='space-y-2'>
-              <div className='min-h-10 rounded-md border border-input bg-background px-3 py-2'>
-                {!channelId ? (
-                  <span className='text-sm text-muted-foreground'>Select a channel first</span>
-                ) : taggingDisabled ? (
-                  <span className='text-sm text-muted-foreground'>Tagging disabled</span>
-                ) : slackUsersLoading ? (
-                  <span className='text-sm text-muted-foreground'>Loading users...</span>
-                ) : selectedUsers.length === 0 ? (
-                  <span className='text-sm text-muted-foreground'>Select users...</span>
-                ) : (
-                  <div className='flex flex-wrap gap-1'>
-                    {selectedUsers.map((userId: string) => {
-                      const user = userOptions.find((opt) => opt.value === userId)
-                      return user ? (
-                        <Badge key={userId} variant='secondary' className='text-xs'>
-                          {user.label}
-                          <button
-                            type='button'
-                            className='ml-1 text-muted-foreground hover:text-foreground'
-                            onClick={() => {
-                              const newValue = selectedUsers.filter((id) => id !== userId)
-                              field.onChange(newValue)
-                              onChange?.(newValue)
-                            }}
-                          >
-                            ×
-                          </button>
-                        </Badge>
-                      ) : null
-                    })}
-                  </div>
-                )}
-              </div>
+              <Loadable 
+                isLoading={!!channelId && !taggingDisabled && slackUsersLoading}
+                label="Loading users..."
+                className='w-full'
+              >
+                <div className='min-h-10 rounded-md border border-input bg-background px-3 py-2'>
+                  {!channelId ? (
+                    <span className='text-sm text-muted-foreground'>Select a channel first</span>
+                  ) : taggingDisabled ? (
+                    <span className='text-sm text-muted-foreground'>Tagging disabled</span>
+                  ) : selectedUsers.length === 0 ? (
+                    <span className='text-sm text-muted-foreground'>Select users...</span>
+                  ) : (
+                    <div className='flex flex-wrap gap-1'>
+                      {selectedUsers.map((userId: string) => {
+                        const user = userOptions.find((opt) => opt.value === userId)
+                        return user ? (
+                          <Badge key={userId} variant='secondary' className='text-xs'>
+                            {user.label}
+                            <button
+                              type='button'
+                              className='ml-1 text-muted-foreground hover:text-foreground'
+                              onClick={() => {
+                                const newValue = selectedUsers.filter((id) => id !== userId)
+                                field.onChange(newValue)
+                                onChange?.(newValue)
+                              }}
+                            >
+                              ×
+                            </button>
+                          </Badge>
+                        ) : null
+                      })}
+                    </div>
+                  )}
+                </div>
+              </Loadable>
 
               {channelId && !taggingDisabled && !slackUsersLoading && (
                 <Select

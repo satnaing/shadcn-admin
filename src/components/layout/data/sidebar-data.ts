@@ -27,8 +27,8 @@ export const sidebarData: SidebarData = {
           icon: LayoutDashboard,
         },
         {
-          title: 'Playbooks',
-          url: '/playbooks',
+          title: 'Plays',
+          url: '/plays',
           icon: PlayCircle,
         },
         {

@@ -14,7 +14,7 @@ import {
 import { toast } from 'sonner';
 import { DollarSign, Users } from 'lucide-react';
 import { formatNumber } from '../../utils';
-import CountrySelector from './country-selector';
+import CountrySelector from '@/components/country-selector';
 import { type TargetMarketUpsertInput } from '@/graphql/global/types.generated';
 
 type FormData = Omit<TargetMarketUpsertInput, 'minRevenue' | 'maxRevenue'> & {

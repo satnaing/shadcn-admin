@@ -15,7 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
 import { Route as TasksIndexRouteImport } from './routes/tasks/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
-import { Route as PlaybooksIndexRouteImport } from './routes/playbooks/index'
+import { Route as PlaysIndexRouteImport } from './routes/plays/index'
 import { Route as IntegrationsIndexRouteImport } from './routes/integrations/index'
 import { Route as HelpCenterIndexRouteImport } from './routes/help-center/index'
 import { Route as ChatsIndexRouteImport } from './routes/chats/index'
@@ -23,8 +23,8 @@ import { Route as SettingsNotificationsRouteImport } from './routes/settings/not
 import { Route as SettingsDisplayRouteImport } from './routes/settings/display'
 import { Route as SettingsAppearanceRouteImport } from './routes/settings/appearance'
 import { Route as SettingsAccountRouteImport } from './routes/settings/account'
-import { Route as PlaybooksNewRouteImport } from './routes/playbooks/new'
-import { Route as PlaybooksPlaybookIdRouteImport } from './routes/playbooks/$playbookId'
+import { Route as PlaysNewRouteImport } from './routes/plays/new'
+import { Route as PlaysPlaybookIdRouteImport } from './routes/plays/$playbookId'
 import { Route as errors503RouteImport } from './routes/(errors)/503'
 import { Route as errors500RouteImport } from './routes/(errors)/500'
 import { Route as errors404RouteImport } from './routes/(errors)/404'
@@ -65,9 +65,9 @@ const SettingsIndexRoute = SettingsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SettingsRouteRoute,
 } as any)
-const PlaybooksIndexRoute = PlaybooksIndexRouteImport.update({
-  id: '/playbooks/',
-  path: '/playbooks/',
+const PlaysIndexRoute = PlaysIndexRouteImport.update({
+  id: '/plays/',
+  path: '/plays/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IntegrationsIndexRoute = IntegrationsIndexRouteImport.update({
@@ -105,14 +105,14 @@ const SettingsAccountRoute = SettingsAccountRouteImport.update({
   path: '/account',
   getParentRoute: () => SettingsRouteRoute,
 } as any)
-const PlaybooksNewRoute = PlaybooksNewRouteImport.update({
-  id: '/playbooks/new',
-  path: '/playbooks/new',
+const PlaysNewRoute = PlaysNewRouteImport.update({
+  id: '/plays/new',
+  path: '/plays/new',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PlaybooksPlaybookIdRoute = PlaybooksPlaybookIdRouteImport.update({
-  id: '/playbooks/$playbookId',
-  path: '/playbooks/$playbookId',
+const PlaysPlaybookIdRoute = PlaysPlaybookIdRouteImport.update({
+  id: '/plays/$playbookId',
+  path: '/plays/$playbookId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const errors503Route = errors503RouteImport.update({
@@ -176,8 +176,8 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/playbooks/$playbookId': typeof PlaybooksPlaybookIdRoute
-  '/playbooks/new': typeof PlaybooksNewRoute
+  '/plays/$playbookId': typeof PlaysPlaybookIdRoute
+  '/plays/new': typeof PlaysNewRoute
   '/settings/account': typeof SettingsAccountRoute
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
@@ -185,7 +185,7 @@ export interface FileRoutesByFullPath {
   '/chats': typeof ChatsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
   '/integrations': typeof IntegrationsIndexRoute
-  '/playbooks': typeof PlaybooksIndexRoute
+  '/plays': typeof PlaysIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/tasks': typeof TasksIndexRoute
   '/users': typeof UsersIndexRoute
@@ -202,8 +202,8 @@ export interface FileRoutesByTo {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/playbooks/$playbookId': typeof PlaybooksPlaybookIdRoute
-  '/playbooks/new': typeof PlaybooksNewRoute
+  '/plays/$playbookId': typeof PlaysPlaybookIdRoute
+  '/plays/new': typeof PlaysNewRoute
   '/settings/account': typeof SettingsAccountRoute
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
@@ -211,7 +211,7 @@ export interface FileRoutesByTo {
   '/chats': typeof ChatsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
   '/integrations': typeof IntegrationsIndexRoute
-  '/playbooks': typeof PlaybooksIndexRoute
+  '/plays': typeof PlaysIndexRoute
   '/settings': typeof SettingsIndexRoute
   '/tasks': typeof TasksIndexRoute
   '/users': typeof UsersIndexRoute
@@ -231,8 +231,8 @@ export interface FileRoutesById {
   '/(errors)/404': typeof errors404Route
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
-  '/playbooks/$playbookId': typeof PlaybooksPlaybookIdRoute
-  '/playbooks/new': typeof PlaybooksNewRoute
+  '/plays/$playbookId': typeof PlaysPlaybookIdRoute
+  '/plays/new': typeof PlaysNewRoute
   '/settings/account': typeof SettingsAccountRoute
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
@@ -240,7 +240,7 @@ export interface FileRoutesById {
   '/chats/': typeof ChatsIndexRoute
   '/help-center/': typeof HelpCenterIndexRoute
   '/integrations/': typeof IntegrationsIndexRoute
-  '/playbooks/': typeof PlaybooksIndexRoute
+  '/plays/': typeof PlaysIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/tasks/': typeof TasksIndexRoute
   '/users/': typeof UsersIndexRoute
@@ -260,8 +260,8 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
-    | '/playbooks/$playbookId'
-    | '/playbooks/new'
+    | '/plays/$playbookId'
+    | '/plays/new'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -269,7 +269,7 @@ export interface FileRouteTypes {
     | '/chats'
     | '/help-center'
     | '/integrations'
-    | '/playbooks'
+    | '/plays'
     | '/settings/'
     | '/tasks'
     | '/users'
@@ -286,8 +286,8 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
-    | '/playbooks/$playbookId'
-    | '/playbooks/new'
+    | '/plays/$playbookId'
+    | '/plays/new'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -295,7 +295,7 @@ export interface FileRouteTypes {
     | '/chats'
     | '/help-center'
     | '/integrations'
-    | '/playbooks'
+    | '/plays'
     | '/settings'
     | '/tasks'
     | '/users'
@@ -314,8 +314,8 @@ export interface FileRouteTypes {
     | '/(errors)/404'
     | '/(errors)/500'
     | '/(errors)/503'
-    | '/playbooks/$playbookId'
-    | '/playbooks/new'
+    | '/plays/$playbookId'
+    | '/plays/new'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -323,7 +323,7 @@ export interface FileRouteTypes {
     | '/chats/'
     | '/help-center/'
     | '/integrations/'
-    | '/playbooks/'
+    | '/plays/'
     | '/settings/'
     | '/tasks/'
     | '/users/'
@@ -341,12 +341,12 @@ export interface RootRouteChildren {
   errors404Route: typeof errors404Route
   errors500Route: typeof errors500Route
   errors503Route: typeof errors503Route
-  PlaybooksPlaybookIdRoute: typeof PlaybooksPlaybookIdRoute
-  PlaybooksNewRoute: typeof PlaybooksNewRoute
+  PlaysPlaybookIdRoute: typeof PlaysPlaybookIdRoute
+  PlaysNewRoute: typeof PlaysNewRoute
   ChatsIndexRoute: typeof ChatsIndexRoute
   HelpCenterIndexRoute: typeof HelpCenterIndexRoute
   IntegrationsIndexRoute: typeof IntegrationsIndexRoute
-  PlaybooksIndexRoute: typeof PlaybooksIndexRoute
+  PlaysIndexRoute: typeof PlaysIndexRoute
   TasksIndexRoute: typeof TasksIndexRoute
   UsersIndexRoute: typeof UsersIndexRoute
   KnowledgeIcpProfileIdRoute: typeof KnowledgeIcpProfileIdRoute
@@ -398,11 +398,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsIndexRouteImport
       parentRoute: typeof SettingsRouteRoute
     }
-    '/playbooks/': {
-      id: '/playbooks/'
-      path: '/playbooks'
-      fullPath: '/playbooks'
-      preLoaderRoute: typeof PlaybooksIndexRouteImport
+    '/plays/': {
+      id: '/plays/'
+      path: '/plays'
+      fullPath: '/plays'
+      preLoaderRoute: typeof PlaysIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/integrations/': {
@@ -454,18 +454,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsAccountRouteImport
       parentRoute: typeof SettingsRouteRoute
     }
-    '/playbooks/new': {
-      id: '/playbooks/new'
-      path: '/playbooks/new'
-      fullPath: '/playbooks/new'
-      preLoaderRoute: typeof PlaybooksNewRouteImport
+    '/plays/new': {
+      id: '/plays/new'
+      path: '/plays/new'
+      fullPath: '/plays/new'
+      preLoaderRoute: typeof PlaysNewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/playbooks/$playbookId': {
-      id: '/playbooks/$playbookId'
-      path: '/playbooks/$playbookId'
-      fullPath: '/playbooks/$playbookId'
-      preLoaderRoute: typeof PlaybooksPlaybookIdRouteImport
+    '/plays/$playbookId': {
+      id: '/plays/$playbookId'
+      path: '/plays/$playbookId'
+      fullPath: '/plays/$playbookId'
+      preLoaderRoute: typeof PlaysPlaybookIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(errors)/503': {
@@ -584,12 +584,12 @@ const rootRouteChildren: RootRouteChildren = {
   errors404Route: errors404Route,
   errors500Route: errors500Route,
   errors503Route: errors503Route,
-  PlaybooksPlaybookIdRoute: PlaybooksPlaybookIdRoute,
-  PlaybooksNewRoute: PlaybooksNewRoute,
+  PlaysPlaybookIdRoute: PlaysPlaybookIdRoute,
+  PlaysNewRoute: PlaysNewRoute,
   ChatsIndexRoute: ChatsIndexRoute,
   HelpCenterIndexRoute: HelpCenterIndexRoute,
   IntegrationsIndexRoute: IntegrationsIndexRoute,
-  PlaybooksIndexRoute: PlaybooksIndexRoute,
+  PlaysIndexRoute: PlaysIndexRoute,
   TasksIndexRoute: TasksIndexRoute,
   UsersIndexRoute: UsersIndexRoute,
   KnowledgeIcpProfileIdRoute: KnowledgeIcpProfileIdRoute,

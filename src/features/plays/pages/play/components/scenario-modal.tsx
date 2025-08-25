@@ -29,7 +29,7 @@ import {
   usePlaybookScenarioUpdateMutation,
   usePlaybookScenarioCreateMutation,
   usePlaybookScenariosDeleteMutation
-} from '../../graphql/operations.generated';
+} from '../../../graphql/operations.generated';
 
 const scenarioFormSchema = z.object({
   name: z.string().min(1, 'Scenario name is required').trim(),
