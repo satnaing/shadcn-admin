@@ -13,7 +13,6 @@ export const FULLSCREEN_ROUTES = [
   '/oauth/callback',
 ]
 
-// Check if a route is public
 export function isPublicRoute(pathname: string): boolean {
   return PUBLIC_ROUTES.some(route => pathname.startsWith(route))
 }

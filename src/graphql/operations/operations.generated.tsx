@@ -59,6 +59,35 @@ export type OauthLoginMutationVariables = Types.Exact<{
 
 export type OauthLoginMutation = { __typename?: 'Mutation', oauthLogin: { __typename?: 'GenericResolverResponse', success: boolean } };
 
+export type UserLoginMutationVariables = Types.Exact<{
+  input?: Types.InputMaybe<Types.UserLoginInput>;
+}>;
+
+
+export type UserLoginMutation = { __typename?: 'Mutation', userLogin: { __typename?: 'User', id: string, email: string, firstName?: string | null, lastName?: string | null, onboardingStatus: Types.OnboardingStatus } };
+
+export type SubscriptionQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type SubscriptionQuery = { __typename?: 'Query', subscription?: { __typename?: 'Subscription', id: string, status: Types.SubscriptionStatus, plan: Types.SubscriptionPlan, startedAt: any, renewsAt?: any | null, interval: Types.SubscriptionInterval, credits: number, creditsUsed: number } | null };
+
+export type OrgInfoQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type OrgInfoQuery = { __typename?: 'Query', orgInfo?: { __typename?: 'OrgInfo', id: string, name?: string | null, description?: string | null, competitors?: string | null, createdAt: any, updatedAt: any } | null };
+
+export type OrgsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type OrgsQuery = { __typename?: 'Query', org: Array<{ __typename?: 'Org', id: string, domain: string }> };
+
+export type OrgInfoUpdateMutationVariables = Types.Exact<{
+  input: Types.OrgInfoUpdateInput;
+}>;
+
+
+export type OrgInfoUpdateMutation = { __typename?: 'Mutation', orgInfoUpdate: { __typename?: 'OrgInfo', id: string, name?: string | null, description?: string | null, competitors?: string | null, createdAt: any, updatedAt: any } };
+
 
 export const IntegrationsDocument = gql`
     query Integrations {
@@ -430,3 +459,208 @@ export function useOauthLoginMutation(baseOptions?: ApolloReactHooks.MutationHoo
 export type OauthLoginMutationHookResult = ReturnType<typeof useOauthLoginMutation>;
 export type OauthLoginMutationResult = ApolloReactCommon.MutationResult<OauthLoginMutation>;
 export type OauthLoginMutationOptions = ApolloReactCommon.BaseMutationOptions<OauthLoginMutation, OauthLoginMutationVariables>;
+export const UserLoginDocument = gql`
+    mutation UserLogin($input: UserLoginInput) {
+  userLogin(input: $input) {
+    id
+    email
+    firstName
+    lastName
+    onboardingStatus
+  }
+}
+    `;
+export type UserLoginMutationFn = ApolloReactCommon.MutationFunction<UserLoginMutation, UserLoginMutationVariables>;
+
+/**
+ * __useUserLoginMutation__
+ *
+ * To run a mutation, you first call `useUserLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUserLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [userLoginMutation, { data, loading, error }] = useUserLoginMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUserLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UserLoginMutation, UserLoginMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<UserLoginMutation, UserLoginMutationVariables>(UserLoginDocument, options);
+      }
+export type UserLoginMutationHookResult = ReturnType<typeof useUserLoginMutation>;
+export type UserLoginMutationResult = ApolloReactCommon.MutationResult<UserLoginMutation>;
+export type UserLoginMutationOptions = ApolloReactCommon.BaseMutationOptions<UserLoginMutation, UserLoginMutationVariables>;
+export const SubscriptionDocument = gql`
+    query Subscription {
+  subscription {
+    id
+    status
+    plan
+    startedAt
+    renewsAt
+    interval
+    credits
+    creditsUsed
+  }
+}
+    `;
+
+/**
+ * __useSubscriptionQuery__
+ *
+ * To run a query within a React component, call `useSubscriptionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubscriptionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubscriptionQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSubscriptionQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SubscriptionQuery, SubscriptionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<SubscriptionQuery, SubscriptionQueryVariables>(SubscriptionDocument, options);
+      }
+export function useSubscriptionLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SubscriptionQuery, SubscriptionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<SubscriptionQuery, SubscriptionQueryVariables>(SubscriptionDocument, options);
+        }
+export function useSubscriptionSuspenseQuery(baseOptions?: ApolloReactHooks.SkipToken | ApolloReactHooks.SuspenseQueryHookOptions<SubscriptionQuery, SubscriptionQueryVariables>) {
+          const options = baseOptions === ApolloReactHooks.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useSuspenseQuery<SubscriptionQuery, SubscriptionQueryVariables>(SubscriptionDocument, options);
+        }
+export type SubscriptionQueryHookResult = ReturnType<typeof useSubscriptionQuery>;
+export type SubscriptionLazyQueryHookResult = ReturnType<typeof useSubscriptionLazyQuery>;
+export type SubscriptionSuspenseQueryHookResult = ReturnType<typeof useSubscriptionSuspenseQuery>;
+export type SubscriptionQueryResult = ApolloReactCommon.QueryResult<SubscriptionQuery, SubscriptionQueryVariables>;
+export const OrgInfoDocument = gql`
+    query OrgInfo {
+  orgInfo {
+    id
+    name
+    description
+    competitors
+    createdAt
+    updatedAt
+  }
+}
+    `;
+
+/**
+ * __useOrgInfoQuery__
+ *
+ * To run a query within a React component, call `useOrgInfoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOrgInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOrgInfoQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useOrgInfoQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<OrgInfoQuery, OrgInfoQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<OrgInfoQuery, OrgInfoQueryVariables>(OrgInfoDocument, options);
+      }
+export function useOrgInfoLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<OrgInfoQuery, OrgInfoQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<OrgInfoQuery, OrgInfoQueryVariables>(OrgInfoDocument, options);
+        }
+export function useOrgInfoSuspenseQuery(baseOptions?: ApolloReactHooks.SkipToken | ApolloReactHooks.SuspenseQueryHookOptions<OrgInfoQuery, OrgInfoQueryVariables>) {
+          const options = baseOptions === ApolloReactHooks.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useSuspenseQuery<OrgInfoQuery, OrgInfoQueryVariables>(OrgInfoDocument, options);
+        }
+export type OrgInfoQueryHookResult = ReturnType<typeof useOrgInfoQuery>;
+export type OrgInfoLazyQueryHookResult = ReturnType<typeof useOrgInfoLazyQuery>;
+export type OrgInfoSuspenseQueryHookResult = ReturnType<typeof useOrgInfoSuspenseQuery>;
+export type OrgInfoQueryResult = ApolloReactCommon.QueryResult<OrgInfoQuery, OrgInfoQueryVariables>;
+export const OrgsDocument = gql`
+    query Orgs {
+  org {
+    id
+    domain
+  }
+}
+    `;
+
+/**
+ * __useOrgsQuery__
+ *
+ * To run a query within a React component, call `useOrgsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOrgsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOrgsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useOrgsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<OrgsQuery, OrgsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<OrgsQuery, OrgsQueryVariables>(OrgsDocument, options);
+      }
+export function useOrgsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<OrgsQuery, OrgsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<OrgsQuery, OrgsQueryVariables>(OrgsDocument, options);
+        }
+export function useOrgsSuspenseQuery(baseOptions?: ApolloReactHooks.SkipToken | ApolloReactHooks.SuspenseQueryHookOptions<OrgsQuery, OrgsQueryVariables>) {
+          const options = baseOptions === ApolloReactHooks.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useSuspenseQuery<OrgsQuery, OrgsQueryVariables>(OrgsDocument, options);
+        }
+export type OrgsQueryHookResult = ReturnType<typeof useOrgsQuery>;
+export type OrgsLazyQueryHookResult = ReturnType<typeof useOrgsLazyQuery>;
+export type OrgsSuspenseQueryHookResult = ReturnType<typeof useOrgsSuspenseQuery>;
+export type OrgsQueryResult = ApolloReactCommon.QueryResult<OrgsQuery, OrgsQueryVariables>;
+export const OrgInfoUpdateDocument = gql`
+    mutation OrgInfoUpdate($input: OrgInfoUpdateInput!) {
+  orgInfoUpdate(input: $input) {
+    id
+    name
+    description
+    competitors
+    createdAt
+    updatedAt
+  }
+}
+    `;
+export type OrgInfoUpdateMutationFn = ApolloReactCommon.MutationFunction<OrgInfoUpdateMutation, OrgInfoUpdateMutationVariables>;
+
+/**
+ * __useOrgInfoUpdateMutation__
+ *
+ * To run a mutation, you first call `useOrgInfoUpdateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useOrgInfoUpdateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [orgInfoUpdateMutation, { data, loading, error }] = useOrgInfoUpdateMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useOrgInfoUpdateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<OrgInfoUpdateMutation, OrgInfoUpdateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<OrgInfoUpdateMutation, OrgInfoUpdateMutationVariables>(OrgInfoUpdateDocument, options);
+      }
+export type OrgInfoUpdateMutationHookResult = ReturnType<typeof useOrgInfoUpdateMutation>;
+export type OrgInfoUpdateMutationResult = ApolloReactCommon.MutationResult<OrgInfoUpdateMutation>;
+export type OrgInfoUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<OrgInfoUpdateMutation, OrgInfoUpdateMutationVariables>;

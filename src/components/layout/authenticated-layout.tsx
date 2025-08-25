@@ -17,6 +17,8 @@ import { sidebarData } from './data/sidebar-data'
 import { NavGroup } from './nav-group'
 import { NavUser } from './nav-user'
 import { TeamSwitcher } from './app-sidebar-header'
+import { OrgSelector } from '@/components/org-selector'
+import { useUser } from '@clerk/clerk-react'
 
 type AuthenticatedLayoutProps = {
   children?: React.ReactNode
@@ -24,6 +26,12 @@ type AuthenticatedLayoutProps = {
 
 export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
   const defaultOpen = getCookie('sidebar_state') !== 'false'
+  const { user } = useUser()
+  
+  // Check if user is internal (Swan team member)
+  const isInternal = user?.publicMetadata?.role === 'internal' || 
+                     user?.emailAddresses?.[0]?.emailAddress?.endsWith('@getswan.com')
+  
   return (
     <SearchProvider>
       <SidebarProvider defaultOpen={defaultOpen}>
@@ -59,6 +67,12 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
             )}
           >
             {children ?? <Outlet />}
+            {/* Show OrgSelector for internal users */}
+            {isInternal && (
+              <div className="fixed bottom-20 right-24 z-50">
+                <OrgSelector />
+              </div>
+            )}
           </SidebarInset>
         </LayoutProvider>
       </SidebarProvider>

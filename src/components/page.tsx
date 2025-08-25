@@ -8,6 +8,8 @@ import { Main } from '@/components/layout/main';
 import { ProfileDropdown } from '@/components/profile-dropdown';
 import { Search } from '@/components/search';
 import { ThemeSwitch } from '@/components/theme-switch';
+import { Loadable } from '@/components/loadable';
+import { cn } from '@/lib/utils';
 
 interface PageProps {
   children: ReactNode;
@@ -22,6 +24,9 @@ interface PageProps {
   showThemeSwitch?: boolean;
   showConfigDrawer?: boolean;
   showProfileDropdown?: boolean;
+  className?: string;
+  loading?: boolean;
+  skeleton?: React.ReactElement;
 }
 
 export function Page({
@@ -37,6 +42,9 @@ export function Page({
   showThemeSwitch = true,
   showConfigDrawer = false,
   showProfileDropdown = true,
+  className,
+  loading,
+  skeleton,
 }: PageProps) {
   const navigate = useNavigate();
 
@@ -51,7 +59,7 @@ export function Page({
         </div>
       </Header>
 
-      <Main fixed={mainFixed} fluid={mainFluid}>
+      <Main fixed={mainFixed} fluid={mainFluid} className={cn(className)}>
         {(title || description || actions) && (
           <div className='mb-6 flex flex-wrap items-center justify-between gap-4'>
             <div className='flex items-start gap-2'>
@@ -80,7 +88,9 @@ export function Page({
           </div>
         )}
         <div className="space-y-4">
-          {children}
+          <Loadable isLoading={loading} loader={skeleton}>
+            {children}
+          </Loadable>
         </div>
       </Main>
     </>

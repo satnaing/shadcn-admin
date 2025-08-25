@@ -91,3 +91,58 @@ mutation OauthLogin($input: OauthLoginInput!) {
     success
   }
 }
+
+# User authentication mutation
+mutation UserLogin($input: UserLoginInput) {
+  userLogin(input: $input) {
+    id
+    email
+    firstName
+    lastName
+    onboardingStatus
+  }
+}
+
+# Subscription query
+query Subscription {
+  subscription {
+    id
+    status
+    plan
+    startedAt
+    renewsAt
+    interval
+    credits
+    creditsUsed
+  }
+}
+
+# Organization info queries and mutations
+query OrgInfo {
+  orgInfo {
+    id
+    name
+    description
+    competitors
+    createdAt
+    updatedAt
+  }
+}
+
+query Orgs {
+  org {
+    id
+    domain
+  }
+}
+
+ mutation OrgInfoUpdate($input: OrgInfoUpdateInput!) {
+  orgInfoUpdate(input: $input) {
+     id
+     name
+     description
+     competitors
+     createdAt
+     updatedAt
+   }
+ }

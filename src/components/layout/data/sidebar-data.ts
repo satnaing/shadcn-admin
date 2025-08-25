@@ -3,6 +3,7 @@ import {
   Target,
   BookOpen,
   PlayCircle,
+  Building2,
 } from 'lucide-react'
 import { type SidebarData } from '../types'
 
@@ -25,6 +26,11 @@ export const sidebarData: SidebarData = {
           title: 'Knowledge',
           icon: BookOpen,
           items: [
+            {
+              title: 'General',
+              url: '/knowledge/general',
+              icon: Building2,
+            },
             {
               title: 'ICP Profiles',
               url: '/knowledge/icp',

@@ -12,6 +12,7 @@ import { isFullscreenRoute, isPublicRoute } from '@/lib/auth'
 import { GraphQLProvider } from '@/lib/graphql'
 import { useClerkAppearance } from '@/lib/clerk-theme'
 import { useTheme } from '@/context/theme-provider'
+import { ClerkAuthProvider } from '@/context/clerk-auth-provider'
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -77,7 +78,9 @@ function AuthWrapper() {
       <GraphQLProvider>
         <NavigationProgress />
         <SignedIn>
-          <Outlet />
+          <ClerkAuthProvider>
+            <Outlet />
+          </ClerkAuthProvider>
         </SignedIn>
         <SignedOut>
           <Outlet />
@@ -98,9 +101,11 @@ function AuthWrapper() {
     <GraphQLProvider>
       <NavigationProgress />
       <SignedIn>
-        <AuthenticatedLayout>
-          <Outlet />
-        </AuthenticatedLayout>
+        <ClerkAuthProvider>
+          <AuthenticatedLayout>
+            <Outlet />
+          </AuthenticatedLayout>
+        </ClerkAuthProvider>
       </SignedIn>
       <SignedOut>
         <RedirectToSignIn redirectUrl={location.href}/>

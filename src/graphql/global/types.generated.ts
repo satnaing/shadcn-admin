@@ -755,6 +755,7 @@ export type Mutation = {
   listDelete: GenericResolverResponse;
   listUpsert: TargetMarket;
   oauthLogin: GenericResolverResponse;
+  orgInfoUpdate: OrgInfo;
   personaUpsert: Persona;
   personasDelete: GenericResolverResponse;
   playbookScenarioCreate: PlaybookScenario;
@@ -884,6 +885,11 @@ export type MutationListUpsertArgs = {
 
 export type MutationOauthLoginArgs = {
   input: OauthLoginInput;
+};
+
+
+export type MutationOrgInfoUpdateArgs = {
+  input: OrgInfoUpdateInput;
 };
 
 
@@ -1023,6 +1029,27 @@ export type Org = {
   domain: Scalars['String']['output'];
   id: Scalars['String']['output'];
   updatedAt: Scalars['DateTimeISO']['output'];
+};
+
+export type OrgInfo = {
+  __typename?: 'OrgInfo';
+  competitors?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['DateTimeISO']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  isHighProfile: Scalars['Boolean']['output'];
+  name?: Maybe<Scalars['String']['output']>;
+  onboardingStatus: OnboardingStatus;
+  orgId: Scalars['String']['output'];
+  research?: Maybe<Scalars['String']['output']>;
+  swanVersion: Scalars['String']['output'];
+  updatedAt: Scalars['DateTimeISO']['output'];
+};
+
+export type OrgInfoUpdateInput = {
+  competitors?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export enum OrgRole {
@@ -1316,6 +1343,7 @@ export type Query = {
   list?: Maybe<TargetMarket>;
   lists: PaginatedLists;
   org: Array<Org>;
+  orgInfo?: Maybe<OrgInfo>;
   personas: Array<Persona>;
   playbook: Playbook;
   playbookScenarios: Array<PlaybookScenario>;
