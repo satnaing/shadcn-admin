@@ -92,12 +92,7 @@ export default function PlaybookDetailPage() {
   if (loading) {
     return (
       <Page
-        actions={
-          <Button variant="outline" onClick={() => navigate({ to: '/plays' })}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Playbooks
-          </Button>
-        }
+        backPath="/plays"
       >
         <PlaybookDetailSkeleton />
       </Page>
@@ -107,12 +102,8 @@ export default function PlaybookDetailPage() {
   if (!playbook) {
     return (
       <Page
-        actions={
-          <Button variant="outline" onClick={() => navigate({ to: '/plays' })}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Playbooks
-          </Button>
-        }
+        title="Playbook not found"
+        backPath="/plays"
       >
         <Card>
           <CardHeader>
@@ -130,42 +121,39 @@ export default function PlaybookDetailPage() {
 
   return (
     <Page
+      title={
+        <EditableText
+          value={playbook.name}
+          onSave={handleUpdateName}
+          placeholder="Playbook name"
+          disabled={updatePlaybookLoading}
+          textClassName="text-2xl font-bold"
+        />
+      }
+      backPath="/plays"
       actions={
-        <div className="flex items-center gap-2">
-          <Button variant="outline" onClick={() => navigate({ to: '/plays' })}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back
-          </Button>
-          <Button 
-            loading={updatePlaybookLoading}
-            variant={playbook.isEnabled ? "destructive" : "default"}
-            onClick={handleTogglePlaybook}
-          >
-            {playbook.isEnabled ? (
-              <>
-                <PauseCircle className="mr-2 h-4 w-4" />
-                Deactivate
-              </>
-            ) : (
-              <>
-                <PlayCircle className="mr-2 h-4 w-4" />
-                Activate
-              </>
-            )}
-          </Button>
-        </div>
+        <Button 
+          loading={updatePlaybookLoading}
+          variant={playbook.isEnabled ? "destructive" : "default"}
+          onClick={handleTogglePlaybook}
+        >
+          {playbook.isEnabled ? (
+            <>
+              <PauseCircle className="mr-2 h-4 w-4" />
+              Deactivate
+            </>
+          ) : (
+            <>
+              <PlayCircle className="mr-2 h-4 w-4" />
+              Activate
+            </>
+          )}
+        </Button>
       }
     >
       <div className="space-y-6">
-        {/* Editable Title and Description */}
-        <div className="mb-8 space-y-3">
-          <EditableText
-            value={playbook.name}
-            onSave={handleUpdateName}
-            placeholder="Playbook name"
-            disabled={updatePlaybookLoading}
-            textClassName="text-2xl font-bold"
-          />
+        {/* Editable Description */}
+        <div className="mb-8">
           <EditableText
             value={playbook.description || ''}
             onSave={handleUpdateDescription}

@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 
 interface PageProps {
   children: ReactNode;
-  title?: string;
+  title?: string | ReactNode;
   description?: string;
   actions?: ReactNode;
   backPath?: string;
@@ -74,7 +74,13 @@ export function Page({
                 </Button>
               )}
               <div className="space-y-1">
-                {title && <h1 className='text-2xl font-bold tracking-tight'>{title}</h1>}
+                {title && (
+                  typeof title === 'string' ? (
+                    <h1 className='text-2xl font-bold tracking-tight'>{title}</h1>
+                  ) : (
+                    title
+                  )
+                )}
                 {description && (
                   <p className='text-muted-foreground'>{description}</p>
                 )}

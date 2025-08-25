@@ -19,13 +19,12 @@ const getReqHeaders = async (
   getOrg?: () => string,
 ) => {
   const token = await getToken();
-  const fakeOrg = getOrg?.();
 
-  const selectedOrgId = localStorage.getItem('swan.selected_org_id');
+  // Get the selected org ID from localStorage (set by OrgSelector component)
+  const selectedOrgId = localStorage.getItem('selectedOrgId');
 
   return {
-    ...(fakeOrg && { 'x-override-org-id': fakeOrg }),
-    ...(selectedOrgId && { 'x-selected-org-id': selectedOrgId }),
+    ...(selectedOrgId && { 'x-override-org-id': selectedOrgId }),
     ...(token && { Authorization: `Bearer ${token}` }),
   };
 };

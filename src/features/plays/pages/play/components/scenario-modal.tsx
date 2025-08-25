@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import {
   Dialog,
+  DialogBody,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -165,7 +166,7 @@ export function ScenarioModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-4xl">
+      <DialogContent className="max-w-4xl" scrollable>
         <DialogHeader>
           <DialogTitle>
             {mode === 'edit' ? 'Edit Scenario' : 'Create New Scenario'}
@@ -177,8 +178,9 @@ export function ScenarioModal({
           </DialogDescription>
         </DialogHeader>
         
-        <Form {...form}>
-          <form id="scenario-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-4">
+        <DialogBody>
+          <Form {...form}>
+            <form id="scenario-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 py-4">
             <FormField
               control={form.control}
               name="name"
@@ -245,8 +247,9 @@ export function ScenarioModal({
                 </FormItem>
               )}
             />
-          </form>
-        </Form>
+            </form>
+          </Form>
+        </DialogBody>
         
         <DialogFooter className="flex items-center justify-between">
           <div>
