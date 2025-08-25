@@ -16,7 +16,6 @@ const createHttpMainApiLink = (gqlEndpoint?: string) =>
 
 const getReqHeaders = async (
   getToken: () => Promise<string | undefined>,
-  getOrg?: () => string,
 ) => {
   const token = await getToken();
 
@@ -29,10 +28,10 @@ const getReqHeaders = async (
   };
 };
 
-const createTokenLink = (getToken: () => Promise<string | undefined>, getOrg?: () => string) =>
+const createTokenLink = (getToken: () => Promise<string | undefined>) =>
   setContext(async () => {
     return {
-      headers: await getReqHeaders(getToken, getOrg),
+      headers: await getReqHeaders(getToken),
     };
   });
 
@@ -69,13 +68,12 @@ const createMiddlewareLink = (gqlEndpoint?: string) =>
 
 const createApolloClient = (args: {
   gqlEndpoint?: string;
-  getCustomOrg?: () => string;
   getAuthToken: () => Promise<string | undefined>;
   typePolicies?: TypePolicies;
 }) => {
   const cache = new InMemoryCache({ typePolicies: args.typePolicies });
 
-  const withTokenLink = createTokenLink(args.getAuthToken, args.getCustomOrg);
+  const withTokenLink = createTokenLink(args.getAuthToken);
   const errorHandlingLink = createErrorHandlingLink();
   const httpMainApiLink = createHttpMainApiLink(args.gqlEndpoint);
   const middlewareLink = createMiddlewareLink(args.gqlEndpoint);

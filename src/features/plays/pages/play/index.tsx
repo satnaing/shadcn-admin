@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Page } from '@/components/page';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, PlayCircle, PauseCircle, Plus, Settings, Layers } from 'lucide-react';
-import { useNavigate, useParams } from '@tanstack/react-router';
+import { PlayCircle, PauseCircle, Plus, Settings, Layers } from 'lucide-react';
+import { useParams } from '@tanstack/react-router';
 import { usePlaybookQuery, usePlaybookUpdateMutation } from '../../graphql/operations.generated';
 import { toast } from 'sonner';
 import { PlaybookDetailSkeleton } from './components/skeleton';
@@ -13,7 +13,6 @@ import { PlaybookTriggers } from './components/playbook-triggers';
 
 export default function PlaybookDetailPage() {
   const { playbookId } = useParams({ from: '/plays/$playbookId' });
-  const navigate = useNavigate();
   const [selectedScenario, setSelectedScenario] = useState<any>(null);
   const [createScenarioOpen, setCreateScenarioOpen] = useState(false);
   

@@ -4,7 +4,6 @@ import { useAuth } from '@clerk/clerk-react';
 import { createApolloClient } from '../lib/graphql/apollo-client';
 
 // Constants for localStorage keys
-const GLOBAL_ORG_KEY = 'swan.global_org_id';
 const AUTH_TOKEN_KEY = 'swan.auth_token';
 
 interface GraphQLProviderProps {
@@ -31,16 +30,12 @@ export function GraphQLProvider({ children }: GraphQLProviderProps) {
       }
     };
 
-    // Function to get custom organization ID
-    const getCustomOrg = () => localStorage.getItem(GLOBAL_ORG_KEY) || '';
-
     // Get GraphQL endpoint from environment variable
     const gqlEndpoint = import.meta.env.VITE_GQL_ENDPOINT || 'http://localhost:4001/graphql';
 
     return createApolloClient({ 
       getAuthToken, 
       gqlEndpoint, 
-      getCustomOrg 
     });
   }, [getToken]);
 
