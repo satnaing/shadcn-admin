@@ -42,9 +42,8 @@ export default function ICPProfilePage() {
       description={isNew ? 'Create a new Ideal Customer Profile' : ''}
       backPath='/knowledge/icp'
     >
-      <Separator className='mb-6' />
-
       <div className='grid gap-6 sm:max-w-[100%] md:max-w-[80%]'>
+        <Separator className='mb-0' />
         {/* Profile Details Card */}
         <Card>
           <CardHeader>

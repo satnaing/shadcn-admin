@@ -39,8 +39,6 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end' className='w-[160px]'>
         <DropdownMenuItem onClick={handleViewDetails}>View Details</DropdownMenuItem>
-        <DropdownMenuItem>View in Playbook</DropdownMenuItem>
-        {execution.entityId && <DropdownMenuItem>View Entity</DropdownMenuItem>}
         <DropdownMenuSeparator />
         {execution.status === 'IN_PROGRESS' || execution.status === 'AWAITING_APPROVAL' ? (
           <DropdownMenuItem onClick={handleCancel} className='text-destructive'>
