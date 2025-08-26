@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -62,8 +62,6 @@ export function ScenarioModal({
   onClose,
   onSuccess,
 }: ScenarioModalProps) {
-  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false)
-
   const form = useForm<ScenarioFormData>({
     resolver: zodResolver(scenarioFormSchema),
     defaultValues: {
@@ -147,18 +145,10 @@ export function ScenarioModal({
       }
     } catch (error: any) {
       toast.error(`Failed to delete scenario: ${error.message}`)
-    } finally {
-      setDeleteConfirmOpen(false)
     }
   }
 
-  const handleClose = () => {
-    form.reset({
-      name: '',
-      description: '',
-      actionPlan: '',
-    })
-    setDeleteConfirmOpen(false)
+  const handleClose = async () => {
     onClose()
   }
 
@@ -188,7 +178,12 @@ export function ScenarioModal({
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder='Scenario name' disabled={loading} {...field} />
+                      <Input
+                        autoComplete='off'
+                        placeholder='Scenario name'
+                        disabled={loading}
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>Give your scenario a clear, descriptive name</FormDescription>
                     <FormMessage />
@@ -250,20 +245,13 @@ export function ScenarioModal({
             {mode === 'edit' && (
               <Confirmable
                 onConfirm={handleDelete}
-                isOpen={deleteConfirmOpen}
-                onCancel={() => setDeleteConfirmOpen(false)}
                 titleText='Delete Scenario'
                 bodyText='Are you sure you want to delete this scenario? This action cannot be undone.'
                 buttonText='Delete'
                 variant='danger'
                 isLoading={deleting}
               >
-                <Button
-                  variant='destructive'
-                  size='sm'
-                  onClick={() => setDeleteConfirmOpen(true)}
-                  disabled={loading}
-                >
+                <Button variant='destructive' size='sm' disabled={loading}>
                   <Trash2 className='mr-2 h-4 w-4' />
                   Delete
                 </Button>
