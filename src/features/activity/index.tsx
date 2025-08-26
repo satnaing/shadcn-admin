@@ -25,8 +25,8 @@ export function Activity() {
 
   return (
     <ExecutionsProvider>
-      <Page title='Activity' description='View and manage agent activity' mainFixed>
-        <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
+      <Page title='Activity' description='View and manage agent activity'>
+        <div className='space-y-4'>
           {executionsLoading ? (
             <div className='space-y-3'>
               <Skeleton className='h-8 w-full' />
