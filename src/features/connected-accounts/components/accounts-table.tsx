@@ -65,14 +65,14 @@ export function AccountsTable({
                     <p className="text-sm font-medium">{account.name}</p>
                     <div className="flex items-center gap-1">
                       {account.linkedinExternalId && !account.isLinkedinEnabled && (
-                        <Badge variant="destructive" className="text-xs">
+                        <p className="text-xs text-destructive">
                           LinkedIn Disconnected
-                        </Badge>
+                        </p>
                       )}
                       {account.emailProvider && !account.isEmailEnabled && (
-                        <Badge variant="destructive" className="text-xs">
+                        <p className="text-xs text-destructive">
                           Email Disconnected
-                        </Badge>
+                        </p>
                       )}
                     </div>
                     <p className="text-xs text-muted-foreground">{account.id}</p>

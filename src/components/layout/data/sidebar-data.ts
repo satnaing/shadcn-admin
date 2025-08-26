@@ -5,14 +5,20 @@ import {
   PlayCircle,
   Building2,
   UserCheck,
+  Activity,
 } from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
   navGroups: [
     {
-      title: 'General',
+      title: 'Operations',
       items: [
+        {
+          title: 'Activity',
+          url: '/activity',
+          icon: Activity,
+        },
         {
           title: 'Plays',
           url: '/plays',
@@ -21,7 +27,7 @@ export const sidebarData: SidebarData = {
       ],
     },
     {
-      title: 'Other',
+      title: 'Intelligence',
       items: [
         {
           title: 'Knowledge',
@@ -40,14 +46,19 @@ export const sidebarData: SidebarData = {
           ],
         },
         {
-          title: 'Connected Accounts',
+          title: 'Tools',
+          url: '/tools',
+          icon: Package,
+        },
+      ],
+    },
+    {
+      title: 'Account',
+      items: [
+        {
+          title: 'Senders',
           url: '/connected-accounts',
           icon: UserCheck,
-        },
-        {
-          title: 'Integrations',
-          url: '/integrations',
-          icon: Package,
         },
       ],
     },

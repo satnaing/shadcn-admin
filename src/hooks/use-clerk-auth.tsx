@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useUser, useAuth } from '@clerk/clerk-react'
+import { useUser, useAuth, useClerk } from '@clerk/clerk-react'
 import { toast } from 'sonner'
 import { useUserLoginMutation, useSubscriptionLazyQuery } from '@/graphql/operations/operations.generated'
 
@@ -11,6 +11,7 @@ interface UseClerkAuthOptions {
 export function useClerkAuth(options?: UseClerkAuthOptions) {
   const { user, isLoaded } = useUser()
   const { isSignedIn } = useAuth()
+  const { signOut } = useClerk()
   const [hasLoggedIn, setHasLoggedIn] = useState(false)
   const loginAttempted = useRef(false)
   
@@ -49,7 +50,11 @@ export function useClerkAuth(options?: UseClerkAuthOptions) {
         {
           description: error.message,
         }
-      )
+            )
+      
+      // Sign out the user on login error - Clerk will handle the redirect
+      signOut()
+      
       options?.onError?.(error)
     },
   })

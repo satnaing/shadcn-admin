@@ -601,6 +601,11 @@ export type DailySessionTargetMarketFit = {
   totalSessions: Scalars['Float']['output'];
 };
 
+export type DateFilter = {
+  from?: InputMaybe<Scalars['DateTimeISO']['input']>;
+  to?: InputMaybe<Scalars['DateTimeISO']['input']>;
+};
+
 export enum EmailProvider {
   Google = 'GOOGLE',
   Mail = 'MAIL',
@@ -636,6 +641,77 @@ export type ExcludedCompanyDeleteInput = {
 export type ExcludedCompanyFilter = {
   query?: InputMaybe<Scalars['String']['input']>;
 };
+
+export type Execution = {
+  __typename?: 'Execution';
+  agentThreadId?: Maybe<Scalars['String']['output']>;
+  approvalRequestedAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  approvalSlackRef?: Maybe<Scalars['String']['output']>;
+  completedAt?: Maybe<Scalars['DateTimeISO']['output']>;
+  createdAt: Scalars['DateTimeISO']['output'];
+  entityId?: Maybe<Scalars['String']['output']>;
+  entityType?: Maybe<ExecutionEntityType>;
+  errorMessage?: Maybe<Scalars['String']['output']>;
+  id: Scalars['String']['output'];
+  initiatedBy?: Maybe<Scalars['String']['output']>;
+  initiatedFrom: ExecutionInitiatedFrom;
+  memoryId?: Maybe<Scalars['String']['output']>;
+  orgId: Scalars['String']['output'];
+  playbookId?: Maybe<Scalars['String']['output']>;
+  result?: Maybe<Scalars['JSON']['output']>;
+  slackRef?: Maybe<Scalars['String']['output']>;
+  status: ExecutionStatus;
+  summary?: Maybe<Scalars['String']['output']>;
+  triggerEventId?: Maybe<Scalars['String']['output']>;
+  type: ExecutionType;
+  updatedAt: Scalars['DateTimeISO']['output'];
+};
+
+export enum ExecutionEntityType {
+  Company = 'COMPANY',
+  Contact = 'CONTACT'
+}
+
+export type ExecutionFilter = {
+  entityId?: InputMaybe<Scalars['String']['input']>;
+  playbookId?: InputMaybe<Scalars['String']['input']>;
+  runAt?: InputMaybe<DateFilter>;
+  status?: InputMaybe<ExecutionStatus>;
+  triggerType?: InputMaybe<TriggerType>;
+  type?: InputMaybe<ExecutionType>;
+};
+
+export enum ExecutionInitiatedFrom {
+  Slack = 'SLACK',
+  System = 'SYSTEM',
+  Ui = 'UI'
+}
+
+/** Fields available for sorting executions */
+export enum ExecutionSortField {
+  CompletedAt = 'COMPLETED_AT',
+  CreatedAt = 'CREATED_AT',
+  Status = 'STATUS'
+}
+
+export type ExecutionSortInput = {
+  field: ExecutionSortField;
+  order: SortOrder;
+};
+
+export enum ExecutionStatus {
+  AwaitingApproval = 'AWAITING_APPROVAL',
+  Cancelled = 'CANCELLED',
+  Completed = 'COMPLETED',
+  Failed = 'FAILED',
+  InProgress = 'IN_PROGRESS',
+  Pending = 'PENDING'
+}
+
+export enum ExecutionType {
+  Playbook = 'PLAYBOOK',
+  User = 'USER'
+}
 
 export type GenericResolverResponse = {
   __typename?: 'GenericResolverResponse';
@@ -1106,6 +1182,14 @@ export type PaginatedExcludedCompanies = {
   totalCount?: Maybe<Scalars['Float']['output']>;
 };
 
+export type PaginatedExecutions = {
+  __typename?: 'PaginatedExecutions';
+  data: Array<Execution>;
+  hasData?: Maybe<Scalars['Boolean']['output']>;
+  hasMore: Scalars['Boolean']['output'];
+  totalCount?: Maybe<Scalars['Float']['output']>;
+};
+
 export type PaginatedLists = {
   __typename?: 'PaginatedLists';
   data: Array<TargetMarket>;
@@ -1339,6 +1423,7 @@ export type Query = {
   crmIntegration?: Maybe<CrmIntegration>;
   crmLists: CrmListResponse;
   excludedCompanies: PaginatedExcludedCompanies;
+  executions: PaginatedExecutions;
   integrations?: Maybe<IntegrationsOutput>;
   list?: Maybe<TargetMarket>;
   lists: PaginatedLists;
@@ -1423,6 +1508,13 @@ export type QueryCrmListsArgs = {
 export type QueryExcludedCompaniesArgs = {
   filter?: InputMaybe<ExcludedCompanyFilter>;
   page?: InputMaybe<PaginationInput>;
+};
+
+
+export type QueryExecutionsArgs = {
+  filters?: InputMaybe<ExecutionFilter>;
+  page?: InputMaybe<PaginationInput>;
+  sort?: InputMaybe<ExecutionSortInput>;
 };
 
 
@@ -1768,6 +1860,11 @@ export type SlackUser = {
   name: Scalars['String']['output'];
   realName: Scalars['String']['output'];
 };
+
+export enum SortOrder {
+  Asc = 'asc',
+  Desc = 'desc'
+}
 
 export type Subscription = {
   __typename?: 'Subscription';

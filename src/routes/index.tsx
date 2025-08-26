@@ -1,6 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router'
-import PlaybooksPage from '@/features/plays'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
-  component: PlaybooksPage,
+  beforeLoad: () => {
+    throw redirect({
+      to: '/activity',
+    })
+  },
 })

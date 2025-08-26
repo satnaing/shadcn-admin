@@ -1,0 +1,36 @@
+# Executions queries
+query Executions(
+  $page: PaginationInput
+  $filters: ExecutionFilter
+) {
+  executions(page: $page, filters: $filters) {
+    data {
+      id
+      createdAt
+      completedAt
+      result
+      summary
+      status
+      playbookId
+      entityId
+      entityType
+      type
+      errorMessage
+      initiatedBy
+      initiatedFrom
+    }
+    hasMore
+    totalCount
+    hasData
+  }
+}
+
+# Query all playbooks for filtering
+query PlaybooksForFilter {
+  playbooks {
+    id
+    name
+    description
+    isEnabled
+  }
+}

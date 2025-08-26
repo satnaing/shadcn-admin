@@ -19,13 +19,13 @@ import {
   FormLabel,
 } from '@/components/ui/form'
 import { toast } from 'sonner'
-import { ConnectedBadge } from '@/features/integrations/components/connected-badge'
+import { ConnectedBadge } from '@/features/tools/components/connected-badge'
 import {
   useCrmIntegrationQuery,
   useCrmIntegrationUpdateMutation,
 } from '@/graphql/operations/operations.generated'
 import type { CrmIntegrationUpdateInput } from '@/graphql/global/types.generated'
-import { getAuthUrlHandler } from '@/features/integrations/utils/auth-helpers'
+import { getAuthUrlHandler } from '@/features/tools/utils/auth-helpers'
 import { Loadable } from '@/components/loadable'
 
 const APP_URL = import.meta.env.VITE_APP_URL

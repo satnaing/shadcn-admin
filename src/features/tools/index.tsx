@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Page } from '@/components/page'
-import { HubSpotConnectModal } from '@/features/integrations/components/hubspot-connect-modal'
-import { SlackConnectModal } from '@/features/integrations/components/slack-connect-modal'
+import { HubSpotConnectModal } from '@/features/tools/components/hubspot-connect-modal'
+import { SlackConnectModal } from '@/features/tools/components/slack-connect-modal'
 import { useIntegrationsQuery } from '@/graphql/operations/operations.generated'
 
 type Integration = {
@@ -21,20 +21,20 @@ const ALL_INTEGRATIONS: Integration[] = [
   {
     name: 'HubSpot',
     app: 'HUBSPOT',
-    description: 'Connect HubSpot to easily sync accounts between Swan and Hubspot.',
+    description: 'Allows Swan to read and write to your HubSpot account',
     logo: 'https://logo.clearbit.com/hubspot.com',
     Component: HubSpotConnectModal,
   },
   {
     name: 'Slack',
     app: 'SLACK',
-    description: 'Connect Slack to get notifications from Swan directly in your own workspace',
+    description: 'Allows Swan to communicate with your team in Slack',
     logo: 'https://logo.clearbit.com/slack.com',
     Component: SlackConnectModal,
   },
 ]
 
-export function Integrations() {
+export function Tools() {
   const [openModal, setOpenModal] = useState('')
   const { data: integrations } = useIntegrationsQuery()
 
@@ -42,8 +42,8 @@ export function Integrations() {
 
   return (
     <Page
-      title="Integrations"
-      description="Connect to platforms to seamlessly sync your Swan data"
+      title="Tools"
+      description="Give Swan access to your team's stack"
       mainFixed
     >
       <div className='grid gap-4 pt-6 pb-16 md:grid-cols-2 lg:grid-cols-3'>

@@ -14,9 +14,9 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { toast } from 'sonner'
-import { ConnectedBadge } from '@/features/integrations/components/connected-badge'
-import { SlackChannelSelector } from '@/features/integrations/components/slack-channel-selector'
-import { useSlackAuth } from '@/features/integrations/hooks/use-slack-auth'
+import { ConnectedBadge } from '@/features/tools/components/connected-badge'
+import { SlackChannelSelector } from '@/features/tools/components/slack-channel-selector'
+import { useSlackAuth } from '@/features/tools/hooks/use-slack-auth'
 import {
   useSlackIntegrationQuery,
   useSlackIntegrationUpdateMutation,

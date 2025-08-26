@@ -13,13 +13,14 @@ import { Route as SettingsRouteRouteImport } from './routes/settings/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
+import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as TasksIndexRouteImport } from './routes/tasks/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
 import { Route as PlaysIndexRouteImport } from './routes/plays/index'
-import { Route as IntegrationsIndexRouteImport } from './routes/integrations/index'
 import { Route as HelpCenterIndexRouteImport } from './routes/help-center/index'
 import { Route as ConnectedAccountsIndexRouteImport } from './routes/connected-accounts/index'
 import { Route as ChatsIndexRouteImport } from './routes/chats/index'
+import { Route as ActivityIndexRouteImport } from './routes/activity/index'
 import { Route as SettingsNotificationsRouteImport } from './routes/settings/notifications'
 import { Route as SettingsDisplayRouteImport } from './routes/settings/display'
 import { Route as SettingsAppearanceRouteImport } from './routes/settings/appearance'
@@ -58,6 +59,11 @@ const UsersIndexRoute = UsersIndexRouteImport.update({
   path: '/users/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsIndexRoute = ToolsIndexRouteImport.update({
+  id: '/tools/',
+  path: '/tools/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TasksIndexRoute = TasksIndexRouteImport.update({
   id: '/tasks/',
   path: '/tasks/',
@@ -73,11 +79,6 @@ const PlaysIndexRoute = PlaysIndexRouteImport.update({
   path: '/plays/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IntegrationsIndexRoute = IntegrationsIndexRouteImport.update({
-  id: '/integrations/',
-  path: '/integrations/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const HelpCenterIndexRoute = HelpCenterIndexRouteImport.update({
   id: '/help-center/',
   path: '/help-center/',
@@ -91,6 +92,11 @@ const ConnectedAccountsIndexRoute = ConnectedAccountsIndexRouteImport.update({
 const ChatsIndexRoute = ChatsIndexRouteImport.update({
   id: '/chats/',
   path: '/chats/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivityIndexRoute = ActivityIndexRouteImport.update({
+  id: '/activity/',
+  path: '/activity/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsNotificationsRoute = SettingsNotificationsRouteImport.update({
@@ -200,13 +206,14 @@ export interface FileRoutesByFullPath {
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
+  '/activity': typeof ActivityIndexRoute
   '/chats': typeof ChatsIndexRoute
   '/connected-accounts': typeof ConnectedAccountsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
-  '/integrations': typeof IntegrationsIndexRoute
   '/plays': typeof PlaysIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/tasks': typeof TasksIndexRoute
+  '/tools': typeof ToolsIndexRoute
   '/users': typeof UsersIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
   '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
@@ -229,13 +236,14 @@ export interface FileRoutesByTo {
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
+  '/activity': typeof ActivityIndexRoute
   '/chats': typeof ChatsIndexRoute
   '/connected-accounts': typeof ConnectedAccountsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
-  '/integrations': typeof IntegrationsIndexRoute
   '/plays': typeof PlaysIndexRoute
   '/settings': typeof SettingsIndexRoute
   '/tasks': typeof TasksIndexRoute
+  '/tools': typeof ToolsIndexRoute
   '/users': typeof UsersIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
   '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
@@ -261,13 +269,14 @@ export interface FileRoutesById {
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
+  '/activity/': typeof ActivityIndexRoute
   '/chats/': typeof ChatsIndexRoute
   '/connected-accounts/': typeof ConnectedAccountsIndexRoute
   '/help-center/': typeof HelpCenterIndexRoute
-  '/integrations/': typeof IntegrationsIndexRoute
   '/plays/': typeof PlaysIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/tasks/': typeof TasksIndexRoute
+  '/tools/': typeof ToolsIndexRoute
   '/users/': typeof UsersIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
   '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
@@ -293,13 +302,14 @@ export interface FileRouteTypes {
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
+    | '/activity'
     | '/chats'
     | '/connected-accounts'
     | '/help-center'
-    | '/integrations'
     | '/plays'
     | '/settings/'
     | '/tasks'
+    | '/tools'
     | '/users'
     | '/knowledge/icp/$profileId'
     | '/knowledge/icp/new'
@@ -322,13 +332,14 @@ export interface FileRouteTypes {
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
+    | '/activity'
     | '/chats'
     | '/connected-accounts'
     | '/help-center'
-    | '/integrations'
     | '/plays'
     | '/settings'
     | '/tasks'
+    | '/tools'
     | '/users'
     | '/knowledge/icp/$profileId'
     | '/knowledge/icp/new'
@@ -353,13 +364,14 @@ export interface FileRouteTypes {
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
+    | '/activity/'
     | '/chats/'
     | '/connected-accounts/'
     | '/help-center/'
-    | '/integrations/'
     | '/plays/'
     | '/settings/'
     | '/tasks/'
+    | '/tools/'
     | '/users/'
     | '/knowledge/icp/$profileId'
     | '/knowledge/icp/new'
@@ -379,12 +391,13 @@ export interface RootRouteChildren {
   errors503Route: typeof errors503Route
   PlaysPlaybookIdRoute: typeof PlaysPlaybookIdRoute
   PlaysNewRoute: typeof PlaysNewRoute
+  ActivityIndexRoute: typeof ActivityIndexRoute
   ChatsIndexRoute: typeof ChatsIndexRoute
   ConnectedAccountsIndexRoute: typeof ConnectedAccountsIndexRoute
   HelpCenterIndexRoute: typeof HelpCenterIndexRoute
-  IntegrationsIndexRoute: typeof IntegrationsIndexRoute
   PlaysIndexRoute: typeof PlaysIndexRoute
   TasksIndexRoute: typeof TasksIndexRoute
+  ToolsIndexRoute: typeof ToolsIndexRoute
   UsersIndexRoute: typeof UsersIndexRoute
   KnowledgeIcpProfileIdRoute: typeof KnowledgeIcpProfileIdRoute
   KnowledgeIcpNewRoute: typeof KnowledgeIcpNewRoute
@@ -423,6 +436,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/': {
+      id: '/tools/'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tasks/': {
       id: '/tasks/'
       path: '/tasks'
@@ -444,13 +464,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlaysIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/integrations/': {
-      id: '/integrations/'
-      path: '/integrations'
-      fullPath: '/integrations'
-      preLoaderRoute: typeof IntegrationsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/help-center/': {
       id: '/help-center/'
       path: '/help-center'
@@ -470,6 +483,13 @@ declare module '@tanstack/react-router' {
       path: '/chats'
       fullPath: '/chats'
       preLoaderRoute: typeof ChatsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activity/': {
+      id: '/activity/'
+      path: '/activity'
+      fullPath: '/activity'
+      preLoaderRoute: typeof ActivityIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings/notifications': {
@@ -646,12 +666,13 @@ const rootRouteChildren: RootRouteChildren = {
   errors503Route: errors503Route,
   PlaysPlaybookIdRoute: PlaysPlaybookIdRoute,
   PlaysNewRoute: PlaysNewRoute,
+  ActivityIndexRoute: ActivityIndexRoute,
   ChatsIndexRoute: ChatsIndexRoute,
   ConnectedAccountsIndexRoute: ConnectedAccountsIndexRoute,
   HelpCenterIndexRoute: HelpCenterIndexRoute,
-  IntegrationsIndexRoute: IntegrationsIndexRoute,
   PlaysIndexRoute: PlaysIndexRoute,
   TasksIndexRoute: TasksIndexRoute,
+  ToolsIndexRoute: ToolsIndexRoute,
   UsersIndexRoute: UsersIndexRoute,
   KnowledgeIcpProfileIdRoute: KnowledgeIcpProfileIdRoute,
   KnowledgeIcpNewRoute: KnowledgeIcpNewRoute,
