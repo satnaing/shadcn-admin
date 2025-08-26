@@ -2,7 +2,6 @@ import { format } from 'date-fns'
 import { useNavigate } from '@tanstack/react-router'
 import { PlayCircle, PauseCircle, Plus, MoreVertical, Clock, Layers, Calendar } from 'lucide-react'
 import { toast } from 'sonner'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import {
@@ -92,13 +91,10 @@ export default function PlaybooksPage() {
               <div className='mb-4 flex items-start justify-between'>
                 <div className='flex-1'>
                   <div className='mb-1 flex items-center gap-2'>
+                    <div
+                      className={`h-2 w-2 rounded-full ${playbook.isEnabled ? 'bg-green-500' : 'bg-yellow-500'}`}
+                    />
                     <h3 className='text-lg font-semibold'>{playbook.name}</h3>
-                    <Badge
-                      variant={playbook.isEnabled ? 'default' : 'secondary'}
-                      className={playbook.isEnabled ? 'bg-green-500' : ''}
-                    >
-                      {playbook.isEnabled ? 'Active' : 'Inactive'}
-                    </Badge>
                   </div>
                   <p className='text-muted-foreground line-clamp-2 text-sm'>
                     {playbook.description || 'No description'}

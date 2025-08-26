@@ -68,6 +68,8 @@ If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest 
 
 **Linting/Formatting:** [Eslint](https://eslint.org/) & [Prettier](https://prettier.io/)
 
+**Pre-commit Hooks:** [Husky](https://typicode.github.io/husky/) & [lint-staged](https://github.com/lint-staged/lint-staged)
+
 **Icons:** [Lucide Icons](https://lucide.dev/icons/), [Tabler Icons](https://tabler.io/icons) (Brand icons only)
 
 **Auth (partial):** [Clerk](https://go.clerk.com/GttUAaK)
@@ -96,6 +98,29 @@ Start the server
 
 ```bash
   pnpm run dev
+```
+
+## Development Workflow
+
+This project uses pre-commit hooks to ensure code quality. When you commit changes, the following checks will automatically run:
+
+1. **TypeScript Type Checking**: Ensures there are no type errors in the codebase
+2. **ESLint**: Checks for code quality issues and automatically fixes them where possible
+3. **Prettier**: Formats your code according to the project's style guidelines
+
+These checks only run on staged files to keep commits fast. If any check fails, the commit will be aborted, and you'll need to fix the issues before committing again.
+
+To manually run these checks:
+
+```bash
+# Type checking
+pnpm tsc --noEmit
+
+# Linting
+pnpm lint
+
+# Formatting
+pnpm format
 ```
 
 ## Sponsoring this project ❤️
