@@ -1,22 +1,14 @@
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K]
-}
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>
-}
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>
-}
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = {
   [_ in K]?: never
 }
 export type Incremental<T> =
   | T
-  | {
-      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never
-    }
+  | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string }
@@ -664,6 +656,7 @@ export type Execution = {
   entityType?: Maybe<ExecutionEntityType>
   errorMessage?: Maybe<Scalars['String']['output']>
   id: Scalars['String']['output']
+  identity?: Maybe<ExecutionIdentity>
   initiatedBy?: Maybe<Scalars['String']['output']>
   initiatedFrom: ExecutionInitiatedFrom
   memoryId?: Maybe<Scalars['String']['output']>
@@ -690,6 +683,14 @@ export type ExecutionFilter = {
   status?: InputMaybe<ExecutionStatus>
   triggerType?: InputMaybe<TriggerType>
   type?: InputMaybe<ExecutionType>
+}
+
+export type ExecutionIdentity = {
+  __typename?: 'ExecutionIdentity'
+  id: Scalars['String']['output']
+  name: Scalars['String']['output']
+  type: Scalars['String']['output']
+  url: Scalars['String']['output']
 }
 
 export enum ExecutionInitiatedFrom {
@@ -1271,13 +1272,11 @@ export type PlaybookScenarioUpdateInput = {
 }
 
 export type PlaybookUpdateInput = {
-  actionsPrompt?: InputMaybe<Scalars['String']['input']>
-  classificationPrompt?: InputMaybe<Scalars['String']['input']>
   description?: InputMaybe<Scalars['String']['input']>
   id: Scalars['String']['input']
   isEnabled?: InputMaybe<Scalars['Boolean']['input']>
   name?: InputMaybe<Scalars['String']['input']>
-  outreachPrompt?: InputMaybe<Scalars['String']['input']>
+  outreachInstructions?: InputMaybe<Scalars['String']['input']>
 }
 
 export type Prompt = {

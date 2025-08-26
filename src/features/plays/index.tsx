@@ -91,10 +91,10 @@ export default function PlaybooksPage() {
               <div className='mb-4 flex items-start justify-between'>
                 <div className='flex-1'>
                   <div className='mb-1 flex items-center gap-2'>
+                    <h3 className='text-lg font-semibold'>{playbook.name}</h3>
                     <div
                       className={`h-2 w-2 rounded-full ${playbook.isEnabled ? 'bg-green-500' : 'bg-yellow-500'}`}
                     />
-                    <h3 className='text-lg font-semibold'>{playbook.name}</h3>
                   </div>
                   <p className='text-muted-foreground line-clamp-2 text-sm'>
                     {playbook.description || 'No description'}

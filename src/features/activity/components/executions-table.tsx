@@ -56,9 +56,9 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
     pagination: { defaultPage: 1, defaultPageSize: 10 },
     globalFilter: { enabled: true, key: 'filter' },
     columnFilters: [
-      { columnId: 'status', searchKey: 'status', type: 'array' },
-      { columnId: 'type', searchKey: 'type', type: 'array' },
-      { columnId: 'playbookId', searchKey: 'playbookId', type: 'array' },
+      { columnId: 'status', searchKey: 'status', type: 'string' },
+      { columnId: 'type', searchKey: 'type', type: 'string' },
+      { columnId: 'playbookId', searchKey: 'playbookId', type: 'string' },
     ],
   })
 

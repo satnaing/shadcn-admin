@@ -34,11 +34,7 @@ export type PersonaFieldsFragment = {
   description?: string | null
   maxContacts: number
   createdAt: any
-  targetMarkets: Array<{
-    __typename?: 'PersonaTargetMarket'
-    id: string
-    targetMarketId: string
-  }>
+  targetMarkets: Array<{ __typename?: 'PersonaTargetMarket'; id: string; targetMarketId: string }>
 }
 
 export type TargetMarketsQueryVariables = Types.Exact<{ [key: string]: never }>
@@ -145,10 +141,7 @@ export type TargetMarketDeleteMutationVariables = Types.Exact<{
 
 export type TargetMarketDeleteMutation = {
   __typename?: 'Mutation'
-  targetMarketDelete: {
-    __typename?: 'GenericResolverResponse'
-    success: boolean
-  }
+  targetMarketDelete: { __typename?: 'GenericResolverResponse'; success: boolean }
 }
 
 export type PersonasQueryVariables = Types.Exact<{
@@ -165,11 +158,7 @@ export type PersonasQuery = {
     description?: string | null
     maxContacts: number
     createdAt: any
-    targetMarkets: Array<{
-      __typename?: 'PersonaTargetMarket'
-      id: string
-      targetMarketId: string
-    }>
+    targetMarkets: Array<{ __typename?: 'PersonaTargetMarket'; id: string; targetMarketId: string }>
   }>
 }
 
@@ -187,11 +176,7 @@ export type PersonaUpsertMutation = {
     description?: string | null
     maxContacts: number
     createdAt: any
-    targetMarkets: Array<{
-      __typename?: 'PersonaTargetMarket'
-      id: string
-      targetMarketId: string
-    }>
+    targetMarkets: Array<{ __typename?: 'PersonaTargetMarket'; id: string; targetMarketId: string }>
   }
 }
 

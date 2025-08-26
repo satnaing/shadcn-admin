@@ -4,9 +4,7 @@ import * as ApolloReactHooks from '@apollo/client'
 import type * as Types from '../../../graphql/global/types.generated'
 
 const defaultOptions = {} as const
-export type ConnectedAccountsQueryVariables = Types.Exact<{
-  [key: string]: never
-}>
+export type ConnectedAccountsQueryVariables = Types.Exact<{ [key: string]: never }>
 
 export type ConnectedAccountsQuery = {
   __typename?: 'Query'
@@ -33,10 +31,7 @@ export type ConnectAccountUrlMutationVariables = Types.Exact<{
 
 export type ConnectAccountUrlMutation = {
   __typename?: 'Mutation'
-  connectedAccountConnectionUrl: {
-    __typename?: 'ConnectedAccountConnectionUrl'
-    url: string
-  }
+  connectedAccountConnectionUrl: { __typename?: 'ConnectedAccountConnectionUrl'; url: string }
 }
 
 export type ReconnectAccountUrlMutationVariables = Types.Exact<{
@@ -45,10 +40,7 @@ export type ReconnectAccountUrlMutationVariables = Types.Exact<{
 
 export type ReconnectAccountUrlMutation = {
   __typename?: 'Mutation'
-  connectedAccountReconnectionUrl: {
-    __typename?: 'ConnectedAccountConnectionUrl'
-    url: string
-  }
+  connectedAccountReconnectionUrl: { __typename?: 'ConnectedAccountConnectionUrl'; url: string }
 }
 
 export type ConnectedAccountDeleteMutationVariables = Types.Exact<{
@@ -57,10 +49,7 @@ export type ConnectedAccountDeleteMutationVariables = Types.Exact<{
 
 export type ConnectedAccountDeleteMutation = {
   __typename?: 'Mutation'
-  connectedAccountDelete: {
-    __typename?: 'GenericResolverResponse'
-    count?: number | null
-  }
+  connectedAccountDelete: { __typename?: 'GenericResolverResponse'; count?: number | null }
 }
 
 export const ConnectedAccountsDocument = gql`

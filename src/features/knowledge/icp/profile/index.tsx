@@ -44,7 +44,7 @@ export default function ICPProfilePage() {
     >
       <Separator className='mb-6' />
 
-      <div className='grid max-w-[80%] gap-6'>
+      <div className='grid gap-6 sm:max-w-[100%] md:max-w-[80%]'>
         {/* Profile Details Card */}
         <Card>
           <CardHeader>

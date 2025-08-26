@@ -113,7 +113,7 @@ function AuthWrapper() {
       <Toaster duration={5000} richColors />
       {import.meta.env.MODE === 'development' && (
         <>
-          <ReactQueryDevtools buttonPosition='top-left' />
+          <ReactQueryDevtools buttonPosition='bottom-left' />
           <TanStackRouterDevtools position='bottom-right' />
         </>
       )}

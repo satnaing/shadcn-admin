@@ -8,15 +8,10 @@ export type IntegrationsQueryVariables = Types.Exact<{ [key: string]: never }>
 
 export type IntegrationsQuery = {
   __typename?: 'Query'
-  integrations?: {
-    __typename?: 'IntegrationsOutput'
-    apps: Array<string>
-  } | null
+  integrations?: { __typename?: 'IntegrationsOutput'; apps: Array<string> } | null
 }
 
-export type SlackIntegrationQueryVariables = Types.Exact<{
-  [key: string]: never
-}>
+export type SlackIntegrationQueryVariables = Types.Exact<{ [key: string]: never }>
 
 export type SlackIntegrationQuery = {
   __typename?: 'Query'
@@ -74,11 +69,7 @@ export type SlackChannelsQueryVariables = Types.Exact<{ [key: string]: never }>
 
 export type SlackChannelsQuery = {
   __typename?: 'Query'
-  slackChannels?: Array<{
-    __typename?: 'SlackChannel'
-    id: string
-    name: string
-  }> | null
+  slackChannels?: Array<{ __typename?: 'SlackChannel'; id: string; name: string }> | null
 }
 
 export type SlackUsersQueryVariables = Types.Exact<{
@@ -103,10 +94,7 @@ export type SlackIntegrationUpdateMutationVariables = Types.Exact<{
 
 export type SlackIntegrationUpdateMutation = {
   __typename?: 'Mutation'
-  slackIntegrationUpdate: {
-    __typename?: 'GenericResolverResponse'
-    success: boolean
-  }
+  slackIntegrationUpdate: { __typename?: 'GenericResolverResponse'; success: boolean }
 }
 
 export type CrmIntegrationUpdateMutationVariables = Types.Exact<{

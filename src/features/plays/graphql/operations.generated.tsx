@@ -36,6 +36,7 @@ export type PlaybookQuery = {
     createdAt: any
     updatedAt: any
     deletedAt?: any | null
+    outreachInstructions?: string | null
     scenarios: Array<{
       __typename?: 'PlaybookScenario'
       id: string
@@ -60,6 +61,7 @@ export type PlaybookUpdateMutation = {
     name: string
     description?: string | null
     isEnabled: boolean
+    outreachInstructions?: string | null
     createdAt: any
     updatedAt: any
     deletedAt?: any | null
@@ -254,6 +256,7 @@ export const PlaybookDocument = gql`
       createdAt
       updatedAt
       deletedAt
+      outreachInstructions
       scenarios {
         id
         name
@@ -324,6 +327,7 @@ export const PlaybookUpdateDocument = gql`
       name
       description
       isEnabled
+      outreachInstructions
       createdAt
       updatedAt
       deletedAt

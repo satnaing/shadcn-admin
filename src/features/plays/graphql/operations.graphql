@@ -20,6 +20,7 @@ query Playbook($id: String!) {
     createdAt
     updatedAt
     deletedAt
+    outreachInstructions
     scenarios {
       id
       name
@@ -37,6 +38,7 @@ mutation PlaybookUpdate($input: PlaybookUpdateInput!) {
     name
     description
     isEnabled
+    outreachInstructions
     createdAt
     updatedAt
     deletedAt

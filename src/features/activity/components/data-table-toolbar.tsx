@@ -3,7 +3,7 @@ import { type Table } from '@tanstack/react-table'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { executionStatuses, executionTypes } from '../data/data'
-import { DataTableFacetedFilter } from './data-table-faceted-filter'
+import { DataTableSingleFilter } from './data-table-single-filter'
 import { DataTableViewOptions } from './data-table-view-options'
 
 type DataTableToolbarProps<TData> = {
@@ -31,21 +31,21 @@ export function DataTableToolbar<TData>({ table, playbooks = [] }: DataTableTool
         />
         <div className='flex gap-x-2'>
           {table.getColumn('status') && (
-            <DataTableFacetedFilter
+            <DataTableSingleFilter
               column={table.getColumn('status')}
               title='Status'
               options={executionStatuses}
             />
           )}
           {table.getColumn('type') && (
-            <DataTableFacetedFilter
+            <DataTableSingleFilter
               column={table.getColumn('type')}
               title='Type'
               options={executionTypes}
             />
           )}
           {table.getColumn('playbookId') && playbookOptions.length > 0 && (
-            <DataTableFacetedFilter
+            <DataTableSingleFilter
               column={table.getColumn('playbookId')}
               title='Playbook'
               options={playbookOptions}

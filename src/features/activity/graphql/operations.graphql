@@ -8,6 +8,12 @@ query Executions($page: PaginationInput, $filters: ExecutionFilter) {
       result
       summary
       status
+      identity {
+        name
+        id
+        type
+        url
+      }
       playbookId
       entityId
       entityType

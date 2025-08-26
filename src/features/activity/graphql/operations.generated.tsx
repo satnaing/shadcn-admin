@@ -31,13 +31,18 @@ export type ExecutionsQuery = {
       errorMessage?: string | null
       initiatedBy?: string | null
       initiatedFrom: Types.ExecutionInitiatedFrom
+      identity?: {
+        __typename?: 'ExecutionIdentity'
+        name: string
+        id: string
+        type: string
+        url: string
+      } | null
     }>
   }
 }
 
-export type PlaybooksForFilterQueryVariables = Types.Exact<{
-  [key: string]: never
-}>
+export type PlaybooksForFilterQueryVariables = Types.Exact<{ [key: string]: never }>
 
 export type PlaybooksForFilterQuery = {
   __typename?: 'Query'
@@ -60,6 +65,12 @@ export const ExecutionsDocument = gql`
         result
         summary
         status
+        identity {
+          name
+          id
+          type
+          url
+        }
         playbookId
         entityId
         entityType

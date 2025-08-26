@@ -8,13 +8,47 @@ import { type Execution } from './schema'
 
 // Extend the table meta type
 declare module '@tanstack/react-table' {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line unused-imports/no-unused-vars
   interface TableMeta<TData> {
     playbooks?: Record<string, { id: string; name: string }>
   }
 }
 
 export const executionsColumns: ColumnDef<Execution>[] = [
+  {
+    accessorKey: 'identity',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Company' />,
+    cell: ({ row }) => {
+      const identity = row.getValue('identity') as {
+        name: string
+        type: string
+        url: string
+      } | null
+
+      if (!identity) {
+        return <span className='text-muted-foreground'>-</span>
+      }
+
+      return (
+        <div className='flex w-[140px] items-center gap-2'>
+          {identity.type === 'COMPANY' && identity.url && (
+            <img
+              src={`https://logo.clearbit.com/${identity.url}`}
+              alt={`${identity.name} logo`}
+              className='size-4 rounded-sm object-contain'
+              onError={(e) => {
+                const img = e.target as HTMLImageElement
+                img.style.display = 'none'
+              }}
+            />
+          )}
+          <span className='truncate text-sm'>{identity.name}</span>
+        </div>
+      )
+    },
+    enableSorting: false,
+    enableHiding: true,
+  },
   {
     accessorKey: 'playbookId',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Playbook' />,
@@ -36,7 +70,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
     },
     filterFn: (row, id, value) => {
       const playbookId = row.getValue(id)
-      return value.includes(playbookId)
+      return playbookId === value
     },
   },
   {
@@ -49,13 +83,31 @@ export const executionsColumns: ColumnDef<Execution>[] = [
         return null
       }
 
+      const getStatusColor = (statusValue: string) => {
+        switch (statusValue) {
+          case 'COMPLETED':
+            return 'text-green-600'
+          case 'FAILED':
+            return 'text-red-600'
+          case 'CANCELLED':
+            return 'text-orange-600'
+          case 'IN_PROGRESS':
+            return 'text-blue-600'
+          case 'AWAITING_APPROVAL':
+            return 'text-yellow-600'
+          case 'NOT_STARTED':
+          default:
+            return 'text-gray-500'
+        }
+      }
+
       return (
         <div className='flex w-[140px] items-center gap-2'>
           {status.icon && (
             <status.icon
               className={`size-4 ${
                 status.icon.displayName === 'Loader2' ? 'animate-spin' : ''
-              } text-muted-foreground`}
+              } ${getStatusColor(status.value)}`}
             />
           )}
           <span>{status.label}</span>
@@ -63,7 +115,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
       )
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return row.getValue(id) === value
     },
   },
   {
@@ -126,7 +178,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
       )
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return row.getValue(id) === value
     },
     enableHiding: false,
   },
