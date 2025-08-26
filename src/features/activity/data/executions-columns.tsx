@@ -29,8 +29,15 @@ export const executionsColumns: ColumnDef<Execution>[] = [
         return <span className='text-muted-foreground'>-</span>
       }
 
-      return (
-        <div className='flex w-[140px] items-center gap-2'>
+      const formatUrl = (url: string) => {
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+          return url
+        }
+        return `https://${url}`
+      }
+
+      const content = (
+        <>
           {identity.type === 'COMPANY' && identity.url && (
             <img
               src={`https://logo.clearbit.com/${identity.url}`}
@@ -43,6 +50,23 @@ export const executionsColumns: ColumnDef<Execution>[] = [
             />
           )}
           <span className='truncate text-sm'>{identity.name}</span>
+        </>
+      )
+
+      return (
+        <div className='flex w-[140px] items-center gap-2'>
+          {identity.url ? (
+            <a
+              href={formatUrl(identity.url)}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='flex items-center gap-2 hover:underline'
+            >
+              {content}
+            </a>
+          ) : (
+            content
+          )}
         </div>
       )
     },
