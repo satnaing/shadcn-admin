@@ -6,19 +6,19 @@ export const Route = createFileRoute('/(auth)')({
 
 function ClerkAuthLayout() {
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center bg-gray-50'>
+    <div className='flex min-h-screen flex-col items-center justify-center bg-gray-50'>
       <div className='w-full max-w-md px-4'>
         {/* Logo Section */}
         <div className='mb-8 items-center'>
-          <img 
-            src='/images/swan_logo_with_wordmark_black.png' 
-            alt='Swan Logo' 
-            className='h-12 mx-auto'
+          <img
+            src='/images/swan_logo_with_wordmark_black.png'
+            alt='Swan Logo'
+            className='mx-auto h-12'
           />
         </div>
 
         {/* Auth Content */}
-        <div >
+        <div>
           <Outlet />
         </div>
 

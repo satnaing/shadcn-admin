@@ -21,10 +21,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { executionsColumns as columns } from '../data/executions-columns'
 import { type Execution } from '../data/schema'
 import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
-import { executionsColumns as columns } from '../data/executions-columns'
 
 const route = getRouteApi('/activity/')
 
@@ -37,7 +37,7 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
   // Local UI-only states
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([
-    { id: 'createdAt', desc: true } // Default sort by creation date descending
+    { id: 'createdAt', desc: true }, // Default sort by creation date descending
   ])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
 
@@ -63,10 +63,13 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
   })
 
   // Create playbook lookup map
-  const playbookLookup = playbooks.reduce((acc, pb) => {
-    acc[pb.id] = pb
-    return acc
-  }, {} as Record<string, { id: string; name: string }>)
+  const playbookLookup = playbooks.reduce(
+    (acc, pb) => {
+      acc[pb.id] = pb
+      return acc
+    },
+    {} as Record<string, { id: string; name: string }>
+  )
 
   const table = useReactTable({
     data,
@@ -121,10 +124,7 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
                     <TableHead key={header.id} colSpan={header.colSpan}>
                       {header.isPlaceholder
                         ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                        : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
                   )
                 })}
@@ -134,26 +134,17 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}
-                >
+                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className='h-24 text-center'
-                >
+                <TableCell colSpan={columns.length} className='h-24 text-center'>
                   No results.
                 </TableCell>
               </TableRow>

@@ -29,7 +29,7 @@ export const COUNTRIES = [
   { value: 'ZA', label: 'South Africa' },
   { value: 'AE', label: 'UAE' },
   { value: 'SA', label: 'Saudi Arabia' },
-];
+]
 
 export const REGIONS = [
   { value: 'USA', label: 'United States' },
@@ -38,13 +38,13 @@ export const REGIONS = [
   { value: 'AFRICA', label: 'Africa' },
   { value: 'LATAM', label: 'Latin America' },
   { value: 'MIDDLE_EAST', label: 'Middle East' },
-];
+]
 
 export function getFlagEmoji(countryCode: string): string {
   // Simple flag emoji generation for country codes
   const codePoints = countryCode
     .toUpperCase()
     .split('')
-    .map(char => 127397 + char.charCodeAt(0));
-  return String.fromCodePoint(...codePoints);
+    .map((char) => 127397 + char.charCodeAt(0))
+  return String.fromCodePoint(...codePoints)
 }

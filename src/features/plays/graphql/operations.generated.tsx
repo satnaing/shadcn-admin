@@ -1,83 +1,196 @@
-import type * as Types from '../../../graphql/global/types.generated';
+import { gql } from '@apollo/client'
+import type * as ApolloReactCommon from '@apollo/client'
+import * as ApolloReactHooks from '@apollo/client'
+import type * as Types from '../../../graphql/global/types.generated'
 
-import { gql } from '@apollo/client';
-import type * as ApolloReactCommon from '@apollo/client';
-import * as ApolloReactHooks from '@apollo/client';
-const defaultOptions = {} as const;
-export type PlaybooksQueryVariables = Types.Exact<{ [key: string]: never; }>;
+const defaultOptions = {} as const
+export type PlaybooksQueryVariables = Types.Exact<{ [key: string]: never }>
 
-
-export type PlaybooksQuery = { __typename?: 'Query', playbooks: Array<{ __typename?: 'Playbook', id: string, name: string, description?: string | null, isEnabled: boolean, createdAt: any, updatedAt: any, deletedAt?: any | null, scenarioCount: number }> };
+export type PlaybooksQuery = {
+  __typename?: 'Query'
+  playbooks: Array<{
+    __typename?: 'Playbook'
+    id: string
+    name: string
+    description?: string | null
+    isEnabled: boolean
+    createdAt: any
+    updatedAt: any
+    deletedAt?: any | null
+    scenarioCount: number
+  }>
+}
 
 export type PlaybookQueryVariables = Types.Exact<{
-  id: Types.Scalars['String']['input'];
-}>;
+  id: Types.Scalars['String']['input']
+}>
 
-
-export type PlaybookQuery = { __typename?: 'Query', playbook: { __typename?: 'Playbook', id: string, name: string, description?: string | null, isEnabled: boolean, createdAt: any, updatedAt: any, deletedAt?: any | null, scenarios: Array<{ __typename?: 'PlaybookScenario', id: string, name: string, description?: string | null, actionPlan: string, updatedAt: any, createdAt: any }> } };
-
-export type PlaybookUpdateMutationVariables = Types.Exact<{
-  input: Types.PlaybookUpdateInput;
-}>;
-
-
-export type PlaybookUpdateMutation = { __typename?: 'Mutation', playbookUpdate: { __typename?: 'Playbook', id: string, name: string, description?: string | null, isEnabled: boolean, createdAt: any, updatedAt: any, deletedAt?: any | null, orgId: string } };
-
-export type PlaybookScenarioCreateMutationVariables = Types.Exact<{
-  input: Types.PlaybookScenarioCreateInput;
-}>;
-
-
-export type PlaybookScenarioCreateMutation = { __typename?: 'Mutation', playbookScenarioCreate: { __typename?: 'PlaybookScenario', id: string, name: string, description?: string | null, actionPlan: string, createdAt: any, updatedAt: any, playbookId: string } };
-
-export type PlaybookScenarioUpdateMutationVariables = Types.Exact<{
-  input: Types.PlaybookScenarioUpdateInput;
-}>;
-
-
-export type PlaybookScenarioUpdateMutation = { __typename?: 'Mutation', playbookScenarioUpdate: { __typename?: 'PlaybookScenario', id: string, name: string, description?: string | null, actionPlan: string, createdAt: any, updatedAt: any, playbookId: string } };
-
-export type PlaybookScenariosDeleteMutationVariables = Types.Exact<{
-  input: Types.BatchModelDeleteInput;
-}>;
-
-
-export type PlaybookScenariosDeleteMutation = { __typename?: 'Mutation', playbookScenariosDelete: { __typename?: 'GenericResolverResponse', success: boolean, count?: number | null } };
-
-export type TriggersQueryVariables = Types.Exact<{
-  filters?: Types.InputMaybe<Types.TriggerFilters>;
-}>;
-
-
-export type TriggersQuery = { __typename?: 'Query', triggers: Array<{ __typename?: 'Trigger', id: string, name: string, type: Types.TriggerType, description?: string | null, config: any, isEnabled: boolean, createdAt: any, updatedAt: any, playbookId?: string | null, orgId: string }> };
-
-export type TrackingScriptQueryVariables = Types.Exact<{ [key: string]: never; }>;
-
-
-export type TrackingScriptQuery = { __typename?: 'Query', trackingScript: { __typename?: 'TrackingScript', id: string, domain?: string | null, isVerified: boolean, excludedPaths?: any | null, allowedCountryCodes?: any | null, minimumSessionTimeSec?: number | null, identificationMode: Types.TrackingScriptIdentificationMode, dailyLimit: number, createdAt: any, updatedAt: any } };
-
-export type TrackingScriptUpdateMutationVariables = Types.Exact<{
-  input: Types.TrackingScriptUpdateInput;
-}>;
-
-
-export type TrackingScriptUpdateMutation = { __typename?: 'Mutation', trackingScriptUpdate: { __typename?: 'TrackingScript', id: string, domain?: string | null, isVerified: boolean, excludedPaths?: any | null, allowedCountryCodes?: any | null, minimumSessionTimeSec?: number | null, identificationMode: Types.TrackingScriptIdentificationMode, dailyLimit: number, createdAt: any, updatedAt: any } };
-
-
-export const PlaybooksDocument = gql`
-    query Playbooks {
-  playbooks {
-    id
-    name
-    description
-    isEnabled
-    createdAt
-    updatedAt
-    deletedAt
-    scenarioCount
+export type PlaybookQuery = {
+  __typename?: 'Query'
+  playbook: {
+    __typename?: 'Playbook'
+    id: string
+    name: string
+    description?: string | null
+    isEnabled: boolean
+    createdAt: any
+    updatedAt: any
+    deletedAt?: any | null
+    scenarios: Array<{
+      __typename?: 'PlaybookScenario'
+      id: string
+      name: string
+      description?: string | null
+      actionPlan: string
+      updatedAt: any
+      createdAt: any
+    }>
   }
 }
-    `;
+
+export type PlaybookUpdateMutationVariables = Types.Exact<{
+  input: Types.PlaybookUpdateInput
+}>
+
+export type PlaybookUpdateMutation = {
+  __typename?: 'Mutation'
+  playbookUpdate: {
+    __typename?: 'Playbook'
+    id: string
+    name: string
+    description?: string | null
+    isEnabled: boolean
+    createdAt: any
+    updatedAt: any
+    deletedAt?: any | null
+    orgId: string
+  }
+}
+
+export type PlaybookScenarioCreateMutationVariables = Types.Exact<{
+  input: Types.PlaybookScenarioCreateInput
+}>
+
+export type PlaybookScenarioCreateMutation = {
+  __typename?: 'Mutation'
+  playbookScenarioCreate: {
+    __typename?: 'PlaybookScenario'
+    id: string
+    name: string
+    description?: string | null
+    actionPlan: string
+    createdAt: any
+    updatedAt: any
+    playbookId: string
+  }
+}
+
+export type PlaybookScenarioUpdateMutationVariables = Types.Exact<{
+  input: Types.PlaybookScenarioUpdateInput
+}>
+
+export type PlaybookScenarioUpdateMutation = {
+  __typename?: 'Mutation'
+  playbookScenarioUpdate: {
+    __typename?: 'PlaybookScenario'
+    id: string
+    name: string
+    description?: string | null
+    actionPlan: string
+    createdAt: any
+    updatedAt: any
+    playbookId: string
+  }
+}
+
+export type PlaybookScenariosDeleteMutationVariables = Types.Exact<{
+  input: Types.BatchModelDeleteInput
+}>
+
+export type PlaybookScenariosDeleteMutation = {
+  __typename?: 'Mutation'
+  playbookScenariosDelete: {
+    __typename?: 'GenericResolverResponse'
+    success: boolean
+    count?: number | null
+  }
+}
+
+export type TriggersQueryVariables = Types.Exact<{
+  filters?: Types.InputMaybe<Types.TriggerFilters>
+}>
+
+export type TriggersQuery = {
+  __typename?: 'Query'
+  triggers: Array<{
+    __typename?: 'Trigger'
+    id: string
+    name: string
+    type: Types.TriggerType
+    description?: string | null
+    config: any
+    isEnabled: boolean
+    createdAt: any
+    updatedAt: any
+    playbookId?: string | null
+    orgId: string
+  }>
+}
+
+export type TrackingScriptQueryVariables = Types.Exact<{ [key: string]: never }>
+
+export type TrackingScriptQuery = {
+  __typename?: 'Query'
+  trackingScript: {
+    __typename?: 'TrackingScript'
+    id: string
+    domain?: string | null
+    isVerified: boolean
+    excludedPaths?: any | null
+    allowedCountryCodes?: any | null
+    minimumSessionTimeSec?: number | null
+    identificationMode: Types.TrackingScriptIdentificationMode
+    dailyLimit: number
+    createdAt: any
+    updatedAt: any
+  }
+}
+
+export type TrackingScriptUpdateMutationVariables = Types.Exact<{
+  input: Types.TrackingScriptUpdateInput
+}>
+
+export type TrackingScriptUpdateMutation = {
+  __typename?: 'Mutation'
+  trackingScriptUpdate: {
+    __typename?: 'TrackingScript'
+    id: string
+    domain?: string | null
+    isVerified: boolean
+    excludedPaths?: any | null
+    allowedCountryCodes?: any | null
+    minimumSessionTimeSec?: number | null
+    identificationMode: Types.TrackingScriptIdentificationMode
+    dailyLimit: number
+    createdAt: any
+    updatedAt: any
+  }
+}
+
+export const PlaybooksDocument = gql`
+  query Playbooks {
+    playbooks {
+      id
+      name
+      description
+      isEnabled
+      createdAt
+      updatedAt
+      deletedAt
+      scenarioCount
+    }
+  }
+`
 
 /**
  * __usePlaybooksQuery__
@@ -94,43 +207,64 @@ export const PlaybooksDocument = gql`
  *   },
  * });
  */
-export function usePlaybooksQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PlaybooksQuery, PlaybooksQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<PlaybooksQuery, PlaybooksQueryVariables>(PlaybooksDocument, options);
-      }
-export function usePlaybooksLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PlaybooksQuery, PlaybooksQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<PlaybooksQuery, PlaybooksQueryVariables>(PlaybooksDocument, options);
-        }
-export function usePlaybooksSuspenseQuery(baseOptions?: ApolloReactHooks.SkipToken | ApolloReactHooks.SuspenseQueryHookOptions<PlaybooksQuery, PlaybooksQueryVariables>) {
-          const options = baseOptions === ApolloReactHooks.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useSuspenseQuery<PlaybooksQuery, PlaybooksQueryVariables>(PlaybooksDocument, options);
-        }
-export type PlaybooksQueryHookResult = ReturnType<typeof usePlaybooksQuery>;
-export type PlaybooksLazyQueryHookResult = ReturnType<typeof usePlaybooksLazyQuery>;
-export type PlaybooksSuspenseQueryHookResult = ReturnType<typeof usePlaybooksSuspenseQuery>;
-export type PlaybooksQueryResult = ApolloReactCommon.QueryResult<PlaybooksQuery, PlaybooksQueryVariables>;
+export function usePlaybooksQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<PlaybooksQuery, PlaybooksQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<PlaybooksQuery, PlaybooksQueryVariables>(
+    PlaybooksDocument,
+    options
+  )
+}
+export function usePlaybooksLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PlaybooksQuery, PlaybooksQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<PlaybooksQuery, PlaybooksQueryVariables>(
+    PlaybooksDocument,
+    options
+  )
+}
+export function usePlaybooksSuspenseQuery(
+  baseOptions?:
+    | ApolloReactHooks.SkipToken
+    | ApolloReactHooks.SuspenseQueryHookOptions<PlaybooksQuery, PlaybooksQueryVariables>
+) {
+  const options =
+    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useSuspenseQuery<PlaybooksQuery, PlaybooksQueryVariables>(
+    PlaybooksDocument,
+    options
+  )
+}
+export type PlaybooksQueryHookResult = ReturnType<typeof usePlaybooksQuery>
+export type PlaybooksLazyQueryHookResult = ReturnType<typeof usePlaybooksLazyQuery>
+export type PlaybooksSuspenseQueryHookResult = ReturnType<typeof usePlaybooksSuspenseQuery>
+export type PlaybooksQueryResult = ApolloReactCommon.QueryResult<
+  PlaybooksQuery,
+  PlaybooksQueryVariables
+>
 export const PlaybookDocument = gql`
-    query Playbook($id: String!) {
-  playbook(id: $id) {
-    id
-    name
-    description
-    isEnabled
-    createdAt
-    updatedAt
-    deletedAt
-    scenarios {
+  query Playbook($id: String!) {
+    playbook(id: $id) {
       id
       name
       description
-      actionPlan
-      updatedAt
+      isEnabled
       createdAt
+      updatedAt
+      deletedAt
+      scenarios {
+        id
+        name
+        description
+        actionPlan
+        updatedAt
+        createdAt
+      }
     }
   }
-}
-    `;
+`
 
 /**
  * __usePlaybookQuery__
@@ -148,37 +282,59 @@ export const PlaybookDocument = gql`
  *   },
  * });
  */
-export function usePlaybookQuery(baseOptions: ApolloReactHooks.QueryHookOptions<PlaybookQuery, PlaybookQueryVariables> & ({ variables: PlaybookQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<PlaybookQuery, PlaybookQueryVariables>(PlaybookDocument, options);
-      }
-export function usePlaybookLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PlaybookQuery, PlaybookQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<PlaybookQuery, PlaybookQueryVariables>(PlaybookDocument, options);
-        }
-export function usePlaybookSuspenseQuery(baseOptions?: ApolloReactHooks.SkipToken | ApolloReactHooks.SuspenseQueryHookOptions<PlaybookQuery, PlaybookQueryVariables>) {
-          const options = baseOptions === ApolloReactHooks.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useSuspenseQuery<PlaybookQuery, PlaybookQueryVariables>(PlaybookDocument, options);
-        }
-export type PlaybookQueryHookResult = ReturnType<typeof usePlaybookQuery>;
-export type PlaybookLazyQueryHookResult = ReturnType<typeof usePlaybookLazyQuery>;
-export type PlaybookSuspenseQueryHookResult = ReturnType<typeof usePlaybookSuspenseQuery>;
-export type PlaybookQueryResult = ApolloReactCommon.QueryResult<PlaybookQuery, PlaybookQueryVariables>;
-export const PlaybookUpdateDocument = gql`
-    mutation PlaybookUpdate($input: PlaybookUpdateInput!) {
-  playbookUpdate(input: $input) {
-    id
-    name
-    description
-    isEnabled
-    createdAt
-    updatedAt
-    deletedAt
-    orgId
-  }
+export function usePlaybookQuery(
+  baseOptions: ApolloReactHooks.QueryHookOptions<PlaybookQuery, PlaybookQueryVariables> &
+    ({ variables: PlaybookQueryVariables; skip?: boolean } | { skip: boolean })
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<PlaybookQuery, PlaybookQueryVariables>(PlaybookDocument, options)
 }
-    `;
-export type PlaybookUpdateMutationFn = ApolloReactCommon.MutationFunction<PlaybookUpdateMutation, PlaybookUpdateMutationVariables>;
+export function usePlaybookLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PlaybookQuery, PlaybookQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<PlaybookQuery, PlaybookQueryVariables>(
+    PlaybookDocument,
+    options
+  )
+}
+export function usePlaybookSuspenseQuery(
+  baseOptions?:
+    | ApolloReactHooks.SkipToken
+    | ApolloReactHooks.SuspenseQueryHookOptions<PlaybookQuery, PlaybookQueryVariables>
+) {
+  const options =
+    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useSuspenseQuery<PlaybookQuery, PlaybookQueryVariables>(
+    PlaybookDocument,
+    options
+  )
+}
+export type PlaybookQueryHookResult = ReturnType<typeof usePlaybookQuery>
+export type PlaybookLazyQueryHookResult = ReturnType<typeof usePlaybookLazyQuery>
+export type PlaybookSuspenseQueryHookResult = ReturnType<typeof usePlaybookSuspenseQuery>
+export type PlaybookQueryResult = ApolloReactCommon.QueryResult<
+  PlaybookQuery,
+  PlaybookQueryVariables
+>
+export const PlaybookUpdateDocument = gql`
+  mutation PlaybookUpdate($input: PlaybookUpdateInput!) {
+    playbookUpdate(input: $input) {
+      id
+      name
+      description
+      isEnabled
+      createdAt
+      updatedAt
+      deletedAt
+      orgId
+    }
+  }
+`
+export type PlaybookUpdateMutationFn = ApolloReactCommon.MutationFunction<
+  PlaybookUpdateMutation,
+  PlaybookUpdateMutationVariables
+>
 
 /**
  * __usePlaybookUpdateMutation__
@@ -197,27 +353,41 @@ export type PlaybookUpdateMutationFn = ApolloReactCommon.MutationFunction<Playbo
  *   },
  * });
  */
-export function usePlaybookUpdateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<PlaybookUpdateMutation, PlaybookUpdateMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<PlaybookUpdateMutation, PlaybookUpdateMutationVariables>(PlaybookUpdateDocument, options);
-      }
-export type PlaybookUpdateMutationHookResult = ReturnType<typeof usePlaybookUpdateMutation>;
-export type PlaybookUpdateMutationResult = ApolloReactCommon.MutationResult<PlaybookUpdateMutation>;
-export type PlaybookUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<PlaybookUpdateMutation, PlaybookUpdateMutationVariables>;
-export const PlaybookScenarioCreateDocument = gql`
-    mutation PlaybookScenarioCreate($input: PlaybookScenarioCreateInput!) {
-  playbookScenarioCreate(input: $input) {
-    id
-    name
-    description
-    actionPlan
-    createdAt
-    updatedAt
-    playbookId
-  }
+export function usePlaybookUpdateMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    PlaybookUpdateMutation,
+    PlaybookUpdateMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<PlaybookUpdateMutation, PlaybookUpdateMutationVariables>(
+    PlaybookUpdateDocument,
+    options
+  )
 }
-    `;
-export type PlaybookScenarioCreateMutationFn = ApolloReactCommon.MutationFunction<PlaybookScenarioCreateMutation, PlaybookScenarioCreateMutationVariables>;
+export type PlaybookUpdateMutationHookResult = ReturnType<typeof usePlaybookUpdateMutation>
+export type PlaybookUpdateMutationResult = ApolloReactCommon.MutationResult<PlaybookUpdateMutation>
+export type PlaybookUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  PlaybookUpdateMutation,
+  PlaybookUpdateMutationVariables
+>
+export const PlaybookScenarioCreateDocument = gql`
+  mutation PlaybookScenarioCreate($input: PlaybookScenarioCreateInput!) {
+    playbookScenarioCreate(input: $input) {
+      id
+      name
+      description
+      actionPlan
+      createdAt
+      updatedAt
+      playbookId
+    }
+  }
+`
+export type PlaybookScenarioCreateMutationFn = ApolloReactCommon.MutationFunction<
+  PlaybookScenarioCreateMutation,
+  PlaybookScenarioCreateMutationVariables
+>
 
 /**
  * __usePlaybookScenarioCreateMutation__
@@ -236,27 +406,44 @@ export type PlaybookScenarioCreateMutationFn = ApolloReactCommon.MutationFunctio
  *   },
  * });
  */
-export function usePlaybookScenarioCreateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<PlaybookScenarioCreateMutation, PlaybookScenarioCreateMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<PlaybookScenarioCreateMutation, PlaybookScenarioCreateMutationVariables>(PlaybookScenarioCreateDocument, options);
-      }
-export type PlaybookScenarioCreateMutationHookResult = ReturnType<typeof usePlaybookScenarioCreateMutation>;
-export type PlaybookScenarioCreateMutationResult = ApolloReactCommon.MutationResult<PlaybookScenarioCreateMutation>;
-export type PlaybookScenarioCreateMutationOptions = ApolloReactCommon.BaseMutationOptions<PlaybookScenarioCreateMutation, PlaybookScenarioCreateMutationVariables>;
-export const PlaybookScenarioUpdateDocument = gql`
-    mutation PlaybookScenarioUpdate($input: PlaybookScenarioUpdateInput!) {
-  playbookScenarioUpdate(input: $input) {
-    id
-    name
-    description
-    actionPlan
-    createdAt
-    updatedAt
-    playbookId
-  }
+export function usePlaybookScenarioCreateMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    PlaybookScenarioCreateMutation,
+    PlaybookScenarioCreateMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<
+    PlaybookScenarioCreateMutation,
+    PlaybookScenarioCreateMutationVariables
+  >(PlaybookScenarioCreateDocument, options)
 }
-    `;
-export type PlaybookScenarioUpdateMutationFn = ApolloReactCommon.MutationFunction<PlaybookScenarioUpdateMutation, PlaybookScenarioUpdateMutationVariables>;
+export type PlaybookScenarioCreateMutationHookResult = ReturnType<
+  typeof usePlaybookScenarioCreateMutation
+>
+export type PlaybookScenarioCreateMutationResult =
+  ApolloReactCommon.MutationResult<PlaybookScenarioCreateMutation>
+export type PlaybookScenarioCreateMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  PlaybookScenarioCreateMutation,
+  PlaybookScenarioCreateMutationVariables
+>
+export const PlaybookScenarioUpdateDocument = gql`
+  mutation PlaybookScenarioUpdate($input: PlaybookScenarioUpdateInput!) {
+    playbookScenarioUpdate(input: $input) {
+      id
+      name
+      description
+      actionPlan
+      createdAt
+      updatedAt
+      playbookId
+    }
+  }
+`
+export type PlaybookScenarioUpdateMutationFn = ApolloReactCommon.MutationFunction<
+  PlaybookScenarioUpdateMutation,
+  PlaybookScenarioUpdateMutationVariables
+>
 
 /**
  * __usePlaybookScenarioUpdateMutation__
@@ -275,22 +462,39 @@ export type PlaybookScenarioUpdateMutationFn = ApolloReactCommon.MutationFunctio
  *   },
  * });
  */
-export function usePlaybookScenarioUpdateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<PlaybookScenarioUpdateMutation, PlaybookScenarioUpdateMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<PlaybookScenarioUpdateMutation, PlaybookScenarioUpdateMutationVariables>(PlaybookScenarioUpdateDocument, options);
-      }
-export type PlaybookScenarioUpdateMutationHookResult = ReturnType<typeof usePlaybookScenarioUpdateMutation>;
-export type PlaybookScenarioUpdateMutationResult = ApolloReactCommon.MutationResult<PlaybookScenarioUpdateMutation>;
-export type PlaybookScenarioUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<PlaybookScenarioUpdateMutation, PlaybookScenarioUpdateMutationVariables>;
-export const PlaybookScenariosDeleteDocument = gql`
-    mutation PlaybookScenariosDelete($input: BatchModelDeleteInput!) {
-  playbookScenariosDelete(input: $input) {
-    success
-    count
-  }
+export function usePlaybookScenarioUpdateMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    PlaybookScenarioUpdateMutation,
+    PlaybookScenarioUpdateMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<
+    PlaybookScenarioUpdateMutation,
+    PlaybookScenarioUpdateMutationVariables
+  >(PlaybookScenarioUpdateDocument, options)
 }
-    `;
-export type PlaybookScenariosDeleteMutationFn = ApolloReactCommon.MutationFunction<PlaybookScenariosDeleteMutation, PlaybookScenariosDeleteMutationVariables>;
+export type PlaybookScenarioUpdateMutationHookResult = ReturnType<
+  typeof usePlaybookScenarioUpdateMutation
+>
+export type PlaybookScenarioUpdateMutationResult =
+  ApolloReactCommon.MutationResult<PlaybookScenarioUpdateMutation>
+export type PlaybookScenarioUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  PlaybookScenarioUpdateMutation,
+  PlaybookScenarioUpdateMutationVariables
+>
+export const PlaybookScenariosDeleteDocument = gql`
+  mutation PlaybookScenariosDelete($input: BatchModelDeleteInput!) {
+    playbookScenariosDelete(input: $input) {
+      success
+      count
+    }
+  }
+`
+export type PlaybookScenariosDeleteMutationFn = ApolloReactCommon.MutationFunction<
+  PlaybookScenariosDeleteMutation,
+  PlaybookScenariosDeleteMutationVariables
+>
 
 /**
  * __usePlaybookScenariosDeleteMutation__
@@ -309,29 +513,43 @@ export type PlaybookScenariosDeleteMutationFn = ApolloReactCommon.MutationFuncti
  *   },
  * });
  */
-export function usePlaybookScenariosDeleteMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<PlaybookScenariosDeleteMutation, PlaybookScenariosDeleteMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<PlaybookScenariosDeleteMutation, PlaybookScenariosDeleteMutationVariables>(PlaybookScenariosDeleteDocument, options);
-      }
-export type PlaybookScenariosDeleteMutationHookResult = ReturnType<typeof usePlaybookScenariosDeleteMutation>;
-export type PlaybookScenariosDeleteMutationResult = ApolloReactCommon.MutationResult<PlaybookScenariosDeleteMutation>;
-export type PlaybookScenariosDeleteMutationOptions = ApolloReactCommon.BaseMutationOptions<PlaybookScenariosDeleteMutation, PlaybookScenariosDeleteMutationVariables>;
-export const TriggersDocument = gql`
-    query Triggers($filters: TriggerFilters) {
-  triggers(filters: $filters) {
-    id
-    name
-    type
-    description
-    config
-    isEnabled
-    createdAt
-    updatedAt
-    playbookId
-    orgId
-  }
+export function usePlaybookScenariosDeleteMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    PlaybookScenariosDeleteMutation,
+    PlaybookScenariosDeleteMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<
+    PlaybookScenariosDeleteMutation,
+    PlaybookScenariosDeleteMutationVariables
+  >(PlaybookScenariosDeleteDocument, options)
 }
-    `;
+export type PlaybookScenariosDeleteMutationHookResult = ReturnType<
+  typeof usePlaybookScenariosDeleteMutation
+>
+export type PlaybookScenariosDeleteMutationResult =
+  ApolloReactCommon.MutationResult<PlaybookScenariosDeleteMutation>
+export type PlaybookScenariosDeleteMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  PlaybookScenariosDeleteMutation,
+  PlaybookScenariosDeleteMutationVariables
+>
+export const TriggersDocument = gql`
+  query Triggers($filters: TriggerFilters) {
+    triggers(filters: $filters) {
+      id
+      name
+      type
+      description
+      config
+      isEnabled
+      createdAt
+      updatedAt
+      playbookId
+      orgId
+    }
+  }
+`
 
 /**
  * __useTriggersQuery__
@@ -349,38 +567,56 @@ export const TriggersDocument = gql`
  *   },
  * });
  */
-export function useTriggersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<TriggersQuery, TriggersQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<TriggersQuery, TriggersQueryVariables>(TriggersDocument, options);
-      }
-export function useTriggersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TriggersQuery, TriggersQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<TriggersQuery, TriggersQueryVariables>(TriggersDocument, options);
-        }
-export function useTriggersSuspenseQuery(baseOptions?: ApolloReactHooks.SkipToken | ApolloReactHooks.SuspenseQueryHookOptions<TriggersQuery, TriggersQueryVariables>) {
-          const options = baseOptions === ApolloReactHooks.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useSuspenseQuery<TriggersQuery, TriggersQueryVariables>(TriggersDocument, options);
-        }
-export type TriggersQueryHookResult = ReturnType<typeof useTriggersQuery>;
-export type TriggersLazyQueryHookResult = ReturnType<typeof useTriggersLazyQuery>;
-export type TriggersSuspenseQueryHookResult = ReturnType<typeof useTriggersSuspenseQuery>;
-export type TriggersQueryResult = ApolloReactCommon.QueryResult<TriggersQuery, TriggersQueryVariables>;
-export const TrackingScriptDocument = gql`
-    query TrackingScript {
-  trackingScript {
-    id
-    domain
-    isVerified
-    excludedPaths
-    allowedCountryCodes
-    minimumSessionTimeSec
-    identificationMode
-    dailyLimit
-    createdAt
-    updatedAt
-  }
+export function useTriggersQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<TriggersQuery, TriggersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<TriggersQuery, TriggersQueryVariables>(TriggersDocument, options)
 }
-    `;
+export function useTriggersLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TriggersQuery, TriggersQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<TriggersQuery, TriggersQueryVariables>(
+    TriggersDocument,
+    options
+  )
+}
+export function useTriggersSuspenseQuery(
+  baseOptions?:
+    | ApolloReactHooks.SkipToken
+    | ApolloReactHooks.SuspenseQueryHookOptions<TriggersQuery, TriggersQueryVariables>
+) {
+  const options =
+    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useSuspenseQuery<TriggersQuery, TriggersQueryVariables>(
+    TriggersDocument,
+    options
+  )
+}
+export type TriggersQueryHookResult = ReturnType<typeof useTriggersQuery>
+export type TriggersLazyQueryHookResult = ReturnType<typeof useTriggersLazyQuery>
+export type TriggersSuspenseQueryHookResult = ReturnType<typeof useTriggersSuspenseQuery>
+export type TriggersQueryResult = ApolloReactCommon.QueryResult<
+  TriggersQuery,
+  TriggersQueryVariables
+>
+export const TrackingScriptDocument = gql`
+  query TrackingScript {
+    trackingScript {
+      id
+      domain
+      isVerified
+      excludedPaths
+      allowedCountryCodes
+      minimumSessionTimeSec
+      identificationMode
+      dailyLimit
+      createdAt
+      updatedAt
+    }
+  }
+`
 
 /**
  * __useTrackingScriptQuery__
@@ -397,39 +633,68 @@ export const TrackingScriptDocument = gql`
  *   },
  * });
  */
-export function useTrackingScriptQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<TrackingScriptQuery, TrackingScriptQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<TrackingScriptQuery, TrackingScriptQueryVariables>(TrackingScriptDocument, options);
-      }
-export function useTrackingScriptLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TrackingScriptQuery, TrackingScriptQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<TrackingScriptQuery, TrackingScriptQueryVariables>(TrackingScriptDocument, options);
-        }
-export function useTrackingScriptSuspenseQuery(baseOptions?: ApolloReactHooks.SkipToken | ApolloReactHooks.SuspenseQueryHookOptions<TrackingScriptQuery, TrackingScriptQueryVariables>) {
-          const options = baseOptions === ApolloReactHooks.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useSuspenseQuery<TrackingScriptQuery, TrackingScriptQueryVariables>(TrackingScriptDocument, options);
-        }
-export type TrackingScriptQueryHookResult = ReturnType<typeof useTrackingScriptQuery>;
-export type TrackingScriptLazyQueryHookResult = ReturnType<typeof useTrackingScriptLazyQuery>;
-export type TrackingScriptSuspenseQueryHookResult = ReturnType<typeof useTrackingScriptSuspenseQuery>;
-export type TrackingScriptQueryResult = ApolloReactCommon.QueryResult<TrackingScriptQuery, TrackingScriptQueryVariables>;
-export const TrackingScriptUpdateDocument = gql`
-    mutation TrackingScriptUpdate($input: TrackingScriptUpdateInput!) {
-  trackingScriptUpdate(input: $input) {
-    id
-    domain
-    isVerified
-    excludedPaths
-    allowedCountryCodes
-    minimumSessionTimeSec
-    identificationMode
-    dailyLimit
-    createdAt
-    updatedAt
-  }
+export function useTrackingScriptQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<TrackingScriptQuery, TrackingScriptQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<TrackingScriptQuery, TrackingScriptQueryVariables>(
+    TrackingScriptDocument,
+    options
+  )
 }
-    `;
-export type TrackingScriptUpdateMutationFn = ApolloReactCommon.MutationFunction<TrackingScriptUpdateMutation, TrackingScriptUpdateMutationVariables>;
+export function useTrackingScriptLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    TrackingScriptQuery,
+    TrackingScriptQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<TrackingScriptQuery, TrackingScriptQueryVariables>(
+    TrackingScriptDocument,
+    options
+  )
+}
+export function useTrackingScriptSuspenseQuery(
+  baseOptions?:
+    | ApolloReactHooks.SkipToken
+    | ApolloReactHooks.SuspenseQueryHookOptions<TrackingScriptQuery, TrackingScriptQueryVariables>
+) {
+  const options =
+    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useSuspenseQuery<TrackingScriptQuery, TrackingScriptQueryVariables>(
+    TrackingScriptDocument,
+    options
+  )
+}
+export type TrackingScriptQueryHookResult = ReturnType<typeof useTrackingScriptQuery>
+export type TrackingScriptLazyQueryHookResult = ReturnType<typeof useTrackingScriptLazyQuery>
+export type TrackingScriptSuspenseQueryHookResult = ReturnType<
+  typeof useTrackingScriptSuspenseQuery
+>
+export type TrackingScriptQueryResult = ApolloReactCommon.QueryResult<
+  TrackingScriptQuery,
+  TrackingScriptQueryVariables
+>
+export const TrackingScriptUpdateDocument = gql`
+  mutation TrackingScriptUpdate($input: TrackingScriptUpdateInput!) {
+    trackingScriptUpdate(input: $input) {
+      id
+      domain
+      isVerified
+      excludedPaths
+      allowedCountryCodes
+      minimumSessionTimeSec
+      identificationMode
+      dailyLimit
+      createdAt
+      updatedAt
+    }
+  }
+`
+export type TrackingScriptUpdateMutationFn = ApolloReactCommon.MutationFunction<
+  TrackingScriptUpdateMutation,
+  TrackingScriptUpdateMutationVariables
+>
 
 /**
  * __useTrackingScriptUpdateMutation__
@@ -448,10 +713,24 @@ export type TrackingScriptUpdateMutationFn = ApolloReactCommon.MutationFunction<
  *   },
  * });
  */
-export function useTrackingScriptUpdateMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<TrackingScriptUpdateMutation, TrackingScriptUpdateMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<TrackingScriptUpdateMutation, TrackingScriptUpdateMutationVariables>(TrackingScriptUpdateDocument, options);
-      }
-export type TrackingScriptUpdateMutationHookResult = ReturnType<typeof useTrackingScriptUpdateMutation>;
-export type TrackingScriptUpdateMutationResult = ApolloReactCommon.MutationResult<TrackingScriptUpdateMutation>;
-export type TrackingScriptUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<TrackingScriptUpdateMutation, TrackingScriptUpdateMutationVariables>;
+export function useTrackingScriptUpdateMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    TrackingScriptUpdateMutation,
+    TrackingScriptUpdateMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<
+    TrackingScriptUpdateMutation,
+    TrackingScriptUpdateMutationVariables
+  >(TrackingScriptUpdateDocument, options)
+}
+export type TrackingScriptUpdateMutationHookResult = ReturnType<
+  typeof useTrackingScriptUpdateMutation
+>
+export type TrackingScriptUpdateMutationResult =
+  ApolloReactCommon.MutationResult<TrackingScriptUpdateMutation>
+export type TrackingScriptUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  TrackingScriptUpdateMutation,
+  TrackingScriptUpdateMutationVariables
+>

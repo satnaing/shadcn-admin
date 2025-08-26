@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { Badge } from '@/components/ui/badge'
+import type { MessagingAppType } from '@/graphql/global/types.generated'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Table,
@@ -9,10 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { AccountIcons } from './account-icons'
-import { AccountActions } from './account-actions'
-import type { MessagingAppType } from '@/graphql/global/types.generated'
 import type { ConnectedAccountsQuery } from '../graphql/operations.generated'
+import { AccountActions } from './account-actions'
+import { AccountIcons } from './account-icons'
 
 interface AccountsTableProps {
   accounts: ConnectedAccountsQuery['connectedAccounts']
@@ -34,7 +33,7 @@ export function AccountsTable({
   deleteLoading,
 }: AccountsTableProps) {
   return (
-    <div className="rounded-md border">
+    <div className='rounded-md border'>
       <Table>
         <TableHeader>
           <TableRow>
@@ -42,15 +41,15 @@ export function AccountsTable({
             <TableHead>Accounts</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Added On</TableHead>
-            <TableHead className="w-[70px]"></TableHead>
+            <TableHead className='w-[70px]'></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {accounts.map((account) => (
             <TableRow key={account.id}>
               <TableCell>
-                <div className="flex items-center gap-3">
-                  <Avatar className="h-8 w-8">
+                <div className='flex items-center gap-3'>
+                  <Avatar className='h-8 w-8'>
                     <AvatarImage src={account.profilePicUrl || ''} />
                     <AvatarFallback>
                       {account.name
@@ -61,36 +60,28 @@ export function AccountsTable({
                         .toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium">{account.name}</p>
-                    <div className="flex items-center gap-1">
+                  <div className='space-y-1'>
+                    <p className='text-sm font-medium'>{account.name}</p>
+                    <div className='flex items-center gap-1'>
                       {account.linkedinExternalId && !account.isLinkedinEnabled && (
-                        <p className="text-xs text-destructive">
-                          LinkedIn Disconnected
-                        </p>
+                        <p className='text-destructive text-xs'>LinkedIn Disconnected</p>
                       )}
                       {account.emailProvider && !account.isEmailEnabled && (
-                        <p className="text-xs text-destructive">
-                          Email Disconnected
-                        </p>
+                        <p className='text-destructive text-xs'>Email Disconnected</p>
                       )}
                     </div>
-                    <p className="text-xs text-muted-foreground">{account.id}</p>
+                    <p className='text-muted-foreground text-xs'>{account.id}</p>
                   </div>
                 </div>
               </TableCell>
               <TableCell>
-                <AccountIcons
-                  account={account}
-                  onReconnect={onReconnect}
-                  onConnect={onConnect}
-                />
+                <AccountIcons account={account} onReconnect={onReconnect} onConnect={onConnect} />
               </TableCell>
               <TableCell>
-                <span className="text-sm">{account.email || '-'}</span>
+                <span className='text-sm'>{account.email || '-'}</span>
               </TableCell>
               <TableCell>
-                <span className="text-sm">
+                <span className='text-sm'>
                   {format(new Date(account.createdAt), 'MMM dd, yyyy')}
                 </span>
               </TableCell>

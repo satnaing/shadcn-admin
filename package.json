@@ -11,7 +11,8 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "knip": "knip",
-    "codegen": "graphql-codegen --config codegen.yml && eslint --fix --quiet **/*operations.generated.tsx"
+    "codegen": "graphql-codegen --config codegen.yml && eslint --fix --quiet **/*operations.generated.tsx",
+    "prepare": "husky"
   },
   "dependencies": {
     "@apollo/client": "^3.14.0",
@@ -87,7 +88,9 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "husky": "^9.1.7",
     "knip": "^5.62.0",
+    "lint-staged": "^16.1.5",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "typescript": "~5.9.2",

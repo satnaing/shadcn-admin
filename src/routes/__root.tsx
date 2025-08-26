@@ -1,18 +1,18 @@
 import { type QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, Outlet, useLocation } from '@tanstack/react-router'
+import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
+import { isFullscreenRoute, isPublicRoute } from '@/lib/auth'
+import { useClerkAppearance } from '@/lib/clerk-theme'
+import { GraphQLProvider } from '@/lib/graphql'
+import { ClerkAuthProvider } from '@/context/clerk-auth-provider'
+import { useTheme } from '@/context/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
+import { AuthenticatedLayout } from '@/components/layout/authenticated-layout'
 import { NavigationProgress } from '@/components/navigation-progress'
 import { GeneralError } from '@/features/errors/general-error'
 import { NotFoundError } from '@/features/errors/not-found-error'
-import { AuthenticatedLayout } from '@/components/layout/authenticated-layout'
-import { isFullscreenRoute, isPublicRoute } from '@/lib/auth'
-import { GraphQLProvider } from '@/lib/graphql'
-import { useClerkAppearance } from '@/lib/clerk-theme'
-import { useTheme } from '@/context/theme-provider'
-import { ClerkAuthProvider } from '@/context/clerk-auth-provider'
 
 // Import your Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -43,18 +43,18 @@ function RootComponent() {
       signInFallbackRedirectUrl='/'
       signUpFallbackRedirectUrl='/'
     >
-        <AuthWrapper />
+      <AuthWrapper />
     </ClerkProvider>
   )
 }
 
 function AuthWrapper() {
   const location = useLocation()
-  
+
   // Check if current route is public
   const isPublic = isPublicRoute(location.pathname)
   const isFullscreen = isFullscreenRoute(location.pathname)
-  
+
   // If route is public, render without authentication checks
   if (isPublic) {
     return (
@@ -108,9 +108,9 @@ function AuthWrapper() {
         </ClerkAuthProvider>
       </SignedIn>
       <SignedOut>
-        <RedirectToSignIn redirectUrl={location.href}/>
+        <RedirectToSignIn redirectUrl={location.href} />
       </SignedOut>
-      <Toaster duration={5000} richColors/>
+      <Toaster duration={5000} richColors />
       {import.meta.env.MODE === 'development' && (
         <>
           <ReactQueryDevtools buttonPosition='top-left' />

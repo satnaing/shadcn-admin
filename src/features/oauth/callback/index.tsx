@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useParams, useSearch } from '@tanstack/react-router'
+import { useOauthLoginMutation } from '@/graphql/operations/operations.generated'
 import { capitalize } from 'lodash'
 import { Check, X, Loader2 } from 'lucide-react'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Card, CardContent } from '@/components/ui/card'
-import { useOauthLoginMutation } from '@/graphql/operations/operations.generated'
 
 const APP_NAME = 'Swan'
 
@@ -19,10 +19,11 @@ interface SuccessMessageProps {
 
 function SuccessMessage({ appName }: SuccessMessageProps) {
   return (
-    <div className="flex items-center gap-3">
-      <Check className="h-5 w-5 text-green-500" />
-      <p className="text-base">
-        {capitalize(appName)} has been successfully connected! You may close this tab and head back to {APP_NAME}...
+    <div className='flex items-center gap-3'>
+      <Check className='h-5 w-5 text-green-500' />
+      <p className='text-base'>
+        {capitalize(appName)} has been successfully connected! You may close this tab and head back
+        to {APP_NAME}...
       </p>
     </div>
   )
@@ -36,7 +37,7 @@ function ErrorMessage({ message }: ErrorMessageProps) {
   const defaultMessage = (
     <>
       Authentication failed, please restart the integration from the{' '}
-      <a href="/" className="font-semibold underline">
+      <a href='/' className='font-semibold underline'>
         {APP_NAME} app.
       </a>
     </>
@@ -46,7 +47,7 @@ function ErrorMessage({ message }: ErrorMessageProps) {
     'No authorization code provided': (
       <>
         Missing authorization code. Please restart the integration from the{' '}
-        <a href="/integrations" className="font-semibold underline">
+        <a href='/integrations' className='font-semibold underline'>
           {APP_NAME} app.
         </a>
       </>
@@ -55,9 +56,9 @@ function ErrorMessage({ message }: ErrorMessageProps) {
   }
 
   return (
-    <div className="flex items-center gap-3">
-      <X className="h-5 w-5 text-red-500" />
-      <p className="text-base">
+    <div className='flex items-center gap-3'>
+      <X className='h-5 w-5 text-red-500' />
+      <p className='text-base'>
         {message && errorMessages[message] ? errorMessages[message] : message || defaultMessage}
       </p>
     </div>
@@ -66,23 +67,23 @@ function ErrorMessage({ message }: ErrorMessageProps) {
 
 function SlackWarning() {
   return (
-    <Alert className="max-w-[600px]">
-      <AlertDescription className="space-y-3">
+    <Alert className='max-w-[600px]'>
+      <AlertDescription className='space-y-3'>
         <p>
           If you tried to connect to a <strong>DM</strong> - please close this tab and try again by
           inviting Swan to a private / public channel.
         </p>
         <p>
           If you connected Swan to a <strong>Private Channel</strong> - please invite Swan to the
-          channel to complete the integration. This page will automatically update once the integration
-          is complete.
+          channel to complete the integration. This page will automatically update once the
+          integration is complete.
         </p>
         <p>
           <a
-            href="https://www.loom.com/share/cdc6c60eb8da43abb480e76ba015ffcf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
+            href='https://www.loom.com/share/cdc6c60eb8da43abb480e76ba015ffcf'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='underline'
           >
             See how
           </a>{' '}
@@ -95,9 +96,9 @@ function SlackWarning() {
 
 function LoadingState() {
   return (
-    <div className="flex items-center gap-3">
-      <Loader2 className="h-5 w-5 animate-spin" />
-      <p className="text-base">Connecting app...</p>
+    <div className='flex items-center gap-3'>
+      <Loader2 className='h-5 w-5 animate-spin' />
+      <p className='text-base'>Connecting app...</p>
     </div>
   )
 }
@@ -113,7 +114,7 @@ export function OauthCallback() {
   const [oauthLogin, { called }] = useOauthLoginMutation({
     onCompleted: () => {
       setState({ status: 'success' })
-      
+
       // Notify opener when complete
       setTimeout(() => {
         if (state.status !== 'error') {
@@ -124,12 +125,12 @@ export function OauthCallback() {
     onError: (error) => {
       const errorCode = error.graphQLErrors?.[0]?.extensions?.code
       const isSlackLoginError = errorCode === 'SLACK_LOGIN_ERROR'
-      
-      setState({ 
+
+      setState({
         status: 'error',
-        message: isSlackLoginError ? 'slack_login_error' : undefined
+        message: isSlackLoginError ? 'slack_login_error' : undefined,
       })
-    }
+    },
   })
 
   useEffect(() => {
@@ -176,11 +177,11 @@ export function OauthCallback() {
 
   // Render based on state
   return (
-    <div className="flex h-screen w-screen items-center justify-center p-4">
-      <div className="flex flex-col items-center gap-6">
+    <div className='flex h-screen w-screen items-center justify-center p-4'>
+      <div className='flex flex-col items-center gap-6'>
         {isSlackLoginError && <SlackWarning />}
-        
-        <Card className="w-full max-w-md">
+
+        <Card className='w-full max-w-md'>
           <CardContent>
             {state.status === 'loading' ? (
               <LoadingState />

@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/client'
-import { Page } from '@/components/page'
 import { Skeleton } from '@/components/ui/skeleton'
-import { ExecutionsDocument, PlaybooksForFilterDocument } from './graphql/operations.generated'
+import { Page } from '@/components/page'
 import { ExecutionsDialogs } from './components/executions-dialogs'
 import { ExecutionsProvider } from './components/executions-provider'
 import { ExecutionsTable } from './components/executions-table'
+import { ExecutionsDocument, PlaybooksForFilterDocument } from './graphql/operations.generated'
 
 export function Activity() {
   // Fetch executions
@@ -25,16 +25,12 @@ export function Activity() {
 
   return (
     <ExecutionsProvider>
-      <Page
-        title="Activity"
-        description="View and manage agent activity"
-        mainFixed
-      >
+      <Page title='Activity' description='View and manage agent activity' mainFixed>
         <div className='-mx-4 flex-1 overflow-auto px-4 py-1 lg:flex-row lg:space-y-0 lg:space-x-12'>
           {executionsLoading ? (
-            <div className="space-y-3">
-              <Skeleton className="h-8 w-full" />
-              <Skeleton className="h-[400px] w-full" />
+            <div className='space-y-3'>
+              <Skeleton className='h-8 w-full' />
+              <Skeleton className='h-[400px] w-full' />
             </div>
           ) : (
             <ExecutionsTable data={executions} playbooks={playbooks} />

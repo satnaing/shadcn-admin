@@ -1,6 +1,8 @@
 import { type Control, Controller, useWatch } from 'react-hook-form'
-import { Label } from '@/components/ui/label'
+import { useSlackUsersQuery } from '@/graphql/operations/operations.generated'
+import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -8,9 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Badge } from '@/components/ui/badge'
 import { Loadable } from '@/components/loadable'
-import { useSlackUsersQuery } from '@/graphql/operations/operations.generated'
 
 interface SlackUserSelectorProps {
   control: Control<any>
@@ -68,18 +68,18 @@ export function SlackUserSelector({
 
           return (
             <div className='space-y-2'>
-              <Loadable 
+              <Loadable
                 isLoading={!!channelId && !taggingDisabled && slackUsersLoading}
-                label="Loading users..."
+                label='Loading users...'
                 className='w-full'
               >
-                <div className='min-h-10 rounded-md border border-input bg-background px-3 py-2'>
+                <div className='border-input bg-background min-h-10 rounded-md border px-3 py-2'>
                   {!channelId ? (
-                    <span className='text-sm text-muted-foreground'>Select a channel first</span>
+                    <span className='text-muted-foreground text-sm'>Select a channel first</span>
                   ) : taggingDisabled ? (
-                    <span className='text-sm text-muted-foreground'>Tagging disabled</span>
+                    <span className='text-muted-foreground text-sm'>Tagging disabled</span>
                   ) : selectedUsers.length === 0 ? (
-                    <span className='text-sm text-muted-foreground'>Select users...</span>
+                    <span className='text-muted-foreground text-sm'>Select users...</span>
                   ) : (
                     <div className='flex flex-wrap gap-1'>
                       {selectedUsers.map((userId: string) => {
@@ -89,7 +89,7 @@ export function SlackUserSelector({
                             {user.label}
                             <button
                               type='button'
-                              className='ml-1 text-muted-foreground hover:text-foreground'
+                              className='text-muted-foreground hover:text-foreground ml-1'
                               onClick={() => {
                                 const newValue = selectedUsers.filter((id) => id !== userId)
                                 field.onChange(newValue)
@@ -134,7 +134,7 @@ export function SlackUserSelector({
               )}
 
               {fieldState.error && (
-                <p className='text-sm text-destructive'>{fieldState.error.message}</p>
+                <p className='text-destructive text-sm'>{fieldState.error.message}</p>
               )}
             </div>
           )
@@ -157,7 +157,7 @@ export function SlackUserSelector({
               />
               <Label
                 htmlFor='disable-tagging'
-                className='text-sm font-normal text-muted-foreground'
+                className='text-muted-foreground text-sm font-normal'
               >
                 Disable tagging users in messages
               </Label>
@@ -166,7 +166,7 @@ export function SlackUserSelector({
         />
       )}
 
-      <p className='text-sm text-muted-foreground'>
+      <p className='text-muted-foreground text-sm'>
         {channelId ? helperText : 'Please select a channel first to load users'}
       </p>
     </div>

@@ -1,4 +1,5 @@
-import { type ReactElement, type ReactNode, useState, cloneElement } from 'react';
+import { type ReactElement, type ReactNode, useState, cloneElement } from 'react'
+import { cn } from '@/lib/utils'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -8,19 +9,18 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { cn } from '@/lib/utils';
+} from '@/components/ui/alert-dialog'
 
 interface ConfirmableProps {
-  titleText?: string;
-  bodyText?: string | ReactNode;
-  buttonText?: string;
-  variant?: 'danger' | 'info';
-  onConfirm: () => any;
-  children: ReactElement<{ onClick?: (e: React.MouseEvent) => void }>;
-  isLoading?: boolean;
-  isOpen?: boolean;
-  onCancel?: () => void;
+  titleText?: string
+  bodyText?: string | ReactNode
+  buttonText?: string
+  variant?: 'danger' | 'info'
+  onConfirm: () => any
+  children: ReactElement<{ onClick?: (e: React.MouseEvent) => void }>
+  isLoading?: boolean
+  isOpen?: boolean
+  onCancel?: () => void
 }
 
 export default function Confirmable({
@@ -34,40 +34,40 @@ export default function Confirmable({
   isLoading,
   isOpen: controlledIsOpen,
 }: ConfirmableProps) {
-  const [internalIsOpen, setInternalIsOpen] = useState(false);
-  const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
+  const [internalIsOpen, setInternalIsOpen] = useState(false)
+  const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen
 
   const handleOpen = () => {
     if (controlledIsOpen === undefined) {
-      setInternalIsOpen(true);
+      setInternalIsOpen(true)
     }
-  };
+  }
 
   const handleClose = () => {
     if (controlledIsOpen === undefined) {
-      setInternalIsOpen(false);
+      setInternalIsOpen(false)
     }
-    onCancel?.();
-  };
+    onCancel?.()
+  }
 
   const handleConfirm = async () => {
-    await onConfirm();
+    await onConfirm()
     if (controlledIsOpen === undefined) {
-      setInternalIsOpen(false);
+      setInternalIsOpen(false)
     }
-  };
+  }
 
   // Clone the child element and add onClick handler
   const childWithProps = cloneElement(children, {
     onClick: (e: React.MouseEvent) => {
-      e.stopPropagation();
+      e.stopPropagation()
       // Call the child's onClick if it exists
       if (children.props.onClick) {
-        children.props.onClick(e);
+        children.props.onClick(e)
       }
-      handleOpen();
+      handleOpen()
     },
-  });
+  })
 
   return (
     <>
@@ -87,9 +87,7 @@ export default function Confirmable({
             <AlertDialogAction
               onClick={handleConfirm}
               disabled={isLoading}
-              className={cn(
-                variant === 'danger' && 'bg-destructive hover:bg-destructive/90'
-              )}
+              className={cn(variant === 'danger' && 'bg-destructive hover:bg-destructive/90')}
             >
               {isLoading ? 'Loading...' : buttonText || 'Confirm'}
             </AlertDialogAction>
@@ -97,5 +95,5 @@ export default function Confirmable({
         </AlertDialogContent>
       </AlertDialog>
     </>
-  );
+  )
 }

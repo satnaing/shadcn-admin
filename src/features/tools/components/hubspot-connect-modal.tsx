@@ -1,8 +1,13 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import type { CrmIntegrationUpdateInput } from '@/graphql/global/types.generated'
+import {
+  useCrmIntegrationQuery,
+  useCrmIntegrationUpdateMutation,
+} from '@/graphql/operations/operations.generated'
 import { ExternalLink } from 'lucide-react'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
-import { Switch } from '@/components/ui/switch'
 import {
   Dialog,
   DialogContent,
@@ -11,22 +16,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-} from '@/components/ui/form'
-import { toast } from 'sonner'
-import { ConnectedBadge } from '@/features/tools/components/connected-badge'
-import {
-  useCrmIntegrationQuery,
-  useCrmIntegrationUpdateMutation,
-} from '@/graphql/operations/operations.generated'
-import type { CrmIntegrationUpdateInput } from '@/graphql/global/types.generated'
-import { getAuthUrlHandler } from '@/features/tools/utils/auth-helpers'
+import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
+import { Switch } from '@/components/ui/switch'
 import { Loadable } from '@/components/loadable'
+import { ConnectedBadge } from '@/features/tools/components/connected-badge'
+import { getAuthUrlHandler } from '@/features/tools/utils/auth-helpers'
 
 const APP_URL = import.meta.env.VITE_APP_URL
 const IS_PROD = import.meta.env.VITE_ENV === 'production'
@@ -67,10 +61,9 @@ const AUTH_URL =
 type HubSpotConnectModalProps = {
   isOpen: boolean
   onOpenChange: (open: boolean) => void
-} 
+}
 
 export function HubSpotConnectModal({ isOpen, onOpenChange }: HubSpotConnectModalProps) {
-
   const {
     data: crmIntegrationData,
     refetch: refetchCrmIntegration,
@@ -98,7 +91,6 @@ export function HubSpotConnectModal({ isOpen, onOpenChange }: HubSpotConnectModa
     }
   }, [setValue, crmIntegrationData])
 
-
   const onSubmit = handleSubmit(async (data) => {
     await update({ variables: { input: data } })
     toast.success('Settings updated', {
@@ -108,86 +100,82 @@ export function HubSpotConnectModal({ isOpen, onOpenChange }: HubSpotConnectModa
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className='max-w-2xl max-h-[90vh] overflow-y-auto'>
+      <DialogContent className='max-h-[90vh] max-w-2xl overflow-y-auto'>
         <Form {...form}>
           <form onSubmit={onSubmit}>
-          <DialogHeader>
-            <div className='flex items-center gap-3'>
-              <DialogTitle>HubSpot</DialogTitle>
-              {crmIntegrationData?.crmIntegration && <ConnectedBadge />}
-            </div>
-            <DialogDescription>
-              <a
-                href='https://swan-ai.notion.site/hubspot-integration'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='flex items-center gap-1 text-primary hover:underline'
-              >
-                Learn more about this integration <ExternalLink className='h-3 w-3' />
-              </a>
-            </DialogDescription>
-          </DialogHeader>
+            <DialogHeader>
+              <div className='flex items-center gap-3'>
+                <DialogTitle>HubSpot</DialogTitle>
+                {crmIntegrationData?.crmIntegration && <ConnectedBadge />}
+              </div>
+              <DialogDescription>
+                <a
+                  href='https://swan-ai.notion.site/hubspot-integration'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='text-primary flex items-center gap-1 hover:underline'
+                >
+                  Learn more about this integration <ExternalLink className='h-3 w-3' />
+                </a>
+              </DialogDescription>
+            </DialogHeader>
 
-        <Loadable isLoading={loading}>  
-          <div className='space-y-6 py-6'>
-            {!crmIntegrationData?.crmIntegration ? (
-              <p className='text-sm text-muted-foreground'>
-                Connect your Hubspot account to allow for seamless integration with your CRM. Sync
-                identified visitors and automatically update your CRM with contact information and
-                company research. Connecting will create all the necessary properties for Swan.
-              </p>
-            ) : (
-                <FormField
-                  control={form.control}
-                  name="enabled"
-                  render={({ field }) => (
-                    <FormItem className='flex items-center justify-between'>
-                      <FormLabel className='text-base font-semibold'>
-                        Enabled
-                      </FormLabel>
-                      <FormControl>
-                        <Switch
-                          checked={field.value ?? false}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-            )}
-          </div>
-          </Loadable>
+            <Loadable isLoading={loading}>
+              <div className='space-y-6 py-6'>
+                {!crmIntegrationData?.crmIntegration ? (
+                  <p className='text-muted-foreground text-sm'>
+                    Connect your Hubspot account to allow for seamless integration with your CRM.
+                    Sync identified visitors and automatically update your CRM with contact
+                    information and company research. Connecting will create all the necessary
+                    properties for Swan.
+                  </p>
+                ) : (
+                  <FormField
+                    control={form.control}
+                    name='enabled'
+                    render={({ field }) => (
+                      <FormItem className='flex items-center justify-between'>
+                        <FormLabel className='text-base font-semibold'>Enabled</FormLabel>
+                        <FormControl>
+                          <Switch checked={field.value ?? false} onCheckedChange={field.onChange} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                )}
+              </div>
+            </Loadable>
 
-          <DialogFooter>
-            {crmIntegrationData?.crmIntegration ? (
-              <div className='flex gap-2'>
+            <DialogFooter>
+              {crmIntegrationData?.crmIntegration ? (
+                <div className='flex gap-2'>
+                  <Button
+                    type='button'
+                    variant='outline'
+                    onClick={(e) => {
+                      e.preventDefault()
+                      authUrlHandler(e as React.MouseEvent<HTMLElement>)
+                    }}
+                  >
+                    Reconnect
+                  </Button>
+                  <Button type='submit' loading={updateIsLoading}>
+                    Save
+                  </Button>
+                </div>
+              ) : (
                 <Button
                   type='button'
-                  variant='outline'
                   onClick={(e) => {
                     e.preventDefault()
                     authUrlHandler(e as React.MouseEvent<HTMLElement>)
                   }}
                 >
-                  Reconnect
+                  Connect
                 </Button>
-                <Button type='submit' loading={updateIsLoading}>
-                  Save
-                </Button>
-              </div>
-            ) : (
-              <Button
-                type='button'
-                onClick={(e) => {
-                  e.preventDefault()
-                  authUrlHandler(e as React.MouseEvent<HTMLElement>)
-                }}
-              >
-                Connect
-              </Button>
-            )}
-          </DialogFooter>
-        </form>
+              )}
+            </DialogFooter>
+          </form>
         </Form>
       </DialogContent>
     </Dialog>

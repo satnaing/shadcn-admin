@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
+import {
+  useUserLoginMutation,
+  useSubscriptionLazyQuery,
+} from '@/graphql/operations/operations.generated'
 import { useUser, useAuth, useClerk } from '@clerk/clerk-react'
 import { toast } from 'sonner'
-import { useUserLoginMutation, useSubscriptionLazyQuery } from '@/graphql/operations/operations.generated'
 
 interface UseClerkAuthOptions {
   onSuccess?: () => void
@@ -14,7 +17,7 @@ export function useClerkAuth(options?: UseClerkAuthOptions) {
   const { signOut } = useClerk()
   const [hasLoggedIn, setHasLoggedIn] = useState(false)
   const loginAttempted = useRef(false)
-  
+
   const [getSubscription] = useSubscriptionLazyQuery()
 
   const [userLogin] = useUserLoginMutation({
@@ -22,12 +25,12 @@ export function useClerkAuth(options?: UseClerkAuthOptions) {
       if (data?.userLogin) {
         // Set a cookie to track that user has logged in
         document.cookie = 'swan.known=true; domain=.getswan.com; path=/; Secure; SameSite=None'
-        
+
         // Fetch subscription data
-        await getSubscription({ 
-          fetchPolicy: 'network-only' 
+        await getSubscription({
+          fetchPolicy: 'network-only',
         })
-        
+
         // Handle onboarding status if needed
         // const onboardingStatus = data.userLogin.onboardingStatus
         // TODO: Add onboarding flow if needed based on onboardingStatus and subscription
@@ -37,7 +40,7 @@ export function useClerkAuth(options?: UseClerkAuthOptions) {
         // } else if (subscriptionData?.subscription?.status === 'TRIAL') {
         //   // Handle trial users
         // }
-        
+
         setHasLoggedIn(true)
         options?.onSuccess?.()
       }
@@ -50,11 +53,11 @@ export function useClerkAuth(options?: UseClerkAuthOptions) {
         {
           description: error.message,
         }
-            )
-      
+      )
+
       // Sign out the user on login error - Clerk will handle the redirect
       signOut()
-      
+
       options?.onError?.(error)
     },
   })

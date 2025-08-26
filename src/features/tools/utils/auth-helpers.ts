@@ -8,7 +8,7 @@ export const getAuthUrlHandler = (url: string, target: string, callback?: () => 
     const newWindow = window.open(
       url,
       target,
-      `width=${width},height=${height},left=${left},top=${top}`,
+      `width=${width},height=${height},left=${left},top=${top}`
     )
 
     window.addEventListener('message', (event) => {

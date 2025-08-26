@@ -1,9 +1,10 @@
-import { Page } from '@/components/page'
-import EmptyState from '@/components/empty-state'
-import { AddAccountDropdown } from './components/add-account-dropdown'
-import { AccountsTable } from './components/accounts-table'
-import { ConnectedAccountsSkeleton } from './components/connected-accounts-skeleton'
+import type { MessagingAppType } from '@/graphql/global/types.generated'
 import { toast } from 'sonner'
+import EmptyState from '@/components/empty-state'
+import { Page } from '@/components/page'
+import { AccountsTable } from './components/accounts-table'
+import { AddAccountDropdown } from './components/add-account-dropdown'
+import { ConnectedAccountsSkeleton } from './components/connected-accounts-skeleton'
 import {
   useConnectedAccountsQuery,
   useConnectAccountUrlMutation,
@@ -11,7 +12,6 @@ import {
   ConnectedAccountsDocument,
   useReconnectAccountUrlMutation,
 } from './graphql/operations.generated'
-import type { MessagingAppType } from '@/graphql/global/types.generated'
 
 export default function ConnectedAccountsPage() {
   const { data, loading, startPolling } = useConnectedAccountsQuery()
@@ -26,24 +26,19 @@ export default function ConnectedAccountsPage() {
     refetchQueries: [ConnectedAccountsDocument],
   })
   const [createUrl, { loading: urlLoading }] = useConnectAccountUrlMutation()
-  const [createReconnectUrl, { loading: reconnectUrlLoading }] =
-    useReconnectAccountUrlMutation()
+  const [createReconnectUrl, { loading: reconnectUrlLoading }] = useReconnectAccountUrlMutation()
 
-  const handleConnectAccount = async (
-    messagingAppType: MessagingAppType,
-    accountId?: string
-  ) => {
+  const handleConnectAccount = async (messagingAppType: MessagingAppType, accountId?: string) => {
     const { data } = await createUrl({
-      variables: { input: { messagingAppType, ...(accountId && { accountId }) } },
+      variables: {
+        input: { messagingAppType, ...(accountId && { accountId }) },
+      },
     })
     startPolling(4000)
     window.open(data?.connectedAccountConnectionUrl.url)
   }
 
-  const handleReconnectAccount = async (
-    accountId: string,
-    messagingAppType: MessagingAppType
-  ) => {
+  const handleReconnectAccount = async (accountId: string, messagingAppType: MessagingAppType) => {
     try {
       const { data } = await createReconnectUrl({
         variables: { input: { accountId, messagingAppType } },
@@ -70,30 +65,22 @@ export default function ConnectedAccountsPage() {
 
   return (
     <Page
-      title="Email & LinkedIn Accounts"
+      title='Email & LinkedIn Accounts'
       description="Connect accounts you'll use to engage prospects"
       actions={
         hasAccounts ? (
-          <AddAccountDropdown
-            onConnect={handleConnectAccount}
-            loading={urlLoading}
-          />
+          <AddAccountDropdown onConnect={handleConnectAccount} loading={urlLoading} />
         ) : undefined
       }
       loading={loading}
       skeleton={<ConnectedAccountsSkeleton />}
     >
-      <div className="space-y-6">
+      <div className='space-y-6'>
         {!hasAccounts && (
           <EmptyState
-            title="No connected accounts"
-            description="Get started by connecting your first account"
-            Cta={
-              <AddAccountDropdown
-                onConnect={handleConnectAccount}
-                loading={urlLoading}
-              />
-            }
+            title='No connected accounts'
+            description='Get started by connecting your first account'
+            Cta={<AddAccountDropdown onConnect={handleConnectAccount} loading={urlLoading} />}
           />
         )}
         {hasAccounts && (

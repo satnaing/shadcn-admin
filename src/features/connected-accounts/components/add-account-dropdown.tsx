@@ -1,3 +1,4 @@
+import { MessagingAppType } from '@/graphql/global/types.generated'
 import { Linkedin, Mail, Plus, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -6,7 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { MessagingAppType } from '@/graphql/global/types.generated'
 
 interface AddAccountDropdownProps {
   onConnect: (messagingAppType: MessagingAppType) => void
@@ -19,26 +19,20 @@ export function AddAccountDropdown({ onConnect, loading }: AddAccountDropdownPro
       <DropdownMenuTrigger asChild>
         <Button disabled={loading}>
           {loading ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            <Loader2 className='mr-2 h-4 w-4 animate-spin' />
           ) : (
-            <Plus className="mr-2 h-4 w-4" />
+            <Plus className='mr-2 h-4 w-4' />
           )}
           Add Account
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem
-          onClick={() => onConnect(MessagingAppType.Linkedin)}
-          disabled={loading}
-        >
-          <Linkedin className="mr-2 h-4 w-4" />
+        <DropdownMenuItem onClick={() => onConnect(MessagingAppType.Linkedin)} disabled={loading}>
+          <Linkedin className='mr-2 h-4 w-4' />
           Add LinkedIn Account
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => onConnect(MessagingAppType.Email)}
-          disabled={loading}
-        >
-          <Mail className="mr-2 h-4 w-4" />
+        <DropdownMenuItem onClick={() => onConnect(MessagingAppType.Email)} disabled={loading}>
+          <Mail className='mr-2 h-4 w-4' />
           Add Email Account
         </DropdownMenuItem>
       </DropdownMenuContent>

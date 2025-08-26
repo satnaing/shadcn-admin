@@ -1,17 +1,11 @@
-
-      export interface PossibleTypesResultData {
-        possibleTypes: {
-          [key: string]: string[]
-        }
-      }
-      const result: PossibleTypesResultData = {
-  "possibleTypes": {
-    "AnyModelUnion": [
-      "CampaignContact",
-      "Message",
-      "SessionIdentity"
-    ]
+export interface PossibleTypesResultData {
+  possibleTypes: {
+    [key: string]: string[]
   }
-};
-      export default result;
-    
+}
+const result: PossibleTypesResultData = {
+  possibleTypes: {
+    AnyModelUnion: ['CampaignContact', 'Message', 'SessionIdentity'],
+  },
+}
+export default result

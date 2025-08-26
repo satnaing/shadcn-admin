@@ -1,40 +1,40 @@
 query ConnectedAccounts {
-    connectedAccounts {
-        id
-        name
-        profilePicUrl
-        isLinkedinEnabled
-        dailyConnectionRequests
-        dailyMessagesSent
+  connectedAccounts {
+    id
+    name
+    profilePicUrl
+    isLinkedinEnabled
+    dailyConnectionRequests
+    dailyMessagesSent
 
-        # linkedin fields
-        isLinkedinEnabled
-        linkedinExternalId
+    # linkedin fields
+    isLinkedinEnabled
+    linkedinExternalId
 
-        # email fields
-        isEmailEnabled
-        emailProvider
-        emailExternalId
-        email
+    # email fields
+    isEmailEnabled
+    emailProvider
+    emailExternalId
+    email
 
-        createdAt
-    }
+    createdAt
+  }
 }
 
-mutation ConnectAccountUrl ($input: ConnectedAccountConnectionUrlInput!) {
-    connectedAccountConnectionUrl(input: $input) {
-        url
-    }
+mutation ConnectAccountUrl($input: ConnectedAccountConnectionUrlInput!) {
+  connectedAccountConnectionUrl(input: $input) {
+    url
+  }
 }
 
 mutation ReconnectAccountUrl($input: ConnectedAccountReconnectionUrlInput!) {
   connectedAccountReconnectionUrl(input: $input) {
-    url  
+    url
   }
 }
 
 mutation ConnectedAccountDelete($input: ConnectedAccountDeleteInput!) {
-    connectedAccountDelete(input: $input) {
-        count
-    }
+  connectedAccountDelete(input: $input) {
+    count
+  }
 }

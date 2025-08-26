@@ -4,9 +4,11 @@ export const executionSchema = z.object({
   id: z.string(),
   createdAt: z.string(),
   completedAt: z.string().nullable(),
-  result: z.object({
-    shortSummary: z.string().nullable(),
-  }).nullable(),
+  result: z
+    .object({
+      shortSummary: z.string().nullable(),
+    })
+    .nullable(),
   summary: z.string().nullable(),
   status: z.string(),
   playbookId: z.string().nullable(),

@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+# Run type checking
+echo "Running TypeScript type check..."
+pnpm tsc --noEmit
+if [ $? -ne 0 ]; then
+  echo "❌ TypeScript type check failed. Please fix type errors before committing."
+  exit 1
+fi
+
+# Run lint-staged for linting and formatting on staged files
+echo "Running lint-staged on staged files..."
+pnpm lint-staged
+if [ $? -ne 0 ]; then
+  echo "❌ Linting or formatting failed. Please fix issues before committing."
+  exit 1
+fi
+
+echo "✅ Pre-commit checks passed!"

@@ -1,32 +1,32 @@
-import type { ReactNode } from 'react';
-import { useNavigate } from '@tanstack/react-router';
-import { ChevronLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { ConfigDrawer } from '@/components/config-drawer';
-import { Header } from '@/components/layout/header';
-import { Main } from '@/components/layout/main';
-import { ProfileDropdown } from '@/components/profile-dropdown';
-import { Search } from '@/components/search';
-import { ThemeSwitch } from '@/components/theme-switch';
-import { Loadable } from '@/components/loadable';
-import { cn } from '@/lib/utils';
+import type { ReactNode } from 'react'
+import { useNavigate } from '@tanstack/react-router'
+import { ChevronLeft } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { ConfigDrawer } from '@/components/config-drawer'
+import { Header } from '@/components/layout/header'
+import { Main } from '@/components/layout/main'
+import { Loadable } from '@/components/loadable'
+import { ProfileDropdown } from '@/components/profile-dropdown'
+import { Search } from '@/components/search'
+import { ThemeSwitch } from '@/components/theme-switch'
 
 interface PageProps {
-  children: ReactNode;
-  title?: string | ReactNode;
-  description?: string;
-  actions?: ReactNode;
-  backPath?: string;
-  headerFixed?: boolean;
-  mainFixed?: boolean;
-  mainFluid?: boolean;
-  showSearch?: boolean;
-  showThemeSwitch?: boolean;
-  showConfigDrawer?: boolean;
-  showProfileDropdown?: boolean;
-  className?: string;
-  loading?: boolean;
-  skeleton?: React.ReactElement;
+  children: ReactNode
+  title?: string | ReactNode
+  description?: string
+  actions?: ReactNode
+  backPath?: string
+  headerFixed?: boolean
+  mainFixed?: boolean
+  mainFluid?: boolean
+  showSearch?: boolean
+  showThemeSwitch?: boolean
+  showConfigDrawer?: boolean
+  showProfileDropdown?: boolean
+  className?: string
+  loading?: boolean
+  skeleton?: React.ReactElement
 }
 
 export function Page({
@@ -46,7 +46,7 @@ export function Page({
   loading,
   skeleton,
 }: PageProps) {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <>
@@ -65,40 +65,33 @@ export function Page({
             <div className='flex items-start gap-2'>
               {backPath && (
                 <Button
-                  variant="ghost"
-                  size="icon"
-                  className="shrink-0 -ml-2"
+                  variant='ghost'
+                  size='icon'
+                  className='-ml-2 shrink-0'
                   onClick={() => navigate({ to: backPath })}
                 >
                   <ChevronLeft />
                 </Button>
               )}
-              <div className="space-y-1">
-                {title && (
-                  typeof title === 'string' ? (
+              <div className='space-y-1'>
+                {title &&
+                  (typeof title === 'string' ? (
                     <h1 className='text-2xl font-bold tracking-tight'>{title}</h1>
                   ) : (
                     title
-                  )
-                )}
-                {description && (
-                  <p className='text-muted-foreground'>{description}</p>
-                )}
+                  ))}
+                {description && <p className='text-muted-foreground'>{description}</p>}
               </div>
             </div>
-            {actions && (
-              <div className='flex items-center space-x-2'>
-                {actions}
-              </div>
-            )}
+            {actions && <div className='flex items-center space-x-2'>{actions}</div>}
           </div>
         )}
-        <div className="space-y-4">
+        <div className='space-y-4'>
           <Loadable isLoading={loading} loader={skeleton}>
             {children}
           </Loadable>
         </div>
       </Main>
     </>
-  );
+  )
 }

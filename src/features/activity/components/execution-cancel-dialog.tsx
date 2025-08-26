@@ -15,7 +15,7 @@ type ExecutionCancelDialogProps = {
 }
 
 export function ExecutionCancelDialog({ open }: ExecutionCancelDialogProps) {
-  const { setOpen, currentExecution } = useExecutions()
+  const { setOpen } = useExecutions()
 
   const handleCancel = () => {
     // TODO: Implement cancel mutation

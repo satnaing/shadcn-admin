@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import { type Control, Controller } from 'react-hook-form'
+import {
+  useSlackIntegrationQuery,
+  useSlackChannelsQuery,
+} from '@/graphql/operations/operations.generated'
 import { Info } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -11,13 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
-import { useSlackIntegrationQuery, useSlackChannelsQuery } from '@/graphql/operations/operations.generated'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 interface SlackChannelSelectorProps {
   control: Control<any>
@@ -111,7 +109,9 @@ export function SlackChannelSelector({
 
                 {selectionMode === 'list' ? (
                   <Select
-                    disabled={isDisabled || !slackData?.slackIntegration?.enabled || slackChannelsLoading}
+                    disabled={
+                      isDisabled || !slackData?.slackIntegration?.enabled || slackChannelsLoading
+                    }
                     value={field.value?.id}
                     onValueChange={(value) => {
                       const option = enhancedOptions.find((opt) => opt.value === value)
@@ -172,10 +172,10 @@ export function SlackChannelSelector({
               </div>
 
               {fieldState.error && (
-                <p className='text-sm text-destructive'>{fieldState.error.message}</p>
+                <p className='text-destructive text-sm'>{fieldState.error.message}</p>
               )}
 
-              <p className='text-sm text-muted-foreground'>
+              <p className='text-muted-foreground text-sm'>
                 {helperText}. If you can't find the channel in the list, add the channel by ID.
               </p>
             </div>

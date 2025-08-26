@@ -1,4 +1,5 @@
 import { Outlet } from '@tanstack/react-router'
+import { useUser } from '@clerk/clerk-react'
 import { getCookie } from '@/lib/cookies'
 import { cn } from '@/lib/utils'
 import { LayoutProvider } from '@/context/layout-provider'
@@ -12,13 +13,12 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
+import { OrgSelector } from '@/components/org-selector'
 import { SkipToMain } from '@/components/skip-to-main'
+import { TeamSwitcher } from './app-sidebar-header'
 import { sidebarData } from './data/sidebar-data'
 import { NavGroup } from './nav-group'
 import { NavUser } from './nav-user'
-import { TeamSwitcher } from './app-sidebar-header'
-import { OrgSelector } from '@/components/org-selector'
-import { useUser } from '@clerk/clerk-react'
 
 type AuthenticatedLayoutProps = {
   children?: React.ReactNode
@@ -27,11 +27,12 @@ type AuthenticatedLayoutProps = {
 export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
   const defaultOpen = getCookie('sidebar_state') !== 'false'
   const { user } = useUser()
-  
+
   // Check if user is internal (Swan team member)
-  const isInternal = user?.publicMetadata?.role === 'internal' || 
-                     user?.emailAddresses?.[0]?.emailAddress?.endsWith('@getswan.com')
-  
+  const isInternal =
+    user?.publicMetadata?.role === 'internal' ||
+    user?.emailAddresses?.[0]?.emailAddress?.endsWith('@getswan.com')
+
   return (
     <SearchProvider>
       <SidebarProvider defaultOpen={defaultOpen}>
@@ -69,7 +70,7 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
             {children ?? <Outlet />}
             {/* Show OrgSelector for internal users */}
             {isInternal && (
-              <div className="fixed bottom-20 right-24 z-50">
+              <div className='fixed right-24 bottom-20 z-50'>
                 <OrgSelector />
               </div>
             )}

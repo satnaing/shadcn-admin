@@ -27,7 +27,7 @@ export function Loadable({
       loader || (
         <div className={cn('flex flex-col gap-2 py-2', className)}>
           <Loader className={cn('h-6 w-6 animate-spin', spinnerClassName)} />
-          {label && <p className="text-sm text-muted-foreground">{label}</p>}
+          {label && <p className='text-muted-foreground text-sm'>{label}</p>}
         </div>
       )
     )

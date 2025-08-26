@@ -18,9 +18,7 @@ export function ExecutionsProvider({ children }: { children: React.ReactNode }) 
   const [currentExecution, setCurrentExecution] = useState<Execution | null>(null)
 
   return (
-    <ExecutionsContext.Provider 
-      value={{ open, setOpen, currentExecution, setCurrentExecution }}
-    >
+    <ExecutionsContext.Provider value={{ open, setOpen, currentExecution, setCurrentExecution }}>
       {children}
     </ExecutionsContext.Provider>
   )

@@ -15,9 +15,7 @@ type DataTableRowActionsProps<TData> = {
   row: Row<TData>
 }
 
-export function DataTableRowActions<TData>({
-  row,
-}: DataTableRowActionsProps<TData>) {
+export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
   const execution = row.original as Execution
   const { setOpen, setCurrentExecution } = useExecutions()
 
@@ -34,10 +32,7 @@ export function DataTableRowActions<TData>({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant='ghost'
-          className='data-[state=open]:bg-muted flex h-8 w-8 p-0'
-        >
+        <Button variant='ghost' className='data-[state=open]:bg-muted flex h-8 w-8 p-0'>
           <DotsHorizontalIcon className='h-4 w-4' />
           <span className='sr-only'>Open menu</span>
         </Button>
@@ -45,18 +40,14 @@ export function DataTableRowActions<TData>({
       <DropdownMenuContent align='end' className='w-[160px]'>
         <DropdownMenuItem onClick={handleViewDetails}>View Details</DropdownMenuItem>
         <DropdownMenuItem>View in Playbook</DropdownMenuItem>
-        {execution.entityId && (
-          <DropdownMenuItem>View Entity</DropdownMenuItem>
-        )}
+        {execution.entityId && <DropdownMenuItem>View Entity</DropdownMenuItem>}
         <DropdownMenuSeparator />
         {execution.status === 'IN_PROGRESS' || execution.status === 'AWAITING_APPROVAL' ? (
-          <DropdownMenuItem onClick={handleCancel} className="text-destructive">
+          <DropdownMenuItem onClick={handleCancel} className='text-destructive'>
             Cancel Execution
           </DropdownMenuItem>
         ) : null}
-        <DropdownMenuItem
-          onClick={() => navigator.clipboard.writeText(execution.id)}
-        >
+        <DropdownMenuItem onClick={() => navigator.clipboard.writeText(execution.id)}>
           Copy Execution ID
         </DropdownMenuItem>
       </DropdownMenuContent>

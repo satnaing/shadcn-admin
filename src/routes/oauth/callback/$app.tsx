@@ -1,6 +1,6 @@
+import z from 'zod'
 import { createFileRoute } from '@tanstack/react-router'
 import { OauthCallback } from '@/features/oauth/callback'
-import z from 'zod'
 
 export const Route = createFileRoute('/oauth/callback/$app')({
   component: OauthCallback,

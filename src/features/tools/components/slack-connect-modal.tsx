@@ -1,10 +1,14 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import type { SlackIntegrationUpdateInput } from '@/graphql/global/types.generated'
+import {
+  useSlackIntegrationQuery,
+  useSlackIntegrationUpdateMutation,
+} from '@/graphql/operations/operations.generated'
 import { AlertCircle } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
+import { toast } from 'sonner'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -13,16 +17,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { toast } from 'sonner'
+import { Label } from '@/components/ui/label'
+import { Separator } from '@/components/ui/separator'
+import { Loadable } from '@/components/loadable'
 import { ConnectedBadge } from '@/features/tools/components/connected-badge'
 import { SlackChannelSelector } from '@/features/tools/components/slack-channel-selector'
 import { useSlackAuth } from '@/features/tools/hooks/use-slack-auth'
-import {
-  useSlackIntegrationQuery,
-  useSlackIntegrationUpdateMutation,
-} from '@/graphql/operations/operations.generated'
-import type { SlackIntegrationUpdateInput } from '@/graphql/global/types.generated'
-import { Loadable } from '@/components/loadable'
 
 type SlackConnectModalProps = {
   isOpen: boolean
@@ -30,7 +30,6 @@ type SlackConnectModalProps = {
 }
 
 export function SlackConnectModal({ isOpen, onOpenChange }: SlackConnectModalProps) {
-
   const {
     data,
     loading,
@@ -79,7 +78,7 @@ export function SlackConnectModal({ isOpen, onOpenChange }: SlackConnectModalPro
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent className='max-w-2xl max-h-[90vh] overflow-y-auto'>
+      <DialogContent className='max-h-[90vh] max-w-2xl overflow-y-auto'>
         <DialogHeader>
           <div className='flex items-center gap-3'>
             <DialogTitle>Slack</DialogTitle>
@@ -87,49 +86,48 @@ export function SlackConnectModal({ isOpen, onOpenChange }: SlackConnectModalPro
           </div>
         </DialogHeader>
 
-      <Loadable isLoading={loading}>
-        <div className='space-y-6 py-6'>
-          {!connected ? (
-            <>
-              <DialogDescription>
-                Connect your Slack workspace to interact directly with the Swan agent through Slack. Ask
-                questions about playbooks, get insights about companies and contacts, and manage your playbook
-                settings - all without leaving your workspace.
-              </DialogDescription>
+        <Loadable isLoading={loading}>
+          <div className='space-y-6 py-6'>
+            {!connected ? (
+              <>
+                <DialogDescription>
+                  Connect your Slack workspace to interact directly with the Swan agent through
+                  Slack. Ask questions about playbooks, get insights about companies and contacts,
+                  and manage your playbook settings - all without leaving your workspace.
+                </DialogDescription>
 
-              <Alert>
-                <AlertCircle className='h-4 w-4' />
-                <AlertDescription>
-                  When selecting a private channel, please make sure to add Swan to channel after
-                  completing the integration. Feel free to reach out at hello@getswan.com if you
-                  need help.
-                </AlertDescription>
-              </Alert>
-            </>
-          ) : (
-            <>
-              <div className='space-y-2'>
-                <Label className='text-sm font-semibold'>Connected channel</Label>
-                <div className='rounded-md border bg-muted/50 p-3'>
-                  <p className='text-sm'>{slackIntegration?.channelName}</p>
+                <Alert>
+                  <AlertCircle className='h-4 w-4' />
+                  <AlertDescription>
+                    When selecting a private channel, please make sure to add Swan to channel after
+                    completing the integration. Feel free to reach out at hello@getswan.com if you
+                    need help.
+                  </AlertDescription>
+                </Alert>
+              </>
+            ) : (
+              <>
+                <div className='space-y-2'>
+                  <Label className='text-sm font-semibold'>Connected channel</Label>
+                  <div className='bg-muted/50 rounded-md border p-3'>
+                    <p className='text-sm'>{slackIntegration?.channelName}</p>
+                  </div>
                 </div>
-              </div>
 
-              <Separator />
+                <Separator />
 
-              <div className='space-y-3'>
-                <SlackChannelSelector
-                  control={control}
-                  name='inboxChannel'
-                  label='Inbox Channel'
-                  helperText='Select a channel for Play related messages and approvals'
-                  onChange={() => onSubmit()}
-                />
-
-              </div>
-            </>
-          )}
-        </div>
+                <div className='space-y-3'>
+                  <SlackChannelSelector
+                    control={control}
+                    name='inboxChannel'
+                    label='Inbox Channel'
+                    helperText='Select a channel for Play related messages and approvals'
+                    onChange={() => onSubmit()}
+                  />
+                </div>
+              </>
+            )}
+          </div>
         </Loadable>
 
         <DialogFooter>

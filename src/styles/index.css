@@ -21,14 +21,14 @@
   body[data-scroll-locked] {
     overflow: unset !important;
   }
-  
+
   /* Make dialog content scrollable when needed */
   [data-slot='dialog-content'] {
     max-height: 90vh;
     display: flex;
     flex-direction: column;
   }
-  
+
   /* Ensure dialog body is scrollable */
   [data-slot='dialog-body'] {
     overflow-y: auto;

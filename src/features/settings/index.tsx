@@ -35,8 +35,8 @@ const sidebarNavItems = [
 export function Settings() {
   return (
     <Page
-      title="Settings"
-      description="Manage your account settings and set e-mail preferences."
+      title='Settings'
+      description='Manage your account settings and set e-mail preferences.'
       mainFixed
     >
       <Separator className='my-4 lg:my-6' />

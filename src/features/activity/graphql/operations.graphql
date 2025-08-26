@@ -1,8 +1,5 @@
 # Executions queries
-query Executions(
-  $page: PaginationInput
-  $filters: ExecutionFilter
-) {
+query Executions($page: PaginationInput, $filters: ExecutionFilter) {
   executions(page: $page, filters: $filters) {
     data {
       id

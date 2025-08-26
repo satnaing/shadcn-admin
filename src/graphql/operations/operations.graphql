@@ -136,13 +136,13 @@ query Orgs {
   }
 }
 
- mutation OrgInfoUpdate($input: OrgInfoUpdateInput!) {
+mutation OrgInfoUpdate($input: OrgInfoUpdateInput!) {
   orgInfoUpdate(input: $input) {
-     id
-     name
-     description
-     competitors
-     createdAt
-     updatedAt
-   }
- }
+    id
+    name
+    description
+    competitors
+    createdAt
+    updatedAt
+  }
+}

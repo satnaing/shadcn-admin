@@ -9,7 +9,7 @@ export function Tasks() {
   return (
     <TasksProvider>
       <Page
-        title="Tasks"
+        title='Tasks'
         description="Here's a list of your tasks for this month!"
         actions={<TasksPrimaryButtons />}
         mainFixed

@@ -1,11 +1,6 @@
-import { Linkedin, Mail } from 'lucide-react'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
 import { MessagingAppType } from '@/graphql/global/types.generated'
+import { Linkedin, Mail } from 'lucide-react'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import type { ConnectedAccountsQuery } from '../graphql/operations.generated'
 
 interface AccountIconsProps {
@@ -22,13 +17,13 @@ export function AccountIcons({ account, onReconnect, onConnect }: AccountIconsPr
 
   return (
     <TooltipProvider>
-      <div className="flex items-center gap-2">
+      <div className='flex items-center gap-2'>
         {/* LinkedIn Icon */}
         {hasLinkedIn ? (
           <Tooltip>
             <TooltipTrigger asChild>
               <button
-                className={`rounded-md p-2 border-2 transition-colors ${
+                className={`rounded-md border-2 p-2 transition-colors ${
                   isLinkedInDisconnected
                     ? 'border-destructive/50 text-destructive hover:border-destructive hover:text-destructive cursor-pointer'
                     : 'border-primary/30 text-primary cursor-default'
@@ -39,7 +34,7 @@ export function AccountIcons({ account, onReconnect, onConnect }: AccountIconsPr
                     : undefined
                 }
               >
-                <Linkedin className="h-4 w-4" />
+                <Linkedin className='h-4 w-4' />
               </button>
             </TooltipTrigger>
             <TooltipContent>
@@ -52,10 +47,10 @@ export function AccountIcons({ account, onReconnect, onConnect }: AccountIconsPr
           <Tooltip>
             <TooltipTrigger asChild>
               <button
-                className="rounded-md p-2 border-2 border-dashed border-muted-foreground/30 text-muted-foreground hover:border-primary hover:text-primary cursor-pointer transition-colors"
+                className='border-muted-foreground/30 text-muted-foreground hover:border-primary hover:text-primary cursor-pointer rounded-md border-2 border-dashed p-2 transition-colors'
                 onClick={() => onConnect(MessagingAppType.Linkedin, account.id)}
               >
-                <Linkedin className="h-4 w-4" />
+                <Linkedin className='h-4 w-4' />
               </button>
             </TooltipTrigger>
             <TooltipContent>Click to connect LinkedIn</TooltipContent>
@@ -67,7 +62,7 @@ export function AccountIcons({ account, onReconnect, onConnect }: AccountIconsPr
           <Tooltip>
             <TooltipTrigger asChild>
               <button
-                className={`rounded-md p-2 border-2 transition-colors ${
+                className={`rounded-md border-2 p-2 transition-colors ${
                   isEmailDisconnected
                     ? 'border-destructive/50 text-destructive hover:border-destructive hover:text-destructive cursor-pointer'
                     : 'border-primary/30 text-primary cursor-default'
@@ -78,23 +73,21 @@ export function AccountIcons({ account, onReconnect, onConnect }: AccountIconsPr
                     : undefined
                 }
               >
-                <Mail className="h-4 w-4" />
+                <Mail className='h-4 w-4' />
               </button>
             </TooltipTrigger>
             <TooltipContent>
-              {isEmailDisconnected
-                ? 'Email disconnected - click to reconnect'
-                : 'Email connected'}
+              {isEmailDisconnected ? 'Email disconnected - click to reconnect' : 'Email connected'}
             </TooltipContent>
           </Tooltip>
         ) : (
           <Tooltip>
             <TooltipTrigger asChild>
               <button
-                className="rounded-md p-2 border-2 border-dashed border-muted-foreground/30 text-muted-foreground hover:border-muted-foreground hover:text-muted-foreground cursor-pointer transition-colors"
+                className='border-muted-foreground/30 text-muted-foreground hover:border-muted-foreground hover:text-muted-foreground cursor-pointer rounded-md border-2 border-dashed p-2 transition-colors'
                 onClick={() => onConnect(MessagingAppType.Email, account.id)}
               >
-                <Mail className="h-4 w-4" />
+                <Mail className='h-4 w-4' />
               </button>
             </TooltipTrigger>
             <TooltipContent>Click to connect email</TooltipContent>

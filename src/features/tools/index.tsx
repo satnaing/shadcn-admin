@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useIntegrationsQuery } from '@/graphql/operations/operations.generated'
 import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Page } from '@/components/page'
 import { HubSpotConnectModal } from '@/features/tools/components/hubspot-connect-modal'
 import { SlackConnectModal } from '@/features/tools/components/slack-connect-modal'
-import { useIntegrationsQuery } from '@/graphql/operations/operations.generated'
 
 type Integration = {
   name: string
@@ -41,56 +41,50 @@ export function Tools() {
   const apps = integrations?.integrations?.apps || []
 
   return (
-    <Page
-      title="Tools"
-      description="Give Swan access to your team's stack"
-      mainFixed
-    >
+    <Page title='Tools' description="Give Swan access to your team's stack" mainFixed>
       <div className='grid gap-4 pt-6 pb-16 md:grid-cols-2 lg:grid-cols-3'>
-          {ALL_INTEGRATIONS.map((integration) => {
-            const isConnected = apps.includes(integration.app)
-            
-            return (
-              <Card
-                key={integration.name}
-                className='cursor-pointer transition-shadow hover:shadow-lg'
-                onClick={() => setOpenModal(integration.name)}
-              >
-                <CardHeader>
-                  <div className='flex items-center gap-2'>
-                    {typeof integration.logo === 'string' ? (
-                      <img
-                        className='h-8 w-8 rounded-lg'
-                        src={integration.logo}
-                        alt={`${integration.name} logo`}
-                      />
-                    ) : (
-                      integration.logo
-                    )}
-                    <CardTitle className='text-lg font-semibold'>
-                      {integration.name}
-                    </CardTitle>
-                  </div>
-                  {isConnected && (
-                    <Badge variant='default' className='bg-green-100 text-green-800'>
-                      Connected
-                    </Badge>
+        {ALL_INTEGRATIONS.map((integration) => {
+          const isConnected = apps.includes(integration.app)
+
+          return (
+            <Card
+              key={integration.name}
+              className='cursor-pointer transition-shadow hover:shadow-lg'
+              onClick={() => setOpenModal(integration.name)}
+            >
+              <CardHeader className='flex items-center justify-between'>
+                <div className='flex items-center gap-2'>
+                  {typeof integration.logo === 'string' ? (
+                    <img
+                      className='h-8 w-8 rounded-lg'
+                      src={integration.logo}
+                      alt={`${integration.name} logo`}
+                    />
+                  ) : (
+                    integration.logo
                   )}
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>{integration.description}</CardDescription>
-                </CardContent>
-                
-                {openModal === integration.name && (
-                  <integration.Component
-                    key={integration.name}
-                    isOpen={openModal === integration.name}
-                    onOpenChange={(open) => !open && setOpenModal('')}
-                  />
+                  <CardTitle className='text-lg font-semibold'>{integration.name}</CardTitle>
+                </div>
+                {isConnected && (
+                  <Badge variant='default' className='bg-green-100 text-green-800'>
+                    Connected
+                  </Badge>
                 )}
-              </Card>
-            )
-          })}
+              </CardHeader>
+              <CardContent>
+                <CardDescription>{integration.description}</CardDescription>
+              </CardContent>
+
+              {openModal === integration.name && (
+                <integration.Component
+                  key={integration.name}
+                  isOpen={openModal === integration.name}
+                  onOpenChange={(open) => !open && setOpenModal('')}
+                />
+              )}
+            </Card>
+          )
+        })}
       </div>
     </Page>
   )
