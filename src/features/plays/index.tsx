@@ -73,12 +73,12 @@ export default function PlaybooksPage() {
     <Page
       title='Plays'
       description='Automate your workflow processes with plays'
-      actions={
-        <Button onClick={() => navigate({ to: '/plays/new' })}>
-          <Plus className='mr-2 h-4 w-4' />
-          Create Play
-        </Button>
-      }
+      // actions={
+      //   <Button onClick={() => navigate({ to: '/plays/new' })}>
+      //     <Plus className='mr-2 h-4 w-4' />
+      //     Create Play
+      //   </Button>
+      // }
     >
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
         {playbooks.map((playbook) => (
