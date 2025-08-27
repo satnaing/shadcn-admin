@@ -18,7 +18,7 @@ function ClerkAuthLayout() {
         </div>
 
         {/* Auth Content */}
-        <div>
+        <div className='z-100'>
           <Outlet />
         </div>
 
