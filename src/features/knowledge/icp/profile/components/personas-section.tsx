@@ -24,8 +24,6 @@ import {
 } from '../../graphql/operations.generated'
 import PersonaForm from './persona-form'
 
-const MAX_PERSONAS = 3
-
 interface PersonasSectionProps {
   targetMarketId: string
   personas: PersonaFieldsFragment[]
@@ -73,15 +71,10 @@ export default function PersonasSection({ targetMarketId, personas }: PersonasSe
       <div className='flex items-center justify-between'>
         {personas.length > 0 && (
           <p className='text-muted-foreground text-sm'>
-            Define up to {MAX_PERSONAS} personas for this ICP profile
+            Define who makes up the buying committee for this ICP profile
           </p>
         )}
-        <Button
-          variant='outline'
-          onClick={handleAddPersona}
-          disabled={personas.length >= MAX_PERSONAS}
-          size='sm'
-        >
+        <Button variant='outline' onClick={handleAddPersona} size='sm'>
           <Plus className='mr-2 h-4 w-4' />
           Add Persona
         </Button>

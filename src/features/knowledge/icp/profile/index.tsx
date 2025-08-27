@@ -58,7 +58,7 @@ export default function ICPProfilePage() {
         {!isNew && data?.targetMarket && (
           <Card>
             <CardHeader>
-              <CardTitle>Personas</CardTitle>
+              <CardTitle>Buying Committee</CardTitle>
             </CardHeader>
             <CardContent>
               <PersonasSection

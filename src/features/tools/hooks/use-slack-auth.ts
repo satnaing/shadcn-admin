@@ -8,6 +8,7 @@ const SCOPES = [
   'groups:write',
   'groups:history',
   'im:read',
+  'im:write',
   'im:history',
   'links:read',
   'channels:read',
