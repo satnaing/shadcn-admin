@@ -15,7 +15,9 @@ export const formSchema = z.object({
         ? 'Please enter your email'
         : 'Invalid email address',
   }),
-  role: z.string({ error: 'Role is required.' }),
+  role: z.enum(['superadmin', 'admin', 'manager', 'cashier'], {
+    error: 'Role is required.',
+  }),
   desc: z.string().optional(),
 })
 

@@ -32,16 +32,28 @@ const baseSchema = z.object({
   phoneNumber: z.string({ error: 'Phone number is required.' }),
   email: z.email({
     error: (issue) =>
-      issue.input === undefined ? 'Email is invalid.' : 'Invalid email address',
+      issue.input === undefined
+        ? 'Email is required.'
+        : 'Invalid email address',
   }),
-  role: z.enum(['superadmin', 'admin', 'manager', 'cashier']),
+  role: z.enum(['superadmin', 'admin', 'manager', 'cashier'], {
+    error: 'Role is required.',
+  }),
 })
 
 export const createSchema = baseSchema.merge(
   z.object({
     intent: z.literal('create'),
-    password: z.string().transform((pwd) => pwd.trim()),
-    confirmPassword: z.string().transform((pwd) => pwd.trim()),
+    password: z
+      .string({
+        error: 'Password is required.',
+      })
+      .transform((pwd) => pwd.trim()),
+    confirmPassword: z
+      .string({
+        error: 'Please confirm your password.',
+      })
+      .transform((pwd) => pwd.trim()),
   }),
 )
 
@@ -55,47 +67,49 @@ const formSchema = z
     if (arg.intent !== 'create') {
       return
     }
-    if (arg.password !== '') {
-      if (arg.password === undefined) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password is required.',
-          path: ['password'],
-        })
-        return
-      }
+    if (arg.password === '' && arg.confirmPassword === '') {
+      return
+    }
 
-      if (arg.password.length < 8) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password must be at least 8 characters long.',
-          path: ['password'],
-        })
-      }
+    if (arg.password === undefined) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Password is required.',
+        path: ['password'],
+      })
+      return
+    }
 
-      if (!arg.password.match(/[a-z]/)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password must contain at least one lowercase letter.',
-          path: ['password'],
-        })
-      }
+    if (arg.password.length < 8) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Password must be at least 8 characters long.',
+        path: ['password'],
+      })
+    }
 
-      if (!arg.password.match(/\d/)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password must contain at least one number.',
-          path: ['password'],
-        })
-      }
+    if (!arg.password.match(/[a-z]/)) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Password must contain at least one lowercase letter.',
+        path: ['password'],
+      })
+    }
 
-      if (arg.password !== arg.confirmPassword) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Passwords don't match.",
-          path: ['confirmPassword'],
-        })
-      }
+    if (!arg.password.match(/\d/)) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Password must contain at least one number.',
+        path: ['password'],
+      })
+    }
+
+    if (arg.password !== arg.confirmPassword) {
+      ctx.addIssue({
+        code: 'custom',
+        message: "Passwords don't match.",
+        path: ['confirmPassword'],
+      })
     }
   })
 

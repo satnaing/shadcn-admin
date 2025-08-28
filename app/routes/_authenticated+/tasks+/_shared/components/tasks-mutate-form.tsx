@@ -20,7 +20,12 @@ import type { Task } from '../data/schema'
 
 export const createSchema = z.object({
   intent: z.literal('create'),
-  title: z.string({ error: 'Title is required.' }),
+  title: z
+    .string({
+      error: 'Title is required.',
+    })
+    .trim()
+    .min(1, 'Title is required.'),
   status: z.string({ error: 'Please select a status.' }),
   label: z.string({ error: 'Please select a label.' }),
   priority: z.string({ error: 'Please choose a priority.' }),
@@ -29,7 +34,10 @@ export const createSchema = z.object({
 export const updateSchema = z.object({
   intent: z.literal('update'),
   id: z.string(),
-  title: z.string({ error: 'Title is required.' }),
+  title: z
+    .string({ error: 'Title is required.' })
+    .trim()
+    .min(1, 'Title is required.'),
   status: z.string({ error: 'Please select a status.' }),
   label: z.string({ error: 'Please select a label.' }),
   priority: z.string({ error: 'Please choose a priority.' }),
