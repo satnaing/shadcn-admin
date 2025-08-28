@@ -26,13 +26,14 @@ import { userTypes } from '../data/data'
 import type { User } from '../data/schema'
 
 const baseSchema = z.object({
-  firstName: z.string({ required_error: 'First Name is required.' }),
-  lastName: z.string({ required_error: 'Last Name is required.' }),
-  username: z.string({ required_error: 'Username is required.' }),
-  phoneNumber: z.string({ required_error: 'Phone number is required.' }),
-  email: z
-    .string({ required_error: 'Email is required.' })
-    .email({ message: 'Email is invalid.' }),
+  firstName: z.string({ error: 'First Name is required.' }),
+  lastName: z.string({ error: 'Last Name is required.' }),
+  username: z.string({ error: 'Username is required.' }),
+  phoneNumber: z.string({ error: 'Phone number is required.' }),
+  email: z.email({
+    error: (issue) =>
+      issue.input === undefined ? 'Email is invalid.' : 'Invalid email address',
+  }),
   role: z.enum(['superadmin', 'admin', 'manager', 'cashier']),
 })
 

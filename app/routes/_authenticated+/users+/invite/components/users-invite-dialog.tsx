@@ -40,6 +40,7 @@ export function UsersInviteDialog({ open, onOpenChange }: Props) {
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
     constraint: getZodConstraint(formSchema),
+    shouldRevalidate: 'onBlur',
   })
   const navigation = useNavigation()
 

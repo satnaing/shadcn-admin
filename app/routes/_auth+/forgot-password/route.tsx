@@ -8,9 +8,12 @@ import type { Route } from './+types/route'
 import { ForgotForm } from './components/forgot-password-form'
 
 export const formSchema = z.object({
-  email: z
-    .string({ required_error: 'Please enter your email' })
-    .email({ message: 'Invalid email address' }),
+  email: z.email({
+    error: (issue) =>
+      issue.input === undefined
+        ? 'Please enter your email'
+        : 'Invalid email address',
+  }),
 })
 
 export const action = async ({ request }: Route.ActionArgs) => {

@@ -23,6 +23,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const navigation = useNavigation()
   const isLoading = navigation.state === 'submitting'

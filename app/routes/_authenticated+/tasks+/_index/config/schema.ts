@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { z } from 'zod/v4'
 import {
   FILTER_FIELDS,
   PAGINATION_PER_PAGE_DEFAULT,
@@ -23,7 +23,7 @@ export const FilterSchema = z.object(
     },
     {} as Record<
       (typeof FILTER_FIELDS)[number],
-      z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodString, 'many'>>>
+      z.ZodDefault<z.ZodOptional<z.ZodArray<z.ZodString>>>
     >,
   ),
 )

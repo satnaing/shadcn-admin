@@ -15,15 +15,21 @@ export const profileFormSchema = z.object({
     .max(30, {
       message: 'Username must not be longer than 30 characters.',
     }),
-  email: z
-    .string({
-      required_error: 'Please select an email to display.',
+  email: z.email({
+    error: (issue) =>
+      issue.input === undefined
+        ? 'Please select an email to display.'
+        : 'Invalid email address',
+  }),
+  bio: z
+    .string()
+    .min(4, {
+      message: 'Bio must be at least 4 characters.',
     })
-    .email(),
-  bio: z.string().max(160).min(4),
-  urls: z
-    .array(z.string().url({ message: 'Please enter a valid URL.' }))
-    .optional(),
+    .max(160, {
+      message: 'Bio must not be longer than 160 characters.',
+    }),
+  urls: z.array(z.url({ message: 'Please enter a valid URL.' })).optional(),
 })
 
 export const action = async ({ request }: Route.ActionArgs) => {

@@ -18,6 +18,7 @@ export function ForgotForm({ className, ...props }: ForgotFormProps) {
     defaultValue: { email: '' },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const navigation = useNavigation()
 

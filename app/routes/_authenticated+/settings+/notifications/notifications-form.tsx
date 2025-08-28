@@ -27,6 +27,7 @@ export function NotificationsForm() {
     defaultValue,
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: notificationsFormSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const navigation = useNavigation()
 
@@ -35,9 +36,20 @@ export function NotificationsForm() {
       <div className="relative space-y-3">
         <Label htmlFor={fields.type.id}>Notify me about...</Label>
         <RadioGroup
+          key={fields.type.key}
           name={fields.type.name}
           id={fields.type.id}
           defaultValue={fields.type.value}
+          onValueChange={(value) => {
+            form.update({
+              name: fields.type.name,
+              value,
+            })
+          }}
+          aria-invalid={!fields.type.valid || undefined}
+          aria-describedby={
+            !fields.type.valid ? fields.type.errorId : undefined
+          }
           className="flex flex-col space-y-1"
         >
           <div className="flex items-center space-y-0 space-x-3">

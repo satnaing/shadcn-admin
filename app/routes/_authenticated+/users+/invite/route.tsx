@@ -9,10 +9,13 @@ import type { Route } from './+types/route'
 import { UsersInviteDialog } from './components/users-invite-dialog'
 
 export const formSchema = z.object({
-  email: z
-    .string({ required_error: 'Email is required.' })
-    .email({ message: 'Email is invalid.' }),
-  role: z.string({ required_error: 'Role is required.' }),
+  email: z.email({
+    error: (issue) =>
+      issue.input === undefined
+        ? 'Please enter your email'
+        : 'Invalid email address',
+  }),
+  role: z.string({ error: 'Role is required.' }),
   desc: z.string().optional(),
 })
 
