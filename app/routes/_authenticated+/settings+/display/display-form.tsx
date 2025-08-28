@@ -48,6 +48,7 @@ export function DisplayForm() {
     defaultValue,
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: displayFormSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const itemList = fields.items.getFieldList()
   const navigation = useNavigation()

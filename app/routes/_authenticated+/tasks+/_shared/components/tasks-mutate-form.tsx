@@ -48,6 +48,7 @@ export function TasksMutateForm({ task }: { task?: Task }) {
     },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const navigation = useNavigation()
   const { backUrl } = useSmartNavigation({ baseUrl: href('/tasks') })

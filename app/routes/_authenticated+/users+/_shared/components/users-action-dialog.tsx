@@ -126,6 +126,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
         },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const isPasswordTouched = fields.password.dirty
   const navigation = useNavigation()
