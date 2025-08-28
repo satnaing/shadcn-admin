@@ -146,6 +146,7 @@ export type TrackingScriptQuery = {
   trackingScript: {
     __typename?: 'TrackingScript'
     id: string
+    pk: string
     domain?: string | null
     isVerified: boolean
     excludedPaths?: any | null
@@ -167,6 +168,28 @@ export type TrackingScriptUpdateMutation = {
   trackingScriptUpdate: {
     __typename?: 'TrackingScript'
     id: string
+    domain?: string | null
+    isVerified: boolean
+    excludedPaths?: any | null
+    allowedCountryCodes?: any | null
+    minimumSessionTimeSec?: number | null
+    identificationMode: Types.TrackingScriptIdentificationMode
+    dailyLimit: number
+    createdAt: any
+    updatedAt: any
+  }
+}
+
+export type TrackingScriptDomainUpdateMutationVariables = Types.Exact<{
+  input: Types.TrackingScriptDomainUpdateInput
+}>
+
+export type TrackingScriptDomainUpdateMutation = {
+  __typename?: 'Mutation'
+  trackingScriptDomainUpdate: {
+    __typename?: 'TrackingScript'
+    id: string
+    pk: string
     domain?: string | null
     isVerified: boolean
     excludedPaths?: any | null
@@ -609,6 +632,7 @@ export const TrackingScriptDocument = gql`
   query TrackingScript {
     trackingScript {
       id
+      pk
       domain
       isVerified
       excludedPaths
@@ -737,4 +761,64 @@ export type TrackingScriptUpdateMutationResult =
 export type TrackingScriptUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<
   TrackingScriptUpdateMutation,
   TrackingScriptUpdateMutationVariables
+>
+export const TrackingScriptDomainUpdateDocument = gql`
+  mutation TrackingScriptDomainUpdate($input: TrackingScriptDomainUpdateInput!) {
+    trackingScriptDomainUpdate(input: $input) {
+      id
+      pk
+      domain
+      isVerified
+      excludedPaths
+      allowedCountryCodes
+      minimumSessionTimeSec
+      identificationMode
+      dailyLimit
+      createdAt
+      updatedAt
+    }
+  }
+`
+export type TrackingScriptDomainUpdateMutationFn = ApolloReactCommon.MutationFunction<
+  TrackingScriptDomainUpdateMutation,
+  TrackingScriptDomainUpdateMutationVariables
+>
+
+/**
+ * __useTrackingScriptDomainUpdateMutation__
+ *
+ * To run a mutation, you first call `useTrackingScriptDomainUpdateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTrackingScriptDomainUpdateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [trackingScriptDomainUpdateMutation, { data, loading, error }] = useTrackingScriptDomainUpdateMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useTrackingScriptDomainUpdateMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    TrackingScriptDomainUpdateMutation,
+    TrackingScriptDomainUpdateMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<
+    TrackingScriptDomainUpdateMutation,
+    TrackingScriptDomainUpdateMutationVariables
+  >(TrackingScriptDomainUpdateDocument, options)
+}
+export type TrackingScriptDomainUpdateMutationHookResult = ReturnType<
+  typeof useTrackingScriptDomainUpdateMutation
+>
+export type TrackingScriptDomainUpdateMutationResult =
+  ApolloReactCommon.MutationResult<TrackingScriptDomainUpdateMutation>
+export type TrackingScriptDomainUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  TrackingScriptDomainUpdateMutation,
+  TrackingScriptDomainUpdateMutationVariables
 >

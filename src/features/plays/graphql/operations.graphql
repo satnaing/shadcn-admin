@@ -95,6 +95,7 @@ query Triggers($filters: TriggerFilters) {
 query TrackingScript {
   trackingScript {
     id
+    pk
     domain
     isVerified
     excludedPaths
@@ -110,6 +111,22 @@ query TrackingScript {
 mutation TrackingScriptUpdate($input: TrackingScriptUpdateInput!) {
   trackingScriptUpdate(input: $input) {
     id
+    domain
+    isVerified
+    excludedPaths
+    allowedCountryCodes
+    minimumSessionTimeSec
+    identificationMode
+    dailyLimit
+    createdAt
+    updatedAt
+  }
+}
+
+mutation TrackingScriptDomainUpdate($input: TrackingScriptDomainUpdateInput!) {
+  trackingScriptDomainUpdate(input: $input) {
+    id
+    pk
     domain
     isVerified
     excludedPaths

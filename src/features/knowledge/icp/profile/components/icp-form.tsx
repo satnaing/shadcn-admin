@@ -4,6 +4,12 @@ import { useNavigate } from '@tanstack/react-router'
 import { type TargetMarketUpsertInput } from '@/graphql/global/types.generated'
 import { DollarSign, Users } from 'lucide-react'
 import { toast } from 'sonner'
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
@@ -145,149 +151,155 @@ export default function ICPForm({ profile, isNew }: ICPFormProps) {
       </div>
 
       {/* Additional Requirements Section */}
-      <div className='mt-8 space-y-6'>
-        <h3 className='font-semibold'>Additional Requirements</h3>
-
-        {/* Industry */}
-        <div className='space-y-2'>
-          <Label htmlFor='industry'>Industry</Label>
-          <Input
-            id='industry'
-            {...register('industry')}
-            placeholder='e.g. SaaS, FinTech, Healthcare'
-          />
-          <p className='text-muted-foreground text-sm'>
-            Leave empty if not restricted to specific industries
-          </p>
-        </div>
-
-        {/* Revenue */}
-        <div className='space-y-2'>
-          <Label>
-            Revenue{' '}
-            <span className='text-muted-foreground text-sm'>
-              (${formatNumber(minRev || 0)} - {maxRev ? `$${formatNumber(maxRev)}` : 'Unlimited'})
-            </span>
-          </Label>
-          <div className='flex gap-3'>
-            <div className='flex-1'>
-              <Input
-                type='number'
-                min={0}
-                {...register('minRevenue', {
-                  valueAsNumber: true,
-                  min: 0,
-                })}
-                placeholder='Min'
-                icon={<DollarSign className='h-4 w-4' />}
-              />
-            </div>
-            <span className='text-muted-foreground text-sm'>to</span>
-            <div className='flex-[2] space-y-2'>
-              <Input
-                type='number'
-                min={minRev ? minRev + 1 : 1}
-                {...register('maxRevenue', {
-                  valueAsNumber: true,
-                  min: {
-                    value: minRev ? minRev + 1 : 1,
-                    message: 'Must be greater than minimum',
-                  },
-                })}
-                placeholder='Max'
-                icon={<DollarSign className='h-4 w-4' />}
-                disabled={maxRev === null}
-              />
-              <div className='flex items-center space-x-2'>
-                <Checkbox
-                  id='unlimited-revenue'
-                  checked={maxRev === null}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setValue('maxRevenue', null)
-                    } else {
-                      setValue('maxRevenue', minRev + 1_000_000)
-                    }
-                  }}
+      <Accordion type='single' collapsible className='w-full'>
+        <AccordionItem value='additional-requirements'>
+          <AccordionTrigger>Additional Requirements</AccordionTrigger>
+          <AccordionContent>
+            <div className='space-y-6'>
+              {/* Industry */}
+              <div className='space-y-2'>
+                <Label htmlFor='industry'>Industry</Label>
+                <Input
+                  id='industry'
+                  {...register('industry')}
+                  placeholder='e.g. SaaS, FinTech, Healthcare'
                 />
-                <Label htmlFor='unlimited-revenue' className='text-sm font-normal'>
-                  Unlimited
-                </Label>
+                <p className='text-muted-foreground text-sm'>
+                  Leave empty if not restricted to specific industries
+                </p>
               </div>
-              {errors.maxRevenue && (
-                <p className='text-destructive text-sm'>{errors.maxRevenue.message}</p>
-              )}
-            </div>
-          </div>
-        </div>
 
-        {/* Employee Count */}
-        <div className='space-y-2'>
-          <Label>
-            Employee Count{' '}
-            <span className='text-muted-foreground text-sm'>
-              ({formatNumber(minEmp || 0)} - {maxEmp ? formatNumber(maxEmp) : 'Unlimited'})
-            </span>
-          </Label>
-          <div className='flex gap-3'>
-            <div className='flex-1'>
-              <Input
-                type='number'
-                min={0}
-                {...register('minEmployees', {
-                  valueAsNumber: true,
-                  min: 0,
-                })}
-                placeholder='Min'
-                icon={<Users className='h-4 w-4' />}
-              />
-            </div>
-            <span className='text-muted-foreground text-sm'>to</span>
-            <div className='flex-[2] space-y-2'>
-              <Input
-                type='number'
-                min={minEmp ? minEmp + 1 : 1}
-                {...register('maxEmployees', {
-                  valueAsNumber: true,
-                  min: {
-                    value: minEmp ? minEmp + 1 : 1,
-                    message: 'Must be greater than minimum',
-                  },
-                })}
-                placeholder='Max'
-                icon={<Users className='h-4 w-4' />}
-                disabled={maxEmp === null}
-              />
-              <div className='flex items-center space-x-2'>
-                <Checkbox
-                  id='unlimited-employees'
-                  checked={maxEmp === null}
-                  onCheckedChange={(checked) => {
-                    if (checked) {
-                      setValue('maxEmployees', null)
-                    } else {
-                      setValue('maxEmployees', minEmp ? minEmp + 1000 : 1000)
-                    }
-                  }}
-                />
-                <Label htmlFor='unlimited-employees' className='text-sm font-normal'>
-                  Unlimited
+              {/* Revenue */}
+              <div className='space-y-2'>
+                <Label>
+                  Revenue{' '}
+                  <span className='text-muted-foreground text-sm'>
+                    (${formatNumber(minRev || 0)} -{' '}
+                    {maxRev ? `$${formatNumber(maxRev)}` : 'Unlimited'})
+                  </span>
                 </Label>
+                <div className='flex gap-3'>
+                  <div className='flex-1'>
+                    <Input
+                      type='number'
+                      min={0}
+                      {...register('minRevenue', {
+                        valueAsNumber: true,
+                        min: 0,
+                      })}
+                      placeholder='Min'
+                      icon={<DollarSign className='h-4 w-4' />}
+                    />
+                  </div>
+                  <span className='text-muted-foreground text-sm'>to</span>
+                  <div className='flex-[2] space-y-2'>
+                    <Input
+                      type='number'
+                      min={minRev ? minRev + 1 : 1}
+                      {...register('maxRevenue', {
+                        valueAsNumber: true,
+                        min: {
+                          value: minRev ? minRev + 1 : 1,
+                          message: 'Must be greater than minimum',
+                        },
+                      })}
+                      placeholder='Max'
+                      icon={<DollarSign className='h-4 w-4' />}
+                      disabled={maxRev === null}
+                    />
+                    <div className='flex items-center space-x-2'>
+                      <Checkbox
+                        id='unlimited-revenue'
+                        checked={maxRev === null}
+                        onCheckedChange={(checked) => {
+                          if (checked) {
+                            setValue('maxRevenue', null)
+                          } else {
+                            setValue('maxRevenue', minRev + 1_000_000)
+                          }
+                        }}
+                      />
+                      <Label htmlFor='unlimited-revenue' className='text-sm font-normal'>
+                        Unlimited
+                      </Label>
+                    </div>
+                    {errors.maxRevenue && (
+                      <p className='text-destructive text-sm'>{errors.maxRevenue.message}</p>
+                    )}
+                  </div>
+                </div>
               </div>
-              {errors.maxEmployees && (
-                <p className='text-destructive text-sm'>{errors.maxEmployees.message}</p>
-              )}
-            </div>
-          </div>
-        </div>
 
-        {/* HQ Locations */}
-        <div className='space-y-2'>
-          <Label>Headquarter Locations</Label>
-          <CountrySelector control={control} name='hqLocations' withRegions />
-          <p className='text-muted-foreground text-sm'>Leave empty if not restricted</p>
-        </div>
-      </div>
+              {/* Employee Count */}
+              <div className='space-y-2'>
+                <Label>
+                  Employee Count{' '}
+                  <span className='text-muted-foreground text-sm'>
+                    ({formatNumber(minEmp || 0)} - {maxEmp ? formatNumber(maxEmp) : 'Unlimited'})
+                  </span>
+                </Label>
+                <div className='flex gap-3'>
+                  <div className='flex-1'>
+                    <Input
+                      type='number'
+                      min={0}
+                      {...register('minEmployees', {
+                        valueAsNumber: true,
+                        min: 0,
+                      })}
+                      placeholder='Min'
+                      icon={<Users className='h-4 w-4' />}
+                    />
+                  </div>
+                  <span className='text-muted-foreground text-sm'>to</span>
+                  <div className='flex-[2] space-y-2'>
+                    <Input
+                      type='number'
+                      min={minEmp ? minEmp + 1 : 1}
+                      {...register('maxEmployees', {
+                        valueAsNumber: true,
+                        min: {
+                          value: minEmp ? minEmp + 1 : 1,
+                          message: 'Must be greater than minimum',
+                        },
+                      })}
+                      placeholder='Max'
+                      icon={<Users className='h-4 w-4' />}
+                      disabled={maxEmp === null}
+                    />
+                    <div className='flex items-center space-x-2'>
+                      <Checkbox
+                        id='unlimited-employees'
+                        checked={maxEmp === null}
+                        onCheckedChange={(checked) => {
+                          if (checked) {
+                            setValue('maxEmployees', null)
+                          } else {
+                            setValue('maxEmployees', minEmp ? minEmp + 1000 : 1000)
+                          }
+                        }}
+                      />
+                      <Label htmlFor='unlimited-employees' className='text-sm font-normal'>
+                        Unlimited
+                      </Label>
+                    </div>
+                    {errors.maxEmployees && (
+                      <p className='text-destructive text-sm'>{errors.maxEmployees.message}</p>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* HQ Locations */}
+              <div className='space-y-2'>
+                <Label>Headquarter Locations</Label>
+                <CountrySelector control={control} name='hqLocations' withRegions />
+                <p className='text-muted-foreground text-sm'>Leave empty if not restricted</p>
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
 
       {/* Submit Button */}
       <div className='flex justify-end'>

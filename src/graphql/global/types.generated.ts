@@ -663,6 +663,8 @@ export type Execution = {
   orgId: Scalars['String']['output']
   playbookId?: Maybe<Scalars['String']['output']>
   result?: Maybe<Scalars['JSON']['output']>
+  runtime?: Maybe<Scalars['Float']['output']>
+  scenarioId?: Maybe<Scalars['String']['output']>
   slackRef?: Maybe<Scalars['String']['output']>
   status: ExecutionStatus
   summary?: Maybe<Scalars['String']['output']>
