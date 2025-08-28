@@ -64,23 +64,30 @@ export const editSchema = baseSchema.merge(
 const formSchema = z
   .discriminatedUnion('intent', [createSchema, editSchema])
   .superRefine((arg, ctx) => {
-    if (arg.intent !== 'create') {
-      return
-    }
-    if (arg.password === '' && arg.confirmPassword === '') {
-      return
-    }
+    if (arg.intent !== 'create') return
 
-    if (arg.password === undefined) {
+    const pwd = arg.password?.trim() ?? ''
+    const cpwd = arg.confirmPassword?.trim() ?? ''
+
+    if (!pwd) {
       ctx.addIssue({
         code: 'custom',
         message: 'Password is required.',
         path: ['password'],
       })
-      return
     }
 
-    if (arg.password.length < 8) {
+    if (!cpwd) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Please confirm your password.',
+        path: ['confirmPassword'],
+      })
+    }
+
+    if (!pwd || !cpwd) return
+
+    if (pwd.length < 8) {
       ctx.addIssue({
         code: 'custom',
         message: 'Password must be at least 8 characters long.',
@@ -88,7 +95,7 @@ const formSchema = z
       })
     }
 
-    if (!arg.password.match(/[a-z]/)) {
+    if (!pwd.match(/[a-z]/)) {
       ctx.addIssue({
         code: 'custom',
         message: 'Password must contain at least one lowercase letter.',
@@ -96,7 +103,7 @@ const formSchema = z
       })
     }
 
-    if (!arg.password.match(/\d/)) {
+    if (!pwd.match(/\d/)) {
       ctx.addIssue({
         code: 'custom',
         message: 'Password must contain at least one number.',
@@ -104,7 +111,7 @@ const formSchema = z
       })
     }
 
-    if (arg.password !== arg.confirmPassword) {
+    if (pwd !== cpwd) {
       ctx.addIssue({
         code: 'custom',
         message: "Passwords don't match.",
@@ -292,7 +299,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
                 </SelectContent>
               </Select>
               <div
-                id={fields.email.errorId}
+                id={fields.role.errorId}
                 className="text-destructive col-span-4 col-start-3 text-[0.8rem] font-medium empty:hidden"
               >
                 {fields.role.errors}
