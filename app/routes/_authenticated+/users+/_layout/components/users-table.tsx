@@ -24,8 +24,8 @@ import {
 import { DataTableToolbar, type FacetedCountProps } from './data-table-toolbar'
 
 declare module '@tanstack/react-table' {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface ColumnMeta<_TData extends RowData, _TValue> {
+  // biome-ignore lint/correctness/noUnusedVariables: TData and TValue are required in original definition
+  interface ColumnMeta<TData extends RowData, TValue> {
     className: string
   }
 }

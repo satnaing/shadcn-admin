@@ -8,7 +8,7 @@ import type { Route } from './+types/route'
 import { OtpForm } from './components/otp-form'
 
 export const formSchema = z.object({
-  otp: z.string({ required_error: 'Please enter your otp code.' }),
+  otp: z.string({ error: 'Please enter your otp code.' }),
 })
 
 export const action = async ({ request }: Route.ActionArgs) => {

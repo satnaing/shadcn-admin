@@ -26,6 +26,8 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>
 
 // This can come from your database or API.
 const defaultValue: Partial<ProfileFormValues> = {
+  username: 'shadcn',
+  email: 'm@example.com',
   bio: 'I own a computer.',
   urls: ['https://shadcn.com', 'http://twitter.com/shadcn'],
 }
@@ -37,6 +39,7 @@ export default function ProfileForm() {
     defaultValue,
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: profileFormSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const urls = fields.urls.getFieldList()
   const navigation = useNavigation()

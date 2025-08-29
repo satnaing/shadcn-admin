@@ -26,21 +26,50 @@ import { userTypes } from '../data/data'
 import type { User } from '../data/schema'
 
 const baseSchema = z.object({
-  firstName: z.string({ required_error: 'First Name is required.' }),
-  lastName: z.string({ required_error: 'Last Name is required.' }),
-  username: z.string({ required_error: 'Username is required.' }),
-  phoneNumber: z.string({ required_error: 'Phone number is required.' }),
-  email: z
-    .string({ required_error: 'Email is required.' })
-    .email({ message: 'Email is invalid.' }),
-  role: z.enum(['superadmin', 'admin', 'manager', 'cashier']),
+  firstName: z.string({ error: 'First Name is required.' }),
+  lastName: z.string({ error: 'Last Name is required.' }),
+  username: z.string({ error: 'Username is required.' }),
+  phoneNumber: z.string({ error: 'Phone number is required.' }),
+  email: z.email({
+    error: (issue) =>
+      issue.input === undefined
+        ? 'Email is required.'
+        : 'Invalid email address',
+  }),
+  role: z.enum(['superadmin', 'admin', 'manager', 'cashier'], {
+    error: 'Role is required.',
+  }),
 })
 
 export const createSchema = baseSchema.merge(
   z.object({
     intent: z.literal('create'),
-    password: z.string().transform((pwd) => pwd.trim()),
-    confirmPassword: z.string().transform((pwd) => pwd.trim()),
+    password: z
+      .string({
+        error: (issue) =>
+          issue.input === undefined
+            ? 'Password is required.'
+            : 'Invalid password',
+      })
+      .trim()
+      .min(8, { error: 'Password must be at least 8 characters long.' })
+      .regex(/[a-z]/, {
+        error: 'Password must contain at least one lowercase letter.',
+      })
+      .regex(/\d/, { error: 'Password must contain at least one number.' }),
+    confirmPassword: z
+      .string({
+        error: (issue) =>
+          issue.input === undefined
+            ? 'Confirm Password is required.'
+            : 'Please confirm your password.',
+      })
+      .trim()
+      .min(8, { error: 'Password must be at least 8 characters long.' })
+      .regex(/[a-z]/, {
+        error: 'Password must contain at least one lowercase letter.',
+      })
+      .regex(/\d/, { error: 'Password must contain at least one number.' }),
   }),
 )
 
@@ -51,50 +80,13 @@ export const editSchema = baseSchema.merge(
 const formSchema = z
   .discriminatedUnion('intent', [createSchema, editSchema])
   .superRefine((arg, ctx) => {
-    if (arg.intent !== 'create') {
-      return
-    }
-    if (arg.password !== '') {
-      if (arg.password === undefined) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password is required.',
-          path: ['password'],
-        })
-        return
-      }
-
-      if (arg.password.length < 8) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password must be at least 8 characters long.',
-          path: ['password'],
-        })
-      }
-
-      if (!arg.password.match(/[a-z]/)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password must contain at least one lowercase letter.',
-          path: ['password'],
-        })
-      }
-
-      if (!arg.password.match(/\d/)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: 'Password must contain at least one number.',
-          path: ['password'],
-        })
-      }
-
-      if (arg.password !== arg.confirmPassword) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Passwords don't match.",
-          path: ['confirmPassword'],
-        })
-      }
+    if (arg.intent !== 'create') return
+    if (arg.password !== arg.confirmPassword) {
+      ctx.addIssue({
+        code: 'custom',
+        message: "Passwords don't match.",
+        path: ['confirmPassword'],
+      })
     }
   })
 
@@ -125,6 +117,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
         },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const isPasswordTouched = fields.password.dirty
   const navigation = useNavigation()
@@ -276,7 +269,7 @@ export function UsersActionDialog({ user, open, onOpenChange }: Props) {
                 </SelectContent>
               </Select>
               <div
-                id={fields.email.errorId}
+                id={fields.role.errorId}
                 className="text-destructive col-span-4 col-start-3 text-[0.8rem] font-medium empty:hidden"
               >
                 {fields.role.errors}

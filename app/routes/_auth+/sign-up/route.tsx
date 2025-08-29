@@ -9,19 +9,26 @@ import { SignUpForm } from './components/sign-up-form'
 
 export const formSchema = z
   .object({
-    email: z
-      .string()
-      .min(1, { message: 'Please enter your email' })
-      .email({ message: 'Invalid email address' }),
+    email: z.email({
+      error: (issue) =>
+        issue.input === undefined
+          ? 'Please enter your email'
+          : 'Invalid email address',
+    }),
     password: z
-      .string()
-      .min(1, {
-        message: 'Please enter your password',
+      .string({
+        error: 'Please enter your password',
       })
       .min(7, {
         message: 'Password must be at least 7 characters long',
       }),
-    confirmPassword: z.string(),
+    confirmPassword: z
+      .string({
+        error: 'Please enter your password',
+      })
+      .min(7, {
+        message: 'Password must be at least 7 characters long',
+      }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match.",
@@ -36,10 +43,10 @@ export const action = async ({ request }: Route.ActionArgs) => {
     return { lastResult: submission.reply() }
   }
 
-  if (submission.value.email !== 'name@example.com') {
+  if (submission.value.email === 'name@example.com') {
     return {
       lastResult: submission.reply({
-        formErrors: ['Invalid email or password'],
+        formErrors: ['User already exists with this email address'],
       }),
     }
   }

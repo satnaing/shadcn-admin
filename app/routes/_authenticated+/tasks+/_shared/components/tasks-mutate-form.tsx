@@ -20,19 +20,27 @@ import type { Task } from '../data/schema'
 
 export const createSchema = z.object({
   intent: z.literal('create'),
-  title: z.string({ required_error: 'Title is required.' }),
-  status: z.string({ required_error: 'Please select a status.' }),
-  label: z.string({ required_error: 'Please select a label.' }),
-  priority: z.string({ required_error: 'Please choose a priority.' }),
+  title: z
+    .string({
+      error: 'Title is required.',
+    })
+    .trim()
+    .min(1, 'Title is required.'),
+  status: z.string({ error: 'Please select a status.' }),
+  label: z.string({ error: 'Please select a label.' }),
+  priority: z.string({ error: 'Please choose a priority.' }),
 })
 
 export const updateSchema = z.object({
   intent: z.literal('update'),
   id: z.string(),
-  title: z.string({ required_error: 'Title is required.' }),
-  status: z.string({ required_error: 'Please select a status.' }),
-  label: z.string({ required_error: 'Please select a label.' }),
-  priority: z.string({ required_error: 'Please choose a priority.' }),
+  title: z
+    .string({ error: 'Title is required.' })
+    .trim()
+    .min(1, 'Title is required.'),
+  status: z.string({ error: 'Please select a status.' }),
+  label: z.string({ error: 'Please select a label.' }),
+  priority: z.string({ error: 'Please choose a priority.' }),
 })
 
 const formSchema = z.discriminatedUnion('intent', [createSchema, updateSchema])
@@ -48,6 +56,7 @@ export function TasksMutateForm({ task }: { task?: Task }) {
     },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const navigation = useNavigation()
   const { backUrl } = useSmartNavigation({ baseUrl: href('/tasks') })

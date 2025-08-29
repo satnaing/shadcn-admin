@@ -8,7 +8,7 @@ import { NotificationsForm } from './notifications-form'
 
 export const notificationsFormSchema = z.object({
   type: z.enum(['all', 'mentions', 'none'], {
-    required_error: 'You need to select a notification type.',
+    error: 'You need to select a notification type.',
   }),
   mobile: z.boolean().default(false).optional(),
   communication_emails: z.boolean().default(false).optional(),
@@ -30,7 +30,7 @@ export const action = async ({ request }: Route.ActionArgs) => {
 
   return dataWithSuccess(
     {
-      lastResult: submission.reply({ resetForm: true }),
+      lastResult: submission.reply(),
     },
     {
       message: 'Notification settings updated.',

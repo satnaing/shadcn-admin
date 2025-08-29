@@ -1,5 +1,8 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.1.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
+  "files": {
+    "includes": ["**", "!app/index.css"]
+  },
   "assist": { "actions": { "source": { "organizeImports": "off" } } },
   "vcs": {
     "enabled": true,
@@ -12,8 +15,11 @@
       "recommended": true,
       "suspicious": {
         "useAwait": "error",
-        "noExplicitAny": "off",
         "noArrayIndexKey": "off"
+      },
+      "correctness": {
+        "useUniqueElementIds": "off",
+        "noNestedComponentDefinitions": "off"
       },
       "a11y": {
         "noSvgWithoutTitle": "off"

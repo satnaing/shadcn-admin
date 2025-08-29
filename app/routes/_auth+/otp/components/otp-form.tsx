@@ -22,6 +22,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
     defaultValue: { otp: '' },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const navigation = useNavigation()
 

@@ -25,6 +25,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
     },
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: formSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const navigation = useNavigation()
   const isLoading = navigation.state === 'submitting'

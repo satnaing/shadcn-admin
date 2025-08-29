@@ -24,6 +24,7 @@ export function AppearanceForm() {
     defaultValue,
     onValidate: ({ formData }) =>
       parseWithZod(formData, { schema: appearanceFormSchema }),
+    shouldRevalidate: 'onBlur',
   })
   const navigation = useNavigation()
 
