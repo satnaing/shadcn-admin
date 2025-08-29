@@ -46,14 +46,30 @@ export const createSchema = baseSchema.merge(
     intent: z.literal('create'),
     password: z
       .string({
-        error: 'Password is required.',
+        error: (issue) =>
+          issue.input === undefined
+            ? 'Password is required.'
+            : 'Invalid password',
       })
-      .transform((pwd) => pwd.trim()),
+      .trim()
+      .min(8, { error: 'Password must be at least 8 characters long.' })
+      .regex(/[a-z]/, {
+        error: 'Password must contain at least one lowercase letter.',
+      })
+      .regex(/\d/, { error: 'Password must contain at least one number.' }),
     confirmPassword: z
       .string({
-        error: 'Please confirm your password.',
+        error: (issue) =>
+          issue.input === undefined
+            ? 'Confirm Password is required.'
+            : 'Please confirm your password.',
       })
-      .transform((pwd) => pwd.trim()),
+      .trim()
+      .min(8, { error: 'Password must be at least 8 characters long.' })
+      .regex(/[a-z]/, {
+        error: 'Password must contain at least one lowercase letter.',
+      })
+      .regex(/\d/, { error: 'Password must contain at least one number.' }),
   }),
 )
 
@@ -65,53 +81,7 @@ const formSchema = z
   .discriminatedUnion('intent', [createSchema, editSchema])
   .superRefine((arg, ctx) => {
     if (arg.intent !== 'create') return
-
-    const pwd = arg.password?.trim() ?? ''
-    const cpwd = arg.confirmPassword?.trim() ?? ''
-
-    if (!pwd) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Password is required.',
-        path: ['password'],
-      })
-    }
-
-    if (!cpwd) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Please confirm your password.',
-        path: ['confirmPassword'],
-      })
-    }
-
-    if (!pwd || !cpwd) return
-
-    if (pwd.length < 8) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Password must be at least 8 characters long.',
-        path: ['password'],
-      })
-    }
-
-    if (!pwd.match(/[a-z]/)) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Password must contain at least one lowercase letter.',
-        path: ['password'],
-      })
-    }
-
-    if (!pwd.match(/\d/)) {
-      ctx.addIssue({
-        code: 'custom',
-        message: 'Password must contain at least one number.',
-        path: ['password'],
-      })
-    }
-
-    if (pwd !== cpwd) {
+    if (arg.password !== arg.confirmPassword) {
       ctx.addIssue({
         code: 'custom',
         message: "Passwords don't match.",
