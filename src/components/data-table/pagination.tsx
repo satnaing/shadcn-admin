@@ -92,7 +92,7 @@ export function DataTablePagination<TData>({
               ) : (
                 <Button
                   variant={currentPage === pageNumber ? 'default' : 'outline'}
-                  className='size-8 p-0'
+                  className='h-8 min-w-8 px-2'
                   onClick={() => table.setPageIndex((pageNumber as number) - 1)}
                 >
                   <span className='sr-only'>Go to page {pageNumber}</span>
