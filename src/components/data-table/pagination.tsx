@@ -30,15 +30,15 @@ export function DataTablePagination<TData>({
     <div
       className={cn(
         'flex items-center justify-between overflow-clip px-2',
-        '@max-2xl/main:flex-col-reverse @max-2xl/main:gap-4'
+        '@max-2xl/content:flex-col-reverse @max-2xl/content:gap-4'
       )}
       style={{ overflowClipMargin: 1 }}
     >
       <div className='flex w-full items-center justify-between'>
-        <div className='flex w-[100px] items-center justify-center text-sm font-medium @2xl/main:hidden'>
+        <div className='flex w-[100px] items-center justify-center text-sm font-medium @2xl/content:hidden'>
           Page {currentPage} of {totalPages}
         </div>
-        <div className='flex items-center gap-2 @max-2xl/main:flex-row-reverse'>
+        <div className='flex items-center gap-2 @max-2xl/content:flex-row-reverse'>
           <Select
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
@@ -61,13 +61,13 @@ export function DataTablePagination<TData>({
       </div>
 
       <div className='flex items-center sm:space-x-6 lg:space-x-8'>
-        <div className='flex w-[100px] items-center justify-center text-sm font-medium @max-3xl/main:hidden'>
+        <div className='flex w-[100px] items-center justify-center text-sm font-medium @max-3xl/content:hidden'>
           Page {currentPage} of {totalPages}
         </div>
         <div className='flex items-center space-x-2'>
           <Button
             variant='outline'
-            className='size-8 p-0 @max-md/main:hidden'
+            className='size-8 p-0 @max-md/content:hidden'
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
@@ -113,7 +113,7 @@ export function DataTablePagination<TData>({
           </Button>
           <Button
             variant='outline'
-            className='size-8 p-0 @max-md/main:hidden'
+            className='size-8 p-0 @max-md/content:hidden'
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >
