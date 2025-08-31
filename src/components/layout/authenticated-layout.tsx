@@ -3,20 +3,9 @@ import { getCookie } from '@/lib/cookies'
 import { cn } from '@/lib/utils'
 import { LayoutProvider } from '@/context/layout-provider'
 import { SearchProvider } from '@/context/search-provider'
-import {
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarInset,
-  SidebarProvider,
-  SidebarRail,
-} from '@/components/ui/sidebar'
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
 import { SkipToMain } from '@/components/skip-to-main'
-import { sidebarData } from './data/sidebar-data'
-import { NavGroup } from './nav-group'
-import { NavUser } from './nav-user'
-import { TeamSwitcher } from './team-switcher'
 
 type AuthenticatedLayoutProps = {
   children?: React.ReactNode
@@ -26,23 +15,10 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
   const defaultOpen = getCookie('sidebar_state') !== 'false'
   return (
     <SearchProvider>
-      <SidebarProvider defaultOpen={defaultOpen}>
-        <LayoutProvider>
+      <LayoutProvider>
+        <SidebarProvider defaultOpen={defaultOpen}>
           <SkipToMain />
-          <AppSidebar>
-            <SidebarHeader>
-              <TeamSwitcher teams={sidebarData.teams} />
-            </SidebarHeader>
-            <SidebarContent>
-              {sidebarData.navGroups.map((props) => (
-                <NavGroup key={props.title} {...props} />
-              ))}
-            </SidebarContent>
-            <SidebarFooter>
-              <NavUser user={sidebarData.user} />
-            </SidebarFooter>
-            <SidebarRail />
-          </AppSidebar>
+          <AppSidebar />
           <SidebarInset
             className={cn(
               // Set content container, so we can use container queries
@@ -59,8 +35,8 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
           >
             {children ?? <Outlet />}
           </SidebarInset>
-        </LayoutProvider>
-      </SidebarProvider>
+        </SidebarProvider>
+      </LayoutProvider>
     </SearchProvider>
   )
 }
