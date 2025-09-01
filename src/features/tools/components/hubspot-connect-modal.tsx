@@ -45,17 +45,14 @@ const SCOPES = [
   'sales-email-read',
 ].join(' ')
 
-const OPTIONAL_SCOPES = ['crm.objects.deals.write', 'conversations.write'].join(' ')
-
 const HUBSPOT_CLIENT_ID = IS_PROD
-  ? 'b9a7c197-cc7e-4bca-8fb6-223f7e9e69cc'
-  : '2068b7d9-4a2c-430e-98c9-1187a81b84a5'
+  ? '32ff3157-fcd7-4471-a4b4-73aeb56c51a2'
+  : '32ff3157-fcd7-4471-a4b4-73aeb56c51a2'
 
 const AUTH_URL =
   `https://app.hubspot.com/oauth/authorize` +
   `?client_id=${HUBSPOT_CLIENT_ID}` +
   `&scope=${encodeURIComponent(SCOPES)}` +
-  `&optional_scope=${encodeURIComponent(OPTIONAL_SCOPES)}` +
   `&redirect_uri=${APP_URL}/oauth/callback/hubspot`
 
 type HubSpotConnectModalProps = {
