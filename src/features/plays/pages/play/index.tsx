@@ -11,6 +11,7 @@ import { EditableText } from '@/components/editable-text'
 import { Page } from '@/components/page'
 import { usePlaybookQuery, usePlaybookUpdateMutation } from '../../graphql/operations.generated'
 import { PlaybookTriggers } from './components/playbook-triggers'
+import { ScenarioForm } from './components/scenario-form'
 import { ScenarioModal } from './components/scenario-modal'
 import { PlaybookDetailSkeleton } from './components/skeleton'
 
@@ -258,35 +259,47 @@ export default function PlaybookDetailPage() {
               </div>
 
               {playbook.scenarios && playbook.scenarios.length > 0 ? (
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                  {playbook.scenarios.map((scenario) => (
-                    <div
-                      key={scenario.id}
-                      className='hover:bg-accent/50 group cursor-pointer rounded-lg border p-4 transition-colors'
-                      onClick={() => setSelectedScenario(scenario)}
-                    >
-                      <div className='flex items-start justify-between gap-2'>
-                        <div className='min-w-0 flex-1'>
-                          <h4 className='truncate font-medium'>{scenario.name}</h4>
-                          <p className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
-                            {scenario.description || 'No description'}
-                          </p>
+                playbook.scenarios.length === 1 ? (
+                  // Single scenario: show form directly
+                  <ScenarioForm
+                    mode='edit'
+                    scenario={playbook.scenarios[0]}
+                    onSuccess={refetch}
+                    formId='single-scenario-form'
+                    showButtons={true}
+                  />
+                ) : (
+                  // Multiple scenarios: show cards with modals
+                  <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                    {playbook.scenarios.map((scenario) => (
+                      <div
+                        key={scenario.id}
+                        className='hover:bg-accent/50 group cursor-pointer rounded-lg border p-4 transition-colors'
+                        onClick={() => setSelectedScenario(scenario)}
+                      >
+                        <div className='flex items-start justify-between gap-2'>
+                          <div className='min-w-0 flex-1'>
+                            <h4 className='truncate font-medium'>{scenario.name}</h4>
+                            <p className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
+                              {scenario.description || 'No description'}
+                            </p>
+                          </div>
+                          <Button
+                            variant='ghost'
+                            size='icon'
+                            className='h-8 w-8 flex-shrink-0 opacity-0 transition-opacity group-hover:opacity-100'
+                            onClick={(e) => {
+                              e.stopPropagation()
+                              setSelectedScenario(scenario)
+                            }}
+                          >
+                            <Settings className='h-4 w-4' />
+                          </Button>
                         </div>
-                        <Button
-                          variant='ghost'
-                          size='icon'
-                          className='h-8 w-8 flex-shrink-0 opacity-0 transition-opacity group-hover:opacity-100'
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            setSelectedScenario(scenario)
-                          }}
-                        >
-                          <Settings className='h-4 w-4' />
-                        </Button>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )
               ) : (
                 <div className='rounded-lg border border-dashed p-8 text-center'>
                   <p className='text-muted-foreground text-sm'>

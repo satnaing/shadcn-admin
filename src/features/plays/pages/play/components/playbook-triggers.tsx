@@ -116,7 +116,7 @@ export function PlaybookTriggers({ playbookId }: PlaybookTriggersProps) {
                           <h4 className='truncate font-medium'>{trigger.name}</h4>
                         </div>
                         <p className='text-muted-foreground line-clamp-2 text-sm'>
-                          {trigger.description || `${getTriggerTypeLabel(trigger.type)} trigger`}
+                          {trigger.description || getTriggerTypeLabel(trigger.type)}
                         </p>
                       </div>
                     </div>

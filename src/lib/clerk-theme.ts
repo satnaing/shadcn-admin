@@ -7,7 +7,6 @@ type ClerkAppearance = {
   variables?: Record<string, string>
 }
 
-// Clerk theme configuration that matches your app's light/dark theme
 export const clerkAppearance = {
   light: {
     baseTheme: undefined, // Use Clerk's default light theme
@@ -25,7 +24,7 @@ export const clerkAppearance = {
   } satisfies ClerkAppearance,
 
   dark: {
-    baseTheme: dark, // Use Clerk's built-in dark theme as base
+    baseTheme: dark,
     elements: {
       // User button specific
       userButtonBox: 'shadow-sm',

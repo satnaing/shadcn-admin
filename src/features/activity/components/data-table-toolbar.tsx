@@ -1,7 +1,6 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { type Table } from '@tanstack/react-table'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { executionStatuses, executionTypes } from '../data/data'
 import { DataTableSingleFilter } from './data-table-single-filter'
 import { DataTableViewOptions } from './data-table-view-options'
@@ -23,12 +22,6 @@ export function DataTableToolbar<TData>({ table, playbooks = [] }: DataTableTool
   return (
     <div className='flex items-center justify-between'>
       <div className='flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2'>
-        <Input
-          placeholder='Filter executions...'
-          value={table.getState().globalFilter ?? ''}
-          onChange={(event) => table.setGlobalFilter(event.target.value)}
-          className='h-8 w-[150px] lg:w-[250px]'
-        />
         <div className='flex gap-x-2'>
           {table.getColumn('status') && (
             <DataTableSingleFilter
