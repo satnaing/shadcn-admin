@@ -28,6 +28,8 @@ const getTriggerTypeLabel = (type: TriggerType) => {
       return 'Company Added to List'
     case TriggerType.NewWebsiteVisitor:
       return 'Whenever a new website visitor is de-anonymized'
+    case TriggerType.HubspotWorkflow:
+      return 'Triggered by custom action from within a Hubspot Workflow'
     default:
       return type
   }

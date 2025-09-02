@@ -494,6 +494,7 @@ export type ContactSession = {
 export enum ContactSource {
   Agent = 'AGENT',
   Coresignal = 'CORESIGNAL',
+  Crm = 'CRM',
   Explorium = 'EXPLORIUM',
   Generect = 'GENERECT',
   Linkup = 'LINKUP',
@@ -1766,7 +1767,6 @@ export type SlackIntegration = {
   notificationsType: SlackNotificationsType
   onboardingThreadTs?: Maybe<Scalars['String']['output']>
   orgId: Scalars['String']['output']
-  requireBotTagging: Scalars['Boolean']['output']
   sendDailyDigest: Scalars['Boolean']['output']
   sendPlayReminders: Scalars['Boolean']['output']
   slackAuthedUserId?: Maybe<Scalars['String']['output']>
@@ -2008,6 +2008,7 @@ export type TriggerFilters = {
 
 export enum TriggerType {
   CompanyAddedToList = 'COMPANY_ADDED_TO_LIST',
+  HubspotWorkflow = 'HUBSPOT_WORKFLOW',
   NewWebsiteVisitor = 'NEW_WEBSITE_VISITOR',
 }
 
