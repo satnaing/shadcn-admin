@@ -49,8 +49,8 @@ const SCOPES = [
 ].join(' ')
 
 const HUBSPOT_CLIENT_ID = IS_PROD
-  ? '32ff3157-fcd7-4471-a4b4-73aeb56c51a2'
-  : '32ff3157-fcd7-4471-a4b4-73aeb56c51a2'
+  ? '06687ae8-83e3-4973-a3b6-ed4e1576bc5a'
+  : '45f81c64-b017-4f90-8b34-3af1b14573ea'
 
 const AUTH_URL =
   `https://app.hubspot.com/oauth/authorize` +
