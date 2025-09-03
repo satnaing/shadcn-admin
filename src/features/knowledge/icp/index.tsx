@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 import { TargetMarketType } from '@/graphql/global/types.generated'
-import { Building2, Users, DollarSign, Globe, Plus, MoreVertical, Trash2 } from 'lucide-react'
+import { Building2, Users, DollarSign, Plus, MoreVertical, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import {
@@ -56,7 +55,7 @@ export default function ICPPage() {
     return (
       <Page
         title='Ideal Customer Profiles'
-        description='Define your ideal customer profile'
+        description='Ideal customer profiles help Swan understand what types of companies you are targeting.'
         mainFixed
       >
         <ICPSkeleton />
@@ -66,7 +65,10 @@ export default function ICPPage() {
 
   if (icpProfiles.length === 0) {
     return (
-      <Page title='Ideal Customer Profiles' description='Define your ideal customer profile'>
+      <Page
+        title='Ideal Customer Profiles'
+        description='Ideal customer profiles help Swan understand what types of companies you are targeting.'
+      >
         <EmptyState
           Icon={Building2}
           title='No ICP profiles defined'
@@ -82,7 +84,7 @@ export default function ICPPage() {
   return (
     <Page
       title='Ideal Customer Profiles'
-      description='Define your ideal customer profile'
+      description='Ideal customer profiles help Swan understand what types of companies you are targeting.'
       actions={<AddICPButton icpProfiles={icpProfiles} />}
     >
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
@@ -95,14 +97,9 @@ export default function ICPPage() {
               borderTop: `4px solid ${profile.color ? COLOR_MAP[profile.color] : '#e5e7eb'}`,
             }}
           >
-            <CardContent>
+            <CardContent className='flex h-full flex-col'>
               <div className='mb-4 flex items-start justify-between'>
-                <div>
-                  <h3 className='text-lg font-semibold'>{profile.name}</h3>
-                  <p className='text-muted-foreground text-sm'>
-                    {profile.industry || 'All Industries'}
-                  </p>
-                </div>
+                <h3 className='text-lg font-semibold'>{profile.name}</h3>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
                     <Button variant='ghost' size='icon' className='h-8 w-8'>
@@ -135,46 +132,33 @@ export default function ICPPage() {
                 </DropdownMenu>
               </div>
 
-              <div className='space-y-4 pt-3'>
-                <div className='flex items-center justify-between'>
-                  <DataDisplay
-                    icon={Users}
-                    label={`${profile.minEmployees || '0'} - ${
-                      profile.maxEmployees ? formatNumber(profile.maxEmployees) : 'Unlimited'
-                    }`}
-                  />
-                  <DataDisplay
-                    icon={DollarSign}
-                    label={`${profile.minRevenue ? `$${formatNumber(profile.minRevenue)}` : '$0'} - ${
-                      profile.maxRevenue ? `$${formatNumber(profile.maxRevenue)}` : 'Unlimited'
-                    }`}
-                  />
-                  <DataDisplay icon={Users} label={`${profile.personas?.length || '0'} Personas`} />
-                </div>
+              <div className='flex-1 overflow-hidden'>
+                <p className='text-muted-foreground line-clamp-4 text-sm'>
+                  {profile.extraRequirements || 'No description available'}
+                </p>
+              </div>
 
-                <div className='flex items-center gap-2'>
-                  <Globe className='text-muted-foreground h-4 w-4' />
-                  <div className='flex flex-wrap gap-1'>
-                    {profile.hqLocations?.length ? (
-                      <>
-                        {profile.hqLocations.slice(0, 4).map((location: string) => (
-                          <Badge key={location} variant='secondary' className='text-xs'>
-                            {location}
-                          </Badge>
-                        ))}
-                        {profile.hqLocations.length > 4 && (
-                          <Badge variant='secondary' className='text-xs'>
-                            +{profile.hqLocations.length - 4}
-                          </Badge>
-                        )}
-                      </>
-                    ) : (
-                      <Badge variant='secondary' className='text-xs'>
-                        Global
-                      </Badge>
-                    )}
-                  </div>
-                </div>
+              <div className='mt-auto flex items-center justify-between pt-3'>
+                <DataDisplay
+                  icon={Users}
+                  label={
+                    (!profile.minEmployees || profile.minEmployees === 0) && !profile.maxEmployees
+                      ? 'Any size'
+                      : !profile.maxEmployees
+                        ? `${formatNumber(profile.minEmployees || 0)}+`
+                        : `${formatNumber(profile.minEmployees || 0)} - ${formatNumber(profile.maxEmployees)}`
+                  }
+                />
+                <DataDisplay
+                  icon={DollarSign}
+                  label={
+                    (!profile.minRevenue || profile.minRevenue === 0) && !profile.maxRevenue
+                      ? 'Any revenue'
+                      : !profile.maxRevenue
+                        ? `$${formatNumber(profile.minRevenue || 0)}+`
+                        : `$${formatNumber(profile.minRevenue || 0)} - $${formatNumber(profile.maxRevenue)}`
+                  }
+                />
               </div>
             </CardContent>
           </Card>

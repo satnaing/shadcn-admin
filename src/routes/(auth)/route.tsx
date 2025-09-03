@@ -24,9 +24,7 @@ function ClerkAuthLayout() {
 
         {/* Footer */}
         <div className='mt-8 text-center'>
-          <p className='text-sm text-gray-500'>
-            Identify, qualify, and convert leads showing intent
-          </p>
+          <p className='text-sm text-gray-500'>GTM at the speed of thought</p>
         </div>
       </div>
     </div>

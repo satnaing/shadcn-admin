@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useIntegrationsQuery } from '@/graphql/operations/operations.generated'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Page } from '@/components/page'
 import { HubSpotConnectModal } from '@/features/tools/components/hubspot-connect-modal'
 import { SlackConnectModal } from '@/features/tools/components/slack-connect-modal'
@@ -36,7 +37,7 @@ const ALL_INTEGRATIONS: Integration[] = [
 
 export function Tools() {
   const [openModal, setOpenModal] = useState('')
-  const { data: integrations } = useIntegrationsQuery()
+  const { data: integrations, loading } = useIntegrationsQuery()
 
   const apps = integrations?.integrations?.apps || []
 
@@ -65,10 +66,14 @@ export function Tools() {
                   )}
                   <CardTitle className='text-lg font-semibold'>{integration.name}</CardTitle>
                 </div>
-                {isConnected && (
-                  <Badge variant='default' className='bg-green-100 text-green-800'>
-                    Connected
-                  </Badge>
+                {loading ? (
+                  <Skeleton className='h-5 w-20 rounded-md' />
+                ) : (
+                  isConnected && (
+                    <Badge variant='default' className='bg-green-100 text-green-800'>
+                      Connected
+                    </Badge>
+                  )
                 )}
               </CardHeader>
               <CardContent>
