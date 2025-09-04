@@ -866,6 +866,7 @@ export type Mutation = {
   targetMarketUpsert: TargetMarket
   trackingScriptDomainUpdate: TrackingScript
   trackingScriptUpdate: TrackingScript
+  triggerUpdate: Trigger
   userInvite: User
   userLogin: User
   userOrgUpdate: User
@@ -1035,6 +1036,10 @@ export type MutationTrackingScriptDomainUpdateArgs = {
 
 export type MutationTrackingScriptUpdateArgs = {
   input: TrackingScriptUpdateInput
+}
+
+export type MutationTriggerUpdateArgs = {
+  input: TriggerUpdateInput
 }
 
 export type MutationUserInviteArgs = {
@@ -1993,6 +1998,8 @@ export type Trigger = {
   createdAt: Scalars['DateTimeISO']['output']
   deletedAt?: Maybe<Scalars['DateTimeISO']['output']>
   description?: Maybe<Scalars['String']['output']>
+  /** [CrmListArray] */
+  excludeLists: Scalars['JSON']['output']
   id: Scalars['String']['output']
   isEnabled: Scalars['Boolean']['output']
   name: Scalars['String']['output']
@@ -2010,6 +2017,11 @@ export enum TriggerType {
   CompanyAddedToList = 'COMPANY_ADDED_TO_LIST',
   HubspotWorkflow = 'HUBSPOT_WORKFLOW',
   NewWebsiteVisitor = 'NEW_WEBSITE_VISITOR',
+}
+
+export type TriggerUpdateInput = {
+  excludeLists: Array<CrmListInput>
+  id: Scalars['String']['input']
 }
 
 export type User = {

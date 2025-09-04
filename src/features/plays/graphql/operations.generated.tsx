@@ -136,7 +136,17 @@ export type TriggersQuery = {
     updatedAt: any
     playbookId?: string | null
     orgId: string
+    excludeLists: any
   }>
+}
+
+export type TriggerUpdateMutationVariables = Types.Exact<{
+  input: Types.TriggerUpdateInput
+}>
+
+export type TriggerUpdateMutation = {
+  __typename?: 'Mutation'
+  triggerUpdate: { __typename?: 'Trigger'; id: string; excludeLists: any }
 }
 
 export type TrackingScriptQueryVariables = Types.Exact<{ [key: string]: never }>
@@ -574,6 +584,7 @@ export const TriggersDocument = gql`
       updatedAt
       playbookId
       orgId
+      excludeLists
     }
   }
 `
@@ -627,6 +638,54 @@ export type TriggersSuspenseQueryHookResult = ReturnType<typeof useTriggersSuspe
 export type TriggersQueryResult = ApolloReactCommon.QueryResult<
   TriggersQuery,
   TriggersQueryVariables
+>
+export const TriggerUpdateDocument = gql`
+  mutation TriggerUpdate($input: TriggerUpdateInput!) {
+    triggerUpdate(input: $input) {
+      id
+      excludeLists
+    }
+  }
+`
+export type TriggerUpdateMutationFn = ApolloReactCommon.MutationFunction<
+  TriggerUpdateMutation,
+  TriggerUpdateMutationVariables
+>
+
+/**
+ * __useTriggerUpdateMutation__
+ *
+ * To run a mutation, you first call `useTriggerUpdateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTriggerUpdateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [triggerUpdateMutation, { data, loading, error }] = useTriggerUpdateMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useTriggerUpdateMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    TriggerUpdateMutation,
+    TriggerUpdateMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<TriggerUpdateMutation, TriggerUpdateMutationVariables>(
+    TriggerUpdateDocument,
+    options
+  )
+}
+export type TriggerUpdateMutationHookResult = ReturnType<typeof useTriggerUpdateMutation>
+export type TriggerUpdateMutationResult = ApolloReactCommon.MutationResult<TriggerUpdateMutation>
+export type TriggerUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  TriggerUpdateMutation,
+  TriggerUpdateMutationVariables
 >
 export const TrackingScriptDocument = gql`
   query TrackingScript {

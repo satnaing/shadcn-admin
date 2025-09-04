@@ -89,8 +89,17 @@ query Triggers($filters: TriggerFilters) {
     updatedAt
     playbookId
     orgId
+    excludeLists
   }
 }
+
+mutation TriggerUpdate($input: TriggerUpdateInput!) {
+  triggerUpdate(input: $input) {
+    id
+    excludeLists
+  }
+}
+
 
 query TrackingScript {
   trackingScript {

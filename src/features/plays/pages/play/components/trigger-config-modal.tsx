@@ -39,6 +39,7 @@ import {
   useTrackingScriptQuery,
   useTrackingScriptDomainUpdateMutation,
 } from '../../../graphql/operations.generated'
+import { TriggerConfigExcludeLists } from './trigger-config-exclude-lists'
 
 const websiteVisitorSchema = z.object({
   excludedPaths: z.array(z.object({ path: z.string().min(1, 'Path is required') })).optional(),
@@ -196,6 +197,9 @@ export function TriggerConfigModal({
             <TabsContent value='settings' className='mt-6 space-y-6'>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(handleSave)} className='space-y-8'>
+                  {/* Excluded Lists */}
+                  {isOpen && <TriggerConfigExcludeLists trigger={trigger} />}
+
                   {/* Excluded Paths */}
                   <FormItem>
                     <FormLabel>Excluded Paths</FormLabel>
