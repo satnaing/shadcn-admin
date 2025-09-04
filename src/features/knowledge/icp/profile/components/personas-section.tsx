@@ -1,6 +1,10 @@
 import { useState } from 'react'
+import { PersonaRole } from '@/graphql/global/types.generated'
+import { startCase } from 'lodash'
 import { Plus, MoreVertical, Users, Edit, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { cn } from '@/lib/utils'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import {
@@ -27,6 +31,27 @@ import PersonaForm from './persona-form'
 interface PersonasSectionProps {
   targetMarketId: string
   personas: PersonaFieldsFragment[]
+}
+
+// Map roles to appropriate badge styles
+const getRoleBadgeStyle = (role: PersonaRole): string => {
+  const roleStyles: Record<PersonaRole, string> = {
+    [PersonaRole.DecisionMaker]:
+      'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-950 dark:text-blue-400 dark:border-blue-800',
+    [PersonaRole.Champion]:
+      'bg-green-100 text-green-700 border-green-200 dark:bg-green-950 dark:text-green-400 dark:border-green-800',
+    [PersonaRole.User]:
+      'bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-950 dark:text-purple-400 dark:border-purple-800',
+    [PersonaRole.Influencer]:
+      'bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-950 dark:text-amber-400 dark:border-amber-800',
+    [PersonaRole.Blocker]:
+      'bg-red-100 text-red-700 border-red-200 dark:bg-red-950 dark:text-red-400 dark:border-red-800',
+    [PersonaRole.BudgetController]:
+      'bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-950 dark:text-orange-400 dark:border-orange-800',
+    [PersonaRole.TechnicalBuyer]:
+      'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-950 dark:text-slate-400 dark:border-slate-800',
+  }
+  return roleStyles[role] || ''
 }
 
 export default function PersonasSection({ targetMarketId, personas }: PersonasSectionProps) {
@@ -99,7 +124,17 @@ export default function PersonasSection({ targetMarketId, personas }: PersonasSe
             <Card key={persona.id} className='relative'>
               <CardContent>
                 <div className='mb-2 flex items-start justify-between'>
-                  <h4 className='font-semibold'>{persona.name}</h4>
+                  <div>
+                    <h4 className='font-semibold'>{persona.name}</h4>
+                    {persona.role && (
+                      <Badge
+                        variant='outline'
+                        className={cn('mt-1 border', getRoleBadgeStyle(persona.role))}
+                      >
+                        {startCase(persona.role.replace(/_/g, ' ').toLowerCase())}
+                      </Badge>
+                    )}
+                  </div>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant='ghost' size='icon' className='-mt-2 -mr-2'>

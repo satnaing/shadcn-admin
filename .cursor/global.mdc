@@ -16,5 +16,6 @@ alwaysApply: true
 - For loading state, aim to always use the <Loadable> component. Pass in a skeleton when it makes sense.
 - Before implementing a feature, always check the src/components directory to see if there are available components ready to use to set up a page.
 - When using toasts, import {toast} from 'sonner'
-- Always strive to have a single component definition per file 
+- Always strive to have a single component definition per file, and try to keep files under ~300 lines
+- Heavily use lodash whenever possible to make code cleaner and more concise. 
 

@@ -34,6 +34,7 @@ fragment personaFields on Persona {
   }
   description
   maxContacts
+  role
   createdAt
 }
 

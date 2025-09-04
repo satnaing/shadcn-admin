@@ -1200,7 +1200,6 @@ export type PagingInput = {
 
 export type Persona = {
   __typename?: 'Persona'
-  campaignId?: Maybe<Scalars['String']['output']>
   createdAt: Scalars['DateTimeISO']['output']
   deletedAt?: Maybe<Scalars['DateTimeISO']['output']>
   description?: Maybe<Scalars['String']['output']>
@@ -1208,6 +1207,7 @@ export type Persona = {
   maxContacts: Scalars['Int']['output']
   name: Scalars['String']['output']
   orgId: Scalars['String']['output']
+  role?: Maybe<PersonaRole>
   targetMarkets: Array<PersonaTargetMarket>
   updatedAt: Scalars['DateTimeISO']['output']
   valueProp?: Maybe<Scalars['String']['output']>
@@ -1215,6 +1215,16 @@ export type Persona = {
 
 export type PersonaFilters = {
   notUsedInCampaign?: InputMaybe<Scalars['Boolean']['input']>
+}
+
+export enum PersonaRole {
+  Blocker = 'BLOCKER',
+  BudgetController = 'BUDGET_CONTROLLER',
+  Champion = 'CHAMPION',
+  DecisionMaker = 'DECISION_MAKER',
+  Influencer = 'INFLUENCER',
+  TechnicalBuyer = 'TECHNICAL_BUYER',
+  User = 'USER',
 }
 
 export type PersonaTargetMarket = {
@@ -1232,6 +1242,7 @@ export type PersonaUpsertInput = {
   id?: InputMaybe<Scalars['String']['input']>
   maxContacts: Scalars['Float']['input']
   name: Scalars['String']['input']
+  role?: InputMaybe<PersonaRole>
   targetMarketIds: Array<Scalars['String']['input']>
   valueProp?: InputMaybe<Scalars['String']['input']>
 }
