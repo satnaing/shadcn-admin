@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from '@tanstack/react-router'
-import { ArrowLeft, ArrowRight, CheckCircle, FileText, Layers, Plus, Zap } from 'lucide-react'
+import { ArrowLeft, ArrowRight, CheckCircle, Layers, Plus, Zap } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
@@ -198,11 +198,7 @@ export default function PlaybookNewPage() {
             <StepperItem step={1} completed={isStepValid(1)}>
               <StepperTrigger>
                 <StepperIndicator>
-                  {isStepValid(1) ? (
-                    <CheckCircle className='h-4 w-4' />
-                  ) : (
-                    <FileText className='h-3 w-3' />
-                  )}
+                  {isStepValid(1) ? <CheckCircle className='h-4 w-4' /> : <span>1</span>}
                 </StepperIndicator>
                 <div className='ml-2'>
                   <StepperTitle>Details</StepperTitle>
