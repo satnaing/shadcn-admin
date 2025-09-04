@@ -4,9 +4,7 @@ alwaysApply: true
 
 ## Project explanation
 - This project uses pnpm, use that to run commands. It uses shadcn and tailwind.
-- The "Frontend" dir is a starter template repo for working with shadcn and vite, which we are going to be customizing to work with Swan, my SaaS app. Swan is an AI go-to-market engineer that builds agentic Sales workflows ontop of your CRM / other external signals and B2B data / research etc.
-- We are working to migrate the capabilities in the root "agents" nextjs folder to this new "frontend" dir and repo.
-- When I ask to migrate something, it means from the "agents" nextjs project to the new "frontend" project
+- The "Frontend" dir is a repo for working with shadcn and vite, which is the Frontend for Swan, my SaaS app. Swan is an AI go-to-market engineer that builds agentic Sales workflows ontop of your CRM / other external signals and B2B data / research etc.
 
 ## GraphQl
 - When creating operations.graphql files - they should live next to where they are being used in the "features" folder
@@ -18,4 +16,5 @@ alwaysApply: true
 - For loading state, aim to always use the <Loadable> component. Pass in a skeleton when it makes sense.
 - Before implementing a feature, always check the src/components directory to see if there are available components ready to use to set up a page.
 - When using toasts, import {toast} from 'sonner'
+- Always strive to have a single component definition per file 
 
