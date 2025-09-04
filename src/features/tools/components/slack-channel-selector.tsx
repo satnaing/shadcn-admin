@@ -40,13 +40,15 @@ export function SlackChannelSelector({
   const { data: slackChannelsData, loading: slackChannelsLoading } = useSlackChannelsQuery({})
 
   const channelOptions =
-    slackChannelsData?.slackChannels?.map((channel) => ({
-      value: channel.id,
-      label: `#${channel.name}${
-        channel.id === slackData?.slackIntegration?.channelId ? ' (Default Channel)' : ''
-      }`,
-      name: channel.name,
-    })) || []
+    slackChannelsData?.slackChannels
+      ?.sort((a, b) => a.name.localeCompare(b.name))
+      .map((channel) => ({
+        value: channel.id,
+        label: `#${channel.name}${
+          channel.id === slackData?.slackIntegration?.channelId ? ' (Default Channel)' : ''
+        }`,
+        name: channel.name,
+      })) || []
 
   const validateChannelId = (id: string): string | boolean => {
     if (!id) return 'ID is required'
@@ -85,7 +87,7 @@ export function SlackChannelSelector({
           if (currentValueMissing) {
             enhancedOptions.push({
               value: field.value.id,
-              label: `#${field.value.name || field.value.id}`,
+              label: field.value.name || field.value.id,
               name: field.value.name || field.value.id,
             })
           }
