@@ -2,10 +2,15 @@ import { useState, useEffect } from 'react'
 import { useParams } from '@tanstack/react-router'
 import { PlayCircle, PauseCircle, Plus, Settings, Layers, FileText } from 'lucide-react'
 import { toast } from 'sonner'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
 import { EditableText } from '@/components/editable-text'
 import { Page } from '@/components/page'
@@ -178,136 +183,165 @@ export default function PlaybookDetailPage() {
         {/* Triggers Card */}
         <PlaybookTriggers playbookId={playbookId} />
 
-        {/* Playbook Card */}
+        {/* Instructions Card */}
         <Card>
           <CardHeader>
             <div className='flex items-center justify-between'>
               <div>
                 <CardTitle className='mb-2 flex items-center gap-2'>
                   <FileText className='h-5 w-5' />
-                  Playbook
+                  Context
                 </CardTitle>
                 <CardDescription>
-                  Configure the context, instructions, and scenarios for this playbook
+                  Provide context and instructions for this playbook
                 </CardDescription>
               </div>
             </div>
           </CardHeader>
-          <CardContent className='space-y-6'>
-            {/* Context & Instructions Section */}
-            <div className='space-y-4'>
-              <div className='space-y-2'>
-                <Label htmlFor='description'>Context</Label>
-                <Textarea
-                  id='description'
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder='Explain briefly when this playbook runs and what Swan should be aware of'
-                  className='max-h-[200px] min-h-[100px] resize-none'
-                  disabled={isSavingDescription}
-                />
-              </div>
-
-              <div className='space-y-2'>
-                <Label htmlFor='outreach-instructions'>Outreach Instructions</Label>
-                <Textarea
-                  id='outreach-instructions'
-                  value={outreachInstructions}
-                  onChange={(e) => setOutreachInstructions(e.target.value)}
-                  placeholder='Provide specific instructions for outreach messages and communication style'
-                  className='max-h-[200px] min-h-[100px] resize-none'
-                  disabled={isSavingDescription}
-                />
-              </div>
-
-              <div className='flex justify-end'>
-                <Button
-                  size='sm'
-                  onClick={handleUpdateDescription}
-                  disabled={
-                    isSavingDescription ||
-                    updatePlaybookLoading ||
-                    (description.trim() === (playbook.description || '').trim() &&
-                      outreachInstructions.trim() === (playbook.outreachInstructions || '').trim())
-                  }
-                  loading={isSavingDescription}
-                >
-                  Save Changes
-                </Button>
-              </div>
+          <CardContent className='space-y-4'>
+            <div className='space-y-2'>
+              <Label htmlFor='description'>Play Description</Label>
+              <Textarea
+                id='description'
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder='Explain briefly when this playbook runs and what Swan should be aware of'
+                className='max-h-[200px] min-h-[100px] resize-none'
+                disabled={isSavingDescription}
+              />
             </div>
 
-            <Separator />
-
-            {/* Scenarios Section */}
-            <div className='space-y-3'>
-              <div className='flex items-center justify-between'>
-                <div>
-                  <h4 className='flex items-center gap-2 text-sm font-medium'>
-                    <Layers className='h-4 w-4' />
-                    Scenarios
-                  </h4>
-                  <p className='text-muted-foreground text-sm'>
-                    {playbook.scenarios?.length || 0} scenario
-                    {playbook.scenarios?.length !== 1 ? 's' : ''} configured
-                  </p>
-                </div>
-                <Button size='sm' variant='outline' onClick={() => setCreateScenarioOpen(true)}>
-                  <Plus className='mr-2 h-4 w-4' />
-                  Add Scenario
-                </Button>
-              </div>
-
-              {playbook.scenarios && playbook.scenarios.length > 0 ? (
-                playbook.scenarios.length === 1 ? (
-                  // Single scenario: show form directly
-                  <ScenarioForm
-                    mode='edit'
-                    scenario={playbook.scenarios[0]}
-                    onSuccess={refetch}
-                    formId='single-scenario-form'
-                    showButtons={true}
-                  />
-                ) : (
-                  // Multiple scenarios: show cards with modals
-                  <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-                    {playbook.scenarios.map((scenario) => (
-                      <div
-                        key={scenario.id}
-                        className='hover:bg-accent/50 group cursor-pointer rounded-lg border p-4 transition-colors'
-                        onClick={() => setSelectedScenario(scenario)}
-                      >
-                        <div className='flex items-start justify-between gap-2'>
-                          <div className='min-w-0 flex-1'>
-                            <h4 className='truncate font-medium'>{scenario.name}</h4>
-                            <p className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
-                              {scenario.description || 'No description'}
-                            </p>
-                          </div>
-                          <Button
-                            variant='ghost'
-                            size='icon'
-                            className='h-8 w-8 flex-shrink-0 opacity-0 transition-opacity group-hover:opacity-100'
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              setSelectedScenario(scenario)
-                            }}
-                          >
-                            <Settings className='h-4 w-4' />
-                          </Button>
-                        </div>
-                      </div>
-                    ))}
+            <Accordion type='single' collapsible className='w-full'>
+              <AccordionItem value='outreach-instructions'>
+                <AccordionTrigger>Outreach Instructions</AccordionTrigger>
+                <AccordionContent>
+                  <div className='space-y-2'>
+                    <Label htmlFor='outreach-instructions' className='sr-only'>
+                      Outreach Instructions
+                    </Label>
+                    <Textarea
+                      id='outreach-instructions'
+                      value={outreachInstructions}
+                      onChange={(e) => setOutreachInstructions(e.target.value)}
+                      placeholder='Provide specific instructions for outreach messages and communication style'
+                      className='max-h-[200px] min-h-[100px] resize-none'
+                      disabled={isSavingDescription}
+                    />
+                    <p className='text-muted-foreground text-sm'>
+                      Provide specific guidelines for how Swan should communicate and engage with
+                      prospects
+                    </p>
                   </div>
-                )
-              ) : (
-                <div className='rounded-lg border border-dashed p-8 text-center'>
-                  <p className='text-muted-foreground text-sm'>
-                    No scenarios configured for this playbook yet.
-                  </p>
-                </div>
-              )}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+
+            <div className='flex justify-end'>
+              <Button
+                size='sm'
+                onClick={handleUpdateDescription}
+                disabled={
+                  isSavingDescription ||
+                  updatePlaybookLoading ||
+                  (description.trim() === (playbook.description || '').trim() &&
+                    outreachInstructions.trim() === (playbook.outreachInstructions || '').trim())
+                }
+                loading={isSavingDescription}
+              >
+                Save Changes
+              </Button>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* Action Plan Card */}
+        <Card>
+          <CardHeader>
+            <div className='flex items-center justify-between'>
+              <div>
+                <CardTitle className='mb-2 flex items-center gap-2'>
+                  <Layers className='h-5 w-5' />
+                  Action Plan
+                </CardTitle>
+                <CardDescription>
+                  Define scenarios with conditions and actions. Swan analyzes the situation first,
+                  then executes the matching action plan.
+                </CardDescription>
+              </div>
+              <Button size='sm' variant='outline' onClick={() => setCreateScenarioOpen(true)}>
+                <Plus className='mr-2 h-4 w-4' />
+                Add Scenario
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {playbook.scenarios && playbook.scenarios.length > 0 ? (
+              playbook.scenarios.length === 1 ? (
+                // Single scenario: show form directly
+                <ScenarioForm
+                  mode='edit'
+                  scenario={playbook.scenarios[0]}
+                  onSuccess={refetch}
+                  formId='single-scenario-form'
+                  showButtons={true}
+                />
+              ) : (
+                // Multiple scenarios: show cards with modals
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  {playbook.scenarios.map((scenario) => (
+                    <div
+                      key={scenario.id}
+                      className='hover:bg-accent/50 group cursor-pointer rounded-lg border p-4 transition-colors'
+                      onClick={() => setSelectedScenario(scenario)}
+                    >
+                      <div className='flex items-start justify-between gap-2'>
+                        <div className='min-w-0 flex-1 space-y-3'>
+                          <h4 className='truncate font-medium'>{scenario.name}</h4>
+
+                          <div className='space-y-2'>
+                            <div>
+                              <span className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
+                                When
+                              </span>
+                              <p className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
+                                {scenario.description || 'No condition defined'}
+                              </p>
+                            </div>
+
+                            <div>
+                              <span className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
+                                Then
+                              </span>
+                              <p className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
+                                {scenario.actionPlan || 'No action plan defined'}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <Button
+                          variant='ghost'
+                          size='icon'
+                          className='h-8 w-8 flex-shrink-0 opacity-0 transition-opacity group-hover:opacity-100'
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedScenario(scenario)
+                          }}
+                        >
+                          <Settings className='h-4 w-4' />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )
+            ) : (
+              <div className='rounded-lg border border-dashed p-8 text-center'>
+                <p className='text-muted-foreground text-sm'>
+                  No action plans configured yet. Add scenarios to define conditions and their
+                  corresponding actions.
+                </p>
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>

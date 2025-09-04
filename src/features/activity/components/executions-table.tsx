@@ -25,6 +25,7 @@ import { executionsColumns as columns } from '../data/executions-columns'
 import { type Execution } from '../data/schema'
 import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
+import { useExecutions } from './executions-provider'
 
 const route = getRouteApi('/activity/')
 
@@ -34,6 +35,8 @@ type DataTableProps = {
 }
 
 export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
+  const { setOpen, setCurrentExecution } = useExecutions()
+
   // Local UI-only states
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([
@@ -53,7 +56,7 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
   } = useTableUrlState({
     search: route.useSearch(),
     navigate: route.useNavigate(),
-    pagination: { defaultPage: 1, defaultPageSize: 10 },
+    pagination: { defaultPage: 1, defaultPageSize: 20 },
     globalFilter: { enabled: true, key: 'filter' },
     columnFilters: [
       { columnId: 'status', searchKey: 'status', type: 'string' },
@@ -134,9 +137,24 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}
+                  className='hover:bg-muted/50 cursor-pointer'
+                  onClick={() => {
+                    const execution = row.original as Execution
+                    setCurrentExecution(execution)
+                    setOpen('view')
+                  }}
+                >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      data-column-id={cell.column.id}
+                      onClick={
+                        cell.column.id === 'actions' ? (e) => e.stopPropagation() : undefined
+                      }
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}

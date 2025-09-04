@@ -48,7 +48,10 @@ export default function PlaybooksPage() {
 
   if (loading) {
     return (
-      <Page title='Plays' description='Automate your workflow processes with plays'>
+      <Page
+        title='Plays'
+        description='Intelligent go-to-market routines that help you grow your business'
+      >
         <PlaybooksSkeleton />
       </Page>
     )
@@ -56,7 +59,10 @@ export default function PlaybooksPage() {
 
   if (playbooks.length === 0) {
     return (
-      <Page title='Plays' description='Automate your workflow processes with plays'>
+      <Page
+        title='Plays'
+        description='Intelligent go-to-market routines that help you grow your business'
+      >
         <EmptyState
           Icon={PlayCircle}
           title='No plays created'
@@ -72,7 +78,7 @@ export default function PlaybooksPage() {
   return (
     <Page
       title='Plays'
-      description='Automate your workflow processes with plays'
+      description='Intelligent go-to-market routines that help you grow your business'
       // actions={
       //   <Button onClick={() => navigate({ to: '/plays/new' })}>
       //     <Plus className='mr-2 h-4 w-4' />

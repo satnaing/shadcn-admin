@@ -5,6 +5,7 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { useTriggersQuery } from '../../../graphql/operations.generated'
+import { TriggerCardSkeleton } from './trigger-card-skeleton'
 import { TriggerConfigModal } from './trigger-config-modal'
 
 interface PlaybookTriggersProps {
@@ -86,8 +87,10 @@ export function PlaybookTriggers({ playbookId }: PlaybookTriggersProps) {
         </CardHeader>
         <CardContent>
           {loading ? (
-            <div className='py-8 text-center'>
-              <p className='text-muted-foreground text-sm'>Loading triggers...</p>
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+              {[1, 2].map((index) => (
+                <TriggerCardSkeleton key={index} />
+              ))}
             </div>
           ) : error ? (
             <div className='py-8 text-center'>

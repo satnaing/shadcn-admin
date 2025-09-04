@@ -131,7 +131,7 @@ export default function GeneralKnowledge() {
                     <FormControl>
                       <Textarea
                         placeholder='Describe what your organization does...'
-                        className='min-h-[120px]'
+                        className='min-h-[220px]'
                         {...field}
                       />
                     </FormControl>

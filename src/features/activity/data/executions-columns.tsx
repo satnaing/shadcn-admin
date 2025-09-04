@@ -1,8 +1,8 @@
 import { format } from 'date-fns'
 import { type ColumnDef } from '@tanstack/react-table'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { DataTableColumnHeader } from '../components/data-table-column-header'
 import { DataTableRowActions } from '../components/data-table-row-actions'
+import { parseSlackMarkdown } from '../utils/slack-markdown-parser'
 import { executionStatuses } from './data'
 import { type Execution } from './schema'
 
@@ -152,32 +152,9 @@ export const executionsColumns: ColumnDef<Execution>[] = [
         return <span className='text-muted-foreground'>No summary</span>
       }
 
-      const truncated = summary.length > 80 ? `${summary.substring(0, 80)}...` : summary
-
       return (
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span className='max-w-[300px] cursor-default'>{truncated}</span>
-            </TooltipTrigger>
-            {summary.length > 80 && (
-              <TooltipContent className='max-w-[400px] whitespace-pre-wrap'>
-                {summary}
-              </TooltipContent>
-            )}
-          </Tooltip>
-        </TooltipProvider>
-      )
-    },
-  },
-  {
-    accessorKey: 'completedAt',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='Completed At' />,
-    cell: ({ row }) => {
-      const completedAt = row.getValue('completedAt') as string | null
-      return (
-        <div className='w-[160px]'>
-          {completedAt ? format(new Date(completedAt), 'MMM d, yyyy HH:mm') : '-'}
+        <div className='w-[400px]'>
+          <div className='text-sm break-words whitespace-normal'>{parseSlackMarkdown(summary)}</div>
         </div>
       )
     },
