@@ -49,6 +49,38 @@ export type PlaybookQuery = {
   }
 }
 
+export type PlaybookTemplatesQueryVariables = Types.Exact<{ [key: string]: never }>
+
+export type PlaybookTemplatesQuery = {
+  __typename?: 'Query'
+  playbookTemplates: Array<{
+    __typename?: 'Playbook'
+    id: string
+    name: string
+    description?: string | null
+    scenarioCount: number
+  }>
+}
+
+export type PlayCreateMutationVariables = Types.Exact<{
+  input: Types.PlaybookCreateInput
+}>
+
+export type PlayCreateMutation = {
+  __typename?: 'Mutation'
+  playCreate: {
+    __typename?: 'Playbook'
+    id: string
+    name: string
+    description?: string | null
+    isEnabled: boolean
+    outreachInstructions?: string | null
+    createdAt: any
+    updatedAt: any
+    orgId: string
+  }
+}
+
 export type PlaybookUpdateMutationVariables = Types.Exact<{
   input: Types.PlaybookUpdateInput
 }>
@@ -65,6 +97,24 @@ export type PlaybookUpdateMutation = {
     createdAt: any
     updatedAt: any
     deletedAt?: any | null
+    orgId: string
+  }
+}
+
+export type PlaybookCreateFromTemplateMutationVariables = Types.Exact<{
+  input: Types.PlaybookCreateFromTemplateInput
+}>
+
+export type PlaybookCreateFromTemplateMutation = {
+  __typename?: 'Mutation'
+  playbookCreateFromTemplate: {
+    __typename?: 'Playbook'
+    id: string
+    name: string
+    description?: string | null
+    isEnabled: boolean
+    createdAt: any
+    updatedAt: any
     orgId: string
   }
 }
@@ -136,7 +186,7 @@ export type TriggersQuery = {
     updatedAt: any
     playbookId?: string | null
     orgId: string
-    excludeLists: any
+    excludeLists?: any | null
   }>
 }
 
@@ -146,7 +196,7 @@ export type TriggerUpdateMutationVariables = Types.Exact<{
 
 export type TriggerUpdateMutation = {
   __typename?: 'Mutation'
-  triggerUpdate: { __typename?: 'Trigger'; id: string; excludeLists: any }
+  triggerUpdate: { __typename?: 'Trigger'; id: string; excludeLists?: any | null }
 }
 
 export type TrackingScriptQueryVariables = Types.Exact<{ [key: string]: never }>
@@ -353,6 +403,134 @@ export type PlaybookQueryResult = ApolloReactCommon.QueryResult<
   PlaybookQuery,
   PlaybookQueryVariables
 >
+export const PlaybookTemplatesDocument = gql`
+  query PlaybookTemplates {
+    playbookTemplates {
+      id
+      name
+      description
+      scenarioCount
+    }
+  }
+`
+
+/**
+ * __usePlaybookTemplatesQuery__
+ *
+ * To run a query within a React component, call `usePlaybookTemplatesQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlaybookTemplatesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlaybookTemplatesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePlaybookTemplatesQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    PlaybookTemplatesQuery,
+    PlaybookTemplatesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<PlaybookTemplatesQuery, PlaybookTemplatesQueryVariables>(
+    PlaybookTemplatesDocument,
+    options
+  )
+}
+export function usePlaybookTemplatesLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    PlaybookTemplatesQuery,
+    PlaybookTemplatesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<PlaybookTemplatesQuery, PlaybookTemplatesQueryVariables>(
+    PlaybookTemplatesDocument,
+    options
+  )
+}
+export function usePlaybookTemplatesSuspenseQuery(
+  baseOptions?:
+    | ApolloReactHooks.SkipToken
+    | ApolloReactHooks.SuspenseQueryHookOptions<
+        PlaybookTemplatesQuery,
+        PlaybookTemplatesQueryVariables
+      >
+) {
+  const options =
+    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useSuspenseQuery<PlaybookTemplatesQuery, PlaybookTemplatesQueryVariables>(
+    PlaybookTemplatesDocument,
+    options
+  )
+}
+export type PlaybookTemplatesQueryHookResult = ReturnType<typeof usePlaybookTemplatesQuery>
+export type PlaybookTemplatesLazyQueryHookResult = ReturnType<typeof usePlaybookTemplatesLazyQuery>
+export type PlaybookTemplatesSuspenseQueryHookResult = ReturnType<
+  typeof usePlaybookTemplatesSuspenseQuery
+>
+export type PlaybookTemplatesQueryResult = ApolloReactCommon.QueryResult<
+  PlaybookTemplatesQuery,
+  PlaybookTemplatesQueryVariables
+>
+export const PlayCreateDocument = gql`
+  mutation PlayCreate($input: PlaybookCreateInput!) {
+    playCreate(input: $input) {
+      id
+      name
+      description
+      isEnabled
+      outreachInstructions
+      createdAt
+      updatedAt
+      orgId
+    }
+  }
+`
+export type PlayCreateMutationFn = ApolloReactCommon.MutationFunction<
+  PlayCreateMutation,
+  PlayCreateMutationVariables
+>
+
+/**
+ * __usePlayCreateMutation__
+ *
+ * To run a mutation, you first call `usePlayCreateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePlayCreateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [playCreateMutation, { data, loading, error }] = usePlayCreateMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function usePlayCreateMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    PlayCreateMutation,
+    PlayCreateMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<PlayCreateMutation, PlayCreateMutationVariables>(
+    PlayCreateDocument,
+    options
+  )
+}
+export type PlayCreateMutationHookResult = ReturnType<typeof usePlayCreateMutation>
+export type PlayCreateMutationResult = ApolloReactCommon.MutationResult<PlayCreateMutation>
+export type PlayCreateMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  PlayCreateMutation,
+  PlayCreateMutationVariables
+>
 export const PlaybookUpdateDocument = gql`
   mutation PlaybookUpdate($input: PlaybookUpdateInput!) {
     playbookUpdate(input: $input) {
@@ -407,6 +585,62 @@ export type PlaybookUpdateMutationResult = ApolloReactCommon.MutationResult<Play
 export type PlaybookUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<
   PlaybookUpdateMutation,
   PlaybookUpdateMutationVariables
+>
+export const PlaybookCreateFromTemplateDocument = gql`
+  mutation PlaybookCreateFromTemplate($input: PlaybookCreateFromTemplateInput!) {
+    playbookCreateFromTemplate(input: $input) {
+      id
+      name
+      description
+      isEnabled
+      createdAt
+      updatedAt
+      orgId
+    }
+  }
+`
+export type PlaybookCreateFromTemplateMutationFn = ApolloReactCommon.MutationFunction<
+  PlaybookCreateFromTemplateMutation,
+  PlaybookCreateFromTemplateMutationVariables
+>
+
+/**
+ * __usePlaybookCreateFromTemplateMutation__
+ *
+ * To run a mutation, you first call `usePlaybookCreateFromTemplateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePlaybookCreateFromTemplateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [playbookCreateFromTemplateMutation, { data, loading, error }] = usePlaybookCreateFromTemplateMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function usePlaybookCreateFromTemplateMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    PlaybookCreateFromTemplateMutation,
+    PlaybookCreateFromTemplateMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<
+    PlaybookCreateFromTemplateMutation,
+    PlaybookCreateFromTemplateMutationVariables
+  >(PlaybookCreateFromTemplateDocument, options)
+}
+export type PlaybookCreateFromTemplateMutationHookResult = ReturnType<
+  typeof usePlaybookCreateFromTemplateMutation
+>
+export type PlaybookCreateFromTemplateMutationResult =
+  ApolloReactCommon.MutationResult<PlaybookCreateFromTemplateMutation>
+export type PlaybookCreateFromTemplateMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  PlaybookCreateFromTemplateMutation,
+  PlaybookCreateFromTemplateMutationVariables
 >
 export const PlaybookScenarioCreateDocument = gql`
   mutation PlaybookScenarioCreate($input: PlaybookScenarioCreateInput!) {

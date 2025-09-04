@@ -32,6 +32,28 @@ query Playbook($id: String!) {
   }
 }
 
+query PlaybookTemplates {
+  playbookTemplates {
+    id
+    name
+    description
+    scenarioCount
+  }
+}
+
+mutation PlayCreate($input: PlaybookCreateInput!) {
+  playCreate(input: $input) {
+    id
+    name
+    description
+    isEnabled
+    outreachInstructions
+    createdAt
+    updatedAt
+    orgId
+  }
+}
+
 mutation PlaybookUpdate($input: PlaybookUpdateInput!) {
   playbookUpdate(input: $input) {
     id
@@ -42,6 +64,18 @@ mutation PlaybookUpdate($input: PlaybookUpdateInput!) {
     createdAt
     updatedAt
     deletedAt
+    orgId
+  }
+}
+
+mutation PlaybookCreateFromTemplate($input: PlaybookCreateFromTemplateInput!) {
+  playbookCreateFromTemplate(input: $input) {
+    id
+    name
+    description
+    isEnabled
+    createdAt
+    updatedAt
     orgId
   }
 }

@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { PersonaRole } from '@/graphql/global/types.generated'
 import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { MultiAsyncSelect } from '@/components/ui/async-multi-select'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -16,13 +17,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import {
   usePersonaUpsertMutation,
@@ -39,7 +33,7 @@ const personaFormSchema = z.object({
     .string()
     .min(1, 'Value proposition is required')
     .max(1300, 'Value proposition must be less than 1300 characters'),
-  role: z.enum(Object.values(PersonaRole)).optional(),
+  roles: z.array(z.enum(Object.values(PersonaRole))).optional(),
   targetMarketIds: z.array(z.string()).min(1, 'At least one segment is required'),
 })
 
@@ -51,6 +45,16 @@ interface PersonaFormProps {
   onSuccess: () => void
   onCancel: () => void
 }
+
+const roleOptions = [
+  { value: PersonaRole.User, label: 'User' },
+  { value: PersonaRole.DecisionMaker, label: 'Decision Maker' },
+  { value: PersonaRole.Blocker, label: 'Blocker' },
+  { value: PersonaRole.Champion, label: 'Champion' },
+  { value: PersonaRole.Influencer, label: 'Influencer' },
+  { value: PersonaRole.BudgetController, label: 'Budget Controller' },
+  { value: PersonaRole.TechnicalBuyer, label: 'Technical Buyer' },
+]
 
 export default function PersonaForm({
   persona,
@@ -68,7 +72,7 @@ export default function PersonaForm({
       name: '',
       description: '',
       valueProp: '',
-      role: '' as any,
+      roles: [],
       targetMarketIds: [targetMarketId],
     },
   })
@@ -79,7 +83,11 @@ export default function PersonaForm({
         name: persona.name,
         description: persona.description || '',
         valueProp: persona.valueProp || '',
-        role: persona.role || undefined,
+        roles: (persona as any).roles
+          ? (persona as any).roles
+          : (persona as any).role
+            ? [(persona as any).role]
+            : [],
         // When editing, include all existing target markets plus the current one
         targetMarketIds: Array.from(
           new Set([...persona.targetMarkets.map((tm: any) => tm.targetMarketId), targetMarketId])
@@ -90,7 +98,7 @@ export default function PersonaForm({
         name: '',
         description: '',
         valueProp: '',
-        role: undefined,
+        roles: [],
         targetMarketIds: [targetMarketId],
       })
     }
@@ -105,7 +113,7 @@ export default function PersonaForm({
             name: data.name,
             description: data.description,
             valueProp: data.valueProp,
-            role: data.role,
+            roles: data.roles,
             maxContacts: 0, // As requested, ignoring max contacts
             targetMarketIds: data.targetMarketIds,
           },
@@ -163,45 +171,25 @@ export default function PersonaForm({
 
         <FormField
           control={form.control}
-          name='role'
-          render={({ field }) => {
-            return (
-              <FormItem>
-                <FormLabel>Role</FormLabel>
-                <Select
-                  onValueChange={(val) => {
-                    field.onChange(val || field.value)
-                  }} // bug in the select component makes it so that the initial empty string overrides the value
-                  value={field.value || ''}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder='Select a role for this persona' />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent className='max-w-[450px]'>
-                    {[
-                      { value: PersonaRole.User, name: 'User' },
-                      { value: PersonaRole.DecisionMaker, name: 'Decision Maker' },
-                      { value: PersonaRole.Blocker, name: 'Blocker' },
-                      { value: PersonaRole.Champion, name: 'Champion' },
-                      { value: PersonaRole.Influencer, name: 'Influencer' },
-                      { value: PersonaRole.BudgetController, name: 'Budget Controller' },
-                      { value: PersonaRole.TechnicalBuyer, name: 'Technical Buyer' },
-                    ].map((role) => (
-                      <SelectItem key={role.value} value={role.value}>
-                        {role.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormDescription>
-                  Select the role this persona plays in the buying process
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )
-          }}
+          name='roles'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Roles</FormLabel>
+              <FormControl>
+                <MultiAsyncSelect
+                  options={roleOptions}
+                  value={field.value || []}
+                  onValueChange={field.onChange}
+                  placeholder='Select roles for this persona'
+                  maxCount={3}
+                />
+              </FormControl>
+              <FormDescription>
+                Select the roles this persona plays in the buying process
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
         />
 
         <FormField

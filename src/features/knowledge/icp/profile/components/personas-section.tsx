@@ -126,13 +126,23 @@ export default function PersonasSection({ targetMarketId, personas }: PersonasSe
                 <div className='mb-2 flex items-start justify-between'>
                   <div>
                     <h4 className='font-semibold'>{persona.name}</h4>
-                    {persona.role && (
-                      <Badge
-                        variant='outline'
-                        className={cn('mt-1 border', getRoleBadgeStyle(persona.role))}
-                      >
-                        {startCase(persona.role.replace(/_/g, ' ').toLowerCase())}
-                      </Badge>
+                    {(
+                      (persona as any).roles ||
+                      ((persona as any).role ? [(persona as any).role] : [])
+                    ).length > 0 && (
+                      <div className='mt-1 flex flex-wrap gap-1'>
+                        {((persona as any).roles || [(persona as any).role])
+                          .filter(Boolean)
+                          .map((role: PersonaRole) => (
+                            <Badge
+                              key={role}
+                              variant='outline'
+                              className={cn('border text-xs', getRoleBadgeStyle(role))}
+                            >
+                              {startCase(role.replace(/_/g, ' ').toLowerCase())}
+                            </Badge>
+                          ))}
+                      </div>
                     )}
                   </div>
                   <DropdownMenu>

@@ -37,11 +37,12 @@ interface ScenarioFormProps {
     description?: string | null
     actionPlan?: string | null
   } | null
-  onSuccess: () => void
+  onSuccess: (() => void) | ((data: ScenarioFormData) => void)
   formId?: string
   showButtons?: boolean
   onCancel?: () => void
   disabled?: boolean
+  skipMutation?: boolean // When true, just calls onSuccess with form data
 }
 
 export function ScenarioForm({
@@ -53,6 +54,7 @@ export function ScenarioForm({
   showButtons = true,
   onCancel,
   disabled = false,
+  skipMutation = false,
 }: ScenarioFormProps) {
   const form = useForm<ScenarioFormData>({
     resolver: zodResolver(scenarioFormSchema),
@@ -66,7 +68,9 @@ export function ScenarioForm({
   const [updateScenario, { loading: updating }] = usePlaybookScenarioUpdateMutation()
   const [createScenario, { loading: creating }] = usePlaybookScenarioCreateMutation()
 
-  const loading = updating || creating || form.formState.isSubmitting || disabled
+  const loading = skipMutation
+    ? form.formState.isSubmitting || disabled
+    : updating || creating || form.formState.isSubmitting || disabled
 
   useEffect(() => {
     if (mode === 'edit' && scenario) {
@@ -86,6 +90,14 @@ export function ScenarioForm({
 
   const onSubmit = async (data: ScenarioFormData) => {
     try {
+      if (skipMutation) {
+        onSuccess(data)
+        if (mode === 'create') {
+          form.reset()
+        }
+        return
+      }
+
       if (mode === 'edit' && scenario) {
         await updateScenario({
           variables: {
@@ -112,7 +124,7 @@ export function ScenarioForm({
         toast.success('Scenario created successfully')
       }
 
-      onSuccess()
+      onSuccess(data)
     } catch (error: any) {
       toast.error(`Failed to ${mode} scenario: ${error.message}`)
     }
@@ -146,7 +158,7 @@ export function ScenarioForm({
           name='description'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Condition</FormLabel>
+              <FormLabel>When (Condition)</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder='Describe the condition that triggers this scenario'
@@ -167,7 +179,7 @@ export function ScenarioForm({
           name='actionPlan'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Action Plan</FormLabel>
+              <FormLabel>Then (Action Plan)</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder='Define the action plan for this scenario'

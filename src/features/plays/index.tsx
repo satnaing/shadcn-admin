@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { format } from 'date-fns'
 import { useNavigate } from '@tanstack/react-router'
 import { PlayCircle, PauseCircle, Plus, MoreVertical, Clock, Layers, Calendar } from 'lucide-react'
@@ -12,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import EmptyState from '@/components/empty-state'
 import { Page } from '@/components/page'
+import PlaybookTemplatesModal from './components/playbook-templates-modal'
 import PlaybooksSkeleton from './components/playbooks-skeleton'
 import { usePlaybooksQuery, usePlaybookUpdateMutation } from './graphql/operations.generated'
 
@@ -19,6 +21,7 @@ export default function PlaybooksPage() {
   const navigate = useNavigate()
   const { data, loading, refetch } = usePlaybooksQuery()
   const [updatePlaybook] = usePlaybookUpdateMutation()
+  const [isTemplatesModalOpen, setIsTemplatesModalOpen] = useState(false)
 
   const playbooks = data?.playbooks || []
 
@@ -69,7 +72,12 @@ export default function PlaybooksPage() {
           description='Get started by creating your first play'
           ctaText='Create Play'
           ctaIcon={Plus}
-          onCtaClick={() => navigate({ to: '/plays/new' })}
+          onCtaClick={() => setIsTemplatesModalOpen(true)}
+        />
+
+        <PlaybookTemplatesModal
+          isOpen={isTemplatesModalOpen}
+          onClose={() => setIsTemplatesModalOpen(false)}
         />
       </Page>
     )
@@ -79,12 +87,12 @@ export default function PlaybooksPage() {
     <Page
       title='Plays'
       description='Intelligent go-to-market routines that help you grow your business'
-      // actions={
-      //   <Button onClick={() => navigate({ to: '/plays/new' })}>
-      //     <Plus className='mr-2 h-4 w-4' />
-      //     Create Play
-      //   </Button>
-      // }
+      actions={
+        <Button onClick={() => setIsTemplatesModalOpen(true)}>
+          <Plus className='h-4 w-4' />
+          Create Play
+        </Button>
+      }
     >
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
         {playbooks.map((playbook) => (
@@ -158,6 +166,11 @@ export default function PlaybooksPage() {
           </Card>
         ))}
       </div>
+
+      <PlaybookTemplatesModal
+        isOpen={isTemplatesModalOpen}
+        onClose={() => setIsTemplatesModalOpen(false)}
+      />
     </Page>
   )
 }

@@ -1,19 +1,15 @@
 import { useState, useEffect } from 'react'
-import { useParams } from '@tanstack/react-router'
-import { PlayCircle, PauseCircle, Plus, Settings, Layers, FileText } from 'lucide-react'
+import { useParams, useSearch } from '@tanstack/react-router'
+import { PlayCircle, PauseCircle, Plus, Settings, Layers } from 'lucide-react'
 import { toast } from 'sonner'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
 import { EditableText } from '@/components/editable-text'
 import { Page } from '@/components/page'
+import {
+  PlaybookDetailsForm,
+  type PlaybookDetailsData,
+} from '../../components/playbook-details-form'
 import { usePlaybookQuery, usePlaybookUpdateMutation } from '../../graphql/operations.generated'
 import { PlaybookTriggers } from './components/playbook-triggers'
 import { ScenarioForm } from './components/scenario-form'
@@ -22,11 +18,14 @@ import { PlaybookDetailSkeleton } from './components/skeleton'
 
 export default function PlaybookDetailPage() {
   const { playbookId } = useParams({ from: '/plays/$playbookId' })
+  const { isNew } = useSearch({ from: '/plays/$playbookId' })
   const [selectedScenario, setSelectedScenario] = useState<any>(null)
   const [createScenarioOpen, setCreateScenarioOpen] = useState(false)
-  const [description, setDescription] = useState('')
-  const [outreachInstructions, setOutreachInstructions] = useState('')
-  const [isSavingDescription, setIsSavingDescription] = useState(false)
+  const [playbookDetails, setPlaybookDetails] = useState<PlaybookDetailsData>({
+    name: '',
+    description: '',
+    outreachInstructions: '',
+  })
 
   const { data, loading, refetch } = usePlaybookQuery({
     variables: { id: playbookId },
@@ -38,10 +37,21 @@ export default function PlaybookDetailPage() {
 
   useEffect(() => {
     if (playbook) {
-      setDescription(playbook.description || '')
-      setOutreachInstructions(playbook.outreachInstructions || '')
+      setPlaybookDetails({
+        name: playbook.name || '',
+        description: playbook.description || '',
+        outreachInstructions: playbook.outreachInstructions || '',
+      })
     }
   }, [playbook])
+
+  useEffect(() => {
+    if (isNew && playbook) {
+      toast.success('Playbook created successfully!', {
+        description: `${playbook.name} has been created from the template.`,
+      })
+    }
+  }, [isNew, playbook])
 
   const handleTogglePlaybook = async () => {
     if (!playbook) return
@@ -84,35 +94,29 @@ export default function PlaybookDetailPage() {
     }
   }
 
-  const handleUpdateDescription = async () => {
+  const handleUpdateDetails = async (data: PlaybookDetailsData) => {
     if (!playbook) return
 
-    const hasDescriptionChanged = description.trim() !== (playbook.description || '').trim()
-    const hasOutreachChanged =
-      outreachInstructions.trim() !== (playbook.outreachInstructions || '').trim()
-
-    if (!hasDescriptionChanged && !hasOutreachChanged) return
-
-    setIsSavingDescription(true)
     try {
       await updatePlaybook({
         variables: {
           input: {
             id: playbook.id,
-            description: description.trim(),
-            outreachInstructions: outreachInstructions.trim(),
+            description: data.description.trim(),
+            outreachInstructions: data.outreachInstructions?.trim(),
           },
         },
       })
-      toast.success('Instructions updated')
+      toast.success('Context updated')
       refetch()
     } catch (error: any) {
-      toast.error(`Failed to update instructions. ${error.message}`)
+      toast.error(`Failed to update context. ${error.message}`)
       // Reset to original values on error
-      setDescription(playbook.description || '')
-      setOutreachInstructions(playbook.outreachInstructions || '')
-    } finally {
-      setIsSavingDescription(false)
+      setPlaybookDetails({
+        name: playbook.name || '',
+        description: playbook.description || '',
+        outreachInstructions: playbook.outreachInstructions || '',
+      })
     }
   }
 
@@ -184,75 +188,13 @@ export default function PlaybookDetailPage() {
         <PlaybookTriggers playbookId={playbookId} />
 
         {/* Instructions Card */}
-        <Card>
-          <CardHeader>
-            <div className='flex items-center justify-between'>
-              <div>
-                <CardTitle className='mb-2 flex items-center gap-2'>
-                  <FileText className='h-5 w-5' />
-                  Context
-                </CardTitle>
-                <CardDescription>
-                  Provide context and instructions for this playbook
-                </CardDescription>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className='space-y-4'>
-            <div className='space-y-2'>
-              <Label htmlFor='description'>Play Description</Label>
-              <Textarea
-                id='description'
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder='Explain briefly when this playbook runs and what Swan should be aware of'
-                className='max-h-[200px] min-h-[100px] resize-none'
-                disabled={isSavingDescription}
-              />
-            </div>
-
-            <Accordion type='single' collapsible className='w-full'>
-              <AccordionItem value='outreach-instructions'>
-                <AccordionTrigger>Outreach Instructions</AccordionTrigger>
-                <AccordionContent>
-                  <div className='space-y-2'>
-                    <Label htmlFor='outreach-instructions' className='sr-only'>
-                      Outreach Instructions
-                    </Label>
-                    <Textarea
-                      id='outreach-instructions'
-                      value={outreachInstructions}
-                      onChange={(e) => setOutreachInstructions(e.target.value)}
-                      placeholder='Provide specific instructions for outreach messages and communication style'
-                      className='max-h-[200px] min-h-[100px] resize-none'
-                      disabled={isSavingDescription}
-                    />
-                    <p className='text-muted-foreground text-sm'>
-                      Provide specific guidelines for how Swan should communicate and engage with
-                      prospects
-                    </p>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-
-            <div className='flex justify-end'>
-              <Button
-                size='sm'
-                onClick={handleUpdateDescription}
-                disabled={
-                  isSavingDescription ||
-                  updatePlaybookLoading ||
-                  (description.trim() === (playbook.description || '').trim() &&
-                    outreachInstructions.trim() === (playbook.outreachInstructions || '').trim())
-                }
-                loading={isSavingDescription}
-              >
-                Save Changes
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <PlaybookDetailsForm
+          initialData={playbookDetails}
+          onSave={handleUpdateDetails}
+          loading={updatePlaybookLoading}
+          showNameField={false}
+          showSaveButton={true}
+        />
 
         {/* Action Plan Card */}
         <Card>

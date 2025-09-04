@@ -849,6 +849,8 @@ export type Mutation = {
   orgInfoUpdate: OrgInfo
   personaUpsert: Persona
   personasDelete: GenericResolverResponse
+  playCreate: Playbook
+  playbookCreateFromTemplate: Playbook
   playbookScenarioCreate: PlaybookScenario
   playbookScenarioUpdate: PlaybookScenario
   playbookScenariosDelete: GenericResolverResponse
@@ -968,6 +970,14 @@ export type MutationPersonaUpsertArgs = {
 
 export type MutationPersonasDeleteArgs = {
   input: BatchModelDeleteInput
+}
+
+export type MutationPlayCreateArgs = {
+  input: PlaybookCreateInput
+}
+
+export type MutationPlaybookCreateFromTemplateArgs = {
+  input: PlaybookCreateFromTemplateInput
 }
 
 export type MutationPlaybookScenarioCreateArgs = {
@@ -1264,6 +1274,16 @@ export type Playbook = {
   updatedAt: Scalars['DateTimeISO']['output']
 }
 
+export type PlaybookCreateFromTemplateInput = {
+  templateId: Scalars['String']['input']
+}
+
+export type PlaybookCreateInput = {
+  description?: InputMaybe<Scalars['String']['input']>
+  name: Scalars['String']['input']
+  outreachInstructions?: InputMaybe<Scalars['String']['input']>
+}
+
 export type PlaybookScenario = {
   __typename?: 'PlaybookScenario'
   actionPlan: Scalars['String']['output']
@@ -1415,6 +1435,7 @@ export type Query = {
   personas: Array<Persona>
   playbook: Playbook
   playbookScenarios: Array<PlaybookScenario>
+  playbookTemplates: Array<Playbook>
   playbooks: Array<Playbook>
   promptRuns: Array<PromptRun>
   promptVariants: Array<Prompt>
@@ -2010,7 +2031,7 @@ export type Trigger = {
   deletedAt?: Maybe<Scalars['DateTimeISO']['output']>
   description?: Maybe<Scalars['String']['output']>
   /** [CrmListArray] */
-  excludeLists: Scalars['JSON']['output']
+  excludeLists?: Maybe<Scalars['JSON']['output']>
   id: Scalars['String']['output']
   isEnabled: Scalars['Boolean']['output']
   name: Scalars['String']['output']
