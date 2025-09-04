@@ -1217,7 +1217,8 @@ export type Persona = {
   maxContacts: Scalars['Int']['output']
   name: Scalars['String']['output']
   orgId: Scalars['String']['output']
-  role?: Maybe<PersonaRole>
+  /** [PersonaRoleArray] */
+  roles?: Maybe<Scalars['JSON']['output']>
   targetMarkets: Array<PersonaTargetMarket>
   updatedAt: Scalars['DateTimeISO']['output']
   valueProp?: Maybe<Scalars['String']['output']>
@@ -1252,7 +1253,7 @@ export type PersonaUpsertInput = {
   id?: InputMaybe<Scalars['String']['input']>
   maxContacts: Scalars['Float']['input']
   name: Scalars['String']['input']
-  role?: InputMaybe<PersonaRole>
+  roles?: InputMaybe<Array<PersonaRole>>
   targetMarketIds: Array<Scalars['String']['input']>
   valueProp?: InputMaybe<Scalars['String']['input']>
 }

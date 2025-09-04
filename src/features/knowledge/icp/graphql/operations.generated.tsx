@@ -33,7 +33,7 @@ export type PersonaFieldsFragment = {
   valueProp?: string | null
   description?: string | null
   maxContacts: number
-  role?: Types.PersonaRole | null
+  roles?: any | null
   createdAt: any
   targetMarkets: Array<{ __typename?: 'PersonaTargetMarket'; id: string; targetMarketId: string }>
 }
@@ -96,7 +96,7 @@ export type TargetMarketQuery = {
       valueProp?: string | null
       description?: string | null
       maxContacts: number
-      role?: Types.PersonaRole | null
+      roles?: any | null
       createdAt: any
       targetMarkets: Array<{
         __typename?: 'PersonaTargetMarket'
@@ -159,7 +159,7 @@ export type PersonasQuery = {
     valueProp?: string | null
     description?: string | null
     maxContacts: number
-    role?: Types.PersonaRole | null
+    roles?: any | null
     createdAt: any
     targetMarkets: Array<{ __typename?: 'PersonaTargetMarket'; id: string; targetMarketId: string }>
   }>
@@ -178,7 +178,7 @@ export type PersonaUpsertMutation = {
     valueProp?: string | null
     description?: string | null
     maxContacts: number
-    role?: Types.PersonaRole | null
+    roles?: any | null
     createdAt: any
     targetMarkets: Array<{ __typename?: 'PersonaTargetMarket'; id: string; targetMarketId: string }>
   }
@@ -230,7 +230,7 @@ export const PersonaFieldsFragmentDoc = gql`
     }
     description
     maxContacts
-    role
+    roles
     createdAt
   }
 `
