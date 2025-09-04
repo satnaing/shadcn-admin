@@ -53,32 +53,32 @@ export function TriggerConfigExcludeLists({ trigger }: TriggerConfigExcludeLists
       <FormItem>
         <FormLabel>Excluded Lists</FormLabel>
         <FormDescription>The lists to exclude from the trigger</FormDescription>
-        <FormControl>
-          <MultiAsyncSelect
-            async
-            loading={!!crmListsLoading}
-            options={allOptions}
-            value={selectedLists.map((list) => list.id)}
-            placeholder='Select excluded lists'
-            onValueChange={(v) => {
-              setSelectedLists(
-                allOptions
-                  .filter((option) => v.includes(option.value))
-                  .map((option) => ({
-                    id: option.value,
-                    name: option.label,
-                  }))
-              )
-            }}
-            onSearch={(v) => setCrmListsSearchQuery(v)}
-          />
-        </FormControl>
+        <div className='flex items-center gap-2'>
+          <FormControl>
+            <MultiAsyncSelect
+              async
+              loading={!!crmListsLoading}
+              options={allOptions}
+              value={selectedLists.map((list) => list.id)}
+              placeholder='Select excluded lists'
+              onValueChange={(v) => {
+                setSelectedLists(
+                  allOptions
+                    .filter((option) => v.includes(option.value))
+                    .map((option) => ({
+                      id: option.value,
+                      name: option.label,
+                    }))
+                )
+              }}
+              onSearch={(v) => setCrmListsSearchQuery(v)}
+            />
+          </FormControl>
+          <Button onClick={handleSave} loading={updateTriggerLoading}>
+            Save Lists
+          </Button>
+        </div>
       </FormItem>
-      <div className='flex justify-end'>
-        <Button onClick={handleSave} loading={updateTriggerLoading}>
-          Save Lists
-        </Button>
-      </div>
       <Separator />
     </Loadable>
   )
