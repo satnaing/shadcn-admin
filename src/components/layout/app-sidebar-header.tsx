@@ -4,17 +4,21 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar'
+import { SwanLogo } from '@/components/swan-logo'
 
 export function TeamSwitcher() {
   const { state } = useSidebar()
+  const isCollapsed = state === 'collapsed'
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton size='lg' className='cursor-default hover:bg-transparent'>
-          <div className='flex items-center gap-2'>
-            <span className='text-2xl'>🦢</span>
-            {state === 'expanded' && <span className='text-lg font-semibold'>Swan</span>}
+          <div>
+            <SwanLogo
+              symbolOnly={isCollapsed}
+              className={isCollapsed ? 'ml-1 h-6 w-6' : 'h-6 w-auto'}
+            />
           </div>
         </SidebarMenuButton>
       </SidebarMenuItem>

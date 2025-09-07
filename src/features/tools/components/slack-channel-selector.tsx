@@ -39,16 +39,17 @@ export function SlackChannelSelector({
   const { data: slackData } = useSlackIntegrationQuery()
   const { data: slackChannelsData, loading: slackChannelsLoading } = useSlackChannelsQuery({})
 
-  const channelOptions =
-    slackChannelsData?.slackChannels
-      ?.sort((a, b) => a.name.localeCompare(b.name))
-      .map((channel) => ({
-        value: channel.id,
-        label: `#${channel.name}${
-          channel.id === slackData?.slackIntegration?.channelId ? ' (Default Channel)' : ''
-        }`,
-        name: channel.name,
-      })) || []
+  const channelOptions = slackChannelsData?.slackChannels
+    ? [...slackChannelsData.slackChannels] // Create a copy to avoid mutating read-only array
+        .sort((a, b) => a.name.localeCompare(b.name || ''))
+        .map((channel) => ({
+          value: channel.id,
+          label: `#${channel.name}${
+            channel.id === slackData?.slackIntegration?.channelId ? ' (Default Channel)' : ''
+          }`,
+          name: channel.name,
+        }))
+    : []
 
   const validateChannelId = (id: string): string | boolean => {
     if (!id) return 'ID is required'

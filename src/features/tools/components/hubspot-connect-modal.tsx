@@ -60,10 +60,10 @@ const AUTH_URL =
 
 type HubSpotConnectModalProps = {
   isOpen: boolean
-  onOpenChange: (open: boolean) => void
+  onClose: () => void
 }
 
-export function HubSpotConnectModal({ isOpen, onOpenChange }: HubSpotConnectModalProps) {
+export function HubSpotConnectModal({ isOpen, onClose }: HubSpotConnectModalProps) {
   const {
     data: crmIntegrationData,
     refetch: refetchCrmIntegration,
@@ -99,7 +99,7 @@ export function HubSpotConnectModal({ isOpen, onOpenChange }: HubSpotConnectModa
   })
 
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='max-h-[90vh] max-w-2xl overflow-y-auto'>
         <Form {...form}>
           <form onSubmit={onSubmit}>

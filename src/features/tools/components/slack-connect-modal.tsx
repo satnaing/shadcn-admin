@@ -26,10 +26,10 @@ import { useSlackAuth } from '@/features/tools/hooks/use-slack-auth'
 
 type SlackConnectModalProps = {
   isOpen: boolean
-  onOpenChange: (open: boolean) => void
+  onClose: () => void
 }
 
-export function SlackConnectModal({ isOpen, onOpenChange }: SlackConnectModalProps) {
+export function SlackConnectModal({ isOpen, onClose }: SlackConnectModalProps) {
   const {
     data,
     loading,
@@ -77,7 +77,7 @@ export function SlackConnectModal({ isOpen, onOpenChange }: SlackConnectModalPro
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={onOpenChange}>
+    <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='max-h-[90vh] max-w-2xl overflow-y-auto'>
         <DialogHeader>
           <div className='flex items-center gap-3'>
@@ -138,7 +138,7 @@ export function SlackConnectModal({ isOpen, onOpenChange }: SlackConnectModalPro
               </Button>
             )}
             {connected ? (
-              <Button onClick={() => onOpenChange(false)}>Done</Button>
+              <Button onClick={onClose}>Done</Button>
             ) : (
               <Button
                 onClick={(e) => {

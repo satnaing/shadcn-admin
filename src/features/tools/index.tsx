@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { useIntegrationsQuery } from '@/graphql/operations/operations.generated'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Page } from '@/components/page'
-import { HubSpotConnectModal } from '@/features/tools/components/hubspot-connect-modal'
 import { SlackConnectModal } from '@/features/tools/components/slack-connect-modal'
+import { HubSpotConnectModal } from './components/hubspot-connect-modal'
 
 type Integration = {
   name: string
@@ -14,7 +14,7 @@ type Integration = {
   logo: string | React.ReactNode
   Component: React.FC<{
     isOpen: boolean
-    onOpenChange: (open: boolean) => void
+    onClose: () => void
   }>
 }
 
@@ -48,46 +48,44 @@ export function Tools() {
           const isConnected = apps.includes(integration.app)
 
           return (
-            <Card
-              key={integration.name}
-              className='cursor-pointer transition-shadow hover:shadow-lg'
-              onClick={() => setOpenModal(integration.name)}
-            >
-              <CardHeader className='flex items-center justify-between'>
-                <div className='flex items-center gap-2'>
-                  {typeof integration.logo === 'string' ? (
-                    <img
-                      className='h-8 w-8 rounded-lg'
-                      src={integration.logo}
-                      alt={`${integration.name} logo`}
-                    />
+            <Fragment key={integration.name}>
+              <Card
+                className='cursor-pointer transition-shadow hover:shadow-lg'
+                onClick={() => setOpenModal(integration.name)}
+              >
+                <CardHeader className='flex items-center justify-between'>
+                  <div className='flex items-center gap-2'>
+                    {typeof integration.logo === 'string' ? (
+                      <img
+                        className='h-8 w-8 rounded-lg'
+                        src={integration.logo}
+                        alt={`${integration.name} logo`}
+                      />
+                    ) : (
+                      integration.logo
+                    )}
+                    <CardTitle className='text-lg font-semibold'>{integration.name}</CardTitle>
+                  </div>
+                  {loading ? (
+                    <Skeleton className='h-5 w-20 rounded-md' />
                   ) : (
-                    integration.logo
+                    isConnected && (
+                      <Badge variant='default' className='bg-green-100 text-green-800'>
+                        Connected
+                      </Badge>
+                    )
                   )}
-                  <CardTitle className='text-lg font-semibold'>{integration.name}</CardTitle>
-                </div>
-                {loading ? (
-                  <Skeleton className='h-5 w-20 rounded-md' />
-                ) : (
-                  isConnected && (
-                    <Badge variant='default' className='bg-green-100 text-green-800'>
-                      Connected
-                    </Badge>
-                  )
-                )}
-              </CardHeader>
-              <CardContent>
-                <CardDescription>{integration.description}</CardDescription>
-              </CardContent>
-
-              {openModal === integration.name && (
-                <integration.Component
-                  key={integration.name}
-                  isOpen={openModal === integration.name}
-                  onOpenChange={(open) => !open && setOpenModal('')}
-                />
-              )}
-            </Card>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>{integration.description}</CardDescription>
+                </CardContent>
+              </Card>
+              <integration.Component
+                key={integration.name}
+                isOpen={openModal === integration.name}
+                onClose={() => setOpenModal('')}
+              />
+            </Fragment>
           )
         })}
       </div>
