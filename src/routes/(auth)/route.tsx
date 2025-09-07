@@ -2,12 +2,12 @@ import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { SwanLogo } from '@/components/swan-logo'
 
 export const Route = createFileRoute('/(auth)')({
-  component: ClerkAuthLayout,
+  component: AuthLayout,
 })
 
-function ClerkAuthLayout() {
+function AuthLayout() {
   return (
-    <div className='flex min-h-screen flex-col items-center justify-center bg-gray-50'>
+    <div className='flex min-h-screen flex-col items-center justify-center'>
       <div className='w-full max-w-md px-4'>
         {/* Logo Section */}
         <div className='mb-8 items-center'>

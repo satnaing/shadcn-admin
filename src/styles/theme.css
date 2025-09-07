@@ -24,6 +24,12 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
 
+  /* Brand color */
+  --brand: oklch(0.6618 0.2253 29.58); /* #FF4433 */
+  --brand-foreground: oklch(1 0 0);
+  --brand-muted: oklch(0.6618 0.19 29.58); /* a bit lighter brand */
+  --brand-subtle: oklch(0.6618 0.0853 29.58); /* Very light tint */
+
   --sidebar: var(--background);
   --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--primary);
