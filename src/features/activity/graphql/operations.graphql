@@ -14,6 +14,7 @@ query Executions($page: PaginationInput, $filters: ExecutionFilter) {
         type
         url
       }
+      scenarioId
       playbookId
       entityId
       entityType
@@ -28,12 +29,19 @@ query Executions($page: PaginationInput, $filters: ExecutionFilter) {
   }
 }
 
+query ScenariosForFilter {
+  playbookScenarios {
+    id
+    name
+    playbookId
+  }
+}
+
 # Query all playbooks for filtering
 query PlaybooksForFilter {
   playbooks {
     id
     name
-    description
     isEnabled
   }
 }

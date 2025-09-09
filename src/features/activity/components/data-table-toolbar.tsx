@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { type Table } from '@tanstack/react-table'
+import { keyBy, sortBy } from 'lodash'
 import { Button } from '@/components/ui/button'
 import { executionStatuses, executionTypes } from '../data/data'
 import { DataTableSingleFilter } from './data-table-single-filter'
@@ -8,10 +10,18 @@ import { DataTableViewOptions } from './data-table-view-options'
 type DataTableToolbarProps<TData> = {
   table: Table<TData>
   playbooks?: Array<{ id: string; name: string }>
+  scenarios?: Array<{ id: string; name: string; playbookId: string }>
 }
 
-export function DataTableToolbar<TData>({ table, playbooks = [] }: DataTableToolbarProps<TData>) {
+export function DataTableToolbar<TData>({
+  table,
+  playbooks = [],
+  scenarios = [],
+}: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0 || table.getState().globalFilter
+
+  // Get the current playbook filter value
+  const selectedPlaybookId = table.getColumn('playbookId')?.getFilterValue() as string | undefined
 
   // Transform playbooks for filter options
   const playbookOptions = playbooks.map((pb) => ({
@@ -19,10 +29,36 @@ export function DataTableToolbar<TData>({ table, playbooks = [] }: DataTableTool
     value: pb.id,
   }))
 
+  const playbookLookup = keyBy(playbooks, 'id')
+
+  const filteredScenarios = selectedPlaybookId
+    ? scenarios.filter((s) => s.playbookId === selectedPlaybookId)
+    : scenarios
+
+  const scenarioOptions = sortBy(filteredScenarios, 'playbookId').map((s) => ({
+    label: selectedPlaybookId ? s.name : s.name + ' (' + playbookLookup[s.playbookId]?.name + ')',
+    value: s.id,
+  }))
+
+  // Clear scenario filter if it doesn't belong to the selected playbook
+  useEffect(() => {
+    if (selectedPlaybookId) {
+      const selectedScenarioId = table.getColumn('scenarioId')?.getFilterValue() as
+        | string
+        | undefined
+      if (selectedScenarioId) {
+        const scenario = scenarios.find((s) => s.id === selectedScenarioId)
+        if (scenario && scenario.playbookId !== selectedPlaybookId) {
+          table.getColumn('scenarioId')?.setFilterValue(undefined)
+        }
+      }
+    }
+  }, [selectedPlaybookId, table, scenarios])
+
   return (
     <div className='flex items-center justify-between'>
       <div className='flex flex-1 flex-col-reverse items-start gap-y-2 sm:flex-row sm:items-center sm:space-x-2'>
-        <div className='flex gap-x-2'>
+        <div className='flex flex-wrap gap-x-2'>
           {table.getColumn('status') && (
             <DataTableSingleFilter
               column={table.getColumn('status')}
@@ -42,6 +78,13 @@ export function DataTableToolbar<TData>({ table, playbooks = [] }: DataTableTool
               column={table.getColumn('playbookId')}
               title='Playbook'
               options={playbookOptions}
+            />
+          )}
+          {table.getColumn('scenarioId') && scenarioOptions.length > 0 && (
+            <DataTableSingleFilter
+              column={table.getColumn('scenarioId')}
+              title='Scenario'
+              options={scenarioOptions}
             />
           )}
         </div>

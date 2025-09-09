@@ -31,7 +31,6 @@ export function DataTableSingleFilter<TData, TValue>({
   title,
   options,
 }: DataTableSingleFilterProps<TData, TValue>) {
-  const facets = column?.getFacetedUniqueValues()
   const selectedValue = column?.getFilterValue() as string | undefined
 
   return (
@@ -79,11 +78,6 @@ export function DataTableSingleFilter<TData, TValue>({
                     </div>
                     {option.icon && <option.icon className='text-muted-foreground size-4' />}
                     <span>{option.label}</span>
-                    {facets?.get(option.value) && (
-                      <span className='ms-auto flex h-4 w-4 items-center justify-center font-mono text-xs'>
-                        {facets.get(option.value)}
-                      </span>
-                    )}
                   </CommandItem>
                 )
               })}

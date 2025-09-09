@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import { type ColumnDef } from '@tanstack/react-table'
+import { cn } from '@/lib/utils'
 import { DataTableColumnHeader } from '../components/data-table-column-header'
 import { DataTableRowActions } from '../components/data-table-row-actions'
 import { parseSlackMarkdown } from '../utils/slack-markdown-parser'
@@ -11,6 +12,7 @@ declare module '@tanstack/react-table' {
   // eslint-disable-next-line unused-imports/no-unused-vars
   interface TableMeta<TData> {
     playbooks?: Record<string, { id: string; name: string }>
+    scenarios?: Record<string, { id: string; name: string; playbookId: string }>
   }
 }
 
@@ -95,6 +97,31 @@ export const executionsColumns: ColumnDef<Execution>[] = [
     filterFn: (row, id, value) => {
       const playbookId = row.getValue(id)
       return playbookId === value
+    },
+  },
+  {
+    accessorKey: 'scenarioId',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Scenario' />,
+    cell: ({ row, table }) => {
+      const scenarioId = row.getValue('scenarioId') as string | null
+
+      if (!scenarioId) {
+        return <span className='text-muted-foreground'>-</span>
+      }
+
+      const scenarioName = table.options.meta?.scenarios?.[scenarioId]?.name
+
+      return (
+        <div className='w-[160px]'>
+          <span className={cn('truncate', scenarioName ? '' : 'text-muted-foreground italic')}>
+            {scenarioName || 'Deleted Scenario'}
+          </span>
+        </div>
+      )
+    },
+    filterFn: (row, id, value) => {
+      const scenarioId = row.getValue(id)
+      return scenarioId === value
     },
   },
   {

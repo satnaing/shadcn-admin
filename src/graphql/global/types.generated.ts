@@ -1529,7 +1529,7 @@ export type QueryPlaybookArgs = {
 }
 
 export type QueryPlaybookScenariosArgs = {
-  playbookId: Scalars['String']['input']
+  playbookId?: InputMaybe<Scalars['String']['input']>
 }
 
 export type QueryPromptRunsArgs = {
@@ -1817,7 +1817,7 @@ export type SlackIntegration = {
 export type SlackIntegrationUpdateInput = {
   enabled: Scalars['Boolean']['input']
   inboxChannel?: InputMaybe<SlackChannelInput>
-  notificationsType: SlackNotificationsType
+  notificationsType?: InputMaybe<SlackNotificationsType>
   sendDailyDigest?: InputMaybe<Scalars['Boolean']['input']>
   sendPlayReminders?: InputMaybe<Scalars['Boolean']['input']>
 }
@@ -2066,6 +2066,7 @@ export type User = {
   lastName?: Maybe<Scalars['String']['output']>
   onboardingStatus: OnboardingStatus
   orgId: Scalars['String']['output']
+  orgInfo?: Maybe<OrgInfo>
   status: UserStatus
   updatedAt: Scalars['DateTimeISO']['output']
 }

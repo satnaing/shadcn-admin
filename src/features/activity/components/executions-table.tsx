@@ -12,6 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import { keyBy } from 'lodash'
 import { useTableUrlState } from '@/hooks/use-table-url-state'
 import {
   Table,
@@ -32,9 +33,10 @@ const route = getRouteApi('/activity/')
 type DataTableProps = {
   data: Execution[]
   playbooks?: Array<{ id: string; name: string }>
+  scenarios?: Array<{ id: string; name: string; playbookId: string }>
 }
 
-export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
+export function ExecutionsTable({ data, playbooks = [], scenarios = [] }: DataTableProps) {
   const { setOpen, setCurrentExecution } = useExecutions()
 
   // Local UI-only states
@@ -62,17 +64,13 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
       { columnId: 'status', searchKey: 'status', type: 'string' },
       { columnId: 'type', searchKey: 'type', type: 'string' },
       { columnId: 'playbookId', searchKey: 'playbookId', type: 'string' },
+      { columnId: 'scenarioId', searchKey: 'scenarioId', type: 'string' },
     ],
   })
 
   // Create playbook lookup map
-  const playbookLookup = playbooks.reduce(
-    (acc, pb) => {
-      acc[pb.id] = pb
-      return acc
-    },
-    {} as Record<string, { id: string; name: string }>
-  )
+  const playbookLookup = keyBy(playbooks, 'id')
+  const scenarioLookup = keyBy(scenarios, 'id')
 
   const table = useReactTable({
     data,
@@ -87,11 +85,13 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
     },
     meta: {
       playbooks: playbookLookup,
+      scenarios: scenarioLookup,
     },
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
     globalFilterFn: (row, _columnId, filterValue) => {
+      // NOT USED ATM
       const summary = String(row.getValue('summary') || '').toLowerCase()
       const id = String(row.getValue('id')).toLowerCase()
       const searchValue = String(filterValue).toLowerCase()
@@ -116,7 +116,7 @@ export function ExecutionsTable({ data, playbooks = [] }: DataTableProps) {
 
   return (
     <div className='space-y-4 max-sm:has-[div[role="toolbar"]]:mb-16'>
-      <DataTableToolbar table={table} playbooks={playbooks} />
+      <DataTableToolbar table={table} playbooks={playbooks} scenarios={scenarios} />
       <div className='overflow-hidden rounded-md border'>
         <Table>
           <TableHeader>
