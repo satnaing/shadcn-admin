@@ -18,4 +18,5 @@ alwaysApply: true
 - When using toasts, import {toast} from 'sonner'
 - Always strive to have a single component definition per file, and try to keep files under ~300 lines
 - Heavily use lodash whenever possible to make code cleaner and more concise. 
+- DONT create READMes for code you write.
 

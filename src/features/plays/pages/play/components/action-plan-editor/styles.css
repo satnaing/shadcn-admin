@@ -1,0 +1,44 @@
+/* Action Plan Editor Styles */
+
+.action-plan-editor {
+  /* Remove default TipTap styles */
+  outline: none;
+}
+
+.action-plan-editor .ProseMirror {
+  min-height: inherit;
+  outline: none;
+}
+
+.action-plan-editor .ProseMirror p {
+  margin: 0;
+}
+
+.action-plan-editor .ProseMirror:focus {
+  outline: none;
+}
+
+/* Placeholder styling */
+.action-plan-editor .ProseMirror p.is-editor-empty:first-child::before {
+  color: hsl(var(--muted-foreground));
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Tag node styling - ensure inline display */
+.action-plan-editor .ProseMirror span[data-type='tag'] {
+  display: inline;
+}
+
+/* Tippy tooltip styles */
+.tippy-box {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.tippy-content {
+  padding: 0;
+}

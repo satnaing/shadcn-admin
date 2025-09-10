@@ -240,6 +240,29 @@ export type TrackingScriptUpdateMutation = {
   }
 }
 
+export type UserAccountMappingsQueryVariables = Types.Exact<{
+  filters?: Types.InputMaybe<Types.UserAccountMappingFilterInput>
+  page?: Types.InputMaybe<Types.PaginationInput>
+}>
+
+export type UserAccountMappingsQuery = {
+  __typename?: 'Query'
+  userAccountMappings: {
+    __typename?: 'PaginatedUserAccountMappings'
+    hasMore: boolean
+    totalCount?: number | null
+    data: Array<{
+      __typename?: 'UserAccountMapping'
+      id: string
+      email: string
+      externalAccountId: string
+      accountType: Types.AccountType
+      accountDetails: any
+      createdAt: any
+    }>
+  }
+}
+
 export type TrackingScriptDomainUpdateMutationVariables = Types.Exact<{
   input: Types.TrackingScriptDomainUpdateInput
 }>
@@ -1054,6 +1077,90 @@ export type TrackingScriptUpdateMutationResult =
 export type TrackingScriptUpdateMutationOptions = ApolloReactCommon.BaseMutationOptions<
   TrackingScriptUpdateMutation,
   TrackingScriptUpdateMutationVariables
+>
+export const UserAccountMappingsDocument = gql`
+  query UserAccountMappings($filters: UserAccountMappingFilterInput, $page: PaginationInput) {
+    userAccountMappings(filters: $filters, page: $page) {
+      data {
+        id
+        email
+        externalAccountId
+        accountType
+        accountDetails
+        createdAt
+      }
+      hasMore
+      totalCount
+    }
+  }
+`
+
+/**
+ * __useUserAccountMappingsQuery__
+ *
+ * To run a query within a React component, call `useUserAccountMappingsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserAccountMappingsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserAccountMappingsQuery({
+ *   variables: {
+ *      filters: // value for 'filters'
+ *      page: // value for 'page'
+ *   },
+ * });
+ */
+export function useUserAccountMappingsQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    UserAccountMappingsQuery,
+    UserAccountMappingsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<UserAccountMappingsQuery, UserAccountMappingsQueryVariables>(
+    UserAccountMappingsDocument,
+    options
+  )
+}
+export function useUserAccountMappingsLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    UserAccountMappingsQuery,
+    UserAccountMappingsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<UserAccountMappingsQuery, UserAccountMappingsQueryVariables>(
+    UserAccountMappingsDocument,
+    options
+  )
+}
+export function useUserAccountMappingsSuspenseQuery(
+  baseOptions?:
+    | ApolloReactHooks.SkipToken
+    | ApolloReactHooks.SuspenseQueryHookOptions<
+        UserAccountMappingsQuery,
+        UserAccountMappingsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useSuspenseQuery<
+    UserAccountMappingsQuery,
+    UserAccountMappingsQueryVariables
+  >(UserAccountMappingsDocument, options)
+}
+export type UserAccountMappingsQueryHookResult = ReturnType<typeof useUserAccountMappingsQuery>
+export type UserAccountMappingsLazyQueryHookResult = ReturnType<
+  typeof useUserAccountMappingsLazyQuery
+>
+export type UserAccountMappingsSuspenseQueryHookResult = ReturnType<
+  typeof useUserAccountMappingsSuspenseQuery
+>
+export type UserAccountMappingsQueryResult = ApolloReactCommon.QueryResult<
+  UserAccountMappingsQuery,
+  UserAccountMappingsQueryVariables
 >
 export const TrackingScriptDomainUpdateDocument = gql`
   mutation TrackingScriptDomainUpdate($input: TrackingScriptDomainUpdateInput!) {

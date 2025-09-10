@@ -65,7 +65,7 @@ export default function ConnectedAccountsPage() {
 
   return (
     <Page
-      title='Email & LinkedIn Accounts'
+      title='Senders'
       description="Connect accounts you'll use to engage prospects"
       actions={
         hasAccounts ? (

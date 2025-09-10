@@ -1,5 +1,5 @@
 {
-  "name": "shadcn-admin",
+  "name": "swan",
   "private": false,
   "version": "2.0.0",
   "type": "module",
@@ -43,6 +43,13 @@
     "@tanstack/react-query": "^5.85.3",
     "@tanstack/react-router": "^1.131.16",
     "@tanstack/react-table": "^8.21.3",
+    "@tippyjs/react": "^4.2.6",
+    "@tiptap/core": "^3.3.0",
+    "@tiptap/extension-mention": "^3.3.0",
+    "@tiptap/pm": "^3.3.0",
+    "@tiptap/react": "^3.3.0",
+    "@tiptap/starter-kit": "^3.3.0",
+    "@tiptap/suggestion": "^3.3.0",
     "axios": "^1.11.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -61,6 +68,7 @@
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.12",
+    "tippy.js": "^6.3.7",
     "tw-animate-css": "^1.3.6",
     "zod": "^4.0.17",
     "zustand": "^5.0.7"

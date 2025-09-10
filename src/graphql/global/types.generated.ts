@@ -21,6 +21,11 @@ export type Scalars = {
   JSON: { input: any; output: any }
 }
 
+export enum AccountType {
+  Hubspot = 'HUBSPOT',
+  Slack = 'SLACK',
+}
+
 export type AiVariableExample = {
   __typename?: 'AiVariableExample'
   content: Scalars['String']['output']
@@ -1190,6 +1195,14 @@ export type PaginatedSessionIdentities = {
   totalCount?: Maybe<Scalars['Float']['output']>
 }
 
+export type PaginatedUserAccountMappings = {
+  __typename?: 'PaginatedUserAccountMappings'
+  data: Array<UserAccountMapping>
+  hasData?: Maybe<Scalars['Boolean']['output']>
+  hasMore: Scalars['Boolean']['output']
+  totalCount?: Maybe<Scalars['Float']['output']>
+}
+
 export type PaginatedUsers = {
   __typename?: 'PaginatedUsers'
   data: Array<User>
@@ -1459,6 +1472,7 @@ export type Query = {
   trackingScript: TrackingScript
   triggers: Array<Trigger>
   user: User
+  userAccountMappings: PaginatedUserAccountMappings
   userOrgs: Array<UserOrg>
   users: PaginatedUsers
   webhookIntegration?: Maybe<WebhookIntegration>
@@ -1585,6 +1599,11 @@ export type QueryTargetMarketArgs = {
 
 export type QueryTriggersArgs = {
   filters?: InputMaybe<TriggerFilters>
+}
+
+export type QueryUserAccountMappingsArgs = {
+  filters?: InputMaybe<UserAccountMappingFilterInput>
+  page?: InputMaybe<PaginationInput>
 }
 
 export type QueryUsersArgs = {
@@ -2069,6 +2088,26 @@ export type User = {
   orgInfo?: Maybe<OrgInfo>
   status: UserStatus
   updatedAt: Scalars['DateTimeISO']['output']
+}
+
+export type UserAccountMapping = {
+  __typename?: 'UserAccountMapping'
+  accountDetails: Scalars['JSON']['output']
+  accountType: AccountType
+  createdAt: Scalars['DateTimeISO']['output']
+  displayName?: Maybe<Scalars['String']['output']>
+  email: Scalars['String']['output']
+  externalAccountId: Scalars['String']['output']
+  id: Scalars['String']['output']
+  isDeleted: Scalars['Boolean']['output']
+  orgId: Scalars['String']['output']
+  updatedAt: Scalars['DateTimeISO']['output']
+}
+
+export type UserAccountMappingFilterInput = {
+  accountType?: InputMaybe<AccountType>
+  includeDeleted?: InputMaybe<Scalars['Boolean']['input']>
+  search?: InputMaybe<Scalars['String']['input']>
 }
 
 export type UserInviteInput = {

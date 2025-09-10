@@ -166,6 +166,22 @@ mutation TrackingScriptUpdate($input: TrackingScriptUpdateInput!) {
   }
 }
 
+
+query UserAccountMappings($filters: UserAccountMappingFilterInput, $page: PaginationInput) {
+  userAccountMappings(filters: $filters, page: $page) {
+    data {
+      id
+      email
+      externalAccountId
+      accountType
+      accountDetails
+      createdAt
+    }
+    hasMore
+    totalCount
+  }
+}
+
 mutation TrackingScriptDomainUpdate($input: TrackingScriptDomainUpdateInput!) {
   trackingScriptDomainUpdate(input: $input) {
     id

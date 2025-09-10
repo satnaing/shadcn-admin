@@ -69,7 +69,7 @@ export function ScenarioModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className='max-w-4xl' scrollable>
+      <DialogContent className='max-w-4xl min-w-2xl' scrollable>
         <DialogHeader>
           <DialogTitle>{mode === 'edit' ? 'Edit Scenario' : 'Create New Scenario'}</DialogTitle>
           <DialogDescription>

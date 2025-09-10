@@ -15,6 +15,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import ActionPlanEditor from '@/features/plays/pages/play/components/action-plan-editor'
 import {
   usePlaybookScenarioUpdateMutation,
   usePlaybookScenarioCreateMutation,
@@ -181,16 +182,16 @@ export function ScenarioForm({
             <FormItem>
               <FormLabel>Then (Action Plan)</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder='Define the action plan for this scenario'
-                  rows={6}
+                <ActionPlanEditor
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder='Type "#" for channels & HubSpot lists, or "@" for users...'
                   disabled={loading}
-                  className='resize-none'
-                  {...field}
                 />
               </FormControl>
               <FormDescription>
-                Provide detailed steps that will be executed when this scenario runs
+                Provide detailed steps that will be executed when this scenario runs. Use "#" for
+                channels & HubSpot lists, or "@" for users.
               </FormDescription>
               <FormMessage />
             </FormItem>
