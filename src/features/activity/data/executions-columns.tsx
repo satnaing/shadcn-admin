@@ -157,7 +157,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
           {status.icon && (
             <status.icon
               className={`size-4 ${
-                status.icon.displayName === 'Loader2' ? 'animate-spin' : ''
+                status.value === 'IN_PROGRESS' ? 'animate-spin' : ''
               } ${getStatusColor(status.value)}`}
             />
           )}

@@ -162,7 +162,7 @@ export function ScenarioForm({
               <FormLabel>When (Condition)</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder='Describe the condition that triggers this scenario'
+                  placeholder='Describe the condition that activates this scenario'
                   rows={4}
                   disabled={loading}
                   className='resize-none'
@@ -185,7 +185,6 @@ export function ScenarioForm({
                 <ActionPlanEditor
                   value={field.value}
                   onChange={field.onChange}
-                  placeholder='Type "#" for channels & HubSpot lists, or "@" for users...'
                   disabled={loading}
                 />
               </FormControl>

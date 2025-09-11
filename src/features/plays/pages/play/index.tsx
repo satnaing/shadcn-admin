@@ -11,6 +11,7 @@ import {
   type PlaybookDetailsData,
 } from '../../components/playbook-details-form'
 import { usePlaybookQuery, usePlaybookUpdateMutation } from '../../graphql/operations.generated'
+import { ActionPlanDisplay } from './components/action-plan-display'
 import { PlaybookTriggers } from './components/playbook-triggers'
 import { ScenarioForm } from './components/scenario-form'
 import { ScenarioModal } from './components/scenario-modal'
@@ -243,7 +244,7 @@ export default function PlaybookDetailPage() {
                           <div className='space-y-2'>
                             <div>
                               <span className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
-                                When
+                                If
                               </span>
                               <p className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
                                 {scenario.description || 'No condition defined'}
@@ -254,9 +255,13 @@ export default function PlaybookDetailPage() {
                               <span className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
                                 Then
                               </span>
-                              <p className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
-                                {scenario.actionPlan || 'No action plan defined'}
-                              </p>
+                              <div className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
+                                {scenario.actionPlan ? (
+                                  <ActionPlanDisplay text={scenario.actionPlan} />
+                                ) : (
+                                  'No action plan defined'
+                                )}
+                              </div>
                             </div>
                           </div>
                         </div>

@@ -18,13 +18,13 @@
   outline: none;
 }
 
-/* Placeholder styling */
-.action-plan-editor .ProseMirror p.is-editor-empty:first-child::before {
-  color: hsl(var(--muted-foreground));
+/* Placeholder styling - for TipTap v3 Placeholder extension */
+.ProseMirror p.is-empty::before {
   content: attr(data-placeholder);
   float: left;
-  height: 0;
+  color: hsl(var(--muted-foreground));
   pointer-events: none;
+  height: 0;
 }
 
 /* Tag node styling - ensure inline display */

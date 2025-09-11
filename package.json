@@ -46,6 +46,7 @@
     "@tippyjs/react": "^4.2.6",
     "@tiptap/core": "^3.3.0",
     "@tiptap/extension-mention": "^3.3.0",
+    "@tiptap/extension-placeholder": "^3.3.0",
     "@tiptap/pm": "^3.3.0",
     "@tiptap/react": "^3.3.0",
     "@tiptap/starter-kit": "^3.3.0",
