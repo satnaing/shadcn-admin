@@ -551,6 +551,7 @@ export type CrmIntegration = {
   missingContactProperties: Scalars['JSON']['output']
   notesToCreate: CrmNoteCreate
   orgId?: Maybe<Scalars['String']['output']>
+  swanVersion: Scalars['String']['output']
   updatedAt: Scalars['DateTimeISO']['output']
   userCrmId: Scalars['String']['output']
   userId: Scalars['String']['output']
@@ -677,6 +678,23 @@ export type Execution = {
   triggerEventId?: Maybe<Scalars['String']['output']>
   type: ExecutionType
   updatedAt: Scalars['DateTimeISO']['output']
+}
+
+export type ExecutionArtifact = {
+  __typename?: 'ExecutionArtifact'
+  createdAt: Scalars['DateTimeISO']['output']
+  displayName?: Maybe<Scalars['String']['output']>
+  entityId?: Maybe<Scalars['String']['output']>
+  entityType: Scalars['String']['output']
+  executionId: Scalars['String']['output']
+  id: Scalars['String']['output']
+  orgId: Scalars['String']['output']
+  sourceAgent: Scalars['String']['output']
+  url: Scalars['String']['output']
+}
+
+export type ExecutionArtifactFilters = {
+  executionId?: InputMaybe<Scalars['String']['input']>
 }
 
 export enum ExecutionEntityType {
@@ -1440,6 +1458,7 @@ export type Query = {
   crmIntegration?: Maybe<CrmIntegration>
   crmLists: CrmListResponse
   excludedCompanies: PaginatedExcludedCompanies
+  executionArtifacts: Array<ExecutionArtifact>
   executions: PaginatedExecutions
   integrations?: Maybe<IntegrationsOutput>
   list?: Maybe<TargetMarket>
@@ -1518,6 +1537,10 @@ export type QueryCrmListsArgs = {
 export type QueryExcludedCompaniesArgs = {
   filter?: InputMaybe<ExcludedCompanyFilter>
   page?: InputMaybe<PaginationInput>
+}
+
+export type QueryExecutionArtifactsArgs = {
+  filters?: InputMaybe<ExecutionArtifactFilters>
 }
 
 export type QueryExecutionsArgs = {

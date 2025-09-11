@@ -11,6 +11,7 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { executionStatuses } from '../data/data'
 import { parseSlackMarkdown } from '../utils/slack-markdown-parser'
+import { AgentOutput } from './agent-output'
 import { useExecutions } from './executions-provider'
 
 type ExecutionViewDialogProps = {
@@ -79,18 +80,6 @@ export function ExecutionViewDialog({ open }: ExecutionViewDialogProps) {
               )}
             </div>
 
-            {currentExecution.summary && (
-              <>
-                <Separator />
-                <div>
-                  <p className='text-muted-foreground mb-2 text-sm font-medium'>Summary</p>
-                  <div className='space-y-1 text-sm'>
-                    {parseSlackMarkdown(currentExecution.summary)}
-                  </div>
-                </div>
-              </>
-            )}
-
             {currentExecution.errorMessage && (
               <>
                 <Separator />
@@ -99,6 +88,26 @@ export function ExecutionViewDialog({ open }: ExecutionViewDialogProps) {
                   <p className='text-destructive text-sm whitespace-pre-wrap'>
                     {currentExecution.errorMessage}
                   </p>
+                </div>
+              </>
+            )}
+
+            <Separator />
+            <div>
+              <p className='text-muted-foreground mb-2 text-sm font-medium'>Output</p>
+              <div className='space-y-1 text-sm'>
+                <AgentOutput executionId={currentExecution.id} />
+              </div>
+            </div>
+
+            {currentExecution.summary && (
+              <>
+                <Separator />
+                <div>
+                  <p className='text-muted-foreground mb-2 text-sm font-medium'>Summary</p>
+                  <div className='space-y-1 text-sm'>
+                    {parseSlackMarkdown(currentExecution.summary)}
+                  </div>
                 </div>
               </>
             )}

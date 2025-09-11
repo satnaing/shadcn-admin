@@ -45,3 +45,15 @@ query PlaybooksForFilter {
     isEnabled
   }
 }
+
+query ExecutionArtifacts($filters: ExecutionArtifactFilters!) {
+  executionArtifacts(filters: $filters) {
+    id
+    url
+    entityId
+    entityType
+    displayName
+    sourceAgent
+    createdAt
+  }
+}

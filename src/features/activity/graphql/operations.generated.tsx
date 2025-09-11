@@ -62,6 +62,24 @@ export type PlaybooksForFilterQuery = {
   playbooks: Array<{ __typename?: 'Playbook'; id: string; name: string; isEnabled: boolean }>
 }
 
+export type ExecutionArtifactsQueryVariables = Types.Exact<{
+  filters: Types.ExecutionArtifactFilters
+}>
+
+export type ExecutionArtifactsQuery = {
+  __typename?: 'Query'
+  executionArtifacts: Array<{
+    __typename?: 'ExecutionArtifact'
+    id: string
+    url: string
+    entityId?: string | null
+    entityType: string
+    displayName?: string | null
+    sourceAgent: string
+    createdAt: any
+  }>
+}
+
 export const ExecutionsDocument = gql`
   query Executions($page: PaginationInput, $filters: ExecutionFilter) {
     executions(page: $page, filters: $filters) {
@@ -297,4 +315,85 @@ export type PlaybooksForFilterSuspenseQueryHookResult = ReturnType<
 export type PlaybooksForFilterQueryResult = ApolloReactCommon.QueryResult<
   PlaybooksForFilterQuery,
   PlaybooksForFilterQueryVariables
+>
+export const ExecutionArtifactsDocument = gql`
+  query ExecutionArtifacts($filters: ExecutionArtifactFilters!) {
+    executionArtifacts(filters: $filters) {
+      id
+      url
+      entityId
+      entityType
+      displayName
+      sourceAgent
+      createdAt
+    }
+  }
+`
+
+/**
+ * __useExecutionArtifactsQuery__
+ *
+ * To run a query within a React component, call `useExecutionArtifactsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useExecutionArtifactsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useExecutionArtifactsQuery({
+ *   variables: {
+ *      filters: // value for 'filters'
+ *   },
+ * });
+ */
+export function useExecutionArtifactsQuery(
+  baseOptions: ApolloReactHooks.QueryHookOptions<
+    ExecutionArtifactsQuery,
+    ExecutionArtifactsQueryVariables
+  > &
+    ({ variables: ExecutionArtifactsQueryVariables; skip?: boolean } | { skip: boolean })
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<ExecutionArtifactsQuery, ExecutionArtifactsQueryVariables>(
+    ExecutionArtifactsDocument,
+    options
+  )
+}
+export function useExecutionArtifactsLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ExecutionArtifactsQuery,
+    ExecutionArtifactsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<ExecutionArtifactsQuery, ExecutionArtifactsQueryVariables>(
+    ExecutionArtifactsDocument,
+    options
+  )
+}
+export function useExecutionArtifactsSuspenseQuery(
+  baseOptions?:
+    | ApolloReactHooks.SkipToken
+    | ApolloReactHooks.SuspenseQueryHookOptions<
+        ExecutionArtifactsQuery,
+        ExecutionArtifactsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useSuspenseQuery<
+    ExecutionArtifactsQuery,
+    ExecutionArtifactsQueryVariables
+  >(ExecutionArtifactsDocument, options)
+}
+export type ExecutionArtifactsQueryHookResult = ReturnType<typeof useExecutionArtifactsQuery>
+export type ExecutionArtifactsLazyQueryHookResult = ReturnType<
+  typeof useExecutionArtifactsLazyQuery
+>
+export type ExecutionArtifactsSuspenseQueryHookResult = ReturnType<
+  typeof useExecutionArtifactsSuspenseQuery
+>
+export type ExecutionArtifactsQueryResult = ApolloReactCommon.QueryResult<
+  ExecutionArtifactsQuery,
+  ExecutionArtifactsQueryVariables
 >
