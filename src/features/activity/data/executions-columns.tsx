@@ -113,7 +113,12 @@ export const executionsColumns: ColumnDef<Execution>[] = [
 
       return (
         <div className='w-[160px]'>
-          <span className={cn('truncate', scenarioName ? '' : 'text-muted-foreground italic')}>
+          <span
+            className={cn(
+              'text-wrap break-words',
+              scenarioName ? '' : 'text-muted-foreground italic'
+            )}
+          >
             {scenarioName || 'Deleted Scenario'}
           </span>
         </div>
