@@ -120,6 +120,7 @@ export default function ICPPage() {
                       <DropdownMenuItem
                         className='text-destructive'
                         onClick={(e) => {
+                          e.preventDefault()
                           e.stopPropagation()
                           setDeleteConfirmationOpen(profile.id)
                         }}

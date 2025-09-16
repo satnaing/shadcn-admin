@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 export default function ICPSkeleton() {
   return (
     <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-      {[1, 2].map((i) => (
+      {[1, 2, 3].map((i) => (
         <Card key={i} className='overflow-hidden'>
           <div className='bg-muted h-1 w-full' />
           <CardContent className='p-6'>
