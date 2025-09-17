@@ -1,11 +1,4 @@
-import {
-  CircleCheck,
-  CircleX,
-  Clock,
-  AlertTriangle,
-  Loader2,
-  PauseCircle,
-} from 'lucide-react'
+import { CircleCheck, CircleX, Clock, AlertTriangle, Loader2, PauseCircle } from 'lucide-react'
 
 export const executionStatuses = [
   {
@@ -34,8 +27,8 @@ export const executionStatuses = [
     icon: Loader2,
   },
   {
-    label: 'Not Started',
-    value: 'NOT_STARTED' as const,
+    label: 'Pending',
+    value: 'PENDING' as const,
     icon: Clock,
   },
 ]

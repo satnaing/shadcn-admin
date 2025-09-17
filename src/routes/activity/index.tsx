@@ -5,16 +5,17 @@ import { executionStatuses, executionTypes } from '@/features/activity/data/data
 
 const executionSearchSchema = z.object({
   page: z.number().optional().catch(1),
-  pageSize: z.number().optional().catch(10),
+  pageSize: z.number().optional().catch(20),
   status: z
-    .array(z.enum(executionStatuses.map((status) => status.value)))
+    .enum(executionStatuses.map((status) => status.value) as [string, ...string[]])
     .optional()
-    .catch([]),
+    .catch(undefined),
   type: z
-    .array(z.enum(executionTypes.map((type) => type.value)))
+    .enum(executionTypes.map((type) => type.value) as [string, ...string[]])
     .optional()
-    .catch([]),
-  playbookId: z.array(z.string()).optional().catch([]),
+    .catch(undefined),
+  playbookId: z.string().optional().catch(undefined),
+  scenarioId: z.string().optional().catch(undefined),
   filter: z.string().optional().catch(''),
 })
 

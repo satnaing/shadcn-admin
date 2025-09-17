@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import type { ColumnFiltersState, OnChangeFn, PaginationState } from '@tanstack/react-table'
 
 type SearchRecord = Record<string, unknown>
@@ -95,7 +95,8 @@ export function useTableUrlState(params: UseTableUrlStateParams): UseTableUrlSta
     return collected
   }, [columnFiltersCfg, search])
 
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(initialColumnFilters)
+  // Derive columnFilters directly from URL instead of maintaining state
+  const columnFilters = initialColumnFilters
 
   const pagination: PaginationState = useMemo(() => {
     const rawPage = (search as SearchRecord)[pageKey]
@@ -118,17 +119,17 @@ export function useTableUrlState(params: UseTableUrlStateParams): UseTableUrlSta
     })
   }
 
-  const [globalFilter, setGlobalFilter] = useState<string | undefined>(() => {
+  // Derive globalFilter directly from URL instead of maintaining state
+  const globalFilter = useMemo(() => {
     if (!globalFilterEnabled) return undefined
     const raw = (search as SearchRecord)[globalFilterKey]
     return typeof raw === 'string' ? raw : ''
-  })
+  }, [globalFilterEnabled, search, globalFilterKey])
 
   const onGlobalFilterChange: OnChangeFn<string> | undefined = globalFilterEnabled
     ? (updater) => {
         const next = typeof updater === 'function' ? updater(globalFilter ?? '') : updater
         const value = trimGlobal ? next.trim() : next
-        setGlobalFilter(value)
         navigate({
           search: (prev) => ({
             ...(prev as SearchRecord),
@@ -141,7 +142,6 @@ export function useTableUrlState(params: UseTableUrlStateParams): UseTableUrlSta
 
   const onColumnFiltersChange: OnChangeFn<ColumnFiltersState> = (updater) => {
     const next = typeof updater === 'function' ? updater(columnFilters) : updater
-    setColumnFilters(next)
 
     const patch: Record<string, unknown> = {}
 

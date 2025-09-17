@@ -98,6 +98,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
       const playbookId = row.getValue(id)
       return playbookId === value
     },
+    enableSorting: false,
   },
   {
     accessorKey: 'scenarioId',
@@ -128,6 +129,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
       const scenarioId = row.getValue(id)
       return scenarioId === value
     },
+    enableSorting: false,
   },
   {
     accessorKey: 'status',
@@ -173,6 +175,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
     filterFn: (row, id, value) => {
       return row.getValue(id) === value
     },
+    enableSorting: false,
   },
   {
     accessorKey: 'result',
@@ -190,6 +193,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
         </div>
       )
     },
+    enableSorting: false,
   },
   {
     accessorKey: 'createdAt',
@@ -198,6 +202,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
       const createdAt = row.getValue('createdAt') as string
       return <div className='w-[160px]'>{format(new Date(createdAt), 'MMM d, yyyy HH:mm')}</div>
     },
+    enableSorting: false,
   },
   {
     accessorKey: 'type',
@@ -214,6 +219,7 @@ export const executionsColumns: ColumnDef<Execution>[] = [
       return row.getValue(id) === value
     },
     enableHiding: false,
+    enableSorting: false,
   },
   {
     id: 'actions',

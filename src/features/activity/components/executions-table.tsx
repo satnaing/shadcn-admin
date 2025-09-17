@@ -5,10 +5,6 @@ import {
   type VisibilityState,
   flexRender,
   getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
@@ -34,9 +30,17 @@ type DataTableProps = {
   data: Execution[]
   playbooks?: Array<{ id: string; name: string }>
   scenarios?: Array<{ id: string; name: string; playbookId: string }>
+  totalCount?: number
+  isLoading?: boolean
 }
 
-export function ExecutionsTable({ data, playbooks = [], scenarios = [] }: DataTableProps) {
+export function ExecutionsTable({
+  data,
+  playbooks = [],
+  scenarios = [],
+  totalCount = 0,
+  isLoading = false,
+}: DataTableProps) {
   const { setOpen, setCurrentExecution } = useExecutions()
 
   // Local UI-only states
@@ -45,6 +49,9 @@ export function ExecutionsTable({ data, playbooks = [], scenarios = [] }: DataTa
     { id: 'createdAt', desc: true }, // Default sort by creation date descending
   ])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+
+  const search = route.useSearch()
+  const navigate = route.useNavigate()
 
   // Synced with URL states
   const {
@@ -56,8 +63,8 @@ export function ExecutionsTable({ data, playbooks = [], scenarios = [] }: DataTa
     onPaginationChange,
     ensurePageInRange,
   } = useTableUrlState({
-    search: route.useSearch(),
-    navigate: route.useNavigate(),
+    search,
+    navigate,
     pagination: { defaultPage: 1, defaultPageSize: 20 },
     globalFilter: { enabled: true, key: 'filter' },
     columnFilters: [
@@ -87,23 +94,14 @@ export function ExecutionsTable({ data, playbooks = [], scenarios = [] }: DataTa
       playbooks: playbookLookup,
       scenarios: scenarioLookup,
     },
+    pageCount: Math.ceil(totalCount / pagination.pageSize),
+    manualPagination: true,
+    manualFiltering: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnVisibilityChange: setColumnVisibility,
-    globalFilterFn: (row, _columnId, filterValue) => {
-      // NOT USED ATM
-      const summary = String(row.getValue('summary') || '').toLowerCase()
-      const id = String(row.getValue('id')).toLowerCase()
-      const searchValue = String(filterValue).toLowerCase()
-
-      return id.includes(searchValue) || summary.includes(searchValue)
-    },
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
     onPaginationChange,
     onGlobalFilterChange,
     onColumnFiltersChange,
@@ -117,7 +115,15 @@ export function ExecutionsTable({ data, playbooks = [], scenarios = [] }: DataTa
   return (
     <div className='space-y-4 max-sm:has-[div[role="toolbar"]]:mb-16'>
       <DataTableToolbar table={table} playbooks={playbooks} scenarios={scenarios} />
-      <div className='overflow-hidden rounded-md border'>
+      <div className='relative overflow-hidden rounded-md border'>
+        {isLoading && (
+          <div className='bg-background/50 absolute inset-0 z-10 flex items-center justify-center backdrop-blur-sm'>
+            <div className='flex flex-col items-center gap-2'>
+              <div className='border-primary h-8 w-8 animate-spin rounded-full border-4 border-t-transparent' />
+              <p className='text-muted-foreground text-sm'>Loading activity...</p>
+            </div>
+          </div>
+        )}
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
