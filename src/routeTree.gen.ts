@@ -12,9 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SettingsRouteRouteImport } from './routes/settings/route'
 import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as UsersIndexRouteImport } from './routes/users/index'
 import { Route as ToolsIndexRouteImport } from './routes/tools/index'
-import { Route as TasksIndexRouteImport } from './routes/tasks/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
 import { Route as PlaysIndexRouteImport } from './routes/plays/index'
 import { Route as HelpCenterIndexRouteImport } from './routes/help-center/index'
@@ -54,19 +52,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const UsersIndexRoute = UsersIndexRouteImport.update({
-  id: '/users/',
-  path: '/users/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ToolsIndexRoute = ToolsIndexRouteImport.update({
   id: '/tools/',
   path: '/tools/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TasksIndexRoute = TasksIndexRouteImport.update({
-  id: '/tasks/',
-  path: '/tasks/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SettingsIndexRoute = SettingsIndexRouteImport.update({
@@ -212,9 +200,7 @@ export interface FileRoutesByFullPath {
   '/help-center': typeof HelpCenterIndexRoute
   '/plays': typeof PlaysIndexRoute
   '/settings/': typeof SettingsIndexRoute
-  '/tasks': typeof TasksIndexRoute
   '/tools': typeof ToolsIndexRoute
-  '/users': typeof UsersIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
   '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
   '/oauth/callback/$app': typeof OauthCallbackAppRoute
@@ -242,9 +228,7 @@ export interface FileRoutesByTo {
   '/help-center': typeof HelpCenterIndexRoute
   '/plays': typeof PlaysIndexRoute
   '/settings': typeof SettingsIndexRoute
-  '/tasks': typeof TasksIndexRoute
   '/tools': typeof ToolsIndexRoute
-  '/users': typeof UsersIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
   '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
   '/oauth/callback/$app': typeof OauthCallbackAppRoute
@@ -275,9 +259,7 @@ export interface FileRoutesById {
   '/help-center/': typeof HelpCenterIndexRoute
   '/plays/': typeof PlaysIndexRoute
   '/settings/': typeof SettingsIndexRoute
-  '/tasks/': typeof TasksIndexRoute
   '/tools/': typeof ToolsIndexRoute
-  '/users/': typeof UsersIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
   '/knowledge/icp/new': typeof KnowledgeIcpNewRoute
   '/oauth/callback/$app': typeof OauthCallbackAppRoute
@@ -308,9 +290,7 @@ export interface FileRouteTypes {
     | '/help-center'
     | '/plays'
     | '/settings/'
-    | '/tasks'
     | '/tools'
-    | '/users'
     | '/knowledge/icp/$profileId'
     | '/knowledge/icp/new'
     | '/oauth/callback/$app'
@@ -338,9 +318,7 @@ export interface FileRouteTypes {
     | '/help-center'
     | '/plays'
     | '/settings'
-    | '/tasks'
     | '/tools'
-    | '/users'
     | '/knowledge/icp/$profileId'
     | '/knowledge/icp/new'
     | '/oauth/callback/$app'
@@ -370,9 +348,7 @@ export interface FileRouteTypes {
     | '/help-center/'
     | '/plays/'
     | '/settings/'
-    | '/tasks/'
     | '/tools/'
-    | '/users/'
     | '/knowledge/icp/$profileId'
     | '/knowledge/icp/new'
     | '/oauth/callback/$app'
@@ -396,9 +372,7 @@ export interface RootRouteChildren {
   ConnectedAccountsIndexRoute: typeof ConnectedAccountsIndexRoute
   HelpCenterIndexRoute: typeof HelpCenterIndexRoute
   PlaysIndexRoute: typeof PlaysIndexRoute
-  TasksIndexRoute: typeof TasksIndexRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
-  UsersIndexRoute: typeof UsersIndexRoute
   KnowledgeIcpProfileIdRoute: typeof KnowledgeIcpProfileIdRoute
   KnowledgeIcpNewRoute: typeof KnowledgeIcpNewRoute
   OauthCallbackAppRoute: typeof OauthCallbackAppRoute
@@ -429,25 +403,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/users/': {
-      id: '/users/'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof UsersIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/tools/': {
       id: '/tools/'
       path: '/tools'
       fullPath: '/tools'
       preLoaderRoute: typeof ToolsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tasks/': {
-      id: '/tasks/'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof TasksIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/settings/': {
@@ -671,9 +631,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConnectedAccountsIndexRoute: ConnectedAccountsIndexRoute,
   HelpCenterIndexRoute: HelpCenterIndexRoute,
   PlaysIndexRoute: PlaysIndexRoute,
-  TasksIndexRoute: TasksIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
-  UsersIndexRoute: UsersIndexRoute,
   KnowledgeIcpProfileIdRoute: KnowledgeIcpProfileIdRoute,
   KnowledgeIcpNewRoute: KnowledgeIcpNewRoute,
   OauthCallbackAppRoute: OauthCallbackAppRoute,
