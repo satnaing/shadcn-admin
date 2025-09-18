@@ -18,6 +18,7 @@ export type GetCampaignContactsQuery = {
     data: Array<{
       __typename?: 'CampaignContact'
       id: string
+      campaignId: string
       status: Types.CampaignContactStatus
       statusReason?: Types.CampaignContactStatusReason | null
       createdAt: any
@@ -128,11 +129,53 @@ export type CampaignContactContinueMutation = {
   }>
 }
 
+export type CampaignApproveStepsMutationVariables = Types.Exact<{
+  input: Types.CampaignApproveStepsInput
+}>
+
+export type CampaignApproveStepsMutation = {
+  __typename?: 'Mutation'
+  campaignApproveSteps: {
+    __typename?: 'GenericResolverResponse'
+    success: boolean
+    code?: string | null
+  }
+}
+
+export type GetCampaignWithStepsQueryVariables = Types.Exact<{
+  campaignId: Types.Scalars['String']['input']
+}>
+
+export type GetCampaignWithStepsQuery = {
+  __typename?: 'Query'
+  campaign: {
+    __typename?: 'Campaign'
+    id: string
+    name: string
+    status: Types.CampaignStatus
+    steps: Array<{
+      __typename?: 'CampaignStep'
+      id: string
+      type: Types.CampaignStepType
+      data: any
+      isEntry: boolean
+      successStepId?: string | null
+      failureStepId?: string | null
+      requireApproval: boolean
+      campaignId: string
+      createdAt: any
+      orgId: string
+      updatedAt: any
+    }>
+  }
+}
+
 export const GetCampaignContactsDocument = gql`
   query GetCampaignContacts($page: PaginationInput, $filters: CampaignContactFilter) {
     campaignContacts(page: $page, filters: $filters) {
       data {
         id
+        campaignId
         status
         statusReason
         createdAt
@@ -517,4 +560,145 @@ export type CampaignContactContinueMutationResult =
 export type CampaignContactContinueMutationOptions = ApolloReactCommon.BaseMutationOptions<
   CampaignContactContinueMutation,
   CampaignContactContinueMutationVariables
+>
+export const CampaignApproveStepsDocument = gql`
+  mutation CampaignApproveSteps($input: CampaignApproveStepsInput!) {
+    campaignApproveSteps(input: $input) {
+      success
+      code
+    }
+  }
+`
+export type CampaignApproveStepsMutationFn = ApolloReactCommon.MutationFunction<
+  CampaignApproveStepsMutation,
+  CampaignApproveStepsMutationVariables
+>
+
+/**
+ * __useCampaignApproveStepsMutation__
+ *
+ * To run a mutation, you first call `useCampaignApproveStepsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCampaignApproveStepsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [campaignApproveStepsMutation, { data, loading, error }] = useCampaignApproveStepsMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCampaignApproveStepsMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    CampaignApproveStepsMutation,
+    CampaignApproveStepsMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<
+    CampaignApproveStepsMutation,
+    CampaignApproveStepsMutationVariables
+  >(CampaignApproveStepsDocument, options)
+}
+export type CampaignApproveStepsMutationHookResult = ReturnType<
+  typeof useCampaignApproveStepsMutation
+>
+export type CampaignApproveStepsMutationResult =
+  ApolloReactCommon.MutationResult<CampaignApproveStepsMutation>
+export type CampaignApproveStepsMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  CampaignApproveStepsMutation,
+  CampaignApproveStepsMutationVariables
+>
+export const GetCampaignWithStepsDocument = gql`
+  query GetCampaignWithSteps($campaignId: String!) {
+    campaign(id: $campaignId) {
+      id
+      name
+      status
+      steps {
+        id
+        type
+        data
+        isEntry
+        successStepId
+        failureStepId
+        requireApproval
+        campaignId
+        createdAt
+        orgId
+        updatedAt
+      }
+    }
+  }
+`
+
+/**
+ * __useGetCampaignWithStepsQuery__
+ *
+ * To run a query within a React component, call `useGetCampaignWithStepsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCampaignWithStepsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCampaignWithStepsQuery({
+ *   variables: {
+ *      campaignId: // value for 'campaignId'
+ *   },
+ * });
+ */
+export function useGetCampaignWithStepsQuery(
+  baseOptions: ApolloReactHooks.QueryHookOptions<
+    GetCampaignWithStepsQuery,
+    GetCampaignWithStepsQueryVariables
+  > &
+    ({ variables: GetCampaignWithStepsQueryVariables; skip?: boolean } | { skip: boolean })
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<GetCampaignWithStepsQuery, GetCampaignWithStepsQueryVariables>(
+    GetCampaignWithStepsDocument,
+    options
+  )
+}
+export function useGetCampaignWithStepsLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    GetCampaignWithStepsQuery,
+    GetCampaignWithStepsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<
+    GetCampaignWithStepsQuery,
+    GetCampaignWithStepsQueryVariables
+  >(GetCampaignWithStepsDocument, options)
+}
+export function useGetCampaignWithStepsSuspenseQuery(
+  baseOptions?:
+    | ApolloReactHooks.SkipToken
+    | ApolloReactHooks.SuspenseQueryHookOptions<
+        GetCampaignWithStepsQuery,
+        GetCampaignWithStepsQueryVariables
+      >
+) {
+  const options =
+    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useSuspenseQuery<
+    GetCampaignWithStepsQuery,
+    GetCampaignWithStepsQueryVariables
+  >(GetCampaignWithStepsDocument, options)
+}
+export type GetCampaignWithStepsQueryHookResult = ReturnType<typeof useGetCampaignWithStepsQuery>
+export type GetCampaignWithStepsLazyQueryHookResult = ReturnType<
+  typeof useGetCampaignWithStepsLazyQuery
+>
+export type GetCampaignWithStepsSuspenseQueryHookResult = ReturnType<
+  typeof useGetCampaignWithStepsSuspenseQuery
+>
+export type GetCampaignWithStepsQueryResult = ApolloReactCommon.QueryResult<
+  GetCampaignWithStepsQuery,
+  GetCampaignWithStepsQueryVariables
 >

@@ -131,6 +131,7 @@ export function useTableUrlState(params: UseTableUrlStateParams): UseTableUrlSta
         const next = typeof updater === 'function' ? updater(globalFilter ?? '') : updater
         const value = trimGlobal ? next.trim() : next
         navigate({
+          replace: true,
           search: (prev) => ({
             ...(prev as SearchRecord),
             [pageKey]: undefined,

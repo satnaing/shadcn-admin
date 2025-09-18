@@ -14,6 +14,12 @@ import {
   ArrowDownLeft,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -28,6 +34,7 @@ import {
 import { Loadable } from '@/components/loadable'
 import { statuses } from '../data/data'
 import { useGetMessagesByCampaignContactQuery } from '../graphql/operations.generated'
+import { CampaignReview } from './campaign-review'
 import { useOutreach } from './outreach-provider'
 import { TimelineSkeleton } from './timeline-skeleton'
 
@@ -162,7 +169,7 @@ export function OutreachTimelineSheet() {
   return (
     <Sheet open={open === 'view'} onOpenChange={(open) => !open && setOpen(null)}>
       <SheetContent className='w-[600px] p-0 sm:max-w-[600px]'>
-        <SheetHeader className='p-6 pb-4'>
+        <SheetHeader className='space-y-2 p-6 pb-4'>
           <div className='flex items-center gap-3'>
             <Avatar className='h-12 w-12'>
               <AvatarFallback>{contactInitials || '??'}</AvatarFallback>
@@ -204,155 +211,178 @@ export function OutreachTimelineSheet() {
               </Badge>
             )}
           </div>
+          {currentOutreach.reachoutReason && (
+            <Accordion type='single' collapsible>
+              <AccordionItem value='reachout-reason' className='border-0'>
+                <AccordionTrigger className='py-2 text-sm'>Reachout Reason</AccordionTrigger>
+                <AccordionContent>
+                  <p className='text-muted-foreground text-sm'>{currentOutreach.reachoutReason}</p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          )}
         </SheetHeader>
 
         <Separator />
 
         <ScrollArea className='h-[calc(100vh-120px)]'>
           <div className='space-y-6 px-6 pb-6'>
-            {/* Sender Details */}
-
-            <h3 className='mb-3 text-sm font-medium'>Sender</h3>
-            {sender ? (
-              <div className='grid grid-cols-2 gap-6'>
-                {/* Sender Column */}
-
-                <>
-                  {sender.name && (
-                    <div>
-                      <span className='text-muted-foreground'>Name:</span>
-                      <p className='font-medium'>{sender.name}</p>
-                    </div>
-                  )}
-                  {sender.email && (
-                    <div>
-                      <span className='text-muted-foreground'>Email:</span>
-                      <p className='font-medium'>{sender.email}</p>
-                    </div>
-                  )}
-                  <div>
-                    <span className='text-muted-foreground'>Email Enabled:</span>
-                    <p className='font-medium'>
-                      <Badge variant={'secondary'} className='text-xs'>
-                        {sender.isEmailEnabled ? 'Yes' : 'No'}
-                      </Badge>
-                    </p>
-                  </div>
-                  <div>
-                    <span className='text-muted-foreground'>LinkedIn Enabled:</span>
-                    <p className='font-medium'>
-                      <Badge variant={'secondary'} className='text-xs'>
-                        {sender.isLinkedinEnabled ? 'Yes' : 'No'}
-                      </Badge>
-                    </p>
-                  </div>
-                </>
-              </div>
+            {/* Show Campaign Review if status is STOPPED and statusReason is STOPPED_AWAITING_APPROVAL */}
+            {currentOutreach.status === 'STOPPED' &&
+            currentOutreach.statusReason === 'STOPPED_AWAITING_APPROVAL' ? (
+              <CampaignReview
+                campaignId={currentOutreach.campaignId}
+                campaignContactId={currentOutreach.id}
+                onApprove={() => {
+                  // Refresh the data and close the sheet after approval
+                  setOpen(null)
+                }}
+                onCancel={() => {
+                  setOpen(null)
+                }}
+              />
             ) : (
-              <div className='text-muted-foreground'>No sender information available</div>
-            )}
-
-            {/* Reachout Reason */}
-            {currentOutreach.reachoutReason && (
-              <div>
-                <span className='text-muted-foreground'>Reachout Reason:</span>
-                <p className='mt-1 text-sm'>{currentOutreach.reachoutReason}</p>
-              </div>
-            )}
-
-            <Separator />
-
-            {/* Timeline */}
-            <div>
-              <h3 className='mb-4 text-sm font-medium'>Activity Timeline</h3>
-              <Loadable
-                isLoading={messagesLoading}
-                loader={<TimelineSkeleton />}
-                isEmpty={timelineEvents.length === 0}
-                emptyComponent={
-                  <div className='text-muted-foreground py-8 text-center'>No activity yet</div>
-                }
-              >
-                <div className='relative space-y-4'>
-                  {/* Timeline line */}
-                  <div
-                    className='bg-border animate-fade-in absolute top-5 bottom-5 left-5 w-px opacity-0'
-                    style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}
-                  />
-
-                  {timelineEvents.map((event, index) => (
-                    <div
-                      key={event.id}
-                      className='animate-fade-in-up relative flex gap-4 opacity-0'
-                      style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
-                    >
-                      {/* Timeline dot */}
-                      <div
-                        className={cn(
-                          'bg-background relative z-10 flex h-10 w-10 items-center justify-center rounded-full border',
-                          event.iconBackground
-                        )}
-                      >
-                        {event.icon}
-                      </div>
-
-                      {/* Content */}
-                      <div className='flex-1 pb-4'>
-                        <div className='mb-1 flex items-center justify-between gap-2'>
-                          <p className='text-sm font-medium'>{event.title}</p>
-                          <time className='text-muted-foreground text-xs'>
-                            {format(event.timestamp, 'MMM d, HH:mm')}
-                          </time>
-                        </div>
-
-                        {event.description && (
-                          <p className='text-muted-foreground text-sm'>{event.description}</p>
-                        )}
-
-                        {event.message && (
-                          <div className='bg-muted/50 mt-2 rounded-lg border p-3'>
-                            {event.message.subject && (
-                              <p className='mb-1 text-sm font-medium'>{event.message.subject}</p>
-                            )}
-                            <p className='text-sm whitespace-pre-wrap'>{event.message.text}</p>
-                            {event.message.reaction && (
-                              <Badge variant='secondary' className='mt-2'>
-                                {event.message.reaction}
-                              </Badge>
-                            )}
-                            <div className='text-muted-foreground mt-2 flex items-center gap-2 text-xs'>
-                              {event.message.type === 'SENT' ? (
-                                <ArrowUpRight className='h-3 w-3' />
-                              ) : (
-                                <ArrowDownLeft className='h-3 w-3' />
-                              )}
-                              <span>
-                                {event.message.type === 'SENT' ? 'Sent' : 'Received'} via{' '}
-                                {event.message.appType === 'EMAIL' ? 'Email' : 'LinkedIn'}
-                              </span>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Loadable>
-            </div>
-
-            {/* Error Message */}
-            {currentOutreach.error && (
               <>
-                <Separator />
-                <div>
-                  <h3 className='mb-3 text-sm font-medium'>Error Details</h3>
-                  <div className='bg-destructive/10 border-destructive/20 rounded-md border p-3'>
-                    <div className='flex items-start gap-2'>
-                      <AlertCircle className='text-destructive mt-0.5 h-4 w-4' />
-                      <p className='text-destructive text-sm'>{currentOutreach.error}</p>
-                    </div>
+                {/* Sender Details */}
+                <h3 className='mb-3 text-sm font-medium'>Sender</h3>
+                {sender ? (
+                  <div className='grid grid-cols-2 gap-6'>
+                    {/* Sender Column */}
+                    <>
+                      {sender.name && (
+                        <div>
+                          <span className='text-muted-foreground text-sm'>Name:</span>
+                          <p className='text-sm font-medium'>{sender.name}</p>
+                        </div>
+                      )}
+                      {sender.email && (
+                        <div>
+                          <span className='text-muted-foreground text-sm'>Email:</span>
+                          <p className='text-sm font-medium'>{sender.email}</p>
+                        </div>
+                      )}
+                      <div>
+                        <span className='text-muted-foreground text-sm'>Email Enabled:</span>
+                        <p className='text-sm font-medium'>
+                          <Badge variant={'secondary'} className='text-xs'>
+                            {sender.isEmailEnabled ? 'Yes' : 'No'}
+                          </Badge>
+                        </p>
+                      </div>
+                      <div>
+                        <span className='text-muted-foreground text-sm'>LinkedIn Enabled:</span>
+                        <p className='text-sm font-medium'>
+                          <Badge variant={'secondary'} className='text-xs'>
+                            {sender.isLinkedinEnabled ? 'Yes' : 'No'}
+                          </Badge>
+                        </p>
+                      </div>
+                    </>
                   </div>
+                ) : (
+                  <div className='text-muted-foreground'>No sender information available</div>
+                )}
+
+                <Separator />
+
+                {/* Timeline */}
+                <div>
+                  <h3 className='mb-4 text-sm font-medium'>Activity Timeline</h3>
+                  <Loadable
+                    isLoading={messagesLoading}
+                    loader={<TimelineSkeleton />}
+                    isEmpty={timelineEvents.length === 0}
+                    emptyComponent={
+                      <div className='text-muted-foreground py-8 text-center'>No activity yet</div>
+                    }
+                  >
+                    <div className='relative space-y-4'>
+                      {/* Timeline line */}
+                      <div
+                        className='bg-border animate-fade-in absolute top-5 bottom-5 left-5 w-px opacity-0'
+                        style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}
+                      />
+
+                      {timelineEvents.map((event, index) => (
+                        <div
+                          key={event.id}
+                          className='animate-fade-in-up relative flex gap-4 opacity-0'
+                          style={{
+                            animationDelay: `${index * 150}ms`,
+                            animationFillMode: 'forwards',
+                          }}
+                        >
+                          {/* Timeline dot */}
+                          <div
+                            className={cn(
+                              'bg-background relative z-10 flex h-10 w-10 items-center justify-center rounded-full border',
+                              event.iconBackground
+                            )}
+                          >
+                            {event.icon}
+                          </div>
+
+                          {/* Content */}
+                          <div className='flex-1 pb-4'>
+                            <div className='mb-1 flex items-center justify-between gap-2'>
+                              <p className='text-sm font-medium'>{event.title}</p>
+                              <time className='text-muted-foreground text-xs'>
+                                {format(event.timestamp, 'MMM d, HH:mm')}
+                              </time>
+                            </div>
+
+                            {event.description && (
+                              <p className='text-muted-foreground text-sm'>{event.description}</p>
+                            )}
+
+                            {event.message && (
+                              <div className='bg-muted/50 mt-2 rounded-lg border p-3'>
+                                {event.message.subject && (
+                                  <p className='mb-1 text-sm font-medium'>
+                                    {event.message.subject}
+                                  </p>
+                                )}
+                                <p className='text-sm whitespace-pre-wrap'>{event.message.text}</p>
+                                {event.message.reaction && (
+                                  <Badge variant='secondary' className='mt-2'>
+                                    {event.message.reaction}
+                                  </Badge>
+                                )}
+                                <div className='text-muted-foreground mt-2 flex items-center gap-2 text-xs'>
+                                  {event.message.type === 'SENT' ? (
+                                    <ArrowUpRight className='h-3 w-3' />
+                                  ) : (
+                                    <ArrowDownLeft className='h-3 w-3' />
+                                  )}
+                                  <span>
+                                    {event.message.type === 'SENT' ? 'Sent' : 'Received'} via{' '}
+                                    {event.message.appType === 'EMAIL' ? 'Email' : 'LinkedIn'}
+                                  </span>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </Loadable>
                 </div>
+
+                {/* Error Message */}
+                {currentOutreach.error && (
+                  <>
+                    <Separator />
+                    <div>
+                      <h3 className='mb-3 text-sm font-medium'>Error Details</h3>
+                      <div className='bg-destructive/10 border-destructive/20 rounded-md border p-3'>
+                        <div className='flex items-start gap-2'>
+                          <AlertCircle className='text-destructive mt-0.5 h-4 w-4' />
+                          <p className='text-destructive text-sm'>{currentOutreach.error}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </>
             )}
           </div>

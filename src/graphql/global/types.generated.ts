@@ -86,6 +86,11 @@ export type CampaignAnalytics = {
   repliedCount: Scalars['Float']['output']
 }
 
+export type CampaignApproveStepsInput = {
+  campaignContactId: Scalars['String']['input']
+  updatedSteps: Array<CampaignStepUpdateInput>
+}
+
 export type CampaignContact = {
   __typename?: 'CampaignContact'
   campaign: Campaign
@@ -287,6 +292,12 @@ export enum CampaignStepType {
   LiMessage = 'LI_MESSAGE',
   LiProfileVisit = 'LI_PROFILE_VISIT',
   Wait = 'WAIT',
+}
+
+export type CampaignStepUpdateInput = {
+  stepId: Scalars['String']['input']
+  subjectTemplate?: InputMaybe<Scalars['String']['input']>
+  template?: InputMaybe<Scalars['String']['input']>
 }
 
 export type CampaignUpdateInput = {
@@ -861,6 +872,7 @@ export enum ModelName {
 export type Mutation = {
   __typename?: 'Mutation'
   accountMappingSync: Scalars['Boolean']['output']
+  campaignApproveSteps: GenericResolverResponse
   campaignContactContinue: Array<CampaignContact>
   campaignContactPause: Array<CampaignContact>
   campaignCreate: Campaign
@@ -914,6 +926,10 @@ export type Mutation = {
 
 export type MutationAccountMappingSyncArgs = {
   accountType: Scalars['String']['input']
+}
+
+export type MutationCampaignApproveStepsArgs = {
+  input: CampaignApproveStepsInput
 }
 
 export type MutationCampaignContactContinueArgs = {

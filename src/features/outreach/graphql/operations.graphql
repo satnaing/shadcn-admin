@@ -5,6 +5,7 @@ query GetCampaignContacts(
   campaignContacts(page: $page, filters: $filters) {
     data {
       id
+      campaignId
       status
       statusReason
       createdAt
@@ -92,5 +93,33 @@ mutation CampaignContactContinue($input: CampaignContactContinueInput!) {
     status
     statusReason
     updatedAt
+  }
+}
+
+mutation CampaignApproveSteps($input: CampaignApproveStepsInput!) {
+  campaignApproveSteps(input: $input) {
+    success
+    code
+  }
+}
+
+query GetCampaignWithSteps($campaignId: String!) {
+  campaign(id: $campaignId) {
+    id
+    name
+    status
+    steps {
+      id
+      type
+      data
+      isEntry
+      successStepId
+      failureStepId
+      requireApproval
+      campaignId
+      createdAt
+      orgId
+      updatedAt
+    }
   }
 }
