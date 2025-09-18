@@ -17,6 +17,7 @@ const executionSearchSchema = z.object({
   playbookId: z.string().optional().catch(undefined),
   scenarioId: z.string().optional().catch(undefined),
   filter: z.string().optional().catch(''),
+  executionId: z.string().optional().catch(undefined),
 })
 
 export const Route = createFileRoute('/activity/')({

@@ -6,6 +6,7 @@ import {
   Building2,
   UserCheck,
   Activity,
+  Send,
 } from 'lucide-react'
 import { type SidebarData } from '../types'
 
@@ -18,6 +19,11 @@ export const sidebarData: SidebarData = {
           title: 'Activity',
           url: '/activity',
           icon: Activity,
+        },
+        {
+          title: 'Outreach',
+          url: '/outreach',
+          icon: Send,
         },
         {
           title: 'Plays',

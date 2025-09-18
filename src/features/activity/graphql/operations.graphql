@@ -1,7 +1,4 @@
-# Executions queries
-query Executions($page: PaginationInput, $filters: ExecutionFilter) {
-  executions(page: $page, filters: $filters) {
-    data {
+fragment ExecutionInfo on Execution {
       id
       createdAt
       completedAt
@@ -22,6 +19,13 @@ query Executions($page: PaginationInput, $filters: ExecutionFilter) {
       errorMessage
       initiatedBy
       initiatedFrom
+    }
+
+# Executions queries
+query Executions($page: PaginationInput, $filters: ExecutionFilter) {
+  executions(page: $page, filters: $filters) {
+    data {
+      ...ExecutionInfo
     }
     hasMore
     totalCount
@@ -57,3 +61,9 @@ query ExecutionArtifacts($filters: ExecutionArtifactFilters!) {
     createdAt
   }
 }
+
+query Execution($id: String!) {
+  execution(id: $id) {
+    ...ExecutionInfo
+  }
+  }

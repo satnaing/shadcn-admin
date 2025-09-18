@@ -123,6 +123,11 @@ export type CampaignContactMessagesArgs = {
   page?: InputMaybe<PaginationInput>
 }
 
+export type CampaignContactContinueInput = {
+  allFromCompany?: InputMaybe<Scalars['Boolean']['input']>
+  id: Scalars['String']['input']
+}
+
 export type CampaignContactFilter = {
   campaignId?: InputMaybe<Scalars['String']['input']>
   searchTerm?: InputMaybe<Scalars['String']['input']>
@@ -400,6 +405,7 @@ export type ConnectionRequestInput = {
 
 export type Contact = {
   __typename?: 'Contact'
+  company?: Maybe<Company>
   companyId?: Maybe<Scalars['String']['output']>
   companyName?: Maybe<Scalars['String']['output']>
   companyWebsite?: Maybe<Scalars['String']['output']>
@@ -437,6 +443,7 @@ export type Contact = {
 
 export type ContactForTesting = {
   __typename?: 'ContactForTesting'
+  company?: Maybe<Company>
   companyId?: Maybe<Scalars['String']['output']>
   companyName?: Maybe<Scalars['String']['output']>
   companyWebsite?: Maybe<Scalars['String']['output']>
@@ -706,6 +713,7 @@ export type ExecutionFilter = {
   entityId?: InputMaybe<Scalars['String']['input']>
   playbookId?: InputMaybe<Scalars['String']['input']>
   runAt?: InputMaybe<DateFilter>
+  scenarioId?: InputMaybe<Scalars['String']['input']>
   status?: InputMaybe<ExecutionStatus>
   triggerType?: InputMaybe<TriggerType>
   type?: InputMaybe<ExecutionType>
@@ -810,6 +818,10 @@ export enum MessageAppType {
   Linkedin = 'LINKEDIN',
 }
 
+export type MessageFilter = {
+  campaignContactId?: InputMaybe<Scalars['String']['input']>
+}
+
 export enum MessageSource {
   External = 'EXTERNAL',
   Internal = 'INTERNAL',
@@ -849,6 +861,7 @@ export enum ModelName {
 export type Mutation = {
   __typename?: 'Mutation'
   accountMappingSync: Scalars['Boolean']['output']
+  campaignContactContinue: Array<CampaignContact>
   campaignContactPause: Array<CampaignContact>
   campaignCreate: Campaign
   campaignDelete: GenericResolverResponse
@@ -901,6 +914,10 @@ export type Mutation = {
 
 export type MutationAccountMappingSyncArgs = {
   accountType: Scalars['String']['input']
+}
+
+export type MutationCampaignContactContinueArgs = {
+  input: CampaignContactContinueInput
 }
 
 export type MutationCampaignContactPauseArgs = {
@@ -1205,6 +1222,14 @@ export type PaginatedLists = {
   totalCount?: Maybe<Scalars['Float']['output']>
 }
 
+export type PaginatedMessages = {
+  __typename?: 'PaginatedMessages'
+  data: Array<Message>
+  hasData?: Maybe<Scalars['Boolean']['output']>
+  hasMore: Scalars['Boolean']['output']
+  totalCount?: Maybe<Scalars['Float']['output']>
+}
+
 export type PaginatedSessionIdentities = {
   __typename?: 'PaginatedSessionIdentities'
   data: Array<SessionIdentity>
@@ -1458,11 +1483,13 @@ export type Query = {
   crmIntegration?: Maybe<CrmIntegration>
   crmLists: CrmListResponse
   excludedCompanies: PaginatedExcludedCompanies
+  execution: Execution
   executionArtifacts: Array<ExecutionArtifact>
   executions: PaginatedExecutions
   integrations?: Maybe<IntegrationsOutput>
   list?: Maybe<TargetMarket>
   lists: PaginatedLists
+  messages: PaginatedMessages
   org: Array<Org>
   orgInfo?: Maybe<OrgInfo>
   personas: Array<Persona>
@@ -1539,6 +1566,10 @@ export type QueryExcludedCompaniesArgs = {
   page?: InputMaybe<PaginationInput>
 }
 
+export type QueryExecutionArgs = {
+  id: Scalars['String']['input']
+}
+
 export type QueryExecutionArtifactsArgs = {
   filters?: InputMaybe<ExecutionArtifactFilters>
 }
@@ -1554,6 +1585,11 @@ export type QueryListArgs = {
 }
 
 export type QueryListsArgs = {
+  page?: InputMaybe<PaginationInput>
+}
+
+export type QueryMessagesArgs = {
+  filters?: InputMaybe<MessageFilter>
   page?: InputMaybe<PaginationInput>
 }
 

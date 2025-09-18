@@ -1,0 +1,21 @@
+## Project explanation
+- This project uses pnpm, use that to run commands. It uses shadcn and tailwind.
+- The "Frontend" dir is a repo for working with shadcn and vite, which is the Frontend for Swan, my SaaS app. Swan is an AI go-to-market engineer that builds agentic Sales workflows ontop of your CRM / other external signals and B2B data / research etc.
+
+## GraphQl
+- When creating operations.graphql files - they should live next to where they are being used in the "features" folder
+- If you need to generate the types for an operations.graphql file - the commans is pnpm codegen
+
+## General Rules
+- Before implementing a feature, always check the src/components directory to see if there are available components ready to use to set up a page.
+- Always strive to have a single component definition per file, and try to keep files under ~300 lines
+- Heavily use lodash whenever possible to make code cleaner and more concise. 
+- DONT create READMes for code you write.
+- Strive for DRY - dont repeat yourself, extract into shared components where it makes sense
+
+## Writing Components
+- To use toasts, import {toast} from 'sonner'
+- When creating forms - use react-hook-form and the Forms components in components/ui/form
+- For new pages, always wrap them in the <Page> component
+- For loading state, aim to always use the <Loadable> component. Pass in a skeleton when it makes sense.
+

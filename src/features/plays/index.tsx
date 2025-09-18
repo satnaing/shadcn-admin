@@ -95,10 +95,11 @@ export default function PlaybooksPage() {
       }
     >
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-        {playbooks.map((playbook) => (
+        {playbooks.map((playbook, index) => (
           <Card
             key={playbook.id}
-            className='cursor-pointer overflow-hidden transition-shadow hover:shadow-lg'
+            className='animate-fade-in-up cursor-pointer overflow-hidden opacity-0 transition-shadow hover:shadow-lg'
+            style={{ animationDelay: `${index * 150}ms`, animationFillMode: 'forwards' }}
             onClick={() => handleCardClick(playbook.id)}
           >
             <CardContent>

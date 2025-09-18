@@ -1,20 +1,24 @@
+import { useEffect } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
 import { useQuery } from '@apollo/client'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Page } from '@/components/page'
 import { ExecutionsDialogs } from './components/executions-dialogs'
 import { ExecutionsProvider } from './components/executions-provider'
+import { useExecutions } from './components/executions-provider'
 import { ExecutionsTable } from './components/executions-table'
 import {
   ExecutionsDocument,
   usePlaybooksForFilterQuery,
   useScenariosForFilterQuery,
+  useExecutionQuery,
 } from './graphql/operations.generated'
 
 const route = getRouteApi('/activity/')
 
-export function Activity() {
+function ActivityContent() {
   const search = route.useSearch()
+  const { setCurrentExecution, currentExecution } = useExecutions()
 
   // Calculate pagination offset
   const offset = ((search.page || 1) - 1) * (search.pageSize || 20)
@@ -44,6 +48,21 @@ export function Activity() {
     notifyOnNetworkStatusChange: true,
   })
 
+  // Fetch specific execution if executionId is in URL and we don't have it from table click
+  const shouldFetchExecution =
+    search.executionId && (!currentExecution || currentExecution.id !== search.executionId)
+  const { data: executionData } = useExecutionQuery({
+    variables: { id: search.executionId! },
+    skip: !shouldFetchExecution,
+  })
+
+  // Set current execution when data is loaded
+  useEffect(() => {
+    if (executionData?.execution && shouldFetchExecution) {
+      setCurrentExecution(executionData.execution)
+    }
+  }, [executionData, shouldFetchExecution, setCurrentExecution])
+
   // Use previous data while loading to prevent skeleton flash
   const currentData = executionsData || previousData
 
@@ -57,7 +76,7 @@ export function Activity() {
   const scenarios = scenariosData?.playbookScenarios || []
 
   return (
-    <ExecutionsProvider>
+    <>
       <Page title='Activity' description='View and manage agent activity'>
         <div className='space-y-4'>
           {!currentData && executionsLoading ? (
@@ -78,6 +97,14 @@ export function Activity() {
       </Page>
 
       <ExecutionsDialogs />
+    </>
+  )
+}
+
+export function Activity() {
+  return (
+    <ExecutionsProvider>
+      <ActivityContent />
     </ExecutionsProvider>
   )
 }

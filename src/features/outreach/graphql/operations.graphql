@@ -1,0 +1,96 @@
+query GetCampaignContacts(
+  $page: PaginationInput
+  $filters: CampaignContactFilter
+) {
+  campaignContacts(page: $page, filters: $filters) {
+    data {
+      id
+      status
+      statusReason
+      createdAt
+      updatedAt
+      connectedAt
+      connectionSentAt
+      contactedAt
+      repliedAt
+      finishedAt
+      rejectedAt
+      reachoutReason
+      error
+      sender {
+        id
+        name
+        email
+        isLinkedinEnabled
+        isEmailEnabled
+      }
+      contact {
+        id
+        firstName
+        executionId
+        lastName
+        workEmail
+        profilePicUrl
+        linkedinUrl
+        company {
+          name
+          domain
+        }
+        title
+        country
+      }
+    }
+    totalCount
+    hasMore
+  }
+}
+
+query GetConnectedAccountsForOutreach {
+  connectedAccounts {
+    id
+    name
+    email
+    isLinkedinEnabled
+    isEmailEnabled
+  }
+}
+
+query GetMessagesByCampaignContact($filters: MessageFilter) {
+  messages(filters: $filters) {
+    data {
+      id
+      text
+      subject
+      type
+      appType
+      source
+      isRead
+      reaction
+      createdAt
+      updatedAt
+      campaignContactId
+      campaignStepId
+      contactId
+    }
+    totalCount
+    hasMore
+  }
+}
+
+mutation CampaignContactPause($input: CampaignContactPauseInput!) {
+  campaignContactPause(input: $input) {
+    id
+    status
+    statusReason
+    updatedAt
+  }
+}
+
+mutation CampaignContactContinue($input: CampaignContactContinueInput!) {
+  campaignContactContinue(input: $input) {
+    id
+    status
+    statusReason
+    updatedAt
+  }
+}

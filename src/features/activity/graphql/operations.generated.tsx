@@ -4,6 +4,31 @@ import * as ApolloReactHooks from '@apollo/client'
 import type * as Types from '../../../graphql/global/types.generated'
 
 const defaultOptions = {} as const
+export type ExecutionInfoFragment = {
+  __typename?: 'Execution'
+  id: string
+  createdAt: any
+  completedAt?: any | null
+  result?: any | null
+  summary?: string | null
+  status: Types.ExecutionStatus
+  scenarioId?: string | null
+  playbookId?: string | null
+  entityId?: string | null
+  entityType?: Types.ExecutionEntityType | null
+  type: Types.ExecutionType
+  errorMessage?: string | null
+  initiatedBy?: string | null
+  initiatedFrom: Types.ExecutionInitiatedFrom
+  identity?: {
+    __typename?: 'ExecutionIdentity'
+    name: string
+    id: string
+    type: string
+    url: string
+  } | null
+}
+
 export type ExecutionsQueryVariables = Types.Exact<{
   page?: Types.InputMaybe<Types.PaginationInput>
   filters?: Types.InputMaybe<Types.ExecutionFilter>
@@ -80,36 +105,74 @@ export type ExecutionArtifactsQuery = {
   }>
 }
 
+export type ExecutionQueryVariables = Types.Exact<{
+  id: Types.Scalars['String']['input']
+}>
+
+export type ExecutionQuery = {
+  __typename?: 'Query'
+  execution: {
+    __typename?: 'Execution'
+    id: string
+    createdAt: any
+    completedAt?: any | null
+    result?: any | null
+    summary?: string | null
+    status: Types.ExecutionStatus
+    scenarioId?: string | null
+    playbookId?: string | null
+    entityId?: string | null
+    entityType?: Types.ExecutionEntityType | null
+    type: Types.ExecutionType
+    errorMessage?: string | null
+    initiatedBy?: string | null
+    initiatedFrom: Types.ExecutionInitiatedFrom
+    identity?: {
+      __typename?: 'ExecutionIdentity'
+      name: string
+      id: string
+      type: string
+      url: string
+    } | null
+  }
+}
+
+export const ExecutionInfoFragmentDoc = gql`
+  fragment ExecutionInfo on Execution {
+    id
+    createdAt
+    completedAt
+    result
+    summary
+    status
+    identity {
+      name
+      id
+      type
+      url
+    }
+    scenarioId
+    playbookId
+    entityId
+    entityType
+    type
+    errorMessage
+    initiatedBy
+    initiatedFrom
+  }
+`
 export const ExecutionsDocument = gql`
   query Executions($page: PaginationInput, $filters: ExecutionFilter) {
     executions(page: $page, filters: $filters) {
       data {
-        id
-        createdAt
-        completedAt
-        result
-        summary
-        status
-        identity {
-          name
-          id
-          type
-          url
-        }
-        scenarioId
-        playbookId
-        entityId
-        entityType
-        type
-        errorMessage
-        initiatedBy
-        initiatedFrom
+        ...ExecutionInfo
       }
       hasMore
       totalCount
       hasData
     }
   }
+  ${ExecutionInfoFragmentDoc}
 `
 
 /**
@@ -396,4 +459,67 @@ export type ExecutionArtifactsSuspenseQueryHookResult = ReturnType<
 export type ExecutionArtifactsQueryResult = ApolloReactCommon.QueryResult<
   ExecutionArtifactsQuery,
   ExecutionArtifactsQueryVariables
+>
+export const ExecutionDocument = gql`
+  query Execution($id: String!) {
+    execution(id: $id) {
+      ...ExecutionInfo
+    }
+  }
+  ${ExecutionInfoFragmentDoc}
+`
+
+/**
+ * __useExecutionQuery__
+ *
+ * To run a query within a React component, call `useExecutionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useExecutionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useExecutionQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useExecutionQuery(
+  baseOptions: ApolloReactHooks.QueryHookOptions<ExecutionQuery, ExecutionQueryVariables> &
+    ({ variables: ExecutionQueryVariables; skip?: boolean } | { skip: boolean })
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<ExecutionQuery, ExecutionQueryVariables>(
+    ExecutionDocument,
+    options
+  )
+}
+export function useExecutionLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ExecutionQuery, ExecutionQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<ExecutionQuery, ExecutionQueryVariables>(
+    ExecutionDocument,
+    options
+  )
+}
+export function useExecutionSuspenseQuery(
+  baseOptions?:
+    | ApolloReactHooks.SkipToken
+    | ApolloReactHooks.SuspenseQueryHookOptions<ExecutionQuery, ExecutionQueryVariables>
+) {
+  const options =
+    baseOptions === ApolloReactHooks.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useSuspenseQuery<ExecutionQuery, ExecutionQueryVariables>(
+    ExecutionDocument,
+    options
+  )
+}
+export type ExecutionQueryHookResult = ReturnType<typeof useExecutionQuery>
+export type ExecutionLazyQueryHookResult = ReturnType<typeof useExecutionLazyQuery>
+export type ExecutionSuspenseQueryHookResult = ReturnType<typeof useExecutionSuspenseQuery>
+export type ExecutionQueryResult = ApolloReactCommon.QueryResult<
+  ExecutionQuery,
+  ExecutionQueryVariables
 >

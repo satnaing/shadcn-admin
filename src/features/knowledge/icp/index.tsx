@@ -88,13 +88,15 @@ export default function ICPPage() {
       actions={<AddICPButton icpProfiles={icpProfiles} />}
     >
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-        {icpProfiles.map((profile) => (
+        {icpProfiles.map((profile, index) => (
           <Card
             key={profile.id}
-            className='cursor-pointer overflow-hidden transition-shadow hover:shadow-lg'
+            className='animate-fade-in-up cursor-pointer overflow-hidden opacity-0 transition-shadow hover:shadow-lg'
             onClick={() => handleCardClick(profile.id)}
             style={{
               borderTop: `4px solid ${profile.color ? COLOR_MAP[profile.color] : '#e5e7eb'}`,
+              animationDelay: `${index * 150}ms`,
+              animationFillMode: 'forwards',
             }}
           >
             <CardContent className='flex h-full flex-col'>

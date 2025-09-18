@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
 import { Route as PlaysIndexRouteImport } from './routes/plays/index'
+import { Route as OutreachIndexRouteImport } from './routes/outreach/index'
 import { Route as HelpCenterIndexRouteImport } from './routes/help-center/index'
 import { Route as ConnectedAccountsIndexRouteImport } from './routes/connected-accounts/index'
 import { Route as ChatsIndexRouteImport } from './routes/chats/index'
@@ -65,6 +66,11 @@ const SettingsIndexRoute = SettingsIndexRouteImport.update({
 const PlaysIndexRoute = PlaysIndexRouteImport.update({
   id: '/plays/',
   path: '/plays/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OutreachIndexRoute = OutreachIndexRouteImport.update({
+  id: '/outreach/',
+  path: '/outreach/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HelpCenterIndexRoute = HelpCenterIndexRouteImport.update({
@@ -198,6 +204,7 @@ export interface FileRoutesByFullPath {
   '/chats': typeof ChatsIndexRoute
   '/connected-accounts': typeof ConnectedAccountsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
+  '/outreach': typeof OutreachIndexRoute
   '/plays': typeof PlaysIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/tools': typeof ToolsIndexRoute
@@ -226,6 +233,7 @@ export interface FileRoutesByTo {
   '/chats': typeof ChatsIndexRoute
   '/connected-accounts': typeof ConnectedAccountsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
+  '/outreach': typeof OutreachIndexRoute
   '/plays': typeof PlaysIndexRoute
   '/settings': typeof SettingsIndexRoute
   '/tools': typeof ToolsIndexRoute
@@ -257,6 +265,7 @@ export interface FileRoutesById {
   '/chats/': typeof ChatsIndexRoute
   '/connected-accounts/': typeof ConnectedAccountsIndexRoute
   '/help-center/': typeof HelpCenterIndexRoute
+  '/outreach/': typeof OutreachIndexRoute
   '/plays/': typeof PlaysIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/tools/': typeof ToolsIndexRoute
@@ -288,6 +297,7 @@ export interface FileRouteTypes {
     | '/chats'
     | '/connected-accounts'
     | '/help-center'
+    | '/outreach'
     | '/plays'
     | '/settings/'
     | '/tools'
@@ -316,6 +326,7 @@ export interface FileRouteTypes {
     | '/chats'
     | '/connected-accounts'
     | '/help-center'
+    | '/outreach'
     | '/plays'
     | '/settings'
     | '/tools'
@@ -346,6 +357,7 @@ export interface FileRouteTypes {
     | '/chats/'
     | '/connected-accounts/'
     | '/help-center/'
+    | '/outreach/'
     | '/plays/'
     | '/settings/'
     | '/tools/'
@@ -371,6 +383,7 @@ export interface RootRouteChildren {
   ChatsIndexRoute: typeof ChatsIndexRoute
   ConnectedAccountsIndexRoute: typeof ConnectedAccountsIndexRoute
   HelpCenterIndexRoute: typeof HelpCenterIndexRoute
+  OutreachIndexRoute: typeof OutreachIndexRoute
   PlaysIndexRoute: typeof PlaysIndexRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   KnowledgeIcpProfileIdRoute: typeof KnowledgeIcpProfileIdRoute
@@ -422,6 +435,13 @@ declare module '@tanstack/react-router' {
       path: '/plays'
       fullPath: '/plays'
       preLoaderRoute: typeof PlaysIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/outreach/': {
+      id: '/outreach/'
+      path: '/outreach'
+      fullPath: '/outreach'
+      preLoaderRoute: typeof OutreachIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/help-center/': {
@@ -630,6 +650,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChatsIndexRoute: ChatsIndexRoute,
   ConnectedAccountsIndexRoute: ConnectedAccountsIndexRoute,
   HelpCenterIndexRoute: HelpCenterIndexRoute,
+  OutreachIndexRoute: OutreachIndexRoute,
   PlaysIndexRoute: PlaysIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   KnowledgeIcpProfileIdRoute: KnowledgeIcpProfileIdRoute,

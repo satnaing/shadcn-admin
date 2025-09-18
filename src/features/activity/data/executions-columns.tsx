@@ -3,9 +3,9 @@ import { type ColumnDef } from '@tanstack/react-table'
 import { cn } from '@/lib/utils'
 import { DataTableColumnHeader } from '../components/data-table-column-header'
 import { DataTableRowActions } from '../components/data-table-row-actions'
+import { type ExecutionInfoFragment } from '../graphql/operations.generated'
 import { parseSlackMarkdown } from '../utils/slack-markdown-parser'
 import { executionStatuses } from './data'
-import { type Execution } from './schema'
 
 // Extend the table meta type
 declare module '@tanstack/react-table' {
@@ -16,7 +16,7 @@ declare module '@tanstack/react-table' {
   }
 }
 
-export const executionsColumns: ColumnDef<Execution>[] = [
+export const executionsColumns: ColumnDef<ExecutionInfoFragment>[] = [
   {
     accessorKey: 'identity',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Company' />,

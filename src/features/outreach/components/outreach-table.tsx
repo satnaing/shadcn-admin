@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo, useCallback } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
 import {
   type SortingState,
@@ -8,7 +8,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { keyBy } from 'lodash'
+import { toast } from 'sonner'
 import { useTableUrlState } from '@/hooks/use-table-url-state'
 import {
   Table,
@@ -19,30 +19,73 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Loadable } from '@/components/loadable'
-import { executionsColumns as columns } from '../data/executions-columns'
-import { type ExecutionInfoFragment } from '../graphql/operations.generated'
+import { createOutreachColumns } from '../data/outreach-columns'
+import { type CampaignContactTableRow } from '../data/schema'
+import {
+  useCampaignContactPauseMutation,
+  useCampaignContactContinueMutation,
+  GetCampaignContactsDocument,
+} from '../graphql/operations.generated'
 import { DataTablePagination } from './data-table-pagination'
 import { DataTableToolbar } from './data-table-toolbar'
-import { useExecutions } from './executions-provider'
+import { useOutreach } from './outreach-provider'
 
-const route = getRouteApi('/activity/')
+const route = getRouteApi('/outreach/')
 
 type DataTableProps = {
-  data: ExecutionInfoFragment[]
-  playbooks?: Array<{ id: string; name: string }>
-  scenarios?: Array<{ id: string; name: string; playbookId: string }>
+  data: CampaignContactTableRow[]
   totalCount?: number
   isLoading?: boolean
 }
 
-export function ExecutionsTable({
-  data,
-  playbooks = [],
-  scenarios = [],
-  totalCount = 0,
-  isLoading = false,
-}: DataTableProps) {
-  const { setOpen, setCurrentExecution } = useExecutions()
+export function OutreachTable({ data, totalCount = 0, isLoading = false }: DataTableProps) {
+  const { setOpen, setCurrentOutreach } = useOutreach()
+  const [loadingContactIds, setLoadingContactIds] = useState<Set<string>>(new Set())
+
+  const [pauseMutation] = useCampaignContactPauseMutation({
+    onCompleted: () => {
+      toast.success('Contact paused successfully')
+    },
+    onError: (error) => {
+      toast.error(`Failed to pause contact: ${error.message}`)
+    },
+    refetchQueries: [GetCampaignContactsDocument],
+  })
+
+  const [continueMutation] = useCampaignContactContinueMutation({
+    onCompleted: () => {
+      toast.success('Contact continued successfully')
+    },
+    onError: (error) => {
+      toast.error(`Failed to continue contact: ${error.message}`)
+    },
+    refetchQueries: [GetCampaignContactsDocument],
+  })
+
+  const handleTogglePause = useCallback(
+    async (contactId: string, isRunning: boolean) => {
+      setLoadingContactIds((prev) => new Set(prev).add(contactId))
+
+      try {
+        if (isRunning) {
+          await pauseMutation({
+            variables: { input: { id: contactId, allFromCompany: false } },
+          })
+        } else {
+          await continueMutation({
+            variables: { input: { id: contactId, allFromCompany: false } },
+          })
+        }
+      } finally {
+        setLoadingContactIds((prev) => {
+          const next = new Set(prev)
+          next.delete(contactId)
+          return next
+        })
+      }
+    },
+    [pauseMutation, continueMutation]
+  )
 
   // Local UI-only states
   const [rowSelection, setRowSelection] = useState({})
@@ -53,6 +96,15 @@ export function ExecutionsTable({
 
   const search = route.useSearch()
   const navigate = route.useNavigate()
+
+  const columns = useMemo(
+    () =>
+      createOutreachColumns({
+        onTogglePause: handleTogglePause,
+        loadingContactIds,
+      }),
+    [handleTogglePause, loadingContactIds]
+  )
 
   // Synced with URL states
   const {
@@ -70,15 +122,9 @@ export function ExecutionsTable({
     globalFilter: { enabled: true, key: 'filter' },
     columnFilters: [
       { columnId: 'status', searchKey: 'status', type: 'string' },
-      { columnId: 'type', searchKey: 'type', type: 'string' },
-      { columnId: 'playbookId', searchKey: 'playbookId', type: 'string' },
-      { columnId: 'scenarioId', searchKey: 'scenarioId', type: 'string' },
+      { columnId: 'sender', searchKey: 'senderId', type: 'string' },
     ],
   })
-
-  // Create playbook lookup map
-  const playbookLookup = keyBy(playbooks, 'id')
-  const scenarioLookup = keyBy(scenarios, 'id')
 
   const table = useReactTable({
     data,
@@ -90,10 +136,6 @@ export function ExecutionsTable({
       columnFilters,
       globalFilter,
       pagination,
-    },
-    meta: {
-      playbooks: playbookLookup,
-      scenarios: scenarioLookup,
     },
     pageCount: Math.ceil(totalCount / pagination.pageSize),
     manualPagination: true,
@@ -115,7 +157,7 @@ export function ExecutionsTable({
 
   return (
     <div className='space-y-4 max-sm:has-[div[role="toolbar"]]:mb-16'>
-      <DataTableToolbar table={table} playbooks={playbooks} scenarios={scenarios} />
+      <DataTableToolbar table={table} />
       <div className='relative overflow-hidden rounded-md border'>
         {isLoading && (
           <div className='bg-background/50 absolute inset-0 z-10 flex items-center justify-center backdrop-blur-sm'>
@@ -146,15 +188,9 @@ export function ExecutionsTable({
                   data-state={row.getIsSelected() && 'selected'}
                   className='hover:bg-muted/50 cursor-pointer'
                   onClick={() => {
-                    const execution = row.original
-                    setCurrentExecution(execution)
+                    const outreach = row.original as CampaignContactTableRow
+                    setCurrentOutreach(outreach)
                     setOpen('view')
-                    navigate({
-                      search: (prev) => ({
-                        ...prev,
-                        executionId: execution.id,
-                      }),
-                    })
                   }}
                 >
                   {row.getVisibleCells().map((cell) => (
