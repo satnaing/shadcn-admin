@@ -8,7 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { type Execution } from '../data/schema'
+import { type ExecutionInfoFragment } from '../graphql/operations.generated'
 import { useExecutions } from './executions-provider'
 
 type DataTableRowActionsProps<TData> = {
@@ -16,7 +16,7 @@ type DataTableRowActionsProps<TData> = {
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-  const execution = row.original as Execution
+  const execution = row.original as ExecutionInfoFragment
   const { setOpen, setCurrentExecution } = useExecutions()
 
   const handleViewDetails = () => {
