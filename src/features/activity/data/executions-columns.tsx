@@ -90,7 +90,7 @@ export const executionsColumns: ColumnDef<ExecutionInfoFragment>[] = [
 
       return (
         <div className='w-[160px]'>
-          <span className='truncate'>{playbookName || playbookId}</span>
+          <div className='truncate'>{playbookName || playbookId}</div>
         </div>
       )
     },
