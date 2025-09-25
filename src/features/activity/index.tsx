@@ -1,7 +1,10 @@
 import { useEffect } from 'react'
-import { getRouteApi } from '@tanstack/react-router'
+import { getRouteApi, useNavigate } from '@tanstack/react-router'
 import { useQuery } from '@apollo/client'
+import { Activity as ActivityIcon, Cable, PlayCircle } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import EmptyState from '@/components/empty-state'
 import { Page } from '@/components/page'
 import { ExecutionsDialogs } from './components/executions-dialogs'
 import { ExecutionsProvider } from './components/executions-provider'
@@ -18,6 +21,7 @@ const route = getRouteApi('/activity/')
 
 function ActivityContent() {
   const search = route.useSearch()
+  const navigate = useNavigate()
   const { setCurrentExecution, currentExecution } = useExecutions()
 
   // Calculate pagination offset
@@ -75,6 +79,9 @@ function ActivityContent() {
   const playbooks = playbooksData?.playbooks || []
   const scenarios = scenariosData?.playbookScenarios || []
 
+  // Check if we have any executions at all (not filtered, total count)
+  const hasAnyActivity = totalCount > 0
+
   return (
     <>
       <Page title='Activity' description='View and manage agent activity'>
@@ -84,6 +91,24 @@ function ActivityContent() {
               <Skeleton className='h-8 w-full' />
               <Skeleton className='h-[400px] w-full' />
             </div>
+          ) : !hasAnyActivity ? (
+            <EmptyState
+              Icon={ActivityIcon}
+              title='No activity yet'
+              description='Get started by connecting your tools and setting up your first play to see agent activity here'
+              Cta={
+                <div className='flex gap-3'>
+                  <Button variant='outline' onClick={() => navigate({ to: '/tools' })}>
+                    <Cable className='mr-2 h-4 w-4' />
+                    Connect Tools
+                  </Button>
+                  <Button onClick={() => navigate({ to: '/plays' })}>
+                    <PlayCircle className='mr-2 h-4 w-4' />
+                    Set Up Your First Play
+                  </Button>
+                </div>
+              }
+            />
           ) : (
             <ExecutionsTable
               data={executions}

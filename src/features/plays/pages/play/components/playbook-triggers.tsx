@@ -30,7 +30,7 @@ const getTriggerTypeLabel = (type: TriggerType) => {
     case TriggerType.CompanyAddedToList:
       return 'Company Added to List'
     case TriggerType.NewWebsiteVisitor:
-      return 'Whenever a new website visitor is de-anonymized'
+      return 'When a visitor to the website is de-anonymized'
     case TriggerType.HubspotWorkflow:
       return 'Triggered by custom action from within a Hubspot Workflow'
     default:
@@ -105,30 +105,7 @@ export function PlaybookTriggers({ playbookId }: PlaybookTriggersProps) {
             </div>
           ) : (
             <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-              {/* Always show the default HubSpot workflow trigger */}
-              <div
-                key={hubspotWorkflowTrigger.id}
-                className='bg-muted/30 relative cursor-default rounded-lg border border-dashed p-4'
-              >
-                <div className='flex items-start gap-3'>
-                  <div className='rounded-lg bg-orange-500/10 p-2'>
-                    <IconHubspot className='h-5 w-5 text-orange-500' />
-                  </div>
-                  <div className='min-w-0 flex-1'>
-                    <div className='mb-1 flex items-center gap-2'>
-                      <h4 className='truncate font-medium'>{hubspotWorkflowTrigger.name}</h4>
-                      <span className='bg-muted text-muted-foreground rounded-full px-2 py-0.5 text-xs'>
-                        Default
-                      </span>
-                    </div>
-                    <p className='text-muted-foreground line-clamp-2 text-sm'>
-                      {hubspotWorkflowTrigger.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Show other configured triggers */}
+              {/* Show other configured triggers first */}
               {triggers.map((trigger) => {
                 const Icon = getTriggerIcon(trigger.type)
                 return (
@@ -157,6 +134,29 @@ export function PlaybookTriggers({ playbookId }: PlaybookTriggersProps) {
                   </div>
                 )
               })}
+
+              {/* Always show the default HubSpot workflow trigger last */}
+              <div
+                key={hubspotWorkflowTrigger.id}
+                className='bg-muted/30 relative cursor-default rounded-lg border border-dashed p-4'
+              >
+                <div className='flex items-start gap-3'>
+                  <div className='rounded-lg bg-orange-500/10 p-2'>
+                    <IconHubspot className='h-5 w-5 text-orange-500' />
+                  </div>
+                  <div className='min-w-0 flex-1'>
+                    <div className='mb-1 flex items-center gap-2'>
+                      <h4 className='truncate font-medium'>{hubspotWorkflowTrigger.name}</h4>
+                      <span className='bg-muted text-muted-foreground rounded-full px-2 py-0.5 text-xs'>
+                        Default
+                      </span>
+                    </div>
+                    <p className='text-muted-foreground line-clamp-2 text-sm'>
+                      {hubspotWorkflowTrigger.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </CardContent>
