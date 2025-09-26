@@ -110,7 +110,7 @@ export function PlaybookDetailsForm({
         )}
 
         <div className='space-y-2'>
-          <Label htmlFor='description'>Description</Label>
+          <Label htmlFor='description'>Goal & General Instructions</Label>
           <Textarea
             id='description'
             value={formData.description}

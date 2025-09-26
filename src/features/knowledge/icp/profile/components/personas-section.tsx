@@ -121,7 +121,11 @@ export default function PersonasSection({ targetMarketId, personas }: PersonasSe
       ) : (
         <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
           {personas.map((persona) => (
-            <Card key={persona.id} className='relative'>
+            <Card
+              key={persona.id}
+              className='hover:bg-accent/50 relative cursor-pointer transition-colors'
+              onClick={() => handleEditPersona(persona)}
+            >
               <CardContent>
                 <div className='mb-2 flex items-start justify-between'>
                   <div>
@@ -147,11 +151,16 @@ export default function PersonasSection({ targetMarketId, personas }: PersonasSe
                   </div>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant='ghost' size='icon' className='-mt-2 -mr-2'>
+                      <Button
+                        variant='ghost'
+                        size='icon'
+                        className='-mt-2 -mr-2'
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <MoreVertical className='h-4 w-4' />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align='end'>
+                    <DropdownMenuContent align='end' onClick={(e) => e.stopPropagation()}>
                       <DropdownMenuItem onClick={() => handleEditPersona(persona)}>
                         <Edit className='mr-2 h-4 w-4' />
                         Edit
