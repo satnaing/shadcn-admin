@@ -11,7 +11,6 @@ import {
   type PlaybookDetailsData,
 } from '../../components/playbook-details-form'
 import { usePlaybookQuery, usePlaybookUpdateMutation } from '../../graphql/operations.generated'
-import { ActionPlanDisplay } from './components/action-plan-display'
 import { PlaybookTriggers } from './components/playbook-triggers'
 import { ScenarioForm } from './components/scenario-form'
 import { ScenarioModal } from './components/scenario-modal'
@@ -230,39 +229,24 @@ export default function PlaybookDetailPage() {
                 />
               ) : (
                 // Multiple scenarios: show cards with modals
-                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
                   {playbook.scenarios.map((scenario) => (
                     <div
                       key={scenario.id}
-                      className='hover:bg-accent/50 group cursor-pointer rounded-lg border p-4 transition-colors'
+                      className='hover:bg-accent/50 group cursor-pointer rounded-lg border p-5 transition-all hover:shadow-md'
                       onClick={() => setSelectedScenario(scenario)}
                     >
-                      <div className='flex items-start justify-between gap-2'>
+                      <div className='flex items-start justify-between gap-3'>
                         <div className='min-w-0 flex-1 space-y-3'>
-                          <h4 className='truncate font-medium'>{scenario.name}</h4>
+                          <h4 className='text-base font-semibold'>{scenario.name}</h4>
 
-                          <div className='space-y-2'>
-                            <div>
-                              <span className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
-                                If
-                              </span>
-                              <p className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
-                                {scenario.description || 'No condition defined'}
-                              </p>
-                            </div>
-
-                            <div>
-                              <span className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
-                                Then
-                              </span>
-                              <div className='text-muted-foreground mt-1 line-clamp-2 text-sm'>
-                                {scenario.actionPlan ? (
-                                  <ActionPlanDisplay text={scenario.actionPlan} />
-                                ) : (
-                                  'No action plan defined'
-                                )}
-                              </div>
-                            </div>
+                          <div>
+                            <span className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
+                              WHEN
+                            </span>
+                            <p className='text-muted-foreground mt-1 line-clamp-3 text-sm'>
+                              {scenario.description || 'No condition defined'}
+                            </p>
                           </div>
                         </div>
                         <Button
