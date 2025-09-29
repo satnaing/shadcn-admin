@@ -77,7 +77,7 @@ export const executionsColumns: ColumnDef<ExecutionInfoFragment>[] = [
   },
   {
     accessorKey: 'playbookId',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='Playbook' />,
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Agent' />,
     cell: ({ row, table }) => {
       const playbookId = row.getValue('playbookId') as string | null
 
@@ -97,6 +97,24 @@ export const executionsColumns: ColumnDef<ExecutionInfoFragment>[] = [
     filterFn: (row, id, value) => {
       const playbookId = row.getValue(id)
       return playbookId === value
+    },
+    enableSorting: false,
+  },
+  {
+    accessorKey: 'result',
+    header: ({ column }) => <DataTableColumnHeader column={column} title='Summary' />,
+    cell: ({ row }) => {
+      const summary = (row.getValue('result') as any)?.shortSummary as string | null
+
+      if (!summary) {
+        return <span className='text-muted-foreground'>No summary</span>
+      }
+
+      return (
+        <div className='w-[400px]'>
+          <div className='text-sm break-words whitespace-normal'>{parseSlackMarkdown(summary)}</div>
+        </div>
+      )
     },
     enableSorting: false,
   },
@@ -178,47 +196,12 @@ export const executionsColumns: ColumnDef<ExecutionInfoFragment>[] = [
     enableSorting: false,
   },
   {
-    accessorKey: 'result',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='Summary' />,
-    cell: ({ row }) => {
-      const summary = (row.getValue('result') as any)?.shortSummary as string | null
-
-      if (!summary) {
-        return <span className='text-muted-foreground'>No summary</span>
-      }
-
-      return (
-        <div className='w-[400px]'>
-          <div className='text-sm break-words whitespace-normal'>{parseSlackMarkdown(summary)}</div>
-        </div>
-      )
-    },
-    enableSorting: false,
-  },
-  {
     accessorKey: 'createdAt',
     header: ({ column }) => <DataTableColumnHeader column={column} title='Started At' />,
     cell: ({ row }) => {
       const createdAt = row.getValue('createdAt') as string
       return <div className='w-[160px]'>{format(new Date(createdAt), 'MMM d, yyyy HH:mm')}</div>
     },
-    enableSorting: false,
-  },
-  {
-    accessorKey: 'type',
-    header: ({ column }) => <DataTableColumnHeader column={column} title='Type' />,
-    cell: ({ row }) => {
-      const type = row.getValue('type') as string
-      return (
-        <div className='w-[100px]'>
-          <span>{type === 'PLAYBOOK' ? 'Playbook' : 'User'}</span>
-        </div>
-      )
-    },
-    filterFn: (row, id, value) => {
-      return row.getValue(id) === value
-    },
-    enableHiding: false,
     enableSorting: false,
   },
   {

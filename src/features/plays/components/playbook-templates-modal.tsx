@@ -1,7 +1,7 @@
 import { useNavigate } from '@tanstack/react-router'
 import { Plus, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import {
   Dialog,
   DialogContent,
@@ -44,20 +44,20 @@ export default function PlaybookTemplatesModal({ isOpen, onClose }: PlaybookTemp
       if (data?.playbookCreateFromTemplate) {
         onClose()
         navigate({
-          to: '/plays/$playbookId',
+          to: '/agents/$playbookId',
           params: { playbookId: data.playbookCreateFromTemplate.id },
           search: { isNew: true },
         })
       }
     } catch (error: any) {
-      toast.error('Failed to create playbook', {
+      toast.error('Failed to create agent', {
         description: error.message || 'Please try again',
       })
     }
   }
 
   const handleCreateFromScratch = () => {
-    navigate({ to: '/plays/new' })
+    navigate({ to: '/agents/new' })
     onClose()
   }
 
@@ -65,7 +65,7 @@ export default function PlaybookTemplatesModal({ isOpen, onClose }: PlaybookTemp
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className='max-h-[80vh] min-w-3xl overflow-y-auto'>
         <DialogHeader>
-          <DialogTitle>Create a New Play</DialogTitle>
+          <DialogTitle>Create a New Agent</DialogTitle>
           <DialogDescription>
             Choose a template to get started quickly, or create your own from scratch.
           </DialogDescription>
@@ -74,8 +74,8 @@ export default function PlaybookTemplatesModal({ isOpen, onClose }: PlaybookTemp
         <div className='mt-6'>
           {loading ? (
             <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
-              {[...Array(4)].map((_, i) => (
-                <Card key={`loading-template-skeleton-${i}`} className='h-32'>
+              {[1, 2, 3, 4].map((skeletonId) => (
+                <Card key={`skeleton-${skeletonId}`} className='h-32'>
                   <CardHeader>
                     <Skeleton className='h-4 w-3/4' />
                     <Skeleton className='mt-2 h-3 w-full' />
@@ -94,7 +94,7 @@ export default function PlaybookTemplatesModal({ isOpen, onClose }: PlaybookTemp
                   <Plus className='text-muted-foreground mb-2 h-8 w-8' />
                   <h3 className='text-lg font-semibold'>Create from scratch</h3>
                   <p className='text-muted-foreground mt-1 text-center text-sm'>
-                    Start with a blank playbook
+                    Start with a blank agent
                   </p>
                 </CardContent>
               </Card>
@@ -106,18 +106,11 @@ export default function PlaybookTemplatesModal({ isOpen, onClose }: PlaybookTemp
                   className={`hover:border-primary cursor-pointer transition-colors ${createFromTemplateLoading ? 'pointer-events-none opacity-50' : ''}`}
                   onClick={() => handleTemplateSelect(template.id)}
                 >
-                  <CardHeader>
-                    <CardTitle className='flex items-center justify-between text-base'>
-                      {template.name}
-                      {createFromTemplateLoading && <Loader2 className='h-4 w-4 animate-spin' />}
-                    </CardTitle>
-                    <CardDescription className='line-clamp-2'>
+                  <CardContent className='flex h-32 flex-col items-center justify-center p-6'>
+                    {createFromTemplateLoading && <Loader2 className='mb-2 h-4 w-4 animate-spin' />}
+                    <h3 className='text-center text-lg font-semibold'>{template.name}</h3>
+                    <p className='text-muted-foreground mt-1 line-clamp-2 text-center text-sm'>
                       {template.description || 'No description available'}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className='text-muted-foreground text-sm'>
-                      {template.scenarioCount} scenario{template.scenarioCount !== 1 ? 's' : ''}
                     </p>
                   </CardContent>
                 </Card>

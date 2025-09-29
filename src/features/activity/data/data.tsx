@@ -33,17 +33,6 @@ export const executionStatuses = [
   },
 ]
 
-export const executionTypes = [
-  {
-    label: 'Playbook',
-    value: 'PLAYBOOK' as const,
-  },
-  {
-    label: 'User',
-    value: 'USER' as const,
-  },
-]
-
 export const executionEntityTypes = [
   {
     label: 'Company',

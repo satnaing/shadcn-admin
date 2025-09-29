@@ -26,8 +26,8 @@ export const sidebarData: SidebarData = {
           icon: Send,
         },
         {
-          title: 'Plays',
-          url: '/plays',
+          title: 'Agents',
+          url: '/agents',
           icon: PlayCircle,
         },
       ],

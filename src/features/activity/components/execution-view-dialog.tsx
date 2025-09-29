@@ -31,20 +31,56 @@ export function ExecutionViewDialog({ open }: ExecutionViewDialogProps) {
         <DialogHeader>
           <DialogTitle>Execution Details</DialogTitle>
           <DialogDescription>
-            View detailed information about this currentExecution.
+            View detailed information about this agent execution.
           </DialogDescription>
         </DialogHeader>
 
         <DialogBody>
           <div className='space-y-4'>
+            {/* Main Content - Summary and Output */}
+            {currentExecution.summary && (
+              <div>
+                <p className='text-muted-foreground mb-3 text-base font-semibold'>
+                  Execution Summary
+                </p>
+                <div className='space-y-2'>{parseSlackMarkdown(currentExecution.summary)}</div>
+              </div>
+            )}
+
+            {currentExecution.summary && <Separator />}
+
+            <div>
+              <p className='text-muted-foreground mb-3 text-base font-semibold'>Assets</p>
+              <div className='space-y-2 text-sm'>
+                <AgentOutput executionId={currentExecution.id} />
+              </div>
+            </div>
+
+            {currentExecution.errorMessage && (
+              <>
+                <Separator />
+                <div>
+                  <p className='text-muted-foreground mb-3 text-base font-semibold'>
+                    Error Message
+                  </p>
+                  <p className='text-destructive whitespace-pre-wrap'>
+                    {currentExecution.errorMessage}
+                  </p>
+                </div>
+              </>
+            )}
+
+            {/* Metadata - ID, Status, Times, etc */}
+            <Separator />
+
             <div className='grid grid-cols-2 gap-4'>
               <div>
-                <p className='text-muted-foreground text-sm font-medium'>ID</p>
+                <p className='text-muted-foreground text-sm font-semibold'>ID</p>
                 <p className='font-mono text-sm'>{currentExecution.id}</p>
               </div>
 
               <div>
-                <p className='text-muted-foreground text-sm font-medium'>Status</p>
+                <p className='text-muted-foreground text-sm font-semibold'>Status</p>
                 <div className='mt-1 flex items-center gap-2'>
                   {status && (
                     <>
@@ -62,17 +98,15 @@ export function ExecutionViewDialog({ open }: ExecutionViewDialogProps) {
               </div>
             </div>
 
-            <Separator />
-
             <div className='grid grid-cols-2 gap-4'>
               <div>
-                <p className='text-muted-foreground text-sm font-medium'>Started At</p>
+                <p className='text-muted-foreground text-sm font-semibold'>Started At</p>
                 <p className='text-sm'>{format(new Date(currentExecution.createdAt), 'PPpp')}</p>
               </div>
 
               {currentExecution.completedAt && (
                 <div>
-                  <p className='text-muted-foreground text-sm font-medium'>Completed At</p>
+                  <p className='text-muted-foreground text-sm font-semibold'>Completed At</p>
                   <p className='text-sm'>
                     {format(new Date(currentExecution.completedAt), 'PPpp')}
                   </p>
@@ -80,55 +114,9 @@ export function ExecutionViewDialog({ open }: ExecutionViewDialogProps) {
               )}
             </div>
 
-            {currentExecution.errorMessage && (
-              <>
-                <Separator />
-                <div>
-                  <p className='text-muted-foreground mb-2 text-sm font-medium'>Error Message</p>
-                  <p className='text-destructive text-sm whitespace-pre-wrap'>
-                    {currentExecution.errorMessage}
-                  </p>
-                </div>
-              </>
-            )}
-
-            <Separator />
-            <div>
-              <p className='text-muted-foreground mb-2 text-sm font-medium'>Output</p>
-              <div className='space-y-1 text-sm'>
-                <AgentOutput executionId={currentExecution.id} />
-              </div>
-            </div>
-
-            {currentExecution.summary && (
-              <>
-                <Separator />
-                <div>
-                  <p className='text-muted-foreground mb-2 text-sm font-medium'>Summary</p>
-                  <div className='space-y-1 text-sm'>
-                    {parseSlackMarkdown(currentExecution.summary)}
-                  </div>
-                </div>
-              </>
-            )}
-
-            <Separator />
-
-            <div className='grid grid-cols-2 gap-4'>
-              <div>
-                <p className='text-muted-foreground text-sm font-medium'>Type</p>
-                <p className='text-sm'>{currentExecution.type}</p>
-              </div>
-
-              <div>
-                <p className='text-muted-foreground text-sm font-medium'>Initiated From</p>
-                <p className='text-sm'>{currentExecution.initiatedFrom}</p>
-              </div>
-            </div>
-
             {currentExecution.initiatedBy && (
               <div>
-                <p className='text-muted-foreground text-sm font-medium'>Initiated By</p>
+                <p className='text-muted-foreground text-sm font-semibold'>Initiated By</p>
                 <p className='text-sm'>{currentExecution.initiatedBy}</p>
               </div>
             )}

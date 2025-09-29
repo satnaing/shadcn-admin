@@ -28,7 +28,7 @@ export function parseSlackMarkdown(text: string): React.ReactNode[] {
       elements.push(
         <blockquote
           key={`blockquote-${key++}`}
-          className='border-muted-foreground/30 text-muted-foreground border-l-4 pl-4 italic'
+          className='border-muted-foreground/30 my-2 border-l-4 pl-4'
         >
           {parseLineContent(content)}
         </blockquote>

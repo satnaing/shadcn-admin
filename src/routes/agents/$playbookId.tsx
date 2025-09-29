@@ -6,7 +6,7 @@ const searchSchema = z.object({
   isNew: z.boolean().optional(),
 })
 
-export const Route = createFileRoute('/plays/$playbookId')({
+export const Route = createFileRoute('/agents/$playbookId')({
   component: PlaybookDetailPage,
   validateSearch: searchSchema,
 })

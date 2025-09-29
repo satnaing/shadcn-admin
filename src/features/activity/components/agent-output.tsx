@@ -25,7 +25,7 @@ export function AgentOutput({ executionId }: AgentOutputProps) {
       isEmpty={artifacts.length === 0}
       emptyComponent={
         <div className='py-8 text-center'>
-          <p className='text-muted-foreground text-sm'>No resources found for this execution.</p>
+          <p className='text-muted-foreground text-sm'>No assets created in this execution.</p>
         </div>
       }
       className='flex items-center justify-center py-8'

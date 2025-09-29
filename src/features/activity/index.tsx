@@ -107,7 +107,7 @@ function ActivityContent() {
                       <Cable className='mr-2 h-4 w-4' />
                       Connect Tools
                     </Button>
-                    <Button onClick={() => navigate({ to: '/plays' })}>
+                    <Button onClick={() => navigate({ to: '/agents' })}>
                       <PlayCircle className='mr-2 h-4 w-4' />
                       Set Up Your First Play
                     </Button>

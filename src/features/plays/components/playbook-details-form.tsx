@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -86,11 +86,10 @@ export function PlaybookDetailsForm({
       <CardHeader>
         <div className='flex items-center justify-between'>
           <div>
-            <CardTitle className='mb-2 flex items-center gap-2'>
+            <CardTitle className='flex items-center gap-2'>
               <FileText className='h-5 w-5' />
-              Context
+              Instructions
             </CardTitle>
-            <CardDescription>Provide context and instructions for this playbook</CardDescription>
           </div>
         </div>
       </CardHeader>
@@ -109,16 +108,21 @@ export function PlaybookDetailsForm({
           </div>
         )}
 
-        <div className='space-y-2'>
-          <Label htmlFor='description'>Goal & General Instructions</Label>
-          <Textarea
-            id='description'
-            value={formData.description}
-            onChange={(e) => handleChange('description', e.target.value)}
-            placeholder='Explain briefly when this playbook runs and what Swan should be aware of'
-            className='max-h-[200px] min-h-[100px] resize-none'
-            disabled={isDisabled}
-          />
+        <div className='space-y-4'>
+          <div>
+            <h3 className='mb-1 text-base font-semibold'>Identity</h3>
+            <p className='text-muted-foreground mb-3 text-sm'>
+              Tell the Agent what its purpose is and what it's trying to achieve.
+            </p>
+            <Textarea
+              id='description'
+              value={formData.description}
+              onChange={(e) => handleChange('description', e.target.value)}
+              placeholder='My goal is... I always...'
+              className='max-h-[200px] min-h-[100px] resize-none'
+              disabled={isDisabled}
+            />
+          </div>
         </div>
 
         <Accordion type='single' collapsible className='w-full'>

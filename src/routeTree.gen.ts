@@ -14,18 +14,18 @@ import { Route as authRouteRouteImport } from './routes/(auth)/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as SettingsIndexRouteImport } from './routes/settings/index'
-import { Route as PlaysIndexRouteImport } from './routes/plays/index'
 import { Route as OutreachIndexRouteImport } from './routes/outreach/index'
 import { Route as HelpCenterIndexRouteImport } from './routes/help-center/index'
 import { Route as ConnectedAccountsIndexRouteImport } from './routes/connected-accounts/index'
 import { Route as ChatsIndexRouteImport } from './routes/chats/index'
+import { Route as AgentsIndexRouteImport } from './routes/agents/index'
 import { Route as ActivityIndexRouteImport } from './routes/activity/index'
 import { Route as SettingsNotificationsRouteImport } from './routes/settings/notifications'
 import { Route as SettingsDisplayRouteImport } from './routes/settings/display'
 import { Route as SettingsAppearanceRouteImport } from './routes/settings/appearance'
 import { Route as SettingsAccountRouteImport } from './routes/settings/account'
-import { Route as PlaysNewRouteImport } from './routes/plays/new'
-import { Route as PlaysPlaybookIdRouteImport } from './routes/plays/$playbookId'
+import { Route as AgentsNewRouteImport } from './routes/agents/new'
+import { Route as AgentsPlaybookIdRouteImport } from './routes/agents/$playbookId'
 import { Route as errors503RouteImport } from './routes/(errors)/503'
 import { Route as errors500RouteImport } from './routes/(errors)/500'
 import { Route as errors404RouteImport } from './routes/(errors)/404'
@@ -63,11 +63,6 @@ const SettingsIndexRoute = SettingsIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SettingsRouteRoute,
 } as any)
-const PlaysIndexRoute = PlaysIndexRouteImport.update({
-  id: '/plays/',
-  path: '/plays/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const OutreachIndexRoute = OutreachIndexRouteImport.update({
   id: '/outreach/',
   path: '/outreach/',
@@ -86,6 +81,11 @@ const ConnectedAccountsIndexRoute = ConnectedAccountsIndexRouteImport.update({
 const ChatsIndexRoute = ChatsIndexRouteImport.update({
   id: '/chats/',
   path: '/chats/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsIndexRoute = AgentsIndexRouteImport.update({
+  id: '/agents/',
+  path: '/agents/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ActivityIndexRoute = ActivityIndexRouteImport.update({
@@ -113,14 +113,14 @@ const SettingsAccountRoute = SettingsAccountRouteImport.update({
   path: '/account',
   getParentRoute: () => SettingsRouteRoute,
 } as any)
-const PlaysNewRoute = PlaysNewRouteImport.update({
-  id: '/plays/new',
-  path: '/plays/new',
+const AgentsNewRoute = AgentsNewRouteImport.update({
+  id: '/agents/new',
+  path: '/agents/new',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PlaysPlaybookIdRoute = PlaysPlaybookIdRouteImport.update({
-  id: '/plays/$playbookId',
-  path: '/plays/$playbookId',
+const AgentsPlaybookIdRoute = AgentsPlaybookIdRouteImport.update({
+  id: '/agents/$playbookId',
+  path: '/agents/$playbookId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const errors503Route = errors503RouteImport.update({
@@ -194,18 +194,18 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/plays/$playbookId': typeof PlaysPlaybookIdRoute
-  '/plays/new': typeof PlaysNewRoute
+  '/agents/$playbookId': typeof AgentsPlaybookIdRoute
+  '/agents/new': typeof AgentsNewRoute
   '/settings/account': typeof SettingsAccountRoute
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
   '/activity': typeof ActivityIndexRoute
+  '/agents': typeof AgentsIndexRoute
   '/chats': typeof ChatsIndexRoute
   '/connected-accounts': typeof ConnectedAccountsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
   '/outreach': typeof OutreachIndexRoute
-  '/plays': typeof PlaysIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
@@ -223,18 +223,18 @@ export interface FileRoutesByTo {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/plays/$playbookId': typeof PlaysPlaybookIdRoute
-  '/plays/new': typeof PlaysNewRoute
+  '/agents/$playbookId': typeof AgentsPlaybookIdRoute
+  '/agents/new': typeof AgentsNewRoute
   '/settings/account': typeof SettingsAccountRoute
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
   '/activity': typeof ActivityIndexRoute
+  '/agents': typeof AgentsIndexRoute
   '/chats': typeof ChatsIndexRoute
   '/connected-accounts': typeof ConnectedAccountsIndexRoute
   '/help-center': typeof HelpCenterIndexRoute
   '/outreach': typeof OutreachIndexRoute
-  '/plays': typeof PlaysIndexRoute
   '/settings': typeof SettingsIndexRoute
   '/tools': typeof ToolsIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
@@ -255,18 +255,18 @@ export interface FileRoutesById {
   '/(errors)/404': typeof errors404Route
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
-  '/plays/$playbookId': typeof PlaysPlaybookIdRoute
-  '/plays/new': typeof PlaysNewRoute
+  '/agents/$playbookId': typeof AgentsPlaybookIdRoute
+  '/agents/new': typeof AgentsNewRoute
   '/settings/account': typeof SettingsAccountRoute
   '/settings/appearance': typeof SettingsAppearanceRoute
   '/settings/display': typeof SettingsDisplayRoute
   '/settings/notifications': typeof SettingsNotificationsRoute
   '/activity/': typeof ActivityIndexRoute
+  '/agents/': typeof AgentsIndexRoute
   '/chats/': typeof ChatsIndexRoute
   '/connected-accounts/': typeof ConnectedAccountsIndexRoute
   '/help-center/': typeof HelpCenterIndexRoute
   '/outreach/': typeof OutreachIndexRoute
-  '/plays/': typeof PlaysIndexRoute
   '/settings/': typeof SettingsIndexRoute
   '/tools/': typeof ToolsIndexRoute
   '/knowledge/icp/$profileId': typeof KnowledgeIcpProfileIdRoute
@@ -287,18 +287,18 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
-    | '/plays/$playbookId'
-    | '/plays/new'
+    | '/agents/$playbookId'
+    | '/agents/new'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
     | '/activity'
+    | '/agents'
     | '/chats'
     | '/connected-accounts'
     | '/help-center'
     | '/outreach'
-    | '/plays'
     | '/settings/'
     | '/tools'
     | '/knowledge/icp/$profileId'
@@ -316,18 +316,18 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
-    | '/plays/$playbookId'
-    | '/plays/new'
+    | '/agents/$playbookId'
+    | '/agents/new'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
     | '/activity'
+    | '/agents'
     | '/chats'
     | '/connected-accounts'
     | '/help-center'
     | '/outreach'
-    | '/plays'
     | '/settings'
     | '/tools'
     | '/knowledge/icp/$profileId'
@@ -347,18 +347,18 @@ export interface FileRouteTypes {
     | '/(errors)/404'
     | '/(errors)/500'
     | '/(errors)/503'
-    | '/plays/$playbookId'
-    | '/plays/new'
+    | '/agents/$playbookId'
+    | '/agents/new'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
     | '/activity/'
+    | '/agents/'
     | '/chats/'
     | '/connected-accounts/'
     | '/help-center/'
     | '/outreach/'
-    | '/plays/'
     | '/settings/'
     | '/tools/'
     | '/knowledge/icp/$profileId'
@@ -377,14 +377,14 @@ export interface RootRouteChildren {
   errors404Route: typeof errors404Route
   errors500Route: typeof errors500Route
   errors503Route: typeof errors503Route
-  PlaysPlaybookIdRoute: typeof PlaysPlaybookIdRoute
-  PlaysNewRoute: typeof PlaysNewRoute
+  AgentsPlaybookIdRoute: typeof AgentsPlaybookIdRoute
+  AgentsNewRoute: typeof AgentsNewRoute
   ActivityIndexRoute: typeof ActivityIndexRoute
+  AgentsIndexRoute: typeof AgentsIndexRoute
   ChatsIndexRoute: typeof ChatsIndexRoute
   ConnectedAccountsIndexRoute: typeof ConnectedAccountsIndexRoute
   HelpCenterIndexRoute: typeof HelpCenterIndexRoute
   OutreachIndexRoute: typeof OutreachIndexRoute
-  PlaysIndexRoute: typeof PlaysIndexRoute
   ToolsIndexRoute: typeof ToolsIndexRoute
   KnowledgeIcpProfileIdRoute: typeof KnowledgeIcpProfileIdRoute
   KnowledgeIcpNewRoute: typeof KnowledgeIcpNewRoute
@@ -430,13 +430,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsIndexRouteImport
       parentRoute: typeof SettingsRouteRoute
     }
-    '/plays/': {
-      id: '/plays/'
-      path: '/plays'
-      fullPath: '/plays'
-      preLoaderRoute: typeof PlaysIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/outreach/': {
       id: '/outreach/'
       path: '/outreach'
@@ -463,6 +456,13 @@ declare module '@tanstack/react-router' {
       path: '/chats'
       fullPath: '/chats'
       preLoaderRoute: typeof ChatsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents/': {
+      id: '/agents/'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof AgentsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/activity/': {
@@ -500,18 +500,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsAccountRouteImport
       parentRoute: typeof SettingsRouteRoute
     }
-    '/plays/new': {
-      id: '/plays/new'
-      path: '/plays/new'
-      fullPath: '/plays/new'
-      preLoaderRoute: typeof PlaysNewRouteImport
+    '/agents/new': {
+      id: '/agents/new'
+      path: '/agents/new'
+      fullPath: '/agents/new'
+      preLoaderRoute: typeof AgentsNewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/plays/$playbookId': {
-      id: '/plays/$playbookId'
-      path: '/plays/$playbookId'
-      fullPath: '/plays/$playbookId'
-      preLoaderRoute: typeof PlaysPlaybookIdRouteImport
+    '/agents/$playbookId': {
+      id: '/agents/$playbookId'
+      path: '/agents/$playbookId'
+      fullPath: '/agents/$playbookId'
+      preLoaderRoute: typeof AgentsPlaybookIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(errors)/503': {
@@ -644,14 +644,14 @@ const rootRouteChildren: RootRouteChildren = {
   errors404Route: errors404Route,
   errors500Route: errors500Route,
   errors503Route: errors503Route,
-  PlaysPlaybookIdRoute: PlaysPlaybookIdRoute,
-  PlaysNewRoute: PlaysNewRoute,
+  AgentsPlaybookIdRoute: AgentsPlaybookIdRoute,
+  AgentsNewRoute: AgentsNewRoute,
   ActivityIndexRoute: ActivityIndexRoute,
+  AgentsIndexRoute: AgentsIndexRoute,
   ChatsIndexRoute: ChatsIndexRoute,
   ConnectedAccountsIndexRoute: ConnectedAccountsIndexRoute,
   HelpCenterIndexRoute: HelpCenterIndexRoute,
   OutreachIndexRoute: OutreachIndexRoute,
-  PlaysIndexRoute: PlaysIndexRoute,
   ToolsIndexRoute: ToolsIndexRoute,
   KnowledgeIcpProfileIdRoute: KnowledgeIcpProfileIdRoute,
   KnowledgeIcpNewRoute: KnowledgeIcpNewRoute,

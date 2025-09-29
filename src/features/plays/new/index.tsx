@@ -4,6 +4,8 @@ import { ArrowLeft, ArrowRight, CheckCircle, Layers, Plus, Zap } from 'lucide-re
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Stepper,
   StepperItem,
@@ -18,12 +20,14 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { Page } from '@/components/page'
 import { HubspotTriggerCard } from '../components/hubspot-trigger-card'
-import { PlaybookDetailsForm, type PlaybookDetailsData } from '../components/playbook-details-form'
+import { type PlaybookDetailsData } from '../components/playbook-details-form'
 import {
   usePlayCreateMutation,
   usePlaybookScenarioCreateMutation,
 } from '../graphql/operations.generated'
+import ActionPlanEditor from '../pages/play/components/action-plan-editor'
 import { ScenarioForm, type ScenarioFormData } from '../pages/play/components/scenario-form'
+import { formatActionPlanForDisplay } from '../utils/format-action-plan'
 
 interface ScenarioData extends ScenarioFormData {
   id: string
@@ -34,11 +38,11 @@ export default function PlaybookNewPage() {
   const [activeStep, setActiveStep] = useState(1)
   const [isCreating, setIsCreating] = useState(false)
 
-  // Step 1: Playbook details
+  // Step 1: Agent details
   const [playbookData, setPlaybookData] = useState<PlaybookDetailsData>({
     name: '',
     description: '',
-    outreachInstructions: '',
+    outreachInstructions: '', // Keep for compatibility but won't be used
   })
 
   // Step 3: Scenarios
@@ -47,7 +51,7 @@ export default function PlaybookNewPage() {
       id: 'temp-1',
       name: 'Scenario 1',
       description: 'Whenever an event occurs',
-      actionPlan: 'Send a notification in our main slack channel',
+      actionPlan: '',
     },
   ])
   const [editingScenarioId, setEditingScenarioId] = useState<string | null>(null)
@@ -85,7 +89,7 @@ export default function PlaybookNewPage() {
     if (activeStep === 1) {
       // Validate step 1
       if (!playbookData.name.trim()) {
-        toast.error('Please provide a playbook name')
+        toast.error('Please provide an agent name')
         return
       }
       if (!playbookData.description.trim()) {
@@ -121,19 +125,18 @@ export default function PlaybookNewPage() {
     setIsCreating(true)
 
     try {
-      // Step 1: Create the playbook
+      // Step 1: Create the agent
       const { data: playbookResponse } = await createPlaybook({
         variables: {
           input: {
             name: playbookData.name,
             description: playbookData.description,
-            outreachInstructions: playbookData.outreachInstructions,
           },
         },
       })
 
       if (!playbookResponse?.playCreate) {
-        toast.error('Failed to create playbook', { description: 'Please try again' })
+        toast.error('Failed to create agent', { description: 'Please try again' })
         return
       }
 
@@ -156,12 +159,12 @@ export default function PlaybookNewPage() {
       await Promise.all(scenarioPromises)
 
       navigate({
-        to: '/plays/$playbookId',
+        to: '/agents/$playbookId',
         params: { playbookId: newPlaybookId },
         search: { isNew: true },
       })
     } catch (error: any) {
-      toast.error('Failed to create playbook', {
+      toast.error('Failed to create agent', {
         description: error.message || 'Please try again',
       })
       setIsCreating(false)
@@ -183,10 +186,10 @@ export default function PlaybookNewPage() {
 
   return (
     <Page
-      title='Create Play'
-      description='Set up your new play step by step'
+      title='Create Agent'
+      description='Set up your new agent step by step'
       actions={
-        <Button variant='outline' onClick={() => navigate({ to: '/plays' })}>
+        <Button variant='outline' onClick={() => navigate({ to: '/agents' })}>
           <ArrowLeft className='mr-2 h-4 w-4' />
           Cancel
         </Button>
@@ -236,14 +239,46 @@ export default function PlaybookNewPage() {
           </StepperNav>
 
           <StepperPanel>
-            {/* Step 1: Playbook Details */}
+            {/* Step 1: Agent Details */}
             <StepperContent value={1}>
-              <PlaybookDetailsForm
-                initialData={playbookData}
-                onChange={handlePlaybookChange}
-                showNameField={true}
-                showSaveButton={false}
-              />
+              <Card>
+                <CardContent className='space-y-6'>
+                  <div className='space-y-2'>
+                    <Label htmlFor='name'>Name *</Label>
+                    <Input
+                      id='name'
+                      placeholder='Enter agent name'
+                      value={playbookData.name}
+                      onChange={(e) =>
+                        handlePlaybookChange({
+                          ...playbookData,
+                          name: e.target.value,
+                        })
+                      }
+                      required
+                    />
+                  </div>
+
+                  <div className='space-y-2'>
+                    <Label htmlFor='description'>Identity</Label>
+                    <Textarea
+                      id='description'
+                      value={playbookData.description}
+                      onChange={(e) =>
+                        handlePlaybookChange({
+                          ...playbookData,
+                          description: e.target.value,
+                        })
+                      }
+                      placeholder='My goal is to... I always...'
+                      className='max-h-[200px] min-h-[100px] resize-none'
+                    />
+                    <p className='text-muted-foreground text-sm'>
+                      Tell the Agent what its purpose is and what it's trying to achieve.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             </StepperContent>
 
             {/* Step 2: Triggers */}
@@ -255,14 +290,14 @@ export default function PlaybookNewPage() {
                     Triggers
                   </CardTitle>
                   <CardDescription>
-                    Your playbook can be triggered by the following events
+                    Your agent can be triggered by the following events
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className='space-y-4'>
                     <HubspotTriggerCard />
                     <p className='text-muted-foreground text-sm'>
-                      Additional triggers can be configured after creating the playbook.
+                      Additional triggers can be configured after creating the agent.
                     </p>
                   </div>
                 </CardContent>
@@ -279,7 +314,7 @@ export default function PlaybookNewPage() {
                   </CardTitle>
                   <CardDescription>
                     {scenarios.length === 1 && !editingScenarioId
-                      ? 'Define what actions Swan should take when this playbook is triggered.'
+                      ? 'Tell the agent what it does once triggered. Add scenarios when different conditions require different actions.'
                       : 'Define scenarios with conditions and actions. Swan analyzes the situation first, then executes the matching action plan.'}
                   </CardDescription>
                 </CardHeader>
@@ -304,22 +339,16 @@ export default function PlaybookNewPage() {
                   ) : scenarios.length === 1 && !editingScenarioId ? (
                     // Simplified view for single scenario
                     <div className='space-y-4'>
-                      <div className='space-y-2'>
-                        <label htmlFor='action-plan' className='text-sm font-medium'>
-                          What to do
-                        </label>
-                        <Textarea
-                          id='action-plan'
-                          placeholder='Define the action plan for this playbook (e.g., Send a notification in our main slack channel)'
-                          rows={6}
+                      <div>
+                        <ActionPlanEditor
                           value={scenarios[0].actionPlan}
-                          onChange={(e) => {
-                            setScenarios((prev) => [{ ...prev[0], actionPlan: e.target.value }])
+                          onChange={(value) => {
+                            setScenarios((prev) => [{ ...prev[0], actionPlan: value }])
                           }}
-                          className='mt resize-none'
+                          disabled={isCreating}
                         />
-                        <p className='text-muted-foreground text-sm'>
-                          Provide detailed steps that will be executed when this playbook runs
+                        <p className='text-muted-foreground mt-2 text-sm'>
+                          Use "@" to tag users or "#" for channels & HubSpot lists
                         </p>
                       </div>
 
@@ -369,7 +398,7 @@ export default function PlaybookNewPage() {
                                       Then
                                     </p>
                                     <p className='text-muted-foreground text-sm'>
-                                      {scenario.actionPlan}
+                                      {formatActionPlanForDisplay(scenario.actionPlan)}
                                     </p>
                                   </div>
                                 </div>
@@ -433,7 +462,7 @@ export default function PlaybookNewPage() {
               disabled={!isStepValid(3) || isCreating}
               loading={isCreating}
             >
-              {isCreating ? 'Creating...' : 'Create Playbook'}
+              {isCreating ? 'Creating...' : 'Create Agent'}
             </Button>
           )}
         </div>

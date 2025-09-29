@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { format } from 'date-fns'
 import { useNavigate } from '@tanstack/react-router'
-import { PlayCircle, PauseCircle, Plus, MoreVertical, Clock, Layers, Calendar } from 'lucide-react'
+import { PlayCircle, PauseCircle, Plus, MoreVertical, Clock, Calendar } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -23,10 +23,10 @@ export default function PlaybooksPage() {
   const [updatePlaybook] = usePlaybookUpdateMutation()
   const [isTemplatesModalOpen, setIsTemplatesModalOpen] = useState(false)
 
-  const playbooks = data?.playbooks || []
+  const playbooks = (data?.playbooks || []).filter((playbook) => !playbook.deletedAt)
 
   const handleCardClick = (playbookId: string) => {
-    navigate({ to: '/plays/$playbookId', params: { playbookId } })
+    navigate({ to: '/agents/$playbookId', params: { playbookId } })
   }
 
   const handleTogglePlaybook = async (e: React.MouseEvent, playbook: any) => {
@@ -40,21 +40,18 @@ export default function PlaybooksPage() {
           },
         },
       })
-      toast.success(playbook.isEnabled ? 'Playbook deactivated' : 'Playbook activated', {
+      toast.success(playbook.isEnabled ? 'Agent deactivated' : 'Agent activated', {
         description: `${playbook.name} has been ${playbook.isEnabled ? 'deactivated' : 'activated'} successfully`,
       })
       refetch()
     } catch (error: any) {
-      toast.error(`Failed to update playbook. ${error.message}`)
+      toast.error(`Failed to update agent. ${error.message}`)
     }
   }
 
   if (loading) {
     return (
-      <Page
-        title='Plays'
-        description='Intelligent go-to-market routines that help you grow your business'
-      >
+      <Page title='Agents' description='Intelligent AI agents that help you grow your business'>
         <PlaybooksSkeleton />
       </Page>
     )
@@ -62,15 +59,12 @@ export default function PlaybooksPage() {
 
   if (playbooks.length === 0) {
     return (
-      <Page
-        title='Plays'
-        description='Intelligent go-to-market routines that help you grow your business'
-      >
+      <Page title='Agents' description='Intelligent AI agents that help you grow your business'>
         <EmptyState
           Icon={PlayCircle}
-          title='No plays created'
-          description='Get started by creating your first play'
-          ctaText='Create Play'
+          title='No agents created'
+          description='Get started by creating your first agent'
+          ctaText='Create Agent'
           ctaIcon={Plus}
           onCtaClick={() => setIsTemplatesModalOpen(true)}
         />
@@ -85,12 +79,12 @@ export default function PlaybooksPage() {
 
   return (
     <Page
-      title='Plays'
-      description='Intelligent go-to-market routines that help you grow your business'
+      title='Agents'
+      description='Intelligent AI agents that help you grow your business'
       actions={
         <Button onClick={() => setIsTemplatesModalOpen(true)}>
           <Plus className='h-4 w-4' />
-          Create Play
+          Create Agent
         </Button>
       }
     >
@@ -139,27 +133,15 @@ export default function PlaybooksPage() {
                 </DropdownMenu>
               </div>
 
-              <div className='space-y-3'>
-                <div className='flex items-center gap-4 text-sm'>
-                  <div className='flex items-center gap-1.5'>
-                    <Layers className='text-muted-foreground h-4 w-4' />
-                    <span className='text-muted-foreground'>
-                      {playbook.scenarioCount} scenario
-                      {playbook.scenarioCount !== 1 ? 's' : ''}
-                    </span>
-                  </div>
-                  <div className='flex items-center gap-1.5'>
-                    <Calendar className='text-muted-foreground h-4 w-4' />
-                    <span className='text-muted-foreground'>
-                      Created {format(new Date(playbook.createdAt), 'MMM dd, yyyy')}
-                    </span>
-                  </div>
+              <div className='text-muted-foreground mt-4 flex items-center gap-4 text-xs'>
+                <div className='flex items-center gap-1'>
+                  <Calendar className='h-3 w-3' />
+                  <span>Created {format(new Date(playbook.createdAt), 'MMM dd')}</span>
                 </div>
-
                 {playbook.updatedAt && playbook.updatedAt !== playbook.createdAt && (
-                  <div className='text-muted-foreground flex items-center gap-1.5 text-xs'>
+                  <div className='flex items-center gap-1'>
                     <Clock className='h-3 w-3' />
-                    <span>Last updated {format(new Date(playbook.updatedAt), 'MMM dd, yyyy')}</span>
+                    <span>Updated {format(new Date(playbook.updatedAt), 'MMM dd')}</span>
                   </div>
                 )}
               </div>

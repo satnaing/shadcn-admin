@@ -3,7 +3,7 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import { type Table } from '@tanstack/react-table'
 import { keyBy, sortBy } from 'lodash'
 import { Button } from '@/components/ui/button'
-import { executionStatuses, executionTypes } from '../data/data'
+import { executionStatuses } from '../data/data'
 import { DataTableSingleFilter } from './data-table-single-filter'
 import { DataTableViewOptions } from './data-table-view-options'
 
@@ -13,10 +13,13 @@ type DataTableToolbarProps<TData> = {
   scenarios?: Array<{ id: string; name: string; playbookId: string }>
 }
 
+const DEFAULT_PLAYBOOKS: Array<{ id: string; name: string }> = []
+const DEFAULT_SCENARIOS: Array<{ id: string; name: string; playbookId: string }> = []
+
 export function DataTableToolbar<TData>({
   table,
-  playbooks = [],
-  scenarios = [],
+  playbooks = DEFAULT_PLAYBOOKS,
+  scenarios = DEFAULT_SCENARIOS,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0 || table.getState().globalFilter
 
@@ -66,17 +69,10 @@ export function DataTableToolbar<TData>({
               options={executionStatuses}
             />
           )}
-          {table.getColumn('type') && (
-            <DataTableSingleFilter
-              column={table.getColumn('type')}
-              title='Type'
-              options={executionTypes}
-            />
-          )}
           {table.getColumn('playbookId') && playbookOptions.length > 0 && (
             <DataTableSingleFilter
               column={table.getColumn('playbookId')}
-              title='Playbook'
+              title='Agent'
               options={playbookOptions}
             />
           )}

@@ -70,13 +70,15 @@ export function DataTableSingleFilter<TData, TValue>({
                   >
                     <div
                       className={cn(
-                        'border-primary flex size-4 items-center justify-center rounded-full border',
+                        'border-primary flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border',
                         isSelected ? 'bg-primary text-primary-foreground' : 'opacity-50'
                       )}
                     >
-                      {isSelected && <div className='size-2 rounded-full bg-current' />}
+                      {isSelected && <div className='h-2 w-2 rounded-full bg-current' />}
                     </div>
-                    {option.icon && <option.icon className='text-muted-foreground size-4' />}
+                    {option.icon && (
+                      <option.icon className='text-muted-foreground h-4 w-4 flex-shrink-0' />
+                    )}
                     <span>{option.label}</span>
                   </CommandItem>
                 )

@@ -169,9 +169,7 @@ export function ScenarioForm({
                   {...field}
                 />
               </FormControl>
-              <FormDescription>
-                Tell Swan when it should classify an event to this sceario.
-              </FormDescription>
+              <FormDescription>Explain when the agent should choose this scenario</FormDescription>
               <FormMessage />
             </FormItem>
           )}
