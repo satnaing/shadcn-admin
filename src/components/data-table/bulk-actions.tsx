@@ -41,7 +41,11 @@ export function DataTableBulkActions<TData>({
   useEffect(() => {
     if (selectedCount > 0) {
       const message = `${selectedCount} ${entityName}${selectedCount > 1 ? 's' : ''} selected. Bulk actions toolbar is available.`
-      setAnnouncement(message)
+
+      // Use queueMicrotask to defer state update and avoid cascading renders
+      queueMicrotask(() => {
+        setAnnouncement(message)
+      })
 
       // Clear announcement after a delay
       const timer = setTimeout(() => setAnnouncement(''), 3000)
