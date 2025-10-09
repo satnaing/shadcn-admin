@@ -54,18 +54,18 @@ export function UserAuthForm({
   function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
 
-    // Mock successful authentication
-    const mockUser = {
-      accountNo: 'ACC001',
-      email: data.email,
-      role: ['user'],
-      exp: Date.now() + 24 * 60 * 60 * 1000, // 24 hours from now
-    }
-
     toast.promise(sleep(2000), {
       loading: 'Signing in...',
       success: () => {
         setIsLoading(false)
+
+        // Mock successful authentication with expiry computed at success time
+        const mockUser = {
+          accountNo: 'ACC001',
+          email: data.email,
+          role: ['user'],
+          exp: Date.now() + 24 * 60 * 60 * 1000, // 24 hours from now
+        }
 
         // Set user and access token
         auth.setUser(mockUser)
