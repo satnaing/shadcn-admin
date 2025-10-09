@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Check, X } from 'lucide-react'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Badge } from '@/components/ui/badge'
@@ -41,14 +41,16 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
     setSelectedUsers(selectedUsers.filter((user) => user.id !== userId))
   }
 
-  useEffect(() => {
-    if (!open) {
+  const handleOpenChange = (newOpen: boolean) => {
+    onOpenChange(newOpen)
+    // Reset selected users when dialog closes
+    if (!newOpen) {
       setSelectedUsers([])
     }
-  }, [open])
+  }
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className='sm:max-w-[600px]'>
         <DialogHeader>
           <DialogTitle>New message</DialogTitle>
