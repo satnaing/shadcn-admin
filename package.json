@@ -70,7 +70,7 @@
     "@types/react-dom": "^19.2.1",
     "@vitejs/plugin-react-swc": "^4.1.0",
     "eslint": "^9.37.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
     "eslint-plugin-react-refresh": "^0.4.23",
     "globals": "^16.4.0",
     "knip": "^5.64.2",
