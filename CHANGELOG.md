@@ -1,3 +1,24 @@
+## v2.2.0 (2025-10-09)
+
+### Feat
+
+- add analytics tab in dashboard page (#220)
+- add extra AppTitle component for sidebar header (#216)
+- update 2-column sign in page (#213)
+
+### Fix
+
+- update sidebar menu chevron direction in RTL mode (#229)
+- pagination button spacing (#215)
+- upgrade lucide-react to solve antivirus warning (#211)
+
+### Refactor
+
+- move sidebar related components into app-sidebar
+- change SidebarInset component from 'main' to 'div'
+- replace extra main container query with content container query
+- replace inline svg logo with logo component (#214)
+
 ## v2.1.0 (2025-08-23)
 
 ### Feat
