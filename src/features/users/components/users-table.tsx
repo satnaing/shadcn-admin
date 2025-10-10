@@ -27,13 +27,6 @@ import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
 import { usersColumns as columns } from './users-columns'
 
-declare module '@tanstack/react-table' {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface ColumnMeta<TData, TValue> {
-    className: string
-  }
-}
-
 type DataTableProps = {
   data: User[]
   search: Record<string, unknown>
@@ -140,7 +133,8 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
                       colSpan={header.colSpan}
                       className={cn(
                         'bg-background group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-                        header.column.columnDef.meta?.className ?? ''
+                        header.column.columnDef.meta?.className,
+                        header.column.columnDef.meta?.thClassName
                       )}
                     >
                       {header.isPlaceholder
@@ -168,7 +162,8 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
                       key={cell.id}
                       className={cn(
                         'bg-background group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-                        cell.column.columnDef.meta?.className ?? ''
+                        cell.column.columnDef.meta?.className,
+                        cell.column.columnDef.meta?.tdClassName
                       )}
                     >
                       {flexRender(
