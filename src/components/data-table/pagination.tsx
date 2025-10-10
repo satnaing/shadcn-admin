@@ -17,10 +17,12 @@ import {
 
 type DataTablePaginationProps<TData> = {
   table: Table<TData>
+  className?: string
 }
 
 export function DataTablePagination<TData>({
   table,
+  className,
 }: DataTablePaginationProps<TData>) {
   const currentPage = table.getState().pagination.pageIndex + 1
   const totalPages = table.getPageCount()
@@ -30,7 +32,8 @@ export function DataTablePagination<TData>({
     <div
       className={cn(
         'flex items-center justify-between overflow-clip px-2',
-        '@max-2xl/content:flex-col-reverse @max-2xl/content:gap-4'
+        '@max-2xl/content:flex-col-reverse @max-2xl/content:gap-4',
+        className
       )}
       style={{ overflowClipMargin: 1 }}
     >
