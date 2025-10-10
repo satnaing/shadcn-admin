@@ -152,7 +152,7 @@ export function ProfileForm() {
                   <FormDescription className={cn(index !== 0 && 'sr-only')}>
                     Add links to your website, blog, or social media profiles.
                   </FormDescription>
-                  <FormControl>
+                  <FormControl className={cn(index !== 0 && 'mt-1.5')}>
                     <Input {...field} />
                   </FormControl>
                   <FormMessage />
