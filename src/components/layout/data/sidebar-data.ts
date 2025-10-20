@@ -3,6 +3,7 @@ import {
   IconBrowserCheck,
   IconBug,
   IconChecklist,
+  IconClipboardList,
   IconError404,
   IconHelp,
   IconLayoutDashboard,
@@ -75,6 +76,11 @@ export const sidebarData: SidebarData = {
           title: 'Users',
           url: '/users',
           icon: IconUsers,
+        },
+        {
+          title: 'Activity Logs',
+          url: '/activity-logs',
+          icon: IconClipboardList,
         },
         {
           title: 'Secured by Clerk',
