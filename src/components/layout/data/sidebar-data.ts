@@ -73,11 +73,7 @@ export const sidebarData: SidebarData = {
           badge: '3',
           icon: MessagesSquare,
         },
-        {
-          title: 'Users',
-          url: '/users',
-          icon: Users,
-        },
+        {          title: 'Users',          url: '/users',          icon: Users,        },        {          title: 'Agents',          url: '/agents',          icon: Settings,        },
         {
           title: 'Secured by Clerk',
           icon: ClerkLogo,
