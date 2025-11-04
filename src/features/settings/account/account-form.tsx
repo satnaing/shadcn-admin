@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { showSubmittedData } from '@/lib/show-submitted-data'
@@ -29,6 +29,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { DatePicker } from '@/components/date-picker'
+import citiesData from '@/lib/cities.json'
 
 const languages = [
   { label: 'English', value: 'en' },
@@ -50,6 +51,9 @@ const accountFormSchema = z.object({
     .max(30, 'Name must not be longer than 30 characters.'),
   dob: z.date('Please select your date of birth.'),
   language: z.string('Please select a language.'),
+  province: z.string('Please select a province.'),
+  city: z.string('Please select a city.'),
+  district: z.string('Please select a district.'),
 })
 
 type AccountFormValues = z.infer<typeof accountFormSchema>
@@ -57,6 +61,9 @@ type AccountFormValues = z.infer<typeof accountFormSchema>
 // This can come from your database or API.
 const defaultValues: Partial<AccountFormValues> = {
   name: '',
+  province: '',
+  city: '',
+  district: '',
 }
 
 export function AccountForm() {
@@ -64,6 +71,20 @@ export function AccountForm() {
     resolver: zodResolver(accountFormSchema),
     defaultValues,
   })
+
+  // Watch for changes to province and city to update options
+  const provinceValue = useWatch({ control: form.control, name: 'province' })
+  const cityValue = useWatch({ control: form.control, name: 'city' })
+
+  // Get cities based on selected province
+  const cities = provinceValue
+    ? citiesData.provinces.find(p => p.id === provinceValue)?.cities || []
+    : []
+
+  // Get districts based on selected city
+  const districts = cityValue
+    ? cities.find(c => c.id === cityValue)?.districts || []
+    : []
 
   function onSubmit(data: AccountFormValues) {
     showSubmittedData(data)
@@ -166,6 +187,192 @@ export function AccountForm() {
             </FormItem>
           )}
         />
+        
+        {/* Province/City/District Selection */}
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+          <FormField
+            control={form.control}
+            name='province'
+            render={({ field }) => (
+              <FormItem className='flex flex-col'>
+                <FormLabel>Province</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant='outline'
+                        role='combobox'
+                        className={cn(
+                          'w-full justify-between',
+                          !field.value && 'text-muted-foreground'
+                        )}
+                      >
+                        {field.value
+                          ? citiesData.provinces.find(p => p.id === field.value)?.name
+                          : 'Select province'}
+                        <CaretSortIcon className='ms-2 h-4 w-4 shrink-0 opacity-50' />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className='w-full p-0'>
+                    <Command>
+                      <CommandInput placeholder='Search province...' />
+                      <CommandEmpty>No province found.</CommandEmpty>
+                      <CommandGroup>
+                        <CommandList>
+                          {citiesData.provinces.map((province) => (
+                            <CommandItem
+                              value={province.name}
+                              key={province.id}
+                              onSelect={() => {
+                                form.setValue('province', province.id)
+                                // Reset city and district when province changes
+                                form.setValue('city', '')
+                                form.setValue('district', '')
+                              }}
+                            >
+                              <CheckIcon
+                                className={cn(
+                                  'size-4',
+                                  province.id === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {province.name}
+                            </CommandItem>
+                          ))}
+                        </CommandList>
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name='city'
+            render={({ field }) => (
+              <FormItem className='flex flex-col'>
+                <FormLabel>City</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant='outline'
+                        role='combobox'
+                        className={cn(
+                          'w-full justify-between',
+                          !field.value && 'text-muted-foreground'
+                        )}
+                        disabled={!provinceValue}
+                      >
+                        {field.value
+                          ? cities.find(c => c.id === field.value)?.name
+                          : 'Select city'}
+                        <CaretSortIcon className='ms-2 h-4 w-4 shrink-0 opacity-50' />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className='w-full p-0'>
+                    <Command>
+                      <CommandInput placeholder='Search city...' />
+                      <CommandEmpty>No city found.</CommandEmpty>
+                      <CommandGroup>
+                        <CommandList>
+                          {cities.map((city) => (
+                            <CommandItem
+                              value={city.name}
+                              key={city.id}
+                              onSelect={() => {
+                                form.setValue('city', city.id)
+                                // Reset district when city changes
+                                form.setValue('district', '')
+                              }}
+                            >
+                              <CheckIcon
+                                className={cn(
+                                  'size-4',
+                                  city.id === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {city.name}
+                            </CommandItem>
+                          ))}
+                        </CommandList>
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name='district'
+            render={({ field }) => (
+              <FormItem className='flex flex-col'>
+                <FormLabel>District</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant='outline'
+                        role='combobox'
+                        className={cn(
+                          'w-full justify-between',
+                          !field.value && 'text-muted-foreground'
+                        )}
+                        disabled={!cityValue}
+                      >
+                        {field.value
+                          ? districts.find(d => d.id === field.value)?.name
+                          : 'Select district'}
+                        <CaretSortIcon className='ms-2 h-4 w-4 shrink-0 opacity-50' />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className='w-full p-0'>
+                    <Command>
+                      <CommandInput placeholder='Search district...' />
+                      <CommandEmpty>No district found.</CommandEmpty>
+                      <CommandGroup>
+                        <CommandList>
+                          {districts.map((district) => (
+                            <CommandItem
+                              value={district.name}
+                              key={district.id}
+                              onSelect={() => form.setValue('district', district.id)}
+                            >
+                              <CheckIcon
+                                className={cn(
+                                  'size-4',
+                                  district.id === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {district.name}
+                            </CommandItem>
+                          ))}
+                        </CommandList>
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        
         <Button type='submit'>Update account</Button>
       </form>
     </Form>
