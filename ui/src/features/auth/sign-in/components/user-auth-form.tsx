@@ -7,7 +7,7 @@ import { Loader2, LogIn } from 'lucide-react'
 import { toast } from 'sonner'
 import { IconFacebook, IconGithub } from '@/assets/brand-icons'
 import { useAuthStore } from '@/stores/auth-store'
-import { sleep, cn } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -21,13 +21,11 @@ import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
 
 const formSchema = z.object({
-  email: z.email({
-    error: (iss) => (iss.input === '' ? 'Please enter your email' : undefined),
-  }),
+  email: z.string().email('Please enter a valid email'),
   password: z
     .string()
     .min(1, 'Please enter your password')
-    .min(7, 'Password must be at least 7 characters long'),
+    .min(8, 'Password must be at least 8 characters long'),
 })
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLFormElement> {
@@ -51,34 +49,41 @@ export function UserAuthForm({
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
 
-    toast.promise(sleep(2000), {
-      loading: 'Signing in...',
-      success: () => {
-        setIsLoading(false)
+    try {
+      // Import the auth API
+      const { authApi } = await import('@/lib/api/auth')
 
-        // Mock successful authentication with expiry computed at success time
-        const mockUser = {
-          accountNo: 'ACC001',
-          email: data.email,
-          role: ['user'],
-          exp: Date.now() + 24 * 60 * 60 * 1000, // 24 hours from now
-        }
+      // Login with the API
+      const tokenResponse = await authApi.login({
+        email: data.email,
+        password: data.password,
+      })
 
-        // Set user and access token
-        auth.setUser(mockUser)
-        auth.setAccessToken('mock-access-token')
+      // Store tokens in auth store
+      auth.setAccessToken(tokenResponse.access_token)
+      auth.setRefreshToken(tokenResponse.refresh_token)
 
-        // Redirect to the stored location or default to dashboard
-        const targetPath = redirectTo || '/'
-        navigate({ to: targetPath, replace: true })
+      // Fetch current user data
+      const user = await authApi.getCurrentUser()
+      auth.setUser(user)
 
-        return `Welcome back, ${data.email}!`
-      },
-      error: 'Error',
-    })
+      // Show success message
+      toast.success(`Welcome back, ${user.email}!`)
+
+      // Redirect to the stored location or default to dashboard
+      const targetPath = redirectTo || '/'
+      navigate({ to: targetPath, replace: true })
+    } catch (error: any) {
+      console.error('Login error:', error)
+      const errorMessage =
+        error.response?.data?.detail || 'Invalid email or password'
+      toast.error(errorMessage)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (

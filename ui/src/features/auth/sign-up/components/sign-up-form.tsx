@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigate } from '@tanstack/react-router'
+import { toast } from 'sonner'
 import { IconFacebook, IconGithub } from '@/assets/brand-icons'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -18,14 +20,11 @@ import { PasswordInput } from '@/components/password-input'
 
 const formSchema = z
   .object({
-    email: z.email({
-      error: (iss) =>
-        iss.input === '' ? 'Please enter your email' : undefined,
-    }),
+    email: z.string().email('Please enter a valid email'),
     password: z
       .string()
       .min(1, 'Please enter your password')
-      .min(7, 'Password must be at least 7 characters long'),
+      .min(8, 'Password must be at least 8 characters long'),
     confirmPassword: z.string().min(1, 'Please confirm your password'),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -38,6 +37,7 @@ export function SignUpForm({
   ...props
 }: React.HTMLAttributes<HTMLFormElement>) {
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,14 +48,32 @@ export function SignUpForm({
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
 
-    setTimeout(() => {
+    try {
+      // Import the auth API
+      const { authApi } = await import('@/lib/api/auth')
+
+      // Register with the API
+      await authApi.register({
+        email: data.email,
+        password: data.password,
+      })
+
+      // Show success message
+      toast.success('Account created successfully! Please sign in.')
+
+      // Redirect to sign-in page
+      navigate({ to: '/sign-in' })
+    } catch (error: any) {
+      console.error('Registration error:', error)
+      const errorMessage =
+        error.response?.data?.detail || 'Failed to create account'
+      toast.error(errorMessage)
+    } finally {
       setIsLoading(false)
-    }, 3000)
+    }
   }
 
   return (

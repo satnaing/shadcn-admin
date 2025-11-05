@@ -4,6 +4,23 @@ Pydantic schemas for User model.
 from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel, EmailStr, Field, ConfigDict
+from enum import Enum
+
+
+class UserRole(str, Enum):
+    """User role enumeration."""
+    SUPERADMIN = "superadmin"
+    ADMIN = "admin"
+    MANAGER = "manager"
+    CASHIER = "cashier"
+
+
+class UserStatus(str, Enum):
+    """User status enumeration."""
+    ACTIVE = "active"
+    INACTIVE = "inactive"
+    INVITED = "invited"
+    SUSPENDED = "suspended"
 
 
 # Shared properties
@@ -12,8 +29,11 @@ class UserBase(BaseModel):
 
     email: EmailStr
     username: Optional[str] = None
-    full_name: Optional[str] = None
-    is_active: bool = True
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    phone_number: Optional[str] = None
+    role: UserRole = UserRole.CASHIER
+    status: UserStatus = UserStatus.ACTIVE
     is_superuser: bool = False
 
 
@@ -23,8 +43,11 @@ class UserCreate(BaseModel):
 
     email: EmailStr
     username: Optional[str] = None
-    full_name: Optional[str] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    phone_number: Optional[str] = None
     password: str = Field(..., min_length=8)
+    role: Optional[UserRole] = UserRole.CASHIER
 
 
 # Properties to receive via API on update
@@ -33,9 +56,12 @@ class UserUpdate(BaseModel):
 
     email: Optional[EmailStr] = None
     username: Optional[str] = None
-    full_name: Optional[str] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    phone_number: Optional[str] = None
     password: Optional[str] = Field(None, min_length=8)
-    is_active: Optional[bool] = None
+    role: Optional[UserRole] = None
+    status: Optional[UserStatus] = None
 
 
 # Properties to return via API

@@ -70,12 +70,17 @@ class UserService:
         Returns:
             Created user object
         """
+        from app.models.user import UserStatus
+
         db_user = User(
             email=user_in.email,
             username=user_in.username,
-            full_name=user_in.full_name,
+            first_name=user_in.first_name,
+            last_name=user_in.last_name,
+            phone_number=user_in.phone_number,
             hashed_password=get_password_hash(user_in.password),
-            is_active=True,
+            role=user_in.role,
+            status=UserStatus.ACTIVE,
             is_superuser=False,
         )
         db.add(db_user)
@@ -141,7 +146,8 @@ class UserService:
         Returns:
             True if user is active, False otherwise
         """
-        return user.is_active
+        from app.models.user import UserStatus
+        return user.status == UserStatus.ACTIVE
 
     @staticmethod
     async def is_superuser(user: User) -> bool:

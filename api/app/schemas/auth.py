@@ -1,7 +1,8 @@
 """
 Pydantic schemas for authentication.
 """
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
+from typing import Optional
 
 
 class LoginRequest(BaseModel):
@@ -15,6 +16,8 @@ class RegisterRequest(BaseModel):
     """Schema for registration request."""
 
     email: EmailStr
-    password: str
-    username: str | None = None
-    full_name: str | None = None
+    password: str = Field(..., min_length=8)
+    username: Optional[str] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    phone_number: Optional[str] = None

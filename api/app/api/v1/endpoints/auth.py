@@ -58,7 +58,9 @@ async def register(
         email=user_in.email,
         password=user_in.password,
         username=user_in.username,
-        full_name=user_in.full_name,
+        first_name=user_in.first_name,
+        last_name=user_in.last_name,
+        phone_number=user_in.phone_number,
     )
     user = await UserService.create(db, user_in=user_create)
 
