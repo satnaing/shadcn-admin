@@ -2,7 +2,7 @@
 Core configuration settings for the FastAPI application.
 """
 from typing import Any, List, Optional
-from pydantic import AnyHttpUrl, field_validator
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     DESCRIPTION: str = "FastAPI backend for Shadcn Admin Dashboard"
 
     # CORS Configuration
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+    BACKEND_CORS_ORIGINS: List[str] = []
 
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
     @classmethod
