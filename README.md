@@ -1,23 +1,58 @@
-# Shadcn Admin Dashboard
+# Shadcn Admin - Full Stack Application
 
-Admin Dashboard UI crafted with Shadcn and Vite. Built with responsiveness and accessibility in mind.
+A modern full-stack admin dashboard with React 19 frontend and FastAPI backend.
 
-![alt text](public/images/shadcn-admin.png)
+> **Note**: This project has been restructured to include a FastAPI backend. The original frontend UI is now in the `/ui` folder, and the new backend API is in the `/api` folder.
 
-I've been creating dashboard UIs at work and for my personal projects. I always wanted to make a reusable collection of dashboard UI for future projects; and here it is now. While I've created a few custom components, some of the code is directly adapted from ShadcnUI examples.
+![alt text](ui/public/images/shadcn-admin.png)
 
-> This is not a starter project (template) though. I'll probably make one in the future.
+Originally crafted as a React admin dashboard UI with Shadcn and Vite. Now enhanced with a production-ready FastAPI backend featuring JWT authentication, async SQLAlchemy, and proper architecture.
+
+## Project Structure
+
+```
+shadcn-admin/
+├── ui/                    # React 19 Frontend (original dashboard)
+│   ├── src/              # React source code
+│   ├── public/           # Static assets
+│   └── package.json      # Frontend dependencies
+│
+├── api/                   # FastAPI Backend (NEW)
+│   ├── app/              # Application code
+│   │   ├── api/         # API routes
+│   │   ├── core/        # Core configuration
+│   │   ├── db/          # Database setup
+│   │   ├── models/      # SQLAlchemy models
+│   │   ├── schemas/     # Pydantic schemas
+│   │   └── services/    # Business logic
+│   ├── requirements.txt  # Python dependencies
+│   └── README.md         # API documentation
+│
+└── README.md             # This file
+```
 
 ## Features
 
+### Frontend Features
 - Light/dark mode
-- Responsive
-- Accessible
-- With built-in Sidebar component
+- Responsive design
+- Accessible components
+- Built-in Sidebar component
 - Global search command
 - 10+ pages
 - Extra custom components
 - RTL support
+
+### Backend Features (NEW)
+- ✅ FastAPI with async/await
+- ✅ JWT authentication (access & refresh tokens)
+- ✅ Password hashing with bcrypt
+- ✅ Async SQLAlchemy ORM
+- ✅ Pydantic validation
+- ✅ CORS middleware
+- ✅ Auto-generated API documentation
+- ✅ Service layer architecture
+- ✅ Type hints throughout
 
 <details>
 <summary>Customized Components (click to expand)</summary>
@@ -58,7 +93,10 @@ If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest 
 
 ## Tech Stack
 
+### Frontend (UI)
 **UI:** [ShadcnUI](https://ui.shadcn.com) (TailwindCSS + RadixUI)
+
+**Framework:** React 19.2.0
 
 **Build Tool:** [Vite](https://vitejs.dev/)
 
@@ -70,7 +108,22 @@ If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest 
 
 **Icons:** [Lucide Icons](https://lucide.dev/icons/), [Tabler Icons](https://tabler.io/icons) (Brand icons only)
 
-**Auth (partial):** [Clerk](https://go.clerk.com/GttUAaK)
+**State Management:** Zustand
+
+**Data Fetching:** TanStack React Query
+
+### Backend (API)
+**Framework:** [FastAPI](https://fastapi.tiangolo.com/)
+
+**Database:** SQLAlchemy (Async)
+
+**Authentication:** JWT (JSON Web Tokens)
+
+**Password Hashing:** Bcrypt
+
+**Validation:** Pydantic
+
+**Server:** Uvicorn
 
 ## Run Locally
 
@@ -86,17 +139,49 @@ Go to the project directory
   cd shadcn-admin
 ```
 
-Install dependencies
+### Frontend Setup
 
 ```bash
-  pnpm install
+cd ui
+pnpm install
+pnpm dev
 ```
 
-Start the server
+The UI will be available at http://localhost:5173
+
+### Backend Setup
 
 ```bash
-  pnpm run dev
+cd api
+pip install -r requirements.txt
+cp .env.example .env
+# Edit .env and set your SECRET_KEY (use: openssl rand -hex 32)
+python run.py
 ```
+
+The API will be available at:
+- API: http://localhost:8000
+- Swagger Docs: http://localhost:8000/api/v1/docs
+- ReDoc: http://localhost:8000/api/v1/redoc
+
+## API Endpoints
+
+### Authentication
+- `POST /api/v1/auth/register` - Register new user
+- `POST /api/v1/auth/login` - Login and get tokens
+- `POST /api/v1/auth/refresh` - Refresh access token
+- `GET /api/v1/auth/me` - Get current user
+
+### Users
+- `GET /api/v1/users/me` - Get current user profile
+- `PUT /api/v1/users/me` - Update current user
+- `GET /api/v1/users/{id}` - Get user by ID (superuser only)
+
+## Documentation
+
+- **Frontend Documentation**: Original UI components and features in `/ui` folder
+- **API Documentation**: Visit http://localhost:8000/api/v1/docs when running the backend
+- **Backend README**: Detailed backend documentation in `/api/README.md`
 
 ## Sponsoring this project ❤️
 
