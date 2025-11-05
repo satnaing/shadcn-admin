@@ -3,8 +3,9 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { showSubmittedData } from '@/lib/show-submitted-data'
+import { useCreateUser, useUpdateUser } from '../hooks/use-users-query'
 import { Button } from '@/components/ui/button'
+import { Loader2 } from 'lucide-react'
 import {
   Dialog,
   DialogContent,
@@ -105,6 +106,9 @@ export function UsersActionDialog({
   onOpenChange,
 }: UserActionDialogProps) {
   const isEdit = !!currentRow
+  const createMutation = useCreateUser()
+  const updateMutation = useUpdateUser()
+
   const form = useForm<UserForm>({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
@@ -127,13 +131,51 @@ export function UsersActionDialog({
         },
   })
 
-  const onSubmit = (values: UserForm) => {
-    form.reset()
-    showSubmittedData(values)
-    onOpenChange(false)
+  const onSubmit = async (values: UserForm) => {
+    try {
+      if (isEdit && currentRow) {
+        // Update existing user
+        const updateData: any = {
+          first_name: values.firstName,
+          last_name: values.lastName,
+          username: values.username,
+          email: values.email,
+          phone_number: values.phoneNumber,
+          role: values.role,
+        }
+
+        // Only include password if it was changed
+        if (values.password) {
+          updateData.password = values.password
+        }
+
+        await updateMutation.mutateAsync({
+          id: Number(currentRow.id),
+          data: updateData,
+        })
+      } else {
+        // Create new user
+        await createMutation.mutateAsync({
+          first_name: values.firstName,
+          last_name: values.lastName,
+          username: values.username,
+          email: values.email,
+          phone_number: values.phoneNumber,
+          password: values.password,
+          role: values.role,
+        })
+      }
+
+      form.reset()
+      onOpenChange(false)
+    } catch (error) {
+      // Error is handled by the mutation hooks
+      console.error('Failed to save user:', error)
+    }
   }
 
   const isPasswordTouched = !!form.formState.dirtyFields.password
+  const isLoading = createMutation.isPending || updateMutation.isPending
 
   return (
     <Dialog
@@ -316,7 +358,8 @@ export function UsersActionDialog({
           </Form>
         </div>
         <DialogFooter>
-          <Button type='submit' form='user-form'>
+          <Button type='submit' form='user-form' disabled={isLoading}>
+            {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
             Save changes
           </Button>
         </DialogFooter>

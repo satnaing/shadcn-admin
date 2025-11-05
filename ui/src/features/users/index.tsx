@@ -9,13 +9,20 @@ import { UsersDialogs } from './components/users-dialogs'
 import { UsersPrimaryButtons } from './components/users-primary-buttons'
 import { UsersProvider } from './components/users-provider'
 import { UsersTable } from './components/users-table'
-import { users } from './data/users'
+import { useUsers } from './hooks/use-users-query'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const route = getRouteApi('/_authenticated/users/')
 
 export function Users() {
   const search = route.useSearch()
   const navigate = route.useNavigate()
+
+  // Fetch users from API
+  const { data, isLoading, error } = useUsers({
+    skip: 0,
+    limit: 1000, // Fetch all for client-side filtering (can optimize later)
+  })
 
   return (
     <UsersProvider>
@@ -38,7 +45,30 @@ export function Users() {
           </div>
           <UsersPrimaryButtons />
         </div>
-        <UsersTable data={users} search={search} navigate={navigate} />
+
+        {isLoading ? (
+          <div className='space-y-4'>
+            <Skeleton className='h-10 w-full' />
+            <Skeleton className='h-[400px] w-full' />
+          </div>
+        ) : error ? (
+          <div className='flex h-[400px] items-center justify-center rounded-md border border-destructive bg-destructive/10'>
+            <div className='text-center'>
+              <p className='text-destructive font-semibold'>
+                Failed to load users
+              </p>
+              <p className='text-muted-foreground text-sm mt-2'>
+                {error instanceof Error ? error.message : 'Unknown error'}
+              </p>
+            </div>
+          </div>
+        ) : (
+          <UsersTable
+            data={data?.users || []}
+            search={search}
+            navigate={navigate}
+          />
+        )}
       </Main>
 
       <UsersDialogs />

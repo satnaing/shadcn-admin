@@ -8,7 +8,7 @@ export interface PaginatedResponse<T> {
   items: T[]
   total: number
   skip: number
-  limit: int
+  limit: number
   has_more: boolean
   total_pages: number
   current_page: number

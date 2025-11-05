@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { AlertTriangle } from 'lucide-react'
-import { showSubmittedData } from '@/lib/show-submitted-data'
+import { useDeleteUser } from '../hooks/use-users-query'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -21,12 +21,19 @@ export function UsersDeleteDialog({
   currentRow,
 }: UserDeleteDialogProps) {
   const [value, setValue] = useState('')
+  const deleteMutation = useDeleteUser()
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (value.trim() !== currentRow.username) return
 
-    onOpenChange(false)
-    showSubmittedData(currentRow, 'The following user has been deleted:')
+    try {
+      await deleteMutation.mutateAsync(Number(currentRow.id))
+      onOpenChange(false)
+      setValue('')
+    } catch (error) {
+      // Error is handled by the mutation hook
+      console.error('Failed to delete user:', error)
+    }
   }
 
   return (
@@ -34,7 +41,8 @@ export function UsersDeleteDialog({
       open={open}
       onOpenChange={onOpenChange}
       handleConfirm={handleDelete}
-      disabled={value.trim() !== currentRow.username}
+      disabled={value.trim() !== currentRow.username || deleteMutation.isPending}
+      isPending={deleteMutation.isPending}
       title={
         <span className='text-destructive'>
           <AlertTriangle
