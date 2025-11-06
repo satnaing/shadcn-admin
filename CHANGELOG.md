@@ -1,3 +1,16 @@
+## v2.2.1 (2025-11-06)
+
+### Fix
+
+- **style**: update data attribute class in authenticated layout (#249)
+- prevent navigation to 500 page during development (#240)
+- **style**: apply variant 'destructive' to sign-out buttons (#236)
+- add missing space in profile form (#235)
+
+### Refactor
+
+- enhance tables and update table layout (#234)
+
 ## v2.2.0 (2025-10-09)
 
 ### Feat
