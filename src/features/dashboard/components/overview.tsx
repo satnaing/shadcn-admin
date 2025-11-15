@@ -63,6 +63,7 @@ export function Overview() {
           axisLine={false}
         />
         <YAxis
+          direction='ltr'
           stroke='#888888'
           fontSize={12}
           tickLine={false}
