@@ -25,9 +25,11 @@ import {
 const SIDEBAR_COOKIE_NAME = 'sidebar_state'
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
 const SIDEBAR_WIDTH = '16rem'
+const SIDEBAR_WIDTH_LARGE = '20rem' // Wider sidebar for 24-inch displays (1920px+)
 const SIDEBAR_WIDTH_MOBILE = '18rem'
 const SIDEBAR_WIDTH_ICON = '3rem'
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b'
+const LARGE_SCREEN_BREAKPOINT = 1920 // 24-inch display typically starts at 1920px width
 
 type SidebarContextProps = {
   state: 'expanded' | 'collapsed'
@@ -65,6 +67,18 @@ function SidebarProvider({
 }) {
   const isMobile = useIsMobile()
   const [openMobile, setOpenMobile] = React.useState(false)
+  const [isLargeScreen, setIsLargeScreen] = React.useState(false)
+
+  // Detect large screens (24-inch displays, 1920px+ width)
+  React.useEffect(() => {
+    const checkScreenSize = () => {
+      setIsLargeScreen(window.innerWidth >= LARGE_SCREEN_BREAKPOINT)
+    }
+
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   // This is the internal state of the sidebar.
   // We use openProp and setOpenProp for control from outside the component.
@@ -123,6 +137,9 @@ function SidebarProvider({
     [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
   )
 
+  // Use wider sidebar on large displays (24-inch+)
+  const sidebarWidth = isLargeScreen ? SIDEBAR_WIDTH_LARGE : SIDEBAR_WIDTH
+
   return (
     <SidebarContext.Provider value={contextValue}>
       <TooltipProvider delayDuration={0}>
@@ -130,7 +147,7 @@ function SidebarProvider({
           data-slot='sidebar-wrapper'
           style={
             {
-              '--sidebar-width': SIDEBAR_WIDTH,
+              '--sidebar-width': sidebarWidth,
               '--sidebar-width-icon': SIDEBAR_WIDTH_ICON,
               ...style,
             } as React.CSSProperties
