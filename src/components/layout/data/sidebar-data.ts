@@ -73,9 +73,14 @@ export const sidebarData: SidebarData = {
           badge: '3',
           icon: MessagesSquare,
         },
-        {
+        {          
           title: 'Users',
           url: '/users',
+          icon: Users,
+        },
+        {          
+          title: 'Teams',
+          url: '/teams',
           icon: Users,
         },
         {
