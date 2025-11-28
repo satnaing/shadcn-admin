@@ -1,4 +1,8 @@
 # Logs
+<<<<<<< HEAD
+=======
+logs
+>>>>>>> 6b1736ff443b08954599d67c12dde63de4c7ddc0
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,6 +11,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+<<<<<<< HEAD
 .DS_Store
 dist
 dist-ssr
@@ -15,15 +20,29 @@ coverage
 
 /cypress/videos/
 /cypress/screenshots/
+=======
+dist
+dist-ssr
+*.local
+
+.env
+>>>>>>> 6b1736ff443b08954599d67c12dde63de4c7ddc0
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
+<<<<<<< HEAD
+=======
+.DS_Store
+>>>>>>> 6b1736ff443b08954599d67c12dde63de4c7ddc0
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
 
 *.tsbuildinfo
+=======
+>>>>>>> 6b1736ff443b08954599d67c12dde63de4c7ddc0
