@@ -79,6 +79,11 @@ export const sidebarData: SidebarData = {
           icon: Users,
         },
         {
+          title: 'Teams',
+          url: '/teams',
+          icon: Users,
+        },
+        {
           title: 'Secured by Clerk',
           icon: ClerkLogo,
           items: [
