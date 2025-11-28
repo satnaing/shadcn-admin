@@ -248,6 +248,50 @@ const constantRoutes = [
                         ]
 
                     },
+                    {
+                        path: "/workflow",
+                        name: "workflow",
+                        meta: {
+                            title: "工作流管理",
+                            icon: "",
+                            requiresAuth: true,
+                            cache: true,
+                            perms: [
+                                "/workflow",
+                            ],
+                        },
+                        children: [
+                            {
+                                path: "/workflow/leave-application",
+                                component: () => import("@/views/workflow/leave-application.vue"),
+                                name: "leave-application",
+                                meta: {
+                                    title: "请假申请",
+                                    icon: "",
+                                    requiresAuth: true,
+                                    cache: true,
+                                    perms: [
+                                        "/workflow/leave-application",
+                                    ],
+                                },
+                            },
+                            {
+                                path: "/workflow/task-center",
+                                component: () => import("@/views/workflow/task-center.vue"),
+                                name: "task-center",
+                                meta: {
+                                    title: "任务中心",
+                                    icon: "",
+                                    requiresAuth: true,
+                                    cache: true,
+                                    perms: [
+                                        "/workflow/task-center",
+                                    ],
+                                },
+                            }
+                        ]
+
+                    },
                 ]
             },
             // {
