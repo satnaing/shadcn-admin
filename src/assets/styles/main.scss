@@ -1,0 +1,38 @@
+// 入口 SCSS 文件，用于导入其他 SCSS 文件
+
+/*********** Base 基础 ************/
+@import "base/reset";
+@import "base/typography";
+
+/*********** abstracts 变量函数 ************/
+@import "abstracts/variables";
+@import "abstracts/mixins";
+@import "abstracts/functions";
+
+/*********** components 组件 ************/
+@import "components/forms";
+@import "components/code";
+
+/*********** layout 布局 ************/
+@import "layout/grid";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/sidebar";
+@import "layout/animate";
+
+/*********** utils 工具 ************/
+@import "libs/media";
+
+/*********** pages 页面(主要增删改查页面)************/
+@import "pages/common";
+@import "pages/get";
+@import "pages/view";
+
+/*********** themes 主题************/
+@import "themes/theme-dark";
+@import "themes/theme-light";
+
+/*********** vendors 第三方库 ************/
+@import "vendors/element";
+
+

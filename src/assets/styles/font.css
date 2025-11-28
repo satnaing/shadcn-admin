@@ -1,0 +1,21 @@
+
+@font-face {
+    font-family: "腾讯体";
+    src: url("../fonts/腾讯体.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "YouSheBiaoTiHei";
+    src: url("../fonts/GaoDuanHeiXiuDing151105-1.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "YouSheBiaoTiHei-2";
+    src: url("../fonts/YouSheBiaoTiHei-2.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
