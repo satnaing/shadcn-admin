@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect } from 'react'
-import { useNavigate, useLocation } from '@tanstack/react-router'
+import { createContext, useEffect } from 'react'
+import { useLocation, useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
 import { useIdle } from '@/hooks/use-idle'
 
@@ -42,15 +42,4 @@ export function LockScreenProvider({ children }: LockScreenProviderProps) {
       {children}
     </LockScreenContext.Provider>
   )
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useLockScreen = () => {
-  const lockscreencContext = useContext(LockScreenContext)
-
-  if (!lockscreencContext) {
-    throw new Error('useLockScreen has to be used within LockScreenProvider')
-  }
-
-  return lockscreencContext
 }
