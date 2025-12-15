@@ -79,7 +79,7 @@ export function Chats() {
         <section className='flex h-full gap-6'>
           {/* Left Side */}
           <div className='flex w-full flex-col gap-2 sm:w-56 lg:w-72 2xl:w-80'>
-            <div className='bg-background sticky top-0 z-10 -mx-4 px-4 pb-3 shadow-md sm:static sm:z-auto sm:mx-0 sm:p-0 sm:shadow-none'>
+            <div className='sticky top-0 z-10 -mx-4 bg-background px-4 pb-3 shadow-md sm:static sm:z-auto sm:mx-0 sm:p-0 sm:shadow-none'>
               <div className='flex items-center justify-between py-2'>
                 <div className='flex gap-2'>
                   <h1 className='text-2xl font-bold'>Inbox</h1>
@@ -98,8 +98,8 @@ export function Chats() {
 
               <label
                 className={cn(
-                  'focus-within:ring-ring focus-within:ring-1 focus-within:outline-hidden',
-                  'border-border flex h-10 w-full items-center space-x-0 rounded-md border ps-2'
+                  'focus-within:ring-1 focus-within:ring-ring focus-within:outline-hidden',
+                  'flex h-10 w-full items-center space-x-0 rounded-md border border-border ps-2'
                 )}
               >
                 <SearchIcon size={15} className='me-2 stroke-slate-500' />
@@ -145,7 +145,7 @@ export function Chats() {
                           <span className='col-start-2 row-span-2 font-medium'>
                             {fullName}
                           </span>
-                          <span className='text-muted-foreground group-hover:text-accent-foreground/90 col-start-2 row-span-2 row-start-2 line-clamp-2 text-ellipsis'>
+                          <span className='col-start-2 row-span-2 row-start-2 line-clamp-2 text-ellipsis text-muted-foreground group-hover:text-accent-foreground/90'>
                             {lastMsg}
                           </span>
                         </div>
@@ -162,12 +162,12 @@ export function Chats() {
           {selectedUser ? (
             <div
               className={cn(
-                'bg-background absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col border shadow-xs sm:static sm:z-auto sm:flex sm:rounded-md',
+                'absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col border bg-background shadow-xs sm:static sm:z-auto sm:flex sm:rounded-md',
                 mobileSelectedUser && 'start-0 flex'
               )}
             >
               {/* Top Part */}
-              <div className='bg-card mb-1 flex flex-none justify-between p-4 shadow-lg sm:rounded-t-md'>
+              <div className='mb-1 flex flex-none justify-between bg-card p-4 shadow-lg sm:rounded-t-md'>
                 {/* Left */}
                 <div className='flex gap-3'>
                   <Button
@@ -190,7 +190,7 @@ export function Chats() {
                       <span className='col-start-2 row-span-2 text-sm font-medium lg:text-base'>
                         {selectedUser.fullName}
                       </span>
-                      <span className='text-muted-foreground col-start-2 row-span-2 row-start-2 line-clamp-1 block max-w-32 text-xs text-nowrap text-ellipsis lg:max-w-none lg:text-sm'>
+                      <span className='col-start-2 row-span-2 row-start-2 line-clamp-1 block max-w-32 text-xs text-nowrap text-ellipsis text-muted-foreground lg:max-w-none lg:text-sm'>
                         {selectedUser.title}
                       </span>
                     </div>
@@ -237,16 +237,16 @@ export function Chats() {
                                 className={cn(
                                   'chat-box max-w-72 px-3 py-2 break-words shadow-lg',
                                   msg.sender === 'You'
-                                    ? 'bg-primary/90 text-primary-foreground/75 self-end rounded-[16px_16px_0_16px]'
-                                    : 'bg-muted self-start rounded-[16px_16px_16px_0]'
+                                    ? 'self-end rounded-[16px_16px_0_16px] bg-primary/90 text-primary-foreground/75'
+                                    : 'self-start rounded-[16px_16px_16px_0] bg-muted'
                                 )}
                               >
                                 {msg.message}{' '}
                                 <span
                                   className={cn(
-                                    'text-foreground/75 mt-1 block text-xs font-light italic',
+                                    'mt-1 block text-xs font-light text-foreground/75 italic',
                                     msg.sender === 'You' &&
-                                      'text-primary-foreground/85 text-end'
+                                      'text-end text-primary-foreground/85'
                                   )}
                                 >
                                   {format(msg.timestamp, 'h:mm a')}
@@ -260,7 +260,7 @@ export function Chats() {
                   </div>
                 </div>
                 <form className='flex w-full flex-none gap-2'>
-                  <div className='border-input bg-card focus-within:ring-ring flex flex-1 items-center gap-2 rounded-md border px-2 py-1 focus-within:ring-1 focus-within:outline-hidden lg:gap-4'>
+                  <div className='flex flex-1 items-center gap-2 rounded-md border border-input bg-card px-2 py-1 focus-within:ring-1 focus-within:ring-ring focus-within:outline-hidden lg:gap-4'>
                     <div className='space-x-1'>
                       <Button
                         size='icon'
@@ -318,16 +318,16 @@ export function Chats() {
           ) : (
             <div
               className={cn(
-                'bg-card absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col justify-center rounded-md border shadow-xs sm:static sm:z-auto sm:flex'
+                'absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col justify-center rounded-md border bg-card shadow-xs sm:static sm:z-auto sm:flex'
               )}
             >
               <div className='flex flex-col items-center space-y-6'>
-                <div className='border-border flex size-16 items-center justify-center rounded-full border-2'>
+                <div className='flex size-16 items-center justify-center rounded-full border-2 border-border'>
                   <MessagesSquare className='size-8' />
                 </div>
                 <div className='space-y-2 text-center'>
                   <h1 className='text-xl font-semibold'>Your messages</h1>
-                  <p className='text-muted-foreground text-sm'>
+                  <p className='text-sm text-muted-foreground'>
                     Send a message to start a chat.
                   </p>
                 </div>

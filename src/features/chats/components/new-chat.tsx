@@ -57,12 +57,12 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
         </DialogHeader>
         <div className='flex flex-col gap-4'>
           <div className='flex flex-wrap items-baseline-last gap-2'>
-            <span className='text-muted-foreground min-h-6 text-sm'>To:</span>
+            <span className='min-h-6 text-sm text-muted-foreground'>To:</span>
             {selectedUsers.map((user) => (
               <Badge key={user.id} variant='default'>
                 {user.fullName}
                 <button
-                  className='ring-offset-background focus:ring-ring ms-1 rounded-full outline-hidden focus:ring-2 focus:ring-offset-2'
+                  className='ms-1 rounded-full ring-offset-background outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2'
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       handleRemoveUser(user.id)
@@ -70,7 +70,7 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
                   }}
                   onClick={() => handleRemoveUser(user.id)}
                 >
-                  <X className='text-muted-foreground hover:text-foreground h-3 w-3' />
+                  <X className='h-3 w-3 text-muted-foreground hover:text-foreground' />
                 </button>
               </Badge>
             ))}
@@ -87,7 +87,7 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
                   <CommandItem
                     key={user.id}
                     onSelect={() => handleSelectUser(user)}
-                    className='hover:bg-accent hover:text-accent-foreground flex items-center justify-between gap-2'
+                    className='flex items-center justify-between gap-2 hover:bg-accent hover:text-accent-foreground'
                   >
                     <div className='flex items-center gap-2'>
                       <img
@@ -99,7 +99,7 @@ export function NewChat({ users, onOpenChange, open }: NewChatProps) {
                         <span className='text-sm font-medium'>
                           {user.fullName}
                         </span>
-                        <span className='text-accent-foreground/70 text-xs'>
+                        <span className='text-xs text-accent-foreground/70'>
                           {user.username}
                         </span>
                       </div>

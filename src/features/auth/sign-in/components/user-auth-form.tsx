@@ -113,7 +113,7 @@ export function UserAuthForm({
               <FormMessage />
               <Link
                 to='/forgot-password'
-                className='text-muted-foreground absolute end-0 -top-0.5 text-sm font-medium hover:opacity-75'
+                className='absolute end-0 -top-0.5 text-sm font-medium text-muted-foreground hover:opacity-75'
               >
                 Forgot password?
               </Link>
@@ -130,7 +130,7 @@ export function UserAuthForm({
             <span className='w-full border-t' />
           </div>
           <div className='relative flex justify-center text-xs uppercase'>
-            <span className='bg-background text-muted-foreground px-2'>
+            <span className='bg-background px-2 text-muted-foreground'>
               Or continue with
             </span>
           </div>

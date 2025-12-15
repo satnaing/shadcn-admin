@@ -25,7 +25,7 @@ export function DatePicker({
         <Button
           variant='outline'
           data-empty={!selected}
-          className='data-[empty=true]:text-muted-foreground w-[240px] justify-start text-start font-normal'
+          className='w-[240px] justify-start text-start font-normal data-[empty=true]:text-muted-foreground'
         >
           {selected ? (
             format(selected, 'MMM d, yyyy')

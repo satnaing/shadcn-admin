@@ -12,6 +12,7 @@
     "@trivago/prettier-plugin-sort-imports",
     "prettier-plugin-tailwindcss"
   ],
+  "tailwindStylesheet": "./src/styles/index.css",
   "importOrder": [
     "^path$",
     "^vite$",
