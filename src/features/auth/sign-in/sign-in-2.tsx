@@ -17,24 +17,24 @@ export function SignIn2() {
         <div className='mx-auto flex w-full max-w-sm flex-col justify-center space-y-2'>
           <div className='flex flex-col space-y-2 text-start'>
             <h2 className='text-lg font-semibold tracking-tight'>Sign in</h2>
-            <p className='text-muted-foreground text-sm'>
+            <p className='text-sm text-muted-foreground'>
               Enter your email and password below <br />
               to log into your account
             </p>
           </div>
           <UserAuthForm />
-          <p className='text-muted-foreground px-8 text-center text-sm'>
+          <p className='px-8 text-center text-sm text-muted-foreground'>
             By clicking sign in, you agree to our{' '}
             <a
               href='/terms'
-              className='hover:text-primary underline underline-offset-4'
+              className='underline underline-offset-4 hover:text-primary'
             >
               Terms of Service
             </a>{' '}
             and{' '}
             <a
               href='/privacy'
-              className='hover:text-primary underline underline-offset-4'
+              className='underline underline-offset-4 hover:text-primary'
             >
               Privacy Policy
             </a>
@@ -45,7 +45,7 @@ export function SignIn2() {
 
       <div
         className={cn(
-          'bg-muted relative h-full overflow-hidden max-lg:hidden',
+          'relative h-full overflow-hidden bg-muted max-lg:hidden',
           '[&>img]:absolute [&>img]:top-[15%] [&>img]:left-20 [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>img]:object-top-left [&>img]:select-none'
         )}
       >

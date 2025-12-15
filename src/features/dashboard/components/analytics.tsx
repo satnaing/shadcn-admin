@@ -31,7 +31,7 @@ export function Analytics() {
               strokeLinecap='round'
               strokeLinejoin='round'
               strokeWidth='2'
-              className='text-muted-foreground h-4 w-4'
+              className='h-4 w-4 text-muted-foreground'
             >
               <path d='M3 3v18h18' />
               <path d='M7 15l4-4 4 4 4-6' />
@@ -39,7 +39,7 @@ export function Analytics() {
           </CardHeader>
           <CardContent>
             <div className='text-2xl font-bold'>1,248</div>
-            <p className='text-muted-foreground text-xs'>+12.4% vs last week</p>
+            <p className='text-xs text-muted-foreground'>+12.4% vs last week</p>
           </CardContent>
         </Card>
         <Card>
@@ -55,7 +55,7 @@ export function Analytics() {
               strokeLinecap='round'
               strokeLinejoin='round'
               strokeWidth='2'
-              className='text-muted-foreground h-4 w-4'
+              className='h-4 w-4 text-muted-foreground'
             >
               <circle cx='12' cy='7' r='4' />
               <path d='M6 21v-2a6 6 0 0 1 12 0v2' />
@@ -63,7 +63,7 @@ export function Analytics() {
           </CardHeader>
           <CardContent>
             <div className='text-2xl font-bold'>832</div>
-            <p className='text-muted-foreground text-xs'>+5.8% vs last week</p>
+            <p className='text-xs text-muted-foreground'>+5.8% vs last week</p>
           </CardContent>
         </Card>
         <Card>
@@ -77,14 +77,14 @@ export function Analytics() {
               strokeLinecap='round'
               strokeLinejoin='round'
               strokeWidth='2'
-              className='text-muted-foreground h-4 w-4'
+              className='h-4 w-4 text-muted-foreground'
             >
               <path d='M3 12h6l3 6 3-6h6' />
             </svg>
           </CardHeader>
           <CardContent>
             <div className='text-2xl font-bold'>42%</div>
-            <p className='text-muted-foreground text-xs'>-3.2% vs last week</p>
+            <p className='text-xs text-muted-foreground'>-3.2% vs last week</p>
           </CardContent>
         </Card>
         <Card>
@@ -98,7 +98,7 @@ export function Analytics() {
               strokeLinecap='round'
               strokeLinejoin='round'
               strokeWidth='2'
-              className='text-muted-foreground h-4 w-4'
+              className='h-4 w-4 text-muted-foreground'
             >
               <circle cx='12' cy='12' r='10' />
               <path d='M12 6v6l4 2' />
@@ -106,7 +106,7 @@ export function Analytics() {
           </CardHeader>
           <CardContent>
             <div className='text-2xl font-bold'>3m 24s</div>
-            <p className='text-muted-foreground text-xs'>+18s vs last week</p>
+            <p className='text-xs text-muted-foreground'>+18s vs last week</p>
           </CardContent>
         </Card>
       </div>
@@ -168,10 +168,10 @@ function SimpleBarList({
         return (
           <li key={i.name} className='flex items-center justify-between gap-3'>
             <div className='min-w-0 flex-1'>
-              <div className='text-muted-foreground mb-1 truncate text-xs'>
+              <div className='mb-1 truncate text-xs text-muted-foreground'>
                 {i.name}
               </div>
-              <div className='bg-muted h-2.5 w-full rounded-full'>
+              <div className='h-2.5 w-full rounded-full bg-muted'>
                 <div
                   className={`h-2.5 rounded-full ${barClass}`}
                   style={{ width }}

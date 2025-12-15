@@ -19,7 +19,7 @@ export function GeneralError({
           <h1 className='text-[7rem] leading-tight font-bold'>500</h1>
         )}
         <span className='font-medium'>Oops! Something went wrong {`:')`}</span>
-        <p className='text-muted-foreground text-center'>
+        <p className='text-center text-muted-foreground'>
           We apologize for the inconvenience. <br /> Please try again later.
         </p>
         {!minimal && (

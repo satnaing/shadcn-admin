@@ -100,7 +100,7 @@ export function DataTableBulkActions<TData>({
                 onClick={() => handleBulkStatusChange(status.value)}
               >
                 {status.icon && (
-                  <status.icon className='text-muted-foreground size-4' />
+                  <status.icon className='size-4 text-muted-foreground' />
                 )}
                 {status.label}
               </DropdownMenuItem>
@@ -136,7 +136,7 @@ export function DataTableBulkActions<TData>({
                 onClick={() => handleBulkPriorityChange(priority.value)}
               >
                 {priority.icon && (
-                  <priority.icon className='text-muted-foreground size-4' />
+                  <priority.icon className='size-4 text-muted-foreground' />
                 )}
                 {priority.label}
               </DropdownMenuItem>

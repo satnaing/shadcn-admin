@@ -35,7 +35,7 @@ export function LearnMore({
         side='top'
         align='start'
         {...contentProps}
-        className={cn('text-muted-foreground text-sm', contentProps?.className)}
+        className={cn('text-sm text-muted-foreground', contentProps?.className)}
       >
         {children}
       </PopoverContent>
