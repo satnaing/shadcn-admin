@@ -154,7 +154,7 @@ export function Apps() {
             >
               <div className='mb-8 flex items-center justify-between'>
                 <div
-                  className={`bg-muted flex size-10 items-center justify-center rounded-lg p-2`}
+                  className={`flex size-10 items-center justify-center rounded-lg bg-muted p-2`}
                 >
                   {app.logo}
                 </div>

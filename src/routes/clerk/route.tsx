@@ -40,7 +40,7 @@ function MissingClerkPubKey() {
     'bg-foreground/10 rounded-sm py-0.5 px-1 text-xs text-foreground font-bold'
   return (
     <AuthenticatedLayout>
-      <div className='bg-background flex h-16 justify-between p-4'>
+      <div className='bg-backgroundh-16 flex justify-between p-4'>
         <SidebarTrigger variant='outline' className='scale-125 sm:scale-100' />
         <div className='space-x-4'>
           <ThemeSwitch />
@@ -61,7 +61,7 @@ function MissingClerkPubKey() {
           </Alert>
 
           <h1 className='mt-4 text-2xl font-bold'>Set your Clerk API key</h1>
-          <div className='text-foreground/75 mt-4 flex flex-col gap-y-4'>
+          <div className='mt-4 flex flex-col gap-y-4 text-foreground/75'>
             <ol className='list-inside list-decimal space-y-1.5'>
               <li>
                 In the{' '}

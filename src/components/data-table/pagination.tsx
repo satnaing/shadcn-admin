@@ -91,7 +91,7 @@ export function DataTablePagination<TData>({
           {pageNumbers.map((pageNumber, index) => (
             <div key={`${pageNumber}-${index}`} className='flex items-center'>
               {pageNumber === '...' ? (
-                <span className='text-muted-foreground px-1 text-sm'>...</span>
+                <span className='px-1 text-sm text-muted-foreground'>...</span>
               ) : (
                 <Button
                   variant={currentPage === pageNumber ? 'default' : 'outline'}
