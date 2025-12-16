@@ -45,16 +45,17 @@ export const tasksColumns: ColumnDef<Task>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Title' />
     ),
-    meta: { className: 'ps-1', tdClassName: 'ps-4' },
+    meta: {
+      className: 'ps-1 max-w-0 w-2/3',
+      tdClassName: 'ps-4',
+    },
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.label)
 
       return (
         <div className='flex space-x-2'>
           {label && <Badge variant='outline'>{label.label}</Badge>}
-          <span className='max-w-32 truncate font-medium sm:max-w-72 md:max-w-124'>
-            {row.getValue('title')}
-          </span>
+          <span className='truncate font-medium'>{row.getValue('title')}</span>
         </div>
       )
     },
