@@ -125,6 +125,10 @@ export const sidebarData: SidebarData = {
               title: 'OTP',
               url: '/otp',
             },
+            {
+              title: 'Lock Screen',
+              url: '/lock-screen',
+            },
           ],
         },
         {

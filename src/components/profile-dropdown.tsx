@@ -52,6 +52,13 @@ export function ProfileDropdown() {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
+              <Link to='/lock-screen'>
+                Lock Screen
+                <DropdownMenuShortcut>⇧⌘L</DropdownMenuShortcut>
+              </Link>
+            </DropdownMenuItem>
+
+            <DropdownMenuItem asChild>
               <Link to='/settings'>
                 Settings
                 <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
