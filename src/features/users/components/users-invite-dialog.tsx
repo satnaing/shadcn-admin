@@ -1,6 +1,5 @@
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from '@tanstack/react-form'
 import { MailPlus, Send } from 'lucide-react'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Button } from '@/components/ui/button'
@@ -13,14 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { SelectDropdown } from '@/components/select-dropdown'
@@ -32,10 +24,8 @@ const formSchema = z.object({
       iss.input === '' ? 'Please enter an email to invite.' : undefined,
   }),
   role: z.string().min(1, 'Role is required.'),
-  desc: z.string().optional(),
+  desc: z.string(),
 })
-
-type UserInviteForm = z.infer<typeof formSchema>
 
 type UserInviteDialogProps = {
   open: boolean
@@ -46,16 +36,21 @@ export function UsersInviteDialog({
   open,
   onOpenChange,
 }: UserInviteDialogProps) {
-  const form = useForm<UserInviteForm>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { email: '', role: '', desc: '' },
+  const form = useForm({
+    defaultValues: {
+      email: '',
+      role: '',
+      desc: '',
+    },
+    validators: {
+      onChange: formSchema,
+    },
+    onSubmit: async ({ value }) => {
+      form.reset()
+      showSubmittedData(value)
+      onOpenChange(false)
+    },
   })
-
-  const onSubmit = (values: UserInviteForm) => {
-    form.reset()
-    showSubmittedData(values)
-    onOpenChange(false)
-  }
 
   return (
     <Dialog
@@ -75,75 +70,96 @@ export function UsersInviteDialog({
             invitation. Assign a role to define their access level.
           </DialogDescription>
         </DialogHeader>
-        <Form {...form}>
-          <form
-            id='user-invite-form'
-            onSubmit={form.handleSubmit(onSubmit)}
-            className='space-y-4'
-          >
-            <FormField
-              control={form.control}
-              name='email'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input
-                      type='email'
-                      placeholder='eg: john.doe@gmail.com'
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            form.handleSubmit()
+          }}
+          className='space-y-4'
+        >
+          <form.Field name='email'>
+            {(field) => (
+              <Field
+                data-invalid={
+                  field.state.meta.isTouched &&
+                  field.state.meta.errors.length > 0
+                }
+              >
+                <FieldLabel>Email</FieldLabel>
+                <Input
+                  type='email'
+                  placeholder='eg: john.doe@gmail.com'
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+                <FieldError errors={field.state.meta.errors} />
+              </Field>
+            )}
+          </form.Field>
+
+          <form.Field name='role'>
+            {(field) => (
+              <Field
+                data-invalid={
+                  field.state.meta.isTouched &&
+                  field.state.meta.errors.length > 0
+                }
+              >
+                <FieldLabel>Role</FieldLabel>
+                <SelectDropdown
+                  defaultValue={field.state.value}
+                  onValueChange={field.handleChange}
+                  placeholder='Select a role'
+                  items={roles.map(({ label, value }) => ({
+                    label,
+                    value,
+                  }))}
+                />
+                <FieldError errors={field.state.meta.errors} />
+              </Field>
+            )}
+          </form.Field>
+
+          <form.Field name='desc'>
+            {(field) => (
+              <Field
+                data-invalid={
+                  field.state.meta.isTouched &&
+                  field.state.meta.errors.length > 0
+                }
+              >
+                <FieldLabel>Description (optional)</FieldLabel>
+                <Textarea
+                  className='resize-none'
+                  placeholder='Add a personal note to your invitation (optional)'
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+                <FieldError errors={field.state.meta.errors} />
+              </Field>
+            )}
+          </form.Field>
+
+          <DialogFooter className='gap-y-2'>
+            <DialogClose asChild>
+              <Button variant='outline'>Cancel</Button>
+            </DialogClose>
+            <form.Subscribe
+              selector={(state) => [state.canSubmit, state.isSubmitting]}
+            >
+              {([canSubmit, isSubmitting]) => (
+                <Button type='submit' disabled={!canSubmit || isSubmitting}>
+                  Invite <Send />
+                </Button>
               )}
-            />
-            <FormField
-              control={form.control}
-              name='role'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Role</FormLabel>
-                  <SelectDropdown
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                    placeholder='Select a role'
-                    items={roles.map(({ label, value }) => ({
-                      label,
-                      value,
-                    }))}
-                  />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='desc'
-              render={({ field }) => (
-                <FormItem className=''>
-                  <FormLabel>Description (optional)</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      className='resize-none'
-                      placeholder='Add a personal note to your invitation (optional)'
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </form>
-        </Form>
-        <DialogFooter className='gap-y-2'>
-          <DialogClose asChild>
-            <Button variant='outline'>Cancel</Button>
-          </DialogClose>
-          <Button type='submit' form='user-invite-form'>
-            Invite <Send />
-          </Button>
-        </DialogFooter>
+            </form.Subscribe>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   )

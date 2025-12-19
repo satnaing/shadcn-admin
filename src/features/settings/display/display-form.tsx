@@ -1,9 +1,14 @@
-import { useForm } from '@tanstack/react-form'
 import { z } from 'zod'
+import { useForm } from '@tanstack/react-form'
+import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
-import { showSubmittedData } from '@/lib/show-submitted-data'
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from '@/components/ui/field'
 
 const items = [
   {
@@ -33,7 +38,7 @@ const items = [
 ] as const
 
 const displayFormSchema = z.object({
-  items: z.array(z.string()).refine(value => value.some(item => item), {
+  items: z.array(z.string()).refine((value) => value.some((item) => item), {
     message: 'You have to select at least one item.',
   }),
 })
@@ -57,24 +62,25 @@ export function DisplayForm() {
         ev.preventDefault()
         form.handleSubmit()
       }}
-      className="space-y-8"
+      className='space-y-8'
     >
-      <form.Field name="items">
+      <form.Field name='items'>
         {(field) => {
-          const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+          const isInvalid =
+            field.state.meta.isTouched && !field.state.meta.isValid
           return (
             <Field data-invalid={isInvalid}>
-              <div className="mb-4">
-                <FieldLabel className="text-base">Sidebar</FieldLabel>
+              <div className='mb-4'>
+                <FieldLabel className='text-base'>Sidebar</FieldLabel>
                 <FieldDescription>
                   Select the items you want to display in the sidebar.
                 </FieldDescription>
               </div>
-              {items.map(item => (
+              {items.map((item) => (
                 <Field
                   key={item.id}
-                  className="flex flex-row items-center gap-2"
-                  orientation="horizontal"
+                  className='flex flex-row items-center gap-2'
+                  orientation='horizontal'
                 >
                   <Checkbox
                     checked={field.state.value?.includes(item.id)}
@@ -82,21 +88,21 @@ export function DisplayForm() {
                       return checked
                         ? field.handleChange([...field.state.value, item.id])
                         : field.handleChange(
-                          field.state.value?.filter(
-                            value => value !== item.id,
-                          ),
-                        )
+                            field.state.value?.filter(
+                              (value) => value !== item.id
+                            )
+                          )
                     }}
                   />
-                  <FieldLabel className="font-normal leading-none">
+                  <FieldLabel className='leading-none font-normal'>
                     {item.label}
                   </FieldLabel>
                 </Field>
               ))}
               {isInvalid && (
                 <FieldError
-                  errors={field.state.meta.errors?.map(err =>
-                    typeof err === 'string' ? { message: err } : err,
+                  errors={field.state.meta.errors?.map((err) =>
+                    typeof err === 'string' ? { message: err } : err
                   )}
                 />
               )}
@@ -106,10 +112,10 @@ export function DisplayForm() {
       </form.Field>
 
       <form.Subscribe
-        selector={formState => [formState.canSubmit, formState.isSubmitting]}
+        selector={(formState) => [formState.canSubmit, formState.isSubmitting]}
       >
         {([canSubmit, isSubmitting]) => (
-          <Button type="submit" disabled={!canSubmit || isSubmitting}>
+          <Button type='submit' disabled={!canSubmit || isSubmitting}>
             Update display
           </Button>
         )}

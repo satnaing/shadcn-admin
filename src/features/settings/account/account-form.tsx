@@ -1,8 +1,9 @@
 'use client'
+import { z } from 'zod'
 import { useForm } from '@tanstack/react-form'
 import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
-import { z } from 'zod'
-import { DatePicker } from '@/components/date-picker'
+import { showSubmittedData } from '@/lib/show-submitted-data'
+import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Command,
@@ -12,15 +13,19 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/ui/command'
-import { Field, FieldDescription, FieldError, FieldLabel } from '@/components/ui/field'
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { showSubmittedData } from '@/lib/show-submitted-data'
-import { cn } from '@/lib/utils'
+import { DatePicker } from '@/components/date-picker'
 
 const languages = [
   { label: 'English', value: 'en' },
@@ -65,11 +70,12 @@ export function AccountForm() {
         ev.preventDefault()
         form.handleSubmit()
       }}
-      className="space-y-8"
+      className='space-y-8'
     >
-      <form.Field name="name">
+      <form.Field name='name'>
         {(field) => {
-          const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+          const isInvalid =
+            field.state.meta.isTouched && !field.state.meta.isValid
           return (
             <Field data-invalid={isInvalid}>
               <FieldLabel htmlFor={field.name}>Name</FieldLabel>
@@ -78,9 +84,9 @@ export function AccountForm() {
                 name={field.name}
                 value={field.state.value}
                 onBlur={field.handleBlur}
-                onChange={e => field.handleChange(e.target.value)}
+                onChange={(e) => field.handleChange(e.target.value)}
                 aria-invalid={isInvalid}
-                placeholder="Your name"
+                placeholder='Your name'
               />
               <FieldDescription>
                 This is the name that will be displayed on your profile and in
@@ -88,8 +94,8 @@ export function AccountForm() {
               </FieldDescription>
               {isInvalid && (
                 <FieldError
-                  errors={field.state.meta.errors?.map(err =>
-                    typeof err === 'string' ? { message: err } : err,
+                  errors={field.state.meta.errors?.map((err) =>
+                    typeof err === 'string' ? { message: err } : err
                   )}
                 />
               )}
@@ -98,23 +104,24 @@ export function AccountForm() {
         }}
       </form.Field>
 
-      <form.Field name="dob">
+      <form.Field name='dob'>
         {(field) => {
-          const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+          const isInvalid =
+            field.state.meta.isTouched && !field.state.meta.isValid
           return (
-            <Field data-invalid={isInvalid} className="flex flex-col w-60">
+            <Field data-invalid={isInvalid} className='flex w-60 flex-col'>
               <FieldLabel>Date of birth</FieldLabel>
               <DatePicker
                 selected={field.state.value}
-                onSelect={date => field.handleChange(date)}
+                onSelect={(date) => field.handleChange(date)}
               />
               <FieldDescription>
                 Your date of birth is used to calculate your age.
               </FieldDescription>
               {isInvalid && (
                 <FieldError
-                  errors={field.state.meta.errors?.map(err =>
-                    typeof err === 'string' ? { message: err } : err,
+                  errors={field.state.meta.errors?.map((err) =>
+                    typeof err === 'string' ? { message: err } : err
                   )}
                 />
               )}
@@ -123,37 +130,38 @@ export function AccountForm() {
         }}
       </form.Field>
 
-      <form.Field name="language">
+      <form.Field name='language'>
         {(field) => {
-          const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+          const isInvalid =
+            field.state.meta.isTouched && !field.state.meta.isValid
           return (
-            <Field data-invalid={isInvalid} className="flex flex-col w-50">
+            <Field data-invalid={isInvalid} className='flex w-50 flex-col'>
               <FieldLabel>Language</FieldLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
-                    variant="outline"
-                    role="combobox"
+                    variant='outline'
+                    role='combobox'
                     className={cn(
                       'justify-between',
-                      !field.state.value && 'text-muted-foreground',
+                      !field.state.value && 'text-muted-foreground'
                     )}
                   >
                     {field.state.value
                       ? languages.find(
-                        language => language.value === field.state.value,
-                      )?.label
+                          (language) => language.value === field.state.value
+                        )?.label
                       : 'Select language'}
-                    <ChevronsUpDownIcon className="size-4 shrink-0 opacity-50" />
+                    <ChevronsUpDownIcon className='size-4 shrink-0 opacity-50' />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-50 p-0">
+                <PopoverContent className='w-50 p-0'>
                   <Command>
-                    <CommandInput placeholder="Search language..." />
+                    <CommandInput placeholder='Search language...' />
                     <CommandEmpty>No language found.</CommandEmpty>
                     <CommandGroup>
                       <CommandList>
-                        {languages.map(language => (
+                        {languages.map((language) => (
                           <CommandItem
                             value={language.label}
                             key={language.value}
@@ -166,7 +174,7 @@ export function AccountForm() {
                                 'size-4',
                                 language.value === field.state.value
                                   ? 'opacity-100'
-                                  : 'opacity-0',
+                                  : 'opacity-0'
                               )}
                             />
                             {language.label}
@@ -182,8 +190,8 @@ export function AccountForm() {
               </FieldDescription>
               {isInvalid && (
                 <FieldError
-                  errors={field.state.meta.errors?.map(err =>
-                    typeof err === 'string' ? { message: err } : err,
+                  errors={field.state.meta.errors?.map((err) =>
+                    typeof err === 'string' ? { message: err } : err
                   )}
                 />
               )}
@@ -193,10 +201,10 @@ export function AccountForm() {
       </form.Field>
 
       <form.Subscribe
-        selector={formState => [formState.canSubmit, formState.isSubmitting]}
+        selector={(formState) => [formState.canSubmit, formState.isSubmitting]}
       >
         {([canSubmit, isSubmitting]) => (
-          <Button type="submit" disabled={!canSubmit || isSubmitting}>
+          <Button type='submit' disabled={!canSubmit || isSubmitting}>
             Update account
           </Button>
         )}

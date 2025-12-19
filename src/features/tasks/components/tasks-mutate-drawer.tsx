@@ -1,16 +1,8 @@
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from '@tanstack/react-form'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import {
@@ -37,7 +29,6 @@ const formSchema = z.object({
   label: z.string().min(1, 'Please select a label.'),
   priority: z.string().min(1, 'Please choose a priority.'),
 })
-type TaskForm = z.infer<typeof formSchema>
 
 export function TasksMutateDrawer({
   open,
@@ -46,22 +37,22 @@ export function TasksMutateDrawer({
 }: TaskMutateDrawerProps) {
   const isUpdate = !!currentRow
 
-  const form = useForm<TaskForm>({
-    resolver: zodResolver(formSchema),
+  const form = useForm({
     defaultValues: currentRow ?? {
       title: '',
       status: '',
       label: '',
       priority: '',
     },
+    validators: {
+      onChange: formSchema,
+    },
+    onSubmit: async ({ value }) => {
+      onOpenChange(false)
+      form.reset()
+      showSubmittedData(value)
+    },
   })
-
-  const onSubmit = (data: TaskForm) => {
-    // do something with the form data
-    onOpenChange(false)
-    form.reset()
-    showSubmittedData(data)
-  }
 
   return (
     <Sheet
@@ -81,130 +72,169 @@ export function TasksMutateDrawer({
             Click save when you&apos;re done.
           </SheetDescription>
         </SheetHeader>
-        <Form {...form}>
-          <form
-            id='tasks-form'
-            onSubmit={form.handleSubmit(onSubmit)}
-            className='flex-1 space-y-6 overflow-y-auto px-4'
-          >
-            <FormField
-              control={form.control}
-              name='title'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Title</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder='Enter a title' />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='status'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Status</FormLabel>
-                  <SelectDropdown
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                    placeholder='Select dropdown'
-                    items={[
-                      { label: 'In Progress', value: 'in progress' },
-                      { label: 'Backlog', value: 'backlog' },
-                      { label: 'Todo', value: 'todo' },
-                      { label: 'Canceled', value: 'canceled' },
-                      { label: 'Done', value: 'done' },
-                    ]}
-                  />
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='label'
-              render={({ field }) => (
-                <FormItem className='relative'>
-                  <FormLabel>Label</FormLabel>
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      className='flex flex-col space-y-1'
+        <form
+          id='tasks-form'
+          onSubmit={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            form.handleSubmit()
+          }}
+          className='flex-1 space-y-6 overflow-y-auto px-4'
+        >
+          <form.Field name='title'>
+            {(field) => (
+              <Field
+                data-invalid={
+                  field.state.meta.isTouched &&
+                  field.state.meta.errors.length > 0
+                }
+              >
+                <FieldLabel>Title</FieldLabel>
+                <Input
+                  placeholder='Enter a title'
+                  name={field.name}
+                  value={field.state.value}
+                  onBlur={field.handleBlur}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                />
+                <FieldError errors={field.state.meta.errors} />
+              </Field>
+            )}
+          </form.Field>
+
+          <form.Field name='status'>
+            {(field) => (
+              <Field
+                data-invalid={
+                  field.state.meta.isTouched &&
+                  field.state.meta.errors.length > 0
+                }
+              >
+                <FieldLabel>Status</FieldLabel>
+                <SelectDropdown
+                  defaultValue={field.state.value}
+                  onValueChange={field.handleChange}
+                  placeholder='Select dropdown'
+                  items={[
+                    { label: 'In Progress', value: 'in progress' },
+                    { label: 'Backlog', value: 'backlog' },
+                    { label: 'Todo', value: 'todo' },
+                    { label: 'Canceled', value: 'canceled' },
+                    { label: 'Done', value: 'done' },
+                  ]}
+                />
+                <FieldError errors={field.state.meta.errors} />
+              </Field>
+            )}
+          </form.Field>
+
+          <form.Field name='label'>
+            {(field) => (
+              <Field
+                className='relative'
+                data-invalid={
+                  field.state.meta.isTouched &&
+                  field.state.meta.errors.length > 0
+                }
+              >
+                <FieldLabel>Label</FieldLabel>
+                <RadioGroup
+                  onValueChange={field.handleChange}
+                  defaultValue={field.state.value}
+                  className='flex flex-col space-y-1'
+                >
+                  <div className='flex items-center space-x-2'>
+                    <RadioGroupItem value='documentation' id='documentation' />
+                    <label
+                      htmlFor='documentation'
+                      className='cursor-pointer font-normal'
                     >
-                      <FormItem className='flex items-center'>
-                        <FormControl>
-                          <RadioGroupItem value='documentation' />
-                        </FormControl>
-                        <FormLabel className='font-normal'>
-                          Documentation
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className='flex items-center'>
-                        <FormControl>
-                          <RadioGroupItem value='feature' />
-                        </FormControl>
-                        <FormLabel className='font-normal'>Feature</FormLabel>
-                      </FormItem>
-                      <FormItem className='flex items-center'>
-                        <FormControl>
-                          <RadioGroupItem value='bug' />
-                        </FormControl>
-                        <FormLabel className='font-normal'>Bug</FormLabel>
-                      </FormItem>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='priority'
-              render={({ field }) => (
-                <FormItem className='relative'>
-                  <FormLabel>Priority</FormLabel>
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      className='flex flex-col space-y-1'
+                      Documentation
+                    </label>
+                  </div>
+                  <div className='flex items-center space-x-2'>
+                    <RadioGroupItem value='feature' id='feature' />
+                    <label
+                      htmlFor='feature'
+                      className='cursor-pointer font-normal'
                     >
-                      <FormItem className='flex items-center'>
-                        <FormControl>
-                          <RadioGroupItem value='high' />
-                        </FormControl>
-                        <FormLabel className='font-normal'>High</FormLabel>
-                      </FormItem>
-                      <FormItem className='flex items-center'>
-                        <FormControl>
-                          <RadioGroupItem value='medium' />
-                        </FormControl>
-                        <FormLabel className='font-normal'>Medium</FormLabel>
-                      </FormItem>
-                      <FormItem className='flex items-center'>
-                        <FormControl>
-                          <RadioGroupItem value='low' />
-                        </FormControl>
-                        <FormLabel className='font-normal'>Low</FormLabel>
-                      </FormItem>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </form>
-        </Form>
+                      Feature
+                    </label>
+                  </div>
+                  <div className='flex items-center space-x-2'>
+                    <RadioGroupItem value='bug' id='bug' />
+                    <label htmlFor='bug' className='cursor-pointer font-normal'>
+                      Bug
+                    </label>
+                  </div>
+                </RadioGroup>
+                <FieldError errors={field.state.meta.errors} />
+              </Field>
+            )}
+          </form.Field>
+
+          <form.Field name='priority'>
+            {(field) => (
+              <Field
+                className='relative'
+                data-invalid={
+                  field.state.meta.isTouched &&
+                  field.state.meta.errors.length > 0
+                }
+              >
+                <FieldLabel>Priority</FieldLabel>
+                <RadioGroup
+                  onValueChange={field.handleChange}
+                  defaultValue={field.state.value}
+                  className='flex flex-col space-y-1'
+                >
+                  <div className='flex items-center space-x-2'>
+                    <RadioGroupItem value='high' id='high' />
+                    <label
+                      htmlFor='high'
+                      className='cursor-pointer font-normal'
+                    >
+                      High
+                    </label>
+                  </div>
+                  <div className='flex items-center space-x-2'>
+                    <RadioGroupItem value='medium' id='medium' />
+                    <label
+                      htmlFor='medium'
+                      className='cursor-pointer font-normal'
+                    >
+                      Medium
+                    </label>
+                  </div>
+                  <div className='flex items-center space-x-2'>
+                    <RadioGroupItem value='low' id='low' />
+                    <label htmlFor='low' className='cursor-pointer font-normal'>
+                      Low
+                    </label>
+                  </div>
+                </RadioGroup>
+                <FieldError errors={field.state.meta.errors} />
+              </Field>
+            )}
+          </form.Field>
+        </form>
         <SheetFooter className='gap-2'>
           <SheetClose asChild>
             <Button variant='outline'>Close</Button>
           </SheetClose>
-          <Button form='tasks-form' type='submit'>
-            Save changes
-          </Button>
+          <form.Subscribe
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
+          >
+            {([canSubmit, isSubmitting]) => (
+              <Button
+                form='tasks-form'
+                type='submit'
+                disabled={!canSubmit || isSubmitting}
+              >
+                Save changes
+              </Button>
+            )}
+          </form.Subscribe>
         </SheetFooter>
       </SheetContent>
     </Sheet>
