@@ -7,7 +7,8 @@ import { Loader2, LogIn } from 'lucide-react'
 import { toast } from 'sonner'
 import { IconFacebook, IconGithub } from '@/assets/brand-icons'
 import { useAuthStore } from '@/stores/auth-store'
-import { sleep, cn } from '@/lib/utils'
+import { authAPI } from '@/api/auth.api'
+import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -51,34 +52,28 @@ export function UserAuthForm({
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
 
-    toast.promise(sleep(2000), {
-      loading: 'Signing in...',
-      success: () => {
-        setIsLoading(false)
-
-        // Mock successful authentication with expiry computed at success time
-        const mockUser = {
-          accountNo: 'ACC001',
-          email: data.email,
-          role: ['user'],
-          exp: Date.now() + 24 * 60 * 60 * 1000, // 24 hours from now
-        }
-
-        // Set user and access token
-        auth.setUser(mockUser)
-        auth.setAccessToken('mock-access-token')
-
-        // Redirect to the stored location or default to dashboard
-        const targetPath = redirectTo || '/'
-        navigate({ to: targetPath, replace: true })
-
-        return `Welcome back, ${data.email}!`
-      },
-      error: 'Error',
-    })
+    try {
+      const response = await authAPI.login(data.email, data.password)
+      const user = response.data.user
+      
+      auth.setUser(user)
+      
+      const targetPath = redirectTo || '/'
+      navigate({ to: targetPath, replace: true })
+      
+      toast.success(`Welcome back, ${user.email}!`)
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 
+        (error && typeof error === 'object' && 'response' in error) 
+          ? (error as { response?: { data?: { message?: string } } }).response?.data?.message || 'Login failed'
+          : 'Login failed'
+      toast.error(message)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (

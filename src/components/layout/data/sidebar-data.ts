@@ -2,48 +2,44 @@ import {
   Construction,
   LayoutDashboard,
   Monitor,
-  Bug,
-  ListTodo,
+  Bug, 
   FileX,
   HelpCircle,
   Lock,
-  Bell,
-  Package,
+  Bell, 
   Palette,
   ServerOff,
   Settings,
   Wrench,
   UserCog,
   UserX,
-  Users,
-  MessagesSquare,
+  Users, 
   ShieldCheck,
   AudioWaveform,
   Command,
   GalleryVerticalEnd,
-} from 'lucide-react'
-import { ClerkLogo } from '@/assets/clerk-logo'
+} from 'lucide-react' 
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
   user: {
-    name: 'satnaing',
-    email: 'satnaingdev@gmail.com',
+    name: 'SuperAdmin',
+    email: 'Superadmin@mqbit.in',
     avatar: '/avatars/shadcn.jpg',
   },
   teams: [
     {
-      name: 'Shadcn Admin',
+      name: 'Travel Admin',
       logo: Command,
       plan: 'Vite + ShadcnUI',
     },
     {
-      name: 'Acme Inc',
+      name: 'XYZ Inc',
       logo: GalleryVerticalEnd,
       plan: 'Enterprise',
     },
     {
-      name: 'Acme Corp.',
+      name: 'Shop your trip',
       logo: AudioWaveform,
       plan: 'Startup',
     },
@@ -56,46 +52,18 @@ export const sidebarData: SidebarData = {
           title: 'Dashboard',
           url: '/',
           icon: LayoutDashboard,
-        },
+        } 
+      ],
+    },
+    {
+      title: 'User Management',
+      items: [
         {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: ListTodo,
-        },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: Package,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: MessagesSquare,
-        },
-        {
+         
           title: 'Users',
           url: '/users',
           icon: Users,
-        },
-        {
-          title: 'Secured by Clerk',
-          icon: ClerkLogo,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/clerk/sign-in',
-            },
-            {
-              title: 'Sign Up',
-              url: '/clerk/sign-up',
-            },
-            {
-              title: 'User Management',
-              url: '/clerk/user-management',
-            },
-          ],
-        },
+        } 
       ],
     },
     {
