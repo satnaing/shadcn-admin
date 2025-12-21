@@ -41,7 +41,7 @@ export interface UpdateUserRequest {
   address?: string;
   roleIds: number[];
   managerId?: number | null;
-  teamId?: string | null;
+  teamId?: number | null;
   isActive: boolean;
 }
 

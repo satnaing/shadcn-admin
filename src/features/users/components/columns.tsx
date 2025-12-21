@@ -1,10 +1,23 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { DataTableColumnHeader } from '@/components/data-table'
+import { Eye, Edit, KeyRound, UserX, MoreHorizontal } from 'lucide-react'
 import type { IUserResponse } from '@/contracts/Response/IUser'
 
-export const columns: ColumnDef<IUserResponse>[] = [
+interface ColumnsProps {
+  onViewUser: (user: IUserResponse) => void
+  onEditUser: (user: IUserResponse) => void
+}
+
+export const createColumns = ({ onViewUser, onEditUser }: ColumnsProps): ColumnDef<IUserResponse>[] => [
   {
     id: 'select',
     header: ({ table }) => (
@@ -96,5 +109,44 @@ export const columns: ColumnDef<IUserResponse>[] = [
       <DataTableColumnHeader column={column} title="Team" />
     ),
     cell: ({ row }) => row.getValue('teamName') || 'N/A',
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: ({ row }) => {
+      const user = row.original
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => onViewUser(user)}>
+              <Eye className="mr-2 h-4 w-4" />
+              View
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onEditUser(user)}>
+              <Edit className="mr-2 h-4 w-4" />
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => {}}>
+              <KeyRound className="mr-2 h-4 w-4" />
+              Reset Password
+            </DropdownMenuItem>
+            <DropdownMenuItem 
+              onClick={() => {}}
+              className="text-destructive"
+            >
+              <UserX className="mr-2 h-4 w-4" />
+              {user.isActive ? 'Deactivate' : 'Activate'}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
+    },
+    enableSorting: false,
+    enableHiding: false,
   },
 ]

@@ -1,10 +1,9 @@
 import { Main } from '@/components/layout/main'
 import { useUsers } from '@/hooks/use-users'
 import { DataTable } from './components/data-table'
-import { columns } from './components/columns'
 
 export function Users() {
-  const { data: users = [], isLoading } = useUsers()
+  const { data: users = [], isLoading, refetch } = useUsers()
 
   if (isLoading) {
     return (
@@ -25,7 +24,7 @@ export function Users() {
             Manage your users and their roles.
           </p>
         </div>
-        <DataTable columns={columns} data={users} />
+        <DataTable data={users} onRefresh={refetch} />
       </div>
     </Main>
   )

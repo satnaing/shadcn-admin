@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   flexRender,
   getCoreRowModel,
@@ -5,7 +6,6 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  type ColumnDef,
 } from '@tanstack/react-table'
 import {
   Table,
@@ -16,16 +16,32 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination } from '@/components/data-table'
+import { UserViewModal } from './user-view-modal'
+import { UserEditModal } from './user-edit-modal'
+import { createColumns } from './columns'
+import type { IUserResponse } from '@/contracts/Response/IUser'
 
-interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+interface DataTableProps {
+  data: IUserResponse[]
+  onRefresh: () => void
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export function DataTable({ data, onRefresh }: DataTableProps) {
+  const [selectedUser, setSelectedUser] = useState<IUserResponse | null>(null)
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+
+  const handleViewUser = (user: IUserResponse) => {
+    setSelectedUser(user)
+    setIsViewModalOpen(true)
+  }
+
+  const handleEditUser = (user: IUserResponse) => {
+    setSelectedUser(user)
+    setIsEditModalOpen(true)
+  }
+
+  const columns = createColumns({ onViewUser: handleViewUser, onEditUser: handleEditUser })
   const table = useReactTable({
     data,
     columns,
@@ -88,6 +104,17 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <DataTablePagination table={table} />
+      <UserViewModal 
+        user={selectedUser}
+        open={isViewModalOpen}
+        onOpenChange={setIsViewModalOpen}
+      />
+      <UserEditModal 
+        user={selectedUser}
+        open={isEditModalOpen}
+        onOpenChange={setIsEditModalOpen}
+        onUserUpdated={onRefresh}
+      />
     </div>
   )
 }
