@@ -48,6 +48,7 @@
     "react-day-picker": "9.12.0",
     "react-dom": "^19.2.3",
     "react-hook-form": "^7.68.0",
+    "react-icons": "^5.5.0",
     "react-top-loading-bar": "^3.0.2",
     "recharts": "^3.6.0",
     "sonner": "^2.0.7",
