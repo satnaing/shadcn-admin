@@ -197,7 +197,7 @@ const topNav = [
     title: 'Overview',
     href: 'dashboard/overview',
     isActive: true,
-    disabled: false,
+    disabled: true,
   },
   {
     title: 'Customers',
