@@ -1,8 +1,7 @@
 'use client'
 
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from '@tanstack/react-form'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import {
@@ -13,14 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
 import { SelectDropdown } from '@/components/select-dropdown'
@@ -105,16 +97,15 @@ export function UsersActionDialog({
   onOpenChange,
 }: UserActionDialogProps) {
   const isEdit = !!currentRow
-  const form = useForm<UserForm>({
-    resolver: zodResolver(formSchema),
+  const form = useForm({
     defaultValues: isEdit
-      ? {
+      ? ({
           ...currentRow,
           password: '',
           confirmPassword: '',
           isEdit,
-        }
-      : {
+        } as UserForm)
+      : ({
           firstName: '',
           lastName: '',
           username: '',
@@ -124,16 +115,16 @@ export function UsersActionDialog({
           password: '',
           confirmPassword: '',
           isEdit,
-        },
+        } as UserForm),
+    validators: {
+      onChange: formSchema,
+    },
+    onSubmit: async ({ value }) => {
+      form.reset()
+      showSubmittedData(value)
+      onOpenChange(false)
+    },
   })
-
-  const onSubmit = (values: UserForm) => {
-    form.reset()
-    showSubmittedData(values)
-    onOpenChange(false)
-  }
-
-  const isPasswordTouched = !!form.formState.dirtyFields.password
 
   return (
     <Dialog
@@ -152,173 +143,255 @@ export function UsersActionDialog({
           </DialogDescription>
         </DialogHeader>
         <div className='h-105 w-[calc(100%+0.75rem)] overflow-y-auto py-1 pe-3'>
-          <Form {...form}>
-            <form
-              id='user-form'
-              onSubmit={form.handleSubmit(onSubmit)}
-              className='space-y-4 px-0.5'
-            >
-              <FormField
-                control={form.control}
-                name='firstName'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>
-                      First Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='John'
-                        className='col-span-4'
-                        autoComplete='off'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='lastName'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>
-                      Last Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='Doe'
-                        className='col-span-4'
-                        autoComplete='off'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='username'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>
-                      Username
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='john_doe'
-                        className='col-span-4'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='email'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='john.doe@gmail.com'
-                        className='col-span-4'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='phoneNumber'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>
-                      Phone Number
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='+123456789'
-                        className='col-span-4'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='role'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>Role</FormLabel>
-                    <SelectDropdown
-                      defaultValue={field.value}
-                      onValueChange={field.onChange}
-                      placeholder='Select a role'
-                      className='col-span-4'
-                      items={roles.map(({ label, value }) => ({
-                        label,
-                        value,
-                      }))}
-                    />
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='password'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>
-                      Password
-                    </FormLabel>
-                    <FormControl>
-                      <PasswordInput
-                        placeholder='e.g., S3cur3P@ssw0rd'
-                        className='col-span-4'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name='confirmPassword'
-                render={({ field }) => (
-                  <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>
-                      Confirm Password
-                    </FormLabel>
-                    <FormControl>
-                      <PasswordInput
-                        disabled={!isPasswordTouched}
-                        placeholder='e.g., S3cur3P@ssw0rd'
-                        className='col-span-4'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage className='col-span-4 col-start-3' />
-                  </FormItem>
-                )}
-              />
-            </form>
-          </Form>
+          <form
+            id='user-form'
+            onSubmit={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              form.handleSubmit()
+            }}
+            className='space-y-4 px-0.5'
+          >
+            <form.Field name='firstName'>
+              {(field) => (
+                <Field
+                  className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'
+                  data-invalid={
+                    field.state.meta.isTouched &&
+                    field.state.meta.errors.length > 0
+                  }
+                >
+                  <FieldLabel className='col-span-2 text-end'>
+                    First Name
+                  </FieldLabel>
+                  <Input
+                    placeholder='John'
+                    className='col-span-4'
+                    autoComplete='off'
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <FieldError
+                    className='col-span-4 col-start-3'
+                    errors={field.state.meta.errors}
+                  />
+                </Field>
+              )}
+            </form.Field>
+
+            <form.Field name='lastName'>
+              {(field) => (
+                <Field
+                  className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'
+                  data-invalid={
+                    field.state.meta.isTouched &&
+                    field.state.meta.errors.length > 0
+                  }
+                >
+                  <FieldLabel className='col-span-2 text-end'>
+                    Last Name
+                  </FieldLabel>
+                  <Input
+                    placeholder='Doe'
+                    className='col-span-4'
+                    autoComplete='off'
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <FieldError
+                    className='col-span-4 col-start-3'
+                    errors={field.state.meta.errors}
+                  />
+                </Field>
+              )}
+            </form.Field>
+
+            <form.Field name='username'>
+              {(field) => (
+                <Field
+                  className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'
+                  data-invalid={
+                    field.state.meta.isTouched &&
+                    field.state.meta.errors.length > 0
+                  }
+                >
+                  <FieldLabel className='col-span-2 text-end'>
+                    Username
+                  </FieldLabel>
+                  <Input
+                    placeholder='john_doe'
+                    className='col-span-4'
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <FieldError
+                    className='col-span-4 col-start-3'
+                    errors={field.state.meta.errors}
+                  />
+                </Field>
+              )}
+            </form.Field>
+
+            <form.Field name='email'>
+              {(field) => (
+                <Field
+                  className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'
+                  data-invalid={
+                    field.state.meta.isTouched &&
+                    field.state.meta.errors.length > 0
+                  }
+                >
+                  <FieldLabel className='col-span-2 text-end'>Email</FieldLabel>
+                  <Input
+                    placeholder='john.doe@gmail.com'
+                    className='col-span-4'
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <FieldError
+                    className='col-span-4 col-start-3'
+                    errors={field.state.meta.errors}
+                  />
+                </Field>
+              )}
+            </form.Field>
+
+            <form.Field name='phoneNumber'>
+              {(field) => (
+                <Field
+                  className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'
+                  data-invalid={
+                    field.state.meta.isTouched &&
+                    field.state.meta.errors.length > 0
+                  }
+                >
+                  <FieldLabel className='col-span-2 text-end'>
+                    Phone Number
+                  </FieldLabel>
+                  <Input
+                    placeholder='+123456789'
+                    className='col-span-4'
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <FieldError
+                    className='col-span-4 col-start-3'
+                    errors={field.state.meta.errors}
+                  />
+                </Field>
+              )}
+            </form.Field>
+
+            <form.Field name='role'>
+              {(field) => (
+                <Field
+                  className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'
+                  data-invalid={
+                    field.state.meta.isTouched &&
+                    field.state.meta.errors.length > 0
+                  }
+                >
+                  <FieldLabel className='col-span-2 text-end'>Role</FieldLabel>
+                  <SelectDropdown
+                    defaultValue={field.state.value}
+                    onValueChange={field.handleChange}
+                    placeholder='Select a role'
+                    className='col-span-4'
+                    items={roles.map(({ label, value }) => ({
+                      label,
+                      value,
+                    }))}
+                  />
+                  <FieldError
+                    className='col-span-4 col-start-3'
+                    errors={field.state.meta.errors}
+                  />
+                </Field>
+              )}
+            </form.Field>
+
+            <form.Field name='password'>
+              {(field) => (
+                <Field
+                  className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'
+                  data-invalid={
+                    field.state.meta.isTouched &&
+                    field.state.meta.errors.length > 0
+                  }
+                >
+                  <FieldLabel className='col-span-2 text-end'>
+                    Password
+                  </FieldLabel>
+                  <PasswordInput
+                    placeholder='e.g., S3cur3P@ssw0rd'
+                    className='col-span-4'
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <FieldError
+                    className='col-span-4 col-start-3'
+                    errors={field.state.meta.errors}
+                  />
+                </Field>
+              )}
+            </form.Field>
+
+            <form.Field name='confirmPassword'>
+              {(field) => (
+                <Field
+                  className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'
+                  data-invalid={
+                    field.state.meta.isTouched &&
+                    field.state.meta.errors.length > 0
+                  }
+                >
+                  <FieldLabel className='col-span-2 text-end'>
+                    Confirm Password
+                  </FieldLabel>
+                  <PasswordInput
+                    disabled={!form.state.values.password && !isEdit}
+                    placeholder='e.g., S3cur3P@ssw0rd'
+                    className='col-span-4'
+                    name={field.name}
+                    value={field.state.value}
+                    onBlur={field.handleBlur}
+                    onChange={(e) => field.handleChange(e.target.value)}
+                  />
+                  <FieldError
+                    className='col-span-4 col-start-3'
+                    errors={field.state.meta.errors}
+                  />
+                </Field>
+              )}
+            </form.Field>
+          </form>
         </div>
         <DialogFooter>
-          <Button type='submit' form='user-form'>
-            Save changes
-          </Button>
+          <form.Subscribe
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
+          >
+            {([canSubmit, isSubmitting]) => (
+              <Button
+                type='submit'
+                form='user-form'
+                disabled={!canSubmit || isSubmitting}
+              >
+                Save changes
+              </Button>
+            )}
+          </form.Subscribe>
         </DialogFooter>
       </DialogContent>
     </Dialog>

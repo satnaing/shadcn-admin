@@ -1,7 +1,7 @@
+'use client'
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from '@tanstack/react-form'
+import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -14,14 +14,11 @@ import {
   CommandList,
 } from '@/components/ui/command'
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import {
   Popover,
@@ -52,84 +49,113 @@ const accountFormSchema = z.object({
   language: z.string('Please select a language.'),
 })
 
-type AccountFormValues = z.infer<typeof accountFormSchema>
-
-// This can come from your database or API.
-const defaultValues: Partial<AccountFormValues> = {
-  name: '',
-}
-
 export function AccountForm() {
-  const form = useForm<AccountFormValues>({
-    resolver: zodResolver(accountFormSchema),
-    defaultValues,
+  const form = useForm({
+    defaultValues: {
+      name: '',
+      dob: undefined as Date | undefined,
+      language: '',
+    },
+    validators: {
+      onSubmit: accountFormSchema,
+    },
+    onSubmit: async (values) => {
+      showSubmittedData(values.value)
+    },
   })
 
-  function onSubmit(data: AccountFormValues) {
-    showSubmittedData(data)
-  }
-
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-        <FormField
-          control={form.control}
-          name='name'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder='Your name' {...field} />
-              </FormControl>
-              <FormDescription>
+    <form
+      onSubmit={(ev) => {
+        ev.preventDefault()
+        form.handleSubmit()
+      }}
+      className='space-y-8'
+    >
+      <form.Field name='name'>
+        {(field) => {
+          const isInvalid =
+            field.state.meta.isTouched && !field.state.meta.isValid
+          return (
+            <Field data-invalid={isInvalid}>
+              <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+              <Input
+                id={field.name}
+                name={field.name}
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={(e) => field.handleChange(e.target.value)}
+                aria-invalid={isInvalid}
+                placeholder='Your name'
+              />
+              <FieldDescription>
                 This is the name that will be displayed on your profile and in
                 emails.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='dob'
-          render={({ field }) => (
-            <FormItem className='flex flex-col'>
-              <FormLabel>Date of birth</FormLabel>
-              <DatePicker selected={field.value} onSelect={field.onChange} />
-              <FormDescription>
+              </FieldDescription>
+              {isInvalid && (
+                <FieldError
+                  errors={field.state.meta.errors?.map((err) =>
+                    typeof err === 'string' ? { message: err } : err
+                  )}
+                />
+              )}
+            </Field>
+          )
+        }}
+      </form.Field>
+
+      <form.Field name='dob'>
+        {(field) => {
+          const isInvalid =
+            field.state.meta.isTouched && !field.state.meta.isValid
+          return (
+            <Field data-invalid={isInvalid} className='flex w-60 flex-col'>
+              <FieldLabel>Date of birth</FieldLabel>
+              <DatePicker
+                selected={field.state.value}
+                onSelect={(date) => field.handleChange(date)}
+              />
+              <FieldDescription>
                 Your date of birth is used to calculate your age.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='language'
-          render={({ field }) => (
-            <FormItem className='flex flex-col'>
-              <FormLabel>Language</FormLabel>
+              </FieldDescription>
+              {isInvalid && (
+                <FieldError
+                  errors={field.state.meta.errors?.map((err) =>
+                    typeof err === 'string' ? { message: err } : err
+                  )}
+                />
+              )}
+            </Field>
+          )
+        }}
+      </form.Field>
+
+      <form.Field name='language'>
+        {(field) => {
+          const isInvalid =
+            field.state.meta.isTouched && !field.state.meta.isValid
+          return (
+            <Field data-invalid={isInvalid} className='flex w-50 flex-col'>
+              <FieldLabel>Language</FieldLabel>
               <Popover>
                 <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant='outline'
-                      role='combobox'
-                      className={cn(
-                        'w-[200px] justify-between',
-                        !field.value && 'text-muted-foreground'
-                      )}
-                    >
-                      {field.value
-                        ? languages.find(
-                            (language) => language.value === field.value
-                          )?.label
-                        : 'Select language'}
-                      <CaretSortIcon className='ms-2 h-4 w-4 shrink-0 opacity-50' />
-                    </Button>
-                  </FormControl>
+                  <Button
+                    variant='outline'
+                    role='combobox'
+                    className={cn(
+                      'justify-between',
+                      !field.state.value && 'text-muted-foreground'
+                    )}
+                  >
+                    {field.state.value
+                      ? languages.find(
+                          (language) => language.value === field.state.value
+                        )?.label
+                      : 'Select language'}
+                    <ChevronsUpDownIcon className='size-4 shrink-0 opacity-50' />
+                  </Button>
                 </PopoverTrigger>
-                <PopoverContent className='w-[200px] p-0'>
+                <PopoverContent className='w-50 p-0'>
                   <Command>
                     <CommandInput placeholder='Search language...' />
                     <CommandEmpty>No language found.</CommandEmpty>
@@ -140,13 +166,13 @@ export function AccountForm() {
                             value={language.label}
                             key={language.value}
                             onSelect={() => {
-                              form.setValue('language', language.value)
+                              field.handleChange(language.value)
                             }}
                           >
                             <CheckIcon
                               className={cn(
                                 'size-4',
-                                language.value === field.value
+                                language.value === field.state.value
                                   ? 'opacity-100'
                                   : 'opacity-0'
                               )}
@@ -159,15 +185,30 @@ export function AccountForm() {
                   </Command>
                 </PopoverContent>
               </Popover>
-              <FormDescription>
+              <FieldDescription>
                 This is the language that will be used in the dashboard.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button type='submit'>Update account</Button>
-      </form>
-    </Form>
+              </FieldDescription>
+              {isInvalid && (
+                <FieldError
+                  errors={field.state.meta.errors?.map((err) =>
+                    typeof err === 'string' ? { message: err } : err
+                  )}
+                />
+              )}
+            </Field>
+          )
+        }}
+      </form.Field>
+
+      <form.Subscribe
+        selector={(formState) => [formState.canSubmit, formState.isSubmitting]}
+      >
+        {([canSubmit, isSubmitting]) => (
+          <Button type='submit' disabled={!canSubmit || isSubmitting}>
+            Update account
+          </Button>
+        )}
+      </form.Subscribe>
+    </form>
   )
 }

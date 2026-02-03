@@ -1,19 +1,15 @@
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
+import { useForm } from '@tanstack/react-form'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from '@/components/ui/field'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Switch } from '@/components/ui/switch'
 
@@ -24,197 +20,208 @@ const notificationsFormSchema = z.object({
         ? 'Please select a notification type.'
         : undefined,
   }),
-  mobile: z.boolean().default(false).optional(),
-  communication_emails: z.boolean().default(false).optional(),
-  social_emails: z.boolean().default(false).optional(),
-  marketing_emails: z.boolean().default(false).optional(),
+  mobile: z.boolean(),
+  communication_emails: z.boolean(),
+  social_emails: z.boolean(),
+  marketing_emails: z.boolean(),
   security_emails: z.boolean(),
 })
 
-type NotificationsFormValues = z.infer<typeof notificationsFormSchema>
-
-// This can come from your database or API.
-const defaultValues: Partial<NotificationsFormValues> = {
-  communication_emails: false,
-  marketing_emails: false,
-  social_emails: true,
-  security_emails: true,
-}
-
 export function NotificationsForm() {
-  const form = useForm<NotificationsFormValues>({
-    resolver: zodResolver(notificationsFormSchema),
-    defaultValues,
+  const form = useForm({
+    defaultValues: {
+      type: 'all' as 'all' | 'mentions' | 'none',
+      mobile: false,
+      communication_emails: false,
+      marketing_emails: false,
+      social_emails: true,
+      security_emails: true,
+    },
+    validators: {
+      onSubmit: notificationsFormSchema,
+    },
+    onSubmit: async (values) => {
+      showSubmittedData(values.value)
+    },
   })
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit((data) => showSubmittedData(data))}
-        className='space-y-8'
-      >
-        <FormField
-          control={form.control}
-          name='type'
-          render={({ field }) => (
-            <FormItem className='relative space-y-3'>
-              <FormLabel>Notify me about...</FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                  className='flex flex-col gap-2'
-                >
-                  <FormItem className='flex items-center'>
-                    <FormControl>
-                      <RadioGroupItem value='all' />
-                    </FormControl>
-                    <FormLabel className='font-normal'>
-                      All new messages
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center'>
-                    <FormControl>
-                      <RadioGroupItem value='mentions' />
-                    </FormControl>
-                    <FormLabel className='font-normal'>
-                      Direct messages and mentions
-                    </FormLabel>
-                  </FormItem>
-                  <FormItem className='flex items-center'>
-                    <FormControl>
-                      <RadioGroupItem value='none' />
-                    </FormControl>
-                    <FormLabel className='font-normal'>Nothing</FormLabel>
-                  </FormItem>
-                </RadioGroup>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className='relative'>
-          <h3 className='mb-4 text-lg font-medium'>Email Notifications</h3>
-          <div className='space-y-4'>
-            <FormField
-              control={form.control}
-              name='communication_emails'
-              render={({ field }) => (
-                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
-                  <div className='space-y-0.5'>
-                    <FormLabel className='text-base'>
-                      Communication emails
-                    </FormLabel>
-                    <FormDescription>
-                      Receive emails about your account activity.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='marketing_emails'
-              render={({ field }) => (
-                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
-                  <div className='space-y-0.5'>
-                    <FormLabel className='text-base'>
-                      Marketing emails
-                    </FormLabel>
-                    <FormDescription>
-                      Receive emails about new products, features, and more.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='social_emails'
-              render={({ field }) => (
-                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
-                  <div className='space-y-0.5'>
-                    <FormLabel className='text-base'>Social emails</FormLabel>
-                    <FormDescription>
-                      Receive emails for friend requests, follows, and more.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='security_emails'
-              render={({ field }) => (
-                <FormItem className='flex flex-row items-center justify-between rounded-lg border p-4'>
-                  <div className='space-y-0.5'>
-                    <FormLabel className='text-base'>Security emails</FormLabel>
-                    <FormDescription>
-                      Receive emails about your account activity and security.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      disabled
-                      aria-readonly
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
-        </div>
-        <FormField
-          control={form.control}
-          name='mobile'
-          render={({ field }) => (
-            <FormItem className='relative flex flex-row items-start'>
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
+    <form
+      onSubmit={(ev) => {
+        ev.preventDefault()
+        form.handleSubmit()
+      }}
+      className='space-y-8'
+    >
+      <form.Field name='type'>
+        {(field) => {
+          const isInvalid =
+            field.state.meta.isTouched && !field.state.meta.isValid
+          return (
+            <Field data-invalid={isInvalid} className='relative space-y-3'>
+              <FieldLabel>Notify me about...</FieldLabel>
+              <RadioGroup
+                onValueChange={(value) =>
+                  field.handleChange(value as 'all' | 'mentions' | 'none')
+                }
+                defaultValue={field.state.value}
+                className='flex flex-col gap-2'
+              >
+                <Field className='flex items-center' orientation='horizontal'>
+                  <RadioGroupItem value='all' />
+                  <FieldLabel className='font-normal'>
+                    All new messages
+                  </FieldLabel>
+                </Field>
+                <Field className='flex items-center' orientation='horizontal'>
+                  <RadioGroupItem value='mentions' />
+                  <FieldLabel className='font-normal'>
+                    Direct messages and mentions
+                  </FieldLabel>
+                </Field>
+                <Field className='flex items-center' orientation='horizontal'>
+                  <RadioGroupItem value='none' />
+                  <FieldLabel className='font-normal'>Nothing</FieldLabel>
+                </Field>
+              </RadioGroup>
+              {isInvalid && (
+                <FieldError
+                  errors={field.state.meta.errors?.map((err) =>
+                    typeof err === 'string' ? { message: err } : err
+                  )}
                 />
-              </FormControl>
-              <div className='space-y-1 leading-none'>
-                <FormLabel>
-                  Use different settings for my mobile devices
-                </FormLabel>
-                <FormDescription>
-                  You can manage your mobile notifications in the{' '}
-                  <Link
-                    to='/settings'
-                    className='underline decoration-dashed underline-offset-4 hover:decoration-solid'
-                  >
-                    mobile settings
-                  </Link>{' '}
-                  page.
-                </FormDescription>
-              </div>
-            </FormItem>
-          )}
-        />
-        <Button type='submit'>Update notifications</Button>
-      </form>
-    </Form>
+              )}
+            </Field>
+          )
+        }}
+      </form.Field>
+      <div className='relative'>
+        <h3 className='mb-4 text-lg font-medium'>Email Notifications</h3>
+        <div className='space-y-4'>
+          <form.Field name='communication_emails'>
+            {(field) => (
+              <Field
+                className='flex flex-row items-center justify-between rounded-lg border p-4'
+                orientation='horizontal'
+              >
+                <div className='space-y-0.5'>
+                  <FieldLabel className='text-base'>
+                    Communication emails
+                  </FieldLabel>
+                  <FieldDescription>
+                    Receive emails about your account activity.
+                  </FieldDescription>
+                </div>
+                <Switch
+                  checked={field.state.value}
+                  onCheckedChange={field.handleChange}
+                />
+              </Field>
+            )}
+          </form.Field>
+          <form.Field name='marketing_emails'>
+            {(field) => (
+              <Field
+                className='flex flex-row items-center justify-between rounded-lg border p-4'
+                orientation='horizontal'
+              >
+                <div className='space-y-0.5'>
+                  <FieldLabel className='text-base'>
+                    Marketing emails
+                  </FieldLabel>
+                  <FieldDescription>
+                    Receive emails about new products, features, and more.
+                  </FieldDescription>
+                </div>
+                <Switch
+                  checked={field.state.value}
+                  onCheckedChange={field.handleChange}
+                />
+              </Field>
+            )}
+          </form.Field>
+          <form.Field name='social_emails'>
+            {(field) => (
+              <Field
+                className='flex flex-row items-center justify-between rounded-lg border p-4'
+                orientation='horizontal'
+              >
+                <div className='space-y-0.5'>
+                  <FieldLabel className='text-base'>Social emails</FieldLabel>
+                  <FieldDescription>
+                    Receive emails for friend requests, follows, and more.
+                  </FieldDescription>
+                </div>
+                <Switch
+                  checked={field.state.value}
+                  onCheckedChange={field.handleChange}
+                />
+              </Field>
+            )}
+          </form.Field>
+          <form.Field name='security_emails'>
+            {(field) => (
+              <Field
+                className='flex flex-row items-center justify-between rounded-lg border p-4'
+                orientation='horizontal'
+              >
+                <div className='space-y-0.5'>
+                  <FieldLabel className='text-base'>Security emails</FieldLabel>
+                  <FieldDescription>
+                    Receive emails about your account activity and security.
+                  </FieldDescription>
+                </div>
+                <Switch
+                  checked={field.state.value}
+                  onCheckedChange={field.handleChange}
+                  disabled
+                  aria-readonly
+                />
+              </Field>
+            )}
+          </form.Field>
+        </div>
+      </div>
+      <form.Field name='mobile'>
+        {(field) => (
+          <Field
+            className='relative flex flex-row items-start gap-3'
+            orientation='horizontal'
+          >
+            <Checkbox
+              checked={field.state.value}
+              onCheckedChange={(checked) =>
+                field.handleChange(checked === true)
+              }
+            />
+            <div className='space-y-1 leading-none'>
+              <FieldLabel>
+                Use different settings for my mobile devices
+              </FieldLabel>
+              <FieldDescription>
+                You can manage your mobile notifications in the{' '}
+                <Link
+                  to='/settings'
+                  className='underline decoration-dashed underline-offset-4 hover:decoration-solid'
+                >
+                  mobile settings
+                </Link>{' '}
+                page.
+              </FieldDescription>
+            </div>
+          </Field>
+        )}
+      </form.Field>
+
+      <form.Subscribe
+        selector={(formState) => [formState.canSubmit, formState.isSubmitting]}
+      >
+        {([canSubmit, isSubmitting]) => (
+          <Button type='submit' disabled={!canSubmit || isSubmitting}>
+            Update notifications
+          </Button>
+        )}
+      </form.Subscribe>
+    </form>
   )
 }

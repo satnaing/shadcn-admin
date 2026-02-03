@@ -1,6 +1,6 @@
+// Remove unused adapter import
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from '@tanstack/react-form'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import {
@@ -12,29 +12,22 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 
 const formSchema = z.object({
   file: z
     .instanceof(FileList)
-    .refine((files) => files.length > 0, {
-      message: 'Please upload a file',
-    })
+    .refine((files) => files.length > 0, 'File is required')
     .refine(
-      (files) => ['text/csv'].includes(files?.[0]?.type),
-      'Please upload csv format.'
+      (files) =>
+        files?.[0]?.type === 'text/csv' ||
+        files?.[0]?.type === 'application/json',
+      'File must be a CSV or JSON file'
     ),
 })
 
-type TaskImportDialogProps = {
+type TasksImportDialogProps = {
   open: boolean
   onOpenChange: (open: boolean) => void
 }
@@ -42,27 +35,29 @@ type TaskImportDialogProps = {
 export function TasksImportDialog({
   open,
   onOpenChange,
-}: TaskImportDialogProps) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { file: undefined },
-  })
-
-  const fileRef = form.register('file')
-
-  const onSubmit = () => {
-    const file = form.getValues('file')
-
-    if (file && file[0]) {
-      const fileDetails = {
-        name: file[0].name,
-        size: file[0].size,
-        type: file[0].type,
+}: TasksImportDialogProps) {
+  const form = useForm({
+    defaultValues: {
+      file: undefined as unknown as FileList,
+    },
+    validators: {
+      onChange: formSchema,
+    },
+    onSubmit: async ({ value }) => {
+      // In a real app, you would parse the file here or send it to server
+      const file = value.file[0]
+      if (file) {
+        const fileDetails = {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+        }
+        showSubmittedData(fileDetails, 'You have imported the following file:')
       }
-      showSubmittedData(fileDetails, 'You have imported the following file:')
-    }
-    onOpenChange(false)
-  }
+      onOpenChange(false)
+      form.reset()
+    },
+  })
 
   return (
     <Dialog
@@ -76,33 +71,59 @@ export function TasksImportDialog({
         <DialogHeader className='text-start'>
           <DialogTitle>Import Tasks</DialogTitle>
           <DialogDescription>
-            Import tasks quickly from a CSV file.
+            Import tasks from a JSON or CSV file.
           </DialogDescription>
         </DialogHeader>
-        <Form {...form}>
-          <form id='task-import-form' onSubmit={form.handleSubmit(onSubmit)}>
-            <FormField
-              control={form.control}
-              name='file'
-              render={() => (
-                <FormItem className='my-2'>
-                  <FormLabel>File</FormLabel>
-                  <FormControl>
-                    <Input type='file' {...fileRef} className='h-8 py-0' />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </form>
-        </Form>
-        <DialogFooter className='gap-2'>
+        <form
+          id='task-import-form'
+          onSubmit={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            form.handleSubmit()
+          }}
+          className='space-y-4'
+        >
+          <form.Field name='file'>
+            {(field) => (
+              <Field
+                data-invalid={
+                  field.state.meta.isTouched &&
+                  field.state.meta.errors.length > 0
+                }
+              >
+                <FieldLabel>File</FieldLabel>
+                <Input
+                  type='file'
+                  accept='.csv, .json'
+                  className='h-8 py-0'
+                  name={field.name}
+                  onChange={(e) => {
+                    const files = e.target.files
+                    if (files) field.handleChange(files)
+                  }}
+                />
+                <FieldError errors={field.state.meta.errors} />
+              </Field>
+            )}
+          </form.Field>
+        </form>
+        <DialogFooter className='gap-2 sm:gap-0'>
           <DialogClose asChild>
             <Button variant='outline'>Close</Button>
           </DialogClose>
-          <Button type='submit' form='task-import-form'>
-            Import
-          </Button>
+          <form.Subscribe
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
+          >
+            {([canSubmit, isSubmitting]) => (
+              <Button
+                form='task-import-form'
+                type='submit'
+                disabled={!canSubmit || isSubmitting}
+              >
+                Import
+              </Button>
+            )}
+          </form.Subscribe>
         </DialogFooter>
       </DialogContent>
     </Dialog>

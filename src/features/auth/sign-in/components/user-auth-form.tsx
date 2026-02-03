@@ -1,29 +1,18 @@
-import { useState } from 'react'
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from '@tanstack/react-form'
 import { Link, useNavigate } from '@tanstack/react-router'
 import { Loader2, LogIn } from 'lucide-react'
 import { toast } from 'sonner'
 import { IconFacebook, IconGithub } from '@/assets/brand-icons'
 import { useAuthStore } from '@/stores/auth-store'
-import { sleep, cn } from '@/lib/utils'
+import { cn, sleep } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { Field, FieldError, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
 
 const formSchema = z.object({
-  email: z.email({
-    error: (iss) => (iss.input === '' ? 'Please enter your email' : undefined),
-  }),
+  email: z.string().email(),
   password: z
     .string()
     .min(1, 'Please enter your password')
@@ -39,112 +28,142 @@ export function UserAuthForm({
   redirectTo,
   ...props
 }: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
   const { auth } = useAuthStore()
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm({
     defaultValues: {
       email: '',
       password: '',
     },
+    validators: {
+      onSubmit: formSchema,
+    },
+    onSubmit: async ({ value }) => {
+      await new Promise((resolve) => {
+        toast.promise(sleep(2000), {
+          loading: 'Signing in...',
+          success: () => {
+            // Mock successful authentication with expiry computed at success time
+            const mockUser = {
+              accountNo: 'ACC001',
+              email: value.email,
+              role: ['user'],
+              exp: Date.now() + 24 * 60 * 60 * 1000, // 24 hours from now
+            }
+
+            // Set user and access token
+            auth.setUser(mockUser)
+            auth.setAccessToken('mock-access-token')
+
+            // Redirect to the stored location or default to dashboard
+            const targetPath = redirectTo || '/'
+            navigate({ to: targetPath, replace: true })
+            resolve(null)
+            return `Welcome back, ${value.email}!`
+          },
+          error: () => {
+            resolve(null)
+            return 'Error'
+          },
+        })
+      })
+    },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    setIsLoading(true)
-
-    toast.promise(sleep(2000), {
-      loading: 'Signing in...',
-      success: () => {
-        setIsLoading(false)
-
-        // Mock successful authentication with expiry computed at success time
-        const mockUser = {
-          accountNo: 'ACC001',
-          email: data.email,
-          role: ['user'],
-          exp: Date.now() + 24 * 60 * 60 * 1000, // 24 hours from now
-        }
-
-        // Set user and access token
-        auth.setUser(mockUser)
-        auth.setAccessToken('mock-access-token')
-
-        // Redirect to the stored location or default to dashboard
-        const targetPath = redirectTo || '/'
-        navigate({ to: targetPath, replace: true })
-
-        return `Welcome back, ${data.email}!`
-      },
-      error: 'Error',
-    })
-  }
-
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className={cn('grid gap-3', className)}
-        {...props}
-      >
-        <FormField
-          control={form.control}
-          name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder='name@example.com' {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='password'
-          render={({ field }) => (
-            <FormItem className='relative'>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <PasswordInput placeholder='********' {...field} />
-              </FormControl>
-              <FormMessage />
+    <form
+      onSubmit={(ev) => {
+        ev.preventDefault()
+        ev.stopPropagation()
+        form.handleSubmit()
+      }}
+      className={cn('grid gap-3', className)}
+      {...props}
+    >
+      <form.Field name='email'>
+        {(field) => (
+          <Field
+            className='grid gap-2'
+            data-invalid={
+              field.state.meta.isTouched && field.state.meta.errors.length > 0
+            }
+          >
+            <FieldLabel>Email</FieldLabel>
+            <Input
+              placeholder='name@example.com'
+              name={field.name}
+              value={field.state.value}
+              onBlur={field.handleBlur}
+              onChange={(e) => field.handleChange(e.target.value)}
+            />
+            <FieldError errors={field.state.meta.errors} />
+          </Field>
+        )}
+      </form.Field>
+
+      <form.Field name='password'>
+        {(field) => (
+          <Field
+            className='grid gap-2'
+            data-invalid={
+              field.state.meta.isTouched && field.state.meta.errors.length > 0
+            }
+          >
+            <div className='flex items-center justify-between'>
+              <FieldLabel>Password</FieldLabel>
               <Link
                 to='/forgot-password'
-                className='absolute end-0 -top-0.5 text-sm font-medium text-muted-foreground hover:opacity-75'
+                className='text-sm font-medium text-muted-foreground hover:opacity-75'
               >
                 Forgot password?
               </Link>
-            </FormItem>
-          )}
-        />
-        <Button className='mt-2' disabled={isLoading}>
-          {isLoading ? <Loader2 className='animate-spin' /> : <LogIn />}
-          Sign in
+            </div>
+            <PasswordInput
+              placeholder='********'
+              name={field.name}
+              value={field.state.value}
+              onBlur={field.handleBlur}
+              onChange={(e) => field.handleChange(e.target.value)}
+            />
+            <FieldError errors={field.state.meta.errors} />
+          </Field>
+        )}
+      </form.Field>
+
+      <form.Subscribe
+        selector={(state) => ({
+          canSubmit: state.canSubmit,
+          isSubmitting: state.isSubmitting,
+        })}
+      >
+        {({ canSubmit, isSubmitting }) => (
+          <Button className='mt-2' disabled={!canSubmit || isSubmitting}>
+            {isSubmitting ? <Loader2 className='animate-spin' /> : <LogIn />}
+            Sign in
+          </Button>
+        )}
+      </form.Subscribe>
+
+      <div className='relative my-2'>
+        <div className='absolute inset-0 flex items-center'>
+          <span className='w-full border-t' />
+        </div>
+        <div className='relative flex justify-center text-xs uppercase'>
+          <span className='bg-background px-2 text-muted-foreground'>
+            Or continue with
+          </span>
+        </div>
+      </div>
+
+      <div className='grid grid-cols-2 gap-2'>
+        <Button variant='outline' type='button'>
+          <IconGithub className='h-4 w-4' /> GitHub
         </Button>
-
-        <div className='relative my-2'>
-          <div className='absolute inset-0 flex items-center'>
-            <span className='w-full border-t' />
-          </div>
-          <div className='relative flex justify-center text-xs uppercase'>
-            <span className='bg-background px-2 text-muted-foreground'>
-              Or continue with
-            </span>
-          </div>
-        </div>
-
-        <div className='grid grid-cols-2 gap-2'>
-          <Button variant='outline' type='button' disabled={isLoading}>
-            <IconGithub className='h-4 w-4' /> GitHub
-          </Button>
-          <Button variant='outline' type='button' disabled={isLoading}>
-            <IconFacebook className='h-4 w-4' /> Facebook
-          </Button>
-        </div>
-      </form>
-    </Form>
+        <Button variant='outline' type='button'>
+          <IconFacebook className='h-4 w-4' /> Facebook
+        </Button>
+      </div>
+    </form>
   )
 }
