@@ -15,6 +15,12 @@ export const getCategories = async () => {
   return response.data
 }
 
+// Collections
+export const getCollections = async () => {
+  const response = await apiClient.get('/admin/collections')
+  return response.data
+}
+
 export const createCategory = async (data: CreateCategoryRequest) => {
   const response = await apiClient.post('/admin/categories', data)
   return response.data

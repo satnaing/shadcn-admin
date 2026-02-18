@@ -13,6 +13,7 @@ import {
   createOptionGroup,
   updateOptionGroup,
   deleteOptionGroup,
+  getCollections,
 } from '@/services/catalog'
 import type {
   CreateCategoryRequest,
@@ -26,6 +27,13 @@ export const useCategories = () => {
   return useQuery({
     queryKey: ['categories'],
     queryFn: getCategories,
+  })
+}
+
+export const useCollections = () => {
+  return useQuery({
+    queryKey: ['collections'],
+    queryFn: getCollections,
   })
 }
 

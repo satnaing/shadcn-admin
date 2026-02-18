@@ -9,6 +9,7 @@ export enum PromotionScope {
   CART = 'CART', // Applies to total
   CATEGORY = 'CATEGORY',
   PRODUCT = 'PRODUCT',
+  MIXED = 'MIXED',
 }
 
 export interface Promotion {
@@ -23,8 +24,24 @@ export interface Promotion {
   startDate?: string // Date string
   endDate?: string
   budgetLimitAmount?: number
-  totalAmountBurned: number // Usage tracking
-  isActive: boolean
+  totalAmountBurned?: number // Usage tracking — may be absent from API
+  isActive?: never // Removed from API
+  status: 'ACTIVE' | 'INACTIVE' | 'ARCHIVED' | null
+  isFeatured?: boolean
+  bannerUrl?: Record<string, string>
+
+  // New fields from API
+  rules?: any[]
+  actions?: any[]
+  applicationType?: 'AUTOMATIC' | 'PUBLIC' | 'HIDDEN'
+  strategyType?: 'STACKABLE' | 'BEST_DEAL'
+  isVoucherRequired?: boolean
+  rewardProductId?: string
+  daysOfWeek?: string[]
+  startTime?: string
+  endTime?: string
+  usageLimitType?: string
+  usageLimitValue?: number
 }
 
 export interface Customer {

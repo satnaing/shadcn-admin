@@ -13,7 +13,7 @@ export const MOCK_PROMOTIONS: Promotion[] = [
     endDate: '2025-12-31',
     budgetLimitAmount: 1000,
     totalAmountBurned: 150,
-    isActive: true,
+    status: 'ACTIVE',
   },
   {
     id: 'promo_coffee',
@@ -28,6 +28,6 @@ export const MOCK_PROMOTIONS: Promotion[] = [
     endDate: '2025-02-28',
     budgetLimitAmount: 500,
     totalAmountBurned: 45,
-    isActive: true,
+    status: 'INACTIVE',
   },
 ]

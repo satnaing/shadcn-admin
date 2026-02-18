@@ -1,27 +1,41 @@
 import { useState } from 'react'
+import { format } from 'date-fns'
 import { type ColumnDef } from '@tanstack/react-table'
 import { DiscountType, type Promotion } from '@/types/growth'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { DataTable } from '@/components/custom/data-table'
 import { PageTitle } from '@/components/page-title'
-import { MOCK_PROMOTIONS } from '../data/mock-promotions'
 import { PromotionSheet } from './components/promotion-sheet'
+import { usePromotions } from './hooks/use-promotions'
 
 export default function PromotionsPage() {
   const [open, setOpen] = useState(false)
-  const [selectedPromotion, setSelectedPromotion] = useState<Promotion | null>(
+  const [editingPromotion, setEditingPromotion] = useState<Promotion | null>(
     null
   )
+  const { data: promotions = [], isLoading } = usePromotions()
+
+  const handleEdit = (promotion: Promotion) => {
+    setEditingPromotion(promotion)
+    setOpen(true)
+  }
+
+  const handleCreate = () => {
+    setEditingPromotion(null)
+    setOpen(true)
+  }
 
   const columns: ColumnDef<Promotion>[] = [
     {
       accessorKey: 'name',
       header: 'Campaign',
       cell: ({ row }) => (
-        <div className='flex flex-col'>
+        <div
+          className='flex cursor-pointer flex-col hover:underline'
+          onClick={() => handleEdit(row.original)}
+        >
           <span className='font-medium'>{row.original.name.en}</span>
           {row.original.code && (
             <span className='font-mono text-xs text-muted-foreground'>
@@ -57,12 +71,21 @@ export default function PromotionsPage() {
       accessorKey: 'timeline',
       header: 'Timeline',
       cell: ({ row }) => {
-        if (!row.original.startDate && !row.original.endDate) return '-'
+        const start = row.original.startDate
+        const end = row.original.endDate
+        if (!start && !end)
+          return <span className='text-xs'>Always Active</span>
+
         return (
-          <div className='flex flex-col text-xs'>
-            <span>{row.original.startDate || 'Now'}</span>
-            <span className='text-muted-foreground'>to</span>
-            <span>{row.original.endDate || 'Forever'}</span>
+          <div className='flex flex-col text-[10px] leading-tight'>
+            <div className='flex items-center gap-1'>
+              <span className='w-8 text-muted-foreground'>From</span>
+              <span>{start ? format(new Date(start), 'PP') : 'Immediate'}</span>
+            </div>
+            <div className='flex items-center gap-1'>
+              <span className='w-8 text-muted-foreground'>To</span>
+              <span>{end ? format(new Date(end), 'PP') : 'No End Date'}</span>
+            </div>
           </div>
         )
       },
@@ -72,7 +95,7 @@ export default function PromotionsPage() {
       header: 'Budget',
       cell: ({ row }) => {
         const limit = row.original.budgetLimitAmount
-        const burned = row.original.totalAmountBurned
+        const burned = row.original.totalAmountBurned ?? 0
         if (!limit) return <span className='text-xs'>Unlimited</span>
 
         const percent = Math.min((burned / limit) * 100, 100)
@@ -88,49 +111,53 @@ export default function PromotionsPage() {
       },
     },
     {
-      accessorKey: 'isActive',
+      accessorKey: 'status',
       header: 'Status',
-      cell: ({ row }) => (
-        <Badge
-          className={cn(row.original.isActive ? 'bg-green-500' : 'bg-gray-400')}
-        >
-          {row.original.isActive ? 'Active' : 'Inactive'}
-        </Badge>
-      ),
-    },
-    {
-      id: 'actions',
-      cell: ({ row }) => (
-        <Button
-          variant='ghost'
-          size='sm'
-          onClick={() => {
-            setSelectedPromotion(row.original)
-            setOpen(true)
-          }}
-        >
-          Edit
-        </Button>
-      ),
+      cell: ({ row }) => {
+        const now = new Date()
+        const start = row.original.startDate
+          ? new Date(row.original.startDate)
+          : null
+        const end = row.original.endDate ? new Date(row.original.endDate) : null
+
+        // Logic: Active if within date range AND status is not explicitly inactive
+        // (Adjust logic if API status field implies something else)
+        const isDateActive = (!start || now >= start) && (!end || now <= end)
+
+        // If API sends null/undefined status, assume ACTIVE if dates are valid
+        // If API sends 'INACTIVE' or 'ARCHIVED', respect that.
+        const apiStatus = row.original.status
+        const isActive =
+          isDateActive &&
+          (apiStatus === 'ACTIVE' ||
+            apiStatus === null ||
+            apiStatus === undefined)
+
+        return (
+          <Badge className={cn(isActive ? 'bg-green-500' : 'bg-gray-400')}>
+            {isActive ? 'Active' : 'Inactive'}
+          </Badge>
+        )
+      },
     },
   ]
 
   return (
     <div className='flex flex-col gap-4 p-6 lg:gap-6 lg:p-6'>
-      <PageTitle
-        title='Promotions'
-        onClick={() => {
-          setSelectedPromotion(null)
-          setOpen(true)
-        }}
-      />
+      <PageTitle title='Promotions' onClick={handleCreate} />
 
-      <DataTable columns={columns} data={MOCK_PROMOTIONS} searchKey='name' />
+      {isLoading ? (
+        <div className='flex items-center justify-center py-12 text-sm text-muted-foreground'>
+          Loading promotions...
+        </div>
+      ) : (
+        <DataTable columns={columns} data={promotions} searchKey='name' />
+      )}
 
       <PromotionSheet
         open={open}
         onOpenChange={setOpen}
-        initialData={selectedPromotion}
+        initialData={editingPromotion}
       />
     </div>
   )

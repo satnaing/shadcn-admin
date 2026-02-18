@@ -517,9 +517,9 @@ const AuthenticatedOpsSessionIndexRoute =
   } as any)
 const AuthenticatedSettingsFinancialCashDrawersLazyRoute =
   AuthenticatedSettingsFinancialCashDrawersLazyRouteImport.update({
-    id: '/financial/cash-drawers',
-    path: '/financial/cash-drawers',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
+    id: '/cash-drawers',
+    path: '/cash-drawers',
+    getParentRoute: () => AuthenticatedSettingsFinancialLazyRoute,
   } as any).lazy(() =>
     import('./routes/_authenticated/settings/financial/cash-drawers.lazy').then(
       (d) => d.Route,
@@ -527,6 +527,7 @@ const AuthenticatedSettingsFinancialCashDrawersLazyRoute =
   )
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthenticatedIndexRoute
   '/inventory': typeof AuthenticatedInventoryRouteRouteWithChildren
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
   '/forgot-password': typeof authForgotPasswordRoute
@@ -539,7 +540,6 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
-  '/': typeof AuthenticatedIndexRoute
   '/inventory/stock': typeof AuthenticatedInventoryStockRouteRoute
   '/ops/session': typeof AuthenticatedOpsSessionRouteRouteWithChildren
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
@@ -564,24 +564,24 @@ export interface FileRoutesByFullPath {
   '/operations/orders': typeof AuthenticatedOperationsOrdersLazyRoute
   '/operations/shift': typeof AuthenticatedOperationsShiftLazyRoute
   '/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsLazyRoute
-  '/settings/financial': typeof AuthenticatedSettingsFinancialLazyRoute
+  '/settings/financial': typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   '/settings/mobile-app': typeof AuthenticatedSettingsMobileAppLazyRoute
   '/settings/roles': typeof AuthenticatedSettingsRolesLazyRoute
   '/settings/store': typeof AuthenticatedSettingsStoreLazyRoute
   '/staff/employees': typeof AuthenticatedStaffEmployeesLazyRoute
   '/staff/roster': typeof AuthenticatedStaffRosterLazyRoute
-  '/apps': typeof AuthenticatedAppsIndexRoute
-  '/chats': typeof AuthenticatedChatsIndexRoute
-  '/help-center': typeof AuthenticatedHelpCenterIndexRoute
+  '/apps/': typeof AuthenticatedAppsIndexRoute
+  '/chats/': typeof AuthenticatedChatsIndexRoute
+  '/help-center/': typeof AuthenticatedHelpCenterIndexRoute
   '/inventory/': typeof AuthenticatedInventoryIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
-  '/operations': typeof AuthenticatedOperationsIndexLazyRoute
+  '/tasks/': typeof AuthenticatedTasksIndexRoute
+  '/users/': typeof AuthenticatedUsersIndexRoute
+  '/operations/': typeof AuthenticatedOperationsIndexLazyRoute
   '/settings/financial/cash-drawers': typeof AuthenticatedSettingsFinancialCashDrawersLazyRoute
   '/ops/session/': typeof AuthenticatedOpsSessionIndexRoute
-  '/growth/reviews': typeof AuthenticatedGrowthReviewsIndexLazyRoute
-  '/menu/availability': typeof AuthenticatedMenuAvailabilityIndexLazyRoute
+  '/growth/reviews/': typeof AuthenticatedGrowthReviewsIndexLazyRoute
+  '/menu/availability/': typeof AuthenticatedMenuAvailabilityIndexLazyRoute
 }
 export interface FileRoutesByTo {
   '/forgot-password': typeof authForgotPasswordRoute
@@ -618,7 +618,7 @@ export interface FileRoutesByTo {
   '/operations/orders': typeof AuthenticatedOperationsOrdersLazyRoute
   '/operations/shift': typeof AuthenticatedOperationsShiftLazyRoute
   '/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsLazyRoute
-  '/settings/financial': typeof AuthenticatedSettingsFinancialLazyRoute
+  '/settings/financial': typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   '/settings/mobile-app': typeof AuthenticatedSettingsMobileAppLazyRoute
   '/settings/roles': typeof AuthenticatedSettingsRolesLazyRoute
   '/settings/store': typeof AuthenticatedSettingsStoreLazyRoute
@@ -677,7 +677,7 @@ export interface FileRoutesById {
   '/_authenticated/operations/orders': typeof AuthenticatedOperationsOrdersLazyRoute
   '/_authenticated/operations/shift': typeof AuthenticatedOperationsShiftLazyRoute
   '/_authenticated/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsLazyRoute
-  '/_authenticated/settings/financial': typeof AuthenticatedSettingsFinancialLazyRoute
+  '/_authenticated/settings/financial': typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   '/_authenticated/settings/mobile-app': typeof AuthenticatedSettingsMobileAppLazyRoute
   '/_authenticated/settings/roles': typeof AuthenticatedSettingsRolesLazyRoute
   '/_authenticated/settings/store': typeof AuthenticatedSettingsStoreLazyRoute
@@ -699,6 +699,7 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
     | '/inventory'
     | '/settings'
     | '/forgot-password'
@@ -711,7 +712,6 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
-    | '/'
     | '/inventory/stock'
     | '/ops/session'
     | '/errors/$error'
@@ -742,18 +742,18 @@ export interface FileRouteTypes {
     | '/settings/store'
     | '/staff/employees'
     | '/staff/roster'
-    | '/apps'
-    | '/chats'
-    | '/help-center'
+    | '/apps/'
+    | '/chats/'
+    | '/help-center/'
     | '/inventory/'
     | '/settings/'
-    | '/tasks'
-    | '/users'
-    | '/operations'
+    | '/tasks/'
+    | '/users/'
+    | '/operations/'
     | '/settings/financial/cash-drawers'
     | '/ops/session/'
-    | '/growth/reviews'
-    | '/menu/availability'
+    | '/growth/reviews/'
+    | '/menu/availability/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/forgot-password'
@@ -887,7 +887,7 @@ declare module '@tanstack/react-router' {
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -985,21 +985,21 @@ declare module '@tanstack/react-router' {
     '/_authenticated/operations/': {
       id: '/_authenticated/operations/'
       path: '/operations'
-      fullPath: '/operations'
+      fullPath: '/operations/'
       preLoaderRoute: typeof AuthenticatedOperationsIndexLazyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
-      fullPath: '/users'
+      fullPath: '/users/'
       preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/tasks/': {
       id: '/_authenticated/tasks/'
       path: '/tasks'
-      fullPath: '/tasks'
+      fullPath: '/tasks/'
       preLoaderRoute: typeof AuthenticatedTasksIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
@@ -1020,21 +1020,21 @@ declare module '@tanstack/react-router' {
     '/_authenticated/help-center/': {
       id: '/_authenticated/help-center/'
       path: '/help-center'
-      fullPath: '/help-center'
+      fullPath: '/help-center/'
       preLoaderRoute: typeof AuthenticatedHelpCenterIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/chats/': {
       id: '/_authenticated/chats/'
       path: '/chats'
-      fullPath: '/chats'
+      fullPath: '/chats/'
       preLoaderRoute: typeof AuthenticatedChatsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/apps/': {
       id: '/_authenticated/apps/'
       path: '/apps'
-      fullPath: '/apps'
+      fullPath: '/apps/'
       preLoaderRoute: typeof AuthenticatedAppsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
@@ -1251,14 +1251,14 @@ declare module '@tanstack/react-router' {
     '/_authenticated/menu/availability/': {
       id: '/_authenticated/menu/availability/'
       path: '/menu/availability'
-      fullPath: '/menu/availability'
+      fullPath: '/menu/availability/'
       preLoaderRoute: typeof AuthenticatedMenuAvailabilityIndexLazyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/growth/reviews/': {
       id: '/_authenticated/growth/reviews/'
       path: '/growth/reviews'
-      fullPath: '/growth/reviews'
+      fullPath: '/growth/reviews/'
       preLoaderRoute: typeof AuthenticatedGrowthReviewsIndexLazyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
@@ -1271,10 +1271,10 @@ declare module '@tanstack/react-router' {
     }
     '/_authenticated/settings/financial/cash-drawers': {
       id: '/_authenticated/settings/financial/cash-drawers'
-      path: '/financial/cash-drawers'
+      path: '/cash-drawers'
       fullPath: '/settings/financial/cash-drawers'
       preLoaderRoute: typeof AuthenticatedSettingsFinancialCashDrawersLazyRouteImport
-      parentRoute: typeof AuthenticatedSettingsRouteRoute
+      parentRoute: typeof AuthenticatedSettingsFinancialLazyRoute
     }
   }
 }
@@ -1301,18 +1301,32 @@ const AuthenticatedInventoryRouteRouteWithChildren =
     AuthenticatedInventoryRouteRouteChildren,
   )
 
+interface AuthenticatedSettingsFinancialLazyRouteChildren {
+  AuthenticatedSettingsFinancialCashDrawersLazyRoute: typeof AuthenticatedSettingsFinancialCashDrawersLazyRoute
+}
+
+const AuthenticatedSettingsFinancialLazyRouteChildren: AuthenticatedSettingsFinancialLazyRouteChildren =
+  {
+    AuthenticatedSettingsFinancialCashDrawersLazyRoute:
+      AuthenticatedSettingsFinancialCashDrawersLazyRoute,
+  }
+
+const AuthenticatedSettingsFinancialLazyRouteWithChildren =
+  AuthenticatedSettingsFinancialLazyRoute._addFileChildren(
+    AuthenticatedSettingsFinancialLazyRouteChildren,
+  )
+
 interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute
   AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
   AuthenticatedSettingsDisplayRoute: typeof AuthenticatedSettingsDisplayRoute
   AuthenticatedSettingsNotificationsRoute: typeof AuthenticatedSettingsNotificationsRoute
   AuthenticatedSettingsAuditLogsLazyRoute: typeof AuthenticatedSettingsAuditLogsLazyRoute
-  AuthenticatedSettingsFinancialLazyRoute: typeof AuthenticatedSettingsFinancialLazyRoute
+  AuthenticatedSettingsFinancialLazyRoute: typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   AuthenticatedSettingsMobileAppLazyRoute: typeof AuthenticatedSettingsMobileAppLazyRoute
   AuthenticatedSettingsRolesLazyRoute: typeof AuthenticatedSettingsRolesLazyRoute
   AuthenticatedSettingsStoreLazyRoute: typeof AuthenticatedSettingsStoreLazyRoute
   AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
-  AuthenticatedSettingsFinancialCashDrawersLazyRoute: typeof AuthenticatedSettingsFinancialCashDrawersLazyRoute
 }
 
 const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteChildren =
@@ -1325,14 +1339,12 @@ const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteCh
     AuthenticatedSettingsAuditLogsLazyRoute:
       AuthenticatedSettingsAuditLogsLazyRoute,
     AuthenticatedSettingsFinancialLazyRoute:
-      AuthenticatedSettingsFinancialLazyRoute,
+      AuthenticatedSettingsFinancialLazyRouteWithChildren,
     AuthenticatedSettingsMobileAppLazyRoute:
       AuthenticatedSettingsMobileAppLazyRoute,
     AuthenticatedSettingsRolesLazyRoute: AuthenticatedSettingsRolesLazyRoute,
     AuthenticatedSettingsStoreLazyRoute: AuthenticatedSettingsStoreLazyRoute,
     AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
-    AuthenticatedSettingsFinancialCashDrawersLazyRoute:
-      AuthenticatedSettingsFinancialCashDrawersLazyRoute,
   }
 
 const AuthenticatedSettingsRouteRouteWithChildren =
