@@ -1,4 +1,4 @@
-import { hqNav, storeNav } from '@/config/nav'
+import { hqNav, getStoreNav } from '@/config/nav'
 import { useLayout } from '@/context/layout-provider'
 import { useAppStore } from '@/hooks/use-app-store'
 import {
@@ -28,6 +28,7 @@ export function AppSidebar() {
     : sidebarData.user
 
   const activeShop = shops.find((s) => s.id === activeShopId)
+  const storeNav = getStoreNav(activeShopId)
 
   return (
     <Sidebar collapsible={collapsible} variant={variant}>

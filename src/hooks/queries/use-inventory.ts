@@ -11,6 +11,7 @@ import {
   deleteUnit,
   getShopStock,
   adjustStock,
+  activateShopIngredients,
 } from '@/services/inventory'
 // import { getInventory, adjustStock } from '@/services/ops' // Deprecated?
 import { type AdjustStockRequest } from '@/types/api'
@@ -44,6 +45,16 @@ export const useAdjustStock = () => {
       queryClient.invalidateQueries({
         queryKey: ['shop-inventory', variables.shopId],
       })
+    },
+  })
+}
+
+export const useActivateShopIngredients = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (shopId: string) => activateShopIngredients(shopId),
+    onSuccess: (_, shopId) => {
+      queryClient.invalidateQueries({ queryKey: ['shop-inventory', shopId] })
     },
   })
 }

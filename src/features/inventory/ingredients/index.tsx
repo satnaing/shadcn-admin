@@ -1,11 +1,19 @@
 import { useState } from 'react'
 import { type Ingredient } from '@/types/inventory'
+import { FileSpreadsheet, Plus } from 'lucide-react'
+import { useIngredients } from '@/hooks/queries/use-inventory'
+import { BrandLoader } from '@/components/ui/brand-loader'
+import { Button } from '@/components/ui/button'
+import { DataTable } from '@/components/custom/data-table'
 import { PageTitle } from '@/components/page-title'
+import { IngredientImportDialog } from './_components/ingredient-import-dialog'
 import { IngredientSheet } from './_components/ingredient-sheet'
-import { IngredientsTable } from './_components/ingredients-table'
+import { columns } from './_components/ingredients-columns'
 
 export default function IngredientsPage() {
+  const { data: ingredients, isLoading } = useIngredients()
   const [open, setOpen] = useState(false)
+  const [importOpen, setImportOpen] = useState(false)
   const [selectedIngredient, setSelectedIngredient] =
     useState<Ingredient | null>(null)
 
@@ -19,16 +27,43 @@ export default function IngredientsPage() {
     setOpen(true)
   }
 
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center p-6'>
+        <BrandLoader />
+      </div>
+    )
+  }
+
   return (
     <div className='p-6'>
       <PageTitle
         title='Ingredients'
         subtitle='Manage your ingredients inventory.'
-        buttonLabel='Add Ingredient'
-        onClick={handleCreate}
+        actions={
+          <div className='flex gap-2'>
+            <Button
+              variant='outline'
+              size='sm'
+              onClick={() => setImportOpen(true)}
+            >
+              <FileSpreadsheet className='mr-2 h-4 w-4' />
+              Import
+            </Button>
+            <Button onClick={handleCreate} size='sm'>
+              <Plus className='mr-2 h-4 w-4' />
+              Add Ingredient
+            </Button>
+          </div>
+        }
       />
 
-      <IngredientsTable onEdit={handleEdit} />
+      <DataTable
+        columns={columns(handleEdit)}
+        data={ingredients || []}
+        searchKey='name'
+        searchPlaceholder='Filter ingredients...'
+      />
 
       <IngredientSheet
         open={open}
@@ -38,6 +73,8 @@ export default function IngredientsPage() {
         }}
         initialData={selectedIngredient}
       />
+
+      <IngredientImportDialog open={importOpen} onOpenChange={setImportOpen} />
     </div>
   )
 }

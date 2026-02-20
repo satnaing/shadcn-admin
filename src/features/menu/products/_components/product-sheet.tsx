@@ -173,23 +173,10 @@ interface ProductSheetProps {
   product?: Product | null // Adding product prop for edit mode
 }
 
-export function ProductSheet({
-  open,
-  onOpenChange,
-  product,
-}: ProductSheetProps) {
-  const { data: categories } = useCategories()
-  const { data: optionGroups } = useOptionGroups()
-  const { data: ingredients } = useIngredients()
-  const { mutate: createProduct, isPending: isCreating } = useCreateProduct()
-  const { mutate: updateProduct, isPending: isUpdating } = useUpdateProduct()
-
-  // Removed unused isPending variable if it's not used in UI or use it if needed.
-  const isPending = isCreating || isUpdating
-
-  const form = useForm<ProductFormValues>({
-    resolver: zodResolver(productSchema) as Resolver<ProductFormValues>,
-    defaultValues: product || {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const mapProductToForm = (product: any): ProductFormValues => {
+  if (!product) {
+    return {
       name: { en: '' },
       description: { en: '' },
       sku: '',
@@ -214,40 +201,72 @@ export function ProductSheet({
       imageUrl: {},
       optionGroupIds: [],
       recipes: [],
-    },
+    }
+  }
+
+  // Handle price choices mapping
+  const mappedPrice = {
+    ...product.price,
+    name: product.price?.name || { en: 'Size' },
+    choices:
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      product.price?.choices?.map((choice: any) => ({
+        ...choice,
+        price: Number(choice.price || 0),
+        recipes:
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          choice.recipes?.map((r: any) => ({
+            ingredientId: r.ingredientId,
+            quantity: Number(r.quantity || 0),
+            optionId: r.optionId || choice.id || choice.sku,
+          })) || [],
+      })) || [],
+  }
+
+  return {
+    ...product,
+    name: product.name || { en: '' },
+    description: product.description || { en: '' },
+    sku: product.sku || '',
+    categoryId: product.categoryId || '',
+    status: (product.status as ProductStatus) || ProductStatus.DRAFT,
+    imageUrl: product.imageUrl || {},
+    price: mappedPrice,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    optionGroupIds: product.optionGroups?.map((g: any) => g.id) || [],
+    recipes:
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      product.recipes?.map((r: any) => ({
+        ingredientId: r.ingredientId,
+        quantity: Number(r.quantity || 0),
+        optionId: r.optionId || '',
+      })) || [],
+  }
+}
+
+export function ProductSheet({
+  open,
+  onOpenChange,
+  product,
+}: ProductSheetProps) {
+  const { data: categories } = useCategories()
+  const { data: optionGroups } = useOptionGroups()
+  const { data: ingredients } = useIngredients()
+  const { mutate: createProduct, isPending: isCreating } = useCreateProduct()
+  const { mutate: updateProduct, isPending: isUpdating } = useUpdateProduct()
+
+  // Removed unused isPending variable if it's not used in UI or use it if needed.
+  const isPending = isCreating || isUpdating
+
+  const form = useForm<ProductFormValues>({
+    resolver: zodResolver(productSchema) as Resolver<ProductFormValues>,
+    defaultValues: mapProductToForm(product),
   })
 
   // Reset form when product changes or sheet opens
   useEffect(() => {
     if (open) {
-      form.reset(
-        product || {
-          name: { en: '' },
-          description: { en: '' },
-          sku: '',
-          price: {
-            name: { en: 'Size' },
-            type: OptionType.VARIANT,
-            sku: '',
-            minSelect: 1,
-            maxSelect: 1,
-            choices: [
-              {
-                sku: '',
-                name: { en: 'Standard' },
-                price: 0,
-                recipes: [],
-              },
-            ],
-          },
-          priceGroupId: '',
-          categoryId: '',
-          status: ProductStatus.DRAFT,
-          imageUrl: {},
-          optionGroupIds: [],
-          recipes: [],
-        }
-      )
+      form.reset(mapProductToForm(product))
     }
   }, [open, product, form])
 

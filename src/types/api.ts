@@ -114,6 +114,15 @@ export interface ProductFilters {
   collectionIds?: string[]
 }
 
+export interface ShopProduct {
+  id: string
+  shopId: string
+  productId: string
+  price: string
+  isAvailable: boolean
+  product: Product
+}
+
 // Recipes
 export interface Recipe {
   id: string

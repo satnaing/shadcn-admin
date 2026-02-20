@@ -40,6 +40,7 @@ import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenti
 import { Route as AuthenticatedOpsSessionRouteRouteImport } from './routes/_authenticated/ops/session/route'
 import { Route as AuthenticatedInventoryStockRouteRouteImport } from './routes/_authenticated/inventory/stock/route'
 import { Route as AuthenticatedOpsSessionIndexRouteImport } from './routes/_authenticated/ops/session/index'
+import { Route as AuthenticatedShopsIdMenuRouteImport } from './routes/_authenticated/shops/$id/menu'
 
 const AuthenticatedOperationsIndexLazyRouteImport = createFileRoute(
   '/_authenticated/operations/',
@@ -525,6 +526,12 @@ const AuthenticatedSettingsFinancialCashDrawersLazyRoute =
       (d) => d.Route,
     ),
   )
+const AuthenticatedShopsIdMenuRoute =
+  AuthenticatedShopsIdMenuRouteImport.update({
+    id: '/shops/$id/menu',
+    path: '/shops/$id/menu',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
@@ -578,6 +585,7 @@ export interface FileRoutesByFullPath {
   '/tasks/': typeof AuthenticatedTasksIndexRoute
   '/users/': typeof AuthenticatedUsersIndexRoute
   '/operations/': typeof AuthenticatedOperationsIndexLazyRoute
+  '/shops/$id/menu': typeof AuthenticatedShopsIdMenuRoute
   '/settings/financial/cash-drawers': typeof AuthenticatedSettingsFinancialCashDrawersLazyRoute
   '/ops/session/': typeof AuthenticatedOpsSessionIndexRoute
   '/growth/reviews/': typeof AuthenticatedGrowthReviewsIndexLazyRoute
@@ -632,6 +640,7 @@ export interface FileRoutesByTo {
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/operations': typeof AuthenticatedOperationsIndexLazyRoute
+  '/shops/$id/menu': typeof AuthenticatedShopsIdMenuRoute
   '/settings/financial/cash-drawers': typeof AuthenticatedSettingsFinancialCashDrawersLazyRoute
   '/ops/session': typeof AuthenticatedOpsSessionIndexRoute
   '/growth/reviews': typeof AuthenticatedGrowthReviewsIndexLazyRoute
@@ -691,6 +700,7 @@ export interface FileRoutesById {
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
   '/_authenticated/operations/': typeof AuthenticatedOperationsIndexLazyRoute
+  '/_authenticated/shops/$id/menu': typeof AuthenticatedShopsIdMenuRoute
   '/_authenticated/settings/financial/cash-drawers': typeof AuthenticatedSettingsFinancialCashDrawersLazyRoute
   '/_authenticated/ops/session/': typeof AuthenticatedOpsSessionIndexRoute
   '/_authenticated/growth/reviews/': typeof AuthenticatedGrowthReviewsIndexLazyRoute
@@ -750,6 +760,7 @@ export interface FileRouteTypes {
     | '/tasks/'
     | '/users/'
     | '/operations/'
+    | '/shops/$id/menu'
     | '/settings/financial/cash-drawers'
     | '/ops/session/'
     | '/growth/reviews/'
@@ -804,6 +815,7 @@ export interface FileRouteTypes {
     | '/tasks'
     | '/users'
     | '/operations'
+    | '/shops/$id/menu'
     | '/settings/financial/cash-drawers'
     | '/ops/session'
     | '/growth/reviews'
@@ -862,6 +874,7 @@ export interface FileRouteTypes {
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
     | '/_authenticated/operations/'
+    | '/_authenticated/shops/$id/menu'
     | '/_authenticated/settings/financial/cash-drawers'
     | '/_authenticated/ops/session/'
     | '/_authenticated/growth/reviews/'
@@ -1276,6 +1289,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsFinancialCashDrawersLazyRouteImport
       parentRoute: typeof AuthenticatedSettingsFinancialLazyRoute
     }
+    '/_authenticated/shops/$id/menu': {
+      id: '/_authenticated/shops/$id/menu'
+      path: '/shops/$id/menu'
+      fullPath: '/shops/$id/menu'
+      preLoaderRoute: typeof AuthenticatedShopsIdMenuRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -1394,6 +1414,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
   AuthenticatedOperationsIndexLazyRoute: typeof AuthenticatedOperationsIndexLazyRoute
+  AuthenticatedShopsIdMenuRoute: typeof AuthenticatedShopsIdMenuRoute
   AuthenticatedGrowthReviewsIndexLazyRoute: typeof AuthenticatedGrowthReviewsIndexLazyRoute
   AuthenticatedMenuAvailabilityIndexLazyRoute: typeof AuthenticatedMenuAvailabilityIndexLazyRoute
 }
@@ -1431,6 +1452,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
   AuthenticatedOperationsIndexLazyRoute: AuthenticatedOperationsIndexLazyRoute,
+  AuthenticatedShopsIdMenuRoute: AuthenticatedShopsIdMenuRoute,
   AuthenticatedGrowthReviewsIndexLazyRoute:
     AuthenticatedGrowthReviewsIndexLazyRoute,
   AuthenticatedMenuAvailabilityIndexLazyRoute:

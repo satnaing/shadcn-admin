@@ -89,3 +89,10 @@ export const adjustStock = async (
 ): Promise<void> => {
   await apiClient.post(`/admin/shops/${shopId}/inventory/adjust`, data)
 }
+
+export const activateShopIngredients = async (shopId: string) => {
+  const response = await apiClient.post(
+    `/admin/shops/${shopId}/inventory/activate`
+  )
+  return response.data
+}

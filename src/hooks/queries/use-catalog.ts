@@ -14,6 +14,11 @@ import {
   updateOptionGroup,
   deleteOptionGroup,
   getCollections,
+  getShopProducts,
+  syncShopCatalog,
+  toggleProductAvailability,
+  toggleBulkProductAvailability,
+  updateShopPrice,
 } from '@/services/catalog'
 import type {
   CreateCategoryRequest,
@@ -164,6 +169,87 @@ export const useDeleteProduct = () => {
     mutationFn: deleteProduct,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['products'] })
+    },
+  })
+}
+
+// Shop Menu
+export const useShopProducts = (shopId: string) => {
+  return useQuery({
+    queryKey: ['shop-products', shopId],
+    queryFn: () => getShopProducts(shopId),
+    enabled: !!shopId,
+  })
+}
+
+export const useSyncShopCatalog = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (shopId: string) => syncShopCatalog(shopId),
+    onSuccess: (_, shopId) => {
+      queryClient.invalidateQueries({
+        queryKey: ['shop-products', shopId],
+      })
+    },
+  })
+}
+
+export const useToggleProductAvailability = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({
+      shopId,
+      productId,
+      isAvailable,
+    }: {
+      shopId: string
+      productId: string
+      isAvailable: boolean
+    }) => toggleProductAvailability(shopId, productId, isAvailable),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ['shop-products', variables.shopId],
+      })
+    },
+  })
+}
+
+export const useToggleBulkProductAvailability = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({
+      shopId,
+      productIds,
+      status,
+    }: {
+      shopId: string
+      productIds: string[]
+      status: boolean
+    }) => toggleBulkProductAvailability(shopId, productIds, status),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ['shop-products', variables.shopId],
+      })
+    },
+  })
+}
+
+export const useUpdateShopPrice = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({
+      shopId,
+      productId,
+      price,
+    }: {
+      shopId: string
+      productId: string
+      price: number
+    }) => updateShopPrice(shopId, productId, price),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ['shop-products', variables.shopId],
+      })
     },
   })
 }

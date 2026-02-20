@@ -98,3 +98,53 @@ export const deleteProduct = async (id: string) => {
   const response = await apiClient.delete(`/admin/products/${id}`)
   return response.data
 }
+
+// Shop Menu
+export const getShopProducts = async (shopId: string) => {
+  const response = await apiClient.get(`/admin/shops/${shopId}/menu`)
+  return response.data
+}
+
+export const syncShopCatalog = async (shopId: string) => {
+  const response = await apiClient.post(
+    `/admin/shops/${shopId}/sync-catalog`,
+    {}
+  )
+  return response.data
+}
+
+export const toggleProductAvailability = async (
+  shopId: string,
+  productId: string,
+  isAvailable: boolean
+) => {
+  const response = await apiClient.patch(
+    `/admin/shops/${shopId}/menu/products/${productId}`,
+    { isAvailable }
+  )
+  return response.data
+}
+
+export const toggleBulkProductAvailability = async (
+  shopId: string,
+  productIds: string[],
+  status: boolean
+) => {
+  const response = await apiClient.patch(`/admin/shops/${shopId}/menu/status`, {
+    productIds,
+    status,
+  })
+  return response.data
+}
+
+export const updateShopPrice = async (
+  shopId: string,
+  productId: string,
+  price: number
+) => {
+  const response = await apiClient.patch(
+    `/admin/shops/${shopId}/menu/products/${productId}`,
+    { price }
+  )
+  return response.data
+}

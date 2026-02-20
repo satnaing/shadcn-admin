@@ -12,7 +12,7 @@ import {
   Users,
 } from 'lucide-react'
 
-export const storeNav = [
+export const getStoreNav = (shopId?: string | null) => [
   // {
   //   title: 'Dashboard',
   //   url: '/',
@@ -34,20 +34,9 @@ export const storeNav = [
     url: '/inventory/stock',
     icon: Package,
   },
-  // {
-  //   title: 'Inventory',
-  //   url: '/inventory',
-  //   icon: Package,
-  //   items: [
-  //     { title: 'Stock Levels', url: '/inventory/stock' },
-  //     { title: 'Purchase Orders', url: '/inventory/purchasing' },
-  //     { title: 'Suppliers', url: '/inventory/suppliers' },
-  //     { title: 'Wastage Logs', url: '/inventory/waste' },
-  //   ],
-  // },
   {
-    title: 'Menu Availability',
-    url: '/menu/availability',
+    title: 'Shop Menu',
+    url: shopId ? `/shops/${shopId}/menu` : '/menu/availability',
     icon: ToggleRight,
   },
   {
