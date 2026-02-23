@@ -63,6 +63,7 @@ export const sidebarData: SidebarData = {
           icon: Package,
           items: [
             { title: 'Stock Levels', url: '/inventory/stock' },
+            { title: 'Inventory Logs', url: '/inventory/logs' },
             { title: 'Purchase Orders', url: '/inventory/purchasing' },
             { title: 'Suppliers', url: '/inventory/suppliers' },
             { title: 'Wastage Logs', url: '/inventory/waste' },

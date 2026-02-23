@@ -33,6 +33,13 @@ export const getStoreNav = (shopId?: string | null) => [
     title: 'Inventory',
     url: '/inventory/stock',
     icon: Package,
+    items: [
+      { title: 'Stock Levels', url: '/inventory/stock' },
+      {
+        title: 'Inventory Logs',
+        url: shopId ? `/shops/${shopId}/inventory/logs` : '#',
+      },
+    ],
   },
   {
     title: 'Shop Menu',

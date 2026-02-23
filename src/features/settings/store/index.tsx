@@ -1,9 +1,12 @@
+import { useEffect } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SUPPORTED_LOCALES, DEFAULT_LOCALE } from '@/config/locales'
-import { useShopStore } from '@/stores/shop-store'
 import { showSubmittedData } from '@/lib/show-submitted-data'
+import { useShop, useUpdateShop } from '@/hooks/queries/use-shops'
+// We still need the current shop context to know WHICH shop to load
+import { useAppStore } from '@/hooks/use-app-store'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -44,47 +47,114 @@ const storeProfileSchema = z.object({
 type StoreProfileValues = z.infer<typeof storeProfileSchema>
 
 export default function StoreProfileForm() {
-  const { shops, shopId, updateShop } = useShopStore()
+  const { activeShopId } = useAppStore() // Get the currently selected shop ID context
 
-  // Find the active shop
-  const activeShop = shops.find((s) => s.name === shopId)
+  const { data: activeShop, isLoading } = useShop(activeShopId!)
+  const { mutate: updateShopMutate, isPending } = useUpdateShop()
 
   const form = useForm<StoreProfileValues>({
-    resolver: zodResolver(storeProfileSchema),
+    resolver: zodResolver(
+      storeProfileSchema
+    ) as unknown as import('react-hook-form').Resolver<StoreProfileValues>,
     defaultValues: {
-      name: activeShop?.name || '',
-      code: activeShop?.code || '',
-      phone: activeShop?.phone || '',
-      description: activeShop?.description || '',
-      openingHours: activeShop?.openingHours || '',
-      imageUrl: activeShop?.imageUrl || '',
-      coverImageUrl: activeShop?.coverImageUrl || '',
-      address: activeShop?.address || '',
-      locationLat: activeShop?.locationLat || 0,
-      locationLong: activeShop?.locationLong || 0,
-      defaultLanguage: activeShop?.defaultLanguage || DEFAULT_LOCALE,
-    },
-    values: {
-      // Use 'values' to reactively update form when activeShop changes
-      name: activeShop?.name || '',
-      code: activeShop?.code || '',
-      phone: activeShop?.phone || '',
-      description: activeShop?.description || '',
-      openingHours: activeShop?.openingHours || '',
-      imageUrl: activeShop?.imageUrl || '',
-      coverImageUrl: activeShop?.coverImageUrl || '',
-      address: activeShop?.address || '',
-      locationLat: activeShop?.locationLat || 0,
-      locationLong: activeShop?.locationLong || 0,
-      defaultLanguage: activeShop?.defaultLanguage || DEFAULT_LOCALE,
+      name: '',
+      code: '',
+      phone: '',
+      description: '',
+      openingHours: '',
+      imageUrl: '',
+      coverImageUrl: '',
+      address: '',
+      locationLat: 0,
+      locationLong: 0,
+      defaultLanguage: DEFAULT_LOCALE,
     },
   })
 
-  function onSubmit(data: StoreProfileValues) {
+  useEffect(() => {
     if (activeShop) {
-      updateShop(activeShop.id, data)
-      showSubmittedData(data)
+      form.reset({
+        name: activeShop.name?.en || '',
+        code: activeShop.code || '',
+        phone:
+          typeof activeShop.phoneContacts === 'object' &&
+          activeShop.phoneContacts !== null
+            ? activeShop.phoneContacts.support ||
+              activeShop.phoneContacts.manager ||
+              ''
+            : '',
+        description: activeShop.description?.en || '',
+        openingHours:
+          typeof activeShop.openingHours === 'object' &&
+          activeShop.openingHours !== null
+            ? Object.values(activeShop.openingHours)[0] || ''
+            : '',
+        imageUrl:
+          typeof activeShop.imageUrl === 'string' ? activeShop.imageUrl : '',
+        coverImageUrl:
+          typeof activeShop.bannerImageUrl === 'string'
+            ? activeShop.bannerImageUrl
+            : '',
+        address: '', // Currently no explicit field in CreateShopDto, can merge into description later
+        locationLat: activeShop.locationLat
+          ? Number(activeShop.locationLat)
+          : 0,
+        locationLong: activeShop.locationLong
+          ? Number(activeShop.locationLong)
+          : 0,
+        defaultLanguage: DEFAULT_LOCALE,
+      })
     }
+  }, [activeShop, form])
+
+  function onSubmit(data: StoreProfileValues) {
+    if (!activeShopId) return
+
+    updateShopMutate(
+      {
+        id: activeShopId,
+        data: {
+          name: { en: data.name },
+          code: data.code,
+          description: { en: data.description || '' },
+          // Simple mapping of phone to a general support number role
+          phoneContacts: data.phone ? { support: data.phone } : undefined,
+          // Simple opening hours mapping to all days if provided
+          openingHours: data.openingHours
+            ? {
+                Monday: data.openingHours,
+                Tuesday: data.openingHours,
+                Wednesday: data.openingHours,
+                Thursday: data.openingHours,
+                Friday: data.openingHours,
+                Saturday: data.openingHours,
+                Sunday: data.openingHours,
+              }
+            : undefined,
+          imageUrl: data.imageUrl,
+          bannerImageUrl: data.coverImageUrl,
+          locationLat: data.locationLat,
+          locationLong: data.locationLong,
+        },
+      },
+      {
+        onSuccess: () => {
+          showSubmittedData(data)
+        },
+      }
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex flex-col space-y-4 p-6 pt-6'>
+        <PageTitle
+          title='Store Profile'
+          subtitle="Manage your store's public details and settings."
+        />
+        <div className='text-sm text-muted-foreground'>Loading...</div>
+      </div>
+    )
   }
 
   return (
@@ -159,7 +229,7 @@ export default function StoreProfileForm() {
                 name='description'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel>Description / Address</FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder='Tell us a little bit about your store'
@@ -277,23 +347,6 @@ export default function StoreProfileForm() {
                 <h3 className='text-lg font-medium'>Location</h3>
               </div>
 
-              <FormField
-                control={form.control}
-                name='address'
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Address</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder='123 Main St, City, Country'
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
               <div className='grid grid-cols-2 gap-4'>
                 <FormField
                   control={form.control}
@@ -362,8 +415,8 @@ export default function StoreProfileForm() {
           </div>
 
           <div className='flex justify-end'>
-            <Button type='submit' size='lg'>
-              Save Changes
+            <Button type='submit' size='lg' disabled={isPending}>
+              {isPending ? 'Saving...' : 'Save Changes'}
             </Button>
           </div>
         </form>
