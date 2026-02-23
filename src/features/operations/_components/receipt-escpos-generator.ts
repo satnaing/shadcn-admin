@@ -19,7 +19,7 @@ export const WIDTH_80MM_DOTS = 576 // 80mm printers usually have 576 dots per li
  */
 export const generateReceiptBlob = (
   order: Order,
-  shopName: string = 'YOK Sonthormuk',
+  shopName: string = 'Branch: YOK Sonthormuk',
   khrRate: number = 4100
 ): Uint8Array => {
   const commands: (number[] | Uint8Array)[] = []
@@ -33,29 +33,27 @@ export const generateReceiptBlob = (
   // ─── Header: Logo + "YOK" ───
   commands.push(COMMANDS.ALIGN_CENTER)
   commands.push(COMMANDS.PRINT_NV_LOGO)
-  commands.push(COMMANDS.TEXT_BOLD_ON)
+  // commands.push(COMMANDS.TEXT_BOLD_ON)
   // commands.push(COMMANDS.TEXT_DOUBLE_HEIGHT)
   // commands.push(COMMANDS.TEXT_DOUBLE_WIDTH)
-  commands.push(encodeText('\nTel: 086 861 255'))
+  commands.push(encodeText('\n\n#146, St 132, Terk Laak 1, Toul Kork, PP\n'))
+  commands.push(encodeText('Tel: 086 861 255\n'))
   // commands.push(COMMANDS.TEXT_NORMAL)
-  commands.push(COMMANDS.TEXT_BOLD_OFF)
+  // commands.push(COMMANDS.TEXT_BOLD_OFF)
   commands.push(COMMANDS.LF)
   commands.push(COMMANDS.LF)
-  commands.push(COMMANDS.LF)
+  // commands.push(COMMANDS.LF)
 
   // ─── Order Info (two-column) ───
   commands.push(COMMANDS.ALIGN_LEFT)
 
-  // Row 1: "LOCKER : B6" bold (left)  |  "ORDER : YOK-XXXXXX" (right)
-  const orderLabel = `ORDER : YOK-${order.invoiceCode}`
   commands.push(COMMANDS.TEXT_BOLD_ON)
-  commands.push(encodeText(padRight('LOCKER : B6', 48 - orderLabel.length)))
+  commands.push(encodeText(padRight('LOCKER : B6', 48 - shopName.length)))
   commands.push(COMMANDS.TEXT_BOLD_OFF)
-  commands.push(encodeText(orderLabel + '\n'))
-
-  // Row 2: shop name (left)  |  date/time (right)
+  commands.push(encodeText(shopName + '\n'))
+  const orderLabel = `ORDER : YOK-${order.invoiceCode}`
   const dateStr = format(new Date(order.createdAt), 'dd/MM/yyyy _ hh:mma')
-  commands.push(encodeText(createTwoColumns(shopName, dateStr, 48) + '\n\n'))
+  commands.push(encodeText(createTwoColumns(orderLabel, dateStr, 48) + '\n\n'))
 
   // ─── Dotted Divider ───
   commands.push(encodeText(DOTS))
