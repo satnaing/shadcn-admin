@@ -2937,6 +2937,11 @@ html-parse-stringify@^3.0.1:
   dependencies:
     void-elements "3.1.0"
 
+html-to-image@^1.11.13:
+  version "1.11.13"
+  resolved "https://registry.yarnpkg.com/html-to-image/-/html-to-image-1.11.13.tgz#adbc989c993b7aaf90b629c0cacf833db84d5f43"
+  integrity sha512-cuOPoI7WApyhBElTTb9oqsawRvZ0rHhaHwghRLlTuffoD1B2aDemlCruLeZrUIIdvG7gs9xeELEPm6PhuASqrg==
+
 i18next@^25.8.4:
   version "25.8.11"
   resolved "https://registry.npmjs.org/i18next/-/i18next-25.8.11.tgz"
@@ -3577,6 +3582,11 @@ react-style-singleton@^2.2.2, react-style-singleton@^2.2.3:
   dependencies:
     get-nonce "^1.0.0"
     tslib "^2.0.0"
+
+react-to-print@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-3.2.0.tgz#935d8c8929d63ce483f15553235c4eec67206c18"
+  integrity sha512-IX2D0mebKMgYTBD6s5tf9B7YRL3RFWjRoevYK8JKgRwn94Rep7PFZyeOTGjCmXofKB1SKzvPSzDrAMG4I2PIwg==
 
 react-top-loading-bar@^3.0.2:
   version "3.0.2"

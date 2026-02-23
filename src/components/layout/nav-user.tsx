@@ -5,6 +5,7 @@ import {
   ChevronsUpDown,
   CreditCard,
   LogOut,
+  Printer,
   Sparkles,
 } from 'lucide-react'
 import useDialogState from '@/hooks/use-dialog-state'
@@ -97,7 +98,13 @@ export function NavUser({ user }: NavUserProps) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to='/settings'>
+                  <Link to='/settings/printers'>
+                    <Printer />
+                    Printer Settings
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to='/'>
                     <CreditCard />
                     Billing
                   </Link>

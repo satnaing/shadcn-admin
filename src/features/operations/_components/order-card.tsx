@@ -1,7 +1,9 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { formatDistanceToNow } from 'date-fns'
-import { type Order, type OrderStatus } from '@/types/orders'
-import { CheckCircle2, Clock, PlayCircle } from 'lucide-react'
+import { type Order, type OrderStatus } from '@/types/api'
+import { CheckCircle2, Clock, PlayCircle, Printer, Tag } from 'lucide-react'
+import { printLabelViaBluetooth } from '@/utils/label-printer'
+import { printReceiptViaBluetooth } from '@/utils/printer'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
@@ -14,6 +16,35 @@ interface OrderCardProps {
 
 export function OrderCard({ order, onStatusChange }: OrderCardProps) {
   // Determine time color
+  const [isPrintingReceipt, setIsPrintingReceipt] = useState(true)
+  const [isPrintingLabel, setIsPrintingLabel] = useState(true)
+
+  const handlePrintReceipt = async () => {
+    setIsPrintingReceipt(true)
+    try {
+      await printReceiptViaBluetooth(order)
+    } finally {
+      setIsPrintingReceipt(false)
+    }
+  }
+
+  const handlePrintLabels = async () => {
+    setIsPrintingLabel(true)
+    try {
+      for (const item of order.items) {
+        await printLabelViaBluetooth({
+          drinkName:
+            typeof item.name === 'string' ? item.name : (item.name?.en ?? ''),
+          note: item.notes ?? undefined,
+          orderCode: `YOK-${order.invoiceCode}`,
+          quantity: item.quantity,
+        })
+      }
+    } finally {
+      setIsPrintingLabel(false)
+    }
+  }
+
   const timeColor = useMemo(() => {
     const created = new Date(order.createdAt)
     const diffMins = (new Date().getTime() - created.getTime()) / 60000
@@ -107,7 +138,29 @@ export function OrderCard({ order, onStatusChange }: OrderCardProps) {
 
       <Separator className='my-2' />
 
-      <CardFooter className='pt-0 pb-3'>
+      <CardFooter className='flex flex-col gap-2 pt-0 pb-3'>
+        {/* Print buttons row */}
+        <div className='flex w-full gap-2'>
+          <Button
+            variant='outline'
+            className='flex-1'
+            onClick={handlePrintReceipt}
+            disabled={isPrintingReceipt}
+          >
+            <Printer className='mr-1.5 h-3.5 w-3.5' />
+            {isPrintingReceipt ? '...' : 'Receipt'}
+          </Button>
+          <Button
+            variant='outline'
+            className='flex-1'
+            onClick={handlePrintLabels}
+            disabled={isPrintingLabel}
+          >
+            <Tag className='mr-1.5 h-3.5 w-3.5' />
+            {isPrintingLabel ? '...' : 'Labels'}
+          </Button>
+        </div>
+        {/* Status action */}
         {action ? (
           <Button
             className='w-full'
