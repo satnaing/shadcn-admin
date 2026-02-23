@@ -58,6 +58,7 @@ export const generateReceiptBlob = (
   // commands.push(encodeText(DOTS))
   // ─── Dotted Divider ───
   commands.push(encodeText(DOTS))
+  commands.push(COMMANDS.ALIGN_LEFT)
 
   // ─── Column Headers ───
   // Layout (48 chars): Desc(22) UnitPrice(10) QTY(5) Discount(9) Total
