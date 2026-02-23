@@ -3,9 +3,11 @@ import { type Order } from '@/types/api'
 import {
   COMMANDS,
   createESCPOSBuffer,
+  createTwoColumns,
   encodeText,
   GS,
   generateQRCode,
+  padRight,
 } from '@/lib/escpos'
 
 export const WIDTH_80MM_DOTS = 576 // 80mm printers usually have 576 dots per line
@@ -15,122 +17,159 @@ export const WIDTH_80MM_DOTS = 576 // 80mm printers usually have 576 dots per li
  * Note: Pure text commands may have limited/garbled support for Khmer Unicode
  * depending on the printer's hardware font ROM.
  */
-export const generateReceiptBlob = (order: Order): Uint8Array => {
+export const generateReceiptBlob = (
+  order: Order,
+  shopName: string = 'YOK Sonthormuk',
+  khrRate: number = 4100
+): Uint8Array => {
   const commands: (number[] | Uint8Array)[] = []
 
-  // Initialize
+  // — Helper: dotted divider (48 chars) —
+  const DOTS = '-'.repeat(48).trimEnd() + '\n' // ".. .. .. .." style
+
+  // ─── Initialize ───
   commands.push(COMMANDS.INIT)
 
-  // Header
+  // ─── Header: Logo + "YOK" ───
   commands.push(COMMANDS.ALIGN_CENTER)
-
-  // NOTE: Uncomment below to print a logo pre-flashed to NV RAM (ID 1) on a Windows PC.
   commands.push(COMMANDS.PRINT_NV_LOGO)
-
   commands.push(COMMANDS.TEXT_BOLD_ON)
-  commands.push(COMMANDS.TEXT_DOUBLE_HEIGHT)
-  commands.push(COMMANDS.TEXT_DOUBLE_WIDTH)
-  commands.push(encodeText('YOK'))
-  commands.push(COMMANDS.TEXT_NORMAL)
+  // commands.push(COMMANDS.TEXT_DOUBLE_HEIGHT)
+  // commands.push(COMMANDS.TEXT_DOUBLE_WIDTH)
+  commands.push(encodeText('\nTel: 086 861 255'))
+  // commands.push(COMMANDS.TEXT_NORMAL)
   commands.push(COMMANDS.TEXT_BOLD_OFF)
   commands.push(COMMANDS.LF)
-
-  // Custom ESC/POS inverted color commands
-  const INVERT_ON = [0x1d, 0x42, 0x01]
-  const INVERT_OFF = [0x1d, 0x42, 0x00]
-
-  // Order Info
-  commands.push(COMMANDS.ALIGN_LEFT)
-
-  // Tag: Locker: B6 (Inverted Background)
-  commands.push(INVERT_ON)
-  commands.push(COMMANDS.TEXT_BOLD_ON)
-  commands.push(encodeText(` Locker: B6 `))
-  commands.push(INVERT_OFF)
-  commands.push(COMMANDS.TEXT_BOLD_OFF)
-
-  // Right aligned order number
-  commands.push(encodeText(`    ORDER: YOK-${order.invoiceCode}\n`))
-
-  commands.push(COMMANDS.ALIGN_RIGHT)
-  commands.push(
-    encodeText(
-      format(new Date(order.createdAt), 'E - dd/MM/yyyy _ hh:mma') + '\n'
-    )
-  )
+  commands.push(COMMANDS.LF)
   commands.push(COMMANDS.LF)
 
+  // ─── Order Info (two-column) ───
   commands.push(COMMANDS.ALIGN_LEFT)
-  commands.push(
-    encodeText('- - - - - - - - - - - - - - - - - - - - - - - - \n')
-  ) // Dotted visual divider
 
-  // Items
+  // Row 1: "LOCKER : B6" bold (left)  |  "ORDER : YOK-XXXXXX" (right)
+  const orderLabel = `ORDER : YOK-${order.invoiceCode}`
+  commands.push(COMMANDS.TEXT_BOLD_ON)
+  commands.push(encodeText(padRight('LOCKER : B6', 48 - orderLabel.length)))
+  commands.push(COMMANDS.TEXT_BOLD_OFF)
+  commands.push(encodeText(orderLabel + '\n'))
+
+  // Row 2: shop name (left)  |  date/time (right)
+  const dateStr = format(new Date(order.createdAt), 'dd/MM/yyyy _ hh:mma')
+  commands.push(encodeText(createTwoColumns(shopName, dateStr, 48) + '\n\n'))
+
+  // ─── Dotted Divider ───
+  commands.push(encodeText(DOTS))
+
+  // ─── Column Headers ───
+  // Layout (48 chars): Desc(22) UnitPrice(10) QTY(5) Discount(9) Total
+  const headerLine =
+    padRight('Item', 22) +
+    padRight('Price', 8) +
+    padRight('QTY', 5) +
+    padRight('Dis%', 8) +
+    'Total\n'
+  commands.push(encodeText(headerLine))
+
+  // ─── Dotted Divider ───
+  commands.push(encodeText(DOTS))
+  commands.push(COMMANDS.LF)
+
+  // ─── Items ───
   for (const item of order.items) {
     const nameStr = item.name['en'] ?? ''
-    const totalStr = `USD ${(item.unitPrice * item.quantity).toFixed(2)}`
 
-    // Line 1: Name (bold) + right-aligned total on the same 48-char line
-    const namePad = Math.max(0, 48 - nameStr.length - totalStr.length)
+    // Sugar/variant option (first option)
+    // const variantOpt = item.options?.[0]
+    // const variantStr = variantOpt ? (variantOpt.name?.['en'] ?? '') : ''
+
+    const unitPriceStr = item.unitPrice.toFixed(2)
+    const qtyStr = String(item.quantity)
+    // Per-item discount = unitPrice * qty - totalPrice
+    const discountAmount = item.unitPrice * item.quantity - item.totalPrice
+    const discountStr = discountAmount.toFixed(2)
+    const totalStr = item.totalPrice.toFixed(2)
+
+    // Right-side columns string (Unit Price + QTY + Discount + Total)
+    const rightCols =
+      padRight(unitPriceStr, 8) +
+      padRight(qtyStr, 5) +
+      padRight(discountStr, 8) +
+      totalStr
+
+    // Line 1: Bold item name (left 22 chars) + right columns
     commands.push(COMMANDS.TEXT_BOLD_ON)
-    commands.push(encodeText(nameStr + ' '.repeat(namePad) + totalStr + '\n'))
+    commands.push(encodeText(padRight(nameStr, 22) + rightCols + '\n'))
     commands.push(COMMANDS.TEXT_BOLD_OFF)
 
-    // Options (if any)
-    for (const opt of item.options ?? []) {
-      const optLabel = opt.name?.en ?? ''
-      const optQty = opt.quantity > 1 ? `${opt.quantity}x ` : ''
-      commands.push(encodeText(`  + ${optQty}${optLabel}\n`))
-    }
+    // // Line 2: Variant label (e.g. "Sweet 50%") — normal weight
+    // if (variantStr) {
+    //   commands.push(encodeText(variantStr + '\n'))
+    // }
 
+    // Extra modifier/addon options (skip first which is the variant)
+    const addonOpts = item.options ?? []
+    let optStr = ''
+    for (const opt of addonOpts) {
+      const optLabel = opt.name?.['en'] ?? ''
+      // const optQty = opt.quantity > 1 ? `${opt.quantity}x ` : ''
+      optStr += `${optLabel} `
+    }
+    commands.push(encodeText(`${optStr}\n`))
     commands.push(COMMANDS.LF)
   }
 
-  // Divider
+  // ─── Dotted Divider ───
+  commands.push(encodeText(DOTS))
+  commands.push(COMMANDS.ALIGN_RIGHT)
+  // ─── Sub Total & Coupon (right-aligned, 48-wide two-column) ───
+  const subTotalStr = order.pricing.subtotal.toFixed(2)
   commands.push(
-    encodeText('- - - - - - - - - - - - - - - - - - - - - - - - \n')
+    encodeText(createTwoColumns('Sub Total', subTotalStr, 30) + '\n')
   )
+
+  const couponDiscount = order.pricing.discount
+  const couponStr = couponDiscount > 0 ? `-${couponDiscount.toFixed(2)}` : '-'
+  commands.push(encodeText(createTwoColumns('Coupon', couponStr, 30) + '\n'))
+
+  // ─── GRAND TOTAL (USD) ───
+  const grandTotalUSD = order.pricing.grandTotal.toFixed(2)
+  commands.push(
+    encodeText(
+      createTwoColumns('GRAND TOTAL ( USD )', grandTotalUSD, 30) + '\n'
+    )
+  )
+
+  // ─── GRAND TOTAL (KHR) ───
+  const grandTotalKHR = Math.round(
+    order.pricing.grandTotal * khrRate
+  ).toLocaleString()
+  commands.push(
+    encodeText(
+      createTwoColumns('GRAND TOTAL ( KHR )', grandTotalKHR, 30) + '\n'
+    )
+  )
+
+  // ─── Dotted Divider ───
+  commands.push(encodeText(DOTS))
+
+  // ─── Footer ───
+  commands.push(COMMANDS.ALIGN_CENTER)
   commands.push(COMMANDS.LF)
-
-  // Total
-  const totalLeft = 'TOTAL PRICE   '
-  const totalRight = ` USD ${order.pricing.grandTotal.toFixed(2)} `
-
-  // Standard 80mm width is 48 chars in normal size.
-  // In Double Width, it fits 24 chars.
-  const totalPad = Math.max(0, 24 - totalLeft.length - totalRight.length)
-
+  commands.push(COMMANDS.LF)
   commands.push(COMMANDS.TEXT_BOLD_ON)
-  commands.push(COMMANDS.TEXT_DOUBLE_HEIGHT)
-  commands.push(COMMANDS.TEXT_DOUBLE_WIDTH)
-
-  commands.push(encodeText(totalLeft + ' '.repeat(totalPad)))
-  commands.push(INVERT_ON)
-  commands.push(encodeText(totalRight))
-  commands.push(INVERT_OFF)
-  commands.push(encodeText('\n'))
-
-  commands.push(COMMANDS.TEXT_NORMAL)
+  commands.push(encodeText('THANK YOU FOR ORDER!\n'))
   commands.push(COMMANDS.TEXT_BOLD_OFF)
   commands.push(COMMANDS.LF)
-  commands.push(
-    encodeText('- - - - - - - - - - - - - - - - - - - - - - - - \n')
-  )
 
-  // Footer
-  commands.push(COMMANDS.ALIGN_CENTER)
-  commands.push(encodeText('-'.repeat(48) + '\n'))
-
-  // Print a native QR Code (Instant hardware generation)
+  // Print a native QR Code (hardware-accelerated)
   commands.push(...generateQRCode('https://yokcafe.com'))
 
   commands.push(COMMANDS.LF)
-  commands.push(encodeText("Follow YOK's Social Media\n"))
-  commands.push(encodeText('FB: YOK Cafe | IG: YOK_Cafe | TT: YOK_Cafe\n'))
+  commands.push(encodeText(`Exchange Rate : ${khrRate}\n`))
   commands.push(COMMANDS.LF)
   commands.push(COMMANDS.LF)
 
-  // Cut Paper
+  // ─── Cut Paper ───
   commands.push(COMMANDS.FEED_AND_CUT)
 
   return createESCPOSBuffer(commands)
