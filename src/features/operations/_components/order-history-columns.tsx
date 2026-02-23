@@ -1,6 +1,6 @@
 import { format } from 'date-fns'
 import { type ColumnDef } from '@tanstack/react-table'
-import { type Order } from '@/types/orders'
+import { type Order } from '@/types/api'
 import { ArrowUpDown } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -21,18 +21,21 @@ export const columns: ColumnDef<Order>[] = [
     ),
   },
   {
-    accessorKey: 'type',
+    accessorKey: 'fulfillment.category',
     header: 'Type',
     cell: ({ row }) => (
       <span className='text-sm text-muted-foreground capitalize'>
-        {String(row.getValue('type')).toLowerCase().replace('_', ' ')}
+        {String(row.original.fulfillment?.category || 'N/A')
+          .toLowerCase()
+          .replace('_', ' ')}
       </span>
     ),
   },
   {
-    accessorKey: 'customerName',
+    accessorFn: (row) => row.customer?.name || 'Guest',
+    id: 'customer',
     header: 'Customer',
-    cell: ({ row }) => row.getValue('customerName') || 'Guest',
+    cell: ({ row }) => row.getValue('customer'),
   },
   {
     accessorKey: 'status',
@@ -60,7 +63,8 @@ export const columns: ColumnDef<Order>[] = [
     },
   },
   {
-    accessorKey: 'grandTotal',
+    accessorFn: (row) => row.pricing?.grandTotal || 0,
+    id: 'grandTotal',
     header: ({ column }) => {
       return (
         <Button
@@ -86,11 +90,18 @@ export const columns: ColumnDef<Order>[] = [
     accessorKey: 'createdAt',
     header: 'Date',
     cell: ({ row }) => {
-      return (
-        <span className='whitespace-nowrap text-muted-foreground'>
-          {format(new Date(row.getValue('createdAt')), 'MMM d, h:mm a')}
-        </span>
-      )
+      const dateVal = row.getValue('createdAt') as string | undefined
+      if (!dateVal) return <span className='text-muted-foreground'>-</span>
+
+      try {
+        return (
+          <span className='whitespace-nowrap text-muted-foreground'>
+            {format(new Date(dateVal), 'MMM d, h:mm a')}
+          </span>
+        )
+      } catch (_e) {
+        return <span className='text-muted-foreground'>Invalid Date</span>
+      }
     },
   },
   {

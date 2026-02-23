@@ -1,4 +1,4 @@
-import { type Order } from '@/types/orders'
+import { type Order } from '@/types/api'
 import { DataTable } from '@/components/custom/data-table'
 import { columns } from './order-history-columns'
 

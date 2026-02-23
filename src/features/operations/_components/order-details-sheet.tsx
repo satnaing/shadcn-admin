@@ -1,7 +1,8 @@
 import { format } from 'date-fns'
-import { type Order } from '@/types/orders'
+import { type Order, OrderStatus } from '@/types/api'
 import { Printer, RefreshCcw } from 'lucide-react'
-import { useShopStore } from '@/stores/shop-store'
+import { useUpdateOrderStatus } from '@/hooks/queries/use-orders'
+import { useAppStore } from '@/hooks/use-app-store'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -26,7 +27,9 @@ export function OrderDetailsSheet({
   onOpenChange,
   order,
 }: OrderDetailsSheetProps) {
-  const shopId = useShopStore((state) => state.shopId)
+  const { activeShopId, shops } = useAppStore()
+  const activeShop = shops.find((s) => s.id === activeShopId)
+  const { mutate: updateStatus, isPending: isUpdating } = useUpdateOrderStatus()
 
   if (!order) return null
 
@@ -34,13 +37,9 @@ export function OrderDetailsSheet({
     alert(`Reprinting receipt for ${order.invoiceCode}...`)
   }
 
-  const handleRefund = () => {
-    const confirmed = window.confirm(
-      `Are you sure you want to refund ${order.invoiceCode}?`
-    )
-    if (confirmed) {
-      alert('Refund processed (Mock).')
-    }
+  const handleStatusChange = (status: OrderStatus) => {
+    updateStatus({ id: order.id, status })
+    onOpenChange(false) // Close sheet on success or immediately
   }
 
   return (
@@ -49,7 +48,19 @@ export function OrderDetailsSheet({
         <SheetHeader className='text-center sm:text-center'>
           <SheetTitle>Digital Receipt</SheetTitle>
           <SheetDescription>
-            {shopId} • {format(new Date(order.createdAt), 'MMM d, yyyy h:mm a')}
+            {activeShop?.name?.en || 'Shop'} •{' '}
+            {order.createdAt
+              ? (() => {
+                  try {
+                    return format(
+                      new Date(order.createdAt),
+                      'MMM d, yyyy h:mm a'
+                    )
+                  } catch (_e) {
+                    return 'Invalid Date'
+                  }
+                })()
+              : 'Unknown Date'}
           </SheetDescription>
         </SheetHeader>
 
@@ -61,11 +72,14 @@ export function OrderDetailsSheet({
                 {order.invoiceCode}
               </h3>
               <Badge variant='outline' className='mt-1'>
-                {order.type} • {order.paymentStatus}
+                {order.fulfillment?.name?.en ||
+                  order.fulfillment?.category ||
+                  'N/A'}{' '}
+                • {order.paymentStatus || 'UNPAID'}
               </Badge>
-              {order.customerName && (
+              {order.customer?.name && (
                 <span className='mt-1 text-sm text-muted-foreground'>
-                  Customer: {order.customerName}
+                  Customer: {order.customer.name}
                 </span>
               )}
             </div>
@@ -78,16 +92,22 @@ export function OrderDetailsSheet({
                 <div key={item.id} className='text-sm'>
                   <div className='flex justify-between font-medium'>
                     <span>
-                      {item.quantity}x {item.name} {item.variant}
+                      {item.quantity}x {item.name?.en}
                     </span>
-                    <span>${(item.price * item.quantity).toFixed(2)}</span>
+                    <span>${item.totalPrice.toFixed(2)}</span>
                   </div>
                   {/* Options */}
                   {item.options && item.options.length > 0 && (
                     <div className='mt-0.5 ml-4 space-y-0.5 text-xs text-muted-foreground'>
                       {item.options.map((opt, idx) => (
                         <div key={idx} className='flex justify-between'>
-                          <span>+ {opt.choice}</span>
+                          <span>
+                            + {opt.quantity > 1 ? `${opt.quantity}x ` : ''}
+                            {opt.name?.en}
+                          </span>
+                          {opt.totalPrice > 0 && (
+                            <span>+${opt.totalPrice.toFixed(2)}</span>
+                          )}
                         </div>
                       ))}
                     </div>
@@ -107,26 +127,23 @@ export function OrderDetailsSheet({
             <div className='space-y-2 text-sm'>
               <div className='flex justify-between text-muted-foreground'>
                 <span>Subtotal</span>
-                <span>${order.subTotal.toFixed(2)}</span>
+                <span>${(order.pricing?.subtotal || 0).toFixed(2)}</span>
               </div>
-              {order.discounts?.map((d, i) => (
-                <div key={i} className='flex justify-between text-green-600'>
-                  <span>{d.name}</span>
-                  <span>-${d.amount.toFixed(2)}</span>
+              {order.pricing?.discount > 0 && (
+                <div className='flex justify-between text-green-600'>
+                  <span>Discount</span>
+                  <span>-${order.pricing.discount.toFixed(2)}</span>
                 </div>
-              ))}
-              {order.surcharges?.map((s, i) => (
-                <div
-                  key={i}
-                  className='flex justify-between text-muted-foreground'
-                >
-                  <span>{s.name}</span>
-                  <span>+${s.amount.toFixed(2)}</span>
+              )}
+              {order.pricing?.surcharge > 0 && (
+                <div className='flex justify-between text-muted-foreground'>
+                  <span>Surcharge</span>
+                  <span>+${order.pricing.surcharge.toFixed(2)}</span>
                 </div>
-              ))}
+              )}
               <div className='flex justify-between border-t pt-2 text-lg font-bold'>
                 <span>Total</span>
-                <span>${order.grandTotal.toFixed(2)}</span>
+                <span>${(order.pricing?.grandTotal || 0).toFixed(2)}</span>
               </div>
             </div>
 
@@ -136,7 +153,7 @@ export function OrderDetailsSheet({
                 <span className='font-medium text-muted-foreground'>
                   Payment Method
                 </span>
-                <span>{order.paymentMethodName}</span>
+                <span>{order.paymentMethodName?.en || 'N/A'}</span>
               </div>
               <div className='mt-1 flex justify-between'>
                 <span className='font-medium text-muted-foreground'>
@@ -144,10 +161,12 @@ export function OrderDetailsSheet({
                 </span>
                 <span
                   className={
-                    order.paymentStatus === 'SUCCESS' ? 'text-green-600' : ''
+                    order.paymentStatus === 'SUCCESS'
+                      ? 'text-green-600'
+                      : 'text-amber-600'
                   }
                 >
-                  {order.paymentStatus}
+                  {order.paymentStatus || 'UNPAID'}
                 </span>
               </div>
             </div>
@@ -163,9 +182,10 @@ export function OrderDetailsSheet({
               <Button
                 variant='destructive'
                 className='flex-1'
-                onClick={handleRefund}
+                onClick={() => handleStatusChange(OrderStatus.CANCELLED)}
+                disabled={isUpdating}
               >
-                <RefreshCcw className='mr-2 h-4 w-4' /> Issue Refund
+                <RefreshCcw className='mr-2 h-4 w-4' /> Cancel & Refund
               </Button>
             )}
         </SheetFooter>

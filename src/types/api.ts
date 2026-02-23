@@ -99,6 +99,11 @@ export interface Product {
   priceGroupId: string
   status: string // ProductStatus enum in DB spec
   categoryId: string
+  category?: {
+    id: string
+    name: LocalizedText
+    slug?: string
+  }
   optionGroupIds?: string[] // M:N relationship
   imageUrl?: LocalizedText
   createdAt: string
@@ -187,27 +192,76 @@ export interface CreateOptionGroupDto {
 
 export type UpdateOptionGroupDto = Partial<CreateOptionGroupDto>
 
+export interface OrderCustomer {
+  id: string
+  name: string
+  phone: string
+  isGuest: boolean
+}
+
+export interface OrderFulfillment {
+  category: string // 'DINE_IN' | 'TAKEAWAY' | 'DELIVERY'
+  name: LocalizedText
+}
+
+export interface OrderPricing {
+  subtotal: number
+  discount: number
+  surcharge: number
+  grandTotal: number
+}
+
 // Orders
 export interface Order {
   id: string
   invoiceCode: string
+  queueNumber: number
   status: OrderStatus
-  subtotal: number
-  grandTotal: number
   createdAt: string
+  customer?: OrderCustomer
+  fulfillment?: OrderFulfillment
+  pricing: OrderPricing
+  totalItems: number
   items: OrderItem[]
-  // ... more fields
+
+  paymentStatus?: PaymentStatus
+  paymentMethodName?: LocalizedText
+}
+
+export interface OrderItemOption {
+  name: LocalizedText
+  quantity: number
+  unitPrice: number
+  totalPrice: number
 }
 
 export interface OrderItem {
   id: string
-  productName: LocalizedText
+  name: LocalizedText
   quantity: number
   unitPrice: number
-  subtotal: number
-  // ...
+  totalPrice: number
+  options?: OrderItemOption[]
+  notes?: string
 }
 
+// Keeping these just in case they are used elsewhere, though not in the prompt JSON
+export interface OrderDiscount {
+  id: string
+  orderId: string
+  promotionId: string
+  name?: LocalizedText
+  amount?: number
+}
+
+export interface OrderSurcharge {
+  id: string
+  orderId: string
+  surchargeConfigId: string
+  name?: LocalizedText
+  amount?: number
+  isTax?: boolean
+}
 export interface GetOrdersFilters {
   page?: number
   limit?: number

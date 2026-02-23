@@ -42,13 +42,14 @@ const getColumns = (shopId: string): ColumnDef<ShopProduct>[] => [
     },
   },
   {
-    accessorKey: 'categoryId',
-    // Map to custom accessor since DataTable expects simple strings for filter columns
+    id: 'categoryId',
     accessorFn: (row) => row.product?.categoryId,
     header: 'Category',
-    // We can show the name here if we pass down categories, or just hide the column later
-    cell: ({ row }) => null,
-    enableHiding: false, // We'll just visually hide it by returning null for now
+    cell: ({ row }) => {
+      const categoryName =
+        row.original.product?.category?.name?.en || 'Uncategorized'
+      return <span>{categoryName}</span>
+    },
   },
   {
     accessorKey: 'isAvailable',
@@ -65,7 +66,7 @@ const getColumns = (shopId: string): ColumnDef<ShopProduct>[] => [
 interface ShopMenuTableProps {
   shopId: string
   data: ShopProduct[]
-  categories?: any[] // We can type this strictly later if needed
+  categories?: any[]
 }
 
 export function ShopMenuTable({

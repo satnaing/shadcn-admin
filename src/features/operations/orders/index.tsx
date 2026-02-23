@@ -1,11 +1,19 @@
 import { useState } from 'react'
-import { type Order } from '@/types/orders'
+import { type Order } from '@/types/api'
+import { useOrders } from '@/hooks/queries/use-orders'
+import { useAppStore } from '@/hooks/use-app-store'
 import { PageTitle } from '@/components/page-title'
 import { OrderDetailsSheet } from '../_components/order-details-sheet'
 import { OrderHistoryTable } from '../_components/order-history-table'
-import { MOCK_ORDER_HISTORY } from '../data/mock-order-history'
 
 export default function OrdersPage() {
+  const shopId = useAppStore((state) => state.activeShopId)
+  const {
+    data: orderData,
+    isLoading,
+    error,
+  } = useOrders({ shopId: shopId || undefined })
+
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
   const [openSheet, setOpenSheet] = useState(false)
 
@@ -14,6 +22,8 @@ export default function OrdersPage() {
     setOpenSheet(true)
   }
 
+  const orders = orderData?.data || []
+
   return (
     <div className='space-y-6 p-6'>
       <PageTitle
@@ -21,10 +31,17 @@ export default function OrdersPage() {
         subtitle='View and manage transaction history.'
       />
 
-      <OrderHistoryTable
-        data={MOCK_ORDER_HISTORY}
-        onRowClick={handleRowClick}
-      />
+      {isLoading ? (
+        <div className='flex h-32 items-center justify-center text-muted-foreground'>
+          Loading orders...
+        </div>
+      ) : error ? (
+        <div className='flex h-32 items-center justify-center text-destructive'>
+          Failed to load orders.
+        </div>
+      ) : (
+        <OrderHistoryTable data={orders} onRowClick={handleRowClick} />
+      )}
 
       <OrderDetailsSheet
         open={openSheet}
