@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { format } from 'date-fns'
 import { type Order, OrderStatus } from '@/types/api'
 import { Printer, RefreshCcw } from 'lucide-react'
+import { printLabelViaBluetooth } from '@/utils/label-printer'
+import { printReceiptViaBluetooth } from '@/utils/printer'
 import { useUpdateOrderStatus } from '@/hooks/queries/use-orders'
 import { useAppStore } from '@/hooks/use-app-store'
 import { Badge } from '@/components/ui/badge'
@@ -30,11 +33,30 @@ export function OrderDetailsSheet({
   const { activeShopId, shops } = useAppStore()
   const activeShop = shops.find((s) => s.id === activeShopId)
   const { mutate: updateStatus, isPending: isUpdating } = useUpdateOrderStatus()
+  const [isPrinting, setIsPrinting] = useState(false)
 
   if (!order) return null
 
-  const handleReprint = () => {
-    alert(`Reprinting receipt for ${order.invoiceCode}...`)
+  const handleReprint = async () => {
+    setIsPrinting(true)
+    try {
+      // 1. Print the receipt on the 80mm receipt printer
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      await printReceiptViaBluetooth(order)
+
+      // // 2. Print a label sticker for every item (quantity = number of copies)
+      // for (const item of order.items) {
+      //   await printLabelViaBluetooth({
+      //     drinkName:
+      //       typeof item.name === 'string' ? item.name : (item.name?.en ?? ''),
+      //     note: item.notes ?? undefined,
+      //     orderCode: `YOK-${order.invoiceCode}`,
+      //     quantity: item.quantity,
+      //   })
+      // }
+    } finally {
+      setIsPrinting(false)
+    }
   }
 
   const handleStatusChange = (status: OrderStatus) => {
@@ -174,8 +196,14 @@ export function OrderDetailsSheet({
         </ScrollArea>
 
         <SheetFooter className='flex-col gap-2 pt-2 sm:flex-row sm:justify-between'>
-          <Button variant='outline' className='flex-1' onClick={handleReprint}>
-            <Printer className='mr-2 h-4 w-4' /> Reprint
+          <Button
+            variant='outline'
+            className='flex-1'
+            onClick={handleReprint}
+            disabled={isPrinting}
+          >
+            <Printer className='mr-2 h-4 w-4' />
+            {isPrinting ? 'Printing...' : 'Reprint All'}
           </Button>
           {order.status === 'COMPLETED' &&
             order.paymentStatus === 'SUCCESS' && (

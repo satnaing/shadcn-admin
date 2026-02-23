@@ -21,6 +21,7 @@ export default defineConfig({
   },
   server: {
     host: true,
+    allowedHosts: ['comely-asha-prolix.ngrok-free.dev'],
     proxy: {
       '/api': {
         target: 'http://localhost:3001',

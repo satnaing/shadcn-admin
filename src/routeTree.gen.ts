@@ -32,6 +32,7 @@ import { Route as AuthenticatedInventoryIndexRouteImport } from './routes/_authe
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
 import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
+import { Route as AuthenticatedSettingsPrintersRouteImport } from './routes/_authenticated/settings/printers'
 import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes/_authenticated/settings/notifications'
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
@@ -462,6 +463,12 @@ const AuthenticatedGrowthAnnouncementsLazyRoute =
       (d) => d.Route,
     ),
   )
+const AuthenticatedSettingsPrintersRoute =
+  AuthenticatedSettingsPrintersRouteImport.update({
+    id: '/printers',
+    path: '/printers',
+    getParentRoute: () => AuthenticatedSettingsRouteRoute,
+  } as any)
 const AuthenticatedSettingsNotificationsRoute =
   AuthenticatedSettingsNotificationsRouteImport.update({
     id: '/notifications',
@@ -574,6 +581,7 @@ export interface FileRoutesByFullPath {
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/settings/printers': typeof AuthenticatedSettingsPrintersRoute
   '/growth/announcements': typeof AuthenticatedGrowthAnnouncementsLazyRoute
   '/growth/customers': typeof AuthenticatedGrowthCustomersLazyRoute
   '/growth/loyalty': typeof AuthenticatedGrowthLoyaltyLazyRoute
@@ -631,6 +639,7 @@ export interface FileRoutesByTo {
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/settings/printers': typeof AuthenticatedSettingsPrintersRoute
   '/growth/announcements': typeof AuthenticatedGrowthAnnouncementsLazyRoute
   '/growth/customers': typeof AuthenticatedGrowthCustomersLazyRoute
   '/growth/loyalty': typeof AuthenticatedGrowthLoyaltyLazyRoute
@@ -693,6 +702,7 @@ export interface FileRoutesById {
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
+  '/_authenticated/settings/printers': typeof AuthenticatedSettingsPrintersRoute
   '/_authenticated/growth/announcements': typeof AuthenticatedGrowthAnnouncementsLazyRoute
   '/_authenticated/growth/customers': typeof AuthenticatedGrowthCustomersLazyRoute
   '/_authenticated/growth/loyalty': typeof AuthenticatedGrowthLoyaltyLazyRoute
@@ -755,6 +765,7 @@ export interface FileRouteTypes {
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
+    | '/settings/printers'
     | '/growth/announcements'
     | '/growth/customers'
     | '/growth/loyalty'
@@ -812,6 +823,7 @@ export interface FileRouteTypes {
     | '/settings/appearance'
     | '/settings/display'
     | '/settings/notifications'
+    | '/settings/printers'
     | '/growth/announcements'
     | '/growth/customers'
     | '/growth/loyalty'
@@ -873,6 +885,7 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
     | '/_authenticated/settings/notifications'
+    | '/_authenticated/settings/printers'
     | '/_authenticated/growth/announcements'
     | '/_authenticated/growth/customers'
     | '/_authenticated/growth/loyalty'
@@ -1251,6 +1264,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGrowthAnnouncementsLazyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/settings/printers': {
+      id: '/_authenticated/settings/printers'
+      path: '/printers'
+      fullPath: '/settings/printers'
+      preLoaderRoute: typeof AuthenticatedSettingsPrintersRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
     '/_authenticated/settings/notifications': {
       id: '/_authenticated/settings/notifications'
       path: '/notifications'
@@ -1387,6 +1407,7 @@ interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
   AuthenticatedSettingsDisplayRoute: typeof AuthenticatedSettingsDisplayRoute
   AuthenticatedSettingsNotificationsRoute: typeof AuthenticatedSettingsNotificationsRoute
+  AuthenticatedSettingsPrintersRoute: typeof AuthenticatedSettingsPrintersRoute
   AuthenticatedSettingsAuditLogsLazyRoute: typeof AuthenticatedSettingsAuditLogsLazyRoute
   AuthenticatedSettingsBusinessLazyRoute: typeof AuthenticatedSettingsBusinessLazyRoute
   AuthenticatedSettingsFinancialLazyRoute: typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
@@ -1403,6 +1424,7 @@ const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteCh
     AuthenticatedSettingsDisplayRoute: AuthenticatedSettingsDisplayRoute,
     AuthenticatedSettingsNotificationsRoute:
       AuthenticatedSettingsNotificationsRoute,
+    AuthenticatedSettingsPrintersRoute: AuthenticatedSettingsPrintersRoute,
     AuthenticatedSettingsAuditLogsLazyRoute:
       AuthenticatedSettingsAuditLogsLazyRoute,
     AuthenticatedSettingsBusinessLazyRoute:
