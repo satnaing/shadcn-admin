@@ -1,6 +1,16 @@
+import { useEffect } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  SurchargeType,
+  type SurchargeConfig,
+  type CreateSurchargeDto,
+} from '@/types/api'
+import {
+  useCreateSurcharge,
+  useUpdateSurcharge,
+} from '@/hooks/queries/use-surcharges'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -27,14 +37,12 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet'
-import { type Surcharge, SurchargeType } from '../../data/mock-settings'
 
 const surchargeSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   type: z.nativeEnum(SurchargeType),
   value: z.number().min(0, 'Value must be positive'),
   isTax: z.boolean(),
-  isAutoApplied: z.boolean(),
   isActive: z.boolean(),
 })
 
@@ -43,7 +51,7 @@ type SurchargeFormValues = z.infer<typeof surchargeSchema>
 interface SurchargeSheetProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  initialData?: Surcharge | null
+  initialData?: SurchargeConfig | null
 }
 
 export function SurchargeSheet({
@@ -51,6 +59,11 @@ export function SurchargeSheet({
   onOpenChange,
   initialData,
 }: SurchargeSheetProps) {
+  const { mutate: createSurcharge, isPending: isCreating } =
+    useCreateSurcharge()
+  const { mutate: updateSurcharge, isPending: isUpdating } =
+    useUpdateSurcharge()
+
   const form = useForm<SurchargeFormValues>({
     resolver: zodResolver(surchargeSchema),
     defaultValues: {
@@ -58,41 +71,62 @@ export function SurchargeSheet({
       type: initialData?.type || SurchargeType.PERCENTAGE,
       value: initialData?.value || 0,
       isTax: initialData?.isTax || false,
-      isAutoApplied: initialData?.isAutoApplied || true,
       isActive: initialData?.isActive || true,
     },
   })
 
-  // Basic effect to reset form when initialData changes
-  if (open) {
-    const currentName = form.getValues('name')
-    if (initialData && currentName !== initialData.name.en) {
-      form.reset({
-        name: initialData.name.en,
-        type: initialData.type,
-        value: initialData.value,
-        isTax: initialData.isTax,
-        isAutoApplied: initialData.isAutoApplied,
-        isActive: initialData.isActive,
-      })
-    } else if (!initialData && currentName !== '') {
-      form.reset({
-        name: '',
-        type: SurchargeType.PERCENTAGE,
-        value: 0,
-        isTax: false,
-        isAutoApplied: true,
-        isActive: true,
+  useEffect(() => {
+    if (open) {
+      if (initialData) {
+        form.reset({
+          name: initialData.name.en,
+          type: initialData.type,
+          value: initialData.value,
+          isTax: initialData.isTax,
+          isActive: initialData.isActive,
+        })
+      } else {
+        form.reset({
+          name: '',
+          type: SurchargeType.PERCENTAGE,
+          value: 0,
+          isTax: false,
+          isActive: true,
+        })
+      }
+    }
+  }, [open, initialData, form])
+
+  function onSubmit(data: SurchargeFormValues) {
+    const payload: CreateSurchargeDto = {
+      name: { en: data.name },
+      value: data.value,
+      type: data.type,
+      isTax: data.isTax,
+      isActive: data.isActive,
+    }
+
+    if (initialData) {
+      updateSurcharge(
+        { id: initialData.id, data: payload },
+        {
+          onSuccess: () => {
+            onOpenChange(false)
+            form.reset()
+          },
+        }
+      )
+    } else {
+      createSurcharge(payload, {
+        onSuccess: () => {
+          onOpenChange(false)
+          form.reset()
+        },
       })
     }
   }
 
-  function onSubmit(data: SurchargeFormValues) {
-    // eslint-disable-next-line no-console
-    console.log('Submitted Surcharge:', data)
-    onOpenChange(false)
-    form.reset()
-  }
+  const isPending = isCreating || isUpdating
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -132,10 +166,7 @@ export function SurchargeSheet({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Type</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder='Select type' />
@@ -198,27 +229,6 @@ export function SurchargeSheet({
 
             <FormField
               control={form.control}
-              name='isAutoApplied'
-              render={({ field }) => (
-                <FormItem className='flex flex-row items-start space-y-0 space-x-3 rounded-md border p-4'>
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <div className='space-y-1 leading-none'>
-                    <FormLabel>Auto-Apply</FormLabel>
-                    <FormDescription>
-                      Automatically add to all applicable orders.
-                    </FormDescription>
-                  </div>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
               name='isActive'
               render={({ field }) => (
                 <FormItem className='flex flex-row items-start space-y-0 space-x-3 rounded-md border p-4'>
@@ -239,7 +249,9 @@ export function SurchargeSheet({
             />
 
             <div className='mt-auto flex justify-end pt-4'>
-              <Button type='submit'>Save Changes</Button>
+              <Button type='submit' disabled={isPending}>
+                {isPending ? 'Saving...' : 'Save Changes'}
+              </Button>
             </div>
           </form>
         </Form>

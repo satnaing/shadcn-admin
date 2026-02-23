@@ -1,11 +1,15 @@
 import { useState } from 'react'
+import { Loader2 } from 'lucide-react'
+import { useActiveCarts } from '@/hooks/queries/use-carts'
+import { useAppStore } from '@/hooks/use-app-store'
 import { PageTitle } from '@/components/page-title'
 import { ActiveCartsTable } from '../_components/active-carts-table'
 import { CartDetailSheet } from '../_components/cart-detail-sheet'
 import { type Cart } from '../data/cart-schema'
-import { MOCK_CARTS } from '../data/mock-carts'
 
 export function ActiveCartsPage() {
+  const { activeShopId } = useAppStore()
+  const { data: carts, isLoading } = useActiveCarts(activeShopId)
   const [selectedCart, setSelectedCart] = useState<Cart | null>(null)
   const [isSheetOpen, setIsSheetOpen] = useState(false)
 
@@ -21,7 +25,16 @@ export function ActiveCartsPage() {
         subtitle='Monitor customer carts in real-time. View items and potential order value.'
       />
 
-      <ActiveCartsTable data={MOCK_CARTS} onViewDetails={handleViewDetails} />
+      {isLoading ? (
+        <div className='flex flex-1 items-center justify-center'>
+          <Loader2 className='h-8 w-8 animate-spin text-primary' />
+        </div>
+      ) : (
+        <ActiveCartsTable
+          data={carts || []}
+          onViewDetails={handleViewDetails}
+        />
+      )}
 
       <CartDetailSheet
         open={isSheetOpen}

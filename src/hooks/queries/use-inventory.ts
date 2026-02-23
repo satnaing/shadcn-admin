@@ -12,6 +12,7 @@ import {
   getShopStock,
   adjustStock,
   activateShopIngredients,
+  getShopInventoryLogs,
 } from '@/services/inventory'
 // import { getInventory, adjustStock } from '@/services/ops' // Deprecated?
 import { type AdjustStockRequest } from '@/types/api'
@@ -26,6 +27,17 @@ export const useShopStock = (shopId: string) => {
   return useQuery({
     queryKey: ['shop-inventory', shopId],
     queryFn: () => getShopStock(shopId),
+    enabled: !!shopId,
+  })
+}
+
+export const useShopInventoryLogs = (
+  shopId: string,
+  params?: Record<string, string | number | boolean>
+) => {
+  return useQuery({
+    queryKey: ['shop-inventory-logs', shopId, params],
+    queryFn: () => getShopInventoryLogs(shopId, params),
     enabled: !!shopId,
   })
 }

@@ -42,6 +42,7 @@ import { Route as AuthenticatedOpsSessionRouteRouteImport } from './routes/_auth
 import { Route as AuthenticatedInventoryStockRouteRouteImport } from './routes/_authenticated/inventory/stock/route'
 import { Route as AuthenticatedOpsSessionIndexRouteImport } from './routes/_authenticated/ops/session/index'
 import { Route as AuthenticatedShopsIdMenuRouteImport } from './routes/_authenticated/shops/$id/menu'
+import { Route as AuthenticatedShopsIdInventoryLogsRouteRouteImport } from './routes/_authenticated/shops/$id/inventory/logs/route'
 
 const AuthenticatedOperationsIndexLazyRouteImport = createFileRoute(
   '/_authenticated/operations/',
@@ -63,6 +64,9 @@ const AuthenticatedSettingsMobileAppLazyRouteImport = createFileRoute(
 )()
 const AuthenticatedSettingsFinancialLazyRouteImport = createFileRoute(
   '/_authenticated/settings/financial',
+)()
+const AuthenticatedSettingsBusinessLazyRouteImport = createFileRoute(
+  '/_authenticated/settings/business',
 )()
 const AuthenticatedSettingsAuditLogsLazyRouteImport = createFileRoute(
   '/_authenticated/settings/audit-logs',
@@ -292,6 +296,16 @@ const AuthenticatedSettingsFinancialLazyRoute =
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any).lazy(() =>
     import('./routes/_authenticated/settings/financial.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+const AuthenticatedSettingsBusinessLazyRoute =
+  AuthenticatedSettingsBusinessLazyRouteImport.update({
+    id: '/business',
+    path: '/business',
+    getParentRoute: () => AuthenticatedSettingsRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/settings/business.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -539,6 +553,12 @@ const AuthenticatedShopsIdMenuRoute =
     path: '/shops/$id/menu',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedShopsIdInventoryLogsRouteRoute =
+  AuthenticatedShopsIdInventoryLogsRouteRouteImport.update({
+    id: '/shops/$id/inventory/logs',
+    path: '/shops/$id/inventory/logs',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
@@ -579,6 +599,7 @@ export interface FileRoutesByFullPath {
   '/operations/orders': typeof AuthenticatedOperationsOrdersLazyRoute
   '/operations/shift': typeof AuthenticatedOperationsShiftLazyRoute
   '/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsLazyRoute
+  '/settings/business': typeof AuthenticatedSettingsBusinessLazyRoute
   '/settings/financial': typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   '/settings/mobile-app': typeof AuthenticatedSettingsMobileAppLazyRoute
   '/settings/roles': typeof AuthenticatedSettingsRolesLazyRoute
@@ -598,6 +619,7 @@ export interface FileRoutesByFullPath {
   '/ops/session/': typeof AuthenticatedOpsSessionIndexRoute
   '/growth/reviews/': typeof AuthenticatedGrowthReviewsIndexLazyRoute
   '/menu/availability/': typeof AuthenticatedMenuAvailabilityIndexLazyRoute
+  '/shops/$id/inventory/logs': typeof AuthenticatedShopsIdInventoryLogsRouteRoute
 }
 export interface FileRoutesByTo {
   '/forgot-password': typeof authForgotPasswordRoute
@@ -635,6 +657,7 @@ export interface FileRoutesByTo {
   '/operations/orders': typeof AuthenticatedOperationsOrdersLazyRoute
   '/operations/shift': typeof AuthenticatedOperationsShiftLazyRoute
   '/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsLazyRoute
+  '/settings/business': typeof AuthenticatedSettingsBusinessLazyRoute
   '/settings/financial': typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   '/settings/mobile-app': typeof AuthenticatedSettingsMobileAppLazyRoute
   '/settings/roles': typeof AuthenticatedSettingsRolesLazyRoute
@@ -654,6 +677,7 @@ export interface FileRoutesByTo {
   '/ops/session': typeof AuthenticatedOpsSessionIndexRoute
   '/growth/reviews': typeof AuthenticatedGrowthReviewsIndexLazyRoute
   '/menu/availability': typeof AuthenticatedMenuAvailabilityIndexLazyRoute
+  '/shops/$id/inventory/logs': typeof AuthenticatedShopsIdInventoryLogsRouteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -696,6 +720,7 @@ export interface FileRoutesById {
   '/_authenticated/operations/orders': typeof AuthenticatedOperationsOrdersLazyRoute
   '/_authenticated/operations/shift': typeof AuthenticatedOperationsShiftLazyRoute
   '/_authenticated/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsLazyRoute
+  '/_authenticated/settings/business': typeof AuthenticatedSettingsBusinessLazyRoute
   '/_authenticated/settings/financial': typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   '/_authenticated/settings/mobile-app': typeof AuthenticatedSettingsMobileAppLazyRoute
   '/_authenticated/settings/roles': typeof AuthenticatedSettingsRolesLazyRoute
@@ -715,6 +740,7 @@ export interface FileRoutesById {
   '/_authenticated/ops/session/': typeof AuthenticatedOpsSessionIndexRoute
   '/_authenticated/growth/reviews/': typeof AuthenticatedGrowthReviewsIndexLazyRoute
   '/_authenticated/menu/availability/': typeof AuthenticatedMenuAvailabilityIndexLazyRoute
+  '/_authenticated/shops/$id/inventory/logs': typeof AuthenticatedShopsIdInventoryLogsRouteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -757,6 +783,7 @@ export interface FileRouteTypes {
     | '/operations/orders'
     | '/operations/shift'
     | '/settings/audit-logs'
+    | '/settings/business'
     | '/settings/financial'
     | '/settings/mobile-app'
     | '/settings/roles'
@@ -776,6 +803,7 @@ export interface FileRouteTypes {
     | '/ops/session/'
     | '/growth/reviews/'
     | '/menu/availability/'
+    | '/shops/$id/inventory/logs'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/forgot-password'
@@ -813,6 +841,7 @@ export interface FileRouteTypes {
     | '/operations/orders'
     | '/operations/shift'
     | '/settings/audit-logs'
+    | '/settings/business'
     | '/settings/financial'
     | '/settings/mobile-app'
     | '/settings/roles'
@@ -832,6 +861,7 @@ export interface FileRouteTypes {
     | '/ops/session'
     | '/growth/reviews'
     | '/menu/availability'
+    | '/shops/$id/inventory/logs'
   id:
     | '__root__'
     | '/_authenticated'
@@ -873,6 +903,7 @@ export interface FileRouteTypes {
     | '/_authenticated/operations/orders'
     | '/_authenticated/operations/shift'
     | '/_authenticated/settings/audit-logs'
+    | '/_authenticated/settings/business'
     | '/_authenticated/settings/financial'
     | '/_authenticated/settings/mobile-app'
     | '/_authenticated/settings/roles'
@@ -892,6 +923,7 @@ export interface FileRouteTypes {
     | '/_authenticated/ops/session/'
     | '/_authenticated/growth/reviews/'
     | '/_authenticated/menu/availability/'
+    | '/_authenticated/shops/$id/inventory/logs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1106,6 +1138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsFinancialLazyRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
+    '/_authenticated/settings/business': {
+      id: '/_authenticated/settings/business'
+      path: '/business'
+      fullPath: '/settings/business'
+      preLoaderRoute: typeof AuthenticatedSettingsBusinessLazyRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
     '/_authenticated/settings/audit-logs': {
       id: '/_authenticated/settings/audit-logs'
       path: '/audit-logs'
@@ -1316,6 +1355,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedShopsIdMenuRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/shops/$id/inventory/logs': {
+      id: '/_authenticated/shops/$id/inventory/logs'
+      path: '/shops/$id/inventory/logs'
+      fullPath: '/shops/$id/inventory/logs'
+      preLoaderRoute: typeof AuthenticatedShopsIdInventoryLogsRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -1363,6 +1409,7 @@ interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsNotificationsRoute: typeof AuthenticatedSettingsNotificationsRoute
   AuthenticatedSettingsPrintersRoute: typeof AuthenticatedSettingsPrintersRoute
   AuthenticatedSettingsAuditLogsLazyRoute: typeof AuthenticatedSettingsAuditLogsLazyRoute
+  AuthenticatedSettingsBusinessLazyRoute: typeof AuthenticatedSettingsBusinessLazyRoute
   AuthenticatedSettingsFinancialLazyRoute: typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   AuthenticatedSettingsMobileAppLazyRoute: typeof AuthenticatedSettingsMobileAppLazyRoute
   AuthenticatedSettingsRolesLazyRoute: typeof AuthenticatedSettingsRolesLazyRoute
@@ -1380,6 +1427,8 @@ const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteCh
     AuthenticatedSettingsPrintersRoute: AuthenticatedSettingsPrintersRoute,
     AuthenticatedSettingsAuditLogsLazyRoute:
       AuthenticatedSettingsAuditLogsLazyRoute,
+    AuthenticatedSettingsBusinessLazyRoute:
+      AuthenticatedSettingsBusinessLazyRoute,
     AuthenticatedSettingsFinancialLazyRoute:
       AuthenticatedSettingsFinancialLazyRouteWithChildren,
     AuthenticatedSettingsMobileAppLazyRoute:
@@ -1439,6 +1488,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedShopsIdMenuRoute: typeof AuthenticatedShopsIdMenuRoute
   AuthenticatedGrowthReviewsIndexLazyRoute: typeof AuthenticatedGrowthReviewsIndexLazyRoute
   AuthenticatedMenuAvailabilityIndexLazyRoute: typeof AuthenticatedMenuAvailabilityIndexLazyRoute
+  AuthenticatedShopsIdInventoryLogsRouteRoute: typeof AuthenticatedShopsIdInventoryLogsRouteRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -1479,6 +1529,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
     AuthenticatedGrowthReviewsIndexLazyRoute,
   AuthenticatedMenuAvailabilityIndexLazyRoute:
     AuthenticatedMenuAvailabilityIndexLazyRoute,
+  AuthenticatedShopsIdInventoryLogsRouteRoute:
+    AuthenticatedShopsIdInventoryLogsRouteRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

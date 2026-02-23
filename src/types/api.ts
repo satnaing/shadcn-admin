@@ -47,6 +47,11 @@ export enum InventoryAdjustmentReason {
   DAMAGE = 'DAMAGE',
 }
 
+export enum SurchargeType {
+  PERCENTAGE = 'PERCENTAGE',
+  FIXED_AMOUNT = 'FIXED_AMOUNT',
+}
+
 // DTOs (from API Spec)
 
 // Auth
@@ -310,9 +315,16 @@ export interface Start {
 export interface Shop {
   id: string
   name: LocalizedText
-  address: string
-  phone: string
   code: string
+  address?: string
+  phone?: string
+  description?: LocalizedText
+  locationLat?: number | string
+  locationLong?: number | string
+  phoneContacts?: Record<string, string>
+  openingHours?: Record<string, string>
+  imageUrl?: string | LocalizedText
+  bannerImageUrl?: string | LocalizedText
 }
 
 export interface Staff {
@@ -337,7 +349,6 @@ export interface AssignShopAccessRequest {
   roleId?: string
 }
 
-// Admin / Business
 export interface BusinessProfile {
   id: string
   name: LocalizedText
@@ -352,3 +363,26 @@ export interface UpdateBusinessProfileRequest {
   logoUrl?: string
   bannerImageUrl?: string
 }
+
+// Surcharges
+export interface SurchargeConfig {
+  id: string
+  businessId: string
+  name: LocalizedText
+  value: number
+  type: SurchargeType
+  isTax: boolean
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface CreateSurchargeDto {
+  name: LocalizedText
+  value: number
+  type: SurchargeType
+  isTax?: boolean
+  isActive?: boolean
+}
+
+export type UpdateSurchargeDto = Partial<CreateSurchargeDto>

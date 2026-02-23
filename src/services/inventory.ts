@@ -9,6 +9,7 @@ import {
   type Recipe,
   type CreateRecipeDto,
   type ShopIngredient,
+  type InventoryLog,
 } from '@/types/inventory'
 import { apiClient } from '@/lib/api-client'
 
@@ -80,6 +81,19 @@ export const getShopStock = async (
   shopId: string
 ): Promise<ShopIngredient[]> => {
   const response = await apiClient.get(`/admin/shops/${shopId}/inventory`)
+  return response.data
+}
+
+export const getShopInventoryLogs = async (
+  shopId: string,
+  params?: Record<string, string | number | boolean>
+): Promise<InventoryLog[]> => {
+  const response = await apiClient.get(
+    `/admin/shops/${shopId}/inventory/logs`,
+    {
+      params,
+    }
+  )
   return response.data
 }
 

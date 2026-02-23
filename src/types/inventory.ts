@@ -82,8 +82,12 @@ export interface InventoryLog {
   id: string
   shopId: string
   ingredientId: string
+  ingredientName?: string
   quantityChange: number
+  unitSymbol?: string
   reason: string // InventoryAdjustmentReason
   note?: string
+  staffName?: string
+  invoiceCode?: string
   createdAt: string
 }

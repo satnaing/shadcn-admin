@@ -31,8 +31,8 @@ export interface Promotion {
   bannerUrl?: Record<string, string>
 
   // New fields from API
-  rules?: any[]
-  actions?: any[]
+  rules?: Record<string, unknown>[]
+  actions?: Record<string, unknown>[]
   applicationType?: 'AUTOMATIC' | 'PUBLIC' | 'HIDDEN'
   strategyType?: 'STACKABLE' | 'BEST_DEAL'
   isVoucherRequired?: boolean

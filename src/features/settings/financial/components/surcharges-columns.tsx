@@ -1,5 +1,6 @@
 import { type ColumnDef } from '@tanstack/react-table'
-import { Edit, MoreHorizontal, Trash } from 'lucide-react'
+import type { SurchargeConfig } from '@/types/api'
+import { Edit, MoreHorizontal, Power, PowerOff } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -10,13 +11,13 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { DataTableColumnHeader } from '@/components/data-table'
-import { type Surcharge } from '../data/mock-settings'
 
 interface TableMeta {
-  onEdit: (surcharge: Surcharge) => void
+  onEdit: (surcharge: SurchargeConfig) => void
+  onToggle: (surcharge: SurchargeConfig) => void
 }
 
-export const columns: ColumnDef<Surcharge>[] = [
+export const columns: ColumnDef<SurchargeConfig>[] = [
   {
     accessorKey: 'name.en',
     header: ({ column }) => (
@@ -37,17 +38,6 @@ export const columns: ColumnDef<Surcharge>[] = [
       const val = row.original.value
       const type = row.original.type
       return type === 'PERCENTAGE' ? `${val}%` : `$${val}`
-    },
-  },
-  {
-    id: 'isAutoApplied',
-    header: 'Auto-Apply',
-    cell: ({ row }) => {
-      return row.original.isAutoApplied ? (
-        <Badge>Yes</Badge>
-      ) : (
-        <Badge variant='secondary'>No</Badge>
-      )
     },
   },
   {
@@ -89,9 +79,18 @@ export const columns: ColumnDef<Surcharge>[] = [
               <Edit className='mr-2 h-4 w-4' />
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem className='text-destructive'>
-              <Trash className='mr-2 h-4 w-4' />
-              Delete
+            <DropdownMenuItem onClick={() => meta?.onToggle(surcharge)}>
+              {surcharge.isActive ? (
+                <>
+                  <PowerOff className='mr-2 h-4 w-4' />
+                  Deactivate
+                </>
+              ) : (
+                <>
+                  <Power className='mr-2 h-4 w-4' />
+                  Activate
+                </>
+              )}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
