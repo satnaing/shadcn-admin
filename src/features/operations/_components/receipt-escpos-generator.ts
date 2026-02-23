@@ -44,17 +44,18 @@ export const generateReceiptBlob = (
   commands.push(COMMANDS.LF)
   // commands.push(COMMANDS.LF)
 
-  // ─── Order Info (two-column) ───
-  commands.push(COMMANDS.ALIGN_LEFT)
-
-  commands.push(COMMANDS.TEXT_BOLD_ON)
-  commands.push(encodeText(padRight('LOCKER : B6', 48 - shopName.length)))
-  commands.push(COMMANDS.TEXT_BOLD_OFF)
-  commands.push(encodeText(shopName + '\n'))
   const orderLabel = `ORDER : YOK-${order.invoiceCode}`
   const dateStr = format(new Date(order.createdAt), 'dd/MM/yyyy _ hh:mma')
   commands.push(encodeText(createTwoColumns(orderLabel, dateStr, 48) + '\n\n'))
-
+  // ─── Order Info (two-column) ───
+  commands.push(encodeText(DOTS))
+  commands.push(COMMANDS.ALIGN_CENTER)
+  commands.push(COMMANDS.TEXT_DOUBLE_SIZE)
+  commands.push(COMMANDS.TEXT_BOLD_ON)
+  commands.push(encodeText('\n6 7 8 5\n\n'))
+  commands.push(COMMANDS.TEXT_NORMAL)
+  commands.push(COMMANDS.TEXT_BOLD_OFF)
+  // commands.push(encodeText(DOTS))
   // ─── Dotted Divider ───
   commands.push(encodeText(DOTS))
 
@@ -160,7 +161,7 @@ export const generateReceiptBlob = (
   commands.push(COMMANDS.LF)
 
   // Print a native QR Code (hardware-accelerated)
-  commands.push(...generateQRCode('https://yokcafe.com'))
+  commands.push(...generateQRCode('https://yokcafee.com'))
 
   commands.push(COMMANDS.LF)
   commands.push(encodeText(`Exchange Rate : ${khrRate}\n`))
