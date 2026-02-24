@@ -44,7 +44,7 @@ export function OrderDetailsSheet({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       await printReceiptViaBluetooth(order)
 
-      // // 2. Print a label sticker for every item (quantity = number of copies)
+      // 2. Print a label sticker for every item (quantity = number of copies)
       // for (const item of order.items) {
       //   await printLabelViaBluetooth({
       //     drinkName:
