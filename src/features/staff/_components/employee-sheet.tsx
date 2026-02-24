@@ -1,8 +1,11 @@
+import { useEffect } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { type Staff } from '@/types/staff'
+import { toast } from 'sonner'
 import { MOCK_SHOPS } from '@/stores/shop-store'
+import { useCreateStaff, useAssignShopAccess } from '@/hooks/queries/use-staff'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -74,14 +77,42 @@ export function EmployeeSheet({
     },
   })
 
-  // Synchronize form with initialData when it opens/changes
-  // Note: simpler effect logic could be used but this matches previous pattern
-  // (In a real app, use useEffect)
+  useEffect(() => {
+    if (open) {
+      if (initialData) {
+        form.reset({
+          fullName: initialData.fullName || '',
+          username: initialData.username || '',
+          phone: initialData.phone || '',
+          globalRoleId: initialData.globalRoleId || '',
+          pin: '',
+          access:
+            initialData.access.map((a: { shopId: string; roleId: string }) => ({
+              shopId: a.shopId,
+              roleId: a.roleId,
+            })) || [],
+        })
+      } else {
+        form.reset({
+          fullName: '',
+          username: '',
+          phone: '',
+          globalRoleId: '',
+          pin: '',
+          access: [],
+        })
+      }
+    }
+  }, [open, initialData, form])
 
   const handleAccessToggle = (checked: boolean, shopId: string) => {
     const currentAccess = form.getValues('access')
     if (checked) {
-      if (!currentAccess.some((a) => a.shopId === shopId)) {
+      if (
+        !currentAccess.some(
+          (a: { shopId: string; roleId: string }) => a.shopId === shopId
+        )
+      ) {
         form.setValue('access', [
           ...currentAccess,
           { shopId, roleId: MOCK_ROLES[1].id }, // Default to Barista? or First role
@@ -90,14 +121,18 @@ export function EmployeeSheet({
     } else {
       form.setValue(
         'access',
-        currentAccess.filter((a) => a.shopId !== shopId)
+        currentAccess.filter(
+          (a: { shopId: string; roleId: string }) => a.shopId !== shopId
+        )
       )
     }
   }
 
   const handleRoleChange = (shopId: string, roleId: string) => {
     const currentAccess = form.getValues('access')
-    const index = currentAccess.findIndex((a) => a.shopId === shopId)
+    const index = currentAccess.findIndex(
+      (a: { shopId: string; roleId: string }) => a.shopId === shopId
+    )
     if (index !== -1) {
       const newAccess = [...currentAccess]
       newAccess[index].roleId = roleId
@@ -105,11 +140,42 @@ export function EmployeeSheet({
     }
   }
 
-  const onSubmit = (data: StaffFormValues) => {
-    // eslint-disable-next-line no-console
-    console.log('Submitted Employee:', data)
-    onOpenChange(false)
-    form.reset()
+  const createStaff = useCreateStaff()
+  const assignShopAccess = useAssignShopAccess()
+
+  const onSubmit = async (data: StaffFormValues) => {
+    try {
+      if (!initialData) {
+        // Create new
+        const newStaff = await createStaff.mutateAsync({
+          fullName: data.fullName,
+          username: data.username,
+          phone: data.phone,
+          password: 'Password123!', // Default password
+          pin: data.pin || '1234',
+          globalRoleId: data.globalRoleId || undefined,
+        })
+
+        // Assign access sequentially to avoid race conditions
+        for (const access of data.access) {
+          await assignShopAccess.mutateAsync({
+            staffId: newStaff.id,
+            shopId: access.shopId,
+            roleId: access.roleId,
+          })
+        }
+
+        toast.success('Successfully created employee and assigned access')
+        onOpenChange(false)
+        form.reset()
+      } else {
+        // Edit flow
+        toast.info('Editing staff is not yet fully integrated')
+        onOpenChange(false)
+      }
+    } catch (_error) {
+      toast.error('Failed to create staff member')
+    }
   }
 
   return (
@@ -217,7 +283,8 @@ export function EmployeeSheet({
                     // Watch access to determine state
                     const currentAccess = form.watch('access') || []
                     const accessEntry = currentAccess.find(
-                      (a) => a.shopId === shop.id
+                      (a: { shopId: string; roleId: string }) =>
+                        a.shopId === shop.id
                     )
                     const isChecked = !!accessEntry
 

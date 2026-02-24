@@ -16,8 +16,8 @@ import { DataTableColumnHeader } from '@/components/data-table'
 
 // Helper to get formatted location list
 const getLocationList = (staff: Staff) => {
-  if (staff.access.length === 0) return 'No Locations'
-  return staff.access.map((a) => a.shopId).join(', ')
+  if (!staff.access || staff.access.length === 0) return 'No Locations'
+  return staff.access.map((a) => a.shop?.name || a.shopId).join(', ')
 }
 
 interface TableMeta {

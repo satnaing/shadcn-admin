@@ -37,6 +37,7 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { MultiLangImageUpload } from '@/components/custom/multi-lang-image-upload'
 import { useCreatePromotion } from '../hooks/use-create-promotion'
+import { useUpdatePromotion } from '../hooks/use-update-promotion'
 import { type PromotionViewModel, type PromotionIntentMode } from '../types'
 import { mapFormToDto, mapDtoToForm } from '../utils/promotion-mapper'
 import { ActionSection } from './action-section'
@@ -186,16 +187,32 @@ export function PromotionSheet({
   }, [startDate, endDate, targets, pwpReward, pwpMode, mode, targetScope])
 
   // Hook for mutation
-  const { mutate, isPending } = useCreatePromotion()
+  const { mutate: createMutate, isPending: isCreating } = useCreatePromotion()
+  const { mutate: updateMutate, isPending: isUpdating } = useUpdatePromotion()
+
+  const isPending = isCreating || isUpdating
 
   const onSubmit = (data: PromotionViewModel) => {
     const dto = mapFormToDto(data)
-    mutate(dto, {
-      onSuccess: () => {
-        onOpenChange(false)
-        reset()
-      },
-    })
+
+    if (initialData) {
+      updateMutate(
+        { id: initialData.id, data: dto },
+        {
+          onSuccess: () => {
+            onOpenChange(false)
+            reset()
+          },
+        }
+      )
+    } else {
+      createMutate(dto, {
+        onSuccess: () => {
+          onOpenChange(false)
+          reset()
+        },
+      })
+    }
   }
 
   const handleTemplateSelect = (newMode: PromotionIntentMode) => {
@@ -1017,7 +1034,11 @@ export function PromotionSheet({
                     disabled={isPending || !isValid}
                     className='min-w-[140px] bg-[#800000] font-medium text-white shadow-lg shadow-red-900/10 hover:bg-[#600000]'
                   >
-                    {isPending ? 'Saving...' : 'Create Promotion'}
+                    {isPending
+                      ? 'Saving...'
+                      : initialData
+                        ? 'Save Changes'
+                        : 'Create Promotion'}
                   </Button>
                 </div>
               </div>

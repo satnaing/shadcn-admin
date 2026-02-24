@@ -27,11 +27,11 @@ export function CustomerBalanceTable({
       ),
     },
     {
-      accessorKey: 'pointsBalance',
+      accessorKey: 'currentPoints',
       header: 'Current Points',
       cell: ({ row }) => (
         <div className='font-mono font-medium'>
-          {row.original.pointsBalance.toLocaleString()}
+          {row.original.currentPoints.toLocaleString()}
         </div>
       ),
     },

@@ -2,14 +2,19 @@ import { type ColumnDef } from '@tanstack/react-table'
 import { type Customer } from '@/types/growth'
 import { Eye } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useCustomers } from '@/hooks/queries/use-customers'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { Button } from '@/components/ui/button'
 import { DataTable } from '@/components/custom/data-table'
 import { PageTitle } from '@/components/page-title'
-import { MOCK_CUSTOMERS } from '../data/mock-customers'
 
 export default function CustomersPage() {
+  const { data: response, isLoading } = useCustomers()
+
+  const customers = response?.data || []
+
   const columns: ColumnDef<Customer>[] = [
     {
       accessorKey: 'fullName',
@@ -21,7 +26,7 @@ export default function CustomersPage() {
               src={`https://api.dicebear.com/7.x/initials/svg?seed=${row.original.fullName}`}
               alt={row.original.fullName}
             />
-            <AvatarFallback>{row.original.fullName.charAt(0)}</AvatarFallback>
+            <AvatarFallback>{row.original.fullName?.charAt(0)}</AvatarFallback>
           </Avatar>
           <div className='flex flex-col'>
             <span className='font-medium'>{row.original.fullName}</span>
@@ -68,11 +73,14 @@ export default function CustomersPage() {
     {
       accessorKey: 'createdAt',
       header: 'Joined',
-      cell: ({ row }) => (
-        <span className='text-sm text-muted-foreground'>
-          {row.original.createdAt}
-        </span>
-      ),
+      cell: ({ row }) => {
+        const date = new Date(row.original.createdAt)
+        return (
+          <span className='text-sm text-muted-foreground'>
+            {date.toLocaleDateString()}
+          </span>
+        )
+      },
     },
     {
       id: 'actions',
@@ -84,10 +92,18 @@ export default function CustomersPage() {
     },
   ]
 
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center p-6'>
+        <BrandLoader />
+      </div>
+    )
+  }
+
   return (
     <div className='flex flex-col gap-4 p-6 lg:gap-6 lg:p-6'>
       <PageTitle title='Customers' />
-      <DataTable columns={columns} data={MOCK_CUSTOMERS} searchKey='fullName' />
+      <DataTable columns={columns} data={customers} searchKey='fullName' />
     </div>
   )
 }

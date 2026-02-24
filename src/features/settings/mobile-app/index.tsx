@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import {
-  MOCK_MOBILE_APP_VERSIONS,
-  type MobileAppVersion,
-} from '../data/mobile-app-schema'
+  useMobileVersions,
+  useUpdateMobileVersion,
+} from '@/hooks/queries/use-mobile-app'
+import { BrandLoader } from '@/components/ui/brand-loader'
+import { type MobileAppVersion } from '../data/mobile-app-schema'
 import { EditVersionSheet } from './components/edit-version-sheet'
 import { MobileAppTable } from './components/mobile-app-table'
 
 export default function MobileAppPage() {
-  const [data, setData] = useState<MobileAppVersion[]>(MOCK_MOBILE_APP_VERSIONS)
+  const { data: versions, isLoading } = useMobileVersions()
+  const { mutate: updateVersion } = useUpdateMobileVersion()
+
   const [sheetOpen, setSheetOpen] = useState(false)
   const [editingVersion, setEditingVersion] = useState<MobileAppVersion | null>(
     null
@@ -19,15 +23,17 @@ export default function MobileAppPage() {
   }
 
   const handleSave = (id: string, updatedData: Partial<MobileAppVersion>) => {
-    setData((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, ...updatedData, updatedAt: new Date().toISOString() }
-          : item
-      )
-    )
+    updateVersion({ id, data: updatedData })
     setSheetOpen(false)
     setEditingVersion(null)
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center p-8'>
+        <BrandLoader />
+      </div>
+    )
   }
 
   const handleSheetOpenChange = (open: boolean) => {
@@ -51,7 +57,10 @@ export default function MobileAppPage() {
         </div>
       </div>
       <div className='flex-1 flex-col space-y-8 p-8 pt-4'>
-        <MobileAppTable data={data} onEdit={handleEdit} />
+        <MobileAppTable
+          data={versions as MobileAppVersion[]}
+          onEdit={handleEdit}
+        />
       </div>
 
       <EditVersionSheet

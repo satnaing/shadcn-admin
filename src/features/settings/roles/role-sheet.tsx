@@ -24,7 +24,6 @@ import {
   SheetFooter,
 } from '@/components/ui/sheet'
 import { Textarea } from '@/components/ui/textarea'
-import { MOCK_PERMISSIONS } from '../data/mock-roles'
 import { roleSchema, type Role } from '../data/role-schema'
 
 interface RoleSheetProps {
@@ -32,26 +31,37 @@ interface RoleSheetProps {
   onOpenChange: (open: boolean) => void
   role: Role | null
   onSave: (role: Role) => void
+  permissions: any[]
 }
-
-// Group permissions by 'group' property
-const groupedPermissions = MOCK_PERMISSIONS.reduce(
-  (acc, permission) => {
-    if (!acc[permission.group]) {
-      acc[permission.group] = []
-    }
-    acc[permission.group].push(permission)
-    return acc
-  },
-  {} as Record<string, typeof MOCK_PERMISSIONS>
-)
 
 export function RoleSheet({
   open,
   onOpenChange,
   role,
   onSave,
+  permissions,
 }: RoleSheetProps) {
+  // Group permissions dynamically from the payload
+  const groupedPermissions = permissions.reduce((acc: any, permission: any) => {
+    // derive group from slug e.g. "pos:access" -> "POS"
+    const parts = permission.slug?.split(':') || ['GENERAL', permission.id]
+    const groupKey = parts[0].toUpperCase()
+
+    const rawLabel =
+      parts.slice(1).join(' ').replace(/_/g, ' ') || permission.slug
+    const label = rawLabel.charAt(0).toUpperCase() + rawLabel.slice(1)
+
+    if (!acc[groupKey]) acc[groupKey] = []
+
+    acc[groupKey].push({
+      id: permission.id,
+      label: label,
+      description: permission.description,
+      group: groupKey,
+    })
+    return acc
+  }, {})
+
   const form = useForm<Role>({
     resolver: zodResolver(roleSchema),
     defaultValues: {

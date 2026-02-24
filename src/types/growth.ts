@@ -44,6 +44,8 @@ export interface Promotion {
   usageLimitValue?: number
 }
 
+export type CustomerStatus = 'ACTIVE' | 'BANNED' | 'PENDING'
+
 export interface Customer {
   id: string
   fullName: string

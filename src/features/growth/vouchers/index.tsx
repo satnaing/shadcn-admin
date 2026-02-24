@@ -1,12 +1,15 @@
 import { type ColumnDef } from '@tanstack/react-table'
 import { type Voucher } from '@/types/growth'
 import { cn } from '@/lib/utils'
+import { useVouchers } from '@/hooks/queries/use-vouchers'
 import { Badge } from '@/components/ui/badge'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { DataTable } from '@/components/custom/data-table'
 import { PageTitle } from '@/components/page-title'
-import { MOCK_VOUCHERS } from '../data/mock-vouchers'
 
 export default function VouchersPage() {
+  const { data: vouchers, isLoading } = useVouchers()
+
   const columns: ColumnDef<Voucher>[] = [
     {
       accessorKey: 'uniqueCode',
@@ -37,8 +40,8 @@ export default function VouchersPage() {
           variant='secondary'
           className={cn(
             row.original.isRedeemed
-              ? 'bg-green-100 text-green-800 hover:bg-green-100'
-              : 'bg-gray-100 text-gray-800 hover:bg-gray-100'
+              ? 'bg-red-100 text-red-800 hover:bg-red-100'
+              : 'bg-green-100 text-green-800 hover:bg-green-100'
           )}
         >
           {row.original.isRedeemed ? 'Redeemed' : 'Unused'}
@@ -56,12 +59,20 @@ export default function VouchersPage() {
     },
   ]
 
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center p-6'>
+        <BrandLoader />
+      </div>
+    )
+  }
+
   return (
     <div className='flex flex-col gap-4 p-6 lg:gap-6 lg:p-6'>
       <PageTitle title='Vouchers' onClick={() => {}} />
       <DataTable
         columns={columns}
-        data={MOCK_VOUCHERS}
+        data={vouchers || []}
         searchKey='uniqueCode'
       />
     </div>

@@ -1,17 +1,22 @@
 import { z } from 'zod'
+import { DiscountType } from '@/types/growth'
 
 export const loyaltySettingsSchema = z.object({
-  earningRate: z.number().min(0, 'Must be positive'), // Points per $1
-  redemptionRate: z.number().min(0, 'Must be positive'), // Points for $1 discount
-  referralBonusReferrer: z.number().min(0, 'Must be positive'), // $ Amount
-  referralBonusReferee: z.number().min(0, 'Must be positive'), // $ Amount
+  minimumSpendPerStamp: z.number().min(0, 'Must be positive'),
+  stampsRequiredForReward: z.number().min(0, 'Must be positive'),
+  stampCardDurationDays: z.number().min(1, 'Must be at least 1').default(60),
+  includeProducts: z.array(z.string()).default([]),
+  includeCategories: z.array(z.string()).default([]),
+  isActive: z.boolean().default(false),
+  type: z.nativeEnum(DiscountType).default(DiscountType.PERCENTAGE),
+  value: z.number().min(0, 'Must be positive'),
 })
 
 export const userLoyaltyBalanceSchema = z.object({
   userId: z.string(),
   userName: z.string(),
   email: z.string().email(),
-  pointsBalance: z.number().int(),
+  currentPoints: z.number().int(),
   lifetimePoints: z.number().int(),
 })
 

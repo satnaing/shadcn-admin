@@ -11,3 +11,12 @@ export const createPromotion = async (data: CreatePromotionDto) => {
   const response = await apiClient.post('/admin/promotions', data)
   return response.data
 }
+
+export const updatePromotion = async (args: {
+  id: string
+  data: Partial<CreatePromotionDto>
+}) => {
+  const { id, data } = args
+  const response = await apiClient.patch(`/admin/promotions/${id}`, data)
+  return response.data
+}

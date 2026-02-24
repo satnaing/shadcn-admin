@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { type Staff } from '@/types/staff'
+import { useStaff } from '@/hooks/queries/use-staff'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { PageTitle } from '@/components/page-title'
 import { EmployeeSheet } from '@/features/staff/_components/employee-sheet'
 import { EmployeesTable } from '@/features/staff/_components/employees-table'
@@ -7,6 +9,8 @@ import { EmployeesTable } from '@/features/staff/_components/employees-table'
 export default function EmployeesPage() {
   const [open, setOpen] = useState(false)
   const [selectedStaff, setSelectedStaff] = useState<Staff | null>(null)
+
+  const { data: staffData, isLoading } = useStaff()
 
   const handleEdit = (staff: Staff) => {
     setSelectedStaff(staff)
@@ -18,6 +22,14 @@ export default function EmployeesPage() {
     setOpen(true)
   }
 
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center p-6'>
+        <BrandLoader />
+      </div>
+    )
+  }
+
   return (
     <div className='space-y-6 p-6'>
       <PageTitle
@@ -26,7 +38,7 @@ export default function EmployeesPage() {
         buttonLabel='Add Employee'
         onClick={handleCreate}
       />
-      <EmployeesTable onEdit={handleEdit} />
+      <EmployeesTable data={staffData || []} onEdit={handleEdit} />
 
       <EmployeeSheet
         open={open}

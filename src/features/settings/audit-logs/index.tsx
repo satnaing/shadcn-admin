@@ -1,17 +1,27 @@
 import { useState } from 'react'
+import { useAuditLogs } from '@/hooks/queries/use-audit-logs'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { PageTitle } from '@/components/page-title'
 import { type AuditLog } from '../data/audit-log-schema'
-import { MOCK_AUDIT_LOGS } from '../data/mock-audit-logs'
 import { AuditLogsTable } from './audit-logs-table'
 import { LogDetailsSheet } from './log-details-sheet'
 
 export function AuditLogsPage() {
   const [selectedLog, setSelectedLog] = useState<AuditLog | null>(null)
   const [isSheetOpen, setIsSheetOpen] = useState(false)
+  const { data: logs, isLoading } = useAuditLogs()
 
   const handleViewDetails = (log: AuditLog) => {
     setSelectedLog(log)
     setIsSheetOpen(true)
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center p-8'>
+        <BrandLoader />
+      </div>
+    )
   }
 
   return (
@@ -22,7 +32,7 @@ export function AuditLogsPage() {
       />
 
       <AuditLogsTable
-        data={MOCK_AUDIT_LOGS}
+        data={(logs?.items as AuditLog[]) || []}
         onViewDetails={handleViewDetails}
       />
 

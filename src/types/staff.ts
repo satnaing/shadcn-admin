@@ -11,6 +11,7 @@ export interface StaffShopAccess {
   shopId: string
   roleId: string
   role?: Role
+  shop?: { id: string; name: string }
 }
 
 export interface Staff {
