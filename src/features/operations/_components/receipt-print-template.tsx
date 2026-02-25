@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { format } from 'date-fns'
-import { type Order } from '@/types/orders'
+import { type Order } from '@/types/api'
 import { Facebook, Instagram } from 'lucide-react'
 import { Logo } from '@/assets/logo'
 
@@ -59,7 +59,7 @@ export const ReceiptPrintTemplate = forwardRef<HTMLDivElement, ReceiptProps>(
           />
           {/* Items */}
           <div className='space-y-6 pb-6'>
-            {order.items.map((item, idx) => (
+            {order.items.map((item: any, idx: number) => (
               <div
                 key={item.id || idx}
                 className='flex items-end justify-between'
@@ -103,7 +103,7 @@ export const ReceiptPrintTemplate = forwardRef<HTMLDivElement, ReceiptProps>(
               className='rounded-full px-6 py-2.5 text-2xl font-extrabold tracking-tight'
               style={{ backgroundColor: '#000000', color: '#ffffff' }}
             >
-              USD {order.grandTotal.toFixed(2)}
+              USD {(order.pricing?.grandTotal || 0).toFixed(2)}
             </div>
           </div>
           <div

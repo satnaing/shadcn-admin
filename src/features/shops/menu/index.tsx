@@ -6,7 +6,6 @@ import {
   useSyncShopCatalog,
 } from '@/hooks/queries/use-catalog'
 import { BrandLoader } from '@/components/ui/brand-loader'
-import { Button } from '@/components/ui/button'
 import { PageTitle } from '@/components/page-title'
 import { ShopMenuTable } from './_components/shop-menu-table'
 
@@ -17,7 +16,7 @@ export default function ShopMenuPage() {
   const { shops } = useShopStore()
   const shop = shops?.find((s) => s.id === shopId)
 
-  const { mutate: syncCatalog, isPending: isSyncing } = useSyncShopCatalog()
+  const { mutate: syncCatalog } = useSyncShopCatalog()
 
   if (isLoading) {
     return (

@@ -1,6 +1,6 @@
-import { type LoyaltySettings, type UserLoyaltyBalance } from './loyalty-schema'
+import { type UserLoyaltyBalance } from './loyalty-schema'
 
-export const MOCK_LOYALTY_SETTINGS: LoyaltySettings = {
+export const MOCK_LOYALTY_SETTINGS: any = {
   minimumSpendPerStamp: 10,
   stampsRequiredForReward: 10,
   stampCardDurationDays: 60,

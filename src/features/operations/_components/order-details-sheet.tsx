@@ -42,7 +42,7 @@ export function OrderDetailsSheet({
     try {
       // 1. Print the receipt on the 80mm receipt printer
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await printReceiptViaBluetooth(order)
+      await printReceiptViaBluetooth(order as any)
 
       // 2. Print a label sticker for every item (quantity = number of copies)
       for (const item of order.items) {

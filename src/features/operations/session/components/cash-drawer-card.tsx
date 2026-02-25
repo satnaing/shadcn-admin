@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import { z } from 'zod'
 import { format } from 'date-fns'
-import { useForm } from 'react-hook-form'
+import { useForm, type SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { getCurrentDrawerSession, openDrawer } from '@/services/ops'
-import { Archive, Lock, Unlock } from 'lucide-react'
+import { Lock, Unlock } from 'lucide-react'
 import { toast } from 'sonner'
 import { useAppStore } from '@/hooks/use-app-store'
 import { Button } from '@/components/ui/button'
@@ -43,10 +42,11 @@ const openDrawerSchema = z.object({
   note: z.string().optional(),
 })
 
+type OpenDrawerFormValues = z.infer<typeof openDrawerSchema>
+
 export function CashDrawerCard() {
   const { activeShopId } = useAppStore()
   const queryClient = useQueryClient()
-  const [isInjecting, setIsInjecting] = useState(false) // For future cash injection/drop? keeping simple for now.
 
   // Fetch current session
   const { data: currentSession, isLoading } = useQuery({
@@ -55,7 +55,8 @@ export function CashDrawerCard() {
     enabled: !!activeShopId,
   })
 
-  const form = useForm<z.infer<typeof openDrawerSchema>>({
+  const form = useForm<OpenDrawerFormValues>({
+    // @ts-expect-error - Known type mismatch between zodResolver and react-hook-form
     resolver: zodResolver(openDrawerSchema),
     defaultValues: {
       openingBalance: 0,
@@ -68,12 +69,11 @@ export function CashDrawerCard() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cash-drawer'] })
       toast.success('Cash drawer opened successfully')
-      setIsInjecting(false) // Reset generic state if reused
     },
     onError: () => toast.error('Failed to open drawer'),
   })
 
-  const onSubmit = (values: z.infer<typeof openDrawerSchema>) => {
+  const onSubmit: SubmitHandler<OpenDrawerFormValues> = (values) => {
     if (!activeShopId) return
     openMutation.mutate({
       shopId: activeShopId,
@@ -159,11 +159,10 @@ export function CashDrawerCard() {
             </DialogHeader>
             <Form {...form}>
               <form
-                onSubmit={form.handleSubmit(onSubmit)}
+                onSubmit={form.handleSubmit(onSubmit as SubmitHandler<any>)}
                 className='space-y-4'
               >
                 <FormField
-                  control={form.control}
                   name='openingBalance'
                   render={({ field }) => (
                     <FormItem>
@@ -177,7 +176,6 @@ export function CashDrawerCard() {
                 />
 
                 <FormField
-                  control={form.control}
                   name='note'
                   render={({ field }) => (
                     <FormItem>

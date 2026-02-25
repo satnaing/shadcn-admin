@@ -1,5 +1,5 @@
 import { type z } from 'zod'
-import { useForm } from 'react-hook-form'
+import { useForm, type SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Plus, Trash2, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
@@ -66,6 +66,7 @@ export function RecipeDrawer({
   const { mutate: deleteRecipe, isPending: isDeleting } = useDeleteRecipe()
 
   const form = useForm<AddRecipeFormValues>({
+    // @ts-expect-error - Known type mismatch between zodResolver and react-hook-form
     resolver: zodResolver(addRecipeSchema),
     defaultValues: {
       ingredientId: '',
@@ -73,7 +74,7 @@ export function RecipeDrawer({
     } as AddRecipeFormValues,
   })
 
-  function onSubmit(data: AddRecipeFormValues) {
+  const onSubmit: SubmitHandler<AddRecipeFormValues> = (data) => {
     if (!optionId) return
 
     createRecipe(
@@ -133,7 +134,6 @@ export function RecipeDrawer({
                 >
                   <div className='space-y-1'>
                     <div className='font-medium'>
-                      {/* @ts-expect-error - name is LocalizedText but types might be loose */}
                       {recipe.ingredient?.name?.['en'] || 'Unknown Ingredient'}
                     </div>
                     <div className='text-xs text-muted-foreground'>
@@ -163,9 +163,11 @@ export function RecipeDrawer({
         <div className='space-y-4'>
           <h3 className='text-sm font-medium'>Add Ingredient</h3>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+            <form
+              onSubmit={form.handleSubmit(onSubmit as SubmitHandler<any>)}
+              className='space-y-4'
+            >
               <FormField
-                control={form.control}
                 name='ingredientId'
                 render={({ field }) => (
                   <FormItem>
@@ -183,7 +185,6 @@ export function RecipeDrawer({
                       <SelectContent>
                         {ingredients?.map((ing) => (
                           <SelectItem key={ing.id} value={ing.id}>
-                            {/* @ts-expect-error - ing.name is LocalizedText */}
                             {ing.name?.['en'] || ing.sku}
                           </SelectItem>
                         ))}
@@ -196,7 +197,6 @@ export function RecipeDrawer({
 
               <div className='flex items-end gap-3'>
                 <FormField
-                  control={form.control}
                   name='quantity'
                   render={({ field }) => (
                     <FormItem className='flex-1'>

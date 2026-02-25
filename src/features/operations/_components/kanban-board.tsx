@@ -1,32 +1,28 @@
-import { useMemo } from 'react'
-import { type Order, OrderStatus } from '@/types/api'
+import { type OrderStatus } from '@/types/api'
+import { type KdsBoardState, type KdsOrder } from '@/types/kds'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { OrderCard } from './order-card'
 import { PrepTally } from './prep-tally'
 
 interface KanbanBoardProps {
-  orders: Order[]
+  boardState: KdsBoardState
   onStatusChange: (id: string, status: OrderStatus) => void
-  onPrintReceipt: (order: Order) => void
-  onPrintLabels: (order: Order) => void
+  onPrintReceipt: (order: KdsOrder) => void
+  onPrintLabels: (order: KdsOrder) => void
   isUpdatingStatusId: string | null
   isPrintingReceiptId: string | null
   isPrintingLabelId: string | null
 }
 
-const COLUMNS: { id: string; label: string; statuses: OrderStatus[] }[] = [
-  {
-    id: 'new',
-    label: 'New Orders',
-    statuses: [OrderStatus.PENDING, OrderStatus.CONFIRMED],
-  },
-  { id: 'preparing', label: 'Preparing', statuses: [OrderStatus.PREPARING] },
-  { id: 'ready', label: 'Ready for Pickup', statuses: [OrderStatus.READY] },
-  { id: 'completed', label: 'Completed', statuses: [OrderStatus.COMPLETED] },
+const COLUMNS = [
+  { id: 'PENDING', title: 'New Orders', status: 'PENDING' as OrderStatus },
+  { id: 'CONFIRMED', title: 'Confirmed', status: 'CONFIRMED' as OrderStatus },
+  { id: 'PREPARING', title: 'Preparing', status: 'PREPARING' as OrderStatus },
+  { id: 'READY', title: 'Ready', status: 'READY' as OrderStatus },
 ]
 
 export function KanbanBoard({
-  orders,
+  boardState,
   onStatusChange,
   onPrintReceipt,
   onPrintLabels,
@@ -34,53 +30,16 @@ export function KanbanBoard({
   isPrintingReceiptId,
   isPrintingLabelId,
 }: KanbanBoardProps) {
-  // 1. Session Filter (Last 12 hours)
-  const activeOrders = useMemo(() => {
-    // Session Filter (Last 7 days to ensure data visibility in dev)
-    const now = new Date().getTime()
-    const sevenDaysAgo = now - 7 * 24 * 60 * 60 * 1000
-    return orders.filter((o) => new Date(o.createdAt).getTime() > sevenDaysAgo)
-  }, [orders])
-
-  // 2. Memoized Grouping
-  const groupedOrders = useMemo(() => {
-    const groups: Record<string, Order[]> = {
-      new: [],
-      preparing: [],
-      ready: [],
-      completed: [],
-    }
-
-    activeOrders.forEach((order) => {
-      const col = COLUMNS.find((c) => c.statuses.includes(order.status))
-      if (col) groups[col.id].push(order)
-    })
-
-    // Sort active columns oldest first
-    ;['new', 'preparing', 'ready'].forEach((id) => {
-      groups[id].sort(
-        (a, b) =>
-          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-      )
-    })
-
-    // Sort completed newest first and cap at 10
-    groups.completed = groups.completed
-      .sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      )
-      .slice(0, 10)
-
-    return groups
-  }, [activeOrders])
+  // We no longer need client-side filtering or grouping, the backend handles this via /kds API
+  // and the Socket.io updates keep it fresh.
 
   return (
     <div className='flex h-full min-h-0 flex-1 overflow-x-auto pb-4'>
       <div className='flex h-full min-w-max gap-6 px-6'>
         {COLUMNS.map((col) => {
-          const colOrders = groupedOrders[col.id]
-          const showTally = col.id === 'new' || col.id === 'preparing'
+          // Direct access from the pre-grouped KdsBoardState
+          const columnOrders = boardState[col.status] || []
+          const showTally = col.id === 'PENDING' || col.id === 'PREPARING'
 
           return (
             <div
@@ -88,21 +47,23 @@ export function KanbanBoard({
               className='flex h-full min-h-0 w-80 flex-col rounded-xl border bg-card/40 p-4 backdrop-blur-sm'
             >
               <div className='mb-4 flex items-center justify-between'>
-                <div className='flex items-center gap-2'>
-                  <h3 className='text-sm font-bold tracking-wider text-muted-foreground uppercase'>
-                    {col.label}
-                  </h3>
-                  <span className='rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-bold text-primary'>
-                    {colOrders.length}
+                <h3 className='font-semibold tracking-tight'>
+                  {col.title}{' '}
+                  <span className='ml-2 rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary'>
+                    {columnOrders.length}
                   </span>
-                </div>
+                </h3>
               </div>
 
-              {showTally && <PrepTally orders={colOrders} />}
+              {showTally && columnOrders.length > 0 && (
+                <div className='mb-4'>
+                  <PrepTally orders={columnOrders} />
+                </div>
+              )}
 
-              <ScrollArea className='-mr-2 min-h-0 flex-1 pr-2'>
-                <div className='flex flex-col gap-3 pb-4'>
-                  {colOrders.map((order) => (
+              <ScrollArea className='min-h-0 flex-1 pr-4'>
+                <div className='flex flex-col gap-3 pb-2'>
+                  {columnOrders.map((order: KdsOrder) => (
                     <OrderCard
                       key={order.id}
                       order={order}
@@ -114,7 +75,7 @@ export function KanbanBoard({
                       isPrintingLabel={isPrintingLabelId === order.id}
                     />
                   ))}
-                  {colOrders.length === 0 && (
+                  {columnOrders.length === 0 && (
                     <div className='flex h-32 items-center justify-center rounded-xl border border-dashed border-muted-foreground/20 text-xs font-medium tracking-widest text-muted-foreground/60 uppercase'>
                       Clear
                     </div>

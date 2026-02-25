@@ -1,11 +1,11 @@
-import { type Order } from '@/types/api'
+import { type KdsOrder } from '@/types/kds'
 import { toast } from 'sonner'
 import {
   generateReceiptBlob,
   // generateReceiptBlobFromCanvas,
 } from '@/features/operations/_components/receipt-escpos-generator'
 
-export const printReceiptViaBluetooth = async (order: Order) => {
+export const printReceiptViaBluetooth = async (order: KdsOrder) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const bluetooth = (navigator as any).bluetooth
 

@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { type Order, type OrderStatus } from '@/types/api'
+import { type OrderStatus } from '@/types/api'
+import { type KdsOrder } from '@/types/kds'
 import { printLabelViaBluetooth } from '@/utils/label-printer'
 import { printReceiptViaBluetooth } from '@/utils/printer'
 import { useUpdateOrderStatus } from '@/hooks/queries/use-orders'
@@ -25,7 +26,7 @@ export function useKdsActions() {
     }
   }
 
-  const handlePrintReceipt = async (order: Order) => {
+  const handlePrintReceipt = async (order: KdsOrder) => {
     setIsPrintingReceiptId(order.id)
     try {
       await printReceiptViaBluetooth(order)
@@ -34,13 +35,13 @@ export function useKdsActions() {
     }
   }
 
-  const handlePrintLabels = async (order: Order) => {
+  const handlePrintLabels = async (order: KdsOrder) => {
     setIsPrintingLabelId(order.id)
     try {
       for (const item of order.items) {
         await printLabelViaBluetooth({
-          drinkName: item.name as unknown as string,
-          note: item.notes ?? undefined,
+          drinkName: item.productName,
+          note: item.instructions ?? undefined,
           orderCode: `YOK-${order.invoiceCode}`,
           quantity: item.quantity,
         })

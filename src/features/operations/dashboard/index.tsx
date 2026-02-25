@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { RefreshCcw } from 'lucide-react'
-import { useOrders } from '@/hooks/queries/use-orders'
+import { useKdsBoard } from '@/hooks/queries/use-kds-board'
 import { useAppStore } from '@/hooks/use-app-store'
 import { useKdsActions } from '@/hooks/use-kds-actions'
 import { BrandLoader } from '@/components/ui/brand-loader'
@@ -15,12 +15,10 @@ export default function OperationsPage() {
   const shopId = useAppStore((state) => state.activeShopId)
 
   const {
-    data: orderData,
+    data: boardStateData,
     isLoading,
     refetch,
-  } = useOrders({
-    shopId: shopId || undefined,
-  })
+  } = useKdsBoard(shopId || undefined, autoRefresh)
 
   const {
     handleStatusChange,
@@ -46,7 +44,7 @@ export default function OperationsPage() {
     )
   }
 
-  const orders = orderData?.data || []
+  const boardState = boardStateData || {}
 
   return (
     <div
@@ -86,9 +84,9 @@ export default function OperationsPage() {
         </div>
       </header>
       {/* Board Content */}
-      <main className='min-h-0 flex-1 overflow-hidden pt-6'>
+      <main className='flex min-h-0 flex-1 flex-col overflow-hidden pt-6'>
         <KanbanBoard
-          orders={orders}
+          boardState={boardState}
           onStatusChange={handleStatusChange}
           onPrintReceipt={handlePrintReceipt}
           onPrintLabels={handlePrintLabels}

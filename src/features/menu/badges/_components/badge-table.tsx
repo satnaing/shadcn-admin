@@ -1,4 +1,5 @@
 import { type ColumnDef } from '@tanstack/react-table'
+// Removed BadgeType
 import { Edit, MoreHorizontal, Trash } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -10,16 +11,15 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { DataTable } from '@/components/custom/data-table'
-import { type Badge as BadgeType } from '../data/badge-schema'
 
 interface BadgeTableProps {
-  data: BadgeType[]
-  onEdit: (badge: BadgeType) => void
-  onDelete?: (badge: BadgeType) => void
+  data: any[]
+  onEdit: (badge: any) => void
+  onDelete: (badge: any) => void
 }
 
 export function BadgeTable({ data, onEdit, onDelete }: BadgeTableProps) {
-  const columns: ColumnDef<BadgeType>[] = [
+  const columns: ColumnDef<any>[] = [
     {
       accessorKey: 'preview',
       header: 'Preview',
@@ -67,6 +67,20 @@ export function BadgeTable({ data, onEdit, onDelete }: BadgeTableProps) {
           {row.original.isActive ? 'Active' : 'Inactive'}
         </Badge>
       ),
+    },
+    {
+      accessorKey: 'isSystem',
+      header: 'Type',
+      cell: ({ row }) => {
+        const isSystem = row.getValue('isSystem')
+        return isSystem ? (
+          <Badge variant='secondary' className='bg-primary/10 text-primary'>
+            System
+          </Badge>
+        ) : (
+          <Badge variant='outline'>Custom</Badge>
+        )
+      },
     },
     {
       id: 'actions',

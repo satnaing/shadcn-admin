@@ -1,5 +1,6 @@
 import { useMemo, useEffect, useState } from 'react'
-import { type Order, type OrderStatus } from '@/types/api'
+import { type OrderStatus } from '@/types/api'
+import { type KdsOrder, type KdsOrderOption } from '@/types/kds'
 import {
   CheckCircle2,
   Clock,
@@ -13,10 +14,10 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 
 interface OrderCardProps {
-  order: Order
+  order: KdsOrder
   onStatusChange: (id: string, status: OrderStatus) => void
-  onPrintReceipt: (order: Order) => void
-  onPrintLabels: (order: Order) => void
+  onPrintReceipt: (order: KdsOrder) => void
+  onPrintLabels: (order: KdsOrder) => void
   isUpdatingStatus: boolean
   isPrintingReceipt: boolean
   isPrintingLabel: boolean
@@ -100,7 +101,7 @@ export function OrderCard({
         </div>
         <div className='flex items-center gap-2'>
           <Badge variant='outline' className='h-5 px-1.5 text-[10px] uppercase'>
-            {order.fulfillment?.category === 'DINE_IN' ? 'Dine-in' : 'Takeaway'}
+            {order.fulfillmentCategory === 'DINE_IN' ? 'Dine-in' : 'Takeaway'}
           </Badge>
           <Badge className='h-6 min-w-[32px] justify-center bg-primary font-bold text-primary-foreground'>
             {order.queueNumber}
@@ -109,50 +110,62 @@ export function OrderCard({
       </CardHeader>
       <CardContent className='px-3 py-2'>
         <div className='space-y-1.5'>
-          {order.items.map((item) => (
-            <div key={item.id} className='text-sm leading-tight'>
-              <div className='flex items-start gap-1 pb-0.5'>
-                <span className='shrink-0 font-bold text-primary'>
-                  {item.quantity}x
-                </span>
-                <span className='font-medium'>
-                  {item.name as unknown as string}
-                </span>
-              </div>
-              {/* Options/Modifiers */}
-              {item.options && item.options.length > 0 && (
-                <div className='mb-1 flex flex-wrap gap-1'>
-                  {item.options.map((opt: any, idx: number) => {
-                    const name = opt.name as string
-                    const isHighImpact =
-                      name.toLowerCase().includes('extra') ||
-                      name.toLowerCase().includes('shot')
-                    const isIced = name.toLowerCase().includes('iced')
+          {order.items.map((item) => {
+            const rawProductName = item.productName as unknown
+            const productName =
+              typeof rawProductName === 'string'
+                ? rawProductName
+                : (rawProductName as Record<string, string>)?.en || 'Product'
 
-                    return (
-                      <span
-                        key={idx}
-                        className={`inline-flex items-center rounded border px-1 py-0 text-[10px] font-bold ${
-                          isHighImpact
-                            ? 'border-red-200 bg-red-50 text-red-700'
-                            : isIced
-                              ? 'border-blue-200 bg-blue-50 text-blue-700'
-                              : 'border-muted-foreground/20 bg-muted text-muted-foreground'
-                        }`}
-                      >
-                        {name}
-                      </span>
-                    )
-                  })}
+            return (
+              <div key={item.id} className='text-sm leading-tight'>
+                <div className='flex items-start gap-1 pb-0.5'>
+                  <span className='shrink-0 font-bold text-primary'>
+                    {item.quantity}x
+                  </span>
+                  <span className='font-medium'>{productName}</span>
                 </div>
-              )}
-              {item.notes && (
-                <div className='mb-1 rounded border border-orange-100 bg-orange-50 px-1.5 py-0.5 text-[11px] text-orange-600 italic'>
-                  "{item.notes}"
-                </div>
-              )}
-            </div>
-          ))}
+                {/* Options/Modifiers */}
+                {item.options && item.options.length > 0 && (
+                  <div className='mb-1 flex flex-wrap gap-1'>
+                    {item.options.map((opt: KdsOrderOption, idx: number) => {
+                      const rawName = opt.optionName as unknown
+                      const name =
+                        typeof rawName === 'string'
+                          ? rawName
+                          : (rawName as Record<string, string>)?.en || 'Option'
+
+                      const nameLower = name.toLowerCase()
+                      const isHighImpact =
+                        nameLower.includes('extra') ||
+                        nameLower.includes('shot')
+                      const isIced = nameLower.includes('iced')
+
+                      return (
+                        <span
+                          key={idx}
+                          className={`inline-flex items-center rounded border px-1 py-0 text-[10px] font-bold ${
+                            isHighImpact
+                              ? 'border-red-200 bg-red-50 text-red-700'
+                              : isIced
+                                ? 'border-blue-200 bg-blue-50 text-blue-700'
+                                : 'border-muted-foreground/20 bg-muted text-muted-foreground'
+                          }`}
+                        >
+                          {name}
+                        </span>
+                      )
+                    })}
+                  </div>
+                )}
+                {item.instructions && (
+                  <div className='mb-1 rounded border border-orange-100 bg-orange-50 px-1.5 py-0.5 text-[11px] text-orange-600 italic'>
+                    "{item.instructions}"
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </div>
       </CardContent>
       <CardFooter className='flex flex-col gap-1.5 px-3 pt-1 pb-3'>

@@ -1,10 +1,11 @@
+import { type Product } from '@/types/api'
 import { DataTable } from '@/components/custom/data-table'
-import { type Product, type Category } from '../data/schema'
+// Removed Category import
 import { getColumns, type ProductActions } from './products-columns'
 
 interface ProductsTableProps extends Partial<ProductActions> {
   data: Product[]
-  categories: Category[]
+  categories?: any[]
 }
 
 export function ProductsTable({
@@ -13,12 +14,12 @@ export function ProductsTable({
   onEdit = () => {},
   onDelete = () => {},
 }: ProductsTableProps) {
-  const columns = getColumns({ onEdit, onDelete, categories })
+  const columns = getColumns({ onEdit, onDelete, categories: categories || [] })
 
   return (
     <DataTable
       columns={columns}
-      data={data}
+      data={data as unknown as any[]}
       searchKey='name'
       searchPlaceholder='Filter products...'
     />

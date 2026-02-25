@@ -6,6 +6,7 @@ import {
   type AdjustStockRequest,
   type PaginationMeta,
 } from '@/types/api'
+import { type KdsBoardState } from '@/types/kds'
 import {
   type StaffShift,
   type CashDrawerSession,
@@ -55,6 +56,12 @@ export const getCurrentDrawerSession = async (
   const response = await apiClient.get(
     `/admin/shops/${shopId}/cash-drawer/current`
   )
+  return response.data
+}
+
+// KDS Board API
+export const getKdsOrders = async (shopId: string): Promise<KdsBoardState> => {
+  const response = await apiClient.get(`/admin/shops/${shopId}/kds`)
   return response.data
 }
 

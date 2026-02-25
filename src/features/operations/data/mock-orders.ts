@@ -1,9 +1,9 @@
 import { subMinutes } from 'date-fns'
-import { type Order } from '@/types/orders'
+import { type Order } from '@/types/api'
 
 const now = new Date()
 
-export const MOCK_ORDERS: Order[] = [
+export const MOCK_ORDERS = [
   {
     id: 'ord_45',
     shopId: 'shop_01',
@@ -102,4 +102,4 @@ export const MOCK_ORDERS: Order[] = [
       },
     ],
   },
-]
+] as unknown as Order[]

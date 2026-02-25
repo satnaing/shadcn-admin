@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { startShift, endShift, getCurrentShift } from '@/services/ops'
-import { ShiftRole, StaffShift } from '@/types/ops'
-import { Clock, LogOut, UserCheck } from 'lucide-react'
+import { ShiftRole } from '@/types/ops'
+import { Clock, UserCheck } from 'lucide-react'
 import { toast } from 'sonner'
 import { useAppStore } from '@/hooks/use-app-store'
 import { Button } from '@/components/ui/button'
@@ -35,7 +35,7 @@ import {
 } from '@/components/ui/select'
 
 const startShiftSchema = z.object({
-  role: z.nativeEnum(ShiftRole, { required_error: 'Role is required' }),
+  role: z.nativeEnum(ShiftRole),
   pin: z.string().min(4, 'PIN must be at least 4 digits'),
 })
 

@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { type Order } from '@/types/api'
+import { type KdsOrder } from '@/types/kds'
 import {
   COMMANDS,
   createESCPOSBuffer,
@@ -18,7 +18,7 @@ export const WIDTH_80MM_DOTS = 576 // 80mm printers usually have 576 dots per li
  * depending on the printer's hardware font ROM.
  */
 export const generateReceiptBlob = (
-  order: Order,
+  order: KdsOrder,
   _shopName: string = 'Branch: YOK Sonthormuk',
   khrRate: number = 4100
 ): Uint8Array => {
@@ -40,7 +40,6 @@ export const generateReceiptBlob = (
   commands.push(encodeText('Tel: 086 861 255\n'))
   // commands.push(COMMANDS.TEXT_NORMAL)
   // commands.push(COMMANDS.TEXT_BOLD_OFF)
-  commands.push(COMMANDS.LF)
   commands.push(COMMANDS.LF)
   // commands.push(COMMANDS.LF)
 
@@ -76,22 +75,17 @@ export const generateReceiptBlob = (
 
   // ─── Items ───
   for (const item of order.items) {
-    const rawName = item.name as unknown
-    const nameStr =
-      typeof rawName === 'string'
-        ? rawName
-        : ((rawName as Record<string, string>)?.['en'] ?? '')
+    const rawItemName = item.productName as unknown
+    const itemNameStr =
+      typeof rawItemName === 'string'
+        ? rawItemName
+        : ((rawItemName as Record<string, string>)?.['en'] ?? '')
 
-    // Sugar/variant option (first option)
-    // const variantOpt = item.options?.[0]
-    // const variantStr = variantOpt ? (variantOpt.name?.['en'] ?? '') : ''
-
-    const unitPriceStr = item.unitPrice.toFixed(2)
+    // Kitchen Chits don't strictly need precise unit prices
+    const unitPriceStr = '---'
     const qtyStr = String(item.quantity)
-    // Per-item discount = unitPrice * qty - totalPrice
-    const discountAmount = item.unitPrice * item.quantity - item.totalPrice
-    const discountStr = discountAmount.toFixed(2)
-    const totalStr = item.totalPrice.toFixed(2)
+    const discountStr = '---'
+    const totalStr = '---'
 
     // Right-side columns string (Unit Price + QTY + Discount + Total)
     const rightCols =
@@ -102,7 +96,7 @@ export const generateReceiptBlob = (
 
     // Line 1: Bold item name (left 22 chars) + right columns
     commands.push(COMMANDS.TEXT_BOLD_ON)
-    commands.push(encodeText(padRight(nameStr, 22) + rightCols + '\n'))
+    commands.push(encodeText(padRight(itemNameStr, 22) + rightCols + '\n'))
     commands.push(COMMANDS.TEXT_BOLD_OFF)
 
     // // Line 2: Variant label (e.g. "Sweet 50%") — normal weight
@@ -114,46 +108,37 @@ export const generateReceiptBlob = (
     const addonOpts = item.options ?? []
     let optStr = ''
     for (const opt of addonOpts) {
-      const rawOptName = opt.name as unknown
+      const rawOptName = opt.optionName as unknown
       const optLabel =
         typeof rawOptName === 'string'
           ? rawOptName
           : ((rawOptName as Record<string, string>)?.['en'] ?? '')
-      // const optQty = opt.quantity > 1 ? `${opt.quantity}x ` : ''
-      optStr += `${optLabel} `
+
+      const optPrice = opt.unitPrice ? ` (+$${opt.unitPrice.toFixed(2)})` : ''
+      const optQty = opt.quantity > 1 ? `${opt.quantity}x ` : ''
+      optStr += `${optQty}${optLabel}${optPrice} `
     }
-    commands.push(encodeText(`${optStr}\n`))
+
+    if (optStr) {
+      commands.push(encodeText(`${optStr.trim()}\n`))
+    }
+
+    if (item.instructions) {
+      commands.push(encodeText(`  Note: ${item.instructions}\n`))
+    }
+
     commands.push(COMMANDS.LF)
   }
 
   // ─── Dotted Divider ───
   commands.push(encodeText(DOTS))
   commands.push(COMMANDS.ALIGN_RIGHT)
-  // ─── Sub Total & Coupon (right-aligned, 48-wide two-column) ───
-  const subTotalStr = order.pricing.subtotal.toFixed(2)
-  commands.push(
-    encodeText(createTwoColumns('Sub Total', subTotalStr, 30) + '\n')
-  )
 
-  const couponDiscount = order.pricing.discount
-  const couponStr = couponDiscount > 0 ? `-${couponDiscount.toFixed(2)}` : '-'
-  commands.push(encodeText(createTwoColumns('Coupon', couponStr, 30) + '\n'))
-
-  // ─── GRAND TOTAL (USD) ───
-  const grandTotalUSD = order.pricing.grandTotal.toFixed(2)
+  // Kitchen Chits derived from KdsOrder do not have pricing data
   commands.push(
     encodeText(
-      createTwoColumns('GRAND TOTAL ( USD )', grandTotalUSD, 30) + '\n'
-    )
-  )
-
-  // ─── GRAND TOTAL (KHR) ───
-  const grandTotalKHR = Math.round(
-    order.pricing.grandTotal * khrRate
-  ).toLocaleString()
-  commands.push(
-    encodeText(
-      createTwoColumns('GRAND TOTAL ( KHR )', grandTotalKHR, 30) + '\n'
+      createTwoColumns('TYPE', order.fulfillmentCategory || 'TAKEAWAY', 30) +
+        '\n'
     )
   )
 

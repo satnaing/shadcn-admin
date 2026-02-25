@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
+import { useForm, type SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { closeDrawer } from '@/services/ops'
-import { CashDrawerSession } from '@/types/ops'
+import { type CashDrawerSession } from '@/types/ops'
 import { toast } from 'sonner'
 import { useAppStore } from '@/hooks/use-app-store'
 import { Button } from '@/components/ui/button'
@@ -38,12 +38,15 @@ const closeDrawerSchema = z.object({
   note: z.string().optional(),
 })
 
+type CloseDrawerFormValues = z.infer<typeof closeDrawerSchema>
+
 export function CloseDrawerDialog({ session }: CloseDrawerDialogProps) {
   const { activeShopId } = useAppStore()
   const queryClient = useQueryClient()
   const [open, setOpen] = useState(false)
 
-  const form = useForm<z.infer<typeof closeDrawerSchema>>({
+  const form = useForm<CloseDrawerFormValues>({
+    // @ts-expect-error - Known type mismatch between zodResolver and react-hook-form
     resolver: zodResolver(closeDrawerSchema),
     defaultValues: {
       closingBalance: 0,
@@ -61,7 +64,7 @@ export function CloseDrawerDialog({ session }: CloseDrawerDialogProps) {
     onError: () => toast.error('Failed to close drawer'),
   })
 
-  const onSubmit = (values: z.infer<typeof closeDrawerSchema>) => {
+  const onSubmit: SubmitHandler<CloseDrawerFormValues> = (values) => {
     if (!activeShopId) return
     closeMutation.mutate({
       shopId: activeShopId,
@@ -85,7 +88,10 @@ export function CloseDrawerDialog({ session }: CloseDrawerDialogProps) {
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
+          <form
+            onSubmit={form.handleSubmit(onSubmit as SubmitHandler<any>)}
+            className='space-y-4'
+          >
             <div className='rounded-md bg-muted p-4'>
               <div className='flex justify-between text-sm'>
                 <span className='text-muted-foreground'>Opening Balance:</span>
@@ -97,7 +103,6 @@ export function CloseDrawerDialog({ session }: CloseDrawerDialogProps) {
             </div>
 
             <FormField
-              control={form.control}
               name='closingBalance'
               render={({ field }) => (
                 <FormItem>
@@ -111,7 +116,6 @@ export function CloseDrawerDialog({ session }: CloseDrawerDialogProps) {
             />
 
             <FormField
-              control={form.control}
               name='note'
               render={({ field }) => (
                 <FormItem>

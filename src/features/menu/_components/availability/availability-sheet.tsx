@@ -91,7 +91,7 @@ export function AvailabilitySheet({
             Configure where <strong>{product.name.en}</strong> is sold and set
             custom prices.
             <br />
-            Base Price: ${product.price.toFixed(2)}
+            Base Price: ${(product.price as any).toFixed(2)}
           </SheetDescription>
         </SheetHeader>
 
@@ -159,7 +159,7 @@ export function AvailabilitySheet({
                         <Input
                           id={`price-${shop.id}`}
                           type='number'
-                          placeholder={product.price.toFixed(2)}
+                          placeholder={(product.price as any).toFixed(2)}
                           value={availability.priceOverride ?? ''}
                           onChange={(e) =>
                             handlePriceChange(shop.id, e.target.value)

@@ -1,26 +1,78 @@
 import { useMemo } from 'react'
-import { type Order } from '@/types/api'
+import {
+  type KdsOrder,
+  type KdsOrderOption,
+  type KdsOrderItem,
+} from '@/types/kds'
 import { Badge } from '@/components/ui/badge'
 
 interface PrepTallyProps {
-  orders: Order[]
+  orders: KdsOrder[]
 }
 
 export function PrepTally({ orders }: PrepTallyProps) {
   const tallies = useMemo(() => {
-    const map = new Map<string, number>()
+    const counts: {
+      [productName: string]: {
+        total: number
+        modifiers: { [modifierName: string]: number }
+      }
+    } = {}
 
     orders.forEach((order) => {
-      order.items.forEach((item) => {
-        const name = item.name as unknown as string
-        const current = map.get(name) || 0
-        map.set(name, current + item.quantity)
+      order.items?.forEach((item: KdsOrderItem) => {
+        const rawProductName = item.productName as unknown
+        const name =
+          typeof rawProductName === 'string'
+            ? rawProductName
+            : (rawProductName as Record<string, string>)?.en || 'Product'
+
+        if (!counts[name]) {
+          counts[name] = { total: 0, modifiers: {} }
+        }
+        counts[name].total += item.quantity
+
+        // Aggregate high-impact modifiers (e.g., extra shots, alt milks)
+        item.options?.forEach((opt: KdsOrderOption) => {
+          const rawOptName = opt.optionName as unknown
+          const optName =
+            typeof rawOptName === 'string'
+              ? rawOptName
+              : (rawOptName as Record<string, string>)?.en || 'Option'
+
+          const optQuantity = opt.quantity || 1 // Fallback in case not provided
+          const lowerOpt = optName.toLowerCase()
+
+          // Example: Only track specific modifiers or those with quantity > 1
+          if (
+            optQuantity > 1 ||
+            lowerOpt.includes('extra shot') ||
+            lowerOpt.includes('almond milk') ||
+            lowerOpt.includes('oat milk') ||
+            lowerOpt.includes('soy milk') ||
+            lowerOpt.includes('decaf')
+          ) {
+            if (!counts[name].modifiers[optName]) {
+              counts[name].modifiers[optName] = 0
+            }
+            counts[name].modifiers[optName] += optQuantity
+          }
+        })
       })
     })
 
-    return Array.from(map.entries())
-      .map(([name, count]) => ({ name, count }))
+    // Convert counts object to a sorted array for rendering
+    const productTallies = Object.entries(counts)
+      .map(([name, data]) => ({
+        name,
+        count: data.total,
+        modifiers: Object.entries(data.modifiers)
+          .map(([modName, modCount]) => ({ name: modName, count: modCount }))
+          .sort((a, b) => b.count - a.count),
+      }))
       .sort((a, b) => b.count - a.count)
+
+    return productTallies
   }, [orders])
 
   if (tallies.length === 0) return null

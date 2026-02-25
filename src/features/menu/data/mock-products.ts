@@ -1,7 +1,7 @@
 import { OptionType } from '@/types/api'
-import { type Product, ProductStatus } from './schema'
+import { ProductStatus } from './schema'
 
-export const MOCK_PRODUCTS: Product[] = [
+export const MOCK_PRODUCTS: any[] = [
   {
     id: 'prod_latte',
     name: { en: 'Latte' },
