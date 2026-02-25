@@ -110,7 +110,9 @@ export const printLabelViaBluetooth = async (label: LabelData) => {
   const bluetooth = (navigator as any).bluetooth
 
   if (!bluetooth) {
-    toast.error('Bluetooth is not supported on this browser.')
+    toast.error(
+      'Bluetooth is not supported. On iOS, please use the Bluefy or WebBLE app.'
+    )
     return
   }
 

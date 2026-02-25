@@ -45,15 +45,15 @@ export function OrderDetailsSheet({
       await printReceiptViaBluetooth(order)
 
       // 2. Print a label sticker for every item (quantity = number of copies)
-      // for (const item of order.items) {
-      //   await printLabelViaBluetooth({
-      //     drinkName:
-      //       typeof item.name === 'string' ? item.name : (item.name?.en ?? ''),
-      //     note: item.notes ?? undefined,
-      //     orderCode: `YOK-${order.invoiceCode}`,
-      //     quantity: item.quantity,
-      //   })
-      // }
+      for (const item of order.items) {
+        await printLabelViaBluetooth({
+          drinkName:
+            typeof item.name === 'string' ? item.name : (item.name?.en ?? ''),
+          note: item.notes ?? undefined,
+          orderCode: `YOK-${order.invoiceCode}`,
+          quantity: item.quantity,
+        })
+      }
     } finally {
       setIsPrinting(false)
     }
