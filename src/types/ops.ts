@@ -53,3 +53,10 @@ export interface CloseDrawerRequest {
   closingBalance: number
   note?: string
 }
+
+export interface GetShiftsFilters {
+  shopId: string
+  staffId?: string
+  startDate?: string
+  endDate?: string
+}

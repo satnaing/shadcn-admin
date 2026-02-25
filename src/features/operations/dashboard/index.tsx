@@ -1,51 +1,66 @@
-import { useState, useEffect } from 'react'
-import { type Order, type OrderStatus } from '@/types/orders'
+import { useState, useMemo } from 'react'
 import { RefreshCcw } from 'lucide-react'
-import { useShopStore } from '@/stores/shop-store'
+import { useOrders } from '@/hooks/queries/use-orders'
+import { useAppStore } from '@/hooks/use-app-store'
+import { useKdsActions } from '@/hooks/use-kds-actions'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { KanbanBoard } from '@/features/operations/_components/kanban-board'
-import { MOCK_ORDERS } from '@/features/operations/data/mock-orders'
 
 export default function OperationsPage() {
-  const [orders, setOrders] = useState<Order[]>(MOCK_ORDERS)
-  const [autoRefresh, setAutoRefresh] = useState(false)
-  const shopId = useShopStore((state) => state.shopId)
+  const [autoRefresh, setAutoRefresh] = useState(true)
+  const activeShop = useAppStore((state) => state.activeShop)
+  const shopId = useAppStore((state) => state.activeShopId)
 
-  // Simulating local state updates
-  const handleStatusChange = (id: string, newStatus: OrderStatus) => {
-    setOrders((prev) =>
-      prev.map((o) =>
-        o.id === id
-          ? { ...o, status: newStatus, updatedAt: new Date().toISOString() }
-          : o
-      )
+  const {
+    data: orderData,
+    isLoading,
+    refetch,
+  } = useOrders({
+    shopId: shopId || undefined,
+  })
+
+  const {
+    handleStatusChange,
+    handlePrintReceipt,
+    handlePrintLabels,
+    isUpdatingStatusId,
+    isPrintingReceiptId,
+    isPrintingLabelId,
+  } = useKdsActions()
+
+  const shopDisplayName = useMemo(() => {
+    if (!activeShop) return shopId || 'Global View'
+    const name = activeShop.name as Record<string, string> | string
+    if (typeof name === 'string') return name
+    return name?.en || name?.km || activeShop.code || 'Shop'
+  }, [activeShop, shopId])
+
+  if (isLoading) {
+    return (
+      <div className='flex h-full items-center justify-center p-6'>
+        <BrandLoader />
+      </div>
     )
   }
 
-  // Effect to simulate auto-refresh (just logging for now)
-  useEffect(() => {
-    let interval: NodeJS.Timeout
-    if (autoRefresh) {
-      interval = setInterval(() => {
-        console.log('Refreshing orders...')
-        // In real app: refetch()
-      }, 5000)
-    }
-    return () => clearInterval(interval)
-  }, [autoRefresh])
+  const orders = orderData?.data || []
 
   return (
-    <div className='flex h-screen flex-col overflow-hidden bg-background'>
+    <div
+      data-layout='fixed'
+      className='flex h-full flex-col overflow-hidden bg-background'
+    >
       {/* Header */}
       <header className='flex h-16 shrink-0 items-center justify-between border-b bg-card px-6'>
         <div className='flex items-center gap-4'>
           <h1 className='text-xl font-bold tracking-tight'>
-            Live KDS - {shopId || 'Unknown Shop'}
+            Live KDS - {shopDisplayName}
           </h1>
           <span className='rounded bg-muted px-2 py-1 text-xs text-muted-foreground'>
-            v1.0.0
+            Live
           </span>
         </div>
 
@@ -61,22 +76,26 @@ export default function OperationsPage() {
               className='flex cursor-pointer items-center gap-2'
             >
               {autoRefresh && <RefreshCcw className='h-3 w-3 animate-spin' />}
-              Auto-Refresh
+              Auto-Polling (30s)
             </Label>
           </div>
-          <Button
-            variant='outline'
-            size='sm'
-            onClick={() => setOrders(MOCK_ORDERS)}
-          >
-            Reset Demo
+          <Button variant='outline' size='sm' onClick={() => refetch()}>
+            <RefreshCcw className='mr-2 h-4 w-4' />
+            Refresh
           </Button>
         </div>
       </header>
-
       {/* Board Content */}
-      <main className='flex-1 overflow-hidden pt-6'>
-        <KanbanBoard orders={orders} onStatusChange={handleStatusChange} />
+      <main className='min-h-0 flex-1 overflow-hidden pt-6'>
+        <KanbanBoard
+          orders={orders}
+          onStatusChange={handleStatusChange}
+          onPrintReceipt={handlePrintReceipt}
+          onPrintLabels={handlePrintLabels}
+          isUpdatingStatusId={isUpdatingStatusId}
+          isPrintingReceiptId={isPrintingReceiptId}
+          isPrintingLabelId={isPrintingLabelId}
+        />
       </main>
     </div>
   )

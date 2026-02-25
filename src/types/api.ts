@@ -234,7 +234,7 @@ export interface Order {
 }
 
 export interface OrderItemOption {
-  name: LocalizedText
+  name: string | LocalizedText
   quantity: number
   unitPrice: number
   totalPrice: number
@@ -242,7 +242,7 @@ export interface OrderItemOption {
 
 export interface OrderItem {
   id: string
-  name: LocalizedText
+  name: string | LocalizedText
   quantity: number
   unitPrice: number
   totalPrice: number

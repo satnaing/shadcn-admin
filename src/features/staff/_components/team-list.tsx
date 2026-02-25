@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 import { type Staff } from '@/types/staff'
+import { useStaff } from '@/hooks/queries/use-staff'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { DataTable } from '@/components/custom/data-table'
-import { MOCK_STAFF } from '../data/mock-staff'
 import { columns } from './team-columns'
 
 interface TeamListProps {
@@ -9,14 +10,24 @@ interface TeamListProps {
 }
 
 export function TeamList({ shopId }: TeamListProps) {
+  const { data: staffList = [], isLoading } = useStaff(shopId)
+
   const filteredData = useMemo(() => {
-    return MOCK_STAFF.filter((staff) =>
+    return staffList.filter((staff) =>
       staff.access.some((a) => a.shopId === shopId)
     )
-  }, [shopId])
+  }, [staffList, shopId])
 
   const handleResetPin = (staff: Staff) => {
     alert(`Resetting PIN for ${staff.fullName} (Mock Action)`)
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex h-48 items-center justify-center'>
+        <BrandLoader />
+      </div>
+    )
   }
 
   return (

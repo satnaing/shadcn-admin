@@ -1,60 +1,62 @@
-import { useMemo, useState } from 'react'
-import { formatDistanceToNow } from 'date-fns'
+import { useMemo, useEffect, useState } from 'react'
 import { type Order, type OrderStatus } from '@/types/api'
-import { CheckCircle2, Clock, PlayCircle, Printer, Tag } from 'lucide-react'
-import { printLabelViaBluetooth } from '@/utils/label-printer'
-import { printReceiptViaBluetooth } from '@/utils/printer'
+import {
+  CheckCircle2,
+  Clock,
+  PlayCircle,
+  Printer,
+  Tag,
+  Loader2,
+} from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 
 interface OrderCardProps {
   order: Order
   onStatusChange: (id: string, status: OrderStatus) => void
+  onPrintReceipt: (order: Order) => void
+  onPrintLabels: (order: Order) => void
+  isUpdatingStatus: boolean
+  isPrintingReceipt: boolean
+  isPrintingLabel: boolean
 }
 
-export function OrderCard({ order, onStatusChange }: OrderCardProps) {
-  // Determine time color
-  const [isPrintingReceipt, setIsPrintingReceipt] = useState(true)
-  const [isPrintingLabel, setIsPrintingLabel] = useState(true)
+export function OrderCard({
+  order,
+  onStatusChange,
+  onPrintReceipt,
+  onPrintLabels,
+  isUpdatingStatus,
+  isPrintingReceipt,
+  isPrintingLabel,
+}: OrderCardProps) {
+  const [elapsed, setElapsed] = useState(0)
 
-  const handlePrintReceipt = async () => {
-    setIsPrintingReceipt(true)
-    try {
-      await printReceiptViaBluetooth(order)
-    } finally {
-      setIsPrintingReceipt(false)
+  useEffect(() => {
+    const start = new Date(order.createdAt).getTime()
+    const update = () => {
+      setElapsed(Math.floor((Date.now() - start) / 1000))
     }
-  }
+    update()
+    const interval = setInterval(update, 1000)
+    return () => clearInterval(interval)
+  }, [order.createdAt])
 
-  const handlePrintLabels = async () => {
-    setIsPrintingLabel(true)
-    try {
-      for (const item of order.items) {
-        await printLabelViaBluetooth({
-          drinkName:
-            typeof item.name === 'string' ? item.name : (item.name?.en ?? ''),
-          note: item.notes ?? undefined,
-          orderCode: `YOK-${order.invoiceCode}`,
-          quantity: item.quantity,
-        })
-      }
-    } finally {
-      setIsPrintingLabel(false)
-    }
+  const formatElapsed = (seconds: number) => {
+    const mins = Math.floor(seconds / 60)
+    const secs = seconds % 60
+    return `${mins}:${secs.toString().padStart(2, '0')}`
   }
 
   const timeColor = useMemo(() => {
-    const created = new Date(order.createdAt)
-    const diffMins = (new Date().getTime() - created.getTime()) / 60000
-
+    const mins = elapsed / 60
     if (order.status === 'COMPLETED' || order.status === 'READY')
       return 'text-muted-foreground'
-    if (diffMins < 5) return 'text-green-600'
-    if (diffMins < 10) return 'text-yellow-600'
-    return 'text-red-600'
-  }, [order.createdAt, order.status])
+    if (mins < 3) return 'text-green-600'
+    if (mins < 7) return 'text-yellow-600'
+    return 'text-red-600 font-bold animate-pulse'
+  }, [elapsed, order.status])
 
   const nextAction = () => {
     switch (order.status) {
@@ -88,46 +90,64 @@ export function OrderCard({ order, onStatusChange }: OrderCardProps) {
   const action = nextAction()
 
   return (
-    <Card className='w-full shrink-0 border-l-4 border-l-primary shadow-sm'>
-      <CardHeader className='flex flex-row items-start justify-between space-y-0 pb-2'>
-        <div className='flex flex-col'>
-          <span className='text-3xl font-bold'>{order.queueNumber}</span>
-          <div
-            className={`flex items-center gap-1 text-xs font-medium ${timeColor}`}
-          >
-            <Clock className='h-3 w-3' />
-            {formatDistanceToNow(new Date(order.createdAt), {
-              addSuffix: true,
-            })}
-          </div>
+    <Card className='w-full shrink-0 overflow-hidden border-l-4 border-l-primary shadow-sm transition-shadow hover:shadow-md'>
+      <CardHeader className='flex flex-row items-center justify-between space-y-0 px-3 py-2'>
+        <div
+          className={`flex items-center gap-1.5 font-mono text-sm ${timeColor}`}
+        >
+          <Clock className='h-3.5 w-3.5' />
+          <span>{formatElapsed(elapsed)}</span>
         </div>
-        <Badge variant={order.type === 'DINE_IN' ? 'secondary' : 'outline'}>
-          {order.type === 'DINE_IN' ? 'Dine-in' : 'Takeaway'}
-        </Badge>
+        <div className='flex items-center gap-2'>
+          <Badge variant='outline' className='h-5 px-1.5 text-[10px] uppercase'>
+            {order.fulfillment?.category === 'DINE_IN' ? 'Dine-in' : 'Takeaway'}
+          </Badge>
+          <Badge className='h-6 min-w-[32px] justify-center bg-primary font-bold text-primary-foreground'>
+            {order.queueNumber}
+          </Badge>
+        </div>
       </CardHeader>
-
-      <CardContent className='py-2'>
-        <div className='space-y-3'>
+      <CardContent className='px-3 py-2'>
+        <div className='space-y-1.5'>
           {order.items.map((item) => (
-            <div key={item.id} className='text-sm'>
-              <div className='flex justify-between font-medium'>
-                <span>
-                  {item.quantity}x {item.name}{' '}
-                  {item.variant && `(${item.variant})`}
+            <div key={item.id} className='text-sm leading-tight'>
+              <div className='flex items-start gap-1 pb-0.5'>
+                <span className='shrink-0 font-bold text-primary'>
+                  {item.quantity}x
+                </span>
+                <span className='font-medium'>
+                  {item.name as unknown as string}
                 </span>
               </div>
               {/* Options/Modifiers */}
               {item.options && item.options.length > 0 && (
-                <div className='mt-1 ml-4 space-y-0.5 text-xs text-muted-foreground'>
-                  {item.options.map((opt, idx) => (
-                    <div key={idx} className='flex gap-1'>
-                      <span className='font-semibold'>{opt.choice}</span>
-                    </div>
-                  ))}
+                <div className='mb-1 flex flex-wrap gap-1'>
+                  {item.options.map((opt: any, idx: number) => {
+                    const name = opt.name as string
+                    const isHighImpact =
+                      name.toLowerCase().includes('extra') ||
+                      name.toLowerCase().includes('shot')
+                    const isIced = name.toLowerCase().includes('iced')
+
+                    return (
+                      <span
+                        key={idx}
+                        className={`inline-flex items-center rounded border px-1 py-0 text-[10px] font-bold ${
+                          isHighImpact
+                            ? 'border-red-200 bg-red-50 text-red-700'
+                            : isIced
+                              ? 'border-blue-200 bg-blue-50 text-blue-700'
+                              : 'border-muted-foreground/20 bg-muted text-muted-foreground'
+                        }`}
+                      >
+                        {name}
+                      </span>
+                    )
+                  })}
                 </div>
               )}
               {item.notes && (
-                <div className='mt-1 ml-4 text-xs text-orange-600 italic'>
+                <div className='mb-1 rounded border border-orange-100 bg-orange-50 px-1.5 py-0.5 text-[11px] text-orange-600 italic'>
                   "{item.notes}"
                 </div>
               )}
@@ -135,44 +155,47 @@ export function OrderCard({ order, onStatusChange }: OrderCardProps) {
           ))}
         </div>
       </CardContent>
-
-      <Separator className='my-2' />
-
-      <CardFooter className='flex flex-col gap-2 pt-0 pb-3'>
-        {/* Print buttons row */}
-        <div className='flex w-full gap-2'>
+      <CardFooter className='flex flex-col gap-1.5 px-3 pt-1 pb-3'>
+        <div className='flex w-full gap-1'>
           <Button
             variant='outline'
-            className='flex-1'
-            onClick={handlePrintReceipt}
+            size='xs'
+            className='h-8 flex-1 text-[11px]'
+            onClick={() => onPrintReceipt(order)}
             disabled={isPrintingReceipt}
           >
-            <Printer className='mr-1.5 h-3.5 w-3.5' />
+            <Printer className='mr-1 h-3 w-3' />
             {isPrintingReceipt ? '...' : 'Receipt'}
           </Button>
           <Button
             variant='outline'
-            className='flex-1'
-            onClick={handlePrintLabels}
+            size='xs'
+            className='h-8 flex-1 text-[11px]'
+            onClick={() => onPrintLabels(order)}
             disabled={isPrintingLabel}
           >
-            <Tag className='mr-1.5 h-3.5 w-3.5' />
+            <Tag className='mr-1 h-3 w-3' />
             {isPrintingLabel ? '...' : 'Labels'}
           </Button>
         </div>
-        {/* Status action */}
         {action ? (
           <Button
-            className='w-full'
+            size='sm'
+            className='h-9 w-full text-xs font-bold'
             variant={action.variant}
             onClick={() => onStatusChange(order.id, action.next)}
+            disabled={isUpdatingStatus}
           >
-            <action.icon className='mr-2 h-4 w-4' />
-            {action.label}
+            {isUpdatingStatus ? (
+              <Loader2 className='mr-1.5 h-4 w-4 animate-spin' />
+            ) : (
+              <action.icon className='mr-1.5 h-4 w-4' />
+            )}
+            {isUpdatingStatus ? 'Updating...' : action.label}
           </Button>
         ) : (
-          <div className='w-full py-2 text-center text-xs text-muted-foreground'>
-            Order Completed
+          <div className='w-full rounded bg-muted/30 py-1 text-center text-[10px] font-medium tracking-widest text-muted-foreground uppercase'>
+            Completed
           </div>
         )}
       </CardFooter>

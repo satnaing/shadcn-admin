@@ -1,16 +1,42 @@
 import type { Staff } from '@/types/staff'
 import { apiClient } from '@/lib/api-client'
 
-// Helper for localized strings
-const getLocal = (val: any) =>
-  typeof val === 'object' && val !== null ? val.en || val.km || '' : val || ''
+interface LocalizedText {
+  en: string
+  km?: string
+}
 
-export const getStaffList = async (): Promise<Staff[]> => {
-  const response = await apiClient.get('/admin/staff')
-  return response.data.map((staff: any) => ({
-    ...staff,
-    access: (staff.shopAccess || []).map((access: any) => ({
-      ...access,
+interface RawShopAccess {
+  shop?: { id: string; name: LocalizedText }
+  role?: {
+    id: string
+    name: LocalizedText
+    description?: LocalizedText
+  }
+  [key: string]: any
+}
+
+interface RawStaff extends Omit<Staff, 'access'> {
+  shopAccess?: RawShopAccess[]
+}
+
+// Helper for localized strings
+const getLocal = (val: unknown): string => {
+  if (val && typeof val === 'object') {
+    const v = val as Record<string, string>
+    return v.en || v.km || ''
+  }
+  return (val as string) || ''
+}
+
+export const getStaffList = async (shopId?: string): Promise<Staff[]> => {
+  const response = await apiClient.get('/admin/staff', {
+    params: { shopId },
+  })
+  return (response.data as RawStaff[]).map((staff) => ({
+    ...(staff as unknown as Staff),
+    access: (staff.shopAccess || []).map((access) => ({
+      ...(access as any),
       shop: access.shop
         ? {
             ...access.shop,
@@ -20,8 +46,9 @@ export const getStaffList = async (): Promise<Staff[]> => {
       role: access.role
         ? {
             ...access.role,
-            name: getLocal(access.role.name),
-            description: getLocal(access.role.description),
+            // Keep as objects to match Role interface in types/staff.ts
+            name: access.role.name,
+            description: access.role.description,
           }
         : undefined,
     })),

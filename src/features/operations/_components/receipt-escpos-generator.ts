@@ -19,7 +19,7 @@ export const WIDTH_80MM_DOTS = 576 // 80mm printers usually have 576 dots per li
  */
 export const generateReceiptBlob = (
   order: Order,
-  shopName: string = 'Branch: YOK Sonthormuk',
+  _shopName: string = 'Branch: YOK Sonthormuk',
   khrRate: number = 4100
 ): Uint8Array => {
   const commands: (number[] | Uint8Array)[] = []
@@ -76,7 +76,11 @@ export const generateReceiptBlob = (
 
   // ─── Items ───
   for (const item of order.items) {
-    const nameStr = item.name['en'] ?? ''
+    const rawName = item.name as unknown
+    const nameStr =
+      typeof rawName === 'string'
+        ? rawName
+        : ((rawName as Record<string, string>)?.['en'] ?? '')
 
     // Sugar/variant option (first option)
     // const variantOpt = item.options?.[0]
@@ -110,7 +114,11 @@ export const generateReceiptBlob = (
     const addonOpts = item.options ?? []
     let optStr = ''
     for (const opt of addonOpts) {
-      const optLabel = opt.name?.['en'] ?? ''
+      const rawOptName = opt.name as unknown
+      const optLabel =
+        typeof rawOptName === 'string'
+          ? rawOptName
+          : ((rawOptName as Record<string, string>)?.['en'] ?? '')
       // const optQty = opt.quantity > 1 ? `${opt.quantity}x ` : ''
       optStr += `${optLabel} `
     }

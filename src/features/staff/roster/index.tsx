@@ -1,11 +1,11 @@
-import { useShopStore } from '@/stores/shop-store'
+import { useAppStore } from '@/hooks/use-app-store'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PageTitle } from '@/components/page-title'
 import { RosterCalendar } from '@/features/staff/_components/roster-calendar'
 import { TeamList } from '@/features/staff/_components/team-list'
 
 export default function RosterPage() {
-  const shopId = useShopStore((state) => state.shopId)
+  const shopId = useAppStore((state) => state.activeShopId)
 
   if (!shopId)
     return <div className='p-6'>Please select a shop to view the roster.</div>

@@ -110,37 +110,53 @@ export function OrderDetailsSheet({
 
             {/* Items List */}
             <div className='space-y-4'>
-              {order.items.map((item) => (
-                <div key={item.id} className='text-sm'>
-                  <div className='flex justify-between font-medium'>
-                    <span>
-                      {item.quantity}x {item.name?.en}
-                    </span>
-                    <span>${item.totalPrice.toFixed(2)}</span>
+              {order.items.map((item) => {
+                const rawName = item.name as unknown
+                const itemName =
+                  typeof rawName === 'string'
+                    ? rawName
+                    : (rawName as Record<string, string>)?.en || 'Item'
+
+                return (
+                  <div key={item.id} className='text-sm'>
+                    <div className='flex justify-between font-medium'>
+                      <span>
+                        {item.quantity}x {itemName}
+                      </span>
+                      <span>${item.totalPrice.toFixed(2)}</span>
+                    </div>
+                    {/* Options */}
+                    {item.options && item.options.length > 0 && (
+                      <div className='mt-0.5 ml-4 space-y-0.5 text-xs text-muted-foreground'>
+                        {item.options.map((opt, idx) => {
+                          const rawOptName = opt.name as unknown
+                          const optName =
+                            typeof rawOptName === 'string'
+                              ? rawOptName
+                              : (rawOptName as Record<string, string>)?.en ||
+                                'Option'
+                          return (
+                            <div key={idx} className='flex justify-between'>
+                              <span>
+                                + {opt.quantity > 1 ? `${opt.quantity}x ` : ''}
+                                {optName}
+                              </span>
+                              {opt.totalPrice > 0 && (
+                                <span>+${opt.totalPrice.toFixed(2)}</span>
+                              )}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    )}
+                    {item.notes && (
+                      <div className='ml-4 text-xs text-orange-600 italic'>
+                        "{item.notes}"
+                      </div>
+                    )}
                   </div>
-                  {/* Options */}
-                  {item.options && item.options.length > 0 && (
-                    <div className='mt-0.5 ml-4 space-y-0.5 text-xs text-muted-foreground'>
-                      {item.options.map((opt, idx) => (
-                        <div key={idx} className='flex justify-between'>
-                          <span>
-                            + {opt.quantity > 1 ? `${opt.quantity}x ` : ''}
-                            {opt.name?.en}
-                          </span>
-                          {opt.totalPrice > 0 && (
-                            <span>+${opt.totalPrice.toFixed(2)}</span>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  {item.notes && (
-                    <div className='ml-4 text-xs text-orange-600 italic'>
-                      "{item.notes}"
-                    </div>
-                  )}
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             <Separator />

@@ -4,10 +4,10 @@ import { toast } from 'sonner'
 
 export const STAFF_QUERY_KEY = ['staff']
 
-export function useStaff() {
+export function useStaff(shopId?: string) {
   return useQuery({
-    queryKey: STAFF_QUERY_KEY,
-    queryFn: staffService.getStaffList,
+    queryKey: [...STAFF_QUERY_KEY, { shopId }],
+    queryFn: () => staffService.getStaffList(shopId),
   })
 }
 

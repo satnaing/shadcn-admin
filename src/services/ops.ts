@@ -13,6 +13,7 @@ import {
   type EndShiftRequest,
   type OpenDrawerRequest,
   type CloseDrawerRequest,
+  type GetShiftsFilters,
 } from '@/types/ops'
 import { apiClient } from '@/lib/api-client'
 
@@ -62,14 +63,35 @@ export const getOrders = async (
   filters?: GetOrdersFilters
 ): Promise<{ data: Order[]; meta: PaginationMeta }> => {
   const response = await apiClient.get('/admin/orders', { params: filters })
-  return response.data // Assuming paginated response structure
+  const rawData = response.data?.data || []
+
+  const orders = rawData.map((order: unknown) => ({
+    ...(order as any),
+    status: (order as any).status?.toUpperCase(), // Ensure status matches enum
+    items: ((order as any).items || []).map((item: unknown) => ({
+      ...(item as any),
+      // Flatten name for frontend consistency
+      name:
+        typeof (item as any).name === 'string'
+          ? (item as any).name
+          : (item as any).name?.en || (item as any).name?.km || 'Item',
+      options: ((item as any).options || []).map((opt: unknown) => ({
+        ...(opt as any),
+        name:
+          typeof (opt as any).name === 'string'
+            ? (opt as any).name
+            : (opt as any).name?.en || (opt as any).name?.km || 'Option',
+      })),
+    })),
+  }))
+  return { ...response.data, data: orders }
 }
 
 export const updateOrderStatus = async (
   id: string,
   data: UpdateOrderStatusRequest
 ): Promise<Order> => {
-  const response = await apiClient.patch(`/admin/orders/${id}`, data)
+  const response = await apiClient.patch(`/admin/orders/${id}/status`, data)
   return response.data
 }
 
@@ -84,5 +106,12 @@ export const getInventory = async (
 
 export const adjustStock = async (data: AdjustStockRequest): Promise<void> => {
   const response = await apiClient.post('/admin/inventory/adjust', data)
+  return response.data
+}
+
+export const getShifts = async (
+  filters: GetShiftsFilters
+): Promise<StaffShift[]> => {
+  const response = await apiClient.get('/admin/shifts', { params: filters })
   return response.data
 }
