@@ -71,7 +71,9 @@ export function SettingsPrinters() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const bluetooth = (navigator as any).bluetooth
     if (!bluetooth) {
-      toast.error('Bluetooth is not supported on this browser.')
+      toast.error(
+        'Bluetooth is not supported. On iOS, please use the Bluefy or WebBLE app.'
+      )
       return
     }
     setReceipt((p) => ({ ...p, status: 'connecting' }))
@@ -127,7 +129,9 @@ export function SettingsPrinters() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const bluetooth = (navigator as any).bluetooth
     if (!bluetooth) {
-      toast.error('Bluetooth is not supported on this browser.')
+      toast.error(
+        'Bluetooth is not supported. On iOS, please use the Bluefy or WebBLE app.'
+      )
       return
     }
     setLabel((p) => ({ ...p, status: 'connecting' }))

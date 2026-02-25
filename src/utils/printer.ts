@@ -10,7 +10,9 @@ export const printReceiptViaBluetooth = async (order: Order) => {
   const bluetooth = (navigator as any).bluetooth
 
   if (!bluetooth) {
-    toast.error('Bluetooth printing is not supported on this browser.')
+    toast.error(
+      'Bluetooth is not supported. On iOS, please use the Bluefy or WebBLE app.'
+    )
     return
   }
 
