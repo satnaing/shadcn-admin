@@ -58,6 +58,7 @@ export function MultiLangInput({
         </Tabs>
       </div>
       <Input
+        autoComplete='off'
         value={currentValue}
         onChange={(e) => handleInputChange(e.target.value)}
         placeholder={(() => {

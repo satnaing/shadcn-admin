@@ -108,6 +108,7 @@ export const hqNav = [
       { title: 'Vouchers', url: '/growth/vouchers' },
       { title: 'Announcements', url: '/growth/announcements' },
       { title: 'Points & Referrals', url: '/growth/loyalty' },
+      { title: 'Membership Program', url: '/growth/membership' },
       { title: 'Reviews', url: '/growth/reviews' },
     ],
   },

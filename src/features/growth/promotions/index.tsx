@@ -51,7 +51,7 @@ export default function PromotionsPage() {
       header: 'Discount',
       cell: ({ row }) => {
         const type = row.original.type
-        const value = row.original.value
+        const value = row.original.value ?? 0
         return (
           <Badge variant='outline'>
             {type === DiscountType.PERCENTAGE

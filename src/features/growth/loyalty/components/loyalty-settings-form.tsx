@@ -317,7 +317,13 @@ export function LoyaltySettingsForm({
         </Form>
       </CardContent>
       <CardFooter className='flex justify-end border-t px-6 py-4'>
-        <Button type='submit' form='loyalty-form'>
+        <Button
+          type='submit'
+          form='loyalty-form'
+          onClick={(_e) => {
+            // No custom logic needed for basic stamp card save
+          }}
+        >
           Save Changes
         </Button>
       </CardFooter>

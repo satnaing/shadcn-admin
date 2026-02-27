@@ -1,6 +1,9 @@
 import { type Promotion, DiscountType } from '@/types/growth'
 import { apiClient } from '@/lib/api-client'
-import type { LoyaltySettings } from '@/features/growth/data/loyalty-schema'
+import type {
+  LoyaltySettings,
+  MembershipTier,
+} from '@/features/growth/data/loyalty-schema'
 
 function mapPromotionToSettings(data: Promotion): LoyaltySettings {
   const loyaltyRule =
@@ -31,6 +34,11 @@ function mapPromotionToSettings(data: Promotion): LoyaltySettings {
     )
       .map((c) => (typeof c === 'string' ? c : c?.id))
       .filter((id): id is string => Boolean(id)),
+    membershipTiers: ((
+      data as unknown as { membershipTiers?: MembershipTier[] }
+    ).membershipTiers || []) as MembershipTier[],
+    lastProductSync: (data as unknown as { lastProductSync?: string })
+      .lastProductSync,
   }
 }
 
@@ -52,6 +60,7 @@ function mapSettingsToPromotionUpdate(
     ],
     includeProducts: settings.includeProducts,
     includeCategories: settings.includeCategories,
+    membershipTiers: settings.membershipTiers,
   }
 }
 

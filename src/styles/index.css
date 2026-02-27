@@ -36,6 +36,17 @@
       font-size: 16px !important;
     }
   }
+
+  /* Hide number input spinners/arrows */
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
 }
 
 @utility container {
