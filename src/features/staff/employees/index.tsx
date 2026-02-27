@@ -24,7 +24,7 @@ export default function EmployeesPage() {
 
   if (isLoading) {
     return (
-      <div className='flex h-full items-center justify-center p-6'>
+      <div className='flex h-[80vh] w-full items-center justify-center p-6'>
         <BrandLoader />
       </div>
     )

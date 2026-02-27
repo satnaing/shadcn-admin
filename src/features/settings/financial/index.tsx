@@ -4,6 +4,7 @@ import {
   useSurcharges,
   useToggleSurcharge,
 } from '@/hooks/queries/use-surcharges'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { DataTable } from '@/components/custom/data-table'
 import { PageTitle } from '@/components/page-title'
 import { columns } from './components/surcharges-columns'
@@ -14,7 +15,7 @@ export default function FinancialSettingsPage() {
   const [selectedSurcharge, setSelectedSurcharge] =
     useState<SurchargeConfig | null>(null)
 
-  const { data: surcharges = [] } = useSurcharges()
+  const { data: surcharges = [], isLoading } = useSurcharges()
   const { mutate: toggleSurcharge } = useToggleSurcharge()
 
   const handleEdit = (surcharge: SurchargeConfig) => {
@@ -24,6 +25,14 @@ export default function FinancialSettingsPage() {
 
   const handleToggle = (surcharge: SurchargeConfig) => {
     toggleSurcharge(surcharge.id)
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex h-[80vh] w-full items-center justify-center p-6'>
+        <BrandLoader />
+      </div>
+    )
   }
 
   return (

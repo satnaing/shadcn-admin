@@ -54,6 +54,7 @@ export const sidebarData: SidebarData = {
             { title: 'Products', url: '/menu/products' },
             { title: 'Categories', url: '/menu/categories' },
             { title: 'Option Groups', url: '/menu/options' },
+            { title: 'Badges', url: '/menu/badges' },
             { title: 'Price Books', url: '/menu/pricing' },
           ],
         },

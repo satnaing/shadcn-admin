@@ -4,6 +4,7 @@ import {
   useLoyaltySettings,
   useUpdateLoyaltySettings,
 } from '@/hooks/queries/use-loyalty'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { PageTitle } from '@/components/page-title'
 import {
   type LoyaltySettings,
@@ -27,7 +28,7 @@ export default function LoyaltyPage() {
     try {
       await updateSettings(data)
       toast.success('Loyalty Program Updated')
-    } catch (error) {
+    } catch (_error) {
       toast.error('Failed to update loyalty program')
     }
   }
@@ -48,6 +49,14 @@ export default function LoyaltyPage() {
     setBalances(updatedBalances)
   }
 
+  if (isLoading || !settings) {
+    return (
+      <div className='flex h-[80vh] w-full items-center justify-center p-6'>
+        <BrandLoader />
+      </div>
+    )
+  }
+
   return (
     <div className='flex flex-col space-y-6 p-8'>
       <PageTitle
@@ -57,16 +66,10 @@ export default function LoyaltyPage() {
 
       <div className='grid gap-8 lg:grid-cols-3'>
         <div className='space-y-8 lg:col-span-2'>
-          {isLoading || !settings ? (
-            <div className='flex h-64 items-center justify-center rounded-lg border border-dashed'>
-              <p className='text-muted-foreground'>Loading settings...</p>
-            </div>
-          ) : (
-            <LoyaltySettingsForm
-              initialData={settings}
-              onSave={handleSaveSettings}
-            />
-          )}
+          <LoyaltySettingsForm
+            initialData={settings}
+            onSave={handleSaveSettings}
+          />
 
           <div className='space-y-4'>
             <h3 className='text-lg font-medium'>Customer Balances</h3>

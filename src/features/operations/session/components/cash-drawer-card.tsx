@@ -7,6 +7,7 @@ import { getCurrentDrawerSession, openDrawer } from '@/services/ops'
 import { Lock, Unlock } from 'lucide-react'
 import { toast } from 'sonner'
 import { useAppStore } from '@/hooks/use-app-store'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -82,7 +83,7 @@ export function CashDrawerCard() {
     })
   }
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <BrandLoader />
 
   if (currentSession) {
     // DRAWER OPEN STATE

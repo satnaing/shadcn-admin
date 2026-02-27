@@ -9,6 +9,7 @@ import { ShiftRole } from '@/types/ops'
 import { Clock, UserCheck } from 'lucide-react'
 import { toast } from 'sonner'
 import { useAppStore } from '@/hooks/use-app-store'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -90,7 +91,7 @@ export function ShiftCard() {
     onError: () => toast.error('Failed to end shift'),
   })
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <BrandLoader />
 
   if (currentShift) {
     // CLOCKED IN STATE

@@ -2,7 +2,10 @@ import { z } from 'zod'
 
 export const badgeSchema = z.object({
   id: z.string().optional(),
-  label: z.string().min(1, { message: 'Label is required' }),
+  label: z.object({
+    en: z.string().min(1, { message: 'English label is required' }),
+    km: z.string().optional(),
+  }),
   code: z.string().min(2, { message: 'Code is required' }).toUpperCase(),
   bgColor: z
     .string()

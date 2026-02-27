@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Loader2 } from 'lucide-react'
 import { useActiveCarts } from '@/hooks/queries/use-carts'
 import { useAppStore } from '@/hooks/use-app-store'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { PageTitle } from '@/components/page-title'
 import { ActiveCartsTable } from '../_components/active-carts-table'
 import { CartDetailSheet } from '../_components/cart-detail-sheet'
@@ -18,6 +18,14 @@ export function ActiveCartsPage() {
     setIsSheetOpen(true)
   }
 
+  if (isLoading) {
+    return (
+      <div className='flex h-[80vh] w-full items-center justify-center p-6'>
+        <BrandLoader />
+      </div>
+    )
+  }
+
   return (
     <div className='flex h-full flex-col space-y-6 p-8'>
       <PageTitle
@@ -25,16 +33,7 @@ export function ActiveCartsPage() {
         subtitle='Monitor customer carts in real-time. View items and potential order value.'
       />
 
-      {isLoading ? (
-        <div className='flex flex-1 items-center justify-center'>
-          <Loader2 className='h-8 w-8 animate-spin text-primary' />
-        </div>
-      ) : (
-        <ActiveCartsTable
-          data={carts || []}
-          onViewDetails={handleViewDetails}
-        />
-      )}
+      <ActiveCartsTable data={carts || []} onViewDetails={handleViewDetails} />
 
       <CartDetailSheet
         open={isSheetOpen}

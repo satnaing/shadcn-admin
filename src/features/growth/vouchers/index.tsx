@@ -12,19 +12,27 @@ export default function VouchersPage() {
 
   const columns: ColumnDef<Voucher>[] = [
     {
+      accessorKey: 'promotionName',
+      header: 'Campaign',
+      cell: ({ row }) => {
+        const promotionName = row.original.promotionName
+        const displayValue =
+          typeof promotionName === 'object' && promotionName !== null
+            ? (promotionName as Record<string, string>).en || ''
+            : promotionName
+
+        return (
+          <span className='cursor-pointer text-primary hover:underline'>
+            {displayValue}
+          </span>
+        )
+      },
+    },
+    {
       accessorKey: 'uniqueCode',
       header: 'Voucher Code',
       cell: ({ row }) => (
         <span className='font-mono font-medium'>{row.original.uniqueCode}</span>
-      ),
-    },
-    {
-      accessorKey: 'promotionName',
-      header: 'Campaign',
-      cell: ({ row }) => (
-        <span className='cursor-pointer text-primary hover:underline'>
-          {row.original.promotionName}
-        </span>
       ),
     },
     {
@@ -61,7 +69,7 @@ export default function VouchersPage() {
 
   if (isLoading) {
     return (
-      <div className='flex h-full items-center justify-center p-6'>
+      <div className='flex h-[80vh] w-full items-center justify-center p-6'>
         <BrandLoader />
       </div>
     )

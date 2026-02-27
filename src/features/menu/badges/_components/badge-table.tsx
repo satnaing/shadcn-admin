@@ -43,14 +43,14 @@ export function BadgeTable({ data, onEdit, onDelete }: BadgeTableProps) {
                 }}
               />
             )}
-            {badge.label}
+            {badge.label.en}
           </div>
         )
       },
     },
     {
-      accessorKey: 'label',
-      header: 'Label',
+      accessorKey: 'label.en',
+      header: 'Label (EN)',
     },
     {
       accessorKey: 'code',
@@ -116,5 +116,5 @@ export function BadgeTable({ data, onEdit, onDelete }: BadgeTableProps) {
     },
   ]
 
-  return <DataTable columns={columns} data={data} searchKey='label' />
+  return <DataTable columns={columns} data={data} searchKey='label.en' />
 }

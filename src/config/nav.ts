@@ -80,6 +80,10 @@ export const hqNav = [
         url: '/menu/collections',
       },
       {
+        title: 'Badges',
+        url: '/menu/badges',
+      },
+      {
         title: 'Availability',
         url: '/menu/availability',
       },

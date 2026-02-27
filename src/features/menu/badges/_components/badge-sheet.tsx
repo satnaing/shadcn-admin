@@ -21,6 +21,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet'
+import { MultiLangInput } from '@/components/custom/multi-lang-input'
 
 // Removed broken badge-schema import
 
@@ -29,6 +30,7 @@ interface BadgeSheetProps {
   onOpenChange: (open: boolean) => void
   badge: any | null
   onSave: (badge: any) => void
+  isPending?: boolean
 }
 
 export function BadgeSheet({
@@ -36,20 +38,23 @@ export function BadgeSheet({
   onOpenChange,
   badge,
   onSave,
+  isPending = false,
 }: BadgeSheetProps) {
   const form = useForm<any>({
     defaultValues: {
-      name: { en: '', km: '' },
-      color: '#3b82f6',
+      label: { en: '', km: '' },
+      code: '',
+      bgColor: '#3b82f6',
+      textColor: '#ffffff',
       isActive: true,
     },
   })
 
   // Watch values for live preview
-  const watchedLabel = form.watch('label') // This will likely be undefined now, as 'label' is removed from defaultValues
-  const watchedBgColor = form.watch('bgColor') // This will likely be undefined now, as 'bgColor' is removed from defaultValues
-  const watchedTextColor = form.watch('textColor') // This will likely be undefined now, as 'textColor' is removed from defaultValues
-  const watchedImageUrl = form.watch('imageUrl') // This will likely be undefined now, as 'imageUrl' is removed from defaultValues
+  const watchedLabelEn = form.watch('label.en')
+  const watchedBgColor = form.watch('bgColor')
+  const watchedTextColor = form.watch('textColor')
+  const watchedImageUrl = form.watch('imageUrl')
 
   useEffect(() => {
     if (open) {
@@ -57,8 +62,10 @@ export function BadgeSheet({
         form.reset(badge)
       } else {
         form.reset({
-          name: { en: '', km: '' },
-          color: '#3b82f6',
+          label: { en: '', km: '' },
+          code: '',
+          bgColor: '#3b82f6',
+          textColor: '#ffffff',
           isActive: true,
         })
       }
@@ -66,12 +73,12 @@ export function BadgeSheet({
   }, [open, badge, form])
 
   function onSubmit(data: any) {
-    const badgeToSave = {
-      ...data,
-      id: badge?.id || crypto.randomUUID(),
+    if (badge?.id) {
+      delete data.id // don't push generated id for updates
     }
-    onSave(badgeToSave)
-    onOpenChange(false)
+    onSave(data)
+    // Removed synchronous close as it's typically closed via onSuccess now
+    // onOpenChange(false)
   }
 
   return (
@@ -116,7 +123,7 @@ export function BadgeSheet({
                         }}
                       />
                     )}
-                    {watchedLabel || 'Badge Label'}
+                    {watchedLabelEn || 'Badge Label'}
                   </div>
                 </div>
               </div>
@@ -127,15 +134,22 @@ export function BadgeSheet({
                     control={form.control}
                     name='label'
                     render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Label</FormLabel>
+                      <FormItem className='col-span-2'>
                         <FormControl>
-                          <Input placeholder='e.g. Best Seller' {...field} />
+                          <MultiLangInput
+                            label='Label'
+                            value={field.value}
+                            onChange={field.onChange}
+                            placeholder='e.g. Best Seller'
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
+                </div>
+
+                <div className='grid grid-cols-2 gap-4'>
                   <FormField
                     control={form.control}
                     name='code'
@@ -266,11 +280,15 @@ export function BadgeSheet({
         </div>
 
         <SheetFooter className='p-6 pt-2'>
-          <Button variant='outline' onClick={() => onOpenChange(false)}>
+          <Button
+            variant='outline'
+            onClick={() => onOpenChange(false)}
+            disabled={isPending}
+          >
             Cancel
           </Button>
-          <Button type='submit' form='badge-form'>
-            Save Changes
+          <Button type='submit' form='badge-form' disabled={isPending}>
+            {isPending ? 'Saving...' : 'Save Changes'}
           </Button>
         </SheetFooter>
       </SheetContent>

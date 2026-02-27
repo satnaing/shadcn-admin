@@ -4,6 +4,7 @@ import { type ColumnDef } from '@tanstack/react-table'
 import { DiscountType, type Promotion } from '@/types/growth'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { Progress } from '@/components/ui/progress'
 import { DataTable } from '@/components/custom/data-table'
 import { PageTitle } from '@/components/page-title'
@@ -142,17 +143,19 @@ export default function PromotionsPage() {
     },
   ]
 
+  if (isLoading) {
+    return (
+      <div className='flex h-[80vh] w-full items-center justify-center p-6'>
+        <BrandLoader />
+      </div>
+    )
+  }
+
   return (
     <div className='flex flex-col gap-4 p-6 lg:gap-6 lg:p-6'>
       <PageTitle title='Promotions' onClick={handleCreate} />
 
-      {isLoading ? (
-        <div className='flex items-center justify-center py-12 text-sm text-muted-foreground'>
-          Loading promotions...
-        </div>
-      ) : (
-        <DataTable columns={columns} data={promotions} searchKey='name' />
-      )}
+      <DataTable columns={columns} data={promotions} searchKey='name' />
 
       <PromotionSheet
         open={open}

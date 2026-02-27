@@ -7,6 +7,7 @@ import { showSubmittedData } from '@/lib/show-submitted-data'
 import { useShop, useUpdateShop } from '@/hooks/queries/use-shops'
 // We still need the current shop context to know WHICH shop to load
 import { useAppStore } from '@/hooks/use-app-store'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -147,12 +148,8 @@ export default function StoreProfileForm() {
 
   if (isLoading) {
     return (
-      <div className='flex flex-col space-y-4 p-6 pt-6'>
-        <PageTitle
-          title='Store Profile'
-          subtitle="Manage your store's public details and settings."
-        />
-        <div className='text-sm text-muted-foreground'>Loading...</div>
+      <div className='flex h-[80vh] w-full items-center justify-center p-6'>
+        <BrandLoader />
       </div>
     )
   }

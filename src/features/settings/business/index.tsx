@@ -7,6 +7,7 @@ import {
   useBusinessProfile,
   useUpdateBusinessProfile,
 } from '@/hooks/queries/use-business'
+import { BrandLoader } from '@/components/ui/brand-loader'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -77,12 +78,8 @@ export default function BusinessProfileForm() {
 
   if (isLoading) {
     return (
-      <div className='flex flex-col space-y-4 p-6 pt-6'>
-        <PageTitle
-          title='Business Setup'
-          subtitle='Manage global business configuration.'
-        />
-        <div className='text-sm text-muted-foreground'>Loading...</div>
+      <div className='flex h-[80vh] w-full items-center justify-center p-6'>
+        <BrandLoader />
       </div>
     )
   }
