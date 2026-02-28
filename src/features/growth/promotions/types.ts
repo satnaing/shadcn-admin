@@ -161,6 +161,7 @@ export interface CreatePromotionDto {
   type: DiscountType
   value: number
   scope: PromotionScope
+  status?: 'ACTIVE' | 'INACTIVE' | 'ARCHIVED'
   startDate?: string
   endDate?: string
   budgetLimitAmount?: number

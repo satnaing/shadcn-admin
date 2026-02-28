@@ -11,7 +11,7 @@ export interface PaginationMeta {
 
 // Enums (from DB Spec)
 export enum OrderStatus {
-  PENDING = 'PENDING',
+  ORDER_PLACED = 'ORDER_PLACED',
   CONFIRMED = 'CONFIRMED',
   PREPARING = 'PREPARING',
   READY = 'READY',

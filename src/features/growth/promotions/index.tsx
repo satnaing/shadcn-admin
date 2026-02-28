@@ -2,13 +2,12 @@ import { useState } from 'react'
 import { format } from 'date-fns'
 import { type ColumnDef } from '@tanstack/react-table'
 import { DiscountType, type Promotion } from '@/types/growth'
-import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { BrandLoader } from '@/components/ui/brand-loader'
 import { Progress } from '@/components/ui/progress'
 import { DataTable } from '@/components/custom/data-table'
 import { PageTitle } from '@/components/page-title'
-import { PromotionSheet } from './components/promotion-sheet'
+import { PromotionQuickEditSheet } from './components/promotion-quick-edit-sheet'
 import { usePromotions } from './hooks/use-promotions'
 
 export default function PromotionsPage() {
@@ -20,11 +19,6 @@ export default function PromotionsPage() {
 
   const handleEdit = (promotion: Promotion) => {
     setEditingPromotion(promotion)
-    setOpen(true)
-  }
-
-  const handleCreate = () => {
-    setEditingPromotion(null)
     setOpen(true)
   }
 
@@ -120,25 +114,25 @@ export default function PromotionsPage() {
           ? new Date(row.original.startDate)
           : null
         const end = row.original.endDate ? new Date(row.original.endDate) : null
-
-        // Logic: Active if within date range AND status is not explicitly inactive
-        // (Adjust logic if API status field implies something else)
-        const isDateActive = (!start || now >= start) && (!end || now <= end)
-
-        // If API sends null/undefined status, assume ACTIVE if dates are valid
-        // If API sends 'INACTIVE' or 'ARCHIVED', respect that.
         const apiStatus = row.original.status
-        const isActive =
-          isDateActive &&
-          (apiStatus === 'ACTIVE' ||
-            apiStatus === null ||
-            apiStatus === undefined)
 
-        return (
-          <Badge className={cn(isActive ? 'bg-green-500' : 'bg-gray-400')}>
-            {isActive ? 'Active' : 'Inactive'}
-          </Badge>
-        )
+        // Explicitly disabled by API
+        if (apiStatus === 'INACTIVE' || apiStatus === 'ARCHIVED') {
+          return <Badge className='bg-gray-400'>Inactive</Badge>
+        }
+
+        // Past end date → expired
+        if (end && now > end) {
+          return <Badge className='bg-red-500'>Expired</Badge>
+        }
+
+        // Not yet started
+        if (start && now < start) {
+          return <Badge className='bg-blue-500'>Scheduled</Badge>
+        }
+
+        // Within range and status is ACTIVE (or null/undefined = treated as active)
+        return <Badge className='bg-green-500'>Active</Badge>
       },
     },
   ]
@@ -153,14 +147,14 @@ export default function PromotionsPage() {
 
   return (
     <div className='flex flex-col gap-4 p-6 lg:gap-6 lg:p-6'>
-      <PageTitle title='Promotions' onClick={handleCreate} />
+      <PageTitle title='Promotions' />
 
       <DataTable columns={columns} data={promotions} searchKey='name' />
 
-      <PromotionSheet
+      <PromotionQuickEditSheet
         open={open}
         onOpenChange={setOpen}
-        initialData={editingPromotion}
+        promotion={editingPromotion}
       />
     </div>
   )

@@ -61,7 +61,13 @@ export function OrderCard({
 
   const nextAction = () => {
     switch (order.status) {
-      case 'PENDING':
+      case 'ORDER_PLACED':
+        return {
+          label: 'Confirm',
+          icon: PlayCircle,
+          next: 'CONFIRMED' as OrderStatus,
+          variant: 'default' as const,
+        }
       case 'CONFIRMED':
         return {
           label: 'Start',

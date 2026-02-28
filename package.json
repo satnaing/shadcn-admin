@@ -6,6 +6,7 @@
   "scripts": {
     "start:dev": "vite",
     "build": "tsc -b && vite build",
+    "deploy": "yarn build && firebase deploy",
     "lint": "eslint .",
     "preview": "vite preview",
     "format:check": "prettier --check .",

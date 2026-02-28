@@ -15,7 +15,7 @@ interface KanbanBoardProps {
 }
 
 const COLUMNS = [
-  { id: 'PENDING', title: 'New Orders', status: 'PENDING' as OrderStatus },
+  { id: 'PLACED', title: 'New Orders', status: 'ORDER_PLACED' as OrderStatus },
   { id: 'CONFIRMED', title: 'Confirmed', status: 'CONFIRMED' as OrderStatus },
   { id: 'PREPARING', title: 'Preparing', status: 'PREPARING' as OrderStatus },
   { id: 'READY', title: 'Ready', status: 'READY' as OrderStatus },

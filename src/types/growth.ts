@@ -50,8 +50,16 @@ export interface Customer {
   id: string
   fullName: string
   phone: string
+  email: string | null
+  gender: string | null
+  profileImageUrl: string | null
   status: 'ACTIVE' | 'BANNED' | 'PENDING'
+  dob: string | null
+  referralCode: string
+  referredByUserId: string | null
+  membershipTierId: string | null
   createdAt: string
+  updatedAt: string
 }
 
 export interface Voucher {

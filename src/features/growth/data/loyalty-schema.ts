@@ -8,7 +8,7 @@ export const membershipTierSchema = z.object({
   priority: z.number().int().default(0).optional(),
   status: z.enum(['DRAFT', 'ACTIVE', 'ARCHIVED']).default('DRAFT').optional(),
   slug: z.string().max(50).optional(),
-  minSpendRequirement: z.number().min(0).default(0),
+  minSpendRequirement: z.number().min(0),
 })
 
 export const loyaltySettingsSchema = z.object({

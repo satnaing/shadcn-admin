@@ -3,7 +3,7 @@ import { type Badge } from './badge-schema'
 export const MOCK_BADGES: Badge[] = [
   {
     id: '1',
-    label: 'Best Seller',
+    label: { en: 'Best Seller' },
     code: 'BEST_SELLER',
     bgColor: '#FF5733',
     textColor: '#FFFFFF',
@@ -11,7 +11,7 @@ export const MOCK_BADGES: Badge[] = [
   },
   {
     id: '2',
-    label: 'New',
+    label: { en: 'New' },
     code: 'NEW_ITEM',
     bgColor: '#33FF57',
     textColor: '#000000',
@@ -19,7 +19,7 @@ export const MOCK_BADGES: Badge[] = [
   },
   {
     id: '3',
-    label: 'Spicy',
+    label: { en: 'Spicy' },
     code: 'SPICY',
     bgColor: '#FF0000',
     textColor: '#FFFFFF',
@@ -27,7 +27,7 @@ export const MOCK_BADGES: Badge[] = [
   },
   {
     id: '4',
-    label: 'Vegan',
+    label: { en: 'Vegan' },
     code: 'VEGAN',
     bgColor: '#33C4FF',
     textColor: '#000000',
