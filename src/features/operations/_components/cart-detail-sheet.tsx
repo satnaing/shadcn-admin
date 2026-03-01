@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query'
+import { getBadges } from '@/services/badges'
 import { Badge } from '@/components/ui/badge'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
@@ -21,6 +23,11 @@ export function CartDetailSheet({
   onOpenChange,
   cart,
 }: CartDetailSheetProps) {
+  const { data: badges } = useQuery({
+    queryKey: ['badges'],
+    queryFn: getBadges,
+  })
+
   if (!cart) return null
 
   const calculateTotal = () => {
@@ -91,7 +98,7 @@ export function CartDetailSheet({
                     >
                       <div className='flex items-start justify-between gap-4'>
                         <div className='space-y-1'>
-                          <div className='flex items-center gap-2'>
+                          <div className='flex flex-wrap items-center gap-2'>
                             <Badge
                               variant='outline'
                               className='h-5 min-w-5 justify-center px-1 font-mono text-[10px]'
@@ -101,14 +108,50 @@ export function CartDetailSheet({
                             <span className='font-medium'>
                               {item.productName}
                             </span>
+                            {item.badgeIds && item.badgeIds.length > 0 && (
+                              <div className='flex flex-wrap gap-1'>
+                                {item.badgeIds.map((bid) => {
+                                  const b = badges?.find((x) => x.id === bid)
+                                  if (!b) return null
+                                  return (
+                                    <span
+                                      key={bid}
+                                      className='rounded px-1.5 py-0.5 text-[10px] leading-none font-bold'
+                                      style={{
+                                        backgroundColor: b.bgColor,
+                                        color: b.textColor,
+                                      }}
+                                    >
+                                      {b.label.en}
+                                    </span>
+                                  )
+                                })}
+                              </div>
+                            )}
                           </div>
                           {item.options && item.options.length > 0 && (
                             <ul className='list-inside list-disc text-xs text-muted-foreground'>
-                              {item.options.map((opt, idx) => (
-                                <li key={idx}>
-                                  {opt.name}: {opt.value}
-                                </li>
-                              ))}
+                              {item.options.map((opt, idx) => {
+                                const optBadge = badges?.find(
+                                  (x) => x.id === opt.badgeId
+                                )
+                                return (
+                                  <li key={idx}>
+                                    {opt.name}: {opt.value}
+                                    {optBadge && (
+                                      <span
+                                        className='ml-1.5 inline-block rounded px-1.5 py-0.5 text-[9px] leading-none font-bold'
+                                        style={{
+                                          backgroundColor: optBadge.bgColor,
+                                          color: optBadge.textColor,
+                                        }}
+                                      >
+                                        {optBadge.label.en}
+                                      </span>
+                                    )}
+                                  </li>
+                                )
+                              })}
                             </ul>
                           )}
                           {item.instructions && (

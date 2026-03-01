@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { getShops, getShop, updateShop } from '@/services/shops'
+import {
+  getShops,
+  getShop,
+  updateShop,
+  getShopFulfillmentMethods,
+} from '@/services/shops'
 
 export const shopsKeys = {
   all: ['shops'] as const,
@@ -36,5 +41,13 @@ export function useUpdateShop() {
         queryKey: shopsKeys.detail(variables.id),
       })
     },
+  })
+}
+
+export function useShopFulfillmentMethods(id: string | undefined) {
+  return useQuery({
+    queryKey: [...shopsKeys.detail(id || ''), 'fulfillment-methods'],
+    queryFn: () => getShopFulfillmentMethods(id as string),
+    enabled: !!id,
   })
 }

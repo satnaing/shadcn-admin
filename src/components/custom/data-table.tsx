@@ -8,11 +8,13 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  getExpandedRowModel,
   useReactTable,
   type ColumnFiltersState,
   type SortingState,
   type VisibilityState,
   type TableMeta,
+  type ExpandedState,
 } from '@tanstack/react-table'
 import {
   Table,
@@ -39,6 +41,16 @@ interface DataTableProps<TData, TValue> {
     }[]
   }[]
   meta?: TableMeta<TData>
+  getSubRows?: (row: TData) => TData[] | undefined
+  pageCount?: number
+  pagination?: {
+    pageIndex: number
+    pageSize: number
+  }
+  onPaginationChange?: (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => void
 }
 
 export function DataTable<TData, TValue>({
@@ -48,11 +60,16 @@ export function DataTable<TData, TValue>({
   searchPlaceholder,
   filters,
   meta,
+  getSubRows,
+  pageCount,
+  pagination,
+  onPaginationChange,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
+  const [expanded, setExpanded] = useState<ExpandedState>({})
 
   const table = useReactTable({
     data,
@@ -62,6 +79,17 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
       columnFilters,
+      expanded,
+      ...(pagination ? { pagination } : {}),
+    },
+    pageCount,
+    manualPagination: !!onPaginationChange,
+    onPaginationChange: (updater) => {
+      if (onPaginationChange && pagination) {
+        const next =
+          typeof updater === 'function' ? updater(pagination) : updater
+        onPaginationChange(next)
+      }
     },
     meta,
     enableRowSelection: true,
@@ -69,12 +97,15 @@ export function DataTable<TData, TValue>({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
+    onExpandedChange: setExpanded,
+    getSubRows,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    getExpandedRowModel: getExpandedRowModel(),
   })
 
   return (
@@ -111,10 +142,13 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
-                  className='h-10' // Standard row height
+                  className='group'
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className='text-sm'>
+                    <TableCell
+                      key={cell.id}
+                      className='py-3 align-top text-sm' // Alignment set to top
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

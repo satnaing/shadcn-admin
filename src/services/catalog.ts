@@ -81,7 +81,6 @@ export const getProducts = async (filters?: ProductFilters) => {
 export const createProduct = async (
   data: CreateProductRequest
 ): Promise<Product> => {
-  console.log('Payload: ', data)
   const response = await apiClient.post('/admin/products', data)
   return response.data
 }
@@ -137,14 +136,26 @@ export const toggleBulkProductAvailability = async (
   return response.data
 }
 
-export const updateShopPrice = async (
+export const updateShopProduct = async (
   shopId: string,
   productId: string,
-  price: number
+  data: { price?: number; isAvailable?: boolean; badgeIds?: string[] }
 ) => {
   const response = await apiClient.patch(
     `/admin/shops/${shopId}/menu/products/${productId}`,
-    { price }
+    data
+  )
+  return response.data
+}
+
+export const updateShopOptionChoice = async (
+  shopId: string,
+  choiceId: string,
+  data: { price?: number; isAvailable?: boolean; badgeIds?: string[] }
+) => {
+  const response = await apiClient.patch(
+    `/admin/shops/${shopId}/menu/choices/${choiceId}`,
+    data
   )
   return response.data
 }

@@ -6,6 +6,7 @@ export interface KdsOrderOption {
   quantity: number
   unitPrice: number
   subtotal: number
+  badgeId?: string | null
 }
 
 export interface KdsOrderItem {
@@ -17,6 +18,7 @@ export interface KdsOrderItem {
   subtotal: number
   instructions?: string
   options: KdsOrderOption[]
+  badgeIds?: string[]
 }
 
 export interface KdsOrder {

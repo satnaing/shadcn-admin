@@ -58,6 +58,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet'
+import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { MultiLangImageUpload } from '@/components/custom/multi-lang-image-upload'
 import { MultiLangInput } from '@/components/custom/multi-lang-input'
@@ -71,14 +72,13 @@ import {
   OptionType,
   productSchema,
   ProductStatus,
+  InventoryPolicy,
   type Product,
   type Category,
   type ProductOptionChoice,
 } from '../../data/schema'
 
 type ProductFormValues = z.infer<typeof productSchema>
-
-// RecipeRow, RecipeUnitSuffix, RecipeCostBadge moved to ./recipe-row.tsx
 
 function VirtualInheritedRow({
   ingredientId,
@@ -159,7 +159,9 @@ function OptionGroupDetails({ group }: { group: OptionGroup }) {
         <div key={option.id || option.sku} className='grid grid-cols-2 text-sm'>
           <span>{option.name['en'] || 'Untitled'}</span>
           <span className='text-right font-mono'>
-            {option.price > 0 ? `${formatCurrency(option.price)}` : '-'}
+            {Number(option.price) > 0
+              ? `${formatCurrency(Number(option.price))}`
+              : '-'}
           </span>
         </div>
       ))}
@@ -170,7 +172,7 @@ function OptionGroupDetails({ group }: { group: OptionGroup }) {
 interface ProductSheetProps {
   open: boolean
   onOpenChange: (open: boolean) => void
-  product?: Product | null // Adding product prop for edit mode
+  product?: Product | null
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -198,13 +200,14 @@ const mapProductToForm = (product: any): ProductFormValues => {
       priceGroupId: '',
       categoryId: '',
       status: ProductStatus.DRAFT,
+      isUnlockable: false,
+      inventoryPolicy: InventoryPolicy.NONE,
       imageUrl: {},
       optionGroupIds: [],
       recipes: [],
     }
   }
 
-  // Handle price choices mapping
   const mappedPrice = {
     ...product.price,
     name: product.price?.name || { en: 'Size' },
@@ -230,6 +233,8 @@ const mapProductToForm = (product: any): ProductFormValues => {
     sku: product.sku || '',
     categoryId: product.categoryId || '',
     status: (product.status as ProductStatus) || ProductStatus.DRAFT,
+    isUnlockable: product.isUnlockable || false,
+    inventoryPolicy: product.inventoryPolicy || InventoryPolicy.NONE,
     imageUrl: product.imageUrl || {},
     price: mappedPrice,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -255,7 +260,6 @@ export function ProductSheet({
   const { mutate: createProduct, isPending: isCreating } = useCreateProduct()
   const { mutate: updateProduct, isPending: isUpdating } = useUpdateProduct()
 
-  // Removed unused isPending variable if it's not used in UI or use it if needed.
   const isPending = isCreating || isUpdating
 
   const form = useForm<ProductFormValues>({
@@ -263,14 +267,12 @@ export function ProductSheet({
     defaultValues: mapProductToForm(product),
   })
 
-  // Reset form when product changes or sheet opens
   useEffect(() => {
     if (open) {
       form.reset(mapProductToForm(product))
     }
   }, [open, product, form])
 
-  // Watch SKU to auto-generate price SKU
   const productSku = useWatch({ control: form.control, name: 'sku' })
   useEffect(() => {
     const currentPriceSku = form.getValues('price.sku')
@@ -284,8 +286,6 @@ export function ProductSheet({
     }
   }, [productSku, form])
 
-  // ... (recipes array and cost calculations remain same) ...
-
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name: 'recipes',
@@ -297,17 +297,12 @@ export function ProductSheet({
   })
   const choices = useMemo(() => choicesValue || [], [choicesValue])
 
-  // Watch recipe fields and price for live cost calculation
   const recipeItems = useWatch({ control: form.control, name: 'recipes' })
-  // For cost calc, if single price, use that. If variant, maybe use lowest?
-  // Let's just use the first choice's price for now as a rough estimate or 0.
   const priceData = useWatch({ control: form.control, name: 'price' })
 
-  // Calculate costs per variant (or just base if no variants)
   const variantMetrics = useMemo(() => {
     if (!recipeItems) return []
 
-    // 1. Identify Base Ingredients
     const baseItems = recipeItems.filter((i) => !i.optionId)
     const baseIngredientsWithCost = baseItems.map((item) => {
       const ingredient = ingredients?.find((i) => i.id === item.ingredientId)
@@ -318,7 +313,6 @@ export function ProductSheet({
       }
     })
 
-    // If no variants, just return base metrics
     if (!choices || choices.length <= 1) {
       const cost = calculateRecipeCost(baseIngredientsWithCost)
       const price = Number(priceData?.choices?.[0]?.price) || 0
@@ -326,15 +320,11 @@ export function ProductSheet({
       return [{ name: 'Base', cost, margin, price, id: 'base' }]
     }
 
-    // 2. Calculate for each variant
     return choices.map((choice: ProductOptionChoice, index: number) => {
       const choiceId = choice.id || choice.sku || `variant-${index}`
       const price = Number(choice.price) || 0
 
-      // Start with base ingredients
       const currentIngredients = [...baseIngredientsWithCost]
-
-      // Apply Overrides & Special Ingredients
       const variantItems = recipeItems.filter((i) => i.optionId === choiceId)
 
       variantItems.forEach((vItem) => {
@@ -345,16 +335,13 @@ export function ProductSheet({
           costPerUnit: ingredient?.cost || 0,
         }
 
-        // Check if it's an override (exists in base)
         const baseIndex = currentIngredients.findIndex(
           (b) => b.ingredientId === vItem.ingredientId
         )
 
         if (baseIndex !== -1) {
-          // Replace base with override
           currentIngredients[baseIndex] = vItemCost
         } else {
-          // Add as special ingredient
           currentIngredients.push(vItemCost)
         }
       })
@@ -371,7 +358,6 @@ export function ProductSheet({
     })
   }, [recipeItems, choices, priceData, ingredients])
 
-  // Derived Summary Metrics
   const hasMetrics = variantMetrics.length > 0
   const minCost = hasMetrics
     ? Math.min(...variantMetrics.map((v) => v.cost))
@@ -389,7 +375,10 @@ export function ProductSheet({
   function onSubmit(data: z.infer<typeof productSchema>) {
     if (product?.id) {
       updateProduct(
-        { id: product.id, data },
+        {
+          id: product.id,
+          data: data as unknown as Partial<CreateProductRequest>,
+        },
         {
           onSuccess: () => {
             toast.success('Product updated successfully')
@@ -462,7 +451,6 @@ export function ProductSheet({
                   name='name'
                   render={({ field }) => (
                     <FormItem>
-                      {/* Label is handled inside MultiLangInput */}
                       <FormControl>
                         <MultiLangInput
                           label='Product Name'
@@ -494,7 +482,6 @@ export function ProductSheet({
                   )}
                 />
 
-                {/* Pricing Strategy Section */}
                 <FormLabel>Pricing Strategy</FormLabel>
                 <div className='rounded-lg border p-2'>
                   <FormField
@@ -517,23 +504,24 @@ export function ProductSheet({
 
                   <div className='space-y-2'>
                     <div className='mb-2 grid grid-cols-12 gap-2 px-2 pt-2'>
-                      <div className='col-span-5 text-sm font-medium'>
+                      <div className='col-span-12 text-sm font-medium md:col-span-5'>
                         Variant Name
                       </div>
-                      <div className='col-span-3 text-sm font-medium'>
+                      <div className='col-span-6 text-sm font-medium md:col-span-3'>
                         Price
                       </div>
-                      <div className='col-span-3 text-sm font-medium'>SKU</div>
+                      <div className='col-span-5 text-sm font-medium md:col-span-3'>
+                        SKU
+                      </div>
                       <div className='col-span-1'></div>
                     </div>
 
-                    {/* Variants List */}
                     {choices.map((_, index) => (
                       <div
                         key={index}
                         className='grid grid-cols-12 items-end gap-2 p-2'
                       >
-                        <div className='col-span-5'>
+                        <div className='col-span-12 md:col-span-5'>
                           <FormField
                             control={form.control}
                             name={`price.choices.${index}.name`}
@@ -548,7 +536,7 @@ export function ProductSheet({
                             )}
                           />
                         </div>
-                        <div className='col-span-3'>
+                        <div className='col-span-6 md:col-span-3'>
                           <FormField
                             control={form.control}
                             name={`price.choices.${index}.price`}
@@ -571,7 +559,7 @@ export function ProductSheet({
                             )}
                           />
                         </div>
-                        <div className='col-span-3'>
+                        <div className='col-span-5 md:col-span-3'>
                           <FormField
                             control={form.control}
                             name={`price.choices.${index}.sku`}
@@ -688,7 +676,55 @@ export function ProductSheet({
                       </FormItem>
                     )}
                   />
+                  <FormField
+                    control={form.control}
+                    name='inventoryPolicy'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Inventory Policy</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder='Select policy' />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {Object.values(InventoryPolicy).map((policy) => (
+                              <SelectItem key={policy} value={policy}>
+                                {policy}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
+
+                <FormField
+                  control={form.control}
+                  name='isUnlockable'
+                  render={({ field }) => (
+                    <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm'>
+                      <div className='space-y-0.5'>
+                        <FormLabel>Unlockable Product</FormLabel>
+                        <p className='text-[0.8rem] text-muted-foreground'>
+                          Product requires progression to unlock
+                        </p>
+                      </div>
+                      <FormControl>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
 
                 <FormField
                   control={form.control}
@@ -866,7 +902,6 @@ export function ProductSheet({
                     </div>
 
                     <div className='space-y-8'>
-                      {/* Base Product Section */}
                       <div className='space-y-3'>
                         <div className='flex items-center justify-between'>
                           <Badge variant='secondary' className='mb-1'>
@@ -893,7 +928,6 @@ export function ProductSheet({
                         })}
                       </div>
 
-                      {/* Variants Sections - Smart Visibility */}
                       {choices.length > 1 &&
                         choices.map(
                           (choice: ProductOptionChoice, cIndex: number) => {
@@ -901,7 +935,7 @@ export function ProductSheet({
                               choice.id || choice.sku || `variant-${cIndex}`
                             const rowsWithLiveValues = fields.map((f, i) => ({
                               ...f,
-                              ...(recipeItems?.[i] || {}), // Merge live values from useWatch
+                              ...recipeItems[i],
                               originalIndex: i,
                             }))
                             const baseRows = rowsWithLiveValues.filter(
@@ -972,7 +1006,6 @@ export function ProductSheet({
                                 </div>
 
                                 <div className='space-y-3'>
-                                  {/* Inherited / Overrides */}
                                   {baseRows.map((baseItem) => {
                                     const overrideIdx = fields.findIndex(
                                       (f) =>
@@ -1010,7 +1043,6 @@ export function ProductSheet({
                                     )
                                   })}
 
-                                  {/* Variant-Specific (non-base) */}
                                   {variantSpecificRows.map((vRow) => (
                                     <RecipeRow
                                       key={`special-${choiceId}-${vRow.id}`}

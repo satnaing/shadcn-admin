@@ -49,6 +49,12 @@ export enum ProductStatus {
   ARCHIVED = 'ARCHIVED',
 }
 
+export enum InventoryPolicy {
+  STRICT = 'STRICT',
+  FLEXIBLE = 'FLEXIBLE',
+  NONE = 'NONE',
+}
+
 // Mock Category Type
 export interface Category {
   id: string
@@ -73,6 +79,8 @@ export const productSchema = z.object({
   priceGroupId: z.string().optional(), // ID of the price group if it exists
   categoryId: z.string().min(1, 'Category is required'),
   status: z.nativeEnum(ProductStatus),
+  isUnlockable: z.boolean().default(false),
+  inventoryPolicy: z.nativeEnum(InventoryPolicy).default(InventoryPolicy.NONE),
   imageUrl: z.record(z.string(), z.string()).optional(),
   optionGroupIds: z.array(z.string()).default([]), // Array of Group IDs
   recipes: z.array(productRecipeSchema).default([]),

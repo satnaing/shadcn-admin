@@ -82,12 +82,28 @@ export interface InventoryLog {
   id: string
   shopId: string
   ingredientId: string
-  ingredientName?: string
+  ingredient: {
+    name: LocalizedText
+    sku: string
+    unit: {
+      name: LocalizedText
+      symbol: LocalizedText
+    }
+  }
   quantityChange: number
-  unitSymbol?: string
   reason: string // InventoryAdjustmentReason
   note?: string
   staffName?: string
   invoiceCode?: string
   createdAt: string
+}
+
+export interface InventoryLogResponse {
+  items: InventoryLog[]
+  meta: {
+    total: number
+    page: number
+    limit: number
+    totalPages: number
+  }
 }

@@ -1,6 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { getOrders, updateOrderStatus } from '@/services/ops'
-import { type GetOrdersFilters, type OrderStatus } from '@/types/api'
+import { getOrders, updateOrderStatus, createOrder } from '@/services/ops'
+import {
+  type GetOrdersFilters,
+  type OrderStatus,
+  type CreateOrderRequest,
+} from '@/types/api'
 import { type KdsBoardState } from '@/types/kds'
 import { KDS_BOARD_KEYS } from './use-kds-board'
 
@@ -9,6 +13,17 @@ export const useOrders = (filters?: GetOrdersFilters) => {
     queryKey: ['orders', filters],
     queryFn: () => getOrders(filters),
     refetchInterval: 30000, // Poll every 30s
+  })
+}
+
+export const useCreateOrder = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: CreateOrderRequest) => createOrder(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: KDS_BOARD_KEYS.all })
+      queryClient.invalidateQueries({ queryKey: ['orders'] })
+    },
   })
 }
 

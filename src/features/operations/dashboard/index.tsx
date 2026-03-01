@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
 import { KanbanBoard } from '@/features/operations/_components/kanban-board'
+import { ManualOrderPanel } from '@/features/operations/_components/manual-order-panel'
 
 export default function OperationsPage() {
   const [autoRefresh, setAutoRefresh] = useState(true)
@@ -81,6 +82,7 @@ export default function OperationsPage() {
             <RefreshCcw className='mr-2 h-4 w-4' />
             Refresh
           </Button>
+          <ManualOrderPanel />
         </div>
       </header>
       {/* Board Content */}

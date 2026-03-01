@@ -5,6 +5,7 @@ export const cartItemOptionSchema = z.object({
   name: z.string(),
   value: z.string(), // Choice name
   price: z.number().optional(),
+  badgeId: z.string().nullable().optional(),
 })
 
 export const cartItemSchema = z.object({
@@ -15,6 +16,7 @@ export const cartItemSchema = z.object({
   unitPrice: z.number(),
   options: z.array(cartItemOptionSchema).optional(), // Parsed JSON options
   instructions: z.string().optional(),
+  badgeIds: z.array(z.string()).optional(),
 })
 
 export const cartUserSchema = z.object({

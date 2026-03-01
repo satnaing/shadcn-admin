@@ -16,9 +16,9 @@ import {
   getCollections,
   getShopProducts,
   syncShopCatalog,
-  toggleProductAvailability,
   toggleBulkProductAvailability,
-  updateShopPrice,
+  updateShopProduct,
+  updateShopOptionChoice,
 } from '@/services/catalog'
 import type {
   CreateCategoryRequest,
@@ -205,7 +205,7 @@ export const useToggleProductAvailability = () => {
       shopId: string
       productId: string
       isAvailable: boolean
-    }) => toggleProductAvailability(shopId, productId, isAvailable),
+    }) => updateShopProduct(shopId, productId, { isAvailable }),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
         queryKey: ['shop-products', variables.shopId],
@@ -234,18 +234,38 @@ export const useToggleBulkProductAvailability = () => {
   })
 }
 
-export const useUpdateShopPrice = () => {
+export const useUpdateShopProduct = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: ({
       shopId,
       productId,
-      price,
+      data,
     }: {
       shopId: string
       productId: string
-      price: number
-    }) => updateShopPrice(shopId, productId, price),
+      data: { price?: number; isAvailable?: boolean; badgeIds?: string[] }
+    }) => updateShopProduct(shopId, productId, data),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ['shop-products', variables.shopId],
+      })
+    },
+  })
+}
+
+export const useUpdateShopOptionChoice = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({
+      shopId,
+      choiceId,
+      data,
+    }: {
+      shopId: string
+      choiceId: string
+      data: { price?: number; isAvailable?: boolean; badgeIds?: string[] }
+    }) => updateShopOptionChoice(shopId, choiceId, data),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
         queryKey: ['shop-products', variables.shopId],

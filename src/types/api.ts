@@ -91,6 +91,8 @@ export interface CreateProductRequest {
   collectionIds?: string[]
   optionGroupIds?: string[]
   imageUrl?: LocalizedText
+  isUnlockable?: boolean
+  inventoryPolicy?: string
   // New fields
   price: ProductOptionGroup // The variant group for price
   priceGroupId: string
@@ -111,8 +113,11 @@ export interface Product {
   }
   optionGroupIds?: string[] // M:N relationship
   imageUrl?: LocalizedText
+  optionGroups?: OptionGroup[]
   createdAt: string
   updatedAt: string
+  isUnlockable?: boolean
+  inventoryPolicy?: string
 }
 
 export interface ProductFilters {
@@ -124,13 +129,38 @@ export interface ProductFilters {
   collectionIds?: string[]
 }
 
+export interface Badge {
+  id: string
+  code: string
+  label: LocalizedText
+  bgColor: string
+  textColor: string
+  imageUrl?: string | null
+  isActive: boolean
+  displayOrder?: number
+}
+
 export interface ShopProduct {
   id: string
   shopId: string
   productId: string
   price: string
   isAvailable: boolean
+  badgeIds?: string[]
+  badges?: Badge[]
   product: Product
+}
+
+export interface ShopOptionChoice {
+  id: string
+  shopId: string
+  choiceId: string
+  price: string
+  isAvailable: boolean
+  badges: Badge[]
+  createdAt?: string
+  updatedAt?: string
+  version?: number
 }
 
 // Recipes
@@ -167,10 +197,15 @@ export interface OptionGroup {
 }
 
 export interface OptionChoice {
-  id?: string
+  id: string
+  groupId?: string
   sku: string
   name: LocalizedText
-  price: number
+  price: string | number
+  imageUrl?: string | null
+  isDefault?: boolean
+  status?: string
+  shopOptionChoices?: ShopOptionChoice[]
 }
 
 export type ProductOptionGroup = Omit<OptionGroup, 'id'> & { id?: string }
@@ -207,6 +242,15 @@ export interface OrderCustomer {
 export interface OrderFulfillment {
   category: string // 'DINE_IN' | 'TAKEAWAY' | 'DELIVERY'
   name: LocalizedText
+}
+
+export interface FulfillmentMethod {
+  id: string
+  name: LocalizedText
+  description?: LocalizedText
+  category: string
+  isEnabled: boolean
+  feePercentage?: number | null
 }
 
 export interface OrderPricing {
@@ -386,3 +430,38 @@ export interface CreateSurchargeDto {
 }
 
 export type UpdateSurchargeDto = Partial<CreateSurchargeDto>
+
+// Order Creation
+export interface CreateOrderOptionDto {
+  choiceId: string
+  quantity: number
+  unitPrice: number
+}
+
+export interface CreateOrderItemDto {
+  productId: string
+  quantity: number
+  unitPrice: number
+  instructions?: string
+  options?: {
+    choiceId: string[]
+  }
+}
+
+export interface CreateOrderRequest {
+  shopId: string
+  userId?: string | null
+  guestInfo?: {
+    name: string
+    phone?: string
+  }
+  items: CreateOrderItemDto[]
+  fulfillmentMethodId: string
+  status: string
+  invoiceCode: string
+  queueNumber: number
+  instructions?: string
+  scheduledFor?: string
+  assignToSelf?: boolean
+  staffId?: string
+}

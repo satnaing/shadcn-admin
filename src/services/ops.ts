@@ -2,6 +2,7 @@ import {
   type Order,
   type GetOrdersFilters,
   type UpdateOrderStatusRequest,
+  type CreateOrderRequest,
   type InventoryItem,
   type AdjustStockRequest,
   type PaginationMeta,
@@ -92,6 +93,14 @@ export const getOrders = async (
     })),
   }))
   return { ...response.data, data: orders }
+}
+
+export const createOrder = async (data: CreateOrderRequest): Promise<Order> => {
+  const response = await apiClient.post(
+    `/admin/orders/shops/${data.shopId}`,
+    data
+  )
+  return response.data
 }
 
 export const updateOrderStatus = async (

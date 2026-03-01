@@ -1,13 +1,15 @@
 import { useMemo, useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { getBadges } from '@/services/badges'
 import { type OrderStatus } from '@/types/api'
 import { type KdsOrder, type KdsOrderOption } from '@/types/kds'
 import {
-  CheckCircle2,
-  Clock,
-  PlayCircle,
-  Printer,
   Tag,
   Loader2,
+  PlayCircle,
+  CheckCircle2,
+  Clock,
+  Printer,
 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -33,6 +35,10 @@ export function OrderCard({
   isPrintingLabel,
 }: OrderCardProps) {
   const [elapsed, setElapsed] = useState(0)
+  const { data: badges } = useQuery({
+    queryKey: ['badges'],
+    queryFn: getBadges,
+  })
 
   useEffect(() => {
     const start = new Date(order.createdAt).getTime()
@@ -126,10 +132,32 @@ export function OrderCard({
             return (
               <div key={item.id} className='text-sm leading-tight'>
                 <div className='flex items-start gap-1 pb-0.5'>
-                  <span className='shrink-0 font-bold text-primary'>
+                  <span className='mt-0.5 shrink-0 font-bold text-primary'>
                     {item.quantity}x
                   </span>
-                  <span className='font-medium'>{productName}</span>
+                  <span className='flex flex-wrap items-center gap-1.5 font-medium'>
+                    {productName}
+                    {item.badgeIds && item.badgeIds.length > 0 && (
+                      <span className='flex flex-wrap gap-1'>
+                        {item.badgeIds.map((bid) => {
+                          const b = badges?.find((x) => x.id === bid)
+                          if (!b) return null
+                          return (
+                            <span
+                              key={bid}
+                              className='rounded px-1.5 py-0.5 text-[9px] leading-none font-bold'
+                              style={{
+                                backgroundColor: b.bgColor,
+                                color: b.textColor,
+                              }}
+                            >
+                              {b.label.en}
+                            </span>
+                          )
+                        })}
+                      </span>
+                    )}
+                  </span>
                 </div>
                 {/* Options/Modifiers */}
                 {item.options && item.options.length > 0 && (
@@ -147,10 +175,12 @@ export function OrderCard({
                         nameLower.includes('shot')
                       const isIced = nameLower.includes('iced')
 
+                      const optBadge = badges?.find((x) => x.id === opt.badgeId)
+
                       return (
                         <span
                           key={idx}
-                          className={`inline-flex items-center rounded border px-1 py-0 text-[10px] font-bold ${
+                          className={`inline-flex items-center gap-1 rounded border px-1 py-0 text-[10px] font-bold ${
                             isHighImpact
                               ? 'border-red-200 bg-red-50 text-red-700'
                               : isIced
@@ -159,6 +189,17 @@ export function OrderCard({
                           }`}
                         >
                           {name}
+                          {optBadge && (
+                            <span
+                              className='rounded px-1 py-0.5 text-[9px] leading-none'
+                              style={{
+                                backgroundColor: optBadge.bgColor,
+                                color: optBadge.textColor,
+                              }}
+                            >
+                              {optBadge.label.en}
+                            </span>
+                          )}
                         </span>
                       )
                     })}
