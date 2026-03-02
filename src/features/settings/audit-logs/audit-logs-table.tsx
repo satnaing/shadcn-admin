@@ -9,9 +9,24 @@ import { type AuditLog } from '../data/audit-log-schema'
 interface AuditLogsTableProps {
   data: AuditLog[]
   onViewDetails: (log: AuditLog) => void
+  pageCount?: number
+  pagination?: {
+    pageIndex: number
+    pageSize: number
+  }
+  onPaginationChange?: (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => void
 }
 
-export function AuditLogsTable({ data, onViewDetails }: AuditLogsTableProps) {
+export function AuditLogsTable({
+  data,
+  onViewDetails,
+  pageCount,
+  pagination,
+  onPaginationChange,
+}: AuditLogsTableProps) {
   const columns: ColumnDef<AuditLog>[] = [
     {
       accessorKey: 'createdAt',
@@ -103,6 +118,9 @@ export function AuditLogsTable({ data, onViewDetails }: AuditLogsTableProps) {
       data={data}
       searchKey='actorName'
       filters={filters}
+      pageCount={pageCount}
+      pagination={pagination}
+      onPaginationChange={onPaginationChange}
     />
   )
 }

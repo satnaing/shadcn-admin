@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useNavigate } from '@tanstack/react-router'
+import { Route } from '@/routes/_authenticated/operations/orders'
 import { type Order } from '@/types/api'
 import { useOrders } from '@/hooks/queries/use-orders'
 import { useAppStore } from '@/hooks/use-app-store'
@@ -8,12 +10,19 @@ import { OrderDetailsSheet } from '../_components/order-details-sheet'
 import { OrderHistoryTable } from '../_components/order-history-table'
 
 export default function OrdersPage() {
+  const { page, limit, search } = Route.useSearch()
+  const navigate = useNavigate({ from: Route.fullPath })
   const shopId = useAppStore((state) => state.activeShopId)
   const {
     data: orderData,
     isLoading,
     error,
-  } = useOrders({ shopId: shopId || undefined })
+  } = useOrders({
+    shopId: shopId || undefined,
+    page,
+    limit,
+    search,
+  })
 
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
   const [openSheet, setOpenSheet] = useState(false)
@@ -21,6 +30,19 @@ export default function OrdersPage() {
   const handleRowClick = (order: Order) => {
     setSelectedOrder(order)
     setOpenSheet(true)
+  }
+
+  const onPaginationChange = (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => {
+    navigate({
+      search: (old: Record<string, unknown>) => ({
+        ...old,
+        page: pagination.pageIndex + 1,
+        limit: pagination.pageSize,
+      }),
+    })
   }
 
   const orders = orderData?.data || []
@@ -45,7 +67,16 @@ export default function OrdersPage() {
           Failed to load orders.
         </div>
       ) : (
-        <OrderHistoryTable data={orders} onRowClick={handleRowClick} />
+        <OrderHistoryTable
+          data={orders}
+          onRowClick={handleRowClick}
+          pageCount={orderData?.meta?.totalPages}
+          pagination={{
+            pageIndex: page - 1,
+            pageSize: limit,
+          }}
+          onPaginationChange={onPaginationChange}
+        />
       )}
 
       <OrderDetailsSheet

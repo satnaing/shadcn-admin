@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useNavigate } from '@tanstack/react-router'
+import { Route } from '@/routes/_authenticated/menu/products'
 import { toast } from 'sonner'
 import { getTranslation } from '@/utils/i18n'
 import {
@@ -23,11 +25,21 @@ import { ProductSheet } from './_components/product-sheet'
 import { ProductsTable } from './_components/products-table'
 
 export default function ProductsPage() {
+  const { page, limit, search } = Route.useSearch() as {
+    page: number
+    limit: number
+    search?: string
+  }
+  const navigate = useNavigate({ from: Route.fullPath })
   const [open, setOpen] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [deleteProduct, setDeleteProduct] = useState<Product | null>(null)
 
-  const { data: response, isLoading: isLoadingProducts } = useProducts()
+  const { data: response, isLoading: isLoadingProducts } = useProducts({
+    page,
+    limit,
+    search,
+  })
   const { data: categories, isLoading: isLoadingCategories } = useCategories()
   const { mutate: deleteProductMutation } = useDeleteProduct()
   const products = response?.data || []
@@ -71,6 +83,19 @@ export default function ProductsPage() {
     )
   }
 
+  const onPaginationChange = (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => {
+    navigate({
+      search: (old: Record<string, unknown>) => ({
+        ...old,
+        page: pagination.pageIndex + 1,
+        limit: pagination.pageSize,
+      }),
+    })
+  }
+
   return (
     <div className='p-6'>
       <PageTitle
@@ -84,6 +109,12 @@ export default function ProductsPage() {
 
       <ProductsTable
         data={products || []}
+        pageCount={response?.meta?.totalPages || response?.meta?.pageCount}
+        pagination={{
+          pageIndex: page - 1,
+          pageSize: limit,
+        }}
+        onPaginationChange={onPaginationChange}
         categories={(categories as Category[]) || []}
         onEdit={handleEdit}
         onDelete={handleDelete}

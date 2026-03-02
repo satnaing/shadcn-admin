@@ -6,11 +6,23 @@ import { getColumns, type ProductActions } from './products-columns'
 interface ProductsTableProps extends Partial<ProductActions> {
   data: Product[]
   categories?: any[]
+  pageCount?: number
+  pagination?: {
+    pageIndex: number
+    pageSize: number
+  }
+  onPaginationChange?: (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => void
 }
 
 export function ProductsTable({
   data,
   categories,
+  pageCount,
+  pagination,
+  onPaginationChange,
   onEdit = () => {},
   onDelete = () => {},
 }: ProductsTableProps) {
@@ -22,6 +34,9 @@ export function ProductsTable({
       data={data as unknown as any[]}
       searchKey='name'
       searchPlaceholder='Filter products...'
+      pageCount={pageCount}
+      pagination={pagination}
+      onPaginationChange={onPaginationChange}
     />
   )
 }

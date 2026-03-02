@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useNavigate } from '@tanstack/react-router'
+import { Route } from '@/routes/_authenticated/settings/audit-logs'
 import { useAuditLogs } from '@/hooks/queries/use-audit-logs'
 import { BrandLoader } from '@/components/ui/brand-loader'
 import { PageTitle } from '@/components/page-title'
@@ -7,9 +9,11 @@ import { AuditLogsTable } from './audit-logs-table'
 import { LogDetailsSheet } from './log-details-sheet'
 
 export function AuditLogsPage() {
+  const { page, limit, search } = Route.useSearch()
+  const navigate = useNavigate({ from: Route.fullPath })
   const [selectedLog, setSelectedLog] = useState<AuditLog | null>(null)
   const [isSheetOpen, setIsSheetOpen] = useState(false)
-  const { data: logs, isLoading } = useAuditLogs()
+  const { data: logs, isLoading } = useAuditLogs({ page, limit, search })
 
   const handleViewDetails = (log: AuditLog) => {
     setSelectedLog(log)
@@ -24,6 +28,19 @@ export function AuditLogsPage() {
     )
   }
 
+  const onPaginationChange = (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => {
+    navigate({
+      search: (old: Record<string, unknown>) => ({
+        ...old,
+        page: pagination.pageIndex + 1,
+        limit: pagination.pageSize,
+      }),
+    })
+  }
+
   return (
     <div className='flex h-full flex-col space-y-6 p-8'>
       <PageTitle
@@ -33,6 +50,12 @@ export function AuditLogsPage() {
 
       <AuditLogsTable
         data={(logs?.items as AuditLog[]) || []}
+        pageCount={logs?.meta?.totalPages}
+        pagination={{
+          pageIndex: page - 1,
+          pageSize: limit,
+        }}
+        onPaginationChange={onPaginationChange}
         onViewDetails={handleViewDetails}
       />
 

@@ -1,4 +1,6 @@
+import { useNavigate } from '@tanstack/react-router'
 import { type ColumnDef } from '@tanstack/react-table'
+import { Route } from '@/routes/_authenticated/growth/customers'
 import { type Customer } from '@/types/growth'
 import { Eye } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -11,7 +13,9 @@ import { DataTable } from '@/components/custom/data-table'
 import { PageTitle } from '@/components/page-title'
 
 export default function CustomersPage() {
-  const { data: response, isLoading } = useCustomers()
+  const { page, limit, search } = Route.useSearch()
+  const navigate = useNavigate({ from: Route.fullPath })
+  const { data: response, isLoading } = useCustomers({ page, limit, search })
 
   const customers = response?.data || []
 
@@ -100,10 +104,33 @@ export default function CustomersPage() {
     )
   }
 
+  const onPaginationChange = (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => {
+    navigate({
+      search: (old: Record<string, unknown>) => ({
+        ...old,
+        page: pagination.pageIndex + 1,
+        limit: pagination.pageSize,
+      }),
+    })
+  }
+
   return (
     <div className='flex flex-col gap-4 p-6 lg:gap-6 lg:p-6'>
       <PageTitle title='Customers' />
-      <DataTable columns={columns} data={customers} searchKey='fullName' />
+      <DataTable
+        columns={columns}
+        data={customers}
+        searchKey='fullName'
+        pageCount={response?.meta?.totalPages}
+        pagination={{
+          pageIndex: page - 1,
+          pageSize: limit,
+        }}
+        onPaginationChange={onPaginationChange}
+      />
     </div>
   )
 }

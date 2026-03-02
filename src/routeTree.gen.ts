@@ -35,8 +35,12 @@ import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authentica
 import { Route as AuthenticatedSettingsPrintersRouteImport } from './routes/_authenticated/settings/printers'
 import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes/_authenticated/settings/notifications'
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
+import { Route as AuthenticatedSettingsAuditLogsRouteImport } from './routes/_authenticated/settings/audit-logs'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
+import { Route as AuthenticatedOperationsOrdersRouteImport } from './routes/_authenticated/operations/orders'
+import { Route as AuthenticatedMenuProductsRouteImport } from './routes/_authenticated/menu/products'
+import { Route as AuthenticatedGrowthCustomersRouteImport } from './routes/_authenticated/growth/customers'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
 import { Route as AuthenticatedOpsSessionRouteRouteImport } from './routes/_authenticated/ops/session/route'
 import { Route as AuthenticatedInventoryStockRouteRouteImport } from './routes/_authenticated/inventory/stock/route'
@@ -68,20 +72,11 @@ const AuthenticatedSettingsFinancialLazyRouteImport = createFileRoute(
 const AuthenticatedSettingsBusinessLazyRouteImport = createFileRoute(
   '/_authenticated/settings/business',
 )()
-const AuthenticatedSettingsAuditLogsLazyRouteImport = createFileRoute(
-  '/_authenticated/settings/audit-logs',
-)()
 const AuthenticatedOperationsShiftLazyRouteImport = createFileRoute(
   '/_authenticated/operations/shift',
 )()
-const AuthenticatedOperationsOrdersLazyRouteImport = createFileRoute(
-  '/_authenticated/operations/orders',
-)()
 const AuthenticatedOperationsCartsLazyRouteImport = createFileRoute(
   '/_authenticated/operations/carts',
-)()
-const AuthenticatedMenuProductsLazyRouteImport = createFileRoute(
-  '/_authenticated/menu/products',
 )()
 const AuthenticatedMenuOptionsLazyRouteImport = createFileRoute(
   '/_authenticated/menu/options',
@@ -115,9 +110,6 @@ const AuthenticatedGrowthMembershipLazyRouteImport = createFileRoute(
 )()
 const AuthenticatedGrowthLoyaltyLazyRouteImport = createFileRoute(
   '/_authenticated/growth/loyalty',
-)()
-const AuthenticatedGrowthCustomersLazyRouteImport = createFileRoute(
-  '/_authenticated/growth/customers',
 )()
 const AuthenticatedGrowthAnnouncementsLazyRouteImport = createFileRoute(
   '/_authenticated/growth/announcements',
@@ -312,16 +304,6 @@ const AuthenticatedSettingsBusinessLazyRoute =
       (d) => d.Route,
     ),
   )
-const AuthenticatedSettingsAuditLogsLazyRoute =
-  AuthenticatedSettingsAuditLogsLazyRouteImport.update({
-    id: '/audit-logs',
-    path: '/audit-logs',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any).lazy(() =>
-    import('./routes/_authenticated/settings/audit-logs.lazy').then(
-      (d) => d.Route,
-    ),
-  )
 const AuthenticatedOperationsShiftLazyRoute =
   AuthenticatedOperationsShiftLazyRouteImport.update({
     id: '/operations/shift',
@@ -329,16 +311,6 @@ const AuthenticatedOperationsShiftLazyRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any).lazy(() =>
     import('./routes/_authenticated/operations/shift.lazy').then(
-      (d) => d.Route,
-    ),
-  )
-const AuthenticatedOperationsOrdersLazyRoute =
-  AuthenticatedOperationsOrdersLazyRouteImport.update({
-    id: '/operations/orders',
-    path: '/operations/orders',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any).lazy(() =>
-    import('./routes/_authenticated/operations/orders.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -351,14 +323,6 @@ const AuthenticatedOperationsCartsLazyRoute =
     import('./routes/_authenticated/operations/carts.lazy').then(
       (d) => d.Route,
     ),
-  )
-const AuthenticatedMenuProductsLazyRoute =
-  AuthenticatedMenuProductsLazyRouteImport.update({
-    id: '/menu/products',
-    path: '/menu/products',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any).lazy(() =>
-    import('./routes/_authenticated/menu/products.lazy').then((d) => d.Route),
   )
 const AuthenticatedMenuOptionsLazyRoute =
   AuthenticatedMenuOptionsLazyRouteImport.update({
@@ -456,16 +420,6 @@ const AuthenticatedGrowthLoyaltyLazyRoute =
   } as any).lazy(() =>
     import('./routes/_authenticated/growth/loyalty.lazy').then((d) => d.Route),
   )
-const AuthenticatedGrowthCustomersLazyRoute =
-  AuthenticatedGrowthCustomersLazyRouteImport.update({
-    id: '/growth/customers',
-    path: '/growth/customers',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any).lazy(() =>
-    import('./routes/_authenticated/growth/customers.lazy').then(
-      (d) => d.Route,
-    ),
-  )
 const AuthenticatedGrowthAnnouncementsLazyRoute =
   AuthenticatedGrowthAnnouncementsLazyRouteImport.update({
     id: '/growth/announcements',
@@ -494,6 +448,16 @@ const AuthenticatedSettingsDisplayRoute =
     path: '/display',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
+const AuthenticatedSettingsAuditLogsRoute =
+  AuthenticatedSettingsAuditLogsRouteImport.update({
+    id: '/audit-logs',
+    path: '/audit-logs',
+    getParentRoute: () => AuthenticatedSettingsRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/settings/audit-logs.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 const AuthenticatedSettingsAppearanceRoute =
   AuthenticatedSettingsAppearanceRouteImport.update({
     id: '/appearance',
@@ -506,6 +470,30 @@ const AuthenticatedSettingsAccountRoute =
     path: '/account',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
+const AuthenticatedOperationsOrdersRoute =
+  AuthenticatedOperationsOrdersRouteImport.update({
+    id: '/operations/orders',
+    path: '/operations/orders',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedMenuProductsRoute =
+  AuthenticatedMenuProductsRouteImport.update({
+    id: '/menu/products',
+    path: '/menu/products',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/menu/products.lazy').then((d) => d.Route),
+  )
+const AuthenticatedGrowthCustomersRoute =
+  AuthenticatedGrowthCustomersRouteImport.update({
+    id: '/growth/customers',
+    path: '/growth/customers',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/growth/customers.lazy').then(
+      (d) => d.Route,
+    ),
+  )
 const AuthenticatedErrorsErrorRoute =
   AuthenticatedErrorsErrorRouteImport.update({
     id: '/errors/$error',
@@ -590,13 +578,16 @@ export interface FileRoutesByFullPath {
   '/inventory/stock': typeof AuthenticatedInventoryStockRouteRoute
   '/ops/session': typeof AuthenticatedOpsSessionRouteRouteWithChildren
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/growth/customers': typeof AuthenticatedGrowthCustomersRoute
+  '/menu/products': typeof AuthenticatedMenuProductsRoute
+  '/operations/orders': typeof AuthenticatedOperationsOrdersRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
+  '/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/settings/printers': typeof AuthenticatedSettingsPrintersRoute
   '/growth/announcements': typeof AuthenticatedGrowthAnnouncementsLazyRoute
-  '/growth/customers': typeof AuthenticatedGrowthCustomersLazyRoute
   '/growth/loyalty': typeof AuthenticatedGrowthLoyaltyLazyRoute
   '/growth/membership': typeof AuthenticatedGrowthMembershipLazyRoute
   '/growth/promotions': typeof AuthenticatedGrowthPromotionsLazyRoute
@@ -608,11 +599,8 @@ export interface FileRoutesByFullPath {
   '/menu/categories': typeof AuthenticatedMenuCategoriesLazyRoute
   '/menu/collections': typeof AuthenticatedMenuCollectionsLazyRoute
   '/menu/options': typeof AuthenticatedMenuOptionsLazyRoute
-  '/menu/products': typeof AuthenticatedMenuProductsLazyRoute
   '/operations/carts': typeof AuthenticatedOperationsCartsLazyRoute
-  '/operations/orders': typeof AuthenticatedOperationsOrdersLazyRoute
   '/operations/shift': typeof AuthenticatedOperationsShiftLazyRoute
-  '/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsLazyRoute
   '/settings/business': typeof AuthenticatedSettingsBusinessLazyRoute
   '/settings/financial': typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   '/settings/mobile-app': typeof AuthenticatedSettingsMobileAppLazyRoute
@@ -649,13 +637,16 @@ export interface FileRoutesByTo {
   '/': typeof AuthenticatedIndexRoute
   '/inventory/stock': typeof AuthenticatedInventoryStockRouteRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/growth/customers': typeof AuthenticatedGrowthCustomersRoute
+  '/menu/products': typeof AuthenticatedMenuProductsRoute
+  '/operations/orders': typeof AuthenticatedOperationsOrdersRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
+  '/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/settings/printers': typeof AuthenticatedSettingsPrintersRoute
   '/growth/announcements': typeof AuthenticatedGrowthAnnouncementsLazyRoute
-  '/growth/customers': typeof AuthenticatedGrowthCustomersLazyRoute
   '/growth/loyalty': typeof AuthenticatedGrowthLoyaltyLazyRoute
   '/growth/membership': typeof AuthenticatedGrowthMembershipLazyRoute
   '/growth/promotions': typeof AuthenticatedGrowthPromotionsLazyRoute
@@ -667,11 +658,8 @@ export interface FileRoutesByTo {
   '/menu/categories': typeof AuthenticatedMenuCategoriesLazyRoute
   '/menu/collections': typeof AuthenticatedMenuCollectionsLazyRoute
   '/menu/options': typeof AuthenticatedMenuOptionsLazyRoute
-  '/menu/products': typeof AuthenticatedMenuProductsLazyRoute
   '/operations/carts': typeof AuthenticatedOperationsCartsLazyRoute
-  '/operations/orders': typeof AuthenticatedOperationsOrdersLazyRoute
   '/operations/shift': typeof AuthenticatedOperationsShiftLazyRoute
-  '/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsLazyRoute
   '/settings/business': typeof AuthenticatedSettingsBusinessLazyRoute
   '/settings/financial': typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   '/settings/mobile-app': typeof AuthenticatedSettingsMobileAppLazyRoute
@@ -713,13 +701,16 @@ export interface FileRoutesById {
   '/_authenticated/inventory/stock': typeof AuthenticatedInventoryStockRouteRoute
   '/_authenticated/ops/session': typeof AuthenticatedOpsSessionRouteRouteWithChildren
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/_authenticated/growth/customers': typeof AuthenticatedGrowthCustomersRoute
+  '/_authenticated/menu/products': typeof AuthenticatedMenuProductsRoute
+  '/_authenticated/operations/orders': typeof AuthenticatedOperationsOrdersRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
+  '/_authenticated/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
   '/_authenticated/settings/printers': typeof AuthenticatedSettingsPrintersRoute
   '/_authenticated/growth/announcements': typeof AuthenticatedGrowthAnnouncementsLazyRoute
-  '/_authenticated/growth/customers': typeof AuthenticatedGrowthCustomersLazyRoute
   '/_authenticated/growth/loyalty': typeof AuthenticatedGrowthLoyaltyLazyRoute
   '/_authenticated/growth/membership': typeof AuthenticatedGrowthMembershipLazyRoute
   '/_authenticated/growth/promotions': typeof AuthenticatedGrowthPromotionsLazyRoute
@@ -731,11 +722,8 @@ export interface FileRoutesById {
   '/_authenticated/menu/categories': typeof AuthenticatedMenuCategoriesLazyRoute
   '/_authenticated/menu/collections': typeof AuthenticatedMenuCollectionsLazyRoute
   '/_authenticated/menu/options': typeof AuthenticatedMenuOptionsLazyRoute
-  '/_authenticated/menu/products': typeof AuthenticatedMenuProductsLazyRoute
   '/_authenticated/operations/carts': typeof AuthenticatedOperationsCartsLazyRoute
-  '/_authenticated/operations/orders': typeof AuthenticatedOperationsOrdersLazyRoute
   '/_authenticated/operations/shift': typeof AuthenticatedOperationsShiftLazyRoute
-  '/_authenticated/settings/audit-logs': typeof AuthenticatedSettingsAuditLogsLazyRoute
   '/_authenticated/settings/business': typeof AuthenticatedSettingsBusinessLazyRoute
   '/_authenticated/settings/financial': typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   '/_authenticated/settings/mobile-app': typeof AuthenticatedSettingsMobileAppLazyRoute
@@ -777,13 +765,16 @@ export interface FileRouteTypes {
     | '/inventory/stock'
     | '/ops/session'
     | '/errors/$error'
+    | '/growth/customers'
+    | '/menu/products'
+    | '/operations/orders'
     | '/settings/account'
     | '/settings/appearance'
+    | '/settings/audit-logs'
     | '/settings/display'
     | '/settings/notifications'
     | '/settings/printers'
     | '/growth/announcements'
-    | '/growth/customers'
     | '/growth/loyalty'
     | '/growth/membership'
     | '/growth/promotions'
@@ -795,11 +786,8 @@ export interface FileRouteTypes {
     | '/menu/categories'
     | '/menu/collections'
     | '/menu/options'
-    | '/menu/products'
     | '/operations/carts'
-    | '/operations/orders'
     | '/operations/shift'
-    | '/settings/audit-logs'
     | '/settings/business'
     | '/settings/financial'
     | '/settings/mobile-app'
@@ -836,13 +824,16 @@ export interface FileRouteTypes {
     | '/'
     | '/inventory/stock'
     | '/errors/$error'
+    | '/growth/customers'
+    | '/menu/products'
+    | '/operations/orders'
     | '/settings/account'
     | '/settings/appearance'
+    | '/settings/audit-logs'
     | '/settings/display'
     | '/settings/notifications'
     | '/settings/printers'
     | '/growth/announcements'
-    | '/growth/customers'
     | '/growth/loyalty'
     | '/growth/membership'
     | '/growth/promotions'
@@ -854,11 +845,8 @@ export interface FileRouteTypes {
     | '/menu/categories'
     | '/menu/collections'
     | '/menu/options'
-    | '/menu/products'
     | '/operations/carts'
-    | '/operations/orders'
     | '/operations/shift'
-    | '/settings/audit-logs'
     | '/settings/business'
     | '/settings/financial'
     | '/settings/mobile-app'
@@ -899,13 +887,16 @@ export interface FileRouteTypes {
     | '/_authenticated/inventory/stock'
     | '/_authenticated/ops/session'
     | '/_authenticated/errors/$error'
+    | '/_authenticated/growth/customers'
+    | '/_authenticated/menu/products'
+    | '/_authenticated/operations/orders'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
+    | '/_authenticated/settings/audit-logs'
     | '/_authenticated/settings/display'
     | '/_authenticated/settings/notifications'
     | '/_authenticated/settings/printers'
     | '/_authenticated/growth/announcements'
-    | '/_authenticated/growth/customers'
     | '/_authenticated/growth/loyalty'
     | '/_authenticated/growth/membership'
     | '/_authenticated/growth/promotions'
@@ -917,11 +908,8 @@ export interface FileRouteTypes {
     | '/_authenticated/menu/categories'
     | '/_authenticated/menu/collections'
     | '/_authenticated/menu/options'
-    | '/_authenticated/menu/products'
     | '/_authenticated/operations/carts'
-    | '/_authenticated/operations/orders'
     | '/_authenticated/operations/shift'
-    | '/_authenticated/settings/audit-logs'
     | '/_authenticated/settings/business'
     | '/_authenticated/settings/financial'
     | '/_authenticated/settings/mobile-app'
@@ -1164,13 +1152,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsBusinessLazyRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
-    '/_authenticated/settings/audit-logs': {
-      id: '/_authenticated/settings/audit-logs'
-      path: '/audit-logs'
-      fullPath: '/settings/audit-logs'
-      preLoaderRoute: typeof AuthenticatedSettingsAuditLogsLazyRouteImport
-      parentRoute: typeof AuthenticatedSettingsRouteRoute
-    }
     '/_authenticated/operations/shift': {
       id: '/_authenticated/operations/shift'
       path: '/operations/shift'
@@ -1178,25 +1159,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOperationsShiftLazyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/operations/orders': {
-      id: '/_authenticated/operations/orders'
-      path: '/operations/orders'
-      fullPath: '/operations/orders'
-      preLoaderRoute: typeof AuthenticatedOperationsOrdersLazyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/operations/carts': {
       id: '/_authenticated/operations/carts'
       path: '/operations/carts'
       fullPath: '/operations/carts'
       preLoaderRoute: typeof AuthenticatedOperationsCartsLazyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/menu/products': {
-      id: '/_authenticated/menu/products'
-      path: '/menu/products'
-      fullPath: '/menu/products'
-      preLoaderRoute: typeof AuthenticatedMenuProductsLazyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/menu/options': {
@@ -1276,13 +1243,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedGrowthLoyaltyLazyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/growth/customers': {
-      id: '/_authenticated/growth/customers'
-      path: '/growth/customers'
-      fullPath: '/growth/customers'
-      preLoaderRoute: typeof AuthenticatedGrowthCustomersLazyRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/growth/announcements': {
       id: '/_authenticated/growth/announcements'
       path: '/growth/announcements'
@@ -1311,6 +1271,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsDisplayRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
+    '/_authenticated/settings/audit-logs': {
+      id: '/_authenticated/settings/audit-logs'
+      path: '/audit-logs'
+      fullPath: '/settings/audit-logs'
+      preLoaderRoute: typeof AuthenticatedSettingsAuditLogsRouteImport
+      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
     '/_authenticated/settings/appearance': {
       id: '/_authenticated/settings/appearance'
       path: '/appearance'
@@ -1324,6 +1291,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/settings/account'
       preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
+    }
+    '/_authenticated/operations/orders': {
+      id: '/_authenticated/operations/orders'
+      path: '/operations/orders'
+      fullPath: '/operations/orders'
+      preLoaderRoute: typeof AuthenticatedOperationsOrdersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/menu/products': {
+      id: '/_authenticated/menu/products'
+      path: '/menu/products'
+      fullPath: '/menu/products'
+      preLoaderRoute: typeof AuthenticatedMenuProductsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/growth/customers': {
+      id: '/_authenticated/growth/customers'
+      path: '/growth/customers'
+      fullPath: '/growth/customers'
+      preLoaderRoute: typeof AuthenticatedGrowthCustomersRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/errors/$error': {
       id: '/_authenticated/errors/$error'
@@ -1431,10 +1419,10 @@ const AuthenticatedSettingsFinancialLazyRouteWithChildren =
 interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute
   AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
+  AuthenticatedSettingsAuditLogsRoute: typeof AuthenticatedSettingsAuditLogsRoute
   AuthenticatedSettingsDisplayRoute: typeof AuthenticatedSettingsDisplayRoute
   AuthenticatedSettingsNotificationsRoute: typeof AuthenticatedSettingsNotificationsRoute
   AuthenticatedSettingsPrintersRoute: typeof AuthenticatedSettingsPrintersRoute
-  AuthenticatedSettingsAuditLogsLazyRoute: typeof AuthenticatedSettingsAuditLogsLazyRoute
   AuthenticatedSettingsBusinessLazyRoute: typeof AuthenticatedSettingsBusinessLazyRoute
   AuthenticatedSettingsFinancialLazyRoute: typeof AuthenticatedSettingsFinancialLazyRouteWithChildren
   AuthenticatedSettingsMobileAppLazyRoute: typeof AuthenticatedSettingsMobileAppLazyRoute
@@ -1447,12 +1435,11 @@ const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteCh
   {
     AuthenticatedSettingsAccountRoute: AuthenticatedSettingsAccountRoute,
     AuthenticatedSettingsAppearanceRoute: AuthenticatedSettingsAppearanceRoute,
+    AuthenticatedSettingsAuditLogsRoute: AuthenticatedSettingsAuditLogsRoute,
     AuthenticatedSettingsDisplayRoute: AuthenticatedSettingsDisplayRoute,
     AuthenticatedSettingsNotificationsRoute:
       AuthenticatedSettingsNotificationsRoute,
     AuthenticatedSettingsPrintersRoute: AuthenticatedSettingsPrintersRoute,
-    AuthenticatedSettingsAuditLogsLazyRoute:
-      AuthenticatedSettingsAuditLogsLazyRoute,
     AuthenticatedSettingsBusinessLazyRoute:
       AuthenticatedSettingsBusinessLazyRoute,
     AuthenticatedSettingsFinancialLazyRoute:
@@ -1489,8 +1476,10 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedOpsSessionRouteRoute: typeof AuthenticatedOpsSessionRouteRouteWithChildren
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
+  AuthenticatedGrowthCustomersRoute: typeof AuthenticatedGrowthCustomersRoute
+  AuthenticatedMenuProductsRoute: typeof AuthenticatedMenuProductsRoute
+  AuthenticatedOperationsOrdersRoute: typeof AuthenticatedOperationsOrdersRoute
   AuthenticatedGrowthAnnouncementsLazyRoute: typeof AuthenticatedGrowthAnnouncementsLazyRoute
-  AuthenticatedGrowthCustomersLazyRoute: typeof AuthenticatedGrowthCustomersLazyRoute
   AuthenticatedGrowthLoyaltyLazyRoute: typeof AuthenticatedGrowthLoyaltyLazyRoute
   AuthenticatedGrowthMembershipLazyRoute: typeof AuthenticatedGrowthMembershipLazyRoute
   AuthenticatedGrowthPromotionsLazyRoute: typeof AuthenticatedGrowthPromotionsLazyRoute
@@ -1500,9 +1489,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedMenuCategoriesLazyRoute: typeof AuthenticatedMenuCategoriesLazyRoute
   AuthenticatedMenuCollectionsLazyRoute: typeof AuthenticatedMenuCollectionsLazyRoute
   AuthenticatedMenuOptionsLazyRoute: typeof AuthenticatedMenuOptionsLazyRoute
-  AuthenticatedMenuProductsLazyRoute: typeof AuthenticatedMenuProductsLazyRoute
   AuthenticatedOperationsCartsLazyRoute: typeof AuthenticatedOperationsCartsLazyRoute
-  AuthenticatedOperationsOrdersLazyRoute: typeof AuthenticatedOperationsOrdersLazyRoute
   AuthenticatedOperationsShiftLazyRoute: typeof AuthenticatedOperationsShiftLazyRoute
   AuthenticatedStaffEmployeesLazyRoute: typeof AuthenticatedStaffEmployeesLazyRoute
   AuthenticatedStaffRosterLazyRoute: typeof AuthenticatedStaffRosterLazyRoute
@@ -1526,9 +1513,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedOpsSessionRouteRoute:
     AuthenticatedOpsSessionRouteRouteWithChildren,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
+  AuthenticatedGrowthCustomersRoute: AuthenticatedGrowthCustomersRoute,
+  AuthenticatedMenuProductsRoute: AuthenticatedMenuProductsRoute,
+  AuthenticatedOperationsOrdersRoute: AuthenticatedOperationsOrdersRoute,
   AuthenticatedGrowthAnnouncementsLazyRoute:
     AuthenticatedGrowthAnnouncementsLazyRoute,
-  AuthenticatedGrowthCustomersLazyRoute: AuthenticatedGrowthCustomersLazyRoute,
   AuthenticatedGrowthLoyaltyLazyRoute: AuthenticatedGrowthLoyaltyLazyRoute,
   AuthenticatedGrowthMembershipLazyRoute:
     AuthenticatedGrowthMembershipLazyRoute,
@@ -1540,10 +1529,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedMenuCategoriesLazyRoute: AuthenticatedMenuCategoriesLazyRoute,
   AuthenticatedMenuCollectionsLazyRoute: AuthenticatedMenuCollectionsLazyRoute,
   AuthenticatedMenuOptionsLazyRoute: AuthenticatedMenuOptionsLazyRoute,
-  AuthenticatedMenuProductsLazyRoute: AuthenticatedMenuProductsLazyRoute,
   AuthenticatedOperationsCartsLazyRoute: AuthenticatedOperationsCartsLazyRoute,
-  AuthenticatedOperationsOrdersLazyRoute:
-    AuthenticatedOperationsOrdersLazyRoute,
   AuthenticatedOperationsShiftLazyRoute: AuthenticatedOperationsShiftLazyRoute,
   AuthenticatedStaffEmployeesLazyRoute: AuthenticatedStaffEmployeesLazyRoute,
   AuthenticatedStaffRosterLazyRoute: AuthenticatedStaffRosterLazyRoute,

@@ -1,14 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import {
-  BadgeCheck,
-  Bell,
-  ChevronsUpDown,
-  CreditCard,
-  LogOut,
-  Printer,
-  Sparkles,
-  Key,
-} from 'lucide-react'
+import { BadgeCheck, ChevronsUpDown, LogOut, Printer, Key } from 'lucide-react'
 import useDialogState from '@/hooks/use-dialog-state'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
