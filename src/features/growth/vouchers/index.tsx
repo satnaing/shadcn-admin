@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { type ColumnDef } from '@tanstack/react-table'
 import { type Voucher } from '@/types/growth'
 import { cn } from '@/lib/utils'
@@ -6,8 +7,10 @@ import { Badge } from '@/components/ui/badge'
 import { BrandLoader } from '@/components/ui/brand-loader'
 import { DataTable } from '@/components/custom/data-table'
 import { PageTitle } from '@/components/page-title'
+import { VoucherSheet } from './_components/voucher-sheet'
 
 export default function VouchersPage() {
+  const [open, setOpen] = useState(false)
   const { data: vouchers, isLoading } = useVouchers()
 
   const columns: ColumnDef<Voucher>[] = [
@@ -77,12 +80,13 @@ export default function VouchersPage() {
 
   return (
     <div className='flex flex-col gap-4 p-6 lg:gap-6 lg:p-6'>
-      <PageTitle title='Vouchers' onClick={() => {}} />
+      <PageTitle title='Vouchers' onClick={() => setOpen(true)} />
       <DataTable
         columns={columns}
         data={vouchers || []}
         searchKey='uniqueCode'
       />
+      <VoucherSheet open={open} onOpenChange={setOpen} />
     </div>
   )
 }

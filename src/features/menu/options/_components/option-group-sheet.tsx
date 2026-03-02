@@ -1,24 +1,13 @@
 import { useEffect } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useQuery } from '@tanstack/react-query'
-import { getBadges } from '@/services/badges'
-import { CheckIcon, Plus, Trash2, X } from 'lucide-react'
+import { Plus, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
-import { cn } from '@/lib/utils'
 import {
   useCreateOptionGroup,
   useUpdateOptionGroup,
 } from '@/hooks/queries/use-catalog'
 import { Button } from '@/components/ui/button'
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command'
 import {
   Form,
   FormControl,
@@ -29,11 +18,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover'
 import {
   Select,
   SelectContent,
@@ -70,10 +54,6 @@ export function OptionGroupSheet({
 }: OptionGroupSheetProps) {
   const { mutate: createGroup, isPending: isCreating } = useCreateOptionGroup()
   const { mutate: updateGroup, isPending: isUpdating } = useUpdateOptionGroup()
-  const { data: badges } = useQuery({
-    queryKey: ['badges'],
-    queryFn: getBadges,
-  })
 
   const isPending = isCreating || isUpdating
 

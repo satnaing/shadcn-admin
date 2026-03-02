@@ -319,7 +319,7 @@ function PrinterCard({
 
   return (
     <Card>
-      <CardHeader className='pb-3'>
+      <CardHeader className='pt-4 pb-3'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>
             {icon}
@@ -329,7 +329,7 @@ function PrinterCard({
         </div>
         <CardDescription className='text-xs'>{description}</CardDescription>
       </CardHeader>
-      <CardContent className='space-y-3'>
+      <CardContent className='space-y-3 py-4'>
         {isConnected && info.deviceName && (
           <div className='flex items-center gap-2 rounded-md bg-muted px-3 py-2 text-xs'>
             <CheckCircle2 className='h-3.5 w-3.5 shrink-0 text-green-500' />

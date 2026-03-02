@@ -20,3 +20,16 @@ export const updatePromotion = async (args: {
   const response = await apiClient.patch(`/admin/promotions/${id}`, data)
   return response.data
 }
+
+export const generateVouchers = async (args: {
+  promotionId: string
+  quantity: number
+  userId?: string
+}) => {
+  const { promotionId, quantity, userId } = args
+  const response = await apiClient.post(
+    `/admin/promotions/${promotionId}/generate-vouchers`,
+    { promotionId, quantity, userId }
+  )
+  return response.data
+}

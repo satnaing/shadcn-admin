@@ -31,7 +31,7 @@ export default function ShopMenuPage() {
       <PageTitle
         title={`${shop?.name || 'Shop'} Menu Options`}
         subtitle='Manage the menu availability and pricing for this specific branch.'
-        buttonLabel='Sync Master Catalog'
+        buttonLabel='Sync'
         onClick={() => syncCatalog(shopId)}
       />
 

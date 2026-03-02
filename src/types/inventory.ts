@@ -63,7 +63,16 @@ export interface CreateRecipeDto {
 }
 
 // Shop Inventory
-// Shop Inventory
+export interface ShopStockResponse {
+  items: ShopIngredient[]
+  meta: {
+    total: number
+    page: number
+    limit: number
+    totalPages: number
+  }
+}
+
 export interface ShopIngredient {
   shopIngredientId: string
   ingredientId: string

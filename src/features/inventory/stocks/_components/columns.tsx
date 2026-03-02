@@ -17,10 +17,12 @@ import { DataTableColumnHeader } from '@/components/data-table'
 
 interface ColumnsProps {
   onAdjust: (item: ShopIngredient) => void
+  onEdit: (item: ShopIngredient) => void
 }
 
 export const getColumns = ({
   onAdjust,
+  onEdit,
 }: ColumnsProps): ColumnDef<ShopIngredient>[] => [
   {
     accessorKey: 'name',
@@ -110,6 +112,9 @@ export const getColumns = ({
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => onAdjust(row.original)}>
               Adjust Stock
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => onEdit(row.original)}>
+              Edit Details
             </DropdownMenuItem>
             <DropdownMenuItem>View History</DropdownMenuItem>
           </DropdownMenuContent>

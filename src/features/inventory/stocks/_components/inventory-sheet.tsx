@@ -1,3 +1,4 @@
+import { type ShopIngredient } from '@/types/inventory'
 import {
   Sheet,
   SheetContent,
@@ -10,9 +11,11 @@ import { InventoryForm, type InventoryFormValues } from './inventory-form'
 export function InventorySheet({
   open,
   onOpenChange,
+  item,
 }: {
   open: boolean
   onOpenChange: (open: boolean) => void
+  item: ShopIngredient | null
 }) {
   const handleSubmit = (data: InventoryFormValues) => {
     // eslint-disable-next-line no-console
@@ -25,14 +28,13 @@ export function InventorySheet({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent className='p-4 sm:max-w-xl'>
         <SheetHeader>
-          <SheetTitle>Manage Shop Inventory</SheetTitle>
+          <SheetTitle>Stock Settings</SheetTitle>
           <SheetDescription>
-            Add or update stock for ingredients in this shop. Click save when
-            you're done.
+            Update the low stock threshold for this ingredient.
           </SheetDescription>
         </SheetHeader>
         <div className='mt-6'>
-          <InventoryForm onSubmit={handleSubmit} />
+          <InventoryForm onSubmit={handleSubmit} initialData={item} />
         </div>
       </SheetContent>
     </Sheet>

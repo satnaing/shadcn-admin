@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { toast } from 'sonner'
 
 // Assuming sonner is used for toasts, if not I might need to check. But typical stack uses sonner or similar.
 // I will check package.json or imports later if this fails, but for now assuming global toast or simple replace.
@@ -87,11 +86,6 @@ apiClient.interceptors.response.use(
         localStorage.removeItem('activeShopId')
         window.location.href = '/login'
       }
-    } else if (status === 403) {
-      // Trying to use a generic way to show toast if possible, otherwise just console error or alert for now until I confirm the toast lib.
-      toast.error('Permission Denied', {
-        description: "You don't have permission to perform this action.",
-      })
     }
     return Promise.reject(error)
   }

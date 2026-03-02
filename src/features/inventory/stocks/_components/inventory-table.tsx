@@ -5,10 +5,27 @@ import { getColumns } from './columns'
 interface InventoryTableProps {
   data: ShopIngredient[]
   onAdjust: (item: ShopIngredient) => void
+  onEdit: (item: ShopIngredient) => void
+  pageCount?: number
+  pagination?: {
+    pageIndex: number
+    pageSize: number
+  }
+  onPaginationChange?: (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => void
 }
 
-export function InventoryTable({ data, onAdjust }: InventoryTableProps) {
-  const columns = getColumns({ onAdjust })
+export function InventoryTable({
+  data,
+  onAdjust,
+  onEdit,
+  pageCount,
+  pagination,
+  onPaginationChange,
+}: InventoryTableProps) {
+  const columns = getColumns({ onAdjust, onEdit })
 
   return (
     <DataTable
@@ -16,6 +33,9 @@ export function InventoryTable({ data, onAdjust }: InventoryTableProps) {
       data={data}
       searchKey='ingredient.name'
       searchPlaceholder='Filter ingredients...'
+      pageCount={pageCount}
+      pagination={pagination}
+      onPaginationChange={onPaginationChange}
     />
   )
 }

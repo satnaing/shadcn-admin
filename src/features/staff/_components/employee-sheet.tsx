@@ -3,8 +3,11 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { type Staff } from '@/types/staff'
+import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
-import { MOCK_SHOPS } from '@/stores/shop-store'
+import { getTranslation } from '@/utils/i18n'
+import { useRoles } from '@/hooks/queries/use-roles'
+import { useShops } from '@/hooks/queries/use-shops'
 import { useCreateStaff, useAssignShopAccess } from '@/hooks/queries/use-staff'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -32,14 +35,19 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { MOCK_ROLES } from '../data/mock-staff'
+
+// import { MOCK_ROLES } from '../data/mock-staff'
 
 const staffSchema = z.object({
   fullName: z.string().min(1, 'Name is required'),
   username: z.string().min(1, 'Username is required'),
   phone: z.string().min(1, 'Phone is required'),
   globalRoleId: z.string().optional(),
-  pin: z.string().min(4, 'PIN must be at least 4 digits').optional(),
+  pin: z
+    .string()
+    .min(4, 'PIN must be at least 4 digits')
+    .optional()
+    .or(z.literal('')),
   access: z.array(
     z.object({
       shopId: z.string(),
@@ -61,6 +69,9 @@ export function EmployeeSheet({
   onOpenChange,
   initialData,
 }: EmployeeSheetProps) {
+  const { data: shops = [] } = useShops()
+  const { data: roles = [] } = useRoles()
+
   const form = useForm<StaffFormValues>({
     resolver: zodResolver(staffSchema),
     defaultValues: {
@@ -113,9 +124,11 @@ export function EmployeeSheet({
           (a: { shopId: string; roleId: string }) => a.shopId === shopId
         )
       ) {
+        // Use the first available role (usually Barista or lowest priority) if available
+        const defaultRoleId = roles[1]?.id || roles[0]?.id || ''
         form.setValue('access', [
           ...currentAccess,
-          { shopId, roleId: MOCK_ROLES[1].id }, // Default to Barista? or First role
+          { shopId, roleId: defaultRoleId },
         ])
       }
     } else {
@@ -151,7 +164,7 @@ export function EmployeeSheet({
           fullName: data.fullName,
           username: data.username,
           phone: data.phone,
-          password: 'Password123!', // Default password
+          password: 'password123', // Default password
           pin: data.pin || '1234',
           globalRoleId: data.globalRoleId || undefined,
         })
@@ -193,7 +206,11 @@ export function EmployeeSheet({
         <Form {...form}>
           {/* Note: We should ideally reset the form when initialData changes */}
           <form
-            onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={form.handleSubmit(onSubmit, (errors) => {
+              // eslint-disable-next-line no-console
+              console.error('Staff Form Validation Errors:', errors)
+              toast.error('Please check the form for errors')
+            })}
             className='flex flex-col gap-6'
           >
             <Tabs defaultValue='profile' className='w-full'>
@@ -269,6 +286,27 @@ export function EmployeeSheet({
                     </FormItem>
                   )}
                 />
+
+                {!initialData && (
+                  <FormField
+                    control={form.control}
+                    name='pin'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>PIN Code</FormLabel>
+                        <FormControl>
+                          <Input
+                            type='password'
+                            placeholder='e.g. 1234'
+                            maxLength={4}
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
               </TabsContent>
 
               <TabsContent value='access' className='space-y-4 py-4'>
@@ -279,7 +317,12 @@ export function EmployeeSheet({
                   </p>
                 </div>
                 <div className='flex flex-col space-y-3'>
-                  {MOCK_SHOPS.map((shop) => {
+                  {shops.length === 0 && (
+                    <div className='rounded-lg border border-dashed py-8 text-center text-sm text-muted-foreground'>
+                      No shops found.
+                    </div>
+                  )}
+                  {shops.map((shop) => {
                     // Watch access to determine state
                     const currentAccess = form.watch('access') || []
                     const accessEntry = currentAccess.find(
@@ -306,7 +349,7 @@ export function EmployeeSheet({
                               htmlFor={`shop-${shop.id}`}
                               className='text-sm leading-none font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
                             >
-                              {shop.name}
+                              {getTranslation(shop.name)}
                             </label>
                             <span className='text-xs text-muted-foreground'>
                               {shop.code}
@@ -324,9 +367,9 @@ export function EmployeeSheet({
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                              {MOCK_ROLES.map((role) => (
-                                <SelectItem key={role.id} value={role.id}>
-                                  {role.name.en}
+                              {roles.map((role) => (
+                                <SelectItem key={role.id} value={role.id || ''}>
+                                  {role.name}
                                 </SelectItem>
                               ))}
                             </SelectContent>
@@ -345,7 +388,14 @@ export function EmployeeSheet({
                   Deactivate User
                 </Button>
               )}
-              <Button type='submit' className={initialData ? '' : 'ml-auto'}>
+              <Button
+                type='submit'
+                className={initialData ? '' : 'ml-auto'}
+                disabled={form.formState.isSubmitting}
+              >
+                {form.formState.isSubmitting && (
+                  <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                )}
                 {initialData ? 'Save Changes' : 'Create Staff'}
               </Button>
             </div>

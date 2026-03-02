@@ -8,9 +8,8 @@ import {
   type UpdateIngredientDto,
   type Recipe,
   type CreateRecipeDto,
-  type ShopIngredient,
-  type InventoryLog,
   type InventoryLogResponse,
+  type ShopStockResponse,
 } from '@/types/inventory'
 import { apiClient } from '@/lib/api-client'
 
@@ -79,9 +78,12 @@ export const deleteRecipe = async (id: string): Promise<void> => {
 
 // Shop Inventory
 export const getShopStock = async (
-  shopId: string
-): Promise<ShopIngredient[]> => {
-  const response = await apiClient.get(`/admin/shops/${shopId}/inventory`)
+  shopId: string,
+  params?: Record<string, string | number | boolean>
+): Promise<ShopStockResponse> => {
+  const response = await apiClient.get(`/admin/shops/${shopId}/inventory`, {
+    params,
+  })
   return response.data
 }
 

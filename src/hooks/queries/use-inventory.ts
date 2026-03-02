@@ -23,10 +23,13 @@ import {
   type UpdateUnitDto,
 } from '@/types/inventory'
 
-export const useShopStock = (shopId: string) => {
+export const useShopStock = (
+  shopId: string,
+  params?: Record<string, string | number | boolean>
+) => {
   return useQuery({
-    queryKey: ['shop-inventory', shopId],
-    queryFn: () => getShopStock(shopId),
+    queryKey: ['shop-inventory', shopId, params],
+    queryFn: () => getShopStock(shopId, params),
     enabled: !!shopId,
   })
 }
