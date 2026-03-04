@@ -465,3 +465,18 @@ export interface CreateOrderRequest {
   assignToSelf?: boolean
   staffId?: string
 }
+
+export type ReceiptProps = {
+  invoiceCode: string
+  createdAt: string
+  items: OrderItem[]
+  fulfillmentCategory: string
+  queueNumber?: number | string
+
+  // Billing & Payment info
+  subtotal?: number
+  discount?: number
+  total?: number
+  paymentMethodName?: string
+  paymentStatus?: string
+}
