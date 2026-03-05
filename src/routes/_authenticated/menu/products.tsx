@@ -1,9 +1,12 @@
+import { z } from 'zod'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_authenticated/menu/products')({
-  component: RouteComponent,
+const productSearchSchema = z.object({
+  page: z.number().catch(1),
+  limit: z.number().catch(10),
+  search: z.string().optional(),
 })
 
-function RouteComponent() {
-  return <div>Hello "/_authenticated/menu/products"!</div>
-}
+export const Route = createFileRoute('/_authenticated/menu/products')({
+  validateSearch: productSearchSchema,
+})

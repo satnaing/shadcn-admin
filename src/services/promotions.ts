@@ -42,7 +42,16 @@ export const getPromotions = async (params?: {
     }
   })
 
-  return { data: promotions, meta }
+  return {
+    data: promotions,
+    meta: {
+      totalItems: meta?.totalItems ?? 0,
+      itemCount: meta?.itemCount ?? 0,
+      itemsPerPage: meta?.itemsPerPage ?? 10,
+      totalPages: meta?.totalPages ?? 1,
+      currentPage: meta?.currentPage ?? 1,
+    },
+  }
 }
 
 export const createPromotion = async (data: CreatePromotionDto) => {

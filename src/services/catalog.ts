@@ -18,11 +18,12 @@ export const getCategories = async (
   const response = await apiClient.get('/admin/categories', { params })
   return {
     data: response.data?.items ?? response.data?.data ?? [],
-    meta: response.data?.meta ?? {
-      total: 0,
-      page: 1,
-      limit: 10,
-      totalPages: 1,
+    meta: {
+      totalItems: response.data?.meta?.totalItems ?? 0,
+      itemCount: response.data?.meta?.itemCount ?? 0,
+      itemsPerPage: response.data?.meta?.itemsPerPage ?? 10,
+      totalPages: response.data?.meta?.totalPages ?? 1,
+      currentPage: response.data?.meta?.currentPage ?? 1,
     },
   }
 }
@@ -32,11 +33,12 @@ export const getCollections = async () => {
   const response = await apiClient.get('/admin/collections')
   return {
     data: response.data?.items ?? response.data?.data ?? [],
-    meta: response.data?.meta ?? {
-      total: 0,
-      page: 1,
-      limit: 10,
-      totalPages: 1,
+    meta: {
+      totalItems: response.data?.meta?.totalItems ?? 0,
+      itemCount: response.data?.meta?.itemCount ?? 0,
+      itemsPerPage: response.data?.meta?.itemsPerPage ?? 10,
+      totalPages: response.data?.meta?.totalPages ?? 1,
+      currentPage: response.data?.meta?.currentPage ?? 1,
     },
   }
 }
@@ -66,11 +68,12 @@ export const getOptionGroups = async (
   const response = await apiClient.get('/admin/option-groups', { params })
   return {
     data: response.data?.items ?? response.data?.data ?? [],
-    meta: response.data?.meta ?? {
-      total: 0,
-      page: 1,
-      limit: 10,
-      totalPages: 1,
+    meta: {
+      totalItems: response.data?.meta?.totalItems ?? 0,
+      itemCount: response.data?.meta?.itemCount ?? 0,
+      itemsPerPage: response.data?.meta?.itemsPerPage ?? 10,
+      totalPages: response.data?.meta?.totalPages ?? 1,
+      currentPage: response.data?.meta?.currentPage ?? 1,
     },
   }
 }
@@ -109,11 +112,12 @@ export const getProducts = async (
   const response = await apiClient.get('/admin/products', { params: filters })
   return {
     data: response.data?.items ?? response.data?.data ?? [],
-    meta: response.data?.meta ?? {
-      total: 0,
-      page: 1,
-      limit: 10,
-      totalPages: 1,
+    meta: {
+      totalItems: response.data?.meta?.totalItems ?? 0,
+      itemCount: response.data?.meta?.itemCount ?? 0,
+      itemsPerPage: response.data?.meta?.itemsPerPage ?? 10,
+      totalPages: response.data?.meta?.totalPages ?? 1,
+      currentPage: response.data?.meta?.currentPage ?? 1,
     },
   }
 }

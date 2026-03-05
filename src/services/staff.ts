@@ -60,7 +60,13 @@ export const getStaffList = async (
           : undefined,
       })),
     })),
-    meta,
+    meta: {
+      totalItems: meta?.totalItems ?? 0,
+      itemCount: meta?.itemCount ?? 0,
+      itemsPerPage: meta?.itemsPerPage ?? 10,
+      totalPages: meta?.totalPages ?? 1,
+      currentPage: meta?.currentPage ?? 1,
+    },
   }
 }
 

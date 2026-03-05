@@ -1,4 +1,4 @@
-import { type LocalizedText } from './api'
+import { type LocalizedText, type PaginationMeta } from './api'
 
 // Unit of Measure
 export interface UnitOfMeasure {
@@ -65,12 +65,7 @@ export interface CreateRecipeDto {
 // Shop Inventory
 export interface ShopStockResponse {
   data: ShopIngredient[]
-  meta: {
-    total: number
-    page: number
-    limit: number
-    totalPages: number
-  }
+  meta: PaginationMeta
 }
 
 export interface ShopIngredient {
@@ -109,10 +104,5 @@ export interface InventoryLog {
 
 export interface InventoryLogResponse {
   data: InventoryLog[]
-  meta: {
-    total: number
-    page: number
-    limit: number
-    totalPages: number
-  }
+  meta: PaginationMeta
 }

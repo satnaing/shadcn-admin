@@ -256,7 +256,7 @@ export function ProductSheet({
 }: ProductSheetProps) {
   const { data: categories } = useCategories()
   const { data: optionGroups } = useOptionGroups()
-  const { data: ingredientsData } = useIngredients()
+  const { data: ingredientsData } = useIngredients({ limit: 1000 })
   const ingredients = useMemo(
     () =>
       (Array.isArray(ingredientsData)

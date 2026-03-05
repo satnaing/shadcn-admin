@@ -5,6 +5,7 @@ import { type Promotion } from '@/types/growth'
 import { CalendarIcon, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
+import { useUploadProductImage } from '@/hooks/queries/use-media'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import {
@@ -16,6 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { ImageUpload } from '@/components/ui/image-upload'
 import { Input } from '@/components/ui/input'
 import {
   Popover,
@@ -52,7 +54,7 @@ interface PromotionQuickEditSheetProps {
 interface QuickEditForm {
   name: Record<string, string>
   description: Record<string, string>
-  bannerUrl: string
+  bannerUrl: Record<string, string>
   isFeatured: boolean
   status: 'ACTIVE' | 'INACTIVE' | 'ARCHIVED'
   startDate: Date | undefined
@@ -66,11 +68,13 @@ export function PromotionQuickEditSheet({
 }: PromotionQuickEditSheetProps) {
   const { mutate: updatePromotion, isPending } = useUpdatePromotion()
 
+  const { mutateAsync: uploadImage } = useUploadProductImage()
+
   const form = useForm<QuickEditForm>({
     defaultValues: {
       name: { en: '', km: '' },
       description: { en: '', km: '' },
-      bannerUrl: '',
+      bannerUrl: {},
       isFeatured: false,
       status: 'ACTIVE',
       startDate: undefined,
@@ -90,7 +94,7 @@ export function PromotionQuickEditSheet({
           typeof promotion.description === 'string'
             ? { en: promotion.description, km: '' }
             : promotion.description || { en: '', km: '' },
-        bannerUrl: promotion.bannerUrl?.en ?? '',
+        bannerUrl: (promotion.bannerUrl as Record<string, string>) || {},
         isFeatured: promotion.isFeatured ?? false,
         status: (promotion.status as QuickEditForm['status']) ?? 'ACTIVE',
         startDate: promotion.startDate
@@ -112,15 +116,13 @@ export function PromotionQuickEditSheet({
       return
     }
 
-    const bannerUrl = data.bannerUrl ? { en: data.bannerUrl } : undefined
-
     updatePromotion(
       {
         id: promotion.id,
         data: {
           name: data.name,
           description: data.description,
-          bannerUrl,
+          bannerUrl: data.bannerUrl,
           isFeatured: data.isFeatured,
           status: data.status,
           startDate: data.startDate?.toISOString(),
@@ -241,18 +243,33 @@ export function PromotionQuickEditSheet({
                 )}
               />
 
-              {/* Banner URL */}
+              {/* Banner Upload */}
               <FormField
                 control={form.control}
                 name='bannerUrl'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Banner Image URL</FormLabel>
+                    <FormLabel>Banner Image</FormLabel>
                     <FormControl>
-                      <Input placeholder='https://...' type='url' {...field} />
+                      <ImageUpload
+                        value={field.value?.en || ''}
+                        onChange={(url) =>
+                          field.onChange({ ...field.value, en: url })
+                        }
+                        onUpload={async (file) => {
+                          const response = await uploadImage(file)
+                          if (
+                            typeof response === 'object' &&
+                            response !== null
+                          ) {
+                            return response.lg || response.raw || response
+                          }
+                          return response
+                        }}
+                      />
                     </FormControl>
                     <FormDescription>
-                      Direct URL to the promotion banner image.
+                      Upload the promotion banner image.
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
