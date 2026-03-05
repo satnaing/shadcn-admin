@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "bcoffee-dev"
+    "default": "bcoffee-dev",
+    "production": "yokcafe-pro"
   }
 }
