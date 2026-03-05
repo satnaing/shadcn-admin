@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import type { Product } from '@/types/api'
 import { Plus, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
 import {
@@ -39,6 +40,7 @@ import {
   OptionType,
   type ProductOptionGroup,
 } from '../../data/schema'
+import { ProductCombobox } from './product-combobox'
 import { RecipeInline } from './recipe-inline.tsx'
 
 interface OptionGroupSheetProps {
@@ -324,7 +326,34 @@ export function OptionGroupSheet({
                               <FormItem>
                                 <FormLabel className='text-xs'>Name</FormLabel>
                                 <FormControl>
-                                  <Input placeholder='Choice Name' {...field} />
+                                  {form.watch('type') === OptionType.COMBO ? (
+                                    <ProductCombobox
+                                      value={
+                                        form.watch(
+                                          `choices.${index}.linkedProductId`
+                                        ) || undefined
+                                      }
+                                      onSelect={(product: Product) => {
+                                        form.setValue(
+                                          `choices.${index}.name.en`,
+                                          product.name.en
+                                        )
+                                        form.setValue(
+                                          `choices.${index}.sku`,
+                                          product.sku
+                                        )
+                                        form.setValue(
+                                          `choices.${index}.linkedProductId`,
+                                          product.id
+                                        )
+                                      }}
+                                    />
+                                  ) : (
+                                    <Input
+                                      placeholder='Choice Name'
+                                      {...field}
+                                    />
+                                  )}
                                 </FormControl>
                                 <FormMessage />
                               </FormItem>

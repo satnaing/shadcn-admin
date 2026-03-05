@@ -5,6 +5,7 @@ export enum OptionType {
   VARIANT = 'VARIANT',
   MODIFIER = 'MODIFIER',
   ADDON = 'ADDON',
+  COMBO = 'COMBO',
 }
 
 // Recipes Schema (Moved up to be used in Option Choice)
@@ -23,6 +24,7 @@ export const optionChoiceSchema = z.object({
     message: 'English name is required',
   }),
   price: z.coerce.number().min(0, 'Price must be non-negative'),
+  linkedProductId: z.string().optional().nullable(),
   // Draft recipes for creation flow
   recipes: z.array(productRecipeSchema).optional().default([]),
 })

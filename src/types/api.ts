@@ -38,6 +38,7 @@ export enum OptionType {
   VARIANT = 'VARIANT',
   MODIFIER = 'MODIFIER',
   ADDON = 'ADDON',
+  COMBO = 'COMBO',
 }
 
 export enum InventoryAdjustmentReason {
@@ -227,6 +228,7 @@ export interface CreateOptionChoiceDto {
   priceModifier?: number // Deprecated? The spec says priceModifier, but UI uses price.
   price?: number
   isDefault?: boolean
+  linkedProductId?: string | null
 }
 
 export type UpdateOptionChoiceDto = Partial<CreateOptionChoiceDto>
