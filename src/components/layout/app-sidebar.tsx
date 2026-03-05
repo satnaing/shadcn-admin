@@ -45,7 +45,7 @@ export function AppSidebar() {
         <SidebarSeparator className='mx-0' />
 
         {/* Head Office Group */}
-        <NavGroup title='Head Office' items={hqNav} />
+        {/* <NavGroup title='Head Office' items={hqNav} /> */}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={navUser} />
