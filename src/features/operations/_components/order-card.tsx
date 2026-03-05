@@ -55,7 +55,32 @@ export function OrderCard({ order }: OrderCardProps) {
   const handlePrintReceipt = async () => {
     setIsPrintingReceipt(true)
     try {
-      await printReceiptViaBluetooth(order)
+      await printReceiptViaBluetooth({
+        invoiceCode: order.invoiceCode,
+        createdAt: order.createdAt,
+        fulfillmentCategory: order.fulfillmentCategory,
+        queueNumber: order.queueNumber,
+        subtotal: order.subtotal,
+        total: order.grandTotal,
+        paymentMethodName:
+          typeof order.paymentMethodName === 'string'
+            ? order.paymentMethodName
+            : (order.paymentMethodName as Record<string, string>)?.en,
+        items: order.items.map((item) => ({
+          id: item.id,
+          name: item.productName,
+          quantity: item.quantity,
+          unitPrice: item.unitPrice,
+          totalPrice: item.subtotal,
+          options: item.options?.map((opt) => ({
+            name: opt.optionName,
+            quantity: opt.quantity,
+            unitPrice: opt.unitPrice,
+            totalPrice: opt.subtotal,
+          })),
+          notes: item.instructions,
+        })),
+      })
     } finally {
       setIsPrintingReceipt(false)
     }
