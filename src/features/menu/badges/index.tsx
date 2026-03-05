@@ -15,10 +15,11 @@ import { BadgeTable } from './_components/badge-table'
 
 export function BadgesPage() {
   const queryClient = useQueryClient()
-  const { data: badges = [], isLoading } = useQuery({
+  const { data: response, isLoading } = useQuery({
     queryKey: ['badges'],
     queryFn: getBadges,
   })
+  const badges = response?.data || []
 
   const [selectedBadge, setSelectedBadge] = useState<Badge | null>(null)
   const [isSheetOpen, setIsSheetOpen] = useState(false)

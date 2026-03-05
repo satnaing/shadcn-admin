@@ -55,6 +55,7 @@ export interface ItemMarkdownState extends BasePromotionState {
     | DiscountType.PERCENTAGE
     | DiscountType.FIXED
     | DiscountType.FIXED_PRICE
+    | DiscountType.STAMP_PER_ITEM
   discountValue: number
   // For Category-level PWP:
   rewardMode?: 'UNLOCK'
@@ -73,6 +74,7 @@ export interface VolumeIncentiveState extends BasePromotionState {
     | DiscountType.PERCENTAGE
     | DiscountType.FIXED
     | DiscountType.FIXED_PRICE
+    | DiscountType.STAMP_PER_ITEM
   discountValue: number
   // For PWP / Unlock Reward:
   rewardMode?: 'BUNDLE' | 'UNLOCK'
@@ -93,6 +95,7 @@ export interface CartRewardState extends BasePromotionState {
     | DiscountType.PERCENTAGE
     | DiscountType.FIXED
     | DiscountType.FIXED_PRICE
+    | DiscountType.STAMP_PER_ITEM
   rewardMode?: 'UNLOCK' // Only UNLOCK is relevant for Cart PWP
   rewardTargets?: SearchResultItem[]
   rewardQuantity?: number

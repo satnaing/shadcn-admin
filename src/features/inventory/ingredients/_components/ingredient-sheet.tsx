@@ -197,7 +197,10 @@ export function IngredientSheet({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {units?.map((unit) => (
+                        {(Array.isArray(units)
+                          ? units
+                          : (units as any)?.data || []
+                        ).map((unit: any) => (
                           <SelectItem
                             key={unit.id}
                             value={unit.id || `unit-${unit.symbol.en}`}

@@ -18,13 +18,15 @@ export const useAppStore = create<AppState>((set) => ({
   activeShopId: localStorage.getItem('activeShopId'),
   activeShop: null,
   setUser: (user) => set({ user }),
-  setShops: (shops) =>
+  setShops: (shops) => {
+    const shopsArray = Array.isArray(shops) ? shops : []
     set((state) => ({
-      shops,
+      shops: shopsArray,
       activeShop: state.activeShopId
-        ? shops.find((s) => s.id === state.activeShopId) || null
+        ? shopsArray.find((s) => s.id === state.activeShopId) || null
         : null,
-    })),
+    }))
+  },
   setActiveShopId: (shopId) => {
     if (shopId) {
       localStorage.setItem('activeShopId', shopId)
@@ -34,7 +36,7 @@ export const useAppStore = create<AppState>((set) => ({
     set((state) => ({
       activeShopId: shopId,
       activeShop: shopId
-        ? state.shops.find((s) => s.id === shopId) || null
+        ? (state.shops || []).find((s) => s.id === shopId) || null
         : null,
     }))
   },

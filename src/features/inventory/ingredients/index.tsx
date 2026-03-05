@@ -11,7 +11,15 @@ import { IngredientSheet } from './_components/ingredient-sheet'
 import { columns } from './_components/ingredients-columns'
 
 export default function IngredientsPage() {
-  const { data: ingredients, isLoading } = useIngredients()
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  })
+  const { data: response, isLoading } = useIngredients({
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize,
+  })
+  const ingredients = response?.data || []
   const [open, setOpen] = useState(false)
   const [importOpen, setImportOpen] = useState(false)
   const [selectedIngredient, setSelectedIngredient] =
@@ -60,9 +68,12 @@ export default function IngredientsPage() {
 
       <DataTable
         columns={columns(handleEdit)}
-        data={ingredients || []}
+        data={ingredients}
         searchKey='name'
         searchPlaceholder='Filter ingredients...'
+        pageCount={response?.meta?.totalPages}
+        pagination={pagination}
+        onPaginationChange={setPagination}
       />
 
       <IngredientSheet

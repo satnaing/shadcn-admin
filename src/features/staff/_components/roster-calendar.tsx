@@ -49,8 +49,11 @@ export function RosterCalendar({ shopId }: RosterCalendarProps) {
         <ScrollArea className='h-[500px]'>
           <div className='divide-y'>
             {days.map((day) => {
-              const dayShifts = shifts.filter(
-                (s) =>
+              const shiftsArray = Array.isArray(shifts)
+                ? shifts
+                : (shifts as any)?.data || []
+              const dayShifts = shiftsArray.filter(
+                (s: any) =>
                   format(new Date(s.startTime), 'yyyy-MM-dd') ===
                   format(day, 'yyyy-MM-dd')
               )
@@ -66,7 +69,7 @@ export function RosterCalendar({ shopId }: RosterCalendarProps) {
                         No shifts scheduled
                       </p>
                     ) : (
-                      dayShifts.map((shift) => (
+                      dayShifts.map((shift: any) => (
                         <div
                           key={shift.id}
                           className='flex items-center justify-between rounded-lg border bg-muted/50 p-3'

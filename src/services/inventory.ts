@@ -1,4 +1,4 @@
-import { type AdjustStockRequest } from '@/types/api'
+import { type AdjustStockRequest, type PaginationMeta } from '@/types/api'
 import {
   type UnitOfMeasure,
   type CreateUnitDto,
@@ -14,9 +14,19 @@ import {
 import { apiClient } from '@/lib/api-client'
 
 // Units of Measure
-export const getUnits = async (): Promise<UnitOfMeasure[]> => {
-  const response = await apiClient.get('/admin/uoms')
-  return response.data
+export const getUnits = async (
+  params?: Record<string, unknown>
+): Promise<{ data: UnitOfMeasure[]; meta: PaginationMeta }> => {
+  const response = await apiClient.get('/admin/uoms', { params })
+  return {
+    data: response.data?.items ?? response.data?.data ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 export const createUnit = async (
@@ -39,9 +49,19 @@ export const deleteUnit = async (id: string): Promise<void> => {
 }
 
 // Ingredients
-export const getIngredients = async (): Promise<Ingredient[]> => {
-  const response = await apiClient.get('/admin/ingredients')
-  return response.data
+export const getIngredients = async (
+  params?: Record<string, unknown>
+): Promise<{ data: Ingredient[]; meta: PaginationMeta }> => {
+  const response = await apiClient.get('/admin/ingredients', { params })
+  return {
+    data: response.data?.items ?? response.data?.data ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 export const createIngredient = async (
@@ -84,7 +104,15 @@ export const getShopStock = async (
   const response = await apiClient.get(`/admin/shops/${shopId}/inventory`, {
     params,
   })
-  return response.data
+  return {
+    data: response.data?.items ?? response.data?.data ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 export const getShopInventoryLogs = async (
@@ -97,7 +125,15 @@ export const getShopInventoryLogs = async (
       params,
     }
   )
-  return response.data
+  return {
+    data: response.data?.items ?? response.data?.data ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 export const adjustStock = async (

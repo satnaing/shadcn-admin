@@ -66,16 +66,19 @@ export function ManualOrderPanel() {
     id: string
     name: string
   } | null>(null)
-  const [orderType, setOrderType] = useState<'DINE_IN' | 'TAKEAWAY'>('DINE_IN')
+  const [orderType, setOrderType] = useState<'DINE_IN' | 'TAKEAWAY'>('TAKEAWAY')
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [activeCategoryId, setActiveCategoryId] = useState<string>('all')
+  const [customerName, setCustomerName] = useState('')
+  const [customerPhone, setCustomerPhone] = useState('')
 
   // Queries
   const { data: customersData } = useCustomers({
     search: searchQuery,
     limit: 5,
   })
-  const { data: categories } = useCategories()
+  const { data: categoriesData } = useCategories()
+  const categories = categoriesData?.data || []
   const { data: productsData, isLoading: isLoadingProducts } = useProducts({
     categoryId: activeCategoryId !== 'all' ? activeCategoryId : undefined,
     limit: 50,
@@ -195,6 +198,8 @@ export function ManualOrderPanel() {
         status: 'CONFIRMED', // Initial status required by spec
         invoiceCode,
         queueNumber,
+        customerName: isGuest && customerName ? customerName : undefined,
+        customerPhone: isGuest && customerPhone ? customerPhone : undefined,
         assignToSelf: true, // Auto-assign to current staff
       },
       {
@@ -205,6 +210,8 @@ export function ManualOrderPanel() {
           setIsGuest(true)
           setSelectedCustomer(null)
           setSearchQuery('')
+          setCustomerName('')
+          setCustomerPhone('')
         },
         onError: (err: any) => {
           const detail = err.response?.data?.message || 'Failed to commit order'
@@ -262,14 +269,14 @@ export function ManualOrderPanel() {
                     <TabsList className='grid h-10 w-full grid-cols-2 bg-muted/30 p-1'>
                       <TabsTrigger
                         value='DINE_IN'
-                        className='gap-2 rounded-md text-xs font-bold'
+                        className='gap-2 rounded-md text-xs font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm'
                       >
                         <Utensils className='h-3.5 w-3.5' />
                         Dine-in
                       </TabsTrigger>
                       <TabsTrigger
                         value='TAKEAWAY'
-                        className='gap-2 rounded-md text-xs font-bold'
+                        className='gap-2 rounded-md text-xs font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm'
                       >
                         <Bike className='h-3.5 w-3.5' />
                         Takeaway
@@ -366,6 +373,27 @@ export function ManualOrderPanel() {
                       )}
                     </div>
                   )}
+
+                  {isGuest && (
+                    <div className='grid animate-in grid-cols-2 gap-3 fade-in slide-in-from-top-1'>
+                      <div className='relative'>
+                        <Input
+                          placeholder='Customer Name'
+                          className='h-10 border text-xs transition-all focus-visible:border-primary focus-visible:ring-0'
+                          value={customerName}
+                          onChange={(e) => setCustomerName(e.target.value)}
+                        />
+                      </div>
+                      <div className='relative'>
+                        <Input
+                          placeholder='Phone Number'
+                          className='h-10 border text-xs transition-all focus-visible:border-primary focus-visible:ring-0'
+                          value={customerPhone}
+                          onChange={(e) => setCustomerPhone(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -390,7 +418,7 @@ export function ManualOrderPanel() {
                   >
                     <span className='truncate text-[13px]'>All Menu</span>
                   </button>
-                  {categories?.map((cat: Category) => (
+                  {categories.map((cat: Category) => (
                     <button
                       key={cat.id}
                       className={cn(

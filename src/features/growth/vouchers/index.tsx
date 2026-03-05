@@ -11,7 +11,17 @@ import { VoucherSheet } from './_components/voucher-sheet'
 
 export default function VouchersPage() {
   const [open, setOpen] = useState(false)
-  const { data: vouchers, isLoading } = useVouchers()
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  })
+
+  const { data: response, isLoading } = useVouchers({
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize,
+  })
+
+  const vouchers = response?.data || []
 
   const columns: ColumnDef<Voucher>[] = [
     {
@@ -83,8 +93,11 @@ export default function VouchersPage() {
       <PageTitle title='Vouchers' onClick={() => setOpen(true)} />
       <DataTable
         columns={columns}
-        data={vouchers || []}
+        data={vouchers}
         searchKey='uniqueCode'
+        pageCount={response?.meta?.totalPages}
+        pagination={pagination}
+        onPaginationChange={setPagination}
       />
       <VoucherSheet open={open} onOpenChange={setOpen} />
     </div>

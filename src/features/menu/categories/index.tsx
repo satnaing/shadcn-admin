@@ -8,6 +8,10 @@ import { CategorySheet } from './_components/category-sheet'
 
 export default function CategoriesPage() {
   const [open, setOpen] = useState(false)
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  })
   const [selectedCategory, setSelectedCategory] = useState<
     | (React.ComponentProps<typeof CategorySheet>['initialData'] & {
         id?: string
@@ -15,7 +19,12 @@ export default function CategoriesPage() {
     | null
   >(null)
 
-  const { data: categories, isLoading } = useCategories()
+  const { data: response, isLoading } = useCategories({
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize,
+  })
+
+  const categories = response?.data || []
 
   const handleEdit = (category: Category) => {
     // @ts-expect-error - Mismatch between schema Category and CategorySheet props (imageUrl type)
@@ -43,8 +52,11 @@ export default function CategoriesPage() {
       />
 
       <CategoriesTable
-        data={(categories as Category[]) || []}
+        data={categories}
         onEdit={handleEdit}
+        pageCount={response?.meta?.totalPages}
+        pagination={pagination}
+        onPaginationChange={setPagination}
       />
 
       <CategorySheet

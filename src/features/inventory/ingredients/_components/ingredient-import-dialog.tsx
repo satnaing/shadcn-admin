@@ -395,7 +395,10 @@ export function IngredientImportDialog({
                         <SelectValue placeholder='Select system unit' />
                       </SelectTrigger>
                       <SelectContent>
-                        {systemUnits?.map((u) => (
+                        {(Array.isArray(systemUnits)
+                          ? systemUnits
+                          : (systemUnits as any)?.data || []
+                        ).map((u: any) => (
                           <SelectItem key={u.id} value={u.id}>
                             {getTranslation(u.name)} ({getTranslation(u.symbol)}
                             )
@@ -434,9 +437,11 @@ export function IngredientImportDialog({
                       {parsedData.map((item) => {
                         const systemUnitId =
                           item.overrideUnitId || unitMappings[item.unitString]
-                        const systemUnit = systemUnits?.find(
-                          (u) => u.id === systemUnitId
-                        )
+                        const systemUnit = (
+                          Array.isArray(systemUnits)
+                            ? systemUnits
+                            : (systemUnits as any)?.data || []
+                        ).find((u: any) => u.id === systemUnitId)
                         const isMapped = !!systemUnit
 
                         return (
@@ -490,8 +495,14 @@ export function IngredientImportDialog({
                                   />
                                 </SelectTrigger>
                                 <SelectContent>
-                                  {systemUnits?.map((u) => (
-                                    <SelectItem key={u.id} value={u.id}>
+                                  {(Array.isArray(systemUnits)
+                                    ? systemUnits
+                                    : (systemUnits as any)?.data || []
+                                  ).map((u: any) => (
+                                    <SelectItem
+                                      key={u.id}
+                                      value={u.id || `unit-${u.symbol.en}`}
+                                    >
                                       {getTranslation(u.name)} (
                                       {getTranslation(u.symbol)})
                                     </SelectItem>

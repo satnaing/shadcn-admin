@@ -273,7 +273,10 @@ export function CategorySheet({
                     </FormControl>
                     <SelectContent>
                       <SelectItem value='none'>None</SelectItem>
-                      {categories?.map((category: Category) => (
+                      {(Array.isArray(categories)
+                        ? categories
+                        : (categories as any)?.data || []
+                      ).map((category: Category) => (
                         <SelectItem
                           key={category.id}
                           value={category.id || `cat-${category.slug}`}

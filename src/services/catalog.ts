@@ -5,20 +5,40 @@ import {
   type ProductFilters,
   type CreateOptionGroupDto,
   type UpdateOptionGroupDto,
-  // Update types if needed
+  type PaginationMeta,
+  type Category,
+  type OptionGroup,
 } from '@/types/api'
 import { apiClient } from '@/lib/api-client'
 
 // Categories
-export const getCategories = async () => {
-  const response = await apiClient.get('/admin/categories')
-  return response.data
+export const getCategories = async (
+  params?: Record<string, unknown>
+): Promise<{ data: Category[]; meta: PaginationMeta }> => {
+  const response = await apiClient.get('/admin/categories', { params })
+  return {
+    data: response.data?.items ?? response.data?.data ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 // Collections
 export const getCollections = async () => {
   const response = await apiClient.get('/admin/collections')
-  return response.data
+  return {
+    data: response.data?.items ?? response.data?.data ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 export const createCategory = async (data: CreateCategoryRequest) => {
@@ -40,9 +60,19 @@ export const deleteCategory = async (id: string) => {
 }
 
 // Option Groups
-export const getOptionGroups = async () => {
-  const response = await apiClient.get('/admin/option-groups')
-  return response.data
+export const getOptionGroups = async (
+  params?: Record<string, unknown>
+): Promise<{ data: OptionGroup[]; meta: PaginationMeta }> => {
+  const response = await apiClient.get('/admin/option-groups', { params })
+  return {
+    data: response.data?.items ?? response.data?.data ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 export const getOptionGroup = async (id: string) => {
@@ -73,9 +103,19 @@ export const deleteOptionGroup = async (id: string) => {
 }
 
 // Products
-export const getProducts = async (filters?: ProductFilters) => {
+export const getProducts = async (
+  filters?: ProductFilters
+): Promise<{ data: Product[]; meta: PaginationMeta }> => {
   const response = await apiClient.get('/admin/products', { params: filters })
-  return response.data
+  return {
+    data: response.data?.items ?? response.data?.data ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 export const createProduct = async (

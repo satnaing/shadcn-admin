@@ -15,15 +15,33 @@ import { columns } from './categories-columns.tsx'
 interface CategoriesTableProps {
   data: Category[]
   onEdit: (category: Category) => void
+  pageCount?: number
+  pagination?: {
+    pageIndex: number
+    pageSize: number
+  }
+  onPaginationChange?: (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => void
 }
 
-export function CategoriesTable({ data, onEdit }: CategoriesTableProps) {
+export function CategoriesTable({
+  data,
+  onEdit,
+  pageCount,
+  pagination,
+  onPaginationChange,
+}: CategoriesTableProps) {
   return (
     <DataTable
       columns={columns}
       data={data}
       searchPlaceholder='Filter categories...'
       meta={{ onEdit }}
+      pageCount={pageCount}
+      pagination={pagination}
+      onPaginationChange={onPaginationChange}
     />
   )
 }

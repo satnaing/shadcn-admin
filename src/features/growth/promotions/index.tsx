@@ -15,7 +15,18 @@ export default function PromotionsPage() {
   const [editingPromotion, setEditingPromotion] = useState<Promotion | null>(
     null
   )
-  const { data: promotions = [], isLoading } = usePromotions()
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  })
+
+  const { data: promotionsData, isLoading } = usePromotions({
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize,
+  })
+
+  const promotions = promotionsData?.data || []
+  const pageCount = promotionsData?.meta?.totalPages || 0
 
   const handleEdit = (promotion: Promotion) => {
     setEditingPromotion(promotion)
@@ -26,31 +37,37 @@ export default function PromotionsPage() {
     {
       accessorKey: 'name',
       header: 'Campaign',
-      cell: ({ row }) => (
-        <div
-          className='flex cursor-pointer flex-col hover:underline'
-          onClick={() => handleEdit(row.original)}
-        >
-          <span className='font-medium'>{row.original.name.en}</span>
-          {row.original.code && (
-            <span className='font-mono text-xs text-muted-foreground'>
-              {row.original.code}
-            </span>
-          )}
-        </div>
-      ),
+      cell: ({ row }) => {
+        const promo = row.original
+        const name = typeof promo.name === 'string' ? promo.name : promo.name.en
+        return (
+          <div
+            className='flex cursor-pointer flex-col hover:underline'
+            onClick={() => handleEdit(promo)}
+          >
+            <span className='font-medium'>{name}</span>
+            {promo.code && (
+              <span className='font-mono text-xs text-muted-foreground'>
+                {promo.code}
+              </span>
+            )}
+          </div>
+        )
+      },
     },
     {
       accessorKey: 'type',
       header: 'Discount',
       cell: ({ row }) => {
         const type = row.original.type
-        const value = row.original.value ?? 0
+        const value = Number(row.original.value ?? 0)
         return (
           <Badge variant='outline'>
             {type === DiscountType.PERCENTAGE
               ? `${value}% OFF`
-              : `$${value.toFixed(2)} OFF`}
+              : type === DiscountType.STAMP_PER_ITEM
+                ? `${value} STAMP${value > 1 ? 'S' : ''}`
+                : `$${value.toFixed(2)} OFF`}
           </Badge>
         )
       },
@@ -149,7 +166,14 @@ export default function PromotionsPage() {
     <div className='flex flex-col gap-4 p-6 lg:gap-6 lg:p-6'>
       <PageTitle title='Promotions' />
 
-      <DataTable columns={columns} data={promotions} searchKey='name' />
+      <DataTable
+        columns={columns}
+        data={promotions}
+        searchKey='name'
+        pagination={pagination}
+        onPaginationChange={setPagination}
+        pageCount={pageCount}
+      />
 
       <PromotionQuickEditSheet
         open={open}

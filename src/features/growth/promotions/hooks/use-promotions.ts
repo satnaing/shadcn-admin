@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
 import { getPromotions } from '@/services/promotions'
-import type { Promotion } from '@/types/growth'
 
-export const usePromotions = () => {
-  return useQuery<Promotion[]>({
-    queryKey: ['promotions'],
-    queryFn: getPromotions,
+export const usePromotions = (params?: { page?: number; limit?: number }) => {
+  return useQuery({
+    queryKey: ['promotions', params],
+    queryFn: () => getPromotions(params),
   })
 }

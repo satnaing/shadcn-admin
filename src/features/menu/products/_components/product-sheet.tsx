@@ -256,7 +256,14 @@ export function ProductSheet({
 }: ProductSheetProps) {
   const { data: categories } = useCategories()
   const { data: optionGroups } = useOptionGroups()
-  const { data: ingredients } = useIngredients()
+  const { data: ingredientsData } = useIngredients()
+  const ingredients = useMemo(
+    () =>
+      (Array.isArray(ingredientsData)
+        ? ingredientsData
+        : (ingredientsData as any)?.data) || [],
+    [ingredientsData]
+  )
   const { mutate: createProduct, isPending: isCreating } = useCreateProduct()
   const { mutate: updateProduct, isPending: isUpdating } = useUpdateProduct()
 
@@ -304,8 +311,14 @@ export function ProductSheet({
     if (!recipeItems) return []
 
     const baseItems = recipeItems.filter((i) => !i.optionId)
+    const ingredientList = Array.isArray(ingredients)
+      ? ingredients
+      : (ingredients as any)?.data || []
+
     const baseIngredientsWithCost = baseItems.map((item) => {
-      const ingredient = ingredients?.find((i) => i.id === item.ingredientId)
+      const ingredient = ingredientList.find(
+        (i: any) => i.id === item.ingredientId
+      )
       return {
         ingredientId: item.ingredientId,
         quantityUsed: Number(item.quantity || 0),
@@ -328,7 +341,9 @@ export function ProductSheet({
       const variantItems = recipeItems.filter((i) => i.optionId === choiceId)
 
       variantItems.forEach((vItem) => {
-        const ingredient = ingredients?.find((i) => i.id === vItem.ingredientId)
+        const ingredient = ingredientList.find(
+          (i: any) => i.id === vItem.ingredientId
+        )
         const vItemCost = {
           ingredientId: vItem.ingredientId,
           quantityUsed: Number(vItem.quantity || 0),
@@ -635,7 +650,10 @@ export function ProductSheet({
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            {categories?.map((category: Category) => (
+                            {(Array.isArray(categories)
+                              ? categories
+                              : (categories as any)?.data || []
+                            ).map((category: Category) => (
                               <SelectItem
                                 key={category.id}
                                 value={category.id || `cat-${category.slug}`}
@@ -752,7 +770,10 @@ export function ProductSheet({
                   render={({ field }) => (
                     <FormItem>
                       <div className='grid gap-4'>
-                        {optionGroups?.map((group: OptionGroup) => (
+                        {(Array.isArray(optionGroups)
+                          ? optionGroups
+                          : (optionGroups as any)?.data || []
+                        ).map((group: OptionGroup) => (
                           <Collapsible key={group.id}>
                             <FormItem className='space-y-0'>
                               <div className='flex cursor-pointer items-start space-x-3 rounded-md border p-3 transition-colors hover:bg-muted/50'>

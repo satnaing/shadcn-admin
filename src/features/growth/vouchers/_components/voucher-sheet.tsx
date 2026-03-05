@@ -102,9 +102,11 @@ export function VoucherSheet({ open, onOpenChange }: Props) {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {promotions?.map((promotion) => (
+                      {promotions?.data?.map((promotion) => (
                         <SelectItem key={promotion.id} value={promotion.id}>
-                          {promotion.name.en}
+                          {typeof promotion.name === 'string'
+                            ? promotion.name
+                            : promotion.name.en}
                         </SelectItem>
                       ))}
                     </SelectContent>

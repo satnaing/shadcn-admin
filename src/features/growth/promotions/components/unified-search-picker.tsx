@@ -63,7 +63,7 @@ export function UnifiedSearchPicker({
     if (mode !== 'CATEGORY_ONLY' && productsData?.data) {
       const productList = Array.isArray(productsData)
         ? productsData
-        : productsData.items || productsData.data || []
+        : productsData.data || []
 
       items.push(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -80,7 +80,7 @@ export function UnifiedSearchPicker({
     if (mode !== 'PRODUCT_ONLY' && categoriesData) {
       const categoryList = Array.isArray(categoriesData)
         ? categoriesData
-        : categoriesData.items || categoriesData.data || []
+        : categoriesData.data || []
 
       items.push(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -100,7 +100,7 @@ export function UnifiedSearchPicker({
     ) {
       const collectionList = Array.isArray(collectionsData)
         ? collectionsData
-        : collectionsData.items || collectionsData.data || []
+        : collectionsData.data || []
 
       items.push(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any

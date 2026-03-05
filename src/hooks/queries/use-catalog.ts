@@ -28,10 +28,10 @@ import type {
 } from '@/types/api'
 
 // Categories
-export const useCategories = () => {
+export const useCategories = (params?: Record<string, unknown>) => {
   return useQuery({
-    queryKey: ['categories'],
-    queryFn: getCategories,
+    queryKey: ['categories', params],
+    queryFn: () => getCategories(params),
   })
 }
 
@@ -78,10 +78,10 @@ export const useDeleteCategory = () => {
   })
 }
 
-export const useOptionGroups = () => {
+export const useOptionGroups = (params?: Record<string, unknown>) => {
   return useQuery({
-    queryKey: ['option-groups'],
-    queryFn: getOptionGroups,
+    queryKey: ['option-groups', params],
+    queryFn: () => getOptionGroups(params),
   })
 }
 

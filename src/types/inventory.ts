@@ -64,7 +64,7 @@ export interface CreateRecipeDto {
 
 // Shop Inventory
 export interface ShopStockResponse {
-  items: ShopIngredient[]
+  data: ShopIngredient[]
   meta: {
     total: number
     page: number
@@ -108,7 +108,7 @@ export interface InventoryLog {
 }
 
 export interface InventoryLogResponse {
-  items: InventoryLog[]
+  data: InventoryLog[]
   meta: {
     total: number
     page: number

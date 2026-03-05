@@ -334,11 +334,14 @@ export function ShopMenuTable({
     }
   })
 
-  const categoryFilters =
-    categories?.map((c) => ({
-      label: c.name?.en || 'Unknown Category',
-      value: c.id,
-    })) || []
+  const categoriesArray = Array.isArray(categories)
+    ? categories
+    : (categories as any)?.data || []
+
+  const categoryFilters = categoriesArray.map((c: any) => ({
+    label: c.name?.en || 'Unknown Category',
+    value: c.id,
+  }))
 
   return (
     <div className='flex flex-col space-y-4'>

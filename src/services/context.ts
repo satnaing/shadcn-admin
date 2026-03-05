@@ -9,6 +9,6 @@ export const getProfile = async (): Promise<Staff> => {
 export const getMyShops = async (): Promise<Shop[]> => {
   // Use /admin/staff/my-shops or fallback to /admin/shops
   // Assuming /admin/shops returns all shops available to the user for now
-  const { data } = await apiClient.get<Shop[]>('/admin/shops')
-  return data
+  const response = await apiClient.get('/admin/shops')
+  return response.data?.items ?? response.data?.data ?? []
 }

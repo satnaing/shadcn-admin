@@ -11,7 +11,15 @@ import { UnitSheet } from './_components/unit-sheet'
 import { columns } from './_components/units-columns'
 
 export default function UnitsSettingsPage() {
-  const { data: units, isLoading } = useUnits()
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  })
+  const { data: response, isLoading } = useUnits({
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize,
+  })
+  const units = response?.data || []
   const deleteUnit = useDeleteUnit()
   const [open, setOpen] = useState(false)
   const [selectedUnit, setSelectedUnit] = useState<UnitOfMeasure | null>(null)
@@ -60,9 +68,12 @@ export default function UnitsSettingsPage() {
 
       <DataTable
         columns={columns(handleEdit, handleDelete)}
-        data={units || []}
+        data={units}
         searchKey='name'
         searchPlaceholder='Filter units...'
+        pageCount={response?.meta?.totalPages}
+        pagination={pagination}
+        onPaginationChange={setPagination}
       />
 
       <UnitSheet

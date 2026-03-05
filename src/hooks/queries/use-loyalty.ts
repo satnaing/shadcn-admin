@@ -1,5 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { getLoyaltySettings, updateLoyaltySettings } from '@/services/loyalty'
+import {
+  getLoyaltySettings,
+  updateLoyaltySettings,
+  getCustomerBalances,
+} from '@/services/loyalty'
 import type { LoyaltySettings } from '@/features/growth/data/loyalty-schema'
 
 export const useLoyaltySettings = () => {
@@ -16,5 +20,12 @@ export const useUpdateLoyaltySettings = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['loyalty-settings'] })
     },
+  })
+}
+
+export const useCustomerBalances = (params?: Record<string, unknown>) => {
+  return useQuery({
+    queryKey: ['customer-balances', params],
+    queryFn: () => getCustomerBalances(params),
   })
 }

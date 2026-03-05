@@ -71,7 +71,7 @@ export const getOrders = async (
   filters?: GetOrdersFilters
 ): Promise<{ data: Order[]; meta: PaginationMeta }> => {
   const response = await apiClient.get('/admin/orders', { params: filters })
-  const rawData = response.data?.data || []
+  const rawData = response.data?.items || response.data?.data || []
 
   const orders = rawData.map((order: unknown) => ({
     ...(order as any),
@@ -92,7 +92,15 @@ export const getOrders = async (
       })),
     })),
   }))
-  return { ...response.data, data: orders }
+  return {
+    data: orders,
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 export const createOrder = async (data: CreateOrderRequest): Promise<Order> => {
@@ -127,7 +135,15 @@ export const adjustStock = async (data: AdjustStockRequest): Promise<void> => {
 
 export const getShifts = async (
   filters: GetShiftsFilters
-): Promise<StaffShift[]> => {
+): Promise<{ data: StaffShift[]; meta: PaginationMeta }> => {
   const response = await apiClient.get('/admin/shifts', { params: filters })
-  return response.data
+  return {
+    data: response.data?.items || response.data?.data || [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }

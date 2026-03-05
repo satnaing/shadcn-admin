@@ -50,11 +50,11 @@ export function LoyaltySettingsForm({
 
   const productList = Array.isArray(productsData)
     ? productsData
-    : productsData?.items || productsData?.data || []
+    : productsData?.data || []
 
   const categoryList = Array.isArray(categoriesData)
     ? categoriesData
-    : categoriesData?.items || categoriesData?.data || []
+    : categoriesData?.data || []
 
   const form = useForm({
     resolver: zodResolver(loyaltySettingsSchema),

@@ -1,9 +1,20 @@
+import { type PaginationMeta } from '@/types/api'
 import { apiClient } from '@/lib/api-client'
 import { type Badge } from '@/features/menu/data/badge-schema'
 
-export const getBadges = async (): Promise<Badge[]> => {
-  const response = await apiClient.get('/admin/badges')
-  return response.data
+export const getBadges = async (
+  params?: Record<string, unknown>
+): Promise<{ data: Badge[]; meta: PaginationMeta }> => {
+  const response = await apiClient.get('/admin/badges', { params })
+  return {
+    data: response.data?.items ?? response.data?.data ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 export const createBadge = async (data: Omit<Badge, 'id'>): Promise<Badge> => {

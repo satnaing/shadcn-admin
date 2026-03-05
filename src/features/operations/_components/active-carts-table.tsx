@@ -75,6 +75,16 @@ export function ActiveCartsTable({
       header: 'Last Updated',
       cell: ({ row }) => {
         const date = row.original.updatedAt
+
+        // Ensure date is valid before using date-fns
+        if (!date || isNaN(date.getTime())) {
+          return (
+            <div className='flex items-center gap-2 text-muted-foreground'>
+              <span>Unknown</span>
+            </div>
+          )
+        }
+
         const isStale = differenceInHours(new Date(), date) >= 1
 
         return (

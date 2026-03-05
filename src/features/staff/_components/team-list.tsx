@@ -10,7 +10,8 @@ interface TeamListProps {
 }
 
 export function TeamList({ shopId }: TeamListProps) {
-  const { data: staffList = [], isLoading } = useStaff(shopId)
+  const { data: response, isLoading } = useStaff({ shopId })
+  const staffList = response?.data || []
 
   const filteredData = useMemo(() => {
     return staffList.filter((staff) =>

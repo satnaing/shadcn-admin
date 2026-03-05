@@ -1,9 +1,19 @@
-import type { Shop, FulfillmentMethod } from '@/types/api'
+import type { Shop, FulfillmentMethod, PaginationMeta } from '@/types/api'
 import { apiClient } from '@/lib/api-client'
 
-export const getShops = async (): Promise<Shop[]> => {
-  const response = await apiClient.get('/admin/shops')
-  return response.data
+export const getShops = async (
+  params?: Record<string, unknown>
+): Promise<{ data: Shop[]; meta: PaginationMeta }> => {
+  const response = await apiClient.get('/admin/shops', { params })
+  return {
+    data: response.data?.items ?? response.data?.data ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }
 
 export const getShop = async (id: string): Promise<Shop> => {

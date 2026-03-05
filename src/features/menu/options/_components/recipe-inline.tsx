@@ -56,7 +56,11 @@ export function RecipeInline({ control, name, choiceId }: RecipeInlineProps) {
               key={field.id}
               control={control}
               index={index}
-              ingredients={ingredients}
+              ingredients={
+                (Array.isArray(ingredients)
+                  ? ingredients
+                  : (ingredients as any)?.data) || []
+              }
               ingredientFieldName={`${name}.${index}.ingredientId`}
               quantityFieldName={`${name}.${index}.quantity`}
               onRemove={() => remove(index)}

@@ -2,7 +2,6 @@ import { useState, useMemo } from 'react'
 import { RefreshCcw } from 'lucide-react'
 import { useKdsBoard } from '@/hooks/queries/use-kds-board'
 import { useAppStore } from '@/hooks/use-app-store'
-import { useKdsActions } from '@/hooks/use-kds-actions'
 import { BrandLoader } from '@/components/ui/brand-loader'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -20,15 +19,6 @@ export default function OperationsPage() {
     isLoading,
     refetch,
   } = useKdsBoard(shopId || undefined, autoRefresh)
-
-  const {
-    handleStatusChange,
-    handlePrintReceipt,
-    handlePrintLabels,
-    isUpdatingStatusId,
-    isPrintingReceiptId,
-    isPrintingLabelId,
-  } = useKdsActions()
 
   const shopDisplayName = useMemo(() => {
     if (!activeShop) return shopId || 'Global View'
@@ -87,15 +77,7 @@ export default function OperationsPage() {
       </header>
       {/* Board Content */}
       <main className='flex min-h-0 flex-1 flex-col overflow-hidden pt-6'>
-        <KanbanBoard
-          boardState={boardState}
-          onStatusChange={handleStatusChange}
-          onPrintReceipt={handlePrintReceipt}
-          onPrintLabels={handlePrintLabels}
-          isUpdatingStatusId={isUpdatingStatusId}
-          isPrintingReceiptId={isPrintingReceiptId}
-          isPrintingLabelId={isPrintingLabelId}
-        />
+        <KanbanBoard boardState={boardState} />
       </main>
     </div>
   )

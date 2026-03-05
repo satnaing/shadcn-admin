@@ -3,6 +3,7 @@ export enum DiscountType {
   FIXED = 'FIXED', // e.g., $5 off
   PERCENTAGE = 'PERCENTAGE', // e.g., 10% off
   FIXED_PRICE = 'FIXED_PRICE', // e.g., Buy for $10
+  STAMP_PER_ITEM = 'STAMP_PER_ITEM', // e.g., 1 stamp per item
 }
 
 export enum PromotionScope {
@@ -12,17 +13,30 @@ export enum PromotionScope {
   MIXED = 'MIXED',
 }
 
+export interface PromotionResponse {
+  data: Promotion[]
+  meta: {
+    totalItems: number
+    itemCount: number
+    itemsPerPage: number
+    totalPages: number
+    currentPage: number
+  }
+}
+
 export interface Promotion {
   id: string
-  name: { en: string }
-  description?: { en: string }
+  name: { en: string; km?: string } | string
+  description?: { en: string; km?: string } | string
   code?: string // e.g., "SUMMER2025"
   type: DiscountType
-  value: number // Decimal in DB
+  value: number | string // Decimal in DB, sometimes returns as string
   scope: PromotionScope
   targetSku?: string // Only if scope is PRODUCT
-  startDate?: string // Date string
-  endDate?: string
+  startDate?: string // Mapped from validFrom
+  endDate?: string // Mapped from validUntil
+  validFrom?: string
+  validUntil?: string
   budgetLimitAmount?: number
   totalAmountBurned?: number // Usage tracking — may be absent from API
   isActive?: never // Removed from API

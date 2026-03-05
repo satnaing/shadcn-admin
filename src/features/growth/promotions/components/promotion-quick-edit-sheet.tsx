@@ -10,11 +10,13 @@ import { Calendar } from '@/components/ui/calendar'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import {
   Popover,
   PopoverContent,
@@ -36,6 +38,9 @@ import {
   SheetHeader,
   SheetTitle,
 } from '@/components/ui/sheet'
+import { Switch } from '@/components/ui/switch'
+import { MultiLangInput } from '@/components/custom/multi-lang-input'
+import { MultiLangTextarea } from '@/components/custom/multi-lang-textarea'
 import { useUpdatePromotion } from '../hooks/use-update-promotion'
 
 interface PromotionQuickEditSheetProps {
@@ -45,6 +50,10 @@ interface PromotionQuickEditSheetProps {
 }
 
 interface QuickEditForm {
+  name: Record<string, string>
+  description: Record<string, string>
+  bannerUrl: string
+  isFeatured: boolean
   status: 'ACTIVE' | 'INACTIVE' | 'ARCHIVED'
   startDate: Date | undefined
   endDate: Date | undefined
@@ -59,6 +68,10 @@ export function PromotionQuickEditSheet({
 
   const form = useForm<QuickEditForm>({
     defaultValues: {
+      name: { en: '', km: '' },
+      description: { en: '', km: '' },
+      bannerUrl: '',
+      isFeatured: false,
       status: 'ACTIVE',
       startDate: undefined,
       endDate: undefined,
@@ -69,6 +82,16 @@ export function PromotionQuickEditSheet({
   useEffect(() => {
     if (promotion && open) {
       form.reset({
+        name:
+          typeof promotion.name === 'string'
+            ? { en: promotion.name, km: '' }
+            : promotion.name || { en: '', km: '' },
+        description:
+          typeof promotion.description === 'string'
+            ? { en: promotion.description, km: '' }
+            : promotion.description || { en: '', km: '' },
+        bannerUrl: promotion.bannerUrl?.en ?? '',
+        isFeatured: promotion.isFeatured ?? false,
         status: (promotion.status as QuickEditForm['status']) ?? 'ACTIVE',
         startDate: promotion.startDate
           ? new Date(promotion.startDate)
@@ -89,10 +112,16 @@ export function PromotionQuickEditSheet({
       return
     }
 
+    const bannerUrl = data.bannerUrl ? { en: data.bannerUrl } : undefined
+
     updatePromotion(
       {
         id: promotion.id,
         data: {
+          name: data.name,
+          description: data.description,
+          bannerUrl,
+          isFeatured: data.isFeatured,
           status: data.status,
           startDate: data.startDate?.toISOString(),
           endDate: data.endDate?.toISOString(),
@@ -117,13 +146,17 @@ export function PromotionQuickEditSheet({
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
-      <SheetContent className='flex w-full flex-col p-4 sm:max-w-md'>
+      <SheetContent className='flex w-full flex-col overflow-y-auto p-4 sm:max-w-md'>
         <SheetHeader>
           <SheetTitle className='truncate'>
-            {promotion?.name?.en ?? 'Edit Promotion'}
+            {promotion
+              ? typeof promotion.name === 'string'
+                ? promotion.name
+                : promotion.name?.en
+              : 'Edit Promotion'}
           </SheetTitle>
           <SheetDescription>
-            Quickly update the promotion's status and active date range.
+            Edit promotion details, status, and active date range.
           </SheetDescription>
         </SheetHeader>
 
@@ -143,7 +176,7 @@ export function PromotionQuickEditSheet({
               <span className='font-mono font-medium'>
                 {promotion.type === 'PERCENTAGE'
                   ? `${promotion.value ?? 0}%`
-                  : `$${(promotion.value ?? 0).toFixed(2)}`}{' '}
+                  : `$${Number(promotion.value ?? 0).toFixed(2)}`}{' '}
                 OFF
               </span>
             </div>
@@ -161,6 +194,96 @@ export function PromotionQuickEditSheet({
             onSubmit={form.handleSubmit(onSubmit)}
             className='flex flex-1 flex-col gap-6'
           >
+            {/* Content Section */}
+            <div className='space-y-4'>
+              <span className='text-sm font-medium'>Content</span>
+
+              {/* Multi-lang Name */}
+              <FormField
+                control={form.control}
+                name='name'
+                rules={{
+                  validate: (val) =>
+                    (val?.en && val.en.trim() !== '') ||
+                    'English title is required',
+                }}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <MultiLangInput
+                        label='Campaign Name'
+                        placeholder='e.g. Summer Sale'
+                        value={field.value as Record<string, string>}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Multi-lang Description */}
+              <FormField
+                control={form.control}
+                name='description'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <MultiLangTextarea
+                        label='Description'
+                        placeholder='Short description shown to customers...'
+                        value={field.value as Record<string, string>}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Banner URL */}
+              <FormField
+                control={form.control}
+                name='bannerUrl'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Banner Image URL</FormLabel>
+                    <FormControl>
+                      <Input placeholder='https://...' type='url' {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      Direct URL to the promotion banner image.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Is Featured */}
+              <FormField
+                control={form.control}
+                name='isFeatured'
+                render={({ field }) => (
+                  <FormItem className='flex flex-row items-center justify-between rounded-lg border p-3'>
+                    <div className='space-y-0.5'>
+                      <FormLabel>Featured</FormLabel>
+                      <FormDescription>
+                        Show this promotion in featured / highlighted sections.
+                      </FormDescription>
+                    </div>
+                    <FormControl>
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            <Separator />
+
             {/* Status */}
             <FormField
               control={form.control}

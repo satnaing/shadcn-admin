@@ -1,8 +1,10 @@
+import { type PaginationMeta } from '@/types/api'
 import { type Promotion, DiscountType } from '@/types/growth'
 import { apiClient } from '@/lib/api-client'
 import type {
   LoyaltySettings,
   MembershipTier,
+  UserLoyaltyBalance,
 } from '@/features/growth/data/loyalty-schema'
 
 function mapPromotionToSettings(data: Promotion): LoyaltySettings {
@@ -75,4 +77,21 @@ export const updateLoyaltySettings = async (
   const payload = mapSettingsToPromotionUpdate(data)
   const response = await apiClient.patch('/admin/loyalty-program', payload)
   return mapPromotionToSettings(response.data)
+}
+
+export const getCustomerBalances = async (
+  params?: Record<string, unknown>
+): Promise<{ data: UserLoyaltyBalance[]; meta: PaginationMeta }> => {
+  const response = await apiClient.get('/admin/loyalty-program/balances', {
+    params,
+  })
+  return {
+    data: response.data?.items ?? [],
+    meta: response.data?.meta ?? {
+      total: 0,
+      page: 1,
+      limit: 10,
+      totalPages: 1,
+    },
+  }
 }

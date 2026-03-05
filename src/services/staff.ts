@@ -1,3 +1,4 @@
+import { type PaginationMeta } from '@/types/api'
 import type { Staff } from '@/types/staff'
 import { apiClient } from '@/lib/api-client'
 
@@ -29,30 +30,38 @@ const getLocal = (val: unknown): string => {
   return (val as string) || ''
 }
 
-export const getStaffList = async (shopId?: string): Promise<Staff[]> => {
+export const getStaffList = async (
+  params?: Record<string, unknown>
+): Promise<{ data: Staff[]; meta: PaginationMeta }> => {
   const response = await apiClient.get('/admin/staff', {
-    params: { shopId },
+    params,
   })
-  return (response.data as RawStaff[]).map((staff) => ({
-    ...(staff as unknown as Staff),
-    access: (staff.shopAccess || []).map((access) => ({
-      ...(access as any),
-      shop: access.shop
-        ? {
-            ...access.shop,
-            name: getLocal(access.shop.name),
-          }
-        : undefined,
-      role: access.role
-        ? {
-            ...access.role,
-            // Keep as objects to match Role interface in types/staff.ts
-            name: access.role.name,
-            description: access.role.description,
-          }
-        : undefined,
+  const { items, data, meta } = response.data
+  const rawData = items || data || []
+
+  return {
+    data: (rawData as RawStaff[]).map((staff) => ({
+      ...(staff as unknown as Staff),
+      access: (staff.shopAccess || []).map((access) => ({
+        ...(access as any),
+        shop: access.shop
+          ? {
+              ...access.shop,
+              name: getLocal(access.shop.name),
+            }
+          : undefined,
+        role: access.role
+          ? {
+              ...access.role,
+              // Keep as objects to match Role interface in types/staff.ts
+              name: access.role.name,
+              description: access.role.description,
+            }
+          : undefined,
+      })),
     })),
-  }))
+    meta,
+  }
 }
 
 export const createStaff = async (

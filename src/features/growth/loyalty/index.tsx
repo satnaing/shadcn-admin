@@ -3,6 +3,7 @@ import { toast } from 'sonner'
 import {
   useLoyaltySettings,
   useUpdateLoyaltySettings,
+  useCustomerBalances,
 } from '@/hooks/queries/use-loyalty'
 import { BrandLoader } from '@/components/ui/brand-loader'
 import { PageTitle } from '@/components/page-title'
@@ -10,18 +11,25 @@ import {
   type LoyaltySettings,
   type UserLoyaltyBalance,
 } from '../data/loyalty-schema'
-import { MOCK_USER_LOYALTY_BALANCES } from '../data/mock-loyalty'
 import { AdjustBalanceDialog } from './components/adjust-balance-dialog'
 import { CustomerBalanceTable } from './components/customer-balance-table'
 import { LoyaltySettingsForm } from './components/loyalty-settings-form'
 
 export default function LoyaltyPage() {
-  const { data: settings, isLoading } = useLoyaltySettings()
+  const { data: settings, isLoading: isLoadingSettings } = useLoyaltySettings()
   const { mutateAsync: updateSettings } = useUpdateLoyaltySettings()
 
-  const [balances, setBalances] = useState<UserLoyaltyBalance[]>(
-    MOCK_USER_LOYALTY_BALANCES
-  )
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  })
+
+  const { data: balanceData, isLoading: isLoadingBalances } =
+    useCustomerBalances({
+      page: pagination.pageIndex + 1,
+      limit: pagination.pageSize,
+    })
+
   const [adjustUser, setAdjustUser] = useState<UserLoyaltyBalance | null>(null)
 
   const handleSaveSettings = async (data: LoyaltySettings) => {
@@ -34,28 +42,25 @@ export default function LoyaltyPage() {
   }
 
   const handleAdjustBalance = (
-    amount: number,
+    _amount: number,
     _reason: string,
     _managerPin: string
   ) => {
     if (!adjustUser) return
-
-    const updatedBalances = balances.map((u) => {
-      if (u.userId === adjustUser.userId) {
-        return { ...u, currentPoints: u.currentPoints + amount }
-      }
-      return u
-    })
-    setBalances(updatedBalances)
+    // TODO: Implement real balance adjustment API call if needed
+    toast.info('Balance adjustment needs API implementation')
   }
 
-  if (isLoading || !settings) {
+  if (isLoadingSettings || isLoadingBalances || !settings) {
     return (
       <div className='flex h-[80vh] w-full items-center justify-center p-6'>
         <BrandLoader />
       </div>
     )
   }
+
+  const balances = balanceData?.data || []
+  const pageCount = balanceData?.meta?.totalPages || 1
 
   return (
     <div className='flex flex-col space-y-6 p-8'>
@@ -73,7 +78,13 @@ export default function LoyaltyPage() {
 
           <div className='space-y-4'>
             <h3 className='text-lg font-medium'>Customer Balances</h3>
-            <CustomerBalanceTable data={balances} onAdjust={setAdjustUser} />
+            <CustomerBalanceTable
+              data={balances}
+              onAdjust={setAdjustUser}
+              pageCount={pageCount}
+              pagination={pagination}
+              onPaginationChange={setPagination}
+            />
           </div>
         </div>
 

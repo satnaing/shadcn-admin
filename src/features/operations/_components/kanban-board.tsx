@@ -6,12 +6,6 @@ import { PrepTally } from './prep-tally'
 
 interface KanbanBoardProps {
   boardState: KdsBoardState
-  onStatusChange: (id: string, status: OrderStatus) => void
-  onPrintReceipt: (order: KdsOrder) => void
-  onPrintLabels: (order: KdsOrder) => void
-  isUpdatingStatusId: string | null
-  isPrintingReceiptId: string | null
-  isPrintingLabelId: string | null
 }
 
 const COLUMNS = [
@@ -21,15 +15,7 @@ const COLUMNS = [
   { id: 'READY', title: 'Ready', status: 'READY' as OrderStatus },
 ]
 
-export function KanbanBoard({
-  boardState,
-  onStatusChange,
-  onPrintReceipt,
-  onPrintLabels,
-  isUpdatingStatusId,
-  isPrintingReceiptId,
-  isPrintingLabelId,
-}: KanbanBoardProps) {
+export function KanbanBoard({ boardState }: KanbanBoardProps) {
   // We no longer need client-side filtering or grouping, the backend handles this via /kds API
   // and the Socket.io updates keep it fresh.
 
@@ -64,16 +50,7 @@ export function KanbanBoard({
               <ScrollArea className='min-h-0 flex-1 pr-4'>
                 <div className='flex flex-col gap-3 pb-2'>
                   {columnOrders.map((order: KdsOrder) => (
-                    <OrderCard
-                      key={order.id}
-                      order={order}
-                      onStatusChange={onStatusChange}
-                      onPrintReceipt={onPrintReceipt}
-                      onPrintLabels={onPrintLabels}
-                      isUpdatingStatus={isUpdatingStatusId === order.id}
-                      isPrintingReceipt={isPrintingReceiptId === order.id}
-                      isPrintingLabel={isPrintingLabelId === order.id}
-                    />
+                    <OrderCard key={order.id} order={order} />
                   ))}
                   {columnOrders.length === 0 && (
                     <div className='flex h-32 items-center justify-center rounded-xl border border-dashed border-muted-foreground/20 text-xs font-medium tracking-widest text-muted-foreground/60 uppercase'>

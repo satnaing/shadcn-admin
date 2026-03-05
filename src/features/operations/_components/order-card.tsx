@@ -11,30 +11,24 @@ import {
   Clock,
   Printer,
 } from 'lucide-react'
+import { printLabelViaBluetooth } from '@/utils/label-printer'
+import { printReceiptViaBluetooth } from '@/utils/printer'
+import { useUpdateOrderStatus } from '@/hooks/queries/use-orders'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 
 interface OrderCardProps {
   order: KdsOrder
-  onStatusChange: (id: string, status: OrderStatus) => void
-  onPrintReceipt: (order: KdsOrder) => void
-  onPrintLabels: (order: KdsOrder) => void
-  isUpdatingStatus: boolean
-  isPrintingReceipt: boolean
-  isPrintingLabel: boolean
 }
 
-export function OrderCard({
-  order,
-  onStatusChange,
-  onPrintReceipt,
-  onPrintLabels,
-  isUpdatingStatus,
-  isPrintingReceipt,
-  isPrintingLabel,
-}: OrderCardProps) {
+export function OrderCard({ order }: OrderCardProps) {
   const [elapsed, setElapsed] = useState(0)
+  const [isPrintingReceipt, setIsPrintingReceipt] = useState(false)
+  const [isPrintingLabel, setIsPrintingLabel] = useState(false)
+
+  const { mutateAsync: updateStatus, isPending: isUpdatingStatus } =
+    useUpdateOrderStatus()
   const { data: badges } = useQuery({
     queryKey: ['badges'],
     queryFn: getBadges,
@@ -49,6 +43,39 @@ export function OrderCard({
     const interval = setInterval(update, 1000)
     return () => clearInterval(interval)
   }, [order.createdAt])
+
+  const handleStatusChange = async (newStatus: OrderStatus) => {
+    try {
+      await updateStatus({ id: order.id, status: newStatus })
+    } catch (_e) {
+      // Error is handled by the mutation
+    }
+  }
+
+  const handlePrintReceipt = async () => {
+    setIsPrintingReceipt(true)
+    try {
+      await printReceiptViaBluetooth(order)
+    } finally {
+      setIsPrintingReceipt(false)
+    }
+  }
+
+  const handlePrintLabels = async () => {
+    setIsPrintingLabel(true)
+    try {
+      for (const item of order.items) {
+        await printLabelViaBluetooth({
+          drinkName: item.productName as string,
+          note: item.instructions ?? undefined,
+          orderCode: `YOK-${order.invoiceCode}`,
+          quantity: item.quantity,
+        })
+      }
+    } finally {
+      setIsPrintingLabel(false)
+    }
+  }
 
   const formatElapsed = (seconds: number) => {
     const mins = Math.floor(seconds / 60)
@@ -140,7 +167,7 @@ export function OrderCard({
                     {item.badgeIds && item.badgeIds.length > 0 && (
                       <span className='flex flex-wrap gap-1'>
                         {item.badgeIds.map((bid) => {
-                          const b = badges?.find((x) => x.id === bid)
+                          const b = badges?.data?.find((x: any) => x.id === bid)
                           if (!b) return null
                           return (
                             <span
@@ -175,7 +202,9 @@ export function OrderCard({
                         nameLower.includes('shot')
                       const isIced = nameLower.includes('iced')
 
-                      const optBadge = badges?.find((x) => x.id === opt.badgeId)
+                      const optBadge = badges?.data?.find(
+                        (x: any) => x.id === opt.badgeId
+                      )
 
                       return (
                         <span
@@ -221,7 +250,7 @@ export function OrderCard({
             variant='outline'
             size='xs'
             className='h-8 flex-1 text-[11px]'
-            onClick={() => onPrintReceipt(order)}
+            onClick={handlePrintReceipt}
             disabled={isPrintingReceipt}
           >
             <Printer className='mr-1 h-3 w-3' />
@@ -231,7 +260,7 @@ export function OrderCard({
             variant='outline'
             size='xs'
             className='h-8 flex-1 text-[11px]'
-            onClick={() => onPrintLabels(order)}
+            onClick={handlePrintLabels}
             disabled={isPrintingLabel}
           >
             <Tag className='mr-1 h-3 w-3' />
@@ -243,7 +272,7 @@ export function OrderCard({
             size='sm'
             className='h-9 w-full text-xs font-bold'
             variant={action.variant}
-            onClick={() => onStatusChange(order.id, action.next)}
+            onClick={() => handleStatusChange(action.next)}
             disabled={isUpdatingStatus}
           >
             {isUpdatingStatus ? (

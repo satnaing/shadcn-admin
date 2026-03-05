@@ -69,8 +69,15 @@ export function EmployeeSheet({
   onOpenChange,
   initialData,
 }: EmployeeSheetProps) {
-  const { data: shops = [] } = useShops()
-  const { data: roles = [] } = useRoles()
+  const { data: shopsData } = useShops()
+  const { data: rolesData } = useRoles()
+
+  const shops = Array.isArray(shopsData)
+    ? shopsData
+    : (shopsData as any)?.data || []
+  const roles = Array.isArray(rolesData)
+    ? rolesData
+    : (rolesData as any)?.data || []
 
   const form = useForm<StaffFormValues>({
     resolver: zodResolver(staffSchema),
@@ -125,7 +132,8 @@ export function EmployeeSheet({
         )
       ) {
         // Use the first available role (usually Barista or lowest priority) if available
-        const defaultRoleId = roles[1]?.id || roles[0]?.id || ''
+        const rolesArray = roles
+        const defaultRoleId = rolesArray[1]?.id || rolesArray[0]?.id || ''
         form.setValue('access', [
           ...currentAccess,
           { shopId, roleId: defaultRoleId },
@@ -322,7 +330,7 @@ export function EmployeeSheet({
                       No shops found.
                     </div>
                   )}
-                  {shops.map((shop) => {
+                  {shops.map((shop: any) => {
                     // Watch access to determine state
                     const currentAccess = form.watch('access') || []
                     const accessEntry = currentAccess.find(
@@ -367,7 +375,7 @@ export function EmployeeSheet({
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                              {roles.map((role) => (
+                              {roles.map((role: any) => (
                                 <SelectItem key={role.id} value={role.id || ''}>
                                   {role.name}
                                 </SelectItem>

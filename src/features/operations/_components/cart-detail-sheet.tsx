@@ -111,7 +111,9 @@ export function CartDetailSheet({
                             {item.badgeIds && item.badgeIds.length > 0 && (
                               <div className='flex flex-wrap gap-1'>
                                 {item.badgeIds.map((bid) => {
-                                  const b = badges?.find((x) => x.id === bid)
+                                  const b = badges?.data?.find(
+                                    (x: any) => x.id === bid
+                                  )
                                   if (!b) return null
                                   return (
                                     <span
@@ -132,8 +134,8 @@ export function CartDetailSheet({
                           {item.options && item.options.length > 0 && (
                             <ul className='list-inside list-disc text-xs text-muted-foreground'>
                               {item.options.map((opt, idx) => {
-                                const optBadge = badges?.find(
-                                  (x) => x.id === opt.badgeId
+                                const optBadge = badges?.data?.find(
+                                  (x: any) => x.id === opt.badgeId
                                 )
                                 return (
                                   <li key={idx}>

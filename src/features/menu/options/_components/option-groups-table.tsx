@@ -1,23 +1,36 @@
+import { type OptionGroup } from '@/types/api'
 import { toast } from 'sonner'
-import {
-  useOptionGroups,
-  useDeleteOptionGroup,
-} from '@/hooks/queries/use-catalog'
+import { useDeleteOptionGroup } from '@/hooks/queries/use-catalog'
 import { DataTable } from '@/components/custom/data-table'
-import { type ProductOptionGroup } from '../../data/schema'
 import { getColumns } from './option-groups-columns.tsx'
 
 interface OptionGroupsTableProps {
-  onEdit: (group: ProductOptionGroup) => void
+  onEdit: (group: OptionGroup) => void
+  data: OptionGroup[]
+  pageCount?: number
+  pagination?: {
+    pageIndex: number
+    pageSize: number
+  }
+  onPaginationChange?: (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => void
 }
 
-export function OptionGroupsTable({ onEdit }: OptionGroupsTableProps) {
-  const { data: optionGroups } = useOptionGroups()
+export function OptionGroupsTable({
+  onEdit,
+  data,
+  pageCount,
+  pagination,
+  onPaginationChange,
+}: OptionGroupsTableProps) {
   const { mutate: deleteGroup } = useDeleteOptionGroup()
 
-  const handleDelete = (group: ProductOptionGroup) => {
-    if (!group.id) return
-    deleteGroup(group.id, {
+  const handleDelete = (group: any) => {
+    const id = group.id || group.sku
+    if (!id) return
+    deleteGroup(id, {
       onSuccess: () => {
         toast.success('Option group deleted')
       },
@@ -29,14 +42,20 @@ export function OptionGroupsTable({ onEdit }: OptionGroupsTableProps) {
 
   // TODO: Update columns to support actions with onDelete and onEdit
   // For now we just pass data
-  const tableColumns = getColumns({ onEdit, onDelete: handleDelete })
+  const tableColumns = getColumns({
+    onEdit: onEdit as any,
+    onDelete: handleDelete,
+  })
 
   return (
     <DataTable
       columns={tableColumns}
-      data={(optionGroups as ProductOptionGroup[]) || []}
+      data={data as any}
       searchKey='name'
       searchPlaceholder='Filter option groups...'
+      pageCount={pageCount}
+      pagination={pagination}
+      onPaginationChange={onPaginationChange}
     />
   )
 }

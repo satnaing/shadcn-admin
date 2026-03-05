@@ -79,6 +79,16 @@ export interface CreateCategoryRequest {
   description?: LocalizedText
 }
 
+export interface Category {
+  id: string
+  name: LocalizedText
+  slug: string
+  description?: LocalizedText
+  sortOrder: number
+  parentId?: string
+  imageUrl?: LocalizedText
+}
+
 export type UpdateCategoryRequest = Partial<CreateCategoryRequest>
 
 // Products
@@ -455,6 +465,8 @@ export interface CreateOrderRequest {
     name: string
     phone?: string
   }
+  customerName?: string
+  customerPhone?: string
   items: CreateOrderItemDto[]
   fulfillmentMethodId: string
   status: string

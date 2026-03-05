@@ -59,8 +59,11 @@ export function RecipeDrawer({
 }: RecipeDrawerProps) {
   const { data: recipes, isLoading: isLoadingRecipes } =
     useGetOptionRecipes(optionId)
-  const { data: ingredients, isLoading: isLoadingIngredients } =
+  const { data: ingredientsData, isLoading: isLoadingIngredients } =
     useIngredients()
+  const ingredients = Array.isArray(ingredientsData)
+    ? ingredientsData
+    : (ingredientsData as any)?.data || []
 
   const { mutate: createRecipe, isPending: isCreating } = useCreateRecipe()
   const { mutate: deleteRecipe, isPending: isDeleting } = useDeleteRecipe()
@@ -183,7 +186,10 @@ export function RecipeDrawer({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        {ingredients?.map((ing) => (
+                        {(Array.isArray(ingredients)
+                          ? ingredients
+                          : (ingredients as any)?.data || []
+                        ).map((ing: any) => (
                           <SelectItem key={ing.id} value={ing.id}>
                             {ing.name?.['en'] || ing.sku}
                           </SelectItem>

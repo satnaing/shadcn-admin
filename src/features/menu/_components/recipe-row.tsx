@@ -25,7 +25,10 @@ export function RecipeUnitSuffix({
   ingredientId: string
   ingredients?: Ingredient[]
 }) {
-  const ingredient = ingredients?.find((i) => i.id === ingredientId)
+  const ingredientList = Array.isArray(ingredients)
+    ? ingredients
+    : (ingredients as any)?.data || []
+  const ingredient = ingredientList.find((i: any) => i.id === ingredientId)
   if (!ingredient)
     return <span className='min-w-[24px] text-xs text-muted-foreground'>-</span>
 
@@ -54,7 +57,10 @@ export function RecipeCostBadge({
   quantity: number
   ingredients?: Ingredient[]
 }) {
-  const ingredient = ingredients?.find((i) => i.id === ingredientId)
+  const ingredientList = Array.isArray(ingredients)
+    ? ingredients
+    : (ingredients as any)?.data || []
+  const ingredient = ingredientList.find((i: any) => i.id === ingredientId)
   const cost = (ingredient?.cost || 0) * (Number(quantity) || 0)
 
   if (cost <= 0) return null
@@ -127,7 +133,10 @@ export function RecipeRow({
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {ingredients?.map((ingredient) => (
+                  {(Array.isArray(ingredients)
+                    ? ingredients
+                    : (ingredients as any)?.data || []
+                  ).map((ingredient: any) => (
                     <SelectItem key={ingredient.id} value={ingredient.id}>
                       {ingredient.name?.['en'] || ingredient.sku || 'Unknown'}
                     </SelectItem>

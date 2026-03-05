@@ -22,15 +22,20 @@ export function ShopSwitcher() {
   const { isMobile } = useSidebar()
   const { shops, activeShopId, setActiveShopId } = useAppStore()
   const [showCreateSheet, setShowCreateSheet] = React.useState(false)
+  const shopsArray = React.useMemo(
+    () => (Array.isArray(shops) ? shops : []),
+    [shops]
+  )
 
   // Set initial shop if none selected
   React.useEffect(() => {
-    if (!activeShopId && shops.length > 0) {
-      setActiveShopId(shops[0].id)
+    if (!activeShopId && shopsArray.length > 0) {
+      setActiveShopId(shopsArray[0].id)
     }
-  }, [activeShopId, shops, setActiveShopId])
+  }, [activeShopId, shopsArray, setActiveShopId])
 
-  const activeShop = shops.find((s) => s.id === activeShopId) || shops[0]
+  const activeShop =
+    shopsArray.find((s) => s.id === activeShopId) || shopsArray[0]
 
   return (
     <>
@@ -67,7 +72,7 @@ export function ShopSwitcher() {
               <DropdownMenuLabel className='text-xs text-muted-foreground'>
                 Shops
               </DropdownMenuLabel>
-              {shops.map((shop, index) => (
+              {shopsArray.map((shop, index) => (
                 <DropdownMenuItem
                   key={shop.id}
                   onClick={() => setActiveShopId(shop.id)}

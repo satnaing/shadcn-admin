@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { BrandLoader } from '@/components/ui/brand-loader'
 import { PageTitle } from '@/components/page-title'
-import { type Product, type Category } from '../data/schema'
+import { type Product } from '../data/schema'
 import { ProductSheet } from './_components/product-sheet'
 import { ProductsTable } from './_components/products-table'
 
@@ -44,7 +44,7 @@ export default function ProductsPage() {
   const { mutate: deleteProductMutation } = useDeleteProduct()
   const products = response?.data || []
 
-  const handleEdit = (product: Product) => {
+  const handleEdit = (product: any) => {
     setSelectedProduct(product)
     setOpen(true)
   }
@@ -108,14 +108,18 @@ export default function ProductsPage() {
       />
 
       <ProductsTable
-        data={products || []}
-        pageCount={response?.meta?.totalPages || response?.meta?.pageCount}
+        data={(products as any) || []}
+        pageCount={response?.meta?.totalPages}
         pagination={{
           pageIndex: page - 1,
           pageSize: limit,
         }}
         onPaginationChange={onPaginationChange}
-        categories={(categories as Category[]) || []}
+        categories={
+          (Array.isArray(categories)
+            ? categories
+            : (categories as any)?.data) || []
+        }
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

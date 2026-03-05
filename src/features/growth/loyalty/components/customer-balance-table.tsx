@@ -7,11 +7,23 @@ import { type UserLoyaltyBalance } from '../../data/loyalty-schema'
 interface CustomerBalanceTableProps {
   data: UserLoyaltyBalance[]
   onAdjust: (user: UserLoyaltyBalance) => void
+  pageCount?: number
+  pagination?: {
+    pageIndex: number
+    pageSize: number
+  }
+  onPaginationChange?: (pagination: {
+    pageIndex: number
+    pageSize: number
+  }) => void
 }
 
 export function CustomerBalanceTable({
   data,
   onAdjust,
+  pageCount,
+  pagination,
+  onPaginationChange,
 }: CustomerBalanceTableProps) {
   const columns: ColumnDef<UserLoyaltyBalance>[] = [
     {
@@ -66,6 +78,9 @@ export function CustomerBalanceTable({
         data={data}
         searchKey='userName'
         searchPlaceholder='Search customers...'
+        pageCount={pageCount}
+        pagination={pagination}
+        onPaginationChange={onPaginationChange}
       />
     </div>
   )

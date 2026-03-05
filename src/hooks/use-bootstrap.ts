@@ -27,19 +27,19 @@ export const useBootstrap = () => {
 
   useEffect(() => {
     if (shops) {
-      setShops(shops)
+      const shopsArray = Array.isArray(shops) ? shops : []
+      setShops(shopsArray)
 
       // Auto-select Default Shop
       // This runs when shops are loaded or changed
       const currentActiveId = localStorage.getItem('activeShopId')
 
       // If we have a stored ID and it exists in the fetched shops, use it
-      // If we have a stored ID and it exists in the fetched shops, use it
-      if (currentActiveId && shops.find((s) => s.id === currentActiveId)) {
+      if (currentActiveId && shopsArray.find((s) => s.id === currentActiveId)) {
         setActiveShopId(currentActiveId)
-      } else if (shops.length > 0) {
+      } else if (shopsArray.length > 0) {
         // Otherwise default to the first shop
-        setActiveShopId(shops[0].id)
+        setActiveShopId(shopsArray[0].id)
       } else {
         // No shops available
         setActiveShopId(null)

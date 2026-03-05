@@ -77,7 +77,7 @@ export default function Inventory() {
         </div>
       ) : (
         <InventoryTable
-          data={shopData?.items || []}
+          data={shopData?.data || []}
           onAdjust={handleAdjust}
           onEdit={handleEdit}
           pageCount={shopData?.meta?.totalPages}

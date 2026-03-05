@@ -38,7 +38,7 @@ export default function ShopMenuPage() {
       <ShopMenuTable
         shopId={shopId}
         data={products || []}
-        categories={categories}
+        categories={categories?.data}
       />
     </div>
   )

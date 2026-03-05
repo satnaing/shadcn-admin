@@ -9,8 +9,17 @@ import { EmployeesTable } from '@/features/staff/_components/employees-table'
 export default function EmployeesPage() {
   const [open, setOpen] = useState(false)
   const [selectedStaff, setSelectedStaff] = useState<Staff | null>(null)
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  })
 
-  const { data: staffData, isLoading } = useStaff()
+  const { data: response, isLoading } = useStaff({
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize,
+  })
+
+  const staffData = response?.data || []
 
   const handleEdit = (staff: Staff) => {
     setSelectedStaff(staff)
@@ -38,7 +47,13 @@ export default function EmployeesPage() {
         buttonLabel='Add Employee'
         onClick={handleCreate}
       />
-      <EmployeesTable data={staffData || []} onEdit={handleEdit} />
+      <EmployeesTable
+        data={staffData}
+        onEdit={handleEdit}
+        pageCount={response?.meta?.totalPages}
+        pagination={pagination}
+        onPaginationChange={setPagination}
+      />
 
       <EmployeeSheet
         open={open}

@@ -96,7 +96,7 @@ const BadgeCell = ({
 
   const displayBadges =
     initialBadges ||
-    (badges as MarketingBadge[])?.filter((b: MarketingBadge) =>
+    badges?.data?.filter((b: MarketingBadge) =>
       currentBadgeIds.includes(b.id!)
     ) ||
     []
@@ -164,7 +164,7 @@ const BadgeCell = ({
             <CommandList>
               <CommandEmpty>No badge found.</CommandEmpty>
               <CommandGroup>
-                {(badges as MarketingBadge[])?.map((badge: MarketingBadge) => (
+                {badges?.data?.map((badge: MarketingBadge) => (
                   <CommandItem
                     key={badge.id}
                     onSelect={() => toggleBadge(badge.id!)}

@@ -75,10 +75,10 @@ export const useActivateShopIngredients = () => {
 }
 
 // Units
-export const useUnits = () => {
+export const useUnits = (params?: Record<string, unknown>) => {
   return useQuery({
-    queryKey: ['units'],
-    queryFn: getUnits,
+    queryKey: ['units', params],
+    queryFn: () => getUnits(params),
   })
 }
 
@@ -114,10 +114,10 @@ export const useDeleteUnit = () => {
 }
 
 // Ingredients
-export const useIngredients = () => {
+export const useIngredients = (params?: Record<string, unknown>) => {
   return useQuery({
-    queryKey: ['ingredients'],
-    queryFn: getIngredients,
+    queryKey: ['ingredients', params],
+    queryFn: () => getIngredients(params),
   })
 }
 

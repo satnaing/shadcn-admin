@@ -49,7 +49,7 @@ export function AuditLogsPage() {
       />
 
       <AuditLogsTable
-        data={(logs?.items as AuditLog[]) || []}
+        data={(logs?.data as AuditLog[]) || []}
         pageCount={logs?.meta?.totalPages}
         pagination={{
           pageIndex: page - 1,

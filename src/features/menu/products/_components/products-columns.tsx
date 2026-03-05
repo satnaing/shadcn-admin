@@ -15,7 +15,10 @@ import { DataTableColumnHeader } from '@/components/data-table'
 import { type Category, type Product, ProductStatus } from '../../data/schema'
 
 const getCategoryName = (categoryId: string, categories: Category[]) => {
-  const category = categories.find((c) => c.id === categoryId)
+  const categoriesArray = Array.isArray(categories)
+    ? categories
+    : (categories as any)?.data || []
+  const category = categoriesArray.find((c: any) => c.id === categoryId)
   return category ? getTranslation(category.name) : 'Unknown'
 }
 

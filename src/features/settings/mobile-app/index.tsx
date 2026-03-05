@@ -58,7 +58,7 @@ export default function MobileAppPage() {
       </div>
       <div className='flex-1 flex-col space-y-8 p-8 pt-4'>
         <MobileAppTable
-          data={versions as MobileAppVersion[]}
+          data={(versions || []) as MobileAppVersion[]}
           onEdit={handleEdit}
         />
       </div>

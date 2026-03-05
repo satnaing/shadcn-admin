@@ -5,11 +5,13 @@ export const getMobileVersions = async (
   params?: Record<string, unknown>
 ): Promise<MobileAppVersion[]> => {
   const response = await apiClient.get('/admin/mobile-versions', { params })
-  return response.data.map((v: any) => ({
+  const rawData = response.data?.items ?? response.data?.data ?? response.data
+  const versionsArray = Array.isArray(rawData) ? rawData : []
+  return versionsArray.map((v: any) => ({
     ...v,
     version: v.latestVersion,
     releaseDate: v.createdAt,
-    status: 'published', // Assuming backend doesn't track this explicitly
+    status: 'published',
   }))
 }
 
