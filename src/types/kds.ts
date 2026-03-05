@@ -2,7 +2,7 @@ import { type OrderStatus } from './api'
 
 export interface KdsOrderOption {
   choiceId: string
-  optionName: { en: string }
+  optionName: string | { en: string }
   quantity: number
   unitPrice: number
   subtotal: number
@@ -12,7 +12,7 @@ export interface KdsOrderOption {
 export interface KdsOrderItem {
   id: string
   productId: string
-  productName: { en: string }
+  productName: string | { en: string }
   quantity: number
   unitPrice: number
   subtotal: number

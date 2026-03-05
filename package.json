@@ -6,12 +6,13 @@
   "scripts": {
     "start:dev": "vite",
     "build": "tsc -b && vite build",
-    "deploy": "yarn build && firebase deploy",
     "lint": "eslint .",
     "preview": "vite preview",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "knip": "knip"
+    "knip": "knip",
+    "deploy": "yarn build && firebase deploy",
+    "deploy:prod": "yarn build && firebase deploy --project yokcafe-pro"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.58.1",
