@@ -91,10 +91,11 @@ export function OrderCard({ order }: OrderCardProps) {
     try {
       for (const item of order.items) {
         await printLabelViaBluetooth({
-          drinkName: item.productName as string,
+          drinkName: item.productName?.en || '',
           note: item.instructions ?? undefined,
-          orderCode: `YOK-${order.invoiceCode}`,
+          orderCode: `YOK-${order.queueNumber}`,
           quantity: item.quantity,
+          options: item.options?.map((opt) => opt.optionName?.en),
         })
       }
     } finally {

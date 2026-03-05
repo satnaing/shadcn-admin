@@ -17,9 +17,38 @@ export interface LabelData {
   note?: string // e.g. "No ice"
   orderCode: string // e.g. "YOK-0012"
   quantity?: number // e.g. 2 (for printing multiple copies)
+  options?: string[] // e.g. ["Iced", "Less Sugar"]
+  counter?: string
 }
 
 // --- TSPL Generator ---
+
+const wrapText = (text: string, maxLength: number): string[] => {
+  const words = text.split(' ')
+  const lines: string[] = []
+  let currentLine = ''
+
+  for (const word of words) {
+    if ((currentLine + (currentLine ? ' ' : '') + word).length <= maxLength) {
+      currentLine = currentLine ? `${currentLine} ${word}` : word
+    } else {
+      if (currentLine) lines.push(currentLine)
+      if (word.length > maxLength) {
+        let remaining = word
+        while (remaining.length > maxLength) {
+          lines.push(remaining.slice(0, maxLength))
+          remaining = remaining.slice(maxLength)
+        }
+        currentLine = remaining
+      } else {
+        currentLine = word
+      }
+    }
+  }
+  if (currentLine) lines.push(currentLine)
+
+  return lines
+}
 
 /**
  * Generates a TSPL command string for a 40mm x 25mm label.
@@ -32,8 +61,7 @@ export const generateLabelTSPL = (label: LabelData): string => {
 
   // Truncate long names to fit the label width
   const drinkName = label.drinkName.slice(0, 20)
-  const variant = (label.variant ?? '').slice(0, 24)
-  const note = (label.note ?? '').slice(0, 24)
+  const note = label.note ?? ''
   const orderCode = label.orderCode.slice(0, 20)
 
   const lines: string[] = [
@@ -60,25 +88,38 @@ export const generateLabelTSPL = (label: LabelData): string => {
     // Drink name — large font, bold, top of label
     // TEXT x, y, "font", rotation, x-scale, y-scale, "text"
     // Font "3" = built-in 14pt font (fits ~20 chars on 40mm)
-    `TEXT 10, 10, "3", 0, 1, 1, "${drinkName}"`,
+    `TEXT 10, 10, "3", 0, 1, 1, "${drinkName} ${label.counter}"`,
+
+    // Options — list them below the drink name
+    ...(label.options?.map((opt, index) => {
+      // Start options below the drink name (y=40) and stack them
+      const yPos = 40 + index * 25
+      // Use font "2" (10pt) for options
+      return `TEXT 9, ${yPos}, "2", 0, 0, 0, "${opt}"`
+    }) ?? []),
   ]
 
-  // Variant/Sugar level line (if present)
-  if (variant) {
-    lines.push(`TEXT 10, 60, "2", 0, 1, 1, "${variant}"`)
-  }
+  // // Variant/Sugar level line (if present)
+  // if (variant) {
+  //   lines.push(`TEXT 10, 60, "2", 0, 1, 1, "${variant}"`)
+  // }
 
   // Note line (if present)
   if (note) {
-    lines.push(`TEXT 10, 90, "2", 0, 1, 1, "* ${note}"`)
+    const wrappedNote = wrapText(note, 27)
+    wrappedNote.forEach((line, index) => {
+      const yPos = 90 + index * 27
+      const prefix = index === 0 ? '* ' : '  ' // auto indent
+      lines.push(`TEXT 10, ${yPos}, "1", 0, 1, 1, "${prefix}${line}"`)
+    })
   }
 
   // Horizontal divider line (x1, y1, x2, y2, thickness in dots)
-  lines.push('BAR 0, 118, 320, 2')
+  lines.push('BAR 0, 160, 320, 2')
 
   // Order Code — small font at the bottom
   // Font "1" = smallest built-in font
-  lines.push(`TEXT 10, 125, "1", 0, 1, 1, "${orderCode}"`)
+  lines.push(`TEXT 10, 170, "2", 0, 1, 1, "${orderCode}"`)
 
   // Timestamp — right-aligned at the bottom
   const now = new Date()
@@ -87,7 +128,7 @@ export const generateLabelTSPL = (label: LabelData): string => {
     minute: '2-digit',
     hour12: true,
   })
-  lines.push(`TEXT 220, 125, "1", 0, 1, 1, "${time}"`)
+  lines.push(`TEXT 220, 170, "1", 0, 1, 1, "${time}"`)
 
   // 7. Print N copies
   lines.push(`PRINT ${copies}`)
