@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { type KdsOrder } from '@/types/kds'
+import { type ReceiptProps } from '@/types/api'
 import {
   COMMANDS,
   createESCPOSBuffer,
@@ -18,10 +18,11 @@ export const WIDTH_80MM_DOTS = 576 // 80mm printers usually have 576 dots per li
  * depending on the printer's hardware font ROM.
  */
 export const generateReceiptBlob = (
-  order: KdsOrder,
+  receiptOrder: ReceiptProps,
   _shopName: string = 'Branch: YOK Sonthormuk',
   khrRate: number = 4100
 ): Uint8Array => {
+  console.log({ receiptOrder })
   const commands: (number[] | Uint8Array)[] = []
 
   // — Helper: dotted divider (48 chars) —
@@ -43,15 +44,20 @@ export const generateReceiptBlob = (
   commands.push(COMMANDS.LF)
   // commands.push(COMMANDS.LF)
 
-  const orderLabel = `ORDER : YOK-${order.invoiceCode}`
-  const dateStr = format(new Date(order.createdAt), 'dd/MM/yyyy _ hh:mma')
+  const orderLabel = `ORDER : YOK-${receiptOrder.invoiceCode}`
+  const dateStr = format(
+    new Date(receiptOrder.createdAt),
+    'dd/MM/yyyy _ hh:mma'
+  )
   commands.push(encodeText(createTwoColumns(orderLabel, dateStr, 48) + '\n\n'))
+  const formattedQueue = String(receiptOrder.queueNumber || 0).padStart(2, '0')
+
   // ─── Order Info (two-column) ───
   commands.push(encodeText(DOTS))
   commands.push(COMMANDS.ALIGN_CENTER)
   commands.push(COMMANDS.TEXT_DOUBLE_SIZE)
   commands.push(COMMANDS.TEXT_BOLD_ON)
-  commands.push(encodeText('\n6 7 8 5\n\n'))
+  commands.push(encodeText(`\n${formattedQueue}\n\n`))
   commands.push(COMMANDS.TEXT_NORMAL)
   commands.push(COMMANDS.TEXT_BOLD_OFF)
   // commands.push(encodeText(DOTS))
@@ -74,18 +80,19 @@ export const generateReceiptBlob = (
   commands.push(COMMANDS.LF)
 
   // ─── Items ───
-  for (const item of order.items) {
-    const rawItemName = item.productName as unknown
+  for (const item of receiptOrder.items) {
+    const rawItemName = item.name
+
     const itemNameStr =
       typeof rawItemName === 'string'
         ? rawItemName
         : ((rawItemName as Record<string, string>)?.['en'] ?? '')
 
     // Kitchen Chits don't strictly need precise unit prices
-    const unitPriceStr = '---'
+    const unitPriceStr = `$${Number(item.unitPrice).toFixed(2)}`
     const qtyStr = String(item.quantity)
-    const discountStr = '---'
-    const totalStr = '---'
+    const discountStr = '0.00'
+    const totalStr = `$${Number(item.totalPrice).toFixed(2)}`
 
     // Right-side columns string (Unit Price + QTY + Discount + Total)
     const rightCols =
@@ -108,37 +115,99 @@ export const generateReceiptBlob = (
     const addonOpts = item.options ?? []
     let optStr = ''
     for (const opt of addonOpts) {
-      const rawOptName = opt.optionName as unknown
+      const rawOptName = opt.name as unknown
       const optLabel =
         typeof rawOptName === 'string'
           ? rawOptName
           : ((rawOptName as Record<string, string>)?.['en'] ?? '')
 
-      const optPrice = opt.unitPrice ? ` (+$${opt.unitPrice.toFixed(2)})` : ''
+      // const optPrice = opt.unitPrice ? ` (+$${opt.unitPrice.toFixed(2)})` : ''
       const optQty = opt.quantity > 1 ? `${opt.quantity}x ` : ''
-      optStr += `${optQty}${optLabel}${optPrice} `
+      // optStr += `${optQty}${optLabel}${optPrice} `
+      optStr += `${optQty}${optLabel} `
     }
 
     if (optStr) {
       commands.push(encodeText(`${optStr.trim()}\n`))
     }
 
-    if (item.instructions) {
-      commands.push(encodeText(`  Note: ${item.instructions}\n`))
-    }
+    // if (item.instructions) {
+    //   commands.push(encodeText(`  Note: ${item.instructions}\n`))
+    // }
 
     commands.push(COMMANDS.LF)
   }
 
   // ─── Dotted Divider ───
   commands.push(encodeText(DOTS))
-  commands.push(COMMANDS.ALIGN_RIGHT)
+
+  // ─── Financials ───
+  if (receiptOrder.subtotal !== undefined) {
+    commands.push(COMMANDS.ALIGN_RIGHT)
+    commands.push(
+      encodeText(
+        createTwoColumns(
+          'Subtotal',
+          `$${Number(receiptOrder.subtotal).toFixed(2)}`,
+          48
+        ) + '\n'
+      )
+    )
+
+    // if (receiptOrder.discount && receiptOrder.discount > 0) {
+    commands.push(
+      encodeText(
+        createTwoColumns(
+          'Discount',
+          receiptOrder.discount
+            ? `-$${Number(receiptOrder.discount).toFixed(2)}`
+            : '$0.00',
+          48
+        ) + '\n'
+      )
+    )
+    // }
+
+    if (receiptOrder.total !== undefined) {
+      commands.push(COMMANDS.TEXT_BOLD_ON)
+      commands.push(
+        encodeText(
+          createTwoColumns(
+            'Total',
+            `$${Number(receiptOrder.total).toFixed(2)}`,
+            48
+          ) + '\n'
+        )
+      )
+      commands.push(COMMANDS.TEXT_BOLD_OFF)
+    }
+
+    // ─── Dotted Divider ───
+    commands.push(encodeText(DOTS))
+  }
+
+  commands.push(COMMANDS.ALIGN_LEFT)
+
+  if (receiptOrder.paymentMethodName) {
+    const status = receiptOrder.paymentStatus
+      ? ` (${receiptOrder.paymentStatus})`
+      : ''
+    commands.push(
+      encodeText(`Payment: ${receiptOrder.paymentMethodName}${status}\n`)
+    )
+
+    // ─── Dotted Divider ───
+    commands.push(encodeText(DOTS))
+  }
 
   // Kitchen Chits derived from KdsOrder do not have pricing data
   commands.push(
     encodeText(
-      createTwoColumns('TYPE', order.fulfillmentCategory || 'TAKEAWAY', 30) +
-        '\n'
+      createTwoColumns(
+        'TYPE',
+        receiptOrder.fulfillmentCategory || 'TAKEAWAY',
+        48
+      ) + '\n'
     )
   )
 

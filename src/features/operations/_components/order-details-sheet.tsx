@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { format } from 'date-fns'
 import { type Order, OrderStatus } from '@/types/api'
 import { Printer, RefreshCcw } from 'lucide-react'
-import { printLabelViaBluetooth } from '@/utils/label-printer'
 import { printReceiptViaBluetooth } from '@/utils/printer'
 import { useUpdateOrderStatus } from '@/hooks/queries/use-orders'
 import { useAppStore } from '@/hooks/use-app-store'
@@ -41,19 +40,32 @@ export function OrderDetailsSheet({
     setIsPrinting(true)
     try {
       // 1. Print the receipt on the 80mm receipt printer
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await printReceiptViaBluetooth(order as any)
+      await printReceiptViaBluetooth({
+        invoiceCode: order.invoiceCode,
+        createdAt: order.createdAt,
+        items: order.items,
+        fulfillmentCategory: order.fulfillment?.category || 'TAKEAWAY',
+        queueNumber: order.queueNumber,
+        subtotal: order.pricing?.subtotal,
+        discount: order.pricing?.discount,
+        total: order.pricing?.grandTotal,
+        paymentMethodName:
+          typeof order.paymentMethodName === 'string'
+            ? order.paymentMethodName
+            : order.paymentMethodName?.en,
+        paymentStatus: order.paymentStatus,
+      })
 
-      // 2. Print a label sticker for every item (quantity = number of copies)
-      for (const item of order.items) {
-        await printLabelViaBluetooth({
-          drinkName:
-            typeof item.name === 'string' ? item.name : (item.name?.en ?? ''),
-          note: item.notes ?? undefined,
-          orderCode: `YOK-${order.invoiceCode}`,
-          quantity: item.quantity,
-        })
-      }
+      // // 2. Print a label sticker for every item (quantity = number of copies)
+      // for (const item of order.items) {
+      //   await printLabelViaBluetooth({
+      //     drinkName:
+      //       typeof item.name === 'string' ? item.name : (item.name?.en ?? ''),
+      //     note: item.notes ?? undefined,
+      //     orderCode: `YOK-${order.invoiceCode}`,
+      //     quantity: item.quantity,
+      //   })
+      // }
     } finally {
       setIsPrinting(false)
     }

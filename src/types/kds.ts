@@ -34,7 +34,7 @@ export interface KdsOrder {
   createdAt: string
   grandTotal: number
   subtotal: number
-  paymentMethodName: string
+  paymentMethodName: string | Record<string, string>
   items: KdsOrderItem[]
 }
 
