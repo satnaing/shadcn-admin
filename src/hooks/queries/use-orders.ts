@@ -6,6 +6,8 @@ import {
   type CreateOrderRequest,
 } from '@/types/api'
 import { type KdsBoardState } from '@/types/kds'
+import { printLabelViaBluetooth } from '@/utils/label-printer'
+import { printReceiptViaBluetooth } from '@/utils/printer'
 import { KDS_BOARD_KEYS } from './use-kds-board'
 
 export const useOrders = (filters?: GetOrdersFilters) => {
@@ -20,9 +22,53 @@ export const useCreateOrder = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (data: CreateOrderRequest) => createOrder(data),
-    onSuccess: () => {
+    onSuccess: async (order: any) => {
       queryClient.invalidateQueries({ queryKey: KDS_BOARD_KEYS.all })
       queryClient.invalidateQueries({ queryKey: ['orders'] })
+
+      printReceiptViaBluetooth({
+        invoiceCode: order.invoiceCode,
+        createdAt: order.createdAt,
+        fulfillmentCategory: order.fulfillmentCategory,
+        queueNumber: order.queueNumber,
+        subtotal: order.subtotal,
+        total: order.grandTotal,
+        paymentMethodName:
+          typeof order.paymentMethodName === 'string'
+            ? order.paymentMethodName
+            : (order.paymentMethodName as Record<string, string>)?.en,
+        items: order.items.map((item) => ({
+          id: item.id,
+          name: item.productName,
+          quantity: item.quantity,
+          unitPrice: item.unitPrice,
+          totalPrice: item.subtotal,
+          options: item.options?.map((opt) => ({
+            name: opt.optionName,
+            quantity: opt.quantity,
+            unitPrice: opt.unitPrice,
+            totalPrice: opt.subtotal,
+          })),
+          notes: item.instructions,
+        })),
+      })
+
+      for (const item of order.items) {
+        await printLabelViaBluetooth({
+          drinkName:
+            typeof item.productName === 'string'
+              ? item.productName
+              : item.productName?.en || '',
+          note: item.instructions ?? undefined,
+          orderCode: `YOK-${order.queueNumber}`,
+          quantity: item.quantity,
+          options: item.options?.map((opt: any) =>
+            typeof opt.optionName === 'string'
+              ? opt.optionName
+              : opt.optionName?.en || ''
+          ),
+        })
+      }
     },
   })
 }

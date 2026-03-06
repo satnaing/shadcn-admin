@@ -1,7 +1,7 @@
 import { useMemo, useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getBadges } from '@/services/badges'
-import { type OrderStatus } from '@/types/api'
+import { OrderStatus } from '@/types/api'
 import { type KdsOrder, type KdsOrderOption } from '@/types/kds'
 import {
   Tag,
@@ -47,6 +47,10 @@ export function OrderCard({ order }: OrderCardProps) {
   const handleStatusChange = async (newStatus: OrderStatus) => {
     try {
       await updateStatus({ id: order.id, status: newStatus })
+      if (newStatus === OrderStatus.CONFIRMED) {
+        await handlePrintReceipt()
+        await handlePrintLabels()
+      }
     } catch (_e) {
       // Error is handled by the mutation
     }
