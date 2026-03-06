@@ -18,7 +18,6 @@ export interface LabelData {
   orderCode: string // e.g. "YOK-0012"
   quantity?: number // e.g. 2 (for printing multiple copies)
   options?: string[] // e.g. ["Iced", "Less Sugar"]
-  counter?: string
 }
 
 // --- TSPL Generator ---
@@ -88,7 +87,7 @@ export const generateLabelTSPL = (label: LabelData): string => {
     // Drink name — large font, bold, top of label
     // TEXT x, y, "font", rotation, x-scale, y-scale, "text"
     // Font "3" = built-in 14pt font (fits ~20 chars on 40mm)
-    `TEXT 10, 10, "3", 0, 1, 1, "${drinkName} ${label.counter}"`,
+    `TEXT 10, 10, "3", 0, 1, 1, "${drinkName}"`,
 
     // Options — list them below the drink name
     ...(label.options?.map((opt, index) => {
@@ -147,6 +146,8 @@ export const generateLabelTSPL = (label: LabelData): string => {
  * Common SPP Service UUID:  0x1101  (or full: 00001101-0000-1000-8000-00805f9b34fb)
  */
 export const printLabelViaBluetooth = async (label: LabelData) => {
+  console.log('label', label)
+  return
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const bluetooth = (navigator as any).bluetooth
 

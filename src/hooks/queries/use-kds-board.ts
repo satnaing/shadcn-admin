@@ -4,6 +4,7 @@ import { getKdsOrders } from '@/services/ops'
 import { type OrderStatus } from '@/types/api'
 import { type KdsBoardState, type KdsOrder } from '@/types/kds'
 import { io } from 'socket.io-client'
+import { playNewOrderSound } from '@/utils/audio'
 
 export const KDS_BOARD_KEYS = {
   all: ['kds-board'] as const,
@@ -46,6 +47,7 @@ export function useKdsBoard(
 
     // Listen for new orders
     socket.on('order.created', (newOrder: KdsOrder) => {
+      playNewOrderSound()
       queryClient.setQueryData<KdsBoardState>(
         KDS_BOARD_KEYS.shop(shopId),
         (oldData) => {
