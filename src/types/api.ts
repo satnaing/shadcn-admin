@@ -489,7 +489,7 @@ export type ReceiptProps = {
 
   // Billing & Payment info
   subtotal?: number
-  discount?: number
+  discount?: string
   total?: number
   paymentMethodName?: string
   paymentStatus?: string

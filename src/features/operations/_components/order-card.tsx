@@ -66,6 +66,7 @@ export function OrderCard({ order }: OrderCardProps) {
         queueNumber: order.queueNumber,
         subtotal: order.subtotal,
         total: order.grandTotal,
+        discount: order.discountTotal,
         paymentMethodName:
           typeof order.paymentMethodName === 'string'
             ? order.paymentMethodName

@@ -29,6 +29,7 @@ export interface KdsOrder {
   instructions?: string
   scheduledFor?: string | null
   fulfillmentMethodId: string
+  discountTotal?: string
   fulfillmentName: string
   fulfillmentCategory: string
   createdAt: string
