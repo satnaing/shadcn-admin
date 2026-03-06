@@ -47,7 +47,7 @@ export function OrderDetailsSheet({
         fulfillmentCategory: order.fulfillment?.category || 'TAKEAWAY',
         queueNumber: order.queueNumber,
         subtotal: order.pricing?.subtotal,
-        discount: order.pricing?.discount,
+        discount: `${order.pricing?.discount}`,
         total: order.pricing?.grandTotal,
         paymentMethodName:
           typeof order.paymentMethodName === 'string'
