@@ -163,18 +163,34 @@ export const printLabelViaBluetooth = async (label: LabelData) => {
     let device = window.cachedLabelPrinterDevice as any
 
     if (!device || !device.gatt?.connected) {
-      device = await bluetooth.requestDevice({
-        filters: [
-          { namePrefix: 'XP' },
-          { namePrefix: 'XP-410' },
-          { namePrefix: 'Printer' },
-        ],
-        // SPP service for classic BT bridged via BLE
-        optionalServices: [
-          '000018f0-0000-1000-8000-00805f9b34fb',
-          '00001101-0000-1000-8000-00805f9b34fb',
-        ],
-      })
+      // Attempt to find it from already permitted devices first
+      if (bluetooth.getDevices) {
+        const devices = await bluetooth.getDevices()
+        const found = devices.find((d: any) =>
+          ['XP-410', 'XP-410B', 'XP-D4601B', 'XP', 'Printer'].some((prefix) =>
+            d.name?.startsWith(prefix)
+          )
+        )
+        if (found) {
+          device = found
+        }
+      }
+
+      // If still no device, prompt the user
+      if (!device) {
+        device = await bluetooth.requestDevice({
+          filters: [
+            { namePrefix: 'XP' },
+            { namePrefix: 'XP-410' },
+            { namePrefix: 'Printer' },
+          ],
+          // SPP service for classic BT bridged via BLE
+          optionalServices: [
+            '000018f0-0000-1000-8000-00805f9b34fb',
+            '00001101-0000-1000-8000-00805f9b34fb',
+          ],
+        })
+      }
 
       window.cachedLabelPrinterDevice = device
 

@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Bluetooth,
   BluetoothOff,
@@ -29,7 +29,13 @@ const RECEIPT_FILTER_PREFIXES = ['XP-58', 'XP-80', 'XP', 'Printer']
 
 const LABEL_SERVICE_UUID = '000018f0-0000-1000-8000-00805f9b34fb'
 const LABEL_CHAR_UUID = '00002af1-0000-1000-8000-00805f9b34fb'
-const LABEL_FILTER_PREFIXES = ['XP-410', 'XP-410B', 'XP', 'Printer']
+const LABEL_FILTER_PREFIXES = [
+  'XP-410',
+  'XP-410B',
+  'XP-D4601B',
+  'XP',
+  'Printer',
+]
 
 type PrinterStatus = 'connected' | 'disconnected' | 'connecting'
 
@@ -64,6 +70,59 @@ export function SettingsPrinters() {
     }
     return { name: 'Label Printer (XP-410B)', status: 'disconnected' }
   })
+
+  // Periodically check printer cache to update status if auto-connected in background
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Receipt Printer Check
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const rd = window.cachedPrinterDevice as any
+      if (rd?.gatt?.connected) {
+        setReceipt((prev) => {
+          if (prev.status !== 'connected') {
+            return {
+              name: 'Receipt Printer',
+              status: 'connected',
+              deviceName: rd.name,
+            }
+          }
+          return prev
+        })
+      } else {
+        setReceipt((prev) => {
+          if (prev.status === 'connected') {
+            return { ...prev, status: 'disconnected', deviceName: undefined }
+          }
+          return prev
+        })
+      }
+
+      // Label Printer Check
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const ld = window.cachedLabelPrinterDevice as any
+      if (ld?.gatt?.connected) {
+        setLabel((prev) => {
+          if (prev.status !== 'connected') {
+            return {
+              name: 'Label Printer (XP-410B)',
+              status: 'connected',
+              deviceName: ld.name,
+            }
+          }
+          return prev
+        })
+      } else {
+        setLabel((prev) => {
+          if (prev.status === 'connected') {
+            return { ...prev, status: 'disconnected', deviceName: undefined }
+          }
+          return prev
+        })
+      }
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   // --- Helpers ---
 

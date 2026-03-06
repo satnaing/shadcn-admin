@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { getOrders, updateOrderStatus, createOrder } from '@/services/ops'
 import {
@@ -37,13 +38,15 @@ export const useCreateOrder = () => {
           typeof order.paymentMethodName === 'string'
             ? order.paymentMethodName
             : (order.paymentMethodName as Record<string, string>)?.en,
-        items: order.items.map((item) => ({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        items: order.items.map((item: any) => ({
           id: item.id,
           name: item.productName,
           quantity: item.quantity,
           unitPrice: item.unitPrice,
           totalPrice: item.subtotal,
-          options: item.options?.map((opt) => ({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          options: item.options?.map((opt: any) => ({
             name: opt.optionName,
             quantity: opt.quantity,
             unitPrice: opt.unitPrice,
@@ -62,6 +65,7 @@ export const useCreateOrder = () => {
           note: item.instructions ?? undefined,
           orderCode: `YOK-${order.queueNumber}`,
           quantity: item.quantity,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           options: item.options?.map((opt: any) =>
             typeof opt.optionName === 'string'
               ? opt.optionName

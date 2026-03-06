@@ -17,18 +17,33 @@ export const printReceiptViaBluetooth = async (order: ReceiptProps) => {
   }
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let device = window.cachedPrinterDevice as any
 
-    if (!device || !device.gatt.connected) {
-      device = await bluetooth.requestDevice({
-        filters: [
-          { services: ['000018f0-0000-1000-8000-00805f9b34fb'] }, // Common ESC/POS service
-          { namePrefix: 'XP' }, // Xprinter
-          { namePrefix: 'Printer' },
-        ],
-        optionalServices: ['000018f0-0000-1000-8000-00805f9b34fb'],
-      })
+    if (!device || !device.gatt?.connected) {
+      // Attempt to find it from already permitted devices first
+      if (bluetooth.getDevices) {
+        const devices = await bluetooth.getDevices()
+        const found = devices.find((d: any) =>
+          ['XP-58', 'XP-80', 'XP', 'Printer'].some((prefix) =>
+            d.name?.startsWith(prefix)
+          )
+        )
+        if (found) {
+          device = found
+        }
+      }
+
+      // If still no device, prompt the user
+      if (!device) {
+        device = await bluetooth.requestDevice({
+          filters: [
+            { services: ['000018f0-0000-1000-8000-00805f9b34fb'] }, // Common ESC/POS service
+            { namePrefix: 'XP' }, // Xprinter
+            { namePrefix: 'Printer' },
+          ],
+          optionalServices: ['000018f0-0000-1000-8000-00805f9b34fb'],
+        })
+      }
 
       // Cache the device on the window object so we can reuse it
       window.cachedPrinterDevice = device
