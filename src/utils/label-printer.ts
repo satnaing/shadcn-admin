@@ -146,8 +146,6 @@ export const generateLabelTSPL = (label: LabelData): string => {
  * Common SPP Service UUID:  0x1101  (or full: 00001101-0000-1000-8000-00805f9b34fb)
  */
 export const printLabelViaBluetooth = async (label: LabelData) => {
-  console.log('label', label)
-  return
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const bluetooth = (navigator as any).bluetooth
 
