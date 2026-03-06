@@ -1954,6 +1954,13 @@
   dependencies:
     undici-types "~7.18.0"
 
+"@types/nosleep.js@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@types/nosleep.js/-/nosleep.js-0.10.0.tgz#4be8d5bedffd87eb2267019fd8ef86c1d4f43a8b"
+  integrity sha512-eFRD95pEYIPo7YZnRbasEJAwSzBOxkT9++vZ7ykoDDuxvBauSuEGKZsijLm2BzohGt5wIj8gSiI+9vwjKfmNgA==
+  dependencies:
+    nosleep.js "*"
+
 "@types/react-dom@^19.2.3":
   version "19.2.3"
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.2.3.tgz"
@@ -3332,6 +3339,11 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/normalize-path/-/normalize-path-3.0.0.tgz"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
+
+nosleep.js@*, nosleep.js@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/nosleep.js/-/nosleep.js-0.12.0.tgz#a01fddab2c13af357d673928b1f40a9013a4dc08"
+  integrity sha512-9d1HbpKLh3sdWlhXMhU6MMH+wQzKkrgfRkYV0EBdvt99YJfj0ilCJrWRDYG2130Tm4GXbEoTCx5b34JSaP+HhA==
 
 optionator@^0.9.3:
   version "0.9.4"
