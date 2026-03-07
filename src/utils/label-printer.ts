@@ -138,6 +138,68 @@ export const generateLabelTSPL = (label: LabelData): string => {
 
 // --- Bluetooth Sender ---
 
+export const connectLabelPrinter = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const bluetooth = (navigator as any).bluetooth
+
+  if (!bluetooth) {
+    toast.error(
+      'Bluetooth is not supported. On iOS, please use the Bluefy or WebBLE app.'
+    )
+    return
+  }
+
+  try {
+    const device = await bluetooth.requestDevice({
+      filters: [
+        { namePrefix: 'XP' },
+        { namePrefix: 'XP-410' },
+        { namePrefix: 'Printer' },
+      ],
+      // SPP service for classic BT bridged via BLE
+      optionalServices: [
+        '000018f0-0000-1000-8000-00805f9b34fb',
+        '00001101-0000-1000-8000-00805f9b34fb',
+      ],
+    })
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(window as any).cachedLabelPrinterDevice = device
+
+    device.addEventListener('gattserverdisconnected', () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(window as any).cachedLabelPrinterDevice = null
+    })
+
+    if (device.gatt && !device.gatt.connected) {
+      await device.gatt.connect()
+    }
+
+    // Stabilize the GATT connection by actually requesting the primary SPP service
+    if (device.gatt && device.gatt.connected) {
+      try {
+        const server = device.gatt
+        try {
+          // ESC/POS Service UUID first
+          await server.getPrimaryService('000018f0-0000-1000-8000-00805f9b34fb')
+        } catch {
+          // Fallback to SPP
+          await server.getPrimaryService('00001101-0000-1000-8000-00805f9b34fb')
+        }
+      } catch (err) {
+        console.warn('Failed to pre-fetch service', err)
+      }
+    }
+
+    toast.success('Label printer connected successfully!')
+  } catch (error: unknown) {
+    const err = error as Error
+    if (err?.message && !err.message.includes('User cancelled')) {
+      toast.error(`Label Print Error: ${err.message}`)
+    }
+  }
+}
+
 /**
  * Connects to the XP-410B label printer via Bluetooth and prints a label.
  * Note: The XP-410B is a CLASSIC Bluetooth (not BLE) device, but Web Bluetooth
@@ -166,7 +228,7 @@ export const printLabelViaBluetooth = async (label: LabelData) => {
       if (bluetooth.getDevices) {
         const devices = await bluetooth.getDevices()
         const found = devices.find((d: any) =>
-          ['XP-410', 'XP-410B', 'XP-D4601B', 'XP', 'Printer'].some((prefix) =>
+          ['XP-410', 'XP-410B', 'XP-D4601B', 'XP-', 'Printer'].some((prefix) =>
             d.name?.startsWith(prefix)
           )
         )
@@ -202,9 +264,25 @@ export const printLabelViaBluetooth = async (label: LabelData) => {
       throw new Error('Cannot connect to GATT on label printer.')
 
     // Connect if not already connected
-    const server = device.gatt.connected
-      ? device.gatt
-      : await device.gatt.connect()
+    let server = device.gatt.connected ? device.gatt : null
+    if (!server) {
+      server = await device.gatt.connect()
+    }
+
+    // Stabilize the GATT connection by actually requesting the primary SPP service
+    if (device.gatt && device.gatt.connected) {
+      try {
+        try {
+          // ESC/POS Service UUID first
+          await server.getPrimaryService('000018f0-0000-1000-8000-00805f9b34fb')
+        } catch {
+          // Fallback to SPP
+          await server.getPrimaryService('00001101-0000-1000-8000-00805f9b34fb')
+        }
+      } catch (err) {
+        console.warn('Failed to pre-fetch service in auto-connect', err)
+      }
+    }
 
     // Try the common ESC/POS service first, then fall back to SPP
     let characteristic

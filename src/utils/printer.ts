@@ -5,6 +5,49 @@ import {
   // generateReceiptBlobFromCanvas,
 } from '@/features/operations/_components/receipt-escpos-generator'
 
+export const connectReceiptPrinter = async () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const bluetooth = (navigator as any).bluetooth
+
+  if (!bluetooth) {
+    toast.error(
+      'Bluetooth is not supported. On iOS, please use the Bluefy or WebBLE app.'
+    )
+    return
+  }
+
+  try {
+    const device = await bluetooth.requestDevice({
+      filters: [
+        { services: ['000018f0-0000-1000-8000-00805f9b34fb'] }, // Common ESC/POS service
+        { namePrefix: 'XP' }, // Xprinter
+        { namePrefix: 'Printer' },
+      ],
+      optionalServices: ['000018f0-0000-1000-8000-00805f9b34fb'],
+    })
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(window as any).cachedPrinterDevice = device
+
+    device.addEventListener('gattserverdisconnected', () => {
+      // eslint-disable-next-line no-console
+      console.log('Printer disconnected')
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(window as any).cachedPrinterDevice = null
+    })
+
+    if (device.gatt && !device.gatt.connected) {
+      await device.gatt.connect()
+    }
+    toast.success('Receipt printer connected successfully!')
+  } catch (error: unknown) {
+    const err = error as Error
+    if (err?.message && !err.message.includes('User cancelled')) {
+      toast.error(`Print Error: ${err.message}`)
+    }
+  }
+}
+
 export const printReceiptViaBluetooth = async (orders: ReceiptProps[]) => {
   console.log({ orders })
   // return
