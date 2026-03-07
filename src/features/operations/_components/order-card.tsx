@@ -48,7 +48,7 @@ export function OrderCard({ order }: OrderCardProps) {
     try {
       await updateStatus({ id: order.id, status: newStatus })
       if (newStatus === OrderStatus.CONFIRMED) {
-        await handlePrintReceipt()
+        await handlePrintReceipt(2)
         await handlePrintLabels()
       }
     } catch (_e) {
@@ -56,10 +56,10 @@ export function OrderCard({ order }: OrderCardProps) {
     }
   }
 
-  const handlePrintReceipt = async () => {
+  const handlePrintReceipt = async (counter: number) => {
     setIsPrintingReceipt(true)
     try {
-      await printReceiptViaBluetooth({
+      const orders = Array.from({ length: counter }, () => ({
         invoiceCode: order.invoiceCode,
         createdAt: order.createdAt,
         fulfillmentCategory: order.fulfillmentCategory,
@@ -85,7 +85,9 @@ export function OrderCard({ order }: OrderCardProps) {
           })),
           notes: item.instructions,
         })),
-      })
+      }))
+      console.log({ orders })
+      await printReceiptViaBluetooth(orders)
     } finally {
       setIsPrintingReceipt(false)
     }
@@ -288,7 +290,7 @@ export function OrderCard({ order }: OrderCardProps) {
             variant='outline'
             size='xs'
             className='h-8 flex-1 text-[11px]'
-            onClick={handlePrintReceipt}
+            onClick={() => handlePrintReceipt(1)}
             disabled={isPrintingReceipt}
           >
             <Printer className='mr-1 h-3 w-3' />

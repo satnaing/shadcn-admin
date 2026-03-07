@@ -40,21 +40,23 @@ export function OrderDetailsSheet({
     setIsPrinting(true)
     try {
       // 1. Print the receipt on the 80mm receipt printer
-      await printReceiptViaBluetooth({
-        invoiceCode: order.invoiceCode,
-        createdAt: order.createdAt,
-        items: order.items,
-        fulfillmentCategory: order.fulfillment?.category || 'TAKEAWAY',
-        queueNumber: order.queueNumber,
-        subtotal: order.pricing?.subtotal,
-        discount: `${order.pricing?.discount}`,
-        total: order.pricing?.grandTotal,
-        paymentMethodName:
-          typeof order.paymentMethodName === 'string'
-            ? order.paymentMethodName
-            : order.paymentMethodName?.en,
-        paymentStatus: order.paymentStatus,
-      })
+      await printReceiptViaBluetooth([
+        {
+          invoiceCode: order.invoiceCode,
+          createdAt: order.createdAt,
+          items: order.items,
+          fulfillmentCategory: order.fulfillment?.category || 'TAKEAWAY',
+          queueNumber: order.queueNumber,
+          subtotal: order.pricing?.subtotal,
+          discount: `${order.pricing?.discount}`,
+          total: order.pricing?.grandTotal,
+          paymentMethodName:
+            typeof order.paymentMethodName === 'string'
+              ? order.paymentMethodName
+              : order.paymentMethodName?.en,
+          paymentStatus: order.paymentStatus,
+        },
+      ])
 
       // // 2. Print a label sticker for every item (quantity = number of copies)
       // for (const item of order.items) {

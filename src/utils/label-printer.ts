@@ -237,7 +237,7 @@ export const printLabelViaBluetooth = async (label: LabelData) => {
       await new Promise((resolve) => setTimeout(resolve, 20))
     }
 
-    toast.success(`Label printed: ${label.drinkName}`)
+    // toast.success(`Label printed: ${label.drinkName}`)
   } catch (error: unknown) {
     const err = error as Error
     toast.error(

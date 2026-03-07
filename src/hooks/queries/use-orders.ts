@@ -26,14 +26,13 @@ export const useCreateOrder = () => {
     onSuccess: async (order: any) => {
       queryClient.invalidateQueries({ queryKey: KDS_BOARD_KEYS.all })
       queryClient.invalidateQueries({ queryKey: ['orders'] })
-
-      printReceiptViaBluetooth({
+      const orderObj = {
         invoiceCode: order.invoiceCode,
         createdAt: order.createdAt,
         fulfillmentCategory: order.fulfillmentCategory,
         queueNumber: order.queueNumber,
-        subtotal: order.subtotal,
         discount: order.discount,
+        subtotal: order.subtotal,
         total: order.grandTotal,
         paymentMethodName:
           typeof order.paymentMethodName === 'string'
@@ -55,7 +54,8 @@ export const useCreateOrder = () => {
           })),
           notes: item.instructions,
         })),
-      })
+      }
+      printReceiptViaBluetooth([orderObj, orderObj])
 
       for (const item of order.items) {
         await printLabelViaBluetooth({

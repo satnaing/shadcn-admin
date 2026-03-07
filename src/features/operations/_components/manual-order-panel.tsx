@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react'
 import { type CreateOrderItemDto, type Product } from '@/types/api'
 import { type Promotion } from '@/types/growth'
@@ -171,7 +172,7 @@ export function ManualOrderPanel() {
 
     setCartItems((prev) => [...prev, newItem])
     setSelectedProduct(null)
-    toast.success(`${selectedProduct.name.en} added`)
+    // toast.success(`${selectedProduct.name.en} added`)
   }
 
   const handleRemoveItem = (tempId: string) => {
@@ -196,12 +197,12 @@ export function ManualOrderPanel() {
 
     setOrderDiscounts([newDiscount])
     setIsDiscountModalOpen(false)
-    toast.success('Discount applied (replaced existing)')
+    // toast.success('Discount applied (replaced existing)')
   }
 
   const handleRemoveDiscount = (id: string) => {
     setOrderDiscounts((prev) => prev.filter((d) => d.id !== id))
-    toast.success('Discount removed')
+    // toast.success('Discount removed')
   }
 
   const handleApplyPromotion = (promo: Promotion) => {
@@ -215,7 +216,7 @@ export function ManualOrderPanel() {
 
     setOrderDiscounts([newDiscount])
     setIsPromotionModalOpen(false)
-    toast.success(`${discountData.reason} applied (replaced existing)`)
+    // toast.success(`${discountData.reason} applied (replaced existing)`)
   }
 
   const handleCommit = () => {
@@ -258,7 +259,7 @@ export function ManualOrderPanel() {
       },
       {
         onSuccess: () => {
-          toast.success('Order committed to KDS')
+          // toast.success('Order committed to KDS')
           setOpen(false)
           setCartItems([])
           setIsGuest(true)

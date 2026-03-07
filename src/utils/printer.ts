@@ -5,7 +5,9 @@ import {
   // generateReceiptBlobFromCanvas,
 } from '@/features/operations/_components/receipt-escpos-generator'
 
-export const printReceiptViaBluetooth = async (order: ReceiptProps) => {
+export const printReceiptViaBluetooth = async (orders: ReceiptProps[]) => {
+  console.log({ orders })
+  // return
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const bluetooth = (navigator as any).bluetooth
 
@@ -70,7 +72,18 @@ export const printReceiptViaBluetooth = async (order: ReceiptProps) => {
     )
 
     // 2. Generate raw text ESC/POS commands
-    const receiptBytes = generateReceiptBlob(order)
+    const receiptBytesList = orders.map((o) => generateReceiptBlob(o))
+
+    const totalLength = receiptBytesList.reduce(
+      (acc, curr) => acc + curr.length,
+      0
+    )
+    const receiptBytes = new Uint8Array(totalLength)
+    let offset = 0
+    for (const bytes of receiptBytesList) {
+      receiptBytes.set(bytes, offset)
+      offset += bytes.length
+    }
 
     // 3. Write chunks (Image data is large, so use small chunks to avoid MTU limits)
     // We must use extremely conservative chunk sizes (64 bytes) and forced 20ms delays.
