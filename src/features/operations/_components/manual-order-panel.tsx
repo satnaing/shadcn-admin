@@ -33,6 +33,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import {
   Sheet,
   SheetContent,
@@ -712,102 +713,104 @@ export function ManualOrderPanel() {
                 {selectedProduct?.name.en}
               </DialogTitle>
             </DialogHeader>
-            <div className='grid gap-6 py-4'>
-              {/* Variants (Price Groups) */}
-              {selectedProduct?.price?.choices && (
-                <div className='space-y-3'>
-                  <Label className='text-[10px] font-bold tracking-widest text-muted-foreground uppercase'>
-                    Selection
-                  </Label>
-                  <div className='grid grid-cols-2 gap-2'>
-                    {selectedProduct.price.choices.map((choice) => {
-                      const id = choice.id || choice.sku
-                      const isSelected = selectedVariantId === id
-                      return (
-                        <button
-                          key={id}
-                          className={cn(
-                            'flex items-center justify-between rounded-lg border-2 px-4 py-3 text-left transition-all',
-                            isSelected
-                              ? 'border-primary bg-primary/5 text-primary'
-                              : 'border-muted hover:border-muted-foreground/30'
-                          )}
-                          onClick={() => setSelectedVariantId(id)}
-                        >
-                          <div className='flex flex-col'>
-                            <span className='text-xs font-bold'>
-                              {choice.name.en}
-                            </span>
-                            <span className='text-[10px] opacity-70'>
-                              {formatCurrency(
-                                typeof choice.price === 'string'
-                                  ? parseFloat(choice.price)
-                                  : choice.price
-                              )}
-                            </span>
-                          </div>
-                          {isSelected && <Check className='h-4 w-4' />}
-                        </button>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
-
-              {/* Modifiers */}
-              {selectedProduct?.optionGroups?.map((group) => (
-                <div key={group.id} className='space-y-3'>
-                  <Label className='text-[10px] font-bold tracking-widest text-muted-foreground uppercase'>
-                    {group.name.en}{' '}
-                    {group.minSelect > 0 && (
-                      <span className='text-destructive'>*</span>
-                    )}
-                  </Label>
-                  <div className='grid grid-cols-2 gap-2'>
-                    {group.choices?.map((choice) => {
-                      const isSelected =
-                        selectedModifiers[group.id] === choice.id
-                      return (
-                        <button
-                          key={choice.id}
-                          className={cn(
-                            'flex items-center justify-between rounded-lg border-2 px-4 py-3 text-left transition-all',
-                            isSelected
-                              ? 'border-primary bg-primary/5 text-primary'
-                              : 'border-muted hover:border-muted-foreground/30'
-                          )}
-                          onClick={() =>
-                            setSelectedModifiers((prev) => ({
-                              ...prev,
-                              [group.id]: choice.id,
-                            }))
-                          }
-                        >
-                          <div className='flex flex-col'>
-                            <span className='text-xs font-bold'>
-                              {choice.name.en}
-                            </span>
-                            {(typeof choice.price === 'string'
-                              ? parseFloat(choice.price)
-                              : choice.price) > 0 && (
+            <ScrollArea className='max-h-[60vh] px-1'>
+              <div className='grid gap-6 py-4'>
+                {/* Variants (Price Groups) */}
+                {selectedProduct?.price?.choices && (
+                  <div className='space-y-3'>
+                    <Label className='text-[10px] font-bold tracking-widest text-muted-foreground uppercase'>
+                      Selection
+                    </Label>
+                    <div className='grid grid-cols-2 gap-2'>
+                      {selectedProduct.price.choices.map((choice) => {
+                        const id = choice.id || choice.sku
+                        const isSelected = selectedVariantId === id
+                        return (
+                          <button
+                            key={id}
+                            className={cn(
+                              'flex items-center justify-between rounded-lg border-2 px-4 py-3 text-left transition-all',
+                              isSelected
+                                ? 'border-primary bg-primary/5 text-primary'
+                                : 'border-muted hover:border-muted-foreground/30'
+                            )}
+                            onClick={() => setSelectedVariantId(id)}
+                          >
+                            <div className='flex flex-col'>
+                              <span className='text-xs font-bold'>
+                                {choice.name.en}
+                              </span>
                               <span className='text-[10px] opacity-70'>
-                                +
                                 {formatCurrency(
                                   typeof choice.price === 'string'
                                     ? parseFloat(choice.price)
                                     : choice.price
                                 )}
                               </span>
-                            )}
-                          </div>
-                          {isSelected && <Check className='h-4 w-4' />}
-                        </button>
-                      )
-                    })}
+                            </div>
+                            {isSelected && <Check className='h-4 w-4' />}
+                          </button>
+                        )
+                      })}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                )}
+
+                {/* Modifiers */}
+                {selectedProduct?.optionGroups?.map((group) => (
+                  <div key={group.id} className='space-y-3'>
+                    <Label className='text-[10px] font-bold tracking-widest text-muted-foreground uppercase'>
+                      {group.name.en}{' '}
+                      {group.minSelect > 0 && (
+                        <span className='text-destructive'>*</span>
+                      )}
+                    </Label>
+                    <div className='grid grid-cols-2 gap-2'>
+                      {group.choices?.map((choice) => {
+                        const isSelected =
+                          selectedModifiers[group.id] === choice.id
+                        return (
+                          <button
+                            key={choice.id}
+                            className={cn(
+                              'flex items-center justify-between rounded-lg border-2 px-4 py-3 text-left transition-all',
+                              isSelected
+                                ? 'border-primary bg-primary/5 text-primary'
+                                : 'border-muted hover:border-muted-foreground/30'
+                            )}
+                            onClick={() =>
+                              setSelectedModifiers((prev) => ({
+                                ...prev,
+                                [group.id]: choice.id,
+                              }))
+                            }
+                          >
+                            <div className='flex flex-col'>
+                              <span className='text-xs font-bold'>
+                                {choice.name.en}
+                              </span>
+                              {(typeof choice.price === 'string'
+                                ? parseFloat(choice.price)
+                                : choice.price) > 0 && (
+                                <span className='text-[10px] opacity-70'>
+                                  +
+                                  {formatCurrency(
+                                    typeof choice.price === 'string'
+                                      ? parseFloat(choice.price)
+                                      : choice.price
+                                  )}
+                                </span>
+                              )}
+                            </div>
+                            {isSelected && <Check className='h-4 w-4' />}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
             <DialogFooter>
               <Button
                 className='h-12 w-full font-bold tracking-widest uppercase'
