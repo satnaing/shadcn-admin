@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { type CreateOrderItemDto, type Product } from '@/types/api'
+import { type Promotion } from '@/types/growth'
 import {
   Plus,
   Search,
@@ -9,6 +10,8 @@ import {
   Utensils,
   Bike,
   Check,
+  Trash2,
+  Ticket,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
@@ -39,6 +42,11 @@ import {
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { type Category } from '@/features/menu/data/schema'
+import {
+  applySmartPromotion,
+  type AppliedDiscount,
+} from '../utils/promotion-utils'
+import { PromotionSelectionModal } from './promotion-selection-modal'
 
 interface CartItem extends CreateOrderItemDto {
   name: string
@@ -71,6 +79,9 @@ export function ManualOrderPanel() {
   const [activeCategoryId, setActiveCategoryId] = useState<string>('all')
   const [customerName, setCustomerName] = useState('')
   const [customerPhone, setCustomerPhone] = useState('')
+  const [orderDiscounts, setOrderDiscounts] = useState<AppliedDiscount[]>([])
+  const [isDiscountModalOpen, setIsDiscountModalOpen] = useState(false)
+  const [isPromotionModalOpen, setIsPromotionModalOpen] = useState(false)
 
   // Queries
   const { data: customersData } = useCustomers({
@@ -167,6 +178,46 @@ export function ManualOrderPanel() {
     setCartItems((prev) => prev.filter((i) => i.tempId !== tempId))
   }
 
+  const handleAddDiscount = (discount: {
+    reason: string
+    amount: number
+    type: 'FIXED' | 'PERCENTAGE'
+  }) => {
+    const appliedAmount =
+      discount.type === 'FIXED'
+        ? discount.amount
+        : Math.floor(totalAmount * (discount.amount / 100) * 100) / 100
+
+    const newDiscount = {
+      ...discount,
+      id: crypto.randomUUID(),
+      appliedAmount,
+    }
+
+    setOrderDiscounts([newDiscount])
+    setIsDiscountModalOpen(false)
+    toast.success('Discount applied (replaced existing)')
+  }
+
+  const handleRemoveDiscount = (id: string) => {
+    setOrderDiscounts((prev) => prev.filter((d) => d.id !== id))
+    toast.success('Discount removed')
+  }
+
+  const handleApplyPromotion = (promo: Promotion) => {
+    // Check if subtotal is enough or other rules (simplified for now)
+    const discountData = applySmartPromotion(promo, totalAmount)
+
+    const newDiscount: AppliedDiscount = {
+      ...discountData,
+      id: crypto.randomUUID(),
+    }
+
+    setOrderDiscounts([newDiscount])
+    setIsPromotionModalOpen(false)
+    toast.success(`${discountData.reason} applied (replaced existing)`)
+  }
+
   const handleCommit = () => {
     if (!shopId) return toast.error('No active shop context')
     if (cartItems.length === 0) return toast.error('Cart is empty')
@@ -201,6 +252,9 @@ export function ManualOrderPanel() {
         customerName: isGuest && customerName ? customerName : undefined,
         customerPhone: isGuest && customerPhone ? customerPhone : undefined,
         assignToSelf: true, // Auto-assign to current staff
+        orderDiscounts: orderDiscounts.map(
+          ({ id, appliedAmount, ...rest }) => rest
+        ),
       },
       {
         onSuccess: () => {
@@ -212,6 +266,7 @@ export function ManualOrderPanel() {
           setSearchQuery('')
           setCustomerName('')
           setCustomerPhone('')
+          setOrderDiscounts([])
         },
         onError: (err: any) => {
           const detail = err.response?.data?.message || 'Failed to commit order'
@@ -225,6 +280,12 @@ export function ManualOrderPanel() {
     (acc, item) => acc + item.unitPrice * item.quantity,
     0
   )
+
+  const totalDiscounts = orderDiscounts.reduce(
+    (acc, d) => acc + d.appliedAmount,
+    0
+  )
+  const totalPayable = Math.max(0, totalAmount - totalDiscounts)
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -574,12 +635,52 @@ export function ManualOrderPanel() {
                   <span>Subtotal</span>
                   <span>{formatCurrency(totalAmount)}</span>
                 </div>
+
+                <div className='flex items-center gap-3 py-2'>
+                  {/* <button
+                    onClick={() => setIsDiscountModalOpen(true)}
+                    className='text-[10px] font-bold text-primary hover:underline'
+                  >
+                    + Add Discount
+                  </button>
+                  <span className='text-[10px] text-muted-foreground'>|</span> */}
+                  <button
+                    onClick={() => setIsPromotionModalOpen(true)}
+                    className='flex items-center gap-1 text-[10px] font-bold text-primary hover:underline'
+                  >
+                    <Ticket className='h-3 w-3' />
+                    Apply Promotion
+                  </button>
+                </div>
+
+                {orderDiscounts.map((discount) => (
+                  <div
+                    key={discount.id}
+                    className='group flex animate-in items-center justify-between text-[11px] font-semibold text-destructive fade-in slide-in-from-top-1'
+                  >
+                    <div className='flex items-center gap-2'>
+                      <button
+                        onClick={() => handleRemoveDiscount(discount.id)}
+                        className='opacity-0 transition-opacity group-hover:opacity-100'
+                      >
+                        <Trash2 className='h-3 w-3' />
+                      </button>
+                      <span>
+                        Discount: {discount.reason}{' '}
+                        {discount.type === 'PERCENTAGE' &&
+                          `(${discount.amount}%)`}
+                      </span>
+                    </div>
+                    <span>-{formatCurrency(discount.appliedAmount)}</span>
+                  </div>
+                ))}
+
                 <div className='flex items-center justify-between border-t border-dashed pt-4'>
                   <span className='text-[10px] font-bold tracking-widest text-muted-foreground uppercase'>
                     Total Payable
                   </span>
                   <span className='font-mono text-2xl font-bold tracking-tight text-primary'>
-                    {formatCurrency(totalAmount)}
+                    {formatCurrency(totalPayable)}
                   </span>
                 </div>
               </div>
@@ -717,6 +818,120 @@ export function ManualOrderPanel() {
           </DialogContent>
         </Dialog>
       </SheetContent>
+
+      <AddDiscountModal
+        open={isDiscountModalOpen}
+        onOpenChange={setIsDiscountModalOpen}
+        onConfirm={handleAddDiscount}
+      />
+
+      <PromotionSelectionModal
+        open={isPromotionModalOpen}
+        onOpenChange={setIsPromotionModalOpen}
+        onSelect={handleApplyPromotion}
+      />
     </Sheet>
+  )
+}
+
+function AddDiscountModal({
+  open,
+  onOpenChange,
+  onConfirm,
+}: {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  onConfirm: (discount: {
+    reason: string
+    amount: number
+    type: 'FIXED' | 'PERCENTAGE'
+  }) => void
+}) {
+  const [reason, setReason] = useState('')
+  const [amount, setAmount] = useState('')
+  const [type, setType] = useState<'FIXED' | 'PERCENTAGE'>('FIXED')
+
+  const handleConfirm = () => {
+    if (!reason || !amount) return toast.error('Please fill all fields')
+    onConfirm({
+      reason,
+      amount: parseFloat(amount),
+      type,
+    })
+    setReason('')
+    setAmount('')
+    setType('FIXED')
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className='sm:max-w-md'>
+        <DialogHeader>
+          <DialogTitle className='text-base font-bold tracking-tight uppercase'>
+            Add Order Discount
+          </DialogTitle>
+        </DialogHeader>
+        <div className='grid gap-4 py-4'>
+          <div className='space-y-2'>
+            <Label className='text-[10px] font-bold tracking-widest text-muted-foreground uppercase'>
+              Discount Type
+            </Label>
+            <Tabs
+              value={type}
+              onValueChange={(v) => setType(v as 'FIXED' | 'PERCENTAGE')}
+              className='w-full'
+            >
+              <TabsList className='grid w-full grid-cols-2'>
+                <TabsTrigger value='FIXED' className='text-xs font-bold'>
+                  Fixed Amount
+                </TabsTrigger>
+                <TabsTrigger value='PERCENTAGE' className='text-xs font-bold'>
+                  Percentage (%)
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+          <div className='space-y-2'>
+            <Label
+              htmlFor='amount'
+              className='text-[10px] font-bold tracking-widest text-muted-foreground uppercase'
+            >
+              Amount {type === 'PERCENTAGE' ? '(%)' : '($)'}
+            </Label>
+            <Input
+              id='amount'
+              type='number'
+              placeholder='0.00'
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className='h-10 text-xs'
+            />
+          </div>
+          <div className='space-y-2'>
+            <Label
+              htmlFor='reason'
+              className='text-[10px] font-bold tracking-widest text-muted-foreground uppercase'
+            >
+              Reason
+            </Label>
+            <Input
+              id='reason'
+              placeholder='Promotion name, staff discount, etc.'
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+              className='h-10 text-xs'
+            />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button
+            className='h-12 w-full font-bold tracking-widest uppercase'
+            onClick={handleConfirm}
+          >
+            Confirm Discount
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }

@@ -478,6 +478,12 @@ export interface CreateOrderRequest {
   scheduledFor?: string
   assignToSelf?: boolean
   staffId?: string
+  orderDiscounts?: {
+    reason: string
+    amount: number
+    type: 'FIXED' | 'PERCENTAGE'
+    promotionId?: string
+  }[]
 }
 
 export type ReceiptProps = {

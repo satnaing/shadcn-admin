@@ -33,6 +33,7 @@ export const useCreateOrder = () => {
         fulfillmentCategory: order.fulfillmentCategory,
         queueNumber: order.queueNumber,
         subtotal: order.subtotal,
+        discount: order.discount,
         total: order.grandTotal,
         paymentMethodName:
           typeof order.paymentMethodName === 'string'
