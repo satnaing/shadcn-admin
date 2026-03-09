@@ -13,6 +13,7 @@ import { handleServerError } from '@/lib/handle-server-error'
 import { DirectionProvider } from './context/direction-provider'
 import { FontProvider } from './context/font-provider'
 import { ThemeProvider } from './context/theme-provider'
+import { useAppVersion } from './hooks/use-app-version'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
 // Styles
@@ -87,6 +88,13 @@ declare module '@tanstack/react-router' {
   }
 }
 
+// Helper to silently run the version polling hook
+// eslint-disable-next-line react-refresh/only-export-components
+const AppVersionChecker = ({ children }: { children: React.ReactNode }) => {
+  useAppVersion()
+  return <>{children}</>
+}
+
 // Render the app
 const rootElement = document.getElementById('root')!
 if (!rootElement.innerHTML) {
@@ -94,13 +102,15 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <FontProvider>
-            <DirectionProvider>
-              <RouterProvider router={router} />
-            </DirectionProvider>
-          </FontProvider>
-        </ThemeProvider>
+        <AppVersionChecker>
+          <ThemeProvider>
+            <FontProvider>
+              <DirectionProvider>
+                <RouterProvider router={router} />
+              </DirectionProvider>
+            </FontProvider>
+          </ThemeProvider>
+        </AppVersionChecker>
       </QueryClientProvider>
     </StrictMode>
   )

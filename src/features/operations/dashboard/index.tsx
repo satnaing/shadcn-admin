@@ -70,26 +70,7 @@ export default function OperationsPage() {
               Auto-Polling (30s)
             </Label>
           </div>
-          <div className='flex items-center space-x-2'>
-            <Button
-              variant='outline'
-              size='sm'
-              onClick={connectReceiptPrinter}
-              title='Connect Receipt Printer'
-            >
-              <Printer className='mr-2 h-4 w-4' />
-              Receipt
-            </Button>
-            <Button
-              variant='outline'
-              size='sm'
-              onClick={connectLabelPrinter}
-              title='Connect Label Printer'
-            >
-              <Tag className='mr-2 h-4 w-4' />
-              Label
-            </Button>
-          </div>
+
           <Button variant='outline' size='sm' onClick={() => refetch()}>
             <RefreshCcw className='mr-2 h-4 w-4' />
             Refresh

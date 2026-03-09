@@ -1,4 +1,4 @@
-import { getStoreNav, hqNav } from '@/config/nav'
+import { getStoreNav } from '@/config/nav'
 import { useLayout } from '@/context/layout-provider'
 import { useAppStore } from '@/hooks/use-app-store'
 import {
