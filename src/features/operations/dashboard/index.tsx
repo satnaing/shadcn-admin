@@ -1,7 +1,5 @@
 import { useState, useMemo } from 'react'
-import { RefreshCcw, Printer, Tag } from 'lucide-react'
-import { connectLabelPrinter } from '@/utils/label-printer'
-import { connectReceiptPrinter } from '@/utils/printer'
+import { RefreshCcw } from 'lucide-react'
 import { useKdsBoard } from '@/hooks/queries/use-kds-board'
 import { useAppStore } from '@/hooks/use-app-store'
 import { BrandLoader } from '@/components/ui/brand-loader'

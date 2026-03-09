@@ -13,7 +13,7 @@ import { handleServerError } from '@/lib/handle-server-error'
 import { DirectionProvider } from './context/direction-provider'
 import { FontProvider } from './context/font-provider'
 import { ThemeProvider } from './context/theme-provider'
-import { useAppVersion } from './hooks/use-app-version'
+// import { useAppVersion } from './hooks/use-app-version'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
 // Styles
@@ -91,7 +91,7 @@ declare module '@tanstack/react-router' {
 // Helper to silently run the version polling hook
 // eslint-disable-next-line react-refresh/only-export-components
 const AppVersionChecker = ({ children }: { children: React.ReactNode }) => {
-  useAppVersion()
+  // useAppVersion()
   return <>{children}</>
 }
 
