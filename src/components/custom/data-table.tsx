@@ -16,6 +16,7 @@ import {
   type TableMeta,
   type ExpandedState,
 } from '@tanstack/react-table'
+import { cn } from '@/lib/utils'
 import {
   Table,
   TableBody,
@@ -25,6 +26,11 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
+
+export type CustomColumnDef<TData, TValue> = ColumnDef<TData, TValue> & {
+  headerClassName?: string
+  cellClassName?: string
+}
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -70,6 +76,10 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([])
   const [expanded, setExpanded] = useState<ExpandedState>({})
+  const [internalPagination, setInternalPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  })
 
   const table = useReactTable({
     data,
@@ -80,17 +90,19 @@ export function DataTable<TData, TValue>({
       rowSelection,
       columnFilters,
       expanded,
-      ...(pagination ? { pagination } : {}),
+      pagination: pagination ?? internalPagination,
     },
     pageCount,
     manualPagination: !!onPaginationChange,
-    onPaginationChange: (updater) => {
-      if (onPaginationChange && pagination) {
-        const next =
-          typeof updater === 'function' ? updater(pagination) : updater
-        onPaginationChange(next)
-      }
-    },
+    onPaginationChange: onPaginationChange
+      ? (updater) => {
+          const next =
+            typeof updater === 'function'
+              ? updater(pagination ?? internalPagination)
+              : updater
+          onPaginationChange(next)
+        }
+      : setInternalPagination,
     meta,
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
@@ -123,7 +135,18 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} colSpan={header.colSpan}>
+                    <TableHead
+                      key={header.id}
+                      colSpan={header.colSpan}
+                      className={
+                        (
+                          header.column.columnDef as CustomColumnDef<
+                            TData,
+                            TValue
+                          >
+                        ).headerClassName
+                      }
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -147,7 +170,15 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className='py-3 align-top text-sm' // Alignment set to top
+                      className={cn(
+                        'py-3 align-top text-sm',
+                        (
+                          cell.column.columnDef as CustomColumnDef<
+                            TData,
+                            TValue
+                          >
+                        ).cellClassName
+                      )}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,

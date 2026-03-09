@@ -7,6 +7,7 @@ export interface AppliedDiscount {
   type: 'FIXED' | 'PERCENTAGE'
   appliedAmount: number
   promotionId?: string
+  maxDiscountAmount?: number
 }
 
 /**
@@ -43,5 +44,6 @@ export function applySmartPromotion(
     reason: typeof promo.name === 'string' ? promo.name : promo.name.en,
     type: promo.type === DiscountType.PERCENTAGE ? 'PERCENTAGE' : 'FIXED',
     appliedAmount: finalDiscountValue,
+    maxDiscountAmount: promo.maxDiscountAmount,
   }
 }

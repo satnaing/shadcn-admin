@@ -14,7 +14,7 @@ export function Login() {
 
   return (
     <AuthLayout>
-      <Card className='gap-4'>
+      <Card className='gap-4 py-4'>
         <CardHeader>
           <CardTitle className='text-lg tracking-tight'>Login</CardTitle>
           <CardDescription>

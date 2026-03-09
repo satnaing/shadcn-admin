@@ -254,7 +254,7 @@ export function ManualOrderPanel() {
         customerName: isGuest && customerName ? customerName : undefined,
         customerPhone: isGuest && customerPhone ? customerPhone : undefined,
         assignToSelf: true, // Auto-assign to current staff
-        orderDiscounts: orderDiscounts.map(
+        orderDiscounts: derivedDiscounts.map(
           ({ id, appliedAmount, ...rest }) => rest
         ),
       },
@@ -283,7 +283,21 @@ export function ManualOrderPanel() {
     0
   )
 
-  const totalDiscounts = orderDiscounts.reduce(
+  const derivedDiscounts = orderDiscounts.map((discount) => {
+    let appliedAmount = 0
+    if (discount.type === 'PERCENTAGE') {
+      const discountAmount =
+        Math.floor(totalAmount * (discount.amount / 100) * 100) / 100
+      appliedAmount = discount.maxDiscountAmount
+        ? Math.min(discountAmount, discount.maxDiscountAmount)
+        : discountAmount
+    } else {
+      appliedAmount = Math.min(discount.amount, totalAmount)
+    }
+    return { ...discount, appliedAmount }
+  })
+
+  const totalDiscounts = derivedDiscounts.reduce(
     (acc, d) => acc + d.appliedAmount,
     0
   )
@@ -655,7 +669,7 @@ export function ManualOrderPanel() {
                   </button>
                 </div>
 
-                {orderDiscounts.map((discount) => (
+                {derivedDiscounts.map((discount) => (
                   <div
                     key={discount.id}
                     className='group flex animate-in items-center justify-between text-[11px] font-semibold text-destructive fade-in slide-in-from-top-1'
