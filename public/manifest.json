@@ -1,0 +1,17 @@
+{
+  "short_name": "bYok Admin",
+  "name": "bYok Admin Dashboard",
+  "icons": [
+    {
+      "src": "/images/favicon.png",
+      "type": "image/png",
+      "sizes": "192x192 512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#ffffff"
+}

@@ -26,6 +26,7 @@ function generateVersionPlugin(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig({
+  assetsInclude: ['**/*.caf'],
   plugins: [
     tanstackRouter({
       target: 'react',
