@@ -233,7 +233,15 @@ export const printLabelViaBluetooth = async (label: LabelData) => {
           )
         )
         if (found) {
-          device = found
+          // getDevices() returns disconnected references — must explicitly connect
+          try {
+            if (!found.gatt?.connected) {
+              await found.gatt.connect()
+            }
+            device = found
+          } catch {
+            // Failed to auto-reconnect, fall through to request a new device
+          }
         }
       }
 

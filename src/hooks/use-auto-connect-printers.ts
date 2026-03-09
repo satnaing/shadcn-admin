@@ -50,6 +50,15 @@ export function useAutoConnectPrinters() {
           console.log(
             `[AutoConnect] Attempting GATT connect for ${printerType} (Attempt ${attempt}/${retries})...`
           )
+          // Notify the UI that we are in the process of reconnecting
+          window.dispatchEvent(
+            new CustomEvent('printer-reconnecting', {
+              detail: {
+                printerType:
+                  printerType === 'label printer' ? 'label' : 'receipt',
+              },
+            })
+          )
           await device.gatt.connect()
           console.log(
             `[AutoConnect] ${printerType} GATT connected successfully`
@@ -63,6 +72,15 @@ export function useAutoConnectPrinters() {
           if (attempt === retries) {
             console.error(
               `[AutoConnect] Giving up on ${printerType} after ${retries} attempts.`
+            )
+            // Notify the UI that auto-connect fully failed so it can prompt the user
+            window.dispatchEvent(
+              new CustomEvent('printer-connect-failed', {
+                detail: {
+                  printerType:
+                    printerType === 'label printer' ? 'label' : 'receipt',
+                },
+              })
             )
             return false
           }

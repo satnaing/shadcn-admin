@@ -49,14 +49,14 @@ export const connectReceiptPrinter = async () => {
 }
 
 export const printReceiptViaBluetooth = async (orders: ReceiptProps[]) => {
-  console.log({ orders })
-  // return
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const bluetooth = (navigator as any).bluetooth
 
   if (!bluetooth) {
     toast.error(
-      'Bluetooth is not supported. On iOS, please use the Bluefy or WebBLE app.'
+      window.isSecureContext
+        ? 'Bluetooth is not supported. On iOS, please use the Bluefy or WebBLE app.'
+        : 'Bluetooth requires HTTPS. Please open the app via the production URL.'
     )
     return
   }
@@ -65,7 +65,7 @@ export const printReceiptViaBluetooth = async (orders: ReceiptProps[]) => {
     let device = window.cachedPrinterDevice as any
 
     if (!device || !device.gatt?.connected) {
-      // Attempt to find it from already permitted devices first
+      // Attempt to find it from already permitted devices first (desktop Chrome only)
       if (bluetooth.getDevices) {
         const devices = await bluetooth.getDevices()
         const found = devices.find((d: any) =>
@@ -74,7 +74,14 @@ export const printReceiptViaBluetooth = async (orders: ReceiptProps[]) => {
           )
         )
         if (found) {
-          device = found
+          try {
+            if (!found.gatt?.connected) {
+              await found.gatt.connect()
+            }
+            device = found
+          } catch {
+            // Failed to auto-reconnect, fall through to request a new device
+          }
         }
       }
 

@@ -9,6 +9,7 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/app-sidebar'
 import { Header } from '@/components/layout/header'
 import { ProtectedRoute } from '@/components/layout/protected-route'
+import { PrinterStatusIndicator } from '@/components/printer-status-indicator'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { SkipToMain } from '@/components/skip-to-main'
@@ -54,6 +55,7 @@ export function AuthenticatedLayout({ children }: AuthenticatedLayoutProps) {
               <Header>
                 <Search />
                 <div className='ml-auto flex items-center space-x-4'>
+                  <PrinterStatusIndicator />
                   <ThemeSwitch />
                   <ProfileDropdown />
                 </div>

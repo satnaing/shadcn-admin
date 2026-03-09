@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { getStoreNav } from '@/config/nav'
 import { useLayout } from '@/context/layout-provider'
 import { useAppStore } from '@/hooks/use-app-store'
@@ -17,6 +18,14 @@ import { ShopSwitcher } from './shop-switcher'
 export function AppSidebar() {
   const { collapsible, variant } = useLayout()
   const { activeShopId, user, shops } = useAppStore()
+  const [version, setVersion] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetch('/version.json', { cache: 'no-store' })
+      .then((r) => r.json())
+      .then((data) => setVersion(data.version))
+      .catch(() => {})
+  }, [])
 
   // Map Staff object to NavUser expected format
   const navUser = user
@@ -49,6 +58,11 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={navUser} />
+        {version && (
+          <p className='px-2 pb-1 text-right text-[10px] text-muted-foreground/60 select-none'>
+            v{version}
+          </p>
+        )}
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
