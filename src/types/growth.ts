@@ -82,6 +82,7 @@ export interface Voucher {
   uniqueCode: string // The specific code user types
   promotionName: string // Joined from Promotion
   userPhone: string // Joined from User
+  status: 'ISSUED' | 'USED' | 'EXPIRED' | 'VOIDED' | string
   isRedeemed: boolean
   createdAt: string
 }

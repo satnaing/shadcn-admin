@@ -14,7 +14,8 @@ export const getVouchers = async (
       uniqueCode: v.uniqueCode,
       promotionName: v.promotion?.name || 'Unknown',
       userPhone: v.user?.phone || 'Guest',
-      isRedeemed: v.isRedeemed,
+      status: v.status,
+      isRedeemed: v.status === 'USED',
       createdAt: new Date(v.createdAt).toLocaleDateString(),
     })),
     meta: {

@@ -54,20 +54,29 @@ export default function VouchersPage() {
       cell: ({ row }) => <span>{row.original.userPhone}</span>,
     },
     {
-      accessorKey: 'isRedeemed',
+      accessorKey: 'status',
       header: 'Status',
-      cell: ({ row }) => (
-        <Badge
-          variant='secondary'
-          className={cn(
-            row.original.isRedeemed
-              ? 'bg-red-100 text-red-800 hover:bg-red-100'
-              : 'bg-green-100 text-green-800 hover:bg-green-100'
-          )}
-        >
-          {row.original.isRedeemed ? 'Redeemed' : 'Unused'}
-        </Badge>
-      ),
+      cell: ({ row }) => {
+        const status = row.original.status
+        const isUsed = status === 'USED' || row.original.isRedeemed
+
+        return (
+          <Badge
+            variant='secondary'
+            className={cn(
+              isUsed
+                ? 'bg-red-100 text-red-800 hover:bg-red-100'
+                : status === 'ISSUED'
+                  ? 'bg-green-100 text-green-800 hover:bg-green-100'
+                  : 'bg-yellow-100 text-yellow-800 hover:bg-yellow-100'
+            )}
+          >
+            {isUsed
+              ? 'Redeemed'
+              : status.charAt(0) + status.slice(1).toLowerCase()}
+          </Badge>
+        )
+      },
     },
     {
       accessorKey: 'createdAt',
