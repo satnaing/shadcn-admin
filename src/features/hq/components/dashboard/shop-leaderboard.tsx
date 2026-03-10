@@ -1,79 +1,60 @@
-import { type ColumnDef } from '@tanstack/react-table'
-import { Star } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { DataTable } from '@/components/custom/data-table'
-import { type ShopLeaderboardItem } from '@/features/hq/data/mock-hq-dashboard'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
-const columns: ColumnDef<ShopLeaderboardItem>[] = [
-  {
-    accessorKey: 'name',
-    header: 'Shop Name',
-    cell: ({ row }) => (
-      <div className='font-medium'>{row.getValue('name')}</div>
-    ),
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    cell: ({ row }) => {
-      const status = row.getValue('status') as string
-      return (
-        <Badge variant={status === 'OPEN' ? 'default' : 'secondary'}>
-          {status}
-        </Badge>
-      )
-    },
-  },
-  {
-    accessorKey: 'sales',
-    header: ({ column }) => {
-      return (
-        <div
-          className='cursor-pointer hover:text-primary'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Sales (Today)
-        </div>
-      )
-    },
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('sales'))
-      const formatted = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(amount)
-      return <div className='font-medium'>{formatted}</div>
-    },
-  },
-  {
-    accessorKey: 'orders',
-    header: 'Orders',
-  },
-  {
-    accessorKey: 'rating',
-    header: 'Rating',
-    cell: ({ row }) => {
-      return (
-        <div className='flex items-center gap-1'>
-          <Star className='h-3 w-3 fill-primary text-primary' />
-          <span>{row.getValue('rating')}</span>
-        </div>
-      )
-    },
-  },
-]
-
-interface ShopLeaderboardProps {
-  data: ShopLeaderboardItem[]
+interface TopProductItem {
+  name: string
+  quantity: number
+  revenue: number
 }
 
-export function ShopLeaderboard({ data }: ShopLeaderboardProps) {
+interface TopProductsProps {
+  data: TopProductItem[]
+}
+
+export function ShopLeaderboard({ data }: TopProductsProps) {
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(amount)
+  }
+
   return (
-    <DataTable
-      columns={columns}
-      data={data}
-      searchKey='name' // Allow filtering by shop name
-      searchPlaceholder='Filter shops...'
-    />
+    <div className='rounded-md border'>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Product</TableHead>
+            <TableHead className='text-right'>Qty Sold</TableHead>
+            <TableHead className='text-right'>Net Revenue</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.length > 0 ? (
+            data.map((product, index) => (
+              <TableRow key={index}>
+                <TableCell className='font-medium'>{product.name}</TableCell>
+                <TableCell className='text-right'>{product.quantity}</TableCell>
+                <TableCell className='text-right'>
+                  {formatCurrency(product.revenue)}
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={3} className='h-24 text-center'>
+                No sales data available yet.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
   )
 }

@@ -1,3 +1,15 @@
+import { useEffect, useState } from 'react'
+import {
+  AlertTriangle,
+  DollarSign,
+  Loader2,
+  Receipt,
+  Tag,
+  Wallet,
+} from 'lucide-react'
+import { apiClient } from '@/lib/api-client'
+import { useAppStore } from '@/hooks/use-app-store'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
   Card,
@@ -6,23 +18,116 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ConfigDrawer } from '@/components/config-drawer'
-import { Header } from '@/components/layout/header'
-import { Main } from '@/components/layout/main'
-import { TopNav } from '@/components/layout/top-nav'
-import { ProfileDropdown } from '@/components/profile-dropdown'
-import { Search } from '@/components/search'
-import { ThemeSwitch } from '@/components/theme-switch'
+import { Skeleton } from '@/components/ui/skeleton'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { Tabs, TabsContent } from '@/components/ui/tabs'
+// import { ConfigDrawer } from '@/components/config-drawer'
+// import { Header } from '@/components/layout/header'
+// import { Main } from '@/components/layout/main'
+// import { TopNav } from '@/components/layout/top-nav'
+// import { ProfileDropdown } from '@/components/profile-dropdown'
+// import { Search } from '@/components/search'
+// import { ThemeSwitch } from '@/components/theme-switch'
 import { Analytics } from './components/analytics'
-import { Overview } from './components/overview'
+// import { Overview } from './components/overview'
 import { RecentSales } from './components/recent-sales'
 
+interface DailyReportData {
+  date: string
+  totals: {
+    totalOrders: number
+    grossSales: number
+    totalDiscounts: number
+    netRevenue: number
+  }
+  recentSales: {
+    invoiceCode: string
+    createdAt: string
+    grandTotal: number
+    status: string
+  }[]
+  lowStockItems: {
+    id: string
+    name: string | Record<string, string>
+    sku: string
+    quantity: number
+  }[]
+}
+
 export function Dashboard() {
+  const { activeShopId } = useAppStore()
+  const [data, setData] = useState<DailyReportData | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isDownloading, setIsDownloading] = useState(false)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!activeShopId) return
+
+      try {
+        setIsLoading(true)
+        const response = await apiClient.get('/admin/shop/reports/daily', {
+          headers: {
+            'x-shop-id': activeShopId,
+          },
+        })
+        setData(response.data)
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching daily report:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchData()
+  }, [activeShopId])
+
+  const handleDownload = async () => {
+    const localDateString = new Date().toLocaleDateString('en-CA') // YYYY-MM-DD
+    try {
+      setIsDownloading(true)
+      const response = await apiClient.get('/admin/shop/reports/export', {
+        params: { date: localDateString },
+        headers: {
+          'x-shop-id': activeShopId,
+        },
+        responseType: 'blob',
+      })
+
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', `daily-report-${localDateString}.xlsx`)
+      document.body.appendChild(link)
+      link.click()
+      link.parentNode?.removeChild(link)
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error downloading report:', error)
+    } finally {
+      setIsDownloading(false)
+    }
+  }
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(amount)
+  }
+
   return (
     <>
       {/* ===== Top Heading ===== */}
-      <Header>
+      {/* <Header>
         <TopNav links={topNav} />
         <div className='ms-auto flex items-center space-x-4'>
           <Search />
@@ -30,14 +135,25 @@ export function Dashboard() {
           <ConfigDrawer />
           <ProfileDropdown />
         </div>
-      </Header>
+      </Header> */}
 
       {/* ===== Main ===== */}
-      <Main>
+      <div className='flex flex-col gap-6 p-6'>
         <div className='mb-2 flex items-center justify-between space-y-2'>
-          <h1 className='text-2xl font-bold tracking-tight'>Dashboard</h1>
+          <h1 className='text-2xl font-bold tracking-tight'>
+            Shop Daily Report
+          </h1>
           <div className='flex items-center space-x-2'>
-            <Button>Download</Button>
+            <Button onClick={handleDownload} disabled={isDownloading}>
+              {isDownloading ? (
+                <>
+                  <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                  Downloading...
+                </>
+              ) : (
+                'Download'
+              )}
+            </Button>
           </div>
         </div>
         <Tabs
@@ -45,140 +161,182 @@ export function Dashboard() {
           defaultValue='overview'
           className='space-y-4'
         >
-          <div className='w-full overflow-x-auto pb-2'>
-            <TabsList>
-              <TabsTrigger value='overview'>Overview</TabsTrigger>
-              <TabsTrigger value='analytics'>Analytics</TabsTrigger>
-              <TabsTrigger value='reports' disabled>
-                Reports
-              </TabsTrigger>
-              <TabsTrigger value='notifications' disabled>
-                Notifications
-              </TabsTrigger>
-            </TabsList>
-          </div>
           <TabsContent value='overview' className='space-y-4'>
             <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
-              <Card>
+              <Card className='py-2'>
                 <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
                   <CardTitle className='text-sm font-medium'>
-                    Total Revenue
+                    Gross Sales
                   </CardTitle>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    className='h-4 w-4 text-muted-foreground'
-                  >
-                    <path d='M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6' />
-                  </svg>
+                  <DollarSign className='h-4 w-4 text-muted-foreground' />
                 </CardHeader>
                 <CardContent>
-                  <div className='text-2xl font-bold'>$45,231.89</div>
+                  {isLoading ? (
+                    <Skeleton className='h-8 w-[100px]' />
+                  ) : (
+                    <div className='text-2xl font-bold'>
+                      {formatCurrency(data?.totals.grossSales || 0)}
+                    </div>
+                  )}
                   <p className='text-xs text-muted-foreground'>
-                    +20.1% from last month
+                    Total sales before discounts
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className='py-2'>
                 <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
                   <CardTitle className='text-sm font-medium'>
-                    Subscriptions
+                    Total Orders
                   </CardTitle>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    className='h-4 w-4 text-muted-foreground'
-                  >
-                    <path d='M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2' />
-                    <circle cx='9' cy='7' r='4' />
-                    <path d='M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75' />
-                  </svg>
+                  <Receipt className='h-4 w-4 text-muted-foreground' />
                 </CardHeader>
                 <CardContent>
-                  <div className='text-2xl font-bold'>+2350</div>
+                  {isLoading ? (
+                    <Skeleton className='h-8 w-[100px]' />
+                  ) : (
+                    <div className='text-2xl font-bold'>
+                      {data?.totals.totalOrders || 0}
+                    </div>
+                  )}
                   <p className='text-xs text-muted-foreground'>
-                    +180.1% from last month
+                    Number of completed orders
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className='py-2'>
                 <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-                  <CardTitle className='text-sm font-medium'>Sales</CardTitle>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    className='h-4 w-4 text-muted-foreground'
-                  >
-                    <rect width='20' height='14' x='2' y='5' rx='2' />
-                    <path d='M2 10h20' />
-                  </svg>
+                  <CardTitle className='text-sm font-medium'>
+                    Discounts Given
+                  </CardTitle>
+                  <Tag className='h-4 w-4 text-muted-foreground' />
                 </CardHeader>
                 <CardContent>
-                  <div className='text-2xl font-bold'>+12,234</div>
+                  {isLoading ? (
+                    <Skeleton className='h-8 w-[100px]' />
+                  ) : (
+                    <div className='text-2xl font-bold'>
+                      {formatCurrency(data?.totals.totalDiscounts || 0)}
+                    </div>
+                  )}
                   <p className='text-xs text-muted-foreground'>
-                    +19% from last month
+                    Total value of all discounts
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className='py-2'>
                 <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
                   <CardTitle className='text-sm font-medium'>
-                    Active Now
+                    Net Revenue
                   </CardTitle>
-                  <svg
-                    xmlns='http://www.w3.org/2000/svg'
-                    viewBox='0 0 24 24'
-                    fill='none'
-                    stroke='currentColor'
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    className='h-4 w-4 text-muted-foreground'
-                  >
-                    <path d='M22 12h-4l-3 9L9 3l-3 9H2' />
-                  </svg>
+                  <Wallet className='h-4 w-4 text-muted-foreground' />
                 </CardHeader>
                 <CardContent>
-                  <div className='text-2xl font-bold'>+573</div>
+                  {isLoading ? (
+                    <Skeleton className='h-8 w-[100px]' />
+                  ) : (
+                    <div className='text-2xl font-bold'>
+                      {formatCurrency(data?.totals.netRevenue || 0)}
+                    </div>
+                  )}
                   <p className='text-xs text-muted-foreground'>
-                    +201 since last hour
+                    Gross sales minus discounts
                   </p>
                 </CardContent>
               </Card>
             </div>
             <div className='grid grid-cols-1 gap-4 lg:grid-cols-7'>
-              <Card className='col-span-1 lg:col-span-4'>
-                <CardHeader>
-                  <CardTitle>Overview</CardTitle>
-                </CardHeader>
-                <CardContent className='ps-2'>
-                  <Overview />
-                </CardContent>
-              </Card>
-              <Card className='col-span-1 lg:col-span-3'>
-                <CardHeader>
-                  <CardTitle>Recent Sales</CardTitle>
-                  <CardDescription>
-                    You made 265 sales this month.
-                  </CardDescription>
+              <Card className='col-span-1 py-2 lg:col-span-4'>
+                <CardHeader className='flex flex-row items-center justify-between space-y-0'>
+                  <CardTitle>Low Stock Alerts</CardTitle>
+                  <AlertTriangle className='h-4 w-4 text-rose-500' />
                 </CardHeader>
                 <CardContent>
-                  <RecentSales />
+                  {data?.lowStockItems && data.lowStockItems.length > 0 ? (
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Product</TableHead>
+                          <TableHead className='text-right'>Stock</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {data.lowStockItems.map((item) => {
+                          let displayName = ''
+                          try {
+                            if (typeof item.name === 'string') {
+                              if (item.name.startsWith('{')) {
+                                const parsed = JSON.parse(item.name)
+                                displayName =
+                                  parsed.en ||
+                                  parsed.km ||
+                                  Object.values(parsed)[0] ||
+                                  'Unknown'
+                              } else {
+                                displayName = item.name
+                              }
+                            } else if (
+                              typeof item.name === 'object' &&
+                              item.name !== null
+                            ) {
+                              const nameObj = item.name as Record<
+                                string,
+                                string
+                              >
+                              displayName =
+                                nameObj.en ||
+                                nameObj.km ||
+                                Object.values(nameObj)[0] ||
+                                'Unknown'
+                            }
+                          } catch (_e) {
+                            displayName = String(item.name)
+                          }
+
+                          return (
+                            <TableRow key={item.id}>
+                              <TableCell className='py-3'>
+                                <div className='font-medium'>{displayName}</div>
+                                <div className='text-xs text-muted-foreground'>
+                                  SKU: {item.sku}
+                                </div>
+                              </TableCell>
+                              <TableCell className='py-3 text-right'>
+                                <Badge
+                                  variant={
+                                    item.quantity <= 5
+                                      ? 'destructive'
+                                      : 'secondary'
+                                  }
+                                  className={
+                                    item.quantity > 5 && item.quantity <= 15
+                                      ? 'bg-amber-100 text-amber-700 hover:bg-amber-100 dark:bg-amber-900/30 dark:text-amber-400'
+                                      : ''
+                                  }
+                                >
+                                  {item.quantity}
+                                </Badge>
+                              </TableCell>
+                            </TableRow>
+                          )
+                        })}
+                      </TableBody>
+                    </Table>
+                  ) : (
+                    <div className='flex h-[150px] items-center justify-center text-sm text-muted-foreground'>
+                      All stock levels are healthy.
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+              <Card className='col-span-1 py-2 lg:col-span-3'>
+                <CardHeader className='mb-2 px-4'>
+                  <CardTitle>Recent Sales</CardTitle>
+                  <CardDescription>
+                    Latest transactions from today.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className='px-4 pt-2'>
+                  <RecentSales data={data?.recentSales} />
                 </CardContent>
               </Card>
             </div>
@@ -187,34 +345,34 @@ export function Dashboard() {
             <Analytics />
           </TabsContent>
         </Tabs>
-      </Main>
+      </div>
     </>
   )
 }
 
-const topNav = [
-  {
-    title: 'Overview',
-    href: 'dashboard/overview',
-    isActive: true,
-    disabled: false,
-  },
-  {
-    title: 'Customers',
-    href: 'dashboard/customers',
-    isActive: false,
-    disabled: true,
-  },
-  {
-    title: 'Products',
-    href: 'dashboard/products',
-    isActive: false,
-    disabled: true,
-  },
-  {
-    title: 'Settings',
-    href: 'dashboard/settings',
-    isActive: false,
-    disabled: true,
-  },
-]
+// const topNav = [
+//   {
+//     title: 'Overview',
+//     href: 'dashboard/overview',
+//     isActive: true,
+//     disabled: false,
+//   },
+//   {
+//     title: 'Customers',
+//     href: 'dashboard/customers',
+//     isActive: false,
+//     disabled: true,
+//   },
+//   {
+//     title: 'Products',
+//     href: 'dashboard/products',
+//     isActive: false,
+//     disabled: true,
+//   },
+//   {
+//     title: 'Settings',
+//     href: 'dashboard/settings',
+//     isActive: false,
+//     disabled: true,
+//   },
+// ]

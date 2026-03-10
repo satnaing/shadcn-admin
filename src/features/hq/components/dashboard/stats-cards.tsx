@@ -1,44 +1,15 @@
-import { useEffect, useState } from 'react'
 import { Coffee, DollarSign, Receipt, Users } from 'lucide-react'
-import { apiClient } from '@/lib/api-client'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { HqKpiData } from './index'
 
-interface KpiData {
-  sales: {
-    cpd: number
-    asp: number
-    grossContribution: number
-    aov: number
-    discountBleedPct: number
-  }
-  acquisition: {
-    newSignups: number
-  }
+interface StatsCardsProps {
+  data: HqKpiData | null
+  loading: boolean
 }
 
-export function StatsCards() {
-  const [data, setData] = useState<KpiData | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchKpi = async () => {
-      try {
-        const { data: json } = await apiClient.get<KpiData>(
-          'admin/reports/dashboard/kpi'
-        )
-        setData(json)
-      } catch {
-        // silently handle fetch errors
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchKpi()
-  }, [])
-
-  if (loading) {
+export function StatsCards({ data, loading }: StatsCardsProps) {
+  if (loading || !data) {
     return (
       <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-4'>
         {Array.from({ length: 4 }).map((_, i) => (
@@ -68,7 +39,7 @@ export function StatsCards() {
           <Coffee className='h-4 w-4 text-muted-foreground' />
         </CardHeader>
         <CardContent>
-          <div className='text-2xl font-bold'>{data?.sales?.cpd ?? '—'}</div>
+          <div className='text-2xl font-bold'>{data.sales.cpd}</div>
           <p className='text-xs text-muted-foreground'>
             Total beverage volume today
           </p>
@@ -84,13 +55,11 @@ export function StatsCards() {
           <DollarSign className='h-4 w-4 text-muted-foreground' />
         </CardHeader>
         <CardContent>
-          <div className='text-2xl font-bold'>
-            ${data?.sales?.asp?.toFixed(2) ?? '—'}
-          </div>
+          <div className='text-2xl font-bold'>${data.sales.asp.toFixed(2)}</div>
           <p className='text-xs text-muted-foreground'>
             Gross Contribution:{' '}
             <span className='text-emerald-500'>
-              ${data?.sales?.grossContribution?.toFixed(2) ?? '—'} / cup
+              ${data.sales.grossContribution.toFixed(2)} / cup
             </span>
           </p>
         </CardContent>
@@ -103,13 +72,11 @@ export function StatsCards() {
           <Receipt className='h-4 w-4 text-muted-foreground' />
         </CardHeader>
         <CardContent>
-          <div className='text-2xl font-bold'>
-            ${data?.sales?.aov?.toFixed(2) ?? '—'}
-          </div>
+          <div className='text-2xl font-bold'>${data.sales.aov.toFixed(2)}</div>
           <p className='text-xs text-muted-foreground'>
             Discount Bleed:{' '}
             <span className='text-rose-500'>
-              {data?.sales?.discountBleedPct ?? '—'}%
+              {data.sales.discountBleedPct.toFixed(1)}%
             </span>
           </p>
         </CardContent>
@@ -123,7 +90,7 @@ export function StatsCards() {
         </CardHeader>
         <CardContent>
           <div className='text-2xl font-bold'>
-            +{data?.acquisition?.newSignups ?? '—'}
+            +{data.acquisition.newSignups}
           </div>
           <p className='text-xs text-muted-foreground'>Registered today</p>
         </CardContent>

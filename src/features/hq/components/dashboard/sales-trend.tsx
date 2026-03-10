@@ -1,26 +1,52 @@
 import {
+  Area,
+  AreaChart,
   CartesianGrid,
-  Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
-  Legend,
 } from 'recharts'
-import { type SalesTrendItem } from '@/features/hq/data/mock-hq-dashboard'
+
+interface RevenueTrendItem {
+  date: string
+  grossSales: number
+  netRevenue: number
+}
 
 interface SalesTrendProps {
-  data: SalesTrendItem[]
+  data: RevenueTrendItem[]
 }
 
 export function SalesTrend({ data }: SalesTrendProps) {
   return (
     <ResponsiveContainer width='100%' height={350}>
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray='3 3' vertical={false} />
+      <AreaChart data={data}>
+        <defs>
+          <linearGradient id='colorNet' x1='0' y1='0' x2='0' y2='1'>
+            <stop
+              offset='5%'
+              stopColor='hsl(var(--primary))'
+              stopOpacity={0.1}
+            />
+            <stop
+              offset='95%'
+              stopColor='hsl(var(--primary))'
+              stopOpacity={0}
+            />
+          </linearGradient>
+          <linearGradient id='colorGross' x1='0' y1='0' x2='0' y2='1'>
+            <stop offset='5%' stopColor='#10b981' stopOpacity={0.1} />
+            <stop offset='95%' stopColor='#10b981' stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <CartesianGrid
+          strokeDasharray='3 3'
+          vertical={false}
+          strokeOpacity={0.5}
+        />
         <XAxis
-          dataKey='time'
+          dataKey='date'
           tickLine={false}
           axisLine={false}
           tickMargin={8}
@@ -37,32 +63,29 @@ export function SalesTrend({ data }: SalesTrendProps) {
           contentStyle={{
             backgroundColor: 'hsl(var(--background))',
             borderColor: 'hsl(var(--border))',
+            borderRadius: '8px',
           }}
-          itemStyle={{ color: 'hsl(var(--foreground))' }}
+          itemStyle={{ fontSize: '12px' }}
         />
-        <Legend />
-        <Line
+        <Area
           type='monotone'
-          dataKey='Downtown'
-          stroke='hsl(var(--primary))'
+          dataKey='grossSales'
+          stroke='hsl(var(--muted-foreground))'
+          fillOpacity={0.1}
+          fill='hsl(var(--muted-foreground))'
           strokeWidth={2}
-          dot={false}
+          name='Gross Sales'
         />
-        <Line
+        <Area
           type='monotone'
-          dataKey='Uptown'
-          stroke='#3b82f6' // Blue
+          dataKey='netRevenue'
+          stroke='#10b981'
+          fillOpacity={0.2}
+          fill='#10b981'
           strokeWidth={2}
-          dot={false}
+          name='Net Revenue'
         />
-        <Line
-          type='monotone'
-          dataKey='Airport'
-          stroke='#10b981' // Green
-          strokeWidth={2}
-          dot={false}
-        />
-      </LineChart>
+      </AreaChart>
     </ResponsiveContainer>
   )
 }
