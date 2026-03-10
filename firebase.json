@@ -1,10 +1,13 @@
 {
   "hosting": {
-    "source": ".",
+    "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "frameworksBackend": {
-      "region": "asia-east1"
-    },
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
     "headers": [
       {
         "source": "**/*.@(html|js|css)",

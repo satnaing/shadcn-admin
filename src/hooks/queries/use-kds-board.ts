@@ -32,8 +32,13 @@ export function useKdsBoard(
   useEffect(() => {
     if (!shopId) return
 
+    // Derive the base server URL by stripping /api/v1 path from the API URL
+    // Socket.IO connects to the server root, not the REST API path
+    const socketBaseUrl =
+      import.meta.env.VITE_API_URL?.replace(/\/api\/v\d+$/, '') ?? ''
+
     // Connect to the specific namespace and send shopId as query
-    const socket = io(`${import.meta.env.VITE_API_URL}/kds`, {
+    const socket = io(`${socketBaseUrl}/kds`, {
       query: {
         shopId,
       },
@@ -43,6 +48,16 @@ export function useKdsBoard(
     socket.on('connect', () => {
       // eslint-disable-next-line no-console
       console.log('Connected to KDS Real-time Gateway for Shop:', shopId)
+    })
+
+    socket.on('connect_error', (err) => {
+      // eslint-disable-next-line no-console
+      console.error(
+        '[KDS Socket] Connection error:',
+        err.message,
+        '| URL:',
+        `${socketBaseUrl}/kds`
+      )
     })
 
     // Listen for new orders
