@@ -22,6 +22,7 @@ import { useCustomers } from '@/hooks/queries/use-customers'
 import { useCreateOrder } from '@/hooks/queries/use-orders'
 import { useShopFulfillmentMethods } from '@/hooks/queries/use-shops'
 import { useAppStore } from '@/hooks/use-app-store'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import {
@@ -208,7 +209,8 @@ export function ManualOrderPanel() {
 
   const handleApplyPromotion = (promo: Promotion) => {
     // Check if subtotal is enough or other rules (simplified for now)
-    const discountData = applySmartPromotion(promo, totalAmount)
+    const itemPrices = cartItems.map((i) => i.unitPrice)
+    const discountData = applySmartPromotion(promo, totalAmount, itemPrices)
 
     const newDiscount: AppliedDiscount = {
       ...discountData,
@@ -285,14 +287,19 @@ export function ManualOrderPanel() {
 
   const derivedDiscounts = orderDiscounts.map((discount) => {
     let appliedAmount = 0
+    const isProductScope = discount.scope === 'PRODUCT'
+    const baseAmount = isProductScope
+      ? Math.max(0, ...cartItems.map((i) => i.unitPrice))
+      : totalAmount
+
     if (discount.type === 'PERCENTAGE') {
       const discountAmount =
-        Math.floor(totalAmount * (discount.amount / 100) * 100) / 100
+        Math.floor(baseAmount * (discount.amount / 100) * 100) / 100
       appliedAmount = discount.maxDiscountAmount
         ? Math.min(discountAmount, discount.maxDiscountAmount)
         : discountAmount
     } else {
-      appliedAmount = Math.min(discount.amount, totalAmount)
+      appliedAmount = Math.min(discount.amount, baseAmount)
     }
     return { ...discount, appliedAmount }
   })
@@ -302,6 +309,16 @@ export function ManualOrderPanel() {
     0
   )
   const totalPayable = Math.max(0, totalAmount - totalDiscounts)
+
+  const productScopeDiscount = derivedDiscounts.find(
+    (d) => d.scope === 'PRODUCT'
+  )
+  let discountedItemTempId: string | null = null
+  if (productScopeDiscount && cartItems.length > 0) {
+    const maxPrice = Math.max(...cartItems.map((i) => i.unitPrice))
+    discountedItemTempId =
+      cartItems.find((i) => i.unitPrice === maxPrice)?.tempId || null
+  }
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -614,10 +631,27 @@ export function ManualOrderPanel() {
                       </div>
                       <div className='min-w-0 flex-1'>
                         <div className='mb-0.5 flex items-center justify-between'>
-                          <span className='max-w-[140px] truncate text-[11px] font-bold text-foreground'>
-                            {item.name}
-                          </span>
-                          <span className='text-[11px] font-bold text-primary'>
+                          <div className='flex items-center gap-2 overflow-hidden'>
+                            <span className='max-w-[140px] truncate text-[11px] font-bold text-foreground'>
+                              {item.name}
+                            </span>
+                            {item.tempId === discountedItemTempId && (
+                              <Badge
+                                variant='secondary'
+                                className='h-3.5 border-primary/20 bg-primary/10 px-1 text-[8px] font-bold tracking-tighter text-primary uppercase'
+                              >
+                                Promo
+                              </Badge>
+                            )}
+                          </div>
+                          <span
+                            className={cn(
+                              'text-[11px] font-bold',
+                              item.tempId === discountedItemTempId
+                                ? 'text-primary'
+                                : 'text-foreground'
+                            )}
+                          >
                             {formatCurrency(item.unitPrice * item.quantity)}
                           </span>
                         </div>

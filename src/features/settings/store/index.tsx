@@ -199,9 +199,6 @@ export default function StoreProfileForm() {
                       <FormControl>
                         <Input placeholder='STOR-001' {...field} />
                       </FormControl>
-                      <FormDescription>
-                        Unique identifier for this location.
-                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
