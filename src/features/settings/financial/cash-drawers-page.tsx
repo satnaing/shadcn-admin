@@ -26,7 +26,7 @@ export function CashDrawersPage() {
   }
 
   return (
-    <div className='flex h-full flex-col space-y-6 p-8'>
+    <div className='flex h-full flex-col space-y-6 p-6'>
       <PageTitle
         title='Cash Drawer History'
         subtitle='Audit cash handling, spot discrepancies, and review shift notes.'

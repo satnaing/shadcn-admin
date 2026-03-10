@@ -1,5 +1,4 @@
 import {
-  hqSnapshotData,
   shopLeaderboardData,
   salesTrendData,
 } from '@/features/hq/data/mock-hq-dashboard'
@@ -16,7 +15,7 @@ export function HqDashboard() {
         </h1>
       </div>
 
-      <StatsCards data={hqSnapshotData} />
+      <StatsCards />
 
       <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-7'>
         <div className='col-span-4 min-h-[400px] rounded-xl border bg-card text-card-foreground shadow'>

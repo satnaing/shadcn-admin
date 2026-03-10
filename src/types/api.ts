@@ -500,3 +500,38 @@ export type ReceiptProps = {
   paymentMethodName?: string
   paymentStatus?: string
 }
+// Payment Methods
+export enum PaymentCategory {
+  CASH = 'CASH',
+  QR = 'QR',
+  CARD = 'CARD',
+  WALLET = 'WALLET',
+  BANK_TRANSFER = 'BANK_TRANSFER',
+  MANUAL_TRANSFER = 'MANUAL_TRANSFER',
+}
+
+export interface PaymentMethod {
+  id: string
+  businessId: string
+  slug: string
+  name: LocalizedText
+  description?: LocalizedText
+  logoUrl?: string
+  category: PaymentCategory
+  isDigital: boolean
+  isActive: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export interface CreatePaymentMethodDto {
+  slug: string
+  name: LocalizedText
+  description?: LocalizedText
+  logoUrl?: string
+  category: PaymentCategory
+  isDigital: boolean
+  isActive: boolean
+}
+
+export type UpdatePaymentMethodDto = Partial<CreatePaymentMethodDto>

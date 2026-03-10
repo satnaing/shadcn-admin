@@ -123,6 +123,7 @@ export const hqNav = [
     icon: Banknote,
     items: [
       { title: 'Tax & Surcharges', url: '/settings/financial' },
+      { title: 'Payment Methods', url: '/settings/financial/payment-methods' },
       { title: 'Cash Drawers', url: '/settings/financial/cash-drawers' },
     ],
   },
