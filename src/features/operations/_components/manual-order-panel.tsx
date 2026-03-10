@@ -241,13 +241,31 @@ export function ManualOrderPanel() {
       )
     }
 
+    // Separate discounts: PRODUCT scope goes into items, CART scope stays top-level
+    const topLevelDiscounts = derivedDiscounts.filter(
+      (d) => d.scope === 'CART' || !d.scope
+    )
+    const productDiscounts = derivedDiscounts.filter(
+      (d) => d.scope === 'PRODUCT'
+    )
+
     createOrder(
       {
         shopId,
         userId: isGuest ? null : selectedCustomer?.id,
         guestInfo: isGuest ? { name: 'Guest Walk-in' } : undefined,
         items: cartItems.map(
-          ({ tempId, name, imageUrl, displayOptions, ...item }) => item
+          ({ tempId, name, imageUrl, displayOptions, ...item }) => {
+            const isDiscounted = tempId === discountedItemTempId
+            return {
+              ...item,
+              itemDiscounts: isDiscounted
+                ? productDiscounts.map(
+                    ({ id, appliedAmount, scope, ...rest }) => rest
+                  )
+                : undefined,
+            }
+          }
         ),
         fulfillmentMethodId: method.id,
         status: 'CONFIRMED', // Initial status required by spec
@@ -256,8 +274,8 @@ export function ManualOrderPanel() {
         customerName: isGuest && customerName ? customerName : undefined,
         customerPhone: isGuest && customerPhone ? customerPhone : undefined,
         assignToSelf: true, // Auto-assign to current staff
-        orderDiscounts: derivedDiscounts.map(
-          ({ id, appliedAmount, ...rest }) => rest
+        orderDiscounts: topLevelDiscounts.map(
+          ({ id, appliedAmount, scope, ...rest }) => rest
         ),
       },
       {
