@@ -1,10 +1,45 @@
-import axios from 'axios'
+import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios'
+import { toast } from 'sonner'
 
-// Assuming sonner is used for toasts, if not I might need to check. But typical stack uses sonner or similar.
-// I will check package.json or imports later if this fails, but for now assuming global toast or simple replace.
-// actually, let's use a safe approach. I'll check imports in other files to see what toast library is used.
-// The user has `src/hooks/use-toast.ts` usually in shadcn or `sonner`.
-// Let's assume standard named import for now or just window.location.href for redirect.
+let isRefreshing = false
+let failedQueue: Array<{
+  resolve: (token: string) => void
+  reject: (error: unknown) => void
+}> = []
+
+const processQueue = (error: unknown, token: string | null = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error)
+    } else {
+      prom.resolve(token!)
+    }
+  })
+  failedQueue = []
+}
+
+const clearAuthAndRedirect = (reason: 'revoked' | 'expired' = 'expired') => {
+  localStorage.removeItem('accessToken')
+  localStorage.removeItem('refreshToken')
+  localStorage.removeItem('currentSessionId')
+  localStorage.removeItem('activeShopId')
+  localStorage.removeItem('currentUser')
+
+  toast.error(
+    reason === 'revoked' ? 'Session terminated' : 'Session expired',
+    {
+      description:
+        reason === 'revoked'
+          ? 'Your session was revoked from another device. Please log in again.'
+          : 'Your session has expired. Please log in again.',
+      duration: 4000,
+    }
+  )
+
+  setTimeout(() => {
+    window.location.href = '/login'
+  }, 1500)
+}
 
 const apiClient = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -63,7 +98,7 @@ apiClient.interceptors.response.use(
 
     return response
   },
-  (error) => {
+  async (error: AxiosError) => {
     // eslint-disable-next-line no-console
     console.groupCollapsed(
       `%cAPI Error: ${error.response?.status || 'Unknown'} ${error.config?.url}`,
@@ -78,15 +113,58 @@ apiClient.interceptors.response.use(
     // eslint-disable-next-line no-console
     console.groupEnd()
 
+    const originalRequest = error.config as InternalAxiosRequestConfig & {
+      _retry?: boolean
+    }
     const status = error.response?.status
+    const isAuthEndpoint = originalRequest?.url?.includes('/admin/auth/')
 
-    if (status === 401) {
-      if (!error.config.url.includes('/auth/login')) {
-        localStorage.removeItem('accessToken')
-        localStorage.removeItem('activeShopId')
-        window.location.href = '/login'
+    if (status === 401 && !originalRequest?._retry && !isAuthEndpoint) {
+      if (isRefreshing) {
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject })
+        })
+          .then((token) => {
+            originalRequest.headers.Authorization = `Bearer ${token}`
+            return apiClient(originalRequest)
+          })
+          .catch((err) => Promise.reject(err))
+      }
+
+      originalRequest._retry = true
+      isRefreshing = true
+
+      const refreshToken = localStorage.getItem('refreshToken')
+
+      if (!refreshToken) {
+        isRefreshing = false
+        clearAuthAndRedirect()
+        return Promise.reject(error)
+      }
+
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_URL}/admin/auth/refresh`,
+          { refreshToken }
+        )
+        const { accessToken, refreshToken: newRefreshToken, sessionId } = response.data
+
+        localStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', newRefreshToken)
+        if (sessionId) localStorage.setItem('currentSessionId', sessionId)
+
+        processQueue(null, accessToken)
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`
+        return apiClient(originalRequest)
+      } catch (refreshError) {
+        processQueue(refreshError, null)
+        clearAuthAndRedirect('revoked')
+        return Promise.reject(refreshError)
+      } finally {
+        isRefreshing = false
       }
     }
+
     return Promise.reject(error)
   }
 )

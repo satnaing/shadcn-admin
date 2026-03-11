@@ -65,7 +65,19 @@ export type LoginResponse = StaffLoginResponse
 
 export interface StaffLoginResponse {
   accessToken: string
+  refreshToken: string
+  sessionId: string
   user: Staff
+}
+
+export interface StaffSession {
+  id: string
+  deviceName: string | null
+  ipAddress: string | null
+  userAgent: string | null
+  lastActiveAt: string
+  createdAt: string
+  expiresAt: string
 }
 
 export interface ChangePasswordRequest {

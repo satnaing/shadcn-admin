@@ -53,9 +53,13 @@ export const getStoreNav = (shopId?: string | null) => [
     icon: Users,
   },
   {
-    title: 'Store Settings',
+    title: 'Settings',
     url: '/settings/store',
     icon: Settings,
+    items: [
+      { title: 'Store Profile', url: '/settings/store' },
+      { title: 'Active Sessions', url: '/settings/sessions' },
+    ],
   },
 ]
 
@@ -137,6 +141,7 @@ export const hqNav = [
       { title: 'Roles & Permissions', url: '/settings/roles' },
       { title: 'Audit Logs', url: '/settings/audit-logs' },
       { title: 'Mobile App', url: '/settings/mobile-app' },
+      { title: 'Active Sessions', url: '/settings/sessions' },
     ],
   },
 ]

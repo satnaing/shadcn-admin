@@ -98,6 +98,7 @@ export const sidebarData: SidebarData = {
           items: [
             { title: 'Store Profile', url: '/settings/store' },
             { title: 'Financials', url: '/settings/financial' },
+            { title: 'Active Sessions', url: '/settings/sessions' },
           ],
         },
       ],
