@@ -21,6 +21,10 @@ import {
   AudioWaveform,
   Command,
   GalleryVerticalEnd,
+  FileCode,
+  BarChart3,
+  GitBranch,
+  ScrollText,
 } from 'lucide-react'
 import { ClerkLogo } from '@/assets/clerk-logo'
 import { type SidebarData } from '../types'
@@ -77,6 +81,27 @@ export const sidebarData: SidebarData = {
           title: 'Users',
           url: '/users',
           icon: Users,
+        },
+        {
+          title: '规则管理',
+          icon: FileCode,
+          items: [
+            {
+              title: '规则统计',
+              url: '/rules/statistics',
+              icon: BarChart3,
+            },
+            {
+              title: '规则版本',
+              url: '/rules/versions',
+              icon: GitBranch,
+            },
+            {
+              title: '规则日志',
+              url: '/rules/logs',
+              icon: ScrollText,
+            },
+          ],
         },
         {
           title: 'Secured by Clerk',

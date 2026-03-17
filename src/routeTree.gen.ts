@@ -38,6 +38,9 @@ import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes
 import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
+import { Route as AuthenticatedRulesVersionsRouteImport } from './routes/_authenticated/rules/versions'
+import { Route as AuthenticatedRulesStatisticsRouteImport } from './routes/_authenticated/rules/statistics'
+import { Route as AuthenticatedRulesLogsRouteImport } from './routes/_authenticated/rules/logs'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
 
 const ClerkRouteRoute = ClerkRouteRouteImport.update({
@@ -190,6 +193,23 @@ const AuthenticatedSettingsAccountRoute =
     path: '/account',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
+const AuthenticatedRulesVersionsRoute =
+  AuthenticatedRulesVersionsRouteImport.update({
+    id: '/rules/versions',
+    path: '/rules/versions',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedRulesStatisticsRoute =
+  AuthenticatedRulesStatisticsRouteImport.update({
+    id: '/rules/statistics',
+    path: '/rules/statistics',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedRulesLogsRoute = AuthenticatedRulesLogsRouteImport.update({
+  id: '/rules/logs',
+  path: '/rules/logs',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedErrorsErrorRoute =
   AuthenticatedErrorsErrorRouteImport.update({
     id: '/errors/$error',
@@ -212,6 +232,9 @@ export interface FileRoutesByFullPath {
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/rules/logs': typeof AuthenticatedRulesLogsRoute
+  '/rules/statistics': typeof AuthenticatedRulesStatisticsRoute
+  '/rules/versions': typeof AuthenticatedRulesVersionsRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -240,6 +263,9 @@ export interface FileRoutesByTo {
   '/503': typeof errors503Route
   '/': typeof AuthenticatedIndexRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/rules/logs': typeof AuthenticatedRulesLogsRoute
+  '/rules/statistics': typeof AuthenticatedRulesStatisticsRoute
+  '/rules/versions': typeof AuthenticatedRulesVersionsRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -273,6 +299,9 @@ export interface FileRoutesById {
   '/(errors)/503': typeof errors503Route
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
+  '/_authenticated/rules/logs': typeof AuthenticatedRulesLogsRoute
+  '/_authenticated/rules/statistics': typeof AuthenticatedRulesStatisticsRoute
+  '/_authenticated/rules/versions': typeof AuthenticatedRulesVersionsRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
   '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
@@ -304,6 +333,9 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/errors/$error'
+    | '/rules/logs'
+    | '/rules/statistics'
+    | '/rules/versions'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -332,6 +364,9 @@ export interface FileRouteTypes {
     | '/503'
     | '/'
     | '/errors/$error'
+    | '/rules/logs'
+    | '/rules/statistics'
+    | '/rules/versions'
     | '/settings/account'
     | '/settings/appearance'
     | '/settings/display'
@@ -364,6 +399,9 @@ export interface FileRouteTypes {
     | '/(errors)/503'
     | '/_authenticated/'
     | '/_authenticated/errors/$error'
+    | '/_authenticated/rules/logs'
+    | '/_authenticated/rules/statistics'
+    | '/_authenticated/rules/versions'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
     | '/_authenticated/settings/display'
@@ -599,6 +637,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsAccountRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
+    '/_authenticated/rules/versions': {
+      id: '/_authenticated/rules/versions'
+      path: '/rules/versions'
+      fullPath: '/rules/versions'
+      preLoaderRoute: typeof AuthenticatedRulesVersionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/rules/statistics': {
+      id: '/_authenticated/rules/statistics'
+      path: '/rules/statistics'
+      fullPath: '/rules/statistics'
+      preLoaderRoute: typeof AuthenticatedRulesStatisticsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/rules/logs': {
+      id: '/_authenticated/rules/logs'
+      path: '/rules/logs'
+      fullPath: '/rules/logs'
+      preLoaderRoute: typeof AuthenticatedRulesLogsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/errors/$error': {
       id: '/_authenticated/errors/$error'
       path: '/errors/$error'
@@ -636,6 +695,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
+  AuthenticatedRulesLogsRoute: typeof AuthenticatedRulesLogsRoute
+  AuthenticatedRulesStatisticsRoute: typeof AuthenticatedRulesStatisticsRoute
+  AuthenticatedRulesVersionsRoute: typeof AuthenticatedRulesVersionsRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
@@ -647,6 +709,9 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
+  AuthenticatedRulesLogsRoute: AuthenticatedRulesLogsRoute,
+  AuthenticatedRulesStatisticsRoute: AuthenticatedRulesStatisticsRoute,
+  AuthenticatedRulesVersionsRoute: AuthenticatedRulesVersionsRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
