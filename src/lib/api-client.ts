@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
+import axios, { type AxiosInstance } from 'axios'
 import { getCookie } from './cookies'
 
 const ACCESS_TOKEN = 'thisisjustarandomstring'
@@ -19,7 +19,7 @@ apiClient.interceptors.request.use(
     const token = cookieState ? JSON.parse(cookieState) : ''
 
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+      config.headers.Authorization = token
     }
 
     return config

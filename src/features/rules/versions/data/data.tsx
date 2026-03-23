@@ -2,17 +2,17 @@ import { CheckCircle2, Eye, XCircle } from 'lucide-react'
 
 export const versionStatuses = [
   {
-    value: 'enabled',
+    value: 'active',
     label: '开启',
     icon: CheckCircle2,
   },
   {
-    value: 'observing',
+    value: 'watch',
     label: '观察',
     icon: Eye,
   },
   {
-    value: 'disabled',
+    value: 'close',
     label: '关闭',
     icon: XCircle,
   },

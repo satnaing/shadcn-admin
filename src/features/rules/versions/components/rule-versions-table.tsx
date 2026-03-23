@@ -30,6 +30,7 @@ import { getRuleVersionColumns } from './rule-versions-columns'
 
 type RuleVersionsTableProps = {
   data: RuleVersion[]
+  userId: string
   onEdit: (row: RuleVersion) => void
   onDelete: (row: RuleVersion) => void
   onStatusChange: (row: RuleVersion, newStatus: string) => void
@@ -38,6 +39,7 @@ type RuleVersionsTableProps = {
 
 export function RuleVersionsTable({
   data,
+  userId,
   onEdit,
   onDelete,
   onStatusChange,
@@ -48,7 +50,7 @@ export function RuleVersionsTable({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [globalFilter, setGlobalFilter] = useState('')
 
-  const columns = getRuleVersionColumns({ onEdit, onDelete, onStatusChange })
+  const columns = getRuleVersionColumns({ userId, onEdit, onDelete, onStatusChange })
 
   const table = useReactTable({
     data,
@@ -74,7 +76,7 @@ export function RuleVersionsTable({
   return (
     <div className='space-y-4'>
       <div className='flex flex-col gap-4 sm:flex-row sm:items-center'>
-        <div className='relative flex-1'>
+        <div className='relative w-full sm:w-1/4'>
           <Search className='absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground' />
           <Input
             placeholder='搜索规则编号、版本名称或描述...'
@@ -83,14 +85,14 @@ export function RuleVersionsTable({
             className='pl-9'
           />
         </div>
-        {table.getColumn('versionStatus') && (
+        {table.getColumn('rule_status') && (
           <DataTableFacetedFilter
-            column={table.getColumn('versionStatus')}
-            title='版本状态'
+            column={table.getColumn('rule_status')}
+            title='规则状态'
             options={versionStatuses}
           />
         )}
-        <Button onClick={onCreateNew} className='shrink-0'>
+        <Button onClick={onCreateNew} className='ml-auto shrink-0'>
           <Plus className='mr-2 size-4' />
           创建新规则
         </Button>
