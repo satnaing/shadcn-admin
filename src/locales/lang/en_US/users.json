@@ -1,0 +1,73 @@
+{
+  "title": "User Management",
+  "description": "Manage system users and their roles here.",
+  "newUser": "New User",
+  "editUser": "Edit User",
+  "deleteUser": "Delete User",
+  "deleteUsers": "Delete Users",
+  "userId": "ID",
+  "userName": "Username",
+  "nickName": "Nick Name",
+  "email": "Email",
+  "phone": "Phone",
+  "status": "Status",
+  "role": "Role",
+  "createTime": "Create Time",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "edit": "Edit",
+  "delete": "Delete",
+  "statusNormal": "Normal",
+  "statusDisabled": "Disabled",
+  "dialogDescription": {
+    "create": "Create new user here. Click save when you're done.",
+    "edit": "Update the user here. Click save when you're done."
+  },
+  "deleteDialog": {
+    "title": "Delete User",
+    "description": "Are you sure you want to delete user <strong>{{userName}}</strong> ({{nickName}})?",
+    "warning": "This action will permanently remove the user from the system.",
+    "warningTitle": "Warning",
+    "cannotUndo": "This operation cannot be undone."
+  },
+  "multiDeleteDialog": {
+    "title": "Delete {{count}} Users",
+    "description": "Are you sure you want to delete {{count}} users?"
+  },
+  "inviteDialog": {
+    "title": "Invite User",
+    "description": "Invite new user to join your team by sending them an email invitation. Assign a role to define their access level.",
+    "role": "Role",
+    "descriptionField": "Description (optional)",
+    "cancel": "Cancel",
+    "invite": "Invite"
+  },
+  "buttons": {
+    "saveChanges": "Save changes",
+    "inviteUser": "Invite User",
+    "addUser": "Add User"
+  },
+  "placeholders": {
+    "userName": "userName",
+    "nickName": "nickName",
+    "email": "bike@example.com",
+    "phone": "+1234567890",
+    "password": "e.g., 123456",
+    "selectStatus": "Select status",
+    "selectRoles": "Select roles",
+    "inviteEmail": "eg: bike@163.com",
+    "selectRole": "Select a role",
+    "inviteDescription": "Add a personal note to your invitation (optional)"
+  },
+  "errors": {
+    "userAlreadyExists": "This username already exists",
+    "createFailed": "Failed to create user",
+    "updateFailed": "Failed to update user",
+    "deleteFailed": "Failed to delete user"
+  },
+  "success": {
+    "created": "User created successfully",
+    "updated": "User updated successfully",
+    "deleted": "User deleted successfully"
+  }
+}

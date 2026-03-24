@@ -1,0 +1,73 @@
+{
+  "title": "用户管理",
+  "description": "在此管理系统用户及其角色。",
+  "newUser": "新建用户",
+  "editUser": "编辑用户",
+  "deleteUser": "删除用户",
+  "deleteUsers": "删除用户",
+  "userId": "用户ID",
+  "userName": "用户名",
+  "nickName": "昵称",
+  "email": "邮箱",
+  "phone": "手机号",
+  "status": "状态",
+  "role": "角色",
+  "createTime": "创建时间",
+  "password": "密码",
+  "confirmPassword": "确认密码",
+  "edit": "编辑",
+  "delete": "删除",
+  "statusNormal": "正常",
+  "statusDisabled": "停用",
+  "dialogDescription": {
+    "create": "在此创建新用户。完成后点击保存。",
+    "edit": "在此更新用户信息。完成后点击保存。"
+  },
+  "deleteDialog": {
+    "title": "删除用户",
+    "description": "确定要删除用户 <strong>{{userName}}</strong> ({{nickName}}) 吗？",
+    "warning": "此操作将永久从系统中移除���用户。",
+    "warningTitle": "警告",
+    "cannotUndo": "此操作无法撤销。"
+  },
+  "multiDeleteDialog": {
+    "title": "删除 {{count}} 个用户",
+    "description": "确定要删除 {{count}} 个用户吗？"
+  },
+  "inviteDialog": {
+    "title": "邀请用户",
+    "description": "通过发送电子邮件邀请新用户加入您的团队。分配角色以定义其访问级别。",
+    "role": "角色",
+    "descriptionField": "描述（可选）",
+    "cancel": "取消",
+    "invite": "邀请"
+  },
+  "buttons": {
+    "saveChanges": "保存更改",
+    "inviteUser": "邀请用户",
+    "addUser": "添加用户"
+  },
+  "placeholders": {
+    "userName": "自行车",
+    "nickName": "张三",
+    "email": "bike@example.com",
+    "phone": "+1234567890",
+    "password": "例如：123456",
+    "selectStatus": "选择状态",
+    "inviteEmail": "例如：bike@163.com",
+    "selectRoles": "选择角色",
+    "selectRole": "选择角色",
+    "inviteDescription": "为您的邀请添加个人备注（可选）"
+  },
+  "errors": {
+    "userAlreadyExists": "该用户名已存在",
+    "createFailed": "创建用户失败",
+    "updateFailed": "更新用户失败",
+    "deleteFailed": "删除用户失败"
+  },
+  "success": {
+    "created": "用户创建成功",
+    "updated": "用户更新成功",
+    "deleted": "用户删除成功"
+  }
+}

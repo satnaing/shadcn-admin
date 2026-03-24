@@ -1,12 +1,13 @@
 import { ContentSection } from '../components/content-section'
 import { AppearanceForm } from './appearance-form'
+import { useTranslation } from 'react-i18next'
 
 export function SettingsAppearance() {
+  const { t } = useTranslation('settings')
   return (
     <ContentSection
-      title='Appearance'
-      desc='Customize the appearance of the app. Automatically switch between day
-          and night themes.'
+      title={t('appearanceTitle')}
+      desc={t('appearanceDesc')}
     >
       <AppearanceForm />
     </ContentSection>

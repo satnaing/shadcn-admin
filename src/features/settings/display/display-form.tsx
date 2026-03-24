@@ -13,33 +13,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
+import { useTranslation } from 'react-i18next'
 
-const items = [
-  {
-    id: 'recents',
-    label: 'Recents',
-  },
-  {
-    id: 'home',
-    label: 'Home',
-  },
-  {
-    id: 'applications',
-    label: 'Applications',
-  },
-  {
-    id: 'desktop',
-    label: 'Desktop',
-  },
-  {
-    id: 'downloads',
-    label: 'Downloads',
-  },
-  {
-    id: 'documents',
-    label: 'Documents',
-  },
-] as const
+const sidebarItemIds = ['recents', 'home', 'applications', 'desktop', 'downloads', 'documents'] as const
 
 const displayFormSchema = z.object({
   items: z.array(z.string()).refine((value) => value.some((item) => item), {
@@ -55,10 +31,13 @@ const defaultValues: Partial<DisplayFormValues> = {
 }
 
 export function DisplayForm() {
+  const { t } = useTranslation('settings')
   const form = useForm<DisplayFormValues>({
     resolver: zodResolver(displayFormSchema),
     defaultValues,
   })
+
+  const items = sidebarItemIds.map((id) => ({ id, label: t(id) }))
 
   return (
     <Form {...form}>
@@ -72,9 +51,9 @@ export function DisplayForm() {
           render={() => (
             <FormItem>
               <div className='mb-4'>
-                <FormLabel className='text-base'>Sidebar</FormLabel>
+                <FormLabel className='text-base'>{t('sidebar')}</FormLabel>
                 <FormDescription>
-                  Select the items you want to display in the sidebar.
+                  {t('sidebarDesc')}
                 </FormDescription>
               </div>
               {items.map((item) => (
@@ -114,7 +93,7 @@ export function DisplayForm() {
             </FormItem>
           )}
         />
-        <Button type='submit'>Update display</Button>
+        <Button type='submit'>{t('updateDisplay')}</Button>
       </form>
     </Form>
   )

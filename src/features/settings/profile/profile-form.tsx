@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react'
 import { z } from 'zod'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from '@tanstack/react-router'
+import { toast } from 'sonner'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -15,14 +17,9 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import { useTranslation } from 'react-i18next'
+import { authService } from '../api'
 
 const profileFormSchema = z.object({
   username: z
@@ -57,6 +54,9 @@ const defaultValues: Partial<ProfileFormValues> = {
 }
 
 export function ProfileForm() {
+  const { t } = useTranslation('settings')
+  const [isLoading, setIsLoading] = useState(true)
+
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
@@ -68,109 +68,131 @@ export function ProfileForm() {
     control: form.control,
   })
 
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const userInfo = await authService.getUserInfo()
+        form.reset({
+          username: userInfo.username,
+          email: userInfo.email || userInfo.username,
+          bio: defaultValues.bio,
+          urls: defaultValues.urls,
+        })
+      } catch (error) {
+        toast.error('Failed to load user information')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchUserInfo()
+  }, [form])
+
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => showSubmittedData(data))}
         className='space-y-8'
       >
-        <FormField
-          control={form.control}
-          name='username'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder='shadcn' {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name. It can be your real name or a
-                pseudonym. You can only change this once every 30 days.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='email'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder='Select a verified email to display' />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value='m@example.com'>m@example.com</SelectItem>
-                  <SelectItem value='m@google.com'>m@google.com</SelectItem>
-                  <SelectItem value='m@support.com'>m@support.com</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormDescription>
-                You can manage verified email addresses in your{' '}
-                <Link to='/'>email settings</Link>.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name='bio'
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Bio</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder='Tell us a little bit about yourself'
-                  className='resize-none'
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription>
-                You can <span>@mention</span> other users and organizations to
-                link to them.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div>
-          {fields.map((field, index) => (
+        {isLoading ? (
+          <div className='space-y-8'>
+            <div className='space-y-2'>
+              <div className='h-4 w-20 bg-muted animate-pulse rounded' />
+              <div className='h-10 bg-muted animate-pulse rounded' />
+            </div>
+            <div className='space-y-2'>
+              <div className='h-4 w-20 bg-muted animate-pulse rounded' />
+              <div className='h-10 bg-muted animate-pulse rounded' />
+            </div>
+          </div>
+        ) : (
+          <>
             <FormField
               control={form.control}
-              key={field.id}
-              name={`urls.${index}.value`}
+              name='username'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className={cn(index !== 0 && 'sr-only')}>
-                    URLs
-                  </FormLabel>
-                  <FormDescription className={cn(index !== 0 && 'sr-only')}>
-                    Add links to your website, blog, or social media profiles.
-                  </FormDescription>
-                  <FormControl className={cn(index !== 0 && 'mt-1.5')}>
-                    <Input {...field} />
+                  <FormLabel>{t('username')}</FormLabel>
+                  <FormControl>
+                    <Input placeholder={t('usernamePlaceholder')} {...field} disabled />
                   </FormControl>
+                  <FormDescription>
+                    {t('usernameDesc')}
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          ))}
-          <Button
-            type='button'
-            variant='outline'
-            size='sm'
-            className='mt-2'
-            onClick={() => append({ value: '' })}
-          >
-            Add URL
-          </Button>
-        </div>
-        <Button type='submit'>Update profile</Button>
+            <FormField
+              control={form.control}
+              name='email'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('email')}</FormLabel>
+                  <FormControl>
+                    <Input placeholder={t('emailPlaceholder')} {...field} disabled />
+                  </FormControl>
+                  <FormDescription>
+                    {t('emailDesc')} <Link to='/'>email settings</Link>.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+                />
+            <FormField
+              control={form.control}
+              name='bio'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t('bio')}</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder={t('bioPlaceholder')}
+                      className='resize-none'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    {t('bioDesc')}
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div>
+              {fields.map((field, index) => (
+                <FormField
+                  control={form.control}
+                  key={field.id}
+                  name={`urls.${index}.value`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className={cn(index !== 0 && 'sr-only')}>
+                        {t('urls')}
+                      </FormLabel>
+                      <FormDescription className={cn(index !== 0 && 'sr-only')}>
+                        {t('urlsDesc')}
+                      </FormDescription>
+                      <FormControl className={cn(index !== 0 && 'mt-1.5')}>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ))}
+              <Button
+                type='button'
+                variant='outline'
+                size='sm'
+                className='mt-2'
+                onClick={() => append({ value: '' })}
+              >
+                {t('addUrl')}
+              </Button>
+            </div>
+            <Button type='submit'>{t('updateProfile')}</Button>
+          </>
+        )}
       </form>
     </Form>
   )

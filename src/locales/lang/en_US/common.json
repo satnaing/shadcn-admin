@@ -1,0 +1,37 @@
+{
+	"okText": "OK",
+	"closeText": "Close",
+	"cancelText": "Cancel",
+	"loadingText": "Loading...",
+	"saveText": "Save",
+	"delText": "Delete",
+	"resetText": "Reset",
+	"searchText": "Search",
+	"queryText": "Search",
+
+	"inputText": "Please enter",
+	"chooseText": "Please choose",
+
+	"redo": "Refresh",
+	"back": "Back",
+
+	"light": "Light",
+	"dark": "Dark",
+
+	"warning": "Warning",
+	"delete": "Delete",
+	"cannotUndo": "This operation cannot be undone",
+	"actions": "Actions",
+	"page": "Page",
+	"of": "of",
+	"rowsPerPage": "Rows per page",
+
+	"profile": "Profile",
+	"billing": "Billing",
+	"settings": "Settings",
+	"newTeam": "New Team",
+	"signOut": "Sign out",
+	"upgradeToPro": "Upgrade to Pro",
+	"account": "Account",
+	"notifications": "Notifications"
+}

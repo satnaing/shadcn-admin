@@ -1,0 +1,174 @@
+{
+	"sys": {
+		"api": {
+			"operationSuccess": "操作成功",
+			"operationFailed": "操作失败",
+			"errorTip": "错误提示",
+			"successTip": "成功提示",
+			"errorMessage": "操作失败,系统异常!",
+			"timeoutMessage": "登录超时,请重新登录!",
+			"apiTimeoutMessage": "接口请求超时,请刷新页面重试!",
+			"apiRequestFailed": "请求出错，请稍候重试",
+			"networkException": "网络异常",
+			"networkExceptionMsg": "网络异常，请检查您的网络连接是否正常!",
+
+			"errMsg401": "用户没有权限（令牌、用户名、密码错误）!",
+			"errMsg403": "用户得到授权，但是访问是被禁止的。!",
+			"errMsg404": "网络请求错误,未找到该资源!",
+			"errMsg405": "网络请求错误,请求方法未允许!",
+			"errMsg408": "网络请求超时!",
+			"errMsg500": "服务器错误,请联系管理员!",
+			"errMsg501": "网络未实现!",
+			"errMsg502": "网络错误!",
+			"errMsg503": "服务不可用，服务器暂时过载或维护!",
+			"errMsg504": "网络超时!",
+			"errMsg505": "http版本不支持该请求!"
+		},
+		"login": {
+			"backSignIn": "返回",
+			"signInFormTitle": "登录到您的账户",
+			"mobileSignInFormTitle": "手机登录",
+			"qrSignInFormTitle": "二维码登录",
+			"signUpFormTitle": "注册",
+			"forgetFormTitle": "重置密码",
+
+			"signInPrimaryTitle": "欢迎回来",
+			"signInSecondTitle": "开箱即用的中后台管理系统",
+			"signInDesc": "输入您的个人详细信息开始使用！",
+			"policy": "我同意xxx隐私政策",
+			"scanSign": "扫码后点击'确认'，即可完成登录",
+			"forgetFormSecondTitle": "请输入与您的帐户关联的电子邮件地址，我们将通过电子邮件向您发送重置密码的链接。",
+
+			"loginButton": "登录",
+			"registerButton": "注册",
+			"rememberMe": "记住我",
+			"forgetPassword": "忘记密码?",
+			"otherSignIn": "其他登录方式",
+			"sendSmsButton": "发送验证码",
+			"sendSmsText": "{{second}}秒后重试",
+			"sendEmailButton": "发送邮件",
+
+			"loginSuccessTitle": "登录成功",
+			"loginSuccessDesc": "欢迎回来",
+
+			"accountPlaceholder": "请输入账号",
+			"passwordPlaceholder": "请输入密码",
+			"confirmPasswordPlaceholder": "请输入确认密码",
+			"emaildPlaceholder": "请输入邮箱",
+			"smsPlaceholder": "请输入验证码",
+			"mobilePlaceholder": "请输入手机号码",
+			"policyPlaceholder": "勾选后才能注册",
+			"diffPwd": "两次输入密码不一致",
+
+			"userName": "账号",
+			"password": "密码",
+			"confirmPassword": "确认密码",
+			"email": "邮箱",
+			"smsCode": "短信验证码",
+			"mobile": "手机号码",
+
+			"registerAndAgree": "注册即我同意",
+			"termsOfService": " 服务条款 ",
+			"privacyPolicy": " 隐私政策 ",
+			"logout": "退出",
+			"signInFormDescription": "输入您的账号登录到您的账户",
+			"noAccount": "没有账号？"
+		},
+		"tab": {
+			"fullscreen": "内容全屏",
+			"refresh": "刷新",
+			"close": "关闭标签页",
+			"closeOthers": "关闭其它标签页",
+			"closeAll": "关闭所有标签页",
+			"closeLeft": "关闭左侧标签页",
+			"closeRight": "关闭右侧标签页"
+		},
+		"nav": {
+			"dashboard": "仪表板",
+			"pages": "页面",
+			"others": "其他",
+			"ui": "UI",
+			"custom_ui_components": "自定义UI组件",
+			"workbench": "工作台",
+			"analysis": "分析",
+			"management": "管理",
+			"user": {
+				"index": "用户",
+				"profile": "个人资料",
+				"account": "账户"
+			},
+			"system": {
+				"index": "系统",
+				"organization": "组织",
+				"permission": "权限",
+				"role": "角色",
+				"user": "用户",
+				"user_detail": "用户详情"
+			},
+			"blog": "博客",
+			"components": "组件",
+			"icon": "图标",
+			"animate": "动画",
+			"scroll": "滚动",
+			"markdown": "Markdown",
+			"editor": "富文本",
+			"i18n": "多语言",
+			"upload": "上传",
+			"chart": "图表",
+			"toast": "Toast",
+			"functions": "功能",
+			"clipboard": "剪贴板",
+			"token_expired": "Token失效",
+			"menulevel": {
+				"index": "多级菜单",
+				"1a": "多级菜单 1a",
+				"1b": {
+					"index": "多级菜单 1b",
+					"2a": "多级菜单 2a",
+					"2b": {
+						"index": "多级菜单 2b",
+						"3a": "多级菜单 3a",
+						"3b": "多级菜单 3b"
+					}
+				}
+			},
+			"disabled": "项目禁用",
+			"label": "项目标签",
+			"link": "链接",
+			"external_link": "外链",
+			"iframe": "内嵌",
+			"blank": "空白",
+			"calendar": "日历",
+			"kanban": "看板",
+			"permission": "权限",
+			"permission.page_test": "页面鉴权测试",
+			"error": {
+				"index": "异常页",
+				"403": "403",
+				"404": "404",
+				"500": "500"
+			}
+		},
+		"docs": "文档",
+		"settings": {
+			"title": "设置",
+			"mode": "模式",
+			"layout": "布局",
+			"stretch": "拉伸",
+			"stretchTip": "仅在屏幕宽度大于 1280px 时可用(xl)",
+			"presetThemes": "预设",
+			"font": "字体",
+			"family": "字体系列",
+			"size": "字体大小",
+			"page": "页面",
+			"breadcrumb": "面包屑",
+			"multiTab": "多标签",
+			"darkSidebar": "暗色侧边栏",
+			"accordion": "手风琴菜单",
+			"fullscreen": "全屏",
+			"exitFullscreen": "退出全屏"
+		}
+	},
+
+	"Welcome to React": "欢迎来到 React and react-i18next"
+}
