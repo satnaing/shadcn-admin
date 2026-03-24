@@ -79,7 +79,8 @@ If you want to update components using the Shadcn CLI (e.g., `npx shadcn@latest 
 Clone the project
 
 ```bash
-  git clone https://github.com/satnaing/shadcn-admin.git
+  # git clone https://github.com/satnaing/shadcn-admin.git
+  git clone https://github.com/republicroad/shadcn-admin.git
 ```
 
 Go to the project directory
@@ -99,12 +100,23 @@ Start the server
 ```bash
   pnpm run dev
 ```
+## 容器启动
+- 进入到你的项目文件夹中 (在你的 Dockerfile 目录下, 包含 app 目录).
+
+- 构建你的FastAPI镜像
+  ```bash
+  docker build -t my-shadcn-image .
+  ```
+- 在构建的镜像基础上，启动容器
+  ```bash
+  docker run -d --name my-shadcn-container -p 8005:80 my-shadcn-image
+  ```
 
 ## Sponsoring this project ❤️
 
 If you find this project helpful or use this in your own work, consider [sponsoring me](https://github.com/sponsors/satnaing) to support development and maintenance. You can [buy me a coffee](https://buymeacoffee.com/satnaing) as well. Don’t worry, every penny helps. Thank you! 🙏
 
-For questions or sponsorship inquiries, feel free to reach out at [satnaingdev@gmail.com](mailto:satnaingdev@gmail.com).
+For questions or sponsorship inquiries, feel free to reach out at [satnaingdev@163.com](mailto:satnaingdev@163.com).
 
 ### Current Sponsor
 
