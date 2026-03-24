@@ -14,7 +14,7 @@ import {
 import { DataTableColumnHeader } from '@/components/data-table'
 import { versionStatuses } from '../data/data'
 import { type RuleVersion } from '../data/schema'
-import { fetchRuleDetail } from '../api'
+import { fetchRuleDetail } from '../../api'
 
 type ColumnsProps = {
   userId: string

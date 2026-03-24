@@ -1,8 +1,6 @@
 import { create } from 'zustand'
 import { getCookie, setCookie, removeCookie } from '@/lib/cookies'
-
-const ACCESS_TOKEN = 'thisisjustarandomstring'
-const USER_INFO = 'user_info'
+import { ACCESS_TOKEN, USER_INFO } from '@/config/system'
 
 interface AuthUser {
   user_id: string

@@ -26,7 +26,7 @@ import { type RuleVersion } from './data/schema'
 import { RuleVersionsTable } from './components/rule-versions-table'
 import { RuleEditDialog } from './components/rule-edit-dialog'
 import { RuleCreateDialog } from './components/rule-create-dialog'
-import { fetchProjs, fetchRules, createRule, updateRule, updateRuleStatus, deleteRule, type Proj } from './api'
+import { fetchProjs, fetchRules, createRule, updateRule, updateRuleStatus, deleteRule, type Proj } from '../api'
 
 export function RuleVersions() {
   const [data, setData] = useState<RuleVersion[]>([])

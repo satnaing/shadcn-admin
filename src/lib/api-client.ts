@@ -1,7 +1,8 @@
 import axios, { type AxiosInstance } from 'axios'
 import { getCookie } from './cookies'
+import { toast } from 'sonner'
+import { ACCESS_TOKEN } from '@/config/system'
 
-const ACCESS_TOKEN = 'thisisjustarandomstring'
 
 // 创建 axios 实例
 const apiClient: AxiosInstance = axios.create({
@@ -32,11 +33,17 @@ apiClient.interceptors.request.use(
 // 响应拦截器 - 统一处理错误
 apiClient.interceptors.response.use(
   (response) => {
+    const data = response.data
+    if (data && typeof data.code === 'number' && data.code !== 200) {
+      const msg = data.msg
+      toast.error(msg)
+      return Promise.reject(new Error(msg))
+    }
     return response
   },
   (error) => {
     if (error.response?.status === 401) {
-      // Token 过期或无效,跳转到登录页
+      localStorage.removeItem('token')
       window.location.href = '/sign-in'
     }
     return Promise.reject(error)

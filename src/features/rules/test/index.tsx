@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useAuthStore } from '@/stores/auth-store'
-import { runRule } from '../versions/api'
+import { runRule } from '../api'
 
 type Language = 'shell' | 'javascript' | 'node' | 'python' | 'php' | 'go' | 'java'
 
