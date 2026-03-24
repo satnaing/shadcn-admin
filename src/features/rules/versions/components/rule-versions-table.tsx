@@ -12,7 +12,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { Plus, Search } from 'lucide-react'
+import { Plus, Search, Zap } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -35,6 +36,7 @@ type RuleVersionsTableProps = {
   onDelete: (row: RuleVersion) => void
   onStatusChange: (row: RuleVersion, newStatus: string) => void
   onCreateNew?: () => void
+  projId?: string
 }
 
 export function RuleVersionsTable({
@@ -44,6 +46,7 @@ export function RuleVersionsTable({
   onDelete,
   onStatusChange,
   onCreateNew,
+  projId,
 }: RuleVersionsTableProps) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -92,7 +95,13 @@ export function RuleVersionsTable({
             options={versionStatuses}
           />
         )}
-        <Button onClick={onCreateNew} className='ml-auto shrink-0'>
+        <Button asChild variant='outline' className='ml-auto shrink-0'>
+          <Link to='/rules/test' search={{ projId }}>
+            <Zap className='mr-2 size-4' />
+            业务调用API
+          </Link>
+        </Button>
+        <Button onClick={onCreateNew} className='shrink-0'>
           <Plus className='mr-2 size-4' />
           创建新规则
         </Button>

@@ -98,3 +98,11 @@ export async function deleteRule(userId: string, ruleId: string): Promise<void> 
     params: { user_id: userId, rule_id: ruleId },
   })
 }
+
+export async function runRule(
+  params: { user_id: string; user_key: string; proj_id: string },
+  data: unknown
+): Promise<unknown> {
+  const { data: response } = await apiClient.post('/geerule/run', data, { params })
+  return response
+}

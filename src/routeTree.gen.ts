@@ -39,6 +39,7 @@ import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_auth
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
 import { Route as AuthenticatedRulesVersionsRouteImport } from './routes/_authenticated/rules/versions'
+import { Route as AuthenticatedRulesTestRouteImport } from './routes/_authenticated/rules/test'
 import { Route as AuthenticatedRulesStatisticsRouteImport } from './routes/_authenticated/rules/statistics'
 import { Route as AuthenticatedRulesLogsRouteImport } from './routes/_authenticated/rules/logs'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
@@ -199,6 +200,11 @@ const AuthenticatedRulesVersionsRoute =
     path: '/rules/versions',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedRulesTestRoute = AuthenticatedRulesTestRouteImport.update({
+  id: '/rules/test',
+  path: '/rules/test',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedRulesStatisticsRoute =
   AuthenticatedRulesStatisticsRouteImport.update({
     id: '/rules/statistics',
@@ -234,6 +240,7 @@ export interface FileRoutesByFullPath {
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/rules/logs': typeof AuthenticatedRulesLogsRoute
   '/rules/statistics': typeof AuthenticatedRulesStatisticsRoute
+  '/rules/test': typeof AuthenticatedRulesTestRoute
   '/rules/versions': typeof AuthenticatedRulesVersionsRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
@@ -265,6 +272,7 @@ export interface FileRoutesByTo {
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/rules/logs': typeof AuthenticatedRulesLogsRoute
   '/rules/statistics': typeof AuthenticatedRulesStatisticsRoute
+  '/rules/test': typeof AuthenticatedRulesTestRoute
   '/rules/versions': typeof AuthenticatedRulesVersionsRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
@@ -301,6 +309,7 @@ export interface FileRoutesById {
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/_authenticated/rules/logs': typeof AuthenticatedRulesLogsRoute
   '/_authenticated/rules/statistics': typeof AuthenticatedRulesStatisticsRoute
+  '/_authenticated/rules/test': typeof AuthenticatedRulesTestRoute
   '/_authenticated/rules/versions': typeof AuthenticatedRulesVersionsRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
@@ -335,6 +344,7 @@ export interface FileRouteTypes {
     | '/errors/$error'
     | '/rules/logs'
     | '/rules/statistics'
+    | '/rules/test'
     | '/rules/versions'
     | '/settings/account'
     | '/settings/appearance'
@@ -366,6 +376,7 @@ export interface FileRouteTypes {
     | '/errors/$error'
     | '/rules/logs'
     | '/rules/statistics'
+    | '/rules/test'
     | '/rules/versions'
     | '/settings/account'
     | '/settings/appearance'
@@ -401,6 +412,7 @@ export interface FileRouteTypes {
     | '/_authenticated/errors/$error'
     | '/_authenticated/rules/logs'
     | '/_authenticated/rules/statistics'
+    | '/_authenticated/rules/test'
     | '/_authenticated/rules/versions'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
@@ -644,6 +656,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRulesVersionsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/rules/test': {
+      id: '/_authenticated/rules/test'
+      path: '/rules/test'
+      fullPath: '/rules/test'
+      preLoaderRoute: typeof AuthenticatedRulesTestRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/rules/statistics': {
       id: '/_authenticated/rules/statistics'
       path: '/rules/statistics'
@@ -697,6 +716,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
   AuthenticatedRulesLogsRoute: typeof AuthenticatedRulesLogsRoute
   AuthenticatedRulesStatisticsRoute: typeof AuthenticatedRulesStatisticsRoute
+  AuthenticatedRulesTestRoute: typeof AuthenticatedRulesTestRoute
   AuthenticatedRulesVersionsRoute: typeof AuthenticatedRulesVersionsRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
@@ -711,6 +731,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
   AuthenticatedRulesLogsRoute: AuthenticatedRulesLogsRoute,
   AuthenticatedRulesStatisticsRoute: AuthenticatedRulesStatisticsRoute,
+  AuthenticatedRulesTestRoute: AuthenticatedRulesTestRoute,
   AuthenticatedRulesVersionsRoute: AuthenticatedRulesVersionsRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,

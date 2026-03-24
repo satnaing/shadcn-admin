@@ -195,6 +195,7 @@ export function RuleVersions() {
             onDelete={handleDelete}
             onStatusChange={handleStatusChange}
             onCreateNew={handleCreateNew}
+            projId={selectedScenario}
           />
         </CardContent>
       </Card>
