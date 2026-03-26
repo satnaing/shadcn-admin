@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react'
 import { getCookie, setCookie } from '@/lib/cookies'
 
 export type Collapsible = 'offcanvas' | 'icon' | 'none'
-export type Variant = 'inset' | 'sidebar' | 'floating'
+type Variant = 'inset' | 'sidebar' | 'floating'
 
 // Cookie constants following the pattern from sidebar.tsx
 const LAYOUT_COLLAPSIBLE_COOKIE_NAME = 'layout_collapsible'
