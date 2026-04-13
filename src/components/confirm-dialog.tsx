@@ -19,11 +19,13 @@ type ConfirmDialogProps = {
   cancelBtnText?: string
   confirmText?: React.ReactNode
   destructive?: boolean
-  handleConfirm: () => void
   isLoading?: boolean
   className?: string
   children?: React.ReactNode
-}
+} & (
+  | { form: string; handleConfirm?: undefined }
+  | { form?: undefined; handleConfirm: () => void }
+)
 
 export function ConfirmDialog(props: ConfirmDialogProps) {
   const {
@@ -36,7 +38,6 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     destructive,
     isLoading,
     disabled = false,
-    handleConfirm,
     ...actions
   } = props
   return (
@@ -54,8 +55,10 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
             {cancelBtnText ?? 'Cancel'}
           </AlertDialogCancel>
           <Button
+            type={props.form ? 'submit' : 'button'}
+            form={props.form}
+            onClick={props.handleConfirm}
             variant={destructive ? 'destructive' : 'default'}
-            onClick={handleConfirm}
             disabled={disabled || isLoading}
           >
             {confirmText ?? 'Continue'}
