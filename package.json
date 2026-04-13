@@ -10,7 +10,12 @@
     "preview": "vite preview",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "knip": "knip"
+    "knip": "knip",
+    "test": "vitest run --browser.headless",
+    "test:watch": "vitest --browser.headless",
+    "test:ui": "vitest --ui --browser.headless",
+    "test:browser": "vitest",
+    "test:coverage": "vitest run --coverage --browser.headless"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.61.3",
@@ -69,6 +74,9 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/browser-playwright": "^4.1.4",
+    "@vitest/coverage-v8": "^4.1.4",
+    "@vitest/ui": "^4.1.4",
     "eslint": "^10.2.0",
     "eslint-plugin-react-hooks": "7.1.0-canary-705268dc-20260409",
     "eslint-plugin-react-refresh": "^0.5.2",
@@ -78,6 +86,8 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.1",
-    "vite": "^8.0.8"
+    "vite": "^8.0.8",
+    "vitest": "^4.1.4",
+    "vitest-browser-react": "^2.2.0"
   }
 }
