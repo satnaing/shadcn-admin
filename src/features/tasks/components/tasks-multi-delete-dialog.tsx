@@ -52,7 +52,7 @@ export function TasksMultiDeleteDialog<TData>({
     <ConfirmDialog
       open={open}
       onOpenChange={onOpenChange}
-      handleConfirm={handleDelete}
+      form='tasks-multi-delete-form'
       disabled={value.trim() !== CONFIRM_WORD}
       title={
         <span className='text-destructive'>
@@ -65,7 +65,14 @@ export function TasksMultiDeleteDialog<TData>({
         </span>
       }
       desc={
-        <div className='space-y-4'>
+        <form
+          id='tasks-multi-delete-form'
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleDelete()
+          }}
+          className='space-y-4'
+        >
           <p className='mb-2'>
             Are you sure you want to delete the selected tasks? <br />
             This action cannot be undone.
@@ -77,6 +84,7 @@ export function TasksMultiDeleteDialog<TData>({
               value={value}
               onChange={(e) => setValue(e.target.value)}
               placeholder={`Type "${CONFIRM_WORD}" to confirm.`}
+              autoFocus
             />
           </Label>
 
@@ -86,7 +94,7 @@ export function TasksMultiDeleteDialog<TData>({
               Please be careful, this operation can not be rolled back.
             </AlertDescription>
           </Alert>
-        </div>
+        </form>
       }
       confirmText='Delete'
       destructive
