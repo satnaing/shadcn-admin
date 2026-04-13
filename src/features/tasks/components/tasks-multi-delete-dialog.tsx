@@ -84,6 +84,7 @@ export function TasksMultiDeleteDialog<TData>({
               value={value}
               onChange={(e) => setValue(e.target.value)}
               placeholder={`Type "${CONFIRM_WORD}" to confirm.`}
+              autoFocus
             />
           </Label>
 
