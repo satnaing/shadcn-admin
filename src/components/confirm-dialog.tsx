@@ -38,6 +38,8 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     destructive,
     isLoading,
     disabled = false,
+    form,
+    handleConfirm,
     ...actions
   } = props
   return (
@@ -55,9 +57,9 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
             {cancelBtnText ?? 'Cancel'}
           </AlertDialogCancel>
           <Button
-            type={props.form ? 'submit' : 'button'}
-            form={props.form}
-            onClick={props.handleConfirm}
+            type={form ? 'submit' : 'button'}
+            form={form}
+            onClick={handleConfirm}
             variant={destructive ? 'destructive' : 'default'}
             disabled={disabled || isLoading}
           >
