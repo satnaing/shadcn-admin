@@ -26,7 +26,7 @@ const formSchema = z.object({
   file: z
     .instanceof(FileList)
     .refine((files) => files.length > 0, {
-      message: 'Please upload a file',
+      message: 'Please upload a file.',
     })
     .refine(
       (files) => ['text/csv'].includes(files?.[0]?.type),
@@ -88,7 +88,12 @@ export function TasksImportDialog({
                 <FormItem className='my-2'>
                   <FormLabel>File</FormLabel>
                   <FormControl>
-                    <Input type='file' {...fileRef} className='h-8 py-0' />
+                    <Input
+                      type='file'
+                      accept='text/csv'
+                      {...fileRef}
+                      className='h-8 py-0'
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
