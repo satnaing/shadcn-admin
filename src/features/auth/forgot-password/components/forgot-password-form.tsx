@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input'
 
 const formSchema = z.object({
   email: z.email({
-    error: (iss) => (iss.input === '' ? 'Please enter your email' : undefined),
+    error: (iss) => (iss.input === '' ? 'Please enter your email.' : undefined),
   }),
 })
 
@@ -37,8 +37,6 @@ export function ForgotPasswordForm({
 
   function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
 
     toast.promise(sleep(2000), {
       loading: 'Sending email...',

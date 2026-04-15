@@ -13,7 +13,7 @@ import { ForgotPasswordForm } from './components/forgot-password-form'
 export function ForgotPassword() {
   return (
     <AuthLayout>
-      <Card className='gap-4'>
+      <Card className='max-w-sm gap-4 sm:min-w-sm'>
         <CardHeader>
           <CardTitle className='text-lg tracking-tight'>
             Forgot Password
