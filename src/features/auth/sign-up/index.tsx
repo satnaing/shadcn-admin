@@ -13,7 +13,7 @@ import { SignUpForm } from './components/sign-up-form'
 export function SignUp() {
   return (
     <AuthLayout>
-      <Card className='gap-4'>
+      <Card className='max-w-sm gap-4'>
         <CardHeader>
           <CardTitle className='text-lg tracking-tight'>
             Create an account
