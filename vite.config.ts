@@ -22,6 +22,7 @@ export default defineConfig({
     },
   },
   test: {
+    silent: 'passed-only',
     browser: {
       enabled: true,
       provider: playwright(),
