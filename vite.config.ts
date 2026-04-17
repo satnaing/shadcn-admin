@@ -28,5 +28,8 @@ export default defineConfig({
       provider: playwright(),
       instances: [{ browser: 'chromium' }],
     },
+    coverage: {
+      exclude: ['src/components/ui/**', 'src/assets/**'],
+    },
   },
 })
