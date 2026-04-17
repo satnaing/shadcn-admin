@@ -47,7 +47,6 @@ export function ConfigDrawer() {
           size='icon'
           variant='ghost'
           aria-label='Open theme settings'
-          aria-describedby='config-drawer-description'
           className='rounded-full'
         >
           <Settings aria-hidden='true' />
@@ -56,7 +55,7 @@ export function ConfigDrawer() {
       <SheetContent className='flex flex-col'>
         <SheetHeader className='pb-0 text-start'>
           <SheetTitle>Theme Settings</SheetTitle>
-          <SheetDescription id='config-drawer-description'>
+          <SheetDescription>
             Adjust the appearance and layout to suit your preferences.
           </SheetDescription>
         </SheetHeader>
@@ -84,11 +83,14 @@ function SectionTitle({
   title,
   showReset = false,
   onReset,
+  resetAriaLabel,
   className,
 }: {
   title: string
   showReset?: boolean
   onReset?: () => void
+  /** Shown on the small per-section reset (RotateCcw) for accessibility and tests. */
+  resetAriaLabel?: string
   className?: string
 }) {
   return (
@@ -101,10 +103,12 @@ function SectionTitle({
       {title}
       {showReset && onReset && (
         <Button
+          type='button'
           size='icon'
           variant='secondary'
           className='size-4 rounded-full'
           onClick={onReset}
+          aria-label={resetAriaLabel}
         >
           <RotateCcw className='size-3' />
         </Button>
@@ -176,6 +180,7 @@ function ThemeConfig() {
         title='Theme'
         showReset={theme !== defaultTheme}
         onReset={() => setTheme(defaultTheme)}
+        resetAriaLabel='Reset theme preference to default'
       />
       <Radio
         value={theme}
@@ -219,6 +224,7 @@ function SidebarConfig() {
         title='Sidebar'
         showReset={defaultVariant !== variant}
         onReset={() => setVariant(defaultVariant)}
+        resetAriaLabel='Reset sidebar style to default'
       />
       <Radio
         value={variant}
@@ -269,6 +275,7 @@ function LayoutConfig() {
           setOpen(true)
           setCollapsible(defaultCollapsible)
         }}
+        resetAriaLabel='Reset layout options to default'
       />
       <Radio
         value={radioState}
@@ -319,6 +326,7 @@ function DirConfig() {
         title='Direction'
         showReset={defaultDir !== dir}
         onReset={() => setDir(defaultDir)}
+        resetAriaLabel='Reset text direction to default'
       />
       <Radio
         value={dir}
