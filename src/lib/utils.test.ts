@@ -20,4 +20,9 @@ describe('getPageNumbers', () => {
   it('shows ellipsis on both side in the middle', () => {
     expect(getPageNumbers(5, 10)).toEqual([1, '...', 4, 5, 6, '...', 10])
   })
+
+  it('handles current page greater than total pages', () => {
+    expect(getPageNumbers(6, 5)).toEqual([1, 2, 3, 4, 5])
+    expect(getPageNumbers(11, 10)).toEqual([1, '...', 7, 8, 9, 10])
+  })
 })
