@@ -15,7 +15,8 @@
     "test:watch": "vitest --browser.headless",
     "test:ui": "vitest --ui --browser.headless",
     "test:browser": "vitest",
-    "test:coverage": "vitest run --coverage --browser.headless"
+    "test:coverage": "vitest run --coverage --browser.headless",
+    "test:browser:install": "playwright install chromium --with-deps"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.61.3",
@@ -82,6 +83,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
     "knip": "^6.4.1",
+    "playwright": "1.59.1",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "~6.0.3",

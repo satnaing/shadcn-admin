@@ -37,8 +37,8 @@ jobs:
       - name: Run Prettier check
         run: pnpm format:check
 
-      - name: Install Playwright Chromium
-        run: pnpm exec playwright install chromium --with-deps
+      - name: Install browsers
+        run: pnpm test:browser:install
 
       - name: Run tests
         run: pnpm test
