@@ -49,11 +49,9 @@ function UserManagement() {
       <SignedIn>
         <UsersProvider>
           <Header fixed>
-            <Search />
-            <div className='ms-auto flex items-center space-x-4'>
-              <ThemeSwitch />
-              <UserButton />
-            </div>
+            <Search className='me-auto' />
+            <ThemeSwitch />
+            <UserButton />
           </Header>
 
           <Main>
