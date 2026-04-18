@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { userEvent } from 'vitest/browser'
 import { showSubmittedData } from '@/lib/show-submitted-data'
@@ -8,6 +8,8 @@ import { UsersInviteDialog } from './users-invite-dialog'
 vi.mock('@/lib/show-submitted-data', () => ({ showSubmittedData: vi.fn() }))
 
 describe('UsersInviteDialog', () => {
+  beforeEach(() => vi.clearAllMocks())
+
   it('renders the dialog title and description', async () => {
     const { getByRole, getByText } = await render(
       <UsersInviteDialog open onOpenChange={vi.fn()} />
