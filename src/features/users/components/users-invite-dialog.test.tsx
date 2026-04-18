@@ -61,8 +61,8 @@ describe('UsersInviteDialog', () => {
     const submitButton = getByRole('button', { name: /Invite/i })
     await userEvent.click(submitButton)
 
-    expect(emailErrorMessage).toBeInTheDocument()
-    expect(roleErrorMessage).toBeInTheDocument()
+    await expect.element(emailErrorMessage).toBeInTheDocument()
+    await expect.element(roleErrorMessage).toBeInTheDocument()
 
     const emailInput = getByRole('textbox', { name: /Email/i })
     await userEvent.fill(emailInput, 'test@example.com')
@@ -71,8 +71,8 @@ describe('UsersInviteDialog', () => {
     await userEvent.click(roleSelect)
     await userEvent.click(getByRole('option', { name: /Superadmin/i }))
 
-    expect(emailErrorMessage).not.toBeInTheDocument()
-    expect(roleErrorMessage).not.toBeInTheDocument()
+    await expect.element(emailErrorMessage).not.toBeInTheDocument()
+    await expect.element(roleErrorMessage).not.toBeInTheDocument()
   })
 
   it('resets entered values when the dialog is closed and reopened', async () => {
@@ -104,9 +104,9 @@ describe('UsersInviteDialog', () => {
     const descInput = getByRole('textbox', { name: /Description/i })
     await userEvent.fill(descInput, DESC_VALUE)
 
-    expect(emailInput).toHaveValue(EMAIL_VALUE)
-    expect(roleSelect).toHaveTextContent(ROLE_VALUE)
-    expect(descInput).toHaveValue(DESC_VALUE)
+    await expect.element(emailInput).toHaveValue(EMAIL_VALUE)
+    await expect.element(roleSelect).toHaveTextContent(ROLE_VALUE)
+    await expect.element(descInput).toHaveValue(DESC_VALUE)
 
     const cancelButton = getByRole('button', { name: /Cancel/i })
     await userEvent.click(cancelButton)
@@ -114,9 +114,9 @@ describe('UsersInviteDialog', () => {
     const reopenButton = getByRole('button', { name: /Reopen/i })
     await userEvent.click(reopenButton)
 
-    expect(emailInput).toHaveValue('')
-    expect(roleSelect).toHaveTextContent('Select a role')
-    expect(descInput).toHaveValue('')
+    await expect.element(emailInput).toHaveValue('')
+    await expect.element(roleSelect).toHaveTextContent('Select a role')
+    await expect.element(descInput).toHaveValue('')
   })
 
   it('shows submitted data when the form is submitted successfully', async () => {

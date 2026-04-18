@@ -28,11 +28,11 @@ describe('TasksImportDialog', () => {
 
     const importButton = getByRole('button', { name: /^Import$/i })
 
-    expect(title).toBeInTheDocument()
-    expect(desc).toBeInTheDocument()
-    expect(fileInput).toBeInTheDocument()
+    await expect.element(title).toBeInTheDocument()
+    await expect.element(desc).toBeInTheDocument()
+    await expect.element(fileInput).toBeInTheDocument()
     expect(closeButtons).toHaveLength(2)
-    expect(importButton).toBeInTheDocument()
+    await expect.element(importButton).toBeInTheDocument()
   })
 
   it('shows validation when submitting without a file', async () => {
@@ -44,7 +44,9 @@ describe('TasksImportDialog', () => {
     const importButton = getByRole('button', { name: /^Import$/i })
     await userEvent.click(importButton)
 
-    expect(getByText('Please upload a file.')).toBeInTheDocument()
+    await expect
+      .element(getByText('Please upload a file.'))
+      .toBeInTheDocument()
     expect(onOpenChange).not.toHaveBeenCalled()
     expect(showSubmittedData).not.toHaveBeenCalled()
   })

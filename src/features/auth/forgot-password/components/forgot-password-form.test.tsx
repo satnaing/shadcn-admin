@@ -29,13 +29,15 @@ describe('ForgotPasswordForm', () => {
   })
 
   it('renders email field and continue button', async () => {
-    expect(emailInput).toBeInTheDocument()
-    expect(continueButton).toBeInTheDocument()
+    await expect.element(emailInput).toBeInTheDocument()
+    await expect.element(continueButton).toBeInTheDocument()
   })
 
   it('shows validation when submitting empty form', async () => {
     await userEvent.click(continueButton)
-    expect(screen.getByText(/^Please enter your email\.$/i)).toBeInTheDocument()
+    await expect
+      .element(screen.getByText(/^Please enter your email\.$/i))
+      .toBeInTheDocument()
   })
 
   it('resets the form and navigates to /otp on success', async () => {
@@ -47,6 +49,6 @@ describe('ForgotPasswordForm', () => {
     )
 
     // Form should reset on success
-    expect(emailInput).toHaveValue('')
+    await expect.element(emailInput).toHaveValue('')
   })
 })

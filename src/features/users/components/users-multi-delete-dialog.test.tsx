@@ -42,11 +42,11 @@ describe('UsersMultiDeleteDialog', () => {
     })
     const deleteButton = getByRole('button', { name: /Delete/i })
 
-    expect(title).toBeInTheDocument()
-    expect(desc).toBeInTheDocument()
-    expect(confirmDeleteInput).toBeInTheDocument()
-    expect(deleteButton).toBeInTheDocument()
-    expect(deleteButton).toBeDisabled()
+    await expect.element(title).toBeInTheDocument()
+    await expect.element(desc).toBeInTheDocument()
+    await expect.element(confirmDeleteInput).toBeInTheDocument()
+    await expect.element(deleteButton).toBeInTheDocument()
+    await expect.element(deleteButton).toBeDisabled()
   })
 
   it('keeps the delete button disabled until the confirm delete input is filled correctly', async () => {
@@ -60,13 +60,13 @@ describe('UsersMultiDeleteDialog', () => {
     })
     const deleteButton = getByRole('button', { name: /Delete/i })
 
-    expect(deleteButton).toBeDisabled()
+    await expect.element(deleteButton).toBeDisabled()
 
     await userEvent.fill(confirmDeleteInput, 'wrong-input')
-    expect(deleteButton).toBeDisabled()
+    await expect.element(deleteButton).toBeDisabled()
 
     await userEvent.fill(confirmDeleteInput, 'DELETE')
-    expect(deleteButton).toBeEnabled()
+    await expect.element(deleteButton).toBeEnabled()
   })
 
   it('closes the dialog when the cancel button is clicked', async () => {
@@ -110,14 +110,14 @@ describe('UsersMultiDeleteDialog', () => {
       name: /Confirm by typing "DELETE"/i,
     })
     await userEvent.fill(confirmDeleteInput, 'DELETE')
-    expect(confirmDeleteInput).toHaveValue('DELETE')
+    await expect.element(confirmDeleteInput).toHaveValue('DELETE')
 
     const cancelButton = getByRole('button', { name: /Cancel/i })
     await userEvent.click(cancelButton)
 
     const reopenButton = getByRole('button', { name: /Reopen/i })
     await userEvent.click(reopenButton)
-    expect(confirmDeleteInput).toHaveValue('')
+    await expect.element(confirmDeleteInput).toHaveValue('')
   })
 
   it('shows the submitted data when deleted successfully', async () => {
@@ -132,10 +132,10 @@ describe('UsersMultiDeleteDialog', () => {
     })
     const deleteButton = getByRole('button', { name: /Delete/i })
 
-    expect(deleteButton).toBeDisabled()
+    await expect.element(deleteButton).toBeDisabled()
 
     await userEvent.fill(confirmDeleteInput, 'DELETE')
-    expect(deleteButton).toBeEnabled()
+    await expect.element(deleteButton).toBeEnabled()
 
     await userEvent.click(deleteButton)
 
@@ -157,10 +157,10 @@ describe('UsersMultiDeleteDialog', () => {
     })
     const deleteButton = getByRole('button', { name: /Delete/i })
 
-    expect(deleteButton).toBeDisabled()
+    await expect.element(deleteButton).toBeDisabled()
 
     await userEvent.fill(confirmDeleteInput, 'DELETE')
-    expect(deleteButton).toBeEnabled()
+    await expect.element(deleteButton).toBeEnabled()
 
     await userEvent.keyboard('{Enter}')
     expect(onOpenChange).toHaveBeenCalledOnce()

@@ -47,9 +47,9 @@ async function openCommandPalette(
         await userEvent.keyboard(`{${modifier}>}k{/${modifier}}`)
       }
 
-      expect(
-        screen.getByPlaceholder(COMMAND_MENU_PLACEHOLDER)
-      ).toBeInTheDocument()
+      await expect
+        .element(screen.getByPlaceholder(COMMAND_MENU_PLACEHOLDER))
+        .toBeInTheDocument()
     },
     { interval: 50, timeout: 5000 }
   )
@@ -66,18 +66,22 @@ describe('SearchProvider and CommandMenu', () => {
 
     await openCommandPalette(screen)
 
-    expect(getByPlaceholder(COMMAND_MENU_PLACEHOLDER)).toBeInTheDocument()
-    expect(getByText('Theme')).toBeInTheDocument()
-    expect(getByText('Light')).toBeInTheDocument()
-    expect(getByText('Dark')).toBeInTheDocument()
-    expect(getByText('System')).toBeInTheDocument()
-    expect(getByText('Dashboard')).toBeInTheDocument()
+    await expect
+      .element(getByPlaceholder(COMMAND_MENU_PLACEHOLDER))
+      .toBeInTheDocument()
+    await expect.element(getByText('Theme')).toBeInTheDocument()
+    await expect.element(getByText('Light')).toBeInTheDocument()
+    await expect.element(getByText('Dark')).toBeInTheDocument()
+    await expect.element(getByText('System')).toBeInTheDocument()
+    await expect.element(getByText('Dashboard')).toBeInTheDocument()
   })
 
   it('does not show the dialog content when search is closed', async () => {
     const { getByPlaceholder } = await renderWithSearchProvider()
 
-    expect(getByPlaceholder(COMMAND_MENU_PLACEHOLDER)).not.toBeInTheDocument()
+    await expect
+      .element(getByPlaceholder(COMMAND_MENU_PLACEHOLDER))
+      .not.toBeInTheDocument()
   })
 
   it.each([
@@ -88,15 +92,15 @@ describe('SearchProvider and CommandMenu', () => {
     async (_label, modifier) => {
       const screen = await renderWithSearchProvider()
 
-      expect(
-        screen.getByPlaceholder(COMMAND_MENU_PLACEHOLDER)
-      ).not.toBeInTheDocument()
+      await expect
+        .element(screen.getByPlaceholder(COMMAND_MENU_PLACEHOLDER))
+        .not.toBeInTheDocument()
 
       await openCommandPalette(screen, modifier)
 
-      expect(
-        screen.getByPlaceholder(COMMAND_MENU_PLACEHOLDER)
-      ).toBeInTheDocument()
+      await expect
+        .element(screen.getByPlaceholder(COMMAND_MENU_PLACEHOLDER))
+        .toBeInTheDocument()
     }
   )
 
@@ -108,9 +112,9 @@ describe('SearchProvider and CommandMenu', () => {
     await userEvent.click(screen.getByText('Tasks'))
 
     expect(mocks.navigate).toHaveBeenCalledWith({ to: '/tasks' })
-    expect(
-      screen.getByPlaceholder(COMMAND_MENU_PLACEHOLDER)
-    ).not.toBeInTheDocument()
+    await expect
+      .element(screen.getByPlaceholder(COMMAND_MENU_PLACEHOLDER))
+      .not.toBeInTheDocument()
   })
 
   it('navigates for nested sidebar items (group with sub-items)', async () => {
@@ -122,7 +126,9 @@ describe('SearchProvider and CommandMenu', () => {
     await userEvent.click(getByRole('option', { name: 'Settings Account' }))
 
     expect(mocks.navigate).toHaveBeenCalledWith({ to: '/settings/account' })
-    expect(getByPlaceholder(COMMAND_MENU_PLACEHOLDER)).not.toBeInTheDocument()
+    await expect
+      .element(getByPlaceholder(COMMAND_MENU_PLACEHOLDER))
+      .not.toBeInTheDocument()
   })
 
   it('applies theme and closes the palette when a theme command is chosen', async () => {
@@ -133,9 +139,9 @@ describe('SearchProvider and CommandMenu', () => {
     await userEvent.click(screen.getByText('Dark'))
 
     expect(mocks.setTheme).toHaveBeenCalledWith('dark')
-    expect(
-      screen.getByPlaceholder(COMMAND_MENU_PLACEHOLDER)
-    ).not.toBeInTheDocument()
+    await expect
+      .element(screen.getByPlaceholder(COMMAND_MENU_PLACEHOLDER))
+      .not.toBeInTheDocument()
   })
 
   it('shows empty state when the filter matches nothing', async () => {
@@ -148,6 +154,8 @@ describe('SearchProvider and CommandMenu', () => {
       'zzzz-no-match-xxxx'
     )
 
-    expect(screen.getByText('No results found.')).toBeInTheDocument()
+    await expect
+      .element(screen.getByText('No results found.'))
+      .toBeInTheDocument()
   })
 })

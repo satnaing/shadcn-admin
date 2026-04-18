@@ -31,9 +31,9 @@ async function openDrawer(screen: RenderResult) {
   await userEvent.click(
     screen.getByRole('button', { name: /^Open theme settings$/i })
   )
-  await vi.waitFor(() =>
-    expect(screen.getByText(/^Theme Settings$/i)).toBeInTheDocument()
-  )
+  await expect
+    .element(screen.getByText(/^Theme Settings$/i))
+    .toBeInTheDocument()
 }
 
 describe('ConfigDrawer (integration)', () => {
@@ -51,14 +51,23 @@ describe('ConfigDrawer (integration)', () => {
 
     await openDrawer(screen)
 
-    expect(screen.getByText(/^Theme$/i)).toBeInTheDocument()
-    expect(screen.getByText(/^Layout$/i)).toBeInTheDocument()
-    expect(screen.getByText(/^Direction$/i)).toBeInTheDocument()
-    expect(
-      screen.getByRole('button', {
-        name: /reset all settings to default values/i,
-      })
-    ).toBeInTheDocument()
+    const drawer = screen.getByRole('dialog', { name: /theme settings/i })
+
+    await expect.element(drawer).toBeInTheDocument()
+
+    await expect.element(drawer.getByText(/^Theme$/i)).toBeInTheDocument()
+    await expect.element(drawer.getByText(/^Layout$/i)).toBeInTheDocument()
+    await expect
+      .element(drawer.getByText(/^Sidebar$/i).first())
+      .toBeInTheDocument()
+    await expect.element(drawer.getByText(/^Direction$/i)).toBeInTheDocument()
+    await expect
+      .element(
+        screen.getByRole('button', {
+          name: /reset all settings to default values/i,
+        })
+      )
+      .toBeInTheDocument()
   })
 
   describe('theme preference', () => {
@@ -257,9 +266,9 @@ describe('ConfigDrawer (integration)', () => {
 
     await openDrawer(screen)
 
-    expect(
-      screen.getByRole('radio', { name: /select default/i })
-    ).toHaveAttribute('data-state', 'checked')
+    await expect
+      .element(screen.getByRole('radio', { name: /select default/i }))
+      .toHaveAttribute('data-state', 'checked')
 
     await userEvent.click(
       screen.getByRole('radio', { name: /select compact/i })

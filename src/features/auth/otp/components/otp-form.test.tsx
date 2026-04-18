@@ -31,13 +31,13 @@ describe('OtpForm', () => {
   })
 
   it('disables Verify until 6 digits are entered', async () => {
-    expect(verifyButton).toBeDisabled()
+    await expect.element(verifyButton).toBeDisabled()
 
     await userEvent.fill(otpInput, '12345')
-    expect(verifyButton).toBeDisabled()
+    await expect.element(verifyButton).toBeDisabled()
 
     await userEvent.fill(otpInput, '123456')
-    expect(verifyButton).toBeEnabled()
+    await expect.element(verifyButton).toBeEnabled()
   })
 
   it('submits the OTP and navigates after timeout', async () => {

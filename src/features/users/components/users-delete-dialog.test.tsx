@@ -40,12 +40,12 @@ describe('UsersDeleteDialog', () => {
     const cancelButton = getByRole('button', { name: /Cancel/i })
     const deleteButton = getByRole('button', { name: /Delete/i })
 
-    expect(title).toBeInTheDocument()
-    expect(desc).toBeInTheDocument()
-    expect(usernameInput).toBeInTheDocument()
-    expect(cancelButton).toBeInTheDocument()
-    expect(deleteButton).toBeInTheDocument()
-    expect(deleteButton).toBeDisabled()
+    await expect.element(title).toBeInTheDocument()
+    await expect.element(desc).toBeInTheDocument()
+    await expect.element(usernameInput).toBeInTheDocument()
+    await expect.element(cancelButton).toBeInTheDocument()
+    await expect.element(deleteButton).toBeInTheDocument()
+    await expect.element(deleteButton).toBeDisabled()
   })
 
   it('keeps the delete button disabled until the username input is filled correctly', async () => {
@@ -56,13 +56,13 @@ describe('UsersDeleteDialog', () => {
     const usernameInput = getByRole('textbox', { name: /Username/i })
     const deleteButton = getByRole('button', { name: /Delete/i })
 
-    expect(deleteButton).toBeDisabled()
+    await expect.element(deleteButton).toBeDisabled()
 
     await userEvent.fill(usernameInput, 'wrong-username')
-    expect(deleteButton).toBeDisabled()
+    await expect.element(deleteButton).toBeDisabled()
 
     await userEvent.fill(usernameInput, MOCK_USER.username)
-    expect(deleteButton).toBeEnabled()
+    await expect.element(deleteButton).toBeEnabled()
   })
 
   it('closes the dialog when the cancel button is clicked', async () => {
@@ -105,14 +105,14 @@ describe('UsersDeleteDialog', () => {
 
     const usernameInput = getByRole('textbox', { name: /Username/i })
     await userEvent.fill(usernameInput, MOCK_USER.username)
-    expect(usernameInput).toHaveValue(MOCK_USER.username)
+    await expect.element(usernameInput).toHaveValue(MOCK_USER.username)
 
     const closeButton = getByRole('button', { name: /Cancel/i })
     await userEvent.click(closeButton)
 
     const reopenButton = getByRole('button', { name: /Reopen/i })
     await userEvent.click(reopenButton)
-    expect(usernameInput).toHaveValue('')
+    await expect.element(usernameInput).toHaveValue('')
   })
 
   it('shows the submitted data when deleted successfully', async () => {
@@ -128,11 +128,11 @@ describe('UsersDeleteDialog', () => {
     const usernameInput = getByRole('textbox', { name: /Username/i })
     const deleteButton = getByRole('button', { name: /Delete/i })
 
-    expect(deleteButton).toBeDisabled()
+    await expect.element(deleteButton).toBeDisabled()
 
     await userEvent.fill(usernameInput, MOCK_USER.username)
 
-    expect(deleteButton).toBeEnabled()
+    await expect.element(deleteButton).toBeEnabled()
 
     await userEvent.click(deleteButton)
 
@@ -159,10 +159,10 @@ describe('UsersDeleteDialog', () => {
     const usernameInput = getByRole('textbox', { name: /Username/i })
     const deleteButton = getByRole('button', { name: /Delete/i })
 
-    expect(deleteButton).toBeDisabled()
+    await expect.element(deleteButton).toBeDisabled()
 
     await userEvent.fill(usernameInput, MOCK_USER.username)
-    expect(deleteButton).toBeEnabled()
+    await expect.element(deleteButton).toBeEnabled()
 
     await userEvent.keyboard('{Enter}')
 
