@@ -307,7 +307,7 @@ async function fillRequiredProfileFields(
     lastName?: string
     username?: string
     email?: string
-    roleOption?: RegExp
+    roleOption?: string | RegExp
     phoneNumber?: string
   }
 ) {
@@ -322,7 +322,7 @@ async function fillRequiredProfileFields(
   for (const [label, value] of entries) {
     const el = screen.getByLabelText(label)
     await expect.element(el).toBeInTheDocument()
-    await user.type(el, value)
+    await user.fill(el, value)
   }
 
   const roleSelect = screen.getByRole('combobox', { name: /Role/i })
