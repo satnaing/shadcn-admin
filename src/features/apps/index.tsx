@@ -85,12 +85,10 @@ export function Apps() {
     <>
       {/* ===== Top Heading ===== */}
       <Header>
-        <Search />
-        <div className='ms-auto flex items-center gap-4'>
-          <ThemeSwitch />
-          <ConfigDrawer />
-          <ProfileDropdown />
-        </div>
+        <Search className='me-auto' />
+        <ThemeSwitch />
+        <ConfigDrawer />
+        <ProfileDropdown />
       </Header>
 
       {/* ===== Content ===== */}

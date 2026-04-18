@@ -67,12 +67,10 @@ export function Chats() {
     <>
       {/* ===== Top Heading ===== */}
       <Header>
-        <Search />
-        <div className='ms-auto flex items-center space-x-4'>
-          <ThemeSwitch />
-          <ConfigDrawer />
-          <ProfileDropdown />
-        </div>
+        <Search className='me-auto' />
+        <ThemeSwitch />
+        <ConfigDrawer />
+        <ProfileDropdown />
       </Header>
 
       <Main fixed>
