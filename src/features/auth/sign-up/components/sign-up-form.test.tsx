@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, type RenderResult } from 'vitest-browser-react'
 import { type Locator, userEvent } from 'vitest/browser'
 import { SignUpForm } from './sign-up-form'
@@ -33,6 +33,10 @@ describe('SignUpForm', () => {
     passwordInput = screen.getByLabelText(/^Password$/i)
     confirmPasswordInput = screen.getByLabelText(/^Confirm Password$/i)
     submitButton = screen.getByRole('button', { name: /^Create Account$/i })
+  })
+
+  afterEach(() => {
+    vi.useRealTimers()
   })
 
   it('renders fields and submit button', async () => {
