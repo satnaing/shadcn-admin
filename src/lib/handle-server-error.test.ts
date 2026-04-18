@@ -74,4 +74,17 @@ describe('handleServerError', () => {
 
     log.mockRestore()
   })
+
+  it('does not log the error to the console in production', () => {
+    vi.stubEnv('DEV', false)
+
+    const log = vi.spyOn(console, 'log').mockImplementation(() => {})
+    const err = new Error('not logged')
+
+    handleServerError(err)
+
+    expect(log).not.toHaveBeenCalled()
+
+    log.mockRestore()
+  })
 })
