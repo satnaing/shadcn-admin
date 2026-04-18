@@ -38,7 +38,7 @@ function ClerkAuthLayout() {
           <LearnMore
             defaultOpen
             triggerProps={{
-              className: 'absolute -top-12 end-0 sm:end-20 size-6',
+              className: 'absolute -top-12 inset-e-0 sm:inset-e-20 size-6',
             }}
             contentProps={{ side: 'top', align: 'end', className: 'w-auto' }}
           >

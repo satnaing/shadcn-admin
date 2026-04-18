@@ -161,7 +161,7 @@ export function Chats() {
             <div
               className={cn(
                 'absolute inset-0 start-full z-50 hidden w-full flex-1 flex-col border bg-background shadow-xs sm:static sm:z-auto sm:flex sm:rounded-md',
-                mobileSelectedUser && 'start-0 flex'
+                mobileSelectedUser && 'inset-s-0 flex'
               )}
             >
               {/* Top Part */}
