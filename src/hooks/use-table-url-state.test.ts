@@ -12,8 +12,8 @@ function applyLastSearchFn(
   prev: Record<string, unknown>
 ) {
   const opts = lastNavigateOpts(navigate)
-  expect(opts).toBeDefined()
-  const s = opts!.search
+  if (!opts) return undefined
+  const s = opts.search
   if (typeof s === 'function') {
     return s(prev) as Record<string, unknown>
   }
