@@ -1,24 +1,14 @@
 import { useState } from 'react'
-import { type Table } from '@tanstack/react-table'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { userEvent } from 'vitest/browser'
+import { createTableMock } from '@/test-utils/tanstack-table'
 import { UsersMultiDeleteDialog } from './users-multi-delete-dialog'
 
 vi.mock('@/lib/utils', async (orig) => ({
   ...(await orig()),
   sleep: vi.fn(() => Promise.resolve()),
 }))
-
-function createTableMock(rowCount = 2) {
-  const rows = Array.from({ length: rowCount }, () => ({}))
-  const resetRowSelection = vi.fn()
-  const table = {
-    getFilteredSelectedRowModel: () => ({ rows }),
-    resetRowSelection,
-  } as unknown as Table<Record<string, unknown>>
-  return { table, resetRowSelection }
-}
 
 describe('UsersMultiDeleteDialog', () => {
   beforeEach(() => vi.clearAllMocks())
