@@ -68,9 +68,7 @@ describe('TasksMutateDrawer', () => {
     const saveButton = getByRole('button', { name: /Save changes/i })
     await userEvent.click(saveButton)
 
-    await expect
-      .element(getByText(/Title is required.$/i))
-      .toBeInTheDocument()
+    await expect.element(getByText(/Title is required.$/i)).toBeInTheDocument()
     await expect
       .element(getByText(/Please select a status.$/i))
       .toBeInTheDocument()

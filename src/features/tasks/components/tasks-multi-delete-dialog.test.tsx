@@ -1,8 +1,8 @@
 import { useState } from 'react'
+import { createTableMock } from '@/test-utils/tanstack-table'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render } from 'vitest-browser-react'
 import { userEvent } from 'vitest/browser'
-import { createTableMock } from '@/test-utils/tanstack-table'
 import { TasksMultiDeleteDialog } from './tasks-multi-delete-dialog'
 
 vi.mock('@/lib/utils', async (orig) => ({
