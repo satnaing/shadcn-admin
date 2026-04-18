@@ -30,7 +30,15 @@ export default defineConfig({
       instances: [{ browser: 'chromium' }],
     },
     coverage: {
-      exclude: ['src/components/ui/**', 'src/assets/**'],
+      // include: ['src/**/*.{js,jsx,ts,tsx}'], // Uncomment to expand the report to all src/**/* so untested modules appear as 0% coverage.
+      exclude: [
+        'src/components/ui/**',
+        'src/assets/**',
+        'src/tanstack-table.d.ts',
+        'src/routeTree.gen.ts',
+        'src/test-utils/**',
+        'src/routes/**',
+      ],
     },
   },
 })
