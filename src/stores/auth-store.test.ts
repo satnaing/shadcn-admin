@@ -1,12 +1,5 @@
+import { clearCookies } from '@/test-utils/cookies'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-
-function clearAllCookies() {
-  for (const part of document.cookie.split(';')) {
-    const name = part.split('=')[0]?.trim()
-    if (!name) continue
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`
-  }
-}
 
 async function importAuthStore() {
   const { useAuthStore } = await import('./auth-store')
@@ -22,7 +15,7 @@ const sampleUser = {
 
 describe('useAuthStore', () => {
   beforeEach(() => {
-    clearAllCookies()
+    clearCookies()
     vi.resetModules()
   })
 

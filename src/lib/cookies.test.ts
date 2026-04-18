@@ -1,16 +1,15 @@
+import { clearCookies } from '@/test-utils/cookies'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { getCookie, removeCookie, setCookie } from './cookies'
 
+const COOKIE_PREFIX = 'test_cookie_'
+
 describe('cookies', () => {
-  const uniqueName = () => `test_cookie_${Math.random().toString(36).slice(2)}`
+  const uniqueName = () =>
+    `${COOKIE_PREFIX}${Math.random().toString(36).slice(2)}`
 
   beforeEach(() => {
-    for (const part of document.cookie.split(';')) {
-      const name = part.split('=')[0]?.trim()
-      if (name?.startsWith('test_cookie_')) {
-        removeCookie(name)
-      }
-    }
+    clearCookies(COOKIE_PREFIX)
   })
 
   it('stores a value that can be read back', () => {
