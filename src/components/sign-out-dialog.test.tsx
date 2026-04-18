@@ -42,4 +42,15 @@ describe('SignOutDialog', () => {
       replace: true,
     })
   })
+
+  it('does not call reset or navigate when Cancel is clicked', async () => {
+    const { getByRole } = await render(
+      <SignOutDialog open onOpenChange={vi.fn()} />
+    )
+
+    await userEvent.click(getByRole('button', { name: /^Cancel$/i }))
+
+    expect(reset).not.toHaveBeenCalled()
+    expect(navigate).not.toHaveBeenCalled()
+  })
 })
