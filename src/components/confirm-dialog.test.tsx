@@ -22,7 +22,9 @@ describe('ConfirmDialog', () => {
     await expect
       .element(getByText('This action cannot be undone.'))
       .toBeInTheDocument()
-    await expect.element(getByRole('button', { name: 'Cancel' })).toBeInTheDocument()
+    await expect
+      .element(getByRole('button', { name: 'Cancel' }))
+      .toBeInTheDocument()
     await expect
       .element(getByRole('button', { name: 'Continue' }))
       .toBeInTheDocument()
@@ -95,8 +97,12 @@ describe('ConfirmDialog', () => {
       />
     )
 
-    await expect.element(getByRole('button', { name: 'No' })).toBeInTheDocument()
-    await expect.element(getByRole('button', { name: 'Yes' })).toBeInTheDocument()
+    await expect
+      .element(getByRole('button', { name: 'No' }))
+      .toBeInTheDocument()
+    await expect
+      .element(getByRole('button', { name: 'Yes' }))
+      .toBeInTheDocument()
   })
 
   it('renders confirm as submit button linked to desc form when `form` is set', async () => {
