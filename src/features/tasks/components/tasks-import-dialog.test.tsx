@@ -24,7 +24,7 @@ describe('TasksImportDialog', () => {
     const fileInput = getByLabelText('File')
     const closeButtons = getByRole('dialog')
       .getByRole('button', { name: 'Close' })
-      .elements()
+      .all()
 
     const importButton = getByRole('button', { name: /^Import$/i })
 
@@ -44,9 +44,7 @@ describe('TasksImportDialog', () => {
     const importButton = getByRole('button', { name: /^Import$/i })
     await userEvent.click(importButton)
 
-    await expect
-      .element(getByText('Please upload a file.'))
-      .toBeInTheDocument()
+    await expect.element(getByText('Please upload a file.')).toBeInTheDocument()
     expect(onOpenChange).not.toHaveBeenCalled()
     expect(showSubmittedData).not.toHaveBeenCalled()
   })
