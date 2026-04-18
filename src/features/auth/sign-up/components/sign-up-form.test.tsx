@@ -40,20 +40,24 @@ describe('SignUpForm', () => {
   })
 
   it('renders fields and submit button', async () => {
-    expect(emailInput).toBeInTheDocument()
-    expect(passwordInput).toBeInTheDocument()
-    expect(confirmPasswordInput).toBeInTheDocument()
-    expect(submitButton).toBeInTheDocument()
+    await expect.element(emailInput).toBeInTheDocument()
+    await expect.element(passwordInput).toBeInTheDocument()
+    await expect.element(confirmPasswordInput).toBeInTheDocument()
+    await expect.element(submitButton).toBeInTheDocument()
   })
 
   it('shows validation messages when submitting empty form', async () => {
     await userEvent.click(submitButton)
 
-    expect(screen.getByText(FORM_MESSAGES.emailEmpty)).toBeInTheDocument()
-    expect(screen.getByText(FORM_MESSAGES.passwordEmpty)).toBeInTheDocument()
-    expect(
-      screen.getByText(FORM_MESSAGES.confirmPasswordEmpty)
-    ).toBeInTheDocument()
+    await expect
+      .element(screen.getByText(FORM_MESSAGES.emailEmpty))
+      .toBeInTheDocument()
+    await expect
+      .element(screen.getByText(FORM_MESSAGES.passwordEmpty))
+      .toBeInTheDocument()
+    await expect
+      .element(screen.getByText(FORM_MESSAGES.confirmPasswordEmpty))
+      .toBeInTheDocument()
   })
 
   it('shows a mismatch error when passwords do not match', async () => {
@@ -62,7 +66,9 @@ describe('SignUpForm', () => {
     await userEvent.fill(confirmPasswordInput, '7654321')
 
     await userEvent.click(submitButton)
-    expect(screen.getByText(FORM_MESSAGES.passwordMismatch)).toBeInTheDocument()
+    await expect
+      .element(screen.getByText(FORM_MESSAGES.passwordMismatch))
+      .toBeInTheDocument()
   })
 
   it('disables submit while submitting and re-enables after timeout', async () => {
@@ -73,10 +79,10 @@ describe('SignUpForm', () => {
     await userEvent.fill(confirmPasswordInput, '1234567')
 
     await userEvent.click(submitButton)
-    expect(submitButton).toBeDisabled()
+    await expect.element(submitButton).toBeDisabled()
 
     await vi.advanceTimersByTimeAsync(2000)
-    await vi.waitFor(() => expect(submitButton).toBeEnabled())
+    await expect.element(submitButton).toBeEnabled()
     expect(toastPromise).toHaveBeenCalledOnce()
   })
 })

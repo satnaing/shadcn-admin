@@ -51,8 +51,8 @@ describe('UsersActionDialog', () => {
         /Create new user here. Click save when you're done./i
       )
 
-      expect(title).toBeInTheDocument()
-      expect(description).toBeInTheDocument()
+      await expect.element(title).toBeInTheDocument()
+      await expect.element(description).toBeInTheDocument()
     })
 
     it('shows validation messages when the form is submitted with empty fields', async () => {
@@ -63,13 +63,27 @@ describe('UsersActionDialog', () => {
       const submitButton = getByRole('button', { name: /Save Changes/i })
       await userEvent.click(submitButton)
 
-      expect(getByText(VALIDATION_MESSAGES.firstName)).toBeInTheDocument()
-      expect(getByText(VALIDATION_MESSAGES.lastName)).toBeInTheDocument()
-      expect(getByText(VALIDATION_MESSAGES.username)).toBeInTheDocument()
-      expect(getByText(VALIDATION_MESSAGES.phoneNumber)).toBeInTheDocument()
-      expect(getByText(VALIDATION_MESSAGES.email)).toBeInTheDocument()
-      expect(getByText(VALIDATION_MESSAGES.role)).toBeInTheDocument()
-      expect(getByText(VALIDATION_MESSAGES.password)).toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.firstName))
+        .toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.lastName))
+        .toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.username))
+        .toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.phoneNumber))
+        .toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.email))
+        .toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.role))
+        .toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.password))
+        .toBeInTheDocument()
     })
 
     it('keeps confirm password disabled until password field is touched', async () => {
@@ -81,10 +95,10 @@ describe('UsersActionDialog', () => {
       const confirmPassword = getByRole('textbox', {
         name: /Confirm Password/i,
       })
-      expect(confirmPassword).toBeDisabled()
+      await expect.element(confirmPassword).toBeDisabled()
 
       await userEvent.type(password, 'a')
-      expect(confirmPassword).toBeEnabled()
+      await expect.element(confirmPassword).toBeEnabled()
     })
 
     it('shows password validation messages when password is invalid', async () => {
@@ -102,36 +116,40 @@ describe('UsersActionDialog', () => {
 
       await userEvent.click(submitButton)
 
-      expect(
-        getByText(VALIDATION_MESSAGES.passwordMismatch)
-      ).toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.passwordMismatch))
+        .toBeInTheDocument()
 
       await userEvent.fill(password, 'short')
 
-      expect(getByText(VALIDATION_MESSAGES.passwordLength)).toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.passwordLength))
+        .toBeInTheDocument()
 
       await userEvent.fill(password, 'ONLYUPPERCASE')
 
-      expect(
-        getByText(VALIDATION_MESSAGES.passwordLowercase)
-      ).toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.passwordLowercase))
+        .toBeInTheDocument()
 
       await userEvent.fill(password, 'onlylowercase')
 
-      expect(getByText(VALIDATION_MESSAGES.passwordNumber)).toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.passwordNumber))
+        .toBeInTheDocument()
 
       await userEvent.fill(password, 'S3cur3P@ssw0rd')
       await userEvent.fill(confirmPassword, 'S3cur3P@ssw0rd')
 
-      expect(
-        getByText(VALIDATION_MESSAGES.passwordMismatch)
-      ).not.toBeInTheDocument()
-      expect(
-        getByText(VALIDATION_MESSAGES.passwordLength)
-      ).not.toBeInTheDocument()
-      expect(
-        getByText(VALIDATION_MESSAGES.passwordNumber)
-      ).not.toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.passwordMismatch))
+        .not.toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.passwordLength))
+        .not.toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.passwordNumber))
+        .not.toBeInTheDocument()
     })
 
     it('shows the submitted data when the form is submitted successfully', async () => {
@@ -180,8 +198,8 @@ describe('UsersActionDialog', () => {
         /Update the user here\. Click save when you're done\./i
       )
 
-      expect(title).toBeInTheDocument()
-      expect(description).toBeInTheDocument()
+      await expect.element(title).toBeInTheDocument()
+      await expect.element(description).toBeInTheDocument()
     })
 
     it('submits without password changes', async () => {
@@ -225,14 +243,14 @@ describe('UsersActionDialog', () => {
       })
 
       await userEvent.fill(password, 'S3cur3P@ssw0rd')
-      expect(confirmPassword).toBeEnabled()
+      await expect.element(confirmPassword).toBeEnabled()
 
       const submitButton = getByRole('button', { name: /Save Changes/i })
       await userEvent.click(submitButton)
 
-      expect(
-        getByText(VALIDATION_MESSAGES.passwordMismatch)
-      ).toBeInTheDocument()
+      await expect
+        .element(getByText(VALIDATION_MESSAGES.passwordMismatch))
+        .toBeInTheDocument()
     })
 
     it('shows the submitted data when the form is submitted successfully', async () => {
@@ -303,7 +321,7 @@ async function fillRequiredProfileFields(
 
   for (const [label, value] of entries) {
     const el = screen.getByLabelText(label)
-    expect(el).toBeInTheDocument()
+    await expect.element(el).toBeInTheDocument()
     await user.type(el, value)
   }
 

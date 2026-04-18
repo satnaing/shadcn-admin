@@ -67,17 +67,21 @@ describe('UserAuthForm', () => {
     })
 
     it('renders fields, submit button, and forgot password link', async () => {
-      expect(emailInput).toBeInTheDocument()
-      expect(passwordInput).toBeInTheDocument()
-      expect(signInButton).toBeInTheDocument()
-      expect(forgotPasswordLink).toBeInTheDocument()
+      await expect.element(emailInput).toBeInTheDocument()
+      await expect.element(passwordInput).toBeInTheDocument()
+      await expect.element(signInButton).toBeInTheDocument()
+      await expect.element(forgotPasswordLink).toBeInTheDocument()
     })
 
     it('shows validation messages when submitting empty form', async () => {
       await userEvent.click(signInButton)
 
-      expect(screen.getByText(FORM_MESSAGES.emailEmpty)).toBeInTheDocument()
-      expect(screen.getByText(FORM_MESSAGES.passwordEmpty)).toBeInTheDocument()
+      await expect
+        .element(screen.getByText(FORM_MESSAGES.emailEmpty))
+        .toBeInTheDocument()
+      await expect
+        .element(screen.getByText(FORM_MESSAGES.passwordEmpty))
+        .toBeInTheDocument()
     })
 
     it('authenticates and navigates to default route on success', async () => {

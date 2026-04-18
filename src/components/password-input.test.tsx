@@ -20,9 +20,9 @@ describe('PasswordInput', () => {
     const passwordInput = getByPlaceholder('password')
     const showPasswordButton = getByRole('button', { name: /show password/i })
 
-    expect(passwordInput).toBeInTheDocument()
-    expect(passwordInput).toHaveAttribute('type', 'password')
-    expect(showPasswordButton).toBeVisible()
+    await expect.element(passwordInput).toBeInTheDocument()
+    await expect.element(passwordInput).toHaveAttribute('type', 'password')
+    await expect.element(showPasswordButton).toBeVisible()
   })
 
   it('toggles the password visibility when the show password button is clicked', async () => {
@@ -33,19 +33,21 @@ describe('PasswordInput', () => {
     const passwordInput = getByPlaceholder('password')
     const showPasswordButton = getByRole('button', { name: /show password/i })
 
-    expect(passwordInput).toHaveAttribute('type', 'password')
-    expect(showPasswordButton).toBeInTheDocument()
+    await expect.element(passwordInput).toHaveAttribute('type', 'password')
+    await expect.element(showPasswordButton).toBeInTheDocument()
 
     await userEvent.click(showPasswordButton)
 
-    expect(passwordInput).toHaveAttribute('type', 'text')
+    await expect.element(passwordInput).toHaveAttribute('type', 'text')
     const hidePasswordButton = getByRole('button', { name: /hide password/i })
-    expect(hidePasswordButton).toBeInTheDocument()
+    await expect.element(hidePasswordButton).toBeInTheDocument()
 
     await userEvent.click(hidePasswordButton)
 
-    expect(passwordInput).toHaveAttribute('type', 'password')
-    expect(getByRole('button', { name: /show password/i })).toBeInTheDocument()
+    await expect.element(passwordInput).toHaveAttribute('type', 'password')
+    await expect
+      .element(getByRole('button', { name: /show password/i }))
+      .toBeInTheDocument()
   })
 
   it('disables the show password button when the password input is disabled', async () => {
@@ -55,8 +57,8 @@ describe('PasswordInput', () => {
 
     const passwordInput = getByPlaceholder('password')
     const showPasswordButton = getByRole('button', { name: /show password/i })
-    expect(showPasswordButton).toBeDisabled()
-    expect(passwordInput).toBeDisabled()
+    await expect.element(showPasswordButton).toBeDisabled()
+    await expect.element(passwordInput).toBeDisabled()
   })
 
   it('works with FormLabel and react-hook-form field spread', async () => {
@@ -88,10 +90,10 @@ describe('PasswordInput', () => {
     const { getByLabelText } = await render(<PasswordInLabeledForm />)
 
     const password = getByLabelText(/^Password$/i)
-    expect(password).toHaveAttribute('type', 'password')
+    await expect.element(password).toHaveAttribute('type', 'password')
 
     await userEvent.type(password, 'secret-value')
 
-    expect(password).toHaveValue('secret-value')
+    await expect.element(password).toHaveValue('secret-value')
   })
 })

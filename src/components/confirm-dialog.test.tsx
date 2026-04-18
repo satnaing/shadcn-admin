@@ -16,10 +16,16 @@ describe('ConfirmDialog', () => {
       />
     )
 
-    expect(getByRole('heading', { name: 'Delete item' })).toBeInTheDocument()
-    expect(getByText('This action cannot be undone.')).toBeInTheDocument()
-    expect(getByRole('button', { name: 'Cancel' })).toBeInTheDocument()
-    expect(getByRole('button', { name: 'Continue' })).toBeInTheDocument()
+    await expect
+      .element(getByRole('heading', { name: 'Delete item' }))
+      .toBeInTheDocument()
+    await expect
+      .element(getByText('This action cannot be undone.'))
+      .toBeInTheDocument()
+    await expect.element(getByRole('button', { name: 'Cancel' })).toBeInTheDocument()
+    await expect
+      .element(getByRole('button', { name: 'Continue' }))
+      .toBeInTheDocument()
   })
 
   it('calls handleConfirm when the confirm button is clicked', async () => {
@@ -53,7 +59,7 @@ describe('ConfirmDialog', () => {
     )
 
     const confirm = getByRole('button', { name: 'Continue' })
-    expect(confirm).toBeDisabled()
+    await expect.element(confirm).toBeDisabled()
     expect(handleConfirm).not.toHaveBeenCalled()
   })
 
@@ -70,8 +76,10 @@ describe('ConfirmDialog', () => {
       />
     )
 
-    expect(getByRole('button', { name: 'Cancel' })).toBeDisabled()
-    expect(getByRole('button', { name: 'Continue' })).toBeDisabled()
+    await expect.element(getByRole('button', { name: 'Cancel' })).toBeDisabled()
+    await expect
+      .element(getByRole('button', { name: 'Continue' }))
+      .toBeDisabled()
   })
 
   it('supports custom button texts', async () => {
@@ -87,8 +95,8 @@ describe('ConfirmDialog', () => {
       />
     )
 
-    expect(getByRole('button', { name: 'No' })).toBeInTheDocument()
-    expect(getByRole('button', { name: 'Yes' })).toBeInTheDocument()
+    await expect.element(getByRole('button', { name: 'No' })).toBeInTheDocument()
+    await expect.element(getByRole('button', { name: 'Yes' })).toBeInTheDocument()
   })
 
   it('renders confirm as submit button linked to desc form when `form` is set', async () => {
@@ -109,8 +117,10 @@ describe('ConfirmDialog', () => {
     )
 
     const deleteBtn = getByRole('button', { name: 'Delete' })
-    expect(deleteBtn).toHaveAttribute('type', 'submit')
-    expect(deleteBtn).toHaveAttribute('form', 'tasks-multi-delete-form')
+    await expect.element(deleteBtn).toHaveAttribute('type', 'submit')
+    await expect
+      .element(deleteBtn)
+      .toHaveAttribute('form', 'tasks-multi-delete-form')
   })
 
   it('submits the desc form when confirm is clicked (form prop, no handleConfirm)', async () => {
@@ -196,7 +206,7 @@ describe('ConfirmDialog', () => {
     )
 
     const deleteBtn = getByRole('button', { name: 'Delete' })
-    expect(deleteBtn).toBeDisabled()
+    await expect.element(deleteBtn).toBeDisabled()
     expect(handleFormSubmit).not.toHaveBeenCalled()
   })
 })
