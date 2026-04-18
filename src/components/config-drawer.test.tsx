@@ -2,7 +2,7 @@ import { clearCookies } from '@/test-utils/cookies'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, type RenderResult } from 'vitest-browser-react'
 import { userEvent } from 'vitest/browser'
-import { getCookie } from '@/lib/cookies'
+import { getCookie, setCookie } from '@/lib/cookies'
 import { DirectionProvider } from '@/context/direction-provider'
 import { LayoutProvider } from '@/context/layout-provider'
 import { ThemeProvider } from '@/context/theme-provider'
@@ -85,13 +85,12 @@ describe('ConfigDrawer (integration)', () => {
     })
 
     it('applies system theme: stores cookie and applies a resolved light or dark class', async () => {
+      // Pre-seed light so mounted theme is not system; re-selecting System alone would not fire setTheme.
+      setCookie('vite-ui-theme', 'light')
+
       const screen = await renderConfigDrawer()
       await openDrawer(screen)
-      // Initial state is already "system" with no cookie; switch away first so System triggers setTheme.
-      await userEvent.click(
-        screen.getByRole('radio', { name: /select light/i })
-      )
-      await vi.waitFor(() => expect(getCookie('vite-ui-theme')).toBe('light'))
+
       await userEvent.click(
         screen.getByRole('radio', { name: /select system/i })
       )
