@@ -4,10 +4,12 @@
 
 ## Types of changes
 
-<!-- What types of changes does your code introduce to AstroPaper? Put an `x` in the boxes that apply -->
+<!-- What types of changes does your code introduce to shadcn-admin? Put an `x` in the boxes that apply -->
 
-- [ ] Bug Fix (non-breaking change which fixes an issue)
-- [ ] New Feature (non-breaking change which adds functionality)
+- [ ] Bug Fix (fixes an issue)
+- [ ] New Feature (adds functionality)
+- [ ] Refactor (improves code structure without changing behavior)
+- [ ] Breaking Change (incompatible change to existing behavior or public API)
 - [ ] Others (any other types not listed above)
 
 ## Checklist
