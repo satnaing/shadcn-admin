@@ -14,7 +14,7 @@ import {
   Video,
   MessagesSquare,
 } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn, getDisplayNameInitials } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
@@ -137,7 +137,9 @@ export function Chats() {
                       <div className='flex gap-2'>
                         <Avatar>
                           <AvatarImage src={profile} alt={username} />
-                          <AvatarFallback>{username}</AvatarFallback>
+                          <AvatarFallback>
+                            {getDisplayNameInitials(fullName)}
+                          </AvatarFallback>
                         </Avatar>
                         <div>
                           <span className='col-start-2 row-span-2 font-medium'>
@@ -182,7 +184,9 @@ export function Chats() {
                         src={selectedUser.profile}
                         alt={selectedUser.username}
                       />
-                      <AvatarFallback>{selectedUser.username}</AvatarFallback>
+                      <AvatarFallback>
+                        {getDisplayNameInitials(selectedUser.fullName)}
+                      </AvatarFallback>
                     </Avatar>
                     <div>
                       <span className='col-start-2 row-span-2 text-sm font-medium lg:text-base'>
