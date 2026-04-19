@@ -1,6 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createFileRoute, Outlet } from '@tanstack/react-router'
-import { ClerkProvider } from '@clerk/clerk-react'
+import { ClerkProvider } from '@clerk/react'
 import { ExternalLink, Key } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Separator } from '@/components/ui/separator'
@@ -120,7 +120,7 @@ function MissingClerkPubKey() {
               <p>
                 However, if you don't plan to use Clerk, you can safely remove
                 this directory and related dependency_{' '}
-                <code className={codeBlock}>@clerk/clerk-react</code>.
+                <code className={codeBlock}>@clerk/react</code>.
               </p>
               <p className='mt-2 text-sm'>
                 This setup is modular by design and won't affect the rest of the
