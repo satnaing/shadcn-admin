@@ -13,6 +13,7 @@
 !README.md
 !eslint.config.js
 !postcss.config.js
+!.vscode/
 
 # Ignore auto generated routeTree.gen.ts
 /src/routeTree.gen.ts
