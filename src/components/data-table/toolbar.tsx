@@ -41,14 +41,14 @@ export function DataTableToolbar<TData>({
             onChange={(event) =>
               table.getColumn(searchKey)?.setFilterValue(event.target.value)
             }
-            className='h-8 w-[150px] lg:w-[250px]'
+            className='h-8 w-37.5 lg:w-62.5'
           />
         ) : (
           <Input
             placeholder={searchPlaceholder}
             value={table.getState().globalFilter ?? ''}
             onChange={(event) => table.setGlobalFilter(event.target.value)}
-            className='h-8 w-[150px] lg:w-[250px]'
+            className='h-8 w-37.5 lg:w-62.5'
           />
         )}
         <div className='flex gap-x-2'>
