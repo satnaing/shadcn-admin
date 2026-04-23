@@ -15,6 +15,7 @@ import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { Analytics } from './components/analytics'
+import { Notifications } from './components/notifications'
 import { Overview } from './components/overview'
 import { RecentSales } from './components/recent-sales'
 
@@ -50,7 +51,7 @@ export function Dashboard() {
               <TabsTrigger value='reports' disabled>
                 Reports
               </TabsTrigger>
-              <TabsTrigger value='notifications' disabled>
+              <TabsTrigger value='notifications'>
                 Notifications
               </TabsTrigger>
             </TabsList>
@@ -183,6 +184,9 @@ export function Dashboard() {
           </TabsContent>
           <TabsContent value='analytics' className='space-y-4'>
             <Analytics />
+          </TabsContent>
+          <TabsContent value='notifications' className='space-y-4'>
+            <Notifications />
           </TabsContent>
         </Tabs>
       </Main>
