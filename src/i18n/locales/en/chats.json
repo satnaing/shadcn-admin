@@ -1,0 +1,17 @@
+{
+  "title": "Inbox",
+  "searchLabel": "Search",
+  "searchPlaceholder": "Search chat...",
+  "youPrefix": "You: ",
+  "messageBoxLabel": "Chat Text Box",
+  "messagePlaceholder": "Type your messages...",
+  "send": "Send",
+  "emptyTitle": "Your messages",
+  "emptyDesc": "Send a message to start a chat.",
+  "emptyButton": "Send message",
+  "newMessage": "New message",
+  "to": "To:",
+  "searchPeople": "Search people...",
+  "noPeopleFound": "No people found.",
+  "chatButton": "Chat"
+}

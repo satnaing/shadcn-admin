@@ -1,0 +1,12 @@
+{
+  "title": "应用集成",
+  "description": "这是您的应用集成列表！",
+  "connected": "已连接",
+  "notConnected": "未连接",
+  "connect": "连接",
+  "disconnect": "断开连接",
+  "allApps": "所有应用",
+  "filterApps": "筛选应用...",
+  "ascending": "升序",
+  "descending": "降序"
+}

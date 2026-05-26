@@ -1,0 +1,20 @@
+{
+  "unauthorizedTitle": "Unauthorized Access",
+  "unauthorizedDesc1": "Please log in with the appropriate credentials",
+  "unauthorizedDesc2": "to access this resource.",
+  "forbiddenTitle": "Access Forbidden",
+  "forbiddenDesc1": "You don't have necessary permission",
+  "forbiddenDesc2": "to view this resource.",
+  "notFoundTitle": "Oops! Page Not Found!",
+  "notFoundDesc1": "It seems like the page you're looking for",
+  "notFoundDesc2": "does not exist or might have been removed.",
+  "serverErrorTitle": "Oops! Something went wrong",
+  "serverErrorDesc1": "We apologize for the inconvenience.",
+  "serverErrorDesc2": "Please try again later.",
+  "maintenanceTitle": "Website is under maintenance!",
+  "maintenanceDesc1": "The site is not available at the moment.",
+  "maintenanceDesc2": "We'll be back online shortly.",
+  "goBack": "Go Back",
+  "backToHome": "Back to Home",
+  "learnMore": "Learn more"
+}

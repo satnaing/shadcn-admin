@@ -1,0 +1,20 @@
+{
+  "unauthorizedTitle": "未授权访问",
+  "unauthorizedDesc1": "请使用适当的凭据登录",
+  "unauthorizedDesc2": "以访问此资源。",
+  "forbiddenTitle": "访问被禁止",
+  "forbiddenDesc1": "您没有必要的权限",
+  "forbiddenDesc2": "来查看此资源。",
+  "notFoundTitle": "哎呀！页面未找到！",
+  "notFoundDesc1": "您查找的页面",
+  "notFoundDesc2": "不存在或可能已被删除。",
+  "serverErrorTitle": "哎呀！出错了",
+  "serverErrorDesc1": "对于给您带来的不便，我们深表歉意。",
+  "serverErrorDesc2": "请稍后再试。",
+  "maintenanceTitle": "网站正在维护中！",
+  "maintenanceDesc1": "网站暂时不可用。",
+  "maintenanceDesc2": "我们很快会恢复上线。",
+  "goBack": "返回",
+  "backToHome": "返回首页",
+  "learnMore": "了解更多"
+}

@@ -1,0 +1,17 @@
+{
+  "title": "收件箱",
+  "searchLabel": "搜索",
+  "searchPlaceholder": "搜索聊天...",
+  "youPrefix": "你：",
+  "messageBoxLabel": "聊天输入框",
+  "messagePlaceholder": "输入消息...",
+  "send": "发送",
+  "emptyTitle": "您的消息",
+  "emptyDesc": "发送消息开始聊天。",
+  "emptyButton": "发送消息",
+  "newMessage": "新消息",
+  "to": "发送给：",
+  "searchPeople": "搜索联系人...",
+  "noPeopleFound": "未找到联系人。",
+  "chatButton": "聊天"
+}

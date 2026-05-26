@@ -1,3 +1,5 @@
+import i18n from '@/i18n'
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
@@ -19,7 +21,7 @@ import { Input } from '@/components/ui/input'
 
 const formSchema = z.object({
   email: z.email({
-    error: (iss) => (iss.input === '' ? 'Please enter your email' : undefined),
+    error: (iss) => (iss.input === '' ? i18n.t('auth:emailRequired') : undefined),
   }),
 })
 
@@ -27,6 +29,7 @@ export function ForgotPasswordForm({
   className,
   ...props
 }: React.HTMLAttributes<HTMLFormElement>) {
+  const { t } = useTranslation('auth')
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -41,14 +44,14 @@ export function ForgotPasswordForm({
     console.log(data)
 
     toast.promise(sleep(2000), {
-      loading: 'Sending email...',
+      loading: t('sendingEmail'),
       success: () => {
         setIsLoading(false)
         form.reset()
         navigate({ to: '/otp' })
-        return `Email sent to ${data.email}`
+        return t('emailSent', { email: data.email })
       },
-      error: 'Error',
+      error: t('error'),
     })
   }
 
@@ -64,16 +67,16 @@ export function ForgotPasswordForm({
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('emailLabel')}</FormLabel>
               <FormControl>
-                <Input placeholder='name@example.com' {...field} />
+                <Input placeholder={t('emailPlaceholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <Button className='mt-2' disabled={isLoading}>
-          Continue
+          {t('continueButton')}
           {isLoading ? <Loader2 className='animate-spin' /> : <ArrowRight />}
         </Button>
       </form>

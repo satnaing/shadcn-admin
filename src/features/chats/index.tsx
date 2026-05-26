@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { Fragment } from 'react/jsx-runtime'
 import { format } from 'date-fns'
@@ -24,6 +25,7 @@ import { Header } from '@/components/layout/header'
 import { Main } from '@/components/layout/main'
 import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
+import { LanguageSwitch } from '@/components/language-switch'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { NewChat } from './components/new-chat'
 import { type ChatUser, type Convo } from './data/chat-types'
@@ -31,6 +33,7 @@ import { type ChatUser, type Convo } from './data/chat-types'
 import { conversations } from './data/convo.json'
 
 export function Chats() {
+  const { t } = useTranslation('chats')
   const [search, setSearch] = useState('')
   const [selectedUser, setSelectedUser] = useState<ChatUser | null>(null)
   const [mobileSelectedUser, setMobileSelectedUser] = useState<ChatUser | null>(
@@ -70,6 +73,7 @@ export function Chats() {
         <Search />
         <div className='ms-auto flex items-center space-x-4'>
           <ThemeSwitch />
+          <LanguageSwitch />
           <ConfigDrawer />
           <ProfileDropdown />
         </div>
@@ -82,7 +86,7 @@ export function Chats() {
             <div className='bg-background sticky top-0 z-10 -mx-4 px-4 pb-3 shadow-md sm:static sm:z-auto sm:mx-0 sm:p-0 sm:shadow-none'>
               <div className='flex items-center justify-between py-2'>
                 <div className='flex gap-2'>
-                  <h1 className='text-2xl font-bold'>Inbox</h1>
+                  <h1 className='text-2xl font-bold'>{t('title')}</h1>
                   <MessagesSquare size={20} />
                 </div>
 
@@ -103,11 +107,11 @@ export function Chats() {
                 )}
               >
                 <SearchIcon size={15} className='me-2 stroke-slate-500' />
-                <span className='sr-only'>Search</span>
+                <span className='sr-only'>{t('searchLabel')}</span>
                 <input
                   type='text'
                   className='w-full flex-1 bg-inherit text-sm focus-visible:outline-hidden'
-                  placeholder='Search chat...'
+                  placeholder={t('searchPlaceholder')}
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -120,7 +124,7 @@ export function Chats() {
                 const lastConvo = messages[0]
                 const lastMsg =
                   lastConvo.sender === 'You'
-                    ? `You: ${lastConvo.message}`
+                    ? `${t('youPrefix')}${lastConvo.message}`
                     : lastConvo.message
                 return (
                   <Fragment key={id}>
@@ -294,10 +298,10 @@ export function Chats() {
                       </Button>
                     </div>
                     <label className='flex-1'>
-                      <span className='sr-only'>Chat Text Box</span>
+                      <span className='sr-only'>{t('messageBoxLabel')}</span>
                       <input
                         type='text'
-                        placeholder='Type your messages...'
+                        placeholder={t('messagePlaceholder')}
                         className='h-8 w-full bg-inherit focus-visible:outline-hidden'
                       />
                     </label>
@@ -310,7 +314,7 @@ export function Chats() {
                     </Button>
                   </div>
                   <Button className='h-full sm:hidden'>
-                    <Send size={18} /> Send
+                    <Send size={18} /> {t('send')}
                   </Button>
                 </form>
               </div>
@@ -326,13 +330,13 @@ export function Chats() {
                   <MessagesSquare className='size-8' />
                 </div>
                 <div className='space-y-2 text-center'>
-                  <h1 className='text-xl font-semibold'>Your messages</h1>
+                  <h1 className='text-xl font-semibold'>{t('emptyTitle')}</h1>
                   <p className='text-muted-foreground text-sm'>
-                    Send a message to start a chat.
+                    {t('emptyDesc')}
                   </p>
                 </div>
                 <Button onClick={() => setCreateConversationDialog(true)}>
-                  Send message
+                  {t('emptyButton')}
                 </Button>
               </div>
             </div>

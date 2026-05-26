@@ -1,0 +1,12 @@
+{
+  "title": "App Integrations",
+  "description": "Here's a list of your apps for the integration!",
+  "connected": "Connected",
+  "notConnected": "Not Connected",
+  "connect": "Connect",
+  "disconnect": "Disconnect",
+  "allApps": "All Apps",
+  "filterApps": "Filter apps...",
+  "ascending": "Ascending",
+  "descending": "Descending"
+}

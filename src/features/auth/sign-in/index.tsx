@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { useSearch } from '@tanstack/react-router'
 import {
   Card,
@@ -11,16 +12,17 @@ import { AuthLayout } from '../auth-layout'
 import { UserAuthForm } from './components/user-auth-form'
 
 export function SignIn() {
+  const { t } = useTranslation('auth')
   const { redirect } = useSearch({ from: '/(auth)/sign-in' })
 
   return (
     <AuthLayout>
       <Card className='gap-4'>
         <CardHeader>
-          <CardTitle className='text-lg tracking-tight'>Sign in</CardTitle>
+          <CardTitle className='text-lg tracking-tight'>{t('signInTitle')}</CardTitle>
           <CardDescription>
-            Enter your email and password below to <br />
-            log into your account
+            {t('signInDesc1')} <br />
+            {t('signInDesc2')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -28,19 +30,19 @@ export function SignIn() {
         </CardContent>
         <CardFooter>
           <p className='text-muted-foreground px-8 text-center text-sm'>
-            By clicking sign in, you agree to our{' '}
+            {t('signInAgreement')}{' '}
             <a
               href='/terms'
               className='hover:text-primary underline underline-offset-4'
             >
-              Terms of Service
+              {t('termsOfService')}
             </a>{' '}
-            and{' '}
+            {t('and')}{' '}
             <a
               href='/privacy'
               className='hover:text-primary underline underline-offset-4'
             >
-              Privacy Policy
+              {t('privacyPolicy')}
             </a>
             .
           </p>

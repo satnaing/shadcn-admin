@@ -1,5 +1,4 @@
-'use client'
-
+import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { AlertTriangle } from 'lucide-react'
 import { showSubmittedData } from '@/lib/show-submitted-data'
@@ -20,6 +19,7 @@ export function UsersDeleteDialog({
   onOpenChange,
   currentRow,
 }: UserDeleteDialogProps) {
+  const { t } = useTranslation('users')
   const [value, setValue] = useState('')
 
   const handleDelete = () => {
@@ -41,40 +41,33 @@ export function UsersDeleteDialog({
             className='stroke-destructive me-1 inline-block'
             size={18}
           />{' '}
-          Delete User
+          {t('deleteUserTitle')}
         </span>
       }
       desc={
         <div className='space-y-4'>
           <p className='mb-2'>
-            Are you sure you want to delete{' '}
-            <span className='font-bold'>{currentRow.username}</span>?
-            <br />
-            This action will permanently remove the user with the role of{' '}
-            <span className='font-bold'>
-              {currentRow.role.toUpperCase()}
-            </span>{' '}
-            from the system. This cannot be undone.
+            {t('deleteUserDesc', { username: currentRow.username, role: currentRow.role.toUpperCase() })}
           </p>
 
           <Label className='my-2'>
-            Username:
+            {t('username')}:
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder='Enter username to confirm deletion.'
+              placeholder={t('enterUsernameConfirm')}
             />
           </Label>
 
           <Alert variant='destructive'>
-            <AlertTitle>Warning!</AlertTitle>
+            <AlertTitle>{t('warning')}</AlertTitle>
             <AlertDescription>
-              Please be careful, this operation can not be rolled back.
+              {t('confirmWarning')}
             </AlertDescription>
           </Alert>
         </div>
       }
-      confirmText='Delete'
+      confirmText={t('delete', { ns: 'common' })}
       destructive
     />
   )
