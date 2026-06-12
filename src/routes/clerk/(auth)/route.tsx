@@ -1,4 +1,5 @@
 import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { ClerkFullLogo } from '@/assets/clerk-full-logo'
 import { Logo } from '@/assets/logo'
 import { LearnMore } from '@/components/learn-more'
@@ -9,6 +10,7 @@ export const Route = createFileRoute('/clerk/(auth)')({
 
 // eslint-disable-next-line react-refresh/only-export-components
 function ClerkAuthLayout() {
+  const { t } = useTranslation()
   return (
     <div className='relative container grid h-svh flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0'>
       <div className='relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-e'>
@@ -42,13 +44,12 @@ function ClerkAuthLayout() {
             }}
             contentProps={{ side: 'top', align: 'end', className: 'w-auto' }}
           >
-            Welcome to the example Clerk auth page. <br />
-            Back to{' '}
+            {t('clerk.welcome_example')} <br />
             <Link
               to='/'
               className='underline decoration-dashed underline-offset-2'
             >
-              Dashboard
+              {t('clerk.back_to_dashboard')}
             </Link>{' '}
             ?
           </LearnMore>

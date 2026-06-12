@@ -34,7 +34,7 @@ describe('UsersDeleteDialog', () => {
       name: /Delete User/i,
     })
     const desc = getByText(
-      new RegExp(`Are you sure you want to delete ${MOCK_USER.username}?`, 'i')
+      new RegExp(`Are you sure you want to delete ${MOCK_USER.username}\\?`, 'i')
     )
     const usernameInput = getByRole('textbox', { name: /Username/i })
     const cancelButton = getByRole('button', { name: /Cancel/i })

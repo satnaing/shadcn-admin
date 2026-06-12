@@ -22,184 +22,189 @@ import {
   Command,
   GalleryVerticalEnd,
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { ClerkLogo } from '@/assets/clerk-logo'
 import { type SidebarData } from '../types'
 
-export const sidebarData: SidebarData = {
-  user: {
-    name: 'satnaing',
-    email: 'satnaingdev@gmail.com',
-    avatar: '/avatars/shadcn.jpg',
-  },
-  teams: [
-    {
-      name: 'Shadcn Admin',
-      logo: Command,
-      plan: 'Vite + ShadcnUI',
+export function useSidebarData(): SidebarData {
+  const { t } = useTranslation()
+
+  return {
+    user: {
+      name: 'satnaing',
+      email: 'satnaingdev@gmail.com',
+      avatar: '/avatars/shadcn.jpg',
     },
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
-    },
-  ],
-  navGroups: [
-    {
-      title: 'General',
-      items: [
-        {
-          title: 'Dashboard',
-          url: '/',
-          icon: LayoutDashboard,
-        },
-        {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: ListTodo,
-        },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: Package,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: MessagesSquare,
-        },
-        {
-          title: 'Users',
-          url: '/users',
-          icon: Users,
-        },
-        {
-          title: 'Secured by Clerk',
-          icon: ClerkLogo,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/clerk/sign-in',
-            },
-            {
-              title: 'Sign Up',
-              url: '/clerk/sign-up',
-            },
-            {
-              title: 'User Management',
-              url: '/clerk/user-management',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: 'Pages',
-      items: [
-        {
-          title: 'Auth',
-          icon: ShieldCheck,
-          items: [
-            {
-              title: 'Sign In',
-              url: '/sign-in',
-            },
-            {
-              title: 'Sign In (2 Col)',
-              url: '/sign-in-2',
-            },
-            {
-              title: 'Sign Up',
-              url: '/sign-up',
-            },
-            {
-              title: 'Forgot Password',
-              url: '/forgot-password',
-            },
-            {
-              title: 'OTP',
-              url: '/otp',
-            },
-          ],
-        },
-        {
-          title: 'Errors',
-          icon: Bug,
-          items: [
-            {
-              title: 'Unauthorized',
-              url: '/errors/unauthorized',
-              icon: Lock,
-            },
-            {
-              title: 'Forbidden',
-              url: '/errors/forbidden',
-              icon: UserX,
-            },
-            {
-              title: 'Not Found',
-              url: '/errors/not-found',
-              icon: FileX,
-            },
-            {
-              title: 'Internal Server Error',
-              url: '/errors/internal-server-error',
-              icon: ServerOff,
-            },
-            {
-              title: 'Maintenance Error',
-              url: '/errors/maintenance-error',
-              icon: Construction,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: 'Other',
-      items: [
-        {
-          title: 'Settings',
-          icon: Settings,
-          items: [
-            {
-              title: 'Profile',
-              url: '/settings',
-              icon: UserCog,
-            },
-            {
-              title: 'Account',
-              url: '/settings/account',
-              icon: Wrench,
-            },
-            {
-              title: 'Appearance',
-              url: '/settings/appearance',
-              icon: Palette,
-            },
-            {
-              title: 'Notifications',
-              url: '/settings/notifications',
-              icon: Bell,
-            },
-            {
-              title: 'Display',
-              url: '/settings/display',
-              icon: Monitor,
-            },
-          ],
-        },
-        {
-          title: 'Help Center',
-          url: '/help-center',
-          icon: HelpCircle,
-        },
-      ],
-    },
-  ],
+    teams: [
+      {
+        name: 'Shadcn Admin',
+        logo: Command,
+        plan: 'Vite + ShadcnUI',
+      },
+      {
+        name: 'Acme Inc',
+        logo: GalleryVerticalEnd,
+        plan: 'Enterprise',
+      },
+      {
+        name: 'Acme Corp.',
+        logo: AudioWaveform,
+        plan: 'Startup',
+      },
+    ],
+    navGroups: [
+      {
+        title: t('sidebar.general'),
+        items: [
+          {
+            title: t('sidebar.dashboard'),
+            url: '/',
+            icon: LayoutDashboard,
+          },
+          {
+            title: t('sidebar.tasks'),
+            url: '/tasks',
+            icon: ListTodo,
+          },
+          {
+            title: t('sidebar.apps'),
+            url: '/apps',
+            icon: Package,
+          },
+          {
+            title: t('sidebar.chats'),
+            url: '/chats',
+            badge: '3',
+            icon: MessagesSquare,
+          },
+          {
+            title: t('sidebar.users'),
+            url: '/users',
+            icon: Users,
+          },
+          {
+            title: t('sidebar.secured_by_clerk'),
+            icon: ClerkLogo,
+            items: [
+              {
+                title: t('sidebar.sign_in'),
+                url: '/clerk/sign-in',
+              },
+              {
+                title: t('sidebar.sign_up'),
+                url: '/clerk/sign-up',
+              },
+              {
+                title: t('sidebar.user_management'),
+                url: '/clerk/user-management',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: t('sidebar.pages'),
+        items: [
+          {
+            title: t('sidebar.auth'),
+            icon: ShieldCheck,
+            items: [
+              {
+                title: t('sidebar.sign_in'),
+                url: '/sign-in',
+              },
+              {
+                title: t('sidebar.sign_in_2col'),
+                url: '/sign-in-2',
+              },
+              {
+                title: t('sidebar.sign_up'),
+                url: '/sign-up',
+              },
+              {
+                title: t('sidebar.forgot_password'),
+                url: '/forgot-password',
+              },
+              {
+                title: t('sidebar.otp'),
+                url: '/otp',
+              },
+            ],
+          },
+          {
+            title: t('sidebar.errors'),
+            icon: Bug,
+            items: [
+              {
+                title: t('sidebar.unauthorized'),
+                url: '/errors/unauthorized',
+                icon: Lock,
+              },
+              {
+                title: t('sidebar.forbidden'),
+                url: '/errors/forbidden',
+                icon: UserX,
+              },
+              {
+                title: t('sidebar.not_found'),
+                url: '/errors/not-found',
+                icon: FileX,
+              },
+              {
+                title: t('sidebar.internal_server_error'),
+                url: '/errors/internal-server-error',
+                icon: ServerOff,
+              },
+              {
+                title: t('sidebar.maintenance_error'),
+                url: '/errors/maintenance-error',
+                icon: Construction,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: t('sidebar.other'),
+        items: [
+          {
+            title: t('sidebar.settings'),
+            icon: Settings,
+            items: [
+              {
+                title: t('sidebar.profile'),
+                url: '/settings',
+                icon: UserCog,
+              },
+              {
+                title: t('sidebar.account'),
+                url: '/settings/account',
+                icon: Wrench,
+              },
+              {
+                title: t('sidebar.appearance'),
+                url: '/settings/appearance',
+                icon: Palette,
+              },
+              {
+                title: t('sidebar.notifications'),
+                url: '/settings/notifications',
+                icon: Bell,
+              },
+              {
+                title: t('sidebar.display'),
+                url: '/settings/display',
+                icon: Monitor,
+              },
+            ],
+          },
+          {
+            title: t('sidebar.help_center'),
+            url: '/help-center',
+            icon: HelpCircle,
+          },
+        ],
+      },
+    ],
+  }
 }
