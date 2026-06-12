@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { TasksImportDialog } from './tasks-import-dialog'
@@ -6,6 +7,7 @@ import { useTasks } from './tasks-provider'
 
 export function TasksDialogs() {
   const { open, setOpen, currentRow, setCurrentRow } = useTasks()
+  const { t } = useTranslation()
   return (
     <>
       <TasksMutateDrawer
@@ -49,21 +51,12 @@ export function TasksDialogs() {
               setTimeout(() => {
                 setCurrentRow(null)
               }, 500)
-              showSubmittedData(
-                currentRow,
-                'The following task has been deleted:'
-              )
+              showSubmittedData(currentRow, t('common.task_deleted'))
             }}
             className='max-w-md'
-            title={`Delete this task: ${currentRow.id} ?`}
-            desc={
-              <>
-                You are about to delete a task with the ID{' '}
-                <strong>{currentRow.id}</strong>. <br />
-                This action cannot be undone.
-              </>
-            }
-            confirmText='Delete'
+            title={t('tasks.delete_task_title', { id: currentRow.id })}
+            desc={<>{t('tasks.delete_task_desc', { id: currentRow.id })}</>}
+            confirmText={t('common.delete')}
           />
         </>
       )}

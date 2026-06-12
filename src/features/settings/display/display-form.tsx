@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslation } from 'react-i18next'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -14,51 +15,53 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 
-const items = [
-  {
-    id: 'recents',
-    label: 'Recents',
-  },
-  {
-    id: 'home',
-    label: 'Home',
-  },
-  {
-    id: 'applications',
-    label: 'Applications',
-  },
-  {
-    id: 'desktop',
-    label: 'Desktop',
-  },
-  {
-    id: 'downloads',
-    label: 'Downloads',
-  },
-  {
-    id: 'documents',
-    label: 'Documents',
-  },
-] as const
-
-const displayFormSchema = z.object({
-  items: z.array(z.string()).refine((value) => value.some((item) => item), {
-    message: 'You have to select at least one item.',
-  }),
-})
-
-type DisplayFormValues = z.infer<typeof displayFormSchema>
-
-// This can come from your database or API.
-const defaultValues: Partial<DisplayFormValues> = {
-  items: ['recents', 'home'],
-}
-
 export function DisplayForm() {
+  const { t } = useTranslation()
+
+  const displayFormSchema = z.object({
+    items: z.array(z.string()).refine((value) => value.some((item) => item), {
+      message: t('validation.select_one_item'),
+    }),
+  })
+
+  type DisplayFormValues = z.infer<typeof displayFormSchema>
+
+  // This can come from your database or API.
+  const defaultValues: Partial<DisplayFormValues> = {
+    items: ['recents', 'home'],
+  }
+
   const form = useForm<DisplayFormValues>({
     resolver: zodResolver(displayFormSchema),
     defaultValues,
   })
+
+  const items = [
+    {
+      id: 'recents',
+      label: t('settings_form.recents'),
+    },
+    {
+      id: 'home',
+      label: t('settings_form.home'),
+    },
+    {
+      id: 'applications',
+      label: t('settings_form.applications'),
+    },
+    {
+      id: 'desktop',
+      label: t('settings_form.desktop'),
+    },
+    {
+      id: 'downloads',
+      label: t('settings_form.downloads'),
+    },
+    {
+      id: 'documents',
+      label: t('settings_form.documents'),
+    },
+  ] as const
 
   return (
     <Form {...form}>
@@ -72,9 +75,11 @@ export function DisplayForm() {
           render={() => (
             <FormItem>
               <div className='mb-4'>
-                <FormLabel className='text-base'>Sidebar</FormLabel>
+                <FormLabel className='text-base'>
+                  {t('settings_form.sidebar_label')}
+                </FormLabel>
                 <FormDescription>
-                  Select the items you want to display in the sidebar.
+                  {t('settings_form.sidebar_desc')}
                 </FormDescription>
               </div>
               {items.map((item) => (
@@ -114,7 +119,7 @@ export function DisplayForm() {
             </FormItem>
           )}
         />
-        <Button type='submit'>Update display</Button>
+        <Button type='submit'>{t('settings_form.update_display')}</Button>
       </form>
     </Form>
   )
