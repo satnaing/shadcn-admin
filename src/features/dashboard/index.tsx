@@ -17,6 +17,7 @@ import { ThemeSwitch } from '@/components/theme-switch'
 import { Analytics } from './components/analytics'
 import { Overview } from './components/overview'
 import { RecentSales } from './components/recent-sales'
+import { Reports } from './components/reports'
 
 export function Dashboard() {
   return (
@@ -47,7 +48,7 @@ export function Dashboard() {
             <TabsList>
               <TabsTrigger value='overview'>Overview</TabsTrigger>
               <TabsTrigger value='analytics'>Analytics</TabsTrigger>
-              <TabsTrigger value='reports' disabled>
+              <TabsTrigger value='reports'>
                 Reports
               </TabsTrigger>
               <TabsTrigger value='notifications' disabled>
@@ -183,6 +184,9 @@ export function Dashboard() {
           </TabsContent>
           <TabsContent value='analytics' className='space-y-4'>
             <Analytics />
+          </TabsContent>
+          <TabsContent value='reports' className='space-y-4'>
+            <Reports />
           </TabsContent>
         </Tabs>
       </Main>
