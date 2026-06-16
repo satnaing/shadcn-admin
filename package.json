@@ -88,7 +88,7 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.8",
+    "vite": "^8.0.16",
     "vitest": "^4.1.4",
     "vitest-browser-react": "^2.2.0"
   }
