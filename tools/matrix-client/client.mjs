@@ -185,12 +185,8 @@ export class MatrixClient {
       rooms.push(roomFromSync(roomId, 'invite', room))
     })
 
-    Object.entries(roomGroups.leave ?? {}).forEach(([roomId, room]) => {
-      rooms.push(roomFromSync(roomId, 'leave', room))
-    })
-
     return rooms.sort((left, right) => {
-      const membershipOrder = { join: 0, invite: 1, leave: 2 }
+      const membershipOrder = { join: 0, invite: 1 }
       return (
         (membershipOrder[left.membership] ?? 9) -
           (membershipOrder[right.membership] ?? 9) ||

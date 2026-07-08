@@ -80,6 +80,81 @@ describe('MatrixClient', () => {
     })
   })
 
+  it('lists joined and invited rooms without returned leave rooms', async () => {
+    const fetchImpl = vi.fn(async () =>
+      jsonResponse({
+        rooms: {
+          join: {
+            '!joined:server': {
+              state: {
+                events: [
+                  {
+                    type: 'm.room.name',
+                    content: {
+                      name: 'Joined room',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          invite: {
+            '!invited:server': {
+              invite_state: {
+                events: [
+                  {
+                    type: 'm.room.canonical_alias',
+                    content: {
+                      alias: '#invited:server',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+          leave: {
+            '!left:server': {
+              state: {
+                events: [
+                  {
+                    type: 'm.room.name',
+                    content: {
+                      name: 'Left room',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      })
+    )
+    const client = new MatrixClient({
+      homeserver: 'http://server.local:8008',
+      accessToken: 'secret-token',
+      fetchImpl,
+    })
+
+    const rooms = await client.listRooms()
+
+    expect(rooms).toEqual([
+      {
+        roomId: '!joined:server',
+        membership: 'join',
+        name: 'Joined room',
+        canonicalAlias: undefined,
+        displayName: 'Joined room',
+      },
+      {
+        roomId: '!invited:server',
+        membership: 'invite',
+        name: undefined,
+        canonicalAlias: '#invited:server',
+        displayName: '#invited:server',
+      },
+    ])
+  })
+
   it('verifies Element visibility from joined or invited membership state', async () => {
     const fetchImpl = vi.fn(async (url) => {
       if (url.endsWith('/account/whoami')) {
@@ -129,6 +204,52 @@ describe('MatrixClient', () => {
         reason: 'User has a pending room invite.',
       },
     ])
+  })
+
+  it('reports Element hidden when the viewer has left the room', async () => {
+    const fetchImpl = vi.fn(async (url) => {
+      if (url.endsWith('/account/whoami')) {
+        return jsonResponse({
+          user_id: '@omnigent:server',
+        })
+      }
+
+      if (url.endsWith('%40omnigent%3Aserver')) {
+        return jsonResponse({
+          membership: 'join',
+        })
+      }
+
+      if (url.endsWith('%40rockleepc%3Aserver')) {
+        return jsonResponse({
+          membership: 'leave',
+        })
+      }
+
+      return jsonResponse({ errcode: 'M_NOT_FOUND' }, 404)
+    })
+    const client = new MatrixClient({
+      homeserver: 'http://server.local:8008',
+      accessToken: 'secret-token',
+      fetchImpl,
+    })
+
+    const verification = await client.verifyRoom({
+      roomId: '!demo:server',
+      expectedUsers: ['@omnigent:server'],
+      elementUser: '@rockleepc:server',
+    })
+
+    expect(verification.elementShouldShow).toBe(false)
+    expect(verification.elementReason).toBe(
+      'The Element viewer account is not joined or invited according to the homeserver state visible to these credentials.'
+    )
+    expect(verification.members.at(-1)).toEqual({
+      userId: '@rockleepc:server',
+      membership: 'leave',
+      displayName: undefined,
+      reason: 'User has left or has not joined the room.',
+    })
   })
 })
 
