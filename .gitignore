@@ -13,6 +13,8 @@ dist-ssr
 *.local
 
 .env
+.matrix-cli.json
+.matrix-cli.local.json
 
 # Editor directories and files
 .vscode/*
