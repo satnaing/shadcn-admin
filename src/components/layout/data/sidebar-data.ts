@@ -17,6 +17,7 @@ import {
   UserX,
   Users,
   MessagesSquare,
+  Bot,
   ShieldCheck,
   AudioWaveform,
   Command,
@@ -72,6 +73,11 @@ export const sidebarData: SidebarData = {
           url: '/chats',
           badge: '3',
           icon: MessagesSquare,
+        },
+        {
+          title: 'AI Chat',
+          url: '/ai-chat',
+          icon: Bot,
         },
         {
           title: 'Users',
