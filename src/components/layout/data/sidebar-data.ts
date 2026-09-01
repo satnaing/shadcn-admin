@@ -18,6 +18,8 @@ import {
   Users,
   MessagesSquare,
   Bot,
+  Library,
+  Store,
   ShieldCheck,
   AudioWaveform,
   Command,
@@ -78,6 +80,16 @@ export const sidebarData: SidebarData = {
           title: 'AI Chat',
           url: '/ai-chat',
           icon: Bot,
+        },
+        {
+          title: 'Knowledge Base',
+          url: '/knowledge-base',
+          icon: Library,
+        },
+        {
+          title: '应用广场',
+          url: '/app-plaza',
+          icon: Store,
         },
         {
           title: 'Users',

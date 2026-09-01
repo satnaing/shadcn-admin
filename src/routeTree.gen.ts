@@ -28,9 +28,11 @@ import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authen
 import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
+import { Route as AuthenticatedKnowledgeBaseIndexRouteImport } from './routes/_authenticated/knowledge-base/index'
 import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
 import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
 import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
+import { Route as AuthenticatedAppPlazaIndexRouteImport } from './routes/_authenticated/app-plaza/index'
 import { Route as AuthenticatedAiChatIndexRouteImport } from './routes/_authenticated/ai-chat/index'
 import { Route as ClerkAuthenticatedUserManagementRouteImport } from './routes/clerk/_authenticated/user-management'
 import { Route as ClerkauthSignUpRouteImport } from './routes/clerk/(auth)/sign-up'
@@ -135,6 +137,12 @@ const AuthenticatedSettingsIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
+const AuthenticatedKnowledgeBaseIndexRoute =
+  AuthenticatedKnowledgeBaseIndexRouteImport.update({
+    id: '/knowledge-base/',
+    path: '/knowledge-base/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedHelpCenterIndexRoute =
   AuthenticatedHelpCenterIndexRouteImport.update({
     id: '/help-center/',
@@ -151,6 +159,12 @@ const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexRouteImport.update({
   path: '/apps/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAppPlazaIndexRoute =
+  AuthenticatedAppPlazaIndexRouteImport.update({
+    id: '/app-plaza/',
+    path: '/app-plaza/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAiChatIndexRoute =
   AuthenticatedAiChatIndexRouteImport.update({
     id: '/ai-chat/',
@@ -227,9 +241,11 @@ export interface FileRoutesByFullPath {
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/ai-chat/': typeof AuthenticatedAiChatIndexRoute
+  '/app-plaza/': typeof AuthenticatedAppPlazaIndexRoute
   '/apps/': typeof AuthenticatedAppsIndexRoute
   '/chats/': typeof AuthenticatedChatsIndexRoute
   '/help-center/': typeof AuthenticatedHelpCenterIndexRoute
+  '/knowledge-base/': typeof AuthenticatedKnowledgeBaseIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
   '/tasks/': typeof AuthenticatedTasksIndexRoute
   '/users/': typeof AuthenticatedUsersIndexRoute
@@ -256,9 +272,11 @@ export interface FileRoutesByTo {
   '/clerk/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/ai-chat': typeof AuthenticatedAiChatIndexRoute
+  '/app-plaza': typeof AuthenticatedAppPlazaIndexRoute
   '/apps': typeof AuthenticatedAppsIndexRoute
   '/chats': typeof AuthenticatedChatsIndexRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexRoute
+  '/knowledge-base': typeof AuthenticatedKnowledgeBaseIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
   '/tasks': typeof AuthenticatedTasksIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
@@ -290,9 +308,11 @@ export interface FileRoutesById {
   '/clerk/(auth)/sign-up': typeof ClerkauthSignUpRoute
   '/clerk/_authenticated/user-management': typeof ClerkAuthenticatedUserManagementRoute
   '/_authenticated/ai-chat/': typeof AuthenticatedAiChatIndexRoute
+  '/_authenticated/app-plaza/': typeof AuthenticatedAppPlazaIndexRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
+  '/_authenticated/knowledge-base/': typeof AuthenticatedKnowledgeBaseIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
@@ -322,9 +342,11 @@ export interface FileRouteTypes {
     | '/clerk/sign-up'
     | '/clerk/user-management'
     | '/ai-chat/'
+    | '/app-plaza/'
     | '/apps/'
     | '/chats/'
     | '/help-center/'
+    | '/knowledge-base/'
     | '/settings/'
     | '/tasks/'
     | '/users/'
@@ -351,9 +373,11 @@ export interface FileRouteTypes {
     | '/clerk/sign-up'
     | '/clerk/user-management'
     | '/ai-chat'
+    | '/app-plaza'
     | '/apps'
     | '/chats'
     | '/help-center'
+    | '/knowledge-base'
     | '/settings'
     | '/tasks'
     | '/users'
@@ -384,9 +408,11 @@ export interface FileRouteTypes {
     | '/clerk/(auth)/sign-up'
     | '/clerk/_authenticated/user-management'
     | '/_authenticated/ai-chat/'
+    | '/_authenticated/app-plaza/'
     | '/_authenticated/apps/'
     | '/_authenticated/chats/'
     | '/_authenticated/help-center/'
+    | '/_authenticated/knowledge-base/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
@@ -542,6 +568,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
+    '/_authenticated/knowledge-base/': {
+      id: '/_authenticated/knowledge-base/'
+      path: '/knowledge-base'
+      fullPath: '/knowledge-base/'
+      preLoaderRoute: typeof AuthenticatedKnowledgeBaseIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/help-center/': {
       id: '/_authenticated/help-center/'
       path: '/help-center'
@@ -561,6 +594,13 @@ declare module '@tanstack/react-router' {
       path: '/apps'
       fullPath: '/apps/'
       preLoaderRoute: typeof AuthenticatedAppsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app-plaza/': {
+      id: '/_authenticated/app-plaza/'
+      path: '/app-plaza'
+      fullPath: '/app-plaza/'
+      preLoaderRoute: typeof AuthenticatedAppPlazaIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/ai-chat/': {
@@ -657,9 +697,11 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
   AuthenticatedAiChatIndexRoute: typeof AuthenticatedAiChatIndexRoute
+  AuthenticatedAppPlazaIndexRoute: typeof AuthenticatedAppPlazaIndexRoute
   AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
   AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
   AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
+  AuthenticatedKnowledgeBaseIndexRoute: typeof AuthenticatedKnowledgeBaseIndexRoute
   AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
 }
@@ -669,9 +711,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
   AuthenticatedAiChatIndexRoute: AuthenticatedAiChatIndexRoute,
+  AuthenticatedAppPlazaIndexRoute: AuthenticatedAppPlazaIndexRoute,
   AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
   AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
   AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
+  AuthenticatedKnowledgeBaseIndexRoute: AuthenticatedKnowledgeBaseIndexRoute,
   AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
 }
