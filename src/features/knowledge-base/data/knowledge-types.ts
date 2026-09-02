@@ -6,6 +6,19 @@ export type KnowledgeItem = {
   uploadedAt: number
 }
 
+export type SegmentMode = 'auto' | 'custom'
+
+export type KnowledgeBaseItem = {
+  id: string
+  name: string
+  description: string
+  dataType: KnowledgeDataType
+  fileCount: number
+  segmentMode: SegmentMode
+  enhancement: boolean
+  createdAt: number
+}
+
 export type KnowledgeDataType = 'unstructured' | 'structured' | 'multimodal'
 
 export type KnowledgeDataTypeOption = {

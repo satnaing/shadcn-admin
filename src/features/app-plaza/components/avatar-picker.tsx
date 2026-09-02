@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 /** 预设渐变头像配色 */
-export const avatarPresets = [
+const avatarPresets = [
   'from-blue-500 to-indigo-500',
   'from-emerald-500 to-teal-500',
   'from-orange-500 to-amber-500',

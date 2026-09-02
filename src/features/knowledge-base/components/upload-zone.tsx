@@ -1,5 +1,5 @@
 import { useRef, useState, type DragEvent } from 'react'
-import { CloudUpload, File as FileIcon, Loader2, X } from 'lucide-react'
+import { CloudUpload, File as FileIcon, X } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'

@@ -1,5 +1,8 @@
-import type { KnowledgeItem } from '../data/knowledge-types'
-import { MAX_FILE_COUNT, MAX_FILE_SIZE } from '../data/knowledge-types'
+import {
+  type KnowledgeItem,
+  MAX_FILE_COUNT,
+  MAX_FILE_SIZE,
+} from '../data/knowledge-types'
 
 /**
  * 由 File 对象创建知识库条目（id / uploadedAt 在此生成，避免组件内调用不纯函数）。
