@@ -37,6 +37,7 @@ type SidebarContextProps = {
   setOpenMobile: (open: boolean) => void
   isMobile: boolean
   toggleSidebar: () => void
+  mobileOpenerRef: React.RefObject<HTMLElement | null>
 }
 
 const SidebarContext = React.createContext<SidebarContextProps | null>(null)
@@ -64,6 +65,7 @@ function SidebarProvider({
   onOpenChange?: (open: boolean) => void
 }) {
   const isMobile = useIsMobile()
+  const mobileOpenerRef = React.useRef<HTMLElement | null>(null)
   const [openMobile, setOpenMobile] = React.useState(false)
 
   // This is the internal state of the sidebar.
@@ -87,8 +89,14 @@ function SidebarProvider({
 
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
+    if (isMobile && !openMobile) {
+      mobileOpenerRef.current =
+        document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null
+    }
     return isMobile ? setOpenMobile((open) => !open) : setOpen((open) => !open)
-  }, [isMobile, setOpen, setOpenMobile])
+  }, [isMobile, openMobile, setOpen, setOpenMobile])
 
   // Adds a keyboard shortcut to toggle the sidebar.
   React.useEffect(() => {
@@ -119,6 +127,7 @@ function SidebarProvider({
       openMobile,
       setOpenMobile,
       toggleSidebar,
+      mobileOpenerRef,
     }),
     [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
   )
@@ -160,7 +169,8 @@ function Sidebar({
   variant?: 'sidebar' | 'floating' | 'inset'
   collapsible?: 'offcanvas' | 'icon' | 'none'
 }) {
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+  const { isMobile, state, openMobile, setOpenMobile, mobileOpenerRef } =
+    useSidebar()
 
   if (collapsible === 'none') {
     return (
@@ -181,6 +191,14 @@ function Sidebar({
     return (
       <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
         <SheetContent
+          onCloseAutoFocus={(event) => {
+            // SidebarTrigger controls this Sheet without a Radix SheetTrigger,
+            // so restore the real keyboard opener explicitly when it closes.
+            if (mobileOpenerRef.current?.isConnected) {
+              event.preventDefault()
+              mobileOpenerRef.current.focus()
+            }
+          }}
           data-sidebar='sidebar'
           data-slot='sidebar'
           data-mobile='true'
@@ -255,12 +273,13 @@ function SidebarTrigger({
   onClick,
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { toggleSidebar } = useSidebar()
+  const { isMobile, open, openMobile, toggleSidebar } = useSidebar()
 
   return (
     <Button
       data-sidebar='trigger'
       data-slot='sidebar-trigger'
+      aria-expanded={isMobile ? openMobile : open}
       variant='ghost'
       size='icon'
       className={cn('size-7', className)}
