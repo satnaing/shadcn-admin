@@ -14,11 +14,24 @@ export function ThemeSwitch() {
   const { theme, setTheme } = useTheme()
 
   /* Update theme-color meta tag
-   * when theme is updated */
+   * when theme or system preference is updated */
   useEffect(() => {
-    const themeColor = theme === 'dark' ? '#020817' : '#fff'
-    const metaThemeColor = document.querySelector("meta[name='theme-color']")
-    if (metaThemeColor) metaThemeColor.setAttribute('content', themeColor)
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const updateThemeColor = () => {
+      const isDark =
+        theme === 'system' ? mediaQuery.matches : theme === 'dark'
+      const themeColor = isDark ? '#020817' : '#fff'
+      const metaThemeColor = document.querySelector("meta[name='theme-color']")
+      if (metaThemeColor) metaThemeColor.setAttribute('content', themeColor)
+    }
+
+    updateThemeColor()
+
+    if (theme === 'system') {
+      mediaQuery.addEventListener('change', updateThemeColor)
+      return () => mediaQuery.removeEventListener('change', updateThemeColor)
+    }
   }, [theme])
 
   return (
