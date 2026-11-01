@@ -16,42 +16,43 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 |---|---|
 | (boş) | başlanmayıb |
 | 🔄 | yazılır (cari bölüm) |
-| ✅ | bitdi —  +  yaşıl, fixture ilə gəzilir |
+| ✅ | bitdi — `build` + `lint` yaşıl, fixture ilə gəzilir |
 | ⏭ | Faza D-ə təxirə salınıb (addon ekranları) |
-| ⊘ | köçürülmür (qərar:  §1 sonu) |
+| ⊘ | köçürülmür (qərar: `task/admin/README.md` §1 sonu) |
 
-**Qrup → bölüm faylı** ():
+**Qrup → bölüm faylı** (`D:\www\xshop\task\admin\`):
 
 | Sidebar qrupu | Bölüm faylı | Panel |
 |---|---|---|
-| Dashboard |  | A |
-| Products → Product Setup |  | A |
-| Products → Products / Operation |  | A |
-| Orders & Sales → Sales |  | A |
-| Users → Customers |  | A |
-| Users → Sellers |  | A |
-| Marketing → Promotion & Offers |  | A |
-| Marketing → Marketing |  | A |
-| Marketing Analytics |  | A |
-| Report Center |  | A |
-| Content & Design → görünüş/CMS |  | A |
-| Content & Design → AI Studio |  | A |
-| Content & Design → Uploaded Files |  | A |
-| Communication |  | A |
-| Integrations → Payment Gateways |  | A |
-| Integrations → OTP System |  | A |
-| Integrations → Shipping System |  | A |
-| Settings → Setup & Configurations |  | A |
-| Settings → Shipping |  | A |
-| Settings → Staffs |  (əsas hissəsi pilotla **hazır**) | A |
-| Settings → System + Addon Manager |  | A |
-| **Satıcı paneli** (49 ekran) |  …  — 15-i admin ekranının  variantıdır (E13) | S |
-| **Kuryer paneli** (11 ekran) |  — 12 AEC ekranı → **6 real ekran** (6 status filtri bir siyahıdır) | K |
-| **Müştəri paneli** (18 ekran) | ⊘ bu layihədə yoxdur — storefront Next.js-dədir () | — |
-| Auction · Wholesale · POS · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point · GST | ⏭ Faza D (–) | A+S |
+| Dashboard | `01-dashboard.md` | A |
+| Products → Product Setup | `02-catalog.md` | A |
+| Products → Products / Operation | `03-products.md` | A |
+| Orders & Sales → Sales | `04-orders.md` | A |
+| Users → Customers | `05-customers.md` | A |
+| Users → Sellers | `06-sellers.md` | A |
+| Marketing → Promotion & Offers | `07-promotions.md` | A |
+| Marketing → Marketing | `08-marketing.md` | A |
+| Marketing Analytics | `09-analytics.md` | A |
+| Report Center | `10-reports.md` | A |
+| Content & Design → görünüş / CMS | `11-appearance.md` | A |
+| Content & Design → AI Studio | `12-ai-studio.md` | A |
+| Content & Design → Uploaded Files | `13-media.md` | A |
+| Communication | `14-communication.md` | A |
+| Integrations → Payment Gateways | `15-payments.md` | A |
+| Integrations → OTP System | `16-otp.md` | A |
+| Integrations → Shipping System | `17-courier.md` | A |
+| Settings → Setup & Configurations | `18-settings.md` | A |
+| Settings → Shipping | `19-shipping.md` | A |
+| Settings → Staffs | `20-staff.md` — əsas hissəsi pilotla **hazırdır** (`features/users`, `role`, `permission`) | A |
+| Settings → System + Addon Manager | `21-system.md` | A |
+| **Satıcı paneli** (49 ekran) | `30-vendor-foundation.md` … `36-vendor-shop.md` — 15 ekran admin ekranının `scope='seller'` variantıdır (E13) | S |
+| **Kuryer paneli** (11 ekran) | `37-courier.md` — 12 AEC ekranı → **6 real ekran** (6 status filtri bir siyahıdır) | K |
+| **Müştəri paneli** (18 ekran) | ⊘ bu layihədə yoxdur — storefront Next.js-dədir (`front/`) | — |
+| Auction · Wholesale · POS · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point · GST | ⏭ Faza D (`40`–`48`) | A+S |
 
-**Panel və rol qatı** (üç nav ağacı, beş rol): .
-**Qeyd:** bu fayldaki  adları AEC-dəndir — **köçürülmür**. xshop formatı  (README E3).
+**Panel və rol qatı** (üç nav ağacı `/admin`·`/seller`·`/courier`, beş rol): `00b-panels-and-roles.md`.
+
+**Qeyd:** bu fayldaki `can:` adları AEC-dəndir — **köçürülmür**. xshop formatı `<modul>.<əməliyyat>` (`task/admin/README.md` E3).
 
 ---
 
