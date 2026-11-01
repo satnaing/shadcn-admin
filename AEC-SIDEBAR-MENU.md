@@ -51,11 +51,12 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 | **Müştəri paneli** (18 ekran) | ⊘ bu layihədə yoxdur — storefront Next.js-dədir (`front/`) | — |
 | **Wholesale Products** | `22-wholesale.md` — öz bölümü, lakin `03-products` feature-ı `type=wholesale` ilə (E26) | A+S |
 | **GST System** | ⊘ köçürülmür — Hindistan vergi sistemi (HSN/CGST/SGST); AZ·RU·TR·GE üçün adi ƏDV `18-settings`-dədir (E27) | — |
+| **Supervisor (reseller) paneli** (AEC-də yoxdur) | `38-supervisor.md` — 4-cü nav ağacı `/supervisor` (E32, api D25) | Sv |
 | **Mağazalar (multi-store)** (AEC-də yoxdur) | `24-stores.md` — tək mağazada menyuda görünmür (E30, api D23) | A |
 | **Dropshipping** | ⏭ plan həcmində yoxdur — gələcəkdə ayrı modul (E28, api D20) | A |
 | Auction · POS · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point | ⏭ Faza D (`40`–`47`) | A+S |
 
-**Panel və rol qatı** (üç nav ağacı `/admin`·`/seller`·`/courier`, beş rol): `00b-panels-and-roles.md`.
+**Panel və rol qatı** (dörd nav ağacı `/admin`·`/seller`·`/courier`·`/supervisor`, altı rol): `00b-panels-and-roles.md`.
 
 **Qeyd:** bu fayldaki `can:` adları AEC-dəndir — **köçürülmür**. xshop formatı `<modul>.<əməliyyat>` (`task/admin/README.md` E3).
 
