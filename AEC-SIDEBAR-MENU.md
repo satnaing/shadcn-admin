@@ -48,7 +48,10 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 | **Satıcı paneli** (49 ekran) | `30-vendor-foundation.md` … `36-vendor-shop.md` — 15 ekran admin ekranının `scope='seller'` variantıdır (E13) | S |
 | **Kuryer paneli** (11 ekran) | `37-courier.md` — 12 AEC ekranı → **6 real ekran** (6 status filtri bir siyahıdır) | K |
 | **Müştəri paneli** (18 ekran) | ⊘ bu layihədə yoxdur — storefront Next.js-dədir (`front/`) | — |
-| Auction · Wholesale · POS · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point · GST | ⏭ Faza D (`40`–`48`) | A+S |
+| **Wholesale Products** | ⊘ ayrı bölüm deyil → `03-products.md` içində qiymət pilləsi (E26) | A+S |
+| **GST System** | ⊘ köçürülmür — Hindistan vergi sistemi (HSN/CGST/SGST); AZ·RU·TR·GE üçün adi ƏDV `18-settings`-dədir (E27) | — |
+| **Dropshipping** (AEC-də yoxdur) | `22-dropshipping.md` — tədarükçü, feed idxalı, marja qaydası, tədarükçü sifarişləri (api D20) | A |
+| Auction · POS · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point | ⏭ Faza D (`40`–`47`) | A+S |
 
 **Panel və rol qatı** (üç nav ağacı `/admin`·`/seller`·`/courier`, beş rol): `00b-panels-and-roles.md`.
 
