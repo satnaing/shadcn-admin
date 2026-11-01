@@ -8,6 +8,53 @@
 
 ---
 
+## 0. İzləmə (bu fayl həm xəritə, həm progress izləyicisidir)
+
+Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün bütün sətirləri işarələnir.
+
+| İşarə | Mənası |
+|---|---|
+| (boş) | başlanmayıb |
+| 🔄 | yazılır (cari bölüm) |
+| ✅ | bitdi —  +  yaşıl, fixture ilə gəzilir |
+| ⏭ | Faza D-ə təxirə salınıb (addon ekranları) |
+| ⊘ | köçürülmür (qərar:  §1 sonu) |
+
+**Qrup → bölüm faylı** ():
+
+| Sidebar qrupu | Bölüm faylı | Panel |
+|---|---|---|
+| Dashboard |  | A |
+| Products → Product Setup |  | A |
+| Products → Products / Operation |  | A |
+| Orders & Sales → Sales |  | A |
+| Users → Customers |  | A |
+| Users → Sellers |  | A |
+| Marketing → Promotion & Offers |  | A |
+| Marketing → Marketing |  | A |
+| Marketing Analytics |  | A |
+| Report Center |  | A |
+| Content & Design → görünüş/CMS |  | A |
+| Content & Design → AI Studio |  | A |
+| Content & Design → Uploaded Files |  | A |
+| Communication |  | A |
+| Integrations → Payment Gateways |  | A |
+| Integrations → OTP System |  | A |
+| Integrations → Shipping System |  | A |
+| Settings → Setup & Configurations |  | A |
+| Settings → Shipping |  | A |
+| Settings → Staffs |  (əsas hissəsi pilotla **hazır**) | A |
+| Settings → System + Addon Manager |  | A |
+| **Satıcı paneli** (49 ekran) |  …  — 15-i admin ekranının  variantıdır (E13) | S |
+| **Kuryer paneli** (11 ekran) |  — 12 AEC ekranı → **6 real ekran** (6 status filtri bir siyahıdır) | K |
+| **Müştəri paneli** (18 ekran) | ⊘ bu layihədə yoxdur — storefront Next.js-dədir () | — |
+| Auction · Wholesale · POS · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point · GST | ⏭ Faza D (–) | A+S |
+
+**Panel və rol qatı** (üç nav ağacı, beş rol): .
+**Qeyd:** bu fayldaki  adları AEC-dəndir — **köçürülmür**. xshop formatı  (README E3).
+
+---
+
 ## 1. Admin Paneli
 
 ### Dashboard
