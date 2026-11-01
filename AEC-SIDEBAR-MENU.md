@@ -43,14 +43,15 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 | Integrations → Shipping System | `17-courier.md` | A |
 | Settings → Setup & Configurations | `18-settings.md` | A |
 | Settings → Shipping | `19-shipping.md` | A |
+| Seller Packages (Users → Sellers altında) | `23-seller-packages.md` — çoxölçülü limit matrisi (E29) | A |
 | Settings → Staffs | `20-staff.md` — əsas hissəsi pilotla **hazırdır** (`features/users`, `role`, `permission`) | A |
 | Settings → System + Addon Manager | `21-system.md` | A |
 | **Satıcı paneli** (49 ekran) | `30-vendor-foundation.md` … `36-vendor-shop.md` — 15 ekran admin ekranının `scope='seller'` variantıdır (E13) | S |
 | **Kuryer paneli** (11 ekran) | `37-courier.md` — 12 AEC ekranı → **6 real ekran** (6 status filtri bir siyahıdır) | K |
 | **Müştəri paneli** (18 ekran) | ⊘ bu layihədə yoxdur — storefront Next.js-dədir (`front/`) | — |
-| **Wholesale Products** | ⊘ ayrı bölüm deyil → `03-products.md` içində qiymət pilləsi (E26) | A+S |
+| **Wholesale Products** | `22-wholesale.md` — öz bölümü, lakin `03-products` feature-ı `type=wholesale` ilə (E26) | A+S |
 | **GST System** | ⊘ köçürülmür — Hindistan vergi sistemi (HSN/CGST/SGST); AZ·RU·TR·GE üçün adi ƏDV `18-settings`-dədir (E27) | — |
-| **Dropshipping** (AEC-də yoxdur) | `22-dropshipping.md` — tədarükçü, feed idxalı, marja qaydası, tədarükçü sifarişləri (api D20) | A |
+| **Dropshipping** | ⏭ plan həcmində yoxdur — gələcəkdə ayrı modul (E28, api D20) | A |
 | Auction · POS · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point | ⏭ Faza D (`40`–`47`) | A+S |
 
 **Panel və rol qatı** (üç nav ağacı `/admin`·`/seller`·`/courier`, beş rol): `00b-panels-and-roles.md`.
