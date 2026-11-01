@@ -1,0 +1,35 @@
+description = "Yazılmış bölümü qadağalar + build üzrə yoxlayır (məs: /yoxla brand)."
+
+prompt = """
+Yoxlanılacaq feature: src/features/{{args}}
+
+1. Aşağıdakı nəticələri oxu (hamısı BOŞ olmalıdır — boş deyilsə pozuntudur):
+
+inline CSS:
+!{grep -rn "style={{" src/features/{{args}} || echo OK}
+
+imperativ DOM / script:
+!{grep -rn "dangerouslySetInnerHTML\|document\.\|<script" src/features/{{args}} || echo OK}
+
+tip qaçışları:
+!{grep -rn ": any\|@ts-ignore\|eslint-disable\|ts-nocheck" src/features/{{args}} || echo OK}
+
+komponentdə sorğu:
+!{grep -rn "axios\|fetch(" src/features/{{args}}/components || echo OK}
+
+data üçün useEffect:
+!{grep -rn "useEffect" src/features/{{args}} || echo OK}
+
+dərin nisbi import:
+!{grep -rn "\.\./\.\./\.\." src/features/{{args}} || echo OK}
+
+başqa bölümdən import:
+!{grep -rn "@/features/" src/features/{{args}} | grep -v "{{args}}" || echo OK}
+
+fayl ölçüləri (komponent ≤150, hook ≤80, service ≤120 sətir):
+!{find src/features/{{args}} -type f \( -name "*.ts" -o -name "*.tsx" \) -exec wc -l {} + | sort -rn | head -12}
+
+2. Hesabat: hər pozuntu üçün bir sətir — fayl:sətir · hansı qayda (GEMINI.md §1 nömrəsi) · düzəliş təklifi.
+3. Pozuntu varsa **düzəlt**, sonra `pnpm build && pnpm lint && pnpm knip && pnpm test` çalışdır.
+4. Təmizdirsə yalnız bunu yaz: "TƏMİZ — <fayl sayı> fayl, ən böyük fayl <N> sətir, build yaşıl".
+"""

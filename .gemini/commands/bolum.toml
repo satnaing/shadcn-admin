@@ -1,0 +1,34 @@
+description = "Bir admin bölümünü plan faylına görə yazır (məs: /bolum 02-catalog). GEMINI.md qaydaları qüvvədədir."
+
+prompt = """
+Bölüm: {{args}}
+
+ADDIM 1 — OXU (kod yazmazdan əvvəl, mütləq)
+1. `D:/www/xshop/task/admin/{{args}}.md` — bu bölümün tam spesifikasiyası (13 bölmə).
+   Diqqət: §1 ekran inventarı · §3 data sxemi · §4 siyahı · §5 forma · §7 endpoint-lər · §8 i18n açarları · §12 DoD · §13 açıq suallar.
+2. `D:/www/xshop/task/admin/SECTION-PROMPT.md` §1 — bu ekran tipi üçün **referans feature** cədvəli.
+3. Həmin referans feature-ın bütün faylları: `D:/www/1c-prielaz/admin/src/features/<referans>/**`.
+   Bu sənin şablonundur — qovluq düzümü, import sırası, prop adları, queryKey strukturu birəbir təkrarlanır.
+4. `D:/www/xshop/admin/GEMINI.md` §1 qadağalar, §3 fayl manifesti, §4 hazır komponentlər, §5 kod kontraktları.
+
+ADDIM 2 — PLAN (kod yazmazdan əvvəl qısa təsdiq)
+Yazacağın faylların siyahısını (GEMINI.md §3 manifestinə uyğun) və hansı referans feature-ı nüsxə çıxardığını
+bir cədvəldə göstər. Manifestdə olmayan fayl yazmırsan.
+
+ADDIM 3 — YAZ
+Hər faylı tam məzmunla yaz. İzah, nəsr yazma.
+Məcburi: Tailwind class (inline CSS yox) · data/hooks/components qat bölgüsü · `WithPagination`/`WithData` zərfləri ·
+hazır `EntityDataTable`/`EntityFormDialog`/`PageGuard` istifadəsi · 3 dil faylı (az/en/tr, eyni açarlar) ·
+`src/mocks/{{args}}` fixture-u (≥12 sətir) + `src/mocks/index.ts`-ə route sətirləri ·
+`src/shared/permissions.ts` və `sidebar-data.<panel>.ts`-ə **yalnız əlavə** sətir.
+
+ADDIM 4 — YOXLA
+GEMINI.md §9-dakı grep-ləri və `pnpm build && pnpm lint && pnpm knip && pnpm test` əmrini çalışdır.
+Nəticə qırmızıdırsa özün düzəlt, sonra hesabat ver.
+
+ADDIM 5 — HESABAT (5 sətirdən çox deyil)
+yazılan fayl sayı · yeni chunk ölçüsü (build çıxışından) · pozulan qayda varsa hansı və niyə ·
+plan faylında cavabsız qalan sual varsa hansı.
+
+Qeyri-müəyyənlik varsa uydurma — dayan və soruş.
+"""
