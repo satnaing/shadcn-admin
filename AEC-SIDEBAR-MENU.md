@@ -54,7 +54,9 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 | **Supervisor (reseller) paneli** (AEC-də yoxdur) | `38-supervisor.md` — 4-cü nav ağacı `/supervisor` (E32, api D25) | Sv |
 | **Mağazalar (multi-store)** (AEC-də yoxdur) | `24-stores.md` — tək mağazada menyuda görünmür (E30, api D23) | A |
 | **Dropshipping** | ⏭ plan həcmində yoxdur — gələcəkdə ayrı modul (E28, api D20) | A |
-| Auction · POS · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point | ⏭ Faza D (`40`–`47`) | A+S |
+| **POS System** | `25-pos.md` — core-a qaytarıldı (E33), satıcı tərəfi `scope=seller` | A+S |
+| **Kuryerlər** (satıcının öz kuryerləri) | `seller.couriers` → `30`–`36` bloku; kuryer paneli `37-courier` eynidir (E34, api D26) | S+K |
+| Auction · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point | ⏭ Faza D (`40`–`47`) | A+S |
 
 **Panel və rol qatı** (dörd nav ağacı `/admin`·`/seller`·`/courier`·`/supervisor`, altı rol): `00b-panels-and-roles.md`.
 
