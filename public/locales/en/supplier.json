@@ -1,0 +1,108 @@
+{
+  "list": {
+    "title": "Suppliers",
+    "description": "Companies you buy raw materials from, with contacts and payment terms.",
+    "tabs": {
+      "suppliers": "Suppliers",
+      "trash": "Trash"
+    },
+    "filterSuppliers": "Search suppliers...",
+    "noResults": "No results found."
+  },
+  "columns": {
+    "id": "ID",
+    "code": "Code",
+    "name": "Name",
+    "contact": "Contact",
+    "paymentTerms": "Payment terms",
+    "materials": "Materials",
+    "status": "Status",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "taxId": "Tax ID",
+    "contactPerson": "Contact person",
+    "note": "Note"
+  },
+  "primaryButtons": {
+    "addSupplier": "Add supplier"
+  },
+  "bulkActions": {
+    "deleteSelected": "Delete selected",
+    "entityName": "supplier"
+  },
+  "form": {
+    "saving": "Saving...",
+    "saveAndExit": "Save",
+    "updating": "Updating...",
+    "updateAndExit": "Update",
+    "active": "Active",
+    "createError": "Could not create the record.",
+    "updateError": "Could not update the record.",
+    "deleteError": "Could not delete the record.",
+    "restoreError": "Could not restore the record.",
+    "forceDeleteError": "Could not permanently delete the record.",
+    "addTitle": "New supplier",
+    "addDescription": "Create a new supplier card.",
+    "updateTitle": "Edit supplier",
+    "updateDescription": "Update this supplier.",
+    "name": "Company name",
+    "namePlaceholder": "Baku Metal Trading LLC",
+    "code": "Code",
+    "codeAutoHint": "The code is issued by the system on save.",
+    "codeLockedHint": "The code cannot be changed.",
+    "contactPerson": "Contact person",
+    "phone": "Phone",
+    "email": "Email",
+    "taxId": "Tax ID",
+    "address": "Address",
+    "paymentTermDays": "Payment term (days)",
+    "paymentTermHint": "0 = payment on delivery.",
+    "paymentTermsNote": "Payment note",
+    "note": "Note",
+    "invalidEmail": "Enter a valid email address."
+  },
+  "rowActions": {
+    "openMenu": "Open menu",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Delete",
+    "restore": "Restore",
+    "deletePermanently": "Delete permanently",
+    "deleteTitle": "Delete {{name}}?",
+    "deleteDescription1": "This will move the following item to the trash:",
+    "deletePermanentlyTitle": "Permanently delete {{name}}?",
+    "deletePermanentlyDescription1": "This will permanently delete:",
+    "deletePermanentlyDescription2": "This action cannot be undone.",
+    "restoreTitle": "Restore {{name}}?",
+    "restoreDescription1": "This will restore the following item from the trash:",
+    "details": "Details"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "Delete {{count}} items?",
+    "warningMessage1": "The selected items will be moved to the trash.",
+    "warningMessage2": "Confirm to continue.",
+    "confirmByTyping": "Type \"{{word}}\" to confirm:",
+    "confirmPlaceholder": "Type {{word}}",
+    "confirmError": "You must type \"{{word}}\" to confirm.",
+    "alertTitle": "Careful!",
+    "alertDescription": "This is a bulk operation.",
+    "deleting": "Deleting...",
+    "delete": "Delete"
+  },
+  "filters": {
+    "status": "Status",
+    "type": "Type"
+  },
+  "detail": {
+    "title": "Supplier details",
+    "description": "Supplier contact details and materials.",
+    "loading": "Loading...",
+    "notFound": "Not found",
+    "generalInfo": "General information",
+    "contactInfo": "Contact",
+    "paymentTerms": "Payment terms",
+    "paymentNote": "Payment note",
+    "materials": "Materials"
+  }
+}

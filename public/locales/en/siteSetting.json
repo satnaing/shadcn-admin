@@ -1,0 +1,101 @@
+{
+  "list": {
+    "title": "Site Settings",
+    "description": "Edit contact, social, and other site settings. New keys are added only via the database.",
+    "loadError": "Failed to load settings.",
+    "empty": "No settings found."
+  },
+  "groups": {
+    "contact": "Contact",
+    "contactDescription": "Phone, email, address, and business hours.",
+    "header": "Header",
+    "headerDescription": "Header call-to-action button label, link, and visibility.",
+    "company": "Company",
+    "companyDescription": "Company name and general information.",
+    "social": "Social Media",
+    "socialDescription": "Social media profile links.",
+    "seo": "SEO",
+    "seoDescription": "Default meta, Open Graph, Twitter, and indexing.",
+    "scripts": "Custom scripts",
+    "scriptsDescription": "HTML / scripts injected into the marketing site <head> and <body> (e.g. analytics, pixels).",
+    "cors": "CORS / API origins",
+    "corsDescription": "Extra browser Origins allowed to call the API (one URL per line). Built-in defaults always stay.",
+    "other": "Other",
+    "defaultDescription": "Edit setting values.",
+    "system": "System",
+    "systemDescription": "How deleting behaves. Even on permanent, modules that carry history — stock, sales, production — stay recoverable.",
+    "finance": "Finance",
+    "financeDescription": "Financial defaults such as the VAT rate.",
+    "invoice": "Invoice",
+    "invoiceDescription": "Invoice numbering, payment terms and footer text.",
+    "notifications": "Notifications",
+    "notificationsDescription": "Notification settings."
+  },
+  "fields": {
+    "contact.address": "Address",
+    "contact.phone": "Phone",
+    "contact.email": "Email",
+    "contact.hours": "Business hours",
+    "contact.whatsapp": "WhatsApp",
+    "header.cta.enabled": "CTA enabled",
+    "header.cta.route": "CTA route key",
+    "header.cta.url": "CTA URL",
+    "header.cta.target": "CTA link target",
+    "company.name": "Company name",
+    "social.linkedin": "LinkedIn",
+    "social.facebook": "Facebook",
+    "social.instagram": "Instagram",
+    "social.tiktok": "TikTok",
+    "social.twitter": "Twitter / X",
+    "seo.twitter_handle": "Twitter handle",
+    "seo.default_meta_title": "Default meta title",
+    "seo.default_meta_description": "Default meta description",
+    "seo.og_image": "Default OG image",
+    "seo.google_site_verification": "Google site verification",
+    "seo.robots_indexing": "Search indexing",
+    "cors.allowed_origins": "Allowed origins",
+    "scripts.head": "<head> scripts",
+    "scripts.body": "<body> scripts",
+    "system": {
+      "delete_mode": "Delete mode"
+    },
+    "company.tax_id": "Tax ID",
+    "company.address": "Address",
+    "company.phone": "Phone",
+    "company.email": "Email",
+    "company.bank_name": "Bank name",
+    "company.bank_account": "Account number (IBAN)",
+    "company.bank_code": "Bank code",
+    "finance.vat_rate": "VAT rate (%)",
+    "invoice.prefix": "Invoice prefix",
+    "invoice.next_number": "Next invoice number",
+    "invoice.default_due_days": "Payment term (days)",
+    "invoice.footer_note": "Invoice footer",
+    "system.delete_mode": "Delete mode"
+  },
+  "form": {
+    "valuePlaceholder": "Enter value",
+    "scriptsPlaceholder": "<script>...</script> or other HTML",
+    "ctaLabelTitle": "Header CTA label",
+    "ctaLabelDescription": "Button text per language. Only the languages enabled in Languages are shown.",
+    "ctaLabelField": "Button text",
+    "ctaContactPageHint": "The header CTA always opens the Contact page (Pages → Contact). Its URL follows that page’s locale slug automatically.",
+    "seoDefaultsTitle": "Default meta (per language)",
+    "seoDefaultsDescription": "Fallback title, description, and OG image used when a page has no SEO of its own. Twitter handle, Google verification, and indexing stay site-wide above.",
+    "seoDefaultMetaTitle": "Default meta title",
+    "seoDefaultMetaDescription": "Default meta description",
+    "seoDefaultOgImage": "Default OG image",
+    "saving": "Saving...",
+    "save": "Save changes",
+    "saveSuccess": "Settings saved successfully.",
+    "updateError": "An error occurred while updating settings."
+  },
+  "choices": {
+    "system": {
+      "delete_mode": {
+        "soft": "Move to trash (recoverable)",
+        "force": "Delete permanently"
+      }
+    }
+  }
+}

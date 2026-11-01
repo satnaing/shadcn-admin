@@ -1,0 +1,103 @@
+{
+  "list": {
+    "title": "Stock movements",
+    "description": "Every receipt and issue is recorded here. Stock on hand is calculated from these movements alone.",
+    "tabs": {
+      "movements": "Movements",
+      "lowStock": "Low stock"
+    },
+    "filterMovements": "Search by reference or note...",
+    "noResults": "No movements found."
+  },
+  "columns": {
+    "movedAt": "Date",
+    "type": "Type",
+    "material": "Material",
+    "quantity": "Quantity",
+    "reason": "Reason",
+    "reference": "Reference",
+    "cost": "Cost",
+    "batch": "Batch",
+    "note": "Not"
+  },
+  "types": {
+    "in": "In",
+    "out": "Out",
+    "adjustment": "Adjustment"
+  },
+  "filters": {
+    "type": "Type"
+  },
+  "primaryButtons": {
+    "stockIn": "Stock in",
+    "stockOut": "Stock out",
+    "adjustment": "Adjustment"
+  },
+  "form": {
+    "title": {
+      "in": "Stock in",
+      "out": "Stock out",
+      "adjustment": "Stock adjustment"
+    },
+    "description": {
+      "in": "Record material received from a supplier.",
+      "out": "Record material issued to production or written off.",
+      "adjustment": "Record the difference found during a stock take."
+    },
+    "material": "Material",
+    "materialPlaceholder": "Select a material",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "unitPlaceholder": "Select a unit",
+    "unitHint": "Stock is held in {{symbol}} — another unit is converted automatically.",
+    "adjustmentHint": "Positive to add, negative to remove.",
+    "reason": "Reason",
+    "reasonPlaceholder": "Select a reason",
+    "reasonRequired": "A reason is required when stock leaves.",
+    "movedAt": "Date",
+    "supplier": "Supplier",
+    "supplierPlaceholder": "Select a supplier",
+    "supplierRequired": "A purchase needs a supplier.",
+    "unitPrice": "Unit price",
+    "unitPriceHint": "Recording it adds a row to the price history automatically.",
+    "reference": "Document / invoice no.",
+    "referencePlaceholder": "INV-2026-001",
+    "location": "Location",
+    "locationPlaceholder": "Select a location",
+    "note": "Note",
+    "onHand": "On hand: {{quantity}} {{symbol}}",
+    "reorderPoint": "reorder at: {{quantity}} {{symbol}}",
+    "positive": "Quantity must be greater than zero.",
+    "notZero": "Quantity cannot be zero.",
+    "saving": "Recording...",
+    "save": "Record",
+    "batchSection": "Batch details",
+    "batchNumber": "Batch number",
+    "batchNumberPlaceholder": "Left blank the system issues one",
+    "batchNumberHint": "Reusing a number adds to the existing lot.",
+    "productionDate": "Production date",
+    "expiryDate": "Expiry date",
+    "expiryHint": "Fill in if known.",
+    "expiryAutoHint": "Left blank it is dated from the {{days}}-day shelf life.",
+    "fefoHint": "This material is batch tracked — the issue is split automatically, earliest expiry first."
+  },
+  "rowActions": {
+    "openMenu": "Open menu",
+    "reverse": "Reverse",
+    "reverseTitle": "Reverse movement #{{id}}?",
+    "reverseDescription": "The movement is not deleted — a mirror adjustment is appended and both stay in the history."
+  },
+  "lowStock": {
+    "title": "Materials needing an order",
+    "viewAll": "View all",
+    "loading": "Loading...",
+    "empty": "Every material is above its reorder point.",
+    "reorderAt": "reorder at: {{quantity}} {{symbol}}"
+  },
+  "toast": {
+    "recorded": "Movement recorded.",
+    "recordError": "Could not record the movement.",
+    "reversed": "Movement reversed.",
+    "reverseError": "Could not reverse the movement."
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "title": "Warehouse reports",
+  "description": "Movement, usage, value and waste — all computed from the movement ledger.",
+  "tabs": {
+    "movements": "Movement report",
+    "usage": "Usage",
+    "valuation": "Stock value",
+    "waste": "Waste",
+    "expiry": "Expiry"
+  },
+  "window": {
+    "from": "From",
+    "to": "To",
+    "lastDays": "Last {{days}} days"
+  },
+  "columns": {
+    "code": "Code",
+    "name": "Name",
+    "opening": "Opening",
+    "in": "In",
+    "out": "Out",
+    "closing": "Closing",
+    "used": "Used",
+    "movementCount": "Movements",
+    "onHand": "On hand",
+    "unitPrice": "Unit price",
+    "value": "Value",
+    "wasted": "Wasted",
+    "cost": "Cost",
+    "batch": "Batch",
+    "expiryDate": "Expires",
+    "daysLeft": "Days left"
+  },
+  "usage": {
+    "mostUsed": "Most used",
+    "leastUsed": "Least used"
+  },
+  "valuation": {
+    "totalValue": "Total stock value",
+    "noPrice": "No price",
+    "unpriced": "{{count}} materials have no price"
+  },
+  "waste": {
+    "totalCost": "Total waste cost",
+    "empty": "No waste recorded in this period."
+  },
+  "loading": "Loading...",
+  "empty": "No data for this period.",
+  "expiry": {
+    "window": "Window:",
+    "days": "{{days}} days",
+    "expired": "Expired",
+    "empty": "No lots expiring in this window."
+  }
+}

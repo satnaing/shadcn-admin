@@ -1,0 +1,128 @@
+{
+  "list": {
+    "title": "Satışlar",
+    "description": "Satış belgeleri. Taslak hiçbir şeyi hareket ettirmez — stoğu yalnızca tamamlama çeker.",
+    "add": "Yeni satış",
+    "empty": "Henüz satış yok."
+  },
+  "columns": {
+    "code": "Kod",
+    "date": "Tarih",
+    "customer": "Müşteri",
+    "seller": "Satıcı",
+    "total": "Tutar",
+    "profit": "Kâr",
+    "payment": "Ödeme",
+    "status": "Durum",
+    "due": "Kalan borç: {{amount}}"
+  },
+  "actions": {
+    "complete": "Tamamla",
+    "cancel": "İptal et",
+    "refund": "İade al",
+    "invoice": "Fatura kes",
+    "invoiceSuccess": "Fatura başarıyla oluşturuldu",
+    "viewInvoice": "Faturaya git"
+  },
+  "create": {
+    "title": "Yeni satış",
+    "description": "Sepeti doldurun. Belge taslak olarak oluşur — stok yalnızca tamamlandığında düşer.",
+    "save": "Taslak oluştur"
+  },
+  "form": {
+    "customer": "Müşteri",
+    "walkIn": "Perakende (isimsiz)",
+    "customerHint": "Perakende satışta boş bırakılabilir; toptanda müşteri seçilmelidir.",
+    "seller": "Satıcı",
+    "selectSeller": "Çalışan seçin",
+    "sellerHint": "Prim bordrosu ve satıcı bazlı rapor buna göre hesaplanır.",
+    "soldAt": "Tarih",
+    "paymentMethod": "Ödeme yöntemi",
+    "creditHint": "Vadeli satış, müşterinin kredi limitine göre denetlenir.",
+    "basketDiscount": "Genel indirim",
+    "paidAmount": "Ödenen tutar",
+    "amountDue": "Kalan borç: {{amount}}",
+    "note": "Not",
+    "cancel": "İptal"
+  },
+  "basket": {
+    "title": "Sepet",
+    "product": "Ürün",
+    "selectProduct": "Ürün seçin",
+    "quantity": "Miktar",
+    "unitPrice": "Birim fiyat",
+    "discount": "İndirim (%)",
+    "addLine": "Satır ekle",
+    "onHand": "Stok: {{quantity}} {{unit}}",
+    "shortWarning": "Stok yetersiz — {{shortfall}} eksik",
+    "saleType": "Satış türü",
+    "retail": "Perakende",
+    "wholesale": "Toptan",
+    "unit": "Birim",
+    "baseUnit": "Temel birim"
+  },
+  "totals": {
+    "subtotal": "Ara toplam",
+    "discount": "İndirim",
+    "tax": "KDV",
+    "total": "Genel toplam",
+    "estimate": "Tahmini toplam",
+    "taxHint": "KDV her ürün kartına göre sunucuda hesaplanır."
+  },
+  "complete": {
+    "title": "{{code}} tamamlansın mı?",
+    "description": "Bu adım mamul stoğunu düşürür ve tutarları dondurur.",
+    "stockHint": "Tüm satırlar önce denetlenir — bir ürün yetmezse satış bütünüyle reddedilir.",
+    "confirm": "Tamamla"
+  },
+  "refund": {
+    "title": "{{code}} için iade",
+    "description": "İade edilen miktar stoğa geri yazılır. Orijinal satış defterde kalır.",
+    "sold": "Satılan: {{quantity}} {{unit}}",
+    "alreadyReturned": "zaten iade edilen: {{quantity}}",
+    "returning": "İade edilen",
+    "max": "en fazla {{quantity}}",
+    "reason": "Sebep",
+    "reasonPlaceholder": "hasarlı, yanlış ürün...",
+    "confirm": "İadeyi onayla"
+  },
+  "messages": {
+    "completed": "Satış tamamlandı ve stok güncellendi.",
+    "refunded": "İade kaydedildi."
+  },
+  "errors": {
+    "create": "Satış oluşturulamadı.",
+    "update": "Güncellenemedi.",
+    "cancel": "İptal edilemedi.",
+    "invoice": "Fatura kesilemedi.",
+    "delete": "Silinemedi."
+  },
+  "detail": {
+    "title": "Satış detayları",
+    "description": "Satışın tüm bilgileri ve kalemleri.",
+    "loading": "Yükleniyor...",
+    "notFound": "Bulunamadı",
+    "generalInfo": "Genel bilgi",
+    "code": "Kod",
+    "customer": "Müşteri",
+    "seller": "Satıcı",
+    "soldAt": "Satış tarihi",
+    "invoice": "Fatura",
+    "paymentMethod": "Ödeme yöntemi",
+    "note": "Not",
+    "financialInfo": "Finansal",
+    "subtotal": "Ara toplam",
+    "discount": "İndirim",
+    "tax": "Vergi",
+    "total": "Toplam",
+    "paid": "Ödendi",
+    "amountDue": "Kalan",
+    "cost": "Maliyet",
+    "profit": "Kâr",
+    "items": "Satış kalemleri",
+    "product": "Ürün",
+    "quantity": "Miktar",
+    "unitPrice": "Birim fiyat",
+    "lineTotal": "Satır toplamı"
+  }
+}

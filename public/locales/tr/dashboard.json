@@ -1,0 +1,49 @@
+{
+  "title": "Kontrol paneli",
+  "description": "Sistemin genel durumu.",
+  "error": "İstatistikler yüklenemedi.",
+  "kpi": {
+    "users": "Kullanıcılar",
+    "materials": "Hammaddeler",
+    "suppliers": "Tedarikçiler",
+    "movements30d": "Hareket (30 gün)",
+    "lowStock": "Düşük stok",
+    "enabled": "{{count}} aktif",
+    "critical": "{{count}} kritik seviyede",
+    "salesAmount": "Satış tutarı (30 gün)",
+    "salesCount": "Satış sayısı (30 gün)",
+    "income": "Gelir (30 gün)",
+    "expense": "Gider (30 gün)",
+    "debtsPayable": "Ödenecek borçlar",
+    "debtsReceivable": "Alınacak borçlar",
+    "overdueDebts": "{{count}} vadesi geçmiş",
+    "pendingOrders": "Bekleyen siparişler",
+    "ordersAmount": "Sipariş tutarı (30 gün)",
+    "activeEmployees": "Aktif çalışanlar",
+    "totalEmployees": "Toplam: {{count}}",
+    "pendingLeaves": "Bekleyen izinler",
+    "productionOrders": "Üretim siparişleri (30 gün)",
+    "planned": "Planlanan",
+    "inProgress": "Devam eden",
+    "products": "Aktif ürünler",
+    "totalProducts": "Toplam: {{count}}",
+    "productLowStock": "Düşük stoklu ürünler"
+  },
+  "chart": {
+    "title": "Stok hareketleri",
+    "description": "Son 30 günde günlük giriş ve çıkış sayısı.",
+    "in": "Giriş",
+    "out": "Çıkış"
+  },
+  "quickLinks": {
+    "title": "Hızlı bağlantılar",
+    "description": "En çok kullanılan bölümler.",
+    "stockMovements": "Stok hareketleri",
+    "rawMaterials": "Hammaddeler",
+    "suppliers": "Tedarikçiler",
+    "locations": "Depo konumları",
+    "units": "Ölçü birimleri",
+    "reports": "Raporlar",
+    "users": "Kullanıcılar"
+  }
+}

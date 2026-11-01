@@ -1,0 +1,89 @@
+{
+  "general": {
+    "title": "Ümumi",
+    "dashboard": "İdarəetmə paneli"
+  },
+  "userManagement": {
+    "title": "İstifadəçi idarəetməsi",
+    "users": {
+      "title": "İstifadəçilər",
+      "all": "Bütün istifadəçilər",
+      "roles": "Rollar",
+      "permissions": "İcazələr"
+    }
+  },
+  "warehouse": {
+    "title": "Anbar",
+    "rawMaterials": "Xammallar",
+    "stockMovements": "Stok hərəkətləri",
+    "suppliers": "Tədarükçülər",
+    "locations": "Anbar yerləri",
+    "units": "Ölçü vahidləri",
+    "reports": "Hesabatlar",
+    "stock": "Stok",
+    "catalogue": "Kataloq",
+    "stockTakes": "İnventarizasiya"
+  },
+  "platform": {
+    "title": "Platforma parametrləri",
+    "modules": "Modullar",
+    "languages": "Dillər",
+    "siteSettings": "Sistem parametrləri",
+    "currencies": "Valyutalar",
+    "trash": "Silinənlər"
+  },
+  "production": {
+    "title": "İstehsalat",
+    "manufacturing": "İstehsal",
+    "orders": "İstehsal əmrləri",
+    "recipes": "Reçetələr"
+  },
+  "products": {
+    "title": "Məhsullar",
+    "catalogue": "Kataloq",
+    "all": "Məhsullar",
+    "categories": "Kateqoriyalar",
+    "stock": "Stok",
+    "productStock": "Hazır məhsul stoku",
+    "reports": "Hesabatlar"
+  },
+  "sales": {
+    "title": "Satış",
+    "desk": "Satış",
+    "all": "Satışlar",
+    "customers": "Müştərilər",
+    "insight": "Təhlil",
+    "reports": "Satış hesabatları"
+  },
+  "hr": {
+    "title": "İşçilər",
+    "people": "Kadrlar",
+    "employees": "İşçilər",
+    "departments": "Departamentlər",
+    "time": "Vaxt və maaş",
+    "attendance": "Davamiyyət",
+    "payroll": "Əməkhaqqı",
+    "performance": "Performans",
+    "goals": "Hədəflər",
+    "activityLog": "Fəaliyyət jurnalı",
+    "leave": "Məzuniyyət",
+    "announcements": "Elanlar"
+  },
+  "finance": {
+    "title": "Maliyyə",
+    "categories": "Kateqoriyalar",
+    "transactions": "Əməliyyatlar",
+    "debts": "Borclar",
+    "reports": "Hesabatlar",
+    "invoices": "Fakturalar",
+    "cashAccounts": "Kassa / Bank",
+    "paymentMethods": "Ödəmə üsulları"
+  },
+  "orders": {
+    "title": "Sifarişlər",
+    "all": "Sifarişlər",
+    "demand": "Gözləyən tələb",
+    "summary": "Məhsul Xülasəsi"
+  },
+  "trash": "Silinənlər"
+}

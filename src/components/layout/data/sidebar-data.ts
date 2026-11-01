@@ -1,203 +1,497 @@
 import {
-  Construction,
-  LayoutDashboard,
-  Monitor,
-  Bug,
-  ListTodo,
-  FileX,
-  HelpCircle,
-  Lock,
-  Bell,
-  Package,
-  Palette,
-  ServerOff,
-  Settings,
-  Wrench,
-  UserCog,
-  UserX,
-  Users,
-  MessagesSquare,
-  ShieldCheck,
-  AudioWaveform,
+  BarChart3,
+  Boxes,
+  Megaphone,
+  CalendarClock,
+  ClipboardList,
   Command,
-  GalleryVerticalEnd,
+  Factory,
+  Banknote,
+  BookOpen,
+  FileBarChart,
+  FileText,
+  Landmark,
+  HandCoins,
+  CreditCard,
+  Wallet,
+  Languages,
+  LayoutDashboard,
+  Package,
+  PackageOpen,
+  Receipt,
+  Settings2,
+  ShoppingCart,
+  SlidersHorizontal,
+  Trash2,
+  Target,
+  Users,
+  UsersRound,
 } from 'lucide-react'
-import { ClerkLogo } from '@/assets/clerk-logo'
+import { PERMISSIONS } from '@/shared/constant'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
   user: {
-    name: 'satnaing',
-    email: 'satnaingdev@gmail.com',
+    name: 'admin',
+    email: 'admin@gmail.com',
     avatar: '/avatars/shadcn.jpg',
   },
   teams: [
     {
-      name: 'Shadcn Admin',
+      name: 'Prielaz',
       logo: Command,
-      plan: 'Vite + ShadcnUI',
-    },
-    {
-      name: 'Acme Inc',
-      logo: GalleryVerticalEnd,
-      plan: 'Enterprise',
-    },
-    {
-      name: 'Acme Corp.',
-      logo: AudioWaveform,
-      plan: 'Startup',
+      plan: 'ERP',
     },
   ],
   navGroups: [
     {
-      title: 'General',
+      key: 'general',
+      title: 'general.title',
       items: [
         {
-          title: 'Dashboard',
+          key: 'dashboard',
+          title: 'general.dashboard',
           url: '/',
           icon: LayoutDashboard,
         },
+      ],
+    },
+
+    {
+      key: 'user-management',
+      title: 'userManagement.title',
+      items: [
         {
-          title: 'Tasks',
-          url: '/tasks',
-          icon: ListTodo,
-        },
-        {
-          title: 'Apps',
-          url: '/apps',
-          icon: Package,
-        },
-        {
-          title: 'Chats',
-          url: '/chats',
-          badge: '3',
-          icon: MessagesSquare,
-        },
-        {
-          title: 'Users',
-          url: '/users',
+          key: 'users',
+          title: 'userManagement.users.title',
           icon: Users,
-        },
-        {
-          title: 'Secured by Clerk',
-          icon: ClerkLogo,
           items: [
             {
-              title: 'Sign In',
-              url: '/clerk/sign-in',
+              key: 'users-all',
+              title: 'userManagement.users.all',
+              url: '/users',
+              permission: PERMISSIONS.USERS.INDEX,
             },
             {
-              title: 'Sign Up',
-              url: '/clerk/sign-up',
+              key: 'roles',
+              title: 'userManagement.users.roles',
+              url: '/role',
+              permission: PERMISSIONS.ROLES.INDEX,
             },
             {
-              title: 'User Management',
-              url: '/clerk/user-management',
+              key: 'permissions',
+              title: 'userManagement.users.permissions',
+              url: '/permission',
+              permission: PERMISSIONS.PERMISSIONS.INDEX,
             },
           ],
         },
       ],
     },
+
+    /*
+     * Warehouse module. Collapsible like the users group, and its permissions
+     * disappear from `auth/me` while the module is switched off, so the whole
+     * group hides itself.
+     */
     {
-      title: 'Pages',
+      key: 'warehouse',
+      title: 'warehouse.title',
       items: [
         {
-          title: 'Auth',
-          icon: ShieldCheck,
+          key: 'warehouse-stock',
+          title: 'warehouse.stock',
+          icon: Package,
           items: [
             {
-              title: 'Sign In',
-              url: '/sign-in',
+              key: 'stock-movements',
+              title: 'warehouse.stockMovements',
+              url: '/stock-movement',
+              permission: PERMISSIONS.STOCK_MOVEMENTS.INDEX,
             },
             {
-              title: 'Sign In (2 Col)',
-              url: '/sign-in-2',
+              key: 'raw-materials',
+              title: 'warehouse.rawMaterials',
+              url: '/raw-material',
+              permission: PERMISSIONS.RAW_MATERIALS.INDEX,
             },
             {
-              title: 'Sign Up',
-              url: '/sign-up',
+              key: 'stock-takes',
+              title: 'warehouse.stockTakes',
+              url: '/stock-take',
+              permission: PERMISSIONS.STOCK_TAKES.INDEX,
             },
             {
-              title: 'Forgot Password',
-              url: '/forgot-password',
-            },
-            {
-              title: 'OTP',
-              url: '/otp',
+              key: 'warehouse-reports',
+              title: 'warehouse.reports',
+              url: '/warehouse-report',
+              permission: PERMISSIONS.WAREHOUSE_REPORTS.VIEW,
             },
           ],
         },
         {
-          title: 'Errors',
-          icon: Bug,
+          key: 'warehouse-catalogue',
+          title: 'warehouse.catalogue',
+          icon: Boxes,
           items: [
             {
-              title: 'Unauthorized',
-              url: '/errors/unauthorized',
-              icon: Lock,
+              key: 'suppliers',
+              title: 'warehouse.suppliers',
+              url: '/supplier',
+              permission: PERMISSIONS.SUPPLIERS.INDEX,
             },
             {
-              title: 'Forbidden',
-              url: '/errors/forbidden',
-              icon: UserX,
+              key: 'warehouse-locations',
+              title: 'warehouse.locations',
+              url: '/warehouse-location',
+              permission: PERMISSIONS.WAREHOUSE_LOCATIONS.INDEX,
             },
             {
-              title: 'Not Found',
-              url: '/errors/not-found',
-              icon: FileX,
-            },
-            {
-              title: 'Internal Server Error',
-              url: '/errors/internal-server-error',
-              icon: ServerOff,
-            },
-            {
-              title: 'Maintenance Error',
-              url: '/errors/maintenance-error',
-              icon: Construction,
+              key: 'units',
+              title: 'warehouse.units',
+              url: '/unit',
+              permission: PERMISSIONS.UNITS.INDEX,
             },
           ],
         },
       ],
     },
+
+    /*
+     * Production module. Hides itself the same way the warehouse group does
+     * when the module is switched off.
+     */
     {
-      title: 'Other',
+      key: 'production',
+      title: 'production.title',
       items: [
         {
-          title: 'Settings',
-          icon: Settings,
+          key: 'production-manufacturing',
+          title: 'production.manufacturing',
+          icon: Factory,
           items: [
             {
-              title: 'Profile',
-              url: '/settings',
-              icon: UserCog,
+              key: 'production-orders',
+              title: 'production.orders',
+              url: '/production-order',
+              permission: PERMISSIONS.PRODUCTION_ORDERS.INDEX,
             },
             {
-              title: 'Account',
-              url: '/settings/account',
-              icon: Wrench,
+              key: 'recipes',
+              title: 'production.recipes',
+              url: '/recipe',
+              permission: PERMISSIONS.RECIPES.INDEX,
+            },
+          ],
+        },
+      ],
+    },
+
+    /*
+     * Products module. The finished-goods catalogue is its own module now:
+     * Production writes into its ledger and Sales draws from it, but a shop
+     * that only resells can run this with Production switched off.
+     */
+    {
+      key: 'products',
+      title: 'products.title',
+      items: [
+        {
+          key: 'products-catalogue',
+          title: 'products.catalogue',
+          icon: PackageOpen,
+          items: [
+            {
+              key: 'products-all',
+              title: 'products.all',
+              url: '/product',
+              permission: PERMISSIONS.PRODUCTS.INDEX,
             },
             {
-              title: 'Appearance',
-              url: '/settings/appearance',
-              icon: Palette,
-            },
-            {
-              title: 'Notifications',
-              url: '/settings/notifications',
-              icon: Bell,
-            },
-            {
-              title: 'Display',
-              url: '/settings/display',
-              icon: Monitor,
+              key: 'product-categories',
+              title: 'products.categories',
+              url: '/product-category',
+              permission: PERMISSIONS.PRODUCT_CATEGORIES.INDEX,
             },
           ],
         },
         {
-          title: 'Help Center',
-          url: '/help-center',
-          icon: HelpCircle,
+          key: 'products-stock',
+          title: 'products.stock',
+          icon: Boxes,
+          items: [
+            {
+              key: 'product-stock',
+              title: 'products.productStock',
+              url: '/product-stock',
+              permission: PERMISSIONS.PRODUCT_STOCK.INDEX,
+            },
+            {
+              key: 'product-reports',
+              title: 'products.reports',
+              url: '/product-report',
+              permission: PERMISSIONS.PRODUCT_REPORTS.VIEW,
+            },
+          ],
+        },
+      ],
+    },
+
+    /*
+     * Sales module. A seller who only holds the "own" permissions still gets
+     * these links; the API narrows what they contain.
+     */
+    {
+      key: 'sales',
+      title: 'sales.title',
+      items: [
+        {
+          key: 'sales-desk',
+          title: 'sales.desk',
+          icon: ShoppingCart,
+          items: [
+            {
+              key: 'sales-all',
+              title: 'sales.all',
+              url: '/sale',
+              permission: PERMISSIONS.SALES.INDEX,
+              anyPermission: [PERMISSIONS.SALES.INDEX, PERMISSIONS.SALES.VIEW_OWN],
+            },
+            {
+              key: 'customers',
+              title: 'sales.customers',
+              url: '/customer',
+              permission: PERMISSIONS.CUSTOMERS.INDEX,
+              anyPermission: [
+                PERMISSIONS.CUSTOMERS.INDEX,
+                PERMISSIONS.CUSTOMERS.VIEW_OWN,
+              ],
+            },
+          ],
+        },
+        {
+          key: 'sales-insight',
+          title: 'sales.insight',
+          icon: Receipt,
+          items: [
+            {
+              key: 'sales-reports',
+              title: 'sales.reports',
+              url: '/sales-report',
+              permission: PERMISSIONS.SALES_REPORTS.VIEW,
+            },
+          ],
+        },
+      ],
+    },
+
+
+    /*
+     * Orders module. Pre-orders / backorders that feed into Sales once
+     * stock is available from Production.
+     */
+    {
+      key: 'orders',
+      title: 'orders.title',
+      items: [
+        {
+          key: 'orders-all',
+          title: 'orders.all',
+          url: '/order',
+          icon: ClipboardList,
+          permission: PERMISSIONS.ORDERS.INDEX,
+          anyPermission: [PERMISSIONS.ORDERS.INDEX, PERMISSIONS.ORDERS.VIEW_OWN],
+        },
+        {
+          key: 'order-summary',
+          title: 'orders.summary',
+          url: '/order-summary',
+          icon: BarChart3,
+          permission: PERMISSIONS.ORDER_SUMMARY.VIEW,
+        },
+      ],
+    },
+
+    /*
+     * Employees (HR). The people the other modules point at.
+     */
+    {
+      key: 'hr',
+      title: 'hr.title',
+      items: [
+        {
+          key: 'hr-people',
+          title: 'hr.people',
+          icon: UsersRound,
+          items: [
+            {
+              key: 'employees',
+              title: 'hr.employees',
+              url: '/employee',
+              permission: PERMISSIONS.EMPLOYEES.INDEX,
+            },
+            {
+              key: 'departments',
+              title: 'hr.departments',
+              url: '/department',
+              permission: PERMISSIONS.DEPARTMENTS.INDEX,
+            },
+          ],
+        },
+        {
+          key: 'hr-time',
+          title: 'hr.time',
+          icon: CalendarClock,
+          items: [
+            {
+              key: 'attendance',
+              title: 'hr.attendance',
+              url: '/attendance',
+              permission: PERMISSIONS.ATTENDANCE.INDEX,
+            },
+            {
+              key: 'leave',
+              title: 'hr.leave',
+              url: '/leave',
+              permission: PERMISSIONS.LEAVE_REQUESTS.INDEX,
+            },
+            {
+              key: 'payroll',
+              title: 'hr.payroll',
+              url: '/payroll',
+              permission: PERMISSIONS.PAYROLL.VIEW,
+            },
+          ],
+        },
+        {
+          key: 'hr-performance',
+          title: 'hr.performance',
+          icon: Target,
+          items: [
+            {
+              key: 'employee-goals',
+              title: 'hr.goals',
+              url: '/employee-goal',
+              permission: PERMISSIONS.EMPLOYEE_GOALS.INDEX,
+            },
+            {
+              key: 'announcements',
+              title: 'hr.announcements',
+              url: '/announcement',
+              icon: Megaphone,
+              permission: PERMISSIONS.ANNOUNCEMENTS.INDEX,
+            },
+            {
+              key: 'activity-logs',
+              title: 'hr.activityLog',
+              url: '/activity-log',
+              permission: PERMISSIONS.ACTIVITY_LOGS.INDEX,
+            },
+          ],
+        },
+      ],
+    },
+
+
+    /*
+     * Finance module. Income/expense tracking, debts, payments, reports.
+     */
+    {
+      key: 'finance',
+      title: 'finance.title',
+      items: [
+        {
+          key: 'finance-categories',
+          title: 'finance.categories',
+          url: '/finance-category',
+          icon: BookOpen,
+          permission: PERMISSIONS.FINANCE_CATEGORIES.INDEX,
+        },
+        {
+          key: 'payment-methods',
+          title: 'finance.paymentMethods',
+          url: '/payment-method',
+          icon: CreditCard,
+          permission: PERMISSIONS.PAYMENT_METHODS.INDEX,
+        },
+                {
+          key: 'invoices',
+          title: 'finance.invoices',
+          url: '/invoice',
+          icon: FileText,
+          permission: PERMISSIONS.INVOICES.INDEX,
+        },
+        {
+          key: 'cash-accounts',
+          title: 'finance.cashAccounts',
+          url: '/cash-account',
+          icon: Landmark,
+          permission: PERMISSIONS.CASH_ACCOUNTS.INDEX,
+        },
+        {
+          key: 'finance-transactions',
+          title: 'finance.transactions',
+          url: '/finance-transaction',
+          icon: Wallet,
+          permission: PERMISSIONS.FINANCE_TRANSACTIONS.INDEX,
+        },
+        {
+          key: 'debts',
+          title: 'finance.debts',
+          url: '/debt',
+          icon: HandCoins,
+          permission: PERMISSIONS.DEBTS.INDEX,
+        },
+        {
+          key: 'finance-reports',
+          title: 'finance.reports',
+          url: '/finance-report',
+          icon: FileBarChart,
+          permission: PERMISSIONS.FINANCE_REPORTS.INDEX,
+        },
+      ],
+    },
+
+    {
+      key: 'platform',
+      title: 'platform.title',
+      items: [
+        {
+          key: 'currencies',
+          title: 'platform.currencies',
+          url: '/currency',
+          icon: Banknote,
+          permission: PERMISSIONS.CURRENCIES.INDEX,
+        },
+        {
+          key: 'modules',
+          title: 'platform.modules',
+          url: '/module',
+          icon: Settings2,
+          permission: PERMISSIONS.MODULES.INDEX,
+        },
+        {
+          key: 'languages',
+          title: 'platform.languages',
+          url: '/language',
+          icon: Languages,
+          permission: PERMISSIONS.LANGUAGES.INDEX,
+        },
+        {
+          key: 'site-settings',
+          title: 'platform.siteSettings',
+          url: '/setting',
+          icon: SlidersHorizontal,
+          permission: PERMISSIONS.SETTINGS.INDEX,
+        },
+        {
+          key: 'trash',
+          title: 'platform.trash',
+          url: '/trash',
+          icon: Trash2,
+          // Any module's trash permission is enough to open the section; the
+          // page itself only draws the tabs the user may actually read.
+          permission: PERMISSIONS.SETTINGS.TRASH,
         },
       ],
     },

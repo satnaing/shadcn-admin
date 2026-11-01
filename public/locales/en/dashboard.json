@@ -1,0 +1,49 @@
+{
+  "title": "Dashboard",
+  "description": "Overall system status.",
+  "error": "Could not load the statistics.",
+  "kpi": {
+    "users": "Users",
+    "materials": "Raw materials",
+    "suppliers": "Suppliers",
+    "movements30d": "Movements (30d)",
+    "lowStock": "Low stock",
+    "enabled": "{{count}} enabled",
+    "critical": "{{count}} at critical level",
+    "salesAmount": "Sales amount (30d)",
+    "salesCount": "Sales count (30d)",
+    "income": "Income (30d)",
+    "expense": "Expense (30d)",
+    "debtsPayable": "Debts payable",
+    "debtsReceivable": "Debts receivable",
+    "overdueDebts": "{{count}} overdue",
+    "pendingOrders": "Pending orders",
+    "ordersAmount": "Orders amount (30d)",
+    "activeEmployees": "Active employees",
+    "totalEmployees": "Total: {{count}}",
+    "pendingLeaves": "Pending leaves",
+    "productionOrders": "Production orders (30d)",
+    "planned": "Planned",
+    "inProgress": "In progress",
+    "products": "Active products",
+    "totalProducts": "Total: {{count}}",
+    "productLowStock": "Low stock products"
+  },
+  "chart": {
+    "title": "Stock movements",
+    "description": "Daily receipts and issues over the last 30 days.",
+    "in": "In",
+    "out": "Out"
+  },
+  "quickLinks": {
+    "title": "Quick links",
+    "description": "The sections you use most.",
+    "stockMovements": "Stock movements",
+    "rawMaterials": "Raw materials",
+    "suppliers": "Suppliers",
+    "locations": "Locations",
+    "units": "Units of measure",
+    "reports": "Reports",
+    "users": "Users"
+  }
+}

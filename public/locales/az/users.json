@@ -1,0 +1,100 @@
+{
+  "list": {
+    "title": "İstifadəçi Siyahısı",
+    "description": "İstifadəçilərinizi və rollarını buradan idarə edin.",
+    "filterPlaceholder": "İstifadəçiləri filtrlə...",
+    "noResults": "Nəticə tapılmadı."
+  },
+  "tabs": {
+    "users": "İstifadəçilər",
+    "trash": "Zibil qutusu"
+  },
+  "primaryButtons": {
+    "addUser": "İstifadəçi Əlavə Et"
+  },
+  "form": {
+    "addTitle": "İstifadəçi Əlavə Et",
+    "updateTitle": "İstifadəçini Yenilə",
+    "addDescription": "Yeni istifadəçi yaratmaq üçün formanı doldurun.",
+    "updateDescription": "İstifadəçi məlumatlarını redaktə edin və yadda saxlayın.",
+    "fullName": "Tam Ad",
+    "fullNamePlaceholder": "Tam adı daxil edin",
+    "email": "E-poçt",
+    "emailPlaceholder": "E-poçtu daxil edin",
+    "password": "Şifrə",
+    "passwordPlaceholder": "Şifrəni daxil edin",
+    "newPasswordPlaceholder": "Yeni şifrəni daxil edin",
+    "passwordOptionalHint": "Şifrəni dəyişmək istəmirsinizsə boş buraxın.",
+    "confirmPassword": "Şifrəni Təsdiqləyin",
+    "confirmPasswordPlaceholder": "Şifrəni təsdiqləyin",
+    "roles": "Rollar",
+    "roleAccess": "rol girişi",
+    "saving": "Yadda saxlanılır...",
+    "saveAndExit": "Yadda saxla və çıx",
+    "updating": "Yenilənir...",
+    "updateAndExit": "Yenilə və çıx",
+    "createError": "İstifadəçi yaradılarkən xəta baş verdi.",
+    "updateError": "İstifadəçi yenilənərkən xəta baş verdi.",
+    "deleteError": "İstifadəçi silinərkən xəta baş verdi.",
+    "restoreError": "İstifadəçi bərpa edilərkən xəta baş verdi.",
+    "forceDeleteError": "İstifadəçi daimi silinərkən xəta baş verdi."
+  },
+  "columns": {
+    "id": "ID",
+    "selectAll": "Hamısını seç",
+    "selectRow": "Satırı seç",
+    "name": "Ad",
+    "email": "E-poçt",
+    "status": "Status",
+    "role": "Rol",
+    "createdAt": "Yaradılma Tarixi"
+  },
+  "rowActions": {
+    "openMenu": "Menyunu aç",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "deletePermanently": "Həmişəlik sil",
+    "restore": "Bərpa et",
+    "deletePermanentlyTitle": "Bu istifadəçini sil: {{name}} ?",
+    "deletePermanentlyDescription1": "Siz <strong>{{name}}</strong> adlı istifadəçini həmişəlik silmək üzrəsiniz.",
+    "deletePermanentlyDescription2": "Bu əməliyyat geri qaytarıla bilməz.",
+    "restoreTitle": "Bu istifadəçini bərpa et: {{name}} ?",
+    "restoreDescription": "Siz <strong>{{name}}</strong> istifadəçisini bərpa etmək istədiyinizdən əminsiniz?"
+  },
+  "deleteDialog": {
+    "title": "İstifadəçini Sil",
+    "description": "<span class=\"font-bold\">{{name}}</span> adlı istifadəçini silmək istədiyinizdən əminsiniz?<br />Bu əməliyyat <span class=\"font-bold\">{{roles}}</span> rollu istifadəçini sistemdən həmişəlik siləcək. Bu geri qaytarıla bilməz.",
+    "usernameLabel": "İstifadəçi adı:",
+    "confirmPlaceholder": "Silinməni təsdiqləmək üçün istifadəçi adını daxil edin.",
+    "warningTitle": "Xəbərdarlıq!",
+    "warningDescription": "Zəhmət olmasa diqqətli olun, bu əməliyyat geri qaytarıla bilməz.",
+    "deletingText": "Silinir...",
+    "confirmText": "Sil"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle_one": "{{count}} istifadəçini sil",
+    "deleteTitle_other": "{{count}} istifadəçini sil",
+    "warningMessage1": "Seçilmiş istifadəçiləri silmək istədiyinizdən əminsiniz?",
+    "warningMessage2": "Bu əməliyyat geri qaytarıla bilməz.",
+    "confirmByTyping": "\"{{word}}\" yazaraq təsdiqləyin:",
+    "confirmPlaceholder": "Təsdiqləmək üçün \"{{word}}\" yazın.",
+    "confirmError": "Təsdiqləmək üçün zəhmət olmasa \"{{word}}\" yazın.",
+    "alertTitle": "Xəbərdarlıq!",
+    "alertDescription": "Zəhmət olmasa diqqətli olun, bu əməliyyat geri qaytarıla bilməz.",
+    "deleting": "Silinir…",
+    "delete": "Sil"
+  },
+  "bulkActions": {
+    "entityName": "istifadəçi",
+    "deleteSelected": "Seçilmiş istifadəçiləri sil"
+  },
+  "validation": {
+    "nameRequired": "Tam ad tələb olunur",
+    "emailInvalid": "Düzgün e-poçt ünvanı daxil edin",
+    "roleRequired": "Ən azı bir rol seçilməlidir.",
+    "passwordMin": "Şifrə ən azı 8 simvol olmalıdır",
+    "passwordUppercase": "Şifrədə ən azı bir böyük hərf olmalıdır",
+    "passwordNumber": "Şifrədə ən azı bir rəqəm olmalıdır",
+    "passwordMismatch": "Şifrələr uyğun gəlmir"
+  }
+}

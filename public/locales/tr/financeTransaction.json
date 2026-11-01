@@ -1,0 +1,60 @@
+{
+  "title": "Finans İşlemleri",
+  "description": "Tüm gelir ve gider işlemleri",
+  "table": {
+    "date": "Tarih",
+    "type": "Tür",
+    "category": "Kategori",
+    "amount": "Tutar",
+    "description": "Açıklama",
+    "source": "Kaynak",
+    "actions": "İşlemler"
+  },
+  "type": {
+    "income": "Gelir",
+    "expense": "Gider",
+    "all": "Tümü"
+  },
+  "dialog": {
+    "createTitle": "Yeni işlem",
+    "editTitle": "İşlemi düzenle"
+  },
+  "form": {
+    "type": "Tür",
+    "category": "Kategori",
+    "amount": "Tutar",
+    "date": "Tarih",
+    "description": "Açıklama"
+  },
+  "delete": {
+    "title": "İşlemi sil",
+    "description": "Bu işlemi silmek istediğinize emin misiniz?"
+  },
+  "actions": {
+    "create": "Yeni işlem",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "save": "Kaydet",
+    "cancel": "İptal"
+  },
+  "source": {
+    "manual": "Manuel",
+    "satis": "Satış",
+    "anbar": "Depo",
+    "isciler": "İK",
+    "production": "Üretim",
+    "mehsullar": "Ürünler",
+    "sifaris": "Siparişler",
+    "maliyye": "Finans",
+    "sales": "Satış",
+    "warehouse": "Depo",
+    "hr": "İnsan Kaynakları",
+    "system": "Sistem",
+    "orders": "Siparişler"
+  },
+  "toast": {
+    "created": "İşlem oluşturuldu",
+    "updated": "İşlem güncellendi",
+    "deleted": "İşlem silindi"
+  }
+}

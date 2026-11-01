@@ -1,0 +1,138 @@
+{
+  "teamSwitcher": {
+    "subtitle": "Management Admin"
+  },
+  "profileDropdown": {
+    "signOut": "Sign out"
+  },
+  "pagination": {
+    "pageOf": "Page {{current}} of {{total}}",
+    "rowsPerPage": "Rows per page",
+    "goToFirstPage": "Go to first page",
+    "goToPreviousPage": "Go to previous page",
+    "goToNextPage": "Go to next page",
+    "goToLastPage": "Go to last page",
+    "goToPage": "Go to page {{page}}"
+  },
+  "viewOptions": {
+    "view": "View",
+    "toggleColumns": "Toggle columns"
+  },
+  "themeColor": "Theme Color",
+  "localeSwitcher": {
+    "toggle": "Change language"
+  },
+  "themeSwitch": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "form": {
+    "backToList": "Back to list"
+  },
+  "contentTheme": {
+    "label": "Theme",
+    "placeholder": "Select theme",
+    "none": "None",
+    "options": {
+      "tangerine": "Tangerine",
+      "lime": "Lime",
+      "cobalt": "Cobalt",
+      "bubblegum": "Bubblegum",
+      "sun": "Sun",
+      "mint": "Mint",
+      "grape": "Grape"
+    }
+  },
+  "slug": {
+    "autoHint": "Filled in from the title of this locale. Edit it to keep your own URL.",
+    "autoHintEnglish": "Generated from the English title. Same URL slug is used for every language.",
+    "englishOnly": "Same as the English slug (URLs are not translated)."
+  },
+  "seo": {
+    "title": "SEO",
+    "description": "Search and social metadata for this entry.",
+    "metaTitle": "Meta title",
+    "metaTitlePlaceholder": "Optional meta title",
+    "metaDescription": "Meta description",
+    "metaDescriptionPlaceholder": "Optional meta description",
+    "ogImage": "OG image",
+    "ogImagePlaceholder": "Optional image URL"
+  },
+  "faqPageKey": {
+    "label": "Page",
+    "labelMulti": "Show on pages",
+    "helpMulti": "Select every page where this FAQ should appear (FAQ page = Global, Home, Services, …).",
+    "required": "Select at least one page",
+    "placeholder": "Select page",
+    "options": {
+      "global": "FAQ page (global)",
+      "home": "Home",
+      "services": "Services",
+      "projects": "Projects",
+      "portfolio": "Portfolio",
+      "blog": "Blog",
+      "about": "About",
+      "contact": "Contact"
+    }
+  },
+  "status": {
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "region": {
+      "active": "Active",
+      "soon": "Coming Soon"
+    }
+  },
+  "filters": {
+    "status": "Status",
+    "pageKey": "Page"
+  },
+  "reorder": "Reorder",
+  "table": {
+    "renderError": "Something went wrong while rendering this table. Please refresh and try again."
+  },
+  "validation": {
+    "nameRequired": "Name is required",
+    "titleRequired": "Title is required",
+    "contentRequired": "Content is required",
+    "descriptionRequired": "Description is required",
+    "slugRequired": "Slug is required",
+    "labelRequired": "Label is required",
+    "valueRequired": "Value is required",
+    "iconRequired": "Icon is required",
+    "colorRequired": "Color is required",
+    "questionRequired": "Question is required",
+    "answerRequired": "Answer is required",
+    "excerptRequired": "Excerpt is required",
+    "cityRequired": "City is required",
+    "keyRequired": "Key is required",
+    "badgeRequired": "Badge is required",
+    "validUntilRequired": "Valid until is required",
+    "heroBadgeRequired": "Hero badge is required",
+    "heroTitleRequired": "Hero title is required",
+    "heroDescriptionRequired": "Hero description is required",
+    "ctaTitleRequired": "CTA title is required",
+    "ctaDescriptionRequired": "CTA description is required",
+    "joinButtonRequired": "Join button is required",
+    "suffixRequired": "Suffix is required",
+    "guardNameRequired": "Guard name is required",
+    "invalidImageUrl": "Please enter a valid image url",
+    "invalidUrl": "Must be a valid URL",
+    "slugKebab": "Slug must be kebab-case (lowercase letters, numbers, hyphens)",
+    "fieldRequired": "This field is required"
+  },
+  "footer": {
+    "copyright": "© {{year}} {{company}}. All rights reserved.",
+    "version": "v{{version}}"
+  },
+  "excel": {
+    "export": "Dışa Aktar",
+    "import": "İçe Aktar",
+    "exportSuccess": "Veriler başarıyla dışa aktarıldı",
+    "importSuccess": "Veriler başarıyla içe aktarıldı",
+    "exportError": "Dışa aktarma sırasında hata oluştu",
+    "importError": "İçe aktarma sırasında hata oluştu"
+  }
+}

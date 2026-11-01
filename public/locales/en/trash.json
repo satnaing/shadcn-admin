@@ -1,0 +1,47 @@
+{
+  "title": "Trash",
+  "description": "Deleted records. Restore them or remove them for good.",
+  "loading": "Loading...",
+  "empty": "Nothing has been deleted.",
+  "noModules": "You do not have permission to view any trash.",
+  "search": "Search...",
+  "previous": "Previous",
+  "next": "Next",
+  "columns": {
+    "record": "Record",
+    "deletedAt": "Deleted at",
+    "actions": "Actions"
+  },
+  "actions": {
+    "restore": "Restore",
+    "forceDelete": "Delete permanently"
+  },
+  "purgeDialog": {
+    "title": "Delete permanently?",
+    "description": "\"{{name}}\" will be removed from the database. This cannot be undone."
+  },
+  "forceMode": {
+    "title": "Trash is turned off",
+    "description": "Settings has the delete mode set to permanent, so deleted records are not kept. Modules that carry history stay recoverable regardless."
+  },
+  "modules": {
+    "customers": "Customers",
+    "suppliers": "Suppliers",
+    "employees": "Employees",
+    "products": "Products",
+    "rawMaterials": "Raw materials",
+    "units": "Units",
+    "warehouseLocations": "Warehouse locations",
+    "currencies": "Currencies",
+    "paymentMethods": "Payment methods",
+    "financeCategories": "Finance categories",
+    "financeTransactions": "Finance transactions",
+    "debts": "Debts",
+    "invoices": "Invoices",
+    "languages": "Languages",
+    "users": "Users",
+    "roles": "Roles",
+    "permissions": "Permissions",
+    "settings": "Settings"
+  }
+}

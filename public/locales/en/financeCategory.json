@@ -1,0 +1,52 @@
+{
+  "title": "Finance Categories",
+  "description": "Manage income and expense categories",
+  "table": {
+    "name": "Name",
+    "type": "Type",
+    "isSystem": "System",
+    "icon": "Icon",
+    "sort": "Sort",
+    "actions": "Actions"
+  },
+  "type": {
+    "income": "Income",
+    "expense": "Expense",
+    "all": "All"
+  },
+  "dialog": {
+    "createTitle": "New category",
+    "editTitle": "Edit category"
+  },
+  "form": {
+    "name": "Name",
+    "type": "Type",
+    "icon": "Icon",
+    "sort": "Sort order"
+  },
+  "delete": {
+    "title": "Delete category",
+    "description": "Are you sure you want to delete this category?"
+  },
+  "actions": {
+    "create": "New category",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "system": {
+    "yes": "System",
+    "no": "Custom"
+  },
+  "toast": {
+    "created": "Category created",
+    "updated": "Category updated",
+    "deleted": "Category deleted"
+  },
+  "loading": "Loading...",
+  "empty": "No categories found.",
+  "filter": {
+    "all": "All"
+  }
+}

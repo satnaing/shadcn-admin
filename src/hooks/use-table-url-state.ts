@@ -1,13 +1,15 @@
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import type {
   ColumnFiltersState,
   OnChangeFn,
   PaginationState,
+  SortingState,
 } from '@tanstack/react-table'
 
 type SearchRecord = Record<string, unknown>
 
 export type NavigateFn = (opts: {
+  to?: string
   search:
     | true
     | SearchRecord
@@ -24,6 +26,12 @@ type UseTableUrlStateParams = {
     defaultPage?: number
     defaultPageSize?: number
   }
+  sorting?: {
+    sortKey?: string
+    orderKey?: string
+    defaultSort?: string
+    defaultOrder?: 'asc' | 'desc'
+  }
   globalFilter?: {
     enabled?: boolean
     key?: string
@@ -34,7 +42,6 @@ type UseTableUrlStateParams = {
         columnId: string
         searchKey: string
         type?: 'string'
-        // Optional transformers for custom types
         serialize?: (value: unknown) => unknown
         deserialize?: (value: unknown) => unknown
       }
@@ -58,6 +65,9 @@ type UseTableUrlStateReturn = {
   // Pagination
   pagination: PaginationState
   onPaginationChange: OnChangeFn<PaginationState>
+  // Sorting
+  sorting: SortingState
+  onSortingChange: OnChangeFn<SortingState>
   // Helpers
   ensurePageInRange: (
     pageCount: number,
@@ -72,6 +82,7 @@ export function useTableUrlState(
     search,
     navigate,
     pagination: paginationCfg,
+    sorting: sortingCfg,
     globalFilter: globalFilterCfg,
     columnFilters: columnFiltersCfg = [],
   } = params
@@ -80,6 +91,11 @@ export function useTableUrlState(
   const pageSizeKey = paginationCfg?.pageSizeKey ?? ('pageSize' as string)
   const defaultPage = paginationCfg?.defaultPage ?? 1
   const defaultPageSize = paginationCfg?.defaultPageSize ?? 10
+
+  const sortKey = sortingCfg?.sortKey ?? ('sort' as string)
+  const orderKey = sortingCfg?.orderKey ?? ('order' as string)
+  const defaultSort = sortingCfg?.defaultSort ?? 'id'
+  const defaultOrder = sortingCfg?.defaultOrder ?? 'desc'
 
   const globalFilterKey = globalFilterCfg?.key ?? ('filter' as string)
   const globalFilterEnabled = globalFilterCfg?.enabled ?? true
@@ -119,16 +135,46 @@ export function useTableUrlState(
     return { pageIndex: Math.max(0, pageNum - 1), pageSize: pageSizeNum }
   }, [search, pageKey, pageSizeKey, defaultPage, defaultPageSize])
 
-  const onPaginationChange: OnChangeFn<PaginationState> = (updater) => {
-    const next = typeof updater === 'function' ? updater(pagination) : updater
-    const nextPage = next.pageIndex + 1
-    const nextPageSize = next.pageSize
+  const onPaginationChange: OnChangeFn<PaginationState> = useCallback(
+    (updater) => {
+      const next = typeof updater === 'function' ? updater(pagination) : updater
+      const nextPage = next.pageIndex + 1
+      const nextPageSize = next.pageSize
+
+      navigate({
+        to: '.',
+        search: (prev) => ({
+          ...(prev as SearchRecord),
+          [pageKey]: nextPage <= defaultPage ? undefined : nextPage,
+          [pageSizeKey]:
+            nextPageSize === defaultPageSize ? undefined : nextPageSize,
+        }),
+      })
+    },
+    [defaultPage, defaultPageSize, navigate, pageKey, pageSizeKey, pagination]
+  )
+
+  const sorting: SortingState = useMemo(() => {
+    const rawSort = (search as SearchRecord)[sortKey]
+    const rawOrder = (search as SearchRecord)[orderKey]
+    const sortId = typeof rawSort === 'string' ? rawSort : defaultSort
+    const isDesc =
+      (typeof rawOrder === 'string' ? rawOrder : defaultOrder) === 'desc'
+    return [{ id: sortId, desc: isDesc }]
+  }, [search, sortKey, orderKey, defaultSort, defaultOrder])
+
+  const onSortingChange: OnChangeFn<SortingState> = (updater) => {
+    const next = typeof updater === 'function' ? updater(sorting) : updater
+    const item = next[0]
+    if (!item) return
+    const nextOrder = item.desc ? 'desc' : 'asc'
     navigate({
+      to: '.',
       search: (prev) => ({
         ...(prev as SearchRecord),
-        [pageKey]: nextPage <= defaultPage ? undefined : nextPage,
-        [pageSizeKey]:
-          nextPageSize === defaultPageSize ? undefined : nextPageSize,
+        [sortKey]: item.id === defaultSort ? undefined : item.id,
+        [orderKey]: nextOrder === defaultOrder ? undefined : nextOrder,
+        [pageKey]: undefined,
       }),
     })
   }
@@ -149,6 +195,7 @@ export function useTableUrlState(
           const value = trimGlobal ? next.trim() : next
           setGlobalFilter(value)
           navigate({
+            to: '.',
             search: (prev) => ({
               ...(prev as SearchRecord),
               [pageKey]: undefined,
@@ -182,6 +229,7 @@ export function useTableUrlState(
     }
 
     navigate({
+      to: '.',
       search: (prev) => ({
         ...(prev as SearchRecord),
         [pageKey]: undefined,
@@ -190,22 +238,28 @@ export function useTableUrlState(
     })
   }
 
-  const ensurePageInRange = (
-    pageCount: number,
-    opts: { resetTo?: 'first' | 'last' } = { resetTo: 'first' }
-  ) => {
-    const currentPage = (search as SearchRecord)[pageKey]
-    const pageNum = typeof currentPage === 'number' ? currentPage : defaultPage
-    if (pageCount > 0 && pageNum > pageCount) {
-      navigate({
-        replace: true,
-        search: (prev) => ({
-          ...(prev as SearchRecord),
-          [pageKey]: opts.resetTo === 'last' ? pageCount : undefined,
-        }),
-      })
-    }
-  }
+  const ensurePageInRange = useCallback(
+    (
+      pageCount: number,
+      opts: { resetTo?: 'first' | 'last' } = { resetTo: 'first' }
+    ) => {
+      const currentPage = (search as SearchRecord)[pageKey]
+      const pageNum =
+        typeof currentPage === 'number' ? currentPage : defaultPage
+
+      if (pageCount > 0 && pageNum > pageCount) {
+        navigate({
+          to: '.',
+          replace: true,
+          search: (prev) => ({
+            ...(prev as SearchRecord),
+            [pageKey]: opts.resetTo === 'last' ? pageCount : undefined,
+          }),
+        })
+      }
+    },
+    [defaultPage, navigate, pageKey, search]
+  )
 
   return {
     globalFilter: globalFilterEnabled ? (globalFilter ?? '') : undefined,
@@ -214,6 +268,8 @@ export function useTableUrlState(
     onColumnFiltersChange,
     pagination,
     onPaginationChange,
+    sorting,
+    onSortingChange,
     ensurePageInRange,
   }
 }

@@ -1,0 +1,60 @@
+{
+  "title": "Maliyyə Əməliyyatları",
+  "description": "Bütün gəlir və xərc əməliyyatları",
+  "table": {
+    "date": "Tarix",
+    "type": "Növ",
+    "category": "Kateqoriya",
+    "amount": "Məbləğ",
+    "description": "Təsvir",
+    "source": "Mənbə",
+    "actions": "Əməliyyatlar"
+  },
+  "type": {
+    "income": "Gəlir",
+    "expense": "Xərc",
+    "all": "Hamısı"
+  },
+  "dialog": {
+    "createTitle": "Yeni əməliyyat",
+    "editTitle": "Əməliyyatı redaktə et"
+  },
+  "form": {
+    "type": "Növ",
+    "category": "Kateqoriya",
+    "amount": "Məbləğ",
+    "date": "Tarix",
+    "description": "Təsvir"
+  },
+  "delete": {
+    "title": "Əməliyyatı sil",
+    "description": "Bu əməliyyatı silmək istədiyinizə əminsiniz?"
+  },
+  "actions": {
+    "create": "Yeni əməliyyat",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "save": "Yadda saxla",
+    "cancel": "Ləğv et"
+  },
+  "source": {
+    "manual": "Əl ilə",
+    "satis": "Satış",
+    "anbar": "Anbar",
+    "isciler": "İşçilər",
+    "production": "İstehsalat",
+    "mehsullar": "Məhsullar",
+    "sifaris": "Sifarişlər",
+    "maliyye": "Maliyyə",
+    "sales": "Satış",
+    "warehouse": "Anbar",
+    "hr": "İnsan Resursları",
+    "system": "Sistem",
+    "orders": "Sifarişlər"
+  },
+  "toast": {
+    "created": "Əməliyyat yaradıldı",
+    "updated": "Əməliyyat yeniləndi",
+    "deleted": "Əməliyyat silindi"
+  }
+}

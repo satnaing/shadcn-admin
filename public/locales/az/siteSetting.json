@@ -1,0 +1,101 @@
+{
+  "list": {
+    "title": "Sayt parametrləri",
+    "description": "Saytın əlaqə, sosial və digər parametrlərini redaktə edin. Yeni açar yalnız bazadan əlavə olunur.",
+    "loadError": "Parametrlər yüklənərkən xəta baş verdi.",
+    "empty": "Heç bir parametr tapılmadı."
+  },
+  "groups": {
+    "contact": "Əlaqə",
+    "contactDescription": "Telefon, email, ünvan və iş saatları.",
+    "header": "Başlıq",
+    "headerDescription": "Başlıq CTA düyməsinin mətni, linki və görünürlüyü.",
+    "company": "Şirkət",
+    "companyDescription": "Şirkət adı və ümumi məlumatlar.",
+    "social": "Sosial şəbəkələr",
+    "socialDescription": "Sosial media linkləri.",
+    "seo": "SEO",
+    "seoDescription": "Defolt meta, Open Graph, Twitter və indeksləmə.",
+    "scripts": "Custom skriptlər",
+    "scriptsDescription": "Marketinq saytının <head> və <body> hissəsinə əlavə olunan HTML / skriptlər (məs. analytics, pixel).",
+    "cors": "CORS / API origin-lər",
+    "corsDescription": "API-yə brauzerdən müraciət edə bilən əlavə Origin-lər (hər sətirdə bir URL). Built-in default-lar həmişə qalır.",
+    "other": "Digər",
+    "defaultDescription": "Parametr dəyərlərini redaktə edin.",
+    "system": "Sistem",
+    "systemDescription": "Silmənin necə davranacağı. \"Həmişəlik\" seçilsə belə, anbar, satış və istehsal kimi tarixçə daşıyan modullar bərpa oluna bilən qalır.",
+    "finance": "Maliyyə",
+    "financeDescription": "Vergi dərəcəsi kimi maliyyə defoltları.",
+    "invoice": "Faktura",
+    "invoiceDescription": "Faktura nömrələnməsi, ödəniş müddəti və altlıq mətni.",
+    "notifications": "Bildirişlər",
+    "notificationsDescription": "Bildiriş parametrləri."
+  },
+  "fields": {
+    "contact.address": "Ünvan",
+    "contact.phone": "Telefon",
+    "contact.email": "Email",
+    "contact.hours": "İş saatları",
+    "contact.whatsapp": "WhatsApp",
+    "header.cta.enabled": "CTA aktiv",
+    "header.cta.route": "CTA route açarı",
+    "header.cta.url": "CTA URL",
+    "header.cta.target": "CTA link target",
+    "company.name": "Şirkət adı",
+    "social.linkedin": "LinkedIn",
+    "social.facebook": "Facebook",
+    "social.instagram": "Instagram",
+    "social.tiktok": "TikTok",
+    "social.twitter": "Twitter / X",
+    "seo.twitter_handle": "Twitter handle",
+    "seo.default_meta_title": "Defolt meta title",
+    "seo.default_meta_description": "Defolt meta description",
+    "seo.og_image": "Defolt OG şəkil",
+    "seo.google_site_verification": "Google site verification",
+    "seo.robots_indexing": "Axtarış indeksləməsi",
+    "cors.allowed_origins": "İcazəli origin-lər",
+    "scripts.head": "<head> skriptləri",
+    "scripts.body": "<body> skriptləri",
+    "system": {
+      "delete_mode": "Silmə rejimi"
+    },
+    "company.tax_id": "VÖEN",
+    "company.address": "Ünvan",
+    "company.phone": "Telefon",
+    "company.email": "E-poçt",
+    "company.bank_name": "Bankın adı",
+    "company.bank_account": "Hesab nömrəsi (IBAN)",
+    "company.bank_code": "Bank kodu",
+    "finance.vat_rate": "ƏDV dərəcəsi (%)",
+    "invoice.prefix": "Faktura prefiksi",
+    "invoice.next_number": "Növbəti faktura nömrəsi",
+    "invoice.default_due_days": "Ödəniş müddəti (gün)",
+    "invoice.footer_note": "Faktura altlığı",
+    "system.delete_mode": "Silmə rejimi"
+  },
+  "form": {
+    "valuePlaceholder": "Dəyəri daxil edin",
+    "scriptsPlaceholder": "<script>...</script> və ya digər HTML",
+    "ctaLabelTitle": "Başlıq CTA düyməsi mətni",
+    "ctaLabelDescription": "Hər dil üçün düymə mətni. Yalnız Dillər bölməsində aktiv olan dillər göstərilir.",
+    "ctaLabelField": "Düymə mətni",
+    "ctaContactPageHint": "Başlıq CTA həmişə Əlaqə səhifəsini açır (Səhifələr → Əlaqə). URL həmin səhifənin dil üzrə slug-ına görə avtomatikdir.",
+    "seoDefaultsTitle": "Varsayılan meta (dilə görə)",
+    "seoDefaultsDescription": "Səhifənin öz SEO-su yoxdursa istifadə olunan başlıq, təsvir və OG şəkil. Twitter, Google verification və indexing yuxarıda sayt üzrə qalır.",
+    "seoDefaultMetaTitle": "Varsayılan meta başlıq",
+    "seoDefaultMetaDescription": "Varsayılan meta təsvir",
+    "seoDefaultOgImage": "Varsayılan OG şəkil",
+    "saving": "Yadda saxlanılır...",
+    "save": "Yadda saxla",
+    "saveSuccess": "Parametrlər uğurla yadda saxlanıldı.",
+    "updateError": "Parametrlər yenilənərkən xəta baş verdi."
+  },
+  "choices": {
+    "system": {
+      "delete_mode": {
+        "soft": "Səbətə göndər (bərpa oluna bilər)",
+        "force": "Həmişəlik sil"
+      }
+    }
+  }
+}

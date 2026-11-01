@@ -1,0 +1,52 @@
+{
+  "title": "Maliyyə Kateqoriyaları",
+  "description": "Gəlir və xərc kateqoriyalarını idarə edin",
+  "table": {
+    "name": "Ad",
+    "type": "Növ",
+    "isSystem": "Sistem",
+    "icon": "İkon",
+    "sort": "Sıra",
+    "actions": "Əməliyyatlar"
+  },
+  "type": {
+    "income": "Gəlir",
+    "expense": "Xərc",
+    "all": "Hamısı"
+  },
+  "dialog": {
+    "createTitle": "Yeni kateqoriya",
+    "editTitle": "Kateqoriyanı redaktə et"
+  },
+  "form": {
+    "name": "Ad",
+    "type": "Növ",
+    "icon": "İkon",
+    "sort": "Sıra nömrəsi"
+  },
+  "delete": {
+    "title": "Kateqoriyanı sil",
+    "description": "Bu kateqoriyanı silmək istədiyinizə əminsiniz?"
+  },
+  "actions": {
+    "create": "Yeni kateqoriya",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "save": "Yadda saxla",
+    "cancel": "Ləğv et"
+  },
+  "system": {
+    "yes": "Sistem",
+    "no": "Xüsusi"
+  },
+  "toast": {
+    "created": "Kateqoriya yaradıldı",
+    "updated": "Kateqoriya yeniləndi",
+    "deleted": "Kateqoriya silindi"
+  },
+  "loading": "Yüklənir...",
+  "empty": "Kateqoriya tapılmadı.",
+  "filter": {
+    "all": "Hamısı"
+  }
+}

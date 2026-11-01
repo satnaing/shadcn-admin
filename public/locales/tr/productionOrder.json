@@ -1,0 +1,99 @@
+{
+  "list": {
+    "title": "Production orders",
+    "description": "Planning moves nothing. Confirming issues the raw materials and receives the finished goods.",
+    "filter": "Search by code, batch or product...",
+    "noResults": "No production orders found."
+  },
+  "columns": {
+    "code": "Code",
+    "product": "Product",
+    "quantity": "Quantity",
+    "unitCost": "Unit cost",
+    "margin": "Margin",
+    "date": "Date",
+    "status": "Status"
+  },
+  "status": {
+    "planned": "Planned",
+    "confirmed": "Confirmed",
+    "cancelled": "Cancelled"
+  },
+  "primaryButtons": {
+    "start": "New production"
+  },
+  "create": {
+    "title": "New production order",
+    "description": "The product's active formula is copied and the material requirement worked out.",
+    "product": "Product",
+    "productPlaceholder": "Select a product",
+    "noRecipe": "This product has no active recipe — create one first.",
+    "quantity": "Quantity to produce",
+    "plannedFor": "Planned for",
+    "note": "Note",
+    "start": "Plan",
+    "starting": "Creating...",
+    "pendingDemand": "Açık siparişlerde bekleyen: {{qty}} {{unit}}",
+    "pendingDemandHint": "Müşterilere henüz teslim edilmemiş miktar — en az bu kadar üretilmeli.",
+    "pendingDemandBy": "{{date}} tarihine kadar"
+  },
+  "detail": {
+    "title": "Production order",
+    "description": "Check the material requirement, then confirm.",
+    "loading": "Loading...",
+    "materials": "Materials",
+    "noLines": "No lines.",
+    "material": "Material",
+    "required": "Required",
+    "available": "In stock",
+    "issued": "Issued",
+    "lineCost": "Cost",
+    "noPrice": "No price",
+    "shortBy": "short by {{quantity}}",
+    "quantities": "Planned: {{planned}} · Produced: {{produced}} {{unit}}",
+    "waste": "Loss: {{quantity}} — {{reason}}",
+    "shortageWarning": "{{count}} materials are short — the order cannot be confirmed.",
+    "estimatedCost": "Estimated cost",
+    "finalCost": "Final cost",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "cancelTitle": "Cancel {{code}}?",
+    "cancelDescription": "The order is cancelled. No stock movement was written, so the warehouse is untouched.",
+    "confirmedBy": "Confirmed by {{by}} on {{at}}",
+    "note": "Not"
+  },
+  "confirm": {
+    "title": "Confirm {{code}}",
+    "description": "This is the moment stock actually moves.",
+    "producedQuantity": "Quantity produced",
+    "plannedWas": "Planned: {{quantity}}",
+    "producedAt": "Production date",
+    "batchNumber": "Batch number",
+    "expiryDate": "Expiry date",
+    "wasteReason": "Reason for the loss",
+    "wasteReasonPlaceholder": "Spillage, damaged containers...",
+    "wasteWarning": "{{quantity}} units lost — the real unit cost will be higher than planned.",
+    "effect": "On confirmation: raw materials leave the warehouse (batch-tracked ones earliest-expiry-first), finished goods enter stock, and the cost is frozen.",
+    "confirm": "Confirm",
+    "confirming": "Confirming..."
+  },
+  "cost": {
+    "materialCost": "Materials",
+    "laborCost": "Labour",
+    "utilityCost": "Utilities",
+    "extraCost": "Other",
+    "totalCost": "Total",
+    "unitCost": "Unit cost",
+    "salePrice": "Sale price",
+    "netHint": "tax-exclusive",
+    "margin": "Margin"
+  },
+  "toast": {
+    "created": "Production order planned.",
+    "createError": "Could not create the order.",
+    "confirmed": "Production confirmed — materials issued, finished goods received.",
+    "confirmError": "Could not confirm the order.",
+    "cancelled": "Order cancelled.",
+    "cancelError": "Could not cancel the order."
+  }
+}

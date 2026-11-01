@@ -1,0 +1,57 @@
+{
+  "title": "Activity Log",
+  "description": "History of all operations in the system.",
+  "loading": "Loading...",
+  "empty": "No records found.",
+  "filters": {
+    "module": "Module",
+    "all": "All",
+    "from": "From",
+    "to": "To"
+  },
+  "columns": {
+    "date": "Date",
+    "module": "Module",
+    "action": "Action",
+    "description": "Description",
+    "user": "User",
+    "employee": "Employee"
+  },
+  "modules": {
+    "sales": "Sales",
+    "warehouse": "Warehouse",
+    "products": "Products",
+    "production": "Production",
+    "finance": "Finance",
+    "hr": "HR",
+    "orders": "Orders",
+    "system": "System"
+  },
+  "entities": {
+    "sale": "Sale",
+    "customer": "Customer",
+    "rawmaterial": "Raw material",
+    "stockmovement": "Stock movement",
+    "stock": "Stock",
+    "supplier": "Supplier",
+    "warehouselocation": "Warehouse location",
+    "product": "Product",
+    "productcategory": "Product category",
+    "productionorder": "Production order",
+    "recipe": "Recipe",
+    "financetransaction": "Finance transaction",
+    "debt": "Debt",
+    "invoice": "Invoice",
+    "employee": "Employee",
+    "order": "Order"
+  },
+  "verbs": {
+    "create": "created",
+    "update": "updated",
+    "delete": "deleted",
+    "complete": "completed",
+    "cancel": "cancelled",
+    "refund": "refunded",
+    "adjust": "adjusted"
+  }
+}

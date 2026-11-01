@@ -1,0 +1,100 @@
+{
+  "list": {
+    "title": "User List",
+    "description": "Manage your users and their roles here.",
+    "filterPlaceholder": "Filter users...",
+    "noResults": "No results."
+  },
+  "tabs": {
+    "users": "Users",
+    "trash": "Trash"
+  },
+  "primaryButtons": {
+    "addUser": "Add User"
+  },
+  "form": {
+    "addTitle": "Add User",
+    "updateTitle": "Update User",
+    "addDescription": "Fill out the form to create a new user.",
+    "updateDescription": "Edit user details and click save.",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter full name",
+    "email": "Email",
+    "emailPlaceholder": "Enter email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "newPasswordPlaceholder": "Enter new password",
+    "passwordOptionalHint": "Leave empty to keep the current password.",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "roles": "Roles",
+    "roleAccess": "role access",
+    "saving": "Saving...",
+    "saveAndExit": "Save and Exit",
+    "updating": "Updating...",
+    "updateAndExit": "Update and Exit",
+    "createError": "An error occurred while creating the user.",
+    "updateError": "An error occurred while updating the user.",
+    "deleteError": "An error occurred while deleting the user.",
+    "restoreError": "An error occurred while restoring the user.",
+    "forceDeleteError": "An error occurred while permanently deleting the user."
+  },
+  "columns": {
+    "id": "ID",
+    "selectAll": "Select all",
+    "selectRow": "Select row",
+    "name": "Name",
+    "email": "Email",
+    "status": "Status",
+    "role": "Role",
+    "createdAt": "Created At"
+  },
+  "rowActions": {
+    "openMenu": "Open menu",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deletePermanently": "Delete Permanently",
+    "restore": "Restore",
+    "deletePermanentlyTitle": "Delete this user: {{name}} ?",
+    "deletePermanentlyDescription1": "You are about to delete a user with the name <strong>{{name}}</strong>.",
+    "deletePermanentlyDescription2": "This action cannot be undone.",
+    "restoreTitle": "Restore this user: {{name}} ?",
+    "restoreDescription": "Are you sure you want to restore <strong>{{name}}</strong>."
+  },
+  "deleteDialog": {
+    "title": "Delete User",
+    "description": "Are you sure you want to delete <span class=\"font-bold\">{{name}}</span>?<br />This action will permanently remove the user with the role of <span class=\"font-bold\">{{roles}}</span> from the system. This cannot be undone.",
+    "usernameLabel": "Username:",
+    "confirmPlaceholder": "Enter username to confirm deletion.",
+    "warningTitle": "Warning!",
+    "warningDescription": "Please be careful, this operation can not be rolled back.",
+    "deletingText": "Deleting...",
+    "confirmText": "Delete"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle_one": "Delete {{count}} user",
+    "deleteTitle_other": "Delete {{count}} users",
+    "warningMessage1": "Are you sure you want to delete the selected users?",
+    "warningMessage2": "This action cannot be undone.",
+    "confirmByTyping": "Confirm by typing \"{{word}}\":",
+    "confirmPlaceholder": "Type \"{{word}}\" to confirm.",
+    "confirmError": "Please type \"{{word}}\" to confirm.",
+    "alertTitle": "Warning!",
+    "alertDescription": "Please be careful, this operation can not be rolled back.",
+    "deleting": "Deleting…",
+    "delete": "Delete"
+  },
+  "bulkActions": {
+    "entityName": "user",
+    "deleteSelected": "Delete selected users"
+  },
+  "validation": {
+    "nameRequired": "Full name is required",
+    "emailInvalid": "Please enter a valid email address",
+    "roleRequired": "At least one role must be chosen.",
+    "passwordMin": "Password must be at least 8 characters",
+    "passwordUppercase": "Password must contain at least one uppercase letter",
+    "passwordNumber": "Password must contain at least one number",
+    "passwordMismatch": "Passwords do not match"
+  }
+}

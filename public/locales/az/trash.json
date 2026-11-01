@@ -1,0 +1,47 @@
+{
+  "title": "Silinənlər",
+  "description": "Silinmiş qeydlər. Bərpa edin və ya həmişəlik silin.",
+  "loading": "Yüklənir...",
+  "empty": "Silinmiş qeyd yoxdur.",
+  "noModules": "Silinənlərə baxmaq üçün icazəniz yoxdur.",
+  "search": "Axtar...",
+  "previous": "Əvvəlki",
+  "next": "Sonrakı",
+  "columns": {
+    "record": "Qeyd",
+    "deletedAt": "Silinmə tarixi",
+    "actions": "Əməliyyat"
+  },
+  "actions": {
+    "restore": "Bərpa et",
+    "forceDelete": "Həmişəlik sil"
+  },
+  "purgeDialog": {
+    "title": "Həmişəlik silinsin?",
+    "description": "\"{{name}}\" bazadan tamamilə silinəcək. Bu əməliyyat geri qaytarıla bilməz."
+  },
+  "forceMode": {
+    "title": "Silinənlər bölümü söndürülüb",
+    "description": "Parametrlərdə silmə rejimi \"həmişəlik\" seçilib, ona görə silinən qeydlər saxlanılmır. Tarixçə daşıyan modullar isə yenə bərpa oluna bilir."
+  },
+  "modules": {
+    "customers": "Müştərilər",
+    "suppliers": "Təchizatçılar",
+    "employees": "İşçilər",
+    "products": "Məhsullar",
+    "rawMaterials": "Xammallar",
+    "units": "Vahidlər",
+    "warehouseLocations": "Anbar yerləri",
+    "currencies": "Valyutalar",
+    "paymentMethods": "Ödəniş üsulları",
+    "financeCategories": "Maliyyə kateqoriyaları",
+    "financeTransactions": "Maliyyə əməliyyatları",
+    "debts": "Borclar",
+    "invoices": "Fakturalar",
+    "languages": "Dillər",
+    "users": "İstifadəçilər",
+    "roles": "Rollar",
+    "permissions": "İcazələr",
+    "settings": "Parametrlər"
+  }
+}

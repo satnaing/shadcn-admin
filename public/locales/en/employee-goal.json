@@ -1,0 +1,39 @@
+{
+  "title": "Employee Goals",
+  "description": "Track sales, production and other goals for employees.",
+  "add": "Add goal",
+  "loading": "Loading...",
+  "empty": "No goals found.",
+  "filters": {
+    "employee": "Employee",
+    "all": "All",
+    "currentOnly": "Current only"
+  },
+  "columns": {
+    "employee": "Employee",
+    "period": "Period",
+    "targetType": "Target type",
+    "target": "Target",
+    "achieved": "Achieved",
+    "progress": "Progress"
+  },
+  "form": {
+    "createTitle": "New goal",
+    "editTitle": "Edit goal",
+    "employee": "Employee",
+    "selectEmployee": "Select employee",
+    "periodStart": "Start date",
+    "periodEnd": "End date",
+    "targetType": "Target type",
+    "targetValue": "Target value",
+    "note": "Note",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "toast": {
+    "created": "Goal created.",
+    "updated": "Goal updated.",
+    "deleted": "Goal deleted.",
+    "error": "Operation failed."
+  }
+}

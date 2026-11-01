@@ -1,0 +1,20 @@
+{
+  "title": "Əməkhaqqı",
+  "description": "Aylıq hesablama. Heç nə saxlanmır — davamiyyət və ya satış dəyişəndə rəqəm özü yenilənir.",
+  "empty": "Bu ay üçün hesablama yoxdur.",
+  "total": "Ümumi",
+  "filters": {
+    "year": "İl",
+    "month": "Ay"
+  },
+  "columns": {
+    "employee": "İşçi",
+    "basis": "Hesablama əsası",
+    "workedDays": "İşlənən gün",
+    "absentDays": "Qayıb",
+    "hours": "Saat",
+    "sales": "Satış",
+    "gross": "Məbləğ"
+  },
+  "recalculatedHint": "Rəqəmlər hər açılışda yenidən hesablanır: düzəldilmiş davamiyyət günü və ya geri qaytarılmış satış dərhal əks olunur."
+}

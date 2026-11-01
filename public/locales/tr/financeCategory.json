@@ -1,0 +1,52 @@
+{
+  "title": "Finans Kategorileri",
+  "description": "Gelir ve gider kategorilerini yönetin",
+  "table": {
+    "name": "Ad",
+    "type": "Tür",
+    "isSystem": "Sistem",
+    "icon": "İkon",
+    "sort": "Sıra",
+    "actions": "İşlemler"
+  },
+  "type": {
+    "income": "Gelir",
+    "expense": "Gider",
+    "all": "Tümü"
+  },
+  "dialog": {
+    "createTitle": "Yeni kategori",
+    "editTitle": "Kategoriyi düzenle"
+  },
+  "form": {
+    "name": "Ad",
+    "type": "Tür",
+    "icon": "İkon",
+    "sort": "Sıra numarası"
+  },
+  "delete": {
+    "title": "Kategoriyi sil",
+    "description": "Bu kategoriyi silmek istediğinize emin misiniz?"
+  },
+  "actions": {
+    "create": "Yeni kategori",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "save": "Kaydet",
+    "cancel": "İptal"
+  },
+  "system": {
+    "yes": "Sistem",
+    "no": "Özel"
+  },
+  "toast": {
+    "created": "Kategori oluşturuldu",
+    "updated": "Kategori güncellendi",
+    "deleted": "Kategori silindi"
+  },
+  "loading": "Yükleniyor...",
+  "empty": "Kategori bulunamadı.",
+  "filter": {
+    "all": "Tümü"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "title": "Anbar hesabatları",
+  "description": "Hərəkət, istifadə, dəyər və zay hesabatları — hamısı hərəkət jurnalından hesablanır.",
+  "tabs": {
+    "movements": "Hərəkət hesabatı",
+    "usage": "İstifadə",
+    "valuation": "Anbarın dəyəri",
+    "waste": "Zay",
+    "expiry": "Partiya müddəti"
+  },
+  "window": {
+    "from": "Başlanğıc",
+    "to": "Son",
+    "lastDays": "Son {{days}} gün"
+  },
+  "columns": {
+    "code": "Kod",
+    "name": "Adı",
+    "opening": "Açılış",
+    "in": "Giriş",
+    "out": "Çıxış",
+    "closing": "Qalıq",
+    "used": "İstifadə",
+    "movementCount": "Hərəkət sayı",
+    "onHand": "Qalıq",
+    "unitPrice": "Vahid qiyməti",
+    "value": "Dəyər",
+    "wasted": "Zay",
+    "cost": "Məbləğ",
+    "batch": "Partiya",
+    "expiryDate": "Son istifadə",
+    "daysLeft": "Qalan gün"
+  },
+  "usage": {
+    "mostUsed": "Ən çox istifadə olunanlar",
+    "leastUsed": "Ən az istifadə olunanlar"
+  },
+  "valuation": {
+    "totalValue": "Anbarın ümumi dəyəri",
+    "noPrice": "Qiymət yoxdur",
+    "unpriced": "{{count}} xammalın qiyməti yoxdur"
+  },
+  "waste": {
+    "totalCost": "Ümumi zay dəyəri",
+    "empty": "Bu dövrdə zay qeydə alınmayıb."
+  },
+  "loading": "Yüklənir...",
+  "empty": "Bu dövr üçün məlumat yoxdur.",
+  "expiry": {
+    "window": "Dövr:",
+    "days": "{{days}} gün",
+    "expired": "Müddəti bitib",
+    "empty": "Bu dövrdə müddəti bitən partiya yoxdur."
+  }
+}

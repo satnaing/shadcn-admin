@@ -1,0 +1,55 @@
+{
+  "title": "Faturalar",
+  "description": "Fatura yönetimi",
+  "direction": "Yön",
+  "party": "Taraf",
+  "status": "Durum",
+  "total": "Tutar",
+  "issueDate": "Tarih",
+  "dueDate": "Son tarih",
+  "empty": "Fatura yok",
+  "invoiceNumber": "Fatura numarası",
+  "subtotal": "Ara toplam",
+  "taxAmount": "Vergi",
+  "notes": "Notlar",
+  "statuses": {
+    "draft": "Taslak",
+    "sent": "Gönderildi",
+    "paid": "Ödendi",
+    "overdue": "Gecikmiş",
+    "cancelled": "İptal edildi"
+  },
+  "directions": {
+    "outgoing": "Giden",
+    "incoming": "Gelen"
+  },
+  "actions": {
+    "view": "Görüntüle",
+    "downloadPdf": "PDF indir",
+    "send": "Gönder",
+    "markPaid": "Ödendi işaretle",
+    "delete": "Sil",
+    "create": "Yeni fatura"
+  },
+  "loading": "Yükleniyor...",
+  "detail": {
+    "title": "Fatura detayları",
+    "description": "Faturanın tüm bilgileri ve kalemleri.",
+    "notFound": "Bulunamadı",
+    "generalInfo": "Genel bilgi",
+    "amounts": "Tutarlar",
+    "creator": "Oluşturan",
+    "source": "Kaynak",
+    "viewSale": "Satışa git",
+    "items": "Kalemler",
+    "itemDescription": "Açıklama",
+    "quantity": "Miktar",
+    "unitPrice": "Birim fiyat",
+    "taxRate": "KDV %",
+    "lineTotal": "Satır toplamı",
+    "party": {
+      "customer": "Müşteri",
+      "supplier": "Tedarikçi"
+    }
+  }
+}

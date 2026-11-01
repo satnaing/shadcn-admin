@@ -1,0 +1,49 @@
+{
+  "title": "İdarəetmə paneli",
+  "description": "Sistemin ümumi vəziyyəti.",
+  "error": "Məlumatları yükləmək mümkün olmadı.",
+  "kpi": {
+    "users": "İstifadəçilər",
+    "materials": "Xammallar",
+    "suppliers": "Tədarükçülər",
+    "movements30d": "Hərəkət (30 gün)",
+    "lowStock": "Aşağı stok",
+    "enabled": "{{count}} aktiv",
+    "critical": "{{count}} kritik səviyyədə",
+    "salesAmount": "Satış məbləği (30 gün)",
+    "salesCount": "Satış sayı (30 gün)",
+    "income": "Gəlir (30 gün)",
+    "expense": "Xərc (30 gün)",
+    "debtsPayable": "Ödəniləcək borclar",
+    "debtsReceivable": "Alınacaq borclar",
+    "overdueDebts": "{{count}} vaxtı keçmiş",
+    "pendingOrders": "Gözləyən sifarişlər",
+    "ordersAmount": "Sifariş məbləği (30 gün)",
+    "activeEmployees": "Aktiv işçilər",
+    "totalEmployees": "Cəmi: {{count}}",
+    "pendingLeaves": "Gözləyən məzuniyyətlər",
+    "productionOrders": "İstehsal sifarişləri (30 gün)",
+    "planned": "Planlaşdırılmış",
+    "inProgress": "Davam edən",
+    "products": "Aktiv məhsullar",
+    "totalProducts": "Cəmi: {{count}}",
+    "productLowStock": "Aşağı stoklu məhsullar"
+  },
+  "chart": {
+    "title": "Stok hərəkətləri",
+    "description": "Son 30 gündə günlük giriş və çıxış sayı.",
+    "in": "Giriş",
+    "out": "Çıxış"
+  },
+  "quickLinks": {
+    "title": "Sürətli keçidlər",
+    "description": "Ən çox istifadə olunan bölmələr.",
+    "stockMovements": "Stok hərəkətləri",
+    "rawMaterials": "Xammallar",
+    "suppliers": "Tədarükçülər",
+    "locations": "Anbar yerləri",
+    "units": "Ölçü vahidləri",
+    "reports": "Hesabatlar",
+    "users": "İstifadəçilər"
+  }
+}

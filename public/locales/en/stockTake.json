@@ -1,0 +1,72 @@
+{
+  "list": {
+    "title": "Stock takes",
+    "description": "Physical count sheets. Differences are posted to the ledger as adjustments.",
+    "filter": "Search by code or note...",
+    "noResults": "No stock takes found."
+  },
+  "columns": {
+    "code": "Code",
+    "date": "Date",
+    "location": "Location",
+    "lines": "Lines",
+    "status": "Status",
+    "appliedBy": "Applied by"
+  },
+  "status": {
+    "draft": "Draft",
+    "counting": "Counting",
+    "applied": "Applied",
+    "cancelled": "Cancelled"
+  },
+  "primaryButtons": {
+    "start": "New stock take"
+  },
+  "create": {
+    "title": "New stock take",
+    "description": "The sheet fills itself from current stock as soon as it opens.",
+    "countedAt": "Count date",
+    "location": "Location",
+    "allLocations": "Whole warehouse",
+    "locationHint": "Pick a location to count only what sits there.",
+    "note": "Note",
+    "start": "Start",
+    "starting": "Creating..."
+  },
+  "detail": {
+    "title": "Stock take",
+    "description": "Enter the physical count, then post the differences.",
+    "loading": "Loading...",
+    "allLocations": "Whole warehouse",
+    "summary": "{{date}} · {{location}}",
+    "progress": "{{counted}}/{{total}} lines counted · {{differences}} differences",
+    "refresh": "Refresh stock",
+    "save": "Save",
+    "saving": "Saving...",
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "applyTitle": "Post the differences?",
+    "applyDescription": "An adjustment movement is written for each of the {{count}} differences. The sheet is frozen afterwards.",
+    "frozen": "Applied by {{by}} on {{at}}"
+  },
+  "sheet": {
+    "material": "Material",
+    "batch": "Batch",
+    "system": "System",
+    "counted": "Counted",
+    "difference": "Difference",
+    "note": "Note",
+    "notePlaceholder": "Reason...",
+    "empty": "This sheet has no lines."
+  },
+  "toast": {
+    "created": "Stock take created.",
+    "createError": "Could not create the stock take.",
+    "saved": "Count saved.",
+    "saveError": "Could not save the count.",
+    "refreshed": "Stock refreshed.",
+    "applied": "Differences posted.",
+    "applyError": "Could not apply the stock take.",
+    "cancelled": "Stock take cancelled."
+  }
+}

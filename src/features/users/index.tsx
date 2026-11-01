@@ -1,44 +1,60 @@
 import { getRouteApi } from '@tanstack/react-router'
-import { ConfigDrawer } from '@/components/config-drawer'
-import { Header } from '@/components/layout/header'
-import { Main } from '@/components/layout/main'
-import { ProfileDropdown } from '@/components/profile-dropdown'
-import { Search } from '@/components/search'
-import { ThemeSwitch } from '@/components/theme-switch'
+import { useListSearchParams } from '@/shared/filters/status-filter'
+import type { MetaInterface } from '@/shared/types'
+import {
+  createCrudTabChangeHandler,
+  resolveListTrashTab,
+} from '@/shared/utils/crud-page'
+import { LayersIcon } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
+import { TabsContent } from '@/components/ui/tabs'
+import { AdminPageShell } from '@/components/admin/admin-page-shell'
+import { CrudTabsLayout } from '@/components/admin/crud-tabs-layout'
 import { UsersDialogs } from './components/users-dialogs'
 import { UsersPrimaryButtons } from './components/users-primary-buttons'
 import { UsersProvider } from './components/users-provider'
 import { UsersTable } from './components/users-table'
-import { users } from './data/users'
+import { useUsers } from './hooks/useUsers'
 
 const route = getRouteApi('/_authenticated/users/')
 
 export function Users() {
+  const { t } = useTranslation('users')
   const search = route.useSearch()
   const navigate = route.useNavigate()
 
+  const { page, pageSize, sort, order, status } = useListSearchParams(search)
+
+  const { data: users } = useUsers(page, pageSize, sort, order, status)
+
   return (
     <UsersProvider>
-      <Header fixed>
-        <Search className='me-auto' />
-        <ThemeSwitch />
-        <ConfigDrawer />
-        <ProfileDropdown />
-      </Header>
-
-      <Main className='flex flex-1 flex-col gap-4 sm:gap-6'>
-        <div className='flex flex-wrap items-end justify-between gap-2'>
-          <div>
-            <h2 className='text-2xl font-bold tracking-tight'>User List</h2>
-            <p className='text-muted-foreground'>
-              Manage your users and their roles here.
-            </p>
-          </div>
-          <UsersPrimaryButtons />
-        </div>
-        <UsersTable data={users} search={search} navigate={navigate} />
-      </Main>
-
+      <AdminPageShell
+        title={t('list.title')}
+        description={t('list.description')}
+        actions={!search.filter ? <UsersPrimaryButtons /> : undefined}
+      >
+        <CrudTabsLayout
+          defaultTab={resolveListTrashTab(search.filter)}
+          tabs={[
+            {
+              value: 'list',
+              label: t('tabs.users'),
+              icon: <LayersIcon />,
+            },
+          ]}
+          onTabChange={createCrudTabChangeHandler(navigate)}
+        >
+          <TabsContent value='list' className='space-y-4'>
+            <UsersTable
+              data={users?.data ?? []}
+              meta={users?.meta as MetaInterface}
+              search={search}
+              navigate={navigate}
+            />
+          </TabsContent>
+        </CrudTabsLayout>
+      </AdminPageShell>
       <UsersDialogs />
     </UsersProvider>
   )

@@ -1,0 +1,56 @@
+{
+  "title": "Devam",
+  "description": "Günlük giriş-çıkış. Saatlik ücret tam olarak bu saatlerle çarpılır.",
+  "add": "Kayıt ekle",
+  "empty": "Bu ay için kayıt yok.",
+  "filters": {
+    "year": "Yıl",
+    "month": "Ay"
+  },
+  "columns": {
+    "employee": "Çalışan",
+    "workedDays": "Çalışılan gün",
+    "lateDays": "Geç",
+    "absentDays": "Devamsız",
+    "leaveDays": "İzinli",
+    "hours": "Saat"
+  },
+  "statuses": {
+    "present": "Geldi",
+    "late": "Geç kaldı",
+    "absent": "Devamsız",
+    "leave": "İzinli",
+    "holiday": "Tatil"
+  },
+  "form": {
+    "title": "Devam kaydı",
+    "employee": "Çalışan",
+    "selectEmployee": "Çalışan seçin",
+    "date": "Tarih",
+    "status": "Durum",
+    "checkIn": "Giriş",
+    "checkOut": "Çıkış",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "upsertHint": "Aynı günü tekrar gönderirseniz kayıt düzeltilir, ikinci satır oluşmaz."
+  },
+  "errors": {
+    "save": "Kayıt yapılamadı.",
+    "delete": "Silinemedi."
+  },
+  "detail": {
+    "title": "Devamsızlık Detayı",
+    "description": "Çalışanın günlük devamsızlık kayıtları.",
+    "loading": "Yükleniyor...",
+    "notFound": "Çalışan bulunamadı.",
+    "date": "Tarih",
+    "checkIn": "Giriş",
+    "checkOut": "Çıkış",
+    "status": "Durum",
+    "hours": "Saat",
+    "note": "Not",
+    "noEntries": "Bu dönem için kayıt yok.",
+    "summary": "Aylık Özet",
+    "dailyEntries": "Günlük Kayıtlar"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "list": {
+    "title": "Departmanlar",
+    "description": "Raporlama ekseni: personelin nasıl gruplandığı ve filtrelendiği.",
+    "add": "Departman ekle",
+    "empty": "Henüz departman yok."
+  },
+  "columns": {
+    "name": "Adı",
+    "module": "Modül",
+    "manager": "Yönetici",
+    "employees": "Personel",
+    "status": "Durum"
+  },
+  "form": {
+    "createTitle": "Yeni departman",
+    "editTitle": "Departmanı düzenle",
+    "description": "Departmanlar personeli gruplar ve raporları filtreler.",
+    "name": "Adı",
+    "moduleKey": "Modül anahtarı",
+    "moduleKeyHint": "Departmanı bir modüle bağlar; raporlar ve bildirimler buna göre yönlendirilir.",
+    "sortOrder": "Sıra",
+    "status": "Durum",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "createError": "Oluşturulamadı.",
+    "updateError": "Güncellenemedi.",
+    "deleteError": "Silinemedi."
+  },
+  "delete": {
+    "title": "Departman silinsin mi?",
+    "description": "\"{{name}}\" kaldırılacak. Kişiler kalır — yalnızca bu departmana bağlılıkları gider.",
+    "confirm": "Sil"
+  }
+}

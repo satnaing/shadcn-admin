@@ -1,0 +1,100 @@
+{
+  "list": {
+    "title": "Depo konumları",
+    "description": "Bölge, raf ve göz numaraları — hammaddenin depoda nerede olduğunu gösterir.",
+    "tabs": {
+      "locations": "Konumlar",
+      "trash": "Çöp kutusu"
+    },
+    "filterLocations": "Konum ara...",
+    "noResults": "Sonuç bulunamadı."
+  },
+  "columns": {
+    "id": "ID",
+    "code": "Kod",
+    "name": "Adı",
+    "position": "Konum",
+    "materials": "Hammadde",
+    "status": "Durum"
+  },
+  "primaryButtons": {
+    "addLocation": "Konum ekle"
+  },
+  "bulkActions": {
+    "deleteSelected": "Seçilenleri sil",
+    "entityName": "konum"
+  },
+  "form": {
+    "saving": "Kaydediliyor...",
+    "saveAndExit": "Kaydet",
+    "updating": "Güncelleniyor...",
+    "updateAndExit": "Güncelle",
+    "active": "Aktif",
+    "createError": "Kayıt oluşturulamadı.",
+    "updateError": "Kayıt güncellenemedi.",
+    "deleteError": "Kayıt silinemedi.",
+    "restoreError": "Kayıt geri yüklenemedi.",
+    "forceDeleteError": "Kayıt kalıcı olarak silinemedi.",
+    "addTitle": "Yeni depo konumu",
+    "addDescription": "Yeni bölge, raf veya göz ekleyin.",
+    "updateTitle": "Depo konumunu düzenle",
+    "updateDescription": "Depo konumu bilgilerini güncelleyin.",
+    "code": "Kod",
+    "codePlaceholder": "A-01",
+    "name": "Adı",
+    "namePlaceholder": "Ana depo — A bölgesi",
+    "zone": "Bölge",
+    "zonePlaceholder": "A",
+    "rack": "Raf",
+    "rackPlaceholder": "3",
+    "bin": "Göz",
+    "binPlaceholder": "12",
+    "note": "Not",
+    "sort": "Sıra"
+  },
+  "rowActions": {
+    "openMenu": "Menüyü aç",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "deleteConfirm": "Sil",
+    "restore": "Geri yükle",
+    "deletePermanently": "Kalıcı olarak sil",
+    "deleteTitle": "{{name}} silinsin mi?",
+    "deleteDescription1": "Bu öğe çöp kutusuna taşınacak:",
+    "deletePermanentlyTitle": "{{name}} kalıcı olarak silinsin mi?",
+    "deletePermanentlyDescription1": "Bu öğe kalıcı olarak silinecek:",
+    "deletePermanentlyDescription2": "Bu işlem geri alınamaz.",
+    "restoreTitle": "{{name}} geri yüklensin mi?",
+    "restoreDescription1": "Bu öğe çöp kutusundan geri alınacak:",
+    "details": "Detaylar"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "{{count}} öğe silinsin mi?",
+    "warningMessage1": "Seçili öğeler çöp kutusuna taşınacak.",
+    "warningMessage2": "Devam etmek için onaylayın.",
+    "confirmByTyping": "Onaylamak için \"{{word}}\" yazın:",
+    "confirmPlaceholder": "{{word}} yazın",
+    "confirmError": "Onaylamak için \"{{word}}\" yazmalısınız.",
+    "alertTitle": "Dikkat!",
+    "alertDescription": "Bu toplu bir işlemdir.",
+    "deleting": "Siliniyor...",
+    "delete": "Sil"
+  },
+  "filters": {
+    "status": "Durum",
+    "type": "Tür"
+  },
+  "detail": {
+    "title": "Depo konumu detayları",
+    "description": "Konum bilgileri ve burada saklanan hammaddeler.",
+    "loading": "Yükleniyor...",
+    "notFound": "Bulunamadı",
+    "generalInfo": "Genel bilgi",
+    "storedMaterials": "Saklanan hammaddeler",
+    "noMaterials": "Burada hammadde saklanmıyor.",
+    "materialCode": "Kod",
+    "materialName": "Hammadde",
+    "stockOnHand": "Stokta",
+    "minQuantity": "Minimum"
+  }
+}

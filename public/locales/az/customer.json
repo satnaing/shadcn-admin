@@ -1,0 +1,129 @@
+{
+  "list": {
+    "title": "Müştərilər",
+    "description": "Satış etdiyiniz şəxs və şirkətlər, ödəniş şərtləri və borc limiti.",
+    "tabs": {
+      "trash": "Səbət",
+      "customers": "Müştərilər"
+    },
+    "noResults": "Nəticə tapılmadı.",
+    "filterCustomers": "Müştəri axtar..."
+  },
+  "columns": {
+    "id": "ID",
+    "code": "Kod",
+    "name": "Adı",
+    "contact": "Əlaqə",
+    "paymentTerms": "Ödəniş şərti",
+    "status": "Status",
+    "type": "Növ",
+    "creditLimit": "Borc limiti",
+    "sales": "Satış sayı",
+    "phone": "Telefon",
+    "email": "E-poçt",
+    "address": "Ünvan",
+    "taxId": "VÖEN",
+    "contactPerson": "Əlaqə şəxsi",
+    "note": "Qeyd"
+  },
+  "primaryButtons": {
+    "addCustomer": "Müştəri əlavə et"
+  },
+  "bulkActions": {
+    "deleteSelected": "Seçilmişləri sil",
+    "entityName": "müştəri"
+  },
+  "form": {
+    "saving": "Yadda saxlanılır...",
+    "saveAndExit": "Yadda saxla",
+    "updating": "Yenilənir...",
+    "updateAndExit": "Yenilə",
+    "active": "Aktiv",
+    "createError": "Yaratmaq mümkün olmadı.",
+    "updateError": "Yeniləmək mümkün olmadı.",
+    "deleteError": "Silmək mümkün olmadı.",
+    "restoreError": "Bərpa etmək mümkün olmadı.",
+    "forceDeleteError": "Həmişəlik silmək mümkün olmadı.",
+    "addTitle": "Yeni müştəri",
+    "addDescription": "Yeni müştəri kartı yaradın.",
+    "updateTitle": "Müştərini redaktə et",
+    "updateDescription": "Müştərinin məlumatlarını yeniləyin.",
+    "name": "Ad / şirkət adı",
+    "namePlaceholder": "Rəşad Məmmədov və ya MMC adı",
+    "code": "Kod",
+    "codeAutoHint": "Kod yadda saxlayarkən sistem tərəfindən verilir.",
+    "codeLockedHint": "Kod dəyişdirilmir.",
+    "contactPerson": "Əlaqədar şəxs",
+    "phone": "Telefon",
+    "email": "E-poçt",
+    "taxId": "VÖEN",
+    "address": "Ünvan",
+    "paymentTermDays": "Ödəniş müddəti (gün)",
+    "paymentTermHint": "0 = çatdırılma zamanı ödəniş.",
+    "note": "Qeyd",
+    "invalidEmail": "Düzgün e-poçt daxil edin.",
+    "type": "Müştəri növü",
+    "typeHint": "Topdan müştərilər üçün ayrıca qiymət səviyyəsi tətbiq oluna bilər.",
+    "creditLimit": "Borc limiti",
+    "creditLimitHint": "0 = yalnız nağd. Limitdən artıq borcu olan müştəriyə nisyə satış edilmir."
+  },
+  "rowActions": {
+    "openMenu": "Menyunu aç",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "deleteConfirm": "Sil",
+    "restore": "Bərpa et",
+    "deletePermanently": "Həmişəlik sil",
+    "deleteTitle": "{{name}} silinsin?",
+    "deleteDescription1": "Bu element səbətə göndəriləcək:",
+    "deletePermanentlyTitle": "{{name}} həmişəlik silinsin?",
+    "deletePermanentlyDescription1": "Bu element həmişəlik silinəcək:",
+    "deletePermanentlyDescription2": "Bu əməliyyatı geri qaytarmaq mümkün deyil.",
+    "restoreTitle": "{{name}} bərpa edilsin?",
+    "restoreDescription1": "Bu element səbətdən geri qaytarılacaq:",
+    "details": "Detallar"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "{{count}} element silinsin?",
+    "warningMessage1": "Seçilmiş elementlər səbətə göndəriləcək.",
+    "warningMessage2": "Davam etmək üçün təsdiqləyin.",
+    "confirmByTyping": "Təsdiq üçün \"{{word}}\" yazın:",
+    "confirmPlaceholder": "{{word}} yazın",
+    "confirmError": "Təsdiq üçün \"{{word}}\" yazmalısınız.",
+    "alertTitle": "Diqqət!",
+    "alertDescription": "Bu əməliyyat toplu şəkildə aparılır.",
+    "deleting": "Silinir...",
+    "delete": "Sil"
+  },
+  "filters": {
+    "status": "Status",
+    "type": "Növ"
+  },
+  "types": {
+    "retail": "Pərakəndə",
+    "wholesale": "Topdan"
+  },
+  "paymentTerms": {
+    "cash": "Nağd",
+    "days": "{{days}} gün"
+  },
+  "detail": {
+    "title": "Müştəri detalları",
+    "description": "Müştərinin əlaqə və maliyyə məlumatları.",
+    "loading": "Yüklənir...",
+    "notFound": "Tapılmadı",
+    "generalInfo": "Ümumi məlumat",
+    "contactInfo": "Əlaqə",
+    "financialInfo": "Maliyyə",
+    "creditLimit": "Kredit limiti",
+    "paymentTerms": "Ödəniş müddəti",
+    "outstandingBalance": "Cari borc",
+    "salesCount": "Satış sayı",
+    "salesHistory": "Satış tarixçəsi",
+    "saleCode": "Kod",
+    "saleDate": "Tarix",
+    "saleTotal": "Cəm",
+    "salePaid": "Ödənilib",
+    "saleDue": "Qalıq"
+  }
+}

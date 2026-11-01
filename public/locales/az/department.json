@@ -1,0 +1,35 @@
+{
+  "list": {
+    "title": "Departamentlər",
+    "description": "Bölmələr — hesabatların və filtrlərin qruplaşdığı ox.",
+    "add": "Departament əlavə et",
+    "empty": "Hələ departament yoxdur."
+  },
+  "columns": {
+    "name": "Adı",
+    "module": "Modul",
+    "manager": "Rəhbər",
+    "employees": "İşçi sayı",
+    "status": "Status"
+  },
+  "form": {
+    "createTitle": "Yeni departament",
+    "editTitle": "Departamenti redaktə et",
+    "description": "Departamentlər işçiləri qruplaşdırır və hesabatları filtrləyir.",
+    "name": "Adı",
+    "moduleKey": "Modul açarı",
+    "moduleKeyHint": "Departamenti bir modula bağlayır ki, hesabatlar və bildirişlər ona görə yönləndirilsin.",
+    "sortOrder": "Sıra",
+    "status": "Status",
+    "save": "Yadda saxla",
+    "cancel": "Ləğv et",
+    "createError": "Yaratmaq mümkün olmadı.",
+    "updateError": "Yeniləmək mümkün olmadı.",
+    "deleteError": "Silmək mümkün olmadı."
+  },
+  "delete": {
+    "title": "Departament silinsin?",
+    "description": "\"{{name}}\" silinəcək. İşçilər qalır — yalnız bu departamentə bağlılıq itir.",
+    "confirm": "Sil"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Borçlar",
+  "description": "Ödenecek ve alınacak borçları yönetin",
+  "table": { "direction": "Yön", "partyType": "Taraf türü", "amount": "Tutar", "paidAmount": "Ödenen", "remaining": "Kalan", "dueDate": "Vade tarihi", "status": "Durum", "description": "Açıklama", "actions": "İşlemler" },
+  "direction": { "payable": "Ödenecek", "receivable": "Alınacak", "all": "Tümü" },
+  "status": { "open": "Açık", "partially_paid": "Kısmen ödendi", "paid": "Ödendi", "all": "Tümü" },
+  "party": { "employee": "Çalışan", "supplier": "Tedarikçi", "customer": "Müşteri" },
+  "dialog": { "createTitle": "Yeni borç", "editTitle": "Borcu düzenle" },
+  "form": { "direction": "Yön", "partyType": "Taraf türü", "partyId": "Taraf ID", "amount": "Tutar", "dueDate": "Vade tarihi", "description": "Açıklama" },
+  "delete": { "title": "Borcu sil", "description": "Bu borcu silmek istediğinize emin misiniz?" },
+  "payment": { "title": "Ödeme yap", "amount": "Ödeme tutarı", "date": "Ödeme tarihi", "method": "Ödeme yöntemi", "note": "Not", "history": "Ödeme geçmişi", "record": "Ödeme kaydet" },
+  "method": { "cash": "Nakit", "bank": "Banka", "card": "Kart" },
+  "actions": { "create": "Yeni borç", "edit": "Düzenle", "delete": "Sil", "pay": "Öde", "save": "Kaydet", "cancel": "İptal" },
+  "overdue": "Vadesi geçmiş",
+  "toast": { "created": "Borç oluşturuldu", "updated": "Borç güncellendi", "deleted": "Borç silindi", "paymentRecorded": "Ödeme kaydedildi" }
+}

@@ -1,0 +1,40 @@
+{
+  "title": "Satış raporları",
+  "description": "Gelir, maliyet ve gerçek kâr. Rakamlar satış tamamlandığında donduruldu.",
+  "empty": "Bu dönem için veri yok.",
+  "filters": {
+    "from": "Başlangıç",
+    "to": "Bitiş",
+    "group": "Gruplama"
+  },
+  "groups": {
+    "day": "Günlük",
+    "month": "Aylık",
+    "year": "Yıllık"
+  },
+  "tabs": {
+    "summary": "Özet",
+    "products": "Ürünler",
+    "sellers": "Satıcılar",
+    "customers": "Müşteriler"
+  },
+  "totals": {
+    "sales": "Satış sayısı",
+    "revenue": "Gelir",
+    "cost": "Maliyet",
+    "profit": "Kâr",
+    "margin": "%{{percent}} marj"
+  },
+  "columns": {
+    "period": "Dönem",
+    "sales": "Satış",
+    "revenue": "Gelir",
+    "cost": "Maliyet",
+    "profit": "Kâr",
+    "product": "Ürün",
+    "quantity": "Miktar",
+    "seller": "Satıcı",
+    "customer": "Müşteri",
+    "outstanding": "Kalan borç"
+  }
+}

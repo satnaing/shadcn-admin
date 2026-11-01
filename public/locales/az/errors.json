@@ -1,0 +1,25 @@
+{
+  "goBack": "Geri",
+  "backHome": "Ana səhifəyə qayıt",
+  "notFound": {
+    "title": "Səhifə tapılmadı!",
+    "description": "Axtardığınız səhifə mövcud deyil və ya silinmiş ola bilər."
+  },
+  "forbidden": {
+    "title": "Giriş qadağandır",
+    "description": "Bu resursu görmək üçün lazımi icazəniz yoxdur."
+  },
+  "unauthorized": {
+    "title": "İcazəsiz giriş",
+    "description": "Bu resursa daxil olmaq üçün uyğun hesabla daxil olun."
+  },
+  "general": {
+    "title": "Xəta baş verdi :')",
+    "description": "Narahatçılığa görə üzr istəyirik. Zəhmət olmasa bir az sonra yenidən cəhd edin."
+  },
+  "maintenance": {
+    "title": "Sayt texniki xidmətdədir!",
+    "description": "Sayt hazırda əlçatan deyil. Tezliklə yenidən online olacağıq.",
+    "learnMore": "Ətraflı"
+  }
+}

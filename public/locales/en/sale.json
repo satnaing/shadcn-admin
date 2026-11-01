@@ -1,0 +1,128 @@
+{
+  "list": {
+    "title": "Sales",
+    "description": "Sale documents. A draft moves nothing — only completing draws stock.",
+    "add": "New sale",
+    "empty": "No sales yet."
+  },
+  "columns": {
+    "code": "Code",
+    "date": "Date",
+    "customer": "Customer",
+    "seller": "Seller",
+    "total": "Total",
+    "profit": "Profit",
+    "payment": "Payment",
+    "status": "Status",
+    "due": "Due: {{amount}}"
+  },
+  "actions": {
+    "complete": "Complete",
+    "cancel": "Cancel",
+    "refund": "Return",
+    "invoice": "Issue invoice",
+    "invoiceSuccess": "Invoice issued successfully",
+    "viewInvoice": "View invoice"
+  },
+  "create": {
+    "title": "New sale",
+    "description": "Fill the basket. It is raised as a draft — stock only moves on completion.",
+    "save": "Save draft"
+  },
+  "form": {
+    "customer": "Customer",
+    "walkIn": "Walk-in",
+    "customerHint": "Optional for a counter sale; wholesale should always name the buyer.",
+    "seller": "Seller",
+    "selectSeller": "Choose an employee",
+    "sellerHint": "Drives commission payroll and the per-seller report.",
+    "soldAt": "Date",
+    "paymentMethod": "Payment method",
+    "creditHint": "A credit sale is checked against the customer's limit.",
+    "basketDiscount": "Basket discount",
+    "paidAmount": "Paid",
+    "amountDue": "Still owed: {{amount}}",
+    "note": "Note",
+    "cancel": "Cancel"
+  },
+  "basket": {
+    "title": "Basket",
+    "product": "Product",
+    "selectProduct": "Choose a product",
+    "quantity": "Quantity",
+    "unitPrice": "Unit price",
+    "discount": "Discount (%)",
+    "addLine": "Add line",
+    "onHand": "On hand: {{quantity}} {{unit}}",
+    "shortWarning": "Not enough stock — short by {{shortfall}}",
+    "saleType": "Sale type",
+    "retail": "Retail",
+    "wholesale": "Wholesale",
+    "unit": "Unit",
+    "baseUnit": "Base unit"
+  },
+  "totals": {
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "tax": "Tax",
+    "total": "Total",
+    "estimate": "Estimated total",
+    "taxHint": "Tax follows each product card and is worked out on the server."
+  },
+  "complete": {
+    "title": "Complete {{code}}?",
+    "description": "This draws finished stock and freezes the money.",
+    "stockHint": "Every line is checked first — if one product is short the whole sale is refused.",
+    "confirm": "Complete"
+  },
+  "refund": {
+    "title": "Return against {{code}}",
+    "description": "Returned goods go back on the shelf. The original sale stays in the books.",
+    "sold": "Sold: {{quantity}} {{unit}}",
+    "alreadyReturned": "already returned: {{quantity}}",
+    "returning": "Returning",
+    "max": "max {{quantity}}",
+    "reason": "Reason",
+    "reasonPlaceholder": "damaged, wrong item...",
+    "confirm": "Confirm return"
+  },
+  "messages": {
+    "completed": "Sale completed and stock updated.",
+    "refunded": "Return recorded."
+  },
+  "errors": {
+    "create": "Could not create the sale.",
+    "update": "Could not update.",
+    "cancel": "Could not cancel.",
+    "invoice": "Could not issue the invoice.",
+    "delete": "Could not delete."
+  },
+  "detail": {
+    "title": "Sale details",
+    "description": "Full sale information and line items.",
+    "loading": "Loading...",
+    "notFound": "Not found",
+    "generalInfo": "General information",
+    "code": "Code",
+    "customer": "Customer",
+    "seller": "Seller",
+    "soldAt": "Sold at",
+    "invoice": "Invoice",
+    "paymentMethod": "Payment method",
+    "note": "Note",
+    "financialInfo": "Financial",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "tax": "Tax",
+    "total": "Total",
+    "paid": "Paid",
+    "amountDue": "Amount due",
+    "cost": "Cost",
+    "profit": "Profit",
+    "items": "Sale items",
+    "product": "Product",
+    "quantity": "Quantity",
+    "unitPrice": "Unit price",
+    "lineTotal": "Line total"
+  }
+}

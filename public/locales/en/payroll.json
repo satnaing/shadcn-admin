@@ -1,0 +1,20 @@
+{
+  "title": "Payroll",
+  "description": "The monthly figure. Nothing is stored — it moves when attendance or sales do.",
+  "empty": "Nothing to calculate for this month.",
+  "total": "Total",
+  "filters": {
+    "year": "Year",
+    "month": "Month"
+  },
+  "columns": {
+    "employee": "Employee",
+    "basis": "Basis",
+    "workedDays": "Days worked",
+    "absentDays": "Absent",
+    "hours": "Hours",
+    "sales": "Sales",
+    "gross": "Gross"
+  },
+  "recalculatedHint": "Worked out on every read: a corrected attendance day or a refunded sale shows up straight away."
+}

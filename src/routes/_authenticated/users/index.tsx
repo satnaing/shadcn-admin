@@ -1,11 +1,15 @@
 import z from 'zod'
 import { createFileRoute } from '@tanstack/react-router'
+import { PERMISSIONS } from '@/shared/constant'
+import { PageGuard } from '@/components/guard/page-guard'
 import { Users } from '@/features/users'
-import { roles } from '@/features/users/data/data'
 
 const usersSearchSchema = z.object({
-  page: z.number().optional().catch(1),
-  pageSize: z.number().optional().catch(10),
+  page: z.coerce.number().optional().catch(1),
+  pageSize: z.coerce.number().optional().catch(10),
+  sort: z.string().optional().catch('id'),
+  order: z.string().optional().catch('desc'),
+  filter: z.string().optional(),
   // Facet filters
   status: z
     .array(
@@ -19,7 +23,7 @@ const usersSearchSchema = z.object({
     .optional()
     .catch([]),
   role: z
-    .array(z.enum(roles.map((r) => r.value as (typeof roles)[number]['value'])))
+    .array(z.string())
     .optional()
     .catch([]),
   // Per-column text filter (example for username)
@@ -28,5 +32,9 @@ const usersSearchSchema = z.object({
 
 export const Route = createFileRoute('/_authenticated/users/')({
   validateSearch: usersSearchSchema,
-  component: Users,
+  component: () => (
+    <PageGuard permission={PERMISSIONS.USERS.INDEX}>
+      <Users />
+    </PageGuard>
+  ),
 })

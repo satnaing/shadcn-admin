@@ -1,0 +1,16 @@
+{
+  "title": "Debts",
+  "description": "Manage payable and receivable debts",
+  "table": { "direction": "Direction", "partyType": "Party type", "amount": "Amount", "paidAmount": "Paid", "remaining": "Remaining", "dueDate": "Due date", "status": "Status", "description": "Description", "actions": "Actions" },
+  "direction": { "payable": "Payable", "receivable": "Receivable", "all": "All" },
+  "status": { "open": "Open", "partially_paid": "Partially paid", "paid": "Paid", "all": "All" },
+  "party": { "employee": "Employee", "supplier": "Supplier", "customer": "Customer" },
+  "dialog": { "createTitle": "New debt", "editTitle": "Edit debt" },
+  "form": { "direction": "Direction", "partyType": "Party type", "partyId": "Party ID", "amount": "Amount", "dueDate": "Due date", "description": "Description" },
+  "delete": { "title": "Delete debt", "description": "Are you sure you want to delete this debt?" },
+  "payment": { "title": "Record payment", "amount": "Payment amount", "date": "Payment date", "method": "Payment method", "note": "Note", "history": "Payment history", "record": "Record payment" },
+  "method": { "cash": "Cash", "bank": "Bank", "card": "Card" },
+  "actions": { "create": "New debt", "edit": "Edit", "delete": "Delete", "pay": "Pay", "save": "Save", "cancel": "Cancel" },
+  "overdue": "Overdue",
+  "toast": { "created": "Debt created", "updated": "Debt updated", "deleted": "Debt deleted", "paymentRecorded": "Payment recorded" }
+}

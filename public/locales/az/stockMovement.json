@@ -1,0 +1,103 @@
+{
+  "list": {
+    "title": "Stok hərəkətləri",
+    "description": "Anbara hər giriş və çıxış burada qeydə alınır. Cari qalıq yalnız bu hərəkətlərdən hesablanır.",
+    "tabs": {
+      "movements": "Hərəkətlər",
+      "lowStock": "Aşağı stok"
+    },
+    "filterMovements": "Sənəd və ya qeyd üzrə axtar...",
+    "noResults": "Hərəkət tapılmadı."
+  },
+  "columns": {
+    "movedAt": "Tarix",
+    "type": "Növ",
+    "material": "Xammal",
+    "quantity": "Miqdar",
+    "reason": "Səbəb",
+    "reference": "Sənəd",
+    "cost": "Məbləğ",
+    "batch": "Partiya",
+    "note": "Qeyd"
+  },
+  "types": {
+    "in": "Giriş",
+    "out": "Çıxış",
+    "adjustment": "Düzəliş"
+  },
+  "filters": {
+    "type": "Növ"
+  },
+  "primaryButtons": {
+    "stockIn": "Giriş",
+    "stockOut": "Çıxış",
+    "adjustment": "Düzəliş"
+  },
+  "form": {
+    "title": {
+      "in": "Anbara giriş",
+      "out": "Anbardan çıxış",
+      "adjustment": "Stok düzəlişi"
+    },
+    "description": {
+      "in": "Tədarükçüdən gələn xammalı qeydə alın.",
+      "out": "İstehsalata verilən və ya zay olan xammalı qeydə alın.",
+      "adjustment": "Fiziki sayımdan sonra fərqi qeydə alın."
+    },
+    "material": "Xammal",
+    "materialPlaceholder": "Xammal seçin",
+    "quantity": "Miqdar",
+    "unit": "Ölçü vahidi",
+    "unitPlaceholder": "Vahid seçin",
+    "unitHint": "Qalıq {{symbol}} ilə saxlanılır — başqa vahid seçsəniz avtomatik çevriləcək.",
+    "adjustmentHint": "Artım üçün müsbət, azalma üçün mənfi rəqəm yazın.",
+    "reason": "Səbəb",
+    "reasonPlaceholder": "Səbəb seçin",
+    "reasonRequired": "Çıxış üçün səbəb seçilməlidir.",
+    "movedAt": "Tarix",
+    "supplier": "Tədarükçü",
+    "supplierPlaceholder": "Tədarükçü seçin",
+    "supplierRequired": "Alış üçün tədarükçü seçilməlidir.",
+    "unitPrice": "Vahid qiyməti",
+    "unitPriceHint": "Qeyd etsəniz qiymət tarixçəsinə avtomatik yazılır.",
+    "reference": "Sənəd / faktura №",
+    "referencePlaceholder": "FK-2026-001",
+    "location": "Anbar yeri",
+    "locationPlaceholder": "Yer seçin",
+    "note": "Qeyd",
+    "onHand": "Cari qalıq: {{quantity}} {{symbol}}",
+    "reorderPoint": "sifariş nöqtəsi: {{quantity}} {{symbol}}",
+    "positive": "Miqdar sıfırdan böyük olmalıdır.",
+    "notZero": "Miqdar sıfır ola bilməz.",
+    "saving": "Qeyd edilir...",
+    "save": "Qeyd et",
+    "batchSection": "Partiya məlumatları",
+    "batchNumber": "Partiya nömrəsi",
+    "batchNumberPlaceholder": "Boş buraxsanız sistem verir",
+    "batchNumberHint": "Eyni nömrə təkrar yazılsa, mövcud partiyaya əlavə olunur.",
+    "productionDate": "İstehsal tarixi",
+    "expiryDate": "Son istifadə tarixi",
+    "expiryHint": "Məlumdursa yazın.",
+    "expiryAutoHint": "Boş qalsa {{days}} gün rəf ömrünə görə hesablanır.",
+    "fefoHint": "Bu xammal partiya ilə izlənilir — çıxış son istifadə tarixi ən yaxın olan partiyadan başlayaraq avtomatik bölüşdürülür."
+  },
+  "rowActions": {
+    "openMenu": "Menyunu aç",
+    "reverse": "Geri qaytar",
+    "reverseTitle": "#{{id}} hərəkəti geri qaytarılsın?",
+    "reverseDescription": "Hərəkət silinmir — əvəzinə əks istiqamətli düzəliş yazılır və hər ikisi tarixçədə qalır."
+  },
+  "lowStock": {
+    "title": "Sifariş tələb edən xammallar",
+    "viewAll": "Hamısına bax",
+    "loading": "Yüklənir...",
+    "empty": "Bütün xammallar sifariş nöqtəsindən yuxarıdır.",
+    "reorderAt": "sifariş nöqtəsi: {{quantity}} {{symbol}}"
+  },
+  "toast": {
+    "recorded": "Hərəkət qeydə alındı.",
+    "recordError": "Hərəkəti qeyd etmək mümkün olmadı.",
+    "reversed": "Hərəkət geri qaytarıldı.",
+    "reverseError": "Geri qaytarmaq mümkün olmadı."
+  }
+}

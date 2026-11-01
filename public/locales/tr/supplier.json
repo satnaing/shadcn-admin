@@ -1,0 +1,108 @@
+{
+  "list": {
+    "title": "Tedarikçiler",
+    "description": "Hammadde aldığınız firmalar, iletişim bilgileri ve ödeme koşulları.",
+    "tabs": {
+      "suppliers": "Tedarikçiler",
+      "trash": "Çöp kutusu"
+    },
+    "filterSuppliers": "Tedarikçi ara...",
+    "noResults": "Sonuç bulunamadı."
+  },
+  "columns": {
+    "id": "ID",
+    "code": "Kod",
+    "name": "Adı",
+    "contact": "İletişim",
+    "paymentTerms": "Ödeme koşulu",
+    "materials": "Hammadde",
+    "status": "Durum",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "address": "Adres",
+    "taxId": "Vergi No",
+    "contactPerson": "İlgili kişi",
+    "note": "Not"
+  },
+  "primaryButtons": {
+    "addSupplier": "Tedarikçi ekle"
+  },
+  "bulkActions": {
+    "deleteSelected": "Seçilenleri sil",
+    "entityName": "tedarikçi"
+  },
+  "form": {
+    "saving": "Kaydediliyor...",
+    "saveAndExit": "Kaydet",
+    "updating": "Güncelleniyor...",
+    "updateAndExit": "Güncelle",
+    "active": "Aktif",
+    "createError": "Kayıt oluşturulamadı.",
+    "updateError": "Kayıt güncellenemedi.",
+    "deleteError": "Kayıt silinemedi.",
+    "restoreError": "Kayıt geri yüklenemedi.",
+    "forceDeleteError": "Kayıt kalıcı olarak silinemedi.",
+    "addTitle": "Yeni tedarikçi",
+    "addDescription": "Yeni bir tedarikçi kartı oluşturun.",
+    "updateTitle": "Tedarikçiyi düzenle",
+    "updateDescription": "Tedarikçi bilgilerini güncelleyin.",
+    "name": "Firma adı",
+    "namePlaceholder": "Bakü Metal Ticaret Ltd.",
+    "code": "Kod",
+    "codeAutoHint": "Kod kayıt sırasında sistem tarafından verilir.",
+    "codeLockedHint": "Kod değiştirilemez.",
+    "contactPerson": "İlgili kişi",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "taxId": "Vergi no",
+    "address": "Adres",
+    "paymentTermDays": "Ödeme vadesi (gün)",
+    "paymentTermHint": "0 = teslimatta ödeme.",
+    "paymentTermsNote": "Ödeme notu",
+    "note": "Not",
+    "invalidEmail": "Geçerli bir e-posta girin."
+  },
+  "rowActions": {
+    "openMenu": "Menüyü aç",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "deleteConfirm": "Sil",
+    "restore": "Geri yükle",
+    "deletePermanently": "Kalıcı olarak sil",
+    "deleteTitle": "{{name}} silinsin mi?",
+    "deleteDescription1": "Bu öğe çöp kutusuna taşınacak:",
+    "deletePermanentlyTitle": "{{name}} kalıcı olarak silinsin mi?",
+    "deletePermanentlyDescription1": "Bu öğe kalıcı olarak silinecek:",
+    "deletePermanentlyDescription2": "Bu işlem geri alınamaz.",
+    "restoreTitle": "{{name}} geri yüklensin mi?",
+    "restoreDescription1": "Bu öğe çöp kutusundan geri alınacak:",
+    "details": "Detaylar"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "{{count}} öğe silinsin mi?",
+    "warningMessage1": "Seçili öğeler çöp kutusuna taşınacak.",
+    "warningMessage2": "Devam etmek için onaylayın.",
+    "confirmByTyping": "Onaylamak için \"{{word}}\" yazın:",
+    "confirmPlaceholder": "{{word}} yazın",
+    "confirmError": "Onaylamak için \"{{word}}\" yazmalısınız.",
+    "alertTitle": "Dikkat!",
+    "alertDescription": "Bu toplu bir işlemdir.",
+    "deleting": "Siliniyor...",
+    "delete": "Sil"
+  },
+  "filters": {
+    "status": "Durum",
+    "type": "Tür"
+  },
+  "detail": {
+    "title": "Tedarikçi detayları",
+    "description": "Tedarikçinin iletişim bilgileri ve hammaddeleri.",
+    "loading": "Yükleniyor...",
+    "notFound": "Bulunamadı",
+    "generalInfo": "Genel bilgi",
+    "contactInfo": "İletişim",
+    "paymentTerms": "Ödeme vadesi",
+    "paymentNote": "Ödeme notu",
+    "materials": "Hammaddeler"
+  }
+}

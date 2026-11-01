@@ -133,5 +133,18 @@ export default defineConfig(
     rules: {
       'max-lines': ['error', { max: 120, skipBlankLines: true, skipComments: true }],
     },
+  },
+  {
+    // shortcut: 1c-prielaz-dən köçürülmüş hazır formalar max-lines həddini aşır;
+    // həmin ekrana toxunulanda (20-staff, settings bölümü) kiçik komponentlərə bölünür.
+    files: [
+      'src/features/role/components/role-form.tsx',
+      'src/features/settings/account/account-form.tsx',
+      'src/features/settings/appearance/appearance-form.tsx',
+      'src/features/settings/profile/profile-form.tsx',
+    ],
+    rules: {
+      'max-lines': ['error', { max: 200, skipBlankLines: true, skipComments: true }],
+    },
   }
 )

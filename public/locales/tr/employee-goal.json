@@ -1,0 +1,39 @@
+{
+  "title": "Çalışan Hedefleri",
+  "description": "Çalışanların satış, üretim ve diğer hedeflerini takip edin.",
+  "add": "Hedef ekle",
+  "loading": "Yükleniyor...",
+  "empty": "Hedef bulunamadı.",
+  "filters": {
+    "employee": "Çalışan",
+    "all": "Tümü",
+    "currentOnly": "Sadece güncel"
+  },
+  "columns": {
+    "employee": "Çalışan",
+    "period": "Dönem",
+    "targetType": "Hedef türü",
+    "target": "Hedef",
+    "achieved": "Elde edilen",
+    "progress": "İlerleme"
+  },
+  "form": {
+    "createTitle": "Yeni hedef",
+    "editTitle": "Hedefi düzenle",
+    "employee": "Çalışan",
+    "selectEmployee": "Çalışan seçin",
+    "periodStart": "Başlangıç tarihi",
+    "periodEnd": "Bitiş tarihi",
+    "targetType": "Hedef türü",
+    "targetValue": "Hedef değeri",
+    "note": "Not",
+    "cancel": "İptal",
+    "save": "Kaydet"
+  },
+  "toast": {
+    "created": "Hedef oluşturuldu.",
+    "updated": "Hedef güncellendi.",
+    "deleted": "Hedef silindi.",
+    "error": "İşlem başarısız oldu."
+  }
+}

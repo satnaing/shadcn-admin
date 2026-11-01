@@ -1,0 +1,47 @@
+{
+  "title": "Silinenler",
+  "description": "Silinen kayıtlar. Geri yükleyin veya kalıcı olarak silin.",
+  "loading": "Yükleniyor...",
+  "empty": "Silinmiş kayıt yok.",
+  "noModules": "Silinenleri görme izniniz yok.",
+  "search": "Ara...",
+  "previous": "Önceki",
+  "next": "Sonraki",
+  "columns": {
+    "record": "Kayıt",
+    "deletedAt": "Silinme tarihi",
+    "actions": "İşlem"
+  },
+  "actions": {
+    "restore": "Geri yükle",
+    "forceDelete": "Kalıcı olarak sil"
+  },
+  "purgeDialog": {
+    "title": "Kalıcı olarak silinsin mi?",
+    "description": "\"{{name}}\" veritabanından tamamen silinecek. Bu işlem geri alınamaz."
+  },
+  "forceMode": {
+    "title": "Silinenler bölümü kapalı",
+    "description": "Ayarlarda silme modu kalıcı seçili, bu yüzden silinen kayıtlar saklanmıyor. Geçmiş taşıyan modüller yine de geri yüklenebilir."
+  },
+  "modules": {
+    "customers": "Müşteriler",
+    "suppliers": "Tedarikçiler",
+    "employees": "Personeller",
+    "products": "Ürünler",
+    "rawMaterials": "Hammaddeler",
+    "units": "Birimler",
+    "warehouseLocations": "Depo konumları",
+    "currencies": "Para birimleri",
+    "paymentMethods": "Ödeme yöntemleri",
+    "financeCategories": "Finans kategorileri",
+    "financeTransactions": "Finans işlemleri",
+    "debts": "Borçlar",
+    "invoices": "Faturalar",
+    "languages": "Diller",
+    "users": "Kullanıcılar",
+    "roles": "Roller",
+    "permissions": "İzinler",
+    "settings": "Ayarlar"
+  }
+}
