@@ -51,6 +51,7 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 | **Müştəri paneli** (18 ekran) | ⊘ bu layihədə yoxdur — storefront Next.js-dədir (`front/`) | — |
 | **Wholesale Products** | `22-wholesale.md` — öz bölümü, lakin `03-products` feature-ı `type=wholesale` ilə (E26) | A+S |
 | **GST System** | ⊘ köçürülmür — Hindistan vergi sistemi (HSN/CGST/SGST); AZ·RU·TR·GE üçün adi ƏDV `18-settings`-dədir (E27) | — |
+| **Mağazalar (multi-store)** (AEC-də yoxdur) | `24-stores.md` — tək mağazada menyuda görünmür (E30, api D23) | A |
 | **Dropshipping** | ⏭ plan həcmində yoxdur — gələcəkdə ayrı modul (E28, api D20) | A |
 | Auction · POS · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point | ⏭ Faza D (`40`–`47`) | A+S |
 
