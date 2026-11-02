@@ -1,0 +1,39 @@
+{
+  "title": "İşçi Hədəfləri",
+  "description": "İşçilərin satış, istehsal və digər hədəflərini izləyin.",
+  "add": "Hədəf əlavə et",
+  "loading": "Yüklənir...",
+  "empty": "Hədəf tapılmadı.",
+  "filters": {
+    "employee": "İşçi",
+    "all": "Hamısı",
+    "currentOnly": "Yalnız cari"
+  },
+  "columns": {
+    "employee": "İşçi",
+    "period": "Dövr",
+    "targetType": "Hədəf növü",
+    "target": "Hədəf",
+    "achieved": "Əldə edilən",
+    "progress": "İrəliləyiş"
+  },
+  "form": {
+    "createTitle": "Yeni hədəf",
+    "editTitle": "Hədəfi redaktə et",
+    "employee": "İşçi",
+    "selectEmployee": "İşçi seçin",
+    "periodStart": "Başlanğıc tarixi",
+    "periodEnd": "Bitmə tarixi",
+    "targetType": "Hədəf növü",
+    "targetValue": "Hədəf dəyəri",
+    "note": "Qeyd",
+    "cancel": "Ləğv et",
+    "save": "Yadda saxla"
+  },
+  "toast": {
+    "created": "Hədəf yaradıldı.",
+    "updated": "Hədəf yeniləndi.",
+    "deleted": "Hədəf silindi.",
+    "error": "Əməliyyat uğursuz oldu."
+  }
+}

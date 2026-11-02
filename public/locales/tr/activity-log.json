@@ -1,0 +1,57 @@
+{
+  "title": "Etkinlik Günlüğü",
+  "description": "Sistemdeki tüm işlemlerin geçmişi.",
+  "loading": "Yükleniyor...",
+  "empty": "Kayıt bulunamadı.",
+  "filters": {
+    "module": "Modül",
+    "all": "Tümü",
+    "from": "Başlangıç",
+    "to": "Bitiş"
+  },
+  "columns": {
+    "date": "Tarih",
+    "module": "Modül",
+    "action": "İşlem",
+    "description": "Açıklama",
+    "user": "Kullanıcı",
+    "employee": "Çalışan"
+  },
+  "modules": {
+    "sales": "Satış",
+    "warehouse": "Depo",
+    "products": "Ürünler",
+    "production": "Üretim",
+    "finance": "Finans",
+    "hr": "İnsan Kaynakları",
+    "orders": "Siparişler",
+    "system": "Sistem"
+  },
+  "entities": {
+    "sale": "Satış",
+    "customer": "Müşteri",
+    "rawmaterial": "Hammadde",
+    "stockmovement": "Stok hareketi",
+    "stock": "Stok",
+    "supplier": "Tedarikçi",
+    "warehouselocation": "Depo konumu",
+    "product": "Ürün",
+    "productcategory": "Ürün kategorisi",
+    "productionorder": "Üretim emri",
+    "recipe": "Reçete",
+    "financetransaction": "Finans işlemi",
+    "debt": "Borç",
+    "invoice": "Fatura",
+    "employee": "Personel",
+    "order": "Sipariş"
+  },
+  "verbs": {
+    "create": "oluşturuldu",
+    "update": "güncellendi",
+    "delete": "silindi",
+    "complete": "tamamlandı",
+    "cancel": "iptal edildi",
+    "refund": "iade edildi",
+    "adjust": "düzeltildi"
+  }
+}

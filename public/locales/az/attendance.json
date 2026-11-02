@@ -1,0 +1,56 @@
+{
+  "title": "Davamiyyət",
+  "description": "Gündəlik giriş-çıxış. Saatlıq maaş məhz bu saatlara vurulur.",
+  "add": "Qeyd əlavə et",
+  "empty": "Bu ay üçün qeyd yoxdur.",
+  "filters": {
+    "year": "İl",
+    "month": "Ay"
+  },
+  "columns": {
+    "employee": "İşçi",
+    "workedDays": "İşlənən gün",
+    "lateDays": "Gecikmə",
+    "absentDays": "Qayıb",
+    "leaveDays": "İcazə",
+    "hours": "Saat"
+  },
+  "statuses": {
+    "present": "Gəlib",
+    "late": "Gecikib",
+    "absent": "Qayıb",
+    "leave": "İcazəli",
+    "holiday": "Bayram"
+  },
+  "form": {
+    "title": "Davamiyyət qeydi",
+    "employee": "İşçi",
+    "selectEmployee": "İşçi seçin",
+    "date": "Tarix",
+    "status": "Vəziyyət",
+    "checkIn": "Giriş",
+    "checkOut": "Çıxış",
+    "save": "Yadda saxla",
+    "cancel": "Ləğv et",
+    "upsertHint": "Eyni gün üçün təkrar yazsanız köhnə qeyd düzəlişlə əvəz olunur, ikinci sətir yaranmır."
+  },
+  "errors": {
+    "save": "Qeyd etmək mümkün olmadı.",
+    "delete": "Silmək mümkün olmadı."
+  },
+  "detail": {
+    "title": "Davamiyyət təfərrüatı",
+    "description": "İşçinin gündəlik davamiyyət qeydləri.",
+    "loading": "Yüklənir...",
+    "notFound": "İşçi tapılmadı.",
+    "date": "Tarix",
+    "checkIn": "Giriş",
+    "checkOut": "Çıxış",
+    "status": "Vəziyyət",
+    "hours": "Saat",
+    "note": "Qeyd",
+    "noEntries": "Bu dövr üçün qeyd yoxdur.",
+    "summary": "Aylıq xülasə",
+    "dailyEntries": "Gündəlik qeydlər"
+  }
+}

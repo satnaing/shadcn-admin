@@ -1,0 +1,120 @@
+{
+  "list": {
+    "title": "Sifarişlər",
+    "description": "Müştəri sifarişləri. Stok çatmayan məhsullar gözləmə statusunda saxlanılır.",
+    "add": "Yeni sifariş",
+    "empty": "Hələ sifariş yoxdur."
+  },
+  "columns": {
+    "code": "Kod",
+    "date": "Tarix",
+    "expectedDate": "Gözlənilən tarix",
+    "customer": "Müştəri",
+    "createdBy": "Yaradıb",
+    "total": "Məbləğ",
+    "deposit": "Beh",
+    "status": "Status",
+    "items": "Məhsullar"
+  },
+  "status": {
+    "pending": "Gözləyir",
+    "partially_fulfilled": "Qismən hazır",
+    "fulfilled": "Tamamlanıb",
+    "cancelled": "Ləğv edilib"
+  },
+  "actions": {
+    "fulfill": "Satışa çevir",
+    "cancel": "Ləğv et",
+    "delete": "Sil"
+  },
+  "create": {
+    "title": "Yeni sifariş",
+    "description": "Səbəti doldurun. Stok çatmayan məhsullar gözləmə statusunda qeyd olunur.",
+    "save": "Sifariş yarat"
+  },
+  "form": {
+    "customer": "Müştəri",
+    "selectCustomer": "Müştəri seçin",
+    "createdBy": "Satış mütəxəssisi",
+    "selectEmployee": "İşçi seçin",
+    "expectedDate": "Gözlənilən tarix",
+    "deposit": "Beh məbləği",
+    "depositHint": "Müştəridən qabaqcadan alınan ödəniş.",
+    "basketDiscount": "Ümumi endirim",
+    "note": "Qeyd",
+    "cancel": "Ləğv et",
+    "cancelReason": "Ləğv səbəbi"
+  },
+  "basket": {
+    "title": "Səbət"
+  },
+  "totals": {
+    "subtotal": "Ara cəm",
+    "discount": "Endirim",
+    "total": "Yekun",
+    "deposit": "Beh",
+    "remaining": "Qalıq"
+  },
+  "cancelDialog": {
+    "title": "Sifarişi ləğv et",
+    "description": "Bu sifariş ləğv ediləcək. Əgər beh ödənilibsə, geri qaytarma əl ilə aparılmalıdır.",
+    "confirm": "Ləğv et"
+  },
+  "fulfill": {
+    "title": "{{code}} — Satışa çevir",
+    "description": "Stokda hazır olan sətirləri seçin. Seçilən sətirlər Satış modulunda yeni satış kimi yaradılacaq.",
+    "product": "Məhsul",
+    "remaining": "Qalıq",
+    "stockStatus": "Stok",
+    "quantity": "Miqdar",
+    "ready": "Hazır",
+    "pending": "Gözləyir",
+    "noItems": "Yerinə yetirilə biləcək sətir yoxdur.",
+    "paymentMethod": "Ödəniş üsulu",
+    "paidAmount": "Ödənilən məbləğ",
+    "cash": "Nağd",
+    "card": "Kart",
+    "transfer": "Köçürmə",
+    "credit": "Nisyə",
+    "confirm": "Satışa çevir"
+  },
+  "detail": {
+    "title": "Sifariş detalları",
+    "description": "Sifarişin tam məlumatı və məhsul sətirləri.",
+    "loading": "Yüklənir...",
+    "notFound": "Tapılmadı",
+    "generalInfo": "Ümumi məlumat",
+    "code": "Kod",
+    "customer": "Müştəri",
+    "creator": "Yaradan",
+    "expectedDate": "Gözlənilən tarix",
+    "createdAt": "Yaradılıb",
+    "cancelReason": "Ləğv səbəbi",
+    "note": "Qeyd",
+    "financialInfo": "Maliyyə",
+    "subtotal": "Ara cəm",
+    "discount": "Endirim",
+    "tax": "Vergi",
+    "total": "Yekun",
+    "deposit": "Beh",
+    "amountDue": "Qalıq borc",
+    "items": "Sifariş məhsulları",
+    "product": "Məhsul",
+    "ordered": "Sifariş",
+    "fulfilled": "Verildi",
+    "remaining": "Qalıq",
+    "unitPrice": "Qiymət",
+    "lineTotal": "Cəm"
+  },
+  "messages": {
+    "created": "Sifariş yaradıldı.",
+    "fulfilled": "Sifariş satışa çevrildi.",
+    "cancelled": "Sifariş ləğv edildi."
+  },
+  "errors": {
+    "create": "Sifariş yaratmaq mümkün olmadı.",
+    "update": "Yeniləmək mümkün olmadı.",
+    "cancel": "Ləğv etmək mümkün olmadı.",
+    "delete": "Silmək mümkün olmadı."
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "list": {
+    "title": "Warehouse locations",
+    "description": "Zones, racks and bins — where each material sits in the warehouse.",
+    "tabs": {
+      "locations": "Locations",
+      "trash": "Trash"
+    },
+    "filterLocations": "Search locations...",
+    "noResults": "No results found."
+  },
+  "columns": {
+    "id": "ID",
+    "code": "Code",
+    "name": "Name",
+    "position": "Position",
+    "materials": "Materials",
+    "status": "Status"
+  },
+  "primaryButtons": {
+    "addLocation": "Add location"
+  },
+  "bulkActions": {
+    "deleteSelected": "Delete selected",
+    "entityName": "location"
+  },
+  "form": {
+    "saving": "Saving...",
+    "saveAndExit": "Save",
+    "updating": "Updating...",
+    "updateAndExit": "Update",
+    "active": "Active",
+    "createError": "Could not create the record.",
+    "updateError": "Could not update the record.",
+    "deleteError": "Could not delete the record.",
+    "restoreError": "Could not restore the record.",
+    "forceDeleteError": "Could not permanently delete the record.",
+    "addTitle": "New warehouse location",
+    "addDescription": "Add a new zone, rack or bin.",
+    "updateTitle": "Edit warehouse location",
+    "updateDescription": "Update this warehouse location.",
+    "code": "Code",
+    "codePlaceholder": "A-01",
+    "name": "Name",
+    "namePlaceholder": "Main warehouse — zone A",
+    "zone": "Zone",
+    "zonePlaceholder": "A",
+    "rack": "Rack",
+    "rackPlaceholder": "3",
+    "bin": "Bin",
+    "binPlaceholder": "12",
+    "note": "Note",
+    "sort": "Sort"
+  },
+  "rowActions": {
+    "openMenu": "Open menu",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Delete",
+    "restore": "Restore",
+    "deletePermanently": "Delete permanently",
+    "deleteTitle": "Delete {{name}}?",
+    "deleteDescription1": "This will move the following item to the trash:",
+    "deletePermanentlyTitle": "Permanently delete {{name}}?",
+    "deletePermanentlyDescription1": "This will permanently delete:",
+    "deletePermanentlyDescription2": "This action cannot be undone.",
+    "restoreTitle": "Restore {{name}}?",
+    "restoreDescription1": "This will restore the following item from the trash:",
+    "details": "Details"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "Delete {{count}} items?",
+    "warningMessage1": "The selected items will be moved to the trash.",
+    "warningMessage2": "Confirm to continue.",
+    "confirmByTyping": "Type \"{{word}}\" to confirm:",
+    "confirmPlaceholder": "Type {{word}}",
+    "confirmError": "You must type \"{{word}}\" to confirm.",
+    "alertTitle": "Careful!",
+    "alertDescription": "This is a bulk operation.",
+    "deleting": "Deleting...",
+    "delete": "Delete"
+  },
+  "filters": {
+    "status": "Status",
+    "type": "Type"
+  },
+  "detail": {
+    "title": "Warehouse location details",
+    "description": "Location details and the materials stored here.",
+    "loading": "Loading...",
+    "notFound": "Not found",
+    "generalInfo": "General information",
+    "storedMaterials": "Stored materials",
+    "noMaterials": "No materials are stored here.",
+    "materialCode": "Code",
+    "materialName": "Material",
+    "stockOnHand": "On hand",
+    "minQuantity": "Minimum"
+  }
+}

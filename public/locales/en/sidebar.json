@@ -1,0 +1,89 @@
+{
+  "general": {
+    "title": "General",
+    "dashboard": "Dashboard"
+  },
+  "userManagement": {
+    "title": "User management",
+    "users": {
+      "title": "Users",
+      "all": "All users",
+      "roles": "Roles",
+      "permissions": "Permissions"
+    }
+  },
+  "warehouse": {
+    "title": "Warehouse",
+    "rawMaterials": "Raw materials",
+    "stockMovements": "Stock movements",
+    "suppliers": "Suppliers",
+    "locations": "Locations",
+    "units": "Units of measure",
+    "reports": "Reports",
+    "stock": "Stock",
+    "catalogue": "Catalogue",
+    "stockTakes": "Stock takes"
+  },
+  "platform": {
+    "title": "Platform settings",
+    "modules": "Modules",
+    "languages": "Languages",
+    "siteSettings": "System settings",
+    "currencies": "Currencies",
+    "trash": "Trash"
+  },
+  "production": {
+    "title": "Production",
+    "manufacturing": "Manufacturing",
+    "orders": "Production orders",
+    "recipes": "Recipes"
+  },
+  "products": {
+    "title": "Products",
+    "catalogue": "Catalogue",
+    "all": "Products",
+    "categories": "Categories",
+    "stock": "Stock",
+    "productStock": "Finished stock",
+    "reports": "Reports"
+  },
+  "sales": {
+    "title": "Sales",
+    "desk": "Sales desk",
+    "all": "Sales",
+    "customers": "Customers",
+    "insight": "Insight",
+    "reports": "Sales reports"
+  },
+  "hr": {
+    "title": "Employees",
+    "people": "People",
+    "employees": "Employees",
+    "departments": "Departments",
+    "time": "Time & pay",
+    "attendance": "Attendance",
+    "payroll": "Payroll",
+    "performance": "Performance",
+    "goals": "Goals",
+    "activityLog": "Activity log",
+    "leave": "Leave",
+    "announcements": "Announcements"
+  },
+  "finance": {
+    "title": "Finance",
+    "categories": "Categories",
+    "transactions": "Transactions",
+    "debts": "Debts",
+    "reports": "Reports",
+    "invoices": "Invoices",
+    "cashAccounts": "Cash / Bank",
+    "paymentMethods": "Payment Methods"
+  },
+  "orders": {
+    "title": "Orders",
+    "all": "Orders",
+    "demand": "Pending demand",
+    "summary": "Product Summary"
+  },
+  "trash": "Trash"
+}

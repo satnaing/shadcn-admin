@@ -1,0 +1,120 @@
+{
+  "list": {
+    "title": "Siparişler",
+    "description": "Müşteri siparişleri. Stokta olmayan ürünler beklemede tutulur.",
+    "add": "Yeni sipariş",
+    "empty": "Henüz sipariş yok."
+  },
+  "columns": {
+    "code": "Kod",
+    "date": "Tarih",
+    "expectedDate": "Beklenen tarih",
+    "customer": "Müşteri",
+    "createdBy": "Oluşturan",
+    "total": "Tutar",
+    "deposit": "Kapora",
+    "status": "Durum",
+    "items": "Ürünler"
+  },
+  "status": {
+    "pending": "Bekliyor",
+    "partially_fulfilled": "Kısmen hazır",
+    "fulfilled": "Tamamlandı",
+    "cancelled": "İptal edildi"
+  },
+  "actions": {
+    "fulfill": "Satışa çevir",
+    "cancel": "İptal et",
+    "delete": "Sil"
+  },
+  "create": {
+    "title": "Yeni sipariş",
+    "description": "Sepeti doldurun. Stokta olmayan ürünler beklemede olarak işaretlenir.",
+    "save": "Sipariş oluştur"
+  },
+  "form": {
+    "customer": "Müşteri",
+    "selectCustomer": "Müşteri seçin",
+    "createdBy": "Satış uzmanı",
+    "selectEmployee": "Çalışan seçin",
+    "expectedDate": "Beklenen tarih",
+    "deposit": "Kapora tutarı",
+    "depositHint": "Müşteriden alınan ön ödeme.",
+    "basketDiscount": "Genel indirim",
+    "note": "Not",
+    "cancel": "İptal",
+    "cancelReason": "İptal nedeni"
+  },
+  "basket": {
+    "title": "Sepet"
+  },
+  "totals": {
+    "subtotal": "Ara toplam",
+    "discount": "İndirim",
+    "total": "Toplam",
+    "deposit": "Kapora",
+    "remaining": "Kalan"
+  },
+  "cancelDialog": {
+    "title": "Siparişi iptal et",
+    "description": "Bu sipariş iptal edilecek. Kapora ödendiyse, iade manuel olarak yapılmalıdır.",
+    "confirm": "İptal et"
+  },
+  "fulfill": {
+    "title": "{{code}} — Satışa çevir",
+    "description": "Stokta hazır olan satırları seçin. Seçilen satırlar yeni bir satış olarak oluşturulacak.",
+    "product": "Ürün",
+    "remaining": "Kalan",
+    "stockStatus": "Stok",
+    "quantity": "Miktar",
+    "ready": "Hazır",
+    "pending": "Bekliyor",
+    "noItems": "Yerine getirilebilecek satır yok.",
+    "paymentMethod": "Ödeme yöntemi",
+    "paidAmount": "Ödenen tutar",
+    "cash": "Nakit",
+    "card": "Kart",
+    "transfer": "Havale",
+    "credit": "Veresiye",
+    "confirm": "Satışa çevir"
+  },
+  "detail": {
+    "title": "Sipariş detayları",
+    "description": "Siparişin tüm bilgileri ve kalemleri.",
+    "loading": "Yükleniyor...",
+    "notFound": "Bulunamadı",
+    "generalInfo": "Genel bilgi",
+    "code": "Kod",
+    "customer": "Müşteri",
+    "creator": "Oluşturan",
+    "expectedDate": "Beklenen tarih",
+    "createdAt": "Oluşturulma",
+    "cancelReason": "İptal sebebi",
+    "note": "Not",
+    "financialInfo": "Finansal",
+    "subtotal": "Ara toplam",
+    "discount": "İndirim",
+    "tax": "Vergi",
+    "total": "Toplam",
+    "deposit": "Kapora",
+    "amountDue": "Kalan borç",
+    "items": "Sipariş kalemleri",
+    "product": "Ürün",
+    "ordered": "Sipariş",
+    "fulfilled": "Karşılandı",
+    "remaining": "Kalan",
+    "unitPrice": "Birim fiyat",
+    "lineTotal": "Satır toplamı"
+  },
+  "messages": {
+    "created": "Sipariş oluşturuldu.",
+    "fulfilled": "Sipariş karşılandı.",
+    "cancelled": "Sipariş iptal edildi."
+  },
+  "errors": {
+    "create": "Sipariş oluşturulamadı.",
+    "update": "Güncellenemedi.",
+    "cancel": "İptal edilemedi.",
+    "delete": "Silinemedi."
+  }
+}

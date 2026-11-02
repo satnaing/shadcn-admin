@@ -1,0 +1,34 @@
+{
+  "title": "Ürün kategorileri",
+  "description": "Kataloğun nasıl gruplandığı — raporlar ve filtreler buna göre çalışır.",
+  "add": "Kategori ekle",
+  "empty": "Henüz kategori yok.",
+  "columns": {
+    "name": "Adı",
+    "parent": "Üst kategori",
+    "products": "Ürün sayısı",
+    "status": "Durum"
+  },
+  "form": {
+    "createTitle": "Yeni kategori",
+    "editTitle": "Kategoriyi düzenle",
+    "name": "Adı",
+    "parent": "Üst kategori",
+    "noParent": "Yok",
+    "description": "Açıklama",
+    "sortOrder": "Sıra",
+    "status": "Durum",
+    "save": "Kaydet",
+    "cancel": "İptal"
+  },
+  "delete": {
+    "title": "Kategori silinsin mi?",
+    "description": "\"{{name}}\" kaldırılacak. Ürünler kalır — yalnızca kategorisiz olurlar.",
+    "confirm": "Sil"
+  },
+  "errors": {
+    "create": "Oluşturulamadı.",
+    "update": "Güncellenemedi.",
+    "delete": "Silinemedi."
+  }
+}

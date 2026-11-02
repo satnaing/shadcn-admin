@@ -6,15 +6,15 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { toast } from 'sonner'
-import { useAuthStore } from '@/stores/auth-store'
+import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { handleServerError } from '@/lib/handle-server-error'
 import { DirectionProvider } from './context/direction-provider'
 import { FontProvider } from './context/font-provider'
 import { ThemeProvider } from './context/theme-provider'
 // Generated Routes
 import { routeTree } from './routeTree.gen'
+// Internalization
+import './shared/i18n'
 // Styles
 import './styles/index.css'
 
@@ -34,42 +34,49 @@ const queryClient = new QueryClient({
         )
       },
       refetchOnWindowFocus: import.meta.env.PROD,
-      staleTime: 10 * 1000, // 10s
+      staleTime: 60 * 1000, // 60s — panel sürət büdcəsi (task/admin/00-baseline.md §14.2)
     },
     mutations: {
       onError: (error) => {
         handleServerError(error)
-
-        if (error instanceof AxiosError) {
-          if (error.response?.status === 304) {
-            toast.error('Content not modified!')
-          }
-        }
       },
     },
   },
   queryCache: new QueryCache({
-    onError: (error) => {
-      if (error instanceof AxiosError) {
-        if (error.response?.status === 401) {
-          toast.error('Session expired!')
-          useAuthStore.getState().auth.reset()
-          const redirect = `${router.history.location.href}`
-          router.navigate({ to: '/sign-in', search: { redirect } })
-        }
-        if (error.response?.status === 500) {
-          toast.error('Internal Server Error!')
-          // Only navigate to error page in production to avoid disrupting HMR in development
-          if (import.meta.env.PROD) {
-            router.navigate({ to: '/500' })
-          }
-        }
-        if (error.response?.status === 403) {
-          // router.navigate("/forbidden", { replace: true });
-        }
-      }
+    onError: () => {
+      // Global unhandled errors can still be caught here if needed,
+      // but Axios Interceptor handles 401, 500, 304 etc.
     },
   }),
+})
+
+/*
+ * A deploy renames every lazy chunk. A tab that is already open still asks for
+ * the old names, the SPA rewrite answers with index.html, and the import dies
+ * on the HTML MIME type. Reload once so the tab picks up the new build —
+ * guarded by a session flag so a genuinely broken chunk cannot loop.
+ */
+const RELOAD_FLAG = 'chunk-reload-attempted'
+
+window.addEventListener('vite:preloadError', (event) => {
+  event.preventDefault()
+
+  try {
+    if (sessionStorage.getItem(RELOAD_FLAG)) return
+    sessionStorage.setItem(RELOAD_FLAG, '1')
+  } catch {
+    // Private mode / blocked storage: reloading once is still the better bet.
+  }
+
+  window.location.reload()
+})
+
+window.addEventListener('load', () => {
+  try {
+    sessionStorage.removeItem(RELOAD_FLAG)
+  } catch {
+    // Nothing to clear when storage is unavailable.
+  }
 })
 
 // Create a new router instance

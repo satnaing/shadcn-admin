@@ -1,0 +1,26 @@
+{
+  "title": "İzin / Məzuniyyət",
+  "description": "İşçi məzuniyyət tələbləri",
+  "newRequest": "Yeni tələb",
+  "employee": "İşçi",
+  "type": "Növ",
+  "startDate": "Başlanğıc",
+  "endDate": "Bitmə",
+  "status": "Status",
+  "reason": "Səbəb",
+  "loading": "Yüklənir...",
+  "empty": "Tələb yoxdur",
+  "createTitle": "Yeni məzuniyyət tələbi",
+  "employeeId": "İşçi ID",
+  "submit": "Göndər",
+  "types": {
+    "annual": "İllik",
+    "sick": "Xəstəlik",
+    "unpaid": "Ödənişsiz"
+  },
+  "statuses": {
+    "pending": "Gözləyir",
+    "approved": "Təsdiqləndi",
+    "rejected": "Rədd edildi"
+  }
+}

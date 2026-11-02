@@ -1,0 +1,35 @@
+{
+  "list": {
+    "title": "Departments",
+    "description": "The reporting axis: how staff are grouped and filtered.",
+    "add": "Add department",
+    "empty": "No departments yet."
+  },
+  "columns": {
+    "name": "Name",
+    "module": "Module",
+    "manager": "Manager",
+    "employees": "Staff",
+    "status": "Status"
+  },
+  "form": {
+    "createTitle": "New department",
+    "editTitle": "Edit department",
+    "description": "Departments group staff and filter reports.",
+    "name": "Name",
+    "moduleKey": "Module key",
+    "moduleKeyHint": "Ties the department to an application module so reports and notices can be routed by it.",
+    "sortOrder": "Order",
+    "status": "Status",
+    "save": "Save",
+    "cancel": "Cancel",
+    "createError": "Could not create.",
+    "updateError": "Could not update.",
+    "deleteError": "Could not delete."
+  },
+  "delete": {
+    "title": "Delete department?",
+    "description": "\"{{name}}\" will be removed. The people stay — only their link to this department goes.",
+    "confirm": "Delete"
+  }
+}

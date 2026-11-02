@@ -1,0 +1,71 @@
+{
+  "header": {
+    "title": "Kontrol Paneli",
+    "subtitle": "İşletmenizin merkezi yönetim noktası"
+  },
+  "kpi": {
+    "registeredCustomer": "Kayıtlı Müşteri",
+    "topCustomers": "En Çok Alışveriş Yapanlar",
+    "totalProducts": "Toplam Ürün",
+    "inhouseProducts": "Mağaza Ürünleri",
+    "sellersProducts": "Satıcı Ürünleri",
+    "totalCategory": "Toplam Kategori",
+    "totalBrands": "Toplam Marka",
+    "allTimeSales": "Tüm Zamanlar Satışı",
+    "salesThisMonth": "Bu ayın satışı",
+    "salesState": "Satış Durumu",
+    "yearlySales": "Yıllık Satış",
+    "inhouseSales": "Mağaza Satışları",
+    "sellersSales": "Satıcı Satışları",
+    "sellersInPlatform": "Platformdaki Satıcılar",
+    "approvedSellers": "Onaylı Satıcılar",
+    "pendingSellers": "Bekleyen Satıcılar",
+    "topSellers": "En İyi Satıcılar",
+    "allSellersBtn": "Tüm Satıcılar",
+    "pendingSellersBtn": "Bekleyen Satıcılar"
+  },
+  "orders": {
+    "title": "Siparişler",
+    "fulfilmentRate": "Karşılama Oranı",
+    "allTypesOfOrders": "Tüm Sipariş Türleri",
+    "inhouseOrders": "Mağaza Siparişleri",
+    "sellerOrders": "Satıcı Siparişleri",
+    "ofTotal": "toplamdan",
+    "viewAllOrders": "Tüm Siparişleri Gör"
+  },
+  "inhouseStore": {
+    "title": "Mağaza İçi Satış",
+    "totalSales": "Toplam Satış",
+    "totalOrders": "Toplam Sipariş",
+    "inhouseProducts": "Mağaza Ürünü",
+    "ratings": "Değerlendirmeler",
+    "allInhouseOrders": "Tüm Mağaza Siparişleri"
+  },
+  "pipeline": {
+    "pending": "Bekleyen Sipariş",
+    "confirmed": "Onaylanan Sipariş",
+    "processed": "İşlenen Sipariş",
+    "shipped": "Kargoya Verilen",
+    "delivered": "Teslim Edilen Sipariş",
+    "cancelled": "İptal Edilen Sipariş"
+  },
+  "rankings": {
+    "topCategoryProducts": "En Çok Satan Kategoriler ve Ürünler",
+    "topSellerProducts": "En Çok Satan Satıcılar ve Ürünler",
+    "topBrandsProducts": "En Çok Satan Markalar ve Ürünler",
+    "inhouseTopCategory": "En Çok Satan Mağaza Kategorileri",
+    "inhouseTopBrands": "En Çok Satan Mağaza Markaları",
+    "bySales": "Satışa Göre",
+    "item": "Ürün",
+    "quantity": "Miktar",
+    "totalPrice": "Toplam Tutar",
+    "nothingFound": "Hiçbir şey bulunamadı"
+  },
+  "periods": {
+    "today": "Bugün",
+    "week": "Hafta",
+    "month": "Ay",
+    "all": "Hepsi"
+  },
+  "error": "Kontrol paneli istatistikleri yüklenemedi."
+}

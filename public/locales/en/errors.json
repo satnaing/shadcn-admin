@@ -1,0 +1,25 @@
+{
+  "goBack": "Go Back",
+  "backHome": "Back to Home",
+  "notFound": {
+    "title": "Oops! Page Not Found!",
+    "description": "It seems like the page you're looking for does not exist or might have been removed."
+  },
+  "forbidden": {
+    "title": "Access Forbidden",
+    "description": "You don't have necessary permission to view this resource."
+  },
+  "unauthorized": {
+    "title": "Unauthorized Access",
+    "description": "Please log in with the appropriate credentials to access this resource."
+  },
+  "general": {
+    "title": "Oops! Something went wrong :')",
+    "description": "We apologize for the inconvenience. Please try again later."
+  },
+  "maintenance": {
+    "title": "Website is under maintenance!",
+    "description": "The site is not available at the moment. We'll be back online shortly.",
+    "learnMore": "Learn more"
+  }
+}

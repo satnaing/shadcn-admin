@@ -1,0 +1,94 @@
+{
+  "title": "Tüm Ürünler",
+  "subtitle": "Mağazada mevcut ürünlerin yönetimi",
+  "inhouse": {
+    "title": "Şirket Ürünleri"
+  },
+  "seller": {
+    "title": "Satıcı Ürünleri"
+  },
+  "tabs": {
+    "all": "Tüm Ürünler",
+    "inHouse": "Şirket",
+    "seller": "Satıcılar"
+  },
+  "actions": {
+    "addNew": "Yeni Ürün Ekle"
+  },
+  "filter": {
+    "searchPlaceholder": "Ürün adı veya marka ara...",
+    "status": "Durum",
+    "all": "Tüm durumlar",
+    "published": "Yayında",
+    "lowStock": "Azalan stok",
+    "todaysDeal": "Günün Fırsatı",
+    "sortBy": "Sıralama",
+    "newest": "En Yeniler",
+    "priceAsc": "Fiyat: Artan",
+    "priceDesc": "Fiyat: Azalan",
+    "ratingDesc": "En Yüksek Puan",
+    "salesDesc": "En Çok Satanlar"
+  },
+  "table": {
+    "thumb": "Resim",
+    "nameBrand": "Ad / Marka",
+    "categoryOwner": "Kategori / Sahip",
+    "price": "Fiyat",
+    "stock": "Stok",
+    "rating": "Puan",
+    "published": "Yayın",
+    "featured": "Öne Çıkan",
+    "todaysDeal": "Günün Fırsatı",
+    "actions": "İşlemler",
+    "noBrand": "Markasız",
+    "inhouse": "Şirket",
+    "seller": "Satıcı"
+  },
+  "common": {
+    "product": "Ürün",
+    "loading": "Yükleniyor...",
+    "noData": "Veri bulunamadı",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor...",
+    "saveProduct": "Ürünü Kaydet"
+  },
+  "stockDialog": {
+    "title": "Stok Miktarını Düzenle",
+    "currentStock": "Mevcut Stok Miktarı"
+  },
+  "create": {
+    "title": "Yeni Ürün Ekle",
+    "subtitle": "Ürün bilgileri, fiyatlandırma ve envanter"
+  },
+  "form": {
+    "generalInfo": "Genel Bilgiler",
+    "name": "Ürün Adı",
+    "category": "Kategori",
+    "unit": "Ölçü Birimi",
+    "selectUnit": "Birim seçin",
+    "wholesale": "Toptan Satış Fiyat Kademeleri",
+    "addTier": "Kademe Ekle",
+    "noWholesale": "Toptan satış kademesi tanımlanmadı.",
+    "pricingStock": "Fiyat ve Stok",
+    "unitPrice": "Taban Fiyat (₺)",
+    "stock": "Stok Miktarı",
+    "statusSettings": "Yayın Ayarları"
+  },
+  "wholesale": {
+    "title": "Toptan Ürünler",
+    "subtitle": "Kademeli özel fiyatlandırma ve minimum sipariş miktarı ile satılan ürünler",
+    "addNew": "Yeni Toptan Ürün Ekle",
+    "createTitle": "Yeni Toptan Ürün Oluştur",
+    "createSubtitle": "Minimum sipariş miktarı ve fiyat kademeleri yapılandırması",
+    "save": "Toptan Ürünü Oluştur"
+  },
+  "reviews": {
+    "title": "Ürün Değerlendirmeleri",
+    "subtitle": "Müşteri yorumları ve puanlarının yönetimi",
+    "customer": "Müşteri",
+    "comment": "Yorum",
+    "date": "Tarih",
+    "published": "Onay"
+  }
+}

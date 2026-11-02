@@ -1,0 +1,128 @@
+{
+  "list": {
+    "title": "Satışlar",
+    "description": "Satış sənədləri. Qaralama heç nə hərəkət etdirmir — stoku yalnız tamamlama çəkir.",
+    "add": "Yeni satış",
+    "empty": "Hələ satış yoxdur."
+  },
+  "columns": {
+    "code": "Kod",
+    "date": "Tarix",
+    "customer": "Müştəri",
+    "seller": "Satıcı",
+    "total": "Məbləğ",
+    "profit": "Mənfəət",
+    "payment": "Ödəniş",
+    "status": "Status",
+    "due": "Qalıq borc: {{amount}}"
+  },
+  "actions": {
+    "complete": "Tamamla",
+    "cancel": "Ləğv et",
+    "refund": "Geri qaytar",
+    "invoice": "Qaimə kəs",
+    "invoiceSuccess": "Qaimə uğurla yaradıldı",
+    "viewInvoice": "Fakturaya bax"
+  },
+  "create": {
+    "title": "Yeni satış",
+    "description": "Səbəti doldurun. Sənəd qaralama kimi yaranır — stok yalnız tamamlayanda azalır.",
+    "save": "Qaralama yarat"
+  },
+  "form": {
+    "customer": "Müştəri",
+    "walkIn": "Pərakəndə (adsız)",
+    "customerHint": "Pərakəndə satışda boş qala bilər; topdan satışda müştəri seçilməlidir.",
+    "seller": "Satıcı",
+    "selectSeller": "İşçi seçin",
+    "sellerHint": "Faizlə maaş və satıcı üzrə hesabat buna görə hesablanır.",
+    "soldAt": "Tarix",
+    "paymentMethod": "Ödəniş üsulu",
+    "creditHint": "Nisyə satış müştərinin borc limiti ilə yoxlanılır.",
+    "basketDiscount": "Ümumi endirim",
+    "paidAmount": "Ödənilən məbləğ",
+    "amountDue": "Qalıq borc: {{amount}}",
+    "note": "Qeyd",
+    "cancel": "Ləğv et"
+  },
+  "basket": {
+    "title": "Səbət",
+    "product": "Məhsul",
+    "selectProduct": "Məhsul seçin",
+    "quantity": "Miqdar",
+    "unitPrice": "Vahid qiymət",
+    "discount": "Endirim (%)",
+    "addLine": "Sətir əlavə et",
+    "onHand": "Qalıq: {{quantity}} {{unit}}",
+    "shortWarning": "Stok çatmır — {{shortfall}} əskik",
+    "saleType": "Satış növü",
+    "retail": "Pərakəndə",
+    "wholesale": "Topdan",
+    "unit": "Vahid",
+    "baseUnit": "Əsas vahid"
+  },
+  "totals": {
+    "subtotal": "Ara cəm",
+    "discount": "Endirim",
+    "tax": "ƏDV",
+    "total": "Yekun",
+    "estimate": "Təxmini yekun",
+    "taxHint": "ƏDV hər məhsulun kartına görə serverdə hesablanır."
+  },
+  "complete": {
+    "title": "{{code}} tamamlansın?",
+    "description": "Bu addım hazır məhsul stokunu azaldır və məbləğləri dondurur.",
+    "stockHint": "Bütün sətirlər əvvəlcədən yoxlanılır — bir məhsul çatmasa satış bütövlükdə rədd edilir.",
+    "confirm": "Tamamla"
+  },
+  "refund": {
+    "title": "{{code}} üzrə qaytarma",
+    "description": "Qaytarılan miqdar stoka geri yazılır. Orijinal satış kitabda qalır.",
+    "sold": "Satılıb: {{quantity}} {{unit}}",
+    "alreadyReturned": "artıq qaytarılıb: {{quantity}}",
+    "returning": "Qaytarılan",
+    "max": "maksimum {{quantity}}",
+    "reason": "Səbəb",
+    "reasonPlaceholder": "zədə, səhv sifariş...",
+    "confirm": "Qaytarmanı təsdiqlə"
+  },
+  "messages": {
+    "completed": "Satış tamamlandı və stok yeniləndi.",
+    "refunded": "Qaytarma qeydə alındı."
+  },
+  "errors": {
+    "create": "Satış yaratmaq mümkün olmadı.",
+    "update": "Yeniləmək mümkün olmadı.",
+    "cancel": "Ləğv etmək mümkün olmadı.",
+    "invoice": "Qaimə kəsmək mümkün olmadı.",
+    "delete": "Silmək mümkün olmadı."
+  },
+  "detail": {
+    "title": "Satış detalları",
+    "description": "Satışın tam məlumatı və məhsul sətirləri.",
+    "loading": "Yüklənir...",
+    "notFound": "Tapılmadı",
+    "generalInfo": "Ümumi məlumat",
+    "code": "Kod",
+    "customer": "Müştəri",
+    "seller": "Satıcı",
+    "soldAt": "Satış tarixi",
+    "invoice": "Faktura",
+    "paymentMethod": "Ödəniş üsulu",
+    "note": "Qeyd",
+    "financialInfo": "Maliyyə",
+    "subtotal": "Ara cəm",
+    "discount": "Endirim",
+    "tax": "Vergi",
+    "total": "Yekun",
+    "paid": "Ödənilib",
+    "amountDue": "Qalıq",
+    "cost": "Maya dəyəri",
+    "profit": "Mənfəət",
+    "items": "Satış məhsulları",
+    "product": "Məhsul",
+    "quantity": "Miqdar",
+    "unitPrice": "Qiymət",
+    "lineTotal": "Cəm"
+  }
+}

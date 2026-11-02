@@ -1,0 +1,23 @@
+{
+  "list": {
+    "title": "Modullar",
+    "description": "Sistemin hansı modullarla işlədiyini buradan idarə edin.",
+    "loading": "Yüklənir...",
+    "loadError": "Modulları yükləmək mümkün olmadı.",
+    "empty": "Modul tapılmadı."
+  },
+  "status": {
+    "active": "Aktiv",
+    "inactive": "Passiv"
+  },
+  "toggleAria": "{{name}} modulunu aç/bağla",
+  "toast": {
+    "enabled": "Modul aktiv edildi.",
+    "disabled": "Modul dayandırıldı.",
+    "error": "Modulun vəziyyətini dəyişmək mümkün olmadı.",
+    "licenseSaved": "Lisenziya açarı yadda saxlanıldı."
+  },
+  "licenseKey": {
+    "placeholder": "Lisenziya açarı"
+  }
+}

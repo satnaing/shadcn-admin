@@ -1,0 +1,55 @@
+{
+  "title": "Fakturalar",
+  "description": "Faktura idarəetməsi",
+  "direction": "İstiqamət",
+  "party": "Tərəf",
+  "status": "Status",
+  "total": "Məbləğ",
+  "issueDate": "Tarix",
+  "dueDate": "Son tarix",
+  "empty": "Faktura yoxdur",
+  "invoiceNumber": "Faktura nömrəsi",
+  "subtotal": "Ara cəm",
+  "taxAmount": "Vergi",
+  "notes": "Qeydlər",
+  "statuses": {
+    "draft": "Qaralama",
+    "sent": "Göndərilib",
+    "paid": "Ödənilib",
+    "overdue": "Gecikib",
+    "cancelled": "Ləğv edilib"
+  },
+  "directions": {
+    "outgoing": "Çıxan",
+    "incoming": "Daxil olan"
+  },
+  "actions": {
+    "view": "Bax",
+    "downloadPdf": "PDF yüklə",
+    "send": "Göndər",
+    "markPaid": "Ödəndi",
+    "delete": "Sil",
+    "create": "Yeni faktura"
+  },
+  "loading": "Yüklənir...",
+  "detail": {
+    "title": "Faktura detalları",
+    "description": "Fakturanın tam məlumatı və sətirləri.",
+    "notFound": "Tapılmadı",
+    "generalInfo": "Ümumi məlumat",
+    "amounts": "Məbləğlər",
+    "creator": "Yaradan",
+    "source": "Mənbə",
+    "viewSale": "Satışa bax",
+    "items": "Sətirlər",
+    "itemDescription": "Təsvir",
+    "quantity": "Miqdar",
+    "unitPrice": "Qiymət",
+    "taxRate": "ƏDV %",
+    "lineTotal": "Cəm",
+    "party": {
+      "customer": "Müştəri",
+      "supplier": "Təchizatçı"
+    }
+  }
+}

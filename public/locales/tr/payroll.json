@@ -1,0 +1,20 @@
+{
+  "title": "Bordro",
+  "description": "Aylık hesap. Hiçbir şey saklanmaz — devam veya satış değiştiğinde rakam kendiliğinden güncellenir.",
+  "empty": "Bu ay için hesaplanacak bir şey yok.",
+  "total": "Toplam",
+  "filters": {
+    "year": "Yıl",
+    "month": "Ay"
+  },
+  "columns": {
+    "employee": "Çalışan",
+    "basis": "Hesap esası",
+    "workedDays": "Çalışılan gün",
+    "absentDays": "Devamsız",
+    "hours": "Saat",
+    "sales": "Satış",
+    "gross": "Brüt"
+  },
+  "recalculatedHint": "Her açılışta yeniden hesaplanır: düzeltilen bir devam günü veya iade edilen bir satış anında yansır."
+}

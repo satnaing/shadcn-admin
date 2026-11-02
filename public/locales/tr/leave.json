@@ -1,0 +1,26 @@
+{
+  "title": "İzin Yönetimi",
+  "description": "Çalışan izin talepleri",
+  "newRequest": "Yeni talep",
+  "employee": "Çalışan",
+  "type": "Tür",
+  "startDate": "Başlangıç",
+  "endDate": "Bitiş",
+  "status": "Durum",
+  "reason": "Sebep",
+  "loading": "Yükleniyor...",
+  "empty": "Talep yok",
+  "createTitle": "Yeni izin talebi",
+  "employeeId": "Çalışan ID",
+  "submit": "Gönder",
+  "types": {
+    "annual": "Yıllık",
+    "sick": "Hastalık",
+    "unpaid": "Ücretsiz"
+  },
+  "statuses": {
+    "pending": "Bekliyor",
+    "approved": "Onaylandı",
+    "rejected": "Reddedildi"
+  }
+}

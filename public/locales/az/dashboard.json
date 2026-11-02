@@ -1,0 +1,71 @@
+{
+  "header": {
+    "title": "İdarəetmə Paneli",
+    "subtitle": "Biznesinizin mərkəzi idarəetmə qovşağı"
+  },
+  "kpi": {
+    "registeredCustomer": "Qeydiyyatdan Keçmiş Müştəri",
+    "topCustomers": "Top Müştərilər",
+    "totalProducts": "Cəmi Məhsul",
+    "inhouseProducts": "Öz Məhsullarımız",
+    "sellersProducts": "Satıcı Məhsulları",
+    "totalCategory": "Cəmi Kateqoriya",
+    "totalBrands": "Cəmi Brend",
+    "allTimeSales": "Bütün Dövrlər Satışı",
+    "salesThisMonth": "Bu ayın satışı",
+    "salesState": "Satış Dinamikası",
+    "yearlySales": "İllik Satış",
+    "inhouseSales": "Öz Satışlarımız",
+    "sellersSales": "Satıcı Satışları",
+    "sellersInPlatform": "Platformadakı Satıcılar",
+    "approvedSellers": "Təsdiqlənmiş Satıcılar",
+    "pendingSellers": "Gözləyən Satıcılar",
+    "topSellers": "Top Satıcılar",
+    "allSellersBtn": "Bütün Satıcılar",
+    "pendingSellersBtn": "Gözləyən Satıcılar"
+  },
+  "orders": {
+    "title": "Sifarişlər",
+    "fulfilmentRate": "İcra Dərəcəsi",
+    "allTypesOfOrders": "Bütün Növ Sifarişlər",
+    "inhouseOrders": "Öz Sifarişlərimiz",
+    "sellerOrders": "Satıcı Sifarişləri",
+    "ofTotal": "ümumidən",
+    "viewAllOrders": "Bütün Sifarişlərə Bax"
+  },
+  "inhouseStore": {
+    "title": "Öz Mağazamız",
+    "totalSales": "Cəmi Satış",
+    "totalOrders": "Cəmi Sifariş",
+    "inhouseProducts": "Öz Məhsullarımız",
+    "ratings": "Reytinq Balı",
+    "allInhouseOrders": "Bütün Öz Sifarişlərimiz"
+  },
+  "pipeline": {
+    "pending": "Gözləyən Sifariş",
+    "confirmed": "Təsdiqlənmiş Sifariş",
+    "processed": "Hazırlanan Sifariş",
+    "shipped": "Yola Salınmış Sifariş",
+    "delivered": "Çatdırılmış Sifariş",
+    "cancelled": "Ləğv Edilmiş Sifariş"
+  },
+  "rankings": {
+    "topCategoryProducts": "Top Kateqoriya və Məhsullar",
+    "topSellerProducts": "Top Satıcı və Məhsullar",
+    "topBrandsProducts": "Top Brend və Məhsullar",
+    "inhouseTopCategory": "Öz Top Kateqoriyalarımız",
+    "inhouseTopBrands": "Öz Top Brendlərimiz",
+    "bySales": "Satışa görə",
+    "item": "Məhsul",
+    "quantity": "Miqdar",
+    "totalPrice": "Cəmi Məbləğ",
+    "nothingFound": "Məlumat tapılmadı"
+  },
+  "periods": {
+    "today": "Bugün",
+    "week": "Həftə",
+    "month": "Ay",
+    "all": "Hamısı"
+  },
+  "error": "Statistika məlumatlarını yükləmək mümkün olmadı."
+}

@@ -1,0 +1,98 @@
+{
+  "list": {
+    "title": "Ölçü birimleri",
+    "description": "Ağırlık, uzunluk, alan, hacim ve adet birimleri ile dönüşüm katsayıları.",
+    "tabs": {
+      "units": "Birimler",
+      "trash": "Çöp kutusu"
+    },
+    "filterUnits": "Birim ara...",
+    "noResults": "Sonuç bulunamadı."
+  },
+  "columns": {
+    "id": "ID",
+    "name": "Ad",
+    "code": "Kod",
+    "symbol": "Sembol",
+    "type": "Tür",
+    "conversion": "Dönüşüm",
+    "status": "Durum",
+    "sort": "Sıra"
+  },
+  "types": {
+    "weight": "Ağırlık",
+    "length": "Uzunluk",
+    "area": "Alan",
+    "volume": "Hacim",
+    "piece": "Adet"
+  },
+  "primaryButtons": {
+    "addUnit": "Birim ekle"
+  },
+  "bulkActions": {
+    "deleteSelected": "Seçilenleri sil",
+    "entityName": "birim"
+  },
+  "form": {
+    "saving": "Kaydediliyor...",
+    "saveAndExit": "Kaydet",
+    "updating": "Güncelleniyor...",
+    "updateAndExit": "Güncelle",
+    "active": "Aktif",
+    "createError": "Kayıt oluşturulamadı.",
+    "updateError": "Kayıt güncellenemedi.",
+    "deleteError": "Kayıt silinemedi.",
+    "restoreError": "Kayıt geri yüklenemedi.",
+    "forceDeleteError": "Kayıt kalıcı olarak silinemedi.",
+    "addTitle": "Yeni ölçü birimi",
+    "addDescription": "Yeni bir ölçü birimi oluşturun.",
+    "updateTitle": "Ölçü birimini düzenle",
+    "updateDescription": "Ölçü birimi bilgilerini güncelleyin.",
+    "name": "Ad",
+    "namePlaceholder": "Kilogram",
+    "code": "Kod",
+    "codePlaceholder": "kg",
+    "symbol": "Sembol",
+    "symbolPlaceholder": "kg",
+    "type": "Tür",
+    "typePlaceholder": "Tür seçin",
+    "isBase": "Temel birim",
+    "isBaseHint": "Her türün bir temel birimi vardır — dönüşüm katsayısı 1'dir.",
+    "baseUnit": "Temel birim",
+    "baseUnitPlaceholder": "Temel birimi seçin",
+    "factor": "Dönüşüm katsayısı",
+    "factorHint": "1 bu birim = kaç temel birim (ör. 1 g = 0.001 kg).",
+    "sort": "Sıra"
+  },
+  "rowActions": {
+    "openMenu": "Menüyü aç",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "deleteConfirm": "Sil",
+    "restore": "Geri yükle",
+    "deletePermanently": "Kalıcı olarak sil",
+    "deleteTitle": "{{name}} silinsin mi?",
+    "deleteDescription1": "Bu öğe çöp kutusuna taşınacak:",
+    "deletePermanentlyTitle": "{{name}} kalıcı olarak silinsin mi?",
+    "deletePermanentlyDescription1": "Bu öğe kalıcı olarak silinecek:",
+    "deletePermanentlyDescription2": "Bu işlem geri alınamaz.",
+    "restoreTitle": "{{name}} geri yüklensin mi?",
+    "restoreDescription1": "Bu öğe çöp kutusundan geri alınacak:"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "{{count}} öğe silinsin mi?",
+    "warningMessage1": "Seçili öğeler çöp kutusuna taşınacak.",
+    "warningMessage2": "Devam etmek için onaylayın.",
+    "confirmByTyping": "Onaylamak için \"{{word}}\" yazın:",
+    "confirmPlaceholder": "{{word}} yazın",
+    "confirmError": "Onaylamak için \"{{word}}\" yazmalısınız.",
+    "alertTitle": "Dikkat!",
+    "alertDescription": "Bu toplu bir işlemdir.",
+    "deleting": "Siliniyor...",
+    "delete": "Sil"
+  },
+  "filters": {
+    "status": "Durum",
+    "type": "Tür"
+  }
+}

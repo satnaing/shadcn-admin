@@ -1,0 +1,56 @@
+{
+  "title": "Attendance",
+  "description": "Daily check-in and out. Hourly pay is multiplied by exactly these hours.",
+  "add": "Add entry",
+  "empty": "No entries for this month.",
+  "filters": {
+    "year": "Year",
+    "month": "Month"
+  },
+  "columns": {
+    "employee": "Employee",
+    "workedDays": "Days worked",
+    "lateDays": "Late",
+    "absentDays": "Absent",
+    "leaveDays": "Leave",
+    "hours": "Hours"
+  },
+  "statuses": {
+    "present": "Present",
+    "late": "Late",
+    "absent": "Absent",
+    "leave": "On leave",
+    "holiday": "Holiday"
+  },
+  "form": {
+    "title": "Attendance entry",
+    "employee": "Employee",
+    "selectEmployee": "Choose an employee",
+    "date": "Date",
+    "status": "Status",
+    "checkIn": "In",
+    "checkOut": "Out",
+    "save": "Save",
+    "cancel": "Cancel",
+    "upsertHint": "Submitting the same day again corrects it rather than adding a second row."
+  },
+  "errors": {
+    "save": "Could not save the entry.",
+    "delete": "Could not delete."
+  },
+  "detail": {
+    "title": "Attendance Detail",
+    "description": "Daily attendance records for the employee.",
+    "loading": "Loading...",
+    "notFound": "Employee not found.",
+    "date": "Date",
+    "checkIn": "Check In",
+    "checkOut": "Check Out",
+    "status": "Status",
+    "hours": "Hours",
+    "note": "Note",
+    "noEntries": "No records for this period.",
+    "summary": "Monthly Summary",
+    "dailyEntries": "Daily Entries"
+  }
+}

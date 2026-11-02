@@ -1,0 +1,34 @@
+{
+  "title": "Product categories",
+  "description": "How the catalogue is grouped — reports and filters follow this.",
+  "add": "Add category",
+  "empty": "No categories yet.",
+  "columns": {
+    "name": "Name",
+    "parent": "Parent",
+    "products": "Products",
+    "status": "Status"
+  },
+  "form": {
+    "createTitle": "New category",
+    "editTitle": "Edit category",
+    "name": "Name",
+    "parent": "Parent category",
+    "noParent": "None",
+    "description": "Description",
+    "sortOrder": "Order",
+    "status": "Status",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "delete": {
+    "title": "Delete category?",
+    "description": "\"{{name}}\" will be removed. Products stay — they simply lose their category.",
+    "confirm": "Delete"
+  },
+  "errors": {
+    "create": "Could not create.",
+    "update": "Could not update.",
+    "delete": "Could not delete."
+  }
+}

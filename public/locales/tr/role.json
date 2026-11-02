@@ -1,0 +1,77 @@
+{
+  "list": {
+    "title": "Roles",
+    "description": "Manage system roles and permissions.",
+    "tabs": {
+      "roles": "Roles",
+      "trash": "Trash"
+    },
+    "filterRoles": "Filter roles...",
+    "noResults": "No results."
+  },
+  "primaryButtons": {
+    "addRole": "Add Role"
+  },
+  "columns": {
+    "id": "ID",
+    "name": "Name",
+    "slug": "Slug",
+    "permissionsCount": "Permissions",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "actions": "Actions"
+  },
+  "rowActions": {
+    "openMenu": "Open menu",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteTitle": "Delete this role: {{name}} ?",
+    "deleteDescription1": "You are about to delete a role with the name <strong>{{name}}</strong>.",
+    "deleteDescription2": "This action cannot be undone.",
+    "deleteConfirm": "Delete",
+    "restore": "Restore",
+    "restoreTitle": "Restore this role: {{name}} ?",
+    "restoreDescription1": "Are you sure you want to restore <strong>{{name}}</strong>?",
+    "deletePermanently": "Delete Permanently",
+    "deletePermanentlyTitle": "Delete this role: {{name}} ?",
+    "deletePermanentlyDescription1": "You are about to permanently delete a role with the name <strong>{{name}}</strong>.",
+    "deletePermanentlyDescription2": "This action cannot be undone."
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "Delete {{count}} role(s)",
+    "warningMessage1": "Are you sure you want to delete the selected roles?",
+    "warningMessage2": "This action cannot be undone.",
+    "confirmByTyping": "Confirm by typing \"{{word}}\":",
+    "confirmPlaceholder": "Type \"{{word}}\" to confirm.",
+    "confirmError": "Please type \"{{word}}\" to confirm.",
+    "alertTitle": "Warning!",
+    "alertDescription": "Please be careful, this operation can not be rolled back.",
+    "delete": "Delete",
+    "deleting": "Deleting…"
+  },
+  "bulkActions": {
+    "entityName": "role",
+    "deleteSelected": "Delete selected roles"
+  },
+  "form": {
+    "addTitle": "Add Role",
+    "updateTitle": "Update Role",
+    "addDescription": "Fill out the form to create a new role.",
+    "updateDescription": "Edit role details and click save.",
+    "name": "Name",
+    "namePlaceholder": "Enter name",
+    "guard": "Guard Name",
+    "guardPlaceholder": "Enter guard name",
+    "slug": "Slug",
+    "slugPlaceholder": "Enter slug",
+    "permissions": "Permissions",
+    "permission_access": "Permission access",
+    "saving": "Saving...",
+    "saveAndExit": "Save and Exit",
+    "updating": "Updating...",
+    "updateAndExit": "Update and Exit",
+    "createError": "An error occurred while creating the role.",
+    "updateError": "An error occurred while updating the role.",
+    "deleteError": "An error occurred while deleting the role."
+  }
+}

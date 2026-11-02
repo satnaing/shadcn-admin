@@ -1,0 +1,101 @@
+{
+  "list": {
+    "title": "Site Ayarları",
+    "description": "İletişim, sosyal ve diğer site ayarlarını düzenleyin. Yeni anahtarlar yalnızca veritabanından eklenir.",
+    "loadError": "Ayarlar yüklenirken hata oluştu.",
+    "empty": "Ayar bulunamadı."
+  },
+  "groups": {
+    "contact": "İletişim",
+    "contactDescription": "Telefon, e-posta, adres ve çalışma saatleri.",
+    "header": "Başlık",
+    "headerDescription": "Başlık CTA düğmesi metni, bağlantısı ve görünürlüğü.",
+    "company": "Şirket",
+    "companyDescription": "Şirket adı ve genel bilgiler.",
+    "social": "Sosyal Medya",
+    "socialDescription": "Sosyal medya profil bağlantıları.",
+    "seo": "SEO",
+    "seoDescription": "Varsayılan meta, Open Graph, Twitter ve indeksleme.",
+    "scripts": "Özel scriptler",
+    "scriptsDescription": "Pazarlama sitesinin <head> ve <body> bölümüne eklenen HTML / scriptler (ör. analytics, pixel).",
+    "cors": "CORS / API origin'leri",
+    "corsDescription": "API'ye tarayıcıdan istek atabilen ek Origin'ler (her satırda bir URL). Yerleşik varsayılanlar her zaman kalır.",
+    "other": "Diğer",
+    "defaultDescription": "Ayar değerlerini düzenleyin.",
+    "system": "Sistem",
+    "systemDescription": "Silmenin nasıl davranacağı. Kalıcı seçilse bile stok, satış ve üretim gibi geçmiş taşıyan modüller geri alınabilir kalır.",
+    "finance": "Finans",
+    "financeDescription": "KDV oranı gibi finansal varsayılanlar.",
+    "invoice": "Fatura",
+    "invoiceDescription": "Fatura numaralandırma, ödeme vadesi ve alt not.",
+    "notifications": "Bildirimler",
+    "notificationsDescription": "Bildirim ayarları."
+  },
+  "fields": {
+    "contact.address": "Adres",
+    "contact.phone": "Telefon",
+    "contact.email": "E-posta",
+    "contact.hours": "Çalışma saatleri",
+    "contact.whatsapp": "WhatsApp",
+    "header.cta.enabled": "CTA aktif",
+    "header.cta.route": "CTA route anahtarı",
+    "header.cta.url": "CTA URL",
+    "header.cta.target": "CTA link hedefi",
+    "company.name": "Şirket adı",
+    "social.linkedin": "LinkedIn",
+    "social.facebook": "Facebook",
+    "social.instagram": "Instagram",
+    "social.tiktok": "TikTok",
+    "social.twitter": "Twitter / X",
+    "seo.twitter_handle": "Twitter handle",
+    "seo.default_meta_title": "Varsayılan meta title",
+    "seo.default_meta_description": "Varsayılan meta description",
+    "seo.og_image": "Varsayılan OG görsel",
+    "seo.google_site_verification": "Google site verification",
+    "seo.robots_indexing": "Arama indeksleme",
+    "cors.allowed_origins": "İzinli origin'ler",
+    "scripts.head": "<head> scriptleri",
+    "scripts.body": "<body> scriptleri",
+    "system": {
+      "delete_mode": "Silme modu"
+    },
+    "company.tax_id": "Vergi No",
+    "company.address": "Adres",
+    "company.phone": "Telefon",
+    "company.email": "E-posta",
+    "company.bank_name": "Banka adı",
+    "company.bank_account": "Hesap numarası (IBAN)",
+    "company.bank_code": "Banka kodu",
+    "finance.vat_rate": "KDV oranı (%)",
+    "invoice.prefix": "Fatura ön eki",
+    "invoice.next_number": "Sonraki fatura numarası",
+    "invoice.default_due_days": "Ödeme vadesi (gün)",
+    "invoice.footer_note": "Fatura alt notu",
+    "system.delete_mode": "Silme modu"
+  },
+  "form": {
+    "valuePlaceholder": "Değeri girin",
+    "scriptsPlaceholder": "<script>...</script> veya diğer HTML",
+    "ctaLabelTitle": "Başlık CTA düğmesi metni",
+    "ctaLabelDescription": "Her dil için düğme metni. Yalnızca Diller bölümünde etkin diller gösterilir.",
+    "ctaLabelField": "Düğme metni",
+    "ctaContactPageHint": "Başlık CTA her zaman İletişim sayfasını açar (Sayfalar → İletişim). URL, o sayfanın dil slug'ına göre otomatiktir.",
+    "seoDefaultsTitle": "Varsayılan meta (dile göre)",
+    "seoDefaultsDescription": "Sayfanın kendi SEO'su yoksa kullanılan başlık, açıklama ve OG görseli. Twitter, Google doğrulama ve indeksleme yukarıda site genelinde kalır.",
+    "seoDefaultMetaTitle": "Varsayılan meta başlık",
+    "seoDefaultMetaDescription": "Varsayılan meta açıklama",
+    "seoDefaultOgImage": "Varsayılan OG görsel",
+    "saving": "Kaydediliyor...",
+    "save": "Kaydet",
+    "saveSuccess": "Ayarlar başarıyla kaydedildi.",
+    "updateError": "Ayarlar güncellenirken bir hata oluştu."
+  },
+  "choices": {
+    "system": {
+      "delete_mode": {
+        "soft": "Çöp kutusuna taşı (geri alınabilir)",
+        "force": "Kalıcı olarak sil"
+      }
+    }
+  }
+}

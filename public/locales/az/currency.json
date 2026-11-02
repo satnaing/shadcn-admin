@@ -1,0 +1,62 @@
+{
+  "title": "Valyutalar",
+  "description": "Sistem valyutalarını idarə edin. Defolt valyuta bütün qiymətlərdə istifadə olunur.",
+  "loading": "Yüklənir...",
+  "empty": "Heç bir valyuta tapılmadı",
+  "table": {
+    "code": "Kod",
+    "name": "Ad",
+    "symbol": "Simvol",
+    "exchangeRate": "Məzənnə",
+    "preview": "Önizləmə",
+    "status": "Status",
+    "actions": "Əməliyyatlar",
+    "default": "Defolt",
+    "exchangeRateAgainst": "Məzənnə (1 {{symbol}} =)"
+  },
+  "status": {
+    "active": "Aktiv",
+    "inactive": "Deaktiv"
+  },
+  "dialog": {
+    "createTitle": "Yeni valyuta",
+    "editTitle": "Valyutanı redaktə et"
+  },
+  "form": {
+    "code": "Valyuta kodu (ISO 4217)",
+    "symbol": "Simvol",
+    "name": "Ad",
+    "namePlaceholder": "Azərbaycan Manatı",
+    "exchangeRate": "Məzənnə",
+    "decimalPlaces": "Onluq rəqəm",
+    "position": "Simvol mövqeyi",
+    "positionBefore": "Əvvəl ($100)",
+    "positionAfter": "Sonra (100 ₼)",
+    "isActive": "Aktivdir",
+    "preview": "Önizləmə"
+  },
+  "actions": {
+    "create": "Əlavə et",
+    "save": "Yadda saxla",
+    "cancel": "Ləğv et",
+    "delete": "Sil",
+    "confirm": "Təsdiq et",
+    "setDefault": "Defolt et",
+    "edit": "Redaktə et"
+  },
+  "delete": {
+    "title": "Valyutanı silmək istəyirsiniz?",
+    "description": "Bu valyuta silinəcək. Bu əməliyyat geri qaytarıla bilər."
+  },
+  "setDefault": {
+    "title": "Defolt valyutanı dəyişmək istəyirsiniz?",
+    "description": "Bu valyuta sistem defolt valyutası olacaq. Məzənnəsi avtomatik 1.0 olaraq təyin ediləcək."
+  },
+  "toast": {
+    "created": "Valyuta uğurla yaradıldı",
+    "updated": "Valyuta uğurla yeniləndi",
+    "deleted": "Valyuta uğurla silindi",
+    "defaultSet": "Defolt valyuta dəyişdirildi"
+  },
+  "emptyHint": "İlk valyutanı əlavə edin — defolt təyin etdiyiniz valyuta bütün qiymətlərdə istifadə olunacaq."
+}

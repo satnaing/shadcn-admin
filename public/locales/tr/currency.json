@@ -1,0 +1,62 @@
+{
+  "title": "Para Birimleri",
+  "description": "Sistem para birimlerini yönetin. Varsayılan para birimi tüm fiyatlandırmada kullanılır.",
+  "loading": "Yükleniyor...",
+  "empty": "Para birimi bulunamadı",
+  "table": {
+    "code": "Kod",
+    "name": "Ad",
+    "symbol": "Simge",
+    "exchangeRate": "Döviz Kuru",
+    "preview": "Önizleme",
+    "status": "Durum",
+    "actions": "İşlemler",
+    "default": "Varsayılan",
+    "exchangeRateAgainst": "Kur (1 {{symbol}} =)"
+  },
+  "status": {
+    "active": "Aktif",
+    "inactive": "Deaktif"
+  },
+  "dialog": {
+    "createTitle": "Yeni Para Birimi",
+    "editTitle": "Para Birimini Düzenle"
+  },
+  "form": {
+    "code": "Para Birimi Kodu (ISO 4217)",
+    "symbol": "Simge",
+    "name": "Ad",
+    "namePlaceholder": "Türk Lirası",
+    "exchangeRate": "Döviz Kuru",
+    "decimalPlaces": "Ondalık Basamak",
+    "position": "Simge Konumu",
+    "positionBefore": "Önce ($100)",
+    "positionAfter": "Sonra (100 ₼)",
+    "isActive": "Aktif",
+    "preview": "Önizleme"
+  },
+  "actions": {
+    "create": "Oluştur",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "delete": "Sil",
+    "confirm": "Onayla",
+    "setDefault": "Varsayılan Yap",
+    "edit": "Düzenle"
+  },
+  "delete": {
+    "title": "Para birimini silmek istiyor musunuz?",
+    "description": "Bu para birimi silinecek. Bu işlem geri alınabilir."
+  },
+  "setDefault": {
+    "title": "Varsayılan para birimini değiştirmek istiyor musunuz?",
+    "description": "Bu para birimi sistem varsayılanı olacak. Döviz kuru otomatik olarak 1.0 yapılacak."
+  },
+  "toast": {
+    "created": "Para birimi başarıyla oluşturuldu",
+    "updated": "Para birimi başarıyla güncellendi",
+    "deleted": "Para birimi başarıyla silindi",
+    "defaultSet": "Varsayılan para birimi değiştirildi"
+  },
+  "emptyHint": "İlk para birimini ekleyin. Varsayılan seçtiğiniz, tüm fiyatlarda kullanılır."
+}

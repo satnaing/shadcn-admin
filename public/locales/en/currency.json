@@ -1,0 +1,62 @@
+{
+  "title": "Currencies",
+  "description": "Manage system currencies. The default currency is used across all pricing.",
+  "loading": "Loading...",
+  "empty": "No currencies found",
+  "table": {
+    "code": "Code",
+    "name": "Name",
+    "symbol": "Symbol",
+    "exchangeRate": "Exchange Rate",
+    "preview": "Preview",
+    "status": "Status",
+    "actions": "Actions",
+    "default": "Default",
+    "exchangeRateAgainst": "Rate (1 {{symbol}} =)"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "dialog": {
+    "createTitle": "New Currency",
+    "editTitle": "Edit Currency"
+  },
+  "form": {
+    "code": "Currency Code (ISO 4217)",
+    "symbol": "Symbol",
+    "name": "Name",
+    "namePlaceholder": "US Dollar",
+    "exchangeRate": "Exchange Rate",
+    "decimalPlaces": "Decimal Places",
+    "position": "Symbol Position",
+    "positionBefore": "Before ($100)",
+    "positionAfter": "After (100 ₼)",
+    "isActive": "Active",
+    "preview": "Preview"
+  },
+  "actions": {
+    "create": "Create",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "setDefault": "Set as Default",
+    "edit": "Edit"
+  },
+  "delete": {
+    "title": "Delete currency?",
+    "description": "This currency will be deleted. This action can be undone."
+  },
+  "setDefault": {
+    "title": "Change default currency?",
+    "description": "This currency will become the system default. Its exchange rate will be automatically set to 1.0."
+  },
+  "toast": {
+    "created": "Currency created successfully",
+    "updated": "Currency updated successfully",
+    "deleted": "Currency deleted successfully",
+    "defaultSet": "Default currency changed"
+  },
+  "emptyHint": "Add the first currency. Whichever you mark as default is what every price is shown in."
+}

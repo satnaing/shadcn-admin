@@ -1,0 +1,40 @@
+{
+  "title": "Satış hesabatları",
+  "description": "Gəlir, maya dəyəri və real mənfəət. Rəqəmlər satış anında dondurulub.",
+  "empty": "Bu dövr üçün məlumat yoxdur.",
+  "filters": {
+    "from": "Başlanğıc",
+    "to": "Son",
+    "group": "Qruplaşdırma"
+  },
+  "groups": {
+    "day": "Günlük",
+    "month": "Aylıq",
+    "year": "İllik"
+  },
+  "tabs": {
+    "summary": "Ümumi",
+    "products": "Məhsullar",
+    "sellers": "Satıcılar",
+    "customers": "Müştərilər"
+  },
+  "totals": {
+    "sales": "Satış sayı",
+    "revenue": "Gəlir",
+    "cost": "Maya dəyəri",
+    "profit": "Mənfəət",
+    "margin": "marja {{percent}}%"
+  },
+  "columns": {
+    "period": "Dövr",
+    "sales": "Satış",
+    "revenue": "Gəlir",
+    "cost": "Maya",
+    "profit": "Mənfəət",
+    "product": "Məhsul",
+    "quantity": "Miqdar",
+    "seller": "Satıcı",
+    "customer": "Müştəri",
+    "outstanding": "Qalıq borc"
+  }
+}

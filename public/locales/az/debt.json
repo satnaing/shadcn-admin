@@ -1,0 +1,76 @@
+{
+  "title": "Borclar",
+  "description": "Ödəniləcək və alınacaq borcların idarəsi",
+  "table": {
+    "direction": "İstiqamət",
+    "partyType": "Tərəf növü",
+    "amount": "Məbləğ",
+    "paidAmount": "Ödənilən",
+    "remaining": "Qalıq",
+    "dueDate": "Son tarix",
+    "status": "Status",
+    "description": "Təsvir",
+    "actions": "Əməliyyatlar"
+  },
+  "direction": {
+    "payable": "Ödəniləcək",
+    "receivable": "Alınacaq",
+    "all": "Hamısı"
+  },
+  "status": {
+    "open": "Açıq",
+    "partially_paid": "Qismən ödənilib",
+    "paid": "Ödənilib",
+    "all": "Hamısı"
+  },
+  "party": {
+    "employee": "İşçi",
+    "supplier": "Tədarükçü",
+    "customer": "Müştəri"
+  },
+  "dialog": {
+    "createTitle": "Yeni borc",
+    "editTitle": "Borcu redaktə et"
+  },
+  "form": {
+    "direction": "İstiqamət",
+    "partyType": "Tərəf növü",
+    "partyId": "Tərəf ID",
+    "amount": "Məbləğ",
+    "dueDate": "Son tarix",
+    "description": "Təsvir"
+  },
+  "delete": {
+    "title": "Borcu sil",
+    "description": "Bu borcu silmək istədiyinizə əminsiniz?"
+  },
+  "payment": {
+    "title": "Ödəniş et",
+    "amount": "Ödəniş məbləği",
+    "date": "Ödəniş tarixi",
+    "method": "Ödəniş üsulu",
+    "note": "Qeyd",
+    "history": "Ödəniş tarixçəsi",
+    "record": "Ödənişi qeyd et"
+  },
+  "method": {
+    "cash": "Nağd",
+    "bank": "Bank",
+    "card": "Kart"
+  },
+  "actions": {
+    "create": "Yeni borc",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "pay": "Ödəniş",
+    "save": "Yadda saxla",
+    "cancel": "Ləğv et"
+  },
+  "overdue": "Vaxtı keçib",
+  "toast": {
+    "created": "Borc yaradıldı",
+    "updated": "Borc yeniləndi",
+    "deleted": "Borc silindi",
+    "paymentRecorded": "Ödəniş qeyd edildi"
+  }
+}

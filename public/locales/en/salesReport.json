@@ -1,0 +1,40 @@
+{
+  "title": "Sales reports",
+  "description": "Revenue, cost and real profit. The figures were frozen when each sale completed.",
+  "empty": "No data for this period.",
+  "filters": {
+    "from": "From",
+    "to": "To",
+    "group": "Group by"
+  },
+  "groups": {
+    "day": "Daily",
+    "month": "Monthly",
+    "year": "Yearly"
+  },
+  "tabs": {
+    "summary": "Summary",
+    "products": "Products",
+    "sellers": "Sellers",
+    "customers": "Customers"
+  },
+  "totals": {
+    "sales": "Sales",
+    "revenue": "Revenue",
+    "cost": "Cost",
+    "profit": "Profit",
+    "margin": "{{percent}}% margin"
+  },
+  "columns": {
+    "period": "Period",
+    "sales": "Sales",
+    "revenue": "Revenue",
+    "cost": "Cost",
+    "profit": "Profit",
+    "product": "Product",
+    "quantity": "Quantity",
+    "seller": "Seller",
+    "customer": "Customer",
+    "outstanding": "Outstanding"
+  }
+}

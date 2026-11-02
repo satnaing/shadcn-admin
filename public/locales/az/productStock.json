@@ -1,0 +1,50 @@
+{
+  "list": {
+    "title": "Hazır məhsul stoku",
+    "description": "İstehsalatdan gələn hazır məhsul. Qalıq yalnız hərəkətlərdən hesablanır.",
+    "tabs": {
+      "balances": "Qalıqlar",
+      "movements": "Hərəkətlər"
+    },
+    "filter": "Axtar...",
+    "noResults": "Hərəkət tapılmadı."
+  },
+  "columns": {
+    "date": "Tarix",
+    "product": "Məhsul",
+    "type": "Növ",
+    "quantity": "Miqdar",
+    "batch": "Partiya",
+    "unitCost": "Vahid maya",
+    "reference": "Sənəd",
+    "note": "Qeyd"
+  },
+  "balances": {
+    "product": "Məhsul",
+    "onHand": "Qalıq",
+    "reorderPoint": "Sifariş nöqtəsi",
+    "salePriceNet": "Qiymət (ƏDV-siz)",
+    "salePriceGross": "Qiymət (ƏDV ilə)",
+    "loading": "Yüklənir...",
+    "empty": "Hələ hazır məhsul yoxdur."
+  },
+  "primaryButtons": {
+    "record": "Hərəkət yaz"
+  },
+  "record": {
+    "title": "Hazır məhsul hərəkəti",
+    "description": "Zay və düzəliş üçün. İstehsal girişi istehsal əmrinin təsdiqi ilə yaranır.",
+    "product": "Məhsul",
+    "productPlaceholder": "Məhsul seçin",
+    "type": "Növ",
+    "quantity": "Miqdar",
+    "adjustmentHint": "Artım üçün müsbət, azalma üçün mənfi.",
+    "note": "Qeyd",
+    "save": "Yaz",
+    "saving": "Yazılır..."
+  },
+  "toast": {
+    "recorded": "Hərəkət qeydə alındı.",
+    "recordError": "Hərəkəti yazmaq mümkün olmadı."
+  }
+}

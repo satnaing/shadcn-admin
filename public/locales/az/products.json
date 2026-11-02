@@ -1,0 +1,94 @@
+{
+  "title": "Bütün Məhsullar",
+  "subtitle": "Mağazada mövcud olan məhsulların idarə edilməsi",
+  "inhouse": {
+    "title": "Daxili (In-House) Məhsullar"
+  },
+  "seller": {
+    "title": "Satıcı Məhsulları"
+  },
+  "tabs": {
+    "all": "Bütün Məhsullar",
+    "inHouse": "In-House",
+    "seller": "Satıcılar"
+  },
+  "actions": {
+    "addNew": "Yeni Məhsul Əlavə Et"
+  },
+  "filter": {
+    "searchPlaceholder": "Məhsul adı və ya brend axtar...",
+    "status": "Status",
+    "all": "Bütün statuslar",
+    "published": "Dərc edilmiş",
+    "lowStock": "Azalan stok",
+    "todaysDeal": "Günün təklifi",
+    "sortBy": "Çeşidləmə",
+    "newest": "Ən yenilər",
+    "priceAsc": "Qiymət: Artan",
+    "priceDesc": "Qiymət: Azalan",
+    "ratingDesc": "Ən yüksək reytinq",
+    "salesDesc": "Ən çox satılanlar"
+  },
+  "table": {
+    "thumb": "Şəkil",
+    "nameBrand": "Ad / Brend",
+    "categoryOwner": "Kateqoriya / Sahibi",
+    "price": "Qiymət",
+    "stock": "Stok",
+    "rating": "Reytinq",
+    "published": "Dərc",
+    "featured": "Seçilmiş",
+    "todaysDeal": "Günün Təklifi",
+    "actions": "Əməliyyatlar",
+    "noBrand": "Brendsiz",
+    "inhouse": "In-House",
+    "seller": "Satıcı"
+  },
+  "common": {
+    "product": "Məhsul",
+    "loading": "Yüklənir...",
+    "noData": "Məlumat tapılmadı",
+    "cancel": "Ləğv et",
+    "save": "Yadda saxla",
+    "saving": "Yadda saxlanılır...",
+    "saveProduct": "Məhsulu Yarat"
+  },
+  "stockDialog": {
+    "title": "Stok Miqdarını Dəyiş",
+    "currentStock": "Mövcud Stok Sayı"
+  },
+  "create": {
+    "title": "Yeni Məhsul Əlavə Et",
+    "subtitle": "Məhsulun əsas məlumatları, qiyməti və stoku"
+  },
+  "form": {
+    "generalInfo": "Əsas Məlumatlar",
+    "name": "Məhsulun Adı",
+    "category": "Kateqoriya",
+    "unit": "Ölçü Vahidi",
+    "selectUnit": "Ölçü vahidi seç",
+    "wholesale": "Topdan Satış Qiymətləri (Wholesale)",
+    "addTier": "Pillə Əlavə Et",
+    "noWholesale": "Topdan satış qiyməti təyin edilməyib.",
+    "pricingStock": "Qiymət və Stok",
+    "unitPrice": "Əsas Qiymət (₼)",
+    "stock": "Stok Miqdar",
+    "statusSettings": "Nəşr Parametrləri"
+  },
+  "wholesale": {
+    "title": "Topdan Satış Məhsulları",
+    "subtitle": "Pilləli xüsusi qiymət və minimum sifariş miqdarı ilə satılan məhsullar",
+    "addNew": "Yeni Topdan Məhsul",
+    "createTitle": "Yeni Topdan Satış Məhsulu",
+    "createSubtitle": "Minimum sifariş miqdarı və pilləli qiymət konfiqurasiyası",
+    "save": "Topdan Məhsulu Yarat"
+  },
+  "reviews": {
+    "title": "Məhsul Rəyləri",
+    "subtitle": "Müştərilərin məhsullara yazdığı rəy və reytinqlərin idarə edilməsi",
+    "customer": "Müştəri",
+    "comment": "Rəy mətni",
+    "date": "Tarix",
+    "published": "Təsdiq"
+  }
+}

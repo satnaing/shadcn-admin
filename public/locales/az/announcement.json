@@ -1,0 +1,10 @@
+{
+  "title": "Elanlar",
+  "description": "Şirkət daxili elanlar",
+  "newAnnouncement": "Yeni elan",
+  "loading": "Yüklənir...",
+  "empty": "Elan yoxdur",
+  "headingLabel": "Başlıq",
+  "bodyLabel": "Mətn",
+  "create": "Yarat"
+}

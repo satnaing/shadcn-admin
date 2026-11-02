@@ -1,14 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { type Table } from '@tanstack/react-table'
+import { asyncRequest } from '@/shared/helper'
 import { AlertTriangle } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
-import { sleep } from '@/lib/utils'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ConfirmDialog } from '@/components/confirm-dialog'
+import type { UserInterface } from '../data/users.type'
+import { useDeleteMany } from '../hooks/useDeleteMany'
 
 type UserMultiDeleteDialogProps<TData> = {
   open: boolean
@@ -16,43 +19,50 @@ type UserMultiDeleteDialogProps<TData> = {
   table: Table<TData>
 }
 
-const CONFIRM_WORD = 'DELETE'
-
-export function UsersMultiDeleteDialog<TData>({
+export function UsersMultiDeleteDialog({
   open,
   onOpenChange,
   table,
-}: UserMultiDeleteDialogProps<TData>) {
+}: UserMultiDeleteDialogProps<UserInterface>) {
+  const { t } = useTranslation('users')
   const [value, setValue] = useState('')
 
+  const { mutateAsync: onDeleteMany, isPending } = useDeleteMany()
+
   const selectedRows = table.getFilteredSelectedRowModel().rows
+  const selectedIds = useMemo(
+    () => selectedRows.map((r) => String(r.original?.id)),
+    [selectedRows]
+  )
+
+  const CONFIRM_WORD = t('multiDeleteDialog.delete').toUpperCase()
+
+  const canConfirm =
+    value.trim() === CONFIRM_WORD && selectedIds.length > 0 && !isPending
 
   const handleDelete = () => {
-    if (value.trim() !== CONFIRM_WORD) {
-      toast.error(`Please type "${CONFIRM_WORD}" to confirm.`)
+    if (!canConfirm) {
+      toast.error(t('multiDeleteDialog.confirmError', { word: CONFIRM_WORD }))
       return
     }
 
     onOpenChange(false)
 
-    toast.promise(sleep(2000), {
-      loading: 'Deleting users...',
-      success: () => {
-        setValue('')
-        table.resetRowSelection()
-        return `Deleted ${selectedRows.length} ${
-          selectedRows.length > 1 ? 'users' : 'user'
-        }`
-      },
-      error: 'Error',
-    })
+    try {
+      asyncRequest(async () => {
+        await onDeleteMany(selectedIds)
+      })
+      table.resetRowSelection()
+    } finally {
+      setValue('')
+    }
   }
 
   return (
     <ConfirmDialog
       open={open}
       onOpenChange={onOpenChange}
-      form='users-multi-delete-form'
+      handleConfirm={handleDelete}
       disabled={value.trim() !== CONFIRM_WORD}
       title={
         <span className='text-destructive'>
@@ -60,43 +70,42 @@ export function UsersMultiDeleteDialog<TData>({
             className='me-1 inline-block stroke-destructive'
             size={18}
           />{' '}
-          Delete {selectedRows.length}{' '}
-          {selectedRows.length > 1 ? 'users' : 'user'}
+          {t('multiDeleteDialog.deleteTitle', { count: selectedRows.length })}
         </span>
       }
       desc={
-        <form
-          id='users-multi-delete-form'
-          onSubmit={(e) => {
-            e.preventDefault()
-            handleDelete()
-          }}
-          className='space-y-4'
-        >
+        <div className='space-y-4'>
           <p className='mb-2'>
-            Are you sure you want to delete the selected users? <br />
-            This action cannot be undone.
+            {t('multiDeleteDialog.warningMessage1')} <br />
+            {t('multiDeleteDialog.warningMessage2')}
           </p>
 
           <Label className='my-4 flex flex-col items-start gap-1.5'>
-            <span className=''>Confirm by typing "{CONFIRM_WORD}":</span>
+            <span className=''>
+              {t('multiDeleteDialog.confirmByTyping', { word: CONFIRM_WORD })}
+            </span>
             <Input
               value={value}
               onChange={(e) => setValue(e.target.value)}
-              placeholder={`Type "${CONFIRM_WORD}" to confirm.`}
-              autoFocus
+              placeholder={t('multiDeleteDialog.confirmPlaceholder', {
+                word: CONFIRM_WORD,
+              })}
             />
           </Label>
 
           <Alert variant='destructive'>
-            <AlertTitle>Warning!</AlertTitle>
+            <AlertTitle>{t('multiDeleteDialog.alertTitle')}</AlertTitle>
             <AlertDescription>
-              Please be careful, this operation can not be rolled back.
+              {t('multiDeleteDialog.alertDescription')}
             </AlertDescription>
           </Alert>
-        </form>
+        </div>
       }
-      confirmText='Delete'
+      confirmText={
+        isPending
+          ? t('multiDeleteDialog.deleting')
+          : t('multiDeleteDialog.delete')
+      }
       destructive
     />
   )

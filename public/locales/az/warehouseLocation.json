@@ -1,0 +1,100 @@
+{
+  "list": {
+    "title": "Anbar yerləri",
+    "description": "Zona, rəf və yer nömrələri — xammalın anbarda harada olduğunu göstərir.",
+    "tabs": {
+      "locations": "Yerlər",
+      "trash": "Səbət"
+    },
+    "filterLocations": "Yer axtar...",
+    "noResults": "Nəticə tapılmadı."
+  },
+  "columns": {
+    "id": "ID",
+    "code": "Kod",
+    "name": "Adı",
+    "position": "Mövqe",
+    "materials": "Xammal sayı",
+    "status": "Status"
+  },
+  "primaryButtons": {
+    "addLocation": "Yer əlavə et"
+  },
+  "bulkActions": {
+    "deleteSelected": "Seçilmişləri sil",
+    "entityName": "yer"
+  },
+  "form": {
+    "saving": "Yadda saxlanılır...",
+    "saveAndExit": "Yadda saxla",
+    "updating": "Yenilənir...",
+    "updateAndExit": "Yenilə",
+    "active": "Aktiv",
+    "createError": "Yaratmaq mümkün olmadı.",
+    "updateError": "Yeniləmək mümkün olmadı.",
+    "deleteError": "Silmək mümkün olmadı.",
+    "restoreError": "Bərpa etmək mümkün olmadı.",
+    "forceDeleteError": "Həmişəlik silmək mümkün olmadı.",
+    "addTitle": "Yeni anbar yeri",
+    "addDescription": "Yeni zona, rəf və ya yer əlavə edin.",
+    "updateTitle": "Anbar yerini redaktə et",
+    "updateDescription": "Anbar yerinin məlumatlarını yeniləyin.",
+    "code": "Kod",
+    "codePlaceholder": "A-01",
+    "name": "Adı",
+    "namePlaceholder": "Əsas anbar — A zonası",
+    "zone": "Zona",
+    "zonePlaceholder": "A",
+    "rack": "Rəf",
+    "rackPlaceholder": "3",
+    "bin": "Yer",
+    "binPlaceholder": "12",
+    "note": "Qeyd",
+    "sort": "Sıra"
+  },
+  "rowActions": {
+    "openMenu": "Menyunu aç",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "deleteConfirm": "Sil",
+    "restore": "Bərpa et",
+    "deletePermanently": "Həmişəlik sil",
+    "deleteTitle": "{{name}} silinsin?",
+    "deleteDescription1": "Bu element səbətə göndəriləcək:",
+    "deletePermanentlyTitle": "{{name}} həmişəlik silinsin?",
+    "deletePermanentlyDescription1": "Bu element həmişəlik silinəcək:",
+    "deletePermanentlyDescription2": "Bu əməliyyatı geri qaytarmaq mümkün deyil.",
+    "restoreTitle": "{{name}} bərpa edilsin?",
+    "restoreDescription1": "Bu element səbətdən geri qaytarılacaq:",
+    "details": "Detallar"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "{{count}} element silinsin?",
+    "warningMessage1": "Seçilmiş elementlər səbətə göndəriləcək.",
+    "warningMessage2": "Davam etmək üçün təsdiqləyin.",
+    "confirmByTyping": "Təsdiq üçün \"{{word}}\" yazın:",
+    "confirmPlaceholder": "{{word}} yazın",
+    "confirmError": "Təsdiq üçün \"{{word}}\" yazmalısınız.",
+    "alertTitle": "Diqqət!",
+    "alertDescription": "Bu əməliyyat toplu şəkildə aparılır.",
+    "deleting": "Silinir...",
+    "delete": "Sil"
+  },
+  "filters": {
+    "status": "Status",
+    "type": "Növ"
+  },
+  "detail": {
+    "title": "Anbar yeri detalları",
+    "description": "Yerin təsviri və burada saxlanılan xammallar.",
+    "loading": "Yüklənir...",
+    "notFound": "Tapılmadı",
+    "generalInfo": "Ümumi məlumat",
+    "storedMaterials": "Saxlanılan xammallar",
+    "noMaterials": "Bu yerdə xammal saxlanılmır.",
+    "materialCode": "Kod",
+    "materialName": "Xammal",
+    "stockOnHand": "Anbarda",
+    "minQuantity": "Minimum"
+  }
+}

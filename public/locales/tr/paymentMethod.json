@@ -1,0 +1,20 @@
+{
+  "title": "Ödeme Yöntemleri",
+  "description": "Ödeme yöntemlerinin yönetimi",
+  "add": "Yeni Ödeme Yöntemi",
+  "addTitle": "Yeni Ödeme Yöntemi",
+  "editTitle": "Ödeme Yöntemini Düzenle",
+  "deleteTitle": "Ödeme Yöntemini Sil",
+  "deleteDescription": "Bu ödeme yöntemini silmek istediğinize emin misiniz?",
+  "loading": "Yükleniyor...",
+  "empty": "Ödeme yöntemi bulunamadı",
+  "active": "Aktif",
+  "inactive": "Pasif",
+  "cancel": "İptal",
+  "confirm": "Sil",
+  "save": "Kaydet",
+  "create": "Oluştur",
+  "table": { "name": "Ad", "code": "Kod", "status": "Durum", "sort": "Sıra", "actions": "İşlemler" },
+  "form": { "name": "Ad", "code": "Kod", "isActive": "Aktif", "sort": "Sıra numarası" },
+  "toast": { "created": "Ödeme yöntemi oluşturuldu", "updated": "Ödeme yöntemi güncellendi", "deleted": "Ödeme yöntemi silindi" }
+}

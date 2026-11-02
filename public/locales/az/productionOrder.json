@@ -1,0 +1,99 @@
+{
+  "list": {
+    "title": "İstehsal əmrləri",
+    "description": "Planlaşdırma heç nə hərəkət etdirmir. Təsdiq xammalı anbardan çıxarır və hazır məhsulu stoka salır.",
+    "filter": "Kod, partiya və ya məhsul üzrə axtar...",
+    "noResults": "İstehsal əmri tapılmadı."
+  },
+  "columns": {
+    "code": "Kod",
+    "product": "Məhsul",
+    "quantity": "Miqdar",
+    "unitCost": "Vahid maya",
+    "margin": "Marja",
+    "date": "Tarix",
+    "status": "Status"
+  },
+  "status": {
+    "planned": "Planlaşdırılıb",
+    "confirmed": "Təsdiqlənib",
+    "cancelled": "Ləğv edilib"
+  },
+  "primaryButtons": {
+    "start": "Yeni istehsal"
+  },
+  "create": {
+    "title": "Yeni istehsal əmri",
+    "description": "Məhsulun aktiv reçetəsi götürülür və lazım olan xammal hesablanır.",
+    "product": "Məhsul",
+    "productPlaceholder": "Məhsul seçin",
+    "noRecipe": "Bu məhsulun aktiv reçetəsi yoxdur — əvvəlcə reçetə yaradın.",
+    "quantity": "İstehsal miqdarı",
+    "plannedFor": "Planlaşdırılan tarix",
+    "note": "Qeyd",
+    "start": "Planlaşdır",
+    "starting": "Yaradılır...",
+    "pendingDemand": "Açıq sifarişlərdə gözləyən: {{qty}} {{unit}}",
+    "pendingDemandHint": "Müştərilərə hələ verilməmiş miqdar — ən azı bu qədər istehsal olunmalıdır.",
+    "pendingDemandBy": "{{date}}-ə qədər"
+  },
+  "detail": {
+    "title": "İstehsal əmri",
+    "description": "Xammal ehtiyacını yoxlayın, sonra təsdiqləyin.",
+    "loading": "Yüklənir...",
+    "materials": "Xammal",
+    "noLines": "Sətir yoxdur.",
+    "material": "Xammal",
+    "required": "Lazımdır",
+    "available": "Anbarda",
+    "issued": "Çıxarılıb",
+    "lineCost": "Dəyər",
+    "noPrice": "Qiymət yoxdur",
+    "shortBy": "{{quantity}} çatışmır",
+    "quantities": "Plan: {{planned}} · Çıxan: {{produced}} {{unit}}",
+    "waste": "Fire: {{quantity}} — {{reason}}",
+    "shortageWarning": "{{count}} xammal çatışmır — təsdiq mümkün deyil.",
+    "estimatedCost": "Təxmini maya dəyəri",
+    "finalCost": "Yekun maya dəyəri",
+    "confirm": "Təsdiqlə",
+    "cancel": "Ləğv et",
+    "cancelTitle": "{{code}} ləğv edilsin?",
+    "cancelDescription": "Əmr ləğv olunacaq. Heç bir stok hərəkəti yazılmayıb, ona görə anbar dəyişmir.",
+    "confirmedBy": "{{by}} tərəfindən {{at}} tarixində təsdiqlənib",
+    "note": "Qeyd"
+  },
+  "confirm": {
+    "title": "{{code}} təsdiqlənsin",
+    "description": "Bu, stokun həqiqətən hərəkət etdiyi andır.",
+    "producedQuantity": "Faktiki çıxan miqdar",
+    "plannedWas": "Plan: {{quantity}}",
+    "producedAt": "İstehsal tarixi",
+    "batchNumber": "Partiya nömrəsi",
+    "expiryDate": "Son istifadə tarixi",
+    "wasteReason": "Fire səbəbi",
+    "wasteReasonPlaceholder": "Tökülmə, qab zədəsi...",
+    "wasteWarning": "{{quantity}} vahid fire — real maya dəyəri planlaşdırılandan yüksək olacaq.",
+    "effect": "Təsdiqdən sonra: xammal anbardan çıxılır (partiyalı xammal FEFO ilə), hazır məhsul stoka əlavə olunur və maya dəyəri dondurulur.",
+    "confirm": "Təsdiqlə",
+    "confirming": "Təsdiqlənir..."
+  },
+  "cost": {
+    "materialCost": "Xammal",
+    "laborCost": "İşçi pulu",
+    "utilityCost": "Kommunal",
+    "extraCost": "Əlavə",
+    "totalCost": "Ümumi",
+    "unitCost": "Vahid maya dəyəri",
+    "salePrice": "Satış qiyməti",
+    "netHint": "ƏDV-siz",
+    "margin": "Xalis marja"
+  },
+  "toast": {
+    "created": "İstehsal əmri planlaşdırıldı.",
+    "createError": "Əmri yaratmaq mümkün olmadı.",
+    "confirmed": "İstehsal təsdiqləndi — xammal çıxarıldı, hazır məhsul stoka əlavə olundu.",
+    "confirmError": "Təsdiqləmək mümkün olmadı.",
+    "cancelled": "Əmr ləğv edildi.",
+    "cancelError": "Ləğv etmək mümkün olmadı."
+  }
+}

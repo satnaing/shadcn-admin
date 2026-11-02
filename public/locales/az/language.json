@@ -1,0 +1,111 @@
+{
+  "list": {
+    "title": "Dil Siyahısı",
+    "description": "Platformanızın dillərini idarə edin.",
+    "tabs": {
+      "languages": "Dillər",
+      "uiMessages": "Sayt mətnləri",
+      "trash": "Zibil"
+    },
+    "filterLanguages": "Dilləri filtrlə...",
+    "noResults": "Nəticə yoxdur."
+  },
+  "primaryButtons": {
+    "addLanguage": "Dil əlavə et"
+  },
+  "columns": {
+    "id": "ID",
+    "name": "Ad",
+    "code": "Kod",
+    "frontDefault": "Front default",
+    "adminDefault": "Admin default",
+    "status": "Status",
+    "createdAt": "Yaradılıb",
+    "updatedAt": "Yenilənib",
+    "actions": "Əməliyyatlar"
+  },
+  "rowActions": {
+    "openMenu": "Menyunu aç",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "deleteTitle": "Bu dili silin: {{name}} ?",
+    "deleteDescription1": "Silmək istədiyinizə əminsinizmi",
+    "deleteConfirm": "Sil",
+    "restore": "Bərpa et",
+    "restoreTitle": "Bu dili bərpa edin: {{name}} ?",
+    "restoreDescription1": "Bərpa etmək istədiyinizə əminsinizmi",
+    "deletePermanently": "Daimi sil",
+    "deletePermanentlyTitle": "Bu dili daimi silin: {{name}} ?",
+    "deletePermanentlyDescription1": "Siz daimi olaraq silmək üzərəsiniz",
+    "deletePermanentlyDescription2": "Bu əməliyyat geri qaytarıla bilməz."
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "{{count}} dil sil",
+    "warningMessage1": "Seçilmiş dilləri silmək istədiyinizə əminsinizmi?",
+    "warningMessage2": "Bu əməliyyat geri qaytarıla bilməz.",
+    "confirmByTyping": "Təsdiq etmək üçün \"{{word}}\" yazın:",
+    "confirmPlaceholder": "Təsdiq üçün \"{{word}}\" yazın.",
+    "confirmError": "Təsdiq üçün \"{{word}}\" yazmaq lazımdır.",
+    "alertTitle": "Xəbərdarlıq!",
+    "alertDescription": "Diqqətli olun, bu əməliyyat geri alına bilməz.",
+    "delete": "Sil",
+    "deleting": "Silinir…"
+  },
+  "bulkActions": {
+    "entityName": "dil",
+    "deleteSelected": "Seçilmiş dilləri sil"
+  },
+  "form": {
+    "addTitle": "Dil əlavə et",
+    "updateTitle": "Dili yenilə",
+    "addDescription": "Yeni dil yaratmaq üçün formu doldurun.",
+    "updateDescription": "Dil məlumatlarını redaktə edin.",
+    "active": "Aktiv",
+    "name": "Ad",
+    "namePlaceholder": "Adı daxil edin",
+    "code": "Kod",
+    "codePlaceholder": "Kodu daxil edin (məs. az)",
+    "frontDefault": "Front default dil",
+    "frontDefaultHint": "Marketinq saytının default dili (/ yönləndirmə, SEO x-default).",
+    "adminDefault": "Admin default dil",
+    "adminDefaultHint": "Admin panel interfeysinin default dili (ilk giriş).",
+    "flagPlaceholder": "Sıralama qaydası",
+    "saving": "Saxlanılır...",
+    "saveAndExit": "Saxla və çıx",
+    "updating": "Yenilənir...",
+    "updateAndExit": "Yenilə və çıx",
+    "createError": "Dil yaradılarkən xəta baş verdi.",
+    "updateError": "Dil yenilənərkən xəta baş verdi.",
+    "deleteError": "Dil silinərkən xəta baş verdi.",
+    "restoreError": "Dil bərpa edilərkən xəta baş verdi.",
+    "forceDeleteError": "Dil daimi silinərkən xəta baş verdi."
+  },
+  "uiMessages": {
+    "locale": "Dil",
+    "namespace": "Namespace",
+    "allNamespaces": "Hamısı",
+    "search": "Axtarış",
+    "searchPlaceholder": "Açar və ya path…",
+    "coverage": "{{filled}} / {{total}} dolu",
+    "translateEmpty": "Boşları AI ilə tərcümə et",
+    "save": "Yadda saxla",
+    "saving": "Saxlanılır…",
+    "saved": "Sayt mətnləri saxlanıldı.",
+    "saveError": "Saxlama uğursuz oldu.",
+    "loading": "Yüklənir…",
+    "empty": "Açar tapılmadı.",
+    "hint": "AI nəticəsi forma üzərində görünür; yadda saxlamadan JSON/fayl yenilənmir.",
+    "sourceHint": "Boz sətirlər {{locale}} mənbəni göstərir. Bu dili doldurub Save edin — canlı sayt ~1 dəqiqəyə götürür.",
+    "noChanges": "Dəyişiklik yoxdur.",
+    "cannotTranslateDefault": "Default dil özü mənbədir.",
+    "nothingToTranslate": "Tərcümə ediləcək boş açar yoxdur.",
+    "translateReady": "Tərcümə hazırdır — yadda saxlayın.",
+    "translateError": "AI tərcüməsi uğursuz oldu.",
+    "loadError": "Sayt mətnləri yüklənmədi (API və ya icazə).",
+    "emptyPack": "Bu API-də hələ sayt mətn paketi yoxdur.",
+    "emptyPackHint": "Yalnız statik chrome (Nav, Footer, Common, Detail, Chat, Meta) buradadır — CMS səhifə/kontent yox. Bir dəfə az/en/tr/ru paketini yükləyin.",
+    "importDefaults": "Chrome paketini yüklə (az/en/tr/ru)",
+    "importSuccess": "Sayt mətn paketləri yükləndi.",
+    "importError": "Paket yüklənməsi uğursuz oldu."
+  }
+}

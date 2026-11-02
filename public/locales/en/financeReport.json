@@ -1,0 +1,12 @@
+{
+  "title": "Finance Reports",
+  "description": "Income/expense, debt and cash flow reports",
+  "tabs": { "profitLoss": "Profit & Loss", "debtSummary": "Debt Summary", "cashFlow": "Cash Flow" },
+  "filter": { "from": "From", "to": "To" },
+  "pl": { "totalIncome": "Total Income", "totalExpense": "Total Expense", "netProfit": "Net Profit", "category": "Category", "type": "Type", "total": "Total", "count": "Count" },
+  "debt": { "payable": "We owe", "receivable": "Owed to us", "partyType": "Party type", "amount": "Amount", "paid": "Paid", "remaining": "Remaining", "dueDate": "Due date", "status": "Status", "totalPayable": "Total payable", "totalReceivable": "Total receivable", "overdueCount": "Overdue" },
+  "cf": { "month": "Month", "income": "Income", "expense": "Expense", "netFlow": "Net flow", "totals": "Totals" },
+  "status": { "open": "Open", "partially_paid": "Partial", "paid": "Paid" },
+  "overdue": "Overdue",
+  "noData": "No data"
+}

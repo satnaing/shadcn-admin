@@ -1,0 +1,120 @@
+{
+  "list": {
+    "title": "Orders",
+    "description": "Customer orders. Out-of-stock items are kept in pending status.",
+    "add": "New order",
+    "empty": "No orders yet."
+  },
+  "columns": {
+    "code": "Code",
+    "date": "Date",
+    "expectedDate": "Expected date",
+    "customer": "Customer",
+    "createdBy": "Created by",
+    "total": "Amount",
+    "deposit": "Deposit",
+    "status": "Status",
+    "items": "Products"
+  },
+  "status": {
+    "pending": "Pending",
+    "partially_fulfilled": "Partially fulfilled",
+    "fulfilled": "Fulfilled",
+    "cancelled": "Cancelled"
+  },
+  "actions": {
+    "fulfill": "Fulfill",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "create": {
+    "title": "New order",
+    "description": "Fill in the basket. Out-of-stock items will be marked as pending.",
+    "save": "Create order"
+  },
+  "form": {
+    "customer": "Customer",
+    "selectCustomer": "Select customer",
+    "createdBy": "Sales person",
+    "selectEmployee": "Select employee",
+    "expectedDate": "Expected date",
+    "deposit": "Deposit amount",
+    "depositHint": "Advance payment received from the customer.",
+    "basketDiscount": "Overall discount",
+    "note": "Note",
+    "cancel": "Cancel",
+    "cancelReason": "Cancellation reason"
+  },
+  "basket": {
+    "title": "Basket"
+  },
+  "totals": {
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "total": "Total",
+    "deposit": "Deposit",
+    "remaining": "Remaining"
+  },
+  "cancelDialog": {
+    "title": "Cancel order",
+    "description": "This order will be cancelled. If a deposit was paid, the refund must be processed manually.",
+    "confirm": "Cancel"
+  },
+  "fulfill": {
+    "title": "{{code}} — Fulfill",
+    "description": "Select lines with available stock. Selected lines will be converted into a new sale.",
+    "product": "Product",
+    "remaining": "Remaining",
+    "stockStatus": "Stock",
+    "quantity": "Quantity",
+    "ready": "Ready",
+    "pending": "Pending",
+    "noItems": "No items available to fulfill.",
+    "paymentMethod": "Payment method",
+    "paidAmount": "Paid amount",
+    "cash": "Cash",
+    "card": "Card",
+    "transfer": "Transfer",
+    "credit": "Credit",
+    "confirm": "Fulfill order"
+  },
+  "detail": {
+    "title": "Order details",
+    "description": "Full order information and line items.",
+    "loading": "Loading...",
+    "notFound": "Not found",
+    "generalInfo": "General information",
+    "code": "Code",
+    "customer": "Customer",
+    "creator": "Created by",
+    "expectedDate": "Expected date",
+    "createdAt": "Created at",
+    "cancelReason": "Cancellation reason",
+    "note": "Note",
+    "financialInfo": "Financial",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "tax": "Tax",
+    "total": "Total",
+    "deposit": "Deposit",
+    "amountDue": "Amount due",
+    "items": "Order items",
+    "product": "Product",
+    "ordered": "Ordered",
+    "fulfilled": "Fulfilled",
+    "remaining": "Remaining",
+    "unitPrice": "Unit price",
+    "lineTotal": "Line total"
+  },
+  "messages": {
+    "created": "Order created.",
+    "fulfilled": "Order fulfilled.",
+    "cancelled": "Order cancelled."
+  },
+  "errors": {
+    "create": "Could not create the order.",
+    "update": "Could not update.",
+    "cancel": "Could not cancel.",
+    "delete": "Could not delete."
+  }
+}

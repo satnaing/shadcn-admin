@@ -1,0 +1,39 @@
+{
+  "title": "Məhsul hesabatları",
+  "description": "Hazır məhsul stokunun dəyəri, azalan qalıqlar və istehsal-satış müqayisəsi.",
+  "empty": "Məlumat yoxdur.",
+  "noAlerts": "Bütün məhsullar kifayət qədərdir.",
+  "hasRecipe": "Reçetə var",
+  "noRecipe": "Reçetə yoxdur",
+  "filters": {
+    "from": "Başlanğıc",
+    "to": "Son"
+  },
+  "tabs": {
+    "valuation": "Dəyər",
+    "alerts": "Xəbərdarlıqlar",
+    "movements": "Hərəkət"
+  },
+  "totals": {
+    "costValue": "Maya dəyəri ilə",
+    "costHint": "Satış qiyməti ilə deyil — satılmamış stok gəlir deyil.",
+    "retailValue": "Satış qiyməti ilə",
+    "potentialProfit": "Potensial mənfəət"
+  },
+  "columns": {
+    "product": "Məhsul",
+    "category": "Kateqoriya",
+    "onHand": "Qalıq",
+    "unitCost": "Vahid maya",
+    "costValue": "Maya dəyəri",
+    "retailValue": "Satış dəyəri",
+    "threshold": "Minimum",
+    "shortfall": "Çatışmır",
+    "canProduce": "İstehsal",
+    "produced": "İstehsal",
+    "sold": "Satılıb",
+    "wasted": "Fire",
+    "netChange": "Fərq",
+    "sellThrough": "Satılma %"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Duyurular",
+  "description": "Şirket içi duyurular",
+  "newAnnouncement": "Yeni duyuru",
+  "loading": "Yükleniyor...",
+  "empty": "Duyuru yok",
+  "headingLabel": "Başlık",
+  "bodyLabel": "Metin",
+  "create": "Oluştur"
+}

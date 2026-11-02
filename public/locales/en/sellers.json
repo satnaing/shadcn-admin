@@ -1,0 +1,138 @@
+{
+  "titles": {
+    "all": "All Sellers",
+    "allSubtitle": "All registered and active sellers on the platform",
+    "pending": "Pending Sellers",
+    "pendingSubtitle": "New seller and shop applications awaiting approval",
+    "rating": "Rating & Followers",
+    "ratingSubtitle": "Customer reviews, ratings, and follower statistics",
+    "payoutRequests": "Seller Payout Requests",
+    "payoutRequestsSubtitle": "Balance payout and transfer requests from sellers",
+    "payoutHistory": "Payouts History",
+    "payoutHistorySubtitle": "All successfully processed payments to sellers",
+    "commissions": "Commission Rules (E31)",
+    "commissionsSubtitle": "Multi-dimensional commission structure: category, brand, and seller priorities",
+    "packages": "Seller Packages (E29)",
+    "packagesSubtitle": "Seller subscription plans and product upload quotas",
+    "verificationForm": "Seller Verification Form",
+    "verificationFormSubtitle": "Configure required documents and fields for seller verification"
+  },
+  "table": {
+    "loading": "Loading...",
+    "empty": "No sellers found",
+    "shop": "Shop / Seller",
+    "metrics": "Products / Orders",
+    "balance": "Balance",
+    "approval": "Approval",
+    "ban": "Ban Status",
+    "actions": "Actions"
+  },
+  "status": {
+    "approved": "Approved",
+    "pending": "Pending",
+    "verified": "Verified",
+    "unverified": "Unverified",
+    "banned": "Banned",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "filter": {
+    "searchPlaceholder": "Search shop, seller, or phone...",
+    "allApproval": "Approval: All",
+    "allVerification": "Verification: All",
+    "allBan": "Ban Status: All",
+    "reset": "Reset"
+  },
+  "actions": {
+    "pay": "Pay",
+    "approve": "Approve",
+    "reject": "Reject",
+    "ban": "Ban",
+    "unban": "Unban"
+  },
+  "detail": {
+    "title": "Seller & Shop Profile",
+    "balance": "Current Balance",
+    "rating": "Rating & Followers",
+    "phone": "Phone",
+    "products": "Products Count",
+    "orders": "Orders Count",
+    "registered": "Registered Date"
+  },
+  "pay": {
+    "title": "Seller Balance Payment",
+    "currentBalance": "Current Balance",
+    "amount": "Payment Amount (₼)",
+    "method": "Payment Method",
+    "bank": "Bank Transfer",
+    "cash": "Cash",
+    "card": "Card Payment",
+    "note": "Note / Transaction Ref",
+    "notePlaceholder": "Enter note...",
+    "confirm": "Confirm Payment"
+  },
+  "payout": {
+    "empty": "No payout requests found",
+    "amount": "Amount",
+    "method": "Payment Method",
+    "date": "Date",
+    "status": "Status",
+    "paid": "Paid",
+    "rejected": "Rejected",
+    "pending": "Pending",
+    "approve": "Approve & Pay",
+    "reject": "Reject",
+    "allStatus": "All Statuses"
+  },
+  "rating": {
+    "topRated": "Top Rated Shops",
+    "totalFollowers": "Total Shop Followers",
+    "avgRating": "Average Rating",
+    "followers": "Followers"
+  },
+  "commission": {
+    "empty": "No custom commission rules configured",
+    "addNew": "New Commission Rule",
+    "name": "Rule Name",
+    "scope": "Scope",
+    "rate": "Commission Rate (%)",
+    "priority": "Priority",
+    "baseRate": "Standard Platform Commission",
+    "activeRules": "Active Custom Rules"
+  },
+  "packages": {
+    "addNew": "Create New Package",
+    "empty": "No seller packages found",
+    "name": "Package Name",
+    "price": "Price (₼)",
+    "limit": "Product Limit",
+    "durationDays": "Duration (Days)",
+    "uploadLimit": "Product upload limit",
+    "duration": "Duration",
+    "editTitle": "Edit Package",
+    "createTitle": "New Seller Package"
+  },
+  "verification": {
+    "addField": "Add Field",
+    "formFields": "Required Documents and Fields"
+  },
+  "dialog": {
+    "edit": "Edit",
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "category": "Category"
+  },
+  "messages": {
+    "paymentSuccess": "Payment recorded successfully!",
+    "approvalUpdated": "Seller approval status updated!",
+    "payoutApproved": "Payout approved and marked as paid!",
+    "payoutRejected": "Payout request rejected!",
+    "commissionCreated": "Commission rule created!",
+    "packageCreated": "New seller package created!",
+    "packageUpdated": "Seller package updated!",
+    "packageDeleted": "Seller package deleted!",
+    "confirmDeletePackage": "Are you sure you want to delete this package?",
+    "verificationSaved": "Verification form configuration saved!"
+  }
+}

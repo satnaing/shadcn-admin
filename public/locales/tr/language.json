@@ -1,0 +1,111 @@
+{
+  "list": {
+    "title": "Language List",
+    "description": "Manage your platform languages.",
+    "tabs": {
+      "languages": "Languages",
+      "uiMessages": "Site strings",
+      "trash": "Trash"
+    },
+    "filterLanguages": "Filter languages...",
+    "noResults": "No results."
+  },
+  "primaryButtons": {
+    "addLanguage": "Add Language"
+  },
+  "columns": {
+    "id": "ID",
+    "name": "Name",
+    "code": "Code",
+    "frontDefault": "Front varsayılan",
+    "adminDefault": "Admin varsayılan",
+    "status": "Durum",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "actions": "Actions"
+  },
+  "rowActions": {
+    "openMenu": "Open menu",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteTitle": "Delete this language: {{name}} ?",
+    "deleteDescription1": "Are you sure you want to delete",
+    "deleteConfirm": "Delete",
+    "restore": "Restore",
+    "restoreTitle": "Restore this language: {{name}} ?",
+    "restoreDescription1": "Are you sure you want to restore",
+    "deletePermanently": "Delete Permanently",
+    "deletePermanentlyTitle": "Delete this language: {{name}} ?",
+    "deletePermanentlyDescription1": "You are about to permanently delete",
+    "deletePermanentlyDescription2": "This action cannot be undone."
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "Delete {{count}} language(s)",
+    "warningMessage1": "Are you sure you want to delete the selected languages?",
+    "warningMessage2": "This action cannot be undone.",
+    "confirmByTyping": "Confirm by typing \"{{word}}\":",
+    "confirmPlaceholder": "Type \"{{word}}\" to confirm.",
+    "confirmError": "Please type \"{{word}}\" to confirm.",
+    "alertTitle": "Warning!",
+    "alertDescription": "Please be careful, this operation can not be rolled back.",
+    "delete": "Delete",
+    "deleting": "Deleting…"
+  },
+  "bulkActions": {
+    "entityName": "language",
+    "deleteSelected": "Delete selected languages"
+  },
+  "form": {
+    "addTitle": "Add Language",
+    "updateTitle": "Update Language",
+    "addDescription": "Fill out the form to create a new language.",
+    "updateDescription": "Edit language details and click save.",
+    "active": "Active",
+    "name": "Name",
+    "namePlaceholder": "Enter name",
+    "code": "Code",
+    "codePlaceholder": "Kod girin (örn. tr)",
+    "frontDefault": "Front varsayılan dil",
+    "frontDefaultHint": "Pazarlama sitesinin varsayılan dili (/, SEO x-default).",
+    "adminDefault": "Admin varsayılan dil",
+    "adminDefaultHint": "Yönetim paneli arayüzünün ilk giriş varsayılan dili.",
+    "flagPlaceholder": "Sıralama",
+    "saving": "Saving...",
+    "saveAndExit": "Save and Exit",
+    "updating": "Updating...",
+    "updateAndExit": "Update and Exit",
+    "createError": "An error occurred while creating the language.",
+    "updateError": "An error occurred while updating the language.",
+    "deleteError": "An error occurred while deleting the language.",
+    "restoreError": "An error occurred while restoring the language.",
+    "forceDeleteError": "An error occurred while permanently deleting the language."
+  },
+  "uiMessages": {
+    "locale": "Dil",
+    "namespace": "Namespace",
+    "allNamespaces": "Tümü",
+    "search": "Ara",
+    "searchPlaceholder": "Anahtar veya path…",
+    "coverage": "{{filled}} / {{total}} dolu",
+    "translateEmpty": "Boşları AI ile çevir",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…",
+    "saved": "Site metinleri kaydedildi.",
+    "saveError": "Kayıt başarısız.",
+    "loading": "Yükleniyor…",
+    "empty": "Anahtar yok.",
+    "hint": "AI sonucu forma yazılır; kaydetmeden JSON güncellenmez.",
+    "sourceHint": "Gri satırlar {{locale}} kaynağını gösterir. Bu dili doldurup Save edin — canlı site ~1 dakikada alır.",
+    "noChanges": "Değişiklik yok.",
+    "cannotTranslateDefault": "Varsayılan dil kaynaktır.",
+    "nothingToTranslate": "Çevrilecek boş anahtar yok.",
+    "translateReady": "Çeviri hazır — kaydedin.",
+    "translateError": "AI çevirisi başarısız.",
+    "loadError": "Site metinleri yüklenemedi (API veya izin).",
+    "emptyPack": "Bu API'de henüz site metin paketi yok.",
+    "emptyPackHint": "Yalnız statik chrome (Nav, Footer, Common, Detail, Chat, Meta) — CMS sayfa/içerik burada değil. az/en/tr/ru paketini bir kez yükleyin.",
+    "importDefaults": "Chrome paketini yükle (az/en/tr/ru)",
+    "importSuccess": "Site metin paketleri yüklendi.",
+    "importError": "Paket yükleme başarısız."
+  }
+}

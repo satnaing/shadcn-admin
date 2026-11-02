@@ -1,0 +1,55 @@
+{
+  "title": "Invoices",
+  "description": "Invoice management",
+  "direction": "Direction",
+  "party": "Party",
+  "status": "Status",
+  "total": "Amount",
+  "issueDate": "Date",
+  "dueDate": "Due date",
+  "empty": "No invoices",
+  "invoiceNumber": "Invoice number",
+  "subtotal": "Subtotal",
+  "taxAmount": "Tax",
+  "notes": "Notes",
+  "statuses": {
+    "draft": "Draft",
+    "sent": "Sent",
+    "paid": "Paid",
+    "overdue": "Overdue",
+    "cancelled": "Cancelled"
+  },
+  "directions": {
+    "outgoing": "Outgoing",
+    "incoming": "Incoming"
+  },
+  "actions": {
+    "view": "View",
+    "downloadPdf": "Download PDF",
+    "send": "Send",
+    "markPaid": "Mark paid",
+    "delete": "Delete",
+    "create": "New invoice"
+  },
+  "loading": "Loading...",
+  "detail": {
+    "title": "Invoice details",
+    "description": "Full invoice information and line items.",
+    "notFound": "Not found",
+    "generalInfo": "General information",
+    "amounts": "Amounts",
+    "creator": "Created by",
+    "source": "Source",
+    "viewSale": "View sale",
+    "items": "Line items",
+    "itemDescription": "Description",
+    "quantity": "Quantity",
+    "unitPrice": "Unit price",
+    "taxRate": "Tax %",
+    "lineTotal": "Line total",
+    "party": {
+      "customer": "Customer",
+      "supplier": "Supplier"
+    }
+  }
+}

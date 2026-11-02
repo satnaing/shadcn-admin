@@ -1,0 +1,129 @@
+{
+  "list": {
+    "title": "Customers",
+    "description": "The people and companies you sell to, their terms and credit limit.",
+    "tabs": {
+      "customers": "Customers",
+      "trash": "Trash"
+    },
+    "filterCustomers": "Search customers...",
+    "noResults": "No results."
+  },
+  "columns": {
+    "id": "ID",
+    "code": "Code",
+    "name": "Name",
+    "contact": "Contact",
+    "paymentTerms": "Payment terms",
+    "status": "Status",
+    "type": "Type",
+    "creditLimit": "Credit limit",
+    "sales": "Sales",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "taxId": "Tax ID",
+    "contactPerson": "Contact person",
+    "note": "Note"
+  },
+  "primaryButtons": {
+    "addCustomer": "Add customer"
+  },
+  "bulkActions": {
+    "deleteSelected": "Delete selected",
+    "entityName": "customer"
+  },
+  "form": {
+    "saving": "Saving...",
+    "saveAndExit": "Save",
+    "updating": "Updating...",
+    "updateAndExit": "Update",
+    "active": "Active",
+    "createError": "Could not create the record.",
+    "updateError": "Could not update the record.",
+    "deleteError": "Could not delete the record.",
+    "restoreError": "Could not restore the record.",
+    "forceDeleteError": "Could not permanently delete the record.",
+    "addTitle": "New customer",
+    "addDescription": "Create a customer record.",
+    "updateTitle": "Edit customer",
+    "updateDescription": "Update this customer's details.",
+    "name": "Name / company",
+    "namePlaceholder": "Jane Doe or Acme Ltd",
+    "code": "Code",
+    "codeAutoHint": "The code is issued by the system on save.",
+    "codeLockedHint": "The code cannot be changed.",
+    "contactPerson": "Contact person",
+    "phone": "Phone",
+    "email": "Email",
+    "taxId": "Tax ID",
+    "address": "Address",
+    "paymentTermDays": "Payment term (days)",
+    "paymentTermHint": "0 = payment on delivery.",
+    "note": "Note",
+    "invalidEmail": "Enter a valid email address.",
+    "type": "Customer type",
+    "typeHint": "Wholesale customers can be given their own price tier.",
+    "creditLimit": "Credit limit",
+    "creditLimitHint": "0 means cash only. A credit sale is refused once this limit is reached."
+  },
+  "rowActions": {
+    "openMenu": "Open menu",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Delete",
+    "restore": "Restore",
+    "deletePermanently": "Delete permanently",
+    "deleteTitle": "Delete {{name}}?",
+    "deleteDescription1": "This will move the following item to the trash:",
+    "deletePermanentlyTitle": "Permanently delete {{name}}?",
+    "deletePermanentlyDescription1": "This will permanently delete:",
+    "deletePermanentlyDescription2": "This action cannot be undone.",
+    "restoreTitle": "Restore {{name}}?",
+    "restoreDescription1": "This will restore the following item from the trash:",
+    "details": "Details"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "Delete {{count}} items?",
+    "warningMessage1": "The selected items will be moved to the trash.",
+    "warningMessage2": "Confirm to continue.",
+    "confirmByTyping": "Type \"{{word}}\" to confirm:",
+    "confirmPlaceholder": "Type {{word}}",
+    "confirmError": "You must type \"{{word}}\" to confirm.",
+    "alertTitle": "Careful!",
+    "alertDescription": "This is a bulk operation.",
+    "deleting": "Deleting...",
+    "delete": "Delete"
+  },
+  "filters": {
+    "status": "Status",
+    "type": "Type"
+  },
+  "types": {
+    "retail": "Retail",
+    "wholesale": "Wholesale"
+  },
+  "paymentTerms": {
+    "cash": "Cash",
+    "days": "{{days}} days"
+  },
+  "detail": {
+    "title": "Customer details",
+    "description": "Customer contact and financial information.",
+    "loading": "Loading...",
+    "notFound": "Not found",
+    "generalInfo": "General information",
+    "contactInfo": "Contact",
+    "financialInfo": "Financial",
+    "creditLimit": "Credit limit",
+    "paymentTerms": "Payment terms",
+    "outstandingBalance": "Outstanding balance",
+    "salesCount": "Sales count",
+    "salesHistory": "Sales history",
+    "saleCode": "Code",
+    "saleDate": "Date",
+    "saleTotal": "Total",
+    "salePaid": "Paid",
+    "saleDue": "Due"
+  }
+}

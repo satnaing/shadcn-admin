@@ -1,0 +1,90 @@
+{
+  "allOrders": {
+    "title": "All Orders",
+    "subtitle": "Track and manage all orders across the system"
+  },
+  "inHouseOrders": {
+    "title": "In-House Orders",
+    "subtitle": "Orders fulfilled directly by the in-house store"
+  },
+  "sellerOrders": {
+    "title": "Seller Orders",
+    "subtitle": "Orders fulfilled by marketplace partner sellers"
+  },
+  "pickupPointOrders": {
+    "title": "Pick-up Point Orders",
+    "subtitle": "Orders designated for collection at pickup points"
+  },
+  "unpaidOrders": {
+    "title": "Unpaid Orders",
+    "subtitle": "Orders pending customer or payment confirmation"
+  },
+  "status": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "picked_up": "Picked Up",
+    "on_the_way": "On the Way",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
+  },
+  "payment": {
+    "paid": "Paid",
+    "unpaid": "Unpaid"
+  },
+  "table": {
+    "code": "Order Code",
+    "items": "Num of Products",
+    "customer": "Customer",
+    "seller": "Seller",
+    "amount": "Amount",
+    "deliveryStatus": "Delivery Status",
+    "paymentMethod": "Payment Method",
+    "paymentStatus": "Payment Status",
+    "options": "Options"
+  },
+  "filter": {
+    "searchPlaceholder": "Code, customer or phone...",
+    "deliveryStatus": "Delivery Status",
+    "allStatuses": "All Statuses",
+    "paymentStatus": "Payment Status",
+    "allPayments": "All Payments",
+    "reset": "Reset"
+  },
+  "dialog": {
+    "title": "Manage Order",
+    "deliveryStatusLabel": "Delivery Status",
+    "paymentStatusLabel": "Payment Status",
+    "cancel": "Cancel",
+    "save": "Save Changes",
+    "saving": "Saving...",
+    "success": "Order status updated successfully!",
+    "error": "Failed to update order status"
+  },
+  "detail": {
+    "title": "Order Details",
+    "placedOn": "Order Date",
+    "printInvoice": "Print Invoice",
+    "customer": "Customer Details",
+    "shippingAddress": "Shipping Address",
+    "pickupPoint": "Pick-up Point",
+    "statusInfo": "Status & Payment",
+    "orderedItems": "Ordered Items",
+    "product": "Product",
+    "variation": "Variation",
+    "quantity": "Quantity",
+    "unitPrice": "Unit Price",
+    "total": "Total",
+    "orderSummary": "Order Summary",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "shippingCost": "Shipping Cost",
+    "couponDiscount": "Coupon Discount",
+    "grandTotal": "Grand Total"
+  },
+  "backToOrders": "Back to orders",
+  "orderNotFound": "Order not found",
+  "loading": "Loading...",
+  "noOrders": "No orders found",
+  "delete": "Delete",
+  "confirmDelete": "Are you sure you want to delete this order?"
+}

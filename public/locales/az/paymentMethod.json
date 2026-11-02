@@ -1,0 +1,35 @@
+{
+  "title": "Ödəmə üsulları",
+  "description": "Ödəmə üsullarının idarə edilməsi",
+  "add": "Yeni ödəmə üsulu",
+  "addTitle": "Yeni ödəmə üsulu",
+  "editTitle": "Ödəmə üsulunu redaktə et",
+  "deleteTitle": "Ödəmə üsulunu sil",
+  "deleteDescription": "Bu ödəmə üsulunu silmək istədiyinizə əminsiniz?",
+  "loading": "Yüklənir...",
+  "empty": "Ödəmə üsulu tapılmadı",
+  "active": "Aktiv",
+  "inactive": "Deaktiv",
+  "cancel": "Ləğv et",
+  "confirm": "Sil",
+  "save": "Yadda saxla",
+  "create": "Yarat",
+  "table": {
+    "name": "Ad",
+    "code": "Kod",
+    "status": "Status",
+    "sort": "Sıra",
+    "actions": "Əməliyyatlar"
+  },
+  "form": {
+    "name": "Ad",
+    "code": "Kod",
+    "isActive": "Aktivdir",
+    "sort": "Sıra nömrəsi"
+  },
+  "toast": {
+    "created": "Ödəmə üsulu yaradıldı",
+    "updated": "Ödəmə üsulu yeniləndi",
+    "deleted": "Ödəmə üsulu silindi"
+  }
+}

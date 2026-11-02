@@ -1,0 +1,17 @@
+{
+  "dashboard": { "title": "Pazarlama Analitiği", "subtitle": "Global izleme, pikseller, arama motorları ve ürün katalog entegrasyonları" },
+  "ga4": { "title": "Google Analytics 4", "subtitle": "Ölçüm ID ve e-ticaret etkinlik yapılandırması" },
+  "reports": { "title": "GA4 Canlı Rapor", "subtitle": "Gerçek zamanlı etkinlik akışı ve test sonuçları" },
+  "gtm": { "title": "Google Tag Manager", "subtitle": "GTM konteyneri ve harici etiket yönetimi" },
+  "pixel": { "title": "Meta Piksel", "subtitle": "Facebook/Instagram reklam pikselleri ve etkinlik izleme" },
+  "capi": { "title": "Meta Dönüşüm API", "subtitle": "Sunucu taraflı güvenilir dönüşüm izleme" },
+  "gmc": { "title": "Google Merchant Center", "subtitle": "Ürün kataloğu ve XML feed oluşturucu" },
+  "gmcFeed": { "title": "GMC Ürün Feed", "subtitle": "Otomatik oluşturulan XML ürün feed" },
+  "fbCatalog": { "title": "Facebook Katalog", "subtitle": "Sosyal ticaret ve dinamik reklam kataloğu" },
+  "fbFeed": { "title": "Facebook Ürün Feed", "subtitle": "Otomatik oluşturulan ürün katalog feed" },
+  "scripts": { "title": "Özel Scriptler", "subtitle": "Özel JavaScript veya HTML kod blokları" },
+  "sitemap": { "title": "Site Haritası", "subtitle": "sitemap.xml otomatik oluşturma" },
+  "seo": { "title": "Global SEO", "subtitle": "Meta başlık, açıklama ve OpenGraph ayarları" },
+  "actions": { "save": "Kaydet", "generate": "Oluştur", "copy": "URL Kopyala", "back": "Geri" },
+  "messages": { "saved": "Ayarlar başarıyla kaydedildi!", "generated": "Feed başarıyla oluşturuldu!", "copied": "URL panoya kopyalandı!" }
+}

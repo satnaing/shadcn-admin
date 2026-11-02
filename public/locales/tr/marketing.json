@@ -1,0 +1,46 @@
+{
+  "dashboard": {
+    "title": "Pazarlama Kontrol Paneli",
+    "subscribers": "Aboneler",
+    "newsletters": "Bültenler",
+    "sms": "SMS Kampanyaları",
+    "activePopups": "Aktif Pop-up'lar",
+    "activeAlerts": "Aktif Bannerlar",
+    "blogs": "Blog Yazıları"
+  },
+  "popups": {
+    "title": "Dinamik Pop-up'lar",
+    "create": "Yeni Pop-up"
+  },
+  "alerts": {
+    "title": "Özel Site Bildirimleri",
+    "create": "Yeni Bildirim"
+  },
+  "saleAlerts": {
+    "title": "Satış Uyarı Pop-up'ı"
+  },
+  "emails": {
+    "title": "E-posta Şablonları"
+  },
+  "blogs": {
+    "title": "Tüm Blog Yazıları"
+  },
+  "newsletters": {
+    "title": "Haber Bültenleri"
+  },
+  "notifications": {
+    "types": "Bildirim Türleri ve Kanalları",
+    "send": "Özel Bildirim Gönder",
+    "history": "Bildirim Geçmişi",
+    "settings": "Bildirim Ayarları"
+  },
+  "sms": {
+    "title": "Toplu SMS Gönderimi"
+  },
+  "subscribers": {
+    "title": "Bülten Aboneleri"
+  },
+  "visitors": {
+    "title": "Özel Ürün Ziyaretçileri"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "list": {
+    "title": "Finished stock",
+    "description": "What production has made. Stock is summed from the movements alone.",
+    "tabs": {
+      "balances": "Balances",
+      "movements": "Movements"
+    },
+    "filter": "Search...",
+    "noResults": "No movements found."
+  },
+  "columns": {
+    "date": "Date",
+    "product": "Product",
+    "type": "Type",
+    "quantity": "Quantity",
+    "batch": "Batch",
+    "unitCost": "Unit cost",
+    "reference": "Reference",
+    "note": "Note"
+  },
+  "balances": {
+    "product": "Product",
+    "onHand": "On hand",
+    "reorderPoint": "Reorder point",
+    "salePriceNet": "Price (net)",
+    "salePriceGross": "Price (gross)",
+    "loading": "Loading...",
+    "empty": "No finished stock yet."
+  },
+  "primaryButtons": {
+    "record": "Record movement"
+  },
+  "record": {
+    "title": "Finished stock movement",
+    "description": "For write-offs and corrections. Production receipts come from confirming an order.",
+    "product": "Product",
+    "productPlaceholder": "Select a product",
+    "type": "Type",
+    "quantity": "Quantity",
+    "adjustmentHint": "Positive to add, negative to remove.",
+    "note": "Note",
+    "save": "Record",
+    "saving": "Recording..."
+  },
+  "toast": {
+    "recorded": "Movement recorded.",
+    "recordError": "Could not record the movement."
+  }
+}

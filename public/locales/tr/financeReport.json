@@ -1,0 +1,12 @@
+{
+  "title": "Finans Raporları",
+  "description": "Gelir/gider, borç ve nakit akışı raporları",
+  "tabs": { "profitLoss": "Kâr/Zarar", "debtSummary": "Borç Özeti", "cashFlow": "Nakit Akışı" },
+  "filter": { "from": "Başlangıç", "to": "Bitiş" },
+  "pl": { "totalIncome": "Toplam Gelir", "totalExpense": "Toplam Gider", "netProfit": "Net Kâr", "category": "Kategori", "type": "Tür", "total": "Toplam", "count": "Adet" },
+  "debt": { "payable": "Borcumuz", "receivable": "Bize borç", "partyType": "Taraf türü", "amount": "Tutar", "paid": "Ödenen", "remaining": "Kalan", "dueDate": "Vade", "status": "Durum", "totalPayable": "Toplam borcumuz", "totalReceivable": "Toplam alacak", "overdueCount": "Vadesi geçmiş" },
+  "cf": { "month": "Ay", "income": "Gelir", "expense": "Gider", "netFlow": "Net akış", "totals": "Toplam" },
+  "status": { "open": "Açık", "partially_paid": "Kısmen", "paid": "Ödendi" },
+  "overdue": "Vadesi geçmiş",
+  "noData": "Veri yok"
+}

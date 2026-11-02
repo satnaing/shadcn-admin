@@ -1,0 +1,23 @@
+{
+  "list": {
+    "title": "Modules",
+    "description": "Choose which modules this installation runs with.",
+    "loading": "Loading...",
+    "loadError": "Could not load the modules.",
+    "empty": "No modules found."
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "toggleAria": "Toggle the {{name}} module",
+  "toast": {
+    "enabled": "Module enabled.",
+    "disabled": "Module disabled.",
+    "error": "Could not change the module state.",
+    "licenseSaved": "License key saved."
+  },
+  "licenseKey": {
+    "placeholder": "License key"
+  }
+}

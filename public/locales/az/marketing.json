@@ -1,0 +1,46 @@
+{
+  "dashboard": {
+    "title": "Marketinq İdarə Paneli",
+    "subscribers": "Abunəçilər",
+    "newsletters": "Bülletenlər",
+    "sms": "SMS Kampaniyaları",
+    "activePopups": "Aktiv Pop-up",
+    "activeAlerts": "Aktiv Bannerlər",
+    "blogs": "Bloq Məqalələri"
+  },
+  "popups": {
+    "title": "Dinamik Pop-uplar",
+    "create": "Yeni Pop-up"
+  },
+  "alerts": {
+    "title": "Xüsusi Sayt Bildirişləri",
+    "create": "Yeni Bildiriş"
+  },
+  "saleAlerts": {
+    "title": "Satış Xəbərdarlığı Pop-up"
+  },
+  "emails": {
+    "title": "E-poçt Şablonları"
+  },
+  "blogs": {
+    "title": "Bütün Bloq Məqalələri"
+  },
+  "newsletters": {
+    "title": "Xəbər Bülletenləri"
+  },
+  "notifications": {
+    "types": "Bildiriş Növləri və Kanalları",
+    "send": "Xüsusi Bildiriş Göndər",
+    "history": "Bildiriş Tarixçəsi",
+    "settings": "Bildiriş Parametrləri"
+  },
+  "sms": {
+    "title": "Kütləvi SMS Göndərişi"
+  },
+  "subscribers": {
+    "title": "Bülleten Abunəçiləri"
+  },
+  "visitors": {
+    "title": "Fərdi Məhsul Ziyarətçiləri"
+  }
+}

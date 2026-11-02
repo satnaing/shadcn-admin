@@ -1,0 +1,39 @@
+{
+  "title": "Product reports",
+  "description": "What finished stock is worth, what is running low, and made-against-sold.",
+  "empty": "No data.",
+  "noAlerts": "Every product is above its threshold.",
+  "hasRecipe": "Has recipe",
+  "noRecipe": "No recipe",
+  "filters": {
+    "from": "From",
+    "to": "To"
+  },
+  "tabs": {
+    "valuation": "Valuation",
+    "alerts": "Alerts",
+    "movements": "Movement"
+  },
+  "totals": {
+    "costValue": "At cost",
+    "costHint": "Not at list price — unsold stock is not revenue.",
+    "retailValue": "At list price",
+    "potentialProfit": "Potential profit"
+  },
+  "columns": {
+    "product": "Product",
+    "category": "Category",
+    "onHand": "On hand",
+    "unitCost": "Unit cost",
+    "costValue": "Cost value",
+    "retailValue": "Retail value",
+    "threshold": "Threshold",
+    "shortfall": "Short by",
+    "canProduce": "Production",
+    "produced": "Produced",
+    "sold": "Sold",
+    "wasted": "Waste",
+    "netChange": "Net",
+    "sellThrough": "Sell-through"
+  }
+}

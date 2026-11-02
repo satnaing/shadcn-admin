@@ -1,0 +1,58 @@
+{
+  "titles": {
+    "all": "Bütün Elan Məhsulları",
+    "inHouse": "Daxili Elan Məhsulları",
+    "seller": "Satıcı Elan Məhsulları",
+    "subtitle": "Yalnız admin və satıcılar tərəfindən idarə olunan elanlar"
+  },
+  "actions": {
+    "addNew": "Yeni Elan Əlavə Et",
+    "addNewDesc": "Admin və ya satıcı adına yeni elan məhsulu yarat"
+  },
+  "table": {
+    "loading": "Yüklənir...",
+    "empty": "Heç bir elan məhsulu tapılmadı",
+    "product": "Məhsul",
+    "creator": "Yaradan / Növ",
+    "category": "Kateqoriya",
+    "condition": "Vəziyyət",
+    "price": "Qiymət",
+    "published": "Dərc olunub",
+    "actions": "Əməliyyatlar"
+  },
+  "types": {
+    "admin": "Admin (In-House)",
+    "seller": "Satıcı"
+  },
+  "condition": {
+    "new": "Yeni",
+    "used": "İşlənmiş"
+  },
+  "filter": {
+    "searchPlaceholder": "Elan və ya yaradan axtar...",
+    "allCreators": "Bütün Növlər",
+    "allConditions": "Bütün Vəziyyətlər"
+  },
+  "dialog": {
+    "title": "Yeni Elan Əlavə Et",
+    "generalInfo": "Ümumi Məlumatlar",
+    "productName": "Məhsul Adı",
+    "creatorType": "Yaradan Növü",
+    "creatorName": "Məsul Şəxs / Mağaza",
+    "category": "Kateqoriya",
+    "price": "Qiymət (₼)",
+    "condition": "Vəziyyət",
+    "image": "Şəkil URL",
+    "location": "Şəhər / Ünvan",
+    "description": "Təsvir",
+    "published": "Dərhal dərc edilsin",
+    "publishedDesc": "Aktiv olduqda saytda dərhal nümayiş olunur",
+    "cancel": "Ləğv et",
+    "save": "Yadda saxla"
+  },
+  "messages": {
+    "created": "Elan uğurla əlavə edildi!",
+    "deleted": "Elan silindi!",
+    "confirmDelete": "Bu elanı silmək istədiyinizə əminsiniz?"
+  }
+}

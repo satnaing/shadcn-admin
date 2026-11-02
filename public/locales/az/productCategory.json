@@ -1,0 +1,34 @@
+{
+  "title": "Məhsul kateqoriyaları",
+  "description": "Kataloqun qruplaşdırılması — hesabatlar və filtrlər buna görə işləyir.",
+  "add": "Kateqoriya əlavə et",
+  "empty": "Hələ kateqoriya yoxdur.",
+  "columns": {
+    "name": "Adı",
+    "parent": "Üst kateqoriya",
+    "products": "Məhsul sayı",
+    "status": "Status"
+  },
+  "form": {
+    "createTitle": "Yeni kateqoriya",
+    "editTitle": "Kateqoriyanı redaktə et",
+    "name": "Adı",
+    "parent": "Üst kateqoriya",
+    "noParent": "Yoxdur",
+    "description": "Təsvir",
+    "sortOrder": "Sıra",
+    "status": "Status",
+    "save": "Yadda saxla",
+    "cancel": "Ləğv et"
+  },
+  "delete": {
+    "title": "Kateqoriya silinsin?",
+    "description": "\"{{name}}\" silinəcək. Məhsullar qalır — sadəcə kateqoriyasız olurlar.",
+    "confirm": "Sil"
+  },
+  "errors": {
+    "create": "Yaratmaq mümkün olmadı.",
+    "update": "Yeniləmək mümkün olmadı.",
+    "delete": "Silmək mümkün olmadı."
+  }
+}

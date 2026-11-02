@@ -1,0 +1,72 @@
+{
+  "list": {
+    "title": "İnventarizasiya",
+    "description": "Fiziki sayım vərəqələri. Fərqlər ledger-ə düzəliş hərəkəti kimi yazılır.",
+    "filter": "Kod və ya qeyd üzrə axtar...",
+    "noResults": "Sayım tapılmadı."
+  },
+  "columns": {
+    "code": "Kod",
+    "date": "Tarix",
+    "location": "Anbar yeri",
+    "lines": "Sətir",
+    "status": "Status",
+    "appliedBy": "Tətbiq edən"
+  },
+  "status": {
+    "draft": "Qaralama",
+    "counting": "Sayılır",
+    "applied": "Tətbiq olunub",
+    "cancelled": "Ləğv edilib"
+  },
+  "primaryButtons": {
+    "start": "Yeni sayım"
+  },
+  "create": {
+    "title": "Yeni inventarizasiya",
+    "description": "Vərəqə açılan kimi cari qalıqlarla avtomatik dolur.",
+    "countedAt": "Sayım tarixi",
+    "location": "Anbar yeri",
+    "allLocations": "Bütün anbar",
+    "locationHint": "Yer seçsəniz yalnız oradakı xammallar sayılır.",
+    "note": "Qeyd",
+    "start": "Başlat",
+    "starting": "Yaradılır..."
+  },
+  "detail": {
+    "title": "İnventarizasiya",
+    "description": "Fiziki sayımı daxil edin, sonra fərqləri tətbiq edin.",
+    "loading": "Yüklənir...",
+    "allLocations": "Bütün anbar",
+    "summary": "{{date}} · {{location}}",
+    "progress": "{{counted}}/{{total}} sətir sayılıb · {{differences}} fərq",
+    "refresh": "Qalıqları yenilə",
+    "save": "Yadda saxla",
+    "saving": "Yadda saxlanılır...",
+    "apply": "Tətbiq et",
+    "cancel": "Ləğv et",
+    "applyTitle": "Fərqlər tətbiq edilsin?",
+    "applyDescription": "{{count}} fərq üçün düzəliş hərəkəti yazılacaq. Vərəqə bundan sonra dəyişdirilə bilməz.",
+    "frozen": "{{by}} tərəfindən {{at}} tarixində tətbiq olunub"
+  },
+  "sheet": {
+    "material": "Xammal",
+    "batch": "Partiya",
+    "system": "Sistem",
+    "counted": "Sayılan",
+    "difference": "Fərq",
+    "note": "Qeyd",
+    "notePlaceholder": "Səbəb...",
+    "empty": "Bu vərəqədə sətir yoxdur."
+  },
+  "toast": {
+    "created": "Sayım vərəqəsi yaradıldı.",
+    "createError": "Vərəqəni yaratmaq mümkün olmadı.",
+    "saved": "Sayım yadda saxlanıldı.",
+    "saveError": "Yadda saxlamaq mümkün olmadı.",
+    "refreshed": "Qalıqlar yeniləndi.",
+    "applied": "Fərqlər tətbiq olundu.",
+    "applyError": "Tətbiq etmək mümkün olmadı.",
+    "cancelled": "Sayım ləğv edildi."
+  }
+}

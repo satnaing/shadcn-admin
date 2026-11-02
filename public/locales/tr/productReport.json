@@ -1,0 +1,39 @@
+{
+  "title": "Ürün raporları",
+  "description": "Mamul stoğunun değeri, azalan kalemler ve üretim-satış karşılaştırması.",
+  "empty": "Veri yok.",
+  "noAlerts": "Tüm ürünler eşiğin üzerinde.",
+  "hasRecipe": "Reçete var",
+  "noRecipe": "Reçete yok",
+  "filters": {
+    "from": "Başlangıç",
+    "to": "Bitiş"
+  },
+  "tabs": {
+    "valuation": "Değerleme",
+    "alerts": "Uyarılar",
+    "movements": "Hareket"
+  },
+  "totals": {
+    "costValue": "Maliyetle",
+    "costHint": "Liste fiyatıyla değil — satılmamış stok gelir değildir.",
+    "retailValue": "Liste fiyatıyla",
+    "potentialProfit": "Potansiyel kâr"
+  },
+  "columns": {
+    "product": "Ürün",
+    "category": "Kategori",
+    "onHand": "Stok",
+    "unitCost": "Birim maliyet",
+    "costValue": "Maliyet değeri",
+    "retailValue": "Satış değeri",
+    "threshold": "Eşik",
+    "shortfall": "Eksik",
+    "canProduce": "Üretim",
+    "produced": "Üretilen",
+    "sold": "Satılan",
+    "wasted": "Fire",
+    "netChange": "Net",
+    "sellThrough": "Satış oranı"
+  }
+}

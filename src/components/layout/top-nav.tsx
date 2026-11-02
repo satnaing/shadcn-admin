@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import React from 'react'
 
 type TopNavProps = React.HTMLAttributes<HTMLElement> & {
   links: {
@@ -21,31 +22,28 @@ type TopNavProps = React.HTMLAttributes<HTMLElement> & {
 export function TopNav({ className, links, ...props }: TopNavProps) {
   return (
     <>
-      <DropdownMenu modal={false}>
-        <DropdownMenuTrigger asChild>
-          <Button
-            size='icon'
-            variant='outline'
-            className={cn('md:size-7 lg:hidden', className)}
-          >
-            <Menu />
-            <span className='sr-only'>Toggle navigation menu</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent side='bottom' align='start'>
-          {links.map(({ title, href, isActive, disabled }) => (
-            <DropdownMenuItem key={`${title}-${href}`} asChild>
-              <Link
-                to={href}
-                className={!isActive ? 'text-muted-foreground' : ''}
-                disabled={disabled}
-              >
-                {title}
-              </Link>
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <div className='lg:hidden'>
+        <DropdownMenu modal={false}>
+          <DropdownMenuTrigger asChild>
+            <Button size='icon' variant='outline' className='md:size-7'>
+              <Menu />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent side='bottom' align='start'>
+            {links.map(({ title, href, isActive, disabled }) => (
+              <DropdownMenuItem key={`${title}-${href}`} asChild>
+                <Link
+                  to={href}
+                  className={!isActive ? 'text-muted-foreground' : ''}
+                  disabled={disabled}
+                >
+                  {title}
+                </Link>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
 
       <nav
         className={cn(

@@ -1,0 +1,108 @@
+{
+  "list": {
+    "title": "Tədarükçülər",
+    "description": "Xammal aldığınız şirkətlər, əlaqə məlumatları və ödəniş şərtləri.",
+    "tabs": {
+      "suppliers": "Tədarükçülər",
+      "trash": "Səbət"
+    },
+    "filterSuppliers": "Tədarükçü axtar...",
+    "noResults": "Nəticə tapılmadı."
+  },
+  "columns": {
+    "id": "ID",
+    "code": "Kod",
+    "name": "Adı",
+    "contact": "Əlaqə",
+    "paymentTerms": "Ödəniş şərti",
+    "materials": "Xammal sayı",
+    "status": "Status",
+    "phone": "Telefon",
+    "email": "E-poçt",
+    "address": "Ünvan",
+    "taxId": "VÖEN",
+    "contactPerson": "Əlaqə şəxsi",
+    "note": "Qeyd"
+  },
+  "primaryButtons": {
+    "addSupplier": "Tədarükçü əlavə et"
+  },
+  "bulkActions": {
+    "deleteSelected": "Seçilmişləri sil",
+    "entityName": "tədarükçü"
+  },
+  "form": {
+    "saving": "Yadda saxlanılır...",
+    "saveAndExit": "Yadda saxla",
+    "updating": "Yenilənir...",
+    "updateAndExit": "Yenilə",
+    "active": "Aktiv",
+    "createError": "Yaratmaq mümkün olmadı.",
+    "updateError": "Yeniləmək mümkün olmadı.",
+    "deleteError": "Silmək mümkün olmadı.",
+    "restoreError": "Bərpa etmək mümkün olmadı.",
+    "forceDeleteError": "Həmişəlik silmək mümkün olmadı.",
+    "addTitle": "Yeni tədarükçü",
+    "addDescription": "Yeni tədarükçü kartı yaradın.",
+    "updateTitle": "Tədarükçünü redaktə et",
+    "updateDescription": "Tədarükçünün məlumatlarını yeniləyin.",
+    "name": "Şirkət adı",
+    "namePlaceholder": "Bakı Metal Ticarət MMC",
+    "code": "Kod",
+    "codeAutoHint": "Kod yadda saxlayarkən sistem tərəfindən verilir.",
+    "codeLockedHint": "Kod dəyişdirilmir.",
+    "contactPerson": "Əlaqədar şəxs",
+    "phone": "Telefon",
+    "email": "E-poçt",
+    "taxId": "VÖEN",
+    "address": "Ünvan",
+    "paymentTermDays": "Ödəniş müddəti (gün)",
+    "paymentTermHint": "0 = çatdırılma zamanı ödəniş.",
+    "paymentTermsNote": "Ödəniş qeydi",
+    "note": "Qeyd",
+    "invalidEmail": "Düzgün e-poçt daxil edin."
+  },
+  "rowActions": {
+    "openMenu": "Menyunu aç",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "deleteConfirm": "Sil",
+    "restore": "Bərpa et",
+    "deletePermanently": "Həmişəlik sil",
+    "deleteTitle": "{{name}} silinsin?",
+    "deleteDescription1": "Bu element səbətə göndəriləcək:",
+    "deletePermanentlyTitle": "{{name}} həmişəlik silinsin?",
+    "deletePermanentlyDescription1": "Bu element həmişəlik silinəcək:",
+    "deletePermanentlyDescription2": "Bu əməliyyatı geri qaytarmaq mümkün deyil.",
+    "restoreTitle": "{{name}} bərpa edilsin?",
+    "restoreDescription1": "Bu element səbətdən geri qaytarılacaq:",
+    "details": "Detallar"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "{{count}} element silinsin?",
+    "warningMessage1": "Seçilmiş elementlər səbətə göndəriləcək.",
+    "warningMessage2": "Davam etmək üçün təsdiqləyin.",
+    "confirmByTyping": "Təsdiq üçün \"{{word}}\" yazın:",
+    "confirmPlaceholder": "{{word}} yazın",
+    "confirmError": "Təsdiq üçün \"{{word}}\" yazmalısınız.",
+    "alertTitle": "Diqqət!",
+    "alertDescription": "Bu əməliyyat toplu şəkildə aparılır.",
+    "deleting": "Silinir...",
+    "delete": "Sil"
+  },
+  "filters": {
+    "status": "Status",
+    "type": "Növ"
+  },
+  "detail": {
+    "title": "Təchizatçı detalları",
+    "description": "Təchizatçının əlaqə məlumatları və xammalları.",
+    "loading": "Yüklənir...",
+    "notFound": "Tapılmadı",
+    "generalInfo": "Ümumi məlumat",
+    "contactInfo": "Əlaqə",
+    "paymentTerms": "Ödəniş müddəti",
+    "paymentNote": "Ödəniş qeydi",
+    "materials": "Xammallar"
+  }
+}

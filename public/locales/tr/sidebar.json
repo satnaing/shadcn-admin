@@ -1,0 +1,89 @@
+{
+  "general": {
+    "title": "Genel",
+    "dashboard": "Yönetim paneli"
+  },
+  "userManagement": {
+    "title": "Kullanıcı yönetimi",
+    "users": {
+      "title": "Kullanıcılar",
+      "all": "Tüm kullanıcılar",
+      "roles": "Roller",
+      "permissions": "İzinler"
+    }
+  },
+  "warehouse": {
+    "title": "Depo",
+    "rawMaterials": "Hammaddeler",
+    "stockMovements": "Stok hareketleri",
+    "suppliers": "Tedarikçiler",
+    "locations": "Depo konumları",
+    "units": "Ölçü birimleri",
+    "reports": "Raporlar",
+    "stock": "Stok",
+    "catalogue": "Katalog",
+    "stockTakes": "Stok sayımı"
+  },
+  "platform": {
+    "title": "Platform ayarları",
+    "modules": "Modüller",
+    "languages": "Diller",
+    "siteSettings": "Sistem ayarları",
+    "currencies": "Para Birimleri",
+    "trash": "Silinenler"
+  },
+  "production": {
+    "title": "Üretim",
+    "manufacturing": "İmalat",
+    "orders": "Üretim emirleri",
+    "recipes": "Reçeteler"
+  },
+  "products": {
+    "title": "Ürünler",
+    "catalogue": "Katalog",
+    "all": "Ürünler",
+    "categories": "Kategoriler",
+    "stock": "Stok",
+    "productStock": "Mamul stoku",
+    "reports": "Raporlar"
+  },
+  "sales": {
+    "title": "Satış",
+    "desk": "Satış",
+    "all": "Satışlar",
+    "customers": "Müşteriler",
+    "insight": "Analiz",
+    "reports": "Satış raporları"
+  },
+  "hr": {
+    "title": "Çalışanlar",
+    "people": "Personel",
+    "employees": "Çalışanlar",
+    "departments": "Departmanlar",
+    "time": "Zaman ve ücret",
+    "attendance": "Devam",
+    "payroll": "Bordro",
+    "performance": "Performans",
+    "goals": "Hedefler",
+    "activityLog": "İşlem günlüğü",
+    "leave": "İzin",
+    "announcements": "Duyurular"
+  },
+  "finance": {
+    "title": "Finans",
+    "categories": "Kategoriler",
+    "transactions": "İşlemler",
+    "debts": "Borçlar",
+    "reports": "Raporlar",
+    "invoices": "Faturalar",
+    "cashAccounts": "Kasa / Banka",
+    "paymentMethods": "Ödeme Yöntemleri"
+  },
+  "orders": {
+    "title": "Siparişler",
+    "all": "Siparişler",
+    "demand": "Bekleyen talep",
+    "summary": "Ürün Özeti"
+  },
+  "trash": "Silinenler"
+}

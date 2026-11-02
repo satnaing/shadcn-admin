@@ -9,7 +9,6 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ClerkRouteRouteImport } from './routes/clerk/route'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as errors503RouteImport } from './routes/(errors)/503'
@@ -17,34 +16,97 @@ import { Route as errors500RouteImport } from './routes/(errors)/500'
 import { Route as errors404RouteImport } from './routes/(errors)/404'
 import { Route as errors403RouteImport } from './routes/(errors)/403'
 import { Route as errors401RouteImport } from './routes/(errors)/401'
-import { Route as authSignUpRouteImport } from './routes/(auth)/sign-up'
-import { Route as authSignIn2RouteImport } from './routes/(auth)/sign-in-2'
 import { Route as authSignInRouteImport } from './routes/(auth)/sign-in'
-import { Route as authOtpRouteImport } from './routes/(auth)/otp'
-import { Route as authForgotPasswordRouteImport } from './routes/(auth)/forgot-password'
-import { Route as ClerkAuthenticatedRouteRouteImport } from './routes/clerk/_authenticated/route'
-import { Route as ClerkauthRouteRouteImport } from './routes/clerk/(auth)/route'
+import { Route as AuthenticatedSupervisorRouteRouteImport } from './routes/_authenticated/supervisor/route'
 import { Route as AuthenticatedSettingsRouteRouteImport } from './routes/_authenticated/settings/route'
-import { Route as AuthenticatedUsersIndexRouteImport } from './routes/_authenticated/users/index'
-import { Route as AuthenticatedTasksIndexRouteImport } from './routes/_authenticated/tasks/index'
+import { Route as AuthenticatedSellerRouteRouteImport } from './routes/_authenticated/seller/route'
+import { Route as AuthenticatedCourierRouteRouteImport } from './routes/_authenticated/courier/route'
+import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
+import { Route as AuthenticatedSupervisorIndexRouteImport } from './routes/_authenticated/supervisor/index'
 import { Route as AuthenticatedSettingsIndexRouteImport } from './routes/_authenticated/settings/index'
-import { Route as AuthenticatedHelpCenterIndexRouteImport } from './routes/_authenticated/help-center/index'
-import { Route as AuthenticatedChatsIndexRouteImport } from './routes/_authenticated/chats/index'
-import { Route as AuthenticatedAppsIndexRouteImport } from './routes/_authenticated/apps/index'
-import { Route as ClerkAuthenticatedUserManagementRouteImport } from './routes/clerk/_authenticated/user-management'
-import { Route as ClerkauthSignUpRouteImport } from './routes/clerk/(auth)/sign-up'
-import { Route as ClerkauthSignInRouteImport } from './routes/clerk/(auth)/sign-in'
-import { Route as AuthenticatedSettingsNotificationsRouteImport } from './routes/_authenticated/settings/notifications'
-import { Route as AuthenticatedSettingsDisplayRouteImport } from './routes/_authenticated/settings/display'
+import { Route as AuthenticatedSellerIndexRouteImport } from './routes/_authenticated/seller/index'
+import { Route as AuthenticatedCourierIndexRouteImport } from './routes/_authenticated/courier/index'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedSettingsAppearanceRouteImport } from './routes/_authenticated/settings/appearance'
 import { Route as AuthenticatedSettingsAccountRouteImport } from './routes/_authenticated/settings/account'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
+import { Route as AuthenticatedAdminWholesaleProductsIndexRouteImport } from './routes/_authenticated/admin/wholesale-products/index'
+import { Route as AuthenticatedAdminUsersIndexRouteImport } from './routes/_authenticated/admin/users/index'
+import { Route as AuthenticatedAdminUnitsIndexRouteImport } from './routes/_authenticated/admin/units/index'
+import { Route as AuthenticatedAdminSellersIndexRouteImport } from './routes/_authenticated/admin/sellers/index'
+import { Route as AuthenticatedAdminRoleIndexRouteImport } from './routes/_authenticated/admin/role/index'
+import { Route as AuthenticatedAdminPromotionsIndexRouteImport } from './routes/_authenticated/admin/promotions/index'
+import { Route as AuthenticatedAdminProductsIndexRouteImport } from './routes/_authenticated/admin/products/index'
+import { Route as AuthenticatedAdminPermissionIndexRouteImport } from './routes/_authenticated/admin/permission/index'
+import { Route as AuthenticatedAdminOrdersIndexRouteImport } from './routes/_authenticated/admin/orders/index'
+import { Route as AuthenticatedAdminMarketingIndexRouteImport } from './routes/_authenticated/admin/marketing/index'
+import { Route as AuthenticatedAdminCustomersIndexRouteImport } from './routes/_authenticated/admin/customers/index'
+import { Route as AuthenticatedAdminColorsIndexRouteImport } from './routes/_authenticated/admin/colors/index'
+import { Route as AuthenticatedAdminClassifiedProductsIndexRouteImport } from './routes/_authenticated/admin/classified-products/index'
+import { Route as AuthenticatedAdminCategoriesIndexRouteImport } from './routes/_authenticated/admin/categories/index'
+import { Route as AuthenticatedAdminBrandsIndexRouteImport } from './routes/_authenticated/admin/brands/index'
+import { Route as AuthenticatedAdminAttributesIndexRouteImport } from './routes/_authenticated/admin/attributes/index'
+import { Route as AuthenticatedAdminAnalyticsIndexRouteImport } from './routes/_authenticated/admin/analytics/index'
+import { Route as AuthenticatedAdminWholesaleProductsSellerRouteImport } from './routes/_authenticated/admin/wholesale-products/seller'
+import { Route as AuthenticatedAdminWholesaleProductsInHouseRouteImport } from './routes/_authenticated/admin/wholesale-products/in-house'
+import { Route as AuthenticatedAdminWholesaleProductsCreateRouteImport } from './routes/_authenticated/admin/wholesale-products/create'
+import { Route as AuthenticatedAdminSellersVerificationFormRouteImport } from './routes/_authenticated/admin/sellers/verification-form'
+import { Route as AuthenticatedAdminSellersRatingFollowersRouteImport } from './routes/_authenticated/admin/sellers/rating-followers'
+import { Route as AuthenticatedAdminSellersPendingRouteImport } from './routes/_authenticated/admin/sellers/pending'
+import { Route as AuthenticatedAdminSellersPayoutsRouteImport } from './routes/_authenticated/admin/sellers/payouts'
+import { Route as AuthenticatedAdminSellersPayoutRequestsRouteImport } from './routes/_authenticated/admin/sellers/payout-requests'
+import { Route as AuthenticatedAdminSellersPackagesRouteImport } from './routes/_authenticated/admin/sellers/packages'
+import { Route as AuthenticatedAdminSellersCommissionsRouteImport } from './routes/_authenticated/admin/sellers/commissions'
+import { Route as AuthenticatedAdminPromotionsSellerProductsRouteImport } from './routes/_authenticated/admin/promotions/seller-products'
+import { Route as AuthenticatedAdminPromotionsProductsRouteImport } from './routes/_authenticated/admin/promotions/products'
+import { Route as AuthenticatedAdminPromotionsCategoryDiscountsRouteImport } from './routes/_authenticated/admin/promotions/category-discounts'
+import { Route as AuthenticatedAdminProductsSellerRouteImport } from './routes/_authenticated/admin/products/seller'
+import { Route as AuthenticatedAdminProductsReviewsRouteImport } from './routes/_authenticated/admin/products/reviews'
+import { Route as AuthenticatedAdminProductsInHouseRouteImport } from './routes/_authenticated/admin/products/in-house'
+import { Route as AuthenticatedAdminProductsCreateRouteImport } from './routes/_authenticated/admin/products/create'
+import { Route as AuthenticatedAdminOrdersUnpaidRouteImport } from './routes/_authenticated/admin/orders/unpaid'
+import { Route as AuthenticatedAdminOrdersSellerRouteImport } from './routes/_authenticated/admin/orders/seller'
+import { Route as AuthenticatedAdminOrdersPickupPointRouteImport } from './routes/_authenticated/admin/orders/pickup-point'
+import { Route as AuthenticatedAdminOrdersInHouseRouteImport } from './routes/_authenticated/admin/orders/in-house'
+import { Route as AuthenticatedAdminOrdersIdRouteImport } from './routes/_authenticated/admin/orders/$id'
+import { Route as AuthenticatedAdminMarketingVisitorsRouteImport } from './routes/_authenticated/admin/marketing/visitors'
+import { Route as AuthenticatedAdminMarketingSubscribersRouteImport } from './routes/_authenticated/admin/marketing/subscribers'
+import { Route as AuthenticatedAdminMarketingSmsRouteImport } from './routes/_authenticated/admin/marketing/sms'
+import { Route as AuthenticatedAdminMarketingSaleAlertsRouteImport } from './routes/_authenticated/admin/marketing/sale-alerts'
+import { Route as AuthenticatedAdminMarketingPopupsRouteImport } from './routes/_authenticated/admin/marketing/popups'
+import { Route as AuthenticatedAdminMarketingNewslettersRouteImport } from './routes/_authenticated/admin/marketing/newsletters'
+import { Route as AuthenticatedAdminMarketingEmailTemplatesRouteImport } from './routes/_authenticated/admin/marketing/email-templates'
+import { Route as AuthenticatedAdminMarketingBlogCategoriesRouteImport } from './routes/_authenticated/admin/marketing/blog-categories'
+import { Route as AuthenticatedAdminMarketingAlertsRouteImport } from './routes/_authenticated/admin/marketing/alerts'
+import { Route as AuthenticatedAdminCustomersUnverifiedRouteImport } from './routes/_authenticated/admin/customers/unverified'
+import { Route as AuthenticatedAdminCustomersPackagesRouteImport } from './routes/_authenticated/admin/customers/packages'
+import { Route as AuthenticatedAdminCustomersClassifiedProductsRouteImport } from './routes/_authenticated/admin/customers/classified-products'
+import { Route as AuthenticatedAdminClassifiedProductsSellerRouteImport } from './routes/_authenticated/admin/classified-products/seller'
+import { Route as AuthenticatedAdminClassifiedProductsInHouseRouteImport } from './routes/_authenticated/admin/classified-products/in-house'
+import { Route as AuthenticatedAdminClassifiedProductsCreateRouteImport } from './routes/_authenticated/admin/classified-products/create'
+import { Route as AuthenticatedAdminAnalyticsSitemapRouteImport } from './routes/_authenticated/admin/analytics/sitemap'
+import { Route as AuthenticatedAdminAnalyticsSeoRouteImport } from './routes/_authenticated/admin/analytics/seo'
+import { Route as AuthenticatedAdminAnalyticsPixelRouteImport } from './routes/_authenticated/admin/analytics/pixel'
+import { Route as AuthenticatedAdminAnalyticsGtmRouteImport } from './routes/_authenticated/admin/analytics/gtm'
+import { Route as AuthenticatedAdminAnalyticsGoogleReportsRouteImport } from './routes/_authenticated/admin/analytics/google-reports'
+import { Route as AuthenticatedAdminAnalyticsGoogleRouteImport } from './routes/_authenticated/admin/analytics/google'
+import { Route as AuthenticatedAdminAnalyticsCustomScriptsRouteImport } from './routes/_authenticated/admin/analytics/custom-scripts'
+import { Route as AuthenticatedAdminAnalyticsConversionsApiRouteImport } from './routes/_authenticated/admin/analytics/conversions-api'
+import { Route as AuthenticatedAdminPromotionsFlashDealsIndexRouteImport } from './routes/_authenticated/admin/promotions/flash-deals/index'
+import { Route as AuthenticatedAdminPromotionsCouponsIndexRouteImport } from './routes/_authenticated/admin/promotions/coupons/index'
+import { Route as AuthenticatedAdminMarketingBlogsIndexRouteImport } from './routes/_authenticated/admin/marketing/blogs/index'
+import { Route as AuthenticatedAdminAnalyticsGmcIndexRouteImport } from './routes/_authenticated/admin/analytics/gmc/index'
+import { Route as AuthenticatedAdminAnalyticsFacebookCatalogueIndexRouteImport } from './routes/_authenticated/admin/analytics/facebook-catalogue/index'
+import { Route as AuthenticatedAdminPromotionsFlashDealsCreateRouteImport } from './routes/_authenticated/admin/promotions/flash-deals/create'
+import { Route as AuthenticatedAdminPromotionsCouponsCreateRouteImport } from './routes/_authenticated/admin/promotions/coupons/create'
+import { Route as AuthenticatedAdminMarketingNotificationsTypesRouteImport } from './routes/_authenticated/admin/marketing/notifications/types'
+import { Route as AuthenticatedAdminMarketingNotificationsSettingsRouteImport } from './routes/_authenticated/admin/marketing/notifications/settings'
+import { Route as AuthenticatedAdminMarketingNotificationsSendRouteImport } from './routes/_authenticated/admin/marketing/notifications/send'
+import { Route as AuthenticatedAdminMarketingNotificationsHistoryRouteImport } from './routes/_authenticated/admin/marketing/notifications/history'
+import { Route as AuthenticatedAdminMarketingBlogsCreateRouteImport } from './routes/_authenticated/admin/marketing/blogs/create'
+import { Route as AuthenticatedAdminAnalyticsGmcFeedRouteImport } from './routes/_authenticated/admin/analytics/gmc/feed'
+import { Route as AuthenticatedAdminAnalyticsFacebookCatalogueFeedRouteImport } from './routes/_authenticated/admin/analytics/facebook-catalogue/feed'
 
-const ClerkRouteRoute = ClerkRouteRouteImport.update({
-  id: '/clerk',
-  path: '/clerk',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
@@ -79,105 +141,69 @@ const errors401Route = errors401RouteImport.update({
   path: '/401',
   getParentRoute: () => rootRouteImport,
 } as any)
-const authSignUpRoute = authSignUpRouteImport.update({
-  id: '/(auth)/sign-up',
-  path: '/sign-up',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const authSignIn2Route = authSignIn2RouteImport.update({
-  id: '/(auth)/sign-in-2',
-  path: '/sign-in-2',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const authSignInRoute = authSignInRouteImport.update({
   id: '/(auth)/sign-in',
   path: '/sign-in',
   getParentRoute: () => rootRouteImport,
 } as any)
-const authOtpRoute = authOtpRouteImport.update({
-  id: '/(auth)/otp',
-  path: '/otp',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const authForgotPasswordRoute = authForgotPasswordRouteImport.update({
-  id: '/(auth)/forgot-password',
-  path: '/forgot-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ClerkAuthenticatedRouteRoute = ClerkAuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => ClerkRouteRoute,
-} as any)
-const ClerkauthRouteRoute = ClerkauthRouteRouteImport.update({
-  id: '/(auth)',
-  getParentRoute: () => ClerkRouteRoute,
-} as any)
+const AuthenticatedSupervisorRouteRoute =
+  AuthenticatedSupervisorRouteRouteImport.update({
+    id: '/supervisor',
+    path: '/supervisor',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSettingsRouteRoute =
   AuthenticatedSettingsRouteRouteImport.update({
     id: '/settings',
     path: '/settings',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexRouteImport.update({
-  id: '/users/',
-  path: '/users/',
+const AuthenticatedSellerRouteRoute =
+  AuthenticatedSellerRouteRouteImport.update({
+    id: '/seller',
+    path: '/seller',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedCourierRouteRoute =
+  AuthenticatedCourierRouteRouteImport.update({
+    id: '/courier',
+    path: '/courier',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedTasksIndexRoute = AuthenticatedTasksIndexRouteImport.update({
-  id: '/tasks/',
-  path: '/tasks/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
+const AuthenticatedSupervisorIndexRoute =
+  AuthenticatedSupervisorIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedSupervisorRouteRoute,
+  } as any)
 const AuthenticatedSettingsIndexRoute =
   AuthenticatedSettingsIndexRouteImport.update({
     id: '/',
     path: '/',
     getParentRoute: () => AuthenticatedSettingsRouteRoute,
   } as any)
-const AuthenticatedHelpCenterIndexRoute =
-  AuthenticatedHelpCenterIndexRouteImport.update({
-    id: '/help-center/',
-    path: '/help-center/',
-    getParentRoute: () => AuthenticatedRouteRoute,
+const AuthenticatedSellerIndexRoute =
+  AuthenticatedSellerIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedSellerRouteRoute,
   } as any)
-const AuthenticatedChatsIndexRoute = AuthenticatedChatsIndexRouteImport.update({
-  id: '/chats/',
-  path: '/chats/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedAppsIndexRoute = AuthenticatedAppsIndexRouteImport.update({
-  id: '/apps/',
-  path: '/apps/',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const ClerkAuthenticatedUserManagementRoute =
-  ClerkAuthenticatedUserManagementRouteImport.update({
-    id: '/user-management',
-    path: '/user-management',
-    getParentRoute: () => ClerkAuthenticatedRouteRoute,
+const AuthenticatedCourierIndexRoute =
+  AuthenticatedCourierIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedCourierRouteRoute,
   } as any)
-const ClerkauthSignUpRoute = ClerkauthSignUpRouteImport.update({
-  id: '/sign-up',
-  path: '/sign-up',
-  getParentRoute: () => ClerkauthRouteRoute,
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
-const ClerkauthSignInRoute = ClerkauthSignInRouteImport.update({
-  id: '/sign-in',
-  path: '/sign-in',
-  getParentRoute: () => ClerkauthRouteRoute,
-} as any)
-const AuthenticatedSettingsNotificationsRoute =
-  AuthenticatedSettingsNotificationsRouteImport.update({
-    id: '/notifications',
-    path: '/notifications',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any)
-const AuthenticatedSettingsDisplayRoute =
-  AuthenticatedSettingsDisplayRouteImport.update({
-    id: '/display',
-    path: '/display',
-    getParentRoute: () => AuthenticatedSettingsRouteRoute,
-  } as any)
 const AuthenticatedSettingsAppearanceRoute =
   AuthenticatedSettingsAppearanceRouteImport.update({
     id: '/appearance',
@@ -196,16 +222,471 @@ const AuthenticatedErrorsErrorRoute =
     path: '/errors/$error',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminWholesaleProductsIndexRoute =
+  AuthenticatedAdminWholesaleProductsIndexRouteImport.update({
+    id: '/wholesale-products/',
+    path: '/wholesale-products/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminUsersIndexRoute =
+  AuthenticatedAdminUsersIndexRouteImport.update({
+    id: '/users/',
+    path: '/users/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminUnitsIndexRoute =
+  AuthenticatedAdminUnitsIndexRouteImport.update({
+    id: '/units/',
+    path: '/units/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSellersIndexRoute =
+  AuthenticatedAdminSellersIndexRouteImport.update({
+    id: '/sellers/',
+    path: '/sellers/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminRoleIndexRoute =
+  AuthenticatedAdminRoleIndexRouteImport.update({
+    id: '/role/',
+    path: '/role/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPromotionsIndexRoute =
+  AuthenticatedAdminPromotionsIndexRouteImport.update({
+    id: '/promotions/',
+    path: '/promotions/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminProductsIndexRoute =
+  AuthenticatedAdminProductsIndexRouteImport.update({
+    id: '/products/',
+    path: '/products/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPermissionIndexRoute =
+  AuthenticatedAdminPermissionIndexRouteImport.update({
+    id: '/permission/',
+    path: '/permission/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminOrdersIndexRoute =
+  AuthenticatedAdminOrdersIndexRouteImport.update({
+    id: '/orders/',
+    path: '/orders/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingIndexRoute =
+  AuthenticatedAdminMarketingIndexRouteImport.update({
+    id: '/marketing/',
+    path: '/marketing/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCustomersIndexRoute =
+  AuthenticatedAdminCustomersIndexRouteImport.update({
+    id: '/customers/',
+    path: '/customers/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminColorsIndexRoute =
+  AuthenticatedAdminColorsIndexRouteImport.update({
+    id: '/colors/',
+    path: '/colors/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminClassifiedProductsIndexRoute =
+  AuthenticatedAdminClassifiedProductsIndexRouteImport.update({
+    id: '/classified-products/',
+    path: '/classified-products/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCategoriesIndexRoute =
+  AuthenticatedAdminCategoriesIndexRouteImport.update({
+    id: '/categories/',
+    path: '/categories/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminBrandsIndexRoute =
+  AuthenticatedAdminBrandsIndexRouteImport.update({
+    id: '/brands/',
+    path: '/brands/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAttributesIndexRoute =
+  AuthenticatedAdminAttributesIndexRouteImport.update({
+    id: '/attributes/',
+    path: '/attributes/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsIndexRoute =
+  AuthenticatedAdminAnalyticsIndexRouteImport.update({
+    id: '/analytics/',
+    path: '/analytics/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminWholesaleProductsSellerRoute =
+  AuthenticatedAdminWholesaleProductsSellerRouteImport.update({
+    id: '/wholesale-products/seller',
+    path: '/wholesale-products/seller',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminWholesaleProductsInHouseRoute =
+  AuthenticatedAdminWholesaleProductsInHouseRouteImport.update({
+    id: '/wholesale-products/in-house',
+    path: '/wholesale-products/in-house',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminWholesaleProductsCreateRoute =
+  AuthenticatedAdminWholesaleProductsCreateRouteImport.update({
+    id: '/wholesale-products/create',
+    path: '/wholesale-products/create',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSellersVerificationFormRoute =
+  AuthenticatedAdminSellersVerificationFormRouteImport.update({
+    id: '/sellers/verification-form',
+    path: '/sellers/verification-form',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSellersRatingFollowersRoute =
+  AuthenticatedAdminSellersRatingFollowersRouteImport.update({
+    id: '/sellers/rating-followers',
+    path: '/sellers/rating-followers',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSellersPendingRoute =
+  AuthenticatedAdminSellersPendingRouteImport.update({
+    id: '/sellers/pending',
+    path: '/sellers/pending',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSellersPayoutsRoute =
+  AuthenticatedAdminSellersPayoutsRouteImport.update({
+    id: '/sellers/payouts',
+    path: '/sellers/payouts',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSellersPayoutRequestsRoute =
+  AuthenticatedAdminSellersPayoutRequestsRouteImport.update({
+    id: '/sellers/payout-requests',
+    path: '/sellers/payout-requests',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSellersPackagesRoute =
+  AuthenticatedAdminSellersPackagesRouteImport.update({
+    id: '/sellers/packages',
+    path: '/sellers/packages',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSellersCommissionsRoute =
+  AuthenticatedAdminSellersCommissionsRouteImport.update({
+    id: '/sellers/commissions',
+    path: '/sellers/commissions',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPromotionsSellerProductsRoute =
+  AuthenticatedAdminPromotionsSellerProductsRouteImport.update({
+    id: '/promotions/seller-products',
+    path: '/promotions/seller-products',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPromotionsProductsRoute =
+  AuthenticatedAdminPromotionsProductsRouteImport.update({
+    id: '/promotions/products',
+    path: '/promotions/products',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPromotionsCategoryDiscountsRoute =
+  AuthenticatedAdminPromotionsCategoryDiscountsRouteImport.update({
+    id: '/promotions/category-discounts',
+    path: '/promotions/category-discounts',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminProductsSellerRoute =
+  AuthenticatedAdminProductsSellerRouteImport.update({
+    id: '/products/seller',
+    path: '/products/seller',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminProductsReviewsRoute =
+  AuthenticatedAdminProductsReviewsRouteImport.update({
+    id: '/products/reviews',
+    path: '/products/reviews',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminProductsInHouseRoute =
+  AuthenticatedAdminProductsInHouseRouteImport.update({
+    id: '/products/in-house',
+    path: '/products/in-house',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminProductsCreateRoute =
+  AuthenticatedAdminProductsCreateRouteImport.update({
+    id: '/products/create',
+    path: '/products/create',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminOrdersUnpaidRoute =
+  AuthenticatedAdminOrdersUnpaidRouteImport.update({
+    id: '/orders/unpaid',
+    path: '/orders/unpaid',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminOrdersSellerRoute =
+  AuthenticatedAdminOrdersSellerRouteImport.update({
+    id: '/orders/seller',
+    path: '/orders/seller',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminOrdersPickupPointRoute =
+  AuthenticatedAdminOrdersPickupPointRouteImport.update({
+    id: '/orders/pickup-point',
+    path: '/orders/pickup-point',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminOrdersInHouseRoute =
+  AuthenticatedAdminOrdersInHouseRouteImport.update({
+    id: '/orders/in-house',
+    path: '/orders/in-house',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminOrdersIdRoute =
+  AuthenticatedAdminOrdersIdRouteImport.update({
+    id: '/orders/$id',
+    path: '/orders/$id',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingVisitorsRoute =
+  AuthenticatedAdminMarketingVisitorsRouteImport.update({
+    id: '/marketing/visitors',
+    path: '/marketing/visitors',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingSubscribersRoute =
+  AuthenticatedAdminMarketingSubscribersRouteImport.update({
+    id: '/marketing/subscribers',
+    path: '/marketing/subscribers',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingSmsRoute =
+  AuthenticatedAdminMarketingSmsRouteImport.update({
+    id: '/marketing/sms',
+    path: '/marketing/sms',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingSaleAlertsRoute =
+  AuthenticatedAdminMarketingSaleAlertsRouteImport.update({
+    id: '/marketing/sale-alerts',
+    path: '/marketing/sale-alerts',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingPopupsRoute =
+  AuthenticatedAdminMarketingPopupsRouteImport.update({
+    id: '/marketing/popups',
+    path: '/marketing/popups',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingNewslettersRoute =
+  AuthenticatedAdminMarketingNewslettersRouteImport.update({
+    id: '/marketing/newsletters',
+    path: '/marketing/newsletters',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingEmailTemplatesRoute =
+  AuthenticatedAdminMarketingEmailTemplatesRouteImport.update({
+    id: '/marketing/email-templates',
+    path: '/marketing/email-templates',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingBlogCategoriesRoute =
+  AuthenticatedAdminMarketingBlogCategoriesRouteImport.update({
+    id: '/marketing/blog-categories',
+    path: '/marketing/blog-categories',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingAlertsRoute =
+  AuthenticatedAdminMarketingAlertsRouteImport.update({
+    id: '/marketing/alerts',
+    path: '/marketing/alerts',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCustomersUnverifiedRoute =
+  AuthenticatedAdminCustomersUnverifiedRouteImport.update({
+    id: '/customers/unverified',
+    path: '/customers/unverified',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCustomersPackagesRoute =
+  AuthenticatedAdminCustomersPackagesRouteImport.update({
+    id: '/customers/packages',
+    path: '/customers/packages',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCustomersClassifiedProductsRoute =
+  AuthenticatedAdminCustomersClassifiedProductsRouteImport.update({
+    id: '/customers/classified-products',
+    path: '/customers/classified-products',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminClassifiedProductsSellerRoute =
+  AuthenticatedAdminClassifiedProductsSellerRouteImport.update({
+    id: '/classified-products/seller',
+    path: '/classified-products/seller',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminClassifiedProductsInHouseRoute =
+  AuthenticatedAdminClassifiedProductsInHouseRouteImport.update({
+    id: '/classified-products/in-house',
+    path: '/classified-products/in-house',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminClassifiedProductsCreateRoute =
+  AuthenticatedAdminClassifiedProductsCreateRouteImport.update({
+    id: '/classified-products/create',
+    path: '/classified-products/create',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsSitemapRoute =
+  AuthenticatedAdminAnalyticsSitemapRouteImport.update({
+    id: '/analytics/sitemap',
+    path: '/analytics/sitemap',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsSeoRoute =
+  AuthenticatedAdminAnalyticsSeoRouteImport.update({
+    id: '/analytics/seo',
+    path: '/analytics/seo',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsPixelRoute =
+  AuthenticatedAdminAnalyticsPixelRouteImport.update({
+    id: '/analytics/pixel',
+    path: '/analytics/pixel',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsGtmRoute =
+  AuthenticatedAdminAnalyticsGtmRouteImport.update({
+    id: '/analytics/gtm',
+    path: '/analytics/gtm',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsGoogleReportsRoute =
+  AuthenticatedAdminAnalyticsGoogleReportsRouteImport.update({
+    id: '/analytics/google-reports',
+    path: '/analytics/google-reports',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsGoogleRoute =
+  AuthenticatedAdminAnalyticsGoogleRouteImport.update({
+    id: '/analytics/google',
+    path: '/analytics/google',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsCustomScriptsRoute =
+  AuthenticatedAdminAnalyticsCustomScriptsRouteImport.update({
+    id: '/analytics/custom-scripts',
+    path: '/analytics/custom-scripts',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsConversionsApiRoute =
+  AuthenticatedAdminAnalyticsConversionsApiRouteImport.update({
+    id: '/analytics/conversions-api',
+    path: '/analytics/conversions-api',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPromotionsFlashDealsIndexRoute =
+  AuthenticatedAdminPromotionsFlashDealsIndexRouteImport.update({
+    id: '/promotions/flash-deals/',
+    path: '/promotions/flash-deals/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPromotionsCouponsIndexRoute =
+  AuthenticatedAdminPromotionsCouponsIndexRouteImport.update({
+    id: '/promotions/coupons/',
+    path: '/promotions/coupons/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingBlogsIndexRoute =
+  AuthenticatedAdminMarketingBlogsIndexRouteImport.update({
+    id: '/marketing/blogs/',
+    path: '/marketing/blogs/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsGmcIndexRoute =
+  AuthenticatedAdminAnalyticsGmcIndexRouteImport.update({
+    id: '/analytics/gmc/',
+    path: '/analytics/gmc/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsFacebookCatalogueIndexRoute =
+  AuthenticatedAdminAnalyticsFacebookCatalogueIndexRouteImport.update({
+    id: '/analytics/facebook-catalogue/',
+    path: '/analytics/facebook-catalogue/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPromotionsFlashDealsCreateRoute =
+  AuthenticatedAdminPromotionsFlashDealsCreateRouteImport.update({
+    id: '/promotions/flash-deals/create',
+    path: '/promotions/flash-deals/create',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPromotionsCouponsCreateRoute =
+  AuthenticatedAdminPromotionsCouponsCreateRouteImport.update({
+    id: '/promotions/coupons/create',
+    path: '/promotions/coupons/create',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingNotificationsTypesRoute =
+  AuthenticatedAdminMarketingNotificationsTypesRouteImport.update({
+    id: '/marketing/notifications/types',
+    path: '/marketing/notifications/types',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingNotificationsSettingsRoute =
+  AuthenticatedAdminMarketingNotificationsSettingsRouteImport.update({
+    id: '/marketing/notifications/settings',
+    path: '/marketing/notifications/settings',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingNotificationsSendRoute =
+  AuthenticatedAdminMarketingNotificationsSendRouteImport.update({
+    id: '/marketing/notifications/send',
+    path: '/marketing/notifications/send',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingNotificationsHistoryRoute =
+  AuthenticatedAdminMarketingNotificationsHistoryRouteImport.update({
+    id: '/marketing/notifications/history',
+    path: '/marketing/notifications/history',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMarketingBlogsCreateRoute =
+  AuthenticatedAdminMarketingBlogsCreateRouteImport.update({
+    id: '/marketing/blogs/create',
+    path: '/marketing/blogs/create',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsGmcFeedRoute =
+  AuthenticatedAdminAnalyticsGmcFeedRouteImport.update({
+    id: '/analytics/gmc/feed',
+    path: '/analytics/gmc/feed',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsFacebookCatalogueFeedRoute =
+  AuthenticatedAdminAnalyticsFacebookCatalogueFeedRouteImport.update({
+    id: '/analytics/facebook-catalogue/feed',
+    path: '/analytics/facebook-catalogue/feed',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
-  '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/courier': typeof AuthenticatedCourierRouteRouteWithChildren
+  '/seller': typeof AuthenticatedSellerRouteRouteWithChildren
   '/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
-  '/forgot-password': typeof authForgotPasswordRoute
-  '/otp': typeof authOtpRoute
+  '/supervisor': typeof AuthenticatedSupervisorRouteRouteWithChildren
   '/sign-in': typeof authSignInRoute
-  '/sign-in-2': typeof authSignIn2Route
-  '/sign-up': typeof authSignUpRoute
   '/401': typeof errors401Route
   '/403': typeof errors403Route
   '/404': typeof errors404Route
@@ -214,25 +695,90 @@ export interface FileRoutesByFullPath {
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/settings/display': typeof AuthenticatedSettingsDisplayRoute
-  '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/clerk/sign-in': typeof ClerkauthSignInRoute
-  '/clerk/sign-up': typeof ClerkauthSignUpRoute
-  '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
-  '/apps/': typeof AuthenticatedAppsIndexRoute
-  '/chats/': typeof AuthenticatedChatsIndexRoute
-  '/help-center/': typeof AuthenticatedHelpCenterIndexRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/courier/': typeof AuthenticatedCourierIndexRoute
+  '/seller/': typeof AuthenticatedSellerIndexRoute
   '/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/tasks/': typeof AuthenticatedTasksIndexRoute
-  '/users/': typeof AuthenticatedUsersIndexRoute
+  '/supervisor/': typeof AuthenticatedSupervisorIndexRoute
+  '/admin/analytics/conversions-api': typeof AuthenticatedAdminAnalyticsConversionsApiRoute
+  '/admin/analytics/custom-scripts': typeof AuthenticatedAdminAnalyticsCustomScriptsRoute
+  '/admin/analytics/google': typeof AuthenticatedAdminAnalyticsGoogleRoute
+  '/admin/analytics/google-reports': typeof AuthenticatedAdminAnalyticsGoogleReportsRoute
+  '/admin/analytics/gtm': typeof AuthenticatedAdminAnalyticsGtmRoute
+  '/admin/analytics/pixel': typeof AuthenticatedAdminAnalyticsPixelRoute
+  '/admin/analytics/seo': typeof AuthenticatedAdminAnalyticsSeoRoute
+  '/admin/analytics/sitemap': typeof AuthenticatedAdminAnalyticsSitemapRoute
+  '/admin/classified-products/create': typeof AuthenticatedAdminClassifiedProductsCreateRoute
+  '/admin/classified-products/in-house': typeof AuthenticatedAdminClassifiedProductsInHouseRoute
+  '/admin/classified-products/seller': typeof AuthenticatedAdminClassifiedProductsSellerRoute
+  '/admin/customers/classified-products': typeof AuthenticatedAdminCustomersClassifiedProductsRoute
+  '/admin/customers/packages': typeof AuthenticatedAdminCustomersPackagesRoute
+  '/admin/customers/unverified': typeof AuthenticatedAdminCustomersUnverifiedRoute
+  '/admin/marketing/alerts': typeof AuthenticatedAdminMarketingAlertsRoute
+  '/admin/marketing/blog-categories': typeof AuthenticatedAdminMarketingBlogCategoriesRoute
+  '/admin/marketing/email-templates': typeof AuthenticatedAdminMarketingEmailTemplatesRoute
+  '/admin/marketing/newsletters': typeof AuthenticatedAdminMarketingNewslettersRoute
+  '/admin/marketing/popups': typeof AuthenticatedAdminMarketingPopupsRoute
+  '/admin/marketing/sale-alerts': typeof AuthenticatedAdminMarketingSaleAlertsRoute
+  '/admin/marketing/sms': typeof AuthenticatedAdminMarketingSmsRoute
+  '/admin/marketing/subscribers': typeof AuthenticatedAdminMarketingSubscribersRoute
+  '/admin/marketing/visitors': typeof AuthenticatedAdminMarketingVisitorsRoute
+  '/admin/orders/$id': typeof AuthenticatedAdminOrdersIdRoute
+  '/admin/orders/in-house': typeof AuthenticatedAdminOrdersInHouseRoute
+  '/admin/orders/pickup-point': typeof AuthenticatedAdminOrdersPickupPointRoute
+  '/admin/orders/seller': typeof AuthenticatedAdminOrdersSellerRoute
+  '/admin/orders/unpaid': typeof AuthenticatedAdminOrdersUnpaidRoute
+  '/admin/products/create': typeof AuthenticatedAdminProductsCreateRoute
+  '/admin/products/in-house': typeof AuthenticatedAdminProductsInHouseRoute
+  '/admin/products/reviews': typeof AuthenticatedAdminProductsReviewsRoute
+  '/admin/products/seller': typeof AuthenticatedAdminProductsSellerRoute
+  '/admin/promotions/category-discounts': typeof AuthenticatedAdminPromotionsCategoryDiscountsRoute
+  '/admin/promotions/products': typeof AuthenticatedAdminPromotionsProductsRoute
+  '/admin/promotions/seller-products': typeof AuthenticatedAdminPromotionsSellerProductsRoute
+  '/admin/sellers/commissions': typeof AuthenticatedAdminSellersCommissionsRoute
+  '/admin/sellers/packages': typeof AuthenticatedAdminSellersPackagesRoute
+  '/admin/sellers/payout-requests': typeof AuthenticatedAdminSellersPayoutRequestsRoute
+  '/admin/sellers/payouts': typeof AuthenticatedAdminSellersPayoutsRoute
+  '/admin/sellers/pending': typeof AuthenticatedAdminSellersPendingRoute
+  '/admin/sellers/rating-followers': typeof AuthenticatedAdminSellersRatingFollowersRoute
+  '/admin/sellers/verification-form': typeof AuthenticatedAdminSellersVerificationFormRoute
+  '/admin/wholesale-products/create': typeof AuthenticatedAdminWholesaleProductsCreateRoute
+  '/admin/wholesale-products/in-house': typeof AuthenticatedAdminWholesaleProductsInHouseRoute
+  '/admin/wholesale-products/seller': typeof AuthenticatedAdminWholesaleProductsSellerRoute
+  '/admin/analytics/': typeof AuthenticatedAdminAnalyticsIndexRoute
+  '/admin/attributes/': typeof AuthenticatedAdminAttributesIndexRoute
+  '/admin/brands/': typeof AuthenticatedAdminBrandsIndexRoute
+  '/admin/categories/': typeof AuthenticatedAdminCategoriesIndexRoute
+  '/admin/classified-products/': typeof AuthenticatedAdminClassifiedProductsIndexRoute
+  '/admin/colors/': typeof AuthenticatedAdminColorsIndexRoute
+  '/admin/customers/': typeof AuthenticatedAdminCustomersIndexRoute
+  '/admin/marketing/': typeof AuthenticatedAdminMarketingIndexRoute
+  '/admin/orders/': typeof AuthenticatedAdminOrdersIndexRoute
+  '/admin/permission/': typeof AuthenticatedAdminPermissionIndexRoute
+  '/admin/products/': typeof AuthenticatedAdminProductsIndexRoute
+  '/admin/promotions/': typeof AuthenticatedAdminPromotionsIndexRoute
+  '/admin/role/': typeof AuthenticatedAdminRoleIndexRoute
+  '/admin/sellers/': typeof AuthenticatedAdminSellersIndexRoute
+  '/admin/units/': typeof AuthenticatedAdminUnitsIndexRoute
+  '/admin/users/': typeof AuthenticatedAdminUsersIndexRoute
+  '/admin/wholesale-products/': typeof AuthenticatedAdminWholesaleProductsIndexRoute
+  '/admin/analytics/facebook-catalogue/feed': typeof AuthenticatedAdminAnalyticsFacebookCatalogueFeedRoute
+  '/admin/analytics/gmc/feed': typeof AuthenticatedAdminAnalyticsGmcFeedRoute
+  '/admin/marketing/blogs/create': typeof AuthenticatedAdminMarketingBlogsCreateRoute
+  '/admin/marketing/notifications/history': typeof AuthenticatedAdminMarketingNotificationsHistoryRoute
+  '/admin/marketing/notifications/send': typeof AuthenticatedAdminMarketingNotificationsSendRoute
+  '/admin/marketing/notifications/settings': typeof AuthenticatedAdminMarketingNotificationsSettingsRoute
+  '/admin/marketing/notifications/types': typeof AuthenticatedAdminMarketingNotificationsTypesRoute
+  '/admin/promotions/coupons/create': typeof AuthenticatedAdminPromotionsCouponsCreateRoute
+  '/admin/promotions/flash-deals/create': typeof AuthenticatedAdminPromotionsFlashDealsCreateRoute
+  '/admin/analytics/facebook-catalogue/': typeof AuthenticatedAdminAnalyticsFacebookCatalogueIndexRoute
+  '/admin/analytics/gmc/': typeof AuthenticatedAdminAnalyticsGmcIndexRoute
+  '/admin/marketing/blogs/': typeof AuthenticatedAdminMarketingBlogsIndexRoute
+  '/admin/promotions/coupons/': typeof AuthenticatedAdminPromotionsCouponsIndexRoute
+  '/admin/promotions/flash-deals/': typeof AuthenticatedAdminPromotionsFlashDealsIndexRoute
 }
 export interface FileRoutesByTo {
-  '/clerk': typeof ClerkAuthenticatedRouteRouteWithChildren
-  '/forgot-password': typeof authForgotPasswordRoute
-  '/otp': typeof authOtpRoute
   '/sign-in': typeof authSignInRoute
-  '/sign-in-2': typeof authSignIn2Route
-  '/sign-up': typeof authSignUpRoute
   '/401': typeof errors401Route
   '/403': typeof errors403Route
   '/404': typeof errors404Route
@@ -242,30 +788,97 @@ export interface FileRoutesByTo {
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/settings/display': typeof AuthenticatedSettingsDisplayRoute
-  '/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/clerk/sign-in': typeof ClerkauthSignInRoute
-  '/clerk/sign-up': typeof ClerkauthSignUpRoute
-  '/clerk/user-management': typeof ClerkAuthenticatedUserManagementRoute
-  '/apps': typeof AuthenticatedAppsIndexRoute
-  '/chats': typeof AuthenticatedChatsIndexRoute
-  '/help-center': typeof AuthenticatedHelpCenterIndexRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/courier': typeof AuthenticatedCourierIndexRoute
+  '/seller': typeof AuthenticatedSellerIndexRoute
   '/settings': typeof AuthenticatedSettingsIndexRoute
-  '/tasks': typeof AuthenticatedTasksIndexRoute
-  '/users': typeof AuthenticatedUsersIndexRoute
+  '/supervisor': typeof AuthenticatedSupervisorIndexRoute
+  '/admin/analytics/conversions-api': typeof AuthenticatedAdminAnalyticsConversionsApiRoute
+  '/admin/analytics/custom-scripts': typeof AuthenticatedAdminAnalyticsCustomScriptsRoute
+  '/admin/analytics/google': typeof AuthenticatedAdminAnalyticsGoogleRoute
+  '/admin/analytics/google-reports': typeof AuthenticatedAdminAnalyticsGoogleReportsRoute
+  '/admin/analytics/gtm': typeof AuthenticatedAdminAnalyticsGtmRoute
+  '/admin/analytics/pixel': typeof AuthenticatedAdminAnalyticsPixelRoute
+  '/admin/analytics/seo': typeof AuthenticatedAdminAnalyticsSeoRoute
+  '/admin/analytics/sitemap': typeof AuthenticatedAdminAnalyticsSitemapRoute
+  '/admin/classified-products/create': typeof AuthenticatedAdminClassifiedProductsCreateRoute
+  '/admin/classified-products/in-house': typeof AuthenticatedAdminClassifiedProductsInHouseRoute
+  '/admin/classified-products/seller': typeof AuthenticatedAdminClassifiedProductsSellerRoute
+  '/admin/customers/classified-products': typeof AuthenticatedAdminCustomersClassifiedProductsRoute
+  '/admin/customers/packages': typeof AuthenticatedAdminCustomersPackagesRoute
+  '/admin/customers/unverified': typeof AuthenticatedAdminCustomersUnverifiedRoute
+  '/admin/marketing/alerts': typeof AuthenticatedAdminMarketingAlertsRoute
+  '/admin/marketing/blog-categories': typeof AuthenticatedAdminMarketingBlogCategoriesRoute
+  '/admin/marketing/email-templates': typeof AuthenticatedAdminMarketingEmailTemplatesRoute
+  '/admin/marketing/newsletters': typeof AuthenticatedAdminMarketingNewslettersRoute
+  '/admin/marketing/popups': typeof AuthenticatedAdminMarketingPopupsRoute
+  '/admin/marketing/sale-alerts': typeof AuthenticatedAdminMarketingSaleAlertsRoute
+  '/admin/marketing/sms': typeof AuthenticatedAdminMarketingSmsRoute
+  '/admin/marketing/subscribers': typeof AuthenticatedAdminMarketingSubscribersRoute
+  '/admin/marketing/visitors': typeof AuthenticatedAdminMarketingVisitorsRoute
+  '/admin/orders/$id': typeof AuthenticatedAdminOrdersIdRoute
+  '/admin/orders/in-house': typeof AuthenticatedAdminOrdersInHouseRoute
+  '/admin/orders/pickup-point': typeof AuthenticatedAdminOrdersPickupPointRoute
+  '/admin/orders/seller': typeof AuthenticatedAdminOrdersSellerRoute
+  '/admin/orders/unpaid': typeof AuthenticatedAdminOrdersUnpaidRoute
+  '/admin/products/create': typeof AuthenticatedAdminProductsCreateRoute
+  '/admin/products/in-house': typeof AuthenticatedAdminProductsInHouseRoute
+  '/admin/products/reviews': typeof AuthenticatedAdminProductsReviewsRoute
+  '/admin/products/seller': typeof AuthenticatedAdminProductsSellerRoute
+  '/admin/promotions/category-discounts': typeof AuthenticatedAdminPromotionsCategoryDiscountsRoute
+  '/admin/promotions/products': typeof AuthenticatedAdminPromotionsProductsRoute
+  '/admin/promotions/seller-products': typeof AuthenticatedAdminPromotionsSellerProductsRoute
+  '/admin/sellers/commissions': typeof AuthenticatedAdminSellersCommissionsRoute
+  '/admin/sellers/packages': typeof AuthenticatedAdminSellersPackagesRoute
+  '/admin/sellers/payout-requests': typeof AuthenticatedAdminSellersPayoutRequestsRoute
+  '/admin/sellers/payouts': typeof AuthenticatedAdminSellersPayoutsRoute
+  '/admin/sellers/pending': typeof AuthenticatedAdminSellersPendingRoute
+  '/admin/sellers/rating-followers': typeof AuthenticatedAdminSellersRatingFollowersRoute
+  '/admin/sellers/verification-form': typeof AuthenticatedAdminSellersVerificationFormRoute
+  '/admin/wholesale-products/create': typeof AuthenticatedAdminWholesaleProductsCreateRoute
+  '/admin/wholesale-products/in-house': typeof AuthenticatedAdminWholesaleProductsInHouseRoute
+  '/admin/wholesale-products/seller': typeof AuthenticatedAdminWholesaleProductsSellerRoute
+  '/admin/analytics': typeof AuthenticatedAdminAnalyticsIndexRoute
+  '/admin/attributes': typeof AuthenticatedAdminAttributesIndexRoute
+  '/admin/brands': typeof AuthenticatedAdminBrandsIndexRoute
+  '/admin/categories': typeof AuthenticatedAdminCategoriesIndexRoute
+  '/admin/classified-products': typeof AuthenticatedAdminClassifiedProductsIndexRoute
+  '/admin/colors': typeof AuthenticatedAdminColorsIndexRoute
+  '/admin/customers': typeof AuthenticatedAdminCustomersIndexRoute
+  '/admin/marketing': typeof AuthenticatedAdminMarketingIndexRoute
+  '/admin/orders': typeof AuthenticatedAdminOrdersIndexRoute
+  '/admin/permission': typeof AuthenticatedAdminPermissionIndexRoute
+  '/admin/products': typeof AuthenticatedAdminProductsIndexRoute
+  '/admin/promotions': typeof AuthenticatedAdminPromotionsIndexRoute
+  '/admin/role': typeof AuthenticatedAdminRoleIndexRoute
+  '/admin/sellers': typeof AuthenticatedAdminSellersIndexRoute
+  '/admin/units': typeof AuthenticatedAdminUnitsIndexRoute
+  '/admin/users': typeof AuthenticatedAdminUsersIndexRoute
+  '/admin/wholesale-products': typeof AuthenticatedAdminWholesaleProductsIndexRoute
+  '/admin/analytics/facebook-catalogue/feed': typeof AuthenticatedAdminAnalyticsFacebookCatalogueFeedRoute
+  '/admin/analytics/gmc/feed': typeof AuthenticatedAdminAnalyticsGmcFeedRoute
+  '/admin/marketing/blogs/create': typeof AuthenticatedAdminMarketingBlogsCreateRoute
+  '/admin/marketing/notifications/history': typeof AuthenticatedAdminMarketingNotificationsHistoryRoute
+  '/admin/marketing/notifications/send': typeof AuthenticatedAdminMarketingNotificationsSendRoute
+  '/admin/marketing/notifications/settings': typeof AuthenticatedAdminMarketingNotificationsSettingsRoute
+  '/admin/marketing/notifications/types': typeof AuthenticatedAdminMarketingNotificationsTypesRoute
+  '/admin/promotions/coupons/create': typeof AuthenticatedAdminPromotionsCouponsCreateRoute
+  '/admin/promotions/flash-deals/create': typeof AuthenticatedAdminPromotionsFlashDealsCreateRoute
+  '/admin/analytics/facebook-catalogue': typeof AuthenticatedAdminAnalyticsFacebookCatalogueIndexRoute
+  '/admin/analytics/gmc': typeof AuthenticatedAdminAnalyticsGmcIndexRoute
+  '/admin/marketing/blogs': typeof AuthenticatedAdminMarketingBlogsIndexRoute
+  '/admin/promotions/coupons': typeof AuthenticatedAdminPromotionsCouponsIndexRoute
+  '/admin/promotions/flash-deals': typeof AuthenticatedAdminPromotionsFlashDealsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/clerk': typeof ClerkRouteRouteWithChildren
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/_authenticated/courier': typeof AuthenticatedCourierRouteRouteWithChildren
+  '/_authenticated/seller': typeof AuthenticatedSellerRouteRouteWithChildren
   '/_authenticated/settings': typeof AuthenticatedSettingsRouteRouteWithChildren
-  '/clerk/(auth)': typeof ClerkauthRouteRouteWithChildren
-  '/clerk/_authenticated': typeof ClerkAuthenticatedRouteRouteWithChildren
-  '/(auth)/forgot-password': typeof authForgotPasswordRoute
-  '/(auth)/otp': typeof authOtpRoute
+  '/_authenticated/supervisor': typeof AuthenticatedSupervisorRouteRouteWithChildren
   '/(auth)/sign-in': typeof authSignInRoute
-  '/(auth)/sign-in-2': typeof authSignIn2Route
-  '/(auth)/sign-up': typeof authSignUpRoute
   '/(errors)/401': typeof errors401Route
   '/(errors)/403': typeof errors403Route
   '/(errors)/404': typeof errors404Route
@@ -275,29 +888,98 @@ export interface FileRoutesById {
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/_authenticated/settings/account': typeof AuthenticatedSettingsAccountRoute
   '/_authenticated/settings/appearance': typeof AuthenticatedSettingsAppearanceRoute
-  '/_authenticated/settings/display': typeof AuthenticatedSettingsDisplayRoute
-  '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsRoute
-  '/clerk/(auth)/sign-in': typeof ClerkauthSignInRoute
-  '/clerk/(auth)/sign-up': typeof ClerkauthSignUpRoute
-  '/clerk/_authenticated/user-management': typeof ClerkAuthenticatedUserManagementRoute
-  '/_authenticated/apps/': typeof AuthenticatedAppsIndexRoute
-  '/_authenticated/chats/': typeof AuthenticatedChatsIndexRoute
-  '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/courier/': typeof AuthenticatedCourierIndexRoute
+  '/_authenticated/seller/': typeof AuthenticatedSellerIndexRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexRoute
-  '/_authenticated/tasks/': typeof AuthenticatedTasksIndexRoute
-  '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
+  '/_authenticated/supervisor/': typeof AuthenticatedSupervisorIndexRoute
+  '/_authenticated/admin/analytics/conversions-api': typeof AuthenticatedAdminAnalyticsConversionsApiRoute
+  '/_authenticated/admin/analytics/custom-scripts': typeof AuthenticatedAdminAnalyticsCustomScriptsRoute
+  '/_authenticated/admin/analytics/google': typeof AuthenticatedAdminAnalyticsGoogleRoute
+  '/_authenticated/admin/analytics/google-reports': typeof AuthenticatedAdminAnalyticsGoogleReportsRoute
+  '/_authenticated/admin/analytics/gtm': typeof AuthenticatedAdminAnalyticsGtmRoute
+  '/_authenticated/admin/analytics/pixel': typeof AuthenticatedAdminAnalyticsPixelRoute
+  '/_authenticated/admin/analytics/seo': typeof AuthenticatedAdminAnalyticsSeoRoute
+  '/_authenticated/admin/analytics/sitemap': typeof AuthenticatedAdminAnalyticsSitemapRoute
+  '/_authenticated/admin/classified-products/create': typeof AuthenticatedAdminClassifiedProductsCreateRoute
+  '/_authenticated/admin/classified-products/in-house': typeof AuthenticatedAdminClassifiedProductsInHouseRoute
+  '/_authenticated/admin/classified-products/seller': typeof AuthenticatedAdminClassifiedProductsSellerRoute
+  '/_authenticated/admin/customers/classified-products': typeof AuthenticatedAdminCustomersClassifiedProductsRoute
+  '/_authenticated/admin/customers/packages': typeof AuthenticatedAdminCustomersPackagesRoute
+  '/_authenticated/admin/customers/unverified': typeof AuthenticatedAdminCustomersUnverifiedRoute
+  '/_authenticated/admin/marketing/alerts': typeof AuthenticatedAdminMarketingAlertsRoute
+  '/_authenticated/admin/marketing/blog-categories': typeof AuthenticatedAdminMarketingBlogCategoriesRoute
+  '/_authenticated/admin/marketing/email-templates': typeof AuthenticatedAdminMarketingEmailTemplatesRoute
+  '/_authenticated/admin/marketing/newsletters': typeof AuthenticatedAdminMarketingNewslettersRoute
+  '/_authenticated/admin/marketing/popups': typeof AuthenticatedAdminMarketingPopupsRoute
+  '/_authenticated/admin/marketing/sale-alerts': typeof AuthenticatedAdminMarketingSaleAlertsRoute
+  '/_authenticated/admin/marketing/sms': typeof AuthenticatedAdminMarketingSmsRoute
+  '/_authenticated/admin/marketing/subscribers': typeof AuthenticatedAdminMarketingSubscribersRoute
+  '/_authenticated/admin/marketing/visitors': typeof AuthenticatedAdminMarketingVisitorsRoute
+  '/_authenticated/admin/orders/$id': typeof AuthenticatedAdminOrdersIdRoute
+  '/_authenticated/admin/orders/in-house': typeof AuthenticatedAdminOrdersInHouseRoute
+  '/_authenticated/admin/orders/pickup-point': typeof AuthenticatedAdminOrdersPickupPointRoute
+  '/_authenticated/admin/orders/seller': typeof AuthenticatedAdminOrdersSellerRoute
+  '/_authenticated/admin/orders/unpaid': typeof AuthenticatedAdminOrdersUnpaidRoute
+  '/_authenticated/admin/products/create': typeof AuthenticatedAdminProductsCreateRoute
+  '/_authenticated/admin/products/in-house': typeof AuthenticatedAdminProductsInHouseRoute
+  '/_authenticated/admin/products/reviews': typeof AuthenticatedAdminProductsReviewsRoute
+  '/_authenticated/admin/products/seller': typeof AuthenticatedAdminProductsSellerRoute
+  '/_authenticated/admin/promotions/category-discounts': typeof AuthenticatedAdminPromotionsCategoryDiscountsRoute
+  '/_authenticated/admin/promotions/products': typeof AuthenticatedAdminPromotionsProductsRoute
+  '/_authenticated/admin/promotions/seller-products': typeof AuthenticatedAdminPromotionsSellerProductsRoute
+  '/_authenticated/admin/sellers/commissions': typeof AuthenticatedAdminSellersCommissionsRoute
+  '/_authenticated/admin/sellers/packages': typeof AuthenticatedAdminSellersPackagesRoute
+  '/_authenticated/admin/sellers/payout-requests': typeof AuthenticatedAdminSellersPayoutRequestsRoute
+  '/_authenticated/admin/sellers/payouts': typeof AuthenticatedAdminSellersPayoutsRoute
+  '/_authenticated/admin/sellers/pending': typeof AuthenticatedAdminSellersPendingRoute
+  '/_authenticated/admin/sellers/rating-followers': typeof AuthenticatedAdminSellersRatingFollowersRoute
+  '/_authenticated/admin/sellers/verification-form': typeof AuthenticatedAdminSellersVerificationFormRoute
+  '/_authenticated/admin/wholesale-products/create': typeof AuthenticatedAdminWholesaleProductsCreateRoute
+  '/_authenticated/admin/wholesale-products/in-house': typeof AuthenticatedAdminWholesaleProductsInHouseRoute
+  '/_authenticated/admin/wholesale-products/seller': typeof AuthenticatedAdminWholesaleProductsSellerRoute
+  '/_authenticated/admin/analytics/': typeof AuthenticatedAdminAnalyticsIndexRoute
+  '/_authenticated/admin/attributes/': typeof AuthenticatedAdminAttributesIndexRoute
+  '/_authenticated/admin/brands/': typeof AuthenticatedAdminBrandsIndexRoute
+  '/_authenticated/admin/categories/': typeof AuthenticatedAdminCategoriesIndexRoute
+  '/_authenticated/admin/classified-products/': typeof AuthenticatedAdminClassifiedProductsIndexRoute
+  '/_authenticated/admin/colors/': typeof AuthenticatedAdminColorsIndexRoute
+  '/_authenticated/admin/customers/': typeof AuthenticatedAdminCustomersIndexRoute
+  '/_authenticated/admin/marketing/': typeof AuthenticatedAdminMarketingIndexRoute
+  '/_authenticated/admin/orders/': typeof AuthenticatedAdminOrdersIndexRoute
+  '/_authenticated/admin/permission/': typeof AuthenticatedAdminPermissionIndexRoute
+  '/_authenticated/admin/products/': typeof AuthenticatedAdminProductsIndexRoute
+  '/_authenticated/admin/promotions/': typeof AuthenticatedAdminPromotionsIndexRoute
+  '/_authenticated/admin/role/': typeof AuthenticatedAdminRoleIndexRoute
+  '/_authenticated/admin/sellers/': typeof AuthenticatedAdminSellersIndexRoute
+  '/_authenticated/admin/units/': typeof AuthenticatedAdminUnitsIndexRoute
+  '/_authenticated/admin/users/': typeof AuthenticatedAdminUsersIndexRoute
+  '/_authenticated/admin/wholesale-products/': typeof AuthenticatedAdminWholesaleProductsIndexRoute
+  '/_authenticated/admin/analytics/facebook-catalogue/feed': typeof AuthenticatedAdminAnalyticsFacebookCatalogueFeedRoute
+  '/_authenticated/admin/analytics/gmc/feed': typeof AuthenticatedAdminAnalyticsGmcFeedRoute
+  '/_authenticated/admin/marketing/blogs/create': typeof AuthenticatedAdminMarketingBlogsCreateRoute
+  '/_authenticated/admin/marketing/notifications/history': typeof AuthenticatedAdminMarketingNotificationsHistoryRoute
+  '/_authenticated/admin/marketing/notifications/send': typeof AuthenticatedAdminMarketingNotificationsSendRoute
+  '/_authenticated/admin/marketing/notifications/settings': typeof AuthenticatedAdminMarketingNotificationsSettingsRoute
+  '/_authenticated/admin/marketing/notifications/types': typeof AuthenticatedAdminMarketingNotificationsTypesRoute
+  '/_authenticated/admin/promotions/coupons/create': typeof AuthenticatedAdminPromotionsCouponsCreateRoute
+  '/_authenticated/admin/promotions/flash-deals/create': typeof AuthenticatedAdminPromotionsFlashDealsCreateRoute
+  '/_authenticated/admin/analytics/facebook-catalogue/': typeof AuthenticatedAdminAnalyticsFacebookCatalogueIndexRoute
+  '/_authenticated/admin/analytics/gmc/': typeof AuthenticatedAdminAnalyticsGmcIndexRoute
+  '/_authenticated/admin/marketing/blogs/': typeof AuthenticatedAdminMarketingBlogsIndexRoute
+  '/_authenticated/admin/promotions/coupons/': typeof AuthenticatedAdminPromotionsCouponsIndexRoute
+  '/_authenticated/admin/promotions/flash-deals/': typeof AuthenticatedAdminPromotionsFlashDealsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/clerk'
+    | '/admin'
+    | '/courier'
+    | '/seller'
     | '/settings'
-    | '/forgot-password'
-    | '/otp'
+    | '/supervisor'
     | '/sign-in'
-    | '/sign-in-2'
-    | '/sign-up'
     | '/401'
     | '/403'
     | '/404'
@@ -306,25 +988,90 @@ export interface FileRouteTypes {
     | '/errors/$error'
     | '/settings/account'
     | '/settings/appearance'
-    | '/settings/display'
-    | '/settings/notifications'
-    | '/clerk/sign-in'
-    | '/clerk/sign-up'
-    | '/clerk/user-management'
-    | '/apps/'
-    | '/chats/'
-    | '/help-center/'
+    | '/admin/'
+    | '/courier/'
+    | '/seller/'
     | '/settings/'
-    | '/tasks/'
-    | '/users/'
+    | '/supervisor/'
+    | '/admin/analytics/conversions-api'
+    | '/admin/analytics/custom-scripts'
+    | '/admin/analytics/google'
+    | '/admin/analytics/google-reports'
+    | '/admin/analytics/gtm'
+    | '/admin/analytics/pixel'
+    | '/admin/analytics/seo'
+    | '/admin/analytics/sitemap'
+    | '/admin/classified-products/create'
+    | '/admin/classified-products/in-house'
+    | '/admin/classified-products/seller'
+    | '/admin/customers/classified-products'
+    | '/admin/customers/packages'
+    | '/admin/customers/unverified'
+    | '/admin/marketing/alerts'
+    | '/admin/marketing/blog-categories'
+    | '/admin/marketing/email-templates'
+    | '/admin/marketing/newsletters'
+    | '/admin/marketing/popups'
+    | '/admin/marketing/sale-alerts'
+    | '/admin/marketing/sms'
+    | '/admin/marketing/subscribers'
+    | '/admin/marketing/visitors'
+    | '/admin/orders/$id'
+    | '/admin/orders/in-house'
+    | '/admin/orders/pickup-point'
+    | '/admin/orders/seller'
+    | '/admin/orders/unpaid'
+    | '/admin/products/create'
+    | '/admin/products/in-house'
+    | '/admin/products/reviews'
+    | '/admin/products/seller'
+    | '/admin/promotions/category-discounts'
+    | '/admin/promotions/products'
+    | '/admin/promotions/seller-products'
+    | '/admin/sellers/commissions'
+    | '/admin/sellers/packages'
+    | '/admin/sellers/payout-requests'
+    | '/admin/sellers/payouts'
+    | '/admin/sellers/pending'
+    | '/admin/sellers/rating-followers'
+    | '/admin/sellers/verification-form'
+    | '/admin/wholesale-products/create'
+    | '/admin/wholesale-products/in-house'
+    | '/admin/wholesale-products/seller'
+    | '/admin/analytics/'
+    | '/admin/attributes/'
+    | '/admin/brands/'
+    | '/admin/categories/'
+    | '/admin/classified-products/'
+    | '/admin/colors/'
+    | '/admin/customers/'
+    | '/admin/marketing/'
+    | '/admin/orders/'
+    | '/admin/permission/'
+    | '/admin/products/'
+    | '/admin/promotions/'
+    | '/admin/role/'
+    | '/admin/sellers/'
+    | '/admin/units/'
+    | '/admin/users/'
+    | '/admin/wholesale-products/'
+    | '/admin/analytics/facebook-catalogue/feed'
+    | '/admin/analytics/gmc/feed'
+    | '/admin/marketing/blogs/create'
+    | '/admin/marketing/notifications/history'
+    | '/admin/marketing/notifications/send'
+    | '/admin/marketing/notifications/settings'
+    | '/admin/marketing/notifications/types'
+    | '/admin/promotions/coupons/create'
+    | '/admin/promotions/flash-deals/create'
+    | '/admin/analytics/facebook-catalogue/'
+    | '/admin/analytics/gmc/'
+    | '/admin/marketing/blogs/'
+    | '/admin/promotions/coupons/'
+    | '/admin/promotions/flash-deals/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/clerk'
-    | '/forgot-password'
-    | '/otp'
     | '/sign-in'
-    | '/sign-in-2'
-    | '/sign-up'
     | '/401'
     | '/403'
     | '/404'
@@ -334,29 +1081,96 @@ export interface FileRouteTypes {
     | '/errors/$error'
     | '/settings/account'
     | '/settings/appearance'
-    | '/settings/display'
-    | '/settings/notifications'
-    | '/clerk/sign-in'
-    | '/clerk/sign-up'
-    | '/clerk/user-management'
-    | '/apps'
-    | '/chats'
-    | '/help-center'
+    | '/admin'
+    | '/courier'
+    | '/seller'
     | '/settings'
-    | '/tasks'
-    | '/users'
+    | '/supervisor'
+    | '/admin/analytics/conversions-api'
+    | '/admin/analytics/custom-scripts'
+    | '/admin/analytics/google'
+    | '/admin/analytics/google-reports'
+    | '/admin/analytics/gtm'
+    | '/admin/analytics/pixel'
+    | '/admin/analytics/seo'
+    | '/admin/analytics/sitemap'
+    | '/admin/classified-products/create'
+    | '/admin/classified-products/in-house'
+    | '/admin/classified-products/seller'
+    | '/admin/customers/classified-products'
+    | '/admin/customers/packages'
+    | '/admin/customers/unverified'
+    | '/admin/marketing/alerts'
+    | '/admin/marketing/blog-categories'
+    | '/admin/marketing/email-templates'
+    | '/admin/marketing/newsletters'
+    | '/admin/marketing/popups'
+    | '/admin/marketing/sale-alerts'
+    | '/admin/marketing/sms'
+    | '/admin/marketing/subscribers'
+    | '/admin/marketing/visitors'
+    | '/admin/orders/$id'
+    | '/admin/orders/in-house'
+    | '/admin/orders/pickup-point'
+    | '/admin/orders/seller'
+    | '/admin/orders/unpaid'
+    | '/admin/products/create'
+    | '/admin/products/in-house'
+    | '/admin/products/reviews'
+    | '/admin/products/seller'
+    | '/admin/promotions/category-discounts'
+    | '/admin/promotions/products'
+    | '/admin/promotions/seller-products'
+    | '/admin/sellers/commissions'
+    | '/admin/sellers/packages'
+    | '/admin/sellers/payout-requests'
+    | '/admin/sellers/payouts'
+    | '/admin/sellers/pending'
+    | '/admin/sellers/rating-followers'
+    | '/admin/sellers/verification-form'
+    | '/admin/wholesale-products/create'
+    | '/admin/wholesale-products/in-house'
+    | '/admin/wholesale-products/seller'
+    | '/admin/analytics'
+    | '/admin/attributes'
+    | '/admin/brands'
+    | '/admin/categories'
+    | '/admin/classified-products'
+    | '/admin/colors'
+    | '/admin/customers'
+    | '/admin/marketing'
+    | '/admin/orders'
+    | '/admin/permission'
+    | '/admin/products'
+    | '/admin/promotions'
+    | '/admin/role'
+    | '/admin/sellers'
+    | '/admin/units'
+    | '/admin/users'
+    | '/admin/wholesale-products'
+    | '/admin/analytics/facebook-catalogue/feed'
+    | '/admin/analytics/gmc/feed'
+    | '/admin/marketing/blogs/create'
+    | '/admin/marketing/notifications/history'
+    | '/admin/marketing/notifications/send'
+    | '/admin/marketing/notifications/settings'
+    | '/admin/marketing/notifications/types'
+    | '/admin/promotions/coupons/create'
+    | '/admin/promotions/flash-deals/create'
+    | '/admin/analytics/facebook-catalogue'
+    | '/admin/analytics/gmc'
+    | '/admin/marketing/blogs'
+    | '/admin/promotions/coupons'
+    | '/admin/promotions/flash-deals'
   id:
     | '__root__'
     | '/_authenticated'
-    | '/clerk'
+    | '/_authenticated/admin'
+    | '/_authenticated/courier'
+    | '/_authenticated/seller'
     | '/_authenticated/settings'
-    | '/clerk/(auth)'
-    | '/clerk/_authenticated'
-    | '/(auth)/forgot-password'
-    | '/(auth)/otp'
+    | '/_authenticated/supervisor'
     | '/(auth)/sign-in'
-    | '/(auth)/sign-in-2'
-    | '/(auth)/sign-up'
     | '/(errors)/401'
     | '/(errors)/403'
     | '/(errors)/404'
@@ -366,27 +1180,92 @@ export interface FileRouteTypes {
     | '/_authenticated/errors/$error'
     | '/_authenticated/settings/account'
     | '/_authenticated/settings/appearance'
-    | '/_authenticated/settings/display'
-    | '/_authenticated/settings/notifications'
-    | '/clerk/(auth)/sign-in'
-    | '/clerk/(auth)/sign-up'
-    | '/clerk/_authenticated/user-management'
-    | '/_authenticated/apps/'
-    | '/_authenticated/chats/'
-    | '/_authenticated/help-center/'
+    | '/_authenticated/admin/'
+    | '/_authenticated/courier/'
+    | '/_authenticated/seller/'
     | '/_authenticated/settings/'
-    | '/_authenticated/tasks/'
-    | '/_authenticated/users/'
+    | '/_authenticated/supervisor/'
+    | '/_authenticated/admin/analytics/conversions-api'
+    | '/_authenticated/admin/analytics/custom-scripts'
+    | '/_authenticated/admin/analytics/google'
+    | '/_authenticated/admin/analytics/google-reports'
+    | '/_authenticated/admin/analytics/gtm'
+    | '/_authenticated/admin/analytics/pixel'
+    | '/_authenticated/admin/analytics/seo'
+    | '/_authenticated/admin/analytics/sitemap'
+    | '/_authenticated/admin/classified-products/create'
+    | '/_authenticated/admin/classified-products/in-house'
+    | '/_authenticated/admin/classified-products/seller'
+    | '/_authenticated/admin/customers/classified-products'
+    | '/_authenticated/admin/customers/packages'
+    | '/_authenticated/admin/customers/unverified'
+    | '/_authenticated/admin/marketing/alerts'
+    | '/_authenticated/admin/marketing/blog-categories'
+    | '/_authenticated/admin/marketing/email-templates'
+    | '/_authenticated/admin/marketing/newsletters'
+    | '/_authenticated/admin/marketing/popups'
+    | '/_authenticated/admin/marketing/sale-alerts'
+    | '/_authenticated/admin/marketing/sms'
+    | '/_authenticated/admin/marketing/subscribers'
+    | '/_authenticated/admin/marketing/visitors'
+    | '/_authenticated/admin/orders/$id'
+    | '/_authenticated/admin/orders/in-house'
+    | '/_authenticated/admin/orders/pickup-point'
+    | '/_authenticated/admin/orders/seller'
+    | '/_authenticated/admin/orders/unpaid'
+    | '/_authenticated/admin/products/create'
+    | '/_authenticated/admin/products/in-house'
+    | '/_authenticated/admin/products/reviews'
+    | '/_authenticated/admin/products/seller'
+    | '/_authenticated/admin/promotions/category-discounts'
+    | '/_authenticated/admin/promotions/products'
+    | '/_authenticated/admin/promotions/seller-products'
+    | '/_authenticated/admin/sellers/commissions'
+    | '/_authenticated/admin/sellers/packages'
+    | '/_authenticated/admin/sellers/payout-requests'
+    | '/_authenticated/admin/sellers/payouts'
+    | '/_authenticated/admin/sellers/pending'
+    | '/_authenticated/admin/sellers/rating-followers'
+    | '/_authenticated/admin/sellers/verification-form'
+    | '/_authenticated/admin/wholesale-products/create'
+    | '/_authenticated/admin/wholesale-products/in-house'
+    | '/_authenticated/admin/wholesale-products/seller'
+    | '/_authenticated/admin/analytics/'
+    | '/_authenticated/admin/attributes/'
+    | '/_authenticated/admin/brands/'
+    | '/_authenticated/admin/categories/'
+    | '/_authenticated/admin/classified-products/'
+    | '/_authenticated/admin/colors/'
+    | '/_authenticated/admin/customers/'
+    | '/_authenticated/admin/marketing/'
+    | '/_authenticated/admin/orders/'
+    | '/_authenticated/admin/permission/'
+    | '/_authenticated/admin/products/'
+    | '/_authenticated/admin/promotions/'
+    | '/_authenticated/admin/role/'
+    | '/_authenticated/admin/sellers/'
+    | '/_authenticated/admin/units/'
+    | '/_authenticated/admin/users/'
+    | '/_authenticated/admin/wholesale-products/'
+    | '/_authenticated/admin/analytics/facebook-catalogue/feed'
+    | '/_authenticated/admin/analytics/gmc/feed'
+    | '/_authenticated/admin/marketing/blogs/create'
+    | '/_authenticated/admin/marketing/notifications/history'
+    | '/_authenticated/admin/marketing/notifications/send'
+    | '/_authenticated/admin/marketing/notifications/settings'
+    | '/_authenticated/admin/marketing/notifications/types'
+    | '/_authenticated/admin/promotions/coupons/create'
+    | '/_authenticated/admin/promotions/flash-deals/create'
+    | '/_authenticated/admin/analytics/facebook-catalogue/'
+    | '/_authenticated/admin/analytics/gmc/'
+    | '/_authenticated/admin/marketing/blogs/'
+    | '/_authenticated/admin/promotions/coupons/'
+    | '/_authenticated/admin/promotions/flash-deals/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  ClerkRouteRoute: typeof ClerkRouteRouteWithChildren
-  authForgotPasswordRoute: typeof authForgotPasswordRoute
-  authOtpRoute: typeof authOtpRoute
   authSignInRoute: typeof authSignInRoute
-  authSignIn2Route: typeof authSignIn2Route
-  authSignUpRoute: typeof authSignUpRoute
   errors401Route: typeof errors401Route
   errors403Route: typeof errors403Route
   errors404Route: typeof errors404Route
@@ -396,13 +1275,6 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/clerk': {
-      id: '/clerk'
-      path: '/clerk'
-      fullPath: '/clerk'
-      preLoaderRoute: typeof ClerkRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
@@ -452,20 +1324,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof errors401RouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(auth)/sign-up': {
-      id: '/(auth)/sign-up'
-      path: '/sign-up'
-      fullPath: '/sign-up'
-      preLoaderRoute: typeof authSignUpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(auth)/sign-in-2': {
-      id: '/(auth)/sign-in-2'
-      path: '/sign-in-2'
-      fullPath: '/sign-in-2'
-      preLoaderRoute: typeof authSignIn2RouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/(auth)/sign-in': {
       id: '/(auth)/sign-in'
       path: '/sign-in'
@@ -473,33 +1331,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authSignInRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(auth)/otp': {
-      id: '/(auth)/otp'
-      path: '/otp'
-      fullPath: '/otp'
-      preLoaderRoute: typeof authOtpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/(auth)/forgot-password': {
-      id: '/(auth)/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof authForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/clerk/_authenticated': {
-      id: '/clerk/_authenticated'
-      path: ''
-      fullPath: '/clerk'
-      preLoaderRoute: typeof ClerkAuthenticatedRouteRouteImport
-      parentRoute: typeof ClerkRouteRoute
-    }
-    '/clerk/(auth)': {
-      id: '/clerk/(auth)'
-      path: ''
-      fullPath: '/clerk'
-      preLoaderRoute: typeof ClerkauthRouteRouteImport
-      parentRoute: typeof ClerkRouteRoute
+    '/_authenticated/supervisor': {
+      id: '/_authenticated/supervisor'
+      path: '/supervisor'
+      fullPath: '/supervisor'
+      preLoaderRoute: typeof AuthenticatedSupervisorRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/settings': {
       id: '/_authenticated/settings'
@@ -508,19 +1345,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/users/': {
-      id: '/_authenticated/users/'
-      path: '/users'
-      fullPath: '/users/'
-      preLoaderRoute: typeof AuthenticatedUsersIndexRouteImport
+    '/_authenticated/seller': {
+      id: '/_authenticated/seller'
+      path: '/seller'
+      fullPath: '/seller'
+      preLoaderRoute: typeof AuthenticatedSellerRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/tasks/': {
-      id: '/_authenticated/tasks/'
-      path: '/tasks'
-      fullPath: '/tasks/'
-      preLoaderRoute: typeof AuthenticatedTasksIndexRouteImport
+    '/_authenticated/courier': {
+      id: '/_authenticated/courier'
+      path: '/courier'
+      fullPath: '/courier'
+      preLoaderRoute: typeof AuthenticatedCourierRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/supervisor/': {
+      id: '/_authenticated/supervisor/'
+      path: '/'
+      fullPath: '/supervisor/'
+      preLoaderRoute: typeof AuthenticatedSupervisorIndexRouteImport
+      parentRoute: typeof AuthenticatedSupervisorRouteRoute
     }
     '/_authenticated/settings/': {
       id: '/_authenticated/settings/'
@@ -529,61 +1380,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSettingsIndexRouteImport
       parentRoute: typeof AuthenticatedSettingsRouteRoute
     }
-    '/_authenticated/help-center/': {
-      id: '/_authenticated/help-center/'
-      path: '/help-center'
-      fullPath: '/help-center/'
-      preLoaderRoute: typeof AuthenticatedHelpCenterIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/_authenticated/seller/': {
+      id: '/_authenticated/seller/'
+      path: '/'
+      fullPath: '/seller/'
+      preLoaderRoute: typeof AuthenticatedSellerIndexRouteImport
+      parentRoute: typeof AuthenticatedSellerRouteRoute
     }
-    '/_authenticated/chats/': {
-      id: '/_authenticated/chats/'
-      path: '/chats'
-      fullPath: '/chats/'
-      preLoaderRoute: typeof AuthenticatedChatsIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/_authenticated/courier/': {
+      id: '/_authenticated/courier/'
+      path: '/'
+      fullPath: '/courier/'
+      preLoaderRoute: typeof AuthenticatedCourierIndexRouteImport
+      parentRoute: typeof AuthenticatedCourierRouteRoute
     }
-    '/_authenticated/apps/': {
-      id: '/_authenticated/apps/'
-      path: '/apps'
-      fullPath: '/apps/'
-      preLoaderRoute: typeof AuthenticatedAppsIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/clerk/_authenticated/user-management': {
-      id: '/clerk/_authenticated/user-management'
-      path: '/user-management'
-      fullPath: '/clerk/user-management'
-      preLoaderRoute: typeof ClerkAuthenticatedUserManagementRouteImport
-      parentRoute: typeof ClerkAuthenticatedRouteRoute
-    }
-    '/clerk/(auth)/sign-up': {
-      id: '/clerk/(auth)/sign-up'
-      path: '/sign-up'
-      fullPath: '/clerk/sign-up'
-      preLoaderRoute: typeof ClerkauthSignUpRouteImport
-      parentRoute: typeof ClerkauthRouteRoute
-    }
-    '/clerk/(auth)/sign-in': {
-      id: '/clerk/(auth)/sign-in'
-      path: '/sign-in'
-      fullPath: '/clerk/sign-in'
-      preLoaderRoute: typeof ClerkauthSignInRouteImport
-      parentRoute: typeof ClerkauthRouteRoute
-    }
-    '/_authenticated/settings/notifications': {
-      id: '/_authenticated/settings/notifications'
-      path: '/notifications'
-      fullPath: '/settings/notifications'
-      preLoaderRoute: typeof AuthenticatedSettingsNotificationsRouteImport
-      parentRoute: typeof AuthenticatedSettingsRouteRoute
-    }
-    '/_authenticated/settings/display': {
-      id: '/_authenticated/settings/display'
-      path: '/display'
-      fullPath: '/settings/display'
-      preLoaderRoute: typeof AuthenticatedSettingsDisplayRouteImport
-      parentRoute: typeof AuthenticatedSettingsRouteRoute
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/settings/appearance': {
       id: '/_authenticated/settings/appearance'
@@ -606,14 +1422,799 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedErrorsErrorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/wholesale-products/': {
+      id: '/_authenticated/admin/wholesale-products/'
+      path: '/wholesale-products'
+      fullPath: '/admin/wholesale-products/'
+      preLoaderRoute: typeof AuthenticatedAdminWholesaleProductsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/users/': {
+      id: '/_authenticated/admin/users/'
+      path: '/users'
+      fullPath: '/admin/users/'
+      preLoaderRoute: typeof AuthenticatedAdminUsersIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/units/': {
+      id: '/_authenticated/admin/units/'
+      path: '/units'
+      fullPath: '/admin/units/'
+      preLoaderRoute: typeof AuthenticatedAdminUnitsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/sellers/': {
+      id: '/_authenticated/admin/sellers/'
+      path: '/sellers'
+      fullPath: '/admin/sellers/'
+      preLoaderRoute: typeof AuthenticatedAdminSellersIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/role/': {
+      id: '/_authenticated/admin/role/'
+      path: '/role'
+      fullPath: '/admin/role/'
+      preLoaderRoute: typeof AuthenticatedAdminRoleIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/promotions/': {
+      id: '/_authenticated/admin/promotions/'
+      path: '/promotions'
+      fullPath: '/admin/promotions/'
+      preLoaderRoute: typeof AuthenticatedAdminPromotionsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/products/': {
+      id: '/_authenticated/admin/products/'
+      path: '/products'
+      fullPath: '/admin/products/'
+      preLoaderRoute: typeof AuthenticatedAdminProductsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/permission/': {
+      id: '/_authenticated/admin/permission/'
+      path: '/permission'
+      fullPath: '/admin/permission/'
+      preLoaderRoute: typeof AuthenticatedAdminPermissionIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/orders/': {
+      id: '/_authenticated/admin/orders/'
+      path: '/orders'
+      fullPath: '/admin/orders/'
+      preLoaderRoute: typeof AuthenticatedAdminOrdersIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/': {
+      id: '/_authenticated/admin/marketing/'
+      path: '/marketing'
+      fullPath: '/admin/marketing/'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/customers/': {
+      id: '/_authenticated/admin/customers/'
+      path: '/customers'
+      fullPath: '/admin/customers/'
+      preLoaderRoute: typeof AuthenticatedAdminCustomersIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/colors/': {
+      id: '/_authenticated/admin/colors/'
+      path: '/colors'
+      fullPath: '/admin/colors/'
+      preLoaderRoute: typeof AuthenticatedAdminColorsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/classified-products/': {
+      id: '/_authenticated/admin/classified-products/'
+      path: '/classified-products'
+      fullPath: '/admin/classified-products/'
+      preLoaderRoute: typeof AuthenticatedAdminClassifiedProductsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/categories/': {
+      id: '/_authenticated/admin/categories/'
+      path: '/categories'
+      fullPath: '/admin/categories/'
+      preLoaderRoute: typeof AuthenticatedAdminCategoriesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/brands/': {
+      id: '/_authenticated/admin/brands/'
+      path: '/brands'
+      fullPath: '/admin/brands/'
+      preLoaderRoute: typeof AuthenticatedAdminBrandsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/attributes/': {
+      id: '/_authenticated/admin/attributes/'
+      path: '/attributes'
+      fullPath: '/admin/attributes/'
+      preLoaderRoute: typeof AuthenticatedAdminAttributesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/': {
+      id: '/_authenticated/admin/analytics/'
+      path: '/analytics'
+      fullPath: '/admin/analytics/'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/wholesale-products/seller': {
+      id: '/_authenticated/admin/wholesale-products/seller'
+      path: '/wholesale-products/seller'
+      fullPath: '/admin/wholesale-products/seller'
+      preLoaderRoute: typeof AuthenticatedAdminWholesaleProductsSellerRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/wholesale-products/in-house': {
+      id: '/_authenticated/admin/wholesale-products/in-house'
+      path: '/wholesale-products/in-house'
+      fullPath: '/admin/wholesale-products/in-house'
+      preLoaderRoute: typeof AuthenticatedAdminWholesaleProductsInHouseRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/wholesale-products/create': {
+      id: '/_authenticated/admin/wholesale-products/create'
+      path: '/wholesale-products/create'
+      fullPath: '/admin/wholesale-products/create'
+      preLoaderRoute: typeof AuthenticatedAdminWholesaleProductsCreateRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/sellers/verification-form': {
+      id: '/_authenticated/admin/sellers/verification-form'
+      path: '/sellers/verification-form'
+      fullPath: '/admin/sellers/verification-form'
+      preLoaderRoute: typeof AuthenticatedAdminSellersVerificationFormRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/sellers/rating-followers': {
+      id: '/_authenticated/admin/sellers/rating-followers'
+      path: '/sellers/rating-followers'
+      fullPath: '/admin/sellers/rating-followers'
+      preLoaderRoute: typeof AuthenticatedAdminSellersRatingFollowersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/sellers/pending': {
+      id: '/_authenticated/admin/sellers/pending'
+      path: '/sellers/pending'
+      fullPath: '/admin/sellers/pending'
+      preLoaderRoute: typeof AuthenticatedAdminSellersPendingRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/sellers/payouts': {
+      id: '/_authenticated/admin/sellers/payouts'
+      path: '/sellers/payouts'
+      fullPath: '/admin/sellers/payouts'
+      preLoaderRoute: typeof AuthenticatedAdminSellersPayoutsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/sellers/payout-requests': {
+      id: '/_authenticated/admin/sellers/payout-requests'
+      path: '/sellers/payout-requests'
+      fullPath: '/admin/sellers/payout-requests'
+      preLoaderRoute: typeof AuthenticatedAdminSellersPayoutRequestsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/sellers/packages': {
+      id: '/_authenticated/admin/sellers/packages'
+      path: '/sellers/packages'
+      fullPath: '/admin/sellers/packages'
+      preLoaderRoute: typeof AuthenticatedAdminSellersPackagesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/sellers/commissions': {
+      id: '/_authenticated/admin/sellers/commissions'
+      path: '/sellers/commissions'
+      fullPath: '/admin/sellers/commissions'
+      preLoaderRoute: typeof AuthenticatedAdminSellersCommissionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/promotions/seller-products': {
+      id: '/_authenticated/admin/promotions/seller-products'
+      path: '/promotions/seller-products'
+      fullPath: '/admin/promotions/seller-products'
+      preLoaderRoute: typeof AuthenticatedAdminPromotionsSellerProductsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/promotions/products': {
+      id: '/_authenticated/admin/promotions/products'
+      path: '/promotions/products'
+      fullPath: '/admin/promotions/products'
+      preLoaderRoute: typeof AuthenticatedAdminPromotionsProductsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/promotions/category-discounts': {
+      id: '/_authenticated/admin/promotions/category-discounts'
+      path: '/promotions/category-discounts'
+      fullPath: '/admin/promotions/category-discounts'
+      preLoaderRoute: typeof AuthenticatedAdminPromotionsCategoryDiscountsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/products/seller': {
+      id: '/_authenticated/admin/products/seller'
+      path: '/products/seller'
+      fullPath: '/admin/products/seller'
+      preLoaderRoute: typeof AuthenticatedAdminProductsSellerRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/products/reviews': {
+      id: '/_authenticated/admin/products/reviews'
+      path: '/products/reviews'
+      fullPath: '/admin/products/reviews'
+      preLoaderRoute: typeof AuthenticatedAdminProductsReviewsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/products/in-house': {
+      id: '/_authenticated/admin/products/in-house'
+      path: '/products/in-house'
+      fullPath: '/admin/products/in-house'
+      preLoaderRoute: typeof AuthenticatedAdminProductsInHouseRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/products/create': {
+      id: '/_authenticated/admin/products/create'
+      path: '/products/create'
+      fullPath: '/admin/products/create'
+      preLoaderRoute: typeof AuthenticatedAdminProductsCreateRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/orders/unpaid': {
+      id: '/_authenticated/admin/orders/unpaid'
+      path: '/orders/unpaid'
+      fullPath: '/admin/orders/unpaid'
+      preLoaderRoute: typeof AuthenticatedAdminOrdersUnpaidRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/orders/seller': {
+      id: '/_authenticated/admin/orders/seller'
+      path: '/orders/seller'
+      fullPath: '/admin/orders/seller'
+      preLoaderRoute: typeof AuthenticatedAdminOrdersSellerRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/orders/pickup-point': {
+      id: '/_authenticated/admin/orders/pickup-point'
+      path: '/orders/pickup-point'
+      fullPath: '/admin/orders/pickup-point'
+      preLoaderRoute: typeof AuthenticatedAdminOrdersPickupPointRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/orders/in-house': {
+      id: '/_authenticated/admin/orders/in-house'
+      path: '/orders/in-house'
+      fullPath: '/admin/orders/in-house'
+      preLoaderRoute: typeof AuthenticatedAdminOrdersInHouseRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/orders/$id': {
+      id: '/_authenticated/admin/orders/$id'
+      path: '/orders/$id'
+      fullPath: '/admin/orders/$id'
+      preLoaderRoute: typeof AuthenticatedAdminOrdersIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/visitors': {
+      id: '/_authenticated/admin/marketing/visitors'
+      path: '/marketing/visitors'
+      fullPath: '/admin/marketing/visitors'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingVisitorsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/subscribers': {
+      id: '/_authenticated/admin/marketing/subscribers'
+      path: '/marketing/subscribers'
+      fullPath: '/admin/marketing/subscribers'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingSubscribersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/sms': {
+      id: '/_authenticated/admin/marketing/sms'
+      path: '/marketing/sms'
+      fullPath: '/admin/marketing/sms'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingSmsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/sale-alerts': {
+      id: '/_authenticated/admin/marketing/sale-alerts'
+      path: '/marketing/sale-alerts'
+      fullPath: '/admin/marketing/sale-alerts'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingSaleAlertsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/popups': {
+      id: '/_authenticated/admin/marketing/popups'
+      path: '/marketing/popups'
+      fullPath: '/admin/marketing/popups'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingPopupsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/newsletters': {
+      id: '/_authenticated/admin/marketing/newsletters'
+      path: '/marketing/newsletters'
+      fullPath: '/admin/marketing/newsletters'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingNewslettersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/email-templates': {
+      id: '/_authenticated/admin/marketing/email-templates'
+      path: '/marketing/email-templates'
+      fullPath: '/admin/marketing/email-templates'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingEmailTemplatesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/blog-categories': {
+      id: '/_authenticated/admin/marketing/blog-categories'
+      path: '/marketing/blog-categories'
+      fullPath: '/admin/marketing/blog-categories'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingBlogCategoriesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/alerts': {
+      id: '/_authenticated/admin/marketing/alerts'
+      path: '/marketing/alerts'
+      fullPath: '/admin/marketing/alerts'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingAlertsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/customers/unverified': {
+      id: '/_authenticated/admin/customers/unverified'
+      path: '/customers/unverified'
+      fullPath: '/admin/customers/unverified'
+      preLoaderRoute: typeof AuthenticatedAdminCustomersUnverifiedRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/customers/packages': {
+      id: '/_authenticated/admin/customers/packages'
+      path: '/customers/packages'
+      fullPath: '/admin/customers/packages'
+      preLoaderRoute: typeof AuthenticatedAdminCustomersPackagesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/customers/classified-products': {
+      id: '/_authenticated/admin/customers/classified-products'
+      path: '/customers/classified-products'
+      fullPath: '/admin/customers/classified-products'
+      preLoaderRoute: typeof AuthenticatedAdminCustomersClassifiedProductsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/classified-products/seller': {
+      id: '/_authenticated/admin/classified-products/seller'
+      path: '/classified-products/seller'
+      fullPath: '/admin/classified-products/seller'
+      preLoaderRoute: typeof AuthenticatedAdminClassifiedProductsSellerRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/classified-products/in-house': {
+      id: '/_authenticated/admin/classified-products/in-house'
+      path: '/classified-products/in-house'
+      fullPath: '/admin/classified-products/in-house'
+      preLoaderRoute: typeof AuthenticatedAdminClassifiedProductsInHouseRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/classified-products/create': {
+      id: '/_authenticated/admin/classified-products/create'
+      path: '/classified-products/create'
+      fullPath: '/admin/classified-products/create'
+      preLoaderRoute: typeof AuthenticatedAdminClassifiedProductsCreateRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/sitemap': {
+      id: '/_authenticated/admin/analytics/sitemap'
+      path: '/analytics/sitemap'
+      fullPath: '/admin/analytics/sitemap'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsSitemapRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/seo': {
+      id: '/_authenticated/admin/analytics/seo'
+      path: '/analytics/seo'
+      fullPath: '/admin/analytics/seo'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsSeoRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/pixel': {
+      id: '/_authenticated/admin/analytics/pixel'
+      path: '/analytics/pixel'
+      fullPath: '/admin/analytics/pixel'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsPixelRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/gtm': {
+      id: '/_authenticated/admin/analytics/gtm'
+      path: '/analytics/gtm'
+      fullPath: '/admin/analytics/gtm'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsGtmRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/google-reports': {
+      id: '/_authenticated/admin/analytics/google-reports'
+      path: '/analytics/google-reports'
+      fullPath: '/admin/analytics/google-reports'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsGoogleReportsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/google': {
+      id: '/_authenticated/admin/analytics/google'
+      path: '/analytics/google'
+      fullPath: '/admin/analytics/google'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsGoogleRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/custom-scripts': {
+      id: '/_authenticated/admin/analytics/custom-scripts'
+      path: '/analytics/custom-scripts'
+      fullPath: '/admin/analytics/custom-scripts'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsCustomScriptsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/conversions-api': {
+      id: '/_authenticated/admin/analytics/conversions-api'
+      path: '/analytics/conversions-api'
+      fullPath: '/admin/analytics/conversions-api'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsConversionsApiRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/promotions/flash-deals/': {
+      id: '/_authenticated/admin/promotions/flash-deals/'
+      path: '/promotions/flash-deals'
+      fullPath: '/admin/promotions/flash-deals/'
+      preLoaderRoute: typeof AuthenticatedAdminPromotionsFlashDealsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/promotions/coupons/': {
+      id: '/_authenticated/admin/promotions/coupons/'
+      path: '/promotions/coupons'
+      fullPath: '/admin/promotions/coupons/'
+      preLoaderRoute: typeof AuthenticatedAdminPromotionsCouponsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/blogs/': {
+      id: '/_authenticated/admin/marketing/blogs/'
+      path: '/marketing/blogs'
+      fullPath: '/admin/marketing/blogs/'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingBlogsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/gmc/': {
+      id: '/_authenticated/admin/analytics/gmc/'
+      path: '/analytics/gmc'
+      fullPath: '/admin/analytics/gmc/'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsGmcIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/facebook-catalogue/': {
+      id: '/_authenticated/admin/analytics/facebook-catalogue/'
+      path: '/analytics/facebook-catalogue'
+      fullPath: '/admin/analytics/facebook-catalogue/'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsFacebookCatalogueIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/promotions/flash-deals/create': {
+      id: '/_authenticated/admin/promotions/flash-deals/create'
+      path: '/promotions/flash-deals/create'
+      fullPath: '/admin/promotions/flash-deals/create'
+      preLoaderRoute: typeof AuthenticatedAdminPromotionsFlashDealsCreateRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/promotions/coupons/create': {
+      id: '/_authenticated/admin/promotions/coupons/create'
+      path: '/promotions/coupons/create'
+      fullPath: '/admin/promotions/coupons/create'
+      preLoaderRoute: typeof AuthenticatedAdminPromotionsCouponsCreateRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/notifications/types': {
+      id: '/_authenticated/admin/marketing/notifications/types'
+      path: '/marketing/notifications/types'
+      fullPath: '/admin/marketing/notifications/types'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingNotificationsTypesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/notifications/settings': {
+      id: '/_authenticated/admin/marketing/notifications/settings'
+      path: '/marketing/notifications/settings'
+      fullPath: '/admin/marketing/notifications/settings'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingNotificationsSettingsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/notifications/send': {
+      id: '/_authenticated/admin/marketing/notifications/send'
+      path: '/marketing/notifications/send'
+      fullPath: '/admin/marketing/notifications/send'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingNotificationsSendRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/notifications/history': {
+      id: '/_authenticated/admin/marketing/notifications/history'
+      path: '/marketing/notifications/history'
+      fullPath: '/admin/marketing/notifications/history'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingNotificationsHistoryRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/marketing/blogs/create': {
+      id: '/_authenticated/admin/marketing/blogs/create'
+      path: '/marketing/blogs/create'
+      fullPath: '/admin/marketing/blogs/create'
+      preLoaderRoute: typeof AuthenticatedAdminMarketingBlogsCreateRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/gmc/feed': {
+      id: '/_authenticated/admin/analytics/gmc/feed'
+      path: '/analytics/gmc/feed'
+      fullPath: '/admin/analytics/gmc/feed'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsGmcFeedRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/facebook-catalogue/feed': {
+      id: '/_authenticated/admin/analytics/facebook-catalogue/feed'
+      path: '/analytics/facebook-catalogue/feed'
+      fullPath: '/admin/analytics/facebook-catalogue/feed'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsFacebookCatalogueFeedRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
+
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminAnalyticsConversionsApiRoute: typeof AuthenticatedAdminAnalyticsConversionsApiRoute
+  AuthenticatedAdminAnalyticsCustomScriptsRoute: typeof AuthenticatedAdminAnalyticsCustomScriptsRoute
+  AuthenticatedAdminAnalyticsGoogleRoute: typeof AuthenticatedAdminAnalyticsGoogleRoute
+  AuthenticatedAdminAnalyticsGoogleReportsRoute: typeof AuthenticatedAdminAnalyticsGoogleReportsRoute
+  AuthenticatedAdminAnalyticsGtmRoute: typeof AuthenticatedAdminAnalyticsGtmRoute
+  AuthenticatedAdminAnalyticsPixelRoute: typeof AuthenticatedAdminAnalyticsPixelRoute
+  AuthenticatedAdminAnalyticsSeoRoute: typeof AuthenticatedAdminAnalyticsSeoRoute
+  AuthenticatedAdminAnalyticsSitemapRoute: typeof AuthenticatedAdminAnalyticsSitemapRoute
+  AuthenticatedAdminClassifiedProductsCreateRoute: typeof AuthenticatedAdminClassifiedProductsCreateRoute
+  AuthenticatedAdminClassifiedProductsInHouseRoute: typeof AuthenticatedAdminClassifiedProductsInHouseRoute
+  AuthenticatedAdminClassifiedProductsSellerRoute: typeof AuthenticatedAdminClassifiedProductsSellerRoute
+  AuthenticatedAdminCustomersClassifiedProductsRoute: typeof AuthenticatedAdminCustomersClassifiedProductsRoute
+  AuthenticatedAdminCustomersPackagesRoute: typeof AuthenticatedAdminCustomersPackagesRoute
+  AuthenticatedAdminCustomersUnverifiedRoute: typeof AuthenticatedAdminCustomersUnverifiedRoute
+  AuthenticatedAdminMarketingAlertsRoute: typeof AuthenticatedAdminMarketingAlertsRoute
+  AuthenticatedAdminMarketingBlogCategoriesRoute: typeof AuthenticatedAdminMarketingBlogCategoriesRoute
+  AuthenticatedAdminMarketingEmailTemplatesRoute: typeof AuthenticatedAdminMarketingEmailTemplatesRoute
+  AuthenticatedAdminMarketingNewslettersRoute: typeof AuthenticatedAdminMarketingNewslettersRoute
+  AuthenticatedAdminMarketingPopupsRoute: typeof AuthenticatedAdminMarketingPopupsRoute
+  AuthenticatedAdminMarketingSaleAlertsRoute: typeof AuthenticatedAdminMarketingSaleAlertsRoute
+  AuthenticatedAdminMarketingSmsRoute: typeof AuthenticatedAdminMarketingSmsRoute
+  AuthenticatedAdminMarketingSubscribersRoute: typeof AuthenticatedAdminMarketingSubscribersRoute
+  AuthenticatedAdminMarketingVisitorsRoute: typeof AuthenticatedAdminMarketingVisitorsRoute
+  AuthenticatedAdminOrdersIdRoute: typeof AuthenticatedAdminOrdersIdRoute
+  AuthenticatedAdminOrdersInHouseRoute: typeof AuthenticatedAdminOrdersInHouseRoute
+  AuthenticatedAdminOrdersPickupPointRoute: typeof AuthenticatedAdminOrdersPickupPointRoute
+  AuthenticatedAdminOrdersSellerRoute: typeof AuthenticatedAdminOrdersSellerRoute
+  AuthenticatedAdminOrdersUnpaidRoute: typeof AuthenticatedAdminOrdersUnpaidRoute
+  AuthenticatedAdminProductsCreateRoute: typeof AuthenticatedAdminProductsCreateRoute
+  AuthenticatedAdminProductsInHouseRoute: typeof AuthenticatedAdminProductsInHouseRoute
+  AuthenticatedAdminProductsReviewsRoute: typeof AuthenticatedAdminProductsReviewsRoute
+  AuthenticatedAdminProductsSellerRoute: typeof AuthenticatedAdminProductsSellerRoute
+  AuthenticatedAdminPromotionsCategoryDiscountsRoute: typeof AuthenticatedAdminPromotionsCategoryDiscountsRoute
+  AuthenticatedAdminPromotionsProductsRoute: typeof AuthenticatedAdminPromotionsProductsRoute
+  AuthenticatedAdminPromotionsSellerProductsRoute: typeof AuthenticatedAdminPromotionsSellerProductsRoute
+  AuthenticatedAdminSellersCommissionsRoute: typeof AuthenticatedAdminSellersCommissionsRoute
+  AuthenticatedAdminSellersPackagesRoute: typeof AuthenticatedAdminSellersPackagesRoute
+  AuthenticatedAdminSellersPayoutRequestsRoute: typeof AuthenticatedAdminSellersPayoutRequestsRoute
+  AuthenticatedAdminSellersPayoutsRoute: typeof AuthenticatedAdminSellersPayoutsRoute
+  AuthenticatedAdminSellersPendingRoute: typeof AuthenticatedAdminSellersPendingRoute
+  AuthenticatedAdminSellersRatingFollowersRoute: typeof AuthenticatedAdminSellersRatingFollowersRoute
+  AuthenticatedAdminSellersVerificationFormRoute: typeof AuthenticatedAdminSellersVerificationFormRoute
+  AuthenticatedAdminWholesaleProductsCreateRoute: typeof AuthenticatedAdminWholesaleProductsCreateRoute
+  AuthenticatedAdminWholesaleProductsInHouseRoute: typeof AuthenticatedAdminWholesaleProductsInHouseRoute
+  AuthenticatedAdminWholesaleProductsSellerRoute: typeof AuthenticatedAdminWholesaleProductsSellerRoute
+  AuthenticatedAdminAnalyticsIndexRoute: typeof AuthenticatedAdminAnalyticsIndexRoute
+  AuthenticatedAdminAttributesIndexRoute: typeof AuthenticatedAdminAttributesIndexRoute
+  AuthenticatedAdminBrandsIndexRoute: typeof AuthenticatedAdminBrandsIndexRoute
+  AuthenticatedAdminCategoriesIndexRoute: typeof AuthenticatedAdminCategoriesIndexRoute
+  AuthenticatedAdminClassifiedProductsIndexRoute: typeof AuthenticatedAdminClassifiedProductsIndexRoute
+  AuthenticatedAdminColorsIndexRoute: typeof AuthenticatedAdminColorsIndexRoute
+  AuthenticatedAdminCustomersIndexRoute: typeof AuthenticatedAdminCustomersIndexRoute
+  AuthenticatedAdminMarketingIndexRoute: typeof AuthenticatedAdminMarketingIndexRoute
+  AuthenticatedAdminOrdersIndexRoute: typeof AuthenticatedAdminOrdersIndexRoute
+  AuthenticatedAdminPermissionIndexRoute: typeof AuthenticatedAdminPermissionIndexRoute
+  AuthenticatedAdminProductsIndexRoute: typeof AuthenticatedAdminProductsIndexRoute
+  AuthenticatedAdminPromotionsIndexRoute: typeof AuthenticatedAdminPromotionsIndexRoute
+  AuthenticatedAdminRoleIndexRoute: typeof AuthenticatedAdminRoleIndexRoute
+  AuthenticatedAdminSellersIndexRoute: typeof AuthenticatedAdminSellersIndexRoute
+  AuthenticatedAdminUnitsIndexRoute: typeof AuthenticatedAdminUnitsIndexRoute
+  AuthenticatedAdminUsersIndexRoute: typeof AuthenticatedAdminUsersIndexRoute
+  AuthenticatedAdminWholesaleProductsIndexRoute: typeof AuthenticatedAdminWholesaleProductsIndexRoute
+  AuthenticatedAdminAnalyticsFacebookCatalogueFeedRoute: typeof AuthenticatedAdminAnalyticsFacebookCatalogueFeedRoute
+  AuthenticatedAdminAnalyticsGmcFeedRoute: typeof AuthenticatedAdminAnalyticsGmcFeedRoute
+  AuthenticatedAdminMarketingBlogsCreateRoute: typeof AuthenticatedAdminMarketingBlogsCreateRoute
+  AuthenticatedAdminMarketingNotificationsHistoryRoute: typeof AuthenticatedAdminMarketingNotificationsHistoryRoute
+  AuthenticatedAdminMarketingNotificationsSendRoute: typeof AuthenticatedAdminMarketingNotificationsSendRoute
+  AuthenticatedAdminMarketingNotificationsSettingsRoute: typeof AuthenticatedAdminMarketingNotificationsSettingsRoute
+  AuthenticatedAdminMarketingNotificationsTypesRoute: typeof AuthenticatedAdminMarketingNotificationsTypesRoute
+  AuthenticatedAdminPromotionsCouponsCreateRoute: typeof AuthenticatedAdminPromotionsCouponsCreateRoute
+  AuthenticatedAdminPromotionsFlashDealsCreateRoute: typeof AuthenticatedAdminPromotionsFlashDealsCreateRoute
+  AuthenticatedAdminAnalyticsFacebookCatalogueIndexRoute: typeof AuthenticatedAdminAnalyticsFacebookCatalogueIndexRoute
+  AuthenticatedAdminAnalyticsGmcIndexRoute: typeof AuthenticatedAdminAnalyticsGmcIndexRoute
+  AuthenticatedAdminMarketingBlogsIndexRoute: typeof AuthenticatedAdminMarketingBlogsIndexRoute
+  AuthenticatedAdminPromotionsCouponsIndexRoute: typeof AuthenticatedAdminPromotionsCouponsIndexRoute
+  AuthenticatedAdminPromotionsFlashDealsIndexRoute: typeof AuthenticatedAdminPromotionsFlashDealsIndexRoute
+}
+
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+    AuthenticatedAdminAnalyticsConversionsApiRoute:
+      AuthenticatedAdminAnalyticsConversionsApiRoute,
+    AuthenticatedAdminAnalyticsCustomScriptsRoute:
+      AuthenticatedAdminAnalyticsCustomScriptsRoute,
+    AuthenticatedAdminAnalyticsGoogleRoute:
+      AuthenticatedAdminAnalyticsGoogleRoute,
+    AuthenticatedAdminAnalyticsGoogleReportsRoute:
+      AuthenticatedAdminAnalyticsGoogleReportsRoute,
+    AuthenticatedAdminAnalyticsGtmRoute: AuthenticatedAdminAnalyticsGtmRoute,
+    AuthenticatedAdminAnalyticsPixelRoute:
+      AuthenticatedAdminAnalyticsPixelRoute,
+    AuthenticatedAdminAnalyticsSeoRoute: AuthenticatedAdminAnalyticsSeoRoute,
+    AuthenticatedAdminAnalyticsSitemapRoute:
+      AuthenticatedAdminAnalyticsSitemapRoute,
+    AuthenticatedAdminClassifiedProductsCreateRoute:
+      AuthenticatedAdminClassifiedProductsCreateRoute,
+    AuthenticatedAdminClassifiedProductsInHouseRoute:
+      AuthenticatedAdminClassifiedProductsInHouseRoute,
+    AuthenticatedAdminClassifiedProductsSellerRoute:
+      AuthenticatedAdminClassifiedProductsSellerRoute,
+    AuthenticatedAdminCustomersClassifiedProductsRoute:
+      AuthenticatedAdminCustomersClassifiedProductsRoute,
+    AuthenticatedAdminCustomersPackagesRoute:
+      AuthenticatedAdminCustomersPackagesRoute,
+    AuthenticatedAdminCustomersUnverifiedRoute:
+      AuthenticatedAdminCustomersUnverifiedRoute,
+    AuthenticatedAdminMarketingAlertsRoute:
+      AuthenticatedAdminMarketingAlertsRoute,
+    AuthenticatedAdminMarketingBlogCategoriesRoute:
+      AuthenticatedAdminMarketingBlogCategoriesRoute,
+    AuthenticatedAdminMarketingEmailTemplatesRoute:
+      AuthenticatedAdminMarketingEmailTemplatesRoute,
+    AuthenticatedAdminMarketingNewslettersRoute:
+      AuthenticatedAdminMarketingNewslettersRoute,
+    AuthenticatedAdminMarketingPopupsRoute:
+      AuthenticatedAdminMarketingPopupsRoute,
+    AuthenticatedAdminMarketingSaleAlertsRoute:
+      AuthenticatedAdminMarketingSaleAlertsRoute,
+    AuthenticatedAdminMarketingSmsRoute: AuthenticatedAdminMarketingSmsRoute,
+    AuthenticatedAdminMarketingSubscribersRoute:
+      AuthenticatedAdminMarketingSubscribersRoute,
+    AuthenticatedAdminMarketingVisitorsRoute:
+      AuthenticatedAdminMarketingVisitorsRoute,
+    AuthenticatedAdminOrdersIdRoute: AuthenticatedAdminOrdersIdRoute,
+    AuthenticatedAdminOrdersInHouseRoute: AuthenticatedAdminOrdersInHouseRoute,
+    AuthenticatedAdminOrdersPickupPointRoute:
+      AuthenticatedAdminOrdersPickupPointRoute,
+    AuthenticatedAdminOrdersSellerRoute: AuthenticatedAdminOrdersSellerRoute,
+    AuthenticatedAdminOrdersUnpaidRoute: AuthenticatedAdminOrdersUnpaidRoute,
+    AuthenticatedAdminProductsCreateRoute:
+      AuthenticatedAdminProductsCreateRoute,
+    AuthenticatedAdminProductsInHouseRoute:
+      AuthenticatedAdminProductsInHouseRoute,
+    AuthenticatedAdminProductsReviewsRoute:
+      AuthenticatedAdminProductsReviewsRoute,
+    AuthenticatedAdminProductsSellerRoute:
+      AuthenticatedAdminProductsSellerRoute,
+    AuthenticatedAdminPromotionsCategoryDiscountsRoute:
+      AuthenticatedAdminPromotionsCategoryDiscountsRoute,
+    AuthenticatedAdminPromotionsProductsRoute:
+      AuthenticatedAdminPromotionsProductsRoute,
+    AuthenticatedAdminPromotionsSellerProductsRoute:
+      AuthenticatedAdminPromotionsSellerProductsRoute,
+    AuthenticatedAdminSellersCommissionsRoute:
+      AuthenticatedAdminSellersCommissionsRoute,
+    AuthenticatedAdminSellersPackagesRoute:
+      AuthenticatedAdminSellersPackagesRoute,
+    AuthenticatedAdminSellersPayoutRequestsRoute:
+      AuthenticatedAdminSellersPayoutRequestsRoute,
+    AuthenticatedAdminSellersPayoutsRoute:
+      AuthenticatedAdminSellersPayoutsRoute,
+    AuthenticatedAdminSellersPendingRoute:
+      AuthenticatedAdminSellersPendingRoute,
+    AuthenticatedAdminSellersRatingFollowersRoute:
+      AuthenticatedAdminSellersRatingFollowersRoute,
+    AuthenticatedAdminSellersVerificationFormRoute:
+      AuthenticatedAdminSellersVerificationFormRoute,
+    AuthenticatedAdminWholesaleProductsCreateRoute:
+      AuthenticatedAdminWholesaleProductsCreateRoute,
+    AuthenticatedAdminWholesaleProductsInHouseRoute:
+      AuthenticatedAdminWholesaleProductsInHouseRoute,
+    AuthenticatedAdminWholesaleProductsSellerRoute:
+      AuthenticatedAdminWholesaleProductsSellerRoute,
+    AuthenticatedAdminAnalyticsIndexRoute:
+      AuthenticatedAdminAnalyticsIndexRoute,
+    AuthenticatedAdminAttributesIndexRoute:
+      AuthenticatedAdminAttributesIndexRoute,
+    AuthenticatedAdminBrandsIndexRoute: AuthenticatedAdminBrandsIndexRoute,
+    AuthenticatedAdminCategoriesIndexRoute:
+      AuthenticatedAdminCategoriesIndexRoute,
+    AuthenticatedAdminClassifiedProductsIndexRoute:
+      AuthenticatedAdminClassifiedProductsIndexRoute,
+    AuthenticatedAdminColorsIndexRoute: AuthenticatedAdminColorsIndexRoute,
+    AuthenticatedAdminCustomersIndexRoute:
+      AuthenticatedAdminCustomersIndexRoute,
+    AuthenticatedAdminMarketingIndexRoute:
+      AuthenticatedAdminMarketingIndexRoute,
+    AuthenticatedAdminOrdersIndexRoute: AuthenticatedAdminOrdersIndexRoute,
+    AuthenticatedAdminPermissionIndexRoute:
+      AuthenticatedAdminPermissionIndexRoute,
+    AuthenticatedAdminProductsIndexRoute: AuthenticatedAdminProductsIndexRoute,
+    AuthenticatedAdminPromotionsIndexRoute:
+      AuthenticatedAdminPromotionsIndexRoute,
+    AuthenticatedAdminRoleIndexRoute: AuthenticatedAdminRoleIndexRoute,
+    AuthenticatedAdminSellersIndexRoute: AuthenticatedAdminSellersIndexRoute,
+    AuthenticatedAdminUnitsIndexRoute: AuthenticatedAdminUnitsIndexRoute,
+    AuthenticatedAdminUsersIndexRoute: AuthenticatedAdminUsersIndexRoute,
+    AuthenticatedAdminWholesaleProductsIndexRoute:
+      AuthenticatedAdminWholesaleProductsIndexRoute,
+    AuthenticatedAdminAnalyticsFacebookCatalogueFeedRoute:
+      AuthenticatedAdminAnalyticsFacebookCatalogueFeedRoute,
+    AuthenticatedAdminAnalyticsGmcFeedRoute:
+      AuthenticatedAdminAnalyticsGmcFeedRoute,
+    AuthenticatedAdminMarketingBlogsCreateRoute:
+      AuthenticatedAdminMarketingBlogsCreateRoute,
+    AuthenticatedAdminMarketingNotificationsHistoryRoute:
+      AuthenticatedAdminMarketingNotificationsHistoryRoute,
+    AuthenticatedAdminMarketingNotificationsSendRoute:
+      AuthenticatedAdminMarketingNotificationsSendRoute,
+    AuthenticatedAdminMarketingNotificationsSettingsRoute:
+      AuthenticatedAdminMarketingNotificationsSettingsRoute,
+    AuthenticatedAdminMarketingNotificationsTypesRoute:
+      AuthenticatedAdminMarketingNotificationsTypesRoute,
+    AuthenticatedAdminPromotionsCouponsCreateRoute:
+      AuthenticatedAdminPromotionsCouponsCreateRoute,
+    AuthenticatedAdminPromotionsFlashDealsCreateRoute:
+      AuthenticatedAdminPromotionsFlashDealsCreateRoute,
+    AuthenticatedAdminAnalyticsFacebookCatalogueIndexRoute:
+      AuthenticatedAdminAnalyticsFacebookCatalogueIndexRoute,
+    AuthenticatedAdminAnalyticsGmcIndexRoute:
+      AuthenticatedAdminAnalyticsGmcIndexRoute,
+    AuthenticatedAdminMarketingBlogsIndexRoute:
+      AuthenticatedAdminMarketingBlogsIndexRoute,
+    AuthenticatedAdminPromotionsCouponsIndexRoute:
+      AuthenticatedAdminPromotionsCouponsIndexRoute,
+    AuthenticatedAdminPromotionsFlashDealsIndexRoute:
+      AuthenticatedAdminPromotionsFlashDealsIndexRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
+
+interface AuthenticatedCourierRouteRouteChildren {
+  AuthenticatedCourierIndexRoute: typeof AuthenticatedCourierIndexRoute
+}
+
+const AuthenticatedCourierRouteRouteChildren: AuthenticatedCourierRouteRouteChildren =
+  {
+    AuthenticatedCourierIndexRoute: AuthenticatedCourierIndexRoute,
+  }
+
+const AuthenticatedCourierRouteRouteWithChildren =
+  AuthenticatedCourierRouteRoute._addFileChildren(
+    AuthenticatedCourierRouteRouteChildren,
+  )
+
+interface AuthenticatedSellerRouteRouteChildren {
+  AuthenticatedSellerIndexRoute: typeof AuthenticatedSellerIndexRoute
+}
+
+const AuthenticatedSellerRouteRouteChildren: AuthenticatedSellerRouteRouteChildren =
+  {
+    AuthenticatedSellerIndexRoute: AuthenticatedSellerIndexRoute,
+  }
+
+const AuthenticatedSellerRouteRouteWithChildren =
+  AuthenticatedSellerRouteRoute._addFileChildren(
+    AuthenticatedSellerRouteRouteChildren,
+  )
 
 interface AuthenticatedSettingsRouteRouteChildren {
   AuthenticatedSettingsAccountRoute: typeof AuthenticatedSettingsAccountRoute
   AuthenticatedSettingsAppearanceRoute: typeof AuthenticatedSettingsAppearanceRoute
-  AuthenticatedSettingsDisplayRoute: typeof AuthenticatedSettingsDisplayRoute
-  AuthenticatedSettingsNotificationsRoute: typeof AuthenticatedSettingsNotificationsRoute
   AuthenticatedSettingsIndexRoute: typeof AuthenticatedSettingsIndexRoute
 }
 
@@ -621,9 +2222,6 @@ const AuthenticatedSettingsRouteRouteChildren: AuthenticatedSettingsRouteRouteCh
   {
     AuthenticatedSettingsAccountRoute: AuthenticatedSettingsAccountRoute,
     AuthenticatedSettingsAppearanceRoute: AuthenticatedSettingsAppearanceRoute,
-    AuthenticatedSettingsDisplayRoute: AuthenticatedSettingsDisplayRoute,
-    AuthenticatedSettingsNotificationsRoute:
-      AuthenticatedSettingsNotificationsRoute,
     AuthenticatedSettingsIndexRoute: AuthenticatedSettingsIndexRoute,
   }
 
@@ -632,82 +2230,47 @@ const AuthenticatedSettingsRouteRouteWithChildren =
     AuthenticatedSettingsRouteRouteChildren,
   )
 
+interface AuthenticatedSupervisorRouteRouteChildren {
+  AuthenticatedSupervisorIndexRoute: typeof AuthenticatedSupervisorIndexRoute
+}
+
+const AuthenticatedSupervisorRouteRouteChildren: AuthenticatedSupervisorRouteRouteChildren =
+  {
+    AuthenticatedSupervisorIndexRoute: AuthenticatedSupervisorIndexRoute,
+  }
+
+const AuthenticatedSupervisorRouteRouteWithChildren =
+  AuthenticatedSupervisorRouteRoute._addFileChildren(
+    AuthenticatedSupervisorRouteRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
+  AuthenticatedCourierRouteRoute: typeof AuthenticatedCourierRouteRouteWithChildren
+  AuthenticatedSellerRouteRoute: typeof AuthenticatedSellerRouteRouteWithChildren
   AuthenticatedSettingsRouteRoute: typeof AuthenticatedSettingsRouteRouteWithChildren
+  AuthenticatedSupervisorRouteRoute: typeof AuthenticatedSupervisorRouteRouteWithChildren
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedErrorsErrorRoute: typeof AuthenticatedErrorsErrorRoute
-  AuthenticatedAppsIndexRoute: typeof AuthenticatedAppsIndexRoute
-  AuthenticatedChatsIndexRoute: typeof AuthenticatedChatsIndexRoute
-  AuthenticatedHelpCenterIndexRoute: typeof AuthenticatedHelpCenterIndexRoute
-  AuthenticatedTasksIndexRoute: typeof AuthenticatedTasksIndexRoute
-  AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
+  AuthenticatedCourierRouteRoute: AuthenticatedCourierRouteRouteWithChildren,
+  AuthenticatedSellerRouteRoute: AuthenticatedSellerRouteRouteWithChildren,
   AuthenticatedSettingsRouteRoute: AuthenticatedSettingsRouteRouteWithChildren,
+  AuthenticatedSupervisorRouteRoute:
+    AuthenticatedSupervisorRouteRouteWithChildren,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedErrorsErrorRoute: AuthenticatedErrorsErrorRoute,
-  AuthenticatedAppsIndexRoute: AuthenticatedAppsIndexRoute,
-  AuthenticatedChatsIndexRoute: AuthenticatedChatsIndexRoute,
-  AuthenticatedHelpCenterIndexRoute: AuthenticatedHelpCenterIndexRoute,
-  AuthenticatedTasksIndexRoute: AuthenticatedTasksIndexRoute,
-  AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface ClerkauthRouteRouteChildren {
-  ClerkauthSignInRoute: typeof ClerkauthSignInRoute
-  ClerkauthSignUpRoute: typeof ClerkauthSignUpRoute
-}
-
-const ClerkauthRouteRouteChildren: ClerkauthRouteRouteChildren = {
-  ClerkauthSignInRoute: ClerkauthSignInRoute,
-  ClerkauthSignUpRoute: ClerkauthSignUpRoute,
-}
-
-const ClerkauthRouteRouteWithChildren = ClerkauthRouteRoute._addFileChildren(
-  ClerkauthRouteRouteChildren,
-)
-
-interface ClerkAuthenticatedRouteRouteChildren {
-  ClerkAuthenticatedUserManagementRoute: typeof ClerkAuthenticatedUserManagementRoute
-}
-
-const ClerkAuthenticatedRouteRouteChildren: ClerkAuthenticatedRouteRouteChildren =
-  {
-    ClerkAuthenticatedUserManagementRoute:
-      ClerkAuthenticatedUserManagementRoute,
-  }
-
-const ClerkAuthenticatedRouteRouteWithChildren =
-  ClerkAuthenticatedRouteRoute._addFileChildren(
-    ClerkAuthenticatedRouteRouteChildren,
-  )
-
-interface ClerkRouteRouteChildren {
-  ClerkauthRouteRoute: typeof ClerkauthRouteRouteWithChildren
-  ClerkAuthenticatedRouteRoute: typeof ClerkAuthenticatedRouteRouteWithChildren
-}
-
-const ClerkRouteRouteChildren: ClerkRouteRouteChildren = {
-  ClerkauthRouteRoute: ClerkauthRouteRouteWithChildren,
-  ClerkAuthenticatedRouteRoute: ClerkAuthenticatedRouteRouteWithChildren,
-}
-
-const ClerkRouteRouteWithChildren = ClerkRouteRoute._addFileChildren(
-  ClerkRouteRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  ClerkRouteRoute: ClerkRouteRouteWithChildren,
-  authForgotPasswordRoute: authForgotPasswordRoute,
-  authOtpRoute: authOtpRoute,
   authSignInRoute: authSignInRoute,
-  authSignIn2Route: authSignIn2Route,
-  authSignUpRoute: authSignUpRoute,
   errors401Route: errors401Route,
   errors403Route: errors403Route,
   errors404Route: errors404Route,

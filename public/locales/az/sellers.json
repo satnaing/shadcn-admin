@@ -1,0 +1,138 @@
+{
+  "titles": {
+    "all": "Bütün Satıcılar",
+    "allSubtitle": "Platformadakı bütün aktiv və qeydiyyatdan keçmiş satıcılar",
+    "pending": "Qeydiyyat Gözləyən Satıcılar",
+    "pendingSubtitle": "Təsdiq gözləyən yeni mağaza və satıcı müraciətləri",
+    "rating": "Reytinq və İzləyicilər",
+    "ratingSubtitle": "Satıcıların müştəri rəyləri və izləyici statistikası",
+    "payoutRequests": "Satıcı Çıxarış Sorğuları",
+    "payoutRequestsSubtitle": "Satıcıların balans çıxarış və köçürmə müraciətləri",
+    "payoutHistory": "Ödəniş Tarixçəsi (Payouts)",
+    "payoutHistorySubtitle": "Satıcılara həyata keçirilmiş bütün uğurlu ödənişlər",
+    "commissions": "Komissiya Qaydaları (E31)",
+    "commissionsSubtitle": "Çoxölçülü komissiya strukturu: kateqoriya, brend və satıcı prioritetləri",
+    "packages": "Satıcı Paketləri (E29)",
+    "packagesSubtitle": "Satıcı abunəlik planları və məhsul yükləmə limitləri",
+    "verificationForm": "Satıcı Verifikasiya Forması",
+    "verificationFormSubtitle": "Satıcıların təsdiqi üçün tələb olunan sənəd və məlumat sahələri"
+  },
+  "table": {
+    "loading": "Yüklənir...",
+    "empty": "Heç bir satıcı tapılmadı",
+    "shop": "Mağaza / Satıcı",
+    "metrics": "Məhsul / Sifariş",
+    "balance": "Balans",
+    "approval": "Təsdiq",
+    "ban": "Qadağa (Ban)",
+    "actions": "Əməliyyatlar"
+  },
+  "status": {
+    "approved": "Təsdiqlənib",
+    "pending": "Gözləyir",
+    "verified": "Doğrulanıb",
+    "unverified": "Doğrulanmamış",
+    "banned": "Ban edilib",
+    "active": "Aktiv",
+    "inactive": "Qeyri-aktiv"
+  },
+  "filter": {
+    "searchPlaceholder": "Mağaza, satıcı və ya telefon...",
+    "allApproval": "Təsdiq statusu: Hamısı",
+    "allVerification": "Verifikasiya: Hamısı",
+    "allBan": "Qadağa: Hamısı",
+    "reset": "Sıfırla"
+  },
+  "actions": {
+    "pay": "Ödə",
+    "approve": "Təsdiqlə",
+    "reject": "İmtina et",
+    "ban": "Ban et",
+    "unban": "Bani qaldır"
+  },
+  "detail": {
+    "title": "Satıcı və Mağaza Profili",
+    "balance": "Cari Balans",
+    "rating": "Reytinq və İzləyici",
+    "phone": "Telefon",
+    "products": "Məhsul sayı",
+    "orders": "Sifariş sayı",
+    "registered": "Qeydiyyat"
+  },
+  "pay": {
+    "title": "Satıcıya Balans Ödənişi",
+    "currentBalance": "Mövcud Balans",
+    "amount": "Ödəniləcək Məbləğ (₼)",
+    "method": "Ödəniş Metodu",
+    "bank": "Bank Köçürməsi (Hesaba)",
+    "cash": "Nağd",
+    "card": "Kart Ödənişi",
+    "note": "Qeyd / Çıxarış nömrəsi",
+    "notePlaceholder": "Qeyd daxil edin...",
+    "confirm": "Ödənişi Təsdiqlə"
+  },
+  "payout": {
+    "empty": "Heç bir çıxarış sorğusu tapılmadı",
+    "amount": "Məbləğ",
+    "method": "Ödəniş Metodu",
+    "date": "Tarix",
+    "status": "Status",
+    "paid": "Ödənilib",
+    "rejected": "İmtina edilib",
+    "pending": "Gözləyir",
+    "approve": "Təsdiqlə və Ödə",
+    "reject": "İmtina et",
+    "allStatus": "Bütün Statuslar"
+  },
+  "rating": {
+    "topRated": "Ən Yüksək Reytinqli Mağazalar",
+    "totalFollowers": "Cəmi Mağaza İzləyiciləri",
+    "avgRating": "Orta Reytinq",
+    "followers": "İzləyici"
+  },
+  "commission": {
+    "empty": "Heç bir fərdi komissiya qaydası təyin edilməyib",
+    "addNew": "Yeni Komissiya Qaydası",
+    "name": "Qayda Adı",
+    "scope": "Tətbiq Sahəsi",
+    "rate": "Komissiya Faizi",
+    "priority": "Prioritet",
+    "baseRate": "Standart Platforma Komissiyası",
+    "activeRules": "Aktiv Xüsusi Qaydalar"
+  },
+  "packages": {
+    "addNew": "Yeni Paket Yarat",
+    "empty": "Heç bir satıcı paketi tapılmadı",
+    "name": "Paket Adı",
+    "price": "Qiymət (₼)",
+    "limit": "Məhsul Limiti",
+    "durationDays": "Müddət (Günlərlə)",
+    "uploadLimit": "Məhsul yükləmə limiti",
+    "duration": "Müddət",
+    "editTitle": "Paketi Redaktə Et",
+    "createTitle": "Yeni Satıcı Paketi"
+  },
+  "verification": {
+    "addField": "Sahə Əlavə Et",
+    "formFields": "Tələb Olunan Sənəd və Sahələr"
+  },
+  "dialog": {
+    "edit": "Redaktə et",
+    "close": "Bağla",
+    "cancel": "Ləğv et",
+    "save": "Yadda saxla",
+    "category": "Kateqoriya"
+  },
+  "messages": {
+    "paymentSuccess": "Ödəniş uğurla qeydə alındı!",
+    "approvalUpdated": "Satıcı təsdiq statusu yeniləndi!",
+    "payoutApproved": "Çıxarış təsdiqləndi və ödənildi!",
+    "payoutRejected": "Çıxarış sorğusuna imtina edildi!",
+    "commissionCreated": "Komissiya qaydası əlavə edildi!",
+    "packageCreated": "Yeni paket yaradıldı!",
+    "packageUpdated": "Paket yeniləndi!",
+    "packageDeleted": "Paket silindi!",
+    "confirmDeletePackage": "Bu paketi silmək istədiyinizə əminsiniz?",
+    "verificationSaved": "Verifikasiya forması konfiqurasiyası yadda saxlanıldı!"
+  }
+}

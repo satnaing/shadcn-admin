@@ -1,0 +1,46 @@
+{
+  "dashboard": {
+    "title": "Marketing Dashboard",
+    "subscribers": "Subscribers",
+    "newsletters": "Newsletters",
+    "sms": "SMS Campaigns",
+    "activePopups": "Active Pop-ups",
+    "activeAlerts": "Active Banners",
+    "blogs": "Blog Posts"
+  },
+  "popups": {
+    "title": "Dynamic Pop-ups",
+    "create": "New Pop-up"
+  },
+  "alerts": {
+    "title": "Custom Alerts",
+    "create": "New Alert"
+  },
+  "saleAlerts": {
+    "title": "Sale Alert Pop-up"
+  },
+  "emails": {
+    "title": "Email Templates"
+  },
+  "blogs": {
+    "title": "All Blog Posts"
+  },
+  "newsletters": {
+    "title": "Newsletters"
+  },
+  "notifications": {
+    "types": "Notification Types & Channels",
+    "send": "Send Custom Notification",
+    "history": "Notification History",
+    "settings": "Notification Settings"
+  },
+  "sms": {
+    "title": "Bulk SMS Campaign"
+  },
+  "subscribers": {
+    "title": "Newsletter Subscribers"
+  },
+  "visitors": {
+    "title": "Custom Product Visitors"
+  }
+}

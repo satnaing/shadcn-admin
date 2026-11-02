@@ -1,0 +1,10 @@
+{
+  "title": "Announcements",
+  "description": "Internal company announcements",
+  "newAnnouncement": "New announcement",
+  "loading": "Loading...",
+  "empty": "No announcements",
+  "headingLabel": "Title",
+  "bodyLabel": "Body",
+  "create": "Create"
+}

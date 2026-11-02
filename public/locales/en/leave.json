@@ -1,0 +1,26 @@
+{
+  "title": "Leave Management",
+  "description": "Employee leave requests",
+  "newRequest": "New request",
+  "employee": "Employee",
+  "type": "Type",
+  "startDate": "Start date",
+  "endDate": "End date",
+  "status": "Status",
+  "reason": "Reason",
+  "loading": "Loading...",
+  "empty": "No requests",
+  "createTitle": "New leave request",
+  "employeeId": "Employee ID",
+  "submit": "Submit",
+  "types": {
+    "annual": "Annual",
+    "sick": "Sick",
+    "unpaid": "Unpaid"
+  },
+  "statuses": {
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  }
+}

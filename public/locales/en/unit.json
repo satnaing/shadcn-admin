@@ -1,0 +1,98 @@
+{
+  "list": {
+    "title": "Units of measure",
+    "description": "Weight, length, area, volume and piece units with their conversion factors.",
+    "tabs": {
+      "units": "Units",
+      "trash": "Trash"
+    },
+    "filterUnits": "Search units...",
+    "noResults": "No results found."
+  },
+  "columns": {
+    "id": "ID",
+    "name": "Name",
+    "code": "Code",
+    "symbol": "Symbol",
+    "type": "Type",
+    "conversion": "Conversion",
+    "status": "Status",
+    "sort": "Sort"
+  },
+  "types": {
+    "weight": "Weight",
+    "length": "Length",
+    "area": "Area",
+    "volume": "Volume",
+    "piece": "Piece"
+  },
+  "primaryButtons": {
+    "addUnit": "Add unit"
+  },
+  "bulkActions": {
+    "deleteSelected": "Delete selected",
+    "entityName": "unit"
+  },
+  "form": {
+    "saving": "Saving...",
+    "saveAndExit": "Save",
+    "updating": "Updating...",
+    "updateAndExit": "Update",
+    "active": "Active",
+    "createError": "Could not create the record.",
+    "updateError": "Could not update the record.",
+    "deleteError": "Could not delete the record.",
+    "restoreError": "Could not restore the record.",
+    "forceDeleteError": "Could not permanently delete the record.",
+    "addTitle": "New unit of measure",
+    "addDescription": "Create a new unit of measure.",
+    "updateTitle": "Edit unit of measure",
+    "updateDescription": "Update this unit of measure.",
+    "name": "Name",
+    "namePlaceholder": "Kilogram",
+    "code": "Code",
+    "codePlaceholder": "kg",
+    "symbol": "Symbol",
+    "symbolPlaceholder": "kg",
+    "type": "Type",
+    "typePlaceholder": "Select a type",
+    "isBase": "Base unit",
+    "isBaseHint": "Each type has one base unit — its conversion factor is 1.",
+    "baseUnit": "Base unit",
+    "baseUnitPlaceholder": "Select the base unit",
+    "factor": "Conversion factor",
+    "factorHint": "1 of this unit = how many base units (e.g. 1 g = 0.001 kg).",
+    "sort": "Sort"
+  },
+  "rowActions": {
+    "openMenu": "Open menu",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Delete",
+    "restore": "Restore",
+    "deletePermanently": "Delete permanently",
+    "deleteTitle": "Delete {{name}}?",
+    "deleteDescription1": "This will move the following item to the trash:",
+    "deletePermanentlyTitle": "Permanently delete {{name}}?",
+    "deletePermanentlyDescription1": "This will permanently delete:",
+    "deletePermanentlyDescription2": "This action cannot be undone.",
+    "restoreTitle": "Restore {{name}}?",
+    "restoreDescription1": "This will restore the following item from the trash:"
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "Delete {{count}} items?",
+    "warningMessage1": "The selected items will be moved to the trash.",
+    "warningMessage2": "Confirm to continue.",
+    "confirmByTyping": "Type \"{{word}}\" to confirm:",
+    "confirmPlaceholder": "Type {{word}}",
+    "confirmError": "You must type \"{{word}}\" to confirm.",
+    "alertTitle": "Careful!",
+    "alertDescription": "This is a bulk operation.",
+    "deleting": "Deleting...",
+    "delete": "Delete"
+  },
+  "filters": {
+    "status": "Status",
+    "type": "Type"
+  }
+}

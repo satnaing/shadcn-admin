@@ -1,0 +1,57 @@
+{
+  "title": "Fəaliyyət Jurnalı",
+  "description": "Sistemdəki bütün əməliyyatların tarixçəsi.",
+  "loading": "Yüklənir...",
+  "empty": "Qeyd tapılmadı.",
+  "filters": {
+    "module": "Modul",
+    "all": "Hamısı",
+    "from": "Tarixdən",
+    "to": "Tarixə"
+  },
+  "columns": {
+    "date": "Tarix",
+    "module": "Modul",
+    "action": "Əməliyyat",
+    "description": "Açıqlama",
+    "user": "İstifadəçi",
+    "employee": "İşçi"
+  },
+  "modules": {
+    "sales": "Satış",
+    "warehouse": "Anbar",
+    "products": "Məhsullar",
+    "production": "İstehsalat",
+    "finance": "Maliyyə",
+    "hr": "İnsan Resursları",
+    "orders": "Sifarişlər",
+    "system": "Sistem"
+  },
+  "entities": {
+    "sale": "Satış",
+    "customer": "Müştəri",
+    "rawmaterial": "Xammal",
+    "stockmovement": "Stok hərəkəti",
+    "stock": "Stok",
+    "supplier": "Təchizatçı",
+    "warehouselocation": "Anbar yeri",
+    "product": "Məhsul",
+    "productcategory": "Məhsul kateqoriyası",
+    "productionorder": "İstehsal əmri",
+    "recipe": "Resept",
+    "financetransaction": "Maliyyə əməliyyatı",
+    "debt": "Borc",
+    "invoice": "Faktura",
+    "employee": "İşçi",
+    "order": "Sifariş"
+  },
+  "verbs": {
+    "create": "yaradıldı",
+    "update": "yeniləndi",
+    "delete": "silindi",
+    "complete": "tamamlandı",
+    "cancel": "ləğv edildi",
+    "refund": "geri qaytarıldı",
+    "adjust": "düzəliş edildi"
+  }
+}

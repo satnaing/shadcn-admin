@@ -1,0 +1,11 @@
+description = "Təməl skeleti qurur: 1c-prielaz infrastrukturunun köçürülməsi + mock qatı + panel qatı (bir dəfə, bölümlərdən əvvəl)."
+
+prompt = """
+`D:/www/xshop/task/admin/PILOT-PROMPT.md` faylını oxu və içindəki ```` bloku arasındaki TAPŞIRIQ-ı
+addım-addım, sıra ilə icra et.
+
+Əlavə şərtlər:
+- `D:/www/xshop/admin/GEMINI.md` §1 qadağaları bu işdə də qüvvədədir (inline CSS, `any`, `@ts-ignore`, yeni qovluq icad etmək yoxdur).
+- 7-ci addımdaki build-fix dövrəsində eyni xətaya 3-cü dəfə qayıdırsan — dayan və soruş.
+- Hesabatı PILOT-PROMPT §11 cədvəl formatında ver, sonra dayan.
+"""

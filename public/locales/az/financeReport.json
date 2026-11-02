@@ -1,0 +1,49 @@
+{
+  "title": "Maliyyə Hesabatları",
+  "description": "Gəlir/xərc, borc və nağd axını hesabatları",
+  "tabs": {
+    "profitLoss": "Gəlir/Xərc",
+    "debtSummary": "Borc Xülasəsi",
+    "cashFlow": "Nağd Axını"
+  },
+  "filter": {
+    "from": "Başlanğıc tarix",
+    "to": "Son tarix"
+  },
+  "pl": {
+    "totalIncome": "Ümumi Gəlir",
+    "totalExpense": "Ümumi Xərc",
+    "netProfit": "Xalis Mənfəət",
+    "category": "Kateqoriya",
+    "type": "Növ",
+    "total": "Cəm",
+    "count": "Say"
+  },
+  "debt": {
+    "payable": "Bizim borcumuz",
+    "receivable": "Bizə borc",
+    "partyType": "Tərəf növü",
+    "amount": "Məbləğ",
+    "paid": "Ödənilib",
+    "remaining": "Qalıq",
+    "dueDate": "Son tarix",
+    "status": "Status",
+    "totalPayable": "Ümumi borcumuz",
+    "totalReceivable": "Bizə ümumi borc",
+    "overdueCount": "Vaxtı keçmiş"
+  },
+  "cf": {
+    "month": "Ay",
+    "income": "Gəlir",
+    "expense": "Xərc",
+    "netFlow": "Xalis axın",
+    "totals": "Cəmi"
+  },
+  "status": {
+    "open": "Açıq",
+    "partially_paid": "Qismən",
+    "paid": "Ödənilib"
+  },
+  "overdue": "Vaxtı keçib",
+  "noData": "Məlumat yoxdur"
+}

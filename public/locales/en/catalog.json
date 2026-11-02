@@ -1,0 +1,100 @@
+{
+  "categories": {
+    "title": "All Categories",
+    "description": "Product categories hierarchy and configuration.",
+    "addNew": "Add New Category",
+    "icon": "Icon",
+    "name": "Category Name",
+    "parent": "Parent Category",
+    "orderLevel": "Order Level",
+    "level": "Level",
+    "featured": "Featured",
+    "hot": "Hot Category",
+    "commission": "Commission",
+    "actions": "Actions",
+    "noParent": "No Parent (Root Category)",
+    "dialog": {
+      "createTitle": "Add New Category",
+      "editTitle": "Edit Category",
+      "nameLabel": "Name",
+      "parentLabel": "Parent Category",
+      "orderLevelLabel": "Order Level",
+      "featuredLabel": "Mark as Featured",
+      "hotLabel": "Mark as Hot Category",
+      "commissionLabel": "Commission Rate (%)",
+      "digitalLabel": "Digital Category",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "brands": {
+    "title": "All Brands",
+    "description": "Manage platform product brands.",
+    "addNew": "Add New Brand",
+    "logo": "Logo",
+    "name": "Brand Name",
+    "top": "Top Brand",
+    "actions": "Actions",
+    "dialog": {
+      "createTitle": "Add New Brand",
+      "editTitle": "Edit Brand",
+      "nameLabel": "Brand Name",
+      "topLabel": "Show as Top Brand",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "colors": {
+    "title": "Colors",
+    "description": "Color palette for product variations.",
+    "addNew": "Add New Color",
+    "preview": "Color",
+    "name": "Color Name",
+    "code": "HEX Code",
+    "actions": "Actions",
+    "dialog": {
+      "createTitle": "Add New Color",
+      "editTitle": "Edit Color",
+      "nameLabel": "Name",
+      "codeLabel": "HEX Color Code",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "attributes": {
+    "title": "Attributes",
+    "description": "Product attributes and variation values (Size, Storage, etc.).",
+    "addNew": "Add New Attribute",
+    "name": "Attribute Name",
+    "values": "Values",
+    "actions": "Actions",
+    "dialog": {
+      "createTitle": "Add New Attribute",
+      "editTitle": "Edit Attribute",
+      "nameLabel": "Attribute Name",
+      "valuesLabel": "Values (comma separated)",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "units": {
+    "title": "Units",
+    "description": "Product quantity units (pc, kg, liter, etc.).",
+    "addNew": "Add New Unit",
+    "name": "Unit Name",
+    "actions": "Actions",
+    "dialog": {
+      "createTitle": "Add New Unit",
+      "editTitle": "Edit Unit",
+      "nameLabel": "Unit Name",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
+  "deleteConfirm": {
+    "title": "Confirm Deletion",
+    "description": "Are you sure you want to delete this item? This action cannot be undone.",
+    "confirm": "Yes, Delete",
+    "cancel": "Cancel"
+  }
+}

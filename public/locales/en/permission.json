@@ -1,0 +1,72 @@
+{
+  "list": {
+    "title": "Permissions",
+    "description": "Manage system permissions.",
+    "tabs": {
+      "permissions": "Permissions",
+      "trash": "Trash"
+    },
+    "filterPermissions": "Filter permissions...",
+    "noResults": "No results."
+  },
+  "primaryButtons": {
+    "addPermission": "Add Permission"
+  },
+  "columns": {
+    "id": "ID",
+    "name": "Name",
+    "slug": "Slug",
+    "group": "Group",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "actions": "Actions"
+  },
+  "rowActions": {
+    "openMenu": "Open menu",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteTitle": "Delete this permission: {{name}} ?",
+    "deleteDescription1": "Are you sure you want to delete",
+    "deleteConfirm": "Delete",
+    "restore": "Restore",
+    "restoreTitle": "Restore this permission: {{name}} ?",
+    "restoreDescription1": "Are you sure you want to restore",
+    "deletePermanently": "Delete Permanently",
+    "deletePermanentlyTitle": "Delete this permission: {{name}} ?",
+    "deletePermanentlyDescription1": "You are about to permanently delete",
+    "deletePermanentlyDescription2": "This action cannot be undone."
+  },
+  "multiDeleteDialog": {
+    "deleteTitle": "Delete {{count}} permission(s)",
+    "warningMessage1": "Are you sure you want to delete the selected permissions?",
+    "warningMessage2": "This action cannot be undone.",
+    "confirmByTyping": "Confirm by typing \"{{word}}\":",
+    "confirmPlaceholder": "Type \"{{word}}\" to confirm.",
+    "confirmError": "Please type \"{{word}}\" to confirm.",
+    "alertTitle": "Warning!",
+    "alertDescription": "Please be careful, this operation can not be rolled back.",
+    "delete": "Delete",
+    "deleting": "Deleting…"
+  },
+  "bulkActions": {
+    "entityName": "permission",
+    "deleteSelected": "Delete selected permissions"
+  },
+  "form": {
+    "addTitle": "Add Permission",
+    "updateTitle": "Update Permission",
+    "addDescription": "Fill out the form to create a new permission.",
+    "updateDescription": "Edit permission details and click save.",
+    "name": "Name",
+    "namePlaceholder": "Enter name",
+    "guardName": "Guard Name",
+    "guardNamePlaceholder": "Enter guard name",
+    "saving": "Saving...",
+    "saveAndExit": "Save and Exit",
+    "updating": "Updating...",
+    "updateAndExit": "Update and Exit",
+    "createError": "An error occurred while creating the permission.",
+    "updateError": "An error occurred while updating the permission.",
+    "deleteError": "An error occurred while deleting the permission."
+  }
+}
