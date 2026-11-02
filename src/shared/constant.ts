@@ -44,10 +44,36 @@ export const PERMISSIONS = {
     CREATE: 'permissions.create',
     UPDATE: 'permissions.update',
     DELETE: 'permissions.delete',
-  
+
     TRASH: 'permissions.trash',
     RESTORE: 'permissions.restore',
     FORCE_DELETE: 'permissions.force_delete',
+  },
+
+  STAFF: {
+    INDEX: 'staff.index',
+    SHOW: 'staff.show',
+    CREATE: 'staff.create',
+    UPDATE: 'staff.update',
+    DELETE: 'staff.delete',
+    VIEW: 'staff.view',
+  },
+
+  ROLE: {
+    INDEX: 'role.index',
+    SHOW: 'role.show',
+    CREATE: 'role.create',
+    UPDATE: 'role.update',
+    DELETE: 'role.delete',
+    MANAGE: 'role.manage',
+  },
+
+  COURIER: {
+    INDEX: 'courier.index',
+    SHOW: 'courier.show',
+    CREATE: 'courier.create',
+    UPDATE: 'courier.update',
+    DELETE: 'courier.delete',
   },
 
   LANGUAGES: {
@@ -56,7 +82,7 @@ export const PERMISSIONS = {
     CREATE: 'languages.create',
     UPDATE: 'languages.update',
     DELETE: 'languages.delete',
-  
+
     TRASH: 'languages.trash',
     RESTORE: 'languages.restore',
     FORCE_DELETE: 'languages.force_delete',
@@ -271,7 +297,6 @@ export const PERMISSIONS = {
     IMPORT: 'customers.import',
   },
 
-
   /* Orders (Sifariş) module */
 
   ORDERS: {
@@ -457,5 +482,4 @@ export const PERMISSIONS = {
     INDEX: 'notifications.index',
     MARK_READ: 'notifications.mark_read',
   },
-
 } as const

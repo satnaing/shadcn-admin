@@ -12,7 +12,7 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import { sidebarData } from './layout/data/sidebar-data'
+import { sidebarAdminData } from './layout/data/sidebar-data.admin'
 import { ScrollArea } from './ui/scroll-area'
 
 export function CommandMenu() {
@@ -34,7 +34,7 @@ export function CommandMenu() {
       <CommandList>
         <ScrollArea type='hover' className='h-72 pe-1'>
           <CommandEmpty>No results found.</CommandEmpty>
-          {sidebarData.navGroups.map((group) => (
+          {sidebarAdminData.navGroups.map((group) => (
             <CommandGroup key={group.title} heading={group.title}>
               {group.items.map((navItem, i) => {
                 if (navItem.url)

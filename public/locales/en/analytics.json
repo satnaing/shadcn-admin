@@ -1,0 +1,17 @@
+{
+  "dashboard": { "title": "Marketing Analytics", "subtitle": "Global tracking, pixels, search engines and product catalog integrations" },
+  "ga4": { "title": "Google Analytics 4", "subtitle": "Measurement ID and e-commerce event configuration" },
+  "reports": { "title": "GA4 Live Reports", "subtitle": "Real-time event stream and test results" },
+  "gtm": { "title": "Google Tag Manager", "subtitle": "GTM container and external tag management" },
+  "pixel": { "title": "Meta Pixel", "subtitle": "Facebook/Instagram ad pixels and event tracking" },
+  "capi": { "title": "Meta Conversion API", "subtitle": "Server-side reliable conversion tracking" },
+  "gmc": { "title": "Google Merchant Center", "subtitle": "Product catalog and XML feed generator" },
+  "gmcFeed": { "title": "GMC Product Feed", "subtitle": "Auto-generated XML product feed" },
+  "fbCatalog": { "title": "Facebook Catalogue", "subtitle": "Social commerce and dynamic ad catalog" },
+  "fbFeed": { "title": "Facebook Product Feed", "subtitle": "Auto-generated product catalog feed" },
+  "scripts": { "title": "Custom Scripts", "subtitle": "Custom JavaScript or HTML code blocks" },
+  "sitemap": { "title": "Sitemap Generator", "subtitle": "sitemap.xml automatic generation" },
+  "seo": { "title": "Global SEO", "subtitle": "Meta title, description and OpenGraph settings" },
+  "actions": { "save": "Save", "generate": "Generate", "copy": "Copy URL", "back": "Back" },
+  "messages": { "saved": "Settings saved successfully!", "generated": "Feed generated successfully!", "copied": "URL copied to clipboard!" }
+}

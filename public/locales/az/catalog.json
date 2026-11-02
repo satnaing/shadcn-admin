@@ -1,0 +1,100 @@
+{
+  "categories": {
+    "title": "Bütün Kateqoriyalar",
+    "description": "Məhsul kateqoriyalarının iyerarxiyası və konfiqurasiyası.",
+    "addNew": "Yeni Kateqoriya",
+    "icon": "İkon",
+    "name": "Kateqoriya Adı",
+    "parent": "Üst Kateqoriya",
+    "orderLevel": "Sıralama",
+    "level": "Səviyyə",
+    "featured": "Seçilmiş",
+    "hot": "Populyar",
+    "commission": "Komissiya",
+    "actions": "Əməliyyatlar",
+    "noParent": "Ana Kateqoriya (Yoxdur)",
+    "dialog": {
+      "createTitle": "Yeni Kateqoriya Əlavə Et",
+      "editTitle": "Kateqoriyanı Redaktə Et",
+      "nameLabel": "Ad",
+      "parentLabel": "Üst Kateqoriya",
+      "orderLevelLabel": "Sıralama Nömrəsi",
+      "featuredLabel": "Seçilmiş olaraq qeyd et",
+      "hotLabel": "Populyar (Hot) kateqoriya",
+      "commissionLabel": "Komissiya Faiz (%)",
+      "digitalLabel": "Rəqəmsal Kateqoriya",
+      "save": "Yadda saxla",
+      "cancel": "Ləğv et"
+    }
+  },
+  "brands": {
+    "title": "Bütün Brendlər",
+    "description": "Platformadakı məhsul brendlərinin idarə edilməsi.",
+    "addNew": "Yeni Brend",
+    "logo": "Loqo",
+    "name": "Brend Adı",
+    "top": "Top Brend",
+    "actions": "Əməliyyatlar",
+    "dialog": {
+      "createTitle": "Yeni Brend Əlavə Et",
+      "editTitle": "Brendi Redaktə Et",
+      "nameLabel": "Brend Adı",
+      "topLabel": "Top Brend olaraq göstər",
+      "save": "Yadda saxla",
+      "cancel": "Ləğv et"
+    }
+  },
+  "colors": {
+    "title": "Rənglər",
+    "description": "Məhsul variantları üçün rəng palitrası.",
+    "addNew": "Yeni Rəng",
+    "preview": "Rəng",
+    "name": "Rəng Adı",
+    "code": "HEX Kodu",
+    "actions": "Əməliyyatlar",
+    "dialog": {
+      "createTitle": "Yeni Rəng Əlavə Et",
+      "editTitle": "Rəngi Redaktə Et",
+      "nameLabel": "Ad",
+      "codeLabel": "HEX Rəng Kodu",
+      "save": "Yadda saxla",
+      "cancel": "Ləğv et"
+    }
+  },
+  "attributes": {
+    "title": "Xüsusiyyətlər (Atributlar)",
+    "description": "Məhsul xassələri və variant dəyərləri (Ölçü, Yaddaş və s.).",
+    "addNew": "Yeni Atribut",
+    "name": "Atribut Adı",
+    "values": "Dəyərlər",
+    "actions": "Əməliyyatlar",
+    "dialog": {
+      "createTitle": "Yeni Atribut Əlavə Et",
+      "editTitle": "Atributu Redaktə Et",
+      "nameLabel": "Atribut Adı",
+      "valuesLabel": "Dəyərlər (vergüllə ayırın)",
+      "save": "Yadda saxla",
+      "cancel": "Ləğv et"
+    }
+  },
+  "units": {
+    "title": "Ölçü Vahidləri",
+    "description": "Məhsul miqdar vahidləri (ədəd, kq, litr və s.).",
+    "addNew": "Yeni Ölçü Vahidi",
+    "name": "Vahid Adı",
+    "actions": "Əməliyyatlar",
+    "dialog": {
+      "createTitle": "Yeni Vahid Əlavə Et",
+      "editTitle": "Vahidi Redaktə Et",
+      "nameLabel": "Vahid Adı",
+      "save": "Yadda saxla",
+      "cancel": "Ləğv et"
+    }
+  },
+  "deleteConfirm": {
+    "title": "Silinməni təsdiqləyin",
+    "description": "Bu elementi silmək istədiyinizə əminsiniz? Bu əməliyyat geri qaytarılmır.",
+    "confirm": "Bəli, sil",
+    "cancel": "Ləğv et"
+  }
+}

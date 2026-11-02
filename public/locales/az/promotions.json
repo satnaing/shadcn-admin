@@ -1,0 +1,79 @@
+{
+  "titles": {
+    "dashboard": "Promosiya və Təkliflər",
+    "dashboardSubtitle": "Flash satışlar, endirim kuponları və xüsusi aksiyaların idarəsi",
+    "promotionalProducts": "Promosiya Məhsulları",
+    "promotionalProductsSubtitle": "Aktiv endirim aksiyalarında və kampaniyalarda iştirak edən bütün məhsullar",
+    "sellerPromotionalProducts": "Satıcı Promosiya Məhsulları",
+    "sellerPromotionalProductsSubtitle": "Yalnız tərəfdaş satıcılar tərəfindən kampaniyalara qoşulmuş məhsullar",
+    "flashDeals": "Flash Satışlar (Flash Deals)",
+    "flashDealsSubtitle": "Müəyyən vaxt intervalında fəaliyyət göstərən böyük endirim aksiyaları",
+    "categoryDiscounts": "Kateqoriya üzrə Endirimlər",
+    "categoryDiscountsSubtitle": "Seçilmiş kateqoriyadakı bütün məhsullara toplu endirim tətbiqi",
+    "coupons": "Endirim Kuponları",
+    "couponsSubtitle": "Promokodlar, səbət endirimləri və qeydiyyat kuponlarının idarəsi"
+  },
+  "summary": {
+    "activeFlashDeals": "Aktiv Flash Satışlar",
+    "activeCoupons": "Aktiv Kuponlar",
+    "discountedCategories": "Endirimli Kateqoriyalar",
+    "promotionalProducts": "Promosiya Məhsulları"
+  },
+  "table": {
+    "loading": "Yüklənir...",
+    "actions": "Əməliyyatlar"
+  },
+  "status": {
+    "active": "Aktiv",
+    "inactive": "Qeyri-aktiv"
+  },
+  "deals": {
+    "empty": "Heç bir flash satış kampaniyası tapılmadı",
+    "title": "Kampaniya Adı",
+    "duration": "Müddət",
+    "productsCount": "Məhsul Sayı",
+    "featured": "Seçilmiş",
+    "status": "Status",
+    "addNew": "Yeni Flash Satış Yarat"
+  },
+  "coupons": {
+    "empty": "Heç bir kupon tapılmadı",
+    "code": "Kupon Kodu",
+    "type": "Kupon Növü",
+    "discount": "Endirim",
+    "validity": "Etibarlılıq",
+    "usage": "İstifadə Sayı",
+    "status": "Status",
+    "addNew": "Yeni Kupon Yarat"
+  },
+  "categories": {
+    "empty": "Heç bir kateqoriya endirimi təyin edilməyib",
+    "category": "Kateqoriya Adı",
+    "discount": "Tətbiq Olunan Endirim",
+    "status": "Status",
+    "addNew": "Yeni Kateqoriya Endirimi",
+    "addTitle": "Kateqoriyaya Toplu Endirim Təyin Et",
+    "selectCategory": "Kateqoriya Seç",
+    "discountValue": "Endirim Dəyəri",
+    "discountType": "Endirim Növü"
+  },
+  "products": {
+    "empty": "Heç bir promosiya məhsulu tapılmadı",
+    "product": "Məhsul",
+    "campaign": "Aksiya / Kampaniya",
+    "source": "Mənbə",
+    "originalPrice": "Əsas Qiymət",
+    "dealPrice": "Aksiya Qiyməti",
+    "status": "Status"
+  },
+  "dialog": {
+    "cancel": "Ləğv et",
+    "save": "Yadda saxla"
+  },
+  "messages": {
+    "dealCreated": "Flash satış uğurla yaradıldı!",
+    "couponCreated": "Yeni kupon uğurla yaradıldı!",
+    "categoryDiscountSaved": "Kateqoriya endirimi tətbiq edildi!",
+    "categoryDiscountDeleted": "Kateqoriya endirimi silindi!"
+  }
+}

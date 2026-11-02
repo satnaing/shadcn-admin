@@ -1,0 +1,90 @@
+{
+  "allOrders": {
+    "title": "Bütün Sifarişlər",
+    "subtitle": "Sistemdəki bütün sifarişlərin izlənməsi və idarəsi"
+  },
+  "inHouseOrders": {
+    "title": "Daxili (In-House) Sifarişlər",
+    "subtitle": "Yalnız daxili mağazaya aid sifarişlər"
+  },
+  "sellerOrders": {
+    "title": "Satıcı Sifarişləri",
+    "subtitle": "Bütün tərəfdaş satıcılara aid sifarişlər"
+  },
+  "pickupPointOrders": {
+    "title": "Təhvil Məntəqəsi Sifarişləri",
+    "subtitle": "Təhvil məntəqələrindən götürüləcək sifarişlər"
+  },
+  "unpaidOrders": {
+    "title": "Ödənilməmiş Sifarişlər",
+    "subtitle": "Ödənişi gözlənilən bütün sifarişlər"
+  },
+  "status": {
+    "pending": "Gözləmədə",
+    "confirmed": "Təsdiqləndi",
+    "picked_up": "Kuryerə verildi",
+    "on_the_way": "Yoldadır",
+    "delivered": "Çatdırıldı",
+    "cancelled": "Ləğv edildi"
+  },
+  "payment": {
+    "paid": "Ödənilib",
+    "unpaid": "Ödənilməyib"
+  },
+  "table": {
+    "code": "Sifariş Kodu",
+    "items": "Məhsul Sayı",
+    "customer": "Müştəri",
+    "seller": "Satıcı",
+    "amount": "Məbləğ",
+    "deliveryStatus": "Çatdırılma Statusu",
+    "paymentMethod": "Ödəniş Metodu",
+    "paymentStatus": "Ödəniş Statusu",
+    "options": "Əməliyyatlar"
+  },
+  "filter": {
+    "searchPlaceholder": "Kod, müştəri və ya telefon...",
+    "deliveryStatus": "Çatdırılma statusu",
+    "allStatuses": "Bütün statuslar",
+    "paymentStatus": "Ödəniş statusu",
+    "allPayments": "Bütün ödənişlər",
+    "reset": "Sıfırla"
+  },
+  "dialog": {
+    "title": "Sifarişi İdarə Et",
+    "deliveryStatusLabel": "Çatdırılma Statusu",
+    "paymentStatusLabel": "Ödəniş Statusu",
+    "cancel": "Ləğv et",
+    "save": "Yadda saxla",
+    "saving": "Yadda saxlanılır...",
+    "success": "Sifariş statusu uğurla yeniləndi!",
+    "error": "Status yenilənərkən xəta baş verdi"
+  },
+  "detail": {
+    "title": "Sifariş Detalı",
+    "placedOn": "Sifariş tarixi",
+    "printInvoice": "Faktura Çap Et",
+    "customer": "Müştəri Məlumatı",
+    "shippingAddress": "Çatdırılma Ünvanı",
+    "pickupPoint": "Təhvil Məntəqəsi",
+    "statusInfo": "Status və Ödəniş",
+    "orderedItems": "Sifariş Edilən Məhsullar",
+    "product": "Məhsul",
+    "variation": "Variant",
+    "quantity": "Say",
+    "unitPrice": "Vahid Qiyməti",
+    "total": "Cəmi",
+    "orderSummary": "Məbləğ Detalları",
+    "subtotal": "Ara Cəm",
+    "tax": "ƏDV / Vergi",
+    "shippingCost": "Çatdırılma Haqqı",
+    "couponDiscount": "Kupon Endirimi",
+    "grandTotal": "Yekun Məbləğ"
+  },
+  "backToOrders": "Sifarişlərə qayıt",
+  "orderNotFound": "Sifariş tapılmadı",
+  "loading": "Yüklənir...",
+  "noOrders": "Heç bir sifariş tapılmadı",
+  "delete": "Sil",
+  "confirmDelete": "Bu sifarişi silmək istədiyinizə əminsiniz?"
+}

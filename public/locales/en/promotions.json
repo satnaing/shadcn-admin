@@ -1,0 +1,79 @@
+{
+  "titles": {
+    "dashboard": "Promotion & Offers",
+    "dashboardSubtitle": "Manage flash sales, discount coupons, and promotional campaigns",
+    "promotionalProducts": "Promotional Products",
+    "promotionalProductsSubtitle": "All products participating in promotional discounts and active deals",
+    "sellerPromotionalProducts": "Seller Promotional Products",
+    "sellerPromotionalProductsSubtitle": "Products joined into promotional campaigns by partner sellers",
+    "flashDeals": "Flash Sales (Flash Deals)",
+    "flashDealsSubtitle": "Time-limited major promotional and discount events",
+    "categoryDiscounts": "Category Discounts",
+    "categoryDiscountsSubtitle": "Bulk discounts applied across all products in selected categories",
+    "coupons": "Discount Coupons",
+    "couponsSubtitle": "Manage promo codes, cart discounts, and welcome coupons"
+  },
+  "summary": {
+    "activeFlashDeals": "Active Flash Deals",
+    "activeCoupons": "Active Coupons",
+    "discountedCategories": "Discounted Categories",
+    "promotionalProducts": "Promotional Products"
+  },
+  "table": {
+    "loading": "Loading...",
+    "actions": "Actions"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "deals": {
+    "empty": "No flash deals found",
+    "title": "Campaign Title",
+    "duration": "Duration",
+    "productsCount": "Products Count",
+    "featured": "Featured",
+    "status": "Status",
+    "addNew": "Create New Flash Deal"
+  },
+  "coupons": {
+    "empty": "No coupons found",
+    "code": "Coupon Code",
+    "type": "Coupon Type",
+    "discount": "Discount",
+    "validity": "Validity",
+    "usage": "Usage Count",
+    "status": "Status",
+    "addNew": "Create New Coupon"
+  },
+  "categories": {
+    "empty": "No category discounts configured",
+    "category": "Category Name",
+    "discount": "Applied Discount",
+    "status": "Status",
+    "addNew": "New Category Discount",
+    "addTitle": "Apply Bulk Category Discount",
+    "selectCategory": "Select Category",
+    "discountValue": "Discount Value",
+    "discountType": "Discount Type"
+  },
+  "products": {
+    "empty": "No promotional products found",
+    "product": "Product",
+    "campaign": "Campaign / Deal",
+    "source": "Source",
+    "originalPrice": "Base Price",
+    "dealPrice": "Deal Price",
+    "status": "Status"
+  },
+  "dialog": {
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "messages": {
+    "dealCreated": "Flash deal created successfully!",
+    "couponCreated": "Coupon created successfully!",
+    "categoryDiscountSaved": "Category discount applied!",
+    "categoryDiscountDeleted": "Category discount deleted!"
+  }
+}

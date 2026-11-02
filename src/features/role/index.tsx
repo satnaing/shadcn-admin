@@ -8,7 +8,7 @@ import { RoleProvider } from './components/role-provider'
 import { RoleTable } from './components/role-table'
 import { useRoles } from './hooks/useRoles'
 
-const route = getRouteApi('/_authenticated/role/')
+const route = getRouteApi('/_authenticated/admin/role/')
 
 export function RolePage() {
   const { t } = useTranslation('role')

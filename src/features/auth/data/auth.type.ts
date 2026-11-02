@@ -1,11 +1,20 @@
+import type { Panel, Role } from '@/config/panels'
 import type { CurrentUserInterface } from '@/features/users/data/users.type'
 
+export type AuthUser = Omit<CurrentUserInterface, 'permissions'> & {
+  role?: Role
+  seller_id?: number | null
+  panel?: Panel | null
+}
+
 export type AuthStoreType = {
-  user: Omit<CurrentUserInterface, 'permissions'> | null
+  user: AuthUser | null
   accessToken: string | null
+  panel: Panel | null
+  seller_id: number | null
   setUser: (user: Omit<CurrentUserInterface, 'permissions'>) => void
   setAccessToken: (accessToken: string) => void
-
+  setRole: (role: Role) => void
   clean: () => void
 }
 

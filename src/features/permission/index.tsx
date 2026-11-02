@@ -8,7 +8,7 @@ import { PermissionProvider } from './components/permission-provider'
 import { PermissionTable } from './components/permission-table'
 import { usePermissions } from './hooks/usePermissions'
 
-const route = getRouteApi('/_authenticated/permission/')
+const route = getRouteApi('/_authenticated/admin/permission/')
 
 export function PermissionPage() {
   const { t } = useTranslation('permission')

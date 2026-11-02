@@ -1,0 +1,79 @@
+{
+  "titles": {
+    "dashboard": "Promosyon ve Teklifler",
+    "dashboardSubtitle": "Flash satışlar, indirim kuponları ve özel kampanyaların yönetimi",
+    "promotionalProducts": "Promosyon Ürünleri",
+    "promotionalProductsSubtitle": "İndirim kampanyalarında yer alan tüm ürünler",
+    "sellerPromotionalProducts": "Satıcı Promosyon Ürünleri",
+    "sellerPromotionalProductsSubtitle": "Yalnızca satıcılar tarafından kampanyaya eklenen ürünler",
+    "flashDeals": "Fırsat Ürünleri (Flash Deals)",
+    "flashDealsSubtitle": "Belirli zaman aralığında geçerli büyük indirim kampanyaları",
+    "categoryDiscounts": "Kategori İndirimleri",
+    "categoryDiscountsSubtitle": "Seçili kategorideki tüm ürünlere toplu indirim uygulaması",
+    "coupons": "İndirim Kuponları",
+    "couponsSubtitle": "Promosyon kodları, sepet indirimleri ve hoşgeldin kuponları"
+  },
+  "summary": {
+    "activeFlashDeals": "Aktif Fırsat Satışları",
+    "activeCoupons": "Aktif Kuponlar",
+    "discountedCategories": "İndirimli Kategoriler",
+    "promotionalProducts": "Promosyon Ürünleri"
+  },
+  "table": {
+    "loading": "Yükleniyor...",
+    "actions": "İşlemler"
+  },
+  "status": {
+    "active": "Aktif",
+    "inactive": "Pasif"
+  },
+  "deals": {
+    "empty": "Flash satış kampanyası bulunamadı",
+    "title": "Kampanya Başlığı",
+    "duration": "Süre",
+    "productsCount": "Ürün Sayısı",
+    "featured": "Öne Çıkan",
+    "status": "Durum",
+    "addNew": "Yeni Fırsat Satışı Oluştur"
+  },
+  "coupons": {
+    "empty": "Kupon bulunamadı",
+    "code": "Kupon Kodu",
+    "type": "Kupon Türü",
+    "discount": "İndirim",
+    "validity": "Geçerlilik",
+    "usage": "Kullanım Sayısı",
+    "status": "Durum",
+    "addNew": "Yeni Kupon Oluştur"
+  },
+  "categories": {
+    "empty": "Kategori indirimi tanımlanmadı",
+    "category": "Kategori Adı",
+    "discount": "Uygulanan İndirim",
+    "status": "Durum",
+    "addNew": "Yeni Kategori İndirimi",
+    "addTitle": "Kategoriye Toplu İndirim Tanımla",
+    "selectCategory": "Kategori Seç",
+    "discountValue": "İndirim Değeri",
+    "discountType": "İndirim Türü"
+  },
+  "products": {
+    "empty": "Promosyon ürünü bulunamadı",
+    "product": "Ürün",
+    "campaign": "Kampanya / Fırsat",
+    "source": "Kaynak",
+    "originalPrice": "Orijinal Fiyat",
+    "dealPrice": "Kampanya Fiyatı",
+    "status": "Durum"
+  },
+  "dialog": {
+    "cancel": "İptal",
+    "save": "Kaydet"
+  },
+  "messages": {
+    "dealCreated": "Fırsat satışı başarıyla oluşturuldu!",
+    "couponCreated": "Yeni kupon başarıyla oluşturuldu!",
+    "categoryDiscountSaved": "Kategori indirimi uygulandı!",
+    "categoryDiscountDeleted": "Kategori indirimi silindi!"
+  }
+}

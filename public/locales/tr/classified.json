@@ -1,0 +1,58 @@
+{
+  "titles": {
+    "all": "Tüm İlan Ürünleri",
+    "inHouse": "Dahili İlan Ürünleri",
+    "seller": "Satıcı İlan Ürünleri",
+    "subtitle": "Yalnızca admin ve satıcılar tarafından yönetilen ilanlar"
+  },
+  "actions": {
+    "addNew": "Yeni İlan Ekle",
+    "addNewDesc": "Admin veya satıcı adına yeni ilan ürünü oluştur"
+  },
+  "table": {
+    "loading": "Yükleniyor...",
+    "empty": "İlan ürünü bulunamadı",
+    "product": "Ürün",
+    "creator": "Oluşturan / Tür",
+    "category": "Kategori",
+    "condition": "Durum",
+    "price": "Fiyat",
+    "published": "Yayınlandı",
+    "actions": "İşlemler"
+  },
+  "types": {
+    "admin": "Admin (Dahili)",
+    "seller": "Satıcı"
+  },
+  "condition": {
+    "new": "Yeni",
+    "used": "İkinci El"
+  },
+  "filter": {
+    "searchPlaceholder": "İlan veya oluşturan ara...",
+    "allCreators": "Tüm Türler",
+    "allConditions": "Tüm Durumlar"
+  },
+  "dialog": {
+    "title": "Yeni İlan Ekle",
+    "generalInfo": "Genel Bilgiler",
+    "productName": "Ürün Adı",
+    "creatorType": "Oluşturan Türü",
+    "creatorName": "Yetkili / Mağaza Adı",
+    "category": "Kategori",
+    "price": "Fiyat (₼)",
+    "condition": "Durum",
+    "image": "Görsel URL",
+    "location": "Şehir / Konum",
+    "description": "Açıklama",
+    "published": "Hemen yayınlansın",
+    "publishedDesc": "Aktif olduğunda sitede hemen gösterilir",
+    "cancel": "İptal",
+    "save": "Kaydet"
+  },
+  "messages": {
+    "created": "İlan başarıyla eklendi!",
+    "deleted": "İlan silindi!",
+    "confirmDelete": "Bu ilanı silmek istediğinizden emin misiniz?"
+  }
+}

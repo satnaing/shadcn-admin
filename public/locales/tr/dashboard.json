@@ -1,49 +1,71 @@
 {
-  "title": "Kontrol paneli",
-  "description": "Sistemin genel durumu.",
-  "error": "İstatistikler yüklenemedi.",
+  "header": {
+    "title": "Kontrol Paneli",
+    "subtitle": "İşletmenizin merkezi yönetim noktası"
+  },
   "kpi": {
-    "users": "Kullanıcılar",
-    "materials": "Hammaddeler",
-    "suppliers": "Tedarikçiler",
-    "movements30d": "Hareket (30 gün)",
-    "lowStock": "Düşük stok",
-    "enabled": "{{count}} aktif",
-    "critical": "{{count}} kritik seviyede",
-    "salesAmount": "Satış tutarı (30 gün)",
-    "salesCount": "Satış sayısı (30 gün)",
-    "income": "Gelir (30 gün)",
-    "expense": "Gider (30 gün)",
-    "debtsPayable": "Ödenecek borçlar",
-    "debtsReceivable": "Alınacak borçlar",
-    "overdueDebts": "{{count}} vadesi geçmiş",
-    "pendingOrders": "Bekleyen siparişler",
-    "ordersAmount": "Sipariş tutarı (30 gün)",
-    "activeEmployees": "Aktif çalışanlar",
-    "totalEmployees": "Toplam: {{count}}",
-    "pendingLeaves": "Bekleyen izinler",
-    "productionOrders": "Üretim siparişleri (30 gün)",
-    "planned": "Planlanan",
-    "inProgress": "Devam eden",
-    "products": "Aktif ürünler",
-    "totalProducts": "Toplam: {{count}}",
-    "productLowStock": "Düşük stoklu ürünler"
+    "registeredCustomer": "Kayıtlı Müşteri",
+    "topCustomers": "En Çok Alışveriş Yapanlar",
+    "totalProducts": "Toplam Ürün",
+    "inhouseProducts": "Mağaza Ürünleri",
+    "sellersProducts": "Satıcı Ürünleri",
+    "totalCategory": "Toplam Kategori",
+    "totalBrands": "Toplam Marka",
+    "allTimeSales": "Tüm Zamanlar Satışı",
+    "salesThisMonth": "Bu ayın satışı",
+    "salesState": "Satış Durumu",
+    "yearlySales": "Yıllık Satış",
+    "inhouseSales": "Mağaza Satışları",
+    "sellersSales": "Satıcı Satışları",
+    "sellersInPlatform": "Platformdaki Satıcılar",
+    "approvedSellers": "Onaylı Satıcılar",
+    "pendingSellers": "Bekleyen Satıcılar",
+    "topSellers": "En İyi Satıcılar",
+    "allSellersBtn": "Tüm Satıcılar",
+    "pendingSellersBtn": "Bekleyen Satıcılar"
   },
-  "chart": {
-    "title": "Stok hareketleri",
-    "description": "Son 30 günde günlük giriş ve çıkış sayısı.",
-    "in": "Giriş",
-    "out": "Çıkış"
+  "orders": {
+    "title": "Siparişler",
+    "fulfilmentRate": "Karşılama Oranı",
+    "allTypesOfOrders": "Tüm Sipariş Türleri",
+    "inhouseOrders": "Mağaza Siparişleri",
+    "sellerOrders": "Satıcı Siparişleri",
+    "ofTotal": "toplamdan",
+    "viewAllOrders": "Tüm Siparişleri Gör"
   },
-  "quickLinks": {
-    "title": "Hızlı bağlantılar",
-    "description": "En çok kullanılan bölümler.",
-    "stockMovements": "Stok hareketleri",
-    "rawMaterials": "Hammaddeler",
-    "suppliers": "Tedarikçiler",
-    "locations": "Depo konumları",
-    "units": "Ölçü birimleri",
-    "reports": "Raporlar",
-    "users": "Kullanıcılar"
-  }
+  "inhouseStore": {
+    "title": "Mağaza İçi Satış",
+    "totalSales": "Toplam Satış",
+    "totalOrders": "Toplam Sipariş",
+    "inhouseProducts": "Mağaza Ürünü",
+    "ratings": "Değerlendirmeler",
+    "allInhouseOrders": "Tüm Mağaza Siparişleri"
+  },
+  "pipeline": {
+    "pending": "Bekleyen Sipariş",
+    "confirmed": "Onaylanan Sipariş",
+    "processed": "İşlenen Sipariş",
+    "shipped": "Kargoya Verilen",
+    "delivered": "Teslim Edilen Sipariş",
+    "cancelled": "İptal Edilen Sipariş"
+  },
+  "rankings": {
+    "topCategoryProducts": "En Çok Satan Kategoriler ve Ürünler",
+    "topSellerProducts": "En Çok Satan Satıcılar ve Ürünler",
+    "topBrandsProducts": "En Çok Satan Markalar ve Ürünler",
+    "inhouseTopCategory": "En Çok Satan Mağaza Kategorileri",
+    "inhouseTopBrands": "En Çok Satan Mağaza Markaları",
+    "bySales": "Satışa Göre",
+    "item": "Ürün",
+    "quantity": "Miktar",
+    "totalPrice": "Toplam Tutar",
+    "nothingFound": "Hiçbir şey bulunamadı"
+  },
+  "periods": {
+    "today": "Bugün",
+    "week": "Hafta",
+    "month": "Ay",
+    "all": "Hepsi"
+  },
+  "error": "Kontrol paneli istatistikleri yüklenemedi."
 }

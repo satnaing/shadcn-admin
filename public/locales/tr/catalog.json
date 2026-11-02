@@ -1,0 +1,100 @@
+{
+  "categories": {
+    "title": "Tüm Kategoriler",
+    "description": "Ürün kategorileri hiyerarşisi ve yapılandırması.",
+    "addNew": "Yeni Kategori",
+    "icon": "İkon",
+    "name": "Kategori Adı",
+    "parent": "Üst Kategori",
+    "orderLevel": "Sıralama",
+    "level": "Seviye",
+    "featured": "Öne Çıkan",
+    "hot": "Popüler",
+    "commission": "Komisyon",
+    "actions": "İşlemler",
+    "noParent": "Ana Kategori (Yok)",
+    "dialog": {
+      "createTitle": "Yeni Kategori Ekle",
+      "editTitle": "Kategoriyi Düzenle",
+      "nameLabel": "Ad",
+      "parentLabel": "Üst Kategori",
+      "orderLevelLabel": "Sıralama Numarası",
+      "featuredLabel": "Öne çıkan olarak işaretle",
+      "hotLabel": "Popüler kategori",
+      "commissionLabel": "Komisyon Oranı (%)",
+      "digitalLabel": "Dijital Kategori",
+      "save": "Kaydet",
+      "cancel": "İptal"
+    }
+  },
+  "brands": {
+    "title": "Tüm Markalar",
+    "description": "Platformdaki ürün markalarının yönetimi.",
+    "addNew": "Yeni Marka",
+    "logo": "Logo",
+    "name": "Marka Adı",
+    "top": "Öne Çıkan Marka",
+    "actions": "İşlemler",
+    "dialog": {
+      "createTitle": "Yeni Marka Ekle",
+      "editTitle": "Markayı Düzenle",
+      "nameLabel": "Marka Adı",
+      "topLabel": "Öne çıkan marka olarak göster",
+      "save": "Kaydet",
+      "cancel": "İptal"
+    }
+  },
+  "colors": {
+    "title": "Renkler",
+    "description": "Ürün varyantları için renk paleti.",
+    "addNew": "Yeni Renk",
+    "preview": "Renk",
+    "name": "Renk Adı",
+    "code": "HEX Kodu",
+    "actions": "İşlemler",
+    "dialog": {
+      "createTitle": "Yeni Renk Ekle",
+      "editTitle": "Rengi Düzenle",
+      "nameLabel": "Ad",
+      "codeLabel": "HEX Renk Kodu",
+      "save": "Kaydet",
+      "cancel": "İptal"
+    }
+  },
+  "attributes": {
+    "title": "Özellikler (Nitelikler)",
+    "description": "Ürün özellikleri ve varyant değerleri (Beden, Hafıza vb.).",
+    "addNew": "Yeni Nitelik",
+    "name": "Nitelik Adı",
+    "values": "Değerler",
+    "actions": "İşlemler",
+    "dialog": {
+      "createTitle": "Yeni Nitelik Ekle",
+      "editTitle": "Niteliği Düzenle",
+      "nameLabel": "Nitelik Adı",
+      "valuesLabel": "Değerler (virgülle ayırın)",
+      "save": "Kaydet",
+      "cancel": "İptal"
+    }
+  },
+  "units": {
+    "title": "Ölçü Birimleri",
+    "description": "Ürün miktar birimleri (adet, kg, litre vb.).",
+    "addNew": "Yeni Ölçü Birimi",
+    "name": "Birim Adı",
+    "actions": "İşlemler",
+    "dialog": {
+      "createTitle": "Yeni Birim Ekle",
+      "editTitle": "Birimi Düzenle",
+      "nameLabel": "Birim Adı",
+      "save": "Kaydet",
+      "cancel": "İptal"
+    }
+  },
+  "deleteConfirm": {
+    "title": "Silmeyi Onaylayın",
+    "description": "Bu öğeyi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.",
+    "confirm": "Evet, Sil",
+    "cancel": "İptal"
+  }
+}

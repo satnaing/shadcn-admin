@@ -1,49 +1,71 @@
 {
-  "title": "Dashboard",
-  "description": "Overall system status.",
-  "error": "Could not load the statistics.",
+  "header": {
+    "title": "Dashboard",
+    "subtitle": "Central hub of your business"
+  },
   "kpi": {
-    "users": "Users",
-    "materials": "Raw materials",
-    "suppliers": "Suppliers",
-    "movements30d": "Movements (30d)",
-    "lowStock": "Low stock",
-    "enabled": "{{count}} enabled",
-    "critical": "{{count}} at critical level",
-    "salesAmount": "Sales amount (30d)",
-    "salesCount": "Sales count (30d)",
-    "income": "Income (30d)",
-    "expense": "Expense (30d)",
-    "debtsPayable": "Debts payable",
-    "debtsReceivable": "Debts receivable",
-    "overdueDebts": "{{count}} overdue",
-    "pendingOrders": "Pending orders",
-    "ordersAmount": "Orders amount (30d)",
-    "activeEmployees": "Active employees",
-    "totalEmployees": "Total: {{count}}",
-    "pendingLeaves": "Pending leaves",
-    "productionOrders": "Production orders (30d)",
-    "planned": "Planned",
-    "inProgress": "In progress",
-    "products": "Active products",
-    "totalProducts": "Total: {{count}}",
-    "productLowStock": "Low stock products"
+    "registeredCustomer": "Registered Customer",
+    "topCustomers": "Top Customers",
+    "totalProducts": "Total Products",
+    "inhouseProducts": "In-house Products",
+    "sellersProducts": "Sellers Products",
+    "totalCategory": "Total Category",
+    "totalBrands": "Total Brands",
+    "allTimeSales": "All Time Sales",
+    "salesThisMonth": "Sales this month",
+    "salesState": "Sales State",
+    "yearlySales": "Yearly Sales",
+    "inhouseSales": "In-house Sales",
+    "sellersSales": "Sellers Sales",
+    "sellersInPlatform": "Sellers in the Platform",
+    "approvedSellers": "Approved Sellers",
+    "pendingSellers": "Pending Sellers",
+    "topSellers": "Top Sellers",
+    "allSellersBtn": "All Sellers",
+    "pendingSellersBtn": "Pending Sellers"
   },
-  "chart": {
-    "title": "Stock movements",
-    "description": "Daily receipts and issues over the last 30 days.",
-    "in": "In",
-    "out": "Out"
+  "orders": {
+    "title": "Orders",
+    "fulfilmentRate": "Fulfilment Rate",
+    "allTypesOfOrders": "All Types of Orders",
+    "inhouseOrders": "In-house Orders",
+    "sellerOrders": "Sellers Orders",
+    "ofTotal": "of Total",
+    "viewAllOrders": "View All Orders"
   },
-  "quickLinks": {
-    "title": "Quick links",
-    "description": "The sections you use most.",
-    "stockMovements": "Stock movements",
-    "rawMaterials": "Raw materials",
-    "suppliers": "Suppliers",
-    "locations": "Locations",
-    "units": "Units of measure",
-    "reports": "Reports",
-    "users": "Users"
-  }
+  "inhouseStore": {
+    "title": "In-house Store",
+    "totalSales": "Total Sales",
+    "totalOrders": "Total Orders",
+    "inhouseProducts": "In-house product",
+    "ratings": "Ratings",
+    "allInhouseOrders": "All In-house Orders"
+  },
+  "pipeline": {
+    "pending": "Pending Order",
+    "confirmed": "Confirmed Order",
+    "processed": "Order Processed",
+    "shipped": "Order Shipped",
+    "delivered": "Order Delivered",
+    "cancelled": "Order Cancelled"
+  },
+  "rankings": {
+    "topCategoryProducts": "Top Category & Products",
+    "topSellerProducts": "Top Seller & Products",
+    "topBrandsProducts": "Top Brands & Products",
+    "inhouseTopCategory": "In-house Top Category",
+    "inhouseTopBrands": "In-house Top Brands",
+    "bySales": "By Sales",
+    "item": "Item",
+    "quantity": "Quantity",
+    "totalPrice": "Total Price",
+    "nothingFound": "Nothing Found"
+  },
+  "periods": {
+    "today": "Today",
+    "week": "Week",
+    "month": "Month",
+    "all": "All"
+  },
+  "error": "Failed to load dashboard statistics."
 }

@@ -14,7 +14,7 @@ export function TeamSwitcher() {
       </div>
       <div className='grid flex-1 text-start text-sm leading-tight'>
         <span className='truncate font-semibold text-foreground'>
-          ERP - (XC4 LTD)
+          xShop
         </span>
         <span className='truncate text-xs text-muted-foreground'>
           {t('teamSwitcher.subtitle')}

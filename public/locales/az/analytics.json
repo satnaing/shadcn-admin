@@ -1,0 +1,17 @@
+{
+  "dashboard": { "title": "Marketinq Analitikası", "subtitle": "Qlobal izləmə, piksellər, axtarış sistemləri və məhsul kataloq inteqrasiyaları" },
+  "ga4": { "title": "Google Analytics 4", "subtitle": "Ölçmə ID və e-ticarət hadisə konfiqurasiyası" },
+  "reports": { "title": "GA4 Canlı Hesabat", "subtitle": "Real vaxt hadisə axını və test nəticələri" },
+  "gtm": { "title": "Google Tag Manager", "subtitle": "GTM konteyneri və xarici teqlərin idarəsi" },
+  "pixel": { "title": "Meta Piksel", "subtitle": "Facebook/Instagram reklam pikselləri və hadisə izləməsi" },
+  "capi": { "title": "Meta Konversiya API", "subtitle": "Server-tərəfli etibarlı dönüşüm izləməsi" },
+  "gmc": { "title": "Google Merchant Center", "subtitle": "Məhsul kataloqu və XML feed generatoru" },
+  "gmcFeed": { "title": "GMC Məhsul Feed", "subtitle": "Avtomatik yaradılan XML məhsul feed" },
+  "fbCatalog": { "title": "Facebook Kataloq", "subtitle": "Sosial ticarət və dinamik reklam kataloqu" },
+  "fbFeed": { "title": "Facebook Məhsul Feed", "subtitle": "Avtomatik yaradılan məhsul kataloq feed" },
+  "scripts": { "title": "Fərdi Skriptlər", "subtitle": "Xüsusi JavaScript və ya HTML kod blokları" },
+  "sitemap": { "title": "Sayt Xəritəsi", "subtitle": "sitemap.xml avtomatik generasiyası" },
+  "seo": { "title": "Qlobal SEO", "subtitle": "Meta başlıq, təsvir və OpenGraph ayarları" },
+  "actions": { "save": "Yadda Saxla", "generate": "Yarat", "copy": "URL Kopyala", "back": "Geri" },
+  "messages": { "saved": "Ayarlar uğurla saxlanıldı!", "generated": "Feed uğurla yaradıldı!", "copied": "URL buferə kopyalandı!" }
+}

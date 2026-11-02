@@ -1,0 +1,26 @@
+{
+  "title": {
+    "admin": "Admin Panel",
+    "seller": "Seller Panel",
+    "courier": "Courier Panel",
+    "supervisor": "Supervisor Panel"
+  },
+  "roles": {
+    "admin": "Admin",
+    "staff": "Staff",
+    "seller": "Seller",
+    "seller_staff": "Seller Staff",
+    "courier": "Courier",
+    "supervisor": "Supervisor",
+    "customer": "Customer"
+  },
+  "roleSwitcher": {
+    "title": "Role Switcher (DEV)",
+    "currentRole": "Current role",
+    "switchSuccess": "Role switched"
+  },
+  "forbidden": {
+    "title": "Access Denied",
+    "description": "You do not have permission to access this panel."
+  }
+}

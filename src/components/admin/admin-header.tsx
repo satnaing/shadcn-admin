@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { ColorPicker } from '@/components/color-picker'
+import { DevRoleSwitcher } from '@/components/dev-role-switcher'
 import { Header } from '@/components/layout/header'
 import { LocaleSwitcher } from '@/components/locale-switcher'
 import { ProfileDropdown } from '@/components/profile-dropdown'
@@ -19,6 +20,7 @@ export function AdminHeader({
     <Header fixed className='border-b'>
       <Search />
       <div className='ms-auto flex items-center space-x-4'>
+        {import.meta.env.DEV ? <DevRoleSwitcher /> : null}
         {showLocaleSwitcher ? <LocaleSwitcher /> : null}
         <ColorPicker />
         <ThemeSwitch />

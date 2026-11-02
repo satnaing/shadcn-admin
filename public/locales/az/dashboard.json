@@ -1,49 +1,71 @@
 {
-  "title": "İdarəetmə paneli",
-  "description": "Sistemin ümumi vəziyyəti.",
-  "error": "Məlumatları yükləmək mümkün olmadı.",
+  "header": {
+    "title": "İdarəetmə Paneli",
+    "subtitle": "Biznesinizin mərkəzi idarəetmə qovşağı"
+  },
   "kpi": {
-    "users": "İstifadəçilər",
-    "materials": "Xammallar",
-    "suppliers": "Tədarükçülər",
-    "movements30d": "Hərəkət (30 gün)",
-    "lowStock": "Aşağı stok",
-    "enabled": "{{count}} aktiv",
-    "critical": "{{count}} kritik səviyyədə",
-    "salesAmount": "Satış məbləği (30 gün)",
-    "salesCount": "Satış sayı (30 gün)",
-    "income": "Gəlir (30 gün)",
-    "expense": "Xərc (30 gün)",
-    "debtsPayable": "Ödəniləcək borclar",
-    "debtsReceivable": "Alınacaq borclar",
-    "overdueDebts": "{{count}} vaxtı keçmiş",
-    "pendingOrders": "Gözləyən sifarişlər",
-    "ordersAmount": "Sifariş məbləği (30 gün)",
-    "activeEmployees": "Aktiv işçilər",
-    "totalEmployees": "Cəmi: {{count}}",
-    "pendingLeaves": "Gözləyən məzuniyyətlər",
-    "productionOrders": "İstehsal sifarişləri (30 gün)",
-    "planned": "Planlaşdırılmış",
-    "inProgress": "Davam edən",
-    "products": "Aktiv məhsullar",
-    "totalProducts": "Cəmi: {{count}}",
-    "productLowStock": "Aşağı stoklu məhsullar"
+    "registeredCustomer": "Qeydiyyatdan Keçmiş Müştəri",
+    "topCustomers": "Top Müştərilər",
+    "totalProducts": "Cəmi Məhsul",
+    "inhouseProducts": "Öz Məhsullarımız",
+    "sellersProducts": "Satıcı Məhsulları",
+    "totalCategory": "Cəmi Kateqoriya",
+    "totalBrands": "Cəmi Brend",
+    "allTimeSales": "Bütün Dövrlər Satışı",
+    "salesThisMonth": "Bu ayın satışı",
+    "salesState": "Satış Dinamikası",
+    "yearlySales": "İllik Satış",
+    "inhouseSales": "Öz Satışlarımız",
+    "sellersSales": "Satıcı Satışları",
+    "sellersInPlatform": "Platformadakı Satıcılar",
+    "approvedSellers": "Təsdiqlənmiş Satıcılar",
+    "pendingSellers": "Gözləyən Satıcılar",
+    "topSellers": "Top Satıcılar",
+    "allSellersBtn": "Bütün Satıcılar",
+    "pendingSellersBtn": "Gözləyən Satıcılar"
   },
-  "chart": {
-    "title": "Stok hərəkətləri",
-    "description": "Son 30 gündə günlük giriş və çıxış sayı.",
-    "in": "Giriş",
-    "out": "Çıxış"
+  "orders": {
+    "title": "Sifarişlər",
+    "fulfilmentRate": "İcra Dərəcəsi",
+    "allTypesOfOrders": "Bütün Növ Sifarişlər",
+    "inhouseOrders": "Öz Sifarişlərimiz",
+    "sellerOrders": "Satıcı Sifarişləri",
+    "ofTotal": "ümumidən",
+    "viewAllOrders": "Bütün Sifarişlərə Bax"
   },
-  "quickLinks": {
-    "title": "Sürətli keçidlər",
-    "description": "Ən çox istifadə olunan bölmələr.",
-    "stockMovements": "Stok hərəkətləri",
-    "rawMaterials": "Xammallar",
-    "suppliers": "Tədarükçülər",
-    "locations": "Anbar yerləri",
-    "units": "Ölçü vahidləri",
-    "reports": "Hesabatlar",
-    "users": "İstifadəçilər"
-  }
+  "inhouseStore": {
+    "title": "Öz Mağazamız",
+    "totalSales": "Cəmi Satış",
+    "totalOrders": "Cəmi Sifariş",
+    "inhouseProducts": "Öz Məhsullarımız",
+    "ratings": "Reytinq Balı",
+    "allInhouseOrders": "Bütün Öz Sifarişlərimiz"
+  },
+  "pipeline": {
+    "pending": "Gözləyən Sifariş",
+    "confirmed": "Təsdiqlənmiş Sifariş",
+    "processed": "Hazırlanan Sifariş",
+    "shipped": "Yola Salınmış Sifariş",
+    "delivered": "Çatdırılmış Sifariş",
+    "cancelled": "Ləğv Edilmiş Sifariş"
+  },
+  "rankings": {
+    "topCategoryProducts": "Top Kateqoriya və Məhsullar",
+    "topSellerProducts": "Top Satıcı və Məhsullar",
+    "topBrandsProducts": "Top Brend və Məhsullar",
+    "inhouseTopCategory": "Öz Top Kateqoriyalarımız",
+    "inhouseTopBrands": "Öz Top Brendlərimiz",
+    "bySales": "Satışa görə",
+    "item": "Məhsul",
+    "quantity": "Miqdar",
+    "totalPrice": "Cəmi Məbləğ",
+    "nothingFound": "Məlumat tapılmadı"
+  },
+  "periods": {
+    "today": "Bugün",
+    "week": "Həftə",
+    "month": "Ay",
+    "all": "Hamısı"
+  },
+  "error": "Statistika məlumatlarını yükləmək mümkün olmadı."
 }

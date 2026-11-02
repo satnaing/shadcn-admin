@@ -16,7 +16,7 @@ import { UsersProvider } from './components/users-provider'
 import { UsersTable } from './components/users-table'
 import { useUsers } from './hooks/useUsers'
 
-const route = getRouteApi('/_authenticated/users/')
+const route = getRouteApi('/_authenticated/admin/users/')
 
 export function Users() {
   const { t } = useTranslation('users')

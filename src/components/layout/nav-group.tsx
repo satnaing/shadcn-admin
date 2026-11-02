@@ -36,7 +36,7 @@ import {
 } from './types'
 
 export function NavGroup({ title, items }: NavGroupProps) {
-  const { t } = useTranslation('sidebar')
+  const { t } = useTranslation(['nav', 'sidebar'])
 
   const { state, isMobile } = useSidebar()
   const href = useLocation({ select: (location) => location.href })

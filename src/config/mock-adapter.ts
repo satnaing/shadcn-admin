@@ -5,6 +5,11 @@ import { mockRoutes } from '@/mocks'
 const LATENCY_MS = 150
 
 function match(method: string, path: string) {
+  let fallback: {
+    handler: (ctx: { params: string[]; query: Record<string, string> }) => unknown
+    params: string[]
+  } | null = null
+
   for (const [key, handler] of Object.entries(mockRoutes)) {
     const [routeMethod, routePath] = key.split(' ')
     if (!routeMethod.split('|').includes(method)) continue
@@ -22,9 +27,16 @@ function match(method: string, path: string) {
       return part === pathParts[index]
     })
 
-    if (hit) return { handler, params }
+    if (hit) {
+      if (params.length === 0) {
+        return { handler, params }
+      }
+      if (!fallback || fallback.params.length > params.length) {
+        fallback = { handler, params }
+      }
+    }
   }
-  return null
+  return fallback
 }
 
 /**

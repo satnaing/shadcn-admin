@@ -1,0 +1,58 @@
+{
+  "titles": {
+    "all": "All Classified Products",
+    "inHouse": "In-House Classified Products",
+    "seller": "Seller Classified Products",
+    "subtitle": "Classified listings managed exclusively by admin and sellers"
+  },
+  "actions": {
+    "addNew": "Add New Classified Product",
+    "addNewDesc": "Create a new classified product on behalf of admin or seller"
+  },
+  "table": {
+    "loading": "Loading...",
+    "empty": "No classified products found",
+    "product": "Product",
+    "creator": "Creator / Type",
+    "category": "Category",
+    "condition": "Condition",
+    "price": "Price",
+    "published": "Published",
+    "actions": "Actions"
+  },
+  "types": {
+    "admin": "Admin (In-House)",
+    "seller": "Seller"
+  },
+  "condition": {
+    "new": "New",
+    "used": "Used"
+  },
+  "filter": {
+    "searchPlaceholder": "Search by product or creator...",
+    "allCreators": "All Types",
+    "allConditions": "All Conditions"
+  },
+  "dialog": {
+    "title": "Add New Classified Product",
+    "generalInfo": "General Information",
+    "productName": "Product Name",
+    "creatorType": "Creator Type",
+    "creatorName": "Creator / Store Name",
+    "category": "Category",
+    "price": "Price (₼)",
+    "condition": "Condition",
+    "image": "Image URL",
+    "location": "City / Location",
+    "description": "Description",
+    "published": "Publish immediately",
+    "publishedDesc": "Listing will be immediately visible on the marketplace",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "messages": {
+    "created": "Classified product created successfully!",
+    "deleted": "Classified product deleted!",
+    "confirmDelete": "Are you sure you want to delete this classified listing?"
+  }
+}

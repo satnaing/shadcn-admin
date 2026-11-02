@@ -50,4 +50,4 @@ class ApiRequestClient implements ApiRequestInterface {
 
 const requestInstanceClient = new ApiRequestClient()
 
-export { requestInstanceClient }
+export { requestInstanceClient, requestInstanceClient as api }

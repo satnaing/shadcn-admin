@@ -1,0 +1,94 @@
+{
+  "title": "All Products",
+  "subtitle": "Manage all products available in store",
+  "inhouse": {
+    "title": "In-House Products"
+  },
+  "seller": {
+    "title": "Seller Products"
+  },
+  "tabs": {
+    "all": "All Products",
+    "inHouse": "In-House",
+    "seller": "Sellers"
+  },
+  "actions": {
+    "addNew": "Add New Product"
+  },
+  "filter": {
+    "searchPlaceholder": "Search products by name or brand...",
+    "status": "Status",
+    "all": "All statuses",
+    "published": "Published",
+    "lowStock": "Low stock",
+    "todaysDeal": "Today's deal",
+    "sortBy": "Sort by",
+    "newest": "Newest",
+    "priceAsc": "Price: Low to High",
+    "priceDesc": "Price: High to Low",
+    "ratingDesc": "Highest Rating",
+    "salesDesc": "Best Sellers"
+  },
+  "table": {
+    "thumb": "Image",
+    "nameBrand": "Name / Brand",
+    "categoryOwner": "Category / Owner",
+    "price": "Price",
+    "stock": "Stock",
+    "rating": "Rating",
+    "published": "Published",
+    "featured": "Featured",
+    "todaysDeal": "Today's Deal",
+    "actions": "Actions",
+    "noBrand": "No Brand",
+    "inhouse": "In-House",
+    "seller": "Seller"
+  },
+  "common": {
+    "product": "Product",
+    "loading": "Loading...",
+    "noData": "No data found",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving...",
+    "saveProduct": "Save Product"
+  },
+  "stockDialog": {
+    "title": "Adjust Stock Quantity",
+    "currentStock": "Current Stock Quantity"
+  },
+  "create": {
+    "title": "Add New Product",
+    "subtitle": "Product details, pricing and inventory"
+  },
+  "form": {
+    "generalInfo": "General Information",
+    "name": "Product Name",
+    "category": "Category",
+    "unit": "Unit",
+    "selectUnit": "Select unit",
+    "wholesale": "Wholesale Pricing Tiers",
+    "addTier": "Add Tier",
+    "noWholesale": "No wholesale tiers configured.",
+    "pricingStock": "Price & Stock",
+    "unitPrice": "Base Price ($)",
+    "stock": "Stock Quantity",
+    "statusSettings": "Publish Settings"
+  },
+  "wholesale": {
+    "title": "Wholesale Products",
+    "subtitle": "Manage products sold in bulk with special pricing tiers and minimum quantities",
+    "addNew": "Add New Wholesale Product",
+    "createTitle": "Create Wholesale Product",
+    "createSubtitle": "Configure minimum purchase quantity and pricing tiers",
+    "save": "Create Wholesale Product"
+  },
+  "reviews": {
+    "title": "Product Reviews",
+    "subtitle": "Customer reviews and ratings moderation",
+    "customer": "Customer",
+    "comment": "Comment",
+    "date": "Date",
+    "published": "Approved"
+  }
+}

@@ -13,7 +13,7 @@ export const Route = createRootRouteWithContext<{
 }>()({
   beforeLoad: () => {
     const prefix =
-      MODE === 'development' ? '🟢 DEVELOPMENT' : 'ERP | Admin Panel'
+      MODE === 'development' ? '🟢 DEVELOPMENT' : 'xShop | Admin Panel'
 
     document.title = `${prefix}`
   },

@@ -1,0 +1,90 @@
+{
+  "allOrders": {
+    "title": "Tüm Siparişler",
+    "subtitle": "Sistemdeki tüm siparişlerin takibi ve yönetimi"
+  },
+  "inHouseOrders": {
+    "title": "Kurum İçi (In-House) Siparişler",
+    "subtitle": "Yalnızca kurum içi mağazaya ait siparişler"
+  },
+  "sellerOrders": {
+    "title": "Satıcı Siparişleri",
+    "subtitle": "Tüm ortak satıcılara ait siparişler"
+  },
+  "pickupPointOrders": {
+    "title": "Teslim Noktası Siparişleri",
+    "subtitle": "Teslim alma noktalarından teslim edilecek siparişler"
+  },
+  "unpaidOrders": {
+    "title": "Ödenmemiş Siparişler",
+    "subtitle": "Ödemesi beklenen tüm siparişler"
+  },
+  "status": {
+    "pending": "Beklemede",
+    "confirmed": "Onaylandı",
+    "picked_up": "Kuryeye verildi",
+    "on_the_way": "Yolda",
+    "delivered": "Teslim edildi",
+    "cancelled": "İptal edildi"
+  },
+  "payment": {
+    "paid": "Ödendi",
+    "unpaid": "Ödenmedi"
+  },
+  "table": {
+    "code": "Sipariş Kodu",
+    "items": "Ürün Sayısı",
+    "customer": "Müşteri",
+    "seller": "Satıcı",
+    "amount": "Tutar",
+    "deliveryStatus": "Teslimat Durumu",
+    "paymentMethod": "Ödeme Yöntemi",
+    "paymentStatus": "Ödeme Durumu",
+    "options": "İşlemler"
+  },
+  "filter": {
+    "searchPlaceholder": "Kod, müşteri veya telefon...",
+    "deliveryStatus": "Teslimat durumu",
+    "allStatuses": "Tüm durumlar",
+    "paymentStatus": "Ödeme durumu",
+    "allPayments": "Tüm ödemeler",
+    "reset": "Sıfırla"
+  },
+  "dialog": {
+    "title": "Siparişi Yönet",
+    "deliveryStatusLabel": "Teslimat Durumu",
+    "paymentStatusLabel": "Ödeme Durumu",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor...",
+    "success": "Sipariş durumu başarıyla güncellendi!",
+    "error": "Durum güncellenirken hata oluştu"
+  },
+  "detail": {
+    "title": "Sipariş Detayı",
+    "placedOn": "Sipariş Tarihi",
+    "printInvoice": "Fatura Yazdır",
+    "customer": "Müşteri Bilgileri",
+    "shippingAddress": "Teslimat Adresi",
+    "pickupPoint": "Teslim Noktası",
+    "statusInfo": "Durum ve Ödeme",
+    "orderedItems": "Sipariş Edilen Ürünler",
+    "product": "Ürün",
+    "variation": "Varyant",
+    "quantity": "Adet",
+    "unitPrice": "Birim Fiyatı",
+    "total": "Toplam",
+    "orderSummary": "Tutar Detayları",
+    "subtotal": "Ara Toplam",
+    "tax": "KDV / Vergi",
+    "shippingCost": "Kargo Ücreti",
+    "couponDiscount": "Kupon İndirimi",
+    "grandTotal": "Genel Toplam"
+  },
+  "backToOrders": "Siparişlere dön",
+  "orderNotFound": "Sipariş bulunamadı",
+  "loading": "Yükleniyor...",
+  "noOrders": "Hiçbir sipariş bulunamadı",
+  "delete": "Sil",
+  "confirmDelete": "Bu siparişi silmek istediğinizden emin misiniz?"
+}

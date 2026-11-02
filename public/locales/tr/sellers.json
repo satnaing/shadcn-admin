@@ -1,0 +1,138 @@
+{
+  "titles": {
+    "all": "Tüm Satıcılar",
+    "allSubtitle": "Platformdaki tüm aktif ve kayıtlı satıcılar",
+    "pending": "Kayıt Bekleyen Satıcılar",
+    "pendingSubtitle": "Onay bekleyen yeni mağaza ve satıcı başvuruları",
+    "rating": "Puan & Takipçiler",
+    "ratingSubtitle": "Müşteri yorumları, puanlar ve takipçi istatistikleri",
+    "payoutRequests": "Satıcı Ödeme Talepleri",
+    "payoutRequestsSubtitle": "Satıcıların bakiye çekim ve transfer talepleri",
+    "payoutHistory": "Ödeme Geçmişi (Payouts)",
+    "payoutHistorySubtitle": "Satıcılara başarıyla gerçekleştirilmiş tüm ödemeler",
+    "commissions": "Komisyon Kuralları (E31)",
+    "commissionsSubtitle": "Çok boyutlu komisyon yapısı: kategori, marka ve satıcı öncelikleri",
+    "packages": "Satıcı Paketleri (E29)",
+    "packagesSubtitle": "Satıcı abonelik planları ve ürün yükleme kotaları",
+    "verificationForm": "Satıcı Doğrulama Formu",
+    "verificationFormSubtitle": "Satıcı onayı için gerekli belge ve alanları yapılandırın"
+  },
+  "table": {
+    "loading": "Yükleniyor...",
+    "empty": "Satıcı bulunamadı",
+    "shop": "Mağaza / Satıcı",
+    "metrics": "Ürün / Sipariş",
+    "balance": "Bakiye",
+    "approval": "Onay",
+    "ban": "Engelleme (Ban)",
+    "actions": "İşlemler"
+  },
+  "status": {
+    "approved": "Onaylandı",
+    "pending": "Beklemede",
+    "verified": "Doğrulandı",
+    "unverified": "Doğrulanmamış",
+    "banned": "Engellendi",
+    "active": "Aktif",
+    "inactive": "Pasif"
+  },
+  "filter": {
+    "searchPlaceholder": "Mağaza, satıcı veya telefon ara...",
+    "allApproval": "Onay durumu: Tümü",
+    "allVerification": "Doğrulama: Tümü",
+    "allBan": "Engelleme: Tümü",
+    "reset": "Sıfırla"
+  },
+  "actions": {
+    "pay": "Öde",
+    "approve": "Onayla",
+    "reject": "Reddet",
+    "ban": "Engelle",
+    "unban": "Engeli Kaldır"
+  },
+  "detail": {
+    "title": "Satıcı ve Mağaza Profili",
+    "balance": "Mevcut Bakiye",
+    "rating": "Puan & Takipçi",
+    "phone": "Telefon",
+    "products": "Ürün Sayısı",
+    "orders": "Sipariş Sayısı",
+    "registered": "Kayıt Tarihi"
+  },
+  "pay": {
+    "title": "Satıcı Bakiye Ödemesi",
+    "currentBalance": "Mevcut Bakiye",
+    "amount": "Ödenecek Tutar (₼)",
+    "method": "Ödeme Yöntemi",
+    "bank": "Banka Havalesi",
+    "cash": "Nakit",
+    "card": "Kart Ödemesi",
+    "note": "Not / Referans Numarası",
+    "notePlaceholder": "Not giriniz...",
+    "confirm": "Ödemeyi Onayla"
+  },
+  "payout": {
+    "empty": "Ödeme talebi bulunamadı",
+    "amount": "Tutar",
+    "method": "Ödeme Yöntemi",
+    "date": "Tarih",
+    "status": "Durum",
+    "paid": "Ödendi",
+    "rejected": "Reddedildi",
+    "pending": "Beklemede",
+    "approve": "Onayla ve Öde",
+    "reject": "Reddet",
+    "allStatus": "Tüm Durumlar"
+  },
+  "rating": {
+    "topRated": "En Yüksek Puanlı Mağazalar",
+    "totalFollowers": "Toplam Mağaza Takipçisi",
+    "avgRating": "Ortalama Puan",
+    "followers": "Takipçi"
+  },
+  "commission": {
+    "empty": "Özel komisyon kuralı tanımlanmadı",
+    "addNew": "Yeni Komisyon Kuralı",
+    "name": "Kural Adı",
+    "scope": "Kapsam",
+    "rate": "Komisyon Oranı (%)",
+    "priority": "Öncelik",
+    "baseRate": "Standart Platform Komisyonu",
+    "activeRules": "Aktif Özel Kurallar"
+  },
+  "packages": {
+    "addNew": "Yeni Paket Oluştur",
+    "empty": "Satıcı paketi bulunamadı",
+    "name": "Paket Adı",
+    "price": "Fiyat (₼)",
+    "limit": "Ürün Limiti",
+    "durationDays": "Süre (Gün)",
+    "uploadLimit": "Ürün yükleme limiti",
+    "duration": "Süre",
+    "editTitle": "Paketi Düzenle",
+    "createTitle": "Yeni Satıcı Paketi"
+  },
+  "verification": {
+    "addField": "Alan Ekle",
+    "formFields": "Gerekli Belge ve Alanlar"
+  },
+  "dialog": {
+    "edit": "Düzenle",
+    "close": "Kapat",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "category": "Kategori"
+  },
+  "messages": {
+    "paymentSuccess": "Ödeme başarıyla kaydedildi!",
+    "approvalUpdated": "Satıcı onay durumu güncellendi!",
+    "payoutApproved": "Ödeme onaylandı ve ödendi olarak işaretlendi!",
+    "payoutRejected": "Ödeme talebi reddedildi!",
+    "commissionCreated": "Komisyon kuralı oluşturuldu!",
+    "packageCreated": "Yeni satıcı paketi oluşturuldu!",
+    "packageUpdated": "Satıcı paketi güncellendi!",
+    "packageDeleted": "Satıcı paketi silindi!",
+    "confirmDeletePackage": "Bu paketi silmek istediğinizden emin misiniz?",
+    "verificationSaved": "Doğrulama formu yapılandırması kaydedildi!"
+  }
+}

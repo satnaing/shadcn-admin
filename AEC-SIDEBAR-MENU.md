@@ -24,11 +24,11 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 
 | Sidebar qrupu | Bölüm faylı | Panel |
 |---|---|---|
-| Dashboard | `01-dashboard.md` | A |
-| Products → Product Setup | `02-catalog.md` | A |
-| Products → Products / Operation | `03-products.md` | A |
-| Orders & Sales → Sales | `04-orders.md` | A |
-| Users → Customers | `05-customers.md` | A |
+| Dashboard | `01-dashboard.md` ✅ | A |
+| Products → Product Setup | `02-catalog.md` ✅ | A |
+| Products → Products / Operation | `03-products.md` ✅ | A |
+| Orders & Sales → Sales | `04-orders.md` ✅ | A |
+| Users → Customers | `05-customers.md` ✅ | A |
 | Users → Sellers | `06-sellers.md` | A |
 | Marketing → Promotion & Offers | `07-promotions.md` | A |
 | Marketing → Marketing | `08-marketing.md` | A |
@@ -49,7 +49,7 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 | **Satıcı paneli** (49 ekran) | `30-vendor-foundation.md` … `36-vendor-shop.md` — 15 ekran admin ekranının `scope='seller'` variantıdır (E13) | S |
 | **Kuryer paneli** (11 ekran) | `37-courier.md` — 12 AEC ekranı → **6 real ekran** (6 status filtri bir siyahıdır) | K |
 | **Müştəri paneli** (18 ekran) | ⊘ bu layihədə yoxdur — storefront Next.js-dədir (`front/`) | — |
-| **Wholesale Products** | `22-wholesale.md` — öz bölümü, lakin `03-products` feature-ı `type=wholesale` ilə (E26) | A+S |
+| **Wholesale Products** | `22-wholesale.md` ✅ — öz bölümü, lakin `03-products` feature-ı `type=wholesale` ilə (E26) | A+S |
 | **GST System** | ⊘ köçürülmür — Hindistan vergi sistemi (HSN/CGST/SGST); AZ·RU·TR·GE üçün adi ƏDV `18-settings`-dədir (E27) | — |
 | **Supervisor (reseller) paneli** (AEC-də yoxdur) | `38-supervisor.md` — 4-cü nav ağacı `/supervisor` (E32, api D25) | Sv |
 | **Mağazalar (multi-store)** (AEC-də yoxdur) | `24-stores.md` — tək mağazada menyuda görünmür (E30, api D23) | A |
@@ -58,7 +58,7 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 | **Kuryerlər** (satıcının öz kuryerləri) | `seller.couriers` → `30`–`36` bloku; kuryer paneli `37-courier` eynidir (E34, api D26) | S+K |
 | Auction · Refund · Preorder · Delivery Boy (admin) · Affiliate · Club Point | ⏭ Faza D (`40`–`47`) | A+S |
 
-**Panel və rol qatı** (dörd nav ağacı `/admin`·`/seller`·`/courier`·`/supervisor`, altı rol): `00b-panels-and-roles.md`.
+**Panel və rol qatı** (dörd nav ağacı `/admin`·`/seller`·`/courier`·`/supervisor`, altı rol): `00b-panels-and-roles.md` ✅.
 
 **Qeyd:** bu fayldaki `can:` adları AEC-dəndir — **köçürülmür**. xshop formatı `<modul>.<əməliyyat>` (`task/admin/README.md` E3).
 
@@ -67,27 +67,27 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 ## 1. Admin Paneli
 
 ### Dashboard
-- **Dashboard** · `admin.dashboard` · can: `admin_dashboard`
+- **Dashboard** ✅ · `admin.dashboard` · can: `admin_dashboard`
 
 ### Products
 - **Product Management** · `—` · can: `view_product_management_dashboard, add_new_product, show_all_products, show_in_house_products, show_seller_products, add_digital_product, edit_digital_product, product_bulk_import, product_bulk_export, view_product_categories, view_all_brands, brand_bulk_upload, view_product_attributes, view_colors, view_product_warranties, smart-bar, view_custom_label, view_product_reviews, view_notes, add_note`
   - **Product Home** · `products.dashboard`
   - **Products** · `—`
-    - **All Products** · `products.all` · can: `show_all_products, show_in_house_products, show_seller_products, add_new_product, add_digital_product`
-    - **In House Products** · `products.admin`
-    - **Seller Product** · `products.seller`
-    - **Add New product** · `products.create`
+    - **All Products** ✅ · `products.all` · can: `show_all_products, show_in_house_products, show_seller_products, add_new_product, add_digital_product`
+    - **In House Products** ✅ · `products.admin`
+    - **Seller Product** ✅ · `products.seller`
+    - **Add New product** ✅ · `products.create`
     - **Add New Digital Product** · `digitalproducts.create`
   - **Product Setup** · `—`
     - **Category** · `—`
-      - **Category** · `categories.index` · can: `view_product_categories, category_bulk_upload`
+      - **Category** ✅ · `categories.index` · can: `view_product_categories, category_bulk_upload`
       - **Bulk Import/Export** · `category_bulk_upload.index`
     - **Brand** · `—`
-      - **All Brands** · `brands.index` · can: `view_all_brands, brand_bulk_upload`
+      - **All Brands** ✅ · `brands.index` · can: `view_all_brands, brand_bulk_upload`
       - **Bulk Import/Export** · `brand_bulk_upload.index`
-    - **Colors** · `colors`
-    - **Attribute** · `attributes.index`
-    - **Unit** · `unit.index`
+    - **Colors** ✅ · `colors`
+    - **Attribute** ✅ · `attributes.index`
+    - **Unit** ✅ · `unit.index`
     - **Size Guide** · `—`
       - **Size Chart** · `size-charts.index` · can: `view_size_charts, view_measurement_points`
       - **Measurement Points** · `measurement-points.index`
@@ -95,62 +95,62 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
     - **Notes** · `—`
       - **Note List** · `note.index` · can: `view_notes, add_note`
   - **Product Operation** · `—`
-    - **Product Reviews** · `reviews.index` · can: `view_product_reviews, smart-bar, view_custom_label, product_bulk_export, product_bulk_import`
+    - **Product Reviews** ✅ · `reviews.index` · can: `view_product_reviews, smart-bar, view_custom_label, product_bulk_export, product_bulk_import`
     - **Smart Bar** · `smart.bar`
     - **Custom Label** · `custom_label.index`
     - **Bulk Import** · `product_bulk_upload.index`
     - **Bulk Export** · `product_bulk_export.index`
 - **Auction Products** · `—` · can: `add_auction_product, view_all_auction_products, view_inhouse_auction_products, view_seller_auction_products, view_auction_product_orders`
-  - **Add New auction product** · `auction_product_create.admin`
-  - **All Auction Products** · `auction.all_products`
-  - **Inhouse Auction Products** · `auction.inhouse_products`
-  - **Seller Auction Products** · `auction.seller_products`
-  - **Auction Products Orders** · `auction_products_orders`
-- **Wholesale Products** · `—` · can: `add_wholesale_product, view_all_wholesale_products, view_inhouse_wholesale_products, view_sellers_wholesale_products`
-  - **Add New Wholesale Product** · `wholesale_product_create.admin`
-  - **All Wholesale Products** · `wholesale_products.all`
-  - **In House Wholesale Products** · `wholesale_products.in_house`
-  - **Seller Wholesale Products** · `wholesale_products.seller`
+  - ⏭ **Add New auction product** · `auction_product_create.admin`
+  - ⏭ **All Auction Products** · `auction.all_products`
+  - ⏭ **Inhouse Auction Products** · `auction.inhouse_products`
+  - ⏭ **Seller Auction Products** · `auction.seller_products`
+  - ⏭ **Auction Products Orders** · `auction_products_orders`
+- **Wholesale Products** ✅ · `—` · can: `add_wholesale_product, view_all_wholesale_products, view_inhouse_wholesale_products, view_sellers_wholesale_products`
+  - **Add New Wholesale Product** ✅ · `wholesale_product_create.admin`
+  - **All Wholesale Products** ✅ · `wholesale_products.all`
+  - **In House Wholesale Products** ✅ · `wholesale_products.in_house`
+  - **Seller Wholesale Products** ✅ · `wholesale_products.seller`
 
 ### Orders & Sales
 - **Sales** · `—` · can: `view_all_orders, view_inhouse_orders, view_seller_orders, view_pickup_point_orders`
-  - **All Orders** · `all_orders.index`
-  - **Inhouse orders** · `inhouse_orders.index`
-  - **Seller Orders** · `seller_orders.index`
-  - **Pick-up Point Orders** · `pick_up_point.index`
-  - **Unpaid Orders** · `unpaid_orders.index`
+  - **All Orders** ✅ · `all_orders.index`
+  - **Inhouse orders** ✅ · `inhouse_orders.index`
+  - **Seller Orders** ✅ · `seller_orders.index`
+  - **Pick-up Point Orders** ✅ · `pick_up_point.index`
+  - **Unpaid Orders** ✅ · `unpaid_orders.index`
 - **POS System** · `—`
   - **POS Manager** · `poin-of-sales.index`
   - **POS Configuration** · `poin-of-sales.activation`
   - **POS Orders** · `pos.orders`
   - **POS Products** · `admin.pos.products`
 - **Refunds** · `—` · can: `view_refund_requests, view_approved_refund_requests, view_rejected_refund_requests, refund_request_configuration, set_category_wise_refund`
-  - **Refund Requests** · `refund_requests_all`
-  - **Dispute Refund Requests** · `dispute_refund_requests_all`
-  - **Refund Configuration** · `refund_time_config`
-  - **Refund Reasons** · `refund_reason_index`
-  - **Category Based Refund** · `categories_wise_product_refund`
+  - ⏭ **Refund Requests** · `refund_requests_all`
+  - ⏭ **Dispute Refund Requests** · `dispute_refund_requests_all`
+  - ⏭ **Refund Configuration** · `refund_time_config`
+  - ⏭ **Refund Reasons** · `refund_reason_index`
+  - ⏭ **Category Based Refund** · `categories_wise_product_refund`
 - **Preorder** · `—` · can: `preorder_dashboard, add_preorder_product, view_all_preorder_products, view_all_preorders, view_all_inhouse_preorders, view_all_seller_preorders, view_all_delayed_prepayment_preorders, view_all_final_preorders, view_preorder_seller_commission_history, preorder_settings, view_all_preorder_product_conversations, view_all_preorder_product_queries, view_all_preorder_product_reviews, view_all_faqs, view_all_preorder_notification_types`
-  - **Preorder Home** · `preorder.dashboard`
-  - **Add New Preorder products** · `preorder-product.create`
-  - **Preorder Products** · `preorder-product.index`
+  - ⏭ **Preorder Home** · `preorder.dashboard`
+  - ⏭ **Add New Preorder products** · `preorder-product.create`
+  - ⏭ **Preorder Products** · `preorder-product.index`
   - **Orders (Preorder)** · `—`
-    - **All Orders** · `all_preorder.list` · can: `view_all_preorders, view_all_inhouse_preorders, view_all_seller_preorders, view_all_delayed_prepayment_preorders, view_all_final_preorders`
-    - **Inhouse Orders** · `inhouse_preorder.list`
-    - **Seller Orders** · `seller_preorder.list`
-    - **Delayed Prepayment** · `delayed_prepayment_preorders.list`
+    - ⏭ **All Orders** · `all_preorder.list` · can: `view_all_preorders, view_all_inhouse_preorders, view_all_seller_preorders, view_all_delayed_prepayment_preorders, view_all_final_preorders`
+    - ⏭ **Inhouse Orders** · `inhouse_preorder.list`
+    - ⏭ **Seller Orders** · `seller_preorder.list`
+    - ⏭ **Delayed Prepayment** · `delayed_prepayment_preorders.list`
     - **Delayed Final Orders** · `delayed_final_orders.list`
-  - **Preorder Product Conversation** · `preorder-conversations.admin_index`
-  - **Preorder Product Queries** · `preorder.product_query.index`
-  - **Preorder Product Reviews** · `preorder.product_reviews.index`
-  - **Preorder Notification Types** · `preorder-notification-types.index`
+  - ⏭ **Preorder Product Conversation** · `preorder-conversations.admin_index`
+  - ⏭ **Preorder Product Queries** · `preorder.product_query.index`
+  - ⏭ **Preorder Product Reviews** · `preorder.product_reviews.index`
+  - ⏭ **Preorder Notification Types** · `preorder-notification-types.index`
 
 ### Users
 - **Customers** · `—` · can: `view_all_customers, view_classified_products, view_classified_packages`
-  - **Customer list** · `customers.index`
-  - **Unverified Customers** · `customers.unverified.index`
-  - **Classified Products** · `classified_products`
-  - **Classified Packages** · `customer_packages.index`
+  - **Customer list** ✅ · `customers.index`
+  - **Unverified Customers** ✅ · `customers.unverified.index`
+  - **Classified Products** ✅ · `classified_products`
+  - **Classified Packages** ✅ · `customer_packages.index`
 - **Sellers** · `—` · can: `view_all_seller, seller_payment_history, view_seller_payout_requests, seller_commission_configuration, view_all_seller_packages, seller_verification_form_configuration, set_category_wise_commission, set_seller_based_commission`
   - **All Seller** · `sellers.index`
   - **Applied Seller** · `sellers.registration_pending`
@@ -163,12 +163,12 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
   - **Seller Packages** · `seller_packages.index`
   - **Seller Verification Form** · `seller_verification_form.index`
 - **Delivery Boy** · `—` · can: `view_all_delivery_boy, add_delivery_boy, delivery_boy_payment_history, collected_histories_from_delivery_boy, order_cancle_request_by_delivery_boy, delivery_boy_configuration`
-  - **All Delivery Boy** · `delivery-boys.index`
-  - **Add Delivery Boy** · `delivery-boys.create`
-  - **Payment Histories** · `delivery-boys-payment-histories`
-  - **Collected Histories** · `delivery-boys-collection-histories`
-  - **Cancel Request** · `delivery-boy.cancel-request`
-  - **Configuration** · `delivery-boy-configuration`
+  - ⏭ **All Delivery Boy** · `delivery-boys.index`
+  - ⏭ **Add Delivery Boy** · `delivery-boys.create`
+  - ⏭ **Payment Histories** · `delivery-boys-payment-histories`
+  - ⏭ **Collected Histories** · `delivery-boys-collection-histories`
+  - ⏭ **Cancel Request** · `delivery-boy.cancel-request`
+  - ⏭ **Configuration** · `delivery-boy-configuration`
 
 ### Marketing & Promotions
 - **Promotion & Offers** · `—` · can: `view_promotion_and_offers_dashboard, view_all_flash_deals, todays_deal_products.index, view_all_coupons, set_category_wise_discount, view_promotional_product`
@@ -213,16 +213,16 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
   - **Sitemap Generator** · `sitemap_generator`
   - **Global SEO** · `global_seo`
 - **Affiliate System** · `—` · can: `affiliate_registration_form_config, affiliate_configurations, view_affiliate_users, view_all_referral_users, view_affiliate_withdraw_requests, view_affiliate_logs`
-  - **Affiliate Registration Form** · `affiliate.configs`
-  - **Affiliate Configurations** · `affiliate.index`
-  - **Affiliate Users** · `affiliate.users`
-  - **Referral Users** · `refferals.users`
-  - **Affiliate Withdraw Requests** · `affiliate.withdraw_requests`
-  - **Affiliate Logs** · `affiliate.logs.admin`
+  - ⏭ **Affiliate Registration Form** · `affiliate.configs`
+  - ⏭ **Affiliate Configurations** · `affiliate.index`
+  - ⏭ **Affiliate Users** · `affiliate.users`
+  - ⏭ **Referral Users** · `refferals.users`
+  - ⏭ **Affiliate Withdraw Requests** · `affiliate.withdraw_requests`
+  - ⏭ **Affiliate Logs** · `affiliate.logs.admin`
 - **Club Point System** · `—` · can: `club_point_configurations, set_club_points, view_users_club_points`
-  - **Club Point Configurations** · `club_points.configs`
-  - **Set Product Point** · `set_product_points`
-  - **User Points** · `club_points.index`
+  - ⏭ **Club Point Configurations** · `club_points.configs`
+  - ⏭ **Set Product Point** · `set_product_points`
+  - ⏭ **User Points** · `club_points.index`
 
 ### Report
 - **Report Center** · `—` · can: `earning_report, in_house_product_sale_report, seller_products_sale_report, products_stock_report, product_wishlist_report, user_search_report, commission_history_report, wallet_transaction_report`
@@ -237,27 +237,27 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
 
 ### Content & Design
 - **Design Studio** · `—` · can: `view_website_dashboard, header_setup, footer_setup, view_all_website_pages, website_appearance, authentication_layout_settings, top_banner_setting, view_top_banner`
-  - **Design Studio Home** · `website.dashboard`
-  - **Select Homepage** · `website.select-homepage`
-  - **Homepage Settings** · `custom-pages.edit`
-  - **Font Family** · `website.select-font-family`
+  - ⊘ **Design Studio Home** · `website.dashboard`
+  - ⊘ **Select Homepage** · `website.select-homepage`
+  - ⊘ **Homepage Settings** · `custom-pages.edit`
+  - ⊘ **Font Family** · `website.select-font-family`
   - **Authentication Layout & Settings** · `website.authentication-layout-settings`
-  - **Select Header** · `website.select-header`
-  - **Header Settings** · `website.header`
+  - ⊘ **Select Header** · `website.select-header`
+  - ⊘ **Header Settings** · `website.header`
   - **Top Bar** · `—` · can: `view_top_banner, top_banner_setting`
     - **Top Bar List** · `top_banner.index`
     - **Top Bar Settings** · `top_banner.setting`
-  - **All Category Layout** · `select_all_category_layout`
-  - **Product Details** · `product_details_section`
-  - **Select Footer** · `website.select-footer`
-  - **Footer Settings** · `website.footer`
+  - ⊘ **All Category Layout** · `select_all_category_layout`
+  - ⊘ **Product Details** · `product_details_section`
+  - ⊘ **Select Footer** · `website.select-footer`
+  - ⊘ **Footer Settings** · `website.footer`
   - **Pages** · `website.pages`
-  - **System Setup** · `website.system_setup`
+  - ⊘ **System Setup** · `website.system_setup`
   - **Appearance** · `website.appearance`
   - **Logo & Favicon** · `website.logo_and_favicon`
   - **Banners & Sliders** · `website.banners_and_sliders`
   - **Element** · `—`
-    - **All Elements** · `elements.index`
+    - ⊘ **All Elements** · `elements.index`
 - **AI Studio** · `—` · can: `manage_ai_configuration`
   - **Add/Edit Product With AI** · `ai-add_edit_products`
   - **Prompt Templates** · `ai-prompt-templates-config`
@@ -292,11 +292,11 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
   - **OTP Configurations** · `otp.configconfiguration`
   - **SMS Templates** · `sms-templates.index`
 - **GST System** · `—`
-  - **Unverified Sellers** · `gst.unverified.sellers`
-  - **HSN Assign** · `products.hsn-gst.assigns`
-  - **Wholesale Products** · `products.wholesale-hsn-gst.assigns`
-  - **Preorder Products** · `products.preorder-hsn-gst.assigns`
-  - **Auction Products** · `products.auction-hsn-gst.assigns`
+  - ⊘ **Unverified Sellers** · `gst.unverified.sellers`
+  - ⊘ **HSN Assign** · `products.hsn-gst.assigns`
+  - ⊘ **Wholesale Products** · `products.wholesale-hsn-gst.assigns`
+  - ⊘ **Preorder Products** · `products.preorder-hsn-gst.assigns`
+  - ⊘ **Auction Products** · `products.auction-hsn-gst.assigns`
 - **Shipping System** · `—` · can: `manage_shipping_system`
   - **Shiprocket** · `shiprocket_configuration`
   - **Steadfast** · `steadfast_configuration`
@@ -336,13 +336,13 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
   - **All staffs** · `staffs.index`
   - **Staff permissions** · `roles.index`
 - **System** · `—` · can: `system_update, server_status`
-  - **Update** · `system_update`
+  - ⊘ **Update** · `system_update`
   - **Server status** · `system_server`
 - **Addon Manager** · `addons.index`
 - **Landing Page Setup** · `—`
-  - **Header Nav** · `website.portfolioheader`
-  - **Landing Page** · `custom-pages.edit`
-  - **Footer Settings** · `website.footer`
+  - ⊘ **Header Nav** · `website.portfolioheader`
+  - ⊘ **Landing Page** · `custom-pages.edit`
+  - ⊘ **Footer Settings** · `website.footer`
 
 ---
 
@@ -367,9 +367,9 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
     - **Product Reviews** · `seller.product-reviews`
     - **Custom Label** · `seller.custom_label.index`
 - **Auction Products** · `—`
-  - **Add New Auction Product** · `auction_product_create.seller`
-  - **All Auction Products** · `auction_products.seller.index`
-  - **Auction Product Orders** · `auction_products_orders.seller`
+  - ⏭ **Add New Auction Product** · `auction_product_create.seller`
+  - ⏭ **All Auction Products** · `auction_products.seller.index`
+  - ⏭ **Auction Product Orders** · `auction_products_orders.seller`
 - **Wholesale Products** · `—`
   - **Add New Wholesale Product** · `wholesale_product_create.seller`
   - **All Wholesale Products** · `seller.wholesale_products_list`
@@ -383,19 +383,19 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
   - **POS Orders** · `seller.pos.orders`
   - **POS Products** · `seller.pos.products`
 - **Refunds** · `—`
-  - **Received Refund Request** · `seller.vendor_refund_request`
-  - **Refund Configuration** · `seller.refund_configuration`
+  - ⏭ **Received Refund Request** · `seller.vendor_refund_request`
+  - ⏭ **Refund Configuration** · `seller.refund_configuration`
 - **Preorder** · `—`
-  - **Preorder Home** · `seller.preorder.dashboard`
-  - **Add New Preorder Product** · `seller.preorder-product.create`
-  - **Preorder Products** · `seller.preorder-product.index`
+  - ⏭ **Preorder Home** · `seller.preorder.dashboard`
+  - ⏭ **Add New Preorder Product** · `seller.preorder-product.create`
+  - ⏭ **Preorder Products** · `seller.preorder-product.index`
   - **Orders (Preorder)** · `—`
-    - **All Orders** · `seller.all_preorder.list`
-    - **Delayed Prepayment Orders** · `seller.delayed_prepayment_preorders.list`
+    - ⏭ **All Orders** · `seller.all_preorder.list`
+    - ⏭ **Delayed Prepayment Orders** · `seller.delayed_prepayment_preorders.list`
     - **Delayed Final Orders** · `seller.delayed_final_orders.list`
-  - **Product Conversations** · `seller.preorder-conversations.index`
-  - **Product Queries** · `seller.preorder_product_query.index`
-  - **Product Reviews** · `seller.preorder_product_reviews`
+  - ⏭ **Product Conversations** · `seller.preorder-conversations.index`
+  - ⏭ **Product Queries** · `seller.preorder_product_query.index`
+  - ⏭ **Product Reviews** · `seller.preorder_product_reviews`
 
 ### Finance
 - **Money Withdraw** · `seller.money_withdraw_requests.index`
@@ -424,10 +424,10 @@ Hər ekranın qarşısına status qoyulur. Bölüm bitəndə həmin bölümün b
   - **Packages** · `seller.seller_packages_list`
   - **Purchase Packages** · `seller.packages_payment_list`
 - **GST System** · `—`
-  - **HSN Assign** · `seller.products.hsn-gst.assigns`
-  - **Wholesale Products** · `seller.products.wholesale-hsn-gst.assigns`
-  - **Preorder Products** · `seller.products.preorder-hsn-gst.assigns`
-  - **Auction Products** · `seller.products.auction-hsn-gst.assigns`
+  - ⊘ **HSN Assign** · `seller.products.hsn-gst.assigns`
+  - ⊘ **Wholesale Products** · `seller.products.wholesale-hsn-gst.assigns`
+  - ⊘ **Preorder Products** · `seller.products.preorder-hsn-gst.assigns`
+  - ⊘ **Auction Products** · `seller.products.auction-hsn-gst.assigns`
 
 ---
 

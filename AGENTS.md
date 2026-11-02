@@ -31,7 +31,7 @@ Tapşırıq faylında cavabsız sual (§13) varsa və cavab kodun formasını d�
 
 ## Chat panelinə yapışdırmaq üçün (hər bölümün başında)
 
-**Hazır prompt dəsti: [`PROMPTS.md`](./PROMPTS.md)** — P1 panel qatı · P3 kuryer · P4 supervisor · P5 bölüm şablonu · P6 audit.
+**Hazır prompt dəsti: [`PROMPTS.md`](./PROMPTS.md)** · Claude üçün: [`ADMIN-QUEUE.md`](./ADMIN-QUEUE.md) (skillər `.claude/skills/`) — P1 panel qatı · P3 kuryer · P4 supervisor · P5 bölüm şablonu · P6 audit.
 
 ```
 `D:/www/xshop/admin/GEMINI.md` və `AGENTS.md` qaydaları qüvvədədir.

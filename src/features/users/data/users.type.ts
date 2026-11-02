@@ -1,3 +1,4 @@
+import type { Panel } from '@/config/panels'
 import type { NamedEntityInterface } from '@/shared/types'
 
 export type CurrentUserApiResponse = {
@@ -8,6 +9,10 @@ export interface CurrentUserInterface {
   id: number
   name: string
   email: string
+  avatar?: string | null
+  role?: string
+  seller_id?: number | null
+  panel?: Panel | null
   roles: NamedEntityInterface[]
   permissions: string[]
   status: boolean
