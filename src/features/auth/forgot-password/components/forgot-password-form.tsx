@@ -3,8 +3,10 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import { ArrowRight, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
+import i18n from '@/i18n'
 import { sleep, cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -19,7 +21,8 @@ import { Input } from '@/components/ui/input'
 
 const formSchema = z.object({
   email: z.email({
-    error: (iss) => (iss.input === '' ? 'Please enter your email.' : undefined),
+    error: (iss) =>
+      iss.input === '' ? i18n.t('auth:errors.emailRequired') : undefined,
   }),
 })
 
@@ -27,6 +30,7 @@ export function ForgotPasswordForm({
   className,
   ...props
 }: React.HTMLAttributes<HTMLFormElement>) {
+  const { t } = useTranslation('auth')
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -39,14 +43,14 @@ export function ForgotPasswordForm({
     setIsLoading(true)
 
     toast.promise(sleep(2000), {
-      loading: 'Sending email...',
+      loading: t('toast.sending'),
       success: () => {
         setIsLoading(false)
         form.reset()
         navigate({ to: '/otp' })
-        return `Email sent to ${data.email}`
+        return t('toast.sent', { email: data.email })
       },
-      error: 'Error',
+      error: t('common.error'),
     })
   }
 
@@ -62,16 +66,16 @@ export function ForgotPasswordForm({
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('common.email')}</FormLabel>
               <FormControl>
-                <Input placeholder='name@example.com' {...field} />
+                <Input placeholder={t('common.emailPlaceholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
         <Button className='mt-2' disabled={isLoading}>
-          Continue
+          {t('forgotPassword.submit')}
           {isLoading ? <Loader2 className='animate-spin' /> : <ArrowRight />}
         </Button>
       </form>

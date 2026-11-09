@@ -1,4 +1,6 @@
 import { Shield, UserCheck, Users, CreditCard } from 'lucide-react'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { type UserStatus } from './schema'
 
 export const callTypes = new Map<UserStatus, string>([
@@ -33,3 +35,12 @@ export const roles = [
     icon: CreditCard,
   },
 ] as const
+
+/** Roles with translated display text (reactive to language changes). */
+export function useRoles() {
+  const { t } = useTranslation('users')
+  return useMemo(
+    () => roles.map((role) => ({ ...role, label: t(`roles.${role.value}`) })),
+    [t]
+  )
+}
