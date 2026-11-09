@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   type SortingState,
   type VisibilityState,
@@ -22,10 +23,10 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
-import { roles } from '../data/data'
+import { useRoles } from '../data/data'
 import { type User } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
-import { usersColumns as columns } from './users-columns'
+import { useUsersColumns } from './users-columns'
 
 type DataTableProps = {
   data: User[]
@@ -34,6 +35,9 @@ type DataTableProps = {
 }
 
 export function UsersTable({ data, search, navigate }: DataTableProps) {
+  const { t } = useTranslation('users')
+  const columns = useUsersColumns()
+  const roles = useRoles()
   // Local UI-only states
   const [rowSelection, setRowSelection] = useState({})
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -101,22 +105,22 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
     >
       <DataTableToolbar
         table={table}
-        searchPlaceholder='Filter users...'
+        searchPlaceholder={t('toolbar.searchPlaceholder')}
         searchKey='username'
         filters={[
           {
             columnId: 'status',
-            title: 'Status',
+            title: t('toolbar.status'),
             options: [
-              { label: 'Active', value: 'active' },
-              { label: 'Inactive', value: 'inactive' },
-              { label: 'Invited', value: 'invited' },
-              { label: 'Suspended', value: 'suspended' },
+              { label: t('statuses.active'), value: 'active' },
+              { label: t('statuses.inactive'), value: 'inactive' },
+              { label: t('statuses.invited'), value: 'invited' },
+              { label: t('statuses.suspended'), value: 'suspended' },
             ],
           },
           {
             columnId: 'role',
-            title: 'Role',
+            title: t('toolbar.role'),
             options: roles.map((role) => ({ ...role })),
           },
         ]}
@@ -180,7 +184,7 @@ export function UsersTable({ data, search, navigate }: DataTableProps) {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  No results.
+                  {t('dataTable:noResults')}
                 </TableCell>
               </TableRow>
             )}
