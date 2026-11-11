@@ -23,6 +23,10 @@ describe('PasswordInput', () => {
     await expect.element(passwordInput).toBeInTheDocument()
     await expect.element(passwordInput).toHaveAttribute('type', 'password')
     await expect.element(showPasswordButton).toBeVisible()
+    // Edge injects ::-ms-reveal; hide it so it does not stack on our toggle.
+    await expect
+      .element(passwordInput)
+      .toHaveClass('[&::-ms-reveal]:hidden', '[&::-ms-clear]:hidden', 'pe-9')
   })
 
   it('toggles the password visibility when the show password button is clicked', async () => {
