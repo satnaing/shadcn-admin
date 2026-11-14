@@ -1,0 +1,26 @@
+{
+  "title": {
+    "admin": "Admin Paneli",
+    "seller": "Satıcı Paneli",
+    "courier": "Kuryer Paneli",
+    "supervisor": "Supervisor Paneli"
+  },
+  "roles": {
+    "admin": "Admin",
+    "staff": "İşçi",
+    "seller": "Satıcı",
+    "seller_staff": "Satıcı İşçisi",
+    "courier": "Kuryer",
+    "supervisor": "Supervisor",
+    "customer": "Müştəri"
+  },
+  "roleSwitcher": {
+    "title": "Rol Dəyişdirici (DEV)",
+    "currentRole": "Cari rol",
+    "switchSuccess": "Rol dəyişdirildi"
+  },
+  "forbidden": {
+    "title": "Giriş qadağandır",
+    "description": "Bu panelə daxil olmaq üçün səlahiyyətiniz çatmır."
+  }
+}

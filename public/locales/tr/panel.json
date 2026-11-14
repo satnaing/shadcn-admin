@@ -1,0 +1,26 @@
+{
+  "title": {
+    "admin": "Admin Paneli",
+    "seller": "Satıcı Paneli",
+    "courier": "Kurye Paneli",
+    "supervisor": "Süpervizör Paneli"
+  },
+  "roles": {
+    "admin": "Admin",
+    "staff": "Personel",
+    "seller": "Satıcı",
+    "seller_staff": "Satıcı Personeli",
+    "courier": "Kurye",
+    "supervisor": "Süpervizör",
+    "customer": "Müşteri"
+  },
+  "roleSwitcher": {
+    "title": "Rol Değiştirici (DEV)",
+    "currentRole": "Geçerli rol",
+    "switchSuccess": "Rol değiştirildi"
+  },
+  "forbidden": {
+    "title": "Erişim Reddedildi",
+    "description": "Bu panele erişmek için yeterli yetkiniz bulunmuyor."
+  }
+}

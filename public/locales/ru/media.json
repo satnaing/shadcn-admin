@@ -1,0 +1,30 @@
+{
+  "title": "Загруженные файлы",
+  "description": "Медиабиблиотека — управление изображениями и документами",
+  "upload": "Загрузить файл",
+  "search": "Поиск по файлам...",
+  "allTypes": "Все",
+  "typeImage": "Изображение",
+  "typeDocument": "Документ",
+  "empty": "Файлы не найдены.",
+  "loading": "Загрузка...",
+  "uploadDialog": {
+    "title": "Загрузить файл",
+    "selectFile": "Выберите файл",
+    "dropHint": "Загрузите изображение или документ (jpg, png, svg, pdf, doc, csv, xlsx)",
+    "selected": "Выбранный файл",
+    "cancel": "Отмена",
+    "confirm": "Загрузить"
+  },
+  "deleteConfirm": {
+    "title": "Удалить файл",
+    "description": "Вы уверены, что хотите удалить этот файл?",
+    "confirm": "Удалить",
+    "cancel": "Отмена"
+  },
+  "imagePicker": {
+    "urlPlaceholder": "URL изображения",
+    "upload": "Загрузить фото",
+    "clear": "Очистить"
+  }
+}

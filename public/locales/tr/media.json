@@ -1,0 +1,30 @@
+{
+  "title": "Yüklenen Dosyalar",
+  "description": "Medya kütüphanesi — görsel ve belgeleri yönetin",
+  "upload": "Dosya Yükle",
+  "search": "Dosya ara...",
+  "allTypes": "Tümü",
+  "typeImage": "Görsel",
+  "typeDocument": "Belge",
+  "empty": "Dosya bulunamadı.",
+  "loading": "Yükleniyor...",
+  "uploadDialog": {
+    "title": "Dosya Yükle",
+    "selectFile": "Bir dosya seçin",
+    "dropHint": "Bir görsel veya belge yükleyin (jpg, png, svg, pdf, doc, csv, xlsx)",
+    "selected": "Seçilen dosya",
+    "cancel": "Vazgeç",
+    "confirm": "Yükle"
+  },
+  "deleteConfirm": {
+    "title": "Dosyayı sil",
+    "description": "Bu dosyayı silmek istediğinizden emin misiniz?",
+    "confirm": "Sil",
+    "cancel": "Vazgeç"
+  },
+  "imagePicker": {
+    "urlPlaceholder": "Görsel URL'si",
+    "upload": "Görsel yükle",
+    "clear": "Temizle"
+  }
+}

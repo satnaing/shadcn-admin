@@ -1,0 +1,138 @@
+{
+  "teamSwitcher": {
+    "subtitle": "Панель управления"
+  },
+  "profileDropdown": {
+    "signOut": "Выход"
+  },
+  "pagination": {
+    "pageOf": "Страница {{current}} из {{total}}",
+    "rowsPerPage": "Строк на странице",
+    "goToFirstPage": "На первую страницу",
+    "goToPreviousPage": "На предыдущую страницу",
+    "goToNextPage": "На следующую страницу",
+    "goToLastPage": "На последнюю страницу",
+    "goToPage": "Перейти на страницу {{page}}"
+  },
+  "viewOptions": {
+    "view": "Вид",
+    "toggleColumns": "Переключить колонки"
+  },
+  "themeColor": "Цвет темы",
+  "localeSwitcher": {
+    "toggle": "Сменить язык"
+  },
+  "themeSwitch": {
+    "toggle": "Сменить тему",
+    "light": "Светлая",
+    "dark": "Темная",
+    "system": "Системная"
+  },
+  "form": {
+    "backToList": "Назад к списку"
+  },
+  "contentTheme": {
+    "label": "Тема",
+    "placeholder": "Выберите тему",
+    "none": "Нет",
+    "options": {
+      "tangerine": "Tangerine",
+      "lime": "Lime",
+      "cobalt": "Cobalt",
+      "bubblegum": "Bubblegum",
+      "sun": "Sun",
+      "mint": "Mint",
+      "grape": "Grape"
+    }
+  },
+  "slug": {
+    "autoHint": "Заполняется автоматически из заголовка. Отредактируйте, чтобы задать собственный URL.",
+    "autoHintEnglish": "Создается из английского заголовка. Тот же slug используется во всех языках.",
+    "englishOnly": "Совпадает с английским slug (URL не переводится)."
+  },
+  "seo": {
+    "title": "SEO",
+    "description": "Поисковые и социальные метаданные для этой записи.",
+    "metaTitle": "Мета-заголовок",
+    "metaTitlePlaceholder": "Необязательный мета-заголовок",
+    "metaDescription": "Мета-описание",
+    "metaDescriptionPlaceholder": "Необязательное мета-описание",
+    "ogImage": "OG-изображение",
+    "ogImagePlaceholder": "Необязательный URL изображения"
+  },
+  "faqPageKey": {
+    "label": "Страница",
+    "labelMulti": "Отображаемые страницы",
+    "helpMulti": "Выберите все страницы, где будет отображаться этот FAQ.",
+    "required": "Выберите как минимум одну страницу",
+    "placeholder": "Выберите страницу",
+    "options": {
+      "global": "Страница FAQ (глобальная)",
+      "home": "Главная страница",
+      "services": "Услуги",
+      "projects": "Проекты",
+      "portfolio": "Портфолио",
+      "blog": "Блог",
+      "about": "О нас",
+      "contact": "Контакты"
+    }
+  },
+  "status": {
+    "enabled": "Активен",
+    "disabled": "Неактивен",
+    "region": {
+      "active": "Активен",
+      "soon": "Скоро"
+    }
+  },
+  "filters": {
+    "status": "Статус",
+    "pageKey": "Страница"
+  },
+  "reorder": "Сортировать",
+  "table": {
+    "renderError": "Произошла ошибка при отображении таблицы. Пожалуйста, обновите страницу."
+  },
+  "validation": {
+    "nameRequired": "Имя обязательно",
+    "titleRequired": "Заголовок обязателен",
+    "contentRequired": "Содержимое обязательно",
+    "descriptionRequired": "Описание обязательно",
+    "slugRequired": "Slug обязателен",
+    "labelRequired": "Метка обязательна",
+    "valueRequired": "Значение обязательно",
+    "iconRequired": "Иконка обязательна",
+    "colorRequired": "Цвет обязателен",
+    "questionRequired": "Вопрос обязателен",
+    "answerRequired": "Ответ обязателен",
+    "excerptRequired": "Краткое содержание обязательно",
+    "cityRequired": "Город обязателен",
+    "keyRequired": "Ключ обязателен",
+    "badgeRequired": "Значок обязателен",
+    "validUntilRequired": "Срок действия обязателен",
+    "heroBadgeRequired": "Hero-значок обязателен",
+    "heroTitleRequired": "Hero-заголовок обязателен",
+    "heroDescriptionRequired": "Hero-описание обязательно",
+    "ctaTitleRequired": "CTA-заголовок обязателен",
+    "ctaDescriptionRequired": "CTA-описание обязательно",
+    "joinButtonRequired": "Кнопка присоединения обязательна",
+    "suffixRequired": "Суффикс обязателен",
+    "guardNameRequired": "Имя guard обязательно",
+    "invalidImageUrl": "Введите корректный URL изображения",
+    "invalidUrl": "Должен быть корректный URL",
+    "slugKebab": "Slug должен быть в формате kebab-case (строчные буквы, цифры, дефис)",
+    "fieldRequired": "Это поле обязательно для заполнения"
+  },
+  "footer": {
+    "copyright": "© {{year}} {{company}}. Все права защищены.",
+    "version": "v{{version}}"
+  },
+  "excel": {
+    "export": "Экспорт",
+    "import": "Импорт",
+    "exportSuccess": "Данные успешно экспортированы",
+    "importSuccess": "Данные успешно импортированы",
+    "exportError": "Ошибка при экспорте данных",
+    "importError": "Ошибка при импорте данных"
+  }
+}

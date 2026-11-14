@@ -1,0 +1,138 @@
+{
+  "teamSwitcher": {
+    "subtitle": "İdarəetmə Paneli"
+  },
+  "profileDropdown": {
+    "signOut": "Çıxış"
+  },
+  "pagination": {
+    "pageOf": "Səhifə {{current}} / {{total}}",
+    "rowsPerPage": "Hər səhifədə sətir",
+    "goToFirstPage": "İlk səhifəyə keç",
+    "goToPreviousPage": "Əvvəlki səhifəyə keç",
+    "goToNextPage": "Növbəti səhifəyə keç",
+    "goToLastPage": "Son səhifəyə keç",
+    "goToPage": "{{page}}-ci səhifəyə keç"
+  },
+  "viewOptions": {
+    "view": "Görünüş",
+    "toggleColumns": "Sütunları dəyiş"
+  },
+  "themeColor": "Tema rəngi",
+  "localeSwitcher": {
+    "toggle": "Dili dəyiş"
+  },
+  "themeSwitch": {
+    "toggle": "Temanı dəyiş",
+    "light": "İşıqlı",
+    "dark": "Qaranlıq",
+    "system": "Sistem"
+  },
+  "form": {
+    "backToList": "Siyahıya qayıt"
+  },
+  "contentTheme": {
+    "label": "Tema",
+    "placeholder": "Tema seçin",
+    "none": "Yox",
+    "options": {
+      "tangerine": "Tangerine",
+      "lime": "Lime",
+      "cobalt": "Cobalt",
+      "bubblegum": "Bubblegum",
+      "sun": "Sun",
+      "mint": "Mint",
+      "grape": "Grape"
+    }
+  },
+  "slug": {
+    "autoHint": "Bu dilin başlığından avtomatik doldurulur. Öz URL-inizi saxlamaq üçün redaktə edin.",
+    "autoHintEnglish": "İngilis başlığından yaradılır. Eyni slug bütün dillərdə istifadə olunur.",
+    "englishOnly": "İngilis slug ilə eyni (URL tərcümə olunmur)."
+  },
+  "seo": {
+    "title": "SEO",
+    "description": "Bu yazı üçün axtarış və sosial meta məlumatları.",
+    "metaTitle": "Meta başlıq",
+    "metaTitlePlaceholder": "İstəyə bağlı meta başlıq",
+    "metaDescription": "Meta təsvir",
+    "metaDescriptionPlaceholder": "İstəyə bağlı meta təsvir",
+    "ogImage": "OG şəkil",
+    "ogImagePlaceholder": "İstəyə bağlı şəkil URL"
+  },
+  "faqPageKey": {
+    "label": "Səhifə",
+    "labelMulti": "Göstəriləcək səhifələr",
+    "helpMulti": "Bu FAQ-ın görünəcəyi bütün səhifələri seçin (FAQ səhifəsi = Qlobal, Ana, Xidmətlər və s.).",
+    "required": "Ən azı bir səhifə seçin",
+    "placeholder": "Səhifə seçin",
+    "options": {
+      "global": "FAQ səhifəsi (qlobal)",
+      "home": "Ana səhifə",
+      "services": "Xidmətlər",
+      "projects": "Layihələr",
+      "portfolio": "Portfolio",
+      "blog": "Bloq",
+      "about": "Haqqımızda",
+      "contact": "Əlaqə"
+    }
+  },
+  "status": {
+    "enabled": "Aktiv",
+    "disabled": "Deaktiv",
+    "region": {
+      "active": "Aktiv",
+      "soon": "Tezliklə"
+    }
+  },
+  "filters": {
+    "status": "Status",
+    "pageKey": "Səhifə"
+  },
+  "reorder": "Sırala",
+  "table": {
+    "renderError": "Cədvəl göstərilərkən xəta baş verdi. Zəhmət olmasa səhifəni yeniləyin."
+  },
+  "validation": {
+    "nameRequired": "Ad tələb olunur",
+    "titleRequired": "Başlıq tələb olunur",
+    "contentRequired": "Məzmun tələb olunur",
+    "descriptionRequired": "Təsvir tələb olunur",
+    "slugRequired": "Slug tələb olunur",
+    "labelRequired": "Etiket tələb olunur",
+    "valueRequired": "Dəyər tələb olunur",
+    "iconRequired": "İkon tələb olunur",
+    "colorRequired": "Rəng tələb olunur",
+    "questionRequired": "Sual tələb olunur",
+    "answerRequired": "Cavab tələb olunur",
+    "excerptRequired": "Çıxarış tələb olunur",
+    "cityRequired": "Şəhər tələb olunur",
+    "keyRequired": "Açar tələb olunur",
+    "badgeRequired": "Nişan tələb olunur",
+    "validUntilRequired": "Etibarlılıq tarixi tələb olunur",
+    "heroBadgeRequired": "Hero nişanı tələb olunur",
+    "heroTitleRequired": "Hero başlığı tələb olunur",
+    "heroDescriptionRequired": "Hero təsviri tələb olunur",
+    "ctaTitleRequired": "CTA başlığı tələb olunur",
+    "ctaDescriptionRequired": "CTA təsviri tələb olunur",
+    "joinButtonRequired": "Qoşul düyməsi tələb olunur",
+    "suffixRequired": "Suffix tələb olunur",
+    "guardNameRequired": "Guard adı tələb olunur",
+    "invalidImageUrl": "Düzgün şəkil URL-i daxil edin",
+    "invalidUrl": "Düzgün URL olmalıdır",
+    "slugKebab": "Slug kebab-case olmalıdır (kiçik hərflər, rəqəmlər, defis)",
+    "fieldRequired": "Bu sahə tələb olunur"
+  },
+  "footer": {
+    "copyright": "© {{year}} {{company}}. Bütün hüquqlar qorunur.",
+    "version": "v{{version}}"
+  },
+  "excel": {
+    "export": "İxrac",
+    "import": "İdxal",
+    "exportSuccess": "Məlumatlar uğurla ixrac edildi",
+    "importSuccess": "Məlumatlar uğurla idxal edildi",
+    "exportError": "İxrac zamanı xəta baş verdi",
+    "importError": "İdxal zamanı xəta baş verdi"
+  }
+}

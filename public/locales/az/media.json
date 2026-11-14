@@ -1,0 +1,30 @@
+{
+  "title": "Yüklənmiş Fayllar",
+  "description": "Media kitabxanası — şəkil və sənədlərin idarəsi",
+  "upload": "Fayl Yüklə",
+  "search": "Fayl üzrə axtarış...",
+  "allTypes": "Hamısı",
+  "typeImage": "Şəkil",
+  "typeDocument": "Sənəd",
+  "empty": "Fayl tapılmadı.",
+  "loading": "Yüklənir...",
+  "uploadDialog": {
+    "title": "Fayl Yüklə",
+    "selectFile": "Fayl seçin",
+    "dropHint": "Şəkil və ya sənəd yükləyin (jpg, png, svg, pdf, doc, csv, xlsx)",
+    "selected": "Seçilmiş fayl",
+    "cancel": "İmtina",
+    "confirm": "Yüklə"
+  },
+  "deleteConfirm": {
+    "title": "Faylı sil",
+    "description": "Bu faylı silmək istədiyinizə əminsiniz?",
+    "confirm": "Sil",
+    "cancel": "İmtina"
+  },
+  "imagePicker": {
+    "urlPlaceholder": "Şəkil URL-i",
+    "upload": "Şəkil yüklə",
+    "clear": "Təmizlə"
+  }
+}

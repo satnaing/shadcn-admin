@@ -1,0 +1,30 @@
+{
+  "title": "Uploaded Files",
+  "description": "Media library — manage images and documents",
+  "upload": "Upload File",
+  "search": "Search files...",
+  "allTypes": "All",
+  "typeImage": "Image",
+  "typeDocument": "Document",
+  "empty": "No files found.",
+  "loading": "Loading...",
+  "uploadDialog": {
+    "title": "Upload File",
+    "selectFile": "Select a file",
+    "dropHint": "Upload an image or document (jpg, png, svg, pdf, doc, csv, xlsx)",
+    "selected": "Selected file",
+    "cancel": "Cancel",
+    "confirm": "Upload"
+  },
+  "deleteConfirm": {
+    "title": "Delete file",
+    "description": "Are you sure you want to delete this file?",
+    "confirm": "Delete",
+    "cancel": "Cancel"
+  },
+  "imagePicker": {
+    "urlPlaceholder": "Image URL",
+    "upload": "Upload image",
+    "clear": "Clear"
+  }
+}
