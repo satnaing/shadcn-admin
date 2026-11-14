@@ -27,3 +27,11 @@ Independent copy of the v1 shell (never import from `../admin`). Mock-first (`VI
 - No route-registry check for module menu items: module routes (`/admin/pos` …) fall into the `/admin/$` ComingSoon splat.
 - Copied v1 browser tests (config-drawer, confirm-dialog, password-input, sign-out-dialog, panel-guard) not re-run.
 - `shared/constant.ts` ERP tree and v1 `sidebar-data.*` removed; `panels.ts` has one shell (`/admin`) for all roles.
+
+## Prompt 03 outcome (2026-11-14)
+- A (front analysis), B (shell), C1–C7 (Dashboard, Pages+builder, Blogs, Themes, Modules, Settings, Role & Permission): built, committed locally.
+- Checks: `tsc -b`, `eslint` (0 errors, 5 warnings), `npm run build` green; 57 node tests pass.
+- Run node tests from a path with an UPPERCASE drive letter (PowerShell `D:\...`); from Git Bash (`/d/...`) vitest fails with "reading 'config'" (module-instance mismatch).
+- Browser-mode `npm test` (playwright) not verified in this environment.
+- Live sweep: 25 route URLs under `/admin` + `/admin/pos` (module placeholder) — no 403/500; console errors checked only on the final stretch of the sweep.
+- Not driven end to end: themes activate/banner write flows, drag-drop, builder Layers/Page tabs, revision drawer, blog category/upload dialogs.
