@@ -1,0 +1,48 @@
+{
+  "toast": { "error": "Xəta baş verdi", "created": "Yaradıldı", "updated": "Yadda saxlanıldı", "deleted": "Silindi" },
+  "status": { "draft": "Qaralama", "published": "Dərc olunub", "scheduled": "Planlanıb" },
+  "columns": { "title": "Məqalə", "category": "Kateqoriya", "languages": "Dillər", "status": "Status", "views": "Baxış", "updated": "Yenilənib" },
+  "actions": { "edit": "Redaktə", "delete": "Sil" },
+  "list": {
+    "title": "Bloqlar",
+    "description": "Tərcümələr, kateqoriyalar və SEO ilə məqalələr.",
+    "search": "Məqalə axtar...",
+    "empty": "Məqalə tapılmadı",
+    "categories": "Kateqoriyalar",
+    "new": "Yeni məqalə"
+  },
+  "delete": { "title": "Məqaləni sil", "desc": "\"{{title}}\" silinəcək. Bu geri qaytarıla bilməz." },
+  "form": {
+    "createTitle": "Yeni məqalə",
+    "editTitle": "Məqaləni redaktə et",
+    "description": "Məqaləni hər dildə yazın, sonra kateqoriya, örtük və dərc ayarlarını seçin.",
+    "title": "Başlıq",
+    "short_description": "Qısa təsvir",
+    "content": "Məzmun (HTML)",
+    "slug": "Slug",
+    "cover": "Örtük şəkli",
+    "category": "Kateqoriya",
+    "categoryPlaceholder": "Kateqoriya seçin",
+    "tags": "Teqlər",
+    "tagsPlaceholder": "mağaza, bələdçi",
+    "publishAt": "Dərc vaxtı",
+    "save": "Yadda saxla",
+    "saving": "Saxlanılır..."
+  },
+  "categories": {
+    "title": "Bloq kateqoriyaları",
+    "description": "Məqalələri kateqoriyalara qruplaşdırın (dil üzrə tərcümə olunur).",
+    "back": "Məqalələrə qayıt",
+    "new": "Yeni kateqoriya",
+    "createTitle": "Yeni kateqoriya",
+    "editTitle": "Kateqoriyanı redaktə et",
+    "name": "Ad",
+    "posts": "Məqalələr",
+    "active": "Aktiv",
+    "inactive": "Deaktiv",
+    "search": "Kateqoriya axtar...",
+    "empty": "Kateqoriya tapılmadı",
+    "deleteTitle": "Kateqoriyanı sil",
+    "deleteDesc": "\"{{name}}\" silinəcək."
+  }
+}

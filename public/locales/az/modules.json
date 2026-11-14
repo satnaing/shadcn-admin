@@ -1,0 +1,46 @@
+{
+  "title": "Modullar",
+  "description": "Modulları aç/bağla, .zip paketlə yenisini qur, yenilə və ya sil.",
+  "search": "Modul axtar...",
+  "empty": "Modul tapılmadı",
+  "save": "Dəyişiklikləri saxla ({{count}})",
+  "filter": { "all": "Hamısı", "active": "Aktiv", "inactive": "Deaktiv", "notInstalled": "Quraşdırılmayıb" },
+  "status": { "active": "Aktiv", "inactive": "Deaktiv", "notInstalled": "Quraşdırılmayıb" },
+  "card": {
+    "required": "Məcburi əsas modul (söndürülə bilməz)",
+    "requires": "Tələb edir",
+    "missingDeps": "Lazımdır: {{list}}",
+    "updateTo": "v{{v}} versiyasına yenilə",
+    "actions": "Modul əməliyyatları",
+    "update": "Yenilə",
+    "delete": "Sil"
+  },
+  "toast": { "error": "Xəta baş verdi", "saved": "Modullar saxlanıldı", "updated": "Modul yeniləndi", "deleted": "Modul silindi", "installed": "Modul quraşdırıldı (deaktiv)" },
+  "upload": {
+    "open": "Modul yüklə",
+    "title": "Modul yüklə",
+    "description": "Modul paketini seçin (.zip, maks. {{mb}} MB). Quraşdırmadan əvvəl yoxlanılır.",
+    "warningTitle": "Modullar PHP kodu icra edir",
+    "warning": "Modul paketi serverdə ixtiyari PHP kodu icra edir. Yalnız etibar etdiyiniz mənbələrdən imzalı paketləri quraşdırın.",
+    "file": "Modul paketi",
+    "tooBig": "Fayl {{mb}} MB-dan böyükdür.",
+    "result": "Yoxlama nəticəsi",
+    "steps": { "size": "Paket ölçüsü", "manifest": "module.json düzgündür", "compatibility": "Bu core versiyası ilə uyğundur", "signature": "İmza / checksum" },
+    "submit": "Yüklə və quraşdır",
+    "close": "Bağla"
+  },
+  "confirm": {
+    "ok": "OK",
+    "continue": "Davam et",
+    "blockedTitle": "Bu modulu dəyişmək olmur",
+    "blockedEnable": "Bu tələb olunan modullar quraşdırılmayıb: {{list}}.",
+    "blockedDisable": "Məcburi əsas modul buna bağlıdır: {{list}}.",
+    "enableTitle": "{{name}} aktiv edilsin?",
+    "enableDesc": "Bu modullar lazımdır və birlikdə aktiv olacaq: {{list}}.",
+    "disableTitle": "{{name}} söndürülsün?",
+    "disableDesc": "Bu modullar ondan asılıdır və birlikdə söndürüləcək: {{list}}.",
+    "deleteTitle": "{{name}} silinsin?",
+    "deleteDesc": "Modul faylları silinir. Datası saxlanılır.",
+    "deleteDependants": "Digər modullar ondan asılıdır: {{list}}. Datası saxlanılır."
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "toast": { "error": "Bir hata oluştu", "created": "Oluşturuldu", "updated": "Kaydedildi", "deleted": "Silindi" },
+  "status": { "draft": "Taslak", "published": "Yayında", "scheduled": "Planlandı" },
+  "columns": { "title": "Yazı", "category": "Kategori", "languages": "Diller", "status": "Durum", "views": "Görüntülenme", "updated": "Güncellendi" },
+  "actions": { "edit": "Düzenle", "delete": "Sil" },
+  "list": {
+    "title": "Bloglar",
+    "description": "Çeviriler, kategoriler ve SEO ile yazılar.",
+    "search": "Yazı ara...",
+    "empty": "Yazı bulunamadı",
+    "categories": "Kategoriler",
+    "new": "Yeni yazı"
+  },
+  "delete": { "title": "Yazıyı sil", "desc": "\"{{title}}\" silinecek. Bu işlem geri alınamaz." },
+  "form": {
+    "createTitle": "Yeni yazı",
+    "editTitle": "Yazıyı düzenle",
+    "description": "Yazıyı her dilde yazın, ardından kategori, kapak ve yayın ayarlarını seçin.",
+    "title": "Başlık",
+    "short_description": "Özet",
+    "content": "İçerik (HTML)",
+    "slug": "Slug",
+    "cover": "Kapak görseli",
+    "category": "Kategori",
+    "categoryPlaceholder": "Kategori seçin",
+    "tags": "Etiketler",
+    "tagsPlaceholder": "mağaza, rehber",
+    "publishAt": "Yayın zamanı",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor..."
+  },
+  "categories": {
+    "title": "Blog kategorileri",
+    "description": "Yazıları kategorilere ayırın (dil başına çevrilir).",
+    "back": "Yazılara dön",
+    "new": "Yeni kategori",
+    "createTitle": "Yeni kategori",
+    "editTitle": "Kategoriyi düzenle",
+    "name": "Ad",
+    "posts": "Yazılar",
+    "active": "Aktif",
+    "inactive": "Pasif",
+    "search": "Kategori ara...",
+    "empty": "Kategori bulunamadı",
+    "deleteTitle": "Kategoriyi sil",
+    "deleteDesc": "\"{{name}}\" silinecek."
+  }
+}

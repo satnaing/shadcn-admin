@@ -1,0 +1,48 @@
+{
+  "toast": { "error": "Something went wrong", "created": "Created", "updated": "Saved", "deleted": "Deleted" },
+  "status": { "draft": "Draft", "published": "Published", "scheduled": "Scheduled" },
+  "columns": { "title": "Post", "category": "Category", "languages": "Languages", "status": "Status", "views": "Views", "updated": "Updated" },
+  "actions": { "edit": "Edit", "delete": "Delete" },
+  "list": {
+    "title": "Blogs",
+    "description": "Posts with translations, categories and SEO.",
+    "search": "Search posts...",
+    "empty": "No posts found",
+    "categories": "Categories",
+    "new": "New post"
+  },
+  "delete": { "title": "Delete post", "desc": "\"{{title}}\" will be deleted. This cannot be undone." },
+  "form": {
+    "createTitle": "New post",
+    "editTitle": "Edit post",
+    "description": "Write the post in every language, then set category, cover and publishing.",
+    "title": "Title",
+    "short_description": "Summary",
+    "content": "Content (HTML)",
+    "slug": "Slug",
+    "cover": "Cover image",
+    "category": "Category",
+    "categoryPlaceholder": "Select category",
+    "tags": "Tags",
+    "tagsPlaceholder": "store, guide",
+    "publishAt": "Publish at",
+    "save": "Save",
+    "saving": "Saving..."
+  },
+  "categories": {
+    "title": "Blog categories",
+    "description": "Group posts into categories (translated per language).",
+    "back": "Back to posts",
+    "new": "New category",
+    "createTitle": "New category",
+    "editTitle": "Edit category",
+    "name": "Name",
+    "posts": "Posts",
+    "active": "Active",
+    "inactive": "Inactive",
+    "search": "Search categories...",
+    "empty": "No categories found",
+    "deleteTitle": "Delete category",
+    "deleteDesc": "\"{{name}}\" will be deleted."
+  }
+}

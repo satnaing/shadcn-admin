@@ -1,0 +1,46 @@
+{
+  "title": "Modüller",
+  "description": "Modülleri aç/kapat, .zip paketiyle yenisini kur, güncelle veya sil.",
+  "search": "Modül ara...",
+  "empty": "Modül bulunamadı",
+  "save": "Değişiklikleri kaydet ({{count}})",
+  "filter": { "all": "Tümü", "active": "Aktif", "inactive": "Pasif", "notInstalled": "Kurulu değil" },
+  "status": { "active": "Aktif", "inactive": "Pasif", "notInstalled": "Kurulu değil" },
+  "card": {
+    "required": "Zorunlu çekirdek modül (kapatılamaz)",
+    "requires": "Gerektirir",
+    "missingDeps": "Gerekli: {{list}}",
+    "updateTo": "v{{v}} sürümüne güncelle",
+    "actions": "Modül işlemleri",
+    "update": "Güncelle",
+    "delete": "Sil"
+  },
+  "toast": { "error": "Bir hata oluştu", "saved": "Modüller kaydedildi", "updated": "Modül güncellendi", "deleted": "Modül silindi", "installed": "Modül kuruldu (pasif)" },
+  "upload": {
+    "open": "Modül yükle",
+    "title": "Modül yükle",
+    "description": "Modül paketini seçin (.zip, en fazla {{mb}} MB). Kurulumdan önce doğrulanır.",
+    "warningTitle": "Modüller PHP kodu çalıştırır",
+    "warning": "Modül paketi sunucuda rastgele PHP kodu çalıştırır. Yalnızca güvendiğiniz kaynaklardan imzalı paketleri kurun.",
+    "file": "Modül paketi",
+    "tooBig": "Dosya {{mb}} MB'tan büyük.",
+    "result": "Doğrulama sonucu",
+    "steps": { "size": "Paket boyutu", "manifest": "module.json geçerli", "compatibility": "Bu çekirdek sürümüyle uyumlu", "signature": "İmza / checksum" },
+    "submit": "Yükle ve kur",
+    "close": "Kapat"
+  },
+  "confirm": {
+    "ok": "Tamam",
+    "continue": "Devam et",
+    "blockedTitle": "Bu modül değiştirilemez",
+    "blockedEnable": "Gerekli şu modüller kurulu değil: {{list}}.",
+    "blockedDisable": "Zorunlu bir çekirdek modül buna bağlı: {{list}}.",
+    "enableTitle": "{{name}} etkinleştirilsin mi?",
+    "enableDesc": "Şu modüller gerekli ve birlikte etkinleşecek: {{list}}.",
+    "disableTitle": "{{name}} kapatılsın mı?",
+    "disableDesc": "Şu modüller ona bağlı ve birlikte kapanacak: {{list}}.",
+    "deleteTitle": "{{name}} silinsin mi?",
+    "deleteDesc": "Modül dosyaları silinir. Verisi korunur.",
+    "deleteDependants": "Diğer modüller ona bağlı: {{list}}. Verisi korunur."
+  }
+}

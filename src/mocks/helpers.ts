@@ -1,5 +1,6 @@
 export type Query = Record<string, string>
-export type Handler = (ctx: { params: string[]; query: Query }) => unknown
+/** `body` = parsed JSON request body (or FormData for uploads); only writes carry one. */
+export type Handler = (ctx: { params: string[]; query: Query; body?: unknown }) => unknown
 
 const PER_PAGE = 10
 

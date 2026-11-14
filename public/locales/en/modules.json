@@ -1,0 +1,46 @@
+{
+  "title": "Modules",
+  "description": "Turn modules on or off, install new ones from a .zip package, update or remove them.",
+  "search": "Search modules...",
+  "empty": "No modules found",
+  "save": "Save changes ({{count}})",
+  "filter": { "all": "All", "active": "Active", "inactive": "Inactive", "notInstalled": "Not installed" },
+  "status": { "active": "Active", "inactive": "Inactive", "notInstalled": "Not installed" },
+  "card": {
+    "required": "Required core module (cannot be disabled)",
+    "requires": "Requires",
+    "missingDeps": "Needs: {{list}}",
+    "updateTo": "Update to v{{v}}",
+    "actions": "Module actions",
+    "update": "Update",
+    "delete": "Delete"
+  },
+  "toast": { "error": "Something went wrong", "saved": "Modules saved", "updated": "Module updated", "deleted": "Module deleted", "installed": "Module installed (disabled)" },
+  "upload": {
+    "open": "Upload module",
+    "title": "Upload module",
+    "description": "Select a module package (.zip, max {{mb}} MB). It is validated before installation.",
+    "warningTitle": "Modules run PHP code",
+    "warning": "A module package executes arbitrary PHP on the server. Install only signed packages from sources you trust.",
+    "file": "Module package",
+    "tooBig": "The file is larger than {{mb}} MB.",
+    "result": "Validation result",
+    "steps": { "size": "Package size", "manifest": "module.json is valid", "compatibility": "Compatible with this core version", "signature": "Signature / checksum" },
+    "submit": "Upload and install",
+    "close": "Close"
+  },
+  "confirm": {
+    "ok": "OK",
+    "continue": "Continue",
+    "blockedTitle": "Cannot change this module",
+    "blockedEnable": "These required modules are not installed: {{list}}.",
+    "blockedDisable": "A required core module depends on: {{list}}.",
+    "enableTitle": "Enable {{name}}?",
+    "enableDesc": "These modules are needed and will be enabled too: {{list}}.",
+    "disableTitle": "Disable {{name}}?",
+    "disableDesc": "These modules depend on it and will be disabled too: {{list}}.",
+    "deleteTitle": "Delete {{name}}?",
+    "deleteDesc": "The module files are removed. Its data is kept.",
+    "deleteDependants": "Other modules depend on it: {{list}}. Its data is kept."
+  }
+}

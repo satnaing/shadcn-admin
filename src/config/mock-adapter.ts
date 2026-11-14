@@ -5,9 +5,18 @@ import { paginate } from '@/mocks/helpers'
 
 const LATENCY_MS = 150
 
+function parseBody(raw: unknown): unknown {
+  if (typeof raw !== 'string') return raw
+  try {
+    return JSON.parse(raw)
+  } catch {
+    return raw
+  }
+}
+
 function match(method: string, path: string) {
   let fallback: {
-    handler: (ctx: { params: string[]; query: Record<string, string> }) => unknown
+    handler: (ctx: { params: string[]; query: Record<string, string>; body?: unknown }) => unknown
     params: string[]
   } | null = null
 
@@ -78,7 +87,7 @@ export function installMockAdapter(instance: AxiosInstance) {
 
     const query = Object.fromEntries(new URLSearchParams(rawQuery ?? ''))
     return {
-      data: found.handler({ params: found.params, query }),
+      data: found.handler({ params: found.params, query, body: parseBody(config.data) }),
       status: 200,
       statusText: 'OK',
       headers: {},
