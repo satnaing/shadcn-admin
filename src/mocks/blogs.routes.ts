@@ -1,4 +1,4 @@
-import { type Handler, ok, paginate } from './helpers'
+import { createCollection, type Handler, paginate } from './helpers'
 
 type Loc = 'az' | 'ru' | 'tr' | 'en'
 type Status = 'draft' | 'published' | 'scheduled'
@@ -38,8 +38,27 @@ const blogs = TOPICS.map((title, i) => {
   }
 })
 
+type Trans = Record<Loc, { title: string; short_description: string; content: string; slug: string; meta_title: string; meta_description: string; og_image: string }>
+type BlogRow = (typeof blogs)[number] & { tags?: string[]; translations?: Trans }
+type BlogBody = { category_id: number; cover: string; tags: string[]; status: Status; publish_at: string | null; translations: Trans }
+type CatBody = { status: boolean; translations: Record<Loc, { name: string; slug: string }> }
+
+const blogCol = createCollection<BlogRow>(blogs)
+const catCol = createCollection(CATEGORIES)
+const now = () => new Date().toISOString().slice(0, 10)
+
+const toRow = (b: BlogBody) => {
+  const locales = (Object.keys(b.translations) as Loc[]).filter((l) => b.translations[l].title.trim())
+  const en = b.translations.en
+  return {
+    title: en.title, slug: en.slug || slug(en.title), cover: b.cover, category_id: b.category_id,
+    category_name: catName(b.category_id), locales, status: b.status, publish_at: b.publish_at,
+    tags: b.tags, translations: b.translations, updated_at: now(),
+  }
+}
+
 const detail = (id: string): unknown => {
-  const b = blogs.find((x) => String(x.id) === id) ?? blogs[0]
+  const b = blogCol.get(id) ?? blogCol.all()[0]
   const t = (l: Loc) => ({
     title: b.locales.includes(l) ? (l === 'en' ? b.title : `${b.title} (${l})`) : '',
     short_description: b.locales.includes(l) ? `Short summary of "${b.title}".` : '',
@@ -48,51 +67,69 @@ const detail = (id: string): unknown => {
   })
   return {
     data: {
-      id: b.id, category_id: b.category_id, cover: b.cover, tags: ['store', 'guide'],
+      id: b.id, category_id: b.category_id, cover: b.cover, tags: b.tags ?? ['store', 'guide'],
       status: b.status, publish_at: b.publish_at,
-      translations: { az: t('az'), ru: t('ru'), tr: t('tr'), en: t('en') },
+      translations: b.translations ?? { az: t('az'), ru: t('ru'), tr: t('tr'), en: t('en') },
     },
   }
 }
 
 const listBlogs: Handler = (ctx) => {
-  const { filter, status, category } = ctx.query
-  const rows = blogs.filter(
-    (b) =>
-      (!status || b.status === status) &&
-      (!category || String(b.category_id) === category) &&
-      (!filter || b.title.toLowerCase().includes(filter.toLowerCase()))
+  const { status, category } = ctx.query
+  const rows = blogCol.all().filter(
+    (b) => (!status || b.status === status) && (!category || String(b.category_id) === category)
   )
   return paginate(rows)(ctx)
 }
 
 const categoryRows = () =>
-  CATEGORIES.map((c) => ({
+  catCol.all().map((c) => ({
     id: c.id, name: c.en, slug: slug(c.en), status: c.status,
-    posts_count: blogs.filter((b) => b.category_id === c.id).length,
+    posts_count: blogCol.all().filter((b) => b.category_id === c.id).length,
   }))
+
+const fromCatBody = (b: CatBody) => ({
+  en: b.translations.en.name, az: b.translations.az.name || b.translations.en.name,
+  ru: b.translations.ru.name || b.translations.en.name, tr: b.translations.tr.name || b.translations.en.name,
+  status: b.status,
+})
 
 const routes: Record<string, Handler> = {
   'GET /admin/blogs': listBlogs,
   'GET /admin/blogs/:id': ({ params }) => detail(params[0]),
-  'POST /admin/blogs': ok({ message: 'created' }),
-  'PUT /admin/blogs/:id': ok({ message: 'updated' }),
-  'DELETE /admin/blogs/:id': ok({ message: 'deleted' }),
-  'GET /admin/blog-categories': (ctx) => {
-    const needle = ctx.query.filter?.toLowerCase()
-    const rows = categoryRows().filter((c) => !needle || c.name.toLowerCase().includes(needle))
-    return paginate(rows)({ ...ctx, query: { order: 'asc', ...ctx.query } })
+  'POST /admin/blogs': ({ body }) => ({
+    data: blogCol.create({ ...toRow(body as BlogBody), views: 0 } as Omit<BlogRow, 'id'>, 'start'),
+    message: 'created',
+  }),
+  'PUT /admin/blogs/:id': ({ params, body }) => {
+    blogCol.update(params[0], toRow(body as BlogBody) as Partial<BlogRow>)
+    return { message: 'updated' }
   },
+  'DELETE /admin/blogs/:id': ({ params }) => {
+    blogCol.remove(params[0])
+    return { message: 'deleted' }
+  },
+  'GET /admin/blog-categories': (ctx) =>
+    paginate(categoryRows)({ ...ctx, query: { sort: 'id', ...ctx.query } }),
   'GET /admin/blog-categories/:id': ({ params }) => {
-    const c = CATEGORIES.find((x) => String(x.id) === params[0]) ?? CATEGORIES[0]
+    const c = catCol.get(params[0]) ?? catCol.all()[0]
     const tr = (l: Loc) => ({ name: c[l], slug: slug(c.en) })
     return {
       data: { id: c.id, status: c.status, translations: { az: tr('az'), ru: tr('ru'), tr: tr('tr'), en: tr('en') } },
     }
   },
-  'POST /admin/blog-categories': ok({ message: 'created' }),
-  'PUT /admin/blog-categories/:id': ok({ message: 'updated' }),
-  'DELETE /admin/blog-categories/:id': ok({ message: 'deleted' }),
+  'POST /admin/blog-categories': ({ body }) => ({
+    data: catCol.create(fromCatBody(body as CatBody)),
+    message: 'created',
+  }),
+  'PUT /admin/blog-categories/:id': ({ params, body }) => {
+    catCol.update(params[0], fromCatBody(body as CatBody))
+    return { message: 'updated' }
+  },
+  'DELETE /admin/blog-categories/:id': ({ params }) => {
+    catCol.remove(params[0])
+    return { message: 'deleted' }
+  },
 }
 
 export default routes
