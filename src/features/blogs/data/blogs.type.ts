@@ -58,10 +58,10 @@ export interface BlogCategoryDetail {
 
 export interface BlogListParams {
   page?: number
-  pageSize?: number
+  per_page?: number
+  q?: string
+  /** `field` ascending, `-field` descending. */
   sort?: string
-  order?: string
-  filter?: string
   status?: string
   category?: string
 }

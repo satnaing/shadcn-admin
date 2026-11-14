@@ -10,8 +10,7 @@ import type {
   BlogListParams,
 } from '@/features/blogs/data/blogs.type'
 
-const query = ({ pageSize, ...rest }: BlogListParams) =>
-  buildListQueryString({ ...rest, per_page: pageSize })
+const query = (params: BlogListParams) => buildListQueryString({ ...params })
 
 export const blogsApi = {
   list: (params: BlogListParams = {}) =>

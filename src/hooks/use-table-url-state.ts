@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type {
   ColumnFiltersState,
   OnChangeFn,
@@ -7,6 +7,8 @@ import type {
 } from '@tanstack/react-table'
 
 type SearchRecord = Record<string, unknown>
+
+const GLOBAL_FILTER_DEBOUNCE_MS = 300
 
 export type NavigateFn = (opts: {
   to?: string
@@ -185,6 +187,10 @@ export function useTableUrlState(
     return typeof raw === 'string' ? raw : ''
   })
 
+  // The input stays responsive; the URL (and so the server request) follows 300 ms after the last key.
+  const searchTimer = useRef<ReturnType<typeof setTimeout>>(undefined)
+  useEffect(() => () => clearTimeout(searchTimer.current), [])
+
   const onGlobalFilterChange: OnChangeFn<string> | undefined =
     globalFilterEnabled
       ? (updater) => {
@@ -193,15 +199,20 @@ export function useTableUrlState(
               ? updater(globalFilter ?? '')
               : updater
           const value = trimGlobal ? next.trim() : next
-          setGlobalFilter(value)
-          navigate({
-            to: '.',
-            search: (prev) => ({
-              ...(prev as SearchRecord),
-              [pageKey]: undefined,
-              [globalFilterKey]: value ? value : undefined,
-            }),
-          })
+          setGlobalFilter(next)
+          clearTimeout(searchTimer.current)
+          searchTimer.current = setTimeout(
+            () =>
+              navigate({
+                to: '.',
+                search: (prev) => ({
+                  ...(prev as SearchRecord),
+                  [pageKey]: undefined,
+                  [globalFilterKey]: value ? value : undefined,
+                }),
+              }),
+            GLOBAL_FILTER_DEBOUNCE_MS
+          )
         }
       : undefined
 

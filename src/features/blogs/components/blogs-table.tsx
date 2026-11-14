@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { EntityDataTable } from '@/components/data-table'
 import type { NavigateFn } from '@/hooks/use-table-url-state'
-import type { BlogListItem, BlogListParams } from '../data/blogs.type'
+import { toServerListParams } from '@/shared/utils/list-query-string'
+import type { BlogListItem } from '../data/blogs.type'
 import { useBlogMutations } from '../hooks/use-blog-mutations'
 import { useBlogCategories, useBlogs } from '../hooks/use-blogs'
 import { useBlogColumns } from './blogs-columns'
@@ -13,9 +14,6 @@ interface Props {
   navigate: NavigateFn
 }
 
-const str = (v: unknown) => (typeof v === 'string' && v ? v : undefined)
-const num = (v: unknown) => (typeof v === 'number' ? v : undefined)
-
 export function BlogsTable({ search, navigate }: Props) {
   const { t } = useTranslation('blogs')
   const [target, setTarget] = useState<BlogListItem | null>(null)
@@ -23,17 +21,8 @@ export function BlogsTable({ search, navigate }: Props) {
   const onDelete = useCallback((blog: BlogListItem) => setTarget(blog), [])
   const columns = useBlogColumns(onDelete)
 
-  const params: BlogListParams = {
-    page: num(search.page),
-    pageSize: num(search.pageSize),
-    sort: str(search.sort),
-    order: str(search.order),
-    filter: str(search.filter),
-    status: str(search.status),
-    category: str(search.category),
-  }
-  const { data } = useBlogs(params)
-  const { data: categories } = useBlogCategories({ pageSize: 100 })
+  const { data } = useBlogs(toServerListParams(search, { defaultSort: 'updated_at', filters: ['status', 'category'] }))
+  const { data: categories } = useBlogCategories({ per_page: 100 })
 
   const toolbarFilters = useMemo(
     () => [

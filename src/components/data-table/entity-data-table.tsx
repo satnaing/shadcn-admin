@@ -40,6 +40,8 @@ export function EntityDataTable<TData extends EntityRow>({
   const {
     columnFilters,
     onColumnFiltersChange,
+    globalFilter,
+    onGlobalFilterChange,
     pagination,
     onPaginationChange,
     sorting,
@@ -90,6 +92,8 @@ export function EntityDataTable<TData extends EntityRow>({
     rowSelection,
     columnFilters,
     columnVisibility,
+    globalFilter,
+    onGlobalFilterChange,
     onPaginationChange,
     onColumnFiltersChange,
     onRowSelectionChange: setRowSelection,

@@ -12,6 +12,7 @@ import type { NavigateFn } from '@/hooks/use-table-url-state'
 import { PERMISSIONS } from '@/shared/permissions'
 import type { BlogCategoryListItem } from '../data/blogs.type'
 import { useBlogMutations } from '../hooks/use-blog-mutations'
+import { toServerListParams } from '@/shared/utils/list-query-string'
 import { useBlogCategories } from '../hooks/use-blogs'
 
 interface Props {
@@ -26,13 +27,7 @@ export function BlogCategoriesTable({ search, navigate, onEdit }: Props) {
   const [target, setTarget] = useState<BlogCategoryListItem | null>(null)
   const onDelete = useCallback((c: BlogCategoryListItem) => setTarget(c), [])
 
-  const { data } = useBlogCategories({
-    page: typeof search.page === 'number' ? search.page : undefined,
-    pageSize: typeof search.pageSize === 'number' ? search.pageSize : undefined,
-    filter: typeof search.filter === 'string' ? search.filter : undefined,
-    sort: typeof search.sort === 'string' ? search.sort : undefined,
-    order: typeof search.order === 'string' ? search.order : 'asc',
-  })
+  const { data } = useBlogCategories(toServerListParams(search, { defaultSort: 'id', defaultOrder: 'asc' }))
 
   const columns = useMemo<ColumnDef<BlogCategoryListItem>[]>(
     () => [

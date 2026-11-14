@@ -5,6 +5,7 @@ export const statusSearchSchema = z.coerce.string().optional()
 export const listPaginationSearchFields = {
   page: z.coerce.number().optional().catch(1),
   pageSize: z.coerce.number().optional().catch(10),
+  q: z.string().optional().catch(undefined),
   sort: z.string().optional().catch('id'),
   order: z.string().optional().catch('desc'),
   status: statusSearchSchema,

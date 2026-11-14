@@ -76,9 +76,9 @@ export interface PageRevision {
 export interface PageListParams {
   page?: number
   per_page?: number
-  search?: string
+  q?: string
+  /** `field` ascending, `-field` descending. */
   sort?: string
-  order?: string
   status?: string
   lang?: string
 }

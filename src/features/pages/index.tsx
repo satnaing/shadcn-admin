@@ -5,6 +5,7 @@ import { AdminPageShell } from '@/components/admin/admin-page-shell'
 import { ConfirmDialog } from '@/components/confirm-dialog'
 import { Button } from '@/components/ui/button'
 import type { NavigateFn } from '@/hooks/use-table-url-state'
+import { toServerListParams } from '@/shared/utils/list-query-string'
 import type { PageRow } from './data/pages.type'
 import { usePageMutations } from './hooks/usePageMutations'
 import { usePagesQuery } from './hooks/usePages'
@@ -20,8 +21,6 @@ interface PagesPageProps {
   navigate: NavigateFn
 }
 
-const str = (value: unknown) => (typeof value === 'string' && value ? value : undefined)
-
 export function PagesPage({ search, navigate }: PagesPageProps) {
   const { t } = useTranslation('pages')
   const { remove } = usePageMutations()
@@ -30,14 +29,9 @@ export function PagesPage({ search, navigate }: PagesPageProps) {
   const [revisionsId, setRevisionsId] = useState<number | null>(null)
   const [deleting, setDeleting] = useState<PageRow | null>(null)
 
-  const list = usePagesQuery({
-    page: typeof search.page === 'number' ? search.page : 1,
-    per_page: typeof search.pageSize === 'number' ? search.pageSize : 10,
-    sort: str(search.sort) ?? 'updated_at',
-    order: str(search.order) ?? 'desc',
-    status: str(search.status),
-    lang: str(search.lang),
-  })
+  const list = usePagesQuery(
+    toServerListParams(search, { defaultSort: 'updated_at', filters: ['status', 'lang'] })
+  )
 
   const handlers = useMemo(
     () => ({

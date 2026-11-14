@@ -15,7 +15,7 @@ import { useBlogCategories } from '../hooks/use-blogs'
 
 export function BlogFormAside({ form }: { form: UseFormReturn<BlogFormValues> }) {
   const { t } = useTranslation('blogs')
-  const { data } = useBlogCategories({ pageSize: 100 })
+  const { data } = useBlogCategories({ per_page: 100 })
   const status = form.watch('status')
 
   return (

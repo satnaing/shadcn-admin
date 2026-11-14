@@ -29,6 +29,8 @@ interface UseEntityReactTableParams<TData extends EntityRow> {
   rowSelection: RowSelectionState
   columnFilters: ColumnFiltersState
   columnVisibility: VisibilityState
+  globalFilter?: string
+  onGlobalFilterChange?: OnChangeFn<string>
   onPaginationChange: OnChangeFn<PaginationState>
   onColumnFiltersChange: OnChangeFn<ColumnFiltersState>
   onRowSelectionChange: OnChangeFn<RowSelectionState>
@@ -55,6 +57,8 @@ export function useEntityReactTable<TData extends EntityRow>({
   rowSelection,
   columnFilters,
   columnVisibility,
+  globalFilter,
+  onGlobalFilterChange,
   onPaginationChange,
   onColumnFiltersChange,
   onRowSelectionChange,
@@ -81,6 +85,7 @@ export function useEntityReactTable<TData extends EntityRow>({
       rowSelection,
       columnFilters,
       columnVisibility,
+      globalFilter,
     },
     getRowId: (row) => String(row.id),
     manualPagination: true,
@@ -92,6 +97,7 @@ export function useEntityReactTable<TData extends EntityRow>({
     enableRowSelection,
     onPaginationChange,
     onColumnFiltersChange,
+    onGlobalFilterChange,
     onRowSelectionChange,
     onSortingChange,
     onColumnVisibilityChange,

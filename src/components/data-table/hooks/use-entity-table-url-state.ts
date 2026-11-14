@@ -64,7 +64,7 @@ export function useEntityTableUrlState({
     navigate,
     pagination: { defaultPage: 1, defaultPageSize: LIMIT },
     sorting: { defaultSort, defaultOrder },
-    globalFilter: { enabled: false },
+    globalFilter: { enabled: true, key: 'q' },
     columnFilters: columnFilterConfigs,
   })
 
