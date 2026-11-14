@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { toNavGroups } from '@/api/adapters/menu.adapter'
+import { routeExists, toNavGroups } from '@/api/adapters/menu.adapter'
 import { menuFor } from '@/mocks/menu.routes'
 import { mockModules } from '@/mocks/modules.data'
 import { ALL_PERMISSIONS } from '@/shared/permissions'
@@ -37,5 +37,33 @@ describe('sidebar merge', () => {
   it('tolerates a missing/garbled menu response', () => {
     expect(toNavGroups(undefined)).toEqual([])
     expect(toNavGroups({} as never)).toEqual([])
+  })
+})
+
+describe('module menu: screens that are not built yet', () => {
+  const paths = ['/admin', '/admin/pos', '/admin/$', '/admin/blogs/$id']
+
+  it('routeExists: exact, param and trailing-slash matches; splat never counts', () => {
+    expect(routeExists('/admin/pos/', paths)).toBe(true)
+    expect(routeExists('/admin/blogs/7', paths)).toBe(true)
+    expect(routeExists('/admin/pos/orders', paths)).toBe(false)
+    expect(routeExists('/admin/anything', paths)).toBe(false)
+  })
+
+  it('marks unbuilt items disabled, built ones not, and nothing when paths are unknown', () => {
+    const flat = (gs: ReturnType<typeof toNavGroups>) => gs.flatMap((g) => g.items).map((i) => [i.key, i.disabled])
+    const posGroup = (gs: ReturnType<typeof toNavGroups>) => gs.filter((g) => g.key === 'module-pos')
+
+    expect(flat(posGroup(toNavGroups(menuFor('admin'), paths)))).toEqual([
+      ['posTerminal', false],
+      ['posOrders', true],
+      ['posProducts', true],
+    ])
+    expect(flat(posGroup(toNavGroups(menuFor('admin')))).every(([, d]) => d === undefined)).toBe(true)
+  })
+
+  it('disabled items survive the permission filter', () => {
+    const merged = mergeSidebar([], toNavGroups(menuFor('admin'), paths), allowAll)
+    expect(merged.flatMap((g) => g.items).some((i) => i.disabled)).toBe(true)
   })
 })

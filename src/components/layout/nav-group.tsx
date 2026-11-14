@@ -76,6 +76,27 @@ function NavBadge({ children }: { children: ReactNode }) {
   return <Badge className='rounded-full px-1 py-0 text-xs'>{children}</Badge>
 }
 
+/** Screen not built yet: muted, not focusable, never navigates. */
+function SoonLabel({ children }: { children: ReactNode }) {
+  const { t } = useTranslation('nav')
+
+  return (
+    <span
+      role='link'
+      aria-disabled='true'
+      className='flex w-full cursor-not-allowed items-center gap-3 opacity-50'
+    >
+      {children}
+      <Badge
+        variant='outline'
+        className='ms-auto rounded-full px-1.5 py-0 text-[10px]'
+      >
+        {t('soon')}
+      </Badge>
+    </span>
+  )
+}
+
 function navLinkClassName(isActive: boolean) {
   return cn(
     'flex items-center gap-3 rounded-md px-3 py-2 text-xs font-medium transition-colors',
@@ -106,11 +127,18 @@ function SidebarMenuLink({
         isActive={isActive}
         tooltip={t(item.title)}
       >
-        <Link to={item.url} onClick={() => setOpenMobile(false)}>
-          {item.icon && <item.icon />}
-          <span>{t(item.title)}</span>
-          {item.badge && <NavBadge>{item.badge}</NavBadge>}
-        </Link>
+        {item.disabled ? (
+          <SoonLabel>
+            {item.icon && <item.icon />}
+            <span>{t(item.title)}</span>
+          </SoonLabel>
+        ) : (
+          <Link to={item.url} onClick={() => setOpenMobile(false)}>
+            {item.icon && <item.icon />}
+            <span>{t(item.title)}</span>
+            {item.badge && <NavBadge>{item.badge}</NavBadge>}
+          </Link>
+        )}
       </SidebarMenuButton>
     </SidebarMenuItem>
   )
@@ -160,11 +188,20 @@ function SidebarMenuCollapsible({
                     variant='nav'
                     isActive={isSubActive}
                   >
-                    <Link to={subItem.url} onClick={() => setOpenMobile(false)}>
-                      {subItem.icon && <subItem.icon />}
-                      <span>{t(subItem.title)}</span>
-                      {subItem.badge && <NavBadge>{subItem.badge}</NavBadge>}
-                    </Link>
+                    {subItem.disabled ? (
+                      <SoonLabel>
+                        <span>{t(subItem.title)}</span>
+                      </SoonLabel>
+                    ) : (
+                      <Link
+                        to={subItem.url}
+                        onClick={() => setOpenMobile(false)}
+                      >
+                        {subItem.icon && <subItem.icon />}
+                        <span>{t(subItem.title)}</span>
+                        {subItem.badge && <NavBadge>{subItem.badge}</NavBadge>}
+                      </Link>
+                    )}
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
               )
@@ -211,14 +248,24 @@ function SidebarMenuCollapsedDropdown({
             const isSubActive = checkIsActive(href, sub)
 
             return (
-              <DropdownMenuItem key={`${sub.key}-${sub.url}`} asChild>
-                <Link to={sub.url} className={navLinkClassName(isSubActive)}>
-                  {sub.icon && <sub.icon />}
-                  <span className='max-w-52 text-wrap'>{t(sub.title)}</span>
-                  {sub.badge && (
-                    <span className='ms-auto text-xs'>{sub.badge}</span>
-                  )}
-                </Link>
+              <DropdownMenuItem
+                key={`${sub.key}-${sub.url}`}
+                asChild={!sub.disabled}
+                disabled={sub.disabled}
+              >
+                {sub.disabled ? (
+                  <SoonLabel>
+                    <span className='max-w-52 text-wrap'>{t(sub.title)}</span>
+                  </SoonLabel>
+                ) : (
+                  <Link to={sub.url} className={navLinkClassName(isSubActive)}>
+                    {sub.icon && <sub.icon />}
+                    <span className='max-w-52 text-wrap'>{t(sub.title)}</span>
+                    {sub.badge && (
+                      <span className='ms-auto text-xs'>{sub.badge}</span>
+                    )}
+                  </Link>
+                )}
               </DropdownMenuItem>
             )
           })}

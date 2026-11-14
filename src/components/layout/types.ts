@@ -18,6 +18,8 @@ type Team = {
 type BaseNavItem = {
   title: string
   badge?: string
+  /** Route not built yet: rendered muted with a "soon" badge, not clickable. */
+  disabled?: boolean
   icon?: React.ElementType
   key: string
 }
