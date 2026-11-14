@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import i18next from 'i18next'
 import { toast } from 'sonner'
+import { locales } from '@/shared/constant'
 import { settingsKeys, settingsService } from '../data/settings.service'
 import type { LanguagePatch } from '../data/settings.type'
 
@@ -13,7 +14,12 @@ export const usePatchLanguage = () => {
   return useMutation({
     mutationFn: ({ id, patch }: { id: number; patch: LanguagePatch }) =>
       settingsService.patchLanguage(id, patch),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: settingsKeys.languages() }),
+    onSuccess: (res, { patch }) => {
+      // the new default language is also the admin UI language, when a locale file exists for it
+      const code = res?.data?.code
+      if (patch.is_default && code && locales.includes(code)) void i18next.changeLanguage(code)
+      return queryClient.invalidateQueries({ queryKey: settingsKeys.languages() })
+    },
     onError: () => toast.error(i18next.t('settings:common.saveError')),
   })
 }

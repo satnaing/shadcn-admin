@@ -13,7 +13,28 @@ interface CurrencyInterface {
   position: 'before' | 'after'
 }
 
-const currencyKeys = { default: ['CURRENCY', 'default'] as const }
+/** Settings → Currency invalidates the `['CURRENCY']` prefix, so every formatter re-renders. */
+export const currencyKeys = { default: ['CURRENCY', 'default'] as const }
+
+type MoneyCurrency = Pick<CurrencyInterface, 'symbol' | 'position' | 'decimal_places'>
+
+export function makeMoneyFormatter(currency: MoneyCurrency | null | undefined) {
+  const symbol = currency?.symbol ?? '₼'
+  const position = currency?.position ?? 'before'
+  const decimals = currency?.decimal_places ?? 2
+
+  const formatMoney = (amount: number | string | null | undefined): string => {
+    const n = typeof amount === 'string' ? parseFloat(amount) : (amount ?? 0)
+    if (Number.isNaN(n)) return '—'
+    const formatted = n.toLocaleString('az-AZ', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    })
+    return position === 'before' ? `${symbol}${formatted}` : `${formatted} ${symbol}`
+  }
+
+  return { formatMoney, symbol, position, decimals }
+}
 
 /** Fetches currencies once and returns a formatter using the default one. */
 export function useCurrencyFormatter() {
@@ -29,19 +50,5 @@ export function useCurrencyFormatter() {
     staleTime: 5 * 60 * 1000,
   })
 
-  const symbol = data?.symbol ?? '₼'
-  const position = data?.position ?? 'before'
-  const decimals = data?.decimal_places ?? 2
-
-  const formatMoney = (amount: number | string | null | undefined): string => {
-    const n = typeof amount === 'string' ? parseFloat(amount) : (amount ?? 0)
-    if (Number.isNaN(n)) return '—'
-    const formatted = n.toLocaleString('az-AZ', {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    })
-    return position === 'before' ? `${symbol}${formatted}` : `${formatted} ${symbol}`
-  }
-
-  return { formatMoney, symbol, position, decimals }
+  return makeMoneyFormatter(data)
 }
