@@ -22,7 +22,10 @@ describe('permission tree', () => {
 
   it('every core nav permission exists in the tree', () => {
     const used = navCore.flatMap((g) =>
-      g.items.flatMap((i) => [i.permission, ...(i.items?.map((c) => c.permission) ?? [])])
+      g.items.flatMap((i) => {
+        const { permission, items } = i as { permission?: string; items?: { permission?: string }[] }
+        return [permission, ...(items?.map((c) => c.permission) ?? [])]
+      })
     )
     for (const p of used.filter(Boolean)) expect(ALL_PERMISSIONS).toContain(p)
   })

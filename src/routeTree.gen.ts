@@ -35,6 +35,10 @@ import { Route as AuthenticatedAdminThemesHeaderRouteImport } from './routes/_au
 import { Route as AuthenticatedAdminThemesFooterRouteImport } from './routes/_authenticated/admin/themes/footer'
 import { Route as AuthenticatedAdminThemesCustomCodeRouteImport } from './routes/_authenticated/admin/themes/custom-code'
 import { Route as AuthenticatedAdminThemesBannersRouteImport } from './routes/_authenticated/admin/themes/banners'
+import { Route as AuthenticatedAdminBlogsNewRouteImport } from './routes/_authenticated/admin/blogs/new'
+import { Route as AuthenticatedAdminBlogsCategoriesRouteImport } from './routes/_authenticated/admin/blogs/categories'
+import { Route as AuthenticatedAdminBlogsIdRouteImport } from './routes/_authenticated/admin/blogs/$id'
+import { Route as AuthenticatedAdminPagesIdBuilderRouteImport } from './routes/_authenticated/admin/pages/$id/builder'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -180,6 +184,30 @@ const AuthenticatedAdminThemesBannersRoute =
     path: '/themes/banners',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminBlogsNewRoute =
+  AuthenticatedAdminBlogsNewRouteImport.update({
+    id: '/blogs/new',
+    path: '/blogs/new',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminBlogsCategoriesRoute =
+  AuthenticatedAdminBlogsCategoriesRouteImport.update({
+    id: '/blogs/categories',
+    path: '/blogs/categories',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminBlogsIdRoute =
+  AuthenticatedAdminBlogsIdRouteImport.update({
+    id: '/blogs/$id',
+    path: '/blogs/$id',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPagesIdBuilderRoute =
+  AuthenticatedAdminPagesIdBuilderRouteImport.update({
+    id: '/pages/$id/builder',
+    path: '/pages/$id/builder',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
@@ -193,6 +221,9 @@ export interface FileRoutesByFullPath {
   '/admin/$': typeof AuthenticatedAdminSplatRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
+  '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
+  '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
   '/admin/themes/banners': typeof AuthenticatedAdminThemesBannersRoute
   '/admin/themes/custom-code': typeof AuthenticatedAdminThemesCustomCodeRoute
   '/admin/themes/footer': typeof AuthenticatedAdminThemesFooterRoute
@@ -207,6 +238,7 @@ export interface FileRoutesByFullPath {
   '/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
   '/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
+  '/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
 }
 export interface FileRoutesByTo {
   '/sign-in': typeof authSignInRoute
@@ -219,6 +251,9 @@ export interface FileRoutesByTo {
   '/admin/$': typeof AuthenticatedAdminSplatRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
+  '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
+  '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
   '/admin/themes/banners': typeof AuthenticatedAdminThemesBannersRoute
   '/admin/themes/custom-code': typeof AuthenticatedAdminThemesCustomCodeRoute
   '/admin/themes/footer': typeof AuthenticatedAdminThemesFooterRoute
@@ -233,6 +268,7 @@ export interface FileRoutesByTo {
   '/admin/roles': typeof AuthenticatedAdminRolesIndexRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes': typeof AuthenticatedAdminThemesIndexRoute
+  '/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -248,6 +284,9 @@ export interface FileRoutesById {
   '/_authenticated/admin/$': typeof AuthenticatedAdminSplatRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
+  '/_authenticated/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
+  '/_authenticated/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
   '/_authenticated/admin/themes/banners': typeof AuthenticatedAdminThemesBannersRoute
   '/_authenticated/admin/themes/custom-code': typeof AuthenticatedAdminThemesCustomCodeRoute
   '/_authenticated/admin/themes/footer': typeof AuthenticatedAdminThemesFooterRoute
@@ -262,6 +301,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
   '/_authenticated/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/_authenticated/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
+  '/_authenticated/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -277,6 +317,9 @@ export interface FileRouteTypes {
     | '/admin/$'
     | '/errors/$error'
     | '/admin/'
+    | '/admin/blogs/$id'
+    | '/admin/blogs/categories'
+    | '/admin/blogs/new'
     | '/admin/themes/banners'
     | '/admin/themes/custom-code'
     | '/admin/themes/footer'
@@ -291,6 +334,7 @@ export interface FileRouteTypes {
     | '/admin/roles/'
     | '/admin/settings/'
     | '/admin/themes/'
+    | '/admin/pages/$id/builder'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/sign-in'
@@ -303,6 +347,9 @@ export interface FileRouteTypes {
     | '/admin/$'
     | '/errors/$error'
     | '/admin'
+    | '/admin/blogs/$id'
+    | '/admin/blogs/categories'
+    | '/admin/blogs/new'
     | '/admin/themes/banners'
     | '/admin/themes/custom-code'
     | '/admin/themes/footer'
@@ -317,6 +364,7 @@ export interface FileRouteTypes {
     | '/admin/roles'
     | '/admin/settings'
     | '/admin/themes'
+    | '/admin/pages/$id/builder'
   id:
     | '__root__'
     | '/_authenticated'
@@ -331,6 +379,9 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/$'
     | '/_authenticated/errors/$error'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/blogs/$id'
+    | '/_authenticated/admin/blogs/categories'
+    | '/_authenticated/admin/blogs/new'
     | '/_authenticated/admin/themes/banners'
     | '/_authenticated/admin/themes/custom-code'
     | '/_authenticated/admin/themes/footer'
@@ -345,6 +396,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/roles/'
     | '/_authenticated/admin/settings/'
     | '/_authenticated/admin/themes/'
+    | '/_authenticated/admin/pages/$id/builder'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -541,12 +593,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminThemesBannersRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/blogs/new': {
+      id: '/_authenticated/admin/blogs/new'
+      path: '/blogs/new'
+      fullPath: '/admin/blogs/new'
+      preLoaderRoute: typeof AuthenticatedAdminBlogsNewRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/blogs/categories': {
+      id: '/_authenticated/admin/blogs/categories'
+      path: '/blogs/categories'
+      fullPath: '/admin/blogs/categories'
+      preLoaderRoute: typeof AuthenticatedAdminBlogsCategoriesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/blogs/$id': {
+      id: '/_authenticated/admin/blogs/$id'
+      path: '/blogs/$id'
+      fullPath: '/admin/blogs/$id'
+      preLoaderRoute: typeof AuthenticatedAdminBlogsIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/pages/$id/builder': {
+      id: '/_authenticated/admin/pages/$id/builder'
+      path: '/pages/$id/builder'
+      fullPath: '/admin/pages/$id/builder'
+      preLoaderRoute: typeof AuthenticatedAdminPagesIdBuilderRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
   }
 }
 
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminSplatRoute: typeof AuthenticatedAdminSplatRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminBlogsIdRoute: typeof AuthenticatedAdminBlogsIdRoute
+  AuthenticatedAdminBlogsCategoriesRoute: typeof AuthenticatedAdminBlogsCategoriesRoute
+  AuthenticatedAdminBlogsNewRoute: typeof AuthenticatedAdminBlogsNewRoute
   AuthenticatedAdminThemesBannersRoute: typeof AuthenticatedAdminThemesBannersRoute
   AuthenticatedAdminThemesCustomCodeRoute: typeof AuthenticatedAdminThemesCustomCodeRoute
   AuthenticatedAdminThemesFooterRoute: typeof AuthenticatedAdminThemesFooterRoute
@@ -561,12 +644,17 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminRolesIndexRoute: typeof AuthenticatedAdminRolesIndexRoute
   AuthenticatedAdminSettingsIndexRoute: typeof AuthenticatedAdminSettingsIndexRoute
   AuthenticatedAdminThemesIndexRoute: typeof AuthenticatedAdminThemesIndexRoute
+  AuthenticatedAdminPagesIdBuilderRoute: typeof AuthenticatedAdminPagesIdBuilderRoute
 }
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
     AuthenticatedAdminSplatRoute: AuthenticatedAdminSplatRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+    AuthenticatedAdminBlogsIdRoute: AuthenticatedAdminBlogsIdRoute,
+    AuthenticatedAdminBlogsCategoriesRoute:
+      AuthenticatedAdminBlogsCategoriesRoute,
+    AuthenticatedAdminBlogsNewRoute: AuthenticatedAdminBlogsNewRoute,
     AuthenticatedAdminThemesBannersRoute: AuthenticatedAdminThemesBannersRoute,
     AuthenticatedAdminThemesCustomCodeRoute:
       AuthenticatedAdminThemesCustomCodeRoute,
@@ -583,6 +671,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminRolesIndexRoute: AuthenticatedAdminRolesIndexRoute,
     AuthenticatedAdminSettingsIndexRoute: AuthenticatedAdminSettingsIndexRoute,
     AuthenticatedAdminThemesIndexRoute: AuthenticatedAdminThemesIndexRoute,
+    AuthenticatedAdminPagesIdBuilderRoute:
+      AuthenticatedAdminPagesIdBuilderRoute,
   }
 
 const AuthenticatedAdminRouteRouteWithChildren =
