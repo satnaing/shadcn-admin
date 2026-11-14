@@ -1,0 +1,22 @@
+{
+  "columns": { "title": "Başlıq", "slug": "URL", "languages": "Dillər", "status": "Status", "sections": "Bölmələr", "updated": "Yenilənib" },
+  "homepage": "Ana səhifə",
+  "status": { "draft": "Qaralama", "published": "Dərc olunub" },
+  "actions": { "menu": "Əməliyyatlar", "builder": "Builder-i aç", "settings": "Səhifə ayarları", "revisions": "Revizyonlar", "delete": "Sil", "save": "Yadda saxla", "cancel": "Ləğv et", "up": "Yuxarı", "down": "Aşağı", "drag": "Sürüşdürərək sırala", "duplicate": "Təkrarla", "toggleHidden": "Göstər / gizlət", "close": "Bağla", "back": "Səhifələrə qayıt", "addItem": "Element əlavə et" },
+  "toast": { "created": "Səhifə yaradıldı", "updated": "Səhifə yeniləndi", "deleted": "Səhifə silindi", "published": "Səhifə dərc olundu", "restored": "Revizyon bərpa olundu" },
+  "list": { "title": "Səhifələr", "description": "Saytın bütün səhifələri, ana səhifə daxil.", "create": "Yeni səhifə", "search": "Səhifə axtar...", "empty": "Səhifə tapılmadı." },
+  "create": { "title": "Yeni səhifə", "description": "Boş səhifədən və ya şablondan başlayın.", "blank": "Boş", "blankHint": "Bölmə yoxdur", "template": "Şablon", "submit": "Səhifə yarat" },
+  "fields": { "title": "Başlıq", "slug": "Slug", "publishAt": "Dərc vaxtı", "header_variant": "Header variantı", "footer_variant": "Footer variantı", "isHomepage": "Ana səhifə et", "choose": "Seçin...", "linkHint": "/yol və ya https://" },
+  "seo": { "title": "SEO başlığı", "description": "SEO təsviri", "canonical": "Canonical URL" },
+  "settings": { "title": "Səhifə ayarları", "description": "SEO, slug-lar, status və layout variantları." },
+  "revisions": { "title": "Revizyonlar", "description": "Səhifənin əvvəlki versiyasını bərpa edin.", "empty": "Hələ revizyon yoxdur.", "sections": "{{count}} bölmə", "current": "Hazırkı", "restore": "Bərpa et" },
+  "delete": { "title": "Səhifəni sil", "description": "\"{{title}}\" silinsin? Bu geri qaytarıla bilməz." },
+  "source": { "type": "Mənbə tipi", "ids": "ID-lər", "idsHint": "Vergüllə ayrılmış ID-lər", "manual": "Əl ilə", "category": "Kateqoriya", "product": "Məhsul", "brand": "Brend", "deal": "Kampaniya", "post": "Yazı" },
+  "field": { "panel": "Bölmə ayarları", "componentMissing": "Komponent aktiv temada tapılmadı", "noSchema": "Bu bölmənin sahə sxemi hələ yoxdur. Payload-u JSON kimi redaktə edin.", "rawJson": "Bölmə payload JSON", "invalidJson": "Yanlış JSON - saxlanılmadı.", "tab": { "content": "Məzmun", "source": "Mənbə", "style": "Stil" } },
+  "palette": { "search": "Bölmə axtar...", "empty": "Uyğun bölmə yoxdur." },
+  "layers": { "empty": "Səhifədə hələ bölmə yoxdur." },
+  "left": { "sections": "Bölmələr", "layers": "Qatlar", "page": "Səhifə" },
+  "canvas": { "toolbar": "Bölmə alətləri", "empty": "Boş səhifə. Soldan bölmə əlavə edin.", "title": "Səhifə canvas-ı" },
+  "topbar": { "language": "Redaktə dili", "device": "Cihaz önizləməsi", "desktop": "Masaüstü", "tablet": "Planşet", "mobile": "Mobil", "undo": "Geri al", "redo": "Təkrar et", "save": { "saving": "Saxlanılır...", "error": "Saxlama xətası", "dirty": "Saxlanmamış dəyişiklik", "saved": "Qaralama saxlanıldı" }, "preview": "Önizləmə", "publish": "Dərc et" },
+  "builder": { "loading": "Builder yüklənir...", "notFound": "Səhifə tapılmadı." }
+}

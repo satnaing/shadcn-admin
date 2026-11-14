@@ -1,0 +1,22 @@
+{
+  "columns": { "title": "Title", "slug": "URL", "languages": "Languages", "status": "Status", "sections": "Sections", "updated": "Updated" },
+  "homepage": "Home",
+  "status": { "draft": "Draft", "published": "Published" },
+  "actions": { "menu": "Actions", "builder": "Open builder", "settings": "Page settings", "revisions": "Revisions", "delete": "Delete", "save": "Save", "cancel": "Cancel", "up": "Move up", "down": "Move down", "drag": "Drag to reorder", "duplicate": "Duplicate", "toggleHidden": "Show / hide", "close": "Close", "back": "Back to pages", "addItem": "Add item" },
+  "toast": { "created": "Page created", "updated": "Page updated", "deleted": "Page deleted", "published": "Page published", "restored": "Revision restored" },
+  "list": { "title": "Pages", "description": "All pages of the site, including the home page.", "create": "New page", "search": "Search pages...", "empty": "No pages found." },
+  "create": { "title": "New page", "description": "Start from a blank page or from a template.", "blank": "Blank", "blankHint": "No sections", "template": "Template", "submit": "Create page" },
+  "fields": { "title": "Title", "slug": "Slug", "publishAt": "Publish at", "header_variant": "Header variant", "footer_variant": "Footer variant", "isHomepage": "Use as home page", "choose": "Choose...", "linkHint": "/path or https://" },
+  "seo": { "title": "SEO title", "description": "SEO description", "canonical": "Canonical URL" },
+  "settings": { "title": "Page settings", "description": "SEO, slugs, status and layout variants." },
+  "revisions": { "title": "Revisions", "description": "Restore an earlier version of this page.", "empty": "No revisions yet.", "sections": "{{count}} sections", "current": "Current", "restore": "Restore" },
+  "delete": { "title": "Delete page", "description": "Delete \"{{title}}\"? This cannot be undone." },
+  "source": { "type": "Source type", "ids": "Ids", "idsHint": "Comma separated ids", "manual": "Manual", "category": "Category", "product": "Product", "brand": "Brand", "deal": "Deal", "post": "Post" },
+  "field": { "panel": "Section settings", "componentMissing": "Component not found in the active theme", "noSchema": "This section has no field schema yet. Edit its payload as JSON.", "rawJson": "Section payload JSON", "invalidJson": "Invalid JSON - not saved.", "tab": { "content": "Content", "source": "Source", "style": "Style" } },
+  "palette": { "search": "Search sections...", "empty": "No sections match." },
+  "layers": { "empty": "No sections on this page yet." },
+  "left": { "sections": "Sections", "layers": "Layers", "page": "Page" },
+  "canvas": { "toolbar": "Section tools", "empty": "Empty page. Add a section from the left.", "title": "Page canvas" },
+  "topbar": { "language": "Editing language", "device": "Device preview", "desktop": "Desktop", "tablet": "Tablet", "mobile": "Mobile", "undo": "Undo", "redo": "Redo", "save": { "saving": "Saving...", "error": "Save failed", "dirty": "Unsaved changes", "saved": "Draft saved" }, "preview": "Preview", "publish": "Publish" },
+  "builder": { "loading": "Loading builder...", "notFound": "Page not found." }
+}

@@ -1,0 +1,22 @@
+{
+  "columns": { "title": "Заголовок", "slug": "URL", "languages": "Языки", "status": "Статус", "sections": "Секции", "updated": "Обновлено" },
+  "homepage": "Главная",
+  "status": { "draft": "Черновик", "published": "Опубликовано" },
+  "actions": { "menu": "Действия", "builder": "Открыть билдер", "settings": "Настройки страницы", "revisions": "Ревизии", "delete": "Удалить", "save": "Сохранить", "cancel": "Отмена", "up": "Вверх", "down": "Вниз", "drag": "Перетащить для сортировки", "duplicate": "Дублировать", "toggleHidden": "Показать / скрыть", "close": "Закрыть", "back": "К списку страниц", "addItem": "Добавить элемент" },
+  "toast": { "created": "Страница создана", "updated": "Страница обновлена", "deleted": "Страница удалена", "published": "Страница опубликована", "restored": "Ревизия восстановлена" },
+  "list": { "title": "Страницы", "description": "Все страницы сайта, включая главную.", "create": "Новая страница", "search": "Поиск страниц...", "empty": "Страницы не найдены." },
+  "create": { "title": "Новая страница", "description": "Начните с пустой страницы или с шаблона.", "blank": "Пустая", "blankHint": "Без секций", "template": "Шаблон", "submit": "Создать страницу" },
+  "fields": { "title": "Заголовок", "slug": "Slug", "publishAt": "Время публикации", "header_variant": "Вариант header", "footer_variant": "Вариант footer", "isHomepage": "Сделать главной", "choose": "Выберите...", "linkHint": "/путь или https://" },
+  "seo": { "title": "SEO-заголовок", "description": "SEO-описание", "canonical": "Canonical URL" },
+  "settings": { "title": "Настройки страницы", "description": "SEO, slug, статус и варианты layout." },
+  "revisions": { "title": "Ревизии", "description": "Восстановите предыдущую версию страницы.", "empty": "Ревизий пока нет.", "sections": "Секций: {{count}}", "current": "Текущая", "restore": "Восстановить" },
+  "delete": { "title": "Удалить страницу", "description": "Удалить «{{title}}»? Это действие нельзя отменить." },
+  "source": { "type": "Тип источника", "ids": "ID", "idsHint": "ID через запятую", "manual": "Вручную", "category": "Категория", "product": "Товар", "brand": "Бренд", "deal": "Акция", "post": "Запись" },
+  "field": { "panel": "Настройки секции", "componentMissing": "Компонент не найден в активной теме", "noSchema": "У этой секции пока нет схемы полей. Редактируйте payload как JSON.", "rawJson": "Payload секции (JSON)", "invalidJson": "Некорректный JSON - не сохранено.", "tab": { "content": "Контент", "source": "Источник", "style": "Стиль" } },
+  "palette": { "search": "Поиск секций...", "empty": "Подходящих секций нет." },
+  "layers": { "empty": "На странице пока нет секций." },
+  "left": { "sections": "Секции", "layers": "Слои", "page": "Страница" },
+  "canvas": { "toolbar": "Инструменты секции", "empty": "Пустая страница. Добавьте секцию слева.", "title": "Холст страницы" },
+  "topbar": { "language": "Язык редактирования", "device": "Просмотр на устройстве", "desktop": "Десктоп", "tablet": "Планшет", "mobile": "Мобильный", "undo": "Отменить", "redo": "Повторить", "save": { "saving": "Сохранение...", "error": "Ошибка сохранения", "dirty": "Есть несохранённые изменения", "saved": "Черновик сохранён" }, "preview": "Предпросмотр", "publish": "Опубликовать" },
+  "builder": { "loading": "Загрузка билдера...", "notFound": "Страница не найдена." }
+}

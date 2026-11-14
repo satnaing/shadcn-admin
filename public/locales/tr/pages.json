@@ -1,0 +1,22 @@
+{
+  "columns": { "title": "Başlık", "slug": "URL", "languages": "Diller", "status": "Durum", "sections": "Bölümler", "updated": "Güncellendi" },
+  "homepage": "Ana sayfa",
+  "status": { "draft": "Taslak", "published": "Yayında" },
+  "actions": { "menu": "İşlemler", "builder": "Builder'ı aç", "settings": "Sayfa ayarları", "revisions": "Revizyonlar", "delete": "Sil", "save": "Kaydet", "cancel": "İptal", "up": "Yukarı", "down": "Aşağı", "drag": "Sürükleyerek sırala", "duplicate": "Çoğalt", "toggleHidden": "Göster / gizle", "close": "Kapat", "back": "Sayfalara dön", "addItem": "Öğe ekle" },
+  "toast": { "created": "Sayfa oluşturuldu", "updated": "Sayfa güncellendi", "deleted": "Sayfa silindi", "published": "Sayfa yayınlandı", "restored": "Revizyon geri yüklendi" },
+  "list": { "title": "Sayfalar", "description": "Ana sayfa dahil sitenin tüm sayfaları.", "create": "Yeni sayfa", "search": "Sayfa ara...", "empty": "Sayfa bulunamadı." },
+  "create": { "title": "Yeni sayfa", "description": "Boş sayfadan veya şablondan başlayın.", "blank": "Boş", "blankHint": "Bölüm yok", "template": "Şablon", "submit": "Sayfa oluştur" },
+  "fields": { "title": "Başlık", "slug": "Slug", "publishAt": "Yayın zamanı", "header_variant": "Header varyantı", "footer_variant": "Footer varyantı", "isHomepage": "Ana sayfa yap", "choose": "Seçin...", "linkHint": "/yol veya https://" },
+  "seo": { "title": "SEO başlığı", "description": "SEO açıklaması", "canonical": "Canonical URL" },
+  "settings": { "title": "Sayfa ayarları", "description": "SEO, slug'lar, durum ve layout varyantları." },
+  "revisions": { "title": "Revizyonlar", "description": "Sayfanın önceki bir sürümünü geri yükleyin.", "empty": "Henüz revizyon yok.", "sections": "{{count}} bölüm", "current": "Güncel", "restore": "Geri yükle" },
+  "delete": { "title": "Sayfayı sil", "description": "\"{{title}}\" silinsin mi? Bu geri alınamaz." },
+  "source": { "type": "Kaynak türü", "ids": "ID'ler", "idsHint": "Virgülle ayrılmış ID'ler", "manual": "Manuel", "category": "Kategori", "product": "Ürün", "brand": "Marka", "deal": "Kampanya", "post": "Yazı" },
+  "field": { "panel": "Bölüm ayarları", "componentMissing": "Bileşen aktif temada bulunamadı", "noSchema": "Bu bölümün alan şeması henüz yok. Payload'u JSON olarak düzenleyin.", "rawJson": "Bölüm payload JSON", "invalidJson": "Geçersiz JSON - kaydedilmedi.", "tab": { "content": "İçerik", "source": "Kaynak", "style": "Stil" } },
+  "palette": { "search": "Bölüm ara...", "empty": "Eşleşen bölüm yok." },
+  "layers": { "empty": "Sayfada henüz bölüm yok." },
+  "left": { "sections": "Bölümler", "layers": "Katmanlar", "page": "Sayfa" },
+  "canvas": { "toolbar": "Bölüm araçları", "empty": "Boş sayfa. Soldan bir bölüm ekleyin.", "title": "Sayfa canvas'ı" },
+  "topbar": { "language": "Düzenleme dili", "device": "Cihaz önizlemesi", "desktop": "Masaüstü", "tablet": "Tablet", "mobile": "Mobil", "undo": "Geri al", "redo": "Yinele", "save": { "saving": "Kaydediliyor...", "error": "Kayıt hatası", "dirty": "Kaydedilmemiş değişiklikler", "saved": "Taslak kaydedildi" }, "preview": "Önizleme", "publish": "Yayınla" },
+  "builder": { "loading": "Builder yükleniyor...", "notFound": "Sayfa bulunamadı." }
+}
