@@ -1,0 +1,24 @@
+{
+  "title": "İdarəetmə paneli",
+  "description": "Saytın icmalı və son dəyişikliklər.",
+  "error": "İdarəetmə paneli yüklənmədi.",
+  "stats": {
+    "pages": "Dərc olunmuş səhifələr",
+    "blogs": "Bloq yazıları",
+    "modules": "Aktiv modullar",
+    "visits": "Ziyarətlər (30 gün)",
+    "delta": "əvvəlki 30 günə nisbətən {{value}}%"
+  },
+  "chart": { "title": "Ziyarətlər və səhifə baxışları", "empty": "Hələ trafik məlumatı yoxdur." },
+  "activity": {
+    "title": "Son fəaliyyət",
+    "empty": "Hələ heç nə baş verməyib.",
+    "actions": {
+      "created": "yaratdı",
+      "updated": "yenilədi",
+      "published": "dərc etdi",
+      "activated": "aktivləşdirdi",
+      "deleted": "sildi"
+    }
+  }
+}

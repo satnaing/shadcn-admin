@@ -1,0 +1,96 @@
+{
+  "title": "Tənzimləmələr",
+  "description": "Dillər, ümumi, SEO, valyuta, e-poçt və bildirişlər.",
+  "tabs": {
+    "general": "Ümumi",
+    "languages": "Dillər",
+    "seo": "SEO",
+    "currency": "Valyuta",
+    "email": "E-poçt (SMTP)",
+    "notifications": "Bildirişlər"
+  },
+  "common": {
+    "save": "Yadda saxla",
+    "saved": "Tənzimləmələr yadda saxlandı",
+    "saveError": "Yadda saxlamaq alınmadı",
+    "loadError": "Tənzimləmələr yüklənmədi.",
+    "invalid": "Zəhmət olmasa dəyəri yoxlayın.",
+    "cancel": "Ləğv et",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "noAccess": "Heç bir tənzimləmə bölməsinə icazəniz yoxdur."
+  },
+  "languages": {
+    "empty": "Heç bir dil əlavə edilməyib.",
+    "hint": "Susmaya görə dil söndürülə bilməz. Məzmun redaktorlarında yalnız aktiv dillər görünür.",
+    "aiTranslate": "AI tərcümə",
+    "aiSoon": "AI modulu ilə gələcək",
+    "name": "Dil",
+    "code": "Kod",
+    "active": "Aktiv",
+    "default": "Susmaya görə",
+    "makeDefault": "Susmaya görə et"
+  },
+  "currency": {
+    "add": "Valyuta əlavə et",
+    "empty": "Hələ valyuta yoxdur.",
+    "default": "Susmaya görə",
+    "makeDefault": "Susmaya görə et",
+    "createTitle": "Valyuta əlavə et",
+    "editTitle": "Valyutanı redaktə et",
+    "deleteTitle": "Valyuta silinsin?",
+    "deleteDesc": "{{code}} silinəcək. Bu əməliyyat geri qaytarılmır.",
+    "fields": {
+      "code": "Kod",
+      "name": "Ad",
+      "symbol": "Simvol",
+      "exchange_rate": "Məzənnə (əsas valyutaya)",
+      "decimal_places": "Onluq say",
+      "is_active": "Aktiv"
+    }
+  },
+  "general": {
+    "fields": {
+      "site_name": "Saytın adı",
+      "tagline": "Şüar",
+      "admin_email": "Admin e-poçtu",
+      "timezone": "Saat qurşağı",
+      "date_format": "Tarix formatı",
+      "maintenance_mode": "Texniki xidmət rejimi"
+    }
+  },
+  "seo": {
+    "fields": {
+      "meta_title": "Susmaya görə meta başlıq",
+      "meta_description": "Susmaya görə meta təsvir",
+      "canonical_base": "Canonical baza URL",
+      "og_image": "Susmaya görə sosial şəkil URL",
+      "robots_index": "Axtarış sistemlərinə indekslənməyə icazə ver",
+      "sitemap_enabled": "sitemap.xml yarat"
+    }
+  },
+  "email": {
+    "fields": {
+      "driver": "Sürücü",
+      "host": "Host",
+      "port": "Port",
+      "username": "İstifadəçi adı",
+      "password": "Parol",
+      "encryption": "Şifrələmə",
+      "from_address": "Göndərən ünvan",
+      "from_name": "Göndərən adı"
+    },
+    "options": { "smtp": "SMTP", "log": "Yalnız jurnal", "tls": "TLS", "ssl": "SSL", "none": "Yoxdur" }
+  },
+  "notifications": {
+    "fields": {
+      "notify_address": "Bildiriş e-poçtu",
+      "new_user_email": "Yeni istifadəçi qeydiyyatı",
+      "form_submission_email": "Form göndərildi",
+      "new_comment_email": "Yeni şərh",
+      "module_update_notice": "Modul yeniləməsi mövcuddur",
+      "digest_frequency": "Xülasə tezliyi"
+    },
+    "options": { "off": "Söndürülü", "daily": "Gündəlik", "weekly": "Həftəlik" }
+  }
+}

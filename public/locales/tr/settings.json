@@ -1,0 +1,96 @@
+{
+  "title": "Ayarlar",
+  "description": "Diller, genel, SEO, para birimi, e-posta ve bildirimler.",
+  "tabs": {
+    "general": "Genel",
+    "languages": "Diller",
+    "seo": "SEO",
+    "currency": "Para birimi",
+    "email": "E-posta (SMTP)",
+    "notifications": "Bildirimler"
+  },
+  "common": {
+    "save": "Kaydet",
+    "saved": "Ayarlar kaydedildi",
+    "saveError": "Kaydedilemedi",
+    "loadError": "Ayarlar yüklenemedi.",
+    "invalid": "Lütfen bu değeri kontrol edin.",
+    "cancel": "İptal",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "noAccess": "Hiçbir ayar bölümüne erişiminiz yok."
+  },
+  "languages": {
+    "empty": "Yapılandırılmış dil yok.",
+    "hint": "Varsayılan dil kapatılamaz. İçerik düzenleyicilerinde yalnızca aktif diller görünür.",
+    "aiTranslate": "YZ çeviri",
+    "aiSoon": "YZ modülüyle gelecek",
+    "name": "Dil",
+    "code": "Kod",
+    "active": "Aktif",
+    "default": "Varsayılan",
+    "makeDefault": "Varsayılan yap"
+  },
+  "currency": {
+    "add": "Para birimi ekle",
+    "empty": "Henüz para birimi yok.",
+    "default": "Varsayılan",
+    "makeDefault": "Varsayılan yap",
+    "createTitle": "Para birimi ekle",
+    "editTitle": "Para birimini düzenle",
+    "deleteTitle": "Para birimi silinsin mi?",
+    "deleteDesc": "{{code}} silinecek. Bu işlem geri alınamaz.",
+    "fields": {
+      "code": "Kod",
+      "name": "Ad",
+      "symbol": "Simge",
+      "exchange_rate": "Kur (varsayılana göre)",
+      "decimal_places": "Ondalık",
+      "is_active": "Aktif"
+    }
+  },
+  "general": {
+    "fields": {
+      "site_name": "Site adı",
+      "tagline": "Slogan",
+      "admin_email": "Yönetici e-postası",
+      "timezone": "Saat dilimi",
+      "date_format": "Tarih biçimi",
+      "maintenance_mode": "Bakım modu"
+    }
+  },
+  "seo": {
+    "fields": {
+      "meta_title": "Varsayılan meta başlık",
+      "meta_description": "Varsayılan meta açıklama",
+      "canonical_base": "Canonical temel URL",
+      "og_image": "Varsayılan sosyal görsel URL",
+      "robots_index": "Arama motorlarının dizinlemesine izin ver",
+      "sitemap_enabled": "sitemap.xml oluştur"
+    }
+  },
+  "email": {
+    "fields": {
+      "driver": "Sürücü",
+      "host": "Sunucu",
+      "port": "Port",
+      "username": "Kullanıcı adı",
+      "password": "Parola",
+      "encryption": "Şifreleme",
+      "from_address": "Gönderen adresi",
+      "from_name": "Gönderen adı"
+    },
+    "options": { "smtp": "SMTP", "log": "Yalnızca günlük", "tls": "TLS", "ssl": "SSL", "none": "Yok" }
+  },
+  "notifications": {
+    "fields": {
+      "notify_address": "Bildirim e-postası",
+      "new_user_email": "Yeni kullanıcı kaydı",
+      "form_submission_email": "Form gönderildi",
+      "new_comment_email": "Yeni yorum",
+      "module_update_notice": "Modül güncellemesi mevcut",
+      "digest_frequency": "Özet sıklığı"
+    },
+    "options": { "off": "Kapalı", "daily": "Günlük", "weekly": "Haftalık" }
+  }
+}

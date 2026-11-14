@@ -1,0 +1,96 @@
+{
+  "title": "Настройки",
+  "description": "Языки, общие, SEO, валюта, e-mail и уведомления.",
+  "tabs": {
+    "general": "Общие",
+    "languages": "Языки",
+    "seo": "SEO",
+    "currency": "Валюта",
+    "email": "E-mail (SMTP)",
+    "notifications": "Уведомления"
+  },
+  "common": {
+    "save": "Сохранить",
+    "saved": "Настройки сохранены",
+    "saveError": "Не удалось сохранить",
+    "loadError": "Не удалось загрузить настройки.",
+    "invalid": "Проверьте это значение.",
+    "cancel": "Отмена",
+    "edit": "Изменить",
+    "delete": "Удалить",
+    "noAccess": "У вас нет доступа ни к одному разделу настроек."
+  },
+  "languages": {
+    "empty": "Языки не настроены.",
+    "hint": "Язык по умолчанию нельзя отключить. В редакторах контента видны только активные языки.",
+    "aiTranslate": "ИИ-перевод",
+    "aiSoon": "Появится с ИИ-модулем",
+    "name": "Язык",
+    "code": "Код",
+    "active": "Активен",
+    "default": "По умолчанию",
+    "makeDefault": "Сделать основным"
+  },
+  "currency": {
+    "add": "Добавить валюту",
+    "empty": "Валют пока нет.",
+    "default": "По умолчанию",
+    "makeDefault": "Сделать основной",
+    "createTitle": "Добавить валюту",
+    "editTitle": "Изменить валюту",
+    "deleteTitle": "Удалить валюту?",
+    "deleteDesc": "{{code}} будет удалена. Это действие необратимо.",
+    "fields": {
+      "code": "Код",
+      "name": "Название",
+      "symbol": "Символ",
+      "exchange_rate": "Курс (к основной)",
+      "decimal_places": "Знаков после запятой",
+      "is_active": "Активна"
+    }
+  },
+  "general": {
+    "fields": {
+      "site_name": "Название сайта",
+      "tagline": "Слоган",
+      "admin_email": "E-mail администратора",
+      "timezone": "Часовой пояс",
+      "date_format": "Формат даты",
+      "maintenance_mode": "Режим обслуживания"
+    }
+  },
+  "seo": {
+    "fields": {
+      "meta_title": "Meta-заголовок по умолчанию",
+      "meta_description": "Meta-описание по умолчанию",
+      "canonical_base": "Базовый canonical URL",
+      "og_image": "URL изображения для соцсетей",
+      "robots_index": "Разрешить индексацию поисковиками",
+      "sitemap_enabled": "Генерировать sitemap.xml"
+    }
+  },
+  "email": {
+    "fields": {
+      "driver": "Драйвер",
+      "host": "Хост",
+      "port": "Порт",
+      "username": "Имя пользователя",
+      "password": "Пароль",
+      "encryption": "Шифрование",
+      "from_address": "Адрес отправителя",
+      "from_name": "Имя отправителя"
+    },
+    "options": { "smtp": "SMTP", "log": "Только лог", "tls": "TLS", "ssl": "SSL", "none": "Нет" }
+  },
+  "notifications": {
+    "fields": {
+      "notify_address": "E-mail для уведомлений",
+      "new_user_email": "Новый пользователь",
+      "form_submission_email": "Отправлена форма",
+      "new_comment_email": "Новый комментарий",
+      "module_update_notice": "Доступно обновление модуля",
+      "digest_frequency": "Периодичность сводки"
+    },
+    "options": { "off": "Выкл.", "daily": "Ежедневно", "weekly": "Еженедельно" }
+  }
+}

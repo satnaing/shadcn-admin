@@ -1,0 +1,24 @@
+{
+  "title": "Gösterge paneli",
+  "description": "Sitenin özeti ve son değişiklikler.",
+  "error": "Gösterge paneli yüklenemedi.",
+  "stats": {
+    "pages": "Yayındaki sayfalar",
+    "blogs": "Blog yazıları",
+    "modules": "Aktif modüller",
+    "visits": "Ziyaretler (30 gün)",
+    "delta": "önceki 30 güne göre %{{value}}"
+  },
+  "chart": { "title": "Ziyaretler ve sayfa görüntülemeleri", "empty": "Henüz trafik verisi yok." },
+  "activity": {
+    "title": "Son etkinlik",
+    "empty": "Henüz bir şey olmadı.",
+    "actions": {
+      "created": "oluşturdu",
+      "updated": "güncelledi",
+      "published": "yayınladı",
+      "activated": "etkinleştirdi",
+      "deleted": "sildi"
+    }
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "title": "Settings",
+  "description": "Languages, general, SEO, currency, e-mail and notifications.",
+  "tabs": {
+    "general": "General",
+    "languages": "Languages",
+    "seo": "SEO",
+    "currency": "Currency",
+    "email": "E-mail (SMTP)",
+    "notifications": "Notifications"
+  },
+  "common": {
+    "save": "Save",
+    "saved": "Settings saved",
+    "saveError": "Could not save",
+    "loadError": "Could not load settings.",
+    "invalid": "Please check this value.",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "noAccess": "You have no access to any settings section."
+  },
+  "languages": {
+    "empty": "No languages configured.",
+    "hint": "The default language cannot be switched off. Only active languages appear in content editors.",
+    "aiTranslate": "AI translate",
+    "aiSoon": "Coming with the AI module",
+    "name": "Language",
+    "code": "Code",
+    "active": "Active",
+    "default": "Default",
+    "makeDefault": "Make default"
+  },
+  "currency": {
+    "add": "Add currency",
+    "empty": "No currencies yet.",
+    "default": "Default",
+    "makeDefault": "Make default",
+    "createTitle": "Add currency",
+    "editTitle": "Edit currency",
+    "deleteTitle": "Delete currency?",
+    "deleteDesc": "{{code}} will be removed. This cannot be undone.",
+    "fields": {
+      "code": "Code",
+      "name": "Name",
+      "symbol": "Symbol",
+      "exchange_rate": "Rate (vs. default)",
+      "decimal_places": "Decimals",
+      "is_active": "Active"
+    }
+  },
+  "general": {
+    "fields": {
+      "site_name": "Site name",
+      "tagline": "Tagline",
+      "admin_email": "Admin e-mail",
+      "timezone": "Time zone",
+      "date_format": "Date format",
+      "maintenance_mode": "Maintenance mode"
+    }
+  },
+  "seo": {
+    "fields": {
+      "meta_title": "Default meta title",
+      "meta_description": "Default meta description",
+      "canonical_base": "Canonical base URL",
+      "og_image": "Default social image URL",
+      "robots_index": "Allow search engines to index",
+      "sitemap_enabled": "Generate sitemap.xml"
+    }
+  },
+  "email": {
+    "fields": {
+      "driver": "Driver",
+      "host": "Host",
+      "port": "Port",
+      "username": "Username",
+      "password": "Password",
+      "encryption": "Encryption",
+      "from_address": "From address",
+      "from_name": "From name"
+    },
+    "options": { "smtp": "SMTP", "log": "Log only", "tls": "TLS", "ssl": "SSL", "none": "None" }
+  },
+  "notifications": {
+    "fields": {
+      "notify_address": "Notification e-mail",
+      "new_user_email": "New user registered",
+      "form_submission_email": "Form submitted",
+      "new_comment_email": "New comment",
+      "module_update_notice": "Module update available",
+      "digest_frequency": "Digest frequency"
+    },
+    "options": { "off": "Off", "daily": "Daily", "weekly": "Weekly" }
+  }
+}

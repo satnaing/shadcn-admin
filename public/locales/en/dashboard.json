@@ -1,0 +1,24 @@
+{
+  "title": "Dashboard",
+  "description": "Overview of your site and recent changes.",
+  "error": "Could not load the dashboard.",
+  "stats": {
+    "pages": "Published pages",
+    "blogs": "Blog posts",
+    "modules": "Active modules",
+    "visits": "Visits (30 days)",
+    "delta": "{{value}}% vs. previous 30 days"
+  },
+  "chart": { "title": "Visits and page views", "empty": "No traffic data yet." },
+  "activity": {
+    "title": "Recent activity",
+    "empty": "Nothing happened yet.",
+    "actions": {
+      "created": "created",
+      "updated": "updated",
+      "published": "published",
+      "activated": "activated",
+      "deleted": "deleted"
+    }
+  }
+}
