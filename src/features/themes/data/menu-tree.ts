@@ -64,11 +64,15 @@ export const moveNode = (tree: MenuNode[], activeId: string, overId: string): Me
   if (!active || overParent === undefined) return tree
   if (overParent !== null && active.children.length > 0) return tree // would become depth 3
 
+  // Moving down within one list lands after the target; otherwise a one-row drag is a no-op.
+  const siblings = overParent === null ? tree : (findNode(tree, overParent)?.children ?? [])
+  const after = siblings.findIndex((n) => n.id === activeId) >= 0 && siblings.findIndex((n) => n.id === activeId) < siblings.findIndex((n) => n.id === overId)
   const without = removeNode(tree, activeId)
   const insert = (list: MenuNode[]): MenuNode[] => {
     const index = list.findIndex((node) => node.id === overId)
     if (index < 0) return list.map((node) => ({ ...node, children: insert(node.children) }))
-    return [...list.slice(0, index), active, ...list.slice(index)]
+    const at = after ? index + 1 : index
+    return [...list.slice(0, at), active, ...list.slice(at)]
   }
   return insert(without)
 }

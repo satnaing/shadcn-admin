@@ -30,6 +30,10 @@ describe('menu tree', () => {
     expect(ids(moveNode(tree, 'c1', 'a'))).toEqual(['c1', 'a', 'a1', 'b', 'c'])
   })
 
+  it('moving a sibling down lands after the target, not in place', () => {
+    expect(ids(moveNode(tree, 'a', 'b'))).toEqual(['b', 'a', 'a1', 'c', 'c1'])
+  })
+
   it('refuses a third level and self-moves', () => {
     expect(moveNode(tree, 'a', 'c1')).toBe(tree)
     expect(moveNode(tree, 'a', 'a')).toBe(tree)
