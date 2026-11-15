@@ -120,3 +120,32 @@ Disable test: Modules → toggle off → Save → sidebar group disappears and t
 | Module toggle off → save | ✅ sidebar group gone, route → 404 | 0 | n/a |
 | `/campaigns/$id` (edit form) | rendered, field values not asserted | 0 | n/a |
 Not clicked through live: campaign create/edit save, prize dialog save, batch generate, claim dialog, export download (covered by node tests on the mock layer only). Mock adapter bypasses XHR → no network ≥400 data.
+
+## Module #2 `refund` (2026-11-15)
+Folder = pilot layout (`src/features/refund/{data,hooks,components}`, `module.manifest.ts`, `src/api/modules/refund.api.ts`, `src/mocks/refund.{data,routes}.ts`, `public/locales/*/refund.json`, `docs/aec-diff/refund.md`). Routes: `/admin/refund`, `/disputes`, `/reasons`, `/categories`, `/settings` (5). Detail/pay/reject are dialogs (AEC uses modals too).
+
+### Pattern changes (read before the next module)
+| Change | Why |
+|---|---|
+| `components/forms/form-input-field.tsx`, `form-select-field.tsx` (shared RHF fields; copies of the pilot's `qr-*-field`) | every module needs them; the pilot's `qr-*` copies can be migrated later (not touched here) |
+| `components/data-table/select-column.tsx` (`selectColumn(selectAll, selectRow)`) | `EntityDataTable` only enables selection state; bulk tables need the checkbox column |
+| Toolbar filters need a **column id** per filter: add hidden filter-only columns (`defaultColumnVisibility`) or the table logs `Column with id '…' does not exist` | seen on `/refund/categories` |
+| Numeric-looking search params (`?main=1`) are parsed by the router as numbers → use `z.coerce.string()` in the route schema | otherwise the filter is dropped (URL shows `"1"`, works) |
+| New module needs its icon in `api/adapters/menu.adapter.ts` `ICONS` | unknown icons fall back to Package |
+| The extras placeholder row for the module id must be removed from `mocks/modules.extra.ts` when its manifest is registered | avoids a duplicate card |
+| `merge-sidebar.node.test.ts` no longer hard-codes the module list (derives it from `menuFor`) | every migrated module would break it |
+| One kind-aware list hook per module (`useRefundList(kind, params)`) instead of two hooks both fetching | avoids a wasted request |
+
+### Verification (Chrome, dev :5198, console tracked from first navigation)
+| Route / flow | Result | Console errors | ≥400 |
+|---|---|---|---|
+| `/admin/refund` (tabs, 10 rows/page, detail dialog) | ✅ | 0 | n/a |
+| `/disputes`, `/reasons`, `/settings` | ✅ rendered with data | 0 | n/a |
+| `/categories` | ✅ after fix (first run logged 28× missing-column errors; hidden filter columns + coerced params fixed them; `?main&unassigned` → 1 row) | 0 | n/a |
+| Offline pay: empty submit → "required"; with TRX id → toast, row leaves Pending tab | ✅ | 0 | n/a |
+| Reject: preset list shows active Russian presets, "Others" shows textarea, confirm → toast, row leaves Pending | ✅ | 0 | n/a |
+| Reasons: create (AZ only) → appears first, toast | ✅ | 0 | n/a |
+| Category days: edit 14→21 saved | ✅ | 0 | n/a |
+| Modules: toggle off + save → sidebar group gone; SPA navigation to `/admin/refund/reasons` → 404 page | ✅ | 0 | n/a |
+Not clicked live: wallet "Refund now" confirm, dispute pay/reject, reason edit/delete/bulk activate, bulk category days, settings save, sticker picker (node tests cover the mock layer). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
+Tests: 104 node tests pass (13 new in `refund.node.test.ts`), `tsc -b` clean, eslint 0 errors (2 `watch()` compiler warnings like the pilot).
