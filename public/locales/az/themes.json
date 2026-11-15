@@ -171,5 +171,19 @@
   "leaf.inverse": "Tərs mətn",
   "h.variant": "Hələ heç bir frontda variant yoxdur (Q-F1).",
   "h.menuId": "Menyu sətirindən ID (məs. header).",
-  "h.columns.menuId": "Mənbə “menyu” olduqda doldurulur."
+  "h.columns.menuId": "Mənbə “menyu” olduqda doldurulur.",
+  "leaf.percent": "Faiz",
+  "leaf.features": "Üstünlüklər",
+  "leaf.perks": "Üstünlük mətnləri",
+  "leaf.heroDeal": "Həftə sonu təklifi",
+  "leaf.vendor": "Satıcı",
+  "leaf.product_id": "Məhsul ID",
+  "leaf.stockLeft": "Qalıq",
+  "leaf.stockTotal": "Ümumi stok",
+  "leaf.priceUsd": "Qiymət (USD)",
+  "leaf.oldPriceUsd": "Köhnə qiymət (USD)",
+  "leaf.endsAt": "Bitmə vaxtı",
+  "leaf.mobileTabBar": "Mobil alt naviqasiya",
+  "leaf.items": "Elementlər",
+  "f.paymentMethods.items": "Ödəniş üsulları"
 }

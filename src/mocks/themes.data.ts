@@ -17,8 +17,8 @@ import { makeNode } from '@/features/themes/data/menu-tree'
 const t4 = (az: string, en: string, tr = en, ru = en): I18n => ({ az, en, tr, ru })
 
 export const mockThemes: ThemeSummary[] = [
-  { id: 'theme-xshop', name: 'xShop', origin: 'theme-xshop', version: '1.4.0', description: 'Bento marketplace theme: 62 sections, free colour tokens.', active: true, sections: 62, token_policy: 'free' },
-  { id: 'theme-senseihost', name: 'SenseiHost', origin: 'theme-senseihost', version: '0.9.2', description: 'Hosting storefront theme: 91 sections, locked brand palette.', active: false, sections: 91, token_policy: 'locked' },
+  { id: 'theme-xshop', name: 'xShop', origin: 'theme-xshop', version: '1.4.0', description: 'Bento marketplace theme: 62 sections, free colour tokens.', active: true, sections: 62, token_policy: 'free', variants: ['default'] },
+  { id: 'theme-senseihost', name: 'SenseiHost', origin: 'theme-senseihost', version: '0.9.2', description: 'Hosting storefront theme: 91 sections, locked brand palette.', active: false, sections: 91, token_policy: 'locked', variants: ['default'] },
 ]
 
 export const mockCompatibility: Record<string, ThemeCompatibility[]> = {
@@ -60,7 +60,6 @@ export const mockTopbar: TopbarSettings = {
 
 export const mockHeader: HeaderSettings = {
   variant: 'default',
-  variants: ['default'],
   sticky: true,
   logo: { light: '', dark: '', band: '', text: 'xShop', href: '/' },
   search: { placeholder: t4('Məhsul axtar…', 'Search products…') },
@@ -70,11 +69,16 @@ export const mockHeader: HeaderSettings = {
   categoriesButtonText: t4('Kateqoriyalar', 'Categories'),
   show: { search: true, cart: true, wishlist: true, login: true, register: true, themeToggle: false },
   menuId: 'header',
+  mobileTabBar: [
+    { label: t4('Ana səhifə', 'Home'), icon: 'home', href: '/' },
+    { label: t4('Kateqoriyalar', 'Categories'), icon: 'grid', href: '/categories' },
+    { label: t4('Səbət', 'Cart'), icon: 'cart', href: '/cart' },
+    { label: t4('Hesab', 'Account'), icon: 'user', href: '/account' },
+  ],
 }
 
 export const mockFooter: FooterSettings = {
   variant: 'default',
-  variants: ['default'],
   brand: { name: t4('xShop', 'xShop'), description: t4('Etibarlı onlayn bazar.', 'A trusted online marketplace.'), logo: '' },
   socials: [
     { network: 'facebook', href: 'https://facebook.com/xshop' },
@@ -93,7 +97,7 @@ export const mockFooter: FooterSettings = {
     { title: t4('Menyu', 'Menu'), source: 'menu', menuId: 'footer', links: [] },
   ],
   contact: { title: t4('Əlaqə', 'Contact'), address: t4('Bakı, Azərbaycan', 'Baku, Azerbaijan'), phone: '+994 12 000 00 00', email: 'info@xshop.az', fax: '' },
-  paymentMethods: { enabled: true, items: ['visa', 'mastercard', 'payriff'] },
+  paymentMethods: { enabled: true, items: [{ code: 'visa', label: 'Visa' }, { code: 'mastercard', label: 'Mastercard' }, { code: 'payriff', label: 'Payriff' }] },
   pills: [link('Qaydalar', 'Terms', '/terms'), link('Məxfilik', 'Privacy', '/privacy')],
   bottomBar: { copyright: t4('© 2026 xShop. Bütün hüquqlar qorunur.', '© 2026 xShop. All rights reserved.'), links: [link('Sayt xəritəsi', 'Sitemap', '/sitemap')] },
   showScrollTop: true,
@@ -180,6 +184,11 @@ export const mockBanners: Banner[] = Array.from({ length: 14 }, (_, index) => {
     tone: TONES[index % TONES.length],
     price: index % 3 === 0 ? '49.00' : '',
     originalPrice: index % 3 === 0 ? '79.00' : '',
+    percent: index % 3 === 0 ? 38 : 0,
+    features: index % 2 === 0 ? [{ icon: 'zap', text: t4('Sürətli çatdırılma', 'Fast delivery') }, { icon: 'shield', text: t4('Təhlükəsiz ödəniş', 'Secure payment') }, { icon: 'star', text: t4('Zəmanət', 'Warranty') }] : [],
+    perks: index % 2 === 0 ? [t4('Pulsuz çatdırılma', 'Free delivery'), t4('30 gün qaytarma', '30-day returns')] : [],
+    deal: { eyebrow: index % 3 === 0 ? t4('Günün təklifi', 'Deal of the day') : {}, vendor: index % 3 === 0 ? 'xShop' : '', product_id: index % 3 === 0 ? String(100 + index) : '', stockLeft: index % 3 === 0 ? 12 : 0, stockTotal: index % 3 === 0 ? 40 : 0 },
+    heroDeal: { icon: index % 3 === 0 ? 'flame' : '', percent: index % 3 === 0 ? 38 : 0, priceUsd: index % 3 === 0 ? 49 : 0, oldPriceUsd: index % 3 === 0 ? 79 : 0, endsAt: index % 3 === 0 ? '2026-11-30T23:59' : '' },
     order: Math.floor(index / GROUPS.length) * 10 + (index % GROUPS.length) + 1,
     enabled: index % 5 !== 4,
     starts_at: index % 4 === 0 ? '2026-11-20T00:00' : '',

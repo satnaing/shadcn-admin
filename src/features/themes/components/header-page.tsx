@@ -1,7 +1,9 @@
+import { showVariantSelect, useThemeVariants } from '@/shared/hooks/useThemeVariants'
 import type { HeaderSettings } from '../data/themes.type'
 import { BlockFormPage } from './block-form-page'
 import { FormSection } from './form-section'
 import { ImageField } from './image-field'
+import { ListEditor } from './list-editor'
 import { LocalizedField } from './localized-field'
 import { SelectField } from './select-field'
 import { SwitchField } from './switch-field'
@@ -10,13 +12,14 @@ import { TextField } from './text-field'
 const TOGGLES = ['search', 'cart', 'wishlist', 'login', 'register', 'themeToggle'] as const
 
 export function HeaderPage() {
+  const variants = useThemeVariants()
+
   return (
     <BlockFormPage<HeaderSettings> block='header' titleKey='page.header'>
-      {(value) => (
+      {() => (
         <>
           <FormSection titleKey='section.general'>
-            {/* Q-F1: no front has header variants yet; options come from the API (one `default`). */}
-            <SelectField path='variant' options={value.variants.map((v) => ({ value: v, label: v }))} />
+            {showVariantSelect(variants) && <SelectField path='variant' options={variants.map((v) => ({ value: v, label: v }))} />}
             <SwitchField path='sticky' />
             <TextField path='menuId' />
             <LocalizedField path='categoriesButtonText' />
@@ -43,6 +46,16 @@ export function HeaderPage() {
             <TextField path='chat.href' />
             <LocalizedField path='chat.onlineText' />
           </FormSection>
+
+          <ListEditor path='mobileTabBar' makeItem={() => ({ label: {}, icon: '', href: '' })}>
+            {(p) => (
+              <>
+                <LocalizedField path={`${p}.label`} />
+                <TextField path={`${p}.icon`} />
+                <TextField path={`${p}.href`} />
+              </>
+            )}
+          </ListEditor>
 
           {/* Q-F2: the fronts always render these blocks, so the switches stay disabled. */}
           <FormSection titleKey='section.visibility'>

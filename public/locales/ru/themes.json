@@ -171,5 +171,19 @@
   "leaf.inverse": "Инверсный текст",
   "h.variant": "Ни в одном фронте пока нет вариантов (Q-F1).",
   "h.menuId": "ID меню (например, header).",
-  "h.columns.menuId": "Используется, когда источник — «menu»."
+  "h.columns.menuId": "Используется, когда источник — «menu».",
+  "leaf.percent": "Процент",
+  "leaf.features": "Преимущества",
+  "leaf.perks": "Бонусы",
+  "leaf.heroDeal": "Предложение выходного дня",
+  "leaf.vendor": "Продавец",
+  "leaf.product_id": "ID товара",
+  "leaf.stockLeft": "Остаток",
+  "leaf.stockTotal": "Всего на складе",
+  "leaf.priceUsd": "Цена (USD)",
+  "leaf.oldPriceUsd": "Старая цена (USD)",
+  "leaf.endsAt": "Окончание",
+  "leaf.mobileTabBar": "Мобильная нижняя панель",
+  "leaf.items": "Элементы",
+  "f.paymentMethods.items": "Способы оплаты"
 }

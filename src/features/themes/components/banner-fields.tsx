@@ -5,6 +5,7 @@ import { useThemeT } from '../hooks/useThemeT'
 import { BANNER_GROUPS } from '../data/banner-defaults'
 import type { BannerDraft } from '../data/themes.type'
 import { useBlockForm } from '../hooks/use-block-form'
+import { BannerDealFields } from './banner-deal-fields'
 import { ColorField } from './color-field'
 import { ImageField } from './image-field'
 import { LocalizedField } from './localized-field'
@@ -63,6 +64,7 @@ export function BannerFields({ lockedColors }: { lockedColors: boolean }) {
       )}
       <TextField path='price' />
       <TextField path='originalPrice' />
+      <BannerDealFields />
       <TextField path='starts_at' type='datetime-local' />
       <TextField path='ends_at' type='datetime-local' />
       <LocaleVisibility />

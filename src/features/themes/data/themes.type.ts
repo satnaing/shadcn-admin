@@ -15,6 +15,7 @@ export interface ThemeSummary {
   active: boolean
   sections: number
   token_policy: 'free' | 'locked'
+  variants: string[]
 }
 
 export interface ThemeCompatibility {
@@ -38,7 +39,6 @@ export interface TopbarSettings {
 
 export interface HeaderSettings {
   variant: string
-  variants: string[]
   sticky: boolean
   logo: { light: string; dark: string; band: string; text: string; href: string }
   search: { placeholder: I18n }
@@ -48,11 +48,11 @@ export interface HeaderSettings {
   categoriesButtonText: I18n
   show: Record<'search' | 'cart' | 'wishlist' | 'login' | 'register' | 'themeToggle', boolean>
   menuId: string
+  mobileTabBar: { label: I18n; icon: string; href: string }[]
 }
 
 export interface FooterSettings {
   variant: string
-  variants: string[]
   brand: { name: I18n; description: I18n; logo: string }
   socials: { network: string; href: string }[]
   appDownload: {
@@ -63,7 +63,7 @@ export interface FooterSettings {
   }
   columns: { title: I18n; source: 'manual' | 'menu'; menuId: string; links: LinkValue[] }[]
   contact: { title: I18n; address: I18n; phone: string; email: string; fax: string }
-  paymentMethods: { enabled: boolean; items: string[] }
+  paymentMethods: { enabled: boolean; items: { code: string; label: string }[] }
   pills: LinkValue[]
   bottomBar: { copyright: I18n; links: LinkValue[] }
   showScrollTop: boolean
@@ -113,6 +113,24 @@ export interface MenuSet {
 export type BannerGroup = 'hero-slider' | 'promo-banners' | 'trio' | 'dual' | 'brand-logos'
 export type BannerTone = 'sage' | 'blush' | 'sky' | 'lavender' | 'amber'
 
+/** xshop `HeroSlider.deal`. */
+export interface BannerDeal {
+  eyebrow: I18n
+  vendor: string
+  product_id: string
+  stockLeft: number
+  stockTotal: number
+}
+
+/** senseihost `heroDeal` (weekend countdown). */
+export interface BannerHeroDeal {
+  icon: string
+  percent: number
+  priceUsd: number
+  oldPriceUsd: number
+  endsAt: string
+}
+
 export interface Banner {
   id: number
   group: BannerGroup
@@ -130,6 +148,11 @@ export interface Banner {
   tone: BannerTone | ''
   price: string
   originalPrice: string
+  percent: number
+  features: { icon: string; text: I18n }[]
+  perks: I18n[]
+  deal: BannerDeal
+  heroDeal: BannerHeroDeal
   order: number
   enabled: boolean
   starts_at: string

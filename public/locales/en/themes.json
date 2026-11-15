@@ -171,5 +171,19 @@
   "leaf.inverse": "Inverse text",
   "h.variant": "No front has variants yet (Q-F1).",
   "h.menuId": "Menu location id (e.g. header).",
-  "h.columns.menuId": "Used when the source is “menu”."
+  "h.columns.menuId": "Used when the source is “menu”.",
+  "leaf.percent": "Percent",
+  "leaf.features": "Features",
+  "leaf.perks": "Perks",
+  "leaf.heroDeal": "Hero deal",
+  "leaf.vendor": "Vendor",
+  "leaf.product_id": "Product ID",
+  "leaf.stockLeft": "Stock left",
+  "leaf.stockTotal": "Stock total",
+  "leaf.priceUsd": "Price (USD)",
+  "leaf.oldPriceUsd": "Old price (USD)",
+  "leaf.endsAt": "Ends at",
+  "leaf.mobileTabBar": "Mobile tab bar",
+  "leaf.items": "Items",
+  "f.paymentMethods.items": "Payment methods"
 }

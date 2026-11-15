@@ -1,3 +1,4 @@
+import { showVariantSelect, useThemeVariants } from '@/shared/hooks/useThemeVariants'
 import type { FooterSettings } from '../data/themes.type'
 import { BlockFormPage } from './block-form-page'
 import { FormSection } from './form-section'
@@ -9,16 +10,18 @@ import { SwitchField } from './switch-field'
 import { TextField } from './text-field'
 
 const NETWORKS = ['facebook', 'instagram', 'linkedin', 'pinterest', 'behance', 'x'].map((n) => ({ value: n, label: n }))
+const PAYMENTS = ['visa', 'mastercard', 'payriff', 'apple-pay', 'google-pay'].map((n) => ({ value: n, label: n }))
 const SOURCES = ['manual', 'menu'].map((n) => ({ value: n, label: n }))
 
 export function FooterPage() {
+  const variants = useThemeVariants()
+
   return (
     <BlockFormPage<FooterSettings> block='footer' titleKey='page.footer'>
-      {(value) => (
+      {() => (
         <>
           <FormSection titleKey='section.general'>
-            {/* Q-F1: no front has footer variants yet; options come from the API. */}
-            <SelectField path='variant' options={value.variants.map((v) => ({ value: v, label: v }))} />
+            {showVariantSelect(variants) && <SelectField path='variant' options={variants.map((v) => ({ value: v, label: v }))} />}
             <SwitchField path='showScrollTop' />
             <LocalizedField path='brand.name' />
             <LocalizedField path='brand.description' multiline />
@@ -86,6 +89,15 @@ export function FooterPage() {
             <SwitchField path='paymentMethods.enabled' />
             <LocalizedField path='bottomBar.copyright' />
           </FormSection>
+
+          <ListEditor path='paymentMethods.items' makeItem={() => ({ code: 'visa', label: '' })}>
+            {(p) => (
+              <>
+                <SelectField path={`${p}.code`} options={PAYMENTS} />
+                <TextField path={`${p}.label`} />
+              </>
+            )}
+          </ListEditor>
 
           <ListEditor path='bottomBar.links' makeItem={() => ({ label: {}, href: '' })}>
             {(p) => (

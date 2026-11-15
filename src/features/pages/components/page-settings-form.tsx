@@ -8,10 +8,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { showVariantSelect, useThemeVariants } from '@/shared/hooks/useThemeVariants'
 import { FALLBACK_FORM_LOCALES } from '@/shared/constants/locales'
 import type { PageDetail, PageSettingsPayload } from '../data/pages.type'
 
-const VARIANTS = ['default', 'minimal', 'centered']
 const toPayload = (page: PageDetail): PageSettingsPayload => ({
   title: page.title,
   slug: page.slug,
@@ -31,6 +31,7 @@ interface PageSettingsFormProps {
 
 export function PageSettingsForm({ page, pending, onSubmit }: PageSettingsFormProps) {
   const { t } = useTranslation('pages')
+  const variants = useThemeVariants()
   const [lang, setLang] = useState<string>(FALLBACK_FORM_LOCALES[0])
   const form = useForm<PageSettingsPayload>({ defaultValues: toPayload(page) })
   const { register, control, handleSubmit } = form
@@ -81,7 +82,7 @@ export function PageSettingsForm({ page, pending, onSubmit }: PageSettingsFormPr
           <Label>{t('fields.publishAt')}</Label>
           <Input type='datetime-local' {...register('publish_at', { setValueAs: (v) => v || null })} />
         </div>
-        {(['header_variant', 'footer_variant'] as const).map((name) => (
+        {showVariantSelect(variants) && (['header_variant', 'footer_variant'] as const).map((name) => (
           <Controller
             key={name}
             control={control}
@@ -92,7 +93,7 @@ export function PageSettingsForm({ page, pending, onSubmit }: PageSettingsFormPr
                 <Select value={field.value} onValueChange={field.onChange}>
                   <SelectTrigger className='w-full'><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    {VARIANTS.map((variant) => (
+                    {variants.map((variant) => (
                       <SelectItem key={variant} value={variant}>{variant}</SelectItem>
                     ))}
                   </SelectContent>

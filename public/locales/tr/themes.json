@@ -171,5 +171,19 @@
   "leaf.inverse": "Ters metin",
   "h.variant": "Henüz hiçbir ön yüzde varyant yok (Q-F1).",
   "h.menuId": "Menü konumu kimliği (örn. header).",
-  "h.columns.menuId": "Kaynak “menü” olduğunda kullanılır."
+  "h.columns.menuId": "Kaynak “menü” olduğunda kullanılır.",
+  "leaf.percent": "Yüzde",
+  "leaf.features": "Özellikler",
+  "leaf.perks": "Avantajlar",
+  "leaf.heroDeal": "Hafta sonu fırsatı",
+  "leaf.vendor": "Satıcı",
+  "leaf.product_id": "Ürün ID",
+  "leaf.stockLeft": "Kalan stok",
+  "leaf.stockTotal": "Toplam stok",
+  "leaf.priceUsd": "Fiyat (USD)",
+  "leaf.oldPriceUsd": "Eski fiyat (USD)",
+  "leaf.endsAt": "Bitiş zamanı",
+  "leaf.mobileTabBar": "Mobil alt menü",
+  "leaf.items": "Öğeler",
+  "f.paymentMethods.items": "Ödeme yöntemleri"
 }
