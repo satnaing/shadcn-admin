@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { EntityFormPage } from '@/components/forms/entity-form-page'
 import { LocaleFormTabs } from '@/components/forms/locale-form-tabs'
+import { useErrorLocale } from '@/components/forms/use-error-locale'
 import { useEnglishSlugSync } from '@/components/forms/use-english-slug-sync'
 import {
   type BlogFormValues,
@@ -27,6 +28,7 @@ export function BlogForm({ blog }: { blog?: BlogDetail }) {
     defaultValues: blog ? blogToForm(blog) : blogDefaults,
   })
   useEnglishSlugSync(form)
+  const { errorLocale, onInvalid } = useErrorLocale()
 
   const isCreate = !blog
   const mutation = isCreate ? create : update
@@ -35,7 +37,7 @@ export function BlogForm({ blog }: { blog?: BlogDetail }) {
     const onSuccess = () => navigate({ to: '/admin/blogs' })
     if (blog) update.mutate({ id: blog.id, values: payload }, { onSuccess })
     else create.mutate(payload, { onSuccess })
-  })
+  }, onInvalid)
 
   return (
     <EntityFormPage
@@ -54,7 +56,7 @@ export function BlogForm({ blog }: { blog?: BlogDetail }) {
       onSubmit={submit}
     >
       <div className='grid gap-6 lg:grid-cols-[1fr_20rem]'>
-        <LocaleFormTabs>{(locale) => <BlogLocaleFields form={form} locale={locale} />}</LocaleFormTabs>
+        <LocaleFormTabs key={errorLocale} defaultLocale={errorLocale}>{(locale) => <BlogLocaleFields form={form} locale={locale} />}</LocaleFormTabs>
         <BlogFormAside form={form} />
       </div>
     </EntityFormPage>

@@ -5,6 +5,7 @@ import { EntityFormDialog } from '@/components/forms/entity-form-dialog'
 import { LocaleFormTabs } from '@/components/forms/locale-form-tabs'
 import { SlugField } from '@/components/forms/slug-field'
 import { useEnglishSlugSync } from '@/components/forms/use-english-slug-sync'
+import { useErrorLocale } from '@/components/forms/use-error-locale'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
@@ -32,13 +33,14 @@ export function BlogCategoryDialog({ open, onOpenChange, category }: Props) {
     defaultValues: category ? categoryToForm(category) : categoryDefaults,
   })
   useEnglishSlugSync(form, 'name')
+  const { errorLocale, onInvalid } = useErrorLocale()
 
   const mutation = category ? updateCategory : createCategory
   const submit = form.handleSubmit((values) => {
     const onSuccess = () => onOpenChange(false)
     if (category) updateCategory.mutate({ id: category.id, values }, { onSuccess })
     else createCategory.mutate(values, { onSuccess })
-  })
+  }, onInvalid)
 
   return (
     <EntityFormDialog
@@ -58,7 +60,7 @@ export function BlogCategoryDialog({ open, onOpenChange, category }: Props) {
       onSubmit={submit}
       contentClassName='sm:max-w-lg'
     >
-      <LocaleFormTabs>
+      <LocaleFormTabs key={errorLocale} defaultLocale={errorLocale}>
         {(locale) => (
           <div className='space-y-4'>
             <FormField
