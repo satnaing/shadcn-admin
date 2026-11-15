@@ -1,5 +1,5 @@
 import type { PageCreatePayload, PageSection, PageSettingsPayload } from '@/features/pages/data/pages.type'
-import { type Handler, ok, paginate } from './helpers'
+import { type Handler, paginate } from './helpers'
 import { senseihostCatalog, xshopCatalog } from './pages.catalog'
 import { pageDetails, pageTemplates, revisionsFor, toRow } from './pages.data'
 
@@ -58,7 +58,16 @@ const routes: Record<string, (ctx: Ctx) => unknown> = {
     return { message: 'ok' }
   },
   'GET /admin/pages/:id/revisions': ({ params }) => ({ data: revisionsFor(Number(params[0])) }),
-  'POST /admin/pages/:id/revisions/:rev/restore': ok({ message: 'ok' }),
+  // shortcut: revisions carry only a section count, so restore trims to it; real API restores the snapshot
+  'POST /admin/pages/:id/revisions/:rev/restore': ({ params }) => {
+    const page = find(params[0])
+    const revision = revisionsFor(Number(params[0])).find((r) => String(r.id) === params[1])
+    if (page && revision) {
+      page.sections = page.sections.slice(0, revision.sections_count)
+      page.updated_at = new Date().toISOString()
+    }
+    return { message: 'ok' }
+  },
   'POST /admin/pages/:id/preview-token': ({ params }) => ({
     data: { token: `mock-${params[0]}`, url: `about:blank#preview-${params[0]}` },
   }),
