@@ -44,6 +44,9 @@ export function useRefundCategoryColumns(onEdit: (category: CategoryRefundItem) 
             <Badge variant='outline'>{t('categories.notRefundable')}</Badge>
           ),
       },
+      // filter-only columns: the toolbar filters (?main=, ?unassigned=) need a column id each
+      { id: 'main', enableSorting: false, enableHiding: false, header: () => null, cell: () => null },
+      { id: 'unassigned', enableSorting: false, enableHiding: false, header: () => null, cell: () => null },
       {
         id: 'actions',
         enableSorting: false,

@@ -12,6 +12,8 @@ import { useRefundCategories } from '../hooks/use-refund'
 import { useRefundCategoryColumns } from './refund-categories-columns'
 import { RefundDaysDialog } from './refund-days-dialog'
 
+const FILTER_ONLY_HIDDEN = { main: false, unassigned: false }
+
 interface Props {
   search: Record<string, unknown>
   navigate: NavigateFn
@@ -63,6 +65,7 @@ export function RefundCategoriesTable({ search, navigate }: Props) {
         enableStatusFilter={false}
         defaultSort='name'
         defaultOrder='asc'
+        defaultColumnVisibility={FILTER_ONLY_HIDDEN}
         toolbarFilters={toolbarFilters}
         urlColumnFilters={[
           { columnId: 'main', searchKey: 'main', type: 'string' },

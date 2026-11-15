@@ -6,8 +6,8 @@ import { createListSearchSchema } from '@/shared/schemas/list-search.schema'
 
 export const Route = createFileRoute('/_authenticated/admin/refund/categories')({
   validateSearch: createListSearchSchema({
-    main: z.string().optional().catch(undefined),
-    unassigned: z.string().optional().catch(undefined),
+    main: z.coerce.string().optional().catch(undefined),
+    unassigned: z.coerce.string().optional().catch(undefined),
   }),
   component: function Page() {
     const search = Route.useSearch()
