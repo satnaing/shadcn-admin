@@ -2,12 +2,13 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { modulesApi } from '@/api/modules.api'
-import type { ModuleChange } from '@/api/modules.types'
+import type { ModuleChange, ModuleListParams } from '@/api/modules.types'
 import { MENU_KEY } from '@/hooks/use-module-menu'
 
 export const MODULES_KEY = ['MODULES'] as const
 
-export const useModules = () => useQuery({ queryKey: MODULES_KEY, queryFn: modulesApi.list })
+export const useModules = (params: ModuleListParams = {}) =>
+  useQuery({ queryKey: [...MODULES_KEY, params], queryFn: () => modulesApi.list(params) })
 
 /** Every module write refreshes the list and the sidebar (module groups come from `admin_menu`). */
 export function useModuleMutations() {

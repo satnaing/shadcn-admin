@@ -5,6 +5,7 @@ import type { ModuleItem } from '@/api/modules.types'
 import { AdminPageShell } from '@/components/admin/admin-page-shell'
 import { PermissionGuard } from '@/components/guard'
 import { Button } from '@/components/ui/button'
+import { useDebouncedValue } from '@/hooks/use-debounced-value'
 import { PERMISSIONS } from '@/shared/permissions'
 import { applyPlan, diffState, type EnabledMap, planToggle, type TogglePlan } from '../data/module-deps'
 import { useModuleMutations, useModules } from '../hooks/use-modules'
@@ -17,15 +18,18 @@ const toMap = (list: ModuleItem[]): EnabledMap => Object.fromEntries(list.map((m
 
 export function ModulesPage() {
   const { t } = useTranslation('modules')
+  const [search, setSearch] = useState('')
+  const [filter, setFilter] = useState<ModuleFilter>('all')
+  const q = useDebouncedValue(search.trim())
+  // All modules drive dependency planning; the grid itself is filtered by the server.
   const { data } = useModules()
+  const { data: shown } = useModules({ q: q || undefined, filter: filter === 'all' ? undefined : filter })
   const { save, update, remove } = useModuleMutations()
   const modules = useMemo(() => data?.data ?? [], [data])
   const server = useMemo(() => toMap(modules), [modules])
 
   const [local, setLocal] = useState<EnabledMap>({})
   const state = { ...server, ...local }
-  const [search, setSearch] = useState('')
-  const [filter, setFilter] = useState<ModuleFilter>('all')
   const [pending, setPending] = useState<PendingAction | null>(null)
   const [uploadOpen, setUploadOpen] = useState(false)
 
@@ -46,13 +50,7 @@ export function ModulesPage() {
       dependants: names(modules.filter((x) => x.requires.includes(id)).map((x) => x.id)),
     })
 
-  const visible = modules.filter((m) => {
-    const on = !!state[m.id]
-    const byFilter =
-      filter === 'all' ||
-      (filter === 'notInstalled' ? !m.installed : m.installed && (filter === 'active' ? on : !on))
-    return byFilter && `${m.name} ${m.id}`.toLowerCase().includes(search.toLowerCase())
-  })
+  const visible = shown?.data ?? []
 
   return (
     <AdminPageShell

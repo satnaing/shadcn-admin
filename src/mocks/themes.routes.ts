@@ -1,5 +1,5 @@
 import type { Banner, BannerDraft, BannerGroupSettings, MenuNode } from '@/features/themes/data/themes.type'
-import { createCollection, type Handler } from './helpers'
+import { createCollection, type Handler, paginate } from './helpers'
 import {
   mockBanners,
   mockCompatibility,
@@ -48,19 +48,23 @@ const routes: Record<string, Handler> = {
     return { data: menu ?? null, message: 'saved' }
   },
 
-  'GET /admin/themes/banners': ({ query }) => ({
-    data: sorted().filter(
-      (banner) =>
-        (!query.group || banner.group === query.group) && (!query.locale || banner.locales.includes(query.locale))
-    ),
-  }),
+  'GET /admin/themes/banners': (ctx) =>
+    paginate(() =>
+      sorted().filter(
+        (banner) =>
+          (!ctx.query.group || banner.group === ctx.query.group) &&
+          (!ctx.query.locale || banner.locales.includes(ctx.query.locale))
+      ) as unknown as Record<string, unknown>[]
+    )(ctx),
   'POST /admin/themes/banners': ({ body }) => {
     const draft = body as BannerDraft
     return { data: banners.create({ ...draft, order: nextOrder(draft.group) } as Omit<Banner, 'id'>) }
   },
   'PUT /admin/themes/banners/reorder': ({ body }) => {
     const ids = (body as { ids: number[] }).ids
-    ids.forEach((id, index) => banners.update(id, { order: index + 1 }))
+    // A page only reorders its own rows: hand the same order slots back in the new sequence.
+    const slots = ids.map((id) => banners.get(id)?.order ?? 0).sort((a, b) => a - b)
+    ids.forEach((id, index) => banners.update(id, { order: slots[index] }))
     return { message: 'saved' }
   },
   'PUT /admin/themes/banners/:id': ({ params, body }) => ({

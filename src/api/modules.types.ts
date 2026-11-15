@@ -21,3 +21,10 @@ export interface ModuleChange {
   id: string
   enabled: boolean
 }
+
+/** Server-side filter of the module grid: free text + saved-state filter. */
+export interface ModuleListParams {
+  [key: string]: string | undefined
+  q?: string
+  filter?: 'active' | 'inactive' | 'notInstalled'
+}

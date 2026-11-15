@@ -4,7 +4,8 @@ import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-ki
 import { Plus } from 'lucide-react'
 import { AdminPageShell } from '@/components/admin/admin-page-shell'
 import { Button } from '@/components/ui/button'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Input } from '@/components/ui/input'
+import { useDebouncedValue } from '@/hooks/use-debounced-value'
 import { Skeleton } from '@/components/ui/skeleton'
 import { FALLBACK_FORM_LOCALES } from '@/shared/constants/locales'
 import { BANNER_GROUPS, emptyBanner } from '../data/banner-defaults'
@@ -14,20 +15,36 @@ import { useThemeT } from '../hooks/useThemeT'
 import { useActiveTheme } from '../hooks/useThemes'
 import { BannerDialog } from './banner-dialog'
 import { BannerRow } from './banner-row'
+import { ALL, FilterSelect } from './banners-filters'
 import { GroupSettingsCard } from './group-settings-card'
 
-const ALL = 'all'
+const PER_PAGE = 8
 
 export function BannersPage() {
   const t = useThemeT()
   const [group, setGroup] = useState(ALL)
   const [locale, setLocale] = useState(ALL)
   const [editing, setEditing] = useState<(BannerDraft & Partial<Pick<Banner, 'id'>>) | null>(null)
-  const query = useBannersQuery({ group: group === ALL ? undefined : group, locale: locale === ALL ? undefined : locale })
+  const [search, setSearch] = useState('')
+  const [page, setPage] = useState(1)
+  const q = useDebouncedValue(search.trim())
+  const query = useBannersQuery({
+    q: q || undefined,
+    page,
+    per_page: PER_PAGE,
+    sort: 'order',
+    group: group === ALL ? undefined : group,
+    locale: locale === ALL ? undefined : locale,
+  })
+  const meta = query.data?.meta
   const { create, update, remove, toggle, reorder } = useBannerMutations()
   const lockedColors = useActiveTheme()?.token_policy === 'locked'
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 6 } }))
-  const rows = [...(query.data?.data ?? [])].sort((a, b) => a.order - b.order)
+  const rows = query.data?.data ?? []
+  const reset = (apply: () => void) => () => {
+    apply()
+    setPage(1)
+  }
 
   const onDragEnd = ({ active, over }: DragEndEvent) => {
     if (!over || active.id === over.id) return
@@ -48,8 +65,9 @@ export function BannersPage() {
       description={t('page.banners.description')}
       actions={
         <div className='flex flex-wrap items-center gap-2'>
-          <FilterSelect value={group} onChange={setGroup} options={[...BANNER_GROUPS]} label={t('leaf.group')} />
-          <FilterSelect value={locale} onChange={setLocale} options={[...FALLBACK_FORM_LOCALES]} label={t('banners.language')} />
+          <Input className='w-48' value={search} placeholder={t('banners.search')} onChange={(e) => { setSearch(e.target.value); setPage(1) }} />
+          <FilterSelect value={group} onChange={(v) => reset(() => setGroup(v))()} options={[...BANNER_GROUPS]} label={t('leaf.group')} />
+          <FilterSelect value={locale} onChange={(v) => reset(() => setLocale(v))()} options={[...FALLBACK_FORM_LOCALES]} label={t('banners.language')} />
           <Button onClick={() => setEditing(emptyBanner(group === ALL ? 'hero-slider' : (group as BannerDraft['group'])))}>
             <Plus className='size-4' /> {t('banners.create')}
           </Button>
@@ -78,6 +96,18 @@ export function BannersPage() {
         </SortableContext>
       </DndContext>
 
+      {meta && meta.last_page > 1 && (
+        <div className='flex items-center justify-end gap-2 text-sm'>
+          <Button variant='outline' size='sm' disabled={page <= 1} onClick={() => setPage(page - 1)}>
+            {t('common.prev')}
+          </Button>
+          <span>{page} / {meta.last_page}</span>
+          <Button variant='outline' size='sm' disabled={page >= meta.last_page} onClick={() => setPage(page + 1)}>
+            {t('common.next')}
+          </Button>
+        </div>
+      )}
+
       <BannerDialog
         banner={editing}
         lockedColors={lockedColors}
@@ -86,32 +116,5 @@ export function BannersPage() {
         onClose={() => setEditing(null)}
       />
     </AdminPageShell>
-  )
-}
-
-interface FilterSelectProps {
-  value: string
-  onChange: (value: string) => void
-  options: string[]
-  label: string
-}
-
-function FilterSelect({ value, onChange, options, label }: FilterSelectProps) {
-  const t = useThemeT()
-
-  return (
-    <Select value={value} onValueChange={onChange}>
-      <SelectTrigger aria-label={label} className='w-40'>
-        <SelectValue />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value={ALL}>{t('common.all')}</SelectItem>
-        {options.map((option) => (
-          <SelectItem key={option} value={option}>
-            {option}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
   )
 }

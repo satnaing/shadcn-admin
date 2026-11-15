@@ -1,5 +1,5 @@
 import { ALL_PERMISSIONS } from '@/shared/permissions'
-import type { Handler } from './helpers'
+import { type Handler, paginate } from './helpers'
 import { type MockRole, mockRoles } from './roles.data'
 
 type Body = { name?: string; description?: string; permissions?: string[] }
@@ -10,7 +10,9 @@ const bodyOf = (ctx: Ctx) => (ctx.body ?? {}) as Body
 const find = (id: string) => mockRoles.find((r) => String(r.id) === id)
 
 const routes: Record<string, Handler> = {
-  'GET /admin/roles': () => ({ data: mockRoles }),
+  // `?page=` → server-paged list (Roles screen); bare call → every role (permission matrix).
+  'GET /admin/roles': (ctx) =>
+    ctx.query.page ? paginate(mockRoles as unknown as Record<string, unknown>[])(ctx) : { data: mockRoles },
   'GET /admin/roles/:id': ({ params }) => ({ data: find(params[0]) ?? mockRoles[0] }),
   'POST /admin/roles': (ctx: Ctx) => {
     const { name = '', description = '', permissions } = bodyOf(ctx)

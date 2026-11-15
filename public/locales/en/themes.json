@@ -185,5 +185,8 @@
   "leaf.endsAt": "Ends at",
   "leaf.mobileTabBar": "Mobile tab bar",
   "leaf.items": "Items",
-  "f.paymentMethods.items": "Payment methods"
+  "f.paymentMethods.items": "Payment methods",
+  "banners.search": "Search banners…",
+  "common.prev": "Previous",
+  "common.next": "Next"
 }

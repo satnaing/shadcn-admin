@@ -1,10 +1,12 @@
 import { api } from '@/api/client'
 import { ENDPOINTS } from '@/api/endpoints'
 import type { ApiMessageResponse, ApiResponse } from '@/api/types'
-import type { ModuleChange, ModuleItem, UploadResult } from '@/api/modules.types'
+import { buildListQueryString } from '@/shared/utils/list-query-string'
+import type { ModuleChange, ModuleListParams, ModuleItem, UploadResult } from '@/api/modules.types'
 
 export const modulesApi = {
-  list: () => api.get<ApiResponse<ModuleItem[]>>(ENDPOINTS.MODULES.LIST),
+  list: (params: ModuleListParams = {}) =>
+    api.get<ApiResponse<ModuleItem[]>>(`${ENDPOINTS.MODULES.LIST}?${buildListQueryString(params)}`),
   saveBatch: (changes: ModuleChange[]) =>
     api.post<ApiMessageResponse>(ENDPOINTS.MODULES.BATCH, { changes }),
   update: (id: string) => api.post<ApiMessageResponse>(ENDPOINTS.MODULES.UPDATE(id)),

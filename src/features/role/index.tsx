@@ -8,16 +8,23 @@ import { ConfirmDialog } from '@/components/confirm-dialog'
 import { PermissionGuard } from '@/components/guard'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
+import type { NavigateFn } from '@/hooks/use-table-url-state'
+import { toServerListParams } from '@/shared/utils/list-query-string'
 import { Skeleton } from '@/components/ui/skeleton'
 import { PERMISSIONS } from '@/shared/permissions'
 import type { Role } from './data/role.type'
 import { RoleFormDialog } from './components/role-form-dialog'
 import { RoleTable } from './components/role-table'
-import { useRoleMutations, useRoles } from './hooks/useRoles'
+import { useRoleMutations, useRolesPage } from './hooks/useRoles'
 
-export function RolesPage() {
+interface RolesPageProps {
+  search: Record<string, unknown>
+  navigate: NavigateFn
+}
+
+export function RolesPage({ search, navigate }: RolesPageProps) {
   const { t } = useTranslation('roles')
-  const { data, isLoading, isError } = useRoles()
+  const { data, isLoading, isError } = useRolesPage(toServerListParams(search, { defaultSort: 'name', defaultOrder: 'asc' }))
   const { deleteRole } = useRoleMutations()
   const [target, setTarget] = useState<Role | 'new' | null>(null)
   const [toDelete, setToDelete] = useState<Role | null>(null)
@@ -52,7 +59,7 @@ export function RolesPage() {
           </Alert>
         )}
         {data && (
-          <RoleTable roles={data.data ?? []} onEdit={setTarget} onDelete={setToDelete} />
+          <RoleTable roles={data.data ?? []} meta={data.meta} search={search} navigate={navigate} onEdit={setTarget} onDelete={setToDelete} />
         )}
       </AdminCardShell>
 

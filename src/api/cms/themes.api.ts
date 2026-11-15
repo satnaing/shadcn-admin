@@ -1,6 +1,8 @@
 import { api } from '@/api/client'
 import { ENDPOINTS } from '@/api/endpoints'
 import type { ApiResponse } from '@/api/types'
+import type { WithPagination } from '@/shared/types'
+import { buildListQueryString, type ListQueryParams } from '@/shared/utils/list-query-string'
 import type {
   Banner,
   BannerDraft,
@@ -14,6 +16,8 @@ import type {
 
 const T = ENDPOINTS.THEMES
 
+export type BannerListParams = ListQueryParams & { group?: string; locale?: string }
+
 export const themesApi = {
   list: () => api.get<ApiResponse<ThemeSummary[]>>(T.LIST),
   compatibility: (id: string) => api.get<ApiResponse<ThemeCompatibility[]>>(T.COMPATIBILITY(id)),
@@ -26,12 +30,8 @@ export const themesApi = {
   saveMenu: (location: MenuLocation, items: MenuNode[]) =>
     api.put<ApiResponse<MenuSet>, { items: MenuNode[] }>(T.MENU(location), { items }),
 
-  banners: (params: { group?: string; locale?: string }) => {
-    const query = new URLSearchParams(
-      Object.entries(params).filter((entry): entry is [string, string] => Boolean(entry[1]))
-    )
-    return api.get<ApiResponse<Banner[]>>(`${T.BANNERS}?${query}`)
-  },
+  banners: (params: BannerListParams) =>
+    api.get<WithPagination<Banner[]>>(`${T.BANNERS}?${buildListQueryString(params)}`),
   createBanner: (draft: BannerDraft) => api.post<ApiResponse<Banner>, BannerDraft>(T.BANNERS, draft),
   updateBanner: (id: number, draft: BannerDraft) =>
     api.put<ApiResponse<Banner>, BannerDraft>(T.BANNER(id), draft),

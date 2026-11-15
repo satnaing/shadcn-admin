@@ -185,5 +185,8 @@
   "leaf.endsAt": "Окончание",
   "leaf.mobileTabBar": "Мобильная нижняя панель",
   "leaf.items": "Элементы",
-  "f.paymentMethods.items": "Способы оплаты"
+  "f.paymentMethods.items": "Способы оплаты",
+  "banners.search": "Поиск баннеров…",
+  "common.prev": "Назад",
+  "common.next": "Далее"
 }

@@ -1,5 +1,6 @@
 {
   "list": {
+    "search": "Search roles…",
     "title": "Roles",
     "description": "Create roles and choose what each one may do.",
     "add": "Add role",

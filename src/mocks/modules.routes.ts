@@ -53,7 +53,15 @@ const upload: Handler = ({ body }) => {
 }
 
 const routes: Record<string, Handler> = {
-  'GET /admin/modules': () => ({ data: all() }),
+  'GET /admin/modules': ({ query }) => ({
+    data: all().filter((m) => {
+      const byFilter =
+        !query.filter ||
+        (query.filter === 'notInstalled' ? !m.installed : m.installed && (query.filter === 'active') === m.enabled)
+      const needle = (query.q ?? '').toLowerCase()
+      return byFilter && `${m.name} ${m.id} ${m.description}`.toLowerCase().includes(needle)
+    }),
+  }),
   'POST /admin/modules/upload': upload,
   'POST /admin/modules/batch': ({ body }) => {
     const changes = (body as { changes?: ModuleChange[] } | undefined)?.changes ?? []

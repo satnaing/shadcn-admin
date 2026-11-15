@@ -185,5 +185,8 @@
   "leaf.endsAt": "Bitiş zamanı",
   "leaf.mobileTabBar": "Mobil alt menü",
   "leaf.items": "Öğeler",
-  "f.paymentMethods.items": "Ödeme yöntemleri"
+  "f.paymentMethods.items": "Ödeme yöntemleri",
+  "banners.search": "Banner ara…",
+  "common.prev": "Önceki",
+  "common.next": "Sonraki"
 }
