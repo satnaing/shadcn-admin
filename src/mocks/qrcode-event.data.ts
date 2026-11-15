@@ -97,8 +97,9 @@ export const seedCodes: CodeRow[] = seedBatches.flatMap((b, bi) => {
   const prizes = seedPrizes.filter((p) => p.campaign_id === b.campaign_id)
   return Array.from({ length: 8 }, (_, k) => {
     const id = bi * 8 + k + 1
-    const status = CODE_STATES[(bi + k) % CODE_STATES.length]
     const prize = k < 2 ? prizes[(bi + k) % prizes.length] : undefined
+    const picked = CODE_STATES[(bi + k) % CODE_STATES.length]
+    const status: CodeStatus = picked === 'claimed' && !prize ? 'checked' : picked
     const revealed = status === 'checked' || status === 'claimed'
     return {
       id, campaign_id: campaign.id, campaign_name: campaign.name, batch_id: b.id,

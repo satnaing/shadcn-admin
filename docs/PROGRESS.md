@@ -92,3 +92,31 @@ Dev server :5180, own tab, console tracked from the first navigation. The mock a
 | Settings: default currency USD | ⚠ | 0 | n/a | saved, but no core screen shows money, so formatter reaction not visible live |
 | Roles: create (group select-all) / edit dialog opens | ✅ | 0 | n/a | |
 | Sweep (fresh load each): /admin, pages, builder, blogs ×4, themes ×8, modules, settings, roles, permissions | ✅ 19/19 | 0 after fixes | n/a | |
+
+## Module migration pattern (set by the pilot `qrcode-event`, 2026-11-15)
+One module = one session. Copy this layout; deviations go to the PM.
+
+| Piece | Where | Rule |
+|---|---|---|
+| Manifest | `src/features/<module>/module.manifest.ts` exports `Omit<ModuleRaw,'enabled'>` (id kebab-case, name, icon, version, `required`, `requires[]`, `admin_menu` = ONE group named after the module + ordered sub-items with `route` + `permission`) | registered in `src/mocks/modules.data.ts` as `{ ...manifest, enabled: true }` (this also feeds `GET /admin/modules` and `GET /admin/menu`) |
+| Permissions | group in `src/shared/permissions.ts`: `PERMISSIONS.<MODULE>` with keys `<module_snake>.<action>` (`index`, `<screen>`, `<screen>_manage` …), exactly `Object.values` = manifest permissions; no `*_own` | tested |
+| Folder | `data/` (types, zod schemas) · `hooks/` (`use-<m>.ts` queries + keys, `use-<m>-mutations.ts`) · `components/` (`<prefix>-*.tsx`, one exported component per file, ≤150 lines) · `index.ts` (public exports) | API client in `src/api/modules/<module>.api.ts`; endpoints in `src/api/endpoints.ts` |
+| Routes | `src/routes/_authenticated/admin/<module>/**`; every route body is `<XRouteGuard permission=…>` = `ModuleGuard` (module enabled → else 404) + `PageGuard` | `ModuleGuard` / `useModuleEnabled` live in `components/guard` + `hooks`; list routes use `createListSearchSchema({ filters… })` (now generic, typed keys) |
+| Mocks | `src/mocks/<module>.data.ts` (seed 10–30 rows) + `<module>.routes.ts` (default-export route map, `createCollection` per table, `paginate(rows(...))` with cloned rows, counts computed on read, lists/detail `{data}` envelope, writes visible on next GET) | picked up by the `*.routes.ts` glob |
+| Tables | `EntityDataTable` + `toServerListParams(search, { filters })`; extra filters live in the URL (`QrListFilters` pattern) | server does q/sort/page |
+| i18n | `public/locales/{az,en,tr,ru}/<module_snake>.json` + sidebar labels in `nav.json` (group key + item keys) + roles label in `roles.json` | key parity tested |
+| Validation messages | zod `message` = i18n key; `FormMessage` resolves `common:validation.<key>` or `ns:key` | |
+| Downloads | API returns `{download_url, filename}`; UI does `window.location.assign` (no DOM access) | mock uses a blob URL |
+| Docs | `docs/aec-diff/<module>.md` (AEC screens table, status tam/natamam/yox, field diff, open questions) | |
+| Tests (`npm run test:node`, PowerShell `D:\`) | manifest ↔ permission tree ↔ nav keys, menu hides when disabled, mock shapes + in-memory writes, locale parity | see `src/features/qrcode-event/qrcode-event.node.test.ts` |
+
+Disable test: Modules → toggle off → Save → sidebar group disappears and the module's URLs render 404 (`ModuleGuard`), verified live for `qrcode-event`.
+
+### Pilot `qrcode-event` — verification (Chrome, dev :5197, console tracked from first navigation)
+| Route | Result | Console errors | ≥400 |
+|---|---|---|---|
+| `/admin/qrcode-event` (stats: 8 cards, chart, prize table) | ✅ | 0 | n/a |
+| `/campaigns`, `/campaigns/new`, `/campaigns/$id/prizes`, `/batches`, `/batches/new?campaign_id=1`, `/codes`, `/codes/4`, `/logs`, `/settings` | ✅ rendered with data | 0 | n/a |
+| Module toggle off → save | ✅ sidebar group gone, route → 404 | 0 | n/a |
+| `/campaigns/$id` (edit form) | rendered, field values not asserted | 0 | n/a |
+Not clicked through live: campaign create/edit save, prize dialog save, batch generate, claim dialog, export download (covered by node tests on the mock layer only). Mock adapter bypasses XHR → no network ≥400 data.

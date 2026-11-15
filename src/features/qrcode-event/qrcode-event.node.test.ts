@@ -76,6 +76,12 @@ describe('qrcode-event mocks', () => {
     expect(get('/codes', { page: '2', per_page: '5' }).data).toHaveLength(5)
   })
 
+  it('stats are consistent (no negative pending prizes)', () => {
+    const stats = get('/stats').data
+    expect(Number(stats.pending_prizes)).toBeGreaterThanOrEqual(0)
+    expect(Number(stats.claimed)).toBeLessThanOrEqual(Number(stats.winners))
+  })
+
   it('applies code and log filters', () => {
     expect(get('/codes', { status: 'disabled', per_page: '1000' }).data.every((c) => c.status === 'disabled')).toBe(true)
     expect(get('/codes', { winner: '1', per_page: '1000' }).data.every((c) => c.prize_id !== null)).toBe(true)
