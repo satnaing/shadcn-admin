@@ -40,5 +40,11 @@
   "qrcodeEventCodes": "Коды",
   "qrcodeEventLogs": "Журнал сканирований",
   "qrcodeEventSettings": "Настройки",
+  "refund": "Возвраты",
+  "refundRequests": "Запросы на возврат",
+  "refundDisputes": "Спорные возвраты",
+  "refundReasons": "Причины возврата",
+  "refundCategories": "Сроки по категориям",
+  "refundSettings": "Настройки",
   "soon": "скоро"
 }

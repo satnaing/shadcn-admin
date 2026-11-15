@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { refundApi } from '@/api/modules/refund.api'
 import { usePaginatedQuery } from '@/hooks/use-paginated-query'
-import type { RefundListParams } from '../data/refund.type'
+import type { RefundKind, RefundListParams } from '../data/refund.type'
 
 export const refundKeys = {
   all: ['REFUND'] as const,
@@ -14,11 +14,11 @@ export const refundKeys = {
   settings: () => [...refundKeys.all, 'settings'] as const,
 }
 
-export const useRefundRequests = (params?: RefundListParams) =>
-  usePaginatedQuery({ queryKey: refundKeys.requests(params), queryFn: () => refundApi.requests(params) })
-
-export const useRefundDisputes = (params?: RefundListParams) =>
-  usePaginatedQuery({ queryKey: refundKeys.disputes(params), queryFn: () => refundApi.disputes(params) })
+export const useRefundList = (kind: RefundKind, params?: RefundListParams) =>
+  usePaginatedQuery({
+    queryKey: kind === 'refund' ? refundKeys.requests(params) : refundKeys.disputes(params),
+    queryFn: () => (kind === 'refund' ? refundApi.requests(params) : refundApi.disputes(params)),
+  })
 
 export const useRefundDetail = (id?: number | string) =>
   useQuery({ queryKey: refundKeys.request(id ?? ''), queryFn: () => refundApi.request(id ?? ''), enabled: !!id })

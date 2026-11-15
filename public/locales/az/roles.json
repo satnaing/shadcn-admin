@@ -50,7 +50,8 @@
     "wholesale": "Topdan satış",
     "classified": "Elanlar",
     "delivery_boys": "Kuryerlər",
-    "qrcode_event": "QR kod tədbirləri"
+    "qrcode_event": "QR kod tədbirləri",
+    "refund": "Geri ödəmə"
   },
   "actions": {
     "index": "Siyahıya bax",

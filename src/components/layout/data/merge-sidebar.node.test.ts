@@ -15,7 +15,9 @@ describe('sidebar merge', () => {
     const coreKeys = keys(navCore)
 
     expect(keys(merged).slice(0, coreKeys.length)).toEqual(coreKeys)
-    expect(keys(merged).slice(coreKeys.length)).toEqual(['module-pos', 'module-wholesale', 'module-delivery-boy', 'module-qrcode-event'])
+    const expected = [...menuFor('admin')].sort((a, b) => a.group.order - b.group.order).map((g) => 'module-' + g.module)
+    expect(expected.length).toBeGreaterThan(0)
+    expect(keys(merged).slice(coreKeys.length)).toEqual(expected)
   })
 
   it('hides the group of a disabled module', () => {

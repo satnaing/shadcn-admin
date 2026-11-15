@@ -40,5 +40,11 @@
   "qrcodeEventCodes": "Kodlar",
   "qrcodeEventLogs": "Tarama günlüğü",
   "qrcodeEventSettings": "Ayarlar",
+  "refund": "İadeler",
+  "refundRequests": "İade talepleri",
+  "refundDisputes": "İtirazlı iadeler",
+  "refundReasons": "İade nedenleri",
+  "refundCategories": "Kategori süreleri",
+  "refundSettings": "Ayarlar",
   "soon": "yakında"
 }

@@ -1,0 +1,41 @@
+{
+  "toast": { "error": "Xəta baş verdi", "paid": "Geri ödəmə tamamlandı", "rejected": "Geri ödəmə rədd edildi", "created": "Yaradıldı", "updated": "Yadda saxlanıldı", "deleted": "Silindi" },
+  "actions": { "more": "Digər əməliyyatlar", "details": "Geri ödəmə detalları", "paymentInfo": "Ödəniş məlumatına bax", "reject": "Geri ödəməni rədd et", "refundNow": "İndi geri ödə", "confirm": "Təsdiq et", "saving": "Saxlanılır...", "save": "Yadda saxla", "edit": "Redaktə", "delete": "Sil", "selectAll": "Hamısını seç", "selectRow": "Sətri seç" },
+  "tabs": { "all": "Bütün sorğular", "admin": "Admin məhsulları", "seller": "Satıcı məhsulları", "pending": "Gözləyir", "approved": "Təsdiqlənib", "rejected": "Rədd edilib", "wallet": "Pulqabı", "offline": "Oflayn" },
+  "status": { "pending": "Gözləyir", "approved": "Təsdiqlənib", "rejected": "Rədd edilib" },
+  "decision": { "pending": "Gözləyir", "approved": "Təsdiqlənib", "rejected": "Rədd edilib", "na": "Tətbiq olunmur" },
+  "channel": { "wallet": "Pulqabı", "offline": "Oflayn" },
+  "kind": { "customer": "Müştəri səbəbi", "rejection": "Rədd səbəbi" },
+  "columns": { "code": "Geri ödəmə", "product": "Məhsul", "amount": "Məbləğ", "approval": "Təsdiq", "payment": "Ödəniş", "requestedAt": "Sorğu tarixi", "seller": "Satıcı", "admin": "Admin" },
+  "refund": { "title": "Geri ödəmə sorğuları", "description": "Müştəri sorğularına baxın, ödəyin və ya rədd edin.", "search": "Kod, sifariş, satıcı və ya məhsula görə axtar...", "empty": "Geri ödəmə sorğusu tapılmadı" },
+  "dispute": { "title": "Mübahisəli geri ödəmələr", "description": "Rədd edilmiş sorğunu yeni səbəb və şəkillərlə yenidən göndərən müştərilər.", "search": "Kod, sifariş, satıcı və ya məhsula görə axtar...", "empty": "Mübahisəli sorğu tapılmadı" },
+  "detail": { "title": "Geri ödəmə sorğusu", "loading": "Yüklənir...", "amount": "Geri ödəmə məbləği", "customer": "Müştəri", "seller": "Satıcı", "requestedAt": "Sorğu vaxtı", "channel": "Ödəniş kanalı", "rejectReason": "Rədd səbəbi", "transactionId": "Əməliyyat ID", "reason": "Müştərinin səbəbi", "paymentInfo": "Müştərinin ödəniş məlumatı", "dispute": "Mübahisə" },
+  "pay": { "walletTitle": "Pulqabıya geri ödəmə", "walletDesc": "{{amount}} {{name}} adlı müştərinin pulqabısına köçürüləcək. Bu geri qaytarıla bilməz.", "offlineTitle": "Oflayn geri ödəmə", "offlineDesc": "{{amount}} məbləğini müştərinin hesabına göndərin və əməliyyat məlumatını daxil edin.", "transactionId": "Əməliyyat ID", "receipt": "Qəbz (ixtiyari)" },
+  "reject": { "title": "Geri ödəməni rədd et", "description": "{{code}} sorğusunun nə üçün rədd edildiyini seçin. Müştəri bu səbəbi görəcək.", "reason": "Rədd səbəbi", "select": "Səbəb seçin", "others": "Digər", "custom": "Səbəbi yazın", "customPlaceholder": "Səbəbi yazın..." },
+  "reasons": {
+    "title": "Geri ödəmə səbəbləri", "description": "Müştərinin sorğu verərkən və adminin rədd edərkən seçdiyi hazır səbəblər.",
+    "new": "Səbəb əlavə et", "search": "Səbəb axtar...", "empty": "Səbəb tapılmadı", "entity": "səbəb", "activate": "Aktiv et", "deactivate": "Deaktiv et",
+    "deleteTitle": "Səbəb silinsin?", "deleteDesc": "\"{{name}}\" hazır siyahıdan silinəcək. Mövcud sorğuların mətni dəyişmir.",
+    "columns": { "kind": "Növ", "reason": "Səbəb", "languages": "Tərcümələr", "status": "Aktiv" },
+    "form": { "createTitle": "Geri ödəmə səbəbi əlavə et", "editTitle": "Geri ödəmə səbəbini redaktə et", "description": "Azərbaycan dilində mətn məcburidir; boş tərcümələr ona keçir.", "kind": "Növ", "text": "Səbəb ({{lang}})" }
+  },
+  "categories": {
+    "title": "Kateqoriya üzrə geri ödəmə müddəti", "description": "Hər kateqoriya üçün geri ödəmə müddəti; alt kateqoriyalara da tətbiq olunur.",
+    "search": "Kateqoriya axtar...", "empty": "Kateqoriya tapılmadı", "entity": "kateqoriya", "level": "Səviyyə", "mainOnly": "Əsas kateqoriyalar", "unassigned": "Təyin olunmayıb",
+    "assignDays": "Gün təyin et", "days": "{{count}} gün", "notRefundable": "Geri qaytarılmır", "zeroHint": "0 — kateqoriya geri qaytarılmır.",
+    "inactiveNotice": "Kateqoriya əsaslı geri ödəmə aktiv deyil. Bu müddətlərin işləməsi üçün Geri ödəmə ayarlarında növü dəyişin.",
+    "daysTitle": "Geri ödəmə müddəti", "daysDesc": "Bu kateqoriyaya və bütün alt kateqoriyalara tətbiq olunur.", "bulkTitle": "Geri ödəmə müddətini təyin et", "bulkDesc": "Seçilmiş {{count}} kateqoriyaya və onların alt kateqoriyalarına tətbiq olunur.",
+    "columns": { "name": "Kateqoriya", "parent": "Üst kateqoriya", "days": "Geri ödəmə günləri" }
+  },
+  "settings": {
+    "title": "Geri ödəmə ayarları", "description": "Təsdiq axını, geri ödəmə müddəti, mübahisə və məhsul stikeri.",
+    "approvalMode": "Satıcı məhsullarının geri ödəməsi", "adminApproval": "Adminin təsdiqi lazımdır", "sellerDirect": "Satıcı birbaşa geri ödəyə bilər",
+    "refundType": "Geri ödəmə növü", "global": "Ümumi geri ödəmə", "category": "Kateqoriya əsaslı geri ödəmə",
+    "typeWarning": "Növü dəyişmək bütün məhsulları geri qaytarılmaz edir. Sonra müddəti yenidən təyin edin.",
+    "refundDays": "Geri ödəmə sorğusu müddəti", "refundDaysHint": "Çatdırılmadan sonra müştərinin sorğu verə biləcəyi gün sayı.",
+    "dispute": "Mübahisəli geri ödəmə", "disputeHint": "Müştəri rədd edilmiş sorğunu səbəb və şəkillərlə yenidən göndərə bilər.",
+    "disputeDays": "Mübahisə sorğusu müddəti", "disputeDaysHint": "Mübahisə göndərmək üçün geri ödəmə müddətinə əlavə olunan günlər.",
+    "sticker": "Geri ödəmə stikeri", "stickerHint": "Məhsul səhifəsində göstərilir."
+  },
+  "validation": { "integer": "Tam ədəd daxil edin", "min0": "0 və ya daha çox olmalıdır", "max120": "Ən çox 120 simvol" }
+}

@@ -40,5 +40,11 @@
   "qrcodeEventCodes": "Codes",
   "qrcodeEventLogs": "Scan log",
   "qrcodeEventSettings": "Settings",
+  "refund": "Refunds",
+  "refundRequests": "Refund requests",
+  "refundDisputes": "Dispute refunds",
+  "refundReasons": "Refund reasons",
+  "refundCategories": "Category periods",
+  "refundSettings": "Settings",
   "soon": "soon"
 }

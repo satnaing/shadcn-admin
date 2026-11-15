@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import type { ReasonItem } from './refund.type'
 
-const days = z.number().int('integer').min(0, 'min0')
+const days = z.number().int('refund:validation.integer').min(0, 'refund:validation.min0')
 
 export const OTHERS = 'others'
 
@@ -19,7 +19,7 @@ export const offlinePaySchema = z.object({
 })
 export type OfflinePayFormValues = z.infer<typeof offlinePaySchema>
 
-const text = z.string().trim().max(120, 'max120')
+const text = z.string().trim().max(120, 'refund:validation.max120')
 
 export const reasonSchema = z.object({
   kind: z.enum(['customer', 'rejection']),

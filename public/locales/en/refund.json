@@ -1,0 +1,41 @@
+{
+  "toast": { "error": "Something went wrong", "paid": "Refund completed", "rejected": "Refund rejected", "created": "Created", "updated": "Saved", "deleted": "Deleted" },
+  "actions": { "more": "More actions", "details": "Refund details", "paymentInfo": "View payment info", "reject": "Reject refund", "refundNow": "Refund now", "confirm": "Confirm", "saving": "Saving...", "save": "Save", "edit": "Edit", "delete": "Delete", "selectAll": "Select all", "selectRow": "Select row" },
+  "tabs": { "all": "All refunds", "admin": "Admin products", "seller": "Seller products", "pending": "Pending", "approved": "Approved", "rejected": "Rejected", "wallet": "Wallet", "offline": "Offline" },
+  "status": { "pending": "Pending", "approved": "Approved", "rejected": "Rejected" },
+  "decision": { "pending": "Pending", "approved": "Approved", "rejected": "Rejected", "na": "N/A" },
+  "channel": { "wallet": "Wallet", "offline": "Offline" },
+  "kind": { "customer": "Customer reason", "rejection": "Rejection reason" },
+  "columns": { "code": "Refund", "product": "Product", "amount": "Amount", "approval": "Approval", "payment": "Payment", "requestedAt": "Requested", "seller": "Seller", "admin": "Admin" },
+  "refund": { "title": "Refund requests", "description": "Review customer refund requests and pay or reject them.", "search": "Search by code, order, seller or product...", "empty": "No refund requests found" },
+  "dispute": { "title": "Dispute refunds", "description": "Customers who resubmitted a rejected refund with new reasons and photos.", "search": "Search by code, order, seller or product...", "empty": "No dispute refunds found" },
+  "detail": { "title": "Refund request", "loading": "Loading...", "amount": "Refund amount", "customer": "Customer", "seller": "Seller", "requestedAt": "Requested at", "channel": "Payment channel", "rejectReason": "Rejection reason", "transactionId": "Transaction ID", "reason": "Customer's reason", "paymentInfo": "Customer payment info", "dispute": "Dispute" },
+  "pay": { "walletTitle": "Refund to wallet", "walletDesc": "{{amount}} will be credited to the wallet of {{name}}. This cannot be undone.", "offlineTitle": "Offline refund", "offlineDesc": "Send {{amount}} to the customer's account, then enter the transaction details.", "transactionId": "Transaction ID", "receipt": "Receipt (optional)" },
+  "reject": { "title": "Reject refund", "description": "Choose why refund {{code}} is rejected. The customer will see this reason.", "reason": "Rejection reason", "select": "Select a reason", "others": "Others", "custom": "Write the reason", "customPlaceholder": "Write reason..." },
+  "reasons": {
+    "title": "Refund reasons", "description": "Preset reasons customers choose when asking for a refund and admins choose when rejecting one.",
+    "new": "Add reason", "search": "Search reasons...", "empty": "No reasons found", "entity": "reason", "activate": "Activate", "deactivate": "Deactivate",
+    "deleteTitle": "Delete reason?", "deleteDesc": "\"{{name}}\" will be removed from the preset list. Existing refunds keep their text.",
+    "columns": { "kind": "Type", "reason": "Reason", "languages": "Translations", "status": "Active" },
+    "form": { "createTitle": "Add refund reason", "editTitle": "Edit refund reason", "description": "Azerbaijani text is required; empty translations fall back to it.", "kind": "Type", "text": "Reason ({{lang}})" }
+  },
+  "categories": {
+    "title": "Category refund periods", "description": "Refund period per category; it also applies to every sub-category.",
+    "search": "Search categories...", "empty": "No categories found", "entity": "category", "level": "Level", "mainOnly": "Main categories", "unassigned": "Not assigned",
+    "assignDays": "Set refund days", "days": "{{count}} days", "notRefundable": "Not refundable", "zeroHint": "0 means the category is not refundable.",
+    "inactiveNotice": "Category-based refund is not active. Switch the refund type in Refund settings for these periods to apply.",
+    "daysTitle": "Refund period", "daysDesc": "Applied to this category and all its sub-categories.", "bulkTitle": "Set refund period", "bulkDesc": "Applied to {{count}} selected categories and their sub-categories.",
+    "columns": { "name": "Category", "parent": "Parent", "days": "Refund days" }
+  },
+  "settings": {
+    "title": "Refund settings", "description": "Approval flow, refund period, disputes and the product sticker.",
+    "approvalMode": "Seller product refunds", "adminApproval": "Need approval from admin", "sellerDirect": "Seller can refund directly",
+    "refundType": "Refund type", "global": "Global refund", "category": "Category-based refund",
+    "typeWarning": "Switching the refund type marks all products as non-refundable. Set the refund period again afterwards.",
+    "refundDays": "Refund request period", "refundDaysHint": "Days after delivery in which a customer can ask for a refund.",
+    "dispute": "Dispute refund", "disputeHint": "Customers can resubmit a rejected refund with reasons and photos.",
+    "disputeDays": "Dispute request period", "disputeDaysHint": "Days added to the refund period for sending a dispute.",
+    "sticker": "Refund sticker", "stickerHint": "Shown on the product details page."
+  },
+  "validation": { "integer": "Enter a whole number", "min0": "Must be 0 or more", "max120": "At most 120 characters" }
+}

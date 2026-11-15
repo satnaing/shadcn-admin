@@ -50,7 +50,8 @@
     "wholesale": "Wholesale",
     "classified": "Classified ads",
     "delivery_boys": "Delivery boys",
-    "qrcode_event": "QR code events"
+    "qrcode_event": "QR code events",
+    "refund": "Refunds"
   },
   "actions": {
     "index": "View list",

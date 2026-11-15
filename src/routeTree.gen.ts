@@ -25,6 +25,7 @@ import { Route as AuthenticatedAdminSplatRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminThemesIndexRouteImport } from './routes/_authenticated/admin/themes/index'
 import { Route as AuthenticatedAdminSettingsIndexRouteImport } from './routes/_authenticated/admin/settings/index'
 import { Route as AuthenticatedAdminRolesIndexRouteImport } from './routes/_authenticated/admin/roles/index'
+import { Route as AuthenticatedAdminRefundIndexRouteImport } from './routes/_authenticated/admin/refund/index'
 import { Route as AuthenticatedAdminQrcodeEventIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/index'
 import { Route as AuthenticatedAdminPermissionsIndexRouteImport } from './routes/_authenticated/admin/permissions/index'
 import { Route as AuthenticatedAdminPagesIndexRouteImport } from './routes/_authenticated/admin/pages/index'
@@ -37,6 +38,10 @@ import { Route as AuthenticatedAdminThemesHeaderRouteImport } from './routes/_au
 import { Route as AuthenticatedAdminThemesFooterRouteImport } from './routes/_authenticated/admin/themes/footer'
 import { Route as AuthenticatedAdminThemesCustomCodeRouteImport } from './routes/_authenticated/admin/themes/custom-code'
 import { Route as AuthenticatedAdminThemesBannersRouteImport } from './routes/_authenticated/admin/themes/banners'
+import { Route as AuthenticatedAdminRefundSettingsRouteImport } from './routes/_authenticated/admin/refund/settings'
+import { Route as AuthenticatedAdminRefundReasonsRouteImport } from './routes/_authenticated/admin/refund/reasons'
+import { Route as AuthenticatedAdminRefundDisputesRouteImport } from './routes/_authenticated/admin/refund/disputes'
+import { Route as AuthenticatedAdminRefundCategoriesRouteImport } from './routes/_authenticated/admin/refund/categories'
 import { Route as AuthenticatedAdminQrcodeEventSettingsRouteImport } from './routes/_authenticated/admin/qrcode-event/settings'
 import { Route as AuthenticatedAdminBlogsNewRouteImport } from './routes/_authenticated/admin/blogs/new'
 import { Route as AuthenticatedAdminBlogsCategoriesRouteImport } from './routes/_authenticated/admin/blogs/categories'
@@ -135,6 +140,12 @@ const AuthenticatedAdminRolesIndexRoute =
     path: '/roles/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminRefundIndexRoute =
+  AuthenticatedAdminRefundIndexRouteImport.update({
+    id: '/refund/',
+    path: '/refund/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminQrcodeEventIndexRoute =
   AuthenticatedAdminQrcodeEventIndexRouteImport.update({
     id: '/qrcode-event/',
@@ -205,6 +216,30 @@ const AuthenticatedAdminThemesBannersRoute =
   AuthenticatedAdminThemesBannersRouteImport.update({
     id: '/themes/banners',
     path: '/themes/banners',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminRefundSettingsRoute =
+  AuthenticatedAdminRefundSettingsRouteImport.update({
+    id: '/refund/settings',
+    path: '/refund/settings',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminRefundReasonsRoute =
+  AuthenticatedAdminRefundReasonsRouteImport.update({
+    id: '/refund/reasons',
+    path: '/refund/reasons',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminRefundDisputesRoute =
+  AuthenticatedAdminRefundDisputesRouteImport.update({
+    id: '/refund/disputes',
+    path: '/refund/disputes',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminRefundCategoriesRoute =
+  AuthenticatedAdminRefundCategoriesRouteImport.update({
+    id: '/refund/categories',
+    path: '/refund/categories',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminQrcodeEventSettingsRoute =
@@ -309,6 +344,10 @@ export interface FileRoutesByFullPath {
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
   '/admin/qrcode-event/settings': typeof AuthenticatedAdminQrcodeEventSettingsRoute
+  '/admin/refund/categories': typeof AuthenticatedAdminRefundCategoriesRoute
+  '/admin/refund/disputes': typeof AuthenticatedAdminRefundDisputesRoute
+  '/admin/refund/reasons': typeof AuthenticatedAdminRefundReasonsRoute
+  '/admin/refund/settings': typeof AuthenticatedAdminRefundSettingsRoute
   '/admin/themes/banners': typeof AuthenticatedAdminThemesBannersRoute
   '/admin/themes/custom-code': typeof AuthenticatedAdminThemesCustomCodeRoute
   '/admin/themes/footer': typeof AuthenticatedAdminThemesFooterRoute
@@ -321,6 +360,7 @@ export interface FileRoutesByFullPath {
   '/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
   '/admin/qrcode-event/': typeof AuthenticatedAdminQrcodeEventIndexRoute
+  '/admin/refund/': typeof AuthenticatedAdminRefundIndexRoute
   '/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
   '/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
@@ -351,6 +391,10 @@ export interface FileRoutesByTo {
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
   '/admin/qrcode-event/settings': typeof AuthenticatedAdminQrcodeEventSettingsRoute
+  '/admin/refund/categories': typeof AuthenticatedAdminRefundCategoriesRoute
+  '/admin/refund/disputes': typeof AuthenticatedAdminRefundDisputesRoute
+  '/admin/refund/reasons': typeof AuthenticatedAdminRefundReasonsRoute
+  '/admin/refund/settings': typeof AuthenticatedAdminRefundSettingsRoute
   '/admin/themes/banners': typeof AuthenticatedAdminThemesBannersRoute
   '/admin/themes/custom-code': typeof AuthenticatedAdminThemesCustomCodeRoute
   '/admin/themes/footer': typeof AuthenticatedAdminThemesFooterRoute
@@ -363,6 +407,7 @@ export interface FileRoutesByTo {
   '/admin/pages': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions': typeof AuthenticatedAdminPermissionsIndexRoute
   '/admin/qrcode-event': typeof AuthenticatedAdminQrcodeEventIndexRoute
+  '/admin/refund': typeof AuthenticatedAdminRefundIndexRoute
   '/admin/roles': typeof AuthenticatedAdminRolesIndexRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes': typeof AuthenticatedAdminThemesIndexRoute
@@ -396,6 +441,10 @@ export interface FileRoutesById {
   '/_authenticated/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/_authenticated/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
   '/_authenticated/admin/qrcode-event/settings': typeof AuthenticatedAdminQrcodeEventSettingsRoute
+  '/_authenticated/admin/refund/categories': typeof AuthenticatedAdminRefundCategoriesRoute
+  '/_authenticated/admin/refund/disputes': typeof AuthenticatedAdminRefundDisputesRoute
+  '/_authenticated/admin/refund/reasons': typeof AuthenticatedAdminRefundReasonsRoute
+  '/_authenticated/admin/refund/settings': typeof AuthenticatedAdminRefundSettingsRoute
   '/_authenticated/admin/themes/banners': typeof AuthenticatedAdminThemesBannersRoute
   '/_authenticated/admin/themes/custom-code': typeof AuthenticatedAdminThemesCustomCodeRoute
   '/_authenticated/admin/themes/footer': typeof AuthenticatedAdminThemesFooterRoute
@@ -408,6 +457,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/_authenticated/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
   '/_authenticated/admin/qrcode-event/': typeof AuthenticatedAdminQrcodeEventIndexRoute
+  '/_authenticated/admin/refund/': typeof AuthenticatedAdminRefundIndexRoute
   '/_authenticated/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
   '/_authenticated/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/_authenticated/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
@@ -441,6 +491,10 @@ export interface FileRouteTypes {
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
     | '/admin/qrcode-event/settings'
+    | '/admin/refund/categories'
+    | '/admin/refund/disputes'
+    | '/admin/refund/reasons'
+    | '/admin/refund/settings'
     | '/admin/themes/banners'
     | '/admin/themes/custom-code'
     | '/admin/themes/footer'
@@ -453,6 +507,7 @@ export interface FileRouteTypes {
     | '/admin/pages/'
     | '/admin/permissions/'
     | '/admin/qrcode-event/'
+    | '/admin/refund/'
     | '/admin/roles/'
     | '/admin/settings/'
     | '/admin/themes/'
@@ -483,6 +538,10 @@ export interface FileRouteTypes {
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
     | '/admin/qrcode-event/settings'
+    | '/admin/refund/categories'
+    | '/admin/refund/disputes'
+    | '/admin/refund/reasons'
+    | '/admin/refund/settings'
     | '/admin/themes/banners'
     | '/admin/themes/custom-code'
     | '/admin/themes/footer'
@@ -495,6 +554,7 @@ export interface FileRouteTypes {
     | '/admin/pages'
     | '/admin/permissions'
     | '/admin/qrcode-event'
+    | '/admin/refund'
     | '/admin/roles'
     | '/admin/settings'
     | '/admin/themes'
@@ -527,6 +587,10 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/blogs/categories'
     | '/_authenticated/admin/blogs/new'
     | '/_authenticated/admin/qrcode-event/settings'
+    | '/_authenticated/admin/refund/categories'
+    | '/_authenticated/admin/refund/disputes'
+    | '/_authenticated/admin/refund/reasons'
+    | '/_authenticated/admin/refund/settings'
     | '/_authenticated/admin/themes/banners'
     | '/_authenticated/admin/themes/custom-code'
     | '/_authenticated/admin/themes/footer'
@@ -539,6 +603,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/pages/'
     | '/_authenticated/admin/permissions/'
     | '/_authenticated/admin/qrcode-event/'
+    | '/_authenticated/admin/refund/'
     | '/_authenticated/admin/roles/'
     | '/_authenticated/admin/settings/'
     | '/_authenticated/admin/themes/'
@@ -679,6 +744,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRolesIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/refund/': {
+      id: '/_authenticated/admin/refund/'
+      path: '/refund'
+      fullPath: '/admin/refund/'
+      preLoaderRoute: typeof AuthenticatedAdminRefundIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/qrcode-event/': {
       id: '/_authenticated/admin/qrcode-event/'
       path: '/qrcode-event'
@@ -761,6 +833,34 @@ declare module '@tanstack/react-router' {
       path: '/themes/banners'
       fullPath: '/admin/themes/banners'
       preLoaderRoute: typeof AuthenticatedAdminThemesBannersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/refund/settings': {
+      id: '/_authenticated/admin/refund/settings'
+      path: '/refund/settings'
+      fullPath: '/admin/refund/settings'
+      preLoaderRoute: typeof AuthenticatedAdminRefundSettingsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/refund/reasons': {
+      id: '/_authenticated/admin/refund/reasons'
+      path: '/refund/reasons'
+      fullPath: '/admin/refund/reasons'
+      preLoaderRoute: typeof AuthenticatedAdminRefundReasonsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/refund/disputes': {
+      id: '/_authenticated/admin/refund/disputes'
+      path: '/refund/disputes'
+      fullPath: '/admin/refund/disputes'
+      preLoaderRoute: typeof AuthenticatedAdminRefundDisputesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/refund/categories': {
+      id: '/_authenticated/admin/refund/categories'
+      path: '/refund/categories'
+      fullPath: '/admin/refund/categories'
+      preLoaderRoute: typeof AuthenticatedAdminRefundCategoriesRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/qrcode-event/settings': {
@@ -871,6 +971,10 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBlogsCategoriesRoute: typeof AuthenticatedAdminBlogsCategoriesRoute
   AuthenticatedAdminBlogsNewRoute: typeof AuthenticatedAdminBlogsNewRoute
   AuthenticatedAdminQrcodeEventSettingsRoute: typeof AuthenticatedAdminQrcodeEventSettingsRoute
+  AuthenticatedAdminRefundCategoriesRoute: typeof AuthenticatedAdminRefundCategoriesRoute
+  AuthenticatedAdminRefundDisputesRoute: typeof AuthenticatedAdminRefundDisputesRoute
+  AuthenticatedAdminRefundReasonsRoute: typeof AuthenticatedAdminRefundReasonsRoute
+  AuthenticatedAdminRefundSettingsRoute: typeof AuthenticatedAdminRefundSettingsRoute
   AuthenticatedAdminThemesBannersRoute: typeof AuthenticatedAdminThemesBannersRoute
   AuthenticatedAdminThemesCustomCodeRoute: typeof AuthenticatedAdminThemesCustomCodeRoute
   AuthenticatedAdminThemesFooterRoute: typeof AuthenticatedAdminThemesFooterRoute
@@ -883,6 +987,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminPagesIndexRoute: typeof AuthenticatedAdminPagesIndexRoute
   AuthenticatedAdminPermissionsIndexRoute: typeof AuthenticatedAdminPermissionsIndexRoute
   AuthenticatedAdminQrcodeEventIndexRoute: typeof AuthenticatedAdminQrcodeEventIndexRoute
+  AuthenticatedAdminRefundIndexRoute: typeof AuthenticatedAdminRefundIndexRoute
   AuthenticatedAdminRolesIndexRoute: typeof AuthenticatedAdminRolesIndexRoute
   AuthenticatedAdminSettingsIndexRoute: typeof AuthenticatedAdminSettingsIndexRoute
   AuthenticatedAdminThemesIndexRoute: typeof AuthenticatedAdminThemesIndexRoute
@@ -908,6 +1013,13 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminBlogsNewRoute: AuthenticatedAdminBlogsNewRoute,
     AuthenticatedAdminQrcodeEventSettingsRoute:
       AuthenticatedAdminQrcodeEventSettingsRoute,
+    AuthenticatedAdminRefundCategoriesRoute:
+      AuthenticatedAdminRefundCategoriesRoute,
+    AuthenticatedAdminRefundDisputesRoute:
+      AuthenticatedAdminRefundDisputesRoute,
+    AuthenticatedAdminRefundReasonsRoute: AuthenticatedAdminRefundReasonsRoute,
+    AuthenticatedAdminRefundSettingsRoute:
+      AuthenticatedAdminRefundSettingsRoute,
     AuthenticatedAdminThemesBannersRoute: AuthenticatedAdminThemesBannersRoute,
     AuthenticatedAdminThemesCustomCodeRoute:
       AuthenticatedAdminThemesCustomCodeRoute,
@@ -923,6 +1035,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminPermissionsIndexRoute,
     AuthenticatedAdminQrcodeEventIndexRoute:
       AuthenticatedAdminQrcodeEventIndexRoute,
+    AuthenticatedAdminRefundIndexRoute: AuthenticatedAdminRefundIndexRoute,
     AuthenticatedAdminRolesIndexRoute: AuthenticatedAdminRolesIndexRoute,
     AuthenticatedAdminSettingsIndexRoute: AuthenticatedAdminSettingsIndexRoute,
     AuthenticatedAdminThemesIndexRoute: AuthenticatedAdminThemesIndexRoute,

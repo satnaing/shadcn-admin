@@ -1,0 +1,41 @@
+{
+  "toast": { "error": "Bir hata oluştu", "paid": "İade tamamlandı", "rejected": "İade reddedildi", "created": "Oluşturuldu", "updated": "Kaydedildi", "deleted": "Silindi" },
+  "actions": { "more": "Diğer işlemler", "details": "İade detayları", "paymentInfo": "Ödeme bilgisini gör", "reject": "İadeyi reddet", "refundNow": "Şimdi iade et", "confirm": "Onayla", "saving": "Kaydediliyor...", "save": "Kaydet", "edit": "Düzenle", "delete": "Sil", "selectAll": "Tümünü seç", "selectRow": "Satırı seç" },
+  "tabs": { "all": "Tüm talepler", "admin": "Admin ürünleri", "seller": "Satıcı ürünleri", "pending": "Bekliyor", "approved": "Onaylandı", "rejected": "Reddedildi", "wallet": "Cüzdan", "offline": "Çevrimdışı" },
+  "status": { "pending": "Bekliyor", "approved": "Onaylandı", "rejected": "Reddedildi" },
+  "decision": { "pending": "Bekliyor", "approved": "Onaylandı", "rejected": "Reddedildi", "na": "Geçerli değil" },
+  "channel": { "wallet": "Cüzdan", "offline": "Çevrimdışı" },
+  "kind": { "customer": "Müşteri nedeni", "rejection": "Red nedeni" },
+  "columns": { "code": "İade", "product": "Ürün", "amount": "Tutar", "approval": "Onay", "payment": "Ödeme", "requestedAt": "Talep tarihi", "seller": "Satıcı", "admin": "Admin" },
+  "refund": { "title": "İade talepleri", "description": "Müşteri iade taleplerini inceleyin, ödeyin veya reddedin.", "search": "Kod, sipariş, satıcı veya ürüne göre ara...", "empty": "İade talebi bulunamadı" },
+  "dispute": { "title": "İtirazlı iadeler", "description": "Reddedilen talebi yeni neden ve fotoğraflarla yeniden gönderen müşteriler.", "search": "Kod, sipariş, satıcı veya ürüne göre ara...", "empty": "İtirazlı iade bulunamadı" },
+  "detail": { "title": "İade talebi", "loading": "Yükleniyor...", "amount": "İade tutarı", "customer": "Müşteri", "seller": "Satıcı", "requestedAt": "Talep zamanı", "channel": "Ödeme kanalı", "rejectReason": "Red nedeni", "transactionId": "İşlem ID", "reason": "Müşterinin nedeni", "paymentInfo": "Müşterinin ödeme bilgisi", "dispute": "İtiraz" },
+  "pay": { "walletTitle": "Cüzdana iade", "walletDesc": "{{amount}}, {{name}} adlı müşterinin cüzdanına aktarılacak. Bu geri alınamaz.", "offlineTitle": "Çevrimdışı iade", "offlineDesc": "{{amount}} tutarını müşterinin hesabına gönderin, ardından işlem bilgilerini girin.", "transactionId": "İşlem ID", "receipt": "Makbuz (isteğe bağlı)" },
+  "reject": { "title": "İadeyi reddet", "description": "{{code}} talebinin neden reddedildiğini seçin. Müşteri bu nedeni görecek.", "reason": "Red nedeni", "select": "Neden seçin", "others": "Diğer", "custom": "Nedeni yazın", "customPlaceholder": "Nedeni yazın..." },
+  "reasons": {
+    "title": "İade nedenleri", "description": "Müşterinin talep ederken ve adminin reddederken seçtiği hazır nedenler.",
+    "new": "Neden ekle", "search": "Neden ara...", "empty": "Neden bulunamadı", "entity": "neden", "activate": "Etkinleştir", "deactivate": "Devre dışı bırak",
+    "deleteTitle": "Neden silinsin mi?", "deleteDesc": "\"{{name}}\" hazır listeden kaldırılacak. Mevcut taleplerin metni değişmez.",
+    "columns": { "kind": "Tür", "reason": "Neden", "languages": "Çeviriler", "status": "Etkin" },
+    "form": { "createTitle": "İade nedeni ekle", "editTitle": "İade nedenini düzenle", "description": "Azerbaycan dilinde metin zorunludur; boş çeviriler ona döner.", "kind": "Tür", "text": "Neden ({{lang}})" }
+  },
+  "categories": {
+    "title": "Kategori bazlı iade süreleri", "description": "Her kategori için iade süresi; alt kategorilere de uygulanır.",
+    "search": "Kategori ara...", "empty": "Kategori bulunamadı", "entity": "kategori", "level": "Seviye", "mainOnly": "Ana kategoriler", "unassigned": "Atanmamış",
+    "assignDays": "Gün ata", "days": "{{count}} gün", "notRefundable": "İade edilemez", "zeroHint": "0 — kategori iade edilemez.",
+    "inactiveNotice": "Kategori bazlı iade etkin değil. Bu sürelerin geçerli olması için İade ayarlarında türü değiştirin.",
+    "daysTitle": "İade süresi", "daysDesc": "Bu kategoriye ve tüm alt kategorilerine uygulanır.", "bulkTitle": "İade süresini ata", "bulkDesc": "Seçilen {{count}} kategoriye ve alt kategorilerine uygulanır.",
+    "columns": { "name": "Kategori", "parent": "Üst kategori", "days": "İade günleri" }
+  },
+  "settings": {
+    "title": "İade ayarları", "description": "Onay akışı, iade süresi, itiraz ve ürün etiketi.",
+    "approvalMode": "Satıcı ürünlerinin iadesi", "adminApproval": "Admin onayı gerekir", "sellerDirect": "Satıcı doğrudan iade edebilir",
+    "refundType": "İade türü", "global": "Genel iade", "category": "Kategori bazlı iade",
+    "typeWarning": "Türü değiştirmek tüm ürünleri iade edilemez yapar. Sonrasında süreyi yeniden belirleyin.",
+    "refundDays": "İade talebi süresi", "refundDaysHint": "Tesliminden sonra müşterinin talep edebileceği gün sayısı.",
+    "dispute": "İtirazlı iade", "disputeHint": "Müşteri reddedilen talebi neden ve fotoğraflarla yeniden gönderebilir.",
+    "disputeDays": "İtiraz talebi süresi", "disputeDaysHint": "İtiraz göndermek için iade süresine eklenen günler.",
+    "sticker": "İade etiketi", "stickerHint": "Ürün detay sayfasında gösterilir."
+  },
+  "validation": { "integer": "Tam sayı girin", "min0": "0 veya daha büyük olmalı", "max120": "En fazla 120 karakter" }
+}

@@ -40,5 +40,11 @@
   "qrcodeEventCodes": "Kodlar",
   "qrcodeEventLogs": "Skan jurnalı",
   "qrcodeEventSettings": "Ayarlar",
+  "refund": "Geri ödəmə",
+  "refundRequests": "Geri ödəmə sorğuları",
+  "refundDisputes": "Mübahisəli sorğular",
+  "refundReasons": "Geri ödəmə səbəbləri",
+  "refundCategories": "Kateqoriya müddətləri",
+  "refundSettings": "Ayarlar",
   "soon": "tezliklə"
 }
