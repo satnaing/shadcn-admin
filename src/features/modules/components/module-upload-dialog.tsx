@@ -72,7 +72,7 @@ export function ModuleUploadDialog({ open, onOpenChange }: Props) {
           <Button variant='outline' onClick={() => onOpenChange(false)}>
             {t('upload.close')}
           </Button>
-          <Button disabled={!valid || upload.isPending} onClick={() => file && upload.mutate(file)}>
+          <Button disabled={!valid || upload.isPending} onClick={() => file && upload.mutate(file, { onSuccess: (res) => res.data.installed && onOpenChange(false) })}>
             {t('upload.submit')}
           </Button>
         </DialogFooter>
