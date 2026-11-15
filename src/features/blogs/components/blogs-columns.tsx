@@ -26,14 +26,18 @@ export function useBlogColumns(onDelete: (blog: BlogListItem) => void): ColumnDe
         ...translatedColumnHeader<BlogListItem, unknown>('blogs:columns.title'),
         cell: ({ row }) => (
           <div className='flex items-center gap-3'>
-            <img
-              src={row.original.cover}
-              alt=''
-              loading='lazy'
-              width={56}
-              height={40}
-              className='h-10 w-14 rounded border object-cover'
-            />
+            {row.original.cover ? (
+              <img
+                src={row.original.cover}
+                alt=''
+                loading='lazy'
+                width={56}
+                height={40}
+                className='h-10 w-14 rounded border object-cover'
+              />
+            ) : (
+              <div className='h-10 w-14 rounded border bg-muted' />
+            )}
             <div className='min-w-0'>
               <div className='truncate font-medium'>{row.original.title}</div>
               <div className='truncate text-xs text-muted-foreground'>/{row.original.slug}</div>
