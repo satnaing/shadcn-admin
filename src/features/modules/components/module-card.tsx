@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import type { ModuleItem } from '@/api/modules.types'
 import { PermissionGuard } from '@/components/guard'
 import { usePermissionStore } from '@/features/auth/data/auth-permission.store'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -71,7 +70,14 @@ export function ModuleCard({ module, enabled, missingDeps, onToggle, onUpdate, o
           <span className={`text-[11px] font-medium ${status === 'active' ? 'text-emerald-500' : 'text-muted-foreground'}`}>
             {status === 'active' ? '●' : '○'} {t(`status.${status}`)}
           </span>
-          {module.update_available && <Badge variant='outline'>{t('card.updateTo', { v: module.update_available })}</Badge>}
+          {module.update_available && (
+            <PermissionGuard permission={PERMISSIONS.MODULES.UPDATE}>
+              <Button variant='outline' size='sm' className='h-6 px-2 text-[11px]' onClick={onUpdate}>
+                <RefreshCw className='me-1 size-3' />
+                {t('card.updateTo', { v: module.update_available })}
+              </Button>
+            </PermissionGuard>
+          )}
         </div>
       </CardContent>
     </Card>
