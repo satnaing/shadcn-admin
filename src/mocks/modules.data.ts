@@ -1,4 +1,5 @@
 import type { ModuleRaw } from '@/api/menu.types'
+import { qrcodeEventManifest } from '@/features/qrcode-event/module.manifest'
 
 /** Installed modules (module.json shape). Mutable on purpose: PATCH /admin/modules/:id toggles `enabled`. */
 export const mockModules: ModuleRaw[] = [
@@ -44,14 +45,7 @@ export const mockModules: ModuleRaw[] = [
       ],
     },
   },
-  {
-    id: 'qrcode-event', name: 'QR code events', description: 'QR code driven event registration', version: '1.0.0',
-    icon: 'QrCode', required: false, enabled: false, requires: [],
-    admin_menu: {
-      group: { key: 'qrcodeEvent', icon: 'QrCode', order: 140, panels: ['admin'] },
-      items: [{ key: 'qrcodeEvents', route: '/admin/qrcode-events', order: 1, permission: 'qrcode_events.index' }],
-    },
-  },
+  { ...qrcodeEventManifest, enabled: true },
   { id: 'theme-xshop', name: 'Theme xShop', description: 'xShop storefront theme package', version: '1.0.0', icon: 'Palette', required: false, enabled: true, requires: [] },
   { id: 'theme-senseihost', name: 'Theme SenseiHost', description: 'SenseiHost storefront theme package', version: '1.0.0', icon: 'Palette', required: false, enabled: false, requires: [] },
 ]

@@ -66,7 +66,17 @@ export const PERMISSIONS = {
   WHOLESALE: { INDEX: 'wholesale.index', CREATE: 'wholesale.create' },
   CLASSIFIED: { INDEX: 'classified.index', CREATE: 'classified.create' },
   DELIVERY_BOYS: { INDEX: 'delivery_boys.index', COLLECTIONS: 'delivery_boys.collections' },
-  QRCODE_EVENTS: { INDEX: 'qrcode_events.index' },
+  QRCODE_EVENT: {
+    INDEX: 'qrcode_event.index',
+    SETTINGS: 'qrcode_event.settings',
+    CAMPAIGNS: 'qrcode_event.campaigns',
+    CAMPAIGNS_MANAGE: 'qrcode_event.campaigns_manage',
+    BATCHES: 'qrcode_event.batches',
+    BATCHES_CREATE: 'qrcode_event.batches_create',
+    CODES: 'qrcode_event.codes',
+    CODES_MANAGE: 'qrcode_event.codes_manage',
+    LOGS: 'qrcode_event.logs',
+  },
 } as const
 
 export const ALL_PERMISSIONS: string[] = Object.values(PERMISSIONS).flatMap(

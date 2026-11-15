@@ -15,7 +15,7 @@ describe('sidebar merge', () => {
     const coreKeys = keys(navCore)
 
     expect(keys(merged).slice(0, coreKeys.length)).toEqual(coreKeys)
-    expect(keys(merged).slice(coreKeys.length)).toEqual(['module-pos', 'module-wholesale', 'module-delivery-boy'])
+    expect(keys(merged).slice(coreKeys.length)).toEqual(['module-pos', 'module-wholesale', 'module-delivery-boy', 'module-qrcode-event'])
   })
 
   it('hides the group of a disabled module', () => {

@@ -11,9 +11,10 @@ export const listPaginationSearchFields = {
   status: statusSearchSchema,
 } as const
 
-export function createListSearchSchema(extra?: z.ZodRawShape) {
+// generic so route files get typed extra keys (e.g. Route.useSearch().campaign_id)
+export function createListSearchSchema<T extends z.ZodRawShape = Record<never, never>>(extra?: T) {
   return z.object({
     ...listPaginationSearchFields,
-    ...extra,
+    ...(extra as T),
   })
 }
