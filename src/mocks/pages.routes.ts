@@ -69,7 +69,7 @@ const routes: Record<string, (ctx: Ctx) => unknown> = {
     return { message: 'ok' }
   },
   'POST /admin/pages/:id/preview-token': ({ params }) => ({
-    data: { token: `mock-${params[0]}`, url: `about:blank#preview-${params[0]}` },
+    data: { token: `mock-${params[0]}`, url: `/preview/${params[0]}` },
   }),
   'GET /admin/page-templates': () => ({ data: pageTemplates }),
   'GET /admin/themes/active/sections': ({ query }) => ({

@@ -18,5 +18,6 @@
   "left": { "sections": "Bölümler", "layers": "Katmanlar", "page": "Sayfa" },
   "canvas": { "toolbar": "Bölüm araçları", "empty": "Boş sayfa. Soldan bir bölüm ekleyin.", "title": "Sayfa canvas'ı" },
   "topbar": { "language": "Düzenleme dili", "device": "Cihaz önizlemesi", "desktop": "Masaüstü", "tablet": "Tablet", "mobile": "Mobil", "undo": "Geri al", "redo": "Yinele", "save": { "saving": "Kaydediliyor...", "error": "Kayıt hatası", "dirty": "Kaydedilmemiş değişiklikler", "saved": "Taslak kaydedildi" }, "preview": "Önizleme", "publish": "Yayınla" },
-  "builder": { "loading": "Builder yükleniyor...", "notFound": "Sayfa bulunamadı." }
+  "builder": { "loading": "Builder yükleniyor...", "notFound": "Sayfa bulunamadı." },
+  "preview": { "hidden": "Gizli" }
 }

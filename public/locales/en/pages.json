@@ -18,5 +18,6 @@
   "left": { "sections": "Sections", "layers": "Layers", "page": "Page" },
   "canvas": { "toolbar": "Section tools", "empty": "Empty page. Add a section from the left.", "title": "Page canvas" },
   "topbar": { "language": "Editing language", "device": "Device preview", "desktop": "Desktop", "tablet": "Tablet", "mobile": "Mobile", "undo": "Undo", "redo": "Redo", "save": { "saving": "Saving...", "error": "Save failed", "dirty": "Unsaved changes", "saved": "Draft saved" }, "preview": "Preview", "publish": "Publish" },
-  "builder": { "loading": "Loading builder...", "notFound": "Page not found." }
+  "builder": { "loading": "Loading builder...", "notFound": "Page not found." },
+  "preview": { "hidden": "Hidden" }
 }

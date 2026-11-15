@@ -18,5 +18,6 @@
   "left": { "sections": "Bölmələr", "layers": "Qatlar", "page": "Səhifə" },
   "canvas": { "toolbar": "Bölmə alətləri", "empty": "Boş səhifə. Soldan bölmə əlavə edin.", "title": "Səhifə canvas-ı" },
   "topbar": { "language": "Redaktə dili", "device": "Cihaz önizləməsi", "desktop": "Masaüstü", "tablet": "Planşet", "mobile": "Mobil", "undo": "Geri al", "redo": "Təkrar et", "save": { "saving": "Saxlanılır...", "error": "Saxlama xətası", "dirty": "Saxlanmamış dəyişiklik", "saved": "Qaralama saxlanıldı" }, "preview": "Önizləmə", "publish": "Dərc et" },
-  "builder": { "loading": "Builder yüklənir...", "notFound": "Səhifə tapılmadı." }
+  "builder": { "loading": "Builder yüklənir...", "notFound": "Səhifə tapılmadı." },
+  "preview": { "hidden": "Gizli" }
 }

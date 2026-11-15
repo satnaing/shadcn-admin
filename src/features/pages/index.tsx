@@ -15,6 +15,7 @@ import { PageSettingsDrawer } from './components/page-settings-drawer'
 import { PagesTable } from './components/pages-table'
 
 export { PageBuilder } from './components/builder/builder-shell'
+export { PagePreview } from './components/page-preview'
 
 interface PagesPageProps {
   search: Record<string, unknown>

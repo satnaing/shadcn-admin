@@ -43,7 +43,7 @@ Dev server :5180, own tab, console tracked from the first navigation. The mock a
 |---|---|---|---|---|
 | Themes: activate senseihost (confirm + incompatibility report, 3 items) and back to xshop | ✅ | 0 | n/a | write survives SPA navigation |
 | Banners: create (deal icon/percent, features, perks, schedule) | ❌→✅ | 1 (fixed) | n/a | form crashed on empty Select option (tone); fixed `61b223e` |
-| Banners: edit / delete / drag reorder / server search typing | ✅ | 0 | n/a | delete has no confirm dialog (open question) |
+| Banners: edit / delete / drag reorder / server search typing | ✅ | 0 | n/a | delete now asks for confirmation (fixed) |
 | Banner deal/features/perks/schedule persist on reopen | ✅ | 0 | n/a | |
 | Header: mobile tab bar edit persists; no variant select (1 variant) | ✅ | 0 | n/a | |
 | Footer: paymentMethods add row + save persists | ✅ | 0 | n/a | |
@@ -51,12 +51,12 @@ Dev server :5180, own tab, console tracked from the first navigation. The mock a
 | Topbar, Tokens (edit + persist), Custom code (edit + persist) | ✅ | 0 | n/a | contrast warning not triggered with the sample colour |
 | Pages: list, create from template (3 sections), revisions drawer | ✅ | 0 | n/a | restore was a no-op in the mock; fixed `729bf5d` (mock trims to the revision's section count — no snapshots) |
 | Builder: Layers (drag reorder, hide), Page tab, undo/redo, duplicate, delete | ✅ | 0 | n/a | |
-| Builder: palette click-add + palette drag-drop, field edit → canvas live, RU payload, Source/Style tabs, Publish | ✅ | 0 | n/a | Preview opens a blank `about:` tab (mock) |
+| Builder: palette click-add + palette drag-drop, field edit → canvas live, RU payload, Source/Style tabs, Publish | ✅ | 0 | n/a | Preview opens mock `/preview/:id` page (fixed) |
 | Blog categories: create/edit/delete | ❌→✅ | 0 | n/a | save silently failed when EN name was empty (error hidden on EN tab); form now jumps to the tab with the error `e63129b` |
 | Blogs: create persists, server search | ✅ | 0 | n/a | |
 | Blog list | ❌→✅ | 1 (fixed) | n/a | `<img src="">` for posts without cover; `cfde882` |
 | Modules: dependency dialog (POS off → Delivery boys), toggle + save, sidebar updates | ✅ | 0 | n/a | |
-| Modules: zip dialog (dummy 2 KB zip injected via DataTransfer; 4 validation steps), update, delete | ✅ | 0 | n/a | upload dialog stays open after success; "vX.Y.Z-ə yenilə" badge on the card is not clickable (update is in the card menu) |
+| Modules: zip dialog (dummy 2 KB zip injected via DataTransfer; 4 validation steps), update, delete | ✅ | 0 | n/a | upload dialog closes after success; update badge is a working button (fixed) |
 | Settings: default language RU → UI switches to Russian | ✅ | 0 | n/a | Georgian has no UI locale |
 | Settings: default currency USD | ⚠ | 0 | n/a | saved, but no core screen shows money, so formatter reaction not visible live |
 | Roles: create (group select-all) / edit dialog opens | ✅ | 0 | n/a | |

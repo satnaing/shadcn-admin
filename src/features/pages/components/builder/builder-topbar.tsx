@@ -36,10 +36,16 @@ export function BuilderTopbar({ pageId, title, saveState }: BuilderTopbarProps) 
     publish.mutate(pageId)
   }
 
-  const preview = () =>
+  const preview = async () => {
+    const state = useBuilderStore.getState()
+    if (state.dirty) {
+      await pagesApi.saveDraft(pageId, state.sections)
+      state.markSaved()
+    }
     previewToken.mutate(pageId, {
-      onSuccess: ({ data }) => window.open(data.url, '_blank', 'noopener'),
+      onSuccess: ({ data }) => window.open(`${data.url}?lang=${state.lang}`, '_blank', 'noopener'),
     })
+  }
 
   return (
     <header className='flex flex-wrap items-center gap-3 border-b bg-background px-3 py-2'>
@@ -64,7 +70,7 @@ export function BuilderTopbar({ pageId, title, saveState }: BuilderTopbarProps) 
       <Button size='icon' variant='ghost' disabled={!canUndo} aria-label={t('topbar.undo')} onClick={undo}><Undo2 className='size-4' /></Button>
       <Button size='icon' variant='ghost' disabled={!canRedo} aria-label={t('topbar.redo')} onClick={redo}><Redo2 className='size-4' /></Button>
       <span className='ms-auto text-xs text-muted-foreground' role='status'>{t(`topbar.save.${saveState}`)}</span>
-      <Button variant='outline' size='sm' disabled={previewToken.isPending} onClick={preview}>
+      <Button variant='outline' size='sm' disabled={previewToken.isPending} onClick={() => void preview()}>
         <Eye className='me-1 size-4' />{t('topbar.preview')}
       </Button>
       <Button size='sm' disabled={publish.isPending || saveState === 'saving'} onClick={() => void publishNow()}>

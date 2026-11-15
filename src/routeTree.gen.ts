@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as PreviewPageIdRouteImport } from './routes/preview/$pageId'
 import { Route as errors503RouteImport } from './routes/(errors)/503'
 import { Route as errors500RouteImport } from './routes/(errors)/500'
 import { Route as errors404RouteImport } from './routes/(errors)/404'
@@ -48,6 +49,11 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const PreviewPageIdRoute = PreviewPageIdRouteImport.update({
+  id: '/preview/$pageId',
+  path: '/preview/$pageId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const errors503Route = errors503RouteImport.update({
   id: '/(errors)/503',
@@ -218,6 +224,7 @@ export interface FileRoutesByFullPath {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
+  '/preview/$pageId': typeof PreviewPageIdRoute
   '/admin/$': typeof AuthenticatedAdminSplatRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
@@ -247,6 +254,7 @@ export interface FileRoutesByTo {
   '/404': typeof errors404Route
   '/500': typeof errors500Route
   '/503': typeof errors503Route
+  '/preview/$pageId': typeof PreviewPageIdRoute
   '/': typeof AuthenticatedIndexRoute
   '/admin/$': typeof AuthenticatedAdminSplatRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
@@ -280,6 +288,7 @@ export interface FileRoutesById {
   '/(errors)/404': typeof errors404Route
   '/(errors)/500': typeof errors500Route
   '/(errors)/503': typeof errors503Route
+  '/preview/$pageId': typeof PreviewPageIdRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/_authenticated/admin/$': typeof AuthenticatedAdminSplatRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
@@ -314,6 +323,7 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
+    | '/preview/$pageId'
     | '/admin/$'
     | '/errors/$error'
     | '/admin/'
@@ -343,6 +353,7 @@ export interface FileRouteTypes {
     | '/404'
     | '/500'
     | '/503'
+    | '/preview/$pageId'
     | '/'
     | '/admin/$'
     | '/errors/$error'
@@ -375,6 +386,7 @@ export interface FileRouteTypes {
     | '/(errors)/404'
     | '/(errors)/500'
     | '/(errors)/503'
+    | '/preview/$pageId'
     | '/_authenticated/'
     | '/_authenticated/admin/$'
     | '/_authenticated/errors/$error'
@@ -407,6 +419,7 @@ export interface RootRouteChildren {
   errors404Route: typeof errors404Route
   errors500Route: typeof errors500Route
   errors503Route: typeof errors503Route
+  PreviewPageIdRoute: typeof PreviewPageIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -424,6 +437,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/preview/$pageId': {
+      id: '/preview/$pageId'
+      path: '/preview/$pageId'
+      fullPath: '/preview/$pageId'
+      preLoaderRoute: typeof PreviewPageIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/(errors)/503': {
       id: '/(errors)/503'
@@ -703,6 +723,7 @@ const rootRouteChildren: RootRouteChildren = {
   errors404Route: errors404Route,
   errors500Route: errors500Route,
   errors503Route: errors503Route,
+  PreviewPageIdRoute: PreviewPageIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
