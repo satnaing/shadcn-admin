@@ -121,7 +121,8 @@
     "invalidImageUrl": "Düzgün şəkil URL-i daxil edin",
     "invalidUrl": "Düzgün URL olmalıdır",
     "slugKebab": "Slug kebab-case olmalıdır (kiçik hərflər, rəqəmlər, defis)",
-    "fieldRequired": "Bu sahə tələb olunur"
+    "fieldRequired": "Bu sahə tələb olunur",
+    "required": "Bu sahə məcburidir"
   },
   "footer": {
     "copyright": "© {{year}} {{company}}. Bütün hüquqlar qorunur.",

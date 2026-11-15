@@ -121,7 +121,8 @@
     "invalidImageUrl": "Please enter a valid image url",
     "invalidUrl": "Must be a valid URL",
     "slugKebab": "Slug must be kebab-case (lowercase letters, numbers, hyphens)",
-    "fieldRequired": "This field is required"
+    "fieldRequired": "This field is required",
+    "required": "This field is required"
   },
   "footer": {
     "copyright": "© {{year}} {{company}}. All rights reserved.",

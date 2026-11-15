@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Controller,
   FormProvider,
@@ -134,7 +135,10 @@ function FormDescription({ className, ...props }: React.ComponentProps<'p'>) {
 
 function FormMessage({ className, ...props }: React.ComponentProps<'p'>) {
   const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message ?? '') : props.children
+  const { t } = useTranslation('common')
+  const message = error ? String(error?.message ?? '') : ''
+  // zod messages are i18n keys: 'required' -> common:validation.required, 'ns:key' -> as is; unknown text stays
+  const body = error ? t(message.includes(':') ? message : 'validation.' + message, { defaultValue: message }) : props.children
 
   if (!body) {
     return null
