@@ -4,6 +4,7 @@ import {
   Package,
   Palette,
   QrCode,
+  RotateCcw,
   ShoppingCart,
   Truck,
 } from 'lucide-react'
@@ -17,6 +18,7 @@ const ICONS: Record<string, React.ElementType> = {
   Package,
   Palette,
   QrCode,
+  RotateCcw,
   ShoppingCart,
   Truck,
 }

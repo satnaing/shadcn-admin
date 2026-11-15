@@ -77,6 +77,16 @@ export const PERMISSIONS = {
     CODES_MANAGE: 'qrcode_event.codes_manage',
     LOGS: 'qrcode_event.logs',
   },
+  REFUND: {
+    INDEX: 'refund.index',
+    REQUESTS_MANAGE: 'refund.requests_manage',
+    DISPUTES: 'refund.disputes',
+    DISPUTES_MANAGE: 'refund.disputes_manage',
+    REASONS: 'refund.reasons',
+    REASONS_MANAGE: 'refund.reasons_manage',
+    CATEGORIES: 'refund.categories',
+    SETTINGS: 'refund.settings',
+  },
 } as const
 
 export const ALL_PERMISSIONS: string[] = Object.values(PERMISSIONS).flatMap(
