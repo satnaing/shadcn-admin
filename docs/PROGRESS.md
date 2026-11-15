@@ -60,4 +60,4 @@ Dev server :5180, own tab, console tracked from the first navigation. The mock a
 | Settings: default language RU → UI switches to Russian | ✅ | 0 | n/a | Georgian has no UI locale |
 | Settings: default currency USD | ⚠ | 0 | n/a | saved, but no core screen shows money, so formatter reaction not visible live |
 | Roles: create (group select-all) / edit dialog opens | ✅ | 0 | n/a | |
-| Sweep (fresh load each): /admin, pages, builder, blogs ×4, themes ×8, modules, settings, roles, permissions | ✅ 24/24 | 0 after fixes | n/a | |
+| Sweep (fresh load each): /admin, pages, builder, blogs ×4, themes ×8, modules, settings, roles, permissions | ✅ 19/19 | 0 after fixes | n/a | |
