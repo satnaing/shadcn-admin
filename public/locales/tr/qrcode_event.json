@@ -1,0 +1,70 @@
+{
+  "toast": { "error": "Bir hata oluştu", "created": "Oluşturuldu", "updated": "Kaydedildi", "deleted": "Silindi", "batchCreated": "Kod partisi oluşturuldu", "claimed": "Ödül teslim edildi olarak işaretlendi" },
+  "actions": { "export": "Dışa aktar", "more": "Diğer işlemler", "edit": "Düzenle", "prizes": "Ödül havuzu", "createBatch": "Kod üret", "setStatus": "Durum ata", "delete": "Sil", "saving": "Kaydediliyor...", "save": "Kaydet", "back": "Geri", "view": "Görüntüle" },
+  "campaign": { "draft": "Taslak", "active": "Aktif", "paused": "Durduruldu", "finished": "Bitti" },
+  "code": { "unused": "Kullanılmadı", "checked": "Açıldı", "claimed": "Ödül teslim edildi", "disabled": "Devre dışı" },
+  "result": { "win": "Kazandı", "lose": "Ödül yok", "used": "Zaten kullanıldı", "already_checked": "Zaten kontrol edildi", "invalid": "Geçersiz kod", "disabled": "Devre dışı kod", "blocked": "Engellendi (çok deneme)" },
+  "prize": { "cash": "Nakit (bakiye)", "product": "Ürün", "gift": "Hediye" },
+  "delivery": { "manual": "Elden teslim", "wallet": "Cüzdana aktarım" },
+  "filters": { "campaign": "Kampanya", "allCampaigns": "Tüm kampanyalar", "dateFrom": "Başlangıç tarihi", "dateTo": "Bitiş tarihi", "ip": "IP adresi" },
+  "validation": { "allocationTooHigh": "Kazanan kod sayısı parti adedini aşamaz" },
+  "stats": {
+    "title": "QR kod etkinlikleri",
+    "description": "Tarama istatistikleri, ödül teslimi ve son 30 günün kontrolleri.",
+    "total": "Toplam kod", "checked": "Açıldı", "unused": "Kullanılmadı", "disabled": "Devre dışı",
+    "winners": "Kazanan kodlar", "winners_revealed": "Açılan kazananlar", "claimed": "Teslim edilen ödüller", "pending_prizes": "Bekleyen ödüller",
+    "breakdown": "Ödüller", "revealed": "Açıldı", "delivered": "Teslim edildi",
+    "chart": "Son 30 günde kontroller", "chartEmpty": "Henüz kontrol yok"
+  },
+  "campaigns": {
+    "title": "Kampanyalar", "description": "Ödül havuzu, süre ve kötüye kullanım limitleriyle kod kampanyaları.",
+    "new": "Yeni kampanya", "search": "Kampanya ara...", "empty": "Kampanya bulunamadı",
+    "deleteTitle": "Kampanyayı sil", "deleteDesc": "\"{{name}}\" kampanyası ödülleri, partileri, kodları ve tarama günlüğüyle birlikte silinecek. Bu geri alınamaz.",
+    "columns": { "name": "Kampanya", "status": "Durum", "period": "Süre", "prefix": "Önek", "prizes": "Ödüller", "codes": "Açılan / kod", "claimed": "Teslim edilen" },
+    "form": {
+      "createTitle": "Yeni kampanya", "editTitle": "Kampanyayı düzenle", "pageDescription": "Süre, ödül teslimi, kötüye kullanım limitleri ve uygulamada gösterilen metinler.",
+      "name": "Ad", "slug": "Slug", "slugHint": "Boş bırakılırsa addan üretilir",
+      "status": "Durum", "prizeDelivery": "Ödül teslimi", "startsAt": "Başlangıç", "endsAt": "Bitiş",
+      "codePrefix": "Kod öneki", "codePrefixHint": "En çok 6 harf/rakam, her kodun başına eklenir",
+      "loginRequired": "Kodu kontrol etmek için giriş gerekli", "banner": "Banner", "description": "Açıklama", "terms": "Koşullar",
+      "limits": "Kötüye kullanım koruması", "maxChecks": "Saatte en çok kontrol", "maxFailed": "Saatte en çok başarısız kontrol", "blockMinutes": "Engelleme süresi (dakika)"
+    }
+  },
+  "prizes": {
+    "title": "Ödül havuzu: {{name}}", "description": "Bu kampanyanın kodlarının kazanabileceği ödüller.", "new": "Ödül ekle", "empty": "Henüz ödül yok",
+    "deleteTitle": "Ödülü sil", "deleteDesc": "\"{{title}}\" ödül havuzundan kaldırılacak.",
+    "columns": { "title": "Ödül", "type": "Tür", "value": "Değer", "quantity": "Adet", "allocated": "Kodlarda", "claimed": "Teslim edilen" },
+    "form": {
+      "createTitle": "Ödül ekle", "editTitle": "Ödülü düzenle", "description": "Nakit ödül bakiye yükler, ürün ödülü katalog ürünlerine bağlanır, hediye serbest metindir.",
+      "type": "Tür", "title": "Başlık", "value": "Değer", "quantity": "Adet", "sortOrder": "Sıra",
+      "products": "Ürünler", "descriptionField": "Açıklama", "image": "Görsel"
+    }
+  },
+  "batches": {
+    "title": "Kod partileri", "description": "Baskı için dışa aktarılabilen üretilmiş kod paketleri.", "new": "Kod üret", "search": "Parti ara...", "empty": "Henüz parti yok",
+    "viewCodes": "Kodları göster", "exportXlsx": "XLSX dışa aktar", "exportCsv": "CSV dışa aktar", "qrZip": "QR bağlantılarını indir",
+    "columns": { "id": "Parti", "campaign": "Kampanya", "quantity": "Kod", "winners": "Kazanan", "note": "Not", "createdBy": "Oluşturan", "createdAt": "Oluşturulma" },
+    "form": {
+      "title": "Kod üret", "description": "Benzersiz kodlardan bir parti oluşturun ve her ödülü kaç kodun kazanacağını belirleyin.",
+      "generate": "Üret", "generating": "Üretiliyor...", "campaign": "Kampanya", "campaignPlaceholder": "Kampanya seçin",
+      "quantity": "Adet", "quantityHint": "Parti başına 1 – 200.000 kod", "product": "Etiketteki ürün", "noProduct": "Ürün yok", "note": "Not",
+      "allocation": "Ödül başına kazanan kodlar (havuzda kalan)", "noPrizes": "Bu kampanyada henüz ödül yok."
+    }
+  },
+  "codes": {
+    "title": "Kodlar", "description": "Üretilen tüm kodlar, durumları ve ödülleri.", "search": "Kod ara...", "empty": "Kod bulunamadı",
+    "winnersOnly": "Kazanan kodlar", "nonWinners": "Kazanmayan kodlar", "enable": "Kodu etkinleştir", "disable": "Kodu devre dışı bırak",
+    "columns": { "code": "Kod", "campaign": "Kampanya", "status": "Durum", "prize": "Ödül", "user": "Açan", "checkedAt": "Açılma zamanı" },
+    "claim": { "title": "Ödülü teslim edildi olarak işaretle", "description": "Kazananın ödülü aldığını kaydeder.", "confirm": "Teslimi onayla", "note": "Not" },
+    "detail": { "description": "Bir kodun durumu, ödülü ve tarama geçmişi.", "checks": "Son taramalar", "noChecks": "Bu kod taranmadı", "claimedAt": "Teslim zamanı", "claimedBy": "Teslim eden", "claimNote": "Teslim notu" }
+  },
+  "logs": {
+    "title": "Tarama günlüğü", "description": "Uygulama veya web sayfasından yapılan tüm kontroller, başarısız denemeler dahil.", "search": "Kod ara...", "empty": "Tarama bulunamadı",
+    "columns": { "at": "Tarih", "code": "Kod", "result": "Sonuç", "campaign": "Kampanya", "user": "Kullanıcı", "ip": "IP", "source": "Kaynak" }
+  },
+  "settings": {
+    "title": "QR kod ayarları", "description": "App Links / Universal Links tanımlayıcıları.",
+    "hint": "API bunları assetlinks.json ve apple-app-site-association için kullanır; taranan bağlantı uygulamayı açar.",
+    "androidPackage": "Android paketi", "androidSha256": "Android SHA-256 parmak izi", "iosTeamId": "iOS Team ID", "iosBundleId": "iOS Bundle ID"
+  }
+}

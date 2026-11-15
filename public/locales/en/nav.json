@@ -34,6 +34,11 @@
   "deliveryBoys": "Delivery boys",
   "deliveryCollections": "Collections",
   "qrcodeEvent": "QR code events",
-  "qrcodeEvents": "QR code events",
+  "qrcodeEventStats": "Statistics",
+  "qrcodeEventCampaigns": "Campaigns",
+  "qrcodeEventBatches": "Code batches",
+  "qrcodeEventCodes": "Codes",
+  "qrcodeEventLogs": "Scan log",
+  "qrcodeEventSettings": "Settings",
   "soon": "soon"
 }

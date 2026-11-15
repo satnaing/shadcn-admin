@@ -25,6 +25,7 @@ import { Route as AuthenticatedAdminSplatRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminThemesIndexRouteImport } from './routes/_authenticated/admin/themes/index'
 import { Route as AuthenticatedAdminSettingsIndexRouteImport } from './routes/_authenticated/admin/settings/index'
 import { Route as AuthenticatedAdminRolesIndexRouteImport } from './routes/_authenticated/admin/roles/index'
+import { Route as AuthenticatedAdminQrcodeEventIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/index'
 import { Route as AuthenticatedAdminPermissionsIndexRouteImport } from './routes/_authenticated/admin/permissions/index'
 import { Route as AuthenticatedAdminPagesIndexRouteImport } from './routes/_authenticated/admin/pages/index'
 import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_authenticated/admin/modules/index'
@@ -36,10 +37,20 @@ import { Route as AuthenticatedAdminThemesHeaderRouteImport } from './routes/_au
 import { Route as AuthenticatedAdminThemesFooterRouteImport } from './routes/_authenticated/admin/themes/footer'
 import { Route as AuthenticatedAdminThemesCustomCodeRouteImport } from './routes/_authenticated/admin/themes/custom-code'
 import { Route as AuthenticatedAdminThemesBannersRouteImport } from './routes/_authenticated/admin/themes/banners'
+import { Route as AuthenticatedAdminQrcodeEventSettingsRouteImport } from './routes/_authenticated/admin/qrcode-event/settings'
 import { Route as AuthenticatedAdminBlogsNewRouteImport } from './routes/_authenticated/admin/blogs/new'
 import { Route as AuthenticatedAdminBlogsCategoriesRouteImport } from './routes/_authenticated/admin/blogs/categories'
 import { Route as AuthenticatedAdminBlogsIdRouteImport } from './routes/_authenticated/admin/blogs/$id'
+import { Route as AuthenticatedAdminQrcodeEventLogsIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/logs/index'
+import { Route as AuthenticatedAdminQrcodeEventCodesIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/codes/index'
+import { Route as AuthenticatedAdminQrcodeEventCampaignsIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/campaigns/index'
+import { Route as AuthenticatedAdminQrcodeEventBatchesIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/batches/index'
+import { Route as AuthenticatedAdminQrcodeEventCodesIdRouteImport } from './routes/_authenticated/admin/qrcode-event/codes/$id'
+import { Route as AuthenticatedAdminQrcodeEventCampaignsNewRouteImport } from './routes/_authenticated/admin/qrcode-event/campaigns/new'
+import { Route as AuthenticatedAdminQrcodeEventBatchesNewRouteImport } from './routes/_authenticated/admin/qrcode-event/batches/new'
 import { Route as AuthenticatedAdminPagesIdBuilderRouteImport } from './routes/_authenticated/admin/pages/$id/builder'
+import { Route as AuthenticatedAdminQrcodeEventCampaignsIdIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/campaigns/$id/index'
+import { Route as AuthenticatedAdminQrcodeEventCampaignsIdPrizesRouteImport } from './routes/_authenticated/admin/qrcode-event/campaigns/$id/prizes'
 
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
@@ -124,6 +135,12 @@ const AuthenticatedAdminRolesIndexRoute =
     path: '/roles/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminQrcodeEventIndexRoute =
+  AuthenticatedAdminQrcodeEventIndexRouteImport.update({
+    id: '/qrcode-event/',
+    path: '/qrcode-event/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminPermissionsIndexRoute =
   AuthenticatedAdminPermissionsIndexRouteImport.update({
     id: '/permissions/',
@@ -190,6 +207,12 @@ const AuthenticatedAdminThemesBannersRoute =
     path: '/themes/banners',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminQrcodeEventSettingsRoute =
+  AuthenticatedAdminQrcodeEventSettingsRouteImport.update({
+    id: '/qrcode-event/settings',
+    path: '/qrcode-event/settings',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminBlogsNewRoute =
   AuthenticatedAdminBlogsNewRouteImport.update({
     id: '/blogs/new',
@@ -208,10 +231,64 @@ const AuthenticatedAdminBlogsIdRoute =
     path: '/blogs/$id',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminQrcodeEventLogsIndexRoute =
+  AuthenticatedAdminQrcodeEventLogsIndexRouteImport.update({
+    id: '/qrcode-event/logs/',
+    path: '/qrcode-event/logs/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminQrcodeEventCodesIndexRoute =
+  AuthenticatedAdminQrcodeEventCodesIndexRouteImport.update({
+    id: '/qrcode-event/codes/',
+    path: '/qrcode-event/codes/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminQrcodeEventCampaignsIndexRoute =
+  AuthenticatedAdminQrcodeEventCampaignsIndexRouteImport.update({
+    id: '/qrcode-event/campaigns/',
+    path: '/qrcode-event/campaigns/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminQrcodeEventBatchesIndexRoute =
+  AuthenticatedAdminQrcodeEventBatchesIndexRouteImport.update({
+    id: '/qrcode-event/batches/',
+    path: '/qrcode-event/batches/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminQrcodeEventCodesIdRoute =
+  AuthenticatedAdminQrcodeEventCodesIdRouteImport.update({
+    id: '/qrcode-event/codes/$id',
+    path: '/qrcode-event/codes/$id',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminQrcodeEventCampaignsNewRoute =
+  AuthenticatedAdminQrcodeEventCampaignsNewRouteImport.update({
+    id: '/qrcode-event/campaigns/new',
+    path: '/qrcode-event/campaigns/new',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminQrcodeEventBatchesNewRoute =
+  AuthenticatedAdminQrcodeEventBatchesNewRouteImport.update({
+    id: '/qrcode-event/batches/new',
+    path: '/qrcode-event/batches/new',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminPagesIdBuilderRoute =
   AuthenticatedAdminPagesIdBuilderRouteImport.update({
     id: '/pages/$id/builder',
     path: '/pages/$id/builder',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminQrcodeEventCampaignsIdIndexRoute =
+  AuthenticatedAdminQrcodeEventCampaignsIdIndexRouteImport.update({
+    id: '/qrcode-event/campaigns/$id/',
+    path: '/qrcode-event/campaigns/$id/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminQrcodeEventCampaignsIdPrizesRoute =
+  AuthenticatedAdminQrcodeEventCampaignsIdPrizesRouteImport.update({
+    id: '/qrcode-event/campaigns/$id/prizes',
+    path: '/qrcode-event/campaigns/$id/prizes',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 
@@ -231,6 +308,7 @@ export interface FileRoutesByFullPath {
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/admin/qrcode-event/settings': typeof AuthenticatedAdminQrcodeEventSettingsRoute
   '/admin/themes/banners': typeof AuthenticatedAdminThemesBannersRoute
   '/admin/themes/custom-code': typeof AuthenticatedAdminThemesCustomCodeRoute
   '/admin/themes/footer': typeof AuthenticatedAdminThemesFooterRoute
@@ -242,10 +320,20 @@ export interface FileRoutesByFullPath {
   '/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
+  '/admin/qrcode-event/': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
   '/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
   '/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
+  '/admin/qrcode-event/batches/new': typeof AuthenticatedAdminQrcodeEventBatchesNewRoute
+  '/admin/qrcode-event/campaigns/new': typeof AuthenticatedAdminQrcodeEventCampaignsNewRoute
+  '/admin/qrcode-event/codes/$id': typeof AuthenticatedAdminQrcodeEventCodesIdRoute
+  '/admin/qrcode-event/batches/': typeof AuthenticatedAdminQrcodeEventBatchesIndexRoute
+  '/admin/qrcode-event/campaigns/': typeof AuthenticatedAdminQrcodeEventCampaignsIndexRoute
+  '/admin/qrcode-event/codes/': typeof AuthenticatedAdminQrcodeEventCodesIndexRoute
+  '/admin/qrcode-event/logs/': typeof AuthenticatedAdminQrcodeEventLogsIndexRoute
+  '/admin/qrcode-event/campaigns/$id/prizes': typeof AuthenticatedAdminQrcodeEventCampaignsIdPrizesRoute
+  '/admin/qrcode-event/campaigns/$id/': typeof AuthenticatedAdminQrcodeEventCampaignsIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/sign-in': typeof authSignInRoute
@@ -262,6 +350,7 @@ export interface FileRoutesByTo {
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/admin/qrcode-event/settings': typeof AuthenticatedAdminQrcodeEventSettingsRoute
   '/admin/themes/banners': typeof AuthenticatedAdminThemesBannersRoute
   '/admin/themes/custom-code': typeof AuthenticatedAdminThemesCustomCodeRoute
   '/admin/themes/footer': typeof AuthenticatedAdminThemesFooterRoute
@@ -273,10 +362,20 @@ export interface FileRoutesByTo {
   '/admin/modules': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions': typeof AuthenticatedAdminPermissionsIndexRoute
+  '/admin/qrcode-event': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/admin/roles': typeof AuthenticatedAdminRolesIndexRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes': typeof AuthenticatedAdminThemesIndexRoute
   '/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
+  '/admin/qrcode-event/batches/new': typeof AuthenticatedAdminQrcodeEventBatchesNewRoute
+  '/admin/qrcode-event/campaigns/new': typeof AuthenticatedAdminQrcodeEventCampaignsNewRoute
+  '/admin/qrcode-event/codes/$id': typeof AuthenticatedAdminQrcodeEventCodesIdRoute
+  '/admin/qrcode-event/batches': typeof AuthenticatedAdminQrcodeEventBatchesIndexRoute
+  '/admin/qrcode-event/campaigns': typeof AuthenticatedAdminQrcodeEventCampaignsIndexRoute
+  '/admin/qrcode-event/codes': typeof AuthenticatedAdminQrcodeEventCodesIndexRoute
+  '/admin/qrcode-event/logs': typeof AuthenticatedAdminQrcodeEventLogsIndexRoute
+  '/admin/qrcode-event/campaigns/$id/prizes': typeof AuthenticatedAdminQrcodeEventCampaignsIdPrizesRoute
+  '/admin/qrcode-event/campaigns/$id': typeof AuthenticatedAdminQrcodeEventCampaignsIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -296,6 +395,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/_authenticated/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/_authenticated/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/_authenticated/admin/qrcode-event/settings': typeof AuthenticatedAdminQrcodeEventSettingsRoute
   '/_authenticated/admin/themes/banners': typeof AuthenticatedAdminThemesBannersRoute
   '/_authenticated/admin/themes/custom-code': typeof AuthenticatedAdminThemesCustomCodeRoute
   '/_authenticated/admin/themes/footer': typeof AuthenticatedAdminThemesFooterRoute
@@ -307,10 +407,20 @@ export interface FileRoutesById {
   '/_authenticated/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/_authenticated/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/_authenticated/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
+  '/_authenticated/admin/qrcode-event/': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/_authenticated/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
   '/_authenticated/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/_authenticated/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
   '/_authenticated/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
+  '/_authenticated/admin/qrcode-event/batches/new': typeof AuthenticatedAdminQrcodeEventBatchesNewRoute
+  '/_authenticated/admin/qrcode-event/campaigns/new': typeof AuthenticatedAdminQrcodeEventCampaignsNewRoute
+  '/_authenticated/admin/qrcode-event/codes/$id': typeof AuthenticatedAdminQrcodeEventCodesIdRoute
+  '/_authenticated/admin/qrcode-event/batches/': typeof AuthenticatedAdminQrcodeEventBatchesIndexRoute
+  '/_authenticated/admin/qrcode-event/campaigns/': typeof AuthenticatedAdminQrcodeEventCampaignsIndexRoute
+  '/_authenticated/admin/qrcode-event/codes/': typeof AuthenticatedAdminQrcodeEventCodesIndexRoute
+  '/_authenticated/admin/qrcode-event/logs/': typeof AuthenticatedAdminQrcodeEventLogsIndexRoute
+  '/_authenticated/admin/qrcode-event/campaigns/$id/prizes': typeof AuthenticatedAdminQrcodeEventCampaignsIdPrizesRoute
+  '/_authenticated/admin/qrcode-event/campaigns/$id/': typeof AuthenticatedAdminQrcodeEventCampaignsIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -330,6 +440,7 @@ export interface FileRouteTypes {
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
+    | '/admin/qrcode-event/settings'
     | '/admin/themes/banners'
     | '/admin/themes/custom-code'
     | '/admin/themes/footer'
@@ -341,10 +452,20 @@ export interface FileRouteTypes {
     | '/admin/modules/'
     | '/admin/pages/'
     | '/admin/permissions/'
+    | '/admin/qrcode-event/'
     | '/admin/roles/'
     | '/admin/settings/'
     | '/admin/themes/'
     | '/admin/pages/$id/builder'
+    | '/admin/qrcode-event/batches/new'
+    | '/admin/qrcode-event/campaigns/new'
+    | '/admin/qrcode-event/codes/$id'
+    | '/admin/qrcode-event/batches/'
+    | '/admin/qrcode-event/campaigns/'
+    | '/admin/qrcode-event/codes/'
+    | '/admin/qrcode-event/logs/'
+    | '/admin/qrcode-event/campaigns/$id/prizes'
+    | '/admin/qrcode-event/campaigns/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/sign-in'
@@ -361,6 +482,7 @@ export interface FileRouteTypes {
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
+    | '/admin/qrcode-event/settings'
     | '/admin/themes/banners'
     | '/admin/themes/custom-code'
     | '/admin/themes/footer'
@@ -372,10 +494,20 @@ export interface FileRouteTypes {
     | '/admin/modules'
     | '/admin/pages'
     | '/admin/permissions'
+    | '/admin/qrcode-event'
     | '/admin/roles'
     | '/admin/settings'
     | '/admin/themes'
     | '/admin/pages/$id/builder'
+    | '/admin/qrcode-event/batches/new'
+    | '/admin/qrcode-event/campaigns/new'
+    | '/admin/qrcode-event/codes/$id'
+    | '/admin/qrcode-event/batches'
+    | '/admin/qrcode-event/campaigns'
+    | '/admin/qrcode-event/codes'
+    | '/admin/qrcode-event/logs'
+    | '/admin/qrcode-event/campaigns/$id/prizes'
+    | '/admin/qrcode-event/campaigns/$id'
   id:
     | '__root__'
     | '/_authenticated'
@@ -394,6 +526,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/blogs/$id'
     | '/_authenticated/admin/blogs/categories'
     | '/_authenticated/admin/blogs/new'
+    | '/_authenticated/admin/qrcode-event/settings'
     | '/_authenticated/admin/themes/banners'
     | '/_authenticated/admin/themes/custom-code'
     | '/_authenticated/admin/themes/footer'
@@ -405,10 +538,20 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/modules/'
     | '/_authenticated/admin/pages/'
     | '/_authenticated/admin/permissions/'
+    | '/_authenticated/admin/qrcode-event/'
     | '/_authenticated/admin/roles/'
     | '/_authenticated/admin/settings/'
     | '/_authenticated/admin/themes/'
     | '/_authenticated/admin/pages/$id/builder'
+    | '/_authenticated/admin/qrcode-event/batches/new'
+    | '/_authenticated/admin/qrcode-event/campaigns/new'
+    | '/_authenticated/admin/qrcode-event/codes/$id'
+    | '/_authenticated/admin/qrcode-event/batches/'
+    | '/_authenticated/admin/qrcode-event/campaigns/'
+    | '/_authenticated/admin/qrcode-event/codes/'
+    | '/_authenticated/admin/qrcode-event/logs/'
+    | '/_authenticated/admin/qrcode-event/campaigns/$id/prizes'
+    | '/_authenticated/admin/qrcode-event/campaigns/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -536,6 +679,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminRolesIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/qrcode-event/': {
+      id: '/_authenticated/admin/qrcode-event/'
+      path: '/qrcode-event'
+      fullPath: '/admin/qrcode-event/'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/permissions/': {
       id: '/_authenticated/admin/permissions/'
       path: '/permissions'
@@ -613,6 +763,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminThemesBannersRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/qrcode-event/settings': {
+      id: '/_authenticated/admin/qrcode-event/settings'
+      path: '/qrcode-event/settings'
+      fullPath: '/admin/qrcode-event/settings'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventSettingsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/blogs/new': {
       id: '/_authenticated/admin/blogs/new'
       path: '/blogs/new'
@@ -634,11 +791,74 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBlogsIdRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/qrcode-event/logs/': {
+      id: '/_authenticated/admin/qrcode-event/logs/'
+      path: '/qrcode-event/logs'
+      fullPath: '/admin/qrcode-event/logs/'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventLogsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/qrcode-event/codes/': {
+      id: '/_authenticated/admin/qrcode-event/codes/'
+      path: '/qrcode-event/codes'
+      fullPath: '/admin/qrcode-event/codes/'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventCodesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/qrcode-event/campaigns/': {
+      id: '/_authenticated/admin/qrcode-event/campaigns/'
+      path: '/qrcode-event/campaigns'
+      fullPath: '/admin/qrcode-event/campaigns/'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventCampaignsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/qrcode-event/batches/': {
+      id: '/_authenticated/admin/qrcode-event/batches/'
+      path: '/qrcode-event/batches'
+      fullPath: '/admin/qrcode-event/batches/'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventBatchesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/qrcode-event/codes/$id': {
+      id: '/_authenticated/admin/qrcode-event/codes/$id'
+      path: '/qrcode-event/codes/$id'
+      fullPath: '/admin/qrcode-event/codes/$id'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventCodesIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/qrcode-event/campaigns/new': {
+      id: '/_authenticated/admin/qrcode-event/campaigns/new'
+      path: '/qrcode-event/campaigns/new'
+      fullPath: '/admin/qrcode-event/campaigns/new'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventCampaignsNewRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/qrcode-event/batches/new': {
+      id: '/_authenticated/admin/qrcode-event/batches/new'
+      path: '/qrcode-event/batches/new'
+      fullPath: '/admin/qrcode-event/batches/new'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventBatchesNewRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/pages/$id/builder': {
       id: '/_authenticated/admin/pages/$id/builder'
       path: '/pages/$id/builder'
       fullPath: '/admin/pages/$id/builder'
       preLoaderRoute: typeof AuthenticatedAdminPagesIdBuilderRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/qrcode-event/campaigns/$id/': {
+      id: '/_authenticated/admin/qrcode-event/campaigns/$id/'
+      path: '/qrcode-event/campaigns/$id'
+      fullPath: '/admin/qrcode-event/campaigns/$id/'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventCampaignsIdIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/qrcode-event/campaigns/$id/prizes': {
+      id: '/_authenticated/admin/qrcode-event/campaigns/$id/prizes'
+      path: '/qrcode-event/campaigns/$id/prizes'
+      fullPath: '/admin/qrcode-event/campaigns/$id/prizes'
+      preLoaderRoute: typeof AuthenticatedAdminQrcodeEventCampaignsIdPrizesRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
   }
@@ -650,6 +870,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBlogsIdRoute: typeof AuthenticatedAdminBlogsIdRoute
   AuthenticatedAdminBlogsCategoriesRoute: typeof AuthenticatedAdminBlogsCategoriesRoute
   AuthenticatedAdminBlogsNewRoute: typeof AuthenticatedAdminBlogsNewRoute
+  AuthenticatedAdminQrcodeEventSettingsRoute: typeof AuthenticatedAdminQrcodeEventSettingsRoute
   AuthenticatedAdminThemesBannersRoute: typeof AuthenticatedAdminThemesBannersRoute
   AuthenticatedAdminThemesCustomCodeRoute: typeof AuthenticatedAdminThemesCustomCodeRoute
   AuthenticatedAdminThemesFooterRoute: typeof AuthenticatedAdminThemesFooterRoute
@@ -661,10 +882,20 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminModulesIndexRoute: typeof AuthenticatedAdminModulesIndexRoute
   AuthenticatedAdminPagesIndexRoute: typeof AuthenticatedAdminPagesIndexRoute
   AuthenticatedAdminPermissionsIndexRoute: typeof AuthenticatedAdminPermissionsIndexRoute
+  AuthenticatedAdminQrcodeEventIndexRoute: typeof AuthenticatedAdminQrcodeEventIndexRoute
   AuthenticatedAdminRolesIndexRoute: typeof AuthenticatedAdminRolesIndexRoute
   AuthenticatedAdminSettingsIndexRoute: typeof AuthenticatedAdminSettingsIndexRoute
   AuthenticatedAdminThemesIndexRoute: typeof AuthenticatedAdminThemesIndexRoute
   AuthenticatedAdminPagesIdBuilderRoute: typeof AuthenticatedAdminPagesIdBuilderRoute
+  AuthenticatedAdminQrcodeEventBatchesNewRoute: typeof AuthenticatedAdminQrcodeEventBatchesNewRoute
+  AuthenticatedAdminQrcodeEventCampaignsNewRoute: typeof AuthenticatedAdminQrcodeEventCampaignsNewRoute
+  AuthenticatedAdminQrcodeEventCodesIdRoute: typeof AuthenticatedAdminQrcodeEventCodesIdRoute
+  AuthenticatedAdminQrcodeEventBatchesIndexRoute: typeof AuthenticatedAdminQrcodeEventBatchesIndexRoute
+  AuthenticatedAdminQrcodeEventCampaignsIndexRoute: typeof AuthenticatedAdminQrcodeEventCampaignsIndexRoute
+  AuthenticatedAdminQrcodeEventCodesIndexRoute: typeof AuthenticatedAdminQrcodeEventCodesIndexRoute
+  AuthenticatedAdminQrcodeEventLogsIndexRoute: typeof AuthenticatedAdminQrcodeEventLogsIndexRoute
+  AuthenticatedAdminQrcodeEventCampaignsIdPrizesRoute: typeof AuthenticatedAdminQrcodeEventCampaignsIdPrizesRoute
+  AuthenticatedAdminQrcodeEventCampaignsIdIndexRoute: typeof AuthenticatedAdminQrcodeEventCampaignsIdIndexRoute
 }
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
@@ -675,6 +906,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminBlogsCategoriesRoute:
       AuthenticatedAdminBlogsCategoriesRoute,
     AuthenticatedAdminBlogsNewRoute: AuthenticatedAdminBlogsNewRoute,
+    AuthenticatedAdminQrcodeEventSettingsRoute:
+      AuthenticatedAdminQrcodeEventSettingsRoute,
     AuthenticatedAdminThemesBannersRoute: AuthenticatedAdminThemesBannersRoute,
     AuthenticatedAdminThemesCustomCodeRoute:
       AuthenticatedAdminThemesCustomCodeRoute,
@@ -688,11 +921,31 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminPagesIndexRoute: AuthenticatedAdminPagesIndexRoute,
     AuthenticatedAdminPermissionsIndexRoute:
       AuthenticatedAdminPermissionsIndexRoute,
+    AuthenticatedAdminQrcodeEventIndexRoute:
+      AuthenticatedAdminQrcodeEventIndexRoute,
     AuthenticatedAdminRolesIndexRoute: AuthenticatedAdminRolesIndexRoute,
     AuthenticatedAdminSettingsIndexRoute: AuthenticatedAdminSettingsIndexRoute,
     AuthenticatedAdminThemesIndexRoute: AuthenticatedAdminThemesIndexRoute,
     AuthenticatedAdminPagesIdBuilderRoute:
       AuthenticatedAdminPagesIdBuilderRoute,
+    AuthenticatedAdminQrcodeEventBatchesNewRoute:
+      AuthenticatedAdminQrcodeEventBatchesNewRoute,
+    AuthenticatedAdminQrcodeEventCampaignsNewRoute:
+      AuthenticatedAdminQrcodeEventCampaignsNewRoute,
+    AuthenticatedAdminQrcodeEventCodesIdRoute:
+      AuthenticatedAdminQrcodeEventCodesIdRoute,
+    AuthenticatedAdminQrcodeEventBatchesIndexRoute:
+      AuthenticatedAdminQrcodeEventBatchesIndexRoute,
+    AuthenticatedAdminQrcodeEventCampaignsIndexRoute:
+      AuthenticatedAdminQrcodeEventCampaignsIndexRoute,
+    AuthenticatedAdminQrcodeEventCodesIndexRoute:
+      AuthenticatedAdminQrcodeEventCodesIndexRoute,
+    AuthenticatedAdminQrcodeEventLogsIndexRoute:
+      AuthenticatedAdminQrcodeEventLogsIndexRoute,
+    AuthenticatedAdminQrcodeEventCampaignsIdPrizesRoute:
+      AuthenticatedAdminQrcodeEventCampaignsIdPrizesRoute,
+    AuthenticatedAdminQrcodeEventCampaignsIdIndexRoute:
+      AuthenticatedAdminQrcodeEventCampaignsIdIndexRoute,
   }
 
 const AuthenticatedAdminRouteRouteWithChildren =

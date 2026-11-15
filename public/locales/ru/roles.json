@@ -50,7 +50,7 @@
     "wholesale": "Опт",
     "classified": "Объявления",
     "delivery_boys": "Курьеры",
-    "qrcode_events": "События QR-кода"
+    "qrcode_event": "События QR-кода"
   },
   "actions": {
     "index": "Просмотр списка",

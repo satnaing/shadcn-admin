@@ -1,0 +1,70 @@
+{
+  "toast": { "error": "Something went wrong", "created": "Created", "updated": "Saved", "deleted": "Deleted", "batchCreated": "Code batch generated", "claimed": "Prize marked as handed over" },
+  "actions": { "export": "Export", "more": "More actions", "edit": "Edit", "prizes": "Prize pool", "createBatch": "Generate codes", "setStatus": "Set status", "delete": "Delete", "saving": "Saving...", "save": "Save", "back": "Back", "view": "View" },
+  "campaign": { "draft": "Draft", "active": "Active", "paused": "Paused", "finished": "Finished" },
+  "code": { "unused": "Unused", "checked": "Revealed", "claimed": "Prize handed over", "disabled": "Disabled" },
+  "result": { "win": "Win", "lose": "No prize", "used": "Already used", "already_checked": "Already checked", "invalid": "Invalid code", "disabled": "Disabled code", "blocked": "Blocked (too many attempts)" },
+  "prize": { "cash": "Cash (balance)", "product": "Product", "gift": "Gift" },
+  "delivery": { "manual": "Manual hand-over", "wallet": "Wallet credit" },
+  "filters": { "campaign": "Campaign", "allCampaigns": "All campaigns", "dateFrom": "From date", "dateTo": "To date", "ip": "IP address" },
+  "validation": { "allocationTooHigh": "Winning codes cannot exceed the batch quantity" },
+  "stats": {
+    "title": "QR code events",
+    "description": "Scan statistics, prize delivery and the last 30 days of checks.",
+    "total": "Total codes", "checked": "Revealed", "unused": "Unused", "disabled": "Disabled",
+    "winners": "Winning codes", "winners_revealed": "Winners revealed", "claimed": "Prizes handed over", "pending_prizes": "Prizes waiting",
+    "breakdown": "Prizes", "revealed": "Revealed", "delivered": "Handed over",
+    "chart": "Checks in the last 30 days", "chartEmpty": "No checks yet"
+  },
+  "campaigns": {
+    "title": "Campaigns", "description": "Scratch-code campaigns with their prize pool, period and abuse limits.",
+    "new": "New campaign", "search": "Search campaigns...", "empty": "No campaigns found",
+    "deleteTitle": "Delete campaign", "deleteDesc": "\"{{name}}\" with its prizes, batches, codes and scan log will be deleted. This cannot be undone.",
+    "columns": { "name": "Campaign", "status": "Status", "period": "Period", "prefix": "Prefix", "prizes": "Prizes", "codes": "Revealed / codes", "claimed": "Handed over" },
+    "form": {
+      "createTitle": "New campaign", "editTitle": "Edit campaign", "pageDescription": "Period, prize delivery, abuse limits and the texts shown in the scanner app.",
+      "name": "Name", "slug": "Slug", "slugHint": "Leave empty to generate from the name",
+      "status": "Status", "prizeDelivery": "Prize delivery", "startsAt": "Starts at", "endsAt": "Ends at",
+      "codePrefix": "Code prefix", "codePrefixHint": "Up to 6 letters/digits, added in front of every generated code",
+      "loginRequired": "Login required to check a code", "banner": "Banner", "description": "Description", "terms": "Terms",
+      "limits": "Abuse protection", "maxChecks": "Max checks per hour", "maxFailed": "Max failed checks per hour", "blockMinutes": "Block for (minutes)"
+    }
+  },
+  "prizes": {
+    "title": "Prize pool: {{name}}", "description": "Prizes that codes of this campaign can win.", "new": "Add prize", "empty": "No prizes yet",
+    "deleteTitle": "Delete prize", "deleteDesc": "\"{{title}}\" will be removed from the prize pool.",
+    "columns": { "title": "Prize", "type": "Type", "value": "Value", "quantity": "Quantity", "allocated": "In codes", "claimed": "Handed over" },
+    "form": {
+      "createTitle": "Add prize", "editTitle": "Edit prize", "description": "Cash prizes credit a value, product prizes link catalogue products, gifts are free text.",
+      "type": "Type", "title": "Title", "value": "Value", "quantity": "Quantity", "sortOrder": "Sort order",
+      "products": "Products", "descriptionField": "Description", "image": "Image"
+    }
+  },
+  "batches": {
+    "title": "Code batches", "description": "Generated code packs with export for printing.", "new": "Generate codes", "search": "Search batches...", "empty": "No batches yet",
+    "viewCodes": "Show codes", "exportXlsx": "Export XLSX", "exportCsv": "Export CSV", "qrZip": "Download QR links",
+    "columns": { "id": "Batch", "campaign": "Campaign", "quantity": "Codes", "winners": "Winning", "note": "Note", "createdBy": "Created by", "createdAt": "Created" },
+    "form": {
+      "title": "Generate codes", "description": "Create a batch of unique codes and decide how many of them win each prize.",
+      "generate": "Generate", "generating": "Generating...", "campaign": "Campaign", "campaignPlaceholder": "Select campaign",
+      "quantity": "Quantity", "quantityHint": "1 – 200,000 codes per batch", "product": "Product on the label", "noProduct": "No product", "note": "Note",
+      "allocation": "Winning codes per prize (remaining in pool)", "noPrizes": "This campaign has no prizes yet."
+    }
+  },
+  "codes": {
+    "title": "Codes", "description": "Every generated code with its state and prize.", "search": "Search code...", "empty": "No codes found",
+    "winnersOnly": "Winning codes", "nonWinners": "Non-winning codes", "enable": "Enable code", "disable": "Disable code",
+    "columns": { "code": "Code", "campaign": "Campaign", "status": "Status", "prize": "Prize", "user": "Revealed by", "checkedAt": "Revealed at" },
+    "claim": { "title": "Mark prize as handed over", "description": "Records that the winner received the prize.", "confirm": "Confirm hand-over", "note": "Note" },
+    "detail": { "description": "State, prize and scan history of one code.", "checks": "Latest scans", "noChecks": "This code has not been scanned", "claimedAt": "Handed over at", "claimedBy": "Handed over by", "claimNote": "Hand-over note" }
+  },
+  "logs": {
+    "title": "Scan log", "description": "Every check made by the app or the web page, including failed attempts.", "search": "Search code...", "empty": "No scans found",
+    "columns": { "at": "Date", "code": "Code", "result": "Result", "campaign": "Campaign", "user": "User", "ip": "IP", "source": "Source" }
+  },
+  "settings": {
+    "title": "QR code settings", "description": "Identifiers for App Links / Universal Links.",
+    "hint": "Used by the API to serve assetlinks.json and apple-app-site-association so scanned links open the app.",
+    "androidPackage": "Android package", "androidSha256": "Android SHA-256 fingerprint", "iosTeamId": "iOS Team ID", "iosBundleId": "iOS Bundle ID"
+  }
+}

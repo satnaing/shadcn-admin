@@ -50,7 +50,7 @@
     "wholesale": "Toptan satış",
     "classified": "İlanlar",
     "delivery_boys": "Kuryeler",
-    "qrcode_events": "QR kod etkinlikleri"
+    "qrcode_event": "QR kod etkinlikleri"
   },
   "actions": {
     "index": "Listeyi gör",

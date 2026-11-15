@@ -1,0 +1,70 @@
+{
+  "toast": { "error": "Xəta baş verdi", "created": "Yaradıldı", "updated": "Yadda saxlanıldı", "deleted": "Silindi", "batchCreated": "Kod partiyası yaradıldı", "claimed": "Uduş təhvil verildi kimi qeyd olundu" },
+  "actions": { "export": "İxrac", "more": "Digər əməliyyatlar", "edit": "Redaktə", "prizes": "Uduş fondu", "createBatch": "Kod yarat", "setStatus": "Status təyin et", "delete": "Sil", "saving": "Saxlanılır...", "save": "Yadda saxla", "back": "Geri", "view": "Bax" },
+  "campaign": { "draft": "Qaralama", "active": "Aktiv", "paused": "Dayandırılıb", "finished": "Bitib" },
+  "code": { "unused": "İstifadə olunmayıb", "checked": "Açılıb", "claimed": "Uduş təhvil verilib", "disabled": "Deaktiv" },
+  "result": { "win": "Uduş", "lose": "Uduş yoxdur", "used": "Artıq istifadə olunub", "already_checked": "Artıq yoxlanılıb", "invalid": "Yanlış kod", "disabled": "Deaktiv kod", "blocked": "Bloklanıb (çox cəhd)" },
+  "prize": { "cash": "Nağd (balans)", "product": "Məhsul", "gift": "Hədiyyə" },
+  "delivery": { "manual": "Əllə təhvil", "wallet": "Pulqabıya köçürmə" },
+  "filters": { "campaign": "Kampaniya", "allCampaigns": "Bütün kampaniyalar", "dateFrom": "Başlanğıc tarix", "dateTo": "Son tarix", "ip": "IP ünvanı" },
+  "validation": { "allocationTooHigh": "Uduşlu kodların sayı partiyanın sayını keçə bilməz" },
+  "stats": {
+    "title": "QR kod tədbirləri",
+    "description": "Skan statistikası, uduşların təhvili və son 30 günün yoxlamaları.",
+    "total": "Cəmi kod", "checked": "Açılıb", "unused": "İstifadə olunmayıb", "disabled": "Deaktiv",
+    "winners": "Uduşlu kodlar", "winners_revealed": "Açılmış uduşlar", "claimed": "Təhvil verilən uduşlar", "pending_prizes": "Gözləyən uduşlar",
+    "breakdown": "Uduşlar", "revealed": "Açılıb", "delivered": "Təhvil verilib",
+    "chart": "Son 30 gündə yoxlamalar", "chartEmpty": "Hələ yoxlama yoxdur"
+  },
+  "campaigns": {
+    "title": "Kampaniyalar", "description": "Uduş fondu, müddət və sui-istifadə limitləri ilə kod kampaniyaları.",
+    "new": "Yeni kampaniya", "search": "Kampaniya axtar...", "empty": "Kampaniya tapılmadı",
+    "deleteTitle": "Kampaniyanı sil", "deleteDesc": "\"{{name}}\" kampaniyası uduşları, partiyaları, kodları və skan jurnalı ilə birlikdə silinəcək. Bu geri qaytarılmır.",
+    "columns": { "name": "Kampaniya", "status": "Status", "period": "Müddət", "prefix": "Prefiks", "prizes": "Uduşlar", "codes": "Açılan / kod", "claimed": "Təhvil verilən" },
+    "form": {
+      "createTitle": "Yeni kampaniya", "editTitle": "Kampaniyanı redaktə et", "pageDescription": "Müddət, uduşun təhvili, sui-istifadə limitləri və tətbiqdə göstərilən mətnlər.",
+      "name": "Ad", "slug": "Slug", "slugHint": "Boş buraxsanız addan yaradılır",
+      "status": "Status", "prizeDelivery": "Uduşun təhvili", "startsAt": "Başlanğıc", "endsAt": "Bitiş",
+      "codePrefix": "Kod prefiksi", "codePrefixHint": "6 simvolədək hərf/rəqəm, hər kodun əvvəlinə əlavə olunur",
+      "loginRequired": "Kodu yoxlamaq üçün giriş tələb olunur", "banner": "Banner", "description": "Təsvir", "terms": "Şərtlər",
+      "limits": "Sui-istifadədən qorunma", "maxChecks": "Saatda maksimum yoxlama", "maxFailed": "Saatda maksimum uğursuz yoxlama", "blockMinutes": "Bloklama müddəti (dəqiqə)"
+    }
+  },
+  "prizes": {
+    "title": "Uduş fondu: {{name}}", "description": "Bu kampaniyanın kodlarının udacağı uduşlar.", "new": "Uduş əlavə et", "empty": "Hələ uduş yoxdur",
+    "deleteTitle": "Uduşu sil", "deleteDesc": "\"{{title}}\" uduş fondundan çıxarılacaq.",
+    "columns": { "title": "Uduş", "type": "Növ", "value": "Dəyər", "quantity": "Say", "allocated": "Kodlarda", "claimed": "Təhvil verilən" },
+    "form": {
+      "createTitle": "Uduş əlavə et", "editTitle": "Uduşu redaktə et", "description": "Nağd uduş məbləğ köçürür, məhsul uduşu kataloq məhsullarına bağlanır, hədiyyə sərbəst mətndir.",
+      "type": "Növ", "title": "Başlıq", "value": "Dəyər", "quantity": "Say", "sortOrder": "Sıra",
+      "products": "Məhsullar", "descriptionField": "Təsvir", "image": "Şəkil"
+    }
+  },
+  "batches": {
+    "title": "Kod partiyaları", "description": "Çap üçün ixrac imkanı ilə yaradılmış kod paketləri.", "new": "Kod yarat", "search": "Partiya axtar...", "empty": "Hələ partiya yoxdur",
+    "viewCodes": "Kodlara bax", "exportXlsx": "XLSX ixrac", "exportCsv": "CSV ixrac", "qrZip": "QR linklərini yüklə",
+    "columns": { "id": "Partiya", "campaign": "Kampaniya", "quantity": "Kod", "winners": "Uduşlu", "note": "Qeyd", "createdBy": "Yaradan", "createdAt": "Yaradılıb" },
+    "form": {
+      "title": "Kod yarat", "description": "Unikal kodlar partiyası yaradın və hər uduşu neçə kodun qazanacağını təyin edin.",
+      "generate": "Yarat", "generating": "Yaradılır...", "campaign": "Kampaniya", "campaignPlaceholder": "Kampaniya seçin",
+      "quantity": "Say", "quantityHint": "Bir partiyada 1 – 200 000 kod", "product": "Etiketdəki məhsul", "noProduct": "Məhsul yoxdur", "note": "Qeyd",
+      "allocation": "Hər uduş üzrə uduşlu kodlar (fonddakı qalıq)", "noPrizes": "Bu kampaniyada hələ uduş yoxdur."
+    }
+  },
+  "codes": {
+    "title": "Kodlar", "description": "Bütün yaradılmış kodlar, vəziyyəti və uduşu.", "search": "Kod axtar...", "empty": "Kod tapılmadı",
+    "winnersOnly": "Uduşlu kodlar", "nonWinners": "Uduşsuz kodlar", "enable": "Kodu aktivləşdir", "disable": "Kodu deaktiv et",
+    "columns": { "code": "Kod", "campaign": "Kampaniya", "status": "Status", "prize": "Uduş", "user": "Açan", "checkedAt": "Açılma vaxtı" },
+    "claim": { "title": "Uduşu təhvil verildi kimi qeyd et", "description": "Qalibin uduşu aldığını qeyd edir.", "confirm": "Təhvili təsdiqlə", "note": "Qeyd" },
+    "detail": { "description": "Bir kodun vəziyyəti, uduşu və skan tarixçəsi.", "checks": "Son skanlar", "noChecks": "Bu kod skan edilməyib", "claimedAt": "Təhvil vaxtı", "claimedBy": "Təhvil verən", "claimNote": "Təhvil qeydi" }
+  },
+  "logs": {
+    "title": "Skan jurnalı", "description": "Tətbiq və ya veb səhifə vasitəsilə edilən bütün yoxlamalar, uğursuz cəhdlər daxil.", "search": "Kod axtar...", "empty": "Skan tapılmadı",
+    "columns": { "at": "Tarix", "code": "Kod", "result": "Nəticə", "campaign": "Kampaniya", "user": "İstifadəçi", "ip": "IP", "source": "Mənbə" }
+  },
+  "settings": {
+    "title": "QR kod ayarları", "description": "App Links / Universal Links identifikatorları.",
+    "hint": "API bunları assetlinks.json və apple-app-site-association üçün istifadə edir ki, skan edilən link tətbiqi açsın.",
+    "androidPackage": "Android paketi", "androidSha256": "Android SHA-256 izi", "iosTeamId": "iOS Team ID", "iosBundleId": "iOS Bundle ID"
+  }
+}

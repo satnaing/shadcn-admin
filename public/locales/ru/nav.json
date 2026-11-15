@@ -33,7 +33,12 @@
   "deliveryBoy": "Курьеры",
   "deliveryBoys": "Курьеры",
   "deliveryCollections": "Инкассации",
-  "qrcodeEvent": "QR-события",
-  "qrcodeEvents": "QR-события",
+  "qrcodeEvent": "QR-акции",
+  "qrcodeEventStats": "Статистика",
+  "qrcodeEventCampaigns": "Кампании",
+  "qrcodeEventBatches": "Партии кодов",
+  "qrcodeEventCodes": "Коды",
+  "qrcodeEventLogs": "Журнал сканирований",
+  "qrcodeEventSettings": "Настройки",
   "soon": "скоро"
 }

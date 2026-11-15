@@ -34,6 +34,11 @@
   "deliveryBoys": "Kuryeler",
   "deliveryCollections": "Tahsilatlar",
   "qrcodeEvent": "QR kod etkinlikleri",
-  "qrcodeEvents": "QR kod etkinlikleri",
+  "qrcodeEventStats": "İstatistikler",
+  "qrcodeEventCampaigns": "Kampanyalar",
+  "qrcodeEventBatches": "Kod partileri",
+  "qrcodeEventCodes": "Kodlar",
+  "qrcodeEventLogs": "Tarama günlüğü",
+  "qrcodeEventSettings": "Ayarlar",
   "soon": "yakında"
 }

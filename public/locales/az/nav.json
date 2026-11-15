@@ -34,6 +34,11 @@
   "deliveryBoys": "Kuryerlər",
   "deliveryCollections": "Yığımlar",
   "qrcodeEvent": "QR kod tədbirləri",
-  "qrcodeEvents": "QR kod tədbirləri",
+  "qrcodeEventStats": "Statistika",
+  "qrcodeEventCampaigns": "Kampaniyalar",
+  "qrcodeEventBatches": "Kod partiyaları",
+  "qrcodeEventCodes": "Kodlar",
+  "qrcodeEventLogs": "Skan jurnalı",
+  "qrcodeEventSettings": "Ayarlar",
   "soon": "tezliklə"
 }
