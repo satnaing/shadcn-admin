@@ -188,5 +188,7 @@
   "f.paymentMethods.items": "Payment methods",
   "banners.search": "Search banners…",
   "common.prev": "Previous",
-  "common.next": "Next"
+  "common.next": "Next",
+  "banners.deleteTitle": "Delete banner?",
+  "banners.deleteDesc": "This banner will be permanently deleted."
 }

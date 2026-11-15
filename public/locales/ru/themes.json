@@ -188,5 +188,7 @@
   "f.paymentMethods.items": "Способы оплаты",
   "banners.search": "Поиск баннеров…",
   "common.prev": "Назад",
-  "common.next": "Далее"
+  "common.next": "Далее",
+  "banners.deleteTitle": "Удалить баннер?",
+  "banners.deleteDesc": "Баннер будет удалён без возможности восстановления."
 }

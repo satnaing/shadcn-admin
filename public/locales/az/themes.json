@@ -188,5 +188,7 @@
   "f.paymentMethods.items": "Ödəniş üsulları",
   "banners.search": "Banner axtar…",
   "common.prev": "Əvvəlki",
-  "common.next": "Növbəti"
+  "common.next": "Növbəti",
+  "banners.deleteTitle": "Banner silinsin?",
+  "banners.deleteDesc": "Bu banner həmişəlik silinəcək."
 }

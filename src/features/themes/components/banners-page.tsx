@@ -3,6 +3,7 @@ import { DndContext, PointerSensor, closestCenter, useSensor, useSensors, type D
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Plus } from 'lucide-react'
 import { AdminPageShell } from '@/components/admin/admin-page-shell'
+import { ConfirmDialog } from '@/components/confirm-dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useDebouncedValue } from '@/hooks/use-debounced-value'
@@ -27,6 +28,7 @@ export function BannersPage() {
   const [editing, setEditing] = useState<(BannerDraft & Partial<Pick<Banner, 'id'>>) | null>(null)
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
+  const [deletingId, setDeletingId] = useState<number | null>(null)
   const q = useDebouncedValue(search.trim())
   const query = useBannersQuery({
     q: q || undefined,
@@ -89,7 +91,7 @@ export function BannersPage() {
                 locale={locale === ALL ? 'az' : locale}
                 onToggle={(id) => toggle.mutate(id)}
                 onEdit={setEditing}
-                onDelete={(id) => remove.mutate(id)}
+                onDelete={setDeletingId}
               />
             ))}
           </ul>
@@ -107,6 +109,18 @@ export function BannersPage() {
           </Button>
         </div>
       )}
+
+      <ConfirmDialog
+        open={deletingId !== null}
+        onOpenChange={(open) => !open && setDeletingId(null)}
+        title={t('banners.deleteTitle')}
+        desc={t('banners.deleteDesc')}
+        confirmText={t('common.remove')}
+        cancelBtnText={t('common.cancel')}
+        destructive
+        isLoading={remove.isPending}
+        handleConfirm={() => deletingId !== null && remove.mutate(deletingId, { onSettled: () => setDeletingId(null) })}
+      />
 
       <BannerDialog
         banner={editing}
