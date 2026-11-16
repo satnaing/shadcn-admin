@@ -149,3 +149,29 @@ Folder = pilot layout (`src/features/refund/{data,hooks,components}`, `module.ma
 | Modules: toggle off + save → sidebar group gone; SPA navigation to `/admin/refund/reasons` → 404 page | ✅ | 0 | n/a |
 Not clicked live: wallet "Refund now" confirm, dispute pay/reject, reason edit/delete/bulk activate, bulk category days, settings save, sticker picker (node tests cover the mock layer). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
 Tests: 104 node tests pass (13 new in `refund.node.test.ts`), `tsc -b` clean, eslint 0 errors (2 `watch()` compiler warnings like the pilot).
+
+## Module #3 `preorder` (2026-11-16)
+Folder = pilot layout (`src/features/preorder/{data,hooks,components}`, `module.manifest.ts`, `src/api/modules/preorder.api.ts`, `src/mocks/preorder.{data,orders,routes}.ts`, `public/locales/*/preorder.json`, `docs/aec-diff/preorder.md`). 13 routes: `/admin/preorder` (dashboard), `/products`, `/products/new`, `/products/$id`, `/orders`, `/orders/$id`, `/commissions`, `/conversations`, `/queries`, `/reviews`, `/faqs`, `/notifications`, `/settings`. AEC source tree is `D:\www\aec` (not `public_html`).
+
+### Pattern additions
+| Change | Why |
+|---|---|
+| `components/forms/form-switch-field.tsx`, `form-textarea-field.tsx`, `form-image-field.tsx` (shared RHF fields) | every module form needs them |
+| `hooks/use-<m>-action.ts`: one `use<M>Action(fn, toastKey, onDone?)` wrapper (invalidate module key + toast) instead of hand-written `onSuccess` per mutation; large mutation sets split by area (`use-preorder-order-mutations.ts`) | keeps the files under the `max-lines` lint limit |
+| Server-filter tab bar `PreorderTabs` (URL param + optional counts) | scope/stage/owner/state tabs; copy for the next module that needs it (refund has its own `RefundTabs`) |
+| Dialog-style detail for small entities (thread, query, reviews, FAQ, notification type), page routes only for list/detail workflows and big forms | AEC uses separate pages for these; dialogs are faster |
+| A tall form = stacked `PreorderFormSection` cards (no tabs) | validation errors never hide in an inactive tab |
+| Bulk bar needing a per-list option: build the component per option and `useMemo` it (`makeOrdersBulkActions(scope)`) — never create a component inside render | `EntityDataTable` only passes `{table}` |
+
+### Verification (Chrome, dev :5199)
+| Route / flow | Result | Console errors | ≥400 |
+|---|---|---|---|
+| `/admin/preorder` (14 cards, sales chart lazy, top products) | ✅ | 0 | n/a |
+| `/orders` (scope + stage tabs with counts; Delayed deposits → 4 rows) | ✅ | 0 | n/a |
+| `/orders/1`: accept "Deposit" through the dialog → badge Accepted, toast | ✅ | 0 | n/a |
+| `/products` (switches, filters), `/products/new` (empty submit → 3 field errors, 6 sections), `/products/1` | ✅ | 0 | n/a |
+| `/commissions`, `/conversations`, `/queries`, `/reviews`, `/faqs`, `/notifications`, `/settings` | ✅ rendered with data | 0 | n/a |
+| FAQ create (dialog) → row appears; conversation reply; query answer (pending 8 → 7); review hide/show switch; settings save; notification dialog opens | ✅ | 0 | n/a |
+| Modules: toggle off + save → sidebar group gone; `/admin/preorder/faqs` → 404 page | ✅ | 0 | n/a |
+Not clicked live: product create/edit save, bulk order delete / reminders, step deny with shipping proof, invoice download, notification save, route-by-route direct reload of every URL (they were reached by SPA navigation except dashboard/orders/detail/products/new). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
+Tests: 20 files / 131 node tests pass (27 new in `preorder*.node.test.ts`), `tsc -b` clean, eslint 0 errors.
