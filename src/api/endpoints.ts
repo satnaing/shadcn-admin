@@ -154,6 +154,17 @@ export const ENDPOINTS = {
     PRODUCTS_ALL: `${ADMIN}/club-point/products/all`,
     SETTINGS: `${ADMIN}/club-point/settings`,
   },
+  POS: {
+    STOCK: `${ADMIN}/pos/stock`,
+    PRODUCTS: `${ADMIN}/pos/products`,
+    PRODUCTS_AVAILABLE: `${ADMIN}/pos/products/available`,
+    CUSTOMERS: `${ADMIN}/pos/customers`,
+    ADDRESSES: (id: number | string) => `${ADMIN}/pos/customers/${id}/addresses`,
+    ORDERS: `${ADMIN}/pos/orders`,
+    RECEIPT: (id: number | string) => `${ADMIN}/pos/orders/${id}/receipt`,
+    SETTINGS: `${ADMIN}/pos/settings`,
+    LOOKUPS: `${ADMIN}/pos/lookups`,
+  },
   COURIER: {
     COURIERS: `${ADMIN}/courier/couriers`,
     COURIER: (id: number | string) => `${ADMIN}/courier/couriers/${id}`,

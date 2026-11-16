@@ -1,0 +1,176 @@
+{
+  "toast": {
+    "error": "Bir hata oluştu",
+    "saved": "Kaydedildi",
+    "addressSaved": "Adres kaydedildi",
+    "productsUpdated": "POS ürünleri güncellendi"
+  },
+  "actions": {
+    "save": "Kaydet",
+    "saving": "Kaydediliyor...",
+    "back": "Geri",
+    "receipt": "Fişi yazdır",
+    "selectAll": "Tümünü seç",
+    "selectRow": "Satırı seç"
+  },
+  "terminal": {
+    "title": "POS terminali",
+    "description": "Mağazada satış: ürünleri seçin, müşteriyi belirleyin ve ödemeyi alın."
+  },
+  "grid": {
+    "search": "Ürün adı veya barkodla ara",
+    "allCategories": "Tüm kategoriler",
+    "allBrands": "Tüm markalar",
+    "empty": "Aramaya uyan POS ürünü yok",
+    "loadMore": "Daha fazla yükle",
+    "loading": "Yükleniyor...",
+    "inStock": "Stokta: {{count}}",
+    "outOfStock": "Stokta yok"
+  },
+  "cart": {
+    "title": "Sepet",
+    "empty": "Henüz ürün eklenmedi",
+    "decrease": "Adedi azalt",
+    "increase": "Adedi artır",
+    "quantity": "Adet",
+    "remove": "Sepetten çıkar",
+    "subtotal": "Ara toplam",
+    "tax": "Vergi",
+    "shipping": "Teslimat",
+    "discount": "İndirim",
+    "total": "Toplam",
+    "clear": "Temizle",
+    "placeOrder": "Siparişi tamamla",
+    "error": {
+      "minStock": "Minimum alım adedi için stok yetersiz",
+      "alreadyInCart": "Bu ürün zaten sepette",
+      "noMoreStock": "Bu üründen başka stok yok"
+    }
+  },
+  "customer": {
+    "title": "Müşteri",
+    "change": "Değiştir",
+    "name": "Ad",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "address": "Adres",
+    "searchBy": "Arama alanı",
+    "searchHint": "En az 3 karakter yazın",
+    "notFound": "Müşteri bulunamadı"
+  },
+  "source": {
+    "walkin": "Mağazada",
+    "registered": "Kayıtlı",
+    "facebook": "Facebook",
+    "whatsapp": "WhatsApp"
+  },
+  "address": {
+    "title": "Teslimat adresi",
+    "description": "Adres müşterinin profiline kaydedilir.",
+    "none": "Bu müşterinin kayıtlı adresi yok",
+    "add": "Yeni adres",
+    "country": "Ülke",
+    "state": "İl",
+    "city": "İlçe",
+    "postalCode": "Posta kodu",
+    "phone": "Telefon",
+    "address": "Adres"
+  },
+  "checkout": {
+    "emptyCart": "Önce sepete ürün ekleyin",
+    "noCustomer": "Müşteri ve teslimat adresi seçin",
+    "noWidth": "Önce POS ayarlarında termal yazıcı genişliğini belirleyin",
+    "placed": "{{code}} siparişi oluşturuldu",
+    "print": "Fişi yazdır"
+  },
+  "summary": {
+    "title": "Sipariş özeti",
+    "offline": "Çevrimdışı",
+    "cod": "Kapıda ödeme",
+    "cash": "Nakit"
+  },
+  "offline": {
+    "method": "Ödeme yöntemi adı",
+    "amount": "Tutar",
+    "trxId": "İşlem kimliği",
+    "proof": "Ödeme kanıtı",
+    "confirm": "Onayla"
+  },
+  "payment": {
+    "cash": "Nakit",
+    "cash_on_delivery": "Kapıda ödeme",
+    "offline_payment": "Çevrimdışı ödeme"
+  },
+  "status": {
+    "paid": "Ödendi",
+    "unpaid": "Ödenmedi"
+  },
+  "tabs": {
+    "all": "Tümü",
+    "paid": "Ödendi",
+    "unpaid": "Ödenmedi"
+  },
+  "orders": {
+    "title": "POS siparişleri",
+    "description": "POS terminalinde oluşturulan siparişler.",
+    "search": "Sipariş kodu veya müşteriyle ara",
+    "empty": "Henüz POS siparişi yok"
+  },
+  "columns": {
+    "code": "Sipariş",
+    "date": "Tarih",
+    "customer": "Müşteri",
+    "source": "Kaynak",
+    "items": "Ürün sayısı",
+    "total": "Toplam",
+    "payment": "Ödeme",
+    "status": "Durum",
+    "operator": "Operatör"
+  },
+  "products": {
+    "title": "POS ürünleri",
+    "description": "Terminalden satılabilen ürünler.",
+    "search": "Ad veya barkodla ara",
+    "empty": "Terminalde henüz ürün yok",
+    "import": "Ürün içe aktar",
+    "inhouse": "Kendi ürünü",
+    "remove": "POS'tan çıkar",
+    "removeTitle": "Ürün çıkarmayı onaylayın",
+    "removeOne": "{{name}} artık terminalden satılmayacak.",
+    "removeMany": "{{count}} ürün artık terminalden satılmayacak.",
+    "removeSelected": "POS'tan çıkar",
+    "entity": "ürün",
+    "columns": {
+      "name": "Ad",
+      "category": "Kategori",
+      "seller": "Satıcı",
+      "price": "Birim fiyat",
+      "stock": "Stok",
+      "rating": "Puan"
+    }
+  },
+  "import": {
+    "title": "Ürün içe aktar",
+    "description": "Terminalden satılacak ürünleri seçin.",
+    "empty": "İçe aktarılacak başka ürün yok",
+    "add": "{{count}} ürünü POS'a ekle"
+  },
+  "config": {
+    "title": "POS yapılandırması",
+    "description": "Satıcı erişimi ve fiş yazdırma.",
+    "activationTitle": "Satıcılar için POS",
+    "activationDescription": "Satıcıların kendi terminallerini kullanmasına izin verin.",
+    "activationLabel": "Satıcılar için POS'u etkinleştir",
+    "printTitle": "Termal yazıcı",
+    "printDescription": "Fişler bu genişlikteki rulo üzerine basılır.",
+    "printWidth": "Baskı genişliği (mm)",
+    "printHint": "Genellikle 58 veya 80 mm."
+  },
+  "validation": {
+    "required": "Bu alan zorunludur",
+    "email": "Geçerli bir e-posta adresi girin",
+    "phoneOrEmail": "Telefon numarası veya e-posta girin",
+    "number": "Tam sayı girin",
+    "width": "Genişlik 30 ile 300 mm arasında olmalıdır"
+  }
+}

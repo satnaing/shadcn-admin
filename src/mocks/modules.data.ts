@@ -3,23 +3,13 @@ import { affiliateManifest } from '@/features/affiliate/module.manifest'
 import { clubPointManifest } from '@/features/club-point/module.manifest'
 import { courierManifest } from '@/features/courier/module.manifest'
 import { qrcodeEventManifest } from '@/features/qrcode-event/module.manifest'
+import { posManifest } from '@/features/pos/module.manifest'
 import { preorderManifest } from '@/features/preorder/module.manifest'
 import { refundManifest } from '@/features/refund/module.manifest'
 
 /** Installed modules (module.json shape). Mutable on purpose: PATCH /admin/modules/:id toggles `enabled`. */
 export const mockModules: ModuleRaw[] = [
-  {
-    id: 'pos', name: 'POS', description: 'Point of sale terminal, orders and catalogue', version: '1.0.0',
-    icon: 'ShoppingCart', required: false, enabled: true, requires: [],
-    admin_menu: {
-      group: { key: 'pos', icon: 'ShoppingCart', order: 100, panels: ['admin', 'seller'] },
-      items: [
-        { key: 'posTerminal', route: '/admin/pos', order: 1, permission: 'pos.index' },
-        { key: 'posOrders', route: '/admin/pos/orders', order: 2, permission: 'pos.orders' },
-        { key: 'posProducts', route: '/admin/pos/products', order: 3, permission: 'pos.products' },
-      ],
-    },
-  },
+  { ...posManifest, enabled: true },
   {
     id: 'wholesale', name: 'Wholesale', description: 'Wholesale catalogue and price tiers', version: '1.0.0',
     icon: 'Boxes', required: false, enabled: true, requires: [],

@@ -248,3 +248,30 @@ Folder = pilot layout (`src/features/courier/{data,hooks,components}`, `module.m
 | Edit `/courier/3`: all fields and region prefilled | ✅ | 0 | n/a |
 | Modules: toggle off + save → sidebar group gone, `/admin/courier/payments` → 404 | ✅ | 0 | n/a |
 Not clicked live: edit save, unban, pay dialog, pay/collect history rows after write, notification/pickup card save, settle dialog with zero balance (shows "Nothing to settle" but the submit button remains). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
+
+## Module #7 `pos` (2026-11-17)
+Folder = pilot layout (`src/features/pos/{data,hooks,components}`, `module.manifest.ts`, `src/api/modules/pos.api.ts`, `src/mocks/pos.{data,routes}.ts`, `public/locales/*/pos.json`, `docs/aec-diff/pos.md`). Replaces the `pos` placeholder in `modules.data.ts` (keys `posTerminal`, `posOrders`, `posProducts` kept, `posConfig` added). 4 routes: `/admin/pos` (terminal), `/orders`, `/products`, `/config`. Admin and seller panel share the screens (seller role = same routes, permission filtered; `pos.activation_manage` is admin only). AEC source tree is `D:\www\aec`.
+
+### Pattern additions
+| Change | Why |
+|---|---|
+| `components/forms/form-card.tsx` (shared `FormCard`: card + RHF form + save, read-only without the write permission, `labels` prop) | third copy of `AffiliateOptionCard` / `ClubPointFormCard` / `CourierFormCard`; the old copies are untouched (PM may migrate them) |
+| Stateless terminal: cart, customer, shipping and discount live in the browser (`use-pos-cart`, `use-pos-customer`, pure rules in `data/pos-cart.ts`, `data/pos-payload.ts`), ONE `POST /admin/pos/orders` places the order | AEC kept them in PHP session + `carts` table; fewer endpoints, nothing to sync |
+| `useInfiniteQuery` + "Load more" for the catalogue grid (16 per page) | AEC behaviour; data-table is the wrong tool for a card grid |
+| Pure logic split from React so it can be tested in node (`pos.logic.node.test.ts`) | cart rules, totals and payload are the money part |
+| Toolbar filters on a table whose column is displayed differently: hidden filter-only columns (`categoryFilter`, `sellerFilter`) | the visible `category` column shows a name, the filter value is an id |
+| `BulkActions` that needs a callback from the table owner: `useCallback` wrapper component at the owner | `EntityDataTable` only passes `{table}` |
+
+### Verification (Chrome, dev :5203, console tracked)
+| Route / flow | Result | Console errors | ≥400 |
+|---|---|---|---|
+| `/admin/pos` terminal (16 cards, filters, Load more present) | ✅ | 0 | n/a |
+| Walk-in order: add to cart, empty "Place order" → phone/address errors, fix → summary dialog → Offline: empty submit → "required"; with method → toast "Order … placed", cart + customer reset | ✅ | 0 | n/a |
+| Registered order: phone search (≥3 chars) → customer → 2 addresses → "New address" dialog (country → state lists only its children) → saved + auto selected → COD → order placed | ✅ | 0 | n/a |
+| Place order without address → toast "Select a customer and a shipping address" | ✅ | 0 | n/a |
+| `/orders` (tabs All / Paid / Unpaid, new orders first) | ✅ rendered with data | 0 | n/a |
+| `/products` (filters, sort, row remove with confirmation → toast, row gone; Import dialog → add → card appears on the terminal) | ✅ | 0 | n/a |
+| `/config`: width 8 → "between 30 and 300 mm"; 58 → "Saved" | ✅ | 0 | n/a |
+| Modules: toggle POS off + save → sidebar group gone; SPA navigation to `/admin/pos/orders` → 404 page | ✅ | 0 | n/a |
+Not clicked live: cash payment, bulk remove from the products table, category / seller toolbar filters, tab filters on orders, receipt print (toast action + row button), seller activation switch, quantity +/- and discount / shipping inputs beyond defaults, seller role view, route-by-route hard reload (reached by SPA navigation except `/admin/pos`). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
+Tests: 26 files / 207 node tests pass (25 new in `pos.node.test.ts` and `pos.logic.node.test.ts`), `tsc -b` clean, eslint 0 errors.

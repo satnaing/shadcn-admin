@@ -62,7 +62,6 @@ export const PERMISSIONS = {
   PERMISSIONS: { INDEX: 'permissions.index', UPDATE: 'permissions.update' },
 
   // Module-declared screens (mock modules); real modules append their own group.
-  POS: { INDEX: 'pos.index', ORDERS: 'pos.orders', PRODUCTS: 'pos.products' },
   WHOLESALE: { INDEX: 'wholesale.index', CREATE: 'wholesale.create' },
   CLASSIFIED: { INDEX: 'classified.index', CREATE: 'classified.create' },
   QRCODE_EVENT: {
@@ -124,6 +123,15 @@ export const PERMISSIONS = {
     WITHDRAWS: 'affiliate.withdraws',
     WITHDRAWS_MANAGE: 'affiliate.withdraws_manage',
     LOGS: 'affiliate.logs',
+  },
+  POS: {
+    INDEX: 'pos.index',
+    ORDERS: 'pos.orders',
+    PRODUCTS: 'pos.products',
+    PRODUCTS_MANAGE: 'pos.products_manage',
+    CONFIG: 'pos.config',
+    CONFIG_MANAGE: 'pos.config_manage',
+    ACTIVATION_MANAGE: 'pos.activation_manage',
   },
   COURIER: {
     INDEX: 'courier.index',

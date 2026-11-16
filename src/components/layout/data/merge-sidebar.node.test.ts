@@ -60,6 +60,7 @@ describe('module menu: screens that are not built yet', () => {
       ['posTerminal', false],
       ['posOrders', true],
       ['posProducts', true],
+      ['posConfig', true],
     ])
     expect(flat(posGroup(toNavGroups(menuFor('admin')))).every(([, d]) => d === undefined)).toBe(true)
   })

@@ -1,0 +1,176 @@
+{
+  "toast": {
+    "error": "Xəta baş verdi",
+    "saved": "Yadda saxlanıldı",
+    "addressSaved": "Ünvan saxlanıldı",
+    "productsUpdated": "POS məhsulları yeniləndi"
+  },
+  "actions": {
+    "save": "Yadda saxla",
+    "saving": "Saxlanılır...",
+    "back": "Geri",
+    "receipt": "Qəbzi çap et",
+    "selectAll": "Hamısını seç",
+    "selectRow": "Sətri seç"
+  },
+  "terminal": {
+    "title": "POS terminalı",
+    "description": "Mağazada satış: məhsulları seçin, müştərini təyin edin və ödənişi qəbul edin."
+  },
+  "grid": {
+    "search": "Məhsul adı və ya barkodla axtar",
+    "allCategories": "Bütün kateqoriyalar",
+    "allBrands": "Bütün brendlər",
+    "empty": "Axtarışa uyğun POS məhsulu yoxdur",
+    "loadMore": "Daha çox yüklə",
+    "loading": "Yüklənir...",
+    "inStock": "Stokda: {{count}}",
+    "outOfStock": "Stokda yoxdur"
+  },
+  "cart": {
+    "title": "Səbət",
+    "empty": "Hələ məhsul əlavə edilməyib",
+    "decrease": "Sayı azalt",
+    "increase": "Sayı artır",
+    "quantity": "Say",
+    "remove": "Səbətdən çıxar",
+    "subtotal": "Cəm (vergisiz)",
+    "tax": "Vergi",
+    "shipping": "Çatdırılma",
+    "discount": "Endirim",
+    "total": "Yekun",
+    "clear": "Təmizlə",
+    "placeOrder": "Sifarişi rəsmiləşdir",
+    "error": {
+      "minStock": "Minimum alış sayı üçün stok kifayət deyil",
+      "alreadyInCart": "Bu məhsul artıq səbətdədir",
+      "noMoreStock": "Bu məhsuldan başqa stok yoxdur"
+    }
+  },
+  "customer": {
+    "title": "Müştəri",
+    "change": "Dəyiş",
+    "name": "Ad",
+    "phone": "Telefon",
+    "email": "E-poçt",
+    "address": "Ünvan",
+    "searchBy": "Axtarış sahəsi",
+    "searchHint": "Ən azı 3 simvol yazın",
+    "notFound": "Müştəri tapılmadı"
+  },
+  "source": {
+    "walkin": "Mağazada",
+    "registered": "Qeydiyyatlı",
+    "facebook": "Facebook",
+    "whatsapp": "WhatsApp"
+  },
+  "address": {
+    "title": "Çatdırılma ünvanı",
+    "description": "Ünvan müştərinin profilinə saxlanılır.",
+    "none": "Bu müştərinin saxlanmış ünvanı yoxdur",
+    "add": "Yeni ünvan",
+    "country": "Ölkə",
+    "state": "Bölgə",
+    "city": "Şəhər",
+    "postalCode": "Poçt indeksi",
+    "phone": "Telefon",
+    "address": "Ünvan"
+  },
+  "checkout": {
+    "emptyCart": "Əvvəlcə səbətə məhsul əlavə edin",
+    "noCustomer": "Müştəri və çatdırılma ünvanı seçin",
+    "noWidth": "Əvvəlcə POS ayarlarında termal printerin enini təyin edin",
+    "placed": "{{code}} sifarişi rəsmiləşdirildi",
+    "print": "Qəbzi çap et"
+  },
+  "summary": {
+    "title": "Sifariş xülasəsi",
+    "offline": "Oflayn",
+    "cod": "Qapıda ödəniş",
+    "cash": "Nağd"
+  },
+  "offline": {
+    "method": "Ödəniş üsulunun adı",
+    "amount": "Məbləğ",
+    "trxId": "Əməliyyat ID-si",
+    "proof": "Ödəniş sübutu",
+    "confirm": "Təsdiq et"
+  },
+  "payment": {
+    "cash": "Nağd",
+    "cash_on_delivery": "Qapıda ödəniş",
+    "offline_payment": "Oflayn ödəniş"
+  },
+  "status": {
+    "paid": "Ödənilib",
+    "unpaid": "Ödənilməyib"
+  },
+  "tabs": {
+    "all": "Hamısı",
+    "paid": "Ödənilib",
+    "unpaid": "Ödənilməyib"
+  },
+  "orders": {
+    "title": "POS sifarişləri",
+    "description": "POS terminalında rəsmiləşdirilmiş sifarişlər.",
+    "search": "Sifariş kodu və ya müştəri ilə axtar",
+    "empty": "Hələ POS sifarişi yoxdur"
+  },
+  "columns": {
+    "code": "Sifariş",
+    "date": "Tarix",
+    "customer": "Müştəri",
+    "source": "Mənbə",
+    "items": "Məhsul sayı",
+    "total": "Yekun",
+    "payment": "Ödəniş",
+    "status": "Status",
+    "operator": "Operator"
+  },
+  "products": {
+    "title": "POS məhsulları",
+    "description": "Terminaldan satıla bilən məhsullar.",
+    "search": "Ad və ya barkodla axtar",
+    "empty": "Terminalda hələ məhsul yoxdur",
+    "import": "Məhsul idxal et",
+    "inhouse": "Daxili",
+    "remove": "POS-dan çıxar",
+    "removeTitle": "Məhsulun çıxarılmasını təsdiq edin",
+    "removeOne": "{{name}} artıq terminaldan satılmayacaq.",
+    "removeMany": "{{count}} məhsul artıq terminaldan satılmayacaq.",
+    "removeSelected": "POS-dan çıxar",
+    "entity": "məhsul",
+    "columns": {
+      "name": "Ad",
+      "category": "Kateqoriya",
+      "seller": "Satıcı",
+      "price": "Vahid qiyməti",
+      "stock": "Stok",
+      "rating": "Reytinq"
+    }
+  },
+  "import": {
+    "title": "Məhsul idxal et",
+    "description": "Terminaldan satılacaq məhsulları seçin.",
+    "empty": "İdxal ediləcək başqa məhsul yoxdur",
+    "add": "{{count}} məhsulu POS-a əlavə et"
+  },
+  "config": {
+    "title": "POS konfiqurasiyası",
+    "description": "Satıcı girişi və qəbzin çapı.",
+    "activationTitle": "Satıcılar üçün POS",
+    "activationDescription": "Satıcılara öz terminalından istifadə imkanı verin.",
+    "activationLabel": "Satıcılar üçün POS-u aktiv et",
+    "printTitle": "Termal printer",
+    "printDescription": "Qəbzlər bu enli rulonda çap olunur.",
+    "printWidth": "Çap eni (mm)",
+    "printHint": "Adətən 58 və ya 80 mm."
+  },
+  "validation": {
+    "required": "Bu sahə məcburidir",
+    "email": "Düzgün e-poçt ünvanı daxil edin",
+    "phoneOrEmail": "Telefon nömrəsi və ya e-poçt daxil edin",
+    "number": "Tam ədəd daxil edin",
+    "width": "En 30 ilə 300 mm arasında olmalıdır"
+  }
+}

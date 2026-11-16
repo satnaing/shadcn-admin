@@ -28,6 +28,7 @@ import { Route as AuthenticatedAdminRolesIndexRouteImport } from './routes/_auth
 import { Route as AuthenticatedAdminRefundIndexRouteImport } from './routes/_authenticated/admin/refund/index'
 import { Route as AuthenticatedAdminQrcodeEventIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/index'
 import { Route as AuthenticatedAdminPreorderIndexRouteImport } from './routes/_authenticated/admin/preorder/index'
+import { Route as AuthenticatedAdminPosIndexRouteImport } from './routes/_authenticated/admin/pos/index'
 import { Route as AuthenticatedAdminPermissionsIndexRouteImport } from './routes/_authenticated/admin/permissions/index'
 import { Route as AuthenticatedAdminPagesIndexRouteImport } from './routes/_authenticated/admin/pages/index'
 import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_authenticated/admin/modules/index'
@@ -54,6 +55,9 @@ import { Route as AuthenticatedAdminPreorderNotificationsRouteImport } from './r
 import { Route as AuthenticatedAdminPreorderFaqsRouteImport } from './routes/_authenticated/admin/preorder/faqs'
 import { Route as AuthenticatedAdminPreorderConversationsRouteImport } from './routes/_authenticated/admin/preorder/conversations'
 import { Route as AuthenticatedAdminPreorderCommissionsRouteImport } from './routes/_authenticated/admin/preorder/commissions'
+import { Route as AuthenticatedAdminPosProductsRouteImport } from './routes/_authenticated/admin/pos/products'
+import { Route as AuthenticatedAdminPosOrdersRouteImport } from './routes/_authenticated/admin/pos/orders'
+import { Route as AuthenticatedAdminPosConfigRouteImport } from './routes/_authenticated/admin/pos/config'
 import { Route as AuthenticatedAdminCourierPaymentsRouteImport } from './routes/_authenticated/admin/courier/payments'
 import { Route as AuthenticatedAdminCourierNewRouteImport } from './routes/_authenticated/admin/courier/new'
 import { Route as AuthenticatedAdminCourierEarningsRouteImport } from './routes/_authenticated/admin/courier/earnings'
@@ -188,6 +192,12 @@ const AuthenticatedAdminPreorderIndexRoute =
   AuthenticatedAdminPreorderIndexRouteImport.update({
     id: '/preorder/',
     path: '/preorder/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPosIndexRoute =
+  AuthenticatedAdminPosIndexRouteImport.update({
+    id: '/pos/',
+    path: '/pos/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminPermissionsIndexRoute =
@@ -344,6 +354,24 @@ const AuthenticatedAdminPreorderCommissionsRoute =
   AuthenticatedAdminPreorderCommissionsRouteImport.update({
     id: '/preorder/commissions',
     path: '/preorder/commissions',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPosProductsRoute =
+  AuthenticatedAdminPosProductsRouteImport.update({
+    id: '/pos/products',
+    path: '/pos/products',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPosOrdersRoute =
+  AuthenticatedAdminPosOrdersRouteImport.update({
+    id: '/pos/orders',
+    path: '/pos/orders',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPosConfigRoute =
+  AuthenticatedAdminPosConfigRouteImport.update({
+    id: '/pos/config',
+    path: '/pos/config',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminCourierPaymentsRoute =
@@ -583,6 +611,9 @@ export interface FileRoutesByFullPath {
   '/admin/courier/earnings': typeof AuthenticatedAdminCourierEarningsRoute
   '/admin/courier/new': typeof AuthenticatedAdminCourierNewRoute
   '/admin/courier/payments': typeof AuthenticatedAdminCourierPaymentsRoute
+  '/admin/pos/config': typeof AuthenticatedAdminPosConfigRoute
+  '/admin/pos/orders': typeof AuthenticatedAdminPosOrdersRoute
+  '/admin/pos/products': typeof AuthenticatedAdminPosProductsRoute
   '/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
   '/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
   '/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
@@ -609,6 +640,7 @@ export interface FileRoutesByFullPath {
   '/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
+  '/admin/pos/': typeof AuthenticatedAdminPosIndexRoute
   '/admin/preorder/': typeof AuthenticatedAdminPreorderIndexRoute
   '/admin/qrcode-event/': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/admin/refund/': typeof AuthenticatedAdminRefundIndexRoute
@@ -662,6 +694,9 @@ export interface FileRoutesByTo {
   '/admin/courier/earnings': typeof AuthenticatedAdminCourierEarningsRoute
   '/admin/courier/new': typeof AuthenticatedAdminCourierNewRoute
   '/admin/courier/payments': typeof AuthenticatedAdminCourierPaymentsRoute
+  '/admin/pos/config': typeof AuthenticatedAdminPosConfigRoute
+  '/admin/pos/orders': typeof AuthenticatedAdminPosOrdersRoute
+  '/admin/pos/products': typeof AuthenticatedAdminPosProductsRoute
   '/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
   '/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
   '/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
@@ -688,6 +723,7 @@ export interface FileRoutesByTo {
   '/admin/modules': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions': typeof AuthenticatedAdminPermissionsIndexRoute
+  '/admin/pos': typeof AuthenticatedAdminPosIndexRoute
   '/admin/preorder': typeof AuthenticatedAdminPreorderIndexRoute
   '/admin/qrcode-event': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/admin/refund': typeof AuthenticatedAdminRefundIndexRoute
@@ -744,6 +780,9 @@ export interface FileRoutesById {
   '/_authenticated/admin/courier/earnings': typeof AuthenticatedAdminCourierEarningsRoute
   '/_authenticated/admin/courier/new': typeof AuthenticatedAdminCourierNewRoute
   '/_authenticated/admin/courier/payments': typeof AuthenticatedAdminCourierPaymentsRoute
+  '/_authenticated/admin/pos/config': typeof AuthenticatedAdminPosConfigRoute
+  '/_authenticated/admin/pos/orders': typeof AuthenticatedAdminPosOrdersRoute
+  '/_authenticated/admin/pos/products': typeof AuthenticatedAdminPosProductsRoute
   '/_authenticated/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
   '/_authenticated/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
   '/_authenticated/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
@@ -770,6 +809,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/_authenticated/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/_authenticated/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
+  '/_authenticated/admin/pos/': typeof AuthenticatedAdminPosIndexRoute
   '/_authenticated/admin/preorder/': typeof AuthenticatedAdminPreorderIndexRoute
   '/_authenticated/admin/qrcode-event/': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/_authenticated/admin/refund/': typeof AuthenticatedAdminRefundIndexRoute
@@ -826,6 +866,9 @@ export interface FileRouteTypes {
     | '/admin/courier/earnings'
     | '/admin/courier/new'
     | '/admin/courier/payments'
+    | '/admin/pos/config'
+    | '/admin/pos/orders'
+    | '/admin/pos/products'
     | '/admin/preorder/commissions'
     | '/admin/preorder/conversations'
     | '/admin/preorder/faqs'
@@ -852,6 +895,7 @@ export interface FileRouteTypes {
     | '/admin/modules/'
     | '/admin/pages/'
     | '/admin/permissions/'
+    | '/admin/pos/'
     | '/admin/preorder/'
     | '/admin/qrcode-event/'
     | '/admin/refund/'
@@ -905,6 +949,9 @@ export interface FileRouteTypes {
     | '/admin/courier/earnings'
     | '/admin/courier/new'
     | '/admin/courier/payments'
+    | '/admin/pos/config'
+    | '/admin/pos/orders'
+    | '/admin/pos/products'
     | '/admin/preorder/commissions'
     | '/admin/preorder/conversations'
     | '/admin/preorder/faqs'
@@ -931,6 +978,7 @@ export interface FileRouteTypes {
     | '/admin/modules'
     | '/admin/pages'
     | '/admin/permissions'
+    | '/admin/pos'
     | '/admin/preorder'
     | '/admin/qrcode-event'
     | '/admin/refund'
@@ -986,6 +1034,9 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/courier/earnings'
     | '/_authenticated/admin/courier/new'
     | '/_authenticated/admin/courier/payments'
+    | '/_authenticated/admin/pos/config'
+    | '/_authenticated/admin/pos/orders'
+    | '/_authenticated/admin/pos/products'
     | '/_authenticated/admin/preorder/commissions'
     | '/_authenticated/admin/preorder/conversations'
     | '/_authenticated/admin/preorder/faqs'
@@ -1012,6 +1063,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/modules/'
     | '/_authenticated/admin/pages/'
     | '/_authenticated/admin/permissions/'
+    | '/_authenticated/admin/pos/'
     | '/_authenticated/admin/preorder/'
     | '/_authenticated/admin/qrcode-event/'
     | '/_authenticated/admin/refund/'
@@ -1179,6 +1231,13 @@ declare module '@tanstack/react-router' {
       path: '/preorder'
       fullPath: '/admin/preorder/'
       preLoaderRoute: typeof AuthenticatedAdminPreorderIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/pos/': {
+      id: '/_authenticated/admin/pos/'
+      path: '/pos'
+      fullPath: '/admin/pos/'
+      preLoaderRoute: typeof AuthenticatedAdminPosIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/permissions/': {
@@ -1361,6 +1420,27 @@ declare module '@tanstack/react-router' {
       path: '/preorder/commissions'
       fullPath: '/admin/preorder/commissions'
       preLoaderRoute: typeof AuthenticatedAdminPreorderCommissionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/pos/products': {
+      id: '/_authenticated/admin/pos/products'
+      path: '/pos/products'
+      fullPath: '/admin/pos/products'
+      preLoaderRoute: typeof AuthenticatedAdminPosProductsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/pos/orders': {
+      id: '/_authenticated/admin/pos/orders'
+      path: '/pos/orders'
+      fullPath: '/admin/pos/orders'
+      preLoaderRoute: typeof AuthenticatedAdminPosOrdersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/pos/config': {
+      id: '/_authenticated/admin/pos/config'
+      path: '/pos/config'
+      fullPath: '/admin/pos/config'
+      preLoaderRoute: typeof AuthenticatedAdminPosConfigRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/courier/payments': {
@@ -1626,6 +1706,9 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminCourierEarningsRoute: typeof AuthenticatedAdminCourierEarningsRoute
   AuthenticatedAdminCourierNewRoute: typeof AuthenticatedAdminCourierNewRoute
   AuthenticatedAdminCourierPaymentsRoute: typeof AuthenticatedAdminCourierPaymentsRoute
+  AuthenticatedAdminPosConfigRoute: typeof AuthenticatedAdminPosConfigRoute
+  AuthenticatedAdminPosOrdersRoute: typeof AuthenticatedAdminPosOrdersRoute
+  AuthenticatedAdminPosProductsRoute: typeof AuthenticatedAdminPosProductsRoute
   AuthenticatedAdminPreorderCommissionsRoute: typeof AuthenticatedAdminPreorderCommissionsRoute
   AuthenticatedAdminPreorderConversationsRoute: typeof AuthenticatedAdminPreorderConversationsRoute
   AuthenticatedAdminPreorderFaqsRoute: typeof AuthenticatedAdminPreorderFaqsRoute
@@ -1652,6 +1735,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminModulesIndexRoute: typeof AuthenticatedAdminModulesIndexRoute
   AuthenticatedAdminPagesIndexRoute: typeof AuthenticatedAdminPagesIndexRoute
   AuthenticatedAdminPermissionsIndexRoute: typeof AuthenticatedAdminPermissionsIndexRoute
+  AuthenticatedAdminPosIndexRoute: typeof AuthenticatedAdminPosIndexRoute
   AuthenticatedAdminPreorderIndexRoute: typeof AuthenticatedAdminPreorderIndexRoute
   AuthenticatedAdminQrcodeEventIndexRoute: typeof AuthenticatedAdminQrcodeEventIndexRoute
   AuthenticatedAdminRefundIndexRoute: typeof AuthenticatedAdminRefundIndexRoute
@@ -1709,6 +1793,9 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminCourierNewRoute: AuthenticatedAdminCourierNewRoute,
     AuthenticatedAdminCourierPaymentsRoute:
       AuthenticatedAdminCourierPaymentsRoute,
+    AuthenticatedAdminPosConfigRoute: AuthenticatedAdminPosConfigRoute,
+    AuthenticatedAdminPosOrdersRoute: AuthenticatedAdminPosOrdersRoute,
+    AuthenticatedAdminPosProductsRoute: AuthenticatedAdminPosProductsRoute,
     AuthenticatedAdminPreorderCommissionsRoute:
       AuthenticatedAdminPreorderCommissionsRoute,
     AuthenticatedAdminPreorderConversationsRoute:
@@ -1749,6 +1836,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminPagesIndexRoute: AuthenticatedAdminPagesIndexRoute,
     AuthenticatedAdminPermissionsIndexRoute:
       AuthenticatedAdminPermissionsIndexRoute,
+    AuthenticatedAdminPosIndexRoute: AuthenticatedAdminPosIndexRoute,
     AuthenticatedAdminPreorderIndexRoute: AuthenticatedAdminPreorderIndexRoute,
     AuthenticatedAdminQrcodeEventIndexRoute:
       AuthenticatedAdminQrcodeEventIndexRoute,

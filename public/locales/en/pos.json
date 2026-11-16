@@ -1,0 +1,176 @@
+{
+  "toast": {
+    "error": "Something went wrong",
+    "saved": "Saved",
+    "addressSaved": "Address saved",
+    "productsUpdated": "POS products updated"
+  },
+  "actions": {
+    "save": "Save",
+    "saving": "Saving...",
+    "back": "Back",
+    "receipt": "Print receipt",
+    "selectAll": "Select all",
+    "selectRow": "Select row"
+  },
+  "terminal": {
+    "title": "POS terminal",
+    "description": "Sell in the shop: pick products, choose the customer and take the payment."
+  },
+  "grid": {
+    "search": "Search by product name or barcode",
+    "allCategories": "All categories",
+    "allBrands": "All brands",
+    "empty": "No products on the terminal match your search",
+    "loadMore": "Load more",
+    "loading": "Loading...",
+    "inStock": "{{count}} in stock",
+    "outOfStock": "Out of stock"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "No product added yet",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "quantity": "Quantity",
+    "remove": "Remove from cart",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "shipping": "Shipping",
+    "discount": "Discount",
+    "total": "Total",
+    "clear": "Clear",
+    "placeOrder": "Place order",
+    "error": {
+      "minStock": "Not enough stock for the minimum purchase quantity",
+      "alreadyInCart": "This product is already in the cart",
+      "noMoreStock": "There is no more stock of this product"
+    }
+  },
+  "customer": {
+    "title": "Customer",
+    "change": "Change",
+    "name": "Name",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "searchBy": "Search by",
+    "searchHint": "Type at least 3 characters",
+    "notFound": "No customer found"
+  },
+  "source": {
+    "walkin": "Walk-in",
+    "registered": "Registered",
+    "facebook": "Facebook",
+    "whatsapp": "WhatsApp"
+  },
+  "address": {
+    "title": "Shipping address",
+    "description": "The address is saved to the customer's profile.",
+    "none": "This customer has no saved address yet",
+    "add": "New address",
+    "country": "Country",
+    "state": "State",
+    "city": "City",
+    "postalCode": "Postal code",
+    "phone": "Phone",
+    "address": "Address"
+  },
+  "checkout": {
+    "emptyCart": "Add a product to the cart first",
+    "noCustomer": "Select a customer and a shipping address",
+    "noWidth": "Set the thermal printer width in the POS configuration first",
+    "placed": "Order {{code}} placed",
+    "print": "Print receipt"
+  },
+  "summary": {
+    "title": "Order summary",
+    "offline": "Offline",
+    "cod": "COD",
+    "cash": "Cash"
+  },
+  "offline": {
+    "method": "Payment method name",
+    "amount": "Amount",
+    "trxId": "Transaction ID",
+    "proof": "Payment proof",
+    "confirm": "Confirm"
+  },
+  "payment": {
+    "cash": "Cash",
+    "cash_on_delivery": "Cash on delivery",
+    "offline_payment": "Offline payment"
+  },
+  "status": {
+    "paid": "Paid",
+    "unpaid": "Unpaid"
+  },
+  "tabs": {
+    "all": "All",
+    "paid": "Paid",
+    "unpaid": "Unpaid"
+  },
+  "orders": {
+    "title": "POS orders",
+    "description": "Orders placed at a POS terminal.",
+    "search": "Search by order code or customer",
+    "empty": "No POS orders yet"
+  },
+  "columns": {
+    "code": "Order",
+    "date": "Date",
+    "customer": "Customer",
+    "source": "Source",
+    "items": "Items",
+    "total": "Total",
+    "payment": "Payment",
+    "status": "Status",
+    "operator": "Operator"
+  },
+  "products": {
+    "title": "POS products",
+    "description": "Products that can be sold from the terminal.",
+    "search": "Search by name or barcode",
+    "empty": "No products on the terminal yet",
+    "import": "Import products",
+    "inhouse": "Inhouse",
+    "remove": "Remove from POS",
+    "removeTitle": "Confirm product removal",
+    "removeOne": "{{name}} will no longer be sold from the terminal.",
+    "removeMany": "{{count}} products will no longer be sold from the terminal.",
+    "removeSelected": "Remove from POS",
+    "entity": "product",
+    "columns": {
+      "name": "Name",
+      "category": "Category",
+      "seller": "Seller",
+      "price": "Unit price",
+      "stock": "Stock",
+      "rating": "Rating"
+    }
+  },
+  "import": {
+    "title": "Import products",
+    "description": "Pick products to sell from the terminal.",
+    "empty": "No more products to import",
+    "add": "Add {{count}} to POS"
+  },
+  "config": {
+    "title": "POS configuration",
+    "description": "Seller access and receipt printing.",
+    "activationTitle": "POS for sellers",
+    "activationDescription": "Let sellers use their own terminal.",
+    "activationLabel": "Enable POS for sellers",
+    "printTitle": "Thermal printer",
+    "printDescription": "Receipts are printed on a roll of this width.",
+    "printWidth": "Print width (mm)",
+    "printHint": "Usually 58 or 80 mm."
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Enter a valid e-mail address",
+    "phoneOrEmail": "Enter a phone number or an e-mail",
+    "number": "Enter a whole number",
+    "width": "Width must be between 30 and 300 mm"
+  }
+}

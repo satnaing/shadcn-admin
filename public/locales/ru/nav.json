@@ -25,6 +25,7 @@
   "posTerminal": "POS-терминал",
   "posOrders": "Заказы POS",
   "posProducts": "Товары POS",
+  "posConfig": "Настройки POS",
   "wholesale": "Опт",
   "wholesaleProducts": "Оптовые товары",
   "wholesaleCreate": "Добавить оптовый товар",

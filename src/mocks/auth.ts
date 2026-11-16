@@ -5,7 +5,8 @@ const without = (list: string[], ...suffixes: string[]) =>
 
 const SELLER_PERMISSIONS: string[] = [
   PERMISSIONS.DASHBOARD.INDEX,
-  ...Object.values(PERMISSIONS.POS),
+  // Switching POS on for sellers is an admin decision (AEC: pos_configuration).
+  ...Object.values(PERMISSIONS.POS).filter((p) => p !== PERMISSIONS.POS.ACTIVATION_MANAGE),
   ...Object.values(PERMISSIONS.WHOLESALE),
   ...Object.values(PERMISSIONS.CLASSIFIED),
 ]

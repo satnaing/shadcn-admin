@@ -25,6 +25,7 @@
   "posTerminal": "POS terminal",
   "posOrders": "POS orders",
   "posProducts": "POS products",
+  "posConfig": "POS configuration",
   "wholesale": "Wholesale",
   "wholesaleProducts": "Wholesale products",
   "wholesaleCreate": "Add wholesale product",

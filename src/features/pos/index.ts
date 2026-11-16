@@ -1,0 +1,6 @@
+export { PosTerminalPage } from './components/pos-terminal-page'
+export { PosOrdersPage } from './components/pos-orders-page'
+export { PosProductsPage } from './components/pos-products-page'
+export { PosConfigPage } from './components/pos-config-page'
+export { PosRouteGuard } from './components/pos-route-guard'
+export { posManifest } from './module.manifest'
