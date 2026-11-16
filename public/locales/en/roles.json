@@ -51,7 +51,8 @@
     "classified": "Classified ads",
     "delivery_boys": "Delivery boys",
     "qrcode_event": "QR code events",
-    "refund": "Refunds"
+    "refund": "Refunds",
+    "preorder": "Preorder"
   },
   "actions": {
     "index": "View list",

@@ -87,6 +87,25 @@ export const PERMISSIONS = {
     CATEGORIES: 'refund.categories',
     SETTINGS: 'refund.settings',
   },
+  PREORDER: {
+    INDEX: 'preorder.index',
+    PRODUCTS: 'preorder.products',
+    PRODUCTS_MANAGE: 'preorder.products_manage',
+    ORDERS: 'preorder.orders',
+    ORDERS_MANAGE: 'preorder.orders_manage',
+    COMMISSIONS: 'preorder.commissions',
+    CONVERSATIONS: 'preorder.conversations',
+    CONVERSATIONS_MANAGE: 'preorder.conversations_manage',
+    QUERIES: 'preorder.queries',
+    QUERIES_MANAGE: 'preorder.queries_manage',
+    REVIEWS: 'preorder.reviews',
+    REVIEWS_MANAGE: 'preorder.reviews_manage',
+    FAQS: 'preorder.faqs',
+    FAQS_MANAGE: 'preorder.faqs_manage',
+    NOTIFICATIONS: 'preorder.notifications',
+    NOTIFICATIONS_MANAGE: 'preorder.notifications_manage',
+    SETTINGS: 'preorder.settings',
+  },
 } as const
 
 export const ALL_PERMISSIONS: string[] = Object.values(PERMISSIONS).flatMap(

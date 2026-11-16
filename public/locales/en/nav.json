@@ -46,5 +46,16 @@
   "refundReasons": "Refund reasons",
   "refundCategories": "Category periods",
   "refundSettings": "Settings",
+  "preorder": "Preorder",
+  "preorderDashboard": "Dashboard",
+  "preorderProducts": "Products",
+  "preorderOrders": "Preorders",
+  "preorderCommissions": "Commissions",
+  "preorderConversations": "Conversations",
+  "preorderQueries": "Product queries",
+  "preorderReviews": "Reviews",
+  "preorderFaqs": "FAQs",
+  "preorderNotifications": "Notification types",
+  "preorderSettings": "Settings",
   "soon": "soon"
 }

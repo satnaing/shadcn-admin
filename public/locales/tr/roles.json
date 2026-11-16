@@ -51,7 +51,8 @@
     "classified": "İlanlar",
     "delivery_boys": "Kuryeler",
     "qrcode_event": "QR kod etkinlikleri",
-    "refund": "İadeler"
+    "refund": "İadeler",
+    "preorder": "Ön sipariş"
   },
   "actions": {
     "index": "Listeyi gör",

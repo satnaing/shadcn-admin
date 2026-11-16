@@ -27,6 +27,7 @@ import { Route as AuthenticatedAdminSettingsIndexRouteImport } from './routes/_a
 import { Route as AuthenticatedAdminRolesIndexRouteImport } from './routes/_authenticated/admin/roles/index'
 import { Route as AuthenticatedAdminRefundIndexRouteImport } from './routes/_authenticated/admin/refund/index'
 import { Route as AuthenticatedAdminQrcodeEventIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/index'
+import { Route as AuthenticatedAdminPreorderIndexRouteImport } from './routes/_authenticated/admin/preorder/index'
 import { Route as AuthenticatedAdminPermissionsIndexRouteImport } from './routes/_authenticated/admin/permissions/index'
 import { Route as AuthenticatedAdminPagesIndexRouteImport } from './routes/_authenticated/admin/pages/index'
 import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_authenticated/admin/modules/index'
@@ -43,6 +44,13 @@ import { Route as AuthenticatedAdminRefundReasonsRouteImport } from './routes/_a
 import { Route as AuthenticatedAdminRefundDisputesRouteImport } from './routes/_authenticated/admin/refund/disputes'
 import { Route as AuthenticatedAdminRefundCategoriesRouteImport } from './routes/_authenticated/admin/refund/categories'
 import { Route as AuthenticatedAdminQrcodeEventSettingsRouteImport } from './routes/_authenticated/admin/qrcode-event/settings'
+import { Route as AuthenticatedAdminPreorderSettingsRouteImport } from './routes/_authenticated/admin/preorder/settings'
+import { Route as AuthenticatedAdminPreorderReviewsRouteImport } from './routes/_authenticated/admin/preorder/reviews'
+import { Route as AuthenticatedAdminPreorderQueriesRouteImport } from './routes/_authenticated/admin/preorder/queries'
+import { Route as AuthenticatedAdminPreorderNotificationsRouteImport } from './routes/_authenticated/admin/preorder/notifications'
+import { Route as AuthenticatedAdminPreorderFaqsRouteImport } from './routes/_authenticated/admin/preorder/faqs'
+import { Route as AuthenticatedAdminPreorderConversationsRouteImport } from './routes/_authenticated/admin/preorder/conversations'
+import { Route as AuthenticatedAdminPreorderCommissionsRouteImport } from './routes/_authenticated/admin/preorder/commissions'
 import { Route as AuthenticatedAdminBlogsNewRouteImport } from './routes/_authenticated/admin/blogs/new'
 import { Route as AuthenticatedAdminBlogsCategoriesRouteImport } from './routes/_authenticated/admin/blogs/categories'
 import { Route as AuthenticatedAdminBlogsIdRouteImport } from './routes/_authenticated/admin/blogs/$id'
@@ -50,9 +58,14 @@ import { Route as AuthenticatedAdminQrcodeEventLogsIndexRouteImport } from './ro
 import { Route as AuthenticatedAdminQrcodeEventCodesIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/codes/index'
 import { Route as AuthenticatedAdminQrcodeEventCampaignsIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/campaigns/index'
 import { Route as AuthenticatedAdminQrcodeEventBatchesIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/batches/index'
+import { Route as AuthenticatedAdminPreorderProductsIndexRouteImport } from './routes/_authenticated/admin/preorder/products/index'
+import { Route as AuthenticatedAdminPreorderOrdersIndexRouteImport } from './routes/_authenticated/admin/preorder/orders/index'
 import { Route as AuthenticatedAdminQrcodeEventCodesIdRouteImport } from './routes/_authenticated/admin/qrcode-event/codes/$id'
 import { Route as AuthenticatedAdminQrcodeEventCampaignsNewRouteImport } from './routes/_authenticated/admin/qrcode-event/campaigns/new'
 import { Route as AuthenticatedAdminQrcodeEventBatchesNewRouteImport } from './routes/_authenticated/admin/qrcode-event/batches/new'
+import { Route as AuthenticatedAdminPreorderProductsNewRouteImport } from './routes/_authenticated/admin/preorder/products/new'
+import { Route as AuthenticatedAdminPreorderProductsIdRouteImport } from './routes/_authenticated/admin/preorder/products/$id'
+import { Route as AuthenticatedAdminPreorderOrdersIdRouteImport } from './routes/_authenticated/admin/preorder/orders/$id'
 import { Route as AuthenticatedAdminPagesIdBuilderRouteImport } from './routes/_authenticated/admin/pages/$id/builder'
 import { Route as AuthenticatedAdminQrcodeEventCampaignsIdIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/campaigns/$id/index'
 import { Route as AuthenticatedAdminQrcodeEventCampaignsIdPrizesRouteImport } from './routes/_authenticated/admin/qrcode-event/campaigns/$id/prizes'
@@ -152,6 +165,12 @@ const AuthenticatedAdminQrcodeEventIndexRoute =
     path: '/qrcode-event/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminPreorderIndexRoute =
+  AuthenticatedAdminPreorderIndexRouteImport.update({
+    id: '/preorder/',
+    path: '/preorder/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminPermissionsIndexRoute =
   AuthenticatedAdminPermissionsIndexRouteImport.update({
     id: '/permissions/',
@@ -248,6 +267,48 @@ const AuthenticatedAdminQrcodeEventSettingsRoute =
     path: '/qrcode-event/settings',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminPreorderSettingsRoute =
+  AuthenticatedAdminPreorderSettingsRouteImport.update({
+    id: '/preorder/settings',
+    path: '/preorder/settings',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPreorderReviewsRoute =
+  AuthenticatedAdminPreorderReviewsRouteImport.update({
+    id: '/preorder/reviews',
+    path: '/preorder/reviews',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPreorderQueriesRoute =
+  AuthenticatedAdminPreorderQueriesRouteImport.update({
+    id: '/preorder/queries',
+    path: '/preorder/queries',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPreorderNotificationsRoute =
+  AuthenticatedAdminPreorderNotificationsRouteImport.update({
+    id: '/preorder/notifications',
+    path: '/preorder/notifications',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPreorderFaqsRoute =
+  AuthenticatedAdminPreorderFaqsRouteImport.update({
+    id: '/preorder/faqs',
+    path: '/preorder/faqs',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPreorderConversationsRoute =
+  AuthenticatedAdminPreorderConversationsRouteImport.update({
+    id: '/preorder/conversations',
+    path: '/preorder/conversations',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPreorderCommissionsRoute =
+  AuthenticatedAdminPreorderCommissionsRouteImport.update({
+    id: '/preorder/commissions',
+    path: '/preorder/commissions',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminBlogsNewRoute =
   AuthenticatedAdminBlogsNewRouteImport.update({
     id: '/blogs/new',
@@ -290,6 +351,18 @@ const AuthenticatedAdminQrcodeEventBatchesIndexRoute =
     path: '/qrcode-event/batches/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminPreorderProductsIndexRoute =
+  AuthenticatedAdminPreorderProductsIndexRouteImport.update({
+    id: '/preorder/products/',
+    path: '/preorder/products/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPreorderOrdersIndexRoute =
+  AuthenticatedAdminPreorderOrdersIndexRouteImport.update({
+    id: '/preorder/orders/',
+    path: '/preorder/orders/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminQrcodeEventCodesIdRoute =
   AuthenticatedAdminQrcodeEventCodesIdRouteImport.update({
     id: '/qrcode-event/codes/$id',
@@ -306,6 +379,24 @@ const AuthenticatedAdminQrcodeEventBatchesNewRoute =
   AuthenticatedAdminQrcodeEventBatchesNewRouteImport.update({
     id: '/qrcode-event/batches/new',
     path: '/qrcode-event/batches/new',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPreorderProductsNewRoute =
+  AuthenticatedAdminPreorderProductsNewRouteImport.update({
+    id: '/preorder/products/new',
+    path: '/preorder/products/new',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPreorderProductsIdRoute =
+  AuthenticatedAdminPreorderProductsIdRouteImport.update({
+    id: '/preorder/products/$id',
+    path: '/preorder/products/$id',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPreorderOrdersIdRoute =
+  AuthenticatedAdminPreorderOrdersIdRouteImport.update({
+    id: '/preorder/orders/$id',
+    path: '/preorder/orders/$id',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminPagesIdBuilderRoute =
@@ -343,6 +434,13 @@ export interface FileRoutesByFullPath {
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
+  '/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
+  '/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
+  '/admin/preorder/notifications': typeof AuthenticatedAdminPreorderNotificationsRoute
+  '/admin/preorder/queries': typeof AuthenticatedAdminPreorderQueriesRoute
+  '/admin/preorder/reviews': typeof AuthenticatedAdminPreorderReviewsRoute
+  '/admin/preorder/settings': typeof AuthenticatedAdminPreorderSettingsRoute
   '/admin/qrcode-event/settings': typeof AuthenticatedAdminQrcodeEventSettingsRoute
   '/admin/refund/categories': typeof AuthenticatedAdminRefundCategoriesRoute
   '/admin/refund/disputes': typeof AuthenticatedAdminRefundDisputesRoute
@@ -359,15 +457,21 @@ export interface FileRoutesByFullPath {
   '/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
+  '/admin/preorder/': typeof AuthenticatedAdminPreorderIndexRoute
   '/admin/qrcode-event/': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/admin/refund/': typeof AuthenticatedAdminRefundIndexRoute
   '/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
   '/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
   '/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
+  '/admin/preorder/orders/$id': typeof AuthenticatedAdminPreorderOrdersIdRoute
+  '/admin/preorder/products/$id': typeof AuthenticatedAdminPreorderProductsIdRoute
+  '/admin/preorder/products/new': typeof AuthenticatedAdminPreorderProductsNewRoute
   '/admin/qrcode-event/batches/new': typeof AuthenticatedAdminQrcodeEventBatchesNewRoute
   '/admin/qrcode-event/campaigns/new': typeof AuthenticatedAdminQrcodeEventCampaignsNewRoute
   '/admin/qrcode-event/codes/$id': typeof AuthenticatedAdminQrcodeEventCodesIdRoute
+  '/admin/preorder/orders/': typeof AuthenticatedAdminPreorderOrdersIndexRoute
+  '/admin/preorder/products/': typeof AuthenticatedAdminPreorderProductsIndexRoute
   '/admin/qrcode-event/batches/': typeof AuthenticatedAdminQrcodeEventBatchesIndexRoute
   '/admin/qrcode-event/campaigns/': typeof AuthenticatedAdminQrcodeEventCampaignsIndexRoute
   '/admin/qrcode-event/codes/': typeof AuthenticatedAdminQrcodeEventCodesIndexRoute
@@ -390,6 +494,13 @@ export interface FileRoutesByTo {
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
+  '/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
+  '/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
+  '/admin/preorder/notifications': typeof AuthenticatedAdminPreorderNotificationsRoute
+  '/admin/preorder/queries': typeof AuthenticatedAdminPreorderQueriesRoute
+  '/admin/preorder/reviews': typeof AuthenticatedAdminPreorderReviewsRoute
+  '/admin/preorder/settings': typeof AuthenticatedAdminPreorderSettingsRoute
   '/admin/qrcode-event/settings': typeof AuthenticatedAdminQrcodeEventSettingsRoute
   '/admin/refund/categories': typeof AuthenticatedAdminRefundCategoriesRoute
   '/admin/refund/disputes': typeof AuthenticatedAdminRefundDisputesRoute
@@ -406,15 +517,21 @@ export interface FileRoutesByTo {
   '/admin/modules': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions': typeof AuthenticatedAdminPermissionsIndexRoute
+  '/admin/preorder': typeof AuthenticatedAdminPreorderIndexRoute
   '/admin/qrcode-event': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/admin/refund': typeof AuthenticatedAdminRefundIndexRoute
   '/admin/roles': typeof AuthenticatedAdminRolesIndexRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes': typeof AuthenticatedAdminThemesIndexRoute
   '/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
+  '/admin/preorder/orders/$id': typeof AuthenticatedAdminPreorderOrdersIdRoute
+  '/admin/preorder/products/$id': typeof AuthenticatedAdminPreorderProductsIdRoute
+  '/admin/preorder/products/new': typeof AuthenticatedAdminPreorderProductsNewRoute
   '/admin/qrcode-event/batches/new': typeof AuthenticatedAdminQrcodeEventBatchesNewRoute
   '/admin/qrcode-event/campaigns/new': typeof AuthenticatedAdminQrcodeEventCampaignsNewRoute
   '/admin/qrcode-event/codes/$id': typeof AuthenticatedAdminQrcodeEventCodesIdRoute
+  '/admin/preorder/orders': typeof AuthenticatedAdminPreorderOrdersIndexRoute
+  '/admin/preorder/products': typeof AuthenticatedAdminPreorderProductsIndexRoute
   '/admin/qrcode-event/batches': typeof AuthenticatedAdminQrcodeEventBatchesIndexRoute
   '/admin/qrcode-event/campaigns': typeof AuthenticatedAdminQrcodeEventCampaignsIndexRoute
   '/admin/qrcode-event/codes': typeof AuthenticatedAdminQrcodeEventCodesIndexRoute
@@ -440,6 +557,13 @@ export interface FileRoutesById {
   '/_authenticated/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/_authenticated/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/_authenticated/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/_authenticated/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
+  '/_authenticated/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
+  '/_authenticated/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
+  '/_authenticated/admin/preorder/notifications': typeof AuthenticatedAdminPreorderNotificationsRoute
+  '/_authenticated/admin/preorder/queries': typeof AuthenticatedAdminPreorderQueriesRoute
+  '/_authenticated/admin/preorder/reviews': typeof AuthenticatedAdminPreorderReviewsRoute
+  '/_authenticated/admin/preorder/settings': typeof AuthenticatedAdminPreorderSettingsRoute
   '/_authenticated/admin/qrcode-event/settings': typeof AuthenticatedAdminQrcodeEventSettingsRoute
   '/_authenticated/admin/refund/categories': typeof AuthenticatedAdminRefundCategoriesRoute
   '/_authenticated/admin/refund/disputes': typeof AuthenticatedAdminRefundDisputesRoute
@@ -456,15 +580,21 @@ export interface FileRoutesById {
   '/_authenticated/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/_authenticated/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/_authenticated/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
+  '/_authenticated/admin/preorder/': typeof AuthenticatedAdminPreorderIndexRoute
   '/_authenticated/admin/qrcode-event/': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/_authenticated/admin/refund/': typeof AuthenticatedAdminRefundIndexRoute
   '/_authenticated/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
   '/_authenticated/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/_authenticated/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
   '/_authenticated/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
+  '/_authenticated/admin/preorder/orders/$id': typeof AuthenticatedAdminPreorderOrdersIdRoute
+  '/_authenticated/admin/preorder/products/$id': typeof AuthenticatedAdminPreorderProductsIdRoute
+  '/_authenticated/admin/preorder/products/new': typeof AuthenticatedAdminPreorderProductsNewRoute
   '/_authenticated/admin/qrcode-event/batches/new': typeof AuthenticatedAdminQrcodeEventBatchesNewRoute
   '/_authenticated/admin/qrcode-event/campaigns/new': typeof AuthenticatedAdminQrcodeEventCampaignsNewRoute
   '/_authenticated/admin/qrcode-event/codes/$id': typeof AuthenticatedAdminQrcodeEventCodesIdRoute
+  '/_authenticated/admin/preorder/orders/': typeof AuthenticatedAdminPreorderOrdersIndexRoute
+  '/_authenticated/admin/preorder/products/': typeof AuthenticatedAdminPreorderProductsIndexRoute
   '/_authenticated/admin/qrcode-event/batches/': typeof AuthenticatedAdminQrcodeEventBatchesIndexRoute
   '/_authenticated/admin/qrcode-event/campaigns/': typeof AuthenticatedAdminQrcodeEventCampaignsIndexRoute
   '/_authenticated/admin/qrcode-event/codes/': typeof AuthenticatedAdminQrcodeEventCodesIndexRoute
@@ -490,6 +620,13 @@ export interface FileRouteTypes {
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
+    | '/admin/preorder/commissions'
+    | '/admin/preorder/conversations'
+    | '/admin/preorder/faqs'
+    | '/admin/preorder/notifications'
+    | '/admin/preorder/queries'
+    | '/admin/preorder/reviews'
+    | '/admin/preorder/settings'
     | '/admin/qrcode-event/settings'
     | '/admin/refund/categories'
     | '/admin/refund/disputes'
@@ -506,15 +643,21 @@ export interface FileRouteTypes {
     | '/admin/modules/'
     | '/admin/pages/'
     | '/admin/permissions/'
+    | '/admin/preorder/'
     | '/admin/qrcode-event/'
     | '/admin/refund/'
     | '/admin/roles/'
     | '/admin/settings/'
     | '/admin/themes/'
     | '/admin/pages/$id/builder'
+    | '/admin/preorder/orders/$id'
+    | '/admin/preorder/products/$id'
+    | '/admin/preorder/products/new'
     | '/admin/qrcode-event/batches/new'
     | '/admin/qrcode-event/campaigns/new'
     | '/admin/qrcode-event/codes/$id'
+    | '/admin/preorder/orders/'
+    | '/admin/preorder/products/'
     | '/admin/qrcode-event/batches/'
     | '/admin/qrcode-event/campaigns/'
     | '/admin/qrcode-event/codes/'
@@ -537,6 +680,13 @@ export interface FileRouteTypes {
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
+    | '/admin/preorder/commissions'
+    | '/admin/preorder/conversations'
+    | '/admin/preorder/faqs'
+    | '/admin/preorder/notifications'
+    | '/admin/preorder/queries'
+    | '/admin/preorder/reviews'
+    | '/admin/preorder/settings'
     | '/admin/qrcode-event/settings'
     | '/admin/refund/categories'
     | '/admin/refund/disputes'
@@ -553,15 +703,21 @@ export interface FileRouteTypes {
     | '/admin/modules'
     | '/admin/pages'
     | '/admin/permissions'
+    | '/admin/preorder'
     | '/admin/qrcode-event'
     | '/admin/refund'
     | '/admin/roles'
     | '/admin/settings'
     | '/admin/themes'
     | '/admin/pages/$id/builder'
+    | '/admin/preorder/orders/$id'
+    | '/admin/preorder/products/$id'
+    | '/admin/preorder/products/new'
     | '/admin/qrcode-event/batches/new'
     | '/admin/qrcode-event/campaigns/new'
     | '/admin/qrcode-event/codes/$id'
+    | '/admin/preorder/orders'
+    | '/admin/preorder/products'
     | '/admin/qrcode-event/batches'
     | '/admin/qrcode-event/campaigns'
     | '/admin/qrcode-event/codes'
@@ -586,6 +742,13 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/blogs/$id'
     | '/_authenticated/admin/blogs/categories'
     | '/_authenticated/admin/blogs/new'
+    | '/_authenticated/admin/preorder/commissions'
+    | '/_authenticated/admin/preorder/conversations'
+    | '/_authenticated/admin/preorder/faqs'
+    | '/_authenticated/admin/preorder/notifications'
+    | '/_authenticated/admin/preorder/queries'
+    | '/_authenticated/admin/preorder/reviews'
+    | '/_authenticated/admin/preorder/settings'
     | '/_authenticated/admin/qrcode-event/settings'
     | '/_authenticated/admin/refund/categories'
     | '/_authenticated/admin/refund/disputes'
@@ -602,15 +765,21 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/modules/'
     | '/_authenticated/admin/pages/'
     | '/_authenticated/admin/permissions/'
+    | '/_authenticated/admin/preorder/'
     | '/_authenticated/admin/qrcode-event/'
     | '/_authenticated/admin/refund/'
     | '/_authenticated/admin/roles/'
     | '/_authenticated/admin/settings/'
     | '/_authenticated/admin/themes/'
     | '/_authenticated/admin/pages/$id/builder'
+    | '/_authenticated/admin/preorder/orders/$id'
+    | '/_authenticated/admin/preorder/products/$id'
+    | '/_authenticated/admin/preorder/products/new'
     | '/_authenticated/admin/qrcode-event/batches/new'
     | '/_authenticated/admin/qrcode-event/campaigns/new'
     | '/_authenticated/admin/qrcode-event/codes/$id'
+    | '/_authenticated/admin/preorder/orders/'
+    | '/_authenticated/admin/preorder/products/'
     | '/_authenticated/admin/qrcode-event/batches/'
     | '/_authenticated/admin/qrcode-event/campaigns/'
     | '/_authenticated/admin/qrcode-event/codes/'
@@ -758,6 +927,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminQrcodeEventIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/preorder/': {
+      id: '/_authenticated/admin/preorder/'
+      path: '/preorder'
+      fullPath: '/admin/preorder/'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/permissions/': {
       id: '/_authenticated/admin/permissions/'
       path: '/permissions'
@@ -870,6 +1046,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminQrcodeEventSettingsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/preorder/settings': {
+      id: '/_authenticated/admin/preorder/settings'
+      path: '/preorder/settings'
+      fullPath: '/admin/preorder/settings'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderSettingsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/preorder/reviews': {
+      id: '/_authenticated/admin/preorder/reviews'
+      path: '/preorder/reviews'
+      fullPath: '/admin/preorder/reviews'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderReviewsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/preorder/queries': {
+      id: '/_authenticated/admin/preorder/queries'
+      path: '/preorder/queries'
+      fullPath: '/admin/preorder/queries'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderQueriesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/preorder/notifications': {
+      id: '/_authenticated/admin/preorder/notifications'
+      path: '/preorder/notifications'
+      fullPath: '/admin/preorder/notifications'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderNotificationsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/preorder/faqs': {
+      id: '/_authenticated/admin/preorder/faqs'
+      path: '/preorder/faqs'
+      fullPath: '/admin/preorder/faqs'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderFaqsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/preorder/conversations': {
+      id: '/_authenticated/admin/preorder/conversations'
+      path: '/preorder/conversations'
+      fullPath: '/admin/preorder/conversations'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderConversationsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/preorder/commissions': {
+      id: '/_authenticated/admin/preorder/commissions'
+      path: '/preorder/commissions'
+      fullPath: '/admin/preorder/commissions'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderCommissionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/blogs/new': {
       id: '/_authenticated/admin/blogs/new'
       path: '/blogs/new'
@@ -919,6 +1144,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminQrcodeEventBatchesIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/preorder/products/': {
+      id: '/_authenticated/admin/preorder/products/'
+      path: '/preorder/products'
+      fullPath: '/admin/preorder/products/'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderProductsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/preorder/orders/': {
+      id: '/_authenticated/admin/preorder/orders/'
+      path: '/preorder/orders'
+      fullPath: '/admin/preorder/orders/'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderOrdersIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/qrcode-event/codes/$id': {
       id: '/_authenticated/admin/qrcode-event/codes/$id'
       path: '/qrcode-event/codes/$id'
@@ -938,6 +1177,27 @@ declare module '@tanstack/react-router' {
       path: '/qrcode-event/batches/new'
       fullPath: '/admin/qrcode-event/batches/new'
       preLoaderRoute: typeof AuthenticatedAdminQrcodeEventBatchesNewRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/preorder/products/new': {
+      id: '/_authenticated/admin/preorder/products/new'
+      path: '/preorder/products/new'
+      fullPath: '/admin/preorder/products/new'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderProductsNewRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/preorder/products/$id': {
+      id: '/_authenticated/admin/preorder/products/$id'
+      path: '/preorder/products/$id'
+      fullPath: '/admin/preorder/products/$id'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderProductsIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/preorder/orders/$id': {
+      id: '/_authenticated/admin/preorder/orders/$id'
+      path: '/preorder/orders/$id'
+      fullPath: '/admin/preorder/orders/$id'
+      preLoaderRoute: typeof AuthenticatedAdminPreorderOrdersIdRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/pages/$id/builder': {
@@ -970,6 +1230,13 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBlogsIdRoute: typeof AuthenticatedAdminBlogsIdRoute
   AuthenticatedAdminBlogsCategoriesRoute: typeof AuthenticatedAdminBlogsCategoriesRoute
   AuthenticatedAdminBlogsNewRoute: typeof AuthenticatedAdminBlogsNewRoute
+  AuthenticatedAdminPreorderCommissionsRoute: typeof AuthenticatedAdminPreorderCommissionsRoute
+  AuthenticatedAdminPreorderConversationsRoute: typeof AuthenticatedAdminPreorderConversationsRoute
+  AuthenticatedAdminPreorderFaqsRoute: typeof AuthenticatedAdminPreorderFaqsRoute
+  AuthenticatedAdminPreorderNotificationsRoute: typeof AuthenticatedAdminPreorderNotificationsRoute
+  AuthenticatedAdminPreorderQueriesRoute: typeof AuthenticatedAdminPreorderQueriesRoute
+  AuthenticatedAdminPreorderReviewsRoute: typeof AuthenticatedAdminPreorderReviewsRoute
+  AuthenticatedAdminPreorderSettingsRoute: typeof AuthenticatedAdminPreorderSettingsRoute
   AuthenticatedAdminQrcodeEventSettingsRoute: typeof AuthenticatedAdminQrcodeEventSettingsRoute
   AuthenticatedAdminRefundCategoriesRoute: typeof AuthenticatedAdminRefundCategoriesRoute
   AuthenticatedAdminRefundDisputesRoute: typeof AuthenticatedAdminRefundDisputesRoute
@@ -986,15 +1253,21 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminModulesIndexRoute: typeof AuthenticatedAdminModulesIndexRoute
   AuthenticatedAdminPagesIndexRoute: typeof AuthenticatedAdminPagesIndexRoute
   AuthenticatedAdminPermissionsIndexRoute: typeof AuthenticatedAdminPermissionsIndexRoute
+  AuthenticatedAdminPreorderIndexRoute: typeof AuthenticatedAdminPreorderIndexRoute
   AuthenticatedAdminQrcodeEventIndexRoute: typeof AuthenticatedAdminQrcodeEventIndexRoute
   AuthenticatedAdminRefundIndexRoute: typeof AuthenticatedAdminRefundIndexRoute
   AuthenticatedAdminRolesIndexRoute: typeof AuthenticatedAdminRolesIndexRoute
   AuthenticatedAdminSettingsIndexRoute: typeof AuthenticatedAdminSettingsIndexRoute
   AuthenticatedAdminThemesIndexRoute: typeof AuthenticatedAdminThemesIndexRoute
   AuthenticatedAdminPagesIdBuilderRoute: typeof AuthenticatedAdminPagesIdBuilderRoute
+  AuthenticatedAdminPreorderOrdersIdRoute: typeof AuthenticatedAdminPreorderOrdersIdRoute
+  AuthenticatedAdminPreorderProductsIdRoute: typeof AuthenticatedAdminPreorderProductsIdRoute
+  AuthenticatedAdminPreorderProductsNewRoute: typeof AuthenticatedAdminPreorderProductsNewRoute
   AuthenticatedAdminQrcodeEventBatchesNewRoute: typeof AuthenticatedAdminQrcodeEventBatchesNewRoute
   AuthenticatedAdminQrcodeEventCampaignsNewRoute: typeof AuthenticatedAdminQrcodeEventCampaignsNewRoute
   AuthenticatedAdminQrcodeEventCodesIdRoute: typeof AuthenticatedAdminQrcodeEventCodesIdRoute
+  AuthenticatedAdminPreorderOrdersIndexRoute: typeof AuthenticatedAdminPreorderOrdersIndexRoute
+  AuthenticatedAdminPreorderProductsIndexRoute: typeof AuthenticatedAdminPreorderProductsIndexRoute
   AuthenticatedAdminQrcodeEventBatchesIndexRoute: typeof AuthenticatedAdminQrcodeEventBatchesIndexRoute
   AuthenticatedAdminQrcodeEventCampaignsIndexRoute: typeof AuthenticatedAdminQrcodeEventCampaignsIndexRoute
   AuthenticatedAdminQrcodeEventCodesIndexRoute: typeof AuthenticatedAdminQrcodeEventCodesIndexRoute
@@ -1011,6 +1284,19 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminBlogsCategoriesRoute:
       AuthenticatedAdminBlogsCategoriesRoute,
     AuthenticatedAdminBlogsNewRoute: AuthenticatedAdminBlogsNewRoute,
+    AuthenticatedAdminPreorderCommissionsRoute:
+      AuthenticatedAdminPreorderCommissionsRoute,
+    AuthenticatedAdminPreorderConversationsRoute:
+      AuthenticatedAdminPreorderConversationsRoute,
+    AuthenticatedAdminPreorderFaqsRoute: AuthenticatedAdminPreorderFaqsRoute,
+    AuthenticatedAdminPreorderNotificationsRoute:
+      AuthenticatedAdminPreorderNotificationsRoute,
+    AuthenticatedAdminPreorderQueriesRoute:
+      AuthenticatedAdminPreorderQueriesRoute,
+    AuthenticatedAdminPreorderReviewsRoute:
+      AuthenticatedAdminPreorderReviewsRoute,
+    AuthenticatedAdminPreorderSettingsRoute:
+      AuthenticatedAdminPreorderSettingsRoute,
     AuthenticatedAdminQrcodeEventSettingsRoute:
       AuthenticatedAdminQrcodeEventSettingsRoute,
     AuthenticatedAdminRefundCategoriesRoute:
@@ -1033,6 +1319,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminPagesIndexRoute: AuthenticatedAdminPagesIndexRoute,
     AuthenticatedAdminPermissionsIndexRoute:
       AuthenticatedAdminPermissionsIndexRoute,
+    AuthenticatedAdminPreorderIndexRoute: AuthenticatedAdminPreorderIndexRoute,
     AuthenticatedAdminQrcodeEventIndexRoute:
       AuthenticatedAdminQrcodeEventIndexRoute,
     AuthenticatedAdminRefundIndexRoute: AuthenticatedAdminRefundIndexRoute,
@@ -1041,12 +1328,22 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminThemesIndexRoute: AuthenticatedAdminThemesIndexRoute,
     AuthenticatedAdminPagesIdBuilderRoute:
       AuthenticatedAdminPagesIdBuilderRoute,
+    AuthenticatedAdminPreorderOrdersIdRoute:
+      AuthenticatedAdminPreorderOrdersIdRoute,
+    AuthenticatedAdminPreorderProductsIdRoute:
+      AuthenticatedAdminPreorderProductsIdRoute,
+    AuthenticatedAdminPreorderProductsNewRoute:
+      AuthenticatedAdminPreorderProductsNewRoute,
     AuthenticatedAdminQrcodeEventBatchesNewRoute:
       AuthenticatedAdminQrcodeEventBatchesNewRoute,
     AuthenticatedAdminQrcodeEventCampaignsNewRoute:
       AuthenticatedAdminQrcodeEventCampaignsNewRoute,
     AuthenticatedAdminQrcodeEventCodesIdRoute:
       AuthenticatedAdminQrcodeEventCodesIdRoute,
+    AuthenticatedAdminPreorderOrdersIndexRoute:
+      AuthenticatedAdminPreorderOrdersIndexRoute,
+    AuthenticatedAdminPreorderProductsIndexRoute:
+      AuthenticatedAdminPreorderProductsIndexRoute,
     AuthenticatedAdminQrcodeEventBatchesIndexRoute:
       AuthenticatedAdminQrcodeEventBatchesIndexRoute,
     AuthenticatedAdminQrcodeEventCampaignsIndexRoute:

@@ -18,7 +18,6 @@ const rows: Row[] = [
   ['offline-payment', 'Offline payment', 'Manual and offline payment methods', 'Wallet', false, false, ['payment']],
   ['ai-tools', 'AI management', 'AI translation and content generation', 'Sparkles', false, true, []],
   ['otp', 'OTP', 'SMS one-time-password login', 'Smartphone', false, false, ['identity']],
-  ['preorder', 'Preorder', 'Preorder products and deposits', 'CalendarClock', false, false, ['product']],
   ['auction', 'Auction', 'Auction products and bidding', 'Gavel', false, false, ['product'], false],
   ['map-provider', 'Map provider', 'Maps for pickup points and delivery', 'Map', false, false, [], false],
   ['google-one-tap', 'Google One Tap', 'One-tap sign-in with Google', 'KeyRound', false, false, ['identity'], false],

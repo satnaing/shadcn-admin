@@ -1,5 +1,6 @@
 import {
   Boxes,
+  CalendarClock,
   Megaphone,
   Package,
   Palette,
@@ -14,6 +15,7 @@ import type { NavGroup, NavItem } from '@/components/layout/types'
 /** Icon names a module may declare in `admin_menu.group.icon`; unknown → Package. */
 const ICONS: Record<string, React.ElementType> = {
   Boxes,
+  CalendarClock,
   Megaphone,
   Package,
   Palette,

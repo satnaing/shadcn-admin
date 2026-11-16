@@ -51,7 +51,8 @@
     "classified": "Объявления",
     "delivery_boys": "Курьеры",
     "qrcode_event": "События QR-кода",
-    "refund": "Возвраты"
+    "refund": "Возвраты",
+    "preorder": "Предзаказы"
   },
   "actions": {
     "index": "Просмотр списка",

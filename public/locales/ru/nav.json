@@ -46,5 +46,16 @@
   "refundReasons": "Причины возврата",
   "refundCategories": "Сроки по категориям",
   "refundSettings": "Настройки",
+  "preorder": "Предзаказы",
+  "preorderDashboard": "Панель",
+  "preorderProducts": "Товары",
+  "preorderOrders": "Предзаказы",
+  "preorderCommissions": "Комиссии",
+  "preorderConversations": "Диалоги",
+  "preorderQueries": "Вопросы о товарах",
+  "preorderReviews": "Отзывы",
+  "preorderFaqs": "Частые вопросы",
+  "preorderNotifications": "Типы уведомлений",
+  "preorderSettings": "Настройки",
   "soon": "скоро"
 }

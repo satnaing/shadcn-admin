@@ -51,7 +51,8 @@
     "classified": "Elanlar",
     "delivery_boys": "Kuryerlər",
     "qrcode_event": "QR kod tədbirləri",
-    "refund": "Geri ödəmə"
+    "refund": "Geri ödəmə",
+    "preorder": "Ön sifariş"
   },
   "actions": {
     "index": "Siyahıya bax",

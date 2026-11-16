@@ -46,5 +46,16 @@
   "refundReasons": "İade nedenleri",
   "refundCategories": "Kategori süreleri",
   "refundSettings": "Ayarlar",
+  "preorder": "Ön sipariş",
+  "preorderDashboard": "Panel",
+  "preorderProducts": "Ürünler",
+  "preorderOrders": "Ön siparişler",
+  "preorderCommissions": "Komisyonlar",
+  "preorderConversations": "Konuşmalar",
+  "preorderQueries": "Ürün soruları",
+  "preorderReviews": "Yorumlar",
+  "preorderFaqs": "SSS",
+  "preorderNotifications": "Bildirim türleri",
+  "preorderSettings": "Ayarlar",
   "soon": "yakında"
 }

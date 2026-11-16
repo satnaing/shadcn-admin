@@ -46,5 +46,16 @@
   "refundReasons": "Geri ödəmə səbəbləri",
   "refundCategories": "Kateqoriya müddətləri",
   "refundSettings": "Ayarlar",
+  "preorder": "Ön sifariş",
+  "preorderDashboard": "Panel",
+  "preorderProducts": "Məhsullar",
+  "preorderOrders": "Ön sifarişlər",
+  "preorderCommissions": "Komissiyalar",
+  "preorderConversations": "Söhbətlər",
+  "preorderQueries": "Məhsul sualları",
+  "preorderReviews": "Rəylər",
+  "preorderFaqs": "Suallar",
+  "preorderNotifications": "Bildiriş növləri",
+  "preorderSettings": "Ayarlar",
   "soon": "tezliklə"
 }
