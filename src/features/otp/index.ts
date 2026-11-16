@@ -1,0 +1,6 @@
+export { OtpSettingsPage } from './components/otp-settings-page'
+export { OtpGatewaysPage } from './components/otp-gateways-page'
+export { OtpTemplatesPage } from './components/otp-templates-page'
+export { OtpBulkSmsPage } from './components/otp-bulk-sms-page'
+export { OtpRouteGuard } from './components/otp-route-guard'
+export { otpManifest } from './module.manifest'

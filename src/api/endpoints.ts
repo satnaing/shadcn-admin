@@ -181,4 +181,14 @@ export const ENDPOINTS = {
     CASH: `${ADMIN}/courier/cash`,
     EARNINGS: `${ADMIN}/courier/earnings`,
   },
+  OTP: {
+    SETTINGS: `${ADMIN}/otp/settings`,
+    GATEWAYS: `${ADMIN}/otp/gateways`,
+    GATEWAY: (key: string) => `${ADMIN}/otp/gateways/${key}`,
+    GATEWAY_ACTIVATION: (key: string) => `${ADMIN}/otp/gateways/${key}/activation`,
+    TEMPLATES: `${ADMIN}/otp/templates`,
+    TEMPLATE: (id: number | string) => `${ADMIN}/otp/templates/${id}`,
+    RECIPIENTS: `${ADMIN}/otp/recipients`,
+    SMS: `${ADMIN}/otp/sms`,
+  },
 } as const

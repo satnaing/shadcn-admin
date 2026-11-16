@@ -1,0 +1,139 @@
+{
+  "common": { "on": "Вкл.", "off": "Выкл." },
+  "actions": { "save": "Сохранить", "saving": "Сохранение…", "edit": "Изменить" },
+  "toast": {
+    "saved": "Сохранено",
+    "error": "Что-то пошло не так",
+    "sent": "SMS отправлено получателям: {{count}}"
+  },
+  "settings": {
+    "title": "Настройки OTP",
+    "description": "Выберите, где клиент должен подтверждать себя одноразовым паролем.",
+    "items": {
+      "login_with_otp": {
+        "title": "Вход по OTP",
+        "description": "Клиенты могут входить по одноразовому паролю, отправленному на телефон или e-mail."
+      },
+      "guest_checkout_with_otp": {
+        "title": "OTP при гостевом заказе",
+        "description": "Гости подтверждают телефон по OTP перед оформлением заказа."
+      },
+      "cod_wallet_otp": {
+        "title": "OTP для оплаты при получении и из кошелька",
+        "description": "Требовать OTP перед подтверждением оплаты при получении или из кошелька, чтобы исключить мошеннические заказы."
+      }
+    }
+  },
+  "gateways": {
+    "title": "SMS-шлюзы",
+    "description": "Учётные данные SMS-провайдеров. Одновременно активен только один провайдер; он отправляет все OTP и SMS.",
+    "activation": "Активен",
+    "saveFirst": "Перед активацией сохраните обязательные данные.",
+    "activeNow": "Активен – отправляет SMS",
+    "inactive": "Не активен",
+    "names": {
+      "twilio": "Twilio",
+      "nexmo": "Vonage (Nexmo)",
+      "fast2sms": "Fast2SMS",
+      "mimo": "Mimo",
+      "mimsms": "MIM SMS",
+      "msegat": "Msegat",
+      "sparrow": "Sparrow SMS",
+      "ssl_wireless": "SSL Wireless",
+      "zender": "Zender"
+    },
+    "fields": {
+      "sid": "SID",
+      "auth_token": "Auth token",
+      "number": "Номер отправителя",
+      "channel": "Канал",
+      "key": "API-ключ",
+      "secret": "API-секрет",
+      "sender_id": "ID отправителя",
+      "auth_key": "Auth-ключ",
+      "entity_id": "Entity ID",
+      "route": "Маршрут",
+      "language": "Язык",
+      "username": "Имя пользователя",
+      "password": "Пароль",
+      "user_name": "Имя пользователя",
+      "api_key": "API-ключ",
+      "user_sender": "Отправитель пользователя",
+      "token": "Токен",
+      "message_from": "Отправитель сообщения",
+      "api_token": "API-токен",
+      "url": "API-адрес",
+      "site_url": "Адрес сайта",
+      "service": "Сервис",
+      "whatsapp": "Аккаунт WhatsApp",
+      "device": "Устройство",
+      "gateway": "Gateway",
+      "sim": "Слот SIM"
+    },
+    "options": {
+      "channel": { "sms": "SMS", "whatsapp": "WhatsApp" },
+      "service": { "sms": "SMS", "whatsapp": "WhatsApp" },
+      "route": { "dlt_manual": "DLT manual", "p": "Рекламный", "t": "Транзакционный" },
+      "language": { "english": "Английский", "unicode": "Unicode" },
+      "sim": { "1": "SIM 1", "2": "SIM 2" }
+    },
+    "hints": {
+      "whatsapp": "Только для сервиса WhatsApp. Уникальный ID привязанного аккаунта WhatsApp.",
+      "device": "Только для сервиса SMS. Уникальный ID привязанного устройства; заполняйте, только если отправляете со своего устройства.",
+      "gateway": "Только для сервиса SMS. Уникальный ID партнёрского устройства или стороннего gateway; заполняйте, только если отправляете через него.",
+      "sim": "Только для сервиса SMS. Слот SIM для отправки; для партнёрских устройств и сторонних gateway игнорируется."
+    }
+  },
+  "templates": {
+    "title": "SMS-шаблоны",
+    "description": "Тексты SMS для подтверждения, заказов и доставки. Оставляйте [[переменные]] без изменений.",
+    "search": "Поиск шаблонов…",
+    "empty": "Шаблоны не найдены.",
+    "alwaysOn": "Отправляется всегда",
+    "columns": { "name": "Сообщение", "body": "Текст", "templateId": "ID шаблона", "status": "Статус" },
+    "names": {
+      "phone_number_verification": "Подтверждение номера телефона",
+      "password_reset": "Сброс пароля",
+      "order_placement": "Заказ оформлен",
+      "delivery_status_change": "Статус доставки изменён",
+      "payment_status_change": "Статус оплаты изменён",
+      "assign_delivery_boy": "Курьер назначен",
+      "account_opening": "Аккаунт создан",
+      "login_with_otp": "Вход по OTP",
+      "guest_checkout_with_otp": "OTP при гостевом заказе",
+      "cod_and_wallet_payment_with_otp": "OTP оплаты при получении и из кошелька"
+    },
+    "form": {
+      "title": "Изменить: {{name}}",
+      "description": "Переменные, которые должны остаться в тексте: {{variables}}",
+      "active": "Отправлять это сообщение",
+      "body": "Текст SMS",
+      "bodyHint": "Не меняйте переменные вида [[имя]].",
+      "templateId": "ID шаблона",
+      "templateIdHint": "Нужен только для Fast2SMS с маршрутом DLT manual."
+    }
+  },
+  "bulk": {
+    "title": "Массовая SMS-рассылка",
+    "description": "Отправьте одно сообщение нескольким клиентам.",
+    "recipients": "Получатели",
+    "search": "Поиск клиента по имени или телефону (минимум 2 символа)",
+    "noResults": "Клиентов с номером телефона не найдено.",
+    "remove": "Убрать {{phone}}",
+    "content": "Текст SMS",
+    "templateId": "ID шаблона",
+    "templateIdHint": "Нужен только для Fast2SMS с маршрутом DLT manual.",
+    "send": "Отправить",
+    "sending": "Отправка…"
+  },
+  "validation": {
+    "required": "Обязательное поле",
+    "max60": "Не более 60 символов",
+    "max255": "Не более 255 символов",
+    "max500": "Не более 500 получателей",
+    "max1000": "Не более 1000 символов",
+    "url": "Введите корректный адрес, начинающийся с http:// или https://",
+    "placeholders": "[[переменные]] должны остаться как в исходном тексте",
+    "recipients": "Выберите хотя бы одного получателя"
+  }
+}

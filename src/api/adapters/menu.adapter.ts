@@ -9,6 +9,7 @@ import {
   RotateCcw,
   Share2,
   ShoppingCart,
+  Smartphone,
   Truck,
 } from 'lucide-react'
 import type { MenuGroupRaw, MenuItemRaw } from '@/api/menu.types'
@@ -26,6 +27,7 @@ const ICONS: Record<string, React.ElementType> = {
   RotateCcw,
   Share2,
   ShoppingCart,
+  Smartphone,
   Truck,
 }
 

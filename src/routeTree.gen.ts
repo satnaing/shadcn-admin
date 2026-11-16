@@ -31,6 +31,7 @@ import { Route as AuthenticatedAdminPreorderIndexRouteImport } from './routes/_a
 import { Route as AuthenticatedAdminPosIndexRouteImport } from './routes/_authenticated/admin/pos/index'
 import { Route as AuthenticatedAdminPermissionsIndexRouteImport } from './routes/_authenticated/admin/permissions/index'
 import { Route as AuthenticatedAdminPagesIndexRouteImport } from './routes/_authenticated/admin/pages/index'
+import { Route as AuthenticatedAdminOtpIndexRouteImport } from './routes/_authenticated/admin/otp/index'
 import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_authenticated/admin/modules/index'
 import { Route as AuthenticatedAdminCourierIndexRouteImport } from './routes/_authenticated/admin/courier/index'
 import { Route as AuthenticatedAdminClubPointIndexRouteImport } from './routes/_authenticated/admin/club-point/index'
@@ -58,6 +59,9 @@ import { Route as AuthenticatedAdminPreorderCommissionsRouteImport } from './rou
 import { Route as AuthenticatedAdminPosProductsRouteImport } from './routes/_authenticated/admin/pos/products'
 import { Route as AuthenticatedAdminPosOrdersRouteImport } from './routes/_authenticated/admin/pos/orders'
 import { Route as AuthenticatedAdminPosConfigRouteImport } from './routes/_authenticated/admin/pos/config'
+import { Route as AuthenticatedAdminOtpTemplatesRouteImport } from './routes/_authenticated/admin/otp/templates'
+import { Route as AuthenticatedAdminOtpGatewaysRouteImport } from './routes/_authenticated/admin/otp/gateways'
+import { Route as AuthenticatedAdminOtpBulkSmsRouteImport } from './routes/_authenticated/admin/otp/bulk-sms'
 import { Route as AuthenticatedAdminCourierPaymentsRouteImport } from './routes/_authenticated/admin/courier/payments'
 import { Route as AuthenticatedAdminCourierNewRouteImport } from './routes/_authenticated/admin/courier/new'
 import { Route as AuthenticatedAdminCourierEarningsRouteImport } from './routes/_authenticated/admin/courier/earnings'
@@ -210,6 +214,12 @@ const AuthenticatedAdminPagesIndexRoute =
   AuthenticatedAdminPagesIndexRouteImport.update({
     id: '/pages/',
     path: '/pages/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminOtpIndexRoute =
+  AuthenticatedAdminOtpIndexRouteImport.update({
+    id: '/otp/',
+    path: '/otp/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminModulesIndexRoute =
@@ -372,6 +382,24 @@ const AuthenticatedAdminPosConfigRoute =
   AuthenticatedAdminPosConfigRouteImport.update({
     id: '/pos/config',
     path: '/pos/config',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminOtpTemplatesRoute =
+  AuthenticatedAdminOtpTemplatesRouteImport.update({
+    id: '/otp/templates',
+    path: '/otp/templates',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminOtpGatewaysRoute =
+  AuthenticatedAdminOtpGatewaysRouteImport.update({
+    id: '/otp/gateways',
+    path: '/otp/gateways',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminOtpBulkSmsRoute =
+  AuthenticatedAdminOtpBulkSmsRouteImport.update({
+    id: '/otp/bulk-sms',
+    path: '/otp/bulk-sms',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminCourierPaymentsRoute =
@@ -611,6 +639,9 @@ export interface FileRoutesByFullPath {
   '/admin/courier/earnings': typeof AuthenticatedAdminCourierEarningsRoute
   '/admin/courier/new': typeof AuthenticatedAdminCourierNewRoute
   '/admin/courier/payments': typeof AuthenticatedAdminCourierPaymentsRoute
+  '/admin/otp/bulk-sms': typeof AuthenticatedAdminOtpBulkSmsRoute
+  '/admin/otp/gateways': typeof AuthenticatedAdminOtpGatewaysRoute
+  '/admin/otp/templates': typeof AuthenticatedAdminOtpTemplatesRoute
   '/admin/pos/config': typeof AuthenticatedAdminPosConfigRoute
   '/admin/pos/orders': typeof AuthenticatedAdminPosOrdersRoute
   '/admin/pos/products': typeof AuthenticatedAdminPosProductsRoute
@@ -638,6 +669,7 @@ export interface FileRoutesByFullPath {
   '/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
   '/admin/courier/': typeof AuthenticatedAdminCourierIndexRoute
   '/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
+  '/admin/otp/': typeof AuthenticatedAdminOtpIndexRoute
   '/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
   '/admin/pos/': typeof AuthenticatedAdminPosIndexRoute
@@ -694,6 +726,9 @@ export interface FileRoutesByTo {
   '/admin/courier/earnings': typeof AuthenticatedAdminCourierEarningsRoute
   '/admin/courier/new': typeof AuthenticatedAdminCourierNewRoute
   '/admin/courier/payments': typeof AuthenticatedAdminCourierPaymentsRoute
+  '/admin/otp/bulk-sms': typeof AuthenticatedAdminOtpBulkSmsRoute
+  '/admin/otp/gateways': typeof AuthenticatedAdminOtpGatewaysRoute
+  '/admin/otp/templates': typeof AuthenticatedAdminOtpTemplatesRoute
   '/admin/pos/config': typeof AuthenticatedAdminPosConfigRoute
   '/admin/pos/orders': typeof AuthenticatedAdminPosOrdersRoute
   '/admin/pos/products': typeof AuthenticatedAdminPosProductsRoute
@@ -721,6 +756,7 @@ export interface FileRoutesByTo {
   '/admin/club-point': typeof AuthenticatedAdminClubPointIndexRoute
   '/admin/courier': typeof AuthenticatedAdminCourierIndexRoute
   '/admin/modules': typeof AuthenticatedAdminModulesIndexRoute
+  '/admin/otp': typeof AuthenticatedAdminOtpIndexRoute
   '/admin/pages': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions': typeof AuthenticatedAdminPermissionsIndexRoute
   '/admin/pos': typeof AuthenticatedAdminPosIndexRoute
@@ -780,6 +816,9 @@ export interface FileRoutesById {
   '/_authenticated/admin/courier/earnings': typeof AuthenticatedAdminCourierEarningsRoute
   '/_authenticated/admin/courier/new': typeof AuthenticatedAdminCourierNewRoute
   '/_authenticated/admin/courier/payments': typeof AuthenticatedAdminCourierPaymentsRoute
+  '/_authenticated/admin/otp/bulk-sms': typeof AuthenticatedAdminOtpBulkSmsRoute
+  '/_authenticated/admin/otp/gateways': typeof AuthenticatedAdminOtpGatewaysRoute
+  '/_authenticated/admin/otp/templates': typeof AuthenticatedAdminOtpTemplatesRoute
   '/_authenticated/admin/pos/config': typeof AuthenticatedAdminPosConfigRoute
   '/_authenticated/admin/pos/orders': typeof AuthenticatedAdminPosOrdersRoute
   '/_authenticated/admin/pos/products': typeof AuthenticatedAdminPosProductsRoute
@@ -807,6 +846,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
   '/_authenticated/admin/courier/': typeof AuthenticatedAdminCourierIndexRoute
   '/_authenticated/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
+  '/_authenticated/admin/otp/': typeof AuthenticatedAdminOtpIndexRoute
   '/_authenticated/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/_authenticated/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
   '/_authenticated/admin/pos/': typeof AuthenticatedAdminPosIndexRoute
@@ -866,6 +906,9 @@ export interface FileRouteTypes {
     | '/admin/courier/earnings'
     | '/admin/courier/new'
     | '/admin/courier/payments'
+    | '/admin/otp/bulk-sms'
+    | '/admin/otp/gateways'
+    | '/admin/otp/templates'
     | '/admin/pos/config'
     | '/admin/pos/orders'
     | '/admin/pos/products'
@@ -893,6 +936,7 @@ export interface FileRouteTypes {
     | '/admin/club-point/'
     | '/admin/courier/'
     | '/admin/modules/'
+    | '/admin/otp/'
     | '/admin/pages/'
     | '/admin/permissions/'
     | '/admin/pos/'
@@ -949,6 +993,9 @@ export interface FileRouteTypes {
     | '/admin/courier/earnings'
     | '/admin/courier/new'
     | '/admin/courier/payments'
+    | '/admin/otp/bulk-sms'
+    | '/admin/otp/gateways'
+    | '/admin/otp/templates'
     | '/admin/pos/config'
     | '/admin/pos/orders'
     | '/admin/pos/products'
@@ -976,6 +1023,7 @@ export interface FileRouteTypes {
     | '/admin/club-point'
     | '/admin/courier'
     | '/admin/modules'
+    | '/admin/otp'
     | '/admin/pages'
     | '/admin/permissions'
     | '/admin/pos'
@@ -1034,6 +1082,9 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/courier/earnings'
     | '/_authenticated/admin/courier/new'
     | '/_authenticated/admin/courier/payments'
+    | '/_authenticated/admin/otp/bulk-sms'
+    | '/_authenticated/admin/otp/gateways'
+    | '/_authenticated/admin/otp/templates'
     | '/_authenticated/admin/pos/config'
     | '/_authenticated/admin/pos/orders'
     | '/_authenticated/admin/pos/products'
@@ -1061,6 +1112,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/club-point/'
     | '/_authenticated/admin/courier/'
     | '/_authenticated/admin/modules/'
+    | '/_authenticated/admin/otp/'
     | '/_authenticated/admin/pages/'
     | '/_authenticated/admin/permissions/'
     | '/_authenticated/admin/pos/'
@@ -1254,6 +1306,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPagesIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/otp/': {
+      id: '/_authenticated/admin/otp/'
+      path: '/otp'
+      fullPath: '/admin/otp/'
+      preLoaderRoute: typeof AuthenticatedAdminOtpIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/modules/': {
       id: '/_authenticated/admin/modules/'
       path: '/modules'
@@ -1441,6 +1500,27 @@ declare module '@tanstack/react-router' {
       path: '/pos/config'
       fullPath: '/admin/pos/config'
       preLoaderRoute: typeof AuthenticatedAdminPosConfigRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/otp/templates': {
+      id: '/_authenticated/admin/otp/templates'
+      path: '/otp/templates'
+      fullPath: '/admin/otp/templates'
+      preLoaderRoute: typeof AuthenticatedAdminOtpTemplatesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/otp/gateways': {
+      id: '/_authenticated/admin/otp/gateways'
+      path: '/otp/gateways'
+      fullPath: '/admin/otp/gateways'
+      preLoaderRoute: typeof AuthenticatedAdminOtpGatewaysRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/otp/bulk-sms': {
+      id: '/_authenticated/admin/otp/bulk-sms'
+      path: '/otp/bulk-sms'
+      fullPath: '/admin/otp/bulk-sms'
+      preLoaderRoute: typeof AuthenticatedAdminOtpBulkSmsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/courier/payments': {
@@ -1706,6 +1786,9 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminCourierEarningsRoute: typeof AuthenticatedAdminCourierEarningsRoute
   AuthenticatedAdminCourierNewRoute: typeof AuthenticatedAdminCourierNewRoute
   AuthenticatedAdminCourierPaymentsRoute: typeof AuthenticatedAdminCourierPaymentsRoute
+  AuthenticatedAdminOtpBulkSmsRoute: typeof AuthenticatedAdminOtpBulkSmsRoute
+  AuthenticatedAdminOtpGatewaysRoute: typeof AuthenticatedAdminOtpGatewaysRoute
+  AuthenticatedAdminOtpTemplatesRoute: typeof AuthenticatedAdminOtpTemplatesRoute
   AuthenticatedAdminPosConfigRoute: typeof AuthenticatedAdminPosConfigRoute
   AuthenticatedAdminPosOrdersRoute: typeof AuthenticatedAdminPosOrdersRoute
   AuthenticatedAdminPosProductsRoute: typeof AuthenticatedAdminPosProductsRoute
@@ -1733,6 +1816,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminClubPointIndexRoute: typeof AuthenticatedAdminClubPointIndexRoute
   AuthenticatedAdminCourierIndexRoute: typeof AuthenticatedAdminCourierIndexRoute
   AuthenticatedAdminModulesIndexRoute: typeof AuthenticatedAdminModulesIndexRoute
+  AuthenticatedAdminOtpIndexRoute: typeof AuthenticatedAdminOtpIndexRoute
   AuthenticatedAdminPagesIndexRoute: typeof AuthenticatedAdminPagesIndexRoute
   AuthenticatedAdminPermissionsIndexRoute: typeof AuthenticatedAdminPermissionsIndexRoute
   AuthenticatedAdminPosIndexRoute: typeof AuthenticatedAdminPosIndexRoute
@@ -1793,6 +1877,9 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminCourierNewRoute: AuthenticatedAdminCourierNewRoute,
     AuthenticatedAdminCourierPaymentsRoute:
       AuthenticatedAdminCourierPaymentsRoute,
+    AuthenticatedAdminOtpBulkSmsRoute: AuthenticatedAdminOtpBulkSmsRoute,
+    AuthenticatedAdminOtpGatewaysRoute: AuthenticatedAdminOtpGatewaysRoute,
+    AuthenticatedAdminOtpTemplatesRoute: AuthenticatedAdminOtpTemplatesRoute,
     AuthenticatedAdminPosConfigRoute: AuthenticatedAdminPosConfigRoute,
     AuthenticatedAdminPosOrdersRoute: AuthenticatedAdminPosOrdersRoute,
     AuthenticatedAdminPosProductsRoute: AuthenticatedAdminPosProductsRoute,
@@ -1833,6 +1920,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminClubPointIndexRoute,
     AuthenticatedAdminCourierIndexRoute: AuthenticatedAdminCourierIndexRoute,
     AuthenticatedAdminModulesIndexRoute: AuthenticatedAdminModulesIndexRoute,
+    AuthenticatedAdminOtpIndexRoute: AuthenticatedAdminOtpIndexRoute,
     AuthenticatedAdminPagesIndexRoute: AuthenticatedAdminPagesIndexRoute,
     AuthenticatedAdminPermissionsIndexRoute:
       AuthenticatedAdminPermissionsIndexRoute,

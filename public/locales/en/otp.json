@@ -1,0 +1,139 @@
+{
+  "common": { "on": "On", "off": "Off" },
+  "actions": { "save": "Save", "saving": "Saving…", "edit": "Edit" },
+  "toast": {
+    "saved": "Saved",
+    "error": "Something went wrong",
+    "sent": "SMS sent, recipients: {{count}}"
+  },
+  "settings": {
+    "title": "OTP settings",
+    "description": "Choose where customers must confirm themselves with a one-time password.",
+    "items": {
+      "login_with_otp": {
+        "title": "Login with OTP",
+        "description": "Customers can sign in with a one-time password sent to their phone number or e-mail."
+      },
+      "guest_checkout_with_otp": {
+        "title": "Guest checkout with OTP",
+        "description": "Guests verify their phone with an OTP before an order is placed."
+      },
+      "cod_wallet_otp": {
+        "title": "OTP for cash on delivery and wallet payments",
+        "description": "Require an OTP before a cash-on-delivery or wallet payment is confirmed, to stop fraudulent orders."
+      }
+    }
+  },
+  "gateways": {
+    "title": "SMS gateways",
+    "description": "Credentials of the SMS providers. Only one provider can be active; it sends every OTP and SMS.",
+    "activation": "Active",
+    "saveFirst": "Save the required credentials before activating.",
+    "activeNow": "Active – sending SMS",
+    "inactive": "Inactive",
+    "names": {
+      "twilio": "Twilio",
+      "nexmo": "Vonage (Nexmo)",
+      "fast2sms": "Fast2SMS",
+      "mimo": "Mimo",
+      "mimsms": "MIM SMS",
+      "msegat": "Msegat",
+      "sparrow": "Sparrow SMS",
+      "ssl_wireless": "SSL Wireless",
+      "zender": "Zender"
+    },
+    "fields": {
+      "sid": "SID",
+      "auth_token": "Auth token",
+      "number": "Sender number",
+      "channel": "Channel",
+      "key": "API key",
+      "secret": "API secret",
+      "sender_id": "Sender ID",
+      "auth_key": "Auth key",
+      "entity_id": "Entity ID",
+      "route": "Route",
+      "language": "Language",
+      "username": "Username",
+      "password": "Password",
+      "user_name": "Username",
+      "api_key": "API key",
+      "user_sender": "User sender",
+      "token": "Token",
+      "message_from": "Message from",
+      "api_token": "API token",
+      "url": "API URL",
+      "site_url": "Site URL",
+      "service": "Service",
+      "whatsapp": "WhatsApp account",
+      "device": "Device",
+      "gateway": "Gateway",
+      "sim": "SIM slot"
+    },
+    "options": {
+      "channel": { "sms": "SMS", "whatsapp": "WhatsApp" },
+      "service": { "sms": "SMS", "whatsapp": "WhatsApp" },
+      "route": { "dlt_manual": "DLT manual", "p": "Promotional", "t": "Transactional" },
+      "language": { "english": "English", "unicode": "Unicode" },
+      "sim": { "1": "SIM 1", "2": "SIM 2" }
+    },
+    "hints": {
+      "whatsapp": "WhatsApp service only. Unique ID of the linked WhatsApp account.",
+      "device": "SMS service only. Unique ID of your linked device; fill it only when sending from one of your own devices.",
+      "gateway": "SMS service only. Unique ID of a partner device or third-party gateway; fill it only when sending through one.",
+      "sim": "SMS service only. SIM slot used for sending; ignored for partner devices and third-party gateways."
+    }
+  },
+  "templates": {
+    "title": "SMS templates",
+    "description": "Text of the SMS messages sent for verification, orders and deliveries. Keep the [[variables]] as they are.",
+    "search": "Search templates…",
+    "empty": "No templates found.",
+    "alwaysOn": "Always sent",
+    "columns": { "name": "Message", "body": "Text", "templateId": "Template ID", "status": "Status" },
+    "names": {
+      "phone_number_verification": "Phone number verification",
+      "password_reset": "Password reset",
+      "order_placement": "Order placed",
+      "delivery_status_change": "Delivery status changed",
+      "payment_status_change": "Payment status changed",
+      "assign_delivery_boy": "Courier assigned",
+      "account_opening": "Account opened",
+      "login_with_otp": "Login with OTP",
+      "guest_checkout_with_otp": "Guest checkout with OTP",
+      "cod_and_wallet_payment_with_otp": "COD and wallet payment OTP"
+    },
+    "form": {
+      "title": "Edit: {{name}}",
+      "description": "Variables that must stay in the text: {{variables}}",
+      "active": "Send this message",
+      "body": "SMS text",
+      "bodyHint": "Do not change the variables written as [[name]].",
+      "templateId": "Template ID",
+      "templateIdHint": "Required only for Fast2SMS with the DLT manual route."
+    }
+  },
+  "bulk": {
+    "title": "Bulk SMS",
+    "description": "Send one message to several customers.",
+    "recipients": "Recipients",
+    "search": "Search customers by name or phone (2 characters minimum)",
+    "noResults": "No customers with a phone number found.",
+    "remove": "Remove {{phone}}",
+    "content": "SMS text",
+    "templateId": "Template ID",
+    "templateIdHint": "Required only for Fast2SMS with the DLT manual route.",
+    "send": "Send",
+    "sending": "Sending…"
+  },
+  "validation": {
+    "required": "This field is required",
+    "max60": "At most 60 characters",
+    "max255": "At most 255 characters",
+    "max500": "At most 500 recipients",
+    "max1000": "At most 1000 characters",
+    "url": "Enter a valid URL starting with http:// or https://",
+    "placeholders": "The [[variables]] must stay exactly as in the original text",
+    "recipients": "Choose at least one recipient"
+  }
+}

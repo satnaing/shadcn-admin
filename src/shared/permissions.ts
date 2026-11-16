@@ -150,6 +150,15 @@ export const PERMISSIONS = {
     CASH_REPORT: 'courier.cash_report',
     EARNINGS: 'courier.earnings',
   },
+  OTP: {
+    INDEX: 'otp.index',
+    SETTINGS_MANAGE: 'otp.settings_manage',
+    GATEWAYS: 'otp.gateways',
+    GATEWAYS_MANAGE: 'otp.gateways_manage',
+    TEMPLATES: 'otp.templates',
+    TEMPLATES_MANAGE: 'otp.templates_manage',
+    BULK_SMS: 'otp.bulk_sms',
+  },
 } as const
 
 export const ALL_PERMISSIONS: string[] = Object.values(PERMISSIONS).flatMap(

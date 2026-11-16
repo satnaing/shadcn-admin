@@ -275,3 +275,26 @@ Folder = pilot layout (`src/features/pos/{data,hooks,components}`, `module.manif
 | Modules: toggle POS off + save → sidebar group gone; SPA navigation to `/admin/pos/orders` → 404 page | ✅ | 0 | n/a |
 Not clicked live: cash payment, bulk remove from the products table, category / seller toolbar filters, tab filters on orders, receipt print (toast action + row button), seller activation switch, quantity +/- and discount / shipping inputs beyond defaults, seller role view, route-by-route hard reload (reached by SPA navigation except `/admin/pos`). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
 Tests: 26 files / 207 node tests pass (25 new in `pos.node.test.ts` and `pos.logic.node.test.ts`), `tsc -b` clean, eslint 0 errors.
+
+## Module #8 `otp` (2026-11-17)
+Folder = pilot layout (`src/features/otp/{data,hooks,components}`, `module.manifest.ts`, `src/api/modules/otp.api.ts`, `src/mocks/otp.{data,routes}.ts`, `public/locales/*/otp.json`, `docs/aec-diff/otp.md`). Replaces the `otp` row of `mocks/modules.extra.ts`. 4 routes: `/admin/otp` (3 switches), `/gateways` (9 provider cards), `/templates` (table + edit dialog), `/bulk-sms`. AEC source tree is `D:\www\aec`. 
+
+### Pattern additions
+| Change | Why |
+|---|---|
+| Data-driven credential forms: `data/otp.gateways.ts` (`GATEWAY_FIELDS` per provider) + `gatewaySchema(key)` builds the zod object from the field specs; one `OtpGatewayCard` renders any provider | nine provider forms differ only in field names/options; labels resolve under `gateways.fields.<name>` so shared names (`api_key`, `sender_id`) are translated once |
+| Secrets masked by the API: `maskCredentials` / `mergeCredentials` (`SECRET_MASK`), sending the mask back = "unchanged" | AEC printed every key into the HTML; contract documented in `aec-diff/otp.md` |
+| `FormCard` (shared) used for every settings card; the card is keyed by the stored credentials JSON, so toggling activation (a refetch) does not wipe unsaved edits | same reasoning as the affiliate option cards |
+| Zod schema built from the loaded row (`templateSchema(original.body)`): the set of `[[variables]]` must stay the same | rule that depends on server data; dialog mounts only after the row is chosen |
+| Server-searched multi-select (`OtpRecipientPicker`: debounced input → list of checkboxes → removable badges) | replaces AEC's "every user in one select"; reusable for other recipient pickers (no new package) |
+
+### Verification (Chrome, dev :5204)
+| Route / flow | Result | Console errors | ≥400 |
+|---|---|---|---|
+| `/admin/otp` (3 cards), switch guest checkout on → persisted on next read | ✅ | 0 | n/a |
+| `/gateways` (9 cards); empty Twilio save → 2 required errors, its activation switch disabled ("save first"); activating Vonage turned Fast2SMS off (only one `aria-checked`) | ✅ | 0 | n/a |
+| `/templates` (10 rows, always-sent badges, search "password" → server filter); edit dialog: text without the variable → "must stay exactly as in the original", valid text saved and row updated | ✅ | 0 | n/a |
+| `/bulk-sms`: empty submit → recipient + text errors; search "Rauf" → pick → badge → send → toast, form reset | ✅ | 0 | n/a |
+| Modules: toggle OTP & SMS off + save → sidebar group gone; SPA navigation to `/admin/otp/gateways` → 404 page | ✅ | 0 | n/a |
+Not clicked live: saving valid gateway credentials (node tests cover mask / merge / exclusivity), template switch in the table, template id field, sort by columns, recipients beyond one result, read-only view without `_manage` permissions. Screens were reached by hard navigation (the screenshot lags the first paint, waited 5 s) except the 404 check (SPA). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
+Tests: 27 files / 224 node tests pass (17 new in `otp.node.test.ts`), `tsc -b` clean, eslint 0 errors.

@@ -15,7 +15,6 @@ const rows: Row[] = [
   ['payriff', 'Payriff', 'Payriff payment driver', 'CreditCard', false, true, ['payment']],
   ['offline-payment', 'Offline payment', 'Manual and offline payment methods', 'Wallet', false, false, ['payment']],
   ['ai-tools', 'AI management', 'AI translation and content generation', 'Sparkles', false, true, []],
-  ['otp', 'OTP', 'SMS one-time-password login', 'Smartphone', false, false, ['identity']],
   ['auction', 'Auction', 'Auction products and bidding', 'Gavel', false, false, ['product'], false],
   ['map-provider', 'Map provider', 'Maps for pickup points and delivery', 'Map', false, false, [], false],
   ['google-one-tap', 'Google One Tap', 'One-tap sign-in with Google', 'KeyRound', false, false, ['identity'], false],

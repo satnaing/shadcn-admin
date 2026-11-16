@@ -1,0 +1,139 @@
+{
+  "common": { "on": "Açık", "off": "Kapalı" },
+  "actions": { "save": "Kaydet", "saving": "Kaydediliyor…", "edit": "Düzenle" },
+  "toast": {
+    "saved": "Kaydedildi",
+    "error": "Bir hata oluştu",
+    "sent": "SMS {{count}} alıcıya gönderildi"
+  },
+  "settings": {
+    "title": "OTP ayarları",
+    "description": "Müşterilerin tek kullanımlık şifreyle kimliklerini doğrulaması gereken yerleri seçin.",
+    "items": {
+      "login_with_otp": {
+        "title": "OTP ile giriş",
+        "description": "Müşteriler telefon numarasına veya e-postaya gönderilen tek kullanımlık şifreyle giriş yapabilir."
+      },
+      "guest_checkout_with_otp": {
+        "title": "Misafir siparişinde OTP",
+        "description": "Misafirler sipariş verilmeden önce telefonlarını OTP ile doğrular."
+      },
+      "cod_wallet_otp": {
+        "title": "Kapıda ödeme ve cüzdan ödemesi için OTP",
+        "description": "Sahte siparişleri önlemek için kapıda ödeme veya cüzdan ödemesi onaylanmadan önce OTP istenir."
+      }
+    }
+  },
+  "gateways": {
+    "title": "SMS sağlayıcıları",
+    "description": "SMS sağlayıcılarının erişim bilgileri. Aynı anda yalnızca bir sağlayıcı etkin olabilir; tüm OTP ve SMS'leri o gönderir.",
+    "activation": "Etkin",
+    "saveFirst": "Etkinleştirmeden önce gerekli bilgileri kaydedin.",
+    "activeNow": "Etkin – SMS gönderiyor",
+    "inactive": "Etkin değil",
+    "names": {
+      "twilio": "Twilio",
+      "nexmo": "Vonage (Nexmo)",
+      "fast2sms": "Fast2SMS",
+      "mimo": "Mimo",
+      "mimsms": "MIM SMS",
+      "msegat": "Msegat",
+      "sparrow": "Sparrow SMS",
+      "ssl_wireless": "SSL Wireless",
+      "zender": "Zender"
+    },
+    "fields": {
+      "sid": "SID",
+      "auth_token": "Auth token",
+      "number": "Gönderen numara",
+      "channel": "Kanal",
+      "key": "API anahtarı",
+      "secret": "API sırrı",
+      "sender_id": "Gönderen ID",
+      "auth_key": "Auth anahtarı",
+      "entity_id": "Entity ID",
+      "route": "Rota",
+      "language": "Dil",
+      "username": "Kullanıcı adı",
+      "password": "Şifre",
+      "user_name": "Kullanıcı adı",
+      "api_key": "API anahtarı",
+      "user_sender": "Kullanıcı göndereni",
+      "token": "Token",
+      "message_from": "Mesajın göndereni",
+      "api_token": "API token",
+      "url": "API adresi",
+      "site_url": "Site adresi",
+      "service": "Hizmet",
+      "whatsapp": "WhatsApp hesabı",
+      "device": "Cihaz",
+      "gateway": "Gateway",
+      "sim": "SIM yuvası"
+    },
+    "options": {
+      "channel": { "sms": "SMS", "whatsapp": "WhatsApp" },
+      "service": { "sms": "SMS", "whatsapp": "WhatsApp" },
+      "route": { "dlt_manual": "DLT manual", "p": "Reklam", "t": "İşlemsel" },
+      "language": { "english": "İngilizce", "unicode": "Unicode" },
+      "sim": { "1": "SIM 1", "2": "SIM 2" }
+    },
+    "hints": {
+      "whatsapp": "Yalnızca WhatsApp hizmeti için. Bağlı WhatsApp hesabının benzersiz ID'si.",
+      "device": "Yalnızca SMS hizmeti için. Bağlı cihazınızın benzersiz ID'si; yalnızca kendi cihazınızdan gönderirken doldurun.",
+      "gateway": "Yalnızca SMS hizmeti için. Ortak cihazın veya üçüncü taraf gateway'in benzersiz ID'si; yalnızca onunla gönderirken doldurun.",
+      "sim": "Yalnızca SMS hizmeti için. Gönderimde kullanılan SIM yuvası; ortak cihaz ve üçüncü taraf gateway için yok sayılır."
+    }
+  },
+  "templates": {
+    "title": "SMS şablonları",
+    "description": "Doğrulama, sipariş ve teslimat için gönderilen SMS metinleri. [[değişkenleri]] olduğu gibi bırakın.",
+    "search": "Şablon ara…",
+    "empty": "Şablon bulunamadı.",
+    "alwaysOn": "Her zaman gönderilir",
+    "columns": { "name": "Mesaj", "body": "Metin", "templateId": "Şablon ID", "status": "Durum" },
+    "names": {
+      "phone_number_verification": "Telefon numarası doğrulama",
+      "password_reset": "Şifre sıfırlama",
+      "order_placement": "Sipariş verildi",
+      "delivery_status_change": "Teslimat durumu değişti",
+      "payment_status_change": "Ödeme durumu değişti",
+      "assign_delivery_boy": "Kurye atandı",
+      "account_opening": "Hesap açıldı",
+      "login_with_otp": "OTP ile giriş",
+      "guest_checkout_with_otp": "Misafir siparişinde OTP",
+      "cod_and_wallet_payment_with_otp": "Kapıda ve cüzdan ödemesi OTP"
+    },
+    "form": {
+      "title": "Düzenle: {{name}}",
+      "description": "Metinde kalması gereken değişkenler: {{variables}}",
+      "active": "Bu mesaj gönderilsin",
+      "body": "SMS metni",
+      "bodyHint": "[[ad]] biçiminde yazılan değişkenleri değiştirmeyin.",
+      "templateId": "Şablon ID",
+      "templateIdHint": "Yalnızca DLT manual rotalı Fast2SMS için gereklidir."
+    }
+  },
+  "bulk": {
+    "title": "Toplu SMS",
+    "description": "Tek bir mesajı birkaç müşteriye gönderin.",
+    "recipients": "Alıcılar",
+    "search": "Müşteriyi ad veya telefonla arayın (en az 2 karakter)",
+    "noResults": "Telefon numarası olan müşteri bulunamadı.",
+    "remove": "{{phone}} kaldır",
+    "content": "SMS metni",
+    "templateId": "Şablon ID",
+    "templateIdHint": "Yalnızca DLT manual rotalı Fast2SMS için gereklidir.",
+    "send": "Gönder",
+    "sending": "Gönderiliyor…"
+  },
+  "validation": {
+    "required": "Bu alan zorunludur",
+    "max60": "En fazla 60 karakter",
+    "max255": "En fazla 255 karakter",
+    "max500": "En fazla 500 alıcı",
+    "max1000": "En fazla 1000 karakter",
+    "url": "http:// veya https:// ile başlayan geçerli bir adres girin",
+    "placeholders": "[[değişkenler]] özgün metindeki gibi kalmalıdır",
+    "recipients": "En az bir alıcı seçin"
+  }
+}
