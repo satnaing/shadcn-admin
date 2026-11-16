@@ -57,5 +57,12 @@
   "preorderFaqs": "Частые вопросы",
   "preorderNotifications": "Типы уведомлений",
   "preorderSettings": "Настройки",
+  "affiliate": "Партнёрская программа",
+  "affiliateConfig": "Настройка",
+  "affiliateForm": "Форма регистрации",
+  "affiliateUsers": "Партнёры",
+  "affiliateReferrals": "Приглашённые",
+  "affiliateWithdraws": "Запросы на вывод",
+  "affiliateLogs": "Журнал",
   "soon": "скоро"
 }

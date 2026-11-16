@@ -1,0 +1,8 @@
+export { AffiliateConfigPage } from './components/affiliate-config-page'
+export { AffiliateFormPage } from './components/affiliate-form-page'
+export { AffiliateUsersPage } from './components/affiliate-users-page'
+export { AffiliateReferralsPage } from './components/affiliate-referrals-page'
+export { AffiliateWithdrawsPage } from './components/affiliate-withdraws-page'
+export { AffiliateLogsPage } from './components/affiliate-logs-page'
+export { AffiliateRouteGuard } from './components/affiliate-route-guard'
+export { affiliateManifest } from './module.manifest'

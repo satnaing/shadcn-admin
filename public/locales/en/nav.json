@@ -57,5 +57,12 @@
   "preorderFaqs": "FAQs",
   "preorderNotifications": "Notification types",
   "preorderSettings": "Settings",
+  "affiliate": "Affiliate",
+  "affiliateConfig": "Configuration",
+  "affiliateForm": "Registration form",
+  "affiliateUsers": "Affiliate users",
+  "affiliateReferrals": "Referral users",
+  "affiliateWithdraws": "Withdraw requests",
+  "affiliateLogs": "Logs",
   "soon": "soon"
 }

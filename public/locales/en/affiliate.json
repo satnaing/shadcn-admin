@@ -1,0 +1,32 @@
+{
+  "toast": { "error": "Something went wrong", "saved": "Saved", "approvalUpdated": "Approval updated", "userRejected": "Application rejected", "paid": "Payment recorded", "withdrawRejected": "Withdraw request rejected, balance returned" },
+  "actions": { "save": "Save", "saving": "Saving...", "pay": "Pay", "reject": "Reject", "accept": "Accept", "history": "Payment history", "show": "Show" },
+  "tabs": { "all": "All" },
+  "status": { "pending": "Pending", "approved": "Approved", "rejected": "Rejected" },
+  "type": { "user_registration_first_purchase": "First purchase", "product_sharing": "Product sharing", "category_wise_affiliate": "Category-wise" },
+  "commissionType": { "amount": "Fixed amount", "percent": "Percent" },
+  "columns": { "name": "Name", "phone": "Phone", "email": "Email", "referredBy": "Referred by", "referral": "Referral user", "amount": "Amount", "order": "Order", "type": "Type", "product": "Product", "date": "Date", "verification": "Application", "approval": "Approved", "balance": "Due amount", "status": "Status", "method": "Method" },
+  "config": { "title": "Affiliate configuration", "description": "Withdraw limit, link validity and the commission rules affiliates earn by." },
+  "settings": { "title": "Withdraw and link settings", "description": "Limits applied to every affiliate user.", "minWithdraw": "Minimum withdraw amount", "minWithdrawHint": "Affiliates cannot request less than this.", "validationDays": "Link validity (days)", "validationDaysHint": "How long a click on an affiliate link is credited to the affiliate." },
+  "first": { "title": "Registration and first purchase", "description": "The referrer earns a share of the first order of every customer they bring.", "percentage": "Percentage of order total", "percentageHint": "0 to 100." },
+  "product": { "title": "Product sharing", "description": "One commission for every product sold through a shared link.", "commission": "Commission", "type": "Commission type" },
+  "category": { "title": "Product sharing by category", "description": "A separate commission for each product category.", "empty": "No categories found", "commission": "Commission", "type": "Type" },
+  "option": { "status": "Active", "exclusive": "Product sharing and category-wise commissions cannot be active at the same time; turning one on turns the other off." },
+  "form": {
+    "title": "Registration form", "description": "Questions a visitor answers when applying to become an affiliate.",
+    "addField": "Add field:", "empty": "No fields yet. Add the first one above.", "type": "Field type", "label": "Label", "options": "Choices", "option": "Choice {{n}}", "addOption": "Add choice", "removeOption": "Remove choice", "remove": "Remove field",
+    "types": { "text": "Text", "select": "Select", "multi_select": "Multiple select", "radio": "Radio", "file": "File" }
+  },
+  "users": { "title": "Affiliate users", "description": "Review applications, approve affiliates and pay what they earned.", "search": "Search by name, phone or email...", "empty": "No affiliate users found" },
+  "referrals": { "title": "Referral users", "description": "Customers who registered through an affiliate link.", "search": "Search by name, phone or email...", "empty": "No referral users found", "deleted": "Deleted user" },
+  "withdraws": { "title": "Withdraw requests", "description": "Affiliates asking to be paid. Rejecting a request returns the amount to their balance.", "search": "Search by name or email...", "empty": "No withdraw requests found", "noAction": "No action available", "rejectTitle": "Reject withdraw request?", "rejectDesc": "The request of {{name}} for {{amount}} will be rejected and the amount returned to their balance." },
+  "logs": { "title": "Affiliate logs", "description": "Every commission credited to an affiliate.", "search": "Search by affiliate, user, order or product...", "empty": "No affiliate logs found", "guest": "Guest ({{id}})" },
+  "verify": { "title": "Affiliate application", "description": "What the applicant submitted.", "address": "Address", "info": "Submitted information", "empty": "No information submitted.", "openFile": "Open file" },
+  "payments": { "title": "Payments to {{name}}", "description": "Newest first.", "empty": "No payments yet" },
+  "pay": {
+    "title": "Pay affiliate", "withdrawTitle": "Pay withdraw request", "description": "Record the payment you made to {{name}}.",
+    "dueAmount": "Due amount", "paypalEmail": "PayPal email", "bankInfo": "Bank information", "amount": "Amount", "method": "Payment method", "selectMethod": "Select a method",
+    "noBalance": "Nothing is due to this affiliate.", "methods": { "Paypal": "PayPal", "Bank": "Bank" }
+  },
+  "validation": { "number": "Enter a number", "min0": "Must be 0 or more", "integer": "Enter a whole number", "max100": "A percentage cannot exceed 100", "positive": "Must be greater than 0", "maxBalance": "Cannot exceed the amount due", "optionsRequired": "Add at least one choice" }
+}

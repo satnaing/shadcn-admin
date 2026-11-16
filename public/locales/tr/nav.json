@@ -57,5 +57,12 @@
   "preorderFaqs": "SSS",
   "preorderNotifications": "Bildirim türleri",
   "preorderSettings": "Ayarlar",
+  "affiliate": "Ortaklık",
+  "affiliateConfig": "Yapılandırma",
+  "affiliateForm": "Kayıt formu",
+  "affiliateUsers": "Ortak kullanıcılar",
+  "affiliateReferrals": "Davet edilenler",
+  "affiliateWithdraws": "Para çekme talepleri",
+  "affiliateLogs": "Günlük",
   "soon": "yakında"
 }

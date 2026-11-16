@@ -1,0 +1,32 @@
+{
+  "toast": { "error": "Bir hata oluştu", "saved": "Kaydedildi", "approvalUpdated": "Onay güncellendi", "userRejected": "Başvuru reddedildi", "paid": "Ödeme kaydedildi", "withdrawRejected": "Para çekme talebi reddedildi, tutar bakiyeye iade edildi" },
+  "actions": { "save": "Kaydet", "saving": "Kaydediliyor...", "pay": "Öde", "reject": "Reddet", "accept": "Kabul et", "history": "Ödeme geçmişi", "show": "Göster" },
+  "tabs": { "all": "Tümü" },
+  "status": { "pending": "Beklemede", "approved": "Onaylandı", "rejected": "Reddedildi" },
+  "type": { "user_registration_first_purchase": "İlk alışveriş", "product_sharing": "Ürün paylaşımı", "category_wise_affiliate": "Kategoriye göre" },
+  "commissionType": { "amount": "Sabit tutar", "percent": "Yüzde" },
+  "columns": { "name": "Ad", "phone": "Telefon", "email": "E-posta", "referredBy": "Davet eden", "referral": "Davet edilen", "amount": "Tutar", "order": "Sipariş", "type": "Tür", "product": "Ürün", "date": "Tarih", "verification": "Başvuru", "approval": "Onay", "balance": "Ödenecek tutar", "status": "Durum", "method": "Yöntem" },
+  "config": { "title": "Ortaklık yapılandırması", "description": "Para çekme limiti, bağlantı süresi ve ortakların kazandığı komisyon kuralları." },
+  "settings": { "title": "Para çekme ve bağlantı ayarları", "description": "Tüm ortak kullanıcılara uygulanan limitler.", "minWithdraw": "Minimum çekim tutarı", "minWithdrawHint": "Ortaklar bundan düşük tutar için talep oluşturamaz.", "validationDays": "Bağlantı geçerlilik süresi (gün)", "validationDaysHint": "Ortak bağlantısına yapılan tıklamanın ortağa ne kadar süre yazılacağı." },
+  "first": { "title": "Kayıt ve ilk alışveriş", "description": "Davet eden, getirdiği her müşterinin ilk siparişinden pay kazanır.", "percentage": "Sipariş tutarının yüzdesi", "percentageHint": "0 ile 100 arasında." },
+  "product": { "title": "Ürün paylaşımı", "description": "Paylaşılan bağlantıyla satılan her ürün için tek komisyon.", "commission": "Komisyon", "type": "Komisyon türü" },
+  "category": { "title": "Kategoriye göre ürün paylaşımı", "description": "Her ürün kategorisi için ayrı komisyon.", "empty": "Kategori bulunamadı", "commission": "Komisyon", "type": "Tür" },
+  "option": { "status": "Aktif", "exclusive": "Ürün paylaşımı ve kategoriye göre komisyon aynı anda aktif olamaz; birini açmak diğerini kapatır." },
+  "form": {
+    "title": "Kayıt formu", "description": "Ziyaretçinin ortak olmak için başvururken yanıtladığı sorular.",
+    "addField": "Alan ekle:", "empty": "Henüz alan yok. Yukarıdan ilk alanı ekleyin.", "type": "Alan türü", "label": "Başlık", "options": "Seçenekler", "option": "Seçenek {{n}}", "addOption": "Seçenek ekle", "removeOption": "Seçeneği sil", "remove": "Alanı sil",
+    "types": { "text": "Metin", "select": "Seçim", "multi_select": "Çoklu seçim", "radio": "Radyo", "file": "Dosya" }
+  },
+  "users": { "title": "Ortak kullanıcılar", "description": "Başvuruları inceleyin, ortakları onaylayın ve kazançlarını ödeyin.", "search": "Ad, telefon veya e-posta ile ara...", "empty": "Ortak kullanıcı bulunamadı" },
+  "referrals": { "title": "Davet edilen kullanıcılar", "description": "Ortak bağlantısıyla kayıt olan müşteriler.", "search": "Ad, telefon veya e-posta ile ara...", "empty": "Davet edilen kullanıcı bulunamadı", "deleted": "Silinmiş kullanıcı" },
+  "withdraws": { "title": "Para çekme talepleri", "description": "Ödeme isteyen ortaklar. Talebi reddetmek tutarı bakiyeye iade eder.", "search": "Ad veya e-posta ile ara...", "empty": "Para çekme talebi bulunamadı", "noAction": "İşlem yok", "rejectTitle": "Para çekme talebi reddedilsin mi?", "rejectDesc": "{{name}} adlı ortağın {{amount}} tutarındaki talebi reddedilecek ve tutar bakiyesine iade edilecek." },
+  "logs": { "title": "Ortaklık günlüğü", "description": "Ortaklara yazılan tüm komisyonlar.", "search": "Ortak, kullanıcı, sipariş veya ürün ile ara...", "empty": "Günlük kaydı bulunamadı", "guest": "Misafir ({{id}})" },
+  "verify": { "title": "Ortaklık başvurusu", "description": "Başvuru sahibinin gönderdiği bilgiler.", "address": "Adres", "info": "Gönderilen bilgiler", "empty": "Bilgi gönderilmemiş.", "openFile": "Dosyayı aç" },
+  "payments": { "title": "{{name}} için ödemeler", "description": "En yeniler üstte.", "empty": "Henüz ödeme yok" },
+  "pay": {
+    "title": "Ortağa ödeme", "withdrawTitle": "Para çekme talebini öde", "description": "{{name}} adlı ortağa yaptığınız ödemeyi kaydedin.",
+    "dueAmount": "Ödenecek tutar", "paypalEmail": "PayPal e-postası", "bankInfo": "Banka bilgisi", "amount": "Tutar", "method": "Ödeme yöntemi", "selectMethod": "Yöntem seçin",
+    "noBalance": "Bu ortağa ödenecek tutar yok.", "methods": { "Paypal": "PayPal", "Bank": "Banka" }
+  },
+  "validation": { "number": "Bir sayı girin", "min0": "0 veya daha fazla olmalı", "integer": "Tam sayı girin", "max100": "Yüzde 100'ü geçemez", "positive": "0'dan büyük olmalı", "maxBalance": "Ödenecek tutarı aşamaz", "optionsRequired": "En az bir seçenek ekleyin" }
+}

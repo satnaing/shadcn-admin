@@ -32,6 +32,7 @@ import { Route as AuthenticatedAdminPermissionsIndexRouteImport } from './routes
 import { Route as AuthenticatedAdminPagesIndexRouteImport } from './routes/_authenticated/admin/pages/index'
 import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_authenticated/admin/modules/index'
 import { Route as AuthenticatedAdminBlogsIndexRouteImport } from './routes/_authenticated/admin/blogs/index'
+import { Route as AuthenticatedAdminAffiliateIndexRouteImport } from './routes/_authenticated/admin/affiliate/index'
 import { Route as AuthenticatedAdminThemesTopbarRouteImport } from './routes/_authenticated/admin/themes/topbar'
 import { Route as AuthenticatedAdminThemesTokensRouteImport } from './routes/_authenticated/admin/themes/tokens'
 import { Route as AuthenticatedAdminThemesMenuRouteImport } from './routes/_authenticated/admin/themes/menu'
@@ -54,6 +55,11 @@ import { Route as AuthenticatedAdminPreorderCommissionsRouteImport } from './rou
 import { Route as AuthenticatedAdminBlogsNewRouteImport } from './routes/_authenticated/admin/blogs/new'
 import { Route as AuthenticatedAdminBlogsCategoriesRouteImport } from './routes/_authenticated/admin/blogs/categories'
 import { Route as AuthenticatedAdminBlogsIdRouteImport } from './routes/_authenticated/admin/blogs/$id'
+import { Route as AuthenticatedAdminAffiliateWithdrawsRouteImport } from './routes/_authenticated/admin/affiliate/withdraws'
+import { Route as AuthenticatedAdminAffiliateUsersRouteImport } from './routes/_authenticated/admin/affiliate/users'
+import { Route as AuthenticatedAdminAffiliateReferralsRouteImport } from './routes/_authenticated/admin/affiliate/referrals'
+import { Route as AuthenticatedAdminAffiliateLogsRouteImport } from './routes/_authenticated/admin/affiliate/logs'
+import { Route as AuthenticatedAdminAffiliateFormRouteImport } from './routes/_authenticated/admin/affiliate/form'
 import { Route as AuthenticatedAdminQrcodeEventLogsIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/logs/index'
 import { Route as AuthenticatedAdminQrcodeEventCodesIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/codes/index'
 import { Route as AuthenticatedAdminQrcodeEventCampaignsIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/campaigns/index'
@@ -195,6 +201,12 @@ const AuthenticatedAdminBlogsIndexRoute =
     path: '/blogs/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminAffiliateIndexRoute =
+  AuthenticatedAdminAffiliateIndexRouteImport.update({
+    id: '/affiliate/',
+    path: '/affiliate/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminThemesTopbarRoute =
   AuthenticatedAdminThemesTopbarRouteImport.update({
     id: '/themes/topbar',
@@ -327,6 +339,36 @@ const AuthenticatedAdminBlogsIdRoute =
     path: '/blogs/$id',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminAffiliateWithdrawsRoute =
+  AuthenticatedAdminAffiliateWithdrawsRouteImport.update({
+    id: '/affiliate/withdraws',
+    path: '/affiliate/withdraws',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAffiliateUsersRoute =
+  AuthenticatedAdminAffiliateUsersRouteImport.update({
+    id: '/affiliate/users',
+    path: '/affiliate/users',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAffiliateReferralsRoute =
+  AuthenticatedAdminAffiliateReferralsRouteImport.update({
+    id: '/affiliate/referrals',
+    path: '/affiliate/referrals',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAffiliateLogsRoute =
+  AuthenticatedAdminAffiliateLogsRouteImport.update({
+    id: '/affiliate/logs',
+    path: '/affiliate/logs',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAffiliateFormRoute =
+  AuthenticatedAdminAffiliateFormRouteImport.update({
+    id: '/affiliate/form',
+    path: '/affiliate/form',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminQrcodeEventLogsIndexRoute =
   AuthenticatedAdminQrcodeEventLogsIndexRouteImport.update({
     id: '/qrcode-event/logs/',
@@ -431,6 +473,11 @@ export interface FileRoutesByFullPath {
   '/admin/$': typeof AuthenticatedAdminSplatRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/admin/affiliate/form': typeof AuthenticatedAdminAffiliateFormRoute
+  '/admin/affiliate/logs': typeof AuthenticatedAdminAffiliateLogsRoute
+  '/admin/affiliate/referrals': typeof AuthenticatedAdminAffiliateReferralsRoute
+  '/admin/affiliate/users': typeof AuthenticatedAdminAffiliateUsersRoute
+  '/admin/affiliate/withdraws': typeof AuthenticatedAdminAffiliateWithdrawsRoute
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
@@ -453,6 +500,7 @@ export interface FileRoutesByFullPath {
   '/admin/themes/menu': typeof AuthenticatedAdminThemesMenuRoute
   '/admin/themes/tokens': typeof AuthenticatedAdminThemesTokensRoute
   '/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
+  '/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
   '/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
   '/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
@@ -491,6 +539,11 @@ export interface FileRoutesByTo {
   '/admin/$': typeof AuthenticatedAdminSplatRoute
   '/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
+  '/admin/affiliate/form': typeof AuthenticatedAdminAffiliateFormRoute
+  '/admin/affiliate/logs': typeof AuthenticatedAdminAffiliateLogsRoute
+  '/admin/affiliate/referrals': typeof AuthenticatedAdminAffiliateReferralsRoute
+  '/admin/affiliate/users': typeof AuthenticatedAdminAffiliateUsersRoute
+  '/admin/affiliate/withdraws': typeof AuthenticatedAdminAffiliateWithdrawsRoute
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
@@ -513,6 +566,7 @@ export interface FileRoutesByTo {
   '/admin/themes/menu': typeof AuthenticatedAdminThemesMenuRoute
   '/admin/themes/tokens': typeof AuthenticatedAdminThemesTokensRoute
   '/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
+  '/admin/affiliate': typeof AuthenticatedAdminAffiliateIndexRoute
   '/admin/blogs': typeof AuthenticatedAdminBlogsIndexRoute
   '/admin/modules': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages': typeof AuthenticatedAdminPagesIndexRoute
@@ -554,6 +608,11 @@ export interface FileRoutesById {
   '/_authenticated/admin/$': typeof AuthenticatedAdminSplatRoute
   '/_authenticated/errors/$error': typeof AuthenticatedErrorsErrorRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/admin/affiliate/form': typeof AuthenticatedAdminAffiliateFormRoute
+  '/_authenticated/admin/affiliate/logs': typeof AuthenticatedAdminAffiliateLogsRoute
+  '/_authenticated/admin/affiliate/referrals': typeof AuthenticatedAdminAffiliateReferralsRoute
+  '/_authenticated/admin/affiliate/users': typeof AuthenticatedAdminAffiliateUsersRoute
+  '/_authenticated/admin/affiliate/withdraws': typeof AuthenticatedAdminAffiliateWithdrawsRoute
   '/_authenticated/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/_authenticated/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/_authenticated/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
@@ -576,6 +635,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/themes/menu': typeof AuthenticatedAdminThemesMenuRoute
   '/_authenticated/admin/themes/tokens': typeof AuthenticatedAdminThemesTokensRoute
   '/_authenticated/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
+  '/_authenticated/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
   '/_authenticated/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
   '/_authenticated/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/_authenticated/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
@@ -617,6 +677,11 @@ export interface FileRouteTypes {
     | '/admin/$'
     | '/errors/$error'
     | '/admin/'
+    | '/admin/affiliate/form'
+    | '/admin/affiliate/logs'
+    | '/admin/affiliate/referrals'
+    | '/admin/affiliate/users'
+    | '/admin/affiliate/withdraws'
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
@@ -639,6 +704,7 @@ export interface FileRouteTypes {
     | '/admin/themes/menu'
     | '/admin/themes/tokens'
     | '/admin/themes/topbar'
+    | '/admin/affiliate/'
     | '/admin/blogs/'
     | '/admin/modules/'
     | '/admin/pages/'
@@ -677,6 +743,11 @@ export interface FileRouteTypes {
     | '/admin/$'
     | '/errors/$error'
     | '/admin'
+    | '/admin/affiliate/form'
+    | '/admin/affiliate/logs'
+    | '/admin/affiliate/referrals'
+    | '/admin/affiliate/users'
+    | '/admin/affiliate/withdraws'
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
@@ -699,6 +770,7 @@ export interface FileRouteTypes {
     | '/admin/themes/menu'
     | '/admin/themes/tokens'
     | '/admin/themes/topbar'
+    | '/admin/affiliate'
     | '/admin/blogs'
     | '/admin/modules'
     | '/admin/pages'
@@ -739,6 +811,11 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/$'
     | '/_authenticated/errors/$error'
     | '/_authenticated/admin/'
+    | '/_authenticated/admin/affiliate/form'
+    | '/_authenticated/admin/affiliate/logs'
+    | '/_authenticated/admin/affiliate/referrals'
+    | '/_authenticated/admin/affiliate/users'
+    | '/_authenticated/admin/affiliate/withdraws'
     | '/_authenticated/admin/blogs/$id'
     | '/_authenticated/admin/blogs/categories'
     | '/_authenticated/admin/blogs/new'
@@ -761,6 +838,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/themes/menu'
     | '/_authenticated/admin/themes/tokens'
     | '/_authenticated/admin/themes/topbar'
+    | '/_authenticated/admin/affiliate/'
     | '/_authenticated/admin/blogs/'
     | '/_authenticated/admin/modules/'
     | '/_authenticated/admin/pages/'
@@ -962,6 +1040,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBlogsIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/affiliate/': {
+      id: '/_authenticated/admin/affiliate/'
+      path: '/affiliate'
+      fullPath: '/admin/affiliate/'
+      preLoaderRoute: typeof AuthenticatedAdminAffiliateIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/themes/topbar': {
       id: '/_authenticated/admin/themes/topbar'
       path: '/themes/topbar'
@@ -1116,6 +1201,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBlogsIdRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/affiliate/withdraws': {
+      id: '/_authenticated/admin/affiliate/withdraws'
+      path: '/affiliate/withdraws'
+      fullPath: '/admin/affiliate/withdraws'
+      preLoaderRoute: typeof AuthenticatedAdminAffiliateWithdrawsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/affiliate/users': {
+      id: '/_authenticated/admin/affiliate/users'
+      path: '/affiliate/users'
+      fullPath: '/admin/affiliate/users'
+      preLoaderRoute: typeof AuthenticatedAdminAffiliateUsersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/affiliate/referrals': {
+      id: '/_authenticated/admin/affiliate/referrals'
+      path: '/affiliate/referrals'
+      fullPath: '/admin/affiliate/referrals'
+      preLoaderRoute: typeof AuthenticatedAdminAffiliateReferralsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/affiliate/logs': {
+      id: '/_authenticated/admin/affiliate/logs'
+      path: '/affiliate/logs'
+      fullPath: '/admin/affiliate/logs'
+      preLoaderRoute: typeof AuthenticatedAdminAffiliateLogsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/affiliate/form': {
+      id: '/_authenticated/admin/affiliate/form'
+      path: '/affiliate/form'
+      fullPath: '/admin/affiliate/form'
+      preLoaderRoute: typeof AuthenticatedAdminAffiliateFormRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/qrcode-event/logs/': {
       id: '/_authenticated/admin/qrcode-event/logs/'
       path: '/qrcode-event/logs'
@@ -1227,6 +1347,11 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminSplatRoute: typeof AuthenticatedAdminSplatRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminAffiliateFormRoute: typeof AuthenticatedAdminAffiliateFormRoute
+  AuthenticatedAdminAffiliateLogsRoute: typeof AuthenticatedAdminAffiliateLogsRoute
+  AuthenticatedAdminAffiliateReferralsRoute: typeof AuthenticatedAdminAffiliateReferralsRoute
+  AuthenticatedAdminAffiliateUsersRoute: typeof AuthenticatedAdminAffiliateUsersRoute
+  AuthenticatedAdminAffiliateWithdrawsRoute: typeof AuthenticatedAdminAffiliateWithdrawsRoute
   AuthenticatedAdminBlogsIdRoute: typeof AuthenticatedAdminBlogsIdRoute
   AuthenticatedAdminBlogsCategoriesRoute: typeof AuthenticatedAdminBlogsCategoriesRoute
   AuthenticatedAdminBlogsNewRoute: typeof AuthenticatedAdminBlogsNewRoute
@@ -1249,6 +1374,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminThemesMenuRoute: typeof AuthenticatedAdminThemesMenuRoute
   AuthenticatedAdminThemesTokensRoute: typeof AuthenticatedAdminThemesTokensRoute
   AuthenticatedAdminThemesTopbarRoute: typeof AuthenticatedAdminThemesTopbarRoute
+  AuthenticatedAdminAffiliateIndexRoute: typeof AuthenticatedAdminAffiliateIndexRoute
   AuthenticatedAdminBlogsIndexRoute: typeof AuthenticatedAdminBlogsIndexRoute
   AuthenticatedAdminModulesIndexRoute: typeof AuthenticatedAdminModulesIndexRoute
   AuthenticatedAdminPagesIndexRoute: typeof AuthenticatedAdminPagesIndexRoute
@@ -1280,6 +1406,14 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
   {
     AuthenticatedAdminSplatRoute: AuthenticatedAdminSplatRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+    AuthenticatedAdminAffiliateFormRoute: AuthenticatedAdminAffiliateFormRoute,
+    AuthenticatedAdminAffiliateLogsRoute: AuthenticatedAdminAffiliateLogsRoute,
+    AuthenticatedAdminAffiliateReferralsRoute:
+      AuthenticatedAdminAffiliateReferralsRoute,
+    AuthenticatedAdminAffiliateUsersRoute:
+      AuthenticatedAdminAffiliateUsersRoute,
+    AuthenticatedAdminAffiliateWithdrawsRoute:
+      AuthenticatedAdminAffiliateWithdrawsRoute,
     AuthenticatedAdminBlogsIdRoute: AuthenticatedAdminBlogsIdRoute,
     AuthenticatedAdminBlogsCategoriesRoute:
       AuthenticatedAdminBlogsCategoriesRoute,
@@ -1314,6 +1448,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminThemesMenuRoute: AuthenticatedAdminThemesMenuRoute,
     AuthenticatedAdminThemesTokensRoute: AuthenticatedAdminThemesTokensRoute,
     AuthenticatedAdminThemesTopbarRoute: AuthenticatedAdminThemesTopbarRoute,
+    AuthenticatedAdminAffiliateIndexRoute:
+      AuthenticatedAdminAffiliateIndexRoute,
     AuthenticatedAdminBlogsIndexRoute: AuthenticatedAdminBlogsIndexRoute,
     AuthenticatedAdminModulesIndexRoute: AuthenticatedAdminModulesIndexRoute,
     AuthenticatedAdminPagesIndexRoute: AuthenticatedAdminPagesIndexRoute,

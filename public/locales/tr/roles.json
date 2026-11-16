@@ -52,7 +52,8 @@
     "delivery_boys": "Kuryeler",
     "qrcode_event": "QR kod etkinlikleri",
     "refund": "İadeler",
-    "preorder": "Ön sipariş"
+    "preorder": "Ön sipariş",
+    "affiliate": "Ortaklık"
   },
   "actions": {
     "index": "Listeyi gör",

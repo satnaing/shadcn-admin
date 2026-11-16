@@ -106,6 +106,19 @@ export const PERMISSIONS = {
     NOTIFICATIONS_MANAGE: 'preorder.notifications_manage',
     SETTINGS: 'preorder.settings',
   },
+  AFFILIATE: {
+    INDEX: 'affiliate.index',
+    CONFIG_MANAGE: 'affiliate.config_manage',
+    FORM: 'affiliate.form',
+    USERS: 'affiliate.users',
+    USERS_MANAGE: 'affiliate.users_manage',
+    USERS_PAY: 'affiliate.users_pay',
+    PAYMENTS: 'affiliate.payments',
+    REFERRALS: 'affiliate.referrals',
+    WITHDRAWS: 'affiliate.withdraws',
+    WITHDRAWS_MANAGE: 'affiliate.withdraws_manage',
+    LOGS: 'affiliate.logs',
+  },
 } as const
 
 export const ALL_PERMISSIONS: string[] = Object.values(PERMISSIONS).flatMap(

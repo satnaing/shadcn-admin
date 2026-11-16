@@ -52,7 +52,8 @@
     "delivery_boys": "Delivery boys",
     "qrcode_event": "QR code events",
     "refund": "Refunds",
-    "preorder": "Preorder"
+    "preorder": "Preorder",
+    "affiliate": "Affiliate"
   },
   "actions": {
     "index": "View list",

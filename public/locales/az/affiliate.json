@@ -1,0 +1,32 @@
+{
+  "toast": { "error": "Xəta baş verdi", "saved": "Yadda saxlanıldı", "approvalUpdated": "Təsdiq yeniləndi", "userRejected": "Müraciət rədd edildi", "paid": "Ödəniş qeyd edildi", "withdrawRejected": "Çıxarış sorğusu rədd edildi, məbləğ balansa qaytarıldı" },
+  "actions": { "save": "Yadda saxla", "saving": "Saxlanılır...", "pay": "Ödə", "reject": "Rədd et", "accept": "Qəbul et", "history": "Ödəniş tarixçəsi", "show": "Bax" },
+  "tabs": { "all": "Hamısı" },
+  "status": { "pending": "Gözləyir", "approved": "Təsdiqlənib", "rejected": "Rədd edilib" },
+  "type": { "user_registration_first_purchase": "İlk alış", "product_sharing": "Məhsul paylaşımı", "category_wise_affiliate": "Kateqoriya üzrə" },
+  "commissionType": { "amount": "Sabit məbləğ", "percent": "Faiz" },
+  "columns": { "name": "Ad", "phone": "Telefon", "email": "E-poçt", "referredBy": "Dəvət edən", "referral": "Dəvət olunan", "amount": "Məbləğ", "order": "Sifariş", "type": "Növ", "product": "Məhsul", "date": "Tarix", "verification": "Müraciət", "approval": "Təsdiq", "balance": "Ödənilməli məbləğ", "status": "Status", "method": "Üsul" },
+  "config": { "title": "Tərəfdaşlıq konfiqurasiyası", "description": "Çıxarış limiti, link müddəti və tərəfdaşların qazandığı komissiya qaydaları." },
+  "settings": { "title": "Çıxarış və link ayarları", "description": "Bütün tərəfdaş istifadəçilərə tətbiq olunan limitlər.", "minWithdraw": "Minimum çıxarış məbləği", "minWithdrawHint": "Tərəfdaşlar bundan az məbləğ üçün sorğu göndərə bilməz.", "validationDays": "Linkin etibarlılıq müddəti (gün)", "validationDaysHint": "Tərəfdaş linkinə klikin nə qədər müddət tərəfdaşa yazılması." },
+  "first": { "title": "Qeydiyyat və ilk alış", "description": "Dəvət edən, gətirdiyi hər müştərinin ilk sifarişindən pay qazanır.", "percentage": "Sifariş məbləğinin faizi", "percentageHint": "0-dan 100-ə qədər." },
+  "product": { "title": "Məhsul paylaşımı", "description": "Paylaşılan link ilə satılan hər məhsul üçün vahid komissiya.", "commission": "Komissiya", "type": "Komissiya növü" },
+  "category": { "title": "Kateqoriya üzrə məhsul paylaşımı", "description": "Hər məhsul kateqoriyası üçün ayrıca komissiya.", "empty": "Kateqoriya tapılmadı", "commission": "Komissiya", "type": "Növ" },
+  "option": { "status": "Aktiv", "exclusive": "Məhsul paylaşımı və kateqoriya üzrə komissiya eyni vaxtda aktiv ola bilməz; birini yandırmaq digərini söndürür." },
+  "form": {
+    "title": "Qeydiyyat forması", "description": "Ziyarətçi tərəfdaş olmaq üçün müraciət edərkən cavablandırdığı suallar.",
+    "addField": "Sahə əlavə et:", "empty": "Hələ sahə yoxdur. Yuxarıdan ilk sahəni əlavə edin.", "type": "Sahə növü", "label": "Başlıq", "options": "Seçimlər", "option": "Seçim {{n}}", "addOption": "Seçim əlavə et", "removeOption": "Seçimi sil", "remove": "Sahəni sil",
+    "types": { "text": "Mətn", "select": "Seçim", "multi_select": "Çoxlu seçim", "radio": "Radio", "file": "Fayl" }
+  },
+  "users": { "title": "Tərəfdaş istifadəçilər", "description": "Müraciətlərə baxın, tərəfdaşları təsdiqləyin və qazandıqlarını ödəyin.", "search": "Ad, telefon və ya e-poçt üzrə axtar...", "empty": "Tərəfdaş istifadəçi tapılmadı" },
+  "referrals": { "title": "Dəvət olunan istifadəçilər", "description": "Tərəfdaş linki ilə qeydiyyatdan keçən müştərilər.", "search": "Ad, telefon və ya e-poçt üzrə axtar...", "empty": "Dəvət olunan istifadəçi tapılmadı", "deleted": "Silinmiş istifadəçi" },
+  "withdraws": { "title": "Çıxarış sorğuları", "description": "Ödəniş istəyən tərəfdaşlar. Sorğunu rədd etmək məbləği balansa qaytarır.", "search": "Ad və ya e-poçt üzrə axtar...", "empty": "Çıxarış sorğusu tapılmadı", "noAction": "Əməliyyat yoxdur", "rejectTitle": "Çıxarış sorğusu rədd edilsin?", "rejectDesc": "{{name}} adlı tərəfdaşın {{amount}} məbləğində sorğusu rədd ediləcək və məbləğ balansa qaytarılacaq." },
+  "logs": { "title": "Tərəfdaşlıq jurnalı", "description": "Tərəfdaşa yazılan bütün komissiyalar.", "search": "Tərəfdaş, istifadəçi, sifariş və ya məhsul üzrə axtar...", "empty": "Jurnal qeydi tapılmadı", "guest": "Qonaq ({{id}})" },
+  "verify": { "title": "Tərəfdaş müraciəti", "description": "Müraciət edənin göndərdiyi məlumatlar.", "address": "Ünvan", "info": "Göndərilən məlumat", "empty": "Məlumat göndərilməyib.", "openFile": "Faylı aç" },
+  "payments": { "title": "{{name}} üçün ödənişlər", "description": "Ən yenilər əvvəldə.", "empty": "Hələ ödəniş yoxdur" },
+  "pay": {
+    "title": "Tərəfdaşa ödəniş", "withdrawTitle": "Çıxarış sorğusunu ödə", "description": "{{name}} adlı tərəfdaşa etdiyiniz ödənişi qeyd edin.",
+    "dueAmount": "Ödənilməli məbləğ", "paypalEmail": "PayPal e-poçtu", "bankInfo": "Bank məlumatı", "amount": "Məbləğ", "method": "Ödəniş üsulu", "selectMethod": "Üsul seçin",
+    "noBalance": "Bu tərəfdaşa ödəniləcək məbləğ yoxdur.", "methods": { "Paypal": "PayPal", "Bank": "Bank" }
+  },
+  "validation": { "number": "Rəqəm daxil edin", "min0": "0 və ya daha çox olmalıdır", "integer": "Tam ədəd daxil edin", "max100": "Faiz 100-dən çox ola bilməz", "positive": "0-dan böyük olmalıdır", "maxBalance": "Ödənilməli məbləği keçə bilməz", "optionsRequired": "Ən azı bir seçim əlavə edin" }
+}
