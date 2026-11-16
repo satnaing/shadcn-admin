@@ -1,0 +1,113 @@
+{
+  "actions": {
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…",
+    "edit": "Düzenle"
+  },
+  "toast": {
+    "saved": "Kaydedildi",
+    "error": "Bir şeyler ters gitti"
+  },
+  "validation": {
+    "required": "Bu alan zorunludur",
+    "max255": "En fazla 255 karakter",
+    "max5000": "En fazla 5000 karakter",
+    "integer": "Tam sayı girin",
+    "min0": "0 veya daha büyük olmalı",
+    "variables": "Değişkenleri aynen koruyun, örn. {product_name}"
+  },
+  "models": {
+    "gemini-3_1-pro-preview": "Gemini 3.1 Pro (gelişmiş)",
+    "gemini-3_1-flash-lite-preview": "Gemini 3.1 Flash-Lite (önizleme, çok hızlı)",
+    "gemini-3-flash-preview": "Gemini 3 Flash (önizleme)",
+    "gemini-3-deep-think": "Gemini 3 Deep Think",
+    "gemini-2_5-pro": "Gemini 2.5 Pro (en yetenekli)",
+    "gemini-2_5-flash": "Gemini 2.5 Flash (fiyat / performans)",
+    "gemini-2_5-flash-lite": "Gemini 2.5 Flash-Lite (en hızlı, en ucuz)",
+    "gemini-3_1-flash-lite": "Gemini 3.1 Flash-Lite (kararlı)"
+  },
+  "settings": {
+    "title": "AI ayarları",
+    "description": "Ürün içeriği üretimi ve dil metinlerinin çevirisi için Google Gemini bilgileri.",
+    "model": "Model",
+    "apiKey": "Gemini API anahtarı",
+    "apiKeyHint": "Şifreli saklanır, maskeli gösterilir. Mevcut anahtarı korumak için maskeyi değiştirmeyin.",
+    "content": {
+      "title": "İçerik üretimi (Gemini)",
+      "description": "Yönetici ve satıcılar için ürün adı, açıklama, SEO etiketleri ve ayarları yazar.",
+      "enabled": "AI içerik üretimini etkinleştir",
+      "sellerLimit": "Satıcı aylık token limiti",
+      "sellerLimitHint": "Her satıcının ayda kullanabileceği token; yöneticiler sınırsızdır. Kaydedince limit tüm satıcılara uygulanır."
+    },
+    "translate": {
+      "title": "AI çeviri",
+      "description": "Boş dil metinlerini Gemini ile doldurur. İçerik üretiminden ayrı kendi anahtarını kullanır.",
+      "enabled": "AI çeviriyi etkinleştir",
+      "apiKeyHint": "Yalnızca dil metinlerinin çevirisi için kullanılır. Gizli tutun."
+    }
+  },
+  "prompts": {
+    "title": "Prompt şablonları",
+    "description": "Gemini’ye gönderilen talimatlar. Metni değiştirebilirsiniz, ancak her {değişken} olduğu gibi kalmalı.",
+    "names": {
+      "product_add_edit_prompt": "Ürün ekleme / düzenleme promptu"
+    },
+    "form": {
+      "title": "{{name}}",
+      "description": "Korunması gereken değişkenler: {{variables}}",
+      "prompt": "Prompt"
+    }
+  },
+  "usage": {
+    "title": "Token kullanımı",
+    "description": "AI özelliklerinin kullanıcı ve model bazında istek ve token harcaması.",
+    "kinds": {
+      "content": "İçerik üretimi",
+      "translation": "Çeviri"
+    },
+    "from": "Başlangıç",
+    "to": "Bitiş",
+    "search": "Ara…",
+    "empty": "Bu dönem için AI kullanımı bulunamadı.",
+    "stats": {
+      "requests": "İstek",
+      "tokens": "Toplam token",
+      "translations": "Çevrilen metin",
+      "avg": "Ort. token / istek"
+    },
+    "columns": {
+      "date": "Tarih ve saat",
+      "user": "Kullanıcı",
+      "language": "Dil",
+      "model": "Model",
+      "translated": "Çevrilen",
+      "promptTokens": "İstek tokenları",
+      "completionTokens": "Yanıt tokenları",
+      "totalTokens": "Toplam token"
+    }
+  },
+  "translate": {
+    "title": "AI çeviri",
+    "description": "Bir dilin boş metinlerini istek başına 50 anahtar olarak doldurur. Mevcut metin asla ezilmez.",
+    "engine": "Çevirmen",
+    "engines": {
+      "ai": "AI (Gemini)",
+      "google": "Google Translate"
+    },
+    "engineHint": {
+      "ai": "AI çeviri etkin ve API anahtarı girilmiş olmalı (AI ayarları).",
+      "google": "Ücretsiz makine çevirisi; anahtar gerekmez."
+    },
+    "coverage": "{{total}} metnin {{done}} tanesi çevrildi, {{missing}} boş",
+    "progress": "Sayfa {{page}} / {{pages}} · {{count}} metin çevrildi",
+    "start": "Boş metinleri çevir",
+    "stop": "Durdur",
+    "result": {
+      "done": "Bitti: {{count}} metin çevrildi",
+      "stopped": "Durduruldu: {{count}} metin çevrildi",
+      "failed": "İstek başarısız oldu; öncesinde {{count}} metin çevrildi. Devam etmek için yeniden çalıştırın.",
+      "disabled": "AI çeviri kapalı. AI ayarlarından etkinleştirin.",
+      "no_key": "Çeviri için Gemini API anahtarı yok. AI ayarlarından ekleyin."
+    }
+  }
+}

@@ -191,6 +191,16 @@ export const ENDPOINTS = {
     RECIPIENTS: `${ADMIN}/otp/recipients`,
     SMS: `${ADMIN}/otp/sms`,
   },
+  AI: {
+    SETTINGS: `${ADMIN}/ai/settings`,
+    CONTENT_SETTINGS: `${ADMIN}/ai/settings/content`,
+    TRANSLATE_SETTINGS: `${ADMIN}/ai/settings/translate`,
+    PROMPTS: `${ADMIN}/ai/prompts`,
+    PROMPT: (id: number | string) => `${ADMIN}/ai/prompts/${id}`,
+    USAGE: `${ADMIN}/ai/usage`,
+    LANGUAGES: `${ADMIN}/ai/translate/languages`,
+    TRANSLATE: (id: number | string) => `${ADMIN}/ai/translate/${id}`,
+  },
   PAYMENTS: {
     MANUAL_METHODS: `${ADMIN}/payments/manual-methods`,
     MANUAL_METHOD: (id: number | string) => `${ADMIN}/payments/manual-methods/${id}`,

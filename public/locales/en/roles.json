@@ -10,7 +10,12 @@
     "delete": "Delete role",
     "system": "System role (locked)"
   },
-  "columns": { "name": "Role", "description": "Description", "permissions": "Permissions", "users": "Users" },
+  "columns": {
+    "name": "Role",
+    "description": "Description",
+    "permissions": "Permissions",
+    "users": "Users"
+  },
   "form": {
     "createTitle": "Add role",
     "editTitle": "Edit role",
@@ -27,8 +32,15 @@
     "updateError": "Could not update the role",
     "deleteError": "Could not delete the role"
   },
-  "delete": { "title": "Delete role?", "desc": "Role “{{name}}” will be removed. Users with this role lose its permissions." },
-  "picker": { "search": "Search permissions…", "empty": "No permission matches.", "selectAll": "Select all in group" },
+  "delete": {
+    "title": "Delete role?",
+    "desc": "Role “{{name}}” will be removed. Users with this role lose its permissions."
+  },
+  "picker": {
+    "search": "Search permissions…",
+    "empty": "No permission matches.",
+    "selectAll": "Select all in group"
+  },
   "matrix": {
     "title": "Permissions",
     "description": "Which role holds which permission.",
@@ -56,7 +68,8 @@
     "refund": "Refunds",
     "preorder": "Preorder",
     "affiliate": "Affiliate",
-    "club_point": "Club points"
+    "club_point": "Club points",
+    "ai": "AI"
   },
   "actions": {
     "index": "View list",

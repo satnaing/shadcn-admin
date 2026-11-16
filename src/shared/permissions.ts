@@ -159,6 +159,14 @@ export const PERMISSIONS = {
     TEMPLATES_MANAGE: 'otp.templates_manage',
     BULK_SMS: 'otp.bulk_sms',
   },
+  AI: {
+    INDEX: 'ai.index',
+    SETTINGS_MANAGE: 'ai.settings_manage',
+    PROMPTS: 'ai.prompts',
+    PROMPTS_MANAGE: 'ai.prompts_manage',
+    USAGE: 'ai.usage',
+    TRANSLATE: 'ai.translate',
+  },
   PAYMENTS: {
     INDEX: 'payments.index',
     MANUAL_MANAGE: 'payments.manual_manage',

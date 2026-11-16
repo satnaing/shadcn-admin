@@ -37,6 +37,7 @@ import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_au
 import { Route as AuthenticatedAdminCourierIndexRouteImport } from './routes/_authenticated/admin/courier/index'
 import { Route as AuthenticatedAdminClubPointIndexRouteImport } from './routes/_authenticated/admin/club-point/index'
 import { Route as AuthenticatedAdminBlogsIndexRouteImport } from './routes/_authenticated/admin/blogs/index'
+import { Route as AuthenticatedAdminAiIndexRouteImport } from './routes/_authenticated/admin/ai/index'
 import { Route as AuthenticatedAdminAffiliateIndexRouteImport } from './routes/_authenticated/admin/affiliate/index'
 import { Route as AuthenticatedAdminThemesTopbarRouteImport } from './routes/_authenticated/admin/themes/topbar'
 import { Route as AuthenticatedAdminThemesTokensRouteImport } from './routes/_authenticated/admin/themes/tokens'
@@ -83,6 +84,9 @@ import { Route as AuthenticatedAdminClubPointConfigRouteImport } from './routes/
 import { Route as AuthenticatedAdminBlogsNewRouteImport } from './routes/_authenticated/admin/blogs/new'
 import { Route as AuthenticatedAdminBlogsCategoriesRouteImport } from './routes/_authenticated/admin/blogs/categories'
 import { Route as AuthenticatedAdminBlogsIdRouteImport } from './routes/_authenticated/admin/blogs/$id'
+import { Route as AuthenticatedAdminAiUsageRouteImport } from './routes/_authenticated/admin/ai/usage'
+import { Route as AuthenticatedAdminAiTranslateRouteImport } from './routes/_authenticated/admin/ai/translate'
+import { Route as AuthenticatedAdminAiPromptsRouteImport } from './routes/_authenticated/admin/ai/prompts'
 import { Route as AuthenticatedAdminAffiliateWithdrawsRouteImport } from './routes/_authenticated/admin/affiliate/withdraws'
 import { Route as AuthenticatedAdminAffiliateUsersRouteImport } from './routes/_authenticated/admin/affiliate/users'
 import { Route as AuthenticatedAdminAffiliateReferralsRouteImport } from './routes/_authenticated/admin/affiliate/referrals'
@@ -257,6 +261,12 @@ const AuthenticatedAdminBlogsIndexRoute =
   AuthenticatedAdminBlogsIndexRouteImport.update({
     id: '/blogs/',
     path: '/blogs/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAiIndexRoute =
+  AuthenticatedAdminAiIndexRouteImport.update({
+    id: '/ai/',
+    path: '/ai/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminAffiliateIndexRoute =
@@ -535,6 +545,24 @@ const AuthenticatedAdminBlogsIdRoute =
     path: '/blogs/$id',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminAiUsageRoute =
+  AuthenticatedAdminAiUsageRouteImport.update({
+    id: '/ai/usage',
+    path: '/ai/usage',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAiTranslateRoute =
+  AuthenticatedAdminAiTranslateRouteImport.update({
+    id: '/ai/translate',
+    path: '/ai/translate',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAiPromptsRoute =
+  AuthenticatedAdminAiPromptsRouteImport.update({
+    id: '/ai/prompts',
+    path: '/ai/prompts',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminAffiliateWithdrawsRoute =
   AuthenticatedAdminAffiliateWithdrawsRouteImport.update({
     id: '/affiliate/withdraws',
@@ -674,6 +702,9 @@ export interface FileRoutesByFullPath {
   '/admin/affiliate/referrals': typeof AuthenticatedAdminAffiliateReferralsRoute
   '/admin/affiliate/users': typeof AuthenticatedAdminAffiliateUsersRoute
   '/admin/affiliate/withdraws': typeof AuthenticatedAdminAffiliateWithdrawsRoute
+  '/admin/ai/prompts': typeof AuthenticatedAdminAiPromptsRoute
+  '/admin/ai/translate': typeof AuthenticatedAdminAiTranslateRoute
+  '/admin/ai/usage': typeof AuthenticatedAdminAiUsageRoute
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
@@ -720,6 +751,7 @@ export interface FileRoutesByFullPath {
   '/admin/themes/tokens': typeof AuthenticatedAdminThemesTokensRoute
   '/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
   '/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
+  '/admin/ai/': typeof AuthenticatedAdminAiIndexRoute
   '/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
   '/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
   '/admin/courier/': typeof AuthenticatedAdminCourierIndexRoute
@@ -768,6 +800,9 @@ export interface FileRoutesByTo {
   '/admin/affiliate/referrals': typeof AuthenticatedAdminAffiliateReferralsRoute
   '/admin/affiliate/users': typeof AuthenticatedAdminAffiliateUsersRoute
   '/admin/affiliate/withdraws': typeof AuthenticatedAdminAffiliateWithdrawsRoute
+  '/admin/ai/prompts': typeof AuthenticatedAdminAiPromptsRoute
+  '/admin/ai/translate': typeof AuthenticatedAdminAiTranslateRoute
+  '/admin/ai/usage': typeof AuthenticatedAdminAiUsageRoute
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
@@ -814,6 +849,7 @@ export interface FileRoutesByTo {
   '/admin/themes/tokens': typeof AuthenticatedAdminThemesTokensRoute
   '/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
   '/admin/affiliate': typeof AuthenticatedAdminAffiliateIndexRoute
+  '/admin/ai': typeof AuthenticatedAdminAiIndexRoute
   '/admin/blogs': typeof AuthenticatedAdminBlogsIndexRoute
   '/admin/club-point': typeof AuthenticatedAdminClubPointIndexRoute
   '/admin/courier': typeof AuthenticatedAdminCourierIndexRoute
@@ -865,6 +901,9 @@ export interface FileRoutesById {
   '/_authenticated/admin/affiliate/referrals': typeof AuthenticatedAdminAffiliateReferralsRoute
   '/_authenticated/admin/affiliate/users': typeof AuthenticatedAdminAffiliateUsersRoute
   '/_authenticated/admin/affiliate/withdraws': typeof AuthenticatedAdminAffiliateWithdrawsRoute
+  '/_authenticated/admin/ai/prompts': typeof AuthenticatedAdminAiPromptsRoute
+  '/_authenticated/admin/ai/translate': typeof AuthenticatedAdminAiTranslateRoute
+  '/_authenticated/admin/ai/usage': typeof AuthenticatedAdminAiUsageRoute
   '/_authenticated/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/_authenticated/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/_authenticated/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
@@ -911,6 +950,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/themes/tokens': typeof AuthenticatedAdminThemesTokensRoute
   '/_authenticated/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
   '/_authenticated/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
+  '/_authenticated/admin/ai/': typeof AuthenticatedAdminAiIndexRoute
   '/_authenticated/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
   '/_authenticated/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
   '/_authenticated/admin/courier/': typeof AuthenticatedAdminCourierIndexRoute
@@ -962,6 +1002,9 @@ export interface FileRouteTypes {
     | '/admin/affiliate/referrals'
     | '/admin/affiliate/users'
     | '/admin/affiliate/withdraws'
+    | '/admin/ai/prompts'
+    | '/admin/ai/translate'
+    | '/admin/ai/usage'
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
@@ -1008,6 +1051,7 @@ export interface FileRouteTypes {
     | '/admin/themes/tokens'
     | '/admin/themes/topbar'
     | '/admin/affiliate/'
+    | '/admin/ai/'
     | '/admin/blogs/'
     | '/admin/club-point/'
     | '/admin/courier/'
@@ -1056,6 +1100,9 @@ export interface FileRouteTypes {
     | '/admin/affiliate/referrals'
     | '/admin/affiliate/users'
     | '/admin/affiliate/withdraws'
+    | '/admin/ai/prompts'
+    | '/admin/ai/translate'
+    | '/admin/ai/usage'
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
@@ -1102,6 +1149,7 @@ export interface FileRouteTypes {
     | '/admin/themes/tokens'
     | '/admin/themes/topbar'
     | '/admin/affiliate'
+    | '/admin/ai'
     | '/admin/blogs'
     | '/admin/club-point'
     | '/admin/courier'
@@ -1152,6 +1200,9 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/affiliate/referrals'
     | '/_authenticated/admin/affiliate/users'
     | '/_authenticated/admin/affiliate/withdraws'
+    | '/_authenticated/admin/ai/prompts'
+    | '/_authenticated/admin/ai/translate'
+    | '/_authenticated/admin/ai/usage'
     | '/_authenticated/admin/blogs/$id'
     | '/_authenticated/admin/blogs/categories'
     | '/_authenticated/admin/blogs/new'
@@ -1198,6 +1249,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/themes/tokens'
     | '/_authenticated/admin/themes/topbar'
     | '/_authenticated/admin/affiliate/'
+    | '/_authenticated/admin/ai/'
     | '/_authenticated/admin/blogs/'
     | '/_authenticated/admin/club-point/'
     | '/_authenticated/admin/courier/'
@@ -1437,6 +1489,13 @@ declare module '@tanstack/react-router' {
       path: '/blogs'
       fullPath: '/admin/blogs/'
       preLoaderRoute: typeof AuthenticatedAdminBlogsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/ai/': {
+      id: '/_authenticated/admin/ai/'
+      path: '/ai'
+      fullPath: '/admin/ai/'
+      preLoaderRoute: typeof AuthenticatedAdminAiIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/affiliate/': {
@@ -1761,6 +1820,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminBlogsIdRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/ai/usage': {
+      id: '/_authenticated/admin/ai/usage'
+      path: '/ai/usage'
+      fullPath: '/admin/ai/usage'
+      preLoaderRoute: typeof AuthenticatedAdminAiUsageRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/ai/translate': {
+      id: '/_authenticated/admin/ai/translate'
+      path: '/ai/translate'
+      fullPath: '/admin/ai/translate'
+      preLoaderRoute: typeof AuthenticatedAdminAiTranslateRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/ai/prompts': {
+      id: '/_authenticated/admin/ai/prompts'
+      path: '/ai/prompts'
+      fullPath: '/admin/ai/prompts'
+      preLoaderRoute: typeof AuthenticatedAdminAiPromptsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/affiliate/withdraws': {
       id: '/_authenticated/admin/affiliate/withdraws'
       path: '/affiliate/withdraws'
@@ -1912,6 +1992,9 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminAffiliateReferralsRoute: typeof AuthenticatedAdminAffiliateReferralsRoute
   AuthenticatedAdminAffiliateUsersRoute: typeof AuthenticatedAdminAffiliateUsersRoute
   AuthenticatedAdminAffiliateWithdrawsRoute: typeof AuthenticatedAdminAffiliateWithdrawsRoute
+  AuthenticatedAdminAiPromptsRoute: typeof AuthenticatedAdminAiPromptsRoute
+  AuthenticatedAdminAiTranslateRoute: typeof AuthenticatedAdminAiTranslateRoute
+  AuthenticatedAdminAiUsageRoute: typeof AuthenticatedAdminAiUsageRoute
   AuthenticatedAdminBlogsIdRoute: typeof AuthenticatedAdminBlogsIdRoute
   AuthenticatedAdminBlogsCategoriesRoute: typeof AuthenticatedAdminBlogsCategoriesRoute
   AuthenticatedAdminBlogsNewRoute: typeof AuthenticatedAdminBlogsNewRoute
@@ -1958,6 +2041,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminThemesTokensRoute: typeof AuthenticatedAdminThemesTokensRoute
   AuthenticatedAdminThemesTopbarRoute: typeof AuthenticatedAdminThemesTopbarRoute
   AuthenticatedAdminAffiliateIndexRoute: typeof AuthenticatedAdminAffiliateIndexRoute
+  AuthenticatedAdminAiIndexRoute: typeof AuthenticatedAdminAiIndexRoute
   AuthenticatedAdminBlogsIndexRoute: typeof AuthenticatedAdminBlogsIndexRoute
   AuthenticatedAdminClubPointIndexRoute: typeof AuthenticatedAdminClubPointIndexRoute
   AuthenticatedAdminCourierIndexRoute: typeof AuthenticatedAdminCourierIndexRoute
@@ -2002,6 +2086,9 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminAffiliateUsersRoute,
     AuthenticatedAdminAffiliateWithdrawsRoute:
       AuthenticatedAdminAffiliateWithdrawsRoute,
+    AuthenticatedAdminAiPromptsRoute: AuthenticatedAdminAiPromptsRoute,
+    AuthenticatedAdminAiTranslateRoute: AuthenticatedAdminAiTranslateRoute,
+    AuthenticatedAdminAiUsageRoute: AuthenticatedAdminAiUsageRoute,
     AuthenticatedAdminBlogsIdRoute: AuthenticatedAdminBlogsIdRoute,
     AuthenticatedAdminBlogsCategoriesRoute:
       AuthenticatedAdminBlogsCategoriesRoute,
@@ -2074,6 +2161,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminThemesTopbarRoute: AuthenticatedAdminThemesTopbarRoute,
     AuthenticatedAdminAffiliateIndexRoute:
       AuthenticatedAdminAffiliateIndexRoute,
+    AuthenticatedAdminAiIndexRoute: AuthenticatedAdminAiIndexRoute,
     AuthenticatedAdminBlogsIndexRoute: AuthenticatedAdminBlogsIndexRoute,
     AuthenticatedAdminClubPointIndexRoute:
       AuthenticatedAdminClubPointIndexRoute,

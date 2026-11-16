@@ -325,3 +325,28 @@ Folder = pilot layout (`src/features/payments/{data,hooks,components}`, `module.
 | Modules: toggle Payments off + save → sidebar group gone; SPA navigation to `/admin/payments/payout-methods` → 404 page | ✅ | 0 | n/a |
 Not clicked live: manual-method edit and delete, payout create / edit / bulk delete, customer-package approve, saving valid Payriff credentials and the activation switch (node tests cover mask / merge / activation rules), the wallet / order tabs other than Pending, column sorting, the read-only view of a role without the `_manage` permissions, receipt links. The first part of the walk ran before console tracking started (the tool begins capturing on its first call). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
 Tests: 28 files / 240 node tests pass (16 new in `payments.node.test.ts`), `tsc -b` clean, eslint 0 errors (11 pre-existing warnings).
+
+## Module #10 `ai` (2026-11-17)
+Folder = pilot layout (`src/features/ai/{data,hooks,components}`, `module.manifest.ts`, `src/api/modules/ai.api.ts`, `src/mocks/ai.{data,routes}.ts`, `public/locales/*/ai.json`, `docs/aec-diff/ai.md`). AEC core "AI" (Gemini content) + addon `ai_translate` in ONE module; replaces the `ai-tools` placeholder row of `modules.extra.ts`. 4 routes: `/admin/ai` (two settings cards), `/prompts`, `/usage` (`?kind=content|translation`, `?from=&to=`), `/translate`. The product-form "Generate with AI" button and the two-link hub page are not built (catalog module, see aec-diff §1 #6/#7).
+
+### Pattern additions
+| Change | Why |
+|---|---|
+| `components/data-table/date-range-filter.tsx` (`DateRangeFilter`, labels as props, `?from=&to=` in the URL) | shared version of `PreorderDateRange`; the preorder copy is untouched |
+| Column hooks must list `t` (from `useTranslation(ns)`) in the `useMemo` deps | `translatedColumnHeader` calls `t('ns:key')` with the default namespace; a lazily loaded module namespace shows raw keys in the headers until the columns are rebuilt |
+| i18n keys never contain dots: model ids → `models.gemini-2_5-flash` via `modelKey()` | i18next reads `.` as nesting |
+| Long-running client loop (`useAiTranslateRun`): one idempotent request per page, `stop` ref, result state (`done / stopped / failed / disabled / no_key`) | AEC "Translate All"; the admin can stop and re-run |
+| API "soft errors" modelled as `data.state` (AEC answered `result:false` with HTTP 200) | the mock has no error path; the UI shows a localised reason |
+| `CardAction` (not `flex-row` on `CardHeader`) to put a button at the right of a card title | shadcn `CardHeader` is a grid |
+| Number inputs (`FormInputField type='number'`) cannot be typed negative (the `-` becomes `0`); minimums are enforced by the schema and node tests | known shared-component limit, untouched |
+
+### Verification (Chrome, dev :5206)
+| Route / flow | Result | Console errors | ≥400 |
+|---|---|---|---|
+| `/admin/ai`: two cards, keys masked; seller limit 777 saved ("Saved") | ✅ | 0 | n/a |
+| `/admin/ai/prompts`: edit dialog; text without all variables → "Keep the variables exactly…"; valid text saved and shown | ✅ | 0 | n/a |
+| `/admin/ai/usage`: content (24 rows, 3 cards), Translation tab (18 rows, 4 cards), date 15.11 → 2 rows and stats follow | ✅ after fix (headers showed raw keys until `t` was added to the column deps) | 0 | n/a |
+| `/admin/ai/translate`: Turkish run → bar 100 %, "Finished: 197 strings translated", button disabled | ✅ | 0 | n/a |
+| Modules: AI toggle off + save → sidebar group gone, SPA navigation to `/admin/ai/prompts` → 404 page | ✅ | 0 | n/a |
+Not clicked live: translation settings card save, model selects, Google engine, stop button mid-run, the `disabled` / `no_key` / `failed` results (node tests cover the mock; the run hook has no test), content/translation sort by column, pagination beyond page 1, role without `ai.*_manage` (read-only cards), hard reload of each URL after the first. Console was read after the flows. Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
+Tests: 29 files / 257 node tests pass (17 new in `ai.node.test.ts`), `tsc -b` clean, eslint 0 errors.

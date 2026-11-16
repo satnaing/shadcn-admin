@@ -1,0 +1,113 @@
+{
+  "actions": {
+    "save": "Saxla",
+    "saving": "Saxlanır…",
+    "edit": "Redaktə et"
+  },
+  "toast": {
+    "saved": "Saxlanıldı",
+    "error": "Xəta baş verdi"
+  },
+  "validation": {
+    "required": "Bu sahə məcburidir",
+    "max255": "Ən çox 255 simvol",
+    "max5000": "Ən çox 5000 simvol",
+    "integer": "Tam ədəd daxil edin",
+    "min0": "0 və ya daha çox olmalıdır",
+    "variables": "Dəyişənləri əslindəki kimi saxlayın, məs. {product_name}"
+  },
+  "models": {
+    "gemini-3_1-pro-preview": "Gemini 3.1 Pro (qabaqcıl)",
+    "gemini-3_1-flash-lite-preview": "Gemini 3.1 Flash-Lite (preview, çox sürətli)",
+    "gemini-3-flash-preview": "Gemini 3 Flash (preview)",
+    "gemini-3-deep-think": "Gemini 3 Deep Think",
+    "gemini-2_5-pro": "Gemini 2.5 Pro (ən güclü)",
+    "gemini-2_5-flash": "Gemini 2.5 Flash (qiymət / performans)",
+    "gemini-2_5-flash-lite": "Gemini 2.5 Flash-Lite (ən sürətli, ən ucuz)",
+    "gemini-3_1-flash-lite": "Gemini 3.1 Flash-Lite (stabil)"
+  },
+  "settings": {
+    "title": "AI ayarları",
+    "description": "Məhsul məzmununun yaradılması və dil mətnlərinin tərcüməsi üçün Google Gemini məlumatları.",
+    "model": "Model",
+    "apiKey": "Gemini API açarı",
+    "apiKeyHint": "Şifrələnmiş saxlanır, maskalanmış göstərilir. Cari açarı saxlamaq üçün maskanı dəyişməyin.",
+    "content": {
+      "title": "Məzmun yaradılması (Gemini)",
+      "description": "Admin və satıcılar üçün məhsul adı, təsvir, SEO teqləri və parametrlər yazır.",
+      "enabled": "AI məzmun yaradılmasını aktiv et",
+      "sellerLimit": "Satıcının aylıq token limiti",
+      "sellerLimitHint": "Hər satıcının aylıq istifadə edə biləcəyi token; adminlər limitsizdir. Saxlayanda limit bütün satıcılara tətbiq olunur."
+    },
+    "translate": {
+      "title": "AI tərcümə",
+      "description": "Boş dil mətnlərini Gemini ilə doldurur. Məzmun yaradılmasından ayrı öz açarından istifadə edir.",
+      "enabled": "AI tərcüməni aktiv et",
+      "apiKeyHint": "Yalnız dil mətnlərinin tərcüməsi üçündür. Gizli saxlayın."
+    }
+  },
+  "prompts": {
+    "title": "Prompt şablonları",
+    "description": "Gemini-yə göndərilən təlimatlar. Mətni dəyişə bilərsiniz, amma hər {dəyişən} olduğu kimi qalmalıdır.",
+    "names": {
+      "product_add_edit_prompt": "Məhsul əlavə / redaktə promptu"
+    },
+    "form": {
+      "title": "{{name}}",
+      "description": "Saxlanmalı dəyişənlər: {{variables}}",
+      "prompt": "Prompt"
+    }
+  },
+  "usage": {
+    "title": "Token istifadəsi",
+    "description": "AI funksiyalarının istifadəçi və model üzrə sorğu və token xərci.",
+    "kinds": {
+      "content": "Məzmun yaradılması",
+      "translation": "Tərcümə"
+    },
+    "from": "Başlanğıc",
+    "to": "Son",
+    "search": "Axtar…",
+    "empty": "Bu dövr üçün AI istifadəsi tapılmadı.",
+    "stats": {
+      "requests": "Sorğu",
+      "tokens": "Cəmi token",
+      "translations": "Tərcümə olunan mətn",
+      "avg": "Orta token / sorğu"
+    },
+    "columns": {
+      "date": "Tarix və vaxt",
+      "user": "İstifadəçi",
+      "language": "Dil",
+      "model": "Model",
+      "translated": "Tərcümə edilən",
+      "promptTokens": "Sorğu tokenləri",
+      "completionTokens": "Cavab tokenləri",
+      "totalTokens": "Cəmi token"
+    }
+  },
+  "translate": {
+    "title": "AI tərcümə",
+    "description": "Dilin boş mətnlərini hər sorğuda 50 açar olmaqla doldurur. Mövcud mətn heç vaxt üstündən yazılmır.",
+    "engine": "Tərcüməçi",
+    "engines": {
+      "ai": "AI (Gemini)",
+      "google": "Google Translate"
+    },
+    "engineHint": {
+      "ai": "AI tərcümə aktiv və API açarı daxil edilmiş olmalıdır (AI ayarları).",
+      "google": "Pulsuz maşın tərcüməsi; açar lazım deyil."
+    },
+    "coverage": "{{total}} mətndən {{done}} tərcümə olunub, {{missing}} boşdur",
+    "progress": "Səhifə {{page}} / {{pages}} · {{count}} mətn tərcümə olundu",
+    "start": "Boş mətnləri tərcümə et",
+    "stop": "Dayandır",
+    "result": {
+      "done": "Bitdi: {{count}} mətn tərcümə olundu",
+      "stopped": "Dayandırıldı: {{count}} mətn tərcümə olundu",
+      "failed": "Sorğu uğursuz oldu; ondan əvvəl {{count}} mətn tərcümə edilib. Davam etmək üçün yenidən işə salın.",
+      "disabled": "AI tərcümə söndürülüb. AI ayarlarında aktiv edin.",
+      "no_key": "Tərcümə üçün Gemini API açarı yoxdur. AI ayarlarında əlavə edin."
+    }
+  }
+}

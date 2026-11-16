@@ -88,5 +88,10 @@
   "paymentsSellerPackages": "Satıcı paketleri",
   "paymentsCustomerPackages": "Müşteri paketleri",
   "paymentsPayouts": "İade yöntemleri",
-  "paymentsPayriff": "Payriff"
+  "paymentsPayriff": "Payriff",
+  "ai": "AI",
+  "aiSettings": "AI ayarları",
+  "aiPrompts": "Prompt şablonları",
+  "aiUsage": "Token kullanımı",
+  "aiTranslate": "AI çeviri"
 }

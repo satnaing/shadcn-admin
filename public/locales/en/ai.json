@@ -1,0 +1,113 @@
+{
+  "actions": {
+    "save": "Save",
+    "saving": "Saving…",
+    "edit": "Edit"
+  },
+  "toast": {
+    "saved": "Saved",
+    "error": "Something went wrong"
+  },
+  "validation": {
+    "required": "This field is required",
+    "max255": "At most 255 characters",
+    "max5000": "At most 5000 characters",
+    "integer": "Enter a whole number",
+    "min0": "Must be 0 or more",
+    "variables": "Keep the variables exactly as in the original, e.g. {product_name}"
+  },
+  "models": {
+    "gemini-3_1-pro-preview": "Gemini 3.1 Pro (advanced)",
+    "gemini-3_1-flash-lite-preview": "Gemini 3.1 Flash-Lite (preview, very fast)",
+    "gemini-3-flash-preview": "Gemini 3 Flash (preview)",
+    "gemini-3-deep-think": "Gemini 3 Deep Think",
+    "gemini-2_5-pro": "Gemini 2.5 Pro (most capable)",
+    "gemini-2_5-flash": "Gemini 2.5 Flash (best price / performance)",
+    "gemini-2_5-flash-lite": "Gemini 2.5 Flash-Lite (fastest, cheapest)",
+    "gemini-3_1-flash-lite": "Gemini 3.1 Flash-Lite (stable)"
+  },
+  "settings": {
+    "title": "AI settings",
+    "description": "Google Gemini credentials for product content generation and for translating language strings.",
+    "model": "Model",
+    "apiKey": "Gemini API key",
+    "apiKeyHint": "Stored encrypted; shown masked. Leave the mask to keep the current key.",
+    "content": {
+      "title": "Content generation (Gemini)",
+      "description": "Writes product names, descriptions, SEO tags and settings for admins and sellers.",
+      "enabled": "Enable AI content generation",
+      "sellerLimit": "Seller monthly token limit",
+      "sellerLimitHint": "Tokens each seller may use per month; admins are not limited. Saving applies the limit to every seller."
+    },
+    "translate": {
+      "title": "AI translation",
+      "description": "Fills empty language strings with Gemini. Uses its own key, separate from content generation.",
+      "enabled": "Enable AI translation",
+      "apiKeyHint": "Used only for translating language strings. Keep it private."
+    }
+  },
+  "prompts": {
+    "title": "Prompt templates",
+    "description": "Instructions sent to Gemini. Edit the wording, but keep every {variable} exactly as it is.",
+    "names": {
+      "product_add_edit_prompt": "Product add / edit prompt"
+    },
+    "form": {
+      "title": "{{name}}",
+      "description": "Variables that must stay: {{variables}}",
+      "prompt": "Prompt"
+    }
+  },
+  "usage": {
+    "title": "Token usage",
+    "description": "Requests and tokens spent by AI features, by user and model.",
+    "kinds": {
+      "content": "Content generation",
+      "translation": "Translation"
+    },
+    "from": "From",
+    "to": "To",
+    "search": "Search…",
+    "empty": "No AI usage found for this period.",
+    "stats": {
+      "requests": "Requests",
+      "tokens": "Total tokens",
+      "translations": "Strings translated",
+      "avg": "Avg tokens / request"
+    },
+    "columns": {
+      "date": "Date & time",
+      "user": "User",
+      "language": "Language",
+      "model": "Model",
+      "translated": "Translated",
+      "promptTokens": "Prompt tokens",
+      "completionTokens": "Completion tokens",
+      "totalTokens": "Total tokens"
+    }
+  },
+  "translate": {
+    "title": "AI translation",
+    "description": "Fills the empty strings of a language, 50 keys per request. Text that already exists is never overwritten.",
+    "engine": "Translator",
+    "engines": {
+      "ai": "AI (Gemini)",
+      "google": "Google Translate"
+    },
+    "engineHint": {
+      "ai": "Needs AI translation enabled and its API key (AI settings).",
+      "google": "Free machine translation; no key needed."
+    },
+    "coverage": "{{done}} of {{total}} strings translated, {{missing}} empty",
+    "progress": "Page {{page}} of {{pages}} · {{count}} strings translated",
+    "start": "Translate empty strings",
+    "stop": "Stop",
+    "result": {
+      "done": "Finished: {{count}} strings translated",
+      "stopped": "Stopped: {{count}} strings translated",
+      "failed": "The request failed; {{count}} strings were translated before it. Run again to continue.",
+      "disabled": "AI translation is switched off. Enable it in AI settings.",
+      "no_key": "No Gemini API key for translation. Add it in AI settings."
+    }
+  }
+}

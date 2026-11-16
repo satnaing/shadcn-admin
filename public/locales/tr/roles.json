@@ -10,7 +10,12 @@
     "delete": "Rolü sil",
     "system": "Sistem rolü (kilitli)"
   },
-  "columns": { "name": "Rol", "description": "Açıklama", "permissions": "İzinler", "users": "Kullanıcılar" },
+  "columns": {
+    "name": "Rol",
+    "description": "Açıklama",
+    "permissions": "İzinler",
+    "users": "Kullanıcılar"
+  },
   "form": {
     "createTitle": "Rol ekle",
     "editTitle": "Rolü düzenle",
@@ -27,8 +32,15 @@
     "updateError": "Rol güncellenemedi",
     "deleteError": "Rol silinemedi"
   },
-  "delete": { "title": "Rol silinsin mi?", "desc": "“{{name}}” rolü silinecek. Bu role sahip kullanıcılar izinlerini kaybeder." },
-  "picker": { "search": "İzinlerde ara…", "empty": "Eşleşen izin yok.", "selectAll": "Gruptaki tümünü seç" },
+  "delete": {
+    "title": "Rol silinsin mi?",
+    "desc": "“{{name}}” rolü silinecek. Bu role sahip kullanıcılar izinlerini kaybeder."
+  },
+  "picker": {
+    "search": "İzinlerde ara…",
+    "empty": "Eşleşen izin yok.",
+    "selectAll": "Gruptaki tümünü seç"
+  },
   "matrix": {
     "title": "İzinler",
     "description": "Hangi rol hangi izne sahip.",
@@ -56,7 +68,8 @@
     "refund": "İadeler",
     "preorder": "Ön sipariş",
     "affiliate": "Ortaklık",
-    "club_point": "Kulüp puanları"
+    "club_point": "Kulüp puanları",
+    "ai": "AI"
   },
   "actions": {
     "index": "Listeyi gör",

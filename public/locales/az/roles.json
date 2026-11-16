@@ -10,7 +10,12 @@
     "delete": "Rolu sil",
     "system": "Sistem rolu (kilidli)"
   },
-  "columns": { "name": "Rol", "description": "Təsvir", "permissions": "İcazələr", "users": "İstifadəçilər" },
+  "columns": {
+    "name": "Rol",
+    "description": "Təsvir",
+    "permissions": "İcazələr",
+    "users": "İstifadəçilər"
+  },
   "form": {
     "createTitle": "Rol əlavə et",
     "editTitle": "Rolu redaktə et",
@@ -27,8 +32,15 @@
     "updateError": "Rolu yeniləmək alınmadı",
     "deleteError": "Rolu silmək alınmadı"
   },
-  "delete": { "title": "Rol silinsin?", "desc": "“{{name}}” rolu silinəcək. Bu rolu olan istifadəçilər onun icazələrini itirir." },
-  "picker": { "search": "İcazələri axtar…", "empty": "Uyğun icazə tapılmadı.", "selectAll": "Qrupdakı hamısını seç" },
+  "delete": {
+    "title": "Rol silinsin?",
+    "desc": "“{{name}}” rolu silinəcək. Bu rolu olan istifadəçilər onun icazələrini itirir."
+  },
+  "picker": {
+    "search": "İcazələri axtar…",
+    "empty": "Uyğun icazə tapılmadı.",
+    "selectAll": "Qrupdakı hamısını seç"
+  },
   "matrix": {
     "title": "İcazələr",
     "description": "Hansı rolun hansı icazəsi var.",
@@ -56,7 +68,8 @@
     "refund": "Geri ödəmə",
     "preorder": "Ön sifariş",
     "affiliate": "Tərəfdaşlıq",
-    "club_point": "Klub xalları"
+    "club_point": "Klub xalları",
+    "ai": "AI"
   },
   "actions": {
     "index": "Siyahıya bax",

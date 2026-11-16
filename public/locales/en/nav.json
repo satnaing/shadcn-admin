@@ -88,5 +88,10 @@
   "paymentsSellerPackages": "Seller packages",
   "paymentsCustomerPackages": "Customer packages",
   "paymentsPayouts": "Payout methods",
-  "paymentsPayriff": "Payriff"
+  "paymentsPayriff": "Payriff",
+  "ai": "AI",
+  "aiSettings": "AI settings",
+  "aiPrompts": "Prompt templates",
+  "aiUsage": "Token usage",
+  "aiTranslate": "AI translation"
 }

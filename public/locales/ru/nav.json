@@ -88,5 +88,10 @@
   "paymentsSellerPackages": "Пакеты продавцов",
   "paymentsCustomerPackages": "Пакеты клиентов",
   "paymentsPayouts": "Способы выплаты",
-  "paymentsPayriff": "Payriff"
+  "paymentsPayriff": "Payriff",
+  "ai": "AI",
+  "aiSettings": "Настройки AI",
+  "aiPrompts": "Шаблоны промптов",
+  "aiUsage": "Расход токенов",
+  "aiTranslate": "AI-перевод"
 }

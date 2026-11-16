@@ -10,6 +10,7 @@ import {
   Share2,
   ShoppingCart,
   Smartphone,
+  Sparkles,
   Truck,
   Wallet,
 } from 'lucide-react'
@@ -29,6 +30,7 @@ const ICONS: Record<string, React.ElementType> = {
   Share2,
   ShoppingCart,
   Smartphone,
+  Sparkles,
   Truck,
   Wallet,
 }

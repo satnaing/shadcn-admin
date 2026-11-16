@@ -1,5 +1,6 @@
 import type { ModuleRaw } from '@/api/menu.types'
 import { affiliateManifest } from '@/features/affiliate/module.manifest'
+import { aiManifest } from '@/features/ai/module.manifest'
 import { clubPointManifest } from '@/features/club-point/module.manifest'
 import { courierManifest } from '@/features/courier/module.manifest'
 import { qrcodeEventManifest } from '@/features/qrcode-event/module.manifest'
@@ -39,6 +40,7 @@ export const mockModules: ModuleRaw[] = [
   { ...courierManifest, enabled: true },
   { ...otpManifest, enabled: true },
   { ...paymentsManifest, enabled: true },
+  { ...aiManifest, enabled: true },
   { id: 'theme-xshop', name: 'Theme xShop', description: 'xShop storefront theme package', version: '1.0.0', icon: 'Palette', required: false, enabled: true, requires: [] },
   { id: 'theme-senseihost', name: 'Theme SenseiHost', description: 'SenseiHost storefront theme package', version: '1.0.0', icon: 'Palette', required: false, enabled: false, requires: [] },
 ]
