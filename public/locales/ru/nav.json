@@ -64,5 +64,9 @@
   "affiliateReferrals": "Приглашённые",
   "affiliateWithdraws": "Запросы на вывод",
   "affiliateLogs": "Журнал",
+  "clubPoint": "Клубные баллы",
+  "clubPointEarnings": "Баллы клиентов",
+  "clubPointProducts": "Баллы товаров",
+  "clubPointConfig": "Настройки",
   "soon": "скоро"
 }

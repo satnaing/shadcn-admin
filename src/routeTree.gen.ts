@@ -31,6 +31,7 @@ import { Route as AuthenticatedAdminPreorderIndexRouteImport } from './routes/_a
 import { Route as AuthenticatedAdminPermissionsIndexRouteImport } from './routes/_authenticated/admin/permissions/index'
 import { Route as AuthenticatedAdminPagesIndexRouteImport } from './routes/_authenticated/admin/pages/index'
 import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_authenticated/admin/modules/index'
+import { Route as AuthenticatedAdminClubPointIndexRouteImport } from './routes/_authenticated/admin/club-point/index'
 import { Route as AuthenticatedAdminBlogsIndexRouteImport } from './routes/_authenticated/admin/blogs/index'
 import { Route as AuthenticatedAdminAffiliateIndexRouteImport } from './routes/_authenticated/admin/affiliate/index'
 import { Route as AuthenticatedAdminThemesTopbarRouteImport } from './routes/_authenticated/admin/themes/topbar'
@@ -52,6 +53,8 @@ import { Route as AuthenticatedAdminPreorderNotificationsRouteImport } from './r
 import { Route as AuthenticatedAdminPreorderFaqsRouteImport } from './routes/_authenticated/admin/preorder/faqs'
 import { Route as AuthenticatedAdminPreorderConversationsRouteImport } from './routes/_authenticated/admin/preorder/conversations'
 import { Route as AuthenticatedAdminPreorderCommissionsRouteImport } from './routes/_authenticated/admin/preorder/commissions'
+import { Route as AuthenticatedAdminClubPointProductsRouteImport } from './routes/_authenticated/admin/club-point/products'
+import { Route as AuthenticatedAdminClubPointConfigRouteImport } from './routes/_authenticated/admin/club-point/config'
 import { Route as AuthenticatedAdminBlogsNewRouteImport } from './routes/_authenticated/admin/blogs/new'
 import { Route as AuthenticatedAdminBlogsCategoriesRouteImport } from './routes/_authenticated/admin/blogs/categories'
 import { Route as AuthenticatedAdminBlogsIdRouteImport } from './routes/_authenticated/admin/blogs/$id'
@@ -195,6 +198,12 @@ const AuthenticatedAdminModulesIndexRoute =
     path: '/modules/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminClubPointIndexRoute =
+  AuthenticatedAdminClubPointIndexRouteImport.update({
+    id: '/club-point/',
+    path: '/club-point/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminBlogsIndexRoute =
   AuthenticatedAdminBlogsIndexRouteImport.update({
     id: '/blogs/',
@@ -319,6 +328,18 @@ const AuthenticatedAdminPreorderCommissionsRoute =
   AuthenticatedAdminPreorderCommissionsRouteImport.update({
     id: '/preorder/commissions',
     path: '/preorder/commissions',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminClubPointProductsRoute =
+  AuthenticatedAdminClubPointProductsRouteImport.update({
+    id: '/club-point/products',
+    path: '/club-point/products',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminClubPointConfigRoute =
+  AuthenticatedAdminClubPointConfigRouteImport.update({
+    id: '/club-point/config',
+    path: '/club-point/config',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminBlogsNewRoute =
@@ -481,6 +502,8 @@ export interface FileRoutesByFullPath {
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/admin/club-point/config': typeof AuthenticatedAdminClubPointConfigRoute
+  '/admin/club-point/products': typeof AuthenticatedAdminClubPointProductsRoute
   '/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
   '/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
   '/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
@@ -502,6 +525,7 @@ export interface FileRoutesByFullPath {
   '/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
   '/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
   '/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
+  '/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
   '/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
@@ -547,6 +571,8 @@ export interface FileRoutesByTo {
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/admin/club-point/config': typeof AuthenticatedAdminClubPointConfigRoute
+  '/admin/club-point/products': typeof AuthenticatedAdminClubPointProductsRoute
   '/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
   '/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
   '/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
@@ -568,6 +594,7 @@ export interface FileRoutesByTo {
   '/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
   '/admin/affiliate': typeof AuthenticatedAdminAffiliateIndexRoute
   '/admin/blogs': typeof AuthenticatedAdminBlogsIndexRoute
+  '/admin/club-point': typeof AuthenticatedAdminClubPointIndexRoute
   '/admin/modules': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions': typeof AuthenticatedAdminPermissionsIndexRoute
@@ -616,6 +643,8 @@ export interface FileRoutesById {
   '/_authenticated/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/_authenticated/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/_authenticated/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/_authenticated/admin/club-point/config': typeof AuthenticatedAdminClubPointConfigRoute
+  '/_authenticated/admin/club-point/products': typeof AuthenticatedAdminClubPointProductsRoute
   '/_authenticated/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
   '/_authenticated/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
   '/_authenticated/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
@@ -637,6 +666,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
   '/_authenticated/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
   '/_authenticated/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
+  '/_authenticated/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
   '/_authenticated/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/_authenticated/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/_authenticated/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
@@ -685,6 +715,8 @@ export interface FileRouteTypes {
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
+    | '/admin/club-point/config'
+    | '/admin/club-point/products'
     | '/admin/preorder/commissions'
     | '/admin/preorder/conversations'
     | '/admin/preorder/faqs'
@@ -706,6 +738,7 @@ export interface FileRouteTypes {
     | '/admin/themes/topbar'
     | '/admin/affiliate/'
     | '/admin/blogs/'
+    | '/admin/club-point/'
     | '/admin/modules/'
     | '/admin/pages/'
     | '/admin/permissions/'
@@ -751,6 +784,8 @@ export interface FileRouteTypes {
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
+    | '/admin/club-point/config'
+    | '/admin/club-point/products'
     | '/admin/preorder/commissions'
     | '/admin/preorder/conversations'
     | '/admin/preorder/faqs'
@@ -772,6 +807,7 @@ export interface FileRouteTypes {
     | '/admin/themes/topbar'
     | '/admin/affiliate'
     | '/admin/blogs'
+    | '/admin/club-point'
     | '/admin/modules'
     | '/admin/pages'
     | '/admin/permissions'
@@ -819,6 +855,8 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/blogs/$id'
     | '/_authenticated/admin/blogs/categories'
     | '/_authenticated/admin/blogs/new'
+    | '/_authenticated/admin/club-point/config'
+    | '/_authenticated/admin/club-point/products'
     | '/_authenticated/admin/preorder/commissions'
     | '/_authenticated/admin/preorder/conversations'
     | '/_authenticated/admin/preorder/faqs'
@@ -840,6 +878,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/themes/topbar'
     | '/_authenticated/admin/affiliate/'
     | '/_authenticated/admin/blogs/'
+    | '/_authenticated/admin/club-point/'
     | '/_authenticated/admin/modules/'
     | '/_authenticated/admin/pages/'
     | '/_authenticated/admin/permissions/'
@@ -1033,6 +1072,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminModulesIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/club-point/': {
+      id: '/_authenticated/admin/club-point/'
+      path: '/club-point'
+      fullPath: '/admin/club-point/'
+      preLoaderRoute: typeof AuthenticatedAdminClubPointIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/blogs/': {
       id: '/_authenticated/admin/blogs/'
       path: '/blogs'
@@ -1178,6 +1224,20 @@ declare module '@tanstack/react-router' {
       path: '/preorder/commissions'
       fullPath: '/admin/preorder/commissions'
       preLoaderRoute: typeof AuthenticatedAdminPreorderCommissionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/club-point/products': {
+      id: '/_authenticated/admin/club-point/products'
+      path: '/club-point/products'
+      fullPath: '/admin/club-point/products'
+      preLoaderRoute: typeof AuthenticatedAdminClubPointProductsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/club-point/config': {
+      id: '/_authenticated/admin/club-point/config'
+      path: '/club-point/config'
+      fullPath: '/admin/club-point/config'
+      preLoaderRoute: typeof AuthenticatedAdminClubPointConfigRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/blogs/new': {
@@ -1355,6 +1415,8 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBlogsIdRoute: typeof AuthenticatedAdminBlogsIdRoute
   AuthenticatedAdminBlogsCategoriesRoute: typeof AuthenticatedAdminBlogsCategoriesRoute
   AuthenticatedAdminBlogsNewRoute: typeof AuthenticatedAdminBlogsNewRoute
+  AuthenticatedAdminClubPointConfigRoute: typeof AuthenticatedAdminClubPointConfigRoute
+  AuthenticatedAdminClubPointProductsRoute: typeof AuthenticatedAdminClubPointProductsRoute
   AuthenticatedAdminPreorderCommissionsRoute: typeof AuthenticatedAdminPreorderCommissionsRoute
   AuthenticatedAdminPreorderConversationsRoute: typeof AuthenticatedAdminPreorderConversationsRoute
   AuthenticatedAdminPreorderFaqsRoute: typeof AuthenticatedAdminPreorderFaqsRoute
@@ -1376,6 +1438,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminThemesTopbarRoute: typeof AuthenticatedAdminThemesTopbarRoute
   AuthenticatedAdminAffiliateIndexRoute: typeof AuthenticatedAdminAffiliateIndexRoute
   AuthenticatedAdminBlogsIndexRoute: typeof AuthenticatedAdminBlogsIndexRoute
+  AuthenticatedAdminClubPointIndexRoute: typeof AuthenticatedAdminClubPointIndexRoute
   AuthenticatedAdminModulesIndexRoute: typeof AuthenticatedAdminModulesIndexRoute
   AuthenticatedAdminPagesIndexRoute: typeof AuthenticatedAdminPagesIndexRoute
   AuthenticatedAdminPermissionsIndexRoute: typeof AuthenticatedAdminPermissionsIndexRoute
@@ -1418,6 +1481,10 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminBlogsCategoriesRoute:
       AuthenticatedAdminBlogsCategoriesRoute,
     AuthenticatedAdminBlogsNewRoute: AuthenticatedAdminBlogsNewRoute,
+    AuthenticatedAdminClubPointConfigRoute:
+      AuthenticatedAdminClubPointConfigRoute,
+    AuthenticatedAdminClubPointProductsRoute:
+      AuthenticatedAdminClubPointProductsRoute,
     AuthenticatedAdminPreorderCommissionsRoute:
       AuthenticatedAdminPreorderCommissionsRoute,
     AuthenticatedAdminPreorderConversationsRoute:
@@ -1451,6 +1518,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminAffiliateIndexRoute:
       AuthenticatedAdminAffiliateIndexRoute,
     AuthenticatedAdminBlogsIndexRoute: AuthenticatedAdminBlogsIndexRoute,
+    AuthenticatedAdminClubPointIndexRoute:
+      AuthenticatedAdminClubPointIndexRoute,
     AuthenticatedAdminModulesIndexRoute: AuthenticatedAdminModulesIndexRoute,
     AuthenticatedAdminPagesIndexRoute: AuthenticatedAdminPagesIndexRoute,
     AuthenticatedAdminPermissionsIndexRoute:

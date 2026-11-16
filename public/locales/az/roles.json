@@ -53,7 +53,8 @@
     "qrcode_event": "QR kod tədbirləri",
     "refund": "Geri ödəmə",
     "preorder": "Ön sifariş",
-    "affiliate": "Tərəfdaşlıq"
+    "affiliate": "Tərəfdaşlıq",
+    "club_point": "Klub xalları"
   },
   "actions": {
     "index": "Siyahıya bax",

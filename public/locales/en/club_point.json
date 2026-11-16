@@ -1,0 +1,15 @@
+{
+  "toast": { "error": "Something went wrong", "saved": "Saved", "bulk": "Points updated for {{count}} products" },
+  "actions": { "save": "Save", "saving": "Saving...", "view": "View", "edit": "Edit" },
+  "tabs": { "all": "All" },
+  "status": { "pending": "Pending", "converted": "Converted" },
+  "columns": { "order": "Order", "customer": "Customer", "points": "Points", "status": "Convert status", "earnedAt": "Earned at", "product": "Product", "owner": "Owner", "price": "Price" },
+  "earnings": { "title": "Customer points", "description": "Points customers earned from their orders and whether they were converted to wallet money.", "search": "Search by order or customer...", "empty": "No points earned yet", "noOrder": "Order not found", "noUser": "User not found" },
+  "lines": { "title": "Points of order #{{code}}", "description": "Points earned for each product of the order.", "deletedProduct": "Deleted product" },
+  "products": { "title": "Points per product", "description": "How many points one unit of each product earns. Set one product, a price range, or every product at once.", "search": "Search by product or owner...", "empty": "No products found" },
+  "product": { "title": "Set points for product", "point": "Points per unit", "pointHint": "Points a customer earns for every unit bought." },
+  "range": { "title": "Products within a price range", "description": "Give the same points to every product priced between the minimum and the maximum.", "point": "Points per unit", "min": "Minimum price", "max": "Maximum price" },
+  "all": { "title": "All products", "description": "Every product earns points in proportion to its price.", "point": "Points per currency unit", "pointHint": "A product that costs 100 earns 100 times this value." },
+  "config": { "title": "Club point configuration", "description": "How earned points turn into wallet money.", "cardTitle": "Convert points to wallet", "cardDescription": "Customers convert the points of an order into wallet money at this rate. Wallet must be enabled.", "convertRate": "Points worth one currency unit", "convertRateHint": "For example 100 means 100 points = 1 in the store currency." },
+  "validation": { "number": "Enter a number", "min0": "Must be 0 or more", "positive": "Must be greater than 0", "range": "Maximum price must not be below the minimum" }
+}

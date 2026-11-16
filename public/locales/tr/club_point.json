@@ -1,0 +1,15 @@
+{
+  "toast": { "error": "Bir hata oluştu", "saved": "Kaydedildi", "bulk": "{{count}} ürün için puanlar güncellendi" },
+  "actions": { "save": "Kaydet", "saving": "Kaydediliyor...", "view": "Görüntüle", "edit": "Düzenle" },
+  "tabs": { "all": "Tümü" },
+  "status": { "pending": "Bekliyor", "converted": "Dönüştürüldü" },
+  "columns": { "order": "Sipariş", "customer": "Müşteri", "points": "Puan", "status": "Dönüşüm durumu", "earnedAt": "Kazanma tarihi", "product": "Ürün", "owner": "Sahibi", "price": "Fiyat" },
+  "earnings": { "title": "Müşteri puanları", "description": "Müşterilerin siparişlerden kazandığı puanlar ve cüzdana dönüştürülüp dönüştürülmediği.", "search": "Sipariş veya müşteriye göre ara...", "empty": "Henüz puan kazanılmadı", "noOrder": "Sipariş bulunamadı", "noUser": "Kullanıcı bulunamadı" },
+  "lines": { "title": "#{{code}} siparişinin puanları", "description": "Siparişin her ürünü için kazanılan puanlar.", "deletedProduct": "Silinmiş ürün" },
+  "products": { "title": "Ürün başına puan", "description": "Her ürünün bir adedinin kaç puan kazandırdığı. Tek ürünü, fiyat aralığını veya tüm ürünleri ayarlayın.", "search": "Ürün veya sahibine göre ara...", "empty": "Ürün bulunamadı" },
+  "product": { "title": "Ürün için puan belirle", "point": "Adet başına puan", "pointHint": "Müşterinin satın aldığı her adet için kazandığı puan." },
+  "range": { "title": "Fiyat aralığındaki ürünler", "description": "Fiyatı minimum ile maksimum arasında olan tüm ürünlere aynı puanı verin.", "point": "Adet başına puan", "min": "Minimum fiyat", "max": "Maksimum fiyat" },
+  "all": { "title": "Tüm ürünler", "description": "Her ürün fiyatıyla orantılı puan kazandırır.", "point": "Para birimi başına puan", "pointHint": "Fiyatı 100 olan ürün bu değerin 100 katını kazandırır." },
+  "config": { "title": "Kulüp puanı ayarları", "description": "Kazanılan puanların cüzdan parasına dönüşmesi.", "cardTitle": "Puanları cüzdana dönüştür", "cardDescription": "Müşteriler sipariş puanlarını bu oranla cüzdan parasına dönüştürür. Cüzdan etkin olmalıdır.", "convertRate": "Bir para birimine eşit puan", "convertRateHint": "Örneğin 100 yazılırsa 100 puan = mağaza para biriminde 1 eder." },
+  "validation": { "number": "Bir sayı girin", "min0": "0 veya daha fazla olmalı", "positive": "0'dan büyük olmalı", "range": "Maksimum fiyat minimumdan küçük olamaz" }
+}

@@ -53,7 +53,8 @@
     "qrcode_event": "QR code events",
     "refund": "Refunds",
     "preorder": "Preorder",
-    "affiliate": "Affiliate"
+    "affiliate": "Affiliate",
+    "club_point": "Club points"
   },
   "actions": {
     "index": "View list",

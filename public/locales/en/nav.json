@@ -64,5 +64,9 @@
   "affiliateReferrals": "Referral users",
   "affiliateWithdraws": "Withdraw requests",
   "affiliateLogs": "Logs",
+  "clubPoint": "Club points",
+  "clubPointEarnings": "Customer points",
+  "clubPointProducts": "Product points",
+  "clubPointConfig": "Configuration",
   "soon": "soon"
 }

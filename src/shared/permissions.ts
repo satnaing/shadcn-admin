@@ -106,6 +106,13 @@ export const PERMISSIONS = {
     NOTIFICATIONS_MANAGE: 'preorder.notifications_manage',
     SETTINGS: 'preorder.settings',
   },
+  CLUB_POINT: {
+    INDEX: 'club_point.index',
+    PRODUCTS: 'club_point.products',
+    PRODUCTS_MANAGE: 'club_point.products_manage',
+    CONFIG: 'club_point.config',
+    CONFIG_MANAGE: 'club_point.config_manage',
+  },
   AFFILIATE: {
     INDEX: 'affiliate.index',
     CONFIG_MANAGE: 'affiliate.config_manage',

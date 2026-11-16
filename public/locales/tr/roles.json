@@ -53,7 +53,8 @@
     "qrcode_event": "QR kod etkinlikleri",
     "refund": "İadeler",
     "preorder": "Ön sipariş",
-    "affiliate": "Ortaklık"
+    "affiliate": "Ortaklık",
+    "club_point": "Kulüp puanları"
   },
   "actions": {
     "index": "Listeyi gör",

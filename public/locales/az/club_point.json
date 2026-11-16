@@ -1,0 +1,15 @@
+{
+  "toast": { "error": "Xəta baş verdi", "saved": "Yadda saxlanıldı", "bulk": "{{count}} məhsul üçün xallar yeniləndi" },
+  "actions": { "save": "Yadda saxla", "saving": "Saxlanılır...", "view": "Bax", "edit": "Redaktə et" },
+  "tabs": { "all": "Hamısı" },
+  "status": { "pending": "Gözləyir", "converted": "Çevrilib" },
+  "columns": { "order": "Sifariş", "customer": "Müştəri", "points": "Xallar", "status": "Çevrilmə statusu", "earnedAt": "Qazanılma tarixi", "product": "Məhsul", "owner": "Sahib", "price": "Qiymət" },
+  "earnings": { "title": "Müştəri xalları", "description": "Müştərilərin sifarişlərdən qazandığı xallar və onların pulqabıya çevrilib-çevrilmədiyi.", "search": "Sifariş və ya müştəri üzrə axtar...", "empty": "Hələ xal qazanılmayıb", "noOrder": "Sifariş tapılmadı", "noUser": "İstifadəçi tapılmadı" },
+  "lines": { "title": "#{{code}} sifarişinin xalları", "description": "Sifarişin hər məhsulu üçün qazanılan xallar.", "deletedProduct": "Silinmiş məhsul" },
+  "products": { "title": "Məhsul üzrə xallar", "description": "Hər məhsulun bir ədədinin neçə xal qazandırdığı. Bir məhsulu, qiymət aralığını və ya bütün məhsulları təyin edin.", "search": "Məhsul və ya sahib üzrə axtar...", "empty": "Məhsul tapılmadı" },
+  "product": { "title": "Məhsul üçün xal təyin et", "point": "Bir ədəd üçün xal", "pointHint": "Müştərinin aldığı hər ədəd üçün qazandığı xal." },
+  "range": { "title": "Qiymət aralığındakı məhsullar", "description": "Qiyməti minimum və maksimum arasında olan bütün məhsullara eyni xalı verin.", "point": "Bir ədəd üçün xal", "min": "Minimum qiymət", "max": "Maksimum qiymət" },
+  "all": { "title": "Bütün məhsullar", "description": "Hər məhsul qiymətinə mütənasib xal qazandırır.", "point": "Valyuta vahidi üçün xal", "pointHint": "Qiyməti 100 olan məhsul bu dəyərin 100 mislini qazandırır." },
+  "config": { "title": "Klub xalı ayarları", "description": "Qazanılmış xalların pulqabı pulu olaraq çevrilməsi.", "cardTitle": "Xalları pulqabıya çevir", "cardDescription": "Müştərilər sifarişin xallarını bu məzənnə ilə pulqabı pulu olaraq çevirir. Pulqabı aktiv olmalıdır.", "convertRate": "Bir valyuta vahidinə bərabər xal", "convertRateHint": "Məsələn 100 yazılsa, 100 xal = mağaza valyutasında 1 edir." },
+  "validation": { "number": "Rəqəm daxil edin", "min0": "0 və ya daha çox olmalıdır", "positive": "0-dan böyük olmalıdır", "range": "Maksimum qiymət minimumdan kiçik ola bilməz" }
+}

@@ -1,0 +1,5 @@
+export { ClubPointEarningsPage } from './components/club-point-earnings-page'
+export { ClubPointProductsPage } from './components/club-point-products-page'
+export { ClubPointConfigPage } from './components/club-point-config-page'
+export { ClubPointRouteGuard } from './components/club-point-route-guard'
+export { clubPointManifest } from './module.manifest'

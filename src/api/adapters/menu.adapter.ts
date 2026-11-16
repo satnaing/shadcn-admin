@@ -1,6 +1,7 @@
 import {
   Boxes,
   CalendarClock,
+  Coins,
   Megaphone,
   Package,
   Palette,
@@ -17,6 +18,7 @@ import type { NavGroup, NavItem } from '@/components/layout/types'
 const ICONS: Record<string, React.ElementType> = {
   Boxes,
   CalendarClock,
+  Coins,
   Megaphone,
   Package,
   Palette,
