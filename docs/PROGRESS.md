@@ -175,3 +175,28 @@ Folder = pilot layout (`src/features/preorder/{data,hooks,components}`, `module.
 | Modules: toggle off + save → sidebar group gone; `/admin/preorder/faqs` → 404 page | ✅ | 0 | n/a |
 Not clicked live: product create/edit save, bulk order delete / reminders, step deny with shipping proof, invoice download, notification save, route-by-route direct reload of every URL (they were reached by SPA navigation except dashboard/orders/detail/products/new). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
 Tests: 20 files / 131 node tests pass (27 new in `preorder*.node.test.ts`), `tsc -b` clean, eslint 0 errors.
+
+## Module #4 `affiliate` (2026-11-16)
+Folder = pilot layout (`src/features/affiliate/{data,hooks,components}`, `module.manifest.ts`, `src/api/modules/affiliate.api.ts`, `src/mocks/affiliate.{data,routes}.ts`, `public/locales/*/affiliate.json`, `docs/aec-diff/affiliate.md`). 6 routes: `/admin/affiliate` (configuration), `/form`, `/users`, `/referrals`, `/withdraws`, `/logs`. Verification, payout, payment history and withdraw reject are dialogs. AEC source tree is `D:\www\aec`.
+
+### Pattern additions
+| Change | Why |
+|---|---|
+| `AffiliateList` (title + optional tab bar + server-side `EntityDataTable`, driven by `kind`) + one kind-aware `useAffiliateList(kind, params)` + typed `ListItemMap` in the api file | four list screens share everything except columns; each page file is only its columns + dialogs |
+| `AffiliateOptionCard` (card + RHF form + save, read-only without the `config_manage` permission via `usePermissionStore`) | several independent settings cards on one screen, each with its own save; cards are keyed by their own server data so a refetch after another card's save does not reset unsaved edits |
+| In-cell permission checks with `PermissionGuard` (switch → read-only badge, action buttons hidden) instead of passing `canX` props through the table | same approach as `FlagSwitch` in preorder |
+| Dialog that needs fetched data renders its form only after the data arrives (`PayForm` mounts with `user`) | the zod schema depends on the fetched balance (`payoutSchema(max)`), so the form must be created with the final limit |
+| `useAction(fn, toastKey)` mutation wrapper (invalidate module key + toast), one hook returning all mutations | same as preorder's `use-<m>-action` |
+
+### Verification (Chrome, dev :5200)
+| Route / flow | Result | Console errors | ≥400 |
+|---|---|---|---|
+| `/admin/affiliate` (4 cards), `/form`, `/users`, `/referrals`, `/withdraws`, `/logs` (10 rows each) | ✅ reached by SPA navigation | 0 | n/a |
+| Users: Pending tab (5) → verification dialog → Accept → toast, row leaves Pending (4) | ✅ | 0 | n/a |
+| Users: Pay dialog (due amount + PayPal e-mail), empty submit → "required" on method, Bank → "Payment recorded", balance → 0.00 | ✅ | 0 | n/a |
+| Withdraws: Pending tab (6), pay dialog with fixed amount, reject confirm → toast, row leaves Pending (5) | ✅ | 0 | n/a |
+| Registration form: add "Select" field, empty save → label + choices errors | ✅ | 0 | n/a |
+| Config: min withdraw 20 → 45 saved; enabling product sharing turns category-wise off | ✅ | 0 | n/a |
+| Modules: toggle Affiliate off + save → sidebar group gone, `/admin/affiliate/users` → 404 | ✅ | 0 | n/a |
+Not clicked live: withdraw pay confirm, payment history with rows, category commission edit, registration form save with valid data, verification Reject, approval switch from the list, route-by-route hard reload (sweep used SPA navigation). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
+Tests: 21 files / 147 node tests pass (16 new in `affiliate.node.test.ts`), `tsc -b` clean, eslint 0 errors.
