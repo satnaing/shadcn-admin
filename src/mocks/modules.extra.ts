@@ -12,8 +12,6 @@ const rows: Row[] = [
   ['media', 'Media', 'Uploaded files and image processing', 'Image', true, true, []],
   ['settings', 'Settings', 'Languages, currency, e-mail and SEO', 'Settings', true, true, []],
   ['coupon', 'Coupons & deals', 'Coupons, flash deals and category discounts', 'Ticket', false, true, ['order']],
-  ['payriff', 'Payriff', 'Payriff payment driver', 'CreditCard', false, true, ['payment']],
-  ['offline-payment', 'Offline payment', 'Manual and offline payment methods', 'Wallet', false, false, ['payment']],
   ['ai-tools', 'AI management', 'AI translation and content generation', 'Sparkles', false, true, []],
   ['auction', 'Auction', 'Auction products and bidding', 'Gavel', false, false, ['product'], false],
   ['map-provider', 'Map provider', 'Maps for pickup points and delivery', 'Map', false, false, [], false],

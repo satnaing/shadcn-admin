@@ -1,0 +1,217 @@
+{
+  "actions": {
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "remove": "Kaldır"
+  },
+  "toast": {
+    "saved": "Kaydedildi",
+    "deleted": "Silindi",
+    "approved": "Onaylandı",
+    "recharged": "Cüzdan yüklendi",
+    "error": "Bir hata oluştu"
+  },
+  "validation": {
+    "required": "Bu alan zorunludur",
+    "max60": "En fazla 60 karakter",
+    "max100": "En fazla 100 karakter",
+    "max120": "En fazla 120 karakter",
+    "max255": "En fazla 255 karakter",
+    "max2000": "En fazla 2000 karakter",
+    "bankRows": "En az bir banka hesabı ekleyin",
+    "customer": "Bir müşteri seçin",
+    "amount": "Tutar 0’dan büyük olmalıdır"
+  },
+  "common": {
+    "receipt": "Makbuzu aç",
+    "selectAll": "Tümünü seç",
+    "selectRow": "Satırı seç"
+  },
+  "manual": {
+    "title": "Manuel ödeme yöntemleri",
+    "description": "Ödeme sırasında müşterilere gösterilen banka havalesi, çek veya özel talimatlar.",
+    "add": "Yöntem ekle",
+    "search": "Yöntem ara…",
+    "empty": "Henüz ödeme yöntemi yok.",
+    "deleteTitle": "Bu yöntem silinsin mi?",
+    "deleteDesc": "“{{name}}” artık ödeme sırasında sunulmayacak.",
+    "columns": {
+      "heading": "Ad",
+      "type": "Tür",
+      "banks": "Banka hesapları"
+    },
+    "types": {
+      "custom_payment": "Özel ödeme",
+      "bank_payment": "Banka ödemesi",
+      "check_payment": "Çek ile ödeme"
+    },
+    "form": {
+      "createTitle": "Yeni ödeme yöntemi",
+      "editTitle": "Ödeme yöntemini düzenle",
+      "description": "Müşteri bu yöntemi seçtiğinde gösterilir.",
+      "type": "Tür",
+      "heading": "Ad",
+      "photo": "Ödeme görseli (438×235 px)",
+      "descriptionField": "Ödeme talimatı",
+      "banks": "Banka hesapları",
+      "addBank": "Hesap ekle",
+      "bankName": "Banka adı",
+      "accountName": "Hesap adı",
+      "accountNumber": "Hesap numarası",
+      "routingNumber": "Yönlendirme numarası"
+    }
+  },
+  "orders": {
+    "title": "Çevrimdışı ödemeli siparişler",
+    "description": "Manuel yöntemle ödenen siparişler. Ödemeyi sipariş sayfasında onaylayın.",
+    "search": "Sipariş, müşteri veya işlem ara…",
+    "empty": "Çevrimdışı ödemeli sipariş yok.",
+    "tabs": {
+      "all": "Tümü",
+      "submitted": "Gönderildi",
+      "paid": "Ödendi",
+      "unpaid": "Ödenmedi"
+    },
+    "status": {
+      "submitted": "Gönderildi",
+      "paid": "Ödendi",
+      "unpaid": "Ödenmedi"
+    },
+    "columns": {
+      "code": "Sipariş",
+      "customer": "Müşteri",
+      "method": "Yöntem",
+      "amount": "Tutar",
+      "trxId": "İşlem ID",
+      "receipt": "Makbuz",
+      "status": "Ödeme",
+      "date": "Tarih"
+    }
+  },
+  "wallet": {
+    "title": "Çevrimdışı cüzdan yükleme",
+    "description": "Onay bekleyen müşteri makbuzları ve yönetici yüklemeleri.",
+    "recharge": "Müşteriye yükle",
+    "search": "Müşteri veya işlem ara…",
+    "empty": "Yükleme talebi yok.",
+    "entity": "talep",
+    "approve": "Onayla",
+    "approved": "Onaylandı",
+    "pending": "Bekliyor",
+    "approveSelected": "Seçilenleri onayla ({{count}})",
+    "tabs": {
+      "all": "Tümü",
+      "pending": "Bekleyen",
+      "approved": "Onaylanan",
+      "by_admin": "Yönetici yükledi",
+      "by_customer": "Müşteri yükledi"
+    },
+    "addedBy": {
+      "admin": "Yönetici",
+      "customer": "Müşteri"
+    },
+    "columns": {
+      "customer": "Müşteri",
+      "amount": "Tutar",
+      "method": "Yöntem",
+      "trxId": "İşlem ID",
+      "receipt": "Makbuz",
+      "addedBy": "Ekleyen",
+      "status": "Durum",
+      "date": "Tarih"
+    }
+  },
+  "recharge": {
+    "title": "Cüzdan yükle",
+    "description": "Aldığınız çevrimdışı ödemeyi kaydedin; cüzdan hemen yüklenir.",
+    "customer": "Müşteri",
+    "search": "Müşteriyi ad veya e-posta ile ara (2+ karakter)…",
+    "noResults": "Müşteri bulunamadı.",
+    "chosen": "Seçildi",
+    "amount": "Tutar",
+    "trxId": "İşlem ID",
+    "photo": "Makbuz fotoğrafı",
+    "confirm": "Yükle"
+  },
+  "packages": {
+    "seller": {
+      "title": "Satıcı paketi ödemeleri",
+      "description": "Satıcı paketlerinin çevrimdışı satın alma talepleri. Onay satıcının aboneliğini uzatır."
+    },
+    "customer": {
+      "title": "Müşteri paketi ödemeleri",
+      "description": "İlan paketlerinin çevrimdışı satın alma talepleri. Onay yükleme hakkını artırır."
+    },
+    "search": "Talep ara…",
+    "empty": "Paket ödeme talebi yok.",
+    "approve": "Onayla",
+    "approved": "Onaylandı",
+    "pending": "Bekliyor",
+    "unavailable": "Paket mevcut değil",
+    "columns": {
+      "seller": "Satıcı",
+      "customer": "Müşteri",
+      "package": "Paket",
+      "method": "Yöntem",
+      "trxId": "İşlem ID",
+      "receipt": "Makbuz",
+      "status": "Durum",
+      "date": "Tarih"
+    }
+  },
+  "payouts": {
+    "title": "İade ödeme yöntemleri",
+    "description": "Müşterinin iadeyi almak için seçebileceği yöntemler.",
+    "add": "Yöntem ekle",
+    "search": "Yöntem ara…",
+    "empty": "Henüz yöntem yok.",
+    "entity": "yöntem",
+    "deleteTitle": "İade yöntemi silinsin mi?",
+    "deleteDesc": "“{{name}}” artık müşterilere sunulmayacak.",
+    "deleteBulkDesc": "{{count}} yöntem artık müşterilere sunulmayacak.",
+    "types": {
+      "bank_payment": "Banka ödemesi",
+      "others": "Diğer"
+    },
+    "columns": {
+      "logo": "Logo",
+      "type": "Tür",
+      "name": "Ad"
+    },
+    "form": {
+      "createTitle": "Yeni iade yöntemi",
+      "editTitle": "İade yöntemini düzenle",
+      "description": "Müşterinin iade talep ederken gördüğü ad ve logo.",
+      "type": "Tür",
+      "name": "Ad",
+      "logo": "Logo"
+    }
+  },
+  "payriff": {
+    "title": "Payriff",
+    "description": "Payriff geçidi ile kart ödemeleri (Azerbaycan).",
+    "card": {
+      "title": "Payriff geçidi",
+      "description": "Modu seçin ve Payriff uygulamasının bilgilerini doldurun. Gizli anahtarlar kaydedildikten sonra tekrar gösterilmez."
+    },
+    "activation": "Ödemede aktif",
+    "saveFirst": "Önce seçilen modun bilgilerini kaydedin.",
+    "modes": {
+      "test": "Test",
+      "production": "Canlı"
+    },
+    "fields": {
+      "display_name": "Ödemede görünen ad",
+      "mode": "Mod",
+      "merchant_id": "Merchant ID",
+      "secret_key": "Gizli anahtar"
+    },
+    "hints": {
+      "display_name": "Ödeme ve cüzdan yüklemede müşteriye gösterilir. Boş bırakılırsa “Payriff” yazılır."
+    },
+    "testCredentials": "Test bilgileri (geliştirme uygulaması)",
+    "productionCredentials": "Canlı bilgiler (online uygulama)"
+  }
+}

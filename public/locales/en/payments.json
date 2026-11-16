@@ -1,0 +1,217 @@
+{
+  "actions": {
+    "save": "Save",
+    "saving": "Saving…",
+    "edit": "Edit",
+    "delete": "Delete",
+    "remove": "Remove"
+  },
+  "toast": {
+    "saved": "Saved",
+    "deleted": "Deleted",
+    "approved": "Approved",
+    "recharged": "Wallet recharged",
+    "error": "Something went wrong"
+  },
+  "validation": {
+    "required": "This field is required",
+    "max60": "At most 60 characters",
+    "max100": "At most 100 characters",
+    "max120": "At most 120 characters",
+    "max255": "At most 255 characters",
+    "max2000": "At most 2000 characters",
+    "bankRows": "Add at least one bank account",
+    "customer": "Choose a customer",
+    "amount": "The amount must be greater than 0"
+  },
+  "common": {
+    "receipt": "Open receipt",
+    "selectAll": "Select all",
+    "selectRow": "Select row"
+  },
+  "manual": {
+    "title": "Manual payment methods",
+    "description": "Bank transfer, cheque or custom instructions shown to customers at checkout.",
+    "add": "Add method",
+    "search": "Search methods…",
+    "empty": "No payment methods yet.",
+    "deleteTitle": "Delete this method?",
+    "deleteDesc": "“{{name}}” will no longer be offered at checkout.",
+    "columns": {
+      "heading": "Name",
+      "type": "Type",
+      "banks": "Bank accounts"
+    },
+    "types": {
+      "custom_payment": "Custom payment",
+      "bank_payment": "Bank payment",
+      "check_payment": "Cheque payment"
+    },
+    "form": {
+      "createTitle": "New payment method",
+      "editTitle": "Edit payment method",
+      "description": "Shown to customers when they pick this method.",
+      "type": "Type",
+      "heading": "Name",
+      "photo": "Checkout thumbnail (438×235 px)",
+      "descriptionField": "Payment instructions",
+      "banks": "Bank accounts",
+      "addBank": "Add account",
+      "bankName": "Bank name",
+      "accountName": "Account name",
+      "accountNumber": "Account number",
+      "routingNumber": "Routing number"
+    }
+  },
+  "orders": {
+    "title": "Offline payment orders",
+    "description": "Orders paid through a manual method. Mark the payment as paid on the order page.",
+    "search": "Search by order, customer or transaction…",
+    "empty": "No offline payment orders.",
+    "tabs": {
+      "all": "All",
+      "submitted": "Submitted",
+      "paid": "Paid",
+      "unpaid": "Unpaid"
+    },
+    "status": {
+      "submitted": "Submitted",
+      "paid": "Paid",
+      "unpaid": "Unpaid"
+    },
+    "columns": {
+      "code": "Order",
+      "customer": "Customer",
+      "method": "Method",
+      "amount": "Amount",
+      "trxId": "Transaction ID",
+      "receipt": "Receipt",
+      "status": "Payment",
+      "date": "Date"
+    }
+  },
+  "wallet": {
+    "title": "Offline wallet recharge",
+    "description": "Customers’ recharge receipts to approve, plus top-ups made by an admin.",
+    "recharge": "Recharge a customer",
+    "search": "Search by customer or transaction…",
+    "empty": "No recharge requests.",
+    "entity": "requests",
+    "approve": "Approve",
+    "approved": "Approved",
+    "pending": "Pending",
+    "approveSelected": "Approve selected ({{count}})",
+    "tabs": {
+      "all": "All",
+      "pending": "Pending",
+      "approved": "Approved",
+      "by_admin": "Recharged by admin",
+      "by_customer": "Recharged by customer"
+    },
+    "addedBy": {
+      "admin": "Admin",
+      "customer": "Customer"
+    },
+    "columns": {
+      "customer": "Customer",
+      "amount": "Amount",
+      "method": "Method",
+      "trxId": "Transaction ID",
+      "receipt": "Receipt",
+      "addedBy": "Added by",
+      "status": "Status",
+      "date": "Date"
+    }
+  },
+  "recharge": {
+    "title": "Recharge a wallet",
+    "description": "Record an offline payment you received; the wallet is credited at once.",
+    "customer": "Customer",
+    "search": "Search customer by name or e-mail (2+ characters)…",
+    "noResults": "No customers found.",
+    "chosen": "Selected",
+    "amount": "Amount",
+    "trxId": "Transaction ID",
+    "photo": "Receipt photo",
+    "confirm": "Recharge"
+  },
+  "packages": {
+    "seller": {
+      "title": "Seller package payments",
+      "description": "Offline purchase requests of seller packages. Approving extends the seller’s subscription."
+    },
+    "customer": {
+      "title": "Customer package payments",
+      "description": "Offline purchase requests of classified-ad packages. Approving adds the upload allowance."
+    },
+    "search": "Search requests…",
+    "empty": "No package payment requests.",
+    "approve": "Approve",
+    "approved": "Approved",
+    "pending": "Pending",
+    "unavailable": "Package unavailable",
+    "columns": {
+      "seller": "Seller",
+      "customer": "Customer",
+      "package": "Package",
+      "method": "Method",
+      "trxId": "Transaction ID",
+      "receipt": "Receipt",
+      "status": "Status",
+      "date": "Date"
+    }
+  },
+  "payouts": {
+    "title": "Refund payout methods",
+    "description": "Ways a customer can choose to receive a refund.",
+    "add": "Add method",
+    "search": "Search payout methods…",
+    "empty": "No payout methods yet.",
+    "entity": "methods",
+    "deleteTitle": "Delete payout method?",
+    "deleteDesc": "“{{name}}” will no longer be offered to customers.",
+    "deleteBulkDesc": "{{count}} methods will no longer be offered to customers.",
+    "types": {
+      "bank_payment": "Bank payment",
+      "others": "Others"
+    },
+    "columns": {
+      "logo": "Logo",
+      "type": "Type",
+      "name": "Name"
+    },
+    "form": {
+      "createTitle": "New payout method",
+      "editTitle": "Edit payout method",
+      "description": "Name and logo customers see when they request a refund.",
+      "type": "Type",
+      "name": "Name",
+      "logo": "Logo"
+    }
+  },
+  "payriff": {
+    "title": "Payriff",
+    "description": "Card payments through the Payriff gateway (Azerbaijan).",
+    "card": {
+      "title": "Payriff gateway",
+      "description": "Pick the mode and fill in the credentials of the Payriff application. Secret keys are never shown again after saving."
+    },
+    "activation": "Active at checkout",
+    "saveFirst": "Save the credentials of the chosen mode first.",
+    "modes": {
+      "test": "Test",
+      "production": "Production"
+    },
+    "fields": {
+      "display_name": "Checkout display name",
+      "mode": "Mode",
+      "merchant_id": "Merchant ID",
+      "secret_key": "Secret key"
+    },
+    "hints": {
+      "display_name": "Shown to customers at checkout and wallet recharge. Leave empty to use “Payriff”."
+    },
+    "testCredentials": "Test credentials (development application)",
+    "productionCredentials": "Production credentials (online application)"
+  }
+}

@@ -11,6 +11,7 @@ import {
   ShoppingCart,
   Smartphone,
   Truck,
+  Wallet,
 } from 'lucide-react'
 import type { MenuGroupRaw, MenuItemRaw } from '@/api/menu.types'
 import type { NavGroup, NavItem } from '@/components/layout/types'
@@ -29,6 +30,7 @@ const ICONS: Record<string, React.ElementType> = {
   ShoppingCart,
   Smartphone,
   Truck,
+  Wallet,
 }
 
 const byOrder = <T extends { order: number }>(a: T, b: T) => a.order - b.order

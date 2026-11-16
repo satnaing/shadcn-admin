@@ -159,6 +159,21 @@ export const PERMISSIONS = {
     TEMPLATES_MANAGE: 'otp.templates_manage',
     BULK_SMS: 'otp.bulk_sms',
   },
+  PAYMENTS: {
+    INDEX: 'payments.index',
+    MANUAL_MANAGE: 'payments.manual_manage',
+    OFFLINE_ORDERS: 'payments.offline_orders',
+    WALLET_REQUESTS: 'payments.wallet_requests',
+    WALLET_MANAGE: 'payments.wallet_manage',
+    SELLER_PACKAGES: 'payments.seller_packages',
+    SELLER_PACKAGES_MANAGE: 'payments.seller_packages_manage',
+    CUSTOMER_PACKAGES: 'payments.customer_packages',
+    CUSTOMER_PACKAGES_MANAGE: 'payments.customer_packages_manage',
+    PAYOUT_METHODS: 'payments.payout_methods',
+    PAYOUT_METHODS_MANAGE: 'payments.payout_methods_manage',
+    PAYRIFF: 'payments.payriff',
+    PAYRIFF_MANAGE: 'payments.payriff_manage',
+  },
 } as const
 
 export const ALL_PERMISSIONS: string[] = Object.values(PERMISSIONS).flatMap(

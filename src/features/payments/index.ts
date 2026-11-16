@@ -1,0 +1,8 @@
+export { PaymentsManualPage } from './components/payments-manual-page'
+export { PaymentsOrdersPage } from './components/payments-orders-page'
+export { PaymentsWalletPage } from './components/payments-wallet-page'
+export { PaymentsPackagesPage } from './components/payments-packages-page'
+export { PaymentsPayoutPage } from './components/payments-payout-page'
+export { PaymentsPayriffPage } from './components/payments-payriff-page'
+export { PaymentsRouteGuard } from './components/payments-route-guard'
+export { paymentsManifest } from './module.manifest'

@@ -80,5 +80,13 @@
   "courierDeliveries": "Teslimatlarım",
   "courierCash": "Tahsil edilen nakit",
   "courierEarnings": "Kazancım",
-  "soon": "yakında"
+  "soon": "yakında",
+  "payments": "Ödemeler",
+  "paymentsManual": "Manuel yöntemler",
+  "paymentsOfflineOrders": "Çevrimdışı siparişler",
+  "paymentsWallet": "Cüzdan yüklemeleri",
+  "paymentsSellerPackages": "Satıcı paketleri",
+  "paymentsCustomerPackages": "Müşteri paketleri",
+  "paymentsPayouts": "İade yöntemleri",
+  "paymentsPayriff": "Payriff"
 }

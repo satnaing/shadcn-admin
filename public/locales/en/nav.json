@@ -80,5 +80,13 @@
   "courierDeliveries": "My deliveries",
   "courierCash": "Cash collected",
   "courierEarnings": "My earnings",
-  "soon": "soon"
+  "soon": "soon",
+  "payments": "Payments",
+  "paymentsManual": "Manual methods",
+  "paymentsOfflineOrders": "Offline orders",
+  "paymentsWallet": "Wallet recharges",
+  "paymentsSellerPackages": "Seller packages",
+  "paymentsCustomerPackages": "Customer packages",
+  "paymentsPayouts": "Payout methods",
+  "paymentsPayriff": "Payriff"
 }

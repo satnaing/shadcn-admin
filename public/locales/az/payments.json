@@ -1,0 +1,217 @@
+{
+  "actions": {
+    "save": "Saxla",
+    "saving": "Saxlanılır…",
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "remove": "Çıxar"
+  },
+  "toast": {
+    "saved": "Saxlanıldı",
+    "deleted": "Silindi",
+    "approved": "Təsdiqləndi",
+    "recharged": "Pulqabı artırıldı",
+    "error": "Xəta baş verdi"
+  },
+  "validation": {
+    "required": "Bu sahə məcburidir",
+    "max60": "Ən çox 60 simvol",
+    "max100": "Ən çox 100 simvol",
+    "max120": "Ən çox 120 simvol",
+    "max255": "Ən çox 255 simvol",
+    "max2000": "Ən çox 2000 simvol",
+    "bankRows": "Ən azı bir bank hesabı əlavə edin",
+    "customer": "Müştəri seçin",
+    "amount": "Məbləğ 0-dan böyük olmalıdır"
+  },
+  "common": {
+    "receipt": "Qəbzi aç",
+    "selectAll": "Hamısını seç",
+    "selectRow": "Sətri seç"
+  },
+  "manual": {
+    "title": "Manual ödəniş üsulları",
+    "description": "Sifariş zamanı müştərilərə göstərilən bank köçürməsi, çek və ya xüsusi təlimatlar.",
+    "add": "Üsul əlavə et",
+    "search": "Üsul axtar…",
+    "empty": "Hələ ödəniş üsulu yoxdur.",
+    "deleteTitle": "Bu üsul silinsin?",
+    "deleteDesc": "“{{name}}” artıq sifariş zamanı təklif olunmayacaq.",
+    "columns": {
+      "heading": "Ad",
+      "type": "Növ",
+      "banks": "Bank hesabları"
+    },
+    "types": {
+      "custom_payment": "Xüsusi ödəniş",
+      "bank_payment": "Bank ödənişi",
+      "check_payment": "Çek ilə ödəniş"
+    },
+    "form": {
+      "createTitle": "Yeni ödəniş üsulu",
+      "editTitle": "Ödəniş üsuluna düzəliş",
+      "description": "Müştəri bu üsulu seçəndə göstərilir.",
+      "type": "Növ",
+      "heading": "Ad",
+      "photo": "Sifariş şəkli (438×235 px)",
+      "descriptionField": "Ödəniş təlimatı",
+      "banks": "Bank hesabları",
+      "addBank": "Hesab əlavə et",
+      "bankName": "Bankın adı",
+      "accountName": "Hesabın adı",
+      "accountNumber": "Hesab nömrəsi",
+      "routingNumber": "Marşrut nömrəsi"
+    }
+  },
+  "orders": {
+    "title": "Oflayn ödənişli sifarişlər",
+    "description": "Manual üsulla ödənilən sifarişlər. Ödənişi sifariş səhifəsində təsdiqləyin.",
+    "search": "Sifariş, müştəri və ya əməliyyat üzrə axtar…",
+    "empty": "Oflayn ödənişli sifariş yoxdur.",
+    "tabs": {
+      "all": "Hamısı",
+      "submitted": "Göndərilib",
+      "paid": "Ödənilib",
+      "unpaid": "Ödənilməyib"
+    },
+    "status": {
+      "submitted": "Göndərilib",
+      "paid": "Ödənilib",
+      "unpaid": "Ödənilməyib"
+    },
+    "columns": {
+      "code": "Sifariş",
+      "customer": "Müştəri",
+      "method": "Üsul",
+      "amount": "Məbləğ",
+      "trxId": "Əməliyyat ID",
+      "receipt": "Qəbz",
+      "status": "Ödəniş",
+      "date": "Tarix"
+    }
+  },
+  "wallet": {
+    "title": "Oflayn pulqabı artırımı",
+    "description": "Təsdiq gözləyən müştəri qəbzləri və admin tərəfindən edilən artırımlar.",
+    "recharge": "Müştəriyə yüklə",
+    "search": "Müştəri və ya əməliyyat üzrə axtar…",
+    "empty": "Artırım sorğusu yoxdur.",
+    "entity": "sorğu",
+    "approve": "Təsdiqlə",
+    "approved": "Təsdiqlənib",
+    "pending": "Gözləyir",
+    "approveSelected": "Seçilənləri təsdiqlə ({{count}})",
+    "tabs": {
+      "all": "Hamısı",
+      "pending": "Gözləyən",
+      "approved": "Təsdiqlənmiş",
+      "by_admin": "Admin tərəfindən",
+      "by_customer": "Müştəri tərəfindən"
+    },
+    "addedBy": {
+      "admin": "Admin",
+      "customer": "Müştəri"
+    },
+    "columns": {
+      "customer": "Müştəri",
+      "amount": "Məbləğ",
+      "method": "Üsul",
+      "trxId": "Əməliyyat ID",
+      "receipt": "Qəbz",
+      "addedBy": "Əlavə edən",
+      "status": "Status",
+      "date": "Tarix"
+    }
+  },
+  "recharge": {
+    "title": "Pulqabını artır",
+    "description": "Aldığınız oflayn ödənişi qeyd edin; pulqabı dərhal artırılır.",
+    "customer": "Müştəri",
+    "search": "Müştərini ad və ya e-poçtla axtar (2+ simvol)…",
+    "noResults": "Müştəri tapılmadı.",
+    "chosen": "Seçilib",
+    "amount": "Məbləğ",
+    "trxId": "Əməliyyat ID",
+    "photo": "Qəbz şəkli",
+    "confirm": "Artır"
+  },
+  "packages": {
+    "seller": {
+      "title": "Satıcı paketi ödənişləri",
+      "description": "Satıcı paketlərinin oflayn alış sorğuları. Təsdiq satıcının abunəliyini uzadır."
+    },
+    "customer": {
+      "title": "Müştəri paketi ödənişləri",
+      "description": "Elan paketlərinin oflayn alış sorğuları. Təsdiq yükləmə limitini artırır."
+    },
+    "search": "Sorğu axtar…",
+    "empty": "Paket ödəniş sorğusu yoxdur.",
+    "approve": "Təsdiqlə",
+    "approved": "Təsdiqlənib",
+    "pending": "Gözləyir",
+    "unavailable": "Paket mövcud deyil",
+    "columns": {
+      "seller": "Satıcı",
+      "customer": "Müştəri",
+      "package": "Paket",
+      "method": "Üsul",
+      "trxId": "Əməliyyat ID",
+      "receipt": "Qəbz",
+      "status": "Status",
+      "date": "Tarix"
+    }
+  },
+  "payouts": {
+    "title": "Geri ödəmə üsulları",
+    "description": "Müştərinin geri ödənişi almaq üçün seçə biləcəyi üsullar.",
+    "add": "Üsul əlavə et",
+    "search": "Üsul axtar…",
+    "empty": "Hələ üsul yoxdur.",
+    "entity": "üsul",
+    "deleteTitle": "Geri ödəmə üsulu silinsin?",
+    "deleteDesc": "“{{name}}” artıq müştərilərə təklif olunmayacaq.",
+    "deleteBulkDesc": "{{count}} üsul artıq müştərilərə təklif olunmayacaq.",
+    "types": {
+      "bank_payment": "Bank ödənişi",
+      "others": "Digər"
+    },
+    "columns": {
+      "logo": "Loqo",
+      "type": "Növ",
+      "name": "Ad"
+    },
+    "form": {
+      "createTitle": "Yeni geri ödəmə üsulu",
+      "editTitle": "Geri ödəmə üsuluna düzəliş",
+      "description": "Müştəri geri ödəmə istəyəndə gördüyü ad və loqo.",
+      "type": "Növ",
+      "name": "Ad",
+      "logo": "Loqo"
+    }
+  },
+  "payriff": {
+    "title": "Payriff",
+    "description": "Payriff şlüzü ilə kart ödənişləri (Azərbaycan).",
+    "card": {
+      "title": "Payriff şlüzü",
+      "description": "Rejimi seçin və Payriff tətbiqinin məlumatlarını doldurun. Gizli açarlar saxlandıqdan sonra yenidən göstərilmir."
+    },
+    "activation": "Sifarişdə aktiv",
+    "saveFirst": "Əvvəlcə seçilmiş rejimin məlumatlarını saxlayın.",
+    "modes": {
+      "test": "Test",
+      "production": "Canlı"
+    },
+    "fields": {
+      "display_name": "Sifarişdə görünən ad",
+      "mode": "Rejim",
+      "merchant_id": "Merchant ID",
+      "secret_key": "Gizli açar"
+    },
+    "hints": {
+      "display_name": "Sifariş və pulqabı artırımında müştəriyə göstərilir. Boş qalsa “Payriff” yazılır."
+    },
+    "testCredentials": "Test məlumatları (development tətbiqi)",
+    "productionCredentials": "Canlı məlumatlar (online tətbiq)"
+  }
+}

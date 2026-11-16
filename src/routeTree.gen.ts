@@ -30,6 +30,7 @@ import { Route as AuthenticatedAdminQrcodeEventIndexRouteImport } from './routes
 import { Route as AuthenticatedAdminPreorderIndexRouteImport } from './routes/_authenticated/admin/preorder/index'
 import { Route as AuthenticatedAdminPosIndexRouteImport } from './routes/_authenticated/admin/pos/index'
 import { Route as AuthenticatedAdminPermissionsIndexRouteImport } from './routes/_authenticated/admin/permissions/index'
+import { Route as AuthenticatedAdminPaymentsIndexRouteImport } from './routes/_authenticated/admin/payments/index'
 import { Route as AuthenticatedAdminPagesIndexRouteImport } from './routes/_authenticated/admin/pages/index'
 import { Route as AuthenticatedAdminOtpIndexRouteImport } from './routes/_authenticated/admin/otp/index'
 import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_authenticated/admin/modules/index'
@@ -59,6 +60,12 @@ import { Route as AuthenticatedAdminPreorderCommissionsRouteImport } from './rou
 import { Route as AuthenticatedAdminPosProductsRouteImport } from './routes/_authenticated/admin/pos/products'
 import { Route as AuthenticatedAdminPosOrdersRouteImport } from './routes/_authenticated/admin/pos/orders'
 import { Route as AuthenticatedAdminPosConfigRouteImport } from './routes/_authenticated/admin/pos/config'
+import { Route as AuthenticatedAdminPaymentsWalletRequestsRouteImport } from './routes/_authenticated/admin/payments/wallet-requests'
+import { Route as AuthenticatedAdminPaymentsSellerPackagesRouteImport } from './routes/_authenticated/admin/payments/seller-packages'
+import { Route as AuthenticatedAdminPaymentsPayriffRouteImport } from './routes/_authenticated/admin/payments/payriff'
+import { Route as AuthenticatedAdminPaymentsPayoutMethodsRouteImport } from './routes/_authenticated/admin/payments/payout-methods'
+import { Route as AuthenticatedAdminPaymentsOfflineOrdersRouteImport } from './routes/_authenticated/admin/payments/offline-orders'
+import { Route as AuthenticatedAdminPaymentsCustomerPackagesRouteImport } from './routes/_authenticated/admin/payments/customer-packages'
 import { Route as AuthenticatedAdminOtpTemplatesRouteImport } from './routes/_authenticated/admin/otp/templates'
 import { Route as AuthenticatedAdminOtpGatewaysRouteImport } from './routes/_authenticated/admin/otp/gateways'
 import { Route as AuthenticatedAdminOtpBulkSmsRouteImport } from './routes/_authenticated/admin/otp/bulk-sms'
@@ -208,6 +215,12 @@ const AuthenticatedAdminPermissionsIndexRoute =
   AuthenticatedAdminPermissionsIndexRouteImport.update({
     id: '/permissions/',
     path: '/permissions/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPaymentsIndexRoute =
+  AuthenticatedAdminPaymentsIndexRouteImport.update({
+    id: '/payments/',
+    path: '/payments/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminPagesIndexRoute =
@@ -382,6 +395,42 @@ const AuthenticatedAdminPosConfigRoute =
   AuthenticatedAdminPosConfigRouteImport.update({
     id: '/pos/config',
     path: '/pos/config',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPaymentsWalletRequestsRoute =
+  AuthenticatedAdminPaymentsWalletRequestsRouteImport.update({
+    id: '/payments/wallet-requests',
+    path: '/payments/wallet-requests',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPaymentsSellerPackagesRoute =
+  AuthenticatedAdminPaymentsSellerPackagesRouteImport.update({
+    id: '/payments/seller-packages',
+    path: '/payments/seller-packages',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPaymentsPayriffRoute =
+  AuthenticatedAdminPaymentsPayriffRouteImport.update({
+    id: '/payments/payriff',
+    path: '/payments/payriff',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPaymentsPayoutMethodsRoute =
+  AuthenticatedAdminPaymentsPayoutMethodsRouteImport.update({
+    id: '/payments/payout-methods',
+    path: '/payments/payout-methods',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPaymentsOfflineOrdersRoute =
+  AuthenticatedAdminPaymentsOfflineOrdersRouteImport.update({
+    id: '/payments/offline-orders',
+    path: '/payments/offline-orders',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPaymentsCustomerPackagesRoute =
+  AuthenticatedAdminPaymentsCustomerPackagesRouteImport.update({
+    id: '/payments/customer-packages',
+    path: '/payments/customer-packages',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminOtpTemplatesRoute =
@@ -642,6 +691,12 @@ export interface FileRoutesByFullPath {
   '/admin/otp/bulk-sms': typeof AuthenticatedAdminOtpBulkSmsRoute
   '/admin/otp/gateways': typeof AuthenticatedAdminOtpGatewaysRoute
   '/admin/otp/templates': typeof AuthenticatedAdminOtpTemplatesRoute
+  '/admin/payments/customer-packages': typeof AuthenticatedAdminPaymentsCustomerPackagesRoute
+  '/admin/payments/offline-orders': typeof AuthenticatedAdminPaymentsOfflineOrdersRoute
+  '/admin/payments/payout-methods': typeof AuthenticatedAdminPaymentsPayoutMethodsRoute
+  '/admin/payments/payriff': typeof AuthenticatedAdminPaymentsPayriffRoute
+  '/admin/payments/seller-packages': typeof AuthenticatedAdminPaymentsSellerPackagesRoute
+  '/admin/payments/wallet-requests': typeof AuthenticatedAdminPaymentsWalletRequestsRoute
   '/admin/pos/config': typeof AuthenticatedAdminPosConfigRoute
   '/admin/pos/orders': typeof AuthenticatedAdminPosOrdersRoute
   '/admin/pos/products': typeof AuthenticatedAdminPosProductsRoute
@@ -671,6 +726,7 @@ export interface FileRoutesByFullPath {
   '/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/otp/': typeof AuthenticatedAdminOtpIndexRoute
   '/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
+  '/admin/payments/': typeof AuthenticatedAdminPaymentsIndexRoute
   '/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
   '/admin/pos/': typeof AuthenticatedAdminPosIndexRoute
   '/admin/preorder/': typeof AuthenticatedAdminPreorderIndexRoute
@@ -729,6 +785,12 @@ export interface FileRoutesByTo {
   '/admin/otp/bulk-sms': typeof AuthenticatedAdminOtpBulkSmsRoute
   '/admin/otp/gateways': typeof AuthenticatedAdminOtpGatewaysRoute
   '/admin/otp/templates': typeof AuthenticatedAdminOtpTemplatesRoute
+  '/admin/payments/customer-packages': typeof AuthenticatedAdminPaymentsCustomerPackagesRoute
+  '/admin/payments/offline-orders': typeof AuthenticatedAdminPaymentsOfflineOrdersRoute
+  '/admin/payments/payout-methods': typeof AuthenticatedAdminPaymentsPayoutMethodsRoute
+  '/admin/payments/payriff': typeof AuthenticatedAdminPaymentsPayriffRoute
+  '/admin/payments/seller-packages': typeof AuthenticatedAdminPaymentsSellerPackagesRoute
+  '/admin/payments/wallet-requests': typeof AuthenticatedAdminPaymentsWalletRequestsRoute
   '/admin/pos/config': typeof AuthenticatedAdminPosConfigRoute
   '/admin/pos/orders': typeof AuthenticatedAdminPosOrdersRoute
   '/admin/pos/products': typeof AuthenticatedAdminPosProductsRoute
@@ -758,6 +820,7 @@ export interface FileRoutesByTo {
   '/admin/modules': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/otp': typeof AuthenticatedAdminOtpIndexRoute
   '/admin/pages': typeof AuthenticatedAdminPagesIndexRoute
+  '/admin/payments': typeof AuthenticatedAdminPaymentsIndexRoute
   '/admin/permissions': typeof AuthenticatedAdminPermissionsIndexRoute
   '/admin/pos': typeof AuthenticatedAdminPosIndexRoute
   '/admin/preorder': typeof AuthenticatedAdminPreorderIndexRoute
@@ -819,6 +882,12 @@ export interface FileRoutesById {
   '/_authenticated/admin/otp/bulk-sms': typeof AuthenticatedAdminOtpBulkSmsRoute
   '/_authenticated/admin/otp/gateways': typeof AuthenticatedAdminOtpGatewaysRoute
   '/_authenticated/admin/otp/templates': typeof AuthenticatedAdminOtpTemplatesRoute
+  '/_authenticated/admin/payments/customer-packages': typeof AuthenticatedAdminPaymentsCustomerPackagesRoute
+  '/_authenticated/admin/payments/offline-orders': typeof AuthenticatedAdminPaymentsOfflineOrdersRoute
+  '/_authenticated/admin/payments/payout-methods': typeof AuthenticatedAdminPaymentsPayoutMethodsRoute
+  '/_authenticated/admin/payments/payriff': typeof AuthenticatedAdminPaymentsPayriffRoute
+  '/_authenticated/admin/payments/seller-packages': typeof AuthenticatedAdminPaymentsSellerPackagesRoute
+  '/_authenticated/admin/payments/wallet-requests': typeof AuthenticatedAdminPaymentsWalletRequestsRoute
   '/_authenticated/admin/pos/config': typeof AuthenticatedAdminPosConfigRoute
   '/_authenticated/admin/pos/orders': typeof AuthenticatedAdminPosOrdersRoute
   '/_authenticated/admin/pos/products': typeof AuthenticatedAdminPosProductsRoute
@@ -848,6 +917,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/_authenticated/admin/otp/': typeof AuthenticatedAdminOtpIndexRoute
   '/_authenticated/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
+  '/_authenticated/admin/payments/': typeof AuthenticatedAdminPaymentsIndexRoute
   '/_authenticated/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
   '/_authenticated/admin/pos/': typeof AuthenticatedAdminPosIndexRoute
   '/_authenticated/admin/preorder/': typeof AuthenticatedAdminPreorderIndexRoute
@@ -909,6 +979,12 @@ export interface FileRouteTypes {
     | '/admin/otp/bulk-sms'
     | '/admin/otp/gateways'
     | '/admin/otp/templates'
+    | '/admin/payments/customer-packages'
+    | '/admin/payments/offline-orders'
+    | '/admin/payments/payout-methods'
+    | '/admin/payments/payriff'
+    | '/admin/payments/seller-packages'
+    | '/admin/payments/wallet-requests'
     | '/admin/pos/config'
     | '/admin/pos/orders'
     | '/admin/pos/products'
@@ -938,6 +1014,7 @@ export interface FileRouteTypes {
     | '/admin/modules/'
     | '/admin/otp/'
     | '/admin/pages/'
+    | '/admin/payments/'
     | '/admin/permissions/'
     | '/admin/pos/'
     | '/admin/preorder/'
@@ -996,6 +1073,12 @@ export interface FileRouteTypes {
     | '/admin/otp/bulk-sms'
     | '/admin/otp/gateways'
     | '/admin/otp/templates'
+    | '/admin/payments/customer-packages'
+    | '/admin/payments/offline-orders'
+    | '/admin/payments/payout-methods'
+    | '/admin/payments/payriff'
+    | '/admin/payments/seller-packages'
+    | '/admin/payments/wallet-requests'
     | '/admin/pos/config'
     | '/admin/pos/orders'
     | '/admin/pos/products'
@@ -1025,6 +1108,7 @@ export interface FileRouteTypes {
     | '/admin/modules'
     | '/admin/otp'
     | '/admin/pages'
+    | '/admin/payments'
     | '/admin/permissions'
     | '/admin/pos'
     | '/admin/preorder'
@@ -1085,6 +1169,12 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/otp/bulk-sms'
     | '/_authenticated/admin/otp/gateways'
     | '/_authenticated/admin/otp/templates'
+    | '/_authenticated/admin/payments/customer-packages'
+    | '/_authenticated/admin/payments/offline-orders'
+    | '/_authenticated/admin/payments/payout-methods'
+    | '/_authenticated/admin/payments/payriff'
+    | '/_authenticated/admin/payments/seller-packages'
+    | '/_authenticated/admin/payments/wallet-requests'
     | '/_authenticated/admin/pos/config'
     | '/_authenticated/admin/pos/orders'
     | '/_authenticated/admin/pos/products'
@@ -1114,6 +1204,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/modules/'
     | '/_authenticated/admin/otp/'
     | '/_authenticated/admin/pages/'
+    | '/_authenticated/admin/payments/'
     | '/_authenticated/admin/permissions/'
     | '/_authenticated/admin/pos/'
     | '/_authenticated/admin/preorder/'
@@ -1297,6 +1388,13 @@ declare module '@tanstack/react-router' {
       path: '/permissions'
       fullPath: '/admin/permissions/'
       preLoaderRoute: typeof AuthenticatedAdminPermissionsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/payments/': {
+      id: '/_authenticated/admin/payments/'
+      path: '/payments'
+      fullPath: '/admin/payments/'
+      preLoaderRoute: typeof AuthenticatedAdminPaymentsIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/pages/': {
@@ -1500,6 +1598,48 @@ declare module '@tanstack/react-router' {
       path: '/pos/config'
       fullPath: '/admin/pos/config'
       preLoaderRoute: typeof AuthenticatedAdminPosConfigRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/payments/wallet-requests': {
+      id: '/_authenticated/admin/payments/wallet-requests'
+      path: '/payments/wallet-requests'
+      fullPath: '/admin/payments/wallet-requests'
+      preLoaderRoute: typeof AuthenticatedAdminPaymentsWalletRequestsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/payments/seller-packages': {
+      id: '/_authenticated/admin/payments/seller-packages'
+      path: '/payments/seller-packages'
+      fullPath: '/admin/payments/seller-packages'
+      preLoaderRoute: typeof AuthenticatedAdminPaymentsSellerPackagesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/payments/payriff': {
+      id: '/_authenticated/admin/payments/payriff'
+      path: '/payments/payriff'
+      fullPath: '/admin/payments/payriff'
+      preLoaderRoute: typeof AuthenticatedAdminPaymentsPayriffRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/payments/payout-methods': {
+      id: '/_authenticated/admin/payments/payout-methods'
+      path: '/payments/payout-methods'
+      fullPath: '/admin/payments/payout-methods'
+      preLoaderRoute: typeof AuthenticatedAdminPaymentsPayoutMethodsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/payments/offline-orders': {
+      id: '/_authenticated/admin/payments/offline-orders'
+      path: '/payments/offline-orders'
+      fullPath: '/admin/payments/offline-orders'
+      preLoaderRoute: typeof AuthenticatedAdminPaymentsOfflineOrdersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/payments/customer-packages': {
+      id: '/_authenticated/admin/payments/customer-packages'
+      path: '/payments/customer-packages'
+      fullPath: '/admin/payments/customer-packages'
+      preLoaderRoute: typeof AuthenticatedAdminPaymentsCustomerPackagesRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/otp/templates': {
@@ -1789,6 +1929,12 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminOtpBulkSmsRoute: typeof AuthenticatedAdminOtpBulkSmsRoute
   AuthenticatedAdminOtpGatewaysRoute: typeof AuthenticatedAdminOtpGatewaysRoute
   AuthenticatedAdminOtpTemplatesRoute: typeof AuthenticatedAdminOtpTemplatesRoute
+  AuthenticatedAdminPaymentsCustomerPackagesRoute: typeof AuthenticatedAdminPaymentsCustomerPackagesRoute
+  AuthenticatedAdminPaymentsOfflineOrdersRoute: typeof AuthenticatedAdminPaymentsOfflineOrdersRoute
+  AuthenticatedAdminPaymentsPayoutMethodsRoute: typeof AuthenticatedAdminPaymentsPayoutMethodsRoute
+  AuthenticatedAdminPaymentsPayriffRoute: typeof AuthenticatedAdminPaymentsPayriffRoute
+  AuthenticatedAdminPaymentsSellerPackagesRoute: typeof AuthenticatedAdminPaymentsSellerPackagesRoute
+  AuthenticatedAdminPaymentsWalletRequestsRoute: typeof AuthenticatedAdminPaymentsWalletRequestsRoute
   AuthenticatedAdminPosConfigRoute: typeof AuthenticatedAdminPosConfigRoute
   AuthenticatedAdminPosOrdersRoute: typeof AuthenticatedAdminPosOrdersRoute
   AuthenticatedAdminPosProductsRoute: typeof AuthenticatedAdminPosProductsRoute
@@ -1818,6 +1964,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminModulesIndexRoute: typeof AuthenticatedAdminModulesIndexRoute
   AuthenticatedAdminOtpIndexRoute: typeof AuthenticatedAdminOtpIndexRoute
   AuthenticatedAdminPagesIndexRoute: typeof AuthenticatedAdminPagesIndexRoute
+  AuthenticatedAdminPaymentsIndexRoute: typeof AuthenticatedAdminPaymentsIndexRoute
   AuthenticatedAdminPermissionsIndexRoute: typeof AuthenticatedAdminPermissionsIndexRoute
   AuthenticatedAdminPosIndexRoute: typeof AuthenticatedAdminPosIndexRoute
   AuthenticatedAdminPreorderIndexRoute: typeof AuthenticatedAdminPreorderIndexRoute
@@ -1880,6 +2027,18 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminOtpBulkSmsRoute: AuthenticatedAdminOtpBulkSmsRoute,
     AuthenticatedAdminOtpGatewaysRoute: AuthenticatedAdminOtpGatewaysRoute,
     AuthenticatedAdminOtpTemplatesRoute: AuthenticatedAdminOtpTemplatesRoute,
+    AuthenticatedAdminPaymentsCustomerPackagesRoute:
+      AuthenticatedAdminPaymentsCustomerPackagesRoute,
+    AuthenticatedAdminPaymentsOfflineOrdersRoute:
+      AuthenticatedAdminPaymentsOfflineOrdersRoute,
+    AuthenticatedAdminPaymentsPayoutMethodsRoute:
+      AuthenticatedAdminPaymentsPayoutMethodsRoute,
+    AuthenticatedAdminPaymentsPayriffRoute:
+      AuthenticatedAdminPaymentsPayriffRoute,
+    AuthenticatedAdminPaymentsSellerPackagesRoute:
+      AuthenticatedAdminPaymentsSellerPackagesRoute,
+    AuthenticatedAdminPaymentsWalletRequestsRoute:
+      AuthenticatedAdminPaymentsWalletRequestsRoute,
     AuthenticatedAdminPosConfigRoute: AuthenticatedAdminPosConfigRoute,
     AuthenticatedAdminPosOrdersRoute: AuthenticatedAdminPosOrdersRoute,
     AuthenticatedAdminPosProductsRoute: AuthenticatedAdminPosProductsRoute,
@@ -1922,6 +2081,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminModulesIndexRoute: AuthenticatedAdminModulesIndexRoute,
     AuthenticatedAdminOtpIndexRoute: AuthenticatedAdminOtpIndexRoute,
     AuthenticatedAdminPagesIndexRoute: AuthenticatedAdminPagesIndexRoute,
+    AuthenticatedAdminPaymentsIndexRoute: AuthenticatedAdminPaymentsIndexRoute,
     AuthenticatedAdminPermissionsIndexRoute:
       AuthenticatedAdminPermissionsIndexRoute,
     AuthenticatedAdminPosIndexRoute: AuthenticatedAdminPosIndexRoute,

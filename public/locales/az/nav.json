@@ -80,5 +80,13 @@
   "courierDeliveries": "Çatdırılmalarım",
   "courierCash": "Yığılmış nağd pul",
   "courierEarnings": "Qazancım",
-  "soon": "tezliklə"
+  "soon": "tezliklə",
+  "payments": "Ödənişlər",
+  "paymentsManual": "Manual üsullar",
+  "paymentsOfflineOrders": "Oflayn sifarişlər",
+  "paymentsWallet": "Pulqabı artırımları",
+  "paymentsSellerPackages": "Satıcı paketləri",
+  "paymentsCustomerPackages": "Müştəri paketləri",
+  "paymentsPayouts": "Geri ödəmə üsulları",
+  "paymentsPayriff": "Payriff"
 }

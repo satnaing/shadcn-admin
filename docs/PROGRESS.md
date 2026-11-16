@@ -298,3 +298,30 @@ Folder = pilot layout (`src/features/otp/{data,hooks,components}`, `module.manif
 | Modules: toggle OTP & SMS off + save → sidebar group gone; SPA navigation to `/admin/otp/gateways` → 404 page | ✅ | 0 | n/a |
 Not clicked live: saving valid gateway credentials (node tests cover mask / merge / exclusivity), template switch in the table, template id field, sort by columns, recipients beyond one result, read-only view without `_manage` permissions. Screens were reached by hard navigation (the screenshot lags the first paint, waited 5 s) except the 404 check (SPA). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
 Tests: 27 files / 224 node tests pass (17 new in `otp.node.test.ts`), `tsc -b` clean, eslint 0 errors.
+
+## Module #9 `payments` (2026-11-17)
+Folder = pilot layout (`src/features/payments/{data,hooks,components}`, `module.manifest.ts`, `src/api/modules/payments.api.ts`, `src/mocks/payments.{data,routes}.ts`, `public/locales/*/payments.json`, `docs/aec-diff/payments.md`). AEC addons `offline_payment` + `payriff` in one module; the two placeholder rows (`payriff`, `offline-payment`) were removed from `modules.extra.ts`. Routes (7): `/admin/payments` (manual methods), `/offline-orders`, `/wallet-requests`, `/seller-packages`, `/customer-packages`, `/payout-methods`, `/payriff`. Create / edit of manual and payout methods and the admin wallet recharge are dialogs (AEC had create / edit pages).
+
+### Pattern additions
+| Change | Why |
+|---|---|
+| `PaymentsTabs` (generic): tab list from a const array, first = default (no `?tab=`), labels from `<prefix>.<tab>`; the tab is a server filter | `RefundTabs` was refund-specific; offline orders and wallet requests both need it |
+| One kind-aware page / hook for two lookalike lists (`PaymentsPackagesPage kind="seller" \| "customer"`, `usePaymentsPackages(kind, p)`) | same shape, two endpoints; avoids a copy |
+| `useFieldArray` inside a dialog for repeatable rows (`PaymentsBankRows`) | bank accounts of a `bank_payment` method |
+| Bulk action component owns its `ConfirmDialog` (`PaymentsPayoutBulk`) | `EntityDataTable` passes only `{ table }` to `BulkActions`; an inline component would remount every render |
+| Secret mask contract reused for Payriff (`payments.payriff.ts`: `maskPayriff` / `mergePayriff` / `isPayriffConfigured`) | same rule as `otp`; the gateway card is keyed by the stored JSON |
+| Server-searched single picker (`PaymentsCustomerPicker`, 2+ characters, debounced) | sibling of `OtpRecipientPicker` (multi); candidates for a shared component once a third one appears |
+| Wallet approval is idempotent in the mock (`POST …/wallet-requests/approve {ids}` skips approved rows) | AEC credited twice on a repeated single approve |
+
+### Verification (Chrome, dev :5205, console tracked from the first navigation of the walk)
+| Route / flow | Result | Console errors | ≥400 |
+|---|---|---|---|
+| `/admin/payments` (7 rows, thumbnails, bank-account count), create dialog: Bank payment without rows → "Add at least one bank account", add account + save → row on top | ✅ | 0 | n/a |
+| `/offline-orders`, `/seller-packages`, `/customer-packages`, `/payout-methods`, `/payriff` | ✅ rendered with data | 0 | n/a |
+| `/wallet-requests?tab=pending`: select two rows → "Approve selected (2)" → rows leave the tab; recharge dialog: empty submit → 3 errors, server search "Ays" → pick → 40 + `ADM-777` → toast, row on top of "Recharged by admin" (Admin / Approved) | ✅ | 0 | n/a |
+| Seller package: first "Approve" → toast, pending count 7 → 6 | ✅ | 0 | n/a |
+| Payout methods: delete → confirmation text names the method → row gone (8 → 7) | ✅ | 0 | n/a |
+| Payriff: switch mode to Production + Save with empty live keys → two "required" errors | ✅ | 0 | n/a |
+| Modules: toggle Payments off + save → sidebar group gone; SPA navigation to `/admin/payments/payout-methods` → 404 page | ✅ | 0 | n/a |
+Not clicked live: manual-method edit and delete, payout create / edit / bulk delete, customer-package approve, saving valid Payriff credentials and the activation switch (node tests cover mask / merge / activation rules), the wallet / order tabs other than Pending, column sorting, the read-only view of a role without the `_manage` permissions, receipt links. The first part of the walk ran before console tracking started (the tool begins capturing on its first call). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
+Tests: 28 files / 240 node tests pass (16 new in `payments.node.test.ts`), `tsc -b` clean, eslint 0 errors (11 pre-existing warnings).

@@ -80,5 +80,13 @@
   "courierDeliveries": "Мои доставки",
   "courierCash": "Собранные наличные",
   "courierEarnings": "Мой заработок",
-  "soon": "скоро"
+  "soon": "скоро",
+  "payments": "Платежи",
+  "paymentsManual": "Ручные способы",
+  "paymentsOfflineOrders": "Офлайн-заказы",
+  "paymentsWallet": "Пополнения кошелька",
+  "paymentsSellerPackages": "Пакеты продавцов",
+  "paymentsCustomerPackages": "Пакеты клиентов",
+  "paymentsPayouts": "Способы выплаты",
+  "paymentsPayriff": "Payriff"
 }
