@@ -31,6 +31,7 @@ import { Route as AuthenticatedAdminPreorderIndexRouteImport } from './routes/_a
 import { Route as AuthenticatedAdminPermissionsIndexRouteImport } from './routes/_authenticated/admin/permissions/index'
 import { Route as AuthenticatedAdminPagesIndexRouteImport } from './routes/_authenticated/admin/pages/index'
 import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_authenticated/admin/modules/index'
+import { Route as AuthenticatedAdminCourierIndexRouteImport } from './routes/_authenticated/admin/courier/index'
 import { Route as AuthenticatedAdminClubPointIndexRouteImport } from './routes/_authenticated/admin/club-point/index'
 import { Route as AuthenticatedAdminBlogsIndexRouteImport } from './routes/_authenticated/admin/blogs/index'
 import { Route as AuthenticatedAdminAffiliateIndexRouteImport } from './routes/_authenticated/admin/affiliate/index'
@@ -53,6 +54,15 @@ import { Route as AuthenticatedAdminPreorderNotificationsRouteImport } from './r
 import { Route as AuthenticatedAdminPreorderFaqsRouteImport } from './routes/_authenticated/admin/preorder/faqs'
 import { Route as AuthenticatedAdminPreorderConversationsRouteImport } from './routes/_authenticated/admin/preorder/conversations'
 import { Route as AuthenticatedAdminPreorderCommissionsRouteImport } from './routes/_authenticated/admin/preorder/commissions'
+import { Route as AuthenticatedAdminCourierPaymentsRouteImport } from './routes/_authenticated/admin/courier/payments'
+import { Route as AuthenticatedAdminCourierNewRouteImport } from './routes/_authenticated/admin/courier/new'
+import { Route as AuthenticatedAdminCourierEarningsRouteImport } from './routes/_authenticated/admin/courier/earnings'
+import { Route as AuthenticatedAdminCourierDeliveriesRouteImport } from './routes/_authenticated/admin/courier/deliveries'
+import { Route as AuthenticatedAdminCourierConfigRouteImport } from './routes/_authenticated/admin/courier/config'
+import { Route as AuthenticatedAdminCourierCollectionsRouteImport } from './routes/_authenticated/admin/courier/collections'
+import { Route as AuthenticatedAdminCourierCashRouteImport } from './routes/_authenticated/admin/courier/cash'
+import { Route as AuthenticatedAdminCourierCancelRequestsRouteImport } from './routes/_authenticated/admin/courier/cancel-requests'
+import { Route as AuthenticatedAdminCourierIdRouteImport } from './routes/_authenticated/admin/courier/$id'
 import { Route as AuthenticatedAdminClubPointProductsRouteImport } from './routes/_authenticated/admin/club-point/products'
 import { Route as AuthenticatedAdminClubPointConfigRouteImport } from './routes/_authenticated/admin/club-point/config'
 import { Route as AuthenticatedAdminBlogsNewRouteImport } from './routes/_authenticated/admin/blogs/new'
@@ -198,6 +208,12 @@ const AuthenticatedAdminModulesIndexRoute =
     path: '/modules/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminCourierIndexRoute =
+  AuthenticatedAdminCourierIndexRouteImport.update({
+    id: '/courier/',
+    path: '/courier/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminClubPointIndexRoute =
   AuthenticatedAdminClubPointIndexRouteImport.update({
     id: '/club-point/',
@@ -328,6 +344,60 @@ const AuthenticatedAdminPreorderCommissionsRoute =
   AuthenticatedAdminPreorderCommissionsRouteImport.update({
     id: '/preorder/commissions',
     path: '/preorder/commissions',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCourierPaymentsRoute =
+  AuthenticatedAdminCourierPaymentsRouteImport.update({
+    id: '/courier/payments',
+    path: '/courier/payments',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCourierNewRoute =
+  AuthenticatedAdminCourierNewRouteImport.update({
+    id: '/courier/new',
+    path: '/courier/new',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCourierEarningsRoute =
+  AuthenticatedAdminCourierEarningsRouteImport.update({
+    id: '/courier/earnings',
+    path: '/courier/earnings',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCourierDeliveriesRoute =
+  AuthenticatedAdminCourierDeliveriesRouteImport.update({
+    id: '/courier/deliveries',
+    path: '/courier/deliveries',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCourierConfigRoute =
+  AuthenticatedAdminCourierConfigRouteImport.update({
+    id: '/courier/config',
+    path: '/courier/config',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCourierCollectionsRoute =
+  AuthenticatedAdminCourierCollectionsRouteImport.update({
+    id: '/courier/collections',
+    path: '/courier/collections',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCourierCashRoute =
+  AuthenticatedAdminCourierCashRouteImport.update({
+    id: '/courier/cash',
+    path: '/courier/cash',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCourierCancelRequestsRoute =
+  AuthenticatedAdminCourierCancelRequestsRouteImport.update({
+    id: '/courier/cancel-requests',
+    path: '/courier/cancel-requests',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCourierIdRoute =
+  AuthenticatedAdminCourierIdRouteImport.update({
+    id: '/courier/$id',
+    path: '/courier/$id',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminClubPointProductsRoute =
@@ -504,6 +574,15 @@ export interface FileRoutesByFullPath {
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
   '/admin/club-point/config': typeof AuthenticatedAdminClubPointConfigRoute
   '/admin/club-point/products': typeof AuthenticatedAdminClubPointProductsRoute
+  '/admin/courier/$id': typeof AuthenticatedAdminCourierIdRoute
+  '/admin/courier/cancel-requests': typeof AuthenticatedAdminCourierCancelRequestsRoute
+  '/admin/courier/cash': typeof AuthenticatedAdminCourierCashRoute
+  '/admin/courier/collections': typeof AuthenticatedAdminCourierCollectionsRoute
+  '/admin/courier/config': typeof AuthenticatedAdminCourierConfigRoute
+  '/admin/courier/deliveries': typeof AuthenticatedAdminCourierDeliveriesRoute
+  '/admin/courier/earnings': typeof AuthenticatedAdminCourierEarningsRoute
+  '/admin/courier/new': typeof AuthenticatedAdminCourierNewRoute
+  '/admin/courier/payments': typeof AuthenticatedAdminCourierPaymentsRoute
   '/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
   '/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
   '/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
@@ -526,6 +605,7 @@ export interface FileRoutesByFullPath {
   '/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
   '/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
   '/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
+  '/admin/courier/': typeof AuthenticatedAdminCourierIndexRoute
   '/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
@@ -573,6 +653,15 @@ export interface FileRoutesByTo {
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
   '/admin/club-point/config': typeof AuthenticatedAdminClubPointConfigRoute
   '/admin/club-point/products': typeof AuthenticatedAdminClubPointProductsRoute
+  '/admin/courier/$id': typeof AuthenticatedAdminCourierIdRoute
+  '/admin/courier/cancel-requests': typeof AuthenticatedAdminCourierCancelRequestsRoute
+  '/admin/courier/cash': typeof AuthenticatedAdminCourierCashRoute
+  '/admin/courier/collections': typeof AuthenticatedAdminCourierCollectionsRoute
+  '/admin/courier/config': typeof AuthenticatedAdminCourierConfigRoute
+  '/admin/courier/deliveries': typeof AuthenticatedAdminCourierDeliveriesRoute
+  '/admin/courier/earnings': typeof AuthenticatedAdminCourierEarningsRoute
+  '/admin/courier/new': typeof AuthenticatedAdminCourierNewRoute
+  '/admin/courier/payments': typeof AuthenticatedAdminCourierPaymentsRoute
   '/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
   '/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
   '/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
@@ -595,6 +684,7 @@ export interface FileRoutesByTo {
   '/admin/affiliate': typeof AuthenticatedAdminAffiliateIndexRoute
   '/admin/blogs': typeof AuthenticatedAdminBlogsIndexRoute
   '/admin/club-point': typeof AuthenticatedAdminClubPointIndexRoute
+  '/admin/courier': typeof AuthenticatedAdminCourierIndexRoute
   '/admin/modules': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/pages': typeof AuthenticatedAdminPagesIndexRoute
   '/admin/permissions': typeof AuthenticatedAdminPermissionsIndexRoute
@@ -645,6 +735,15 @@ export interface FileRoutesById {
   '/_authenticated/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
   '/_authenticated/admin/club-point/config': typeof AuthenticatedAdminClubPointConfigRoute
   '/_authenticated/admin/club-point/products': typeof AuthenticatedAdminClubPointProductsRoute
+  '/_authenticated/admin/courier/$id': typeof AuthenticatedAdminCourierIdRoute
+  '/_authenticated/admin/courier/cancel-requests': typeof AuthenticatedAdminCourierCancelRequestsRoute
+  '/_authenticated/admin/courier/cash': typeof AuthenticatedAdminCourierCashRoute
+  '/_authenticated/admin/courier/collections': typeof AuthenticatedAdminCourierCollectionsRoute
+  '/_authenticated/admin/courier/config': typeof AuthenticatedAdminCourierConfigRoute
+  '/_authenticated/admin/courier/deliveries': typeof AuthenticatedAdminCourierDeliveriesRoute
+  '/_authenticated/admin/courier/earnings': typeof AuthenticatedAdminCourierEarningsRoute
+  '/_authenticated/admin/courier/new': typeof AuthenticatedAdminCourierNewRoute
+  '/_authenticated/admin/courier/payments': typeof AuthenticatedAdminCourierPaymentsRoute
   '/_authenticated/admin/preorder/commissions': typeof AuthenticatedAdminPreorderCommissionsRoute
   '/_authenticated/admin/preorder/conversations': typeof AuthenticatedAdminPreorderConversationsRoute
   '/_authenticated/admin/preorder/faqs': typeof AuthenticatedAdminPreorderFaqsRoute
@@ -667,6 +766,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
   '/_authenticated/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
   '/_authenticated/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
+  '/_authenticated/admin/courier/': typeof AuthenticatedAdminCourierIndexRoute
   '/_authenticated/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/_authenticated/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
   '/_authenticated/admin/permissions/': typeof AuthenticatedAdminPermissionsIndexRoute
@@ -717,6 +817,15 @@ export interface FileRouteTypes {
     | '/admin/blogs/new'
     | '/admin/club-point/config'
     | '/admin/club-point/products'
+    | '/admin/courier/$id'
+    | '/admin/courier/cancel-requests'
+    | '/admin/courier/cash'
+    | '/admin/courier/collections'
+    | '/admin/courier/config'
+    | '/admin/courier/deliveries'
+    | '/admin/courier/earnings'
+    | '/admin/courier/new'
+    | '/admin/courier/payments'
     | '/admin/preorder/commissions'
     | '/admin/preorder/conversations'
     | '/admin/preorder/faqs'
@@ -739,6 +848,7 @@ export interface FileRouteTypes {
     | '/admin/affiliate/'
     | '/admin/blogs/'
     | '/admin/club-point/'
+    | '/admin/courier/'
     | '/admin/modules/'
     | '/admin/pages/'
     | '/admin/permissions/'
@@ -786,6 +896,15 @@ export interface FileRouteTypes {
     | '/admin/blogs/new'
     | '/admin/club-point/config'
     | '/admin/club-point/products'
+    | '/admin/courier/$id'
+    | '/admin/courier/cancel-requests'
+    | '/admin/courier/cash'
+    | '/admin/courier/collections'
+    | '/admin/courier/config'
+    | '/admin/courier/deliveries'
+    | '/admin/courier/earnings'
+    | '/admin/courier/new'
+    | '/admin/courier/payments'
     | '/admin/preorder/commissions'
     | '/admin/preorder/conversations'
     | '/admin/preorder/faqs'
@@ -808,6 +927,7 @@ export interface FileRouteTypes {
     | '/admin/affiliate'
     | '/admin/blogs'
     | '/admin/club-point'
+    | '/admin/courier'
     | '/admin/modules'
     | '/admin/pages'
     | '/admin/permissions'
@@ -857,6 +977,15 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/blogs/new'
     | '/_authenticated/admin/club-point/config'
     | '/_authenticated/admin/club-point/products'
+    | '/_authenticated/admin/courier/$id'
+    | '/_authenticated/admin/courier/cancel-requests'
+    | '/_authenticated/admin/courier/cash'
+    | '/_authenticated/admin/courier/collections'
+    | '/_authenticated/admin/courier/config'
+    | '/_authenticated/admin/courier/deliveries'
+    | '/_authenticated/admin/courier/earnings'
+    | '/_authenticated/admin/courier/new'
+    | '/_authenticated/admin/courier/payments'
     | '/_authenticated/admin/preorder/commissions'
     | '/_authenticated/admin/preorder/conversations'
     | '/_authenticated/admin/preorder/faqs'
@@ -879,6 +1008,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/affiliate/'
     | '/_authenticated/admin/blogs/'
     | '/_authenticated/admin/club-point/'
+    | '/_authenticated/admin/courier/'
     | '/_authenticated/admin/modules/'
     | '/_authenticated/admin/pages/'
     | '/_authenticated/admin/permissions/'
@@ -1072,6 +1202,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminModulesIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/courier/': {
+      id: '/_authenticated/admin/courier/'
+      path: '/courier'
+      fullPath: '/admin/courier/'
+      preLoaderRoute: typeof AuthenticatedAdminCourierIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/club-point/': {
       id: '/_authenticated/admin/club-point/'
       path: '/club-point'
@@ -1224,6 +1361,69 @@ declare module '@tanstack/react-router' {
       path: '/preorder/commissions'
       fullPath: '/admin/preorder/commissions'
       preLoaderRoute: typeof AuthenticatedAdminPreorderCommissionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/courier/payments': {
+      id: '/_authenticated/admin/courier/payments'
+      path: '/courier/payments'
+      fullPath: '/admin/courier/payments'
+      preLoaderRoute: typeof AuthenticatedAdminCourierPaymentsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/courier/new': {
+      id: '/_authenticated/admin/courier/new'
+      path: '/courier/new'
+      fullPath: '/admin/courier/new'
+      preLoaderRoute: typeof AuthenticatedAdminCourierNewRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/courier/earnings': {
+      id: '/_authenticated/admin/courier/earnings'
+      path: '/courier/earnings'
+      fullPath: '/admin/courier/earnings'
+      preLoaderRoute: typeof AuthenticatedAdminCourierEarningsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/courier/deliveries': {
+      id: '/_authenticated/admin/courier/deliveries'
+      path: '/courier/deliveries'
+      fullPath: '/admin/courier/deliveries'
+      preLoaderRoute: typeof AuthenticatedAdminCourierDeliveriesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/courier/config': {
+      id: '/_authenticated/admin/courier/config'
+      path: '/courier/config'
+      fullPath: '/admin/courier/config'
+      preLoaderRoute: typeof AuthenticatedAdminCourierConfigRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/courier/collections': {
+      id: '/_authenticated/admin/courier/collections'
+      path: '/courier/collections'
+      fullPath: '/admin/courier/collections'
+      preLoaderRoute: typeof AuthenticatedAdminCourierCollectionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/courier/cash': {
+      id: '/_authenticated/admin/courier/cash'
+      path: '/courier/cash'
+      fullPath: '/admin/courier/cash'
+      preLoaderRoute: typeof AuthenticatedAdminCourierCashRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/courier/cancel-requests': {
+      id: '/_authenticated/admin/courier/cancel-requests'
+      path: '/courier/cancel-requests'
+      fullPath: '/admin/courier/cancel-requests'
+      preLoaderRoute: typeof AuthenticatedAdminCourierCancelRequestsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/courier/$id': {
+      id: '/_authenticated/admin/courier/$id'
+      path: '/courier/$id'
+      fullPath: '/admin/courier/$id'
+      preLoaderRoute: typeof AuthenticatedAdminCourierIdRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/club-point/products': {
@@ -1417,6 +1617,15 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBlogsNewRoute: typeof AuthenticatedAdminBlogsNewRoute
   AuthenticatedAdminClubPointConfigRoute: typeof AuthenticatedAdminClubPointConfigRoute
   AuthenticatedAdminClubPointProductsRoute: typeof AuthenticatedAdminClubPointProductsRoute
+  AuthenticatedAdminCourierIdRoute: typeof AuthenticatedAdminCourierIdRoute
+  AuthenticatedAdminCourierCancelRequestsRoute: typeof AuthenticatedAdminCourierCancelRequestsRoute
+  AuthenticatedAdminCourierCashRoute: typeof AuthenticatedAdminCourierCashRoute
+  AuthenticatedAdminCourierCollectionsRoute: typeof AuthenticatedAdminCourierCollectionsRoute
+  AuthenticatedAdminCourierConfigRoute: typeof AuthenticatedAdminCourierConfigRoute
+  AuthenticatedAdminCourierDeliveriesRoute: typeof AuthenticatedAdminCourierDeliveriesRoute
+  AuthenticatedAdminCourierEarningsRoute: typeof AuthenticatedAdminCourierEarningsRoute
+  AuthenticatedAdminCourierNewRoute: typeof AuthenticatedAdminCourierNewRoute
+  AuthenticatedAdminCourierPaymentsRoute: typeof AuthenticatedAdminCourierPaymentsRoute
   AuthenticatedAdminPreorderCommissionsRoute: typeof AuthenticatedAdminPreorderCommissionsRoute
   AuthenticatedAdminPreorderConversationsRoute: typeof AuthenticatedAdminPreorderConversationsRoute
   AuthenticatedAdminPreorderFaqsRoute: typeof AuthenticatedAdminPreorderFaqsRoute
@@ -1439,6 +1648,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminAffiliateIndexRoute: typeof AuthenticatedAdminAffiliateIndexRoute
   AuthenticatedAdminBlogsIndexRoute: typeof AuthenticatedAdminBlogsIndexRoute
   AuthenticatedAdminClubPointIndexRoute: typeof AuthenticatedAdminClubPointIndexRoute
+  AuthenticatedAdminCourierIndexRoute: typeof AuthenticatedAdminCourierIndexRoute
   AuthenticatedAdminModulesIndexRoute: typeof AuthenticatedAdminModulesIndexRoute
   AuthenticatedAdminPagesIndexRoute: typeof AuthenticatedAdminPagesIndexRoute
   AuthenticatedAdminPermissionsIndexRoute: typeof AuthenticatedAdminPermissionsIndexRoute
@@ -1485,6 +1695,20 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminClubPointConfigRoute,
     AuthenticatedAdminClubPointProductsRoute:
       AuthenticatedAdminClubPointProductsRoute,
+    AuthenticatedAdminCourierIdRoute: AuthenticatedAdminCourierIdRoute,
+    AuthenticatedAdminCourierCancelRequestsRoute:
+      AuthenticatedAdminCourierCancelRequestsRoute,
+    AuthenticatedAdminCourierCashRoute: AuthenticatedAdminCourierCashRoute,
+    AuthenticatedAdminCourierCollectionsRoute:
+      AuthenticatedAdminCourierCollectionsRoute,
+    AuthenticatedAdminCourierConfigRoute: AuthenticatedAdminCourierConfigRoute,
+    AuthenticatedAdminCourierDeliveriesRoute:
+      AuthenticatedAdminCourierDeliveriesRoute,
+    AuthenticatedAdminCourierEarningsRoute:
+      AuthenticatedAdminCourierEarningsRoute,
+    AuthenticatedAdminCourierNewRoute: AuthenticatedAdminCourierNewRoute,
+    AuthenticatedAdminCourierPaymentsRoute:
+      AuthenticatedAdminCourierPaymentsRoute,
     AuthenticatedAdminPreorderCommissionsRoute:
       AuthenticatedAdminPreorderCommissionsRoute,
     AuthenticatedAdminPreorderConversationsRoute:
@@ -1520,6 +1744,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminBlogsIndexRoute: AuthenticatedAdminBlogsIndexRoute,
     AuthenticatedAdminClubPointIndexRoute:
       AuthenticatedAdminClubPointIndexRoute,
+    AuthenticatedAdminCourierIndexRoute: AuthenticatedAdminCourierIndexRoute,
     AuthenticatedAdminModulesIndexRoute: AuthenticatedAdminModulesIndexRoute,
     AuthenticatedAdminPagesIndexRoute: AuthenticatedAdminPagesIndexRoute,
     AuthenticatedAdminPermissionsIndexRoute:

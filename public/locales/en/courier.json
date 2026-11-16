@@ -1,0 +1,177 @@
+{
+  "toast": {
+    "error": "Something went wrong",
+    "saved": "Saved",
+    "created": "Courier created",
+    "collected": "Cash collected from the courier",
+    "paid": "Courier paid",
+    "cancelRequested": "Cancel request sent"
+  },
+  "actions": {
+    "save": "Save",
+    "saving": "Saving...",
+    "add": "Add courier",
+    "edit": "Edit",
+    "ban": "Ban",
+    "unban": "Unban",
+    "collect": "Collect cash",
+    "pay": "Pay courier",
+    "more": "More actions",
+    "requestCancel": "Request cancel"
+  },
+  "tabs": {
+    "all": "All"
+  },
+  "status": {
+    "banned": "Banned"
+  },
+  "columns": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "earning": "Earning",
+    "collection": "Collection",
+    "courier": "Courier",
+    "paidAmount": "Paid amount",
+    "collectedAmount": "Collected amount",
+    "createdAt": "Date",
+    "order": "Order",
+    "requestedBy": "Requested by",
+    "requestedAt": "Requested at",
+    "customer": "Customer",
+    "address": "Address",
+    "payment": "Payment",
+    "total": "Total",
+    "status": "Status",
+    "deliveredAt": "Delivered at"
+  },
+  "couriers": {
+    "title": "Couriers",
+    "description": "Courier accounts with the cash they hold and what the store owes them.",
+    "search": "Search by name, email or phone...",
+    "empty": "No couriers yet"
+  },
+  "payments": {
+    "title": "Payment history",
+    "description": "Payouts made to couriers.",
+    "search": "Search by courier...",
+    "empty": "No payments yet"
+  },
+  "collections": {
+    "title": "Collection history",
+    "description": "Cash collected from couriers.",
+    "search": "Search by courier...",
+    "empty": "No collections yet"
+  },
+  "cancelRequests": {
+    "title": "Cancel requests",
+    "description": "Orders couriers asked to cancel. The decision is made on the order.",
+    "search": "Search by order or courier...",
+    "empty": "No cancel requests"
+  },
+  "deliveries": {
+    "title": "My deliveries",
+    "description": "Orders assigned to you, by stage.",
+    "search": "Search by order or customer...",
+    "empty": "No deliveries in this stage",
+    "cancelRequested": "Cancel requested",
+    "cancelTitle": "Request cancellation?",
+    "cancelDesc": "The store will review the cancel request for order #{{code}}."
+  },
+  "cash": {
+    "title": "Cash collected",
+    "description": "Cash-on-delivery money you collected on delivered orders.",
+    "search": "Search by order...",
+    "empty": "No cash collected yet"
+  },
+  "earnings": {
+    "title": "My earnings",
+    "description": "What each delivered order earned you.",
+    "search": "Search by order...",
+    "empty": "No earnings yet"
+  },
+  "ban": {
+    "banTitle": "Ban this courier?",
+    "banDesc": "{{name}} will not be able to sign in.",
+    "unbanTitle": "Unban this courier?",
+    "unbanDesc": "{{name}} will be able to sign in again."
+  },
+  "settle": {
+    "collectTitle": "Collect cash from courier",
+    "payTitle": "Pay courier",
+    "description": "Courier: {{name}}",
+    "holding": "Cash the courier holds",
+    "payable": "Total payable",
+    "nothing": "Nothing to settle.",
+    "collected": "Collected amount",
+    "paid": "Paid amount",
+    "collectAction": "Collect",
+    "payAction": "Pay"
+  },
+  "form": {
+    "createTitle": "Add courier",
+    "editTitle": "Edit courier",
+    "description": "Account and contact details of the courier.",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "password": "Password",
+    "passwordHint": "Leave blank to keep the current password.",
+    "country": "Country",
+    "state": "State",
+    "city": "City",
+    "avatar": "Image",
+    "address": "Address"
+  },
+  "config": {
+    "title": "Courier configuration",
+    "description": "How couriers are paid, notified and where they pick parcels up.",
+    "paymentTitle": "Payment configuration",
+    "paymentDescription": "Pay couriers a monthly salary or a fixed commission per delivered order.",
+    "paymentType": "Payment type",
+    "salaryOption": "Monthly salary",
+    "commissionOption": "Per order commission",
+    "salary": "Salary amount",
+    "commission": "Commission rate",
+    "commissionHint": "Added to the courier balance for every delivered order.",
+    "notificationTitle": "Notification configuration",
+    "notificationDescription": "How a courier is told about a new order.",
+    "mail": "Send email",
+    "otp": "Send OTP",
+    "otpHint": "Needs the OTP module.",
+    "pickupTitle": "Pickup location for couriers",
+    "pickupDescription": "Coordinates of the place couriers collect parcels from.",
+    "latitude": "Latitude",
+    "longitude": "Longitude"
+  },
+  "stage": {
+    "assigned": "Assigned",
+    "pickup": "Picked up",
+    "on_the_way": "On the way",
+    "completed": "Completed",
+    "pending": "Pending",
+    "cancelled": "Cancelled"
+  },
+  "deliveryStatus": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "picked_up": "Picked up",
+    "on_the_way": "On the way",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
+  },
+  "payment": {
+    "cash_on_delivery": "Cash on delivery",
+    "prepaid": "Prepaid"
+  },
+  "validation": {
+    "required": "Required",
+    "number": "Enter a number",
+    "min0": "Must be 0 or more",
+    "positive": "Must be greater than 0",
+    "max": "Cannot be more than the available amount",
+    "password": "At least 6 characters",
+    "email": "Enter a valid email",
+    "coordinate": "Enter a valid coordinate"
+  }
+}

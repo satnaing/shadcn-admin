@@ -65,7 +65,6 @@ export const PERMISSIONS = {
   POS: { INDEX: 'pos.index', ORDERS: 'pos.orders', PRODUCTS: 'pos.products' },
   WHOLESALE: { INDEX: 'wholesale.index', CREATE: 'wholesale.create' },
   CLASSIFIED: { INDEX: 'classified.index', CREATE: 'classified.create' },
-  DELIVERY_BOYS: { INDEX: 'delivery_boys.index', COLLECTIONS: 'delivery_boys.collections' },
   QRCODE_EVENT: {
     INDEX: 'qrcode_event.index',
     SETTINGS: 'qrcode_event.settings',
@@ -125,6 +124,23 @@ export const PERMISSIONS = {
     WITHDRAWS: 'affiliate.withdraws',
     WITHDRAWS_MANAGE: 'affiliate.withdraws_manage',
     LOGS: 'affiliate.logs',
+  },
+  COURIER: {
+    INDEX: 'courier.index',
+    CREATE: 'courier.create',
+    EDIT: 'courier.edit',
+    BAN: 'courier.ban',
+    COLLECT: 'courier.collect',
+    PAY: 'courier.pay',
+    PAYMENTS: 'courier.payments',
+    COLLECTIONS: 'courier.collections',
+    CANCEL_REQUESTS: 'courier.cancel_requests',
+    CONFIG: 'courier.config',
+    CONFIG_MANAGE: 'courier.config_manage',
+    DELIVERIES: 'courier.deliveries',
+    DELIVERIES_MANAGE: 'courier.deliveries_manage',
+    CASH_REPORT: 'courier.cash_report',
+    EARNINGS: 'courier.earnings',
   },
 } as const
 

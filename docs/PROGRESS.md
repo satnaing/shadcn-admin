@@ -223,3 +223,28 @@ Folder = pilot layout (`src/features/club-point/{data,hooks,components}`, `modul
 | Modules: toggle Club points off + save → sidebar group gone, `/admin/club-point/products` → 404; on again → group back (3 links) | ✅ | 0 | n/a |
 Not clicked live: lines dialog for an order with a deleted product, earnings status tabs / search, sort by column, role without `_manage` (read-only cards). Console was read after the flows (tracking starts on first read), no errors; fresh-load sweep of each URL not repeated. Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.
 Tests: 22 files / 162 node tests pass (15 new in `club-point.node.test.ts`), `tsc -b` clean, eslint 0 errors.
+
+## Module #6 `courier` (2026-11-16)
+Folder = pilot layout (`src/features/courier/{data,hooks,components}`, `module.manifest.ts`, `src/api/modules/courier.api.ts`, `src/mocks/courier.{data,routes}.ts`, `public/locales/*/courier.json`, `docs/aec-diff/courier.md`). Replaces the old `delivery-boy` placeholder (`modules.data.ts`, `PERMISSIONS.DELIVERY_BOYS`, `deliveryBoy*` nav keys). 10 routes: `/admin/courier`, `/new`, `/$id`, `/payments`, `/collections`, `/cancel-requests`, `/config`, `/deliveries` (`?tab=` stages), `/cash`, `/earnings`. Admin and courier-panel screens live in one module; the courier role (panel `courier`) sees only its own items.
+
+### Pattern additions
+| Change | Why |
+|---|---|
+| `CourierList` + `ListItemMap` / `CourierListKind` in `data/courier.type.ts`, `courierApi.list(kind)` | one generic list shell for 7 tables (same as affiliate), typed per kind |
+| `FormInputField` accepts `type='email' \| 'password'` | create/edit forms need them (additive) |
+| Cascading selects: reset children from `form.watch` callback, only when `type === 'change'` | prefilled edit must not reset the region |
+| Use `useWatch` instead of `form.watch()` in components (React Compiler warning) | keeps eslint at 0 warnings |
+| `use_*` mutation toasts: `created/saved/collected/paid` | one `useAction` wrapper, refetch all module queries |
+
+### Verification (Chrome, dev :5202, console tracked after first navigation)
+| Route / flow | Result | Console errors | ≥400 |
+|---|---|---|---|
+| 8 menu routes (couriers, payments, collections, cancel requests, config, deliveries, cash, earnings) | ✅ rendered with data | 0 | n/a |
+| Collect cash: over-limit → "Cannot be more than…"; 100 → balance 592.50 → 492.50 | ✅ | 0 | n/a |
+| Create: empty submit shows all required errors; country→state→city lists only children; save → first row | ✅ | 0 | n/a |
+| Ban + confirm → "Banned" badge | ✅ | 0 | n/a |
+| Deliveries stage tab, request cancel + confirm → appears in cancel requests | ✅ | 0 | n/a |
+| Config: commission saved (toast), latitude 95 → "valid coordinate" error | ✅ | 0 | n/a |
+| Edit `/courier/3`: all fields and region prefilled | ✅ | 0 | n/a |
+| Modules: toggle off + save → sidebar group gone, `/admin/courier/payments` → 404 | ✅ | 0 | n/a |
+Not clicked live: edit save, unban, pay dialog, pay/collect history rows after write, notification/pickup card save, settle dialog with zero balance (shows "Nothing to settle" but the submit button remains). Mock adapter bypasses XHR → no network ≥400 data. Playwright suite not run.

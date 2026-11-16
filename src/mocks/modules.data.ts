@@ -1,6 +1,7 @@
 import type { ModuleRaw } from '@/api/menu.types'
 import { affiliateManifest } from '@/features/affiliate/module.manifest'
 import { clubPointManifest } from '@/features/club-point/module.manifest'
+import { courierManifest } from '@/features/courier/module.manifest'
 import { qrcodeEventManifest } from '@/features/qrcode-event/module.manifest'
 import { preorderManifest } from '@/features/preorder/module.manifest'
 import { refundManifest } from '@/features/refund/module.manifest'
@@ -38,22 +39,12 @@ export const mockModules: ModuleRaw[] = [
       items: [{ key: 'classifiedProducts', route: '/admin/classified-products', order: 1, permission: 'classified.index' }],
     },
   },
-  {
-    id: 'delivery-boy', name: 'Delivery boys', description: 'Courier accounts, collections and cancel requests', version: '1.0.0',
-    icon: 'Truck', required: false, enabled: true, requires: ['pos'],
-    admin_menu: {
-      group: { key: 'deliveryBoy', icon: 'Truck', order: 130, panels: ['admin', 'courier'] },
-      items: [
-        { key: 'deliveryBoys', route: '/admin/delivery-boys', order: 1, permission: 'delivery_boys.index' },
-        { key: 'deliveryCollections', route: '/admin/delivery-boys/collections', order: 2, permission: 'delivery_boys.collections' },
-      ],
-    },
-  },
   { ...qrcodeEventManifest, enabled: true },
   { ...refundManifest, enabled: true },
   { ...preorderManifest, enabled: true },
   { ...affiliateManifest, enabled: true },
   { ...clubPointManifest, enabled: true },
+  { ...courierManifest, enabled: true },
   { id: 'theme-xshop', name: 'Theme xShop', description: 'xShop storefront theme package', version: '1.0.0', icon: 'Palette', required: false, enabled: true, requires: [] },
   { id: 'theme-senseihost', name: 'Theme SenseiHost', description: 'SenseiHost storefront theme package', version: '1.0.0', icon: 'Palette', required: false, enabled: false, requires: [] },
 ]

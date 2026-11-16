@@ -6,7 +6,7 @@ interface Props<T extends FieldValues> {
   form: UseFormReturn<T>
   name: Path<T>
   label: string
-  type?: 'text' | 'number' | 'date' | 'datetime-local'
+  type?: 'text' | 'number' | 'date' | 'datetime-local' | 'email' | 'password'
   hint?: string
   placeholder?: string
   className?: string

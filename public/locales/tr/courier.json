@@ -1,0 +1,177 @@
+{
+  "toast": {
+    "error": "Bir hata oluştu",
+    "saved": "Kaydedildi",
+    "created": "Kurye oluşturuldu",
+    "collected": "Kuryeden nakit tahsil edildi",
+    "paid": "Kuryeye ödeme yapıldı",
+    "cancelRequested": "İptal talebi gönderildi"
+  },
+  "actions": {
+    "save": "Kaydet",
+    "saving": "Kaydediliyor...",
+    "add": "Kurye ekle",
+    "edit": "Düzenle",
+    "ban": "Engelle",
+    "unban": "Engeli kaldır",
+    "collect": "Nakit tahsil et",
+    "pay": "Kuryeye öde",
+    "more": "Diğer işlemler",
+    "requestCancel": "İptal talep et"
+  },
+  "tabs": {
+    "all": "Tümü"
+  },
+  "status": {
+    "banned": "Engelli"
+  },
+  "columns": {
+    "name": "Ad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "earning": "Kazanç",
+    "collection": "Tahsilat",
+    "courier": "Kurye",
+    "paidAmount": "Ödenen tutar",
+    "collectedAmount": "Tahsil edilen tutar",
+    "createdAt": "Tarih",
+    "order": "Sipariş",
+    "requestedBy": "Talep eden",
+    "requestedAt": "Talep zamanı",
+    "customer": "Müşteri",
+    "address": "Adres",
+    "payment": "Ödeme",
+    "total": "Toplam",
+    "status": "Durum",
+    "deliveredAt": "Teslim zamanı"
+  },
+  "couriers": {
+    "title": "Kuryeler",
+    "description": "Kurye hesapları, ellerindeki nakit ve mağazanın borcu.",
+    "search": "Ad, e-posta veya telefonla ara...",
+    "empty": "Henüz kurye yok"
+  },
+  "payments": {
+    "title": "Ödeme geçmişi",
+    "description": "Kuryelere yapılan ödemeler.",
+    "search": "Kuryeye göre ara...",
+    "empty": "Henüz ödeme yok"
+  },
+  "collections": {
+    "title": "Tahsilat geçmişi",
+    "description": "Kuryelerden tahsil edilen nakit.",
+    "search": "Kuryeye göre ara...",
+    "empty": "Henüz tahsilat yok"
+  },
+  "cancelRequests": {
+    "title": "İptal talepleri",
+    "description": "Kuryelerin iptal etmek istediği siparişler. Karar sipariş üzerinde verilir.",
+    "search": "Sipariş veya kuryeye göre ara...",
+    "empty": "İptal talebi yok"
+  },
+  "deliveries": {
+    "title": "Teslimatlarım",
+    "description": "Size atanan siparişler, aşamaya göre.",
+    "search": "Sipariş veya müşteriye göre ara...",
+    "empty": "Bu aşamada teslimat yok",
+    "cancelRequested": "İptal talep edildi",
+    "cancelTitle": "İptal talebi gönderilsin mi?",
+    "cancelDesc": "Mağaza #{{code}} siparişi için iptal talebini inceleyecek."
+  },
+  "cash": {
+    "title": "Tahsil edilen nakit",
+    "description": "Teslim edilen siparişlerde kapıda tahsil ettiğiniz nakit.",
+    "search": "Siparişe göre ara...",
+    "empty": "Henüz nakit tahsil edilmedi"
+  },
+  "earnings": {
+    "title": "Kazancım",
+    "description": "Teslim edilen her siparişten kazancınız.",
+    "search": "Siparişe göre ara...",
+    "empty": "Henüz kazanç yok"
+  },
+  "ban": {
+    "banTitle": "Bu kurye engellensin mi?",
+    "banDesc": "{{name}} giriş yapamayacak.",
+    "unbanTitle": "Bu kuryenin engeli kaldırılsın mı?",
+    "unbanDesc": "{{name}} tekrar giriş yapabilecek."
+  },
+  "settle": {
+    "collectTitle": "Kuryeden nakit tahsil et",
+    "payTitle": "Kuryeye öde",
+    "description": "Kurye: {{name}}",
+    "holding": "Kuryenin elindeki nakit",
+    "payable": "Ödenecek toplam",
+    "nothing": "Hesaplaşılacak tutar yok.",
+    "collected": "Tahsil edilen tutar",
+    "paid": "Ödenen tutar",
+    "collectAction": "Tahsil et",
+    "payAction": "Öde"
+  },
+  "form": {
+    "createTitle": "Kurye ekle",
+    "editTitle": "Kuryeyi düzenle",
+    "description": "Kuryenin hesap ve iletişim bilgileri.",
+    "name": "Ad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "password": "Şifre",
+    "passwordHint": "Mevcut şifreyi korumak için boş bırakın.",
+    "country": "Ülke",
+    "state": "Bölge",
+    "city": "Şehir",
+    "avatar": "Görsel",
+    "address": "Adres"
+  },
+  "config": {
+    "title": "Kurye yapılandırması",
+    "description": "Kuryelerin ödemesi, bildirimleri ve paketleri aldıkları yer.",
+    "paymentTitle": "Ödeme yapılandırması",
+    "paymentDescription": "Kuryelere aylık maaş veya teslim edilen her sipariş için sabit komisyon ödeyin.",
+    "paymentType": "Ödeme türü",
+    "salaryOption": "Aylık maaş",
+    "commissionOption": "Sipariş başına komisyon",
+    "salary": "Maaş tutarı",
+    "commission": "Komisyon tutarı",
+    "commissionHint": "Teslim edilen her sipariş için kurye bakiyesine eklenir.",
+    "notificationTitle": "Bildirim yapılandırması",
+    "notificationDescription": "Kuryeye yeni sipariş nasıl bildirilir.",
+    "mail": "E-posta gönder",
+    "otp": "OTP gönder",
+    "otpHint": "OTP modülü gerekir.",
+    "pickupTitle": "Kuryeler için alım noktası",
+    "pickupDescription": "Kuryelerin paketleri aldığı yerin koordinatları.",
+    "latitude": "Enlem",
+    "longitude": "Boylam"
+  },
+  "stage": {
+    "assigned": "Atanan",
+    "pickup": "Alınan",
+    "on_the_way": "Yolda",
+    "completed": "Tamamlanan",
+    "pending": "Bekleyen",
+    "cancelled": "İptal edilen"
+  },
+  "deliveryStatus": {
+    "pending": "Bekliyor",
+    "confirmed": "Onaylandı",
+    "picked_up": "Alındı",
+    "on_the_way": "Yolda",
+    "delivered": "Teslim edildi",
+    "cancelled": "İptal edildi"
+  },
+  "payment": {
+    "cash_on_delivery": "Kapıda ödeme",
+    "prepaid": "Önceden ödendi"
+  },
+  "validation": {
+    "required": "Zorunludur",
+    "number": "Bir sayı girin",
+    "min0": "0 veya daha fazla olmalı",
+    "positive": "0'dan büyük olmalı",
+    "max": "Mevcut tutardan fazla olamaz",
+    "password": "En az 6 karakter",
+    "email": "Geçerli bir e-posta girin",
+    "coordinate": "Geçerli bir koordinat girin"
+  }
+}

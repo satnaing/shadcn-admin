@@ -1,0 +1,177 @@
+{
+  "toast": {
+    "error": "Xəta baş verdi",
+    "saved": "Yadda saxlanıldı",
+    "created": "Kuryer yaradıldı",
+    "collected": "Kuryerdən nağd pul alındı",
+    "paid": "Kuryerə ödəniş edildi",
+    "cancelRequested": "Ləğv sorğusu göndərildi"
+  },
+  "actions": {
+    "save": "Yadda saxla",
+    "saving": "Saxlanılır...",
+    "add": "Kuryer əlavə et",
+    "edit": "Redaktə et",
+    "ban": "Blokla",
+    "unban": "Bloku aç",
+    "collect": "Nağd pul al",
+    "pay": "Kuryerə ödə",
+    "more": "Daha çox əməliyyat",
+    "requestCancel": "Ləğv sorğusu göndər"
+  },
+  "tabs": {
+    "all": "Hamısı"
+  },
+  "status": {
+    "banned": "Bloklanıb"
+  },
+  "columns": {
+    "name": "Ad",
+    "email": "E-poçt",
+    "phone": "Telefon",
+    "earning": "Qazanc",
+    "collection": "Nağd məbləğ",
+    "courier": "Kuryer",
+    "paidAmount": "Ödənilən məbləğ",
+    "collectedAmount": "Alınan məbləğ",
+    "createdAt": "Tarix",
+    "order": "Sifariş",
+    "requestedBy": "Sorğu göndərən",
+    "requestedAt": "Sorğu vaxtı",
+    "customer": "Müştəri",
+    "address": "Ünvan",
+    "payment": "Ödəniş",
+    "total": "Cəmi",
+    "status": "Status",
+    "deliveredAt": "Çatdırılma vaxtı"
+  },
+  "couriers": {
+    "title": "Kuryerlər",
+    "description": "Kuryer hesabları, onların üzərindəki nağd pul və mağazanın borcu.",
+    "search": "Ad, e-poçt və ya telefonla axtar...",
+    "empty": "Hələ kuryer yoxdur"
+  },
+  "payments": {
+    "title": "Ödəniş tarixçəsi",
+    "description": "Kuryerlərə edilmiş ödənişlər.",
+    "search": "Kuryerə görə axtar...",
+    "empty": "Hələ ödəniş yoxdur"
+  },
+  "collections": {
+    "title": "Alınan nağd pul tarixçəsi",
+    "description": "Kuryerlərdən alınmış nağd pul.",
+    "search": "Kuryerə görə axtar...",
+    "empty": "Hələ alınan məbləğ yoxdur"
+  },
+  "cancelRequests": {
+    "title": "Ləğv sorğuları",
+    "description": "Kuryerlərin ləğv etmək istədiyi sifarişlər. Qərar sifariş üzərində verilir.",
+    "search": "Sifariş və ya kuryerə görə axtar...",
+    "empty": "Ləğv sorğusu yoxdur"
+  },
+  "deliveries": {
+    "title": "Çatdırılmalarım",
+    "description": "Sizə təyin edilmiş sifarişlər, mərhələ üzrə.",
+    "search": "Sifariş və ya müştəriyə görə axtar...",
+    "empty": "Bu mərhələdə çatdırılma yoxdur",
+    "cancelRequested": "Ləğv sorğusu var",
+    "cancelTitle": "Ləğv sorğusu göndərilsin?",
+    "cancelDesc": "Mağaza #{{code}} sifarişi üzrə ləğv sorğusuna baxacaq."
+  },
+  "cash": {
+    "title": "Yığılmış nağd pul",
+    "description": "Çatdırılmış sifarişlərdə qapıda yığdığınız nağd pul.",
+    "search": "Sifarişə görə axtar...",
+    "empty": "Hələ nağd pul yığılmayıb"
+  },
+  "earnings": {
+    "title": "Qazancım",
+    "description": "Hər çatdırılmış sifarişdən qazancınız.",
+    "search": "Sifarişə görə axtar...",
+    "empty": "Hələ qazanc yoxdur"
+  },
+  "ban": {
+    "banTitle": "Bu kuryer bloklansın?",
+    "banDesc": "{{name}} sistemə daxil ola bilməyəcək.",
+    "unbanTitle": "Bu kuryerin bloku açılsın?",
+    "unbanDesc": "{{name}} yenidən daxil ola biləcək."
+  },
+  "settle": {
+    "collectTitle": "Kuryerdən nağd pul al",
+    "payTitle": "Kuryerə ödə",
+    "description": "Kuryer: {{name}}",
+    "holding": "Kuryerin əlindəki nağd pul",
+    "payable": "Ödənilməli məbləğ",
+    "nothing": "Hesablaşmaq üçün məbləğ yoxdur.",
+    "collected": "Alınan məbləğ",
+    "paid": "Ödənilən məbləğ",
+    "collectAction": "Al",
+    "payAction": "Ödə"
+  },
+  "form": {
+    "createTitle": "Kuryer əlavə et",
+    "editTitle": "Kuryeri redaktə et",
+    "description": "Kuryerin hesab və əlaqə məlumatları.",
+    "name": "Ad",
+    "email": "E-poçt",
+    "phone": "Telefon",
+    "password": "Şifrə",
+    "passwordHint": "Cari şifrəni saxlamaq üçün boş buraxın.",
+    "country": "Ölkə",
+    "state": "Bölgə",
+    "city": "Şəhər",
+    "avatar": "Şəkil",
+    "address": "Ünvan"
+  },
+  "config": {
+    "title": "Kuryer konfiqurasiyası",
+    "description": "Kuryerlərin ödənişi, bildirişləri və bağlamları götürdükləri yer.",
+    "paymentTitle": "Ödəniş konfiqurasiyası",
+    "paymentDescription": "Kuryerlərə aylıq maaş və ya çatdırılmış hər sifariş üçün sabit komissiya ödəyin.",
+    "paymentType": "Ödəniş növü",
+    "salaryOption": "Aylıq maaş",
+    "commissionOption": "Sifariş başına komissiya",
+    "salary": "Maaş məbləği",
+    "commission": "Komissiya məbləği",
+    "commissionHint": "Çatdırılmış hər sifariş üçün kuryer balansına əlavə olunur.",
+    "notificationTitle": "Bildiriş konfiqurasiyası",
+    "notificationDescription": "Kuryerə yeni sifariş haqqında necə xəbər verilir.",
+    "mail": "E-poçt göndər",
+    "otp": "OTP göndər",
+    "otpHint": "OTP modulu tələb olunur.",
+    "pickupTitle": "Kuryerlər üçün götürmə yeri",
+    "pickupDescription": "Kuryerlərin bağlamları götürdüyü yerin koordinatları.",
+    "latitude": "Enlik",
+    "longitude": "Uzunluq"
+  },
+  "stage": {
+    "assigned": "Təyin edilmiş",
+    "pickup": "Götürülmüş",
+    "on_the_way": "Yolda",
+    "completed": "Tamamlanmış",
+    "pending": "Gözləyən",
+    "cancelled": "Ləğv edilmiş"
+  },
+  "deliveryStatus": {
+    "pending": "Gözləyir",
+    "confirmed": "Təsdiqlənib",
+    "picked_up": "Götürülüb",
+    "on_the_way": "Yoldadır",
+    "delivered": "Çatdırılıb",
+    "cancelled": "Ləğv edilib"
+  },
+  "payment": {
+    "cash_on_delivery": "Qapıda ödəniş",
+    "prepaid": "Əvvəlcədən ödənilib"
+  },
+  "validation": {
+    "required": "Məcburidir",
+    "number": "Rəqəm daxil edin",
+    "min0": "0 və ya daha çox olmalıdır",
+    "positive": "0-dan böyük olmalıdır",
+    "max": "Mövcud məbləğdən çox ola bilməz",
+    "password": "Ən azı 6 simvol",
+    "email": "Düzgün e-poçt daxil edin",
+    "coordinate": "Düzgün koordinat daxil edin"
+  }
+}

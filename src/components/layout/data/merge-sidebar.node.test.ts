@@ -31,7 +31,7 @@ describe('sidebar merge', () => {
   })
 
   it('filters module groups by panel and drops items without permission', () => {
-    expect(keys(toNavGroups(menuFor('courier')))).toEqual(['module-delivery-boy'])
+    expect(keys(toNavGroups(menuFor('courier')))).toEqual(['module-courier'])
     const merged = mergeSidebar([], toNavGroups(menuFor('admin')), (p) => p === 'pos.index')
     expect(merged.map((g) => g.items.length)).toEqual([1])
   })
