@@ -147,5 +147,20 @@
     "search": "Axtarış...",
     "noResults": "Nəticə tapılmadı",
     "remove": "Sil: {{name}}"
+  },
+  "richText": {
+    "toolbar": "Mətn alətləri",
+    "h2": "Başlıq 2",
+    "h3": "Başlıq 3",
+    "bold": "Qalın",
+    "italic": "Kursiv",
+    "bullets": "Siyahı",
+    "numbers": "Nömrəli siyahı",
+    "quote": "Sitat",
+    "link": "Link",
+    "unlink": "Linki sil",
+    "image": "Şəkil",
+    "linkPrompt": "Link ünvanı (boş = sil)",
+    "count": "{{count}} / {{limit}}"
   }
 }

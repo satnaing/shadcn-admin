@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { FormImageField } from '@/components/forms/form-image-field'
 import { FormInputField } from '@/components/forms/form-input-field'
 import { FormSelectField } from '@/components/forms/form-select-field'
-import { FormTextareaField } from '@/components/forms/form-textarea-field'
+import { FormRichTextField } from '@/components/forms/form-richtext-field'
 import type { ProductFormValues } from '../data/preorder.schema'
 import { usePreorderLookups } from '../hooks/use-preorder'
 import { PreorderFormSection } from './preorder-form-section'
@@ -90,11 +90,10 @@ export function PreorderProductGeneral({
         name='thumbnail'
         label={t('form.thumbnail')}
       />
-      <FormTextareaField
+      <FormRichTextField
         form={form}
         name='description'
         label={t('form.descriptionField')}
-        rows={6}
       />
     </PreorderFormSection>
   )

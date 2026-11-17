@@ -5,7 +5,7 @@ import { EntityFormDialog } from '@/components/forms/entity-form-dialog'
 import { FormImageField } from '@/components/forms/form-image-field'
 import { FormInputField } from '@/components/forms/form-input-field'
 import { FormSelectField } from '@/components/forms/form-select-field'
-import { FormTextareaField } from '@/components/forms/form-textarea-field'
+import { FormRichTextField } from '@/components/forms/form-richtext-field'
 import { type ManualFormValues, manualDefaults, manualSchema } from '../data/payments.schema'
 import { MANUAL_TYPES, type ManualMethod } from '../data/payments.type'
 import { usePaymentsMutations } from '../hooks/use-payments-mutations'
@@ -59,7 +59,7 @@ export function PaymentsManualDialog({ open, onOpenChange, method }: Props) {
       />
       <FormInputField form={form} name='heading' label={t('manual.form.heading')} />
       <FormImageField form={form} name='photo' label={t('manual.form.photo')} />
-      <FormTextareaField form={form} name='description' rows={4} label={t('manual.form.descriptionField')} />
+      <FormRichTextField form={form} name='description' label={t('manual.form.descriptionField')} />
       {isBank && <PaymentsBankRows form={form} />}
     </EntityFormDialog>
   )

@@ -147,5 +147,20 @@
     "search": "Search...",
     "noResults": "No results",
     "remove": "Remove {{name}}"
+  },
+  "richText": {
+    "toolbar": "Text tools",
+    "h2": "Heading 2",
+    "h3": "Heading 3",
+    "bold": "Bold",
+    "italic": "Italic",
+    "bullets": "Bullet list",
+    "numbers": "Numbered list",
+    "quote": "Quote",
+    "link": "Link",
+    "unlink": "Remove link",
+    "image": "Image",
+    "linkPrompt": "Link URL (empty = remove)",
+    "count": "{{count}} / {{limit}}"
   }
 }

@@ -147,5 +147,20 @@
     "search": "Ara...",
     "noResults": "Sonuç bulunamadı",
     "remove": "Kaldır: {{name}}"
+  },
+  "richText": {
+    "toolbar": "Metin araçları",
+    "h2": "Başlık 2",
+    "h3": "Başlık 3",
+    "bold": "Kalın",
+    "italic": "İtalik",
+    "bullets": "Madde listesi",
+    "numbers": "Numaralı liste",
+    "quote": "Alıntı",
+    "link": "Bağlantı",
+    "unlink": "Bağlantıyı kaldır",
+    "image": "Görsel",
+    "linkPrompt": "Bağlantı adresi (boş = kaldır)",
+    "count": "{{count}} / {{limit}}"
   }
 }

@@ -5,7 +5,7 @@ import { FormInputField } from '@/components/forms/form-input-field'
 import { FormTagField } from '@/components/forms/form-tag-field'
 import { FormSectionCard } from '@/components/forms/form-section-card'
 import { FormSelectField } from '@/components/forms/form-select-field'
-import { FormTextareaField } from '@/components/forms/form-textarea-field'
+import { FormRichTextField } from '@/components/forms/form-richtext-field'
 import type { ProductFormValues } from '../data/wholesale.schema'
 import { useWholesaleLookups } from '../hooks/use-wholesale'
 
@@ -80,11 +80,10 @@ export function WholesaleFormGeneral({
         name='thumbnail'
         label={t('form.thumbnail')}
       />
-      <FormTextareaField
+      <FormRichTextField
         form={form}
         name='description'
         label={t('form.descriptionField')}
-        rows={6}
       />
     </FormSectionCard>
   )

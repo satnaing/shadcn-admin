@@ -1,3 +1,4 @@
+import { RichTextEditor } from '@/components/shared/rich-text/rich-text-editor'
 import type { UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -37,7 +38,19 @@ export function BlogLocaleFields({ form, locale }: Props) {
       {text('title')}
       <SlugField form={form} locale={locale} label={t('form.slug')} />
       {text('short_description', 2)}
-      {text('content', 12)}
+      <FormField
+        control={form.control}
+        name={`translations.${locale}.content` as `translations.az.content`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{t('form.content')}</FormLabel>
+            <FormControl>
+              <RichTextEditor value={field.value} onChange={field.onChange} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
       <SeoFields form={form} namePrefix={`translations.${locale}`} />
     </div>
   )

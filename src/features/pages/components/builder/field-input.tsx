@@ -1,3 +1,4 @@
+import { RichTextEditor } from '@/components/shared/rich-text/rich-text-editor'
 import { useTranslation } from 'react-i18next'
 import { ImagePicker } from '@/components/image-picker'
 import { Input } from '@/components/ui/input'
@@ -45,8 +46,10 @@ export function FieldInput({ def, value, onChange, lang }: FieldInputProps) {
         {def.label}
         {def.localized ? <span className='rounded bg-muted px-1 text-[10px] uppercase'>{lang}</span> : null}
       </Label>
-      {widget === 'textarea' || widget === 'richtext' ? (
-        <Textarea id={id} rows={widget === 'richtext' ? 6 : 3} value={text} onChange={(e) => setText(e.target.value)} />
+      {widget === 'richtext' ? (
+        <RichTextEditor id={id} value={text} onChange={setText} />
+      ) : widget === 'textarea' ? (
+        <Textarea id={id} rows={3} value={text} onChange={(e) => setText(e.target.value)} />
       ) : widget === 'number' ? (
         <Input id={id} type='number' value={asText(value)} onChange={(e) => onChange(e.target.value === '' ? 0 : Number(e.target.value))} />
       ) : widget === 'switch' ? (
