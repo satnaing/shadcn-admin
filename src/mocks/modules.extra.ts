@@ -13,7 +13,6 @@ const rows: Row[] = [
   ['settings', 'Settings', 'Languages, currency, e-mail and SEO', 'Settings', true, true, []],
   ['coupon', 'Coupons & deals', 'Coupons, flash deals and category discounts', 'Ticket', false, true, ['order']],
   ['auction', 'Auction', 'Auction products and bidding', 'Gavel', false, false, ['product'], false],
-  ['map-provider', 'Map provider', 'Maps for pickup points and delivery', 'Map', false, false, [], false],
   ['google-one-tap', 'Google One Tap', 'One-tap sign-in with Google', 'KeyRound', false, false, ['identity'], false],
 ]
 

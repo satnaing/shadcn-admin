@@ -31,6 +31,8 @@
   "otpGateways": "SMS provayderləri",
   "otpTemplates": "SMS şablonları",
   "otpBulkSms": "Kütləvi SMS",
+  "mapProvider": "Xəritə provayderi",
+  "mapProviderSettings": "Xəritə ayarları",
   "wholesale": "Topdan satış",
   "wholesaleProducts": "Topdan məhsullar",
   "wholesaleCreate": "Topdan məhsul əlavə et",

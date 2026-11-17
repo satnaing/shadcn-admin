@@ -163,6 +163,10 @@ export const PERMISSIONS = {
     CASH_REPORT: 'courier.cash_report',
     EARNINGS: 'courier.earnings',
   },
+  MAP_PROVIDER: {
+    INDEX: 'map_provider.index',
+    MANAGE: 'map_provider.manage',
+  },
   OTP: {
     INDEX: 'otp.index',
     SETTINGS_MANAGE: 'otp.settings_manage',

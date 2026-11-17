@@ -35,6 +35,7 @@ import { Route as AuthenticatedAdminPaymentsIndexRouteImport } from './routes/_a
 import { Route as AuthenticatedAdminPagesIndexRouteImport } from './routes/_authenticated/admin/pages/index'
 import { Route as AuthenticatedAdminOtpIndexRouteImport } from './routes/_authenticated/admin/otp/index'
 import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_authenticated/admin/modules/index'
+import { Route as AuthenticatedAdminMapProviderIndexRouteImport } from './routes/_authenticated/admin/map-provider/index'
 import { Route as AuthenticatedAdminCourierIndexRouteImport } from './routes/_authenticated/admin/courier/index'
 import { Route as AuthenticatedAdminClubPointIndexRouteImport } from './routes/_authenticated/admin/club-point/index'
 import { Route as AuthenticatedAdminClassifiedIndexRouteImport } from './routes/_authenticated/admin/classified/index'
@@ -254,6 +255,12 @@ const AuthenticatedAdminModulesIndexRoute =
   AuthenticatedAdminModulesIndexRouteImport.update({
     id: '/modules/',
     path: '/modules/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminMapProviderIndexRoute =
+  AuthenticatedAdminMapProviderIndexRouteImport.update({
+    id: '/map-provider/',
+    path: '/map-provider/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminCourierIndexRoute =
@@ -794,6 +801,7 @@ export interface FileRoutesByFullPath {
   '/admin/classified/': typeof AuthenticatedAdminClassifiedIndexRoute
   '/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
   '/admin/courier/': typeof AuthenticatedAdminCourierIndexRoute
+  '/admin/map-provider/': typeof AuthenticatedAdminMapProviderIndexRoute
   '/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/otp/': typeof AuthenticatedAdminOtpIndexRoute
   '/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
@@ -897,6 +905,7 @@ export interface FileRoutesByTo {
   '/admin/classified': typeof AuthenticatedAdminClassifiedIndexRoute
   '/admin/club-point': typeof AuthenticatedAdminClubPointIndexRoute
   '/admin/courier': typeof AuthenticatedAdminCourierIndexRoute
+  '/admin/map-provider': typeof AuthenticatedAdminMapProviderIndexRoute
   '/admin/modules': typeof AuthenticatedAdminModulesIndexRoute
   '/admin/otp': typeof AuthenticatedAdminOtpIndexRoute
   '/admin/pages': typeof AuthenticatedAdminPagesIndexRoute
@@ -1003,6 +1012,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/classified/': typeof AuthenticatedAdminClassifiedIndexRoute
   '/_authenticated/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
   '/_authenticated/admin/courier/': typeof AuthenticatedAdminCourierIndexRoute
+  '/_authenticated/admin/map-provider/': typeof AuthenticatedAdminMapProviderIndexRoute
   '/_authenticated/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
   '/_authenticated/admin/otp/': typeof AuthenticatedAdminOtpIndexRoute
   '/_authenticated/admin/pages/': typeof AuthenticatedAdminPagesIndexRoute
@@ -1109,6 +1119,7 @@ export interface FileRouteTypes {
     | '/admin/classified/'
     | '/admin/club-point/'
     | '/admin/courier/'
+    | '/admin/map-provider/'
     | '/admin/modules/'
     | '/admin/otp/'
     | '/admin/pages/'
@@ -1212,6 +1223,7 @@ export interface FileRouteTypes {
     | '/admin/classified'
     | '/admin/club-point'
     | '/admin/courier'
+    | '/admin/map-provider'
     | '/admin/modules'
     | '/admin/otp'
     | '/admin/pages'
@@ -1317,6 +1329,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/classified/'
     | '/_authenticated/admin/club-point/'
     | '/_authenticated/admin/courier/'
+    | '/_authenticated/admin/map-provider/'
     | '/_authenticated/admin/modules/'
     | '/_authenticated/admin/otp/'
     | '/_authenticated/admin/pages/'
@@ -1540,6 +1553,13 @@ declare module '@tanstack/react-router' {
       path: '/modules'
       fullPath: '/admin/modules/'
       preLoaderRoute: typeof AuthenticatedAdminModulesIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/map-provider/': {
+      id: '/_authenticated/admin/map-provider/'
+      path: '/map-provider'
+      fullPath: '/admin/map-provider/'
+      preLoaderRoute: typeof AuthenticatedAdminMapProviderIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/courier/': {
@@ -2149,6 +2169,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminClassifiedIndexRoute: typeof AuthenticatedAdminClassifiedIndexRoute
   AuthenticatedAdminClubPointIndexRoute: typeof AuthenticatedAdminClubPointIndexRoute
   AuthenticatedAdminCourierIndexRoute: typeof AuthenticatedAdminCourierIndexRoute
+  AuthenticatedAdminMapProviderIndexRoute: typeof AuthenticatedAdminMapProviderIndexRoute
   AuthenticatedAdminModulesIndexRoute: typeof AuthenticatedAdminModulesIndexRoute
   AuthenticatedAdminOtpIndexRoute: typeof AuthenticatedAdminOtpIndexRoute
   AuthenticatedAdminPagesIndexRoute: typeof AuthenticatedAdminPagesIndexRoute
@@ -2277,6 +2298,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminClubPointIndexRoute:
       AuthenticatedAdminClubPointIndexRoute,
     AuthenticatedAdminCourierIndexRoute: AuthenticatedAdminCourierIndexRoute,
+    AuthenticatedAdminMapProviderIndexRoute:
+      AuthenticatedAdminMapProviderIndexRoute,
     AuthenticatedAdminModulesIndexRoute: AuthenticatedAdminModulesIndexRoute,
     AuthenticatedAdminOtpIndexRoute: AuthenticatedAdminOtpIndexRoute,
     AuthenticatedAdminPagesIndexRoute: AuthenticatedAdminPagesIndexRoute,

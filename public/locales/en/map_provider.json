@@ -1,0 +1,41 @@
+{
+  "title": "Map provider",
+  "description": "Choose the map used by address pickers, set the provider key and the default location.",
+  "settings": {
+    "title": "Map settings",
+    "description": "One provider serves checkout, addresses, seller shop and delivery configuration.",
+    "enabled": "Map enabled",
+    "enabledHint": "Switched off, address pickers show no map.",
+    "provider": "Map provider",
+    "google_api_key": "Google Maps API key",
+    "maptiler_key": "MapTiler key",
+    "yandex_key": "Yandex Maps key",
+    "osmNoKey": "OpenStreetMap is free and needs no key."
+  },
+  "providers": {
+    "osm": "OpenStreetMap (free)",
+    "maptiler": "MapTiler (free tier)",
+    "google": "Google Maps",
+    "yandex": "Yandex Maps"
+  },
+  "location": {
+    "title": "Default location",
+    "description": "The centre address pickers open on. Leave both empty for no default.",
+    "latitude": "Latitude",
+    "longitude": "Longitude"
+  },
+  "validation": {
+    "required": "Required",
+    "max255": "At most 255 characters",
+    "latitude": "Latitude must be between -90 and 90",
+    "longitude": "Longitude must be between -180 and 180"
+  },
+  "actions": {
+    "save": "Save",
+    "saving": "Saving…"
+  },
+  "toast": {
+    "saved": "Settings saved",
+    "error": "Could not save the settings"
+  }
+}

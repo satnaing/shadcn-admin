@@ -31,6 +31,8 @@
   "otpGateways": "SMS sağlayıcıları",
   "otpTemplates": "SMS şablonları",
   "otpBulkSms": "Toplu SMS",
+  "mapProvider": "Harita sağlayıcı",
+  "mapProviderSettings": "Harita ayarları",
   "wholesale": "Toptan satış",
   "wholesaleProducts": "Toptan ürünler",
   "wholesaleCreate": "Toptan ürün ekle",

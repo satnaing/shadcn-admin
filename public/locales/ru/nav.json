@@ -31,6 +31,8 @@
   "otpGateways": "SMS-шлюзы",
   "otpTemplates": "SMS-шаблоны",
   "otpBulkSms": "Массовая SMS-рассылка",
+  "mapProvider": "Картографический провайдер",
+  "mapProviderSettings": "Настройки карты",
   "wholesale": "Опт",
   "wholesaleProducts": "Оптовые товары",
   "wholesaleCreate": "Добавить оптовый товар",

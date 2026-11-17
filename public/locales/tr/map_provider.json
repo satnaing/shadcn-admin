@@ -1,0 +1,41 @@
+{
+  "title": "Harita sağlayıcı",
+  "description": "Adres seçicilerde kullanılan haritayı, sağlayıcı anahtarını ve varsayılan konumu seçin.",
+  "settings": {
+    "title": "Harita ayarları",
+    "description": "Tek bir sağlayıcı ödeme, adresler, satıcı mağazası ve teslimat yapılandırmasına hizmet eder.",
+    "enabled": "Harita etkin",
+    "enabledHint": "Kapalıyken adres seçicilerde harita gösterilmez.",
+    "provider": "Harita sağlayıcı",
+    "google_api_key": "Google Maps API anahtarı",
+    "maptiler_key": "MapTiler anahtarı",
+    "yandex_key": "Yandex Maps anahtarı",
+    "osmNoKey": "OpenStreetMap ücretsizdir ve anahtar gerektirmez."
+  },
+  "providers": {
+    "osm": "OpenStreetMap (ücretsiz)",
+    "maptiler": "MapTiler (ücretsiz plan)",
+    "google": "Google Maps",
+    "yandex": "Yandex Maps"
+  },
+  "location": {
+    "title": "Varsayılan konum",
+    "description": "Adres seçicilerin açıldığı merkez. Varsayılan istemiyorsanız ikisini de boş bırakın.",
+    "latitude": "Enlem",
+    "longitude": "Boylam"
+  },
+  "validation": {
+    "required": "Zorunlu",
+    "max255": "En fazla 255 karakter",
+    "latitude": "Enlem -90 ile 90 arasında olmalıdır",
+    "longitude": "Boylam -180 ile 180 arasında olmalıdır"
+  },
+  "actions": {
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…"
+  },
+  "toast": {
+    "saved": "Ayarlar kaydedildi",
+    "error": "Ayarlar kaydedilemedi"
+  }
+}

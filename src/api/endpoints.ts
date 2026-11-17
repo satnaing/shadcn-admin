@@ -195,6 +195,10 @@ export const ENDPOINTS = {
     CASH: `${ADMIN}/courier/cash`,
     EARNINGS: `${ADMIN}/courier/earnings`,
   },
+  MAP_PROVIDER: {
+    SETTINGS: `${ADMIN}/map-provider/settings`,
+    LOCATION: `${ADMIN}/map-provider/location`,
+  },
   OTP: {
     SETTINGS: `${ADMIN}/otp/settings`,
     GATEWAYS: `${ADMIN}/otp/gateways`,

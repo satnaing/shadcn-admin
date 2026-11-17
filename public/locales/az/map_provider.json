@@ -1,0 +1,41 @@
+{
+  "title": "Xəritə provayderi",
+  "description": "Ünvan seçicilərində işlənən xəritəni, provayder açarını və standart yeri seçin.",
+  "settings": {
+    "title": "Xəritə ayarları",
+    "description": "Bir provayder ödəniş, ünvanlar, satıcı mağazası və çatdırılma konfiqurasiyasına xidmət edir.",
+    "enabled": "Xəritə aktivdir",
+    "enabledHint": "Söndürüləndə ünvan seçicilərində xəritə göstərilmir.",
+    "provider": "Xəritə provayderi",
+    "google_api_key": "Google Maps API açarı",
+    "maptiler_key": "MapTiler açarı",
+    "yandex_key": "Yandex Maps açarı",
+    "osmNoKey": "OpenStreetMap pulsuzdur və açar tələb etmir."
+  },
+  "providers": {
+    "osm": "OpenStreetMap (pulsuz)",
+    "maptiler": "MapTiler (pulsuz plan)",
+    "google": "Google Maps",
+    "yandex": "Yandex Maps"
+  },
+  "location": {
+    "title": "Standart yer",
+    "description": "Ünvan seçicilərinin açıldığı mərkəz. Standart yer istəmirsinizsə hər ikisini boş buraxın.",
+    "latitude": "Enlik",
+    "longitude": "Uzunluq"
+  },
+  "validation": {
+    "required": "Məcburidir",
+    "max255": "Ən çox 255 simvol",
+    "latitude": "Enlik -90 ilə 90 arasında olmalıdır",
+    "longitude": "Uzunluq -180 ilə 180 arasında olmalıdır"
+  },
+  "actions": {
+    "save": "Saxla",
+    "saving": "Saxlanır…"
+  },
+  "toast": {
+    "saved": "Ayarlar saxlanıldı",
+    "error": "Ayarlar saxlanıla bilmədi"
+  }
+}

@@ -31,6 +31,8 @@
   "otpGateways": "SMS gateways",
   "otpTemplates": "SMS templates",
   "otpBulkSms": "Bulk SMS",
+  "mapProvider": "Map provider",
+  "mapProviderSettings": "Map settings",
   "wholesale": "Wholesale",
   "wholesaleProducts": "Wholesale products",
   "wholesaleCreate": "Add wholesale product",
