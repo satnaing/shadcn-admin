@@ -392,3 +392,6 @@ Details: `docs/sweep-2026-11-17.md`.
 - Write flows clicked live: seller-package, classified, map-provider, wholesale, qrcode-event, preorder, courier, payments, affiliate (pay), otp, ai (10/14 modules; refund disputes not drivable, pos / club-point not repeated).
 - Fixed: `FormImageField` swallowed its validation message (silent failed save); numeric search params dropped by `z.string().catch` (qr batches/codes/logs, blogs).
 - Added: collapsible sidebar group headers (user request).
+
+## Prompt 06 — shared components (2026-11-17)
+Details: `docs/shared-components.md`. TagInput, EntityPicker, MediaPicker (`/admin/media` mock), RichTextEditor (TipTap), MapPicker (Leaflet) in `src/components/shared/`; existing forms switched over (see doc). Packages added: `@tiptap/*`, `leaflet`, `react-leaflet`, `@types/leaflet`. Small fixes: seller seed rights, i18n namespace preload, dev mock persistence (`?mockReset=1`). Checks: tsc, eslint (0 errors), build, 321 node tests.

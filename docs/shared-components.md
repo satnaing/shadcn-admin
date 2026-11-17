@@ -1,6 +1,6 @@
 # Shared components (`src/components/shared/`, Prompt 06)
 
-Status: **TagInput, EntityPicker, MediaPicker done.** RichTextEditor and MapPicker are **not built** — they need `@tiptap/*` and `leaflet`/`react-leaflet`, and the package install was refused by the permission layer in this session (see "Blocked").
+Status: **all five done** (TagInput, EntityPicker, MediaPicker, RichTextEditor, MapPicker).
 
 ## TagInput — `shared/tag-input.tsx` (+ `tag-input.logic.ts`, RHF: `forms/form-tag-field.tsx`)
 Chips input. Enter / comma / blur adds, Backspace on empty removes the last, × removes one. Case-insensitive duplicate check, `maxLength` (default 50), `maxTags`.
@@ -29,14 +29,23 @@ Single-image forms keep a URL string: `ImagePicker` (`components/image-picker`) 
 API: `GET /admin/media?q&type&page`, `POST /admin/media` (multipart `file`) → `{data: MediaRef}`, `DELETE /admin/media/:id` (`api/modules/media.api.ts`, mock `mocks/media.routes.ts`, 18 images + 3 PDFs). Upload URLs in the mock are blob URLs (valid for the tab's lifetime only). i18n: `media:{search,upload,library.*,picker.*}`.
 No form has a multi-image gallery or PDF spec field yet (preorder / wholesale have only a thumbnail) — `FormMediaField multiple` is ready for them but adding the fields needs schema + API fields, which this task does not define.
 
-## Blocked
-| Component | Needs | State |
-|---|---|---|
-| RichTextEditor (TipTap) | `@tiptap/react`, `@tiptap/starter-kit`, `@tiptap/pm`, extension-link / image / placeholder / character-count | not built |
-| MapPicker (Leaflet) | `leaflet`, `react-leaflet`, `@types/leaflet` | not built |
-Both were approved in the prompt, but `pnpm add` was denied by the sandbox permission layer. After the packages are added: RichTextEditor goes into `shared/rich-text/` (use `MediaPicker` for the image button; sanitize the HTML output on change), MapPicker lazy-loaded from `shared/map/` (settings from `GET /admin/map-provider/settings`, OSM default).
-
 ## Other changes in this task
 - Dev mock persistence: `mocks/persist.ts` — collections survive a hard reload in dev (sessionStorage, keyed by creation order); `?mockReset=1` clears; disabled in tests/production. Non-collection mock state (e.g. module toggles, settings objects) is not persisted.
 - `/admin` route `beforeLoad` preloads the section's i18n namespace (`shared/i18n/route-namespaces.ts`): no raw-key flash.
 - Seller seed: no `classified.packages*`, no wholesale in-house / sellers lists (`mocks/auth.ts`, test `mocks/auth.node.test.ts`).
+
+## RichTextEditor — `shared/rich-text/` (`rich-text-editor.tsx`, `rich-text-toolbar.tsx`, `rich-text.logic.ts`; RHF: `forms/form-richtext-field.tsx`)
+TipTap (StarterKit + Image + Placeholder + CharacterCount). Toolbar: H2/H3, bold, italic, bullet/numbered list, quote, link (prompt), image (opens the MediaPicker library). `value`/`onChange` are HTML; output is **sanitized** (allow-list tags/attributes, `javascript:`/`data:` URLs removed, `''` when empty). Props: `readOnly`, `limit` (text characters), `placeholder`. TipTap v3's StarterKit already contains Link, so `@tiptap/extension-link` is installed but not imported.
+```tsx
+<FormRichTextField form={form} name='description' label={t('form.descriptionField')} limit={5000} />
+<RichTextEditor value={html} onChange={setHtml} readOnly />
+```
+Used by: payments manual-method description, preorder product description, wholesale product description, blog content (per locale), page-builder `richtext` field. i18n `common:richText.*`. Tables are not offered (by spec).
+Live check: bold + bullet list rendered, pasted `<script>` / `onclick` / `javascript:` link removed, dark theme OK, 0 console errors.
+
+## MapPicker — `shared/map/` (`map-picker.tsx` lazy → `map-picker-canvas.tsx`, `map.logic.ts`)
+Leaflet + react-leaflet, CSS pin marker (no PNG assets), click or drag to move, address search via `GET /admin/map-provider/geocode?q=` (mock: 9 Azerbaijani places) → `{data: {label, lat, lng}[]}`. Value `{lat, lng} | null` (`parseLatLng` bridges text inputs). Tiles: OpenStreetMap by default; MapTiler when `provider=maptiler` and a real key; Google / Yandex (own SDKs) or a masked key fall back to OSM. The admin settings endpoint masks keys, so a public subset endpoint is needed for real MapTiler tiles (open question).
+Used by: map-provider default location card, courier pickup card. Loaded with `React.lazy` (separate 153 kB chunk, only fetched when a picker is rendered). Live check: search → coordinates filled, map click moves the point, save works, 0 console errors (tile images load from the network; only part of them had loaded in the check).
+
+## Bundle (build)
+Entry chunk `index` 234.5 → 235.4 kB (+0.9 kB). New route-split chunks: `rich-text-editor` 418 kB (131.97 kB gzip, loaded by screens with a rich-text field), `map-picker-canvas` 153 kB (45 kB gzip, lazy).
