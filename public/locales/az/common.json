@@ -135,5 +135,12 @@
     "importSuccess": "Məlumatlar uğurla idxal edildi",
     "exportError": "İxrac zamanı xəta baş verdi",
     "importError": "İdxal zamanı xəta baş verdi"
+  },
+  "tagInput": {
+    "remove": "Etiketi sil: {{tag}}",
+    "empty": "Etiket boş ola bilməz",
+    "duplicate": "Bu etiket artıq var",
+    "tooLong": "Etiket ən çox {{max}} simvol ola bilər",
+    "tooMany": "Ən çox {{max}} etiket əlavə edilə bilər"
   }
 }

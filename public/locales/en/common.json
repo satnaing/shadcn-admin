@@ -135,5 +135,12 @@
     "importSuccess": "Data imported successfully",
     "exportError": "Error occurred during export",
     "importError": "Error occurred during import"
+  },
+  "tagInput": {
+    "remove": "Remove {{tag}}",
+    "empty": "Tag is empty",
+    "duplicate": "This tag already exists",
+    "tooLong": "A tag can have at most {{max}} characters",
+    "tooMany": "At most {{max}} tags are allowed"
   }
 }

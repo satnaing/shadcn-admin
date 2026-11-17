@@ -2,6 +2,7 @@ import type { UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { FormImageField } from '@/components/forms/form-image-field'
 import { FormInputField } from '@/components/forms/form-input-field'
+import { FormTagField } from '@/components/forms/form-tag-field'
 import { FormSectionCard } from '@/components/forms/form-section-card'
 import { FormSelectField } from '@/components/forms/form-select-field'
 import { FormTextareaField } from '@/components/forms/form-textarea-field'
@@ -52,7 +53,7 @@ export function WholesaleFormGeneral({
           hint={t('form.minQtyHint')}
         />
         <FormInputField form={form} name='barcode' label={t('form.barcode')} />
-        <FormInputField
+        <FormTagField
           form={form}
           name='tags'
           label={t('form.tags')}

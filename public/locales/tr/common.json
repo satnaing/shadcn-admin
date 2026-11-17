@@ -135,5 +135,12 @@
     "importSuccess": "Veriler başarıyla içe aktarıldı",
     "exportError": "Dışa aktarma sırasında hata oluştu",
     "importError": "İçe aktarma sırasında hata oluştu"
+  },
+  "tagInput": {
+    "remove": "{{tag}} etiketini kaldır",
+    "empty": "Etiket boş olamaz",
+    "duplicate": "Bu etiket zaten var",
+    "tooLong": "Etiket en fazla {{max}} karakter olabilir",
+    "tooMany": "En fazla {{max}} etiket eklenebilir"
   }
 }

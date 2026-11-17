@@ -1,3 +1,5 @@
+import { TagInput } from '@/components/shared/tag-input'
+import { joinTags, splitTags } from '@/components/shared/tag-input.logic'
 import type { UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -63,7 +65,11 @@ export function BlogFormAside({ form }: { form: UseFormReturn<BlogFormValues> })
           <FormItem>
             <FormLabel>{t('form.tags')}</FormLabel>
             <FormControl>
-              <Input placeholder={t('form.tagsPlaceholder')} {...field} />
+              <TagInput
+                placeholder={t('form.tagsPlaceholder')}
+                value={splitTags(field.value)}
+                onChange={(tags) => field.onChange(joinTags(tags))}
+              />
             </FormControl>
           </FormItem>
         )}
