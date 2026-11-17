@@ -96,5 +96,7 @@
   "aiPrompts": "Prompt templates",
   "aiUsage": "Token usage",
   "aiTranslate": "AI translation",
-  "classifiedPackages": "Classified packages"
+  "classifiedPackages": "Classified packages",
+  "sellerPackage": "Seller packages",
+  "sellerPackages": "Packages"
 }

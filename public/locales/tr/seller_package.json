@@ -1,0 +1,69 @@
+{
+  "toast": {
+    "error": "Bir hata oluştu",
+    "created": "Paket oluşturuldu",
+    "updated": "Paket güncellendi",
+    "deleted": "Paket silindi"
+  },
+  "actions": {
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor..."
+  },
+  "title": "Satıcı paketleri",
+  "description": "Satıcıların mağaza limitlerini artırmak için aldığı abonelik paketleri. Çevrimdışı ödeme talepleri Ödemeler modülünde yönetilir.",
+  "new": "Yeni paket",
+  "empty": "Henüz paket yok",
+  "deleteTitle": "Paketi sil",
+  "deleteDesc": "\"{{name}}\" paketi silinsin mi? Satın alan mağazalar süresi bitene kadar mevcut limitlerini korur.",
+  "card": {
+    "free": "Ücretsiz",
+    "uploads": "{{count}} ürün yükleme",
+    "preorderUploads": "{{count}} ön sipariş ürünü yükleme",
+    "days": "{{count}} gün",
+    "sellers": "{{count}} satıcı"
+  },
+  "form": {
+    "createTitle": "Yeni satıcı paketi",
+    "editTitle": "Satıcı paketini düzenle",
+    "description": "Dillere göre ad, fiyat, süre ve paketin mağazaya verdiği olanaklar.",
+    "name": "Ad ({{lang}})",
+    "amount": "Fiyat",
+    "duration": "Süre (gün)",
+    "durationHint": "Satın alımdan sonra paketin kaç gün aktif kalacağı.",
+    "productUploadLimit": "Ürün yükleme limiti",
+    "preorderUploadLimit": "Ön sipariş ürünü yükleme limiti",
+    "logo": "Paket logosu",
+    "limitsTitle": "Mağaza limitleri",
+    "limitsHint": "Yükleme sayılarının ötesinde. -1 sınırsız demektir."
+  },
+  "limits": {
+    "digital_product_limit": "Dijital ürünler",
+    "staff_limit": "Personel hesapları",
+    "storage_mb": "Depolama (MB)",
+    "flash_deal_limit": "Flaş kampanyalar",
+    "coupon_limit": "Kuponlar",
+    "promo_product_limit": "Öne çıkarılan ürünler",
+    "featured_slots": "Öne çıkan alanlar",
+    "monthly_order_limit": "Aylık sipariş sayısı",
+    "support_priority": "Destek önceliği",
+    "wholesale_enabled": "Toptan satış",
+    "shop_design_enabled": "Mağaza tasarımı",
+    "pos_enabled": "POS",
+    "custom_domain_enabled": "Özel alan adı"
+  },
+  "priority": {
+    "low": "Düşük",
+    "normal": "Normal",
+    "high": "Yüksek"
+  },
+  "validation": {
+    "max255": "En fazla 255 karakter",
+    "number": "Bir sayı girin",
+    "min0": "0 veya daha fazla olmalı",
+    "minUnlimited": "-1 (sınırsız) veya daha fazla olmalı",
+    "minDuration": "En az 1 gün olmalı",
+    "integer": "Tam sayı olmalı"
+  }
+}

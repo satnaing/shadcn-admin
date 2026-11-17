@@ -10,6 +10,7 @@ import { otpManifest } from '@/features/otp/module.manifest'
 import { paymentsManifest } from '@/features/payments/module.manifest'
 import { posManifest } from '@/features/pos/module.manifest'
 import { preorderManifest } from '@/features/preorder/module.manifest'
+import { sellerPackageManifest } from '@/features/seller-package/module.manifest'
 import { refundManifest } from '@/features/refund/module.manifest'
 import { wholesaleManifest } from '@/features/wholesale/module.manifest'
 
@@ -28,6 +29,7 @@ export const mockModules: ModuleRaw[] = [
   { ...mapProviderManifest, enabled: true },
   { ...paymentsManifest, enabled: true },
   { ...aiManifest, enabled: true },
+  { ...sellerPackageManifest, enabled: true },
   { id: 'theme-xshop', name: 'Theme xShop', description: 'xShop storefront theme package', version: '1.0.0', icon: 'Palette', required: false, enabled: true, requires: [] },
   { id: 'theme-senseihost', name: 'Theme SenseiHost', description: 'SenseiHost storefront theme package', version: '1.0.0', icon: 'Palette', required: false, enabled: false, requires: [] },
 ]

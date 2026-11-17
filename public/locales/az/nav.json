@@ -96,5 +96,7 @@
   "aiPrompts": "Prompt şablonları",
   "aiUsage": "Token istifadəsi",
   "aiTranslate": "AI tərcümə",
-  "classifiedPackages": "Elan paketləri"
+  "classifiedPackages": "Elan paketləri",
+  "sellerPackage": "Satıcı paketləri",
+  "sellerPackages": "Paketlər"
 }

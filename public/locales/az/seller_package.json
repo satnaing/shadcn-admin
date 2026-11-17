@@ -1,0 +1,69 @@
+{
+  "toast": {
+    "error": "Xəta baş verdi",
+    "created": "Paket yaradıldı",
+    "updated": "Paket yeniləndi",
+    "deleted": "Paket silindi"
+  },
+  "actions": {
+    "edit": "Redaktə et",
+    "delete": "Sil",
+    "save": "Saxla",
+    "saving": "Saxlanılır..."
+  },
+  "title": "Satıcı paketləri",
+  "description": "Satıcıların mağaza limitlərini artırmaq üçün aldığı abunə paketləri. Oflayn ödəniş sorğuları Ödənişlər modulunda həll olunur.",
+  "new": "Yeni paket",
+  "empty": "Hələ paket yoxdur",
+  "deleteTitle": "Paketi sil",
+  "deleteDesc": "\"{{name}}\" paketi silinsin? Artıq alan mağazalar müddəti bitənə qədər cari limitlərini saxlayır.",
+  "card": {
+    "free": "Pulsuz",
+    "uploads": "{{count}} məhsul yükləmə",
+    "preorderUploads": "{{count}} ön sifariş məhsulu yükləmə",
+    "days": "{{count}} gün",
+    "sellers": "{{count}} satıcı"
+  },
+  "form": {
+    "createTitle": "Yeni satıcı paketi",
+    "editTitle": "Satıcı paketini redaktə et",
+    "description": "Dillər üzrə ad, qiymət, müddət və paketin mağazaya verdiyi imkanlar.",
+    "name": "Ad ({{lang}})",
+    "amount": "Qiymət",
+    "duration": "Müddət (gün)",
+    "durationHint": "Alışdan sonra paketin neçə gün aktiv qalması.",
+    "productUploadLimit": "Məhsul yükləmə limiti",
+    "preorderUploadLimit": "Ön sifariş məhsulu yükləmə limiti",
+    "logo": "Paket loqosu",
+    "limitsTitle": "Mağaza limitləri",
+    "limitsHint": "Yükləmə saylarından əlavə. -1 limitsiz deməkdir."
+  },
+  "limits": {
+    "digital_product_limit": "Rəqəmsal məhsullar",
+    "staff_limit": "İşçi hesabları",
+    "storage_mb": "Yaddaş (MB)",
+    "flash_deal_limit": "Flash kampaniyalar",
+    "coupon_limit": "Kuponlar",
+    "promo_product_limit": "Təşviq olunan məhsullar",
+    "featured_slots": "Önə çıxarılan yerlər",
+    "monthly_order_limit": "Aylıq sifariş sayı",
+    "support_priority": "Dəstək prioriteti",
+    "wholesale_enabled": "Topdan satış",
+    "shop_design_enabled": "Mağaza dizaynı",
+    "pos_enabled": "POS",
+    "custom_domain_enabled": "Xüsusi domen"
+  },
+  "priority": {
+    "low": "Aşağı",
+    "normal": "Normal",
+    "high": "Yüksək"
+  },
+  "validation": {
+    "max255": "Ən çox 255 simvol",
+    "number": "Ədəd daxil edin",
+    "min0": "0 və ya daha çox olmalıdır",
+    "minUnlimited": "-1 (limitsiz) və ya daha çox olmalıdır",
+    "minDuration": "Ən azı 1 gün olmalıdır",
+    "integer": "Tam ədəd olmalıdır"
+  }
+}

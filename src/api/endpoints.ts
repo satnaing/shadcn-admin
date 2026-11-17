@@ -152,6 +152,10 @@ export const ENDPOINTS = {
     PRODUCT_FLAG: (id: number | string) => `${ADMIN}/wholesale/products/${id}/flag`,
     PRODUCTS_DELETE: `${ADMIN}/wholesale/products/delete`,
   },
+  SELLER_PACKAGE: {
+    LIST: `${ADMIN}/seller-packages`,
+    ITEM: (id: number | string) => `${ADMIN}/seller-packages/${id}`,
+  },
   CLASSIFIED: {
     PRODUCTS: `${ADMIN}/classified/products`,
     PRODUCT: (id: number | string) => `${ADMIN}/classified/products/${id}`,

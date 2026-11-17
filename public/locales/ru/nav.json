@@ -96,5 +96,7 @@
   "aiPrompts": "Шаблоны промптов",
   "aiUsage": "Расход токенов",
   "aiTranslate": "AI-перевод",
-  "classifiedPackages": "Пакеты объявлений"
+  "classifiedPackages": "Пакеты объявлений",
+  "sellerPackage": "Пакеты продавцов",
+  "sellerPackages": "Пакеты"
 }

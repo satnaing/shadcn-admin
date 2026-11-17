@@ -25,6 +25,7 @@ import { Route as AuthenticatedAdminSplatRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminWholesaleIndexRouteImport } from './routes/_authenticated/admin/wholesale/index'
 import { Route as AuthenticatedAdminThemesIndexRouteImport } from './routes/_authenticated/admin/themes/index'
 import { Route as AuthenticatedAdminSettingsIndexRouteImport } from './routes/_authenticated/admin/settings/index'
+import { Route as AuthenticatedAdminSellerPackageIndexRouteImport } from './routes/_authenticated/admin/seller-package/index'
 import { Route as AuthenticatedAdminRolesIndexRouteImport } from './routes/_authenticated/admin/roles/index'
 import { Route as AuthenticatedAdminRefundIndexRouteImport } from './routes/_authenticated/admin/refund/index'
 import { Route as AuthenticatedAdminQrcodeEventIndexRouteImport } from './routes/_authenticated/admin/qrcode-event/index'
@@ -195,6 +196,12 @@ const AuthenticatedAdminSettingsIndexRoute =
   AuthenticatedAdminSettingsIndexRouteImport.update({
     id: '/settings/',
     path: '/settings/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSellerPackageIndexRoute =
+  AuthenticatedAdminSellerPackageIndexRouteImport.update({
+    id: '/seller-package/',
+    path: '/seller-package/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminRolesIndexRoute =
@@ -812,6 +819,7 @@ export interface FileRoutesByFullPath {
   '/admin/qrcode-event/': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/admin/refund/': typeof AuthenticatedAdminRefundIndexRoute
   '/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
+  '/admin/seller-package/': typeof AuthenticatedAdminSellerPackageIndexRoute
   '/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
   '/admin/wholesale/': typeof AuthenticatedAdminWholesaleIndexRoute
@@ -916,6 +924,7 @@ export interface FileRoutesByTo {
   '/admin/qrcode-event': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/admin/refund': typeof AuthenticatedAdminRefundIndexRoute
   '/admin/roles': typeof AuthenticatedAdminRolesIndexRoute
+  '/admin/seller-package': typeof AuthenticatedAdminSellerPackageIndexRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes': typeof AuthenticatedAdminThemesIndexRoute
   '/admin/wholesale': typeof AuthenticatedAdminWholesaleIndexRoute
@@ -1023,6 +1032,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/qrcode-event/': typeof AuthenticatedAdminQrcodeEventIndexRoute
   '/_authenticated/admin/refund/': typeof AuthenticatedAdminRefundIndexRoute
   '/_authenticated/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
+  '/_authenticated/admin/seller-package/': typeof AuthenticatedAdminSellerPackageIndexRoute
   '/_authenticated/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/_authenticated/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
   '/_authenticated/admin/wholesale/': typeof AuthenticatedAdminWholesaleIndexRoute
@@ -1130,6 +1140,7 @@ export interface FileRouteTypes {
     | '/admin/qrcode-event/'
     | '/admin/refund/'
     | '/admin/roles/'
+    | '/admin/seller-package/'
     | '/admin/settings/'
     | '/admin/themes/'
     | '/admin/wholesale/'
@@ -1234,6 +1245,7 @@ export interface FileRouteTypes {
     | '/admin/qrcode-event'
     | '/admin/refund'
     | '/admin/roles'
+    | '/admin/seller-package'
     | '/admin/settings'
     | '/admin/themes'
     | '/admin/wholesale'
@@ -1340,6 +1352,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/qrcode-event/'
     | '/_authenticated/admin/refund/'
     | '/_authenticated/admin/roles/'
+    | '/_authenticated/admin/seller-package/'
     | '/_authenticated/admin/settings/'
     | '/_authenticated/admin/themes/'
     | '/_authenticated/admin/wholesale/'
@@ -1483,6 +1496,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/admin/settings/'
       preLoaderRoute: typeof AuthenticatedAdminSettingsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/seller-package/': {
+      id: '/_authenticated/admin/seller-package/'
+      path: '/seller-package'
+      fullPath: '/admin/seller-package/'
+      preLoaderRoute: typeof AuthenticatedAdminSellerPackageIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/roles/': {
@@ -2180,6 +2200,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminQrcodeEventIndexRoute: typeof AuthenticatedAdminQrcodeEventIndexRoute
   AuthenticatedAdminRefundIndexRoute: typeof AuthenticatedAdminRefundIndexRoute
   AuthenticatedAdminRolesIndexRoute: typeof AuthenticatedAdminRolesIndexRoute
+  AuthenticatedAdminSellerPackageIndexRoute: typeof AuthenticatedAdminSellerPackageIndexRoute
   AuthenticatedAdminSettingsIndexRoute: typeof AuthenticatedAdminSettingsIndexRoute
   AuthenticatedAdminThemesIndexRoute: typeof AuthenticatedAdminThemesIndexRoute
   AuthenticatedAdminWholesaleIndexRoute: typeof AuthenticatedAdminWholesaleIndexRoute
@@ -2312,6 +2333,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminQrcodeEventIndexRoute,
     AuthenticatedAdminRefundIndexRoute: AuthenticatedAdminRefundIndexRoute,
     AuthenticatedAdminRolesIndexRoute: AuthenticatedAdminRolesIndexRoute,
+    AuthenticatedAdminSellerPackageIndexRoute:
+      AuthenticatedAdminSellerPackageIndexRoute,
     AuthenticatedAdminSettingsIndexRoute: AuthenticatedAdminSettingsIndexRoute,
     AuthenticatedAdminThemesIndexRoute: AuthenticatedAdminThemesIndexRoute,
     AuthenticatedAdminWholesaleIndexRoute:

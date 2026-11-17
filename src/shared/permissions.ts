@@ -70,6 +70,12 @@ export const PERMISSIONS = {
     EDIT: 'wholesale.edit',
     DELETE: 'wholesale.delete',
   },
+  SELLER_PACKAGE: {
+    INDEX: 'seller_package.index',
+    CREATE: 'seller_package.create',
+    EDIT: 'seller_package.edit',
+    DELETE: 'seller_package.delete',
+  },
   CLASSIFIED: {
     INDEX: 'classified.index',
     PUBLISH: 'classified.publish',

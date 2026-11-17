@@ -1,0 +1,69 @@
+{
+  "toast": {
+    "error": "Something went wrong",
+    "created": "Package created",
+    "updated": "Package updated",
+    "deleted": "Package deleted"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "saving": "Saving..."
+  },
+  "title": "Seller packages",
+  "description": "Subscription packages sellers buy to raise their shop limits. Offline payment requests are handled in Payments.",
+  "new": "New package",
+  "empty": "No packages yet",
+  "deleteTitle": "Delete package",
+  "deleteDesc": "Delete the package \"{{name}}\"? Shops that already bought it keep their current limits until it expires.",
+  "card": {
+    "free": "Free",
+    "uploads": "{{count}} product uploads",
+    "preorderUploads": "{{count}} preorder product uploads",
+    "days": "{{count}} days",
+    "sellers": "{{count}} sellers"
+  },
+  "form": {
+    "createTitle": "New seller package",
+    "editTitle": "Edit seller package",
+    "description": "Name per language, price, validity and what the package allows a shop to do.",
+    "name": "Name ({{lang}})",
+    "amount": "Price",
+    "duration": "Validity (days)",
+    "durationHint": "Number of days the package stays active after purchase.",
+    "productUploadLimit": "Product upload limit",
+    "preorderUploadLimit": "Preorder product upload limit",
+    "logo": "Package logo",
+    "limitsTitle": "Shop limits",
+    "limitsHint": "Beyond the upload counts. -1 means unlimited."
+  },
+  "limits": {
+    "digital_product_limit": "Digital products",
+    "staff_limit": "Staff accounts",
+    "storage_mb": "Storage (MB)",
+    "flash_deal_limit": "Flash deals",
+    "coupon_limit": "Coupons",
+    "promo_product_limit": "Promoted products",
+    "featured_slots": "Featured slots",
+    "monthly_order_limit": "Orders per month",
+    "support_priority": "Support priority",
+    "wholesale_enabled": "Wholesale selling",
+    "shop_design_enabled": "Shop design",
+    "pos_enabled": "POS",
+    "custom_domain_enabled": "Custom domain"
+  },
+  "priority": {
+    "low": "Low",
+    "normal": "Normal",
+    "high": "High"
+  },
+  "validation": {
+    "max255": "At most 255 characters",
+    "number": "Enter a number",
+    "min0": "Must be 0 or more",
+    "minUnlimited": "Must be -1 (unlimited) or more",
+    "minDuration": "Must be at least 1 day",
+    "integer": "Must be a whole number"
+  }
+}
