@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react'
+import { type ReactNode, useState } from 'react'
 import { Link, useLocation } from '@tanstack/react-router'
 import { ChevronDown } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -41,34 +41,68 @@ export function NavGroup({ title, items }: NavGroupProps) {
   const { state, isMobile } = useSidebar()
   const href = useLocation({ select: (location) => location.href })
 
+  const pathname = href.split('?')[0]
+  // The dashboard url "/admin" prefixes every route, so it only counts on an exact match.
+  const hasActive = items.some((item) =>
+    item.url === '/admin'
+      ? pathname === '/admin' || pathname === '/admin/'
+      : checkIsActive(href, item)
+  )
+  // null = follow the route (open while it is inside this group); a click overrides.
+  const [manual, setManual] = useState<boolean | null>(null)
+  const open = manual ?? hasActive
+  const iconOnly = state === 'collapsed' && !isMobile
+
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel className='text-xs font-medium text-muted-foreground'>
-        {t(title)}
-      </SidebarGroupLabel>
-      <SidebarMenu className='gap-1'>
-        {items.map((item) => {
-          const key = `${item.key}-${item.url}`
+    <Collapsible open={open || iconOnly} onOpenChange={setManual} asChild>
+      <SidebarGroup>
+        <SidebarGroupLabel
+          asChild
+          className='text-xs font-medium text-muted-foreground'
+        >
+          <CollapsibleTrigger className='flex w-full items-center justify-between'>
+            {t(title)}
+            <ChevronDown
+              className={cn(
+                'size-3.5 transition-transform',
+                open && 'rotate-180'
+              )}
+            />
+          </CollapsibleTrigger>
+        </SidebarGroupLabel>
+        <CollapsibleContent>
+          <SidebarMenu className='gap-1'>
+            {items.map((item) => {
+              const key = `${item.key}-${item.url}`
 
-          if (!item.items)
-            return <SidebarMenuLink key={key} item={item} href={href} t={t} />
+              if (!item.items)
+                return (
+                  <SidebarMenuLink key={key} item={item} href={href} t={t} />
+                )
 
-          if (state === 'collapsed' && !isMobile)
-            return (
-              <SidebarMenuCollapsedDropdown
-                key={key}
-                item={item}
-                href={href}
-                t={t}
-              />
-            )
+              if (state === 'collapsed' && !isMobile)
+                return (
+                  <SidebarMenuCollapsedDropdown
+                    key={key}
+                    item={item}
+                    href={href}
+                    t={t}
+                  />
+                )
 
-          return (
-            <SidebarMenuCollapsible key={key} item={item} href={href} t={t} />
-          )
-        })}
-      </SidebarMenu>
-    </SidebarGroup>
+              return (
+                <SidebarMenuCollapsible
+                  key={key}
+                  item={item}
+                  href={href}
+                  t={t}
+                />
+              )
+            })}
+          </SidebarMenu>
+        </CollapsibleContent>
+      </SidebarGroup>
+    </Collapsible>
   )
 }
 
