@@ -1,6 +1,7 @@
 import type { ModuleRaw } from '@/api/menu.types'
 import { affiliateManifest } from '@/features/affiliate/module.manifest'
 import { aiManifest } from '@/features/ai/module.manifest'
+import { classifiedManifest } from '@/features/classified/module.manifest'
 import { clubPointManifest } from '@/features/club-point/module.manifest'
 import { courierManifest } from '@/features/courier/module.manifest'
 import { qrcodeEventManifest } from '@/features/qrcode-event/module.manifest'
@@ -24,19 +25,12 @@ export const mockModules: ModuleRaw[] = [
       ],
     },
   },
-  {
-    id: 'classified', name: 'Classified Ads', description: 'Classified listings and packages', version: '1.0.0',
-    icon: 'Megaphone', required: false, enabled: false, requires: [],
-    admin_menu: {
-      group: { key: 'classified', icon: 'Megaphone', order: 120, panels: ['admin'] },
-      items: [{ key: 'classifiedProducts', route: '/admin/classified-products', order: 1, permission: 'classified.index' }],
-    },
-  },
   { ...qrcodeEventManifest, enabled: true },
   { ...refundManifest, enabled: true },
   { ...preorderManifest, enabled: true },
   { ...affiliateManifest, enabled: true },
   { ...clubPointManifest, enabled: true },
+  { ...classifiedManifest, enabled: true },
   { ...courierManifest, enabled: true },
   { ...otpManifest, enabled: true },
   { ...paymentsManifest, enabled: true },

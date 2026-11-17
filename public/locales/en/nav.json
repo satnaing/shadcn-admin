@@ -34,7 +34,7 @@
   "wholesale": "Wholesale",
   "wholesaleProducts": "Wholesale products",
   "wholesaleCreate": "Add wholesale product",
-  "classified": "Classified Ads",
+  "classified": "Classified ads",
   "classifiedProducts": "Classified products",
   "qrcodeEvent": "QR code events",
   "qrcodeEventStats": "Statistics",
@@ -93,5 +93,6 @@
   "aiSettings": "AI settings",
   "aiPrompts": "Prompt templates",
   "aiUsage": "Token usage",
-  "aiTranslate": "AI translation"
+  "aiTranslate": "AI translation",
+  "classifiedPackages": "Classified packages"
 }

@@ -145,6 +145,13 @@ export const ENDPOINTS = {
     WITHDRAW_REJECT: (id: number | string) => `${ADMIN}/affiliate/withdraws/${id}/reject`,
     LOGS: `${ADMIN}/affiliate/logs`,
   },
+  CLASSIFIED: {
+    PRODUCTS: `${ADMIN}/classified/products`,
+    PRODUCT: (id: number | string) => `${ADMIN}/classified/products/${id}`,
+    PRODUCTS_DELETE: `${ADMIN}/classified/products/delete`,
+    PACKAGES: `${ADMIN}/classified/packages`,
+    PACKAGE: (id: number | string) => `${ADMIN}/classified/packages/${id}`,
+  },
   CLUB_POINT: {
     EARNINGS: `${ADMIN}/club-point/earnings`,
     EARNING: (id: number | string) => `${ADMIN}/club-point/earnings/${id}`,

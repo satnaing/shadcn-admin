@@ -1,0 +1,68 @@
+{
+  "toast": {
+    "error": "Something went wrong",
+    "published": "Listing updated",
+    "productDeleted": "Listing deleted",
+    "productsDeleted": "{{count}} listings deleted",
+    "packageCreated": "Package created",
+    "packageUpdated": "Package updated",
+    "packageDeleted": "Package deleted"
+  },
+  "actions": {
+    "selectAll": "Select all",
+    "selectRow": "Select row",
+    "delete": "Delete",
+    "edit": "Edit",
+    "save": "Save",
+    "saving": "Saving..."
+  },
+  "status": {
+    "published": "Published",
+    "unpublished": "Unpublished"
+  },
+  "columns": {
+    "name": "Name",
+    "image": "Image",
+    "owner": "Uploaded by",
+    "customerStatus": "Owner status",
+    "published": "Published"
+  },
+  "products": {
+    "title": "Classified products",
+    "description": "Listings uploaded by customers and sellers. Publish them to show them on the storefront, or delete them.",
+    "search": "Search by name...",
+    "empty": "No listings found",
+    "entity": "listing",
+    "deleteTitle": "Delete listing",
+    "deleteDesc": "Delete \"{{name}}\"? This cannot be undone.",
+    "bulkDeleteTitle": "Delete listings",
+    "bulkDeleteDesc": "Delete the {{count}} selected listings? This cannot be undone."
+  },
+  "packages": {
+    "title": "Classified packages",
+    "description": "Packages customers buy to upload more classified listings. Offline payment requests are handled in Payments.",
+    "new": "New package",
+    "empty": "No packages yet",
+    "free": "Free",
+    "uploads": "{{count}} listing uploads",
+    "deleteTitle": "Delete package",
+    "deleteDesc": "Delete the package \"{{name}}\"?",
+    "form": {
+      "createTitle": "New package",
+      "editTitle": "Edit package",
+      "description": "Name per language, price and how many listings the package allows.",
+      "name": "Name ({{lang}})",
+      "amount": "Price",
+      "productUpload": "Listing uploads",
+      "productUploadHint": "How many classified listings a buyer can upload.",
+      "logo": "Package logo"
+    }
+  },
+  "validation": {
+    "max255": "At most 255 characters",
+    "number": "Enter a number",
+    "min0": "Must be 0 or more",
+    "integer": "Must be a whole number",
+    "oneFree": "Only one free package is allowed"
+  }
+}

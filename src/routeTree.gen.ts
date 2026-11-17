@@ -36,6 +36,7 @@ import { Route as AuthenticatedAdminOtpIndexRouteImport } from './routes/_authen
 import { Route as AuthenticatedAdminModulesIndexRouteImport } from './routes/_authenticated/admin/modules/index'
 import { Route as AuthenticatedAdminCourierIndexRouteImport } from './routes/_authenticated/admin/courier/index'
 import { Route as AuthenticatedAdminClubPointIndexRouteImport } from './routes/_authenticated/admin/club-point/index'
+import { Route as AuthenticatedAdminClassifiedIndexRouteImport } from './routes/_authenticated/admin/classified/index'
 import { Route as AuthenticatedAdminBlogsIndexRouteImport } from './routes/_authenticated/admin/blogs/index'
 import { Route as AuthenticatedAdminAiIndexRouteImport } from './routes/_authenticated/admin/ai/index'
 import { Route as AuthenticatedAdminAffiliateIndexRouteImport } from './routes/_authenticated/admin/affiliate/index'
@@ -81,6 +82,7 @@ import { Route as AuthenticatedAdminCourierCancelRequestsRouteImport } from './r
 import { Route as AuthenticatedAdminCourierIdRouteImport } from './routes/_authenticated/admin/courier/$id'
 import { Route as AuthenticatedAdminClubPointProductsRouteImport } from './routes/_authenticated/admin/club-point/products'
 import { Route as AuthenticatedAdminClubPointConfigRouteImport } from './routes/_authenticated/admin/club-point/config'
+import { Route as AuthenticatedAdminClassifiedPackagesRouteImport } from './routes/_authenticated/admin/classified/packages'
 import { Route as AuthenticatedAdminBlogsNewRouteImport } from './routes/_authenticated/admin/blogs/new'
 import { Route as AuthenticatedAdminBlogsCategoriesRouteImport } from './routes/_authenticated/admin/blogs/categories'
 import { Route as AuthenticatedAdminBlogsIdRouteImport } from './routes/_authenticated/admin/blogs/$id'
@@ -255,6 +257,12 @@ const AuthenticatedAdminClubPointIndexRoute =
   AuthenticatedAdminClubPointIndexRouteImport.update({
     id: '/club-point/',
     path: '/club-point/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminClassifiedIndexRoute =
+  AuthenticatedAdminClassifiedIndexRouteImport.update({
+    id: '/classified/',
+    path: '/classified/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminBlogsIndexRoute =
@@ -527,6 +535,12 @@ const AuthenticatedAdminClubPointConfigRoute =
     path: '/club-point/config',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminClassifiedPackagesRoute =
+  AuthenticatedAdminClassifiedPackagesRouteImport.update({
+    id: '/classified/packages',
+    path: '/classified/packages',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminBlogsNewRoute =
   AuthenticatedAdminBlogsNewRouteImport.update({
     id: '/blogs/new',
@@ -708,6 +722,7 @@ export interface FileRoutesByFullPath {
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/admin/classified/packages': typeof AuthenticatedAdminClassifiedPackagesRoute
   '/admin/club-point/config': typeof AuthenticatedAdminClubPointConfigRoute
   '/admin/club-point/products': typeof AuthenticatedAdminClubPointProductsRoute
   '/admin/courier/$id': typeof AuthenticatedAdminCourierIdRoute
@@ -753,6 +768,7 @@ export interface FileRoutesByFullPath {
   '/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
   '/admin/ai/': typeof AuthenticatedAdminAiIndexRoute
   '/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
+  '/admin/classified/': typeof AuthenticatedAdminClassifiedIndexRoute
   '/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
   '/admin/courier/': typeof AuthenticatedAdminCourierIndexRoute
   '/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
@@ -806,6 +822,7 @@ export interface FileRoutesByTo {
   '/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/admin/classified/packages': typeof AuthenticatedAdminClassifiedPackagesRoute
   '/admin/club-point/config': typeof AuthenticatedAdminClubPointConfigRoute
   '/admin/club-point/products': typeof AuthenticatedAdminClubPointProductsRoute
   '/admin/courier/$id': typeof AuthenticatedAdminCourierIdRoute
@@ -851,6 +868,7 @@ export interface FileRoutesByTo {
   '/admin/affiliate': typeof AuthenticatedAdminAffiliateIndexRoute
   '/admin/ai': typeof AuthenticatedAdminAiIndexRoute
   '/admin/blogs': typeof AuthenticatedAdminBlogsIndexRoute
+  '/admin/classified': typeof AuthenticatedAdminClassifiedIndexRoute
   '/admin/club-point': typeof AuthenticatedAdminClubPointIndexRoute
   '/admin/courier': typeof AuthenticatedAdminCourierIndexRoute
   '/admin/modules': typeof AuthenticatedAdminModulesIndexRoute
@@ -907,6 +925,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/blogs/$id': typeof AuthenticatedAdminBlogsIdRoute
   '/_authenticated/admin/blogs/categories': typeof AuthenticatedAdminBlogsCategoriesRoute
   '/_authenticated/admin/blogs/new': typeof AuthenticatedAdminBlogsNewRoute
+  '/_authenticated/admin/classified/packages': typeof AuthenticatedAdminClassifiedPackagesRoute
   '/_authenticated/admin/club-point/config': typeof AuthenticatedAdminClubPointConfigRoute
   '/_authenticated/admin/club-point/products': typeof AuthenticatedAdminClubPointProductsRoute
   '/_authenticated/admin/courier/$id': typeof AuthenticatedAdminCourierIdRoute
@@ -952,6 +971,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
   '/_authenticated/admin/ai/': typeof AuthenticatedAdminAiIndexRoute
   '/_authenticated/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
+  '/_authenticated/admin/classified/': typeof AuthenticatedAdminClassifiedIndexRoute
   '/_authenticated/admin/club-point/': typeof AuthenticatedAdminClubPointIndexRoute
   '/_authenticated/admin/courier/': typeof AuthenticatedAdminCourierIndexRoute
   '/_authenticated/admin/modules/': typeof AuthenticatedAdminModulesIndexRoute
@@ -1008,6 +1028,7 @@ export interface FileRouteTypes {
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
+    | '/admin/classified/packages'
     | '/admin/club-point/config'
     | '/admin/club-point/products'
     | '/admin/courier/$id'
@@ -1053,6 +1074,7 @@ export interface FileRouteTypes {
     | '/admin/affiliate/'
     | '/admin/ai/'
     | '/admin/blogs/'
+    | '/admin/classified/'
     | '/admin/club-point/'
     | '/admin/courier/'
     | '/admin/modules/'
@@ -1106,6 +1128,7 @@ export interface FileRouteTypes {
     | '/admin/blogs/$id'
     | '/admin/blogs/categories'
     | '/admin/blogs/new'
+    | '/admin/classified/packages'
     | '/admin/club-point/config'
     | '/admin/club-point/products'
     | '/admin/courier/$id'
@@ -1151,6 +1174,7 @@ export interface FileRouteTypes {
     | '/admin/affiliate'
     | '/admin/ai'
     | '/admin/blogs'
+    | '/admin/classified'
     | '/admin/club-point'
     | '/admin/courier'
     | '/admin/modules'
@@ -1206,6 +1230,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/blogs/$id'
     | '/_authenticated/admin/blogs/categories'
     | '/_authenticated/admin/blogs/new'
+    | '/_authenticated/admin/classified/packages'
     | '/_authenticated/admin/club-point/config'
     | '/_authenticated/admin/club-point/products'
     | '/_authenticated/admin/courier/$id'
@@ -1251,6 +1276,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/affiliate/'
     | '/_authenticated/admin/ai/'
     | '/_authenticated/admin/blogs/'
+    | '/_authenticated/admin/classified/'
     | '/_authenticated/admin/club-point/'
     | '/_authenticated/admin/courier/'
     | '/_authenticated/admin/modules/'
@@ -1482,6 +1508,13 @@ declare module '@tanstack/react-router' {
       path: '/club-point'
       fullPath: '/admin/club-point/'
       preLoaderRoute: typeof AuthenticatedAdminClubPointIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/classified/': {
+      id: '/_authenticated/admin/classified/'
+      path: '/classified'
+      fullPath: '/admin/classified/'
+      preLoaderRoute: typeof AuthenticatedAdminClassifiedIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/blogs/': {
@@ -1799,6 +1832,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminClubPointConfigRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/classified/packages': {
+      id: '/_authenticated/admin/classified/packages'
+      path: '/classified/packages'
+      fullPath: '/admin/classified/packages'
+      preLoaderRoute: typeof AuthenticatedAdminClassifiedPackagesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/blogs/new': {
       id: '/_authenticated/admin/blogs/new'
       path: '/blogs/new'
@@ -1998,6 +2038,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminBlogsIdRoute: typeof AuthenticatedAdminBlogsIdRoute
   AuthenticatedAdminBlogsCategoriesRoute: typeof AuthenticatedAdminBlogsCategoriesRoute
   AuthenticatedAdminBlogsNewRoute: typeof AuthenticatedAdminBlogsNewRoute
+  AuthenticatedAdminClassifiedPackagesRoute: typeof AuthenticatedAdminClassifiedPackagesRoute
   AuthenticatedAdminClubPointConfigRoute: typeof AuthenticatedAdminClubPointConfigRoute
   AuthenticatedAdminClubPointProductsRoute: typeof AuthenticatedAdminClubPointProductsRoute
   AuthenticatedAdminCourierIdRoute: typeof AuthenticatedAdminCourierIdRoute
@@ -2043,6 +2084,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminAffiliateIndexRoute: typeof AuthenticatedAdminAffiliateIndexRoute
   AuthenticatedAdminAiIndexRoute: typeof AuthenticatedAdminAiIndexRoute
   AuthenticatedAdminBlogsIndexRoute: typeof AuthenticatedAdminBlogsIndexRoute
+  AuthenticatedAdminClassifiedIndexRoute: typeof AuthenticatedAdminClassifiedIndexRoute
   AuthenticatedAdminClubPointIndexRoute: typeof AuthenticatedAdminClubPointIndexRoute
   AuthenticatedAdminCourierIndexRoute: typeof AuthenticatedAdminCourierIndexRoute
   AuthenticatedAdminModulesIndexRoute: typeof AuthenticatedAdminModulesIndexRoute
@@ -2093,6 +2135,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminBlogsCategoriesRoute:
       AuthenticatedAdminBlogsCategoriesRoute,
     AuthenticatedAdminBlogsNewRoute: AuthenticatedAdminBlogsNewRoute,
+    AuthenticatedAdminClassifiedPackagesRoute:
+      AuthenticatedAdminClassifiedPackagesRoute,
     AuthenticatedAdminClubPointConfigRoute:
       AuthenticatedAdminClubPointConfigRoute,
     AuthenticatedAdminClubPointProductsRoute:
@@ -2163,6 +2207,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminAffiliateIndexRoute,
     AuthenticatedAdminAiIndexRoute: AuthenticatedAdminAiIndexRoute,
     AuthenticatedAdminBlogsIndexRoute: AuthenticatedAdminBlogsIndexRoute,
+    AuthenticatedAdminClassifiedIndexRoute:
+      AuthenticatedAdminClassifiedIndexRoute,
     AuthenticatedAdminClubPointIndexRoute:
       AuthenticatedAdminClubPointIndexRoute,
     AuthenticatedAdminCourierIndexRoute: AuthenticatedAdminCourierIndexRoute,

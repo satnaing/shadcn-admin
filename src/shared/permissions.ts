@@ -63,7 +63,13 @@ export const PERMISSIONS = {
 
   // Module-declared screens (mock modules); real modules append their own group.
   WHOLESALE: { INDEX: 'wholesale.index', CREATE: 'wholesale.create' },
-  CLASSIFIED: { INDEX: 'classified.index', CREATE: 'classified.create' },
+  CLASSIFIED: {
+    INDEX: 'classified.index',
+    PUBLISH: 'classified.publish',
+    DELETE: 'classified.delete',
+    PACKAGES: 'classified.packages',
+    PACKAGES_MANAGE: 'classified.packages_manage',
+  },
   QRCODE_EVENT: {
     INDEX: 'qrcode_event.index',
     SETTINGS: 'qrcode_event.settings',

@@ -1,0 +1,68 @@
+{
+  "toast": {
+    "error": "Bir şeyler ters gitti",
+    "published": "İlan güncellendi",
+    "productDeleted": "İlan silindi",
+    "productsDeleted": "{{count}} ilan silindi",
+    "packageCreated": "Paket oluşturuldu",
+    "packageUpdated": "Paket güncellendi",
+    "packageDeleted": "Paket silindi"
+  },
+  "actions": {
+    "selectAll": "Tümünü seç",
+    "selectRow": "Satırı seç",
+    "delete": "Sil",
+    "edit": "Düzenle",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor..."
+  },
+  "status": {
+    "published": "Yayında",
+    "unpublished": "Yayında değil"
+  },
+  "columns": {
+    "name": "Ad",
+    "image": "Görsel",
+    "owner": "Yükleyen",
+    "customerStatus": "Sahip durumu",
+    "published": "Yayın"
+  },
+  "products": {
+    "title": "İlan ürünleri",
+    "description": "Müşteri ve satıcıların yüklediği ilanlar. Mağazada göstermek için yayınlayın veya silin.",
+    "search": "Ada göre ara...",
+    "empty": "İlan bulunamadı",
+    "entity": "ilan",
+    "deleteTitle": "İlanı sil",
+    "deleteDesc": "\"{{name}}\" silinsin mi? Bu geri alınamaz.",
+    "bulkDeleteTitle": "İlanları sil",
+    "bulkDeleteDesc": "Seçilen {{count}} ilan silinsin mi? Bu geri alınamaz."
+  },
+  "packages": {
+    "title": "İlan paketleri",
+    "description": "Müşterilerin daha fazla ilan yüklemek için aldığı paketler. Çevrimdışı ödeme talepleri Ödemeler bölümündedir.",
+    "new": "Yeni paket",
+    "empty": "Henüz paket yok",
+    "free": "Ücretsiz",
+    "uploads": "{{count}} ilan yükleme",
+    "deleteTitle": "Paketi sil",
+    "deleteDesc": "\"{{name}}\" paketi silinsin mi?",
+    "form": {
+      "createTitle": "Yeni paket",
+      "editTitle": "Paketi düzenle",
+      "description": "Dil başına ad, fiyat ve paketin kaç ilana izin verdiği.",
+      "name": "Ad ({{lang}})",
+      "amount": "Fiyat",
+      "productUpload": "İlan yükleme sayısı",
+      "productUploadHint": "Alıcı kaç ilan yükleyebilir.",
+      "logo": "Paket logosu"
+    }
+  },
+  "validation": {
+    "max255": "En fazla 255 karakter",
+    "number": "Bir sayı girin",
+    "min0": "0 veya daha fazla olmalı",
+    "integer": "Tam sayı olmalı",
+    "oneFree": "Yalnızca bir ücretsiz paket olabilir"
+  }
+}

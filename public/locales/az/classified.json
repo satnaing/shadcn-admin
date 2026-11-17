@@ -1,0 +1,68 @@
+{
+  "toast": {
+    "error": "Xəta baş verdi",
+    "published": "Elan yeniləndi",
+    "productDeleted": "Elan silindi",
+    "productsDeleted": "{{count}} elan silindi",
+    "packageCreated": "Paket yaradıldı",
+    "packageUpdated": "Paket yeniləndi",
+    "packageDeleted": "Paket silindi"
+  },
+  "actions": {
+    "selectAll": "Hamısını seç",
+    "selectRow": "Sətri seç",
+    "delete": "Sil",
+    "edit": "Redaktə",
+    "save": "Yadda saxla",
+    "saving": "Saxlanılır..."
+  },
+  "status": {
+    "published": "Dərc olunub",
+    "unpublished": "Dərc olunmayıb"
+  },
+  "columns": {
+    "name": "Ad",
+    "image": "Şəkil",
+    "owner": "Yükləyən",
+    "customerStatus": "Sahibin statusu",
+    "published": "Dərc"
+  },
+  "products": {
+    "title": "Elan məhsulları",
+    "description": "Müştəri və satıcıların yüklədiyi elanlar. Mağazada göstərmək üçün dərc edin və ya silin.",
+    "search": "Ada görə axtar...",
+    "empty": "Elan tapılmadı",
+    "entity": "elan",
+    "deleteTitle": "Elanı sil",
+    "deleteDesc": "\"{{name}}\" silinsin? Bu geri qaytarılmır.",
+    "bulkDeleteTitle": "Elanları sil",
+    "bulkDeleteDesc": "Seçilmiş {{count}} elan silinsin? Bu geri qaytarılmır."
+  },
+  "packages": {
+    "title": "Elan paketləri",
+    "description": "Müştərilərin daha çox elan yükləmək üçün aldığı paketlər. Oflayn ödəniş sorğuları Ödənişlər bölməsindədir.",
+    "new": "Yeni paket",
+    "empty": "Hələ paket yoxdur",
+    "free": "Pulsuz",
+    "uploads": "{{count}} elan yükləmə",
+    "deleteTitle": "Paketi sil",
+    "deleteDesc": "\"{{name}}\" paketi silinsin?",
+    "form": {
+      "createTitle": "Yeni paket",
+      "editTitle": "Paketi redaktə et",
+      "description": "Dillər üzrə ad, qiymət və paketin neçə elana icazə verdiyi.",
+      "name": "Ad ({{lang}})",
+      "amount": "Qiymət",
+      "productUpload": "Elan yükləmə sayı",
+      "productUploadHint": "Alıcı neçə elan yükləyə bilər.",
+      "logo": "Paket loqosu"
+    }
+  },
+  "validation": {
+    "max255": "Ən çox 255 simvol",
+    "number": "Rəqəm daxil edin",
+    "min0": "0 və ya daha çox olmalıdır",
+    "integer": "Tam ədəd olmalıdır",
+    "oneFree": "Yalnız bir pulsuz paket ola bilər"
+  }
+}

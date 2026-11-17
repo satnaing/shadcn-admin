@@ -93,5 +93,6 @@
   "aiSettings": "Настройки AI",
   "aiPrompts": "Шаблоны промптов",
   "aiUsage": "Расход токенов",
-  "aiTranslate": "AI-перевод"
+  "aiTranslate": "AI-перевод",
+  "classifiedPackages": "Пакеты объявлений"
 }

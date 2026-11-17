@@ -93,5 +93,6 @@
   "aiSettings": "AI ayarları",
   "aiPrompts": "Prompt şablonları",
   "aiUsage": "Token kullanımı",
-  "aiTranslate": "AI çeviri"
+  "aiTranslate": "AI çeviri",
+  "classifiedPackages": "İlan paketleri"
 }
