@@ -7,8 +7,14 @@ const SELLER_PERMISSIONS: string[] = [
   PERMISSIONS.DASHBOARD.INDEX,
   // Switching POS on for sellers is an admin decision (AEC: pos_configuration).
   ...Object.values(PERMISSIONS.POS).filter((p) => p !== PERMISSIONS.POS.ACTIVATION_MANAGE),
-  ...Object.values(PERMISSIONS.WHOLESALE),
-  ...Object.values(PERMISSIONS.CLASSIFIED),
+  // In-house and all-sellers lists are admin screens (AEC: wholesale_product_list vs seller panel).
+  ...Object.values(PERMISSIONS.WHOLESALE).filter(
+    (p) => p !== PERMISSIONS.WHOLESALE.INHOUSE && p !== PERMISSIONS.WHOLESALE.SELLERS
+  ),
+  // Listing packages are an admin product in AEC.
+  ...Object.values(PERMISSIONS.CLASSIFIED).filter(
+    (p) => p !== PERMISSIONS.CLASSIFIED.PACKAGES && p !== PERMISSIONS.CLASSIFIED.PACKAGES_MANAGE
+  ),
 ]
 
 const COURIER_PERMISSIONS: string[] = [

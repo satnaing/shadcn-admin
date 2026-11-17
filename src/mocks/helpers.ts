@@ -1,3 +1,5 @@
+import { persistCollection } from './persist'
+
 export type Query = Record<string, string>
 /** `body` = parsed JSON request body (or FormData for uploads); only writes carry one. */
 export type Handler = (ctx: { params: string[]; query: Query; body?: unknown }) => unknown
@@ -57,6 +59,7 @@ export function paginate<T extends Record<string, unknown>>(rows: T[] | (() => T
  */
 export function createCollection<T extends { id: number }>(seed: T[]) {
   const rows = seed.map((row) => ({ ...row }))
+  persistCollection(rows)
   let next = Math.max(0, ...rows.map((row) => row.id)) + 1
   const at = (id: string | number) => rows.findIndex((row) => String(row.id) === String(id))
 
