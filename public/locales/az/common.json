@@ -142,5 +142,10 @@
     "duplicate": "Bu etiket artıq var",
     "tooLong": "Etiket ən çox {{max}} simvol ola bilər",
     "tooMany": "Ən çox {{max}} etiket əlavə edilə bilər"
+  },
+  "entityPicker": {
+    "search": "Axtarış...",
+    "noResults": "Nəticə tapılmadı",
+    "remove": "Sil: {{name}}"
   }
 }

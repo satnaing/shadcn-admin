@@ -142,5 +142,10 @@
     "duplicate": "Bu etiket zaten var",
     "tooLong": "Etiket en fazla {{max}} karakter olabilir",
     "tooMany": "En fazla {{max}} etiket eklenebilir"
+  },
+  "entityPicker": {
+    "search": "Ara...",
+    "noResults": "Sonuç bulunamadı",
+    "remove": "Kaldır: {{name}}"
   }
 }

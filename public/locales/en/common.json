@@ -142,5 +142,10 @@
     "duplicate": "This tag already exists",
     "tooLong": "A tag can have at most {{max}} characters",
     "tooMany": "At most {{max}} tags are allowed"
+  },
+  "entityPicker": {
+    "search": "Search...",
+    "noResults": "No results",
+    "remove": "Remove {{name}}"
   }
 }
