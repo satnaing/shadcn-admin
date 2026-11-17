@@ -26,5 +26,17 @@
     "urlPlaceholder": "Image URL",
     "upload": "Upload image",
     "clear": "Clear"
+  },
+  "library": {
+    "title": "Media library",
+    "description": "Pick a file or upload a new one.",
+    "select": "Select ({{count}})",
+    "uploadFailed": "Upload failed"
+  },
+  "picker": {
+    "choose": "Choose from library",
+    "chooseMany": "Add files",
+    "remove": "Remove {{name}}",
+    "drag": "Reorder"
   }
 }

@@ -26,5 +26,17 @@
     "urlPlaceholder": "Görsel URL'si",
     "upload": "Görsel yükle",
     "clear": "Temizle"
+  },
+  "library": {
+    "title": "Medya kütüphanesi",
+    "description": "Bir dosya seçin veya yenisini yükleyin.",
+    "select": "Seç ({{count}})",
+    "uploadFailed": "Yükleme başarısız"
+  },
+  "picker": {
+    "choose": "Kütüphaneden seç",
+    "chooseMany": "Dosya ekle",
+    "remove": "Kaldır: {{name}}",
+    "drag": "Sırayı değiştir"
   }
 }

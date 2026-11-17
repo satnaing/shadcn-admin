@@ -2,7 +2,7 @@
   "title": "Yüklənmiş Fayllar",
   "description": "Media kitabxanası — şəkil və sənədlərin idarəsi",
   "upload": "Fayl Yüklə",
-  "search": "Fayl üzrə axtarış...",
+  "search": "Fayl axtar...",
   "allTypes": "Hamısı",
   "typeImage": "Şəkil",
   "typeDocument": "Sənəd",
@@ -26,5 +26,17 @@
     "urlPlaceholder": "Şəkil URL-i",
     "upload": "Şəkil yüklə",
     "clear": "Təmizlə"
+  },
+  "library": {
+    "title": "Media kitabxanası",
+    "description": "Faylı seçin və ya yenisini yükləyin.",
+    "select": "Seç ({{count}})",
+    "uploadFailed": "Fayl yüklənmədi"
+  },
+  "picker": {
+    "choose": "Kitabxanadan seç",
+    "chooseMany": "Fayl əlavə et",
+    "remove": "Sil: {{name}}",
+    "drag": "Sıranı dəyiş"
   }
 }

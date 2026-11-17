@@ -10,6 +10,10 @@ export const ENDPOINTS = {
     ME: '/auth/me',
   },
   MENU: `${ADMIN}/menu`,
+  MEDIA: {
+    LIST: `${ADMIN}/media`,
+    ITEM: (id: number | string) => `${ADMIN}/media/${id}`,
+  },
   PAGES: {
     LIST: `${ADMIN}/pages`,
     ITEM: (id: number | string) => `${ADMIN}/pages/${id}`,
