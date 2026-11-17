@@ -7,7 +7,7 @@ import { PERMISSIONS } from '@/shared/permissions'
 
 export const Route = createFileRoute('/_authenticated/admin/blogs/')({
   validateSearch: createListSearchSchema({
-    category: z.string().optional().catch(undefined),
+    category: z.coerce.string().optional().catch(undefined),
   }),
   component: function BlogsRoute() {
     const search = Route.useSearch()

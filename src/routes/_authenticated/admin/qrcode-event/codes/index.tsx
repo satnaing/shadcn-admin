@@ -6,10 +6,10 @@ import { PERMISSIONS } from '@/shared/permissions'
 
 export const Route = createFileRoute('/_authenticated/admin/qrcode-event/codes/')({
   validateSearch: createListSearchSchema({
-    campaign_id: z.string().optional().catch(undefined),
-    batch_id: z.string().optional().catch(undefined),
+    campaign_id: z.coerce.string().optional().catch(undefined),
+    batch_id: z.coerce.string().optional().catch(undefined),
     winner: z.string().optional().catch(undefined),
-    prize_id: z.string().optional().catch(undefined),
+    prize_id: z.coerce.string().optional().catch(undefined),
     date_from: z.string().optional().catch(undefined),
     date_to: z.string().optional().catch(undefined),
   }),

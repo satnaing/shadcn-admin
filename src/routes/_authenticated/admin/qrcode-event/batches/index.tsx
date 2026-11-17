@@ -6,7 +6,7 @@ import { PERMISSIONS } from '@/shared/permissions'
 
 export const Route = createFileRoute('/_authenticated/admin/qrcode-event/batches/')({
   validateSearch: createListSearchSchema({
-    campaign_id: z.string().optional().catch(undefined),
+    campaign_id: z.coerce.string().optional().catch(undefined),
   }),
   component: function Page() {
     const search = Route.useSearch()
