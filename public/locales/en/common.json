@@ -162,5 +162,10 @@
     "image": "Image",
     "linkPrompt": "Link URL (empty = remove)",
     "count": "{{count}} / {{limit}}"
+  },
+  "mapPicker": {
+    "search": "Search an address...",
+    "noResults": "No results",
+    "hint": "Click the map or search an address"
   }
 }

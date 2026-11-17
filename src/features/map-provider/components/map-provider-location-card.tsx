@@ -1,8 +1,10 @@
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslation } from 'react-i18next'
 import { FormCard } from '@/components/forms/form-card'
 import { FormInputField } from '@/components/forms/form-input-field'
+import { MapPicker } from '@/components/shared/map/map-picker'
+import { parseLatLng, roundLatLng } from '@/components/shared/map/map.logic'
 import { PERMISSIONS } from '@/shared/permissions'
 import { type LocationFormValues, locationSchema, toCoordinate } from '../data/map-provider.schema'
 import type { MapLocation } from '../data/map-provider.type'
@@ -16,6 +18,8 @@ export function MapProviderLocationCard({ location }: { location: MapLocation })
     resolver: zodResolver(locationSchema),
     defaultValues: { latitude: String(location.latitude ?? ''), longitude: String(location.longitude ?? '') },
   })
+
+  const [lat, lng] = useWatch({ control: form.control, name: ['latitude', 'longitude'] })
 
   return (
     <FormCard
@@ -31,6 +35,14 @@ export function MapProviderLocationCard({ location }: { location: MapLocation })
         <FormInputField form={form} name='latitude' label={t('location.latitude')} placeholder='40.4093' />
         <FormInputField form={form} name='longitude' label={t('location.longitude')} placeholder='49.8671' />
       </div>
+      <MapPicker
+        value={parseLatLng(lat, lng)}
+        onChange={(p) => {
+          const r = roundLatLng(p)
+          form.setValue('latitude', String(r.lat), { shouldDirty: true })
+          form.setValue('longitude', String(r.lng), { shouldDirty: true })
+        }}
+      />
     </FormCard>
   )
 }

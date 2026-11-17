@@ -162,5 +162,10 @@
     "image": "Görsel",
     "linkPrompt": "Bağlantı adresi (boş = kaldır)",
     "count": "{{count}} / {{limit}}"
+  },
+  "mapPicker": {
+    "search": "Adres ara...",
+    "noResults": "Sonuç bulunamadı",
+    "hint": "Haritaya tıklayın veya adres arayın"
   }
 }

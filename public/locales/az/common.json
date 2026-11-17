@@ -162,5 +162,10 @@
     "image": "Şəkil",
     "linkPrompt": "Link ünvanı (boş = sil)",
     "count": "{{count}} / {{limit}}"
+  },
+  "mapPicker": {
+    "search": "Ünvan axtar...",
+    "noResults": "Nəticə tapılmadı",
+    "hint": "Xəritədə klikləyin və ya ünvan axtarın"
   }
 }

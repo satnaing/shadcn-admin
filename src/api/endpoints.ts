@@ -206,6 +206,7 @@ export const ENDPOINTS = {
   MAP_PROVIDER: {
     SETTINGS: `${ADMIN}/map-provider/settings`,
     LOCATION: `${ADMIN}/map-provider/location`,
+    GEOCODE: `${ADMIN}/map-provider/geocode`,
   },
   OTP: {
     SETTINGS: `${ADMIN}/otp/settings`,
