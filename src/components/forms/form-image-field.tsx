@@ -1,5 +1,5 @@
 import type { FieldValues, Path, UseFormReturn } from 'react-hook-form'
-import { FormField, FormItem } from '@/components/ui/form'
+import { FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { ImagePicker } from '@/components/image-picker'
 
 interface Props<T extends FieldValues> {
@@ -25,6 +25,7 @@ export function FormImageField<T extends FieldValues>({
             value={field.value}
             onChange={field.onChange}
           />
+          <FormMessage />
         </FormItem>
       )}
     />
