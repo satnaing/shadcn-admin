@@ -10,21 +10,12 @@ import { paymentsManifest } from '@/features/payments/module.manifest'
 import { posManifest } from '@/features/pos/module.manifest'
 import { preorderManifest } from '@/features/preorder/module.manifest'
 import { refundManifest } from '@/features/refund/module.manifest'
+import { wholesaleManifest } from '@/features/wholesale/module.manifest'
 
 /** Installed modules (module.json shape). Mutable on purpose: PATCH /admin/modules/:id toggles `enabled`. */
 export const mockModules: ModuleRaw[] = [
   { ...posManifest, enabled: true },
-  {
-    id: 'wholesale', name: 'Wholesale', description: 'Wholesale catalogue and price tiers', version: '1.0.0',
-    icon: 'Boxes', required: false, enabled: true, requires: [],
-    admin_menu: {
-      group: { key: 'wholesale', icon: 'Boxes', order: 110, panels: ['admin', 'seller'] },
-      items: [
-        { key: 'wholesaleProducts', route: '/admin/wholesale-products', order: 1, permission: 'wholesale.index' },
-        { key: 'wholesaleCreate', route: '/admin/wholesale-products/create', order: 2, permission: 'wholesale.create' },
-      ],
-    },
-  },
+  { ...wholesaleManifest, enabled: true },
   { ...qrcodeEventManifest, enabled: true },
   { ...refundManifest, enabled: true },
   { ...preorderManifest, enabled: true },

@@ -22,6 +22,7 @@ import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedErrorsErrorRouteImport } from './routes/_authenticated/errors/$error'
 import { Route as AuthenticatedAdminSplatRouteImport } from './routes/_authenticated/admin/$'
+import { Route as AuthenticatedAdminWholesaleIndexRouteImport } from './routes/_authenticated/admin/wholesale/index'
 import { Route as AuthenticatedAdminThemesIndexRouteImport } from './routes/_authenticated/admin/themes/index'
 import { Route as AuthenticatedAdminSettingsIndexRouteImport } from './routes/_authenticated/admin/settings/index'
 import { Route as AuthenticatedAdminRolesIndexRouteImport } from './routes/_authenticated/admin/roles/index'
@@ -40,6 +41,8 @@ import { Route as AuthenticatedAdminClassifiedIndexRouteImport } from './routes/
 import { Route as AuthenticatedAdminBlogsIndexRouteImport } from './routes/_authenticated/admin/blogs/index'
 import { Route as AuthenticatedAdminAiIndexRouteImport } from './routes/_authenticated/admin/ai/index'
 import { Route as AuthenticatedAdminAffiliateIndexRouteImport } from './routes/_authenticated/admin/affiliate/index'
+import { Route as AuthenticatedAdminWholesaleNewRouteImport } from './routes/_authenticated/admin/wholesale/new'
+import { Route as AuthenticatedAdminWholesaleIdRouteImport } from './routes/_authenticated/admin/wholesale/$id'
 import { Route as AuthenticatedAdminThemesTopbarRouteImport } from './routes/_authenticated/admin/themes/topbar'
 import { Route as AuthenticatedAdminThemesTokensRouteImport } from './routes/_authenticated/admin/themes/tokens'
 import { Route as AuthenticatedAdminThemesMenuRouteImport } from './routes/_authenticated/admin/themes/menu'
@@ -175,6 +178,12 @@ const AuthenticatedAdminSplatRoute = AuthenticatedAdminSplatRouteImport.update({
   path: '/$',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminWholesaleIndexRoute =
+  AuthenticatedAdminWholesaleIndexRouteImport.update({
+    id: '/wholesale/',
+    path: '/wholesale/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminThemesIndexRoute =
   AuthenticatedAdminThemesIndexRouteImport.update({
     id: '/themes/',
@@ -281,6 +290,18 @@ const AuthenticatedAdminAffiliateIndexRoute =
   AuthenticatedAdminAffiliateIndexRouteImport.update({
     id: '/affiliate/',
     path: '/affiliate/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminWholesaleNewRoute =
+  AuthenticatedAdminWholesaleNewRouteImport.update({
+    id: '/wholesale/new',
+    path: '/wholesale/new',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminWholesaleIdRoute =
+  AuthenticatedAdminWholesaleIdRouteImport.update({
+    id: '/wholesale/$id',
+    path: '/wholesale/$id',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
 const AuthenticatedAdminThemesTopbarRoute =
@@ -765,6 +786,8 @@ export interface FileRoutesByFullPath {
   '/admin/themes/menu': typeof AuthenticatedAdminThemesMenuRoute
   '/admin/themes/tokens': typeof AuthenticatedAdminThemesTokensRoute
   '/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
+  '/admin/wholesale/$id': typeof AuthenticatedAdminWholesaleIdRoute
+  '/admin/wholesale/new': typeof AuthenticatedAdminWholesaleNewRoute
   '/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
   '/admin/ai/': typeof AuthenticatedAdminAiIndexRoute
   '/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
@@ -783,6 +806,7 @@ export interface FileRoutesByFullPath {
   '/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
   '/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
+  '/admin/wholesale/': typeof AuthenticatedAdminWholesaleIndexRoute
   '/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
   '/admin/preorder/orders/$id': typeof AuthenticatedAdminPreorderOrdersIdRoute
   '/admin/preorder/products/$id': typeof AuthenticatedAdminPreorderProductsIdRoute
@@ -865,6 +889,8 @@ export interface FileRoutesByTo {
   '/admin/themes/menu': typeof AuthenticatedAdminThemesMenuRoute
   '/admin/themes/tokens': typeof AuthenticatedAdminThemesTokensRoute
   '/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
+  '/admin/wholesale/$id': typeof AuthenticatedAdminWholesaleIdRoute
+  '/admin/wholesale/new': typeof AuthenticatedAdminWholesaleNewRoute
   '/admin/affiliate': typeof AuthenticatedAdminAffiliateIndexRoute
   '/admin/ai': typeof AuthenticatedAdminAiIndexRoute
   '/admin/blogs': typeof AuthenticatedAdminBlogsIndexRoute
@@ -883,6 +909,7 @@ export interface FileRoutesByTo {
   '/admin/roles': typeof AuthenticatedAdminRolesIndexRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsIndexRoute
   '/admin/themes': typeof AuthenticatedAdminThemesIndexRoute
+  '/admin/wholesale': typeof AuthenticatedAdminWholesaleIndexRoute
   '/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
   '/admin/preorder/orders/$id': typeof AuthenticatedAdminPreorderOrdersIdRoute
   '/admin/preorder/products/$id': typeof AuthenticatedAdminPreorderProductsIdRoute
@@ -968,6 +995,8 @@ export interface FileRoutesById {
   '/_authenticated/admin/themes/menu': typeof AuthenticatedAdminThemesMenuRoute
   '/_authenticated/admin/themes/tokens': typeof AuthenticatedAdminThemesTokensRoute
   '/_authenticated/admin/themes/topbar': typeof AuthenticatedAdminThemesTopbarRoute
+  '/_authenticated/admin/wholesale/$id': typeof AuthenticatedAdminWholesaleIdRoute
+  '/_authenticated/admin/wholesale/new': typeof AuthenticatedAdminWholesaleNewRoute
   '/_authenticated/admin/affiliate/': typeof AuthenticatedAdminAffiliateIndexRoute
   '/_authenticated/admin/ai/': typeof AuthenticatedAdminAiIndexRoute
   '/_authenticated/admin/blogs/': typeof AuthenticatedAdminBlogsIndexRoute
@@ -986,6 +1015,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/roles/': typeof AuthenticatedAdminRolesIndexRoute
   '/_authenticated/admin/settings/': typeof AuthenticatedAdminSettingsIndexRoute
   '/_authenticated/admin/themes/': typeof AuthenticatedAdminThemesIndexRoute
+  '/_authenticated/admin/wholesale/': typeof AuthenticatedAdminWholesaleIndexRoute
   '/_authenticated/admin/pages/$id/builder': typeof AuthenticatedAdminPagesIdBuilderRoute
   '/_authenticated/admin/preorder/orders/$id': typeof AuthenticatedAdminPreorderOrdersIdRoute
   '/_authenticated/admin/preorder/products/$id': typeof AuthenticatedAdminPreorderProductsIdRoute
@@ -1071,6 +1101,8 @@ export interface FileRouteTypes {
     | '/admin/themes/menu'
     | '/admin/themes/tokens'
     | '/admin/themes/topbar'
+    | '/admin/wholesale/$id'
+    | '/admin/wholesale/new'
     | '/admin/affiliate/'
     | '/admin/ai/'
     | '/admin/blogs/'
@@ -1089,6 +1121,7 @@ export interface FileRouteTypes {
     | '/admin/roles/'
     | '/admin/settings/'
     | '/admin/themes/'
+    | '/admin/wholesale/'
     | '/admin/pages/$id/builder'
     | '/admin/preorder/orders/$id'
     | '/admin/preorder/products/$id'
@@ -1171,6 +1204,8 @@ export interface FileRouteTypes {
     | '/admin/themes/menu'
     | '/admin/themes/tokens'
     | '/admin/themes/topbar'
+    | '/admin/wholesale/$id'
+    | '/admin/wholesale/new'
     | '/admin/affiliate'
     | '/admin/ai'
     | '/admin/blogs'
@@ -1189,6 +1224,7 @@ export interface FileRouteTypes {
     | '/admin/roles'
     | '/admin/settings'
     | '/admin/themes'
+    | '/admin/wholesale'
     | '/admin/pages/$id/builder'
     | '/admin/preorder/orders/$id'
     | '/admin/preorder/products/$id'
@@ -1273,6 +1309,8 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/themes/menu'
     | '/_authenticated/admin/themes/tokens'
     | '/_authenticated/admin/themes/topbar'
+    | '/_authenticated/admin/wholesale/$id'
+    | '/_authenticated/admin/wholesale/new'
     | '/_authenticated/admin/affiliate/'
     | '/_authenticated/admin/ai/'
     | '/_authenticated/admin/blogs/'
@@ -1291,6 +1329,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/roles/'
     | '/_authenticated/admin/settings/'
     | '/_authenticated/admin/themes/'
+    | '/_authenticated/admin/wholesale/'
     | '/_authenticated/admin/pages/$id/builder'
     | '/_authenticated/admin/preorder/orders/$id'
     | '/_authenticated/admin/preorder/products/$id'
@@ -1410,6 +1449,13 @@ declare module '@tanstack/react-router' {
       path: '/$'
       fullPath: '/admin/$'
       preLoaderRoute: typeof AuthenticatedAdminSplatRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/wholesale/': {
+      id: '/_authenticated/admin/wholesale/'
+      path: '/wholesale'
+      fullPath: '/admin/wholesale/'
+      preLoaderRoute: typeof AuthenticatedAdminWholesaleIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/themes/': {
@@ -1536,6 +1582,20 @@ declare module '@tanstack/react-router' {
       path: '/affiliate'
       fullPath: '/admin/affiliate/'
       preLoaderRoute: typeof AuthenticatedAdminAffiliateIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/wholesale/new': {
+      id: '/_authenticated/admin/wholesale/new'
+      path: '/wholesale/new'
+      fullPath: '/admin/wholesale/new'
+      preLoaderRoute: typeof AuthenticatedAdminWholesaleNewRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/wholesale/$id': {
+      id: '/_authenticated/admin/wholesale/$id'
+      path: '/wholesale/$id'
+      fullPath: '/admin/wholesale/$id'
+      preLoaderRoute: typeof AuthenticatedAdminWholesaleIdRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/admin/themes/topbar': {
@@ -2081,6 +2141,8 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminThemesMenuRoute: typeof AuthenticatedAdminThemesMenuRoute
   AuthenticatedAdminThemesTokensRoute: typeof AuthenticatedAdminThemesTokensRoute
   AuthenticatedAdminThemesTopbarRoute: typeof AuthenticatedAdminThemesTopbarRoute
+  AuthenticatedAdminWholesaleIdRoute: typeof AuthenticatedAdminWholesaleIdRoute
+  AuthenticatedAdminWholesaleNewRoute: typeof AuthenticatedAdminWholesaleNewRoute
   AuthenticatedAdminAffiliateIndexRoute: typeof AuthenticatedAdminAffiliateIndexRoute
   AuthenticatedAdminAiIndexRoute: typeof AuthenticatedAdminAiIndexRoute
   AuthenticatedAdminBlogsIndexRoute: typeof AuthenticatedAdminBlogsIndexRoute
@@ -2099,6 +2161,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminRolesIndexRoute: typeof AuthenticatedAdminRolesIndexRoute
   AuthenticatedAdminSettingsIndexRoute: typeof AuthenticatedAdminSettingsIndexRoute
   AuthenticatedAdminThemesIndexRoute: typeof AuthenticatedAdminThemesIndexRoute
+  AuthenticatedAdminWholesaleIndexRoute: typeof AuthenticatedAdminWholesaleIndexRoute
   AuthenticatedAdminPagesIdBuilderRoute: typeof AuthenticatedAdminPagesIdBuilderRoute
   AuthenticatedAdminPreorderOrdersIdRoute: typeof AuthenticatedAdminPreorderOrdersIdRoute
   AuthenticatedAdminPreorderProductsIdRoute: typeof AuthenticatedAdminPreorderProductsIdRoute
@@ -2203,6 +2266,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminThemesMenuRoute: AuthenticatedAdminThemesMenuRoute,
     AuthenticatedAdminThemesTokensRoute: AuthenticatedAdminThemesTokensRoute,
     AuthenticatedAdminThemesTopbarRoute: AuthenticatedAdminThemesTopbarRoute,
+    AuthenticatedAdminWholesaleIdRoute: AuthenticatedAdminWholesaleIdRoute,
+    AuthenticatedAdminWholesaleNewRoute: AuthenticatedAdminWholesaleNewRoute,
     AuthenticatedAdminAffiliateIndexRoute:
       AuthenticatedAdminAffiliateIndexRoute,
     AuthenticatedAdminAiIndexRoute: AuthenticatedAdminAiIndexRoute,
@@ -2226,6 +2291,8 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminRolesIndexRoute: AuthenticatedAdminRolesIndexRoute,
     AuthenticatedAdminSettingsIndexRoute: AuthenticatedAdminSettingsIndexRoute,
     AuthenticatedAdminThemesIndexRoute: AuthenticatedAdminThemesIndexRoute,
+    AuthenticatedAdminWholesaleIndexRoute:
+      AuthenticatedAdminWholesaleIndexRoute,
     AuthenticatedAdminPagesIdBuilderRoute:
       AuthenticatedAdminPagesIdBuilderRoute,
     AuthenticatedAdminPreorderOrdersIdRoute:

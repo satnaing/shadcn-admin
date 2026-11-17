@@ -61,8 +61,15 @@ export const PERMISSIONS = {
   ROLES: { ...crud('roles') },
   PERMISSIONS: { INDEX: 'permissions.index', UPDATE: 'permissions.update' },
 
-  // Module-declared screens (mock modules); real modules append their own group.
-  WHOLESALE: { INDEX: 'wholesale.index', CREATE: 'wholesale.create' },
+  // Module-declared screens; each module appends its own group.
+  WHOLESALE: {
+    INDEX: 'wholesale.index',
+    INHOUSE: 'wholesale.inhouse',
+    SELLERS: 'wholesale.sellers',
+    CREATE: 'wholesale.create',
+    EDIT: 'wholesale.edit',
+    DELETE: 'wholesale.delete',
+  },
   CLASSIFIED: {
     INDEX: 'classified.index',
     PUBLISH: 'classified.publish',

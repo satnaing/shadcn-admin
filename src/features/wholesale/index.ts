@@ -1,0 +1,5 @@
+export { WholesaleProductsPage } from './components/wholesale-products-page'
+export { WholesaleProductForm } from './components/wholesale-product-form'
+export { WholesaleProductEditPage } from './components/wholesale-product-edit-page'
+export { WholesaleRouteGuard } from './components/wholesale-route-guard'
+export { wholesaleManifest } from './module.manifest'
