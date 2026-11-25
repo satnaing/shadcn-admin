@@ -10,6 +10,7 @@ import {
 import { sidebarData } from './data/sidebar-data'
 import { NavGroup } from './nav-group'
 import { NavUser } from './nav-user'
+import { SidebarSponsors } from './sidebar-sponsors'
 import { TeamSwitcher } from './team-switcher'
 
 export function AppSidebar() {
@@ -29,6 +30,7 @@ export function AppSidebar() {
         ))}
       </SidebarContent>
       <SidebarFooter>
+        <SidebarSponsors />
         <NavUser user={sidebarData.user} />
       </SidebarFooter>
       <SidebarRail />
