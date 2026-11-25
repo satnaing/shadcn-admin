@@ -1,8 +1,9 @@
+import i18n from '@/i18n'
 import { toast } from 'sonner'
 
 export function showSubmittedData(
   data: unknown,
-  title: string = 'You submitted the following values:'
+  title: string = i18n.t('common.submitted_values')
 ) {
   toast.message(title, {
     description: (
