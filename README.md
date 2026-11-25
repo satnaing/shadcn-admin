@@ -4,8 +4,6 @@ Admin Dashboard UI crafted with Shadcn and Vite. Built with responsiveness and a
 
 ![alt text](public/images/shadcn-admin.png)
 
-[![Sponsored by Clerk](https://img.shields.io/badge/Sponsored%20by-Clerk-5b6ee1?logo=clerk)](https://go.clerk.com/GttUAaK)
-
 I've been creating dashboard UIs at work and for my personal projects. I always wanted to make a reusable collection of dashboard UI for future projects; and here it is now. While I've created a few custom components, some of the code is directly adapted from ShadcnUI examples.
 
 > This is not a starter project (template) though. I'll probably make one in the future.
@@ -106,9 +104,25 @@ If you find this project helpful or use this in your own work, consider [sponsor
 
 For questions or sponsorship inquiries, feel free to reach out at [satnaingdev@gmail.com](mailto:satnaingdev@gmail.com).
 
-### Current Sponsor
+### Current Sponsors
 
-- [Clerk](https://go.clerk.com/GttUAaK) - authentication and user management for the modern web
+<table>
+  <tr>
+    <td align="center" width="140">
+      <a href="https://www.shadcnblocks.com/admin-dashboard">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset=".github/assets/sponsors/shadcnblocks-white.svg">
+          <img src=".github/assets/sponsors/shadcnblocks.svg" alt="" height="64">
+        </picture>
+        <br>
+        <b>Shadcnblocks</b>
+      </a>
+    </td>
+    <td align="center" width="140">
+      <a href="mailto:satnaingdev@gmail.com?subject=shadcn-admin%20sponsorship">Your logo here</a>
+    </td>
+  </tr>
+</table>
 
 ## Author
 
