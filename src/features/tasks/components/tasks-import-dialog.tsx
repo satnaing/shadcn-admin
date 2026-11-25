@@ -1,6 +1,8 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslation } from 'react-i18next'
+import i18n from '@/i18n'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import {
@@ -26,12 +28,11 @@ const formSchema = z.object({
   file: z
     .instanceof(FileList)
     .refine((files) => files.length > 0, {
-      message: 'Please upload a file.',
+      error: () => i18n.t('tasks:import.errors.uploadFile'),
     })
-    .refine(
-      (files) => ['text/csv'].includes(files?.[0]?.type),
-      'Please upload csv format.'
-    ),
+    .refine((files) => ['text/csv'].includes(files?.[0]?.type), {
+      error: () => i18n.t('tasks:import.errors.uploadCsv'),
+    }),
 })
 
 type TaskImportDialogProps = {
@@ -43,6 +44,7 @@ export function TasksImportDialog({
   open,
   onOpenChange,
 }: TaskImportDialogProps) {
+  const { t } = useTranslation('tasks')
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { file: undefined },
@@ -59,7 +61,7 @@ export function TasksImportDialog({
         size: file[0].size,
         type: file[0].type,
       }
-      showSubmittedData(fileDetails, 'You have imported the following file:')
+      showSubmittedData(fileDetails, t('import.imported'))
     }
     onOpenChange(false)
   }
@@ -74,10 +76,8 @@ export function TasksImportDialog({
     >
       <DialogContent className='gap-2 sm:max-w-sm'>
         <DialogHeader className='text-start'>
-          <DialogTitle>Import Tasks</DialogTitle>
-          <DialogDescription>
-            Import tasks quickly from a CSV file.
-          </DialogDescription>
+          <DialogTitle>{t('import.title')}</DialogTitle>
+          <DialogDescription>{t('import.description')}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form id='task-import-form' onSubmit={form.handleSubmit(onSubmit)}>
@@ -86,7 +86,7 @@ export function TasksImportDialog({
               name='file'
               render={() => (
                 <FormItem className='my-2'>
-                  <FormLabel>File</FormLabel>
+                  <FormLabel>{t('import.file')}</FormLabel>
                   <FormControl>
                     <Input
                       type='file'
@@ -103,10 +103,10 @@ export function TasksImportDialog({
         </Form>
         <DialogFooter className='gap-2'>
           <DialogClose asChild>
-            <Button variant='outline'>Close</Button>
+            <Button variant='outline'>{t('import.close')}</Button>
           </DialogClose>
           <Button type='submit' form='task-import-form'>
-            Import
+            {t('import.importBtn')}
           </Button>
         </DialogFooter>
       </DialogContent>

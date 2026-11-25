@@ -1,57 +1,22 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from 'recharts'
-
-const data = [
-  {
-    name: 'Jan',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'Feb',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'Mar',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'Apr',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'May',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'Jun',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'Jul',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'Aug',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'Sep',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'Oct',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'Nov',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-  {
-    name: 'Dec',
-    total: Math.floor(Math.random() * 5000) + 1000,
-  },
-]
+import { useTranslation } from 'react-i18next'
 
 export function Overview() {
+  const { t } = useTranslation('dashboard')
+  const data = [
+    { name: t('months.jan'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.feb'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.mar'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.apr'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.may'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.jun'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.jul'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.aug'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.sep'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.oct'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.nov'), total: Math.floor(Math.random() * 5000) + 1000 },
+    { name: t('months.dec'), total: Math.floor(Math.random() * 5000) + 1000 },
+  ]
   return (
     <ResponsiveContainer width='100%' height={350}>
       <BarChart data={data}>

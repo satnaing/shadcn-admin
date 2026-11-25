@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getRouteApi } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
 import {
   type SortingState,
   type VisibilityState,
@@ -23,10 +24,10 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { DataTablePagination, DataTableToolbar } from '@/components/data-table'
-import { priorities, statuses } from '../data/data'
+import { useTaskPriorities, useTaskStatuses } from '../data/data'
 import { type Task } from '../data/schema'
 import { DataTableBulkActions } from './data-table-bulk-actions'
-import { tasksColumns as columns } from './tasks-columns'
+import { useTasksColumns } from './tasks-columns'
 
 const route = getRouteApi('/_authenticated/tasks/')
 
@@ -35,6 +36,10 @@ type DataTableProps = {
 }
 
 export function TasksTable({ data }: DataTableProps) {
+  const { t } = useTranslation('tasks')
+  const columns = useTasksColumns()
+  const statuses = useTaskStatuses()
+  const priorities = useTaskPriorities()
   // Local UI-only states
   const [rowSelection, setRowSelection] = useState({})
   const [sorting, setSorting] = useState<SortingState>([])
@@ -113,16 +118,16 @@ export function TasksTable({ data }: DataTableProps) {
     >
       <DataTableToolbar
         table={table}
-        searchPlaceholder='Filter by title or ID...'
+        searchPlaceholder={t('toolbar.searchPlaceholder')}
         filters={[
           {
             columnId: 'status',
-            title: 'Status',
+            title: t('toolbar.status'),
             options: statuses,
           },
           {
             columnId: 'priority',
-            title: 'Priority',
+            title: t('toolbar.priority'),
             options: priorities,
           },
         ]}
@@ -183,7 +188,7 @@ export function TasksTable({ data }: DataTableProps) {
                   colSpan={columns.length}
                   className='h-24 text-center'
                 >
-                  No results.
+                  {t('dataTable:noResults')}
                 </TableCell>
               </TableRow>
             )}

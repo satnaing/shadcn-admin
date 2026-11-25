@@ -3,6 +3,8 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from '@tanstack/react-router'
+import { useTranslation } from 'react-i18next'
+import i18n from '@/i18n'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -24,13 +26,14 @@ import {
 const formSchema = z.object({
   otp: z
     .string()
-    .min(6, 'Please enter the 6-digit code.')
-    .max(6, 'Please enter the 6-digit code.'),
+    .min(6, { error: () => i18n.t('auth:errors.otpLength') })
+    .max(6, { error: () => i18n.t('auth:errors.otpLength') }),
 })
 
 type OtpFormProps = React.HTMLAttributes<HTMLFormElement>
 
 export function OtpForm({ className, ...props }: OtpFormProps) {
+  const { t } = useTranslation('auth')
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -64,7 +67,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
           name='otp'
           render={({ field }) => (
             <FormItem>
-              <FormLabel className='sr-only'>One-Time Password</FormLabel>
+              <FormLabel className='sr-only'>{t('otp.label')}</FormLabel>
               <FormControl>
                 <InputOTP
                   maxLength={6}
@@ -92,7 +95,7 @@ export function OtpForm({ className, ...props }: OtpFormProps) {
           )}
         />
         <Button className='mt-2' disabled={otp.length < 6 || isLoading}>
-          Verify
+          {t('otp.submit')}
         </Button>
       </form>
     </Form>

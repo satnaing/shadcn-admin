@@ -3,6 +3,8 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslation } from 'react-i18next'
+import i18n from '@/i18n'
 import { showSubmittedData } from '@/lib/show-submitted-data'
 import { Button } from '@/components/ui/button'
 import {
@@ -24,20 +26,33 @@ import {
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
 import { SelectDropdown } from '@/components/select-dropdown'
-import { roles } from '../data/data'
+import { useRoles } from '../data/data'
 import { type User } from '../data/schema'
 
 const formSchema = z
   .object({
-    firstName: z.string().min(1, 'First Name is required.'),
-    lastName: z.string().min(1, 'Last Name is required.'),
-    username: z.string().min(1, 'Username is required.'),
-    phoneNumber: z.string().min(1, 'Phone number is required.'),
+    firstName: z
+      .string()
+      .min(1, { error: () => i18n.t('users:actionDialog.errors.firstNameRequired') }),
+    lastName: z
+      .string()
+      .min(1, { error: () => i18n.t('users:actionDialog.errors.lastNameRequired') }),
+    username: z
+      .string()
+      .min(1, { error: () => i18n.t('users:actionDialog.errors.usernameRequired') }),
+    phoneNumber: z
+      .string()
+      .min(1, { error: () => i18n.t('users:actionDialog.errors.phoneNumberRequired') }),
     email: z.email({
-      error: (iss) => (iss.input === '' ? 'Email is required.' : undefined),
+      error: (iss) =>
+        iss.input === ''
+          ? i18n.t('users:actionDialog.errors.emailRequired')
+          : undefined,
     }),
     password: z.string().transform((pwd) => pwd.trim()),
-    role: z.string().min(1, 'Role is required.'),
+    role: z
+      .string()
+      .min(1, { error: () => i18n.t('users:actionDialog.errors.roleRequired') }),
     confirmPassword: z.string().transform((pwd) => pwd.trim()),
     isEdit: z.boolean(),
   })
@@ -47,7 +62,7 @@ const formSchema = z
       return data.password.length > 0
     },
     {
-      message: 'Password is required.',
+      error: () => i18n.t('users:actionDialog.errors.passwordRequired'),
       path: ['password'],
     }
   )
@@ -57,7 +72,7 @@ const formSchema = z
       return password.length >= 8
     },
     {
-      message: 'Password must be at least 8 characters long.',
+      error: () => i18n.t('users:actionDialog.errors.passwordMin'),
       path: ['password'],
     }
   )
@@ -67,7 +82,7 @@ const formSchema = z
       return /[a-z]/.test(password)
     },
     {
-      message: 'Password must contain at least one lowercase letter.',
+      error: () => i18n.t('users:actionDialog.errors.passwordLowercase'),
       path: ['password'],
     }
   )
@@ -77,7 +92,7 @@ const formSchema = z
       return /\d/.test(password)
     },
     {
-      message: 'Password must contain at least one number.',
+      error: () => i18n.t('users:actionDialog.errors.passwordNumber'),
       path: ['password'],
     }
   )
@@ -87,7 +102,7 @@ const formSchema = z
       return password === confirmPassword
     },
     {
-      message: "Passwords don't match.",
+      error: () => i18n.t('users:actionDialog.errors.passwordMismatch'),
       path: ['confirmPassword'],
     }
   )
@@ -105,6 +120,8 @@ export function UsersActionDialog({
   onOpenChange,
 }: UserActionDialogProps) {
   const isEdit = !!currentRow
+  const { t } = useTranslation('users')
+  const roles = useRoles()
   const form = useForm<UserForm>({
     resolver: zodResolver(formSchema),
     defaultValues: isEdit
@@ -145,10 +162,12 @@ export function UsersActionDialog({
     >
       <DialogContent className='sm:max-w-lg'>
         <DialogHeader className='text-start'>
-          <DialogTitle>{isEdit ? 'Edit User' : 'Add New User'}</DialogTitle>
+          <DialogTitle>
+            {isEdit ? t('actionDialog.editTitle') : t('actionDialog.addTitle')}
+          </DialogTitle>
           <DialogDescription>
-            {isEdit ? 'Update the user here. ' : 'Create new user here. '}
-            Click save when you&apos;re done.
+            {isEdit ? t('actionDialog.editDesc') : t('actionDialog.addDesc')}
+            {t('actionDialog.clickSave')}
           </DialogDescription>
         </DialogHeader>
         <div className='h-105 w-[calc(100%+0.75rem)] overflow-y-auto py-1 pe-3'>
@@ -164,11 +183,11 @@ export function UsersActionDialog({
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
                     <FormLabel className='col-span-2 text-end'>
-                      First Name
+                      {t('actionDialog.firstName')}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='John'
+                        placeholder={t('actionDialog.firstNamePlaceholder')}
                         className='col-span-4'
                         autoComplete='off'
                         {...field}
@@ -184,11 +203,11 @@ export function UsersActionDialog({
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
                     <FormLabel className='col-span-2 text-end'>
-                      Last Name
+                      {t('actionDialog.lastName')}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='Doe'
+                        placeholder={t('actionDialog.lastNamePlaceholder')}
                         className='col-span-4'
                         autoComplete='off'
                         {...field}
@@ -204,11 +223,11 @@ export function UsersActionDialog({
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
                     <FormLabel className='col-span-2 text-end'>
-                      Username
+                      {t('actionDialog.username')}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='john_doe'
+                        placeholder={t('actionDialog.usernamePlaceholder')}
                         className='col-span-4'
                         {...field}
                       />
@@ -222,10 +241,12 @@ export function UsersActionDialog({
                 name='email'
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>Email</FormLabel>
+                    <FormLabel className='col-span-2 text-end'>
+                      {t('actionDialog.email')}
+                    </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='john.doe@gmail.com'
+                        placeholder={t('actionDialog.emailPlaceholder')}
                         className='col-span-4'
                         {...field}
                       />
@@ -240,11 +261,11 @@ export function UsersActionDialog({
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
                     <FormLabel className='col-span-2 text-end'>
-                      Phone Number
+                      {t('actionDialog.phoneNumber')}
                     </FormLabel>
                     <FormControl>
                       <Input
-                        placeholder='+123456789'
+                        placeholder={t('actionDialog.phoneNumberPlaceholder')}
                         className='col-span-4'
                         {...field}
                       />
@@ -258,11 +279,13 @@ export function UsersActionDialog({
                 name='role'
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
-                    <FormLabel className='col-span-2 text-end'>Role</FormLabel>
+                    <FormLabel className='col-span-2 text-end'>
+                      {t('actionDialog.role')}
+                    </FormLabel>
                     <SelectDropdown
                       defaultValue={field.value}
                       onValueChange={field.onChange}
-                      placeholder='Select a role'
+                      placeholder={t('actionDialog.rolePlaceholder')}
                       className='col-span-4'
                       items={roles.map(({ label, value }) => ({
                         label,
@@ -279,11 +302,11 @@ export function UsersActionDialog({
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
                     <FormLabel className='col-span-2 text-end'>
-                      Password
+                      {t('actionDialog.password')}
                     </FormLabel>
                     <FormControl>
                       <PasswordInput
-                        placeholder='e.g., S3cur3P@ssw0rd'
+                        placeholder={t('actionDialog.passwordPlaceholder')}
                         className='col-span-4'
                         {...field}
                       />
@@ -298,12 +321,12 @@ export function UsersActionDialog({
                 render={({ field }) => (
                   <FormItem className='grid grid-cols-6 items-center space-y-0 gap-x-4 gap-y-1'>
                     <FormLabel className='col-span-2 text-end'>
-                      Confirm Password
+                      {t('actionDialog.confirmPassword')}
                     </FormLabel>
                     <FormControl>
                       <PasswordInput
                         disabled={!isPasswordTouched}
-                        placeholder='e.g., S3cur3P@ssw0rd'
+                        placeholder={t('actionDialog.confirmPasswordPlaceholder')}
                         className='col-span-4'
                         {...field}
                       />
@@ -317,7 +340,7 @@ export function UsersActionDialog({
         </div>
         <DialogFooter>
           <Button type='submit' form='user-form'>
-            Save changes
+            {t('actionDialog.save')}
           </Button>
         </DialogFooter>
       </DialogContent>

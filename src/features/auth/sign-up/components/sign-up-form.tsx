@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useTranslation } from 'react-i18next'
 import { Loader2, UserPlus } from 'lucide-react'
 import { toast } from 'sonner'
 import { IconFacebook, IconGithub } from '@/assets/brand-icons'
+import i18n from '@/i18n'
 import { sleep, cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -22,16 +24,18 @@ const formSchema = z
   .object({
     email: z.email({
       error: (iss) =>
-        iss.input === '' ? 'Please enter your email.' : undefined,
+        iss.input === '' ? i18n.t('auth:errors.emailRequired') : undefined,
     }),
     password: z
       .string()
-      .min(1, 'Please enter your password.')
-      .min(7, 'Password must be at least 7 characters long.'),
-    confirmPassword: z.string().min(1, 'Please confirm your password.'),
+      .min(1, { error: () => i18n.t('auth:errors.passwordRequired') })
+      .min(7, { error: () => i18n.t('auth:errors.passwordMin') }),
+    confirmPassword: z
+      .string()
+      .min(1, { error: () => i18n.t('auth:errors.confirmRequired') }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match.",
+    error: () => i18n.t('auth:errors.passwordMismatch'),
     path: ['confirmPassword'],
   })
 
@@ -39,6 +43,7 @@ export function SignUpForm({
   className,
   ...props
 }: React.HTMLAttributes<HTMLFormElement>) {
+  const { t } = useTranslation('auth')
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -54,12 +59,12 @@ export function SignUpForm({
     setIsLoading(true)
 
     toast.promise(sleep(2000), {
-      loading: 'Creating account...',
+      loading: t('toast.creating'),
       success: () => {
         setIsLoading(false)
-        return `Account created for ${data.email}.`
+        return t('toast.created', { email: data.email })
       },
-      error: 'Error',
+      error: t('common.error'),
     })
   }
 
@@ -75,9 +80,9 @@ export function SignUpForm({
           name='email'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>{t('common.email')}</FormLabel>
               <FormControl>
-                <Input placeholder='name@example.com' {...field} />
+                <Input placeholder={t('common.emailPlaceholder')} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -88,7 +93,7 @@ export function SignUpForm({
           name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t('common.password')}</FormLabel>
               <FormControl>
                 <PasswordInput placeholder='********' {...field} />
               </FormControl>
@@ -101,7 +106,7 @@ export function SignUpForm({
           name='confirmPassword'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
+              <FormLabel>{t('common.confirmPassword')}</FormLabel>
               <FormControl>
                 <PasswordInput placeholder='********' {...field} />
               </FormControl>
@@ -111,7 +116,7 @@ export function SignUpForm({
         />
         <Button className='mt-2' disabled={isLoading}>
           {isLoading ? <Loader2 className='animate-spin' /> : <UserPlus />}
-          Create Account
+          {t('signUp.submit')}
         </Button>
 
         <div className='relative my-2'>
@@ -120,7 +125,7 @@ export function SignUpForm({
           </div>
           <div className='relative flex justify-center text-xs uppercase'>
             <span className='bg-background px-2 text-muted-foreground'>
-              Or continue with
+              {t('common.orContinueWith')}
             </span>
           </div>
         </div>
@@ -132,7 +137,7 @@ export function SignUpForm({
             type='button'
             disabled={isLoading}
           >
-            <IconGithub className='h-4 w-4' /> GitHub
+            <IconGithub className='h-4 w-4' /> {t('common.github')}
           </Button>
           <Button
             variant='outline'
@@ -140,7 +145,7 @@ export function SignUpForm({
             type='button'
             disabled={isLoading}
           >
-            <IconFacebook className='h-4 w-4' /> Facebook
+            <IconFacebook className='h-4 w-4' /> {t('common.facebook')}
           </Button>
         </div>
       </form>
