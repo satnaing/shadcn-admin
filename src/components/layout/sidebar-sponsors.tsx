@@ -26,7 +26,7 @@ export function SidebarSponsors() {
       <a
         href='https://www.shadcnblocks.com/admin-dashboard'
         target='_blank'
-        rel='sponsored noopener noreferrer'
+        rel='noopener'
         className='flex items-center gap-2 rounded-md px-1 py-1 text-sm transition-colors hover:bg-sidebar-accent'
       >
         <ShadcnblocksLogo />
