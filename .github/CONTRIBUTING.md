@@ -22,7 +22,7 @@ Thank you for considering contributing to **shadcn-admin**! Every contribution i
    git clone https://github.com/your-username/shadcn-admin.git
    ```
 
-3. **Install dependencies:**
+3. **Install dependencies** (pnpm 10 or newer):
 
    ```bash
    pnpm install
