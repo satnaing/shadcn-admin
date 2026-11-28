@@ -86,7 +86,7 @@ Go to the project directory
   cd shadcn-admin
 ```
 
-Install dependencies
+Install dependencies (pnpm 10 or newer)
 
 ```bash
   pnpm install
